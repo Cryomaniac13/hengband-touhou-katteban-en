@@ -2,9 +2,11 @@
 *.raw
 
 # Save files
+/lib/save/*
 /lib/save/*.*
 
 # User data
+/lib/user/*
 /lib/user/*.*
 
 # Base Heng ini file
