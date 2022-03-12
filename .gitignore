@@ -1,0 +1,14 @@
+# Compiled data files/scores
+*.raw
+
+# Save files
+/lib/save/*.*
+
+# User data
+/lib/user/*.*
+
+# Base Heng ini file
+hengband.ini
+
+# Builds
+*.exe
