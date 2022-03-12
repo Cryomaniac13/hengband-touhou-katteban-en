@@ -2,11 +2,11 @@
 *.raw
 
 # Save files
-/lib/save/*.
+/lib/save/*.*
 /lib/save/*.html
 
 # User data
-/lib/user/*.
+/lib/user/*.*
 /lib/user/*.html
 /lib/user/*.txt
 
