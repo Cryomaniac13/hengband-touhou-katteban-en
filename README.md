@@ -31,6 +31,8 @@ mistranslations and/or awkward wording. I apologize in advance.
 - I've also taken some pages from the Japanese wiki for this project and
 translated them in text form. They're in the Documentation folder.
 Link to wiki: https://w.atwiki.jp/hengtouhou/
+Changed from base Hengband.txt is the author's list of main differences
+between this mod and original Hengband.
 
 - I didn't have Visual Studio on hand, but I managed to compile using
 Borland C++. The makefile I'm using is makefile.bcc. Keep in mind you have
