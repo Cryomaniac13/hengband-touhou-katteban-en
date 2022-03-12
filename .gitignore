@@ -12,3 +12,6 @@ hengband.ini
 
 # Builds
 *.exe
+
+# Archives
+*.zip
