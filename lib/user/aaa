@@ -1,0 +1,183 @@
+  [Hengband Katteban 1.1.90T character dump]
+
+                Name  : Ordinary PLAYER
+
+ Sex      : Female           Difficulty       HARD   STR :       6
+ Race     : Youkai-Fox       Score             634   INT :      16
+ Class    : Sorceror                                 WIS :      14
+ Magic    : Transformation, Necromancy               DEX :      12
+                                                     CON :       8
+                                                     CHR :      12
+
+ Two hands         (-8,+0)   HP            -1/  22   Fighting   : Bad
+                             MP            24/  24   Shooting   : Bad
+ Blows/Round           1+0                           SavingThrow: Excellent
+ AverageDmg/Rnd        4+0   Level               1   Stealth    : Excellent
+                             Experience          0
+ Shooting         (-21,+0)   Max Exp             0
+ Multiplier          x0.00   Exp to Adv         20   Searching  : Excellent
+ Shots/Round          0.00   Gold             1209   Disarming  : Fair
+                                                     MagicDevice: Excellent
+ AC                 [2,+0]   Time      Day 1  7:00
+ Speed                (+0)   Play time    00:00:22   Infra-Vision: 70 feet
+
+
+                         (Character Background)
+          Write something about your background and goals
+
+
+
+
+          ...You were defeated by a Small kobold in Wilderness.
+
+
+                                                               Modification
+ Sex   Female          Stat    BaseRacClaPerMod ActualCurrent  abcdefghijkl@
+ Race  Youkai-Fox      STR :     10 -1 -3  0  0      6         .............
+ Class Sorceror        INT :     10  3  3  0  0     16         .............
+ Level 1               WIS :     10  3  1  0  0     14         .............
+ HP    -1/22           DEX :     10  2  0  0  0     12         .............
+ MP    24/24           CON :     10  0 -2  0  0      8         .............
+                       CHR :     10  1  1  0  0     12         .............
+         /      (                 /      (                     /      (
+         abcdefghijkl@            abcdefghijkl@                abcdefghijkl@
+ Acid  : .............    Sound : .............    SeeInvis  : ............+
+ Elec  : .............    Nether: .............    Warning   : .............
+ Fire  : .............    SpTime: .............    SlowDigest: .............
+ Cold  : .............    Chaos : .............    Regen     : .............
+ Poison: .............    Disnch: .............    Levitation: .............
+ Light : .............    Fear  : .............    Swiftness : .............
+ Dark  : .............    FrAct : .............    NoTele    : .............
+ Shard : .............    Conf  : .............    NoMagic   : .............
+ Water : .............    Blind : .............    Reflection: .............
+ Holy  : .............v   Insane: .............    Cursed    : .............
+
+              /                  /      (                      /      (
+              ab@                abcdefghijkl@                 abcdefghijkl@
+ Slay Chaos : ...   Telepathy  : .............   Speed       : .............
+ Slay Lawful: ...   ESP Uniques: .............   Blows       : .............
+ Slay Human : ...   ESP Nonlvng: .............   Infravision : .............
+ Slay Animal: ...   ESP Chaos  : .............   Device Mstry: .............
+ Slay Undead: ...   ESP Lawful : .............   Stealth     : .............
+ Slay Dragon: ...   ESP Human  : .............   Searching   : .............
+ Slay Demon : ...   ESP Animal : .............   Digging     : .............
+ Slay Deity : ...   ESP Undead : .............
+ Slay Youkai: ...   ESP Dragon : .............   Easy Spells : .............
+ Melting    : ...   ESP Demon  : .............   Cheap Spells: .............
+ Shocking   : ...   ESP Deity  : .............   Blessed     : .............
+ Burning    : ...   ESP Youkai : .............   Light       : .............
+ Freezing   : ...                                Riding      : .............
+ Venomous   : ...   Sustain STR: .............   Throwing    : .............
+ Sharpness  : ...   Sustain INT: .............
+ Quake      : ...   Sustain WIS: .............   Drain EXP   : .............
+ Vampiric   : ...   Sustain DEX: .............   Teleport    : .............
+ Chaotic    : ...   Sustain CON: .............   Aggravate   : .............
+ Force Wpn  : ...   Sustain CHR: .............   Foul Curse  : .............
+
+
+  [What happened before defeat]
+
+> The Killer whale bites you. <x2>
+> Is not this dying with courage and true greatness?
+>  
+>   
+> ====================
+>  
+>   
+> あと 1 つの呪文を学べる。
+> 敵がすぐ近くにいるときは広域マップに入れない！
+> 見習プリーストは呪文を唱えようとしたが失敗した。
+> 見習プリーストに攻撃された。 <x6>
+> 見習プリーストの攻撃をかわした。
+> 見習プリーストに攻撃された。 <x3>
+> アイルビーバック！
+>  
+>   
+> ====================
+>  
+>   
+> You can learn 1 more spell.
+> You are ambushed !
+> The Novice rogue kicks you.
+> The Novice rogue stings you.
+> The Novice rogue touches you.
+> Your purse feels lighter.
+> 162 coins were stolen!
+> The thief flees laughing!
+> You have no scrolls to read.
+> The Small kobold hits you. <x3>
+> And in my last hour, I'm a slave to the power of death.
+> Goodbye, PLAYER!
+
+
+  [Option Settings]
+
+ Preserve Mode:      ON
+ Small Levels:       ENABLED
+ Arena Levels:       ENABLED
+
+
+  [Recall Depth]
+
+
+
+  [Quest Information]
+
+< Completed Quest >
+  Nothing.
+
+< Failed Quest >
+  Nothing.
+
+
+  [Defeated Monsters]
+
+You have defeated no enemies yet.
+
+  [技能一覧]
+Skill          Aptitude  Skill Level
+Martial Arts ( E )     0 
+Shields      ( E )     0 
+Riding       ( E )     0 
+Dual Wielding ( E )     0 
+Throwing     ( C )     5 
+
+Short Blades ( C )     5 
+Long Blades  ( D )     0 
+Katanas      ( E )     0 
+Blunt Weapons ( D )     0 
+Staves       ( C )     5 
+Axes         ( E )     0 
+Spears       ( E )     0 
+Polearms     ( E )     0 
+Bows         ( E )     0 
+Crossbows    ( E )     0 
+Guns         ( D )     0 
+
+
+  [Character Equipment]
+
+a) a Quarterstaff (1d9) (+0,+0)
+b) (weapon held with both arms)
+c) (nothing)
+d) (nothing)
+e) (nothing)
+f) (nothing)
+g) (nothing)
+h) a Robe [2,+0]
+i) (nothing)
+j) (nothing)
+k) (nothing)
+l) (nothing)
+
+
+  [Character Inventory]
+
+a) a Book of Sorcery Arts of Transformation - Volume 1
+b) a Book of Sorcery Arts of Necromancy - Volume 1
+c) 3 Aburaages
+d) 5 Wooden Torches (with 2500 turns of light)
+
+
+  [Check Sum: "e6dfc6651b1200e8ec"]
+
