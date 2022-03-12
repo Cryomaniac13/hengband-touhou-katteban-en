@@ -3,11 +3,12 @@
 
 # Save files
 /lib/save/*
-/lib/save/*.*
+/lib/save/*.html
 
 # User data
 /lib/user/*
-/lib/user/*.*
+/lib/save/*.html
+/lib/user/*.txt
 
 # Base Heng ini file
 hengband.ini
