@@ -1,0 +1,4 @@
+#monspeak for Gensoukyou uniques
+
+N:*:Default lines
+#Gensoukyou uniques have no default lines

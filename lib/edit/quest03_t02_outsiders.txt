@@ -1,0 +1,90 @@
+# quest03_t02_outsiders.txt
+
+# Name
+Q:$3:N:Logrus Master and Friends
+Q:3:N:ログルス使い＋α
+
+# Definition
+Q:$3:Q:6:0:0:0:35:0:0:0:2
+Q:3:Q:6:0:0:0:35:0:0:0:2
+
+# Description for quest
+?:[LEQ $QUEST3 2]
+Q:$3:T:Aya - 'Ayayayaya, there's trouble, there's trouble.
+Q:$3:T:Some visitors from Outside World are performing strange rituals
+Q:$3:T:every night in a vacant house on the outskirts. They're probably
+Q:$3:T:not that strong, but we've had several young tengu get knocked
+Q:$3:T:unconscious or turned into frogs. Our elders treat it as if it
+Q:$3:T:was just a vacant house, and aren't doing anything. Wouldn't 
+Q:$3:T:someone sneak inside and clear this group out?'
+Q:3:T:文「あやややや困りました困りました。
+Q:3:T:異界から来たらしい連中が外れの空き家で夜な夜な妙な儀式を行っているのですよ。
+Q:3:T:まあ大して強い連中でもないようですが、
+Q:3:T:若い天狗が不覚を取ってカエルに変えられてしまいまして。
+Q:3:T:それでまあ管理責任だの派閥の面子だので空き家放っぽって喧々囂々はや半年。
+Q:3:T:何とも情けない話です。
+Q:3:T:あーあ、誰か部外者がこっそりあの家に押し入ってちょちょいと
+Q:3:T:中の連中追い出したりしてくれませんかねー？」
+
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST3 3]
+Q:$3:T:Aya - 'Well, that certainly was interesting.
+Q:$3:T:Pity I couldn't take a picture of our elders' faces.
+Q:$3:T:Well, since there's no more vacant house to speak of,
+Q:$3:T:maybe you could place your belongings there?'
+Q:3:T:文「いやあ面白いものが見られました。
+Q:3:T:長老連中のあの渋い顔を写真に撮れなかったのが残念ですよ。
+Q:3:T:ああ、あの空き家は存在しないことになったみたいですよ。
+Q:3:T:物置にでも使ったらどうです？」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST3 5]
+Q:$3:T:If you see this message, that's a bug
+Q:3:T:このメッセージが出たらバグ
+?:1
+
+
+#このクエスト再挑戦時にはアイテムが落ちていないようにする
+# Object 10 levels out of depth
+F:O:FLOOR:8:0:*10
+F:P:FLOOR:8:0:614
+F:Q:FLOOR:8:0:609
+
+?:[EQU $RETRY3 1]
+F:O:FLOOR:8:
+F:P:FLOOR:8:
+F:Q:FLOOR:8:
+?:1
+
+# Floor with Logrus Master
+F:a:FLOOR:8:498
+F:b:FLOOR:8:636
+F:c:FLOOR:8:1008
+
+
+# Dungeon
+D:XXXXXXXXXXXXXXX
+D:X...........QQX
+D:X.........a..PX
+D:X.............X
+D:X....XXXXXXXXXX
+D:X.............X
+D:X.........b...X
+D:X.............X
+D:X....XXXXXXXXXX
+D:X.............X
+D:X..........O..X
+D:X.........c...X
+D:X..........O..X
+D:X....XXXXXXXXXX
+D:X.............X
+D:X.............X
+D:X.............X
+D:X<............X
+D:XXXXXXXXXXXXXXX
+
+# Starting position
+P:16:2

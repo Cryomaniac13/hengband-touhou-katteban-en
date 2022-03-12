@@ -1,0 +1,52 @@
+# File: misc.txt
+
+# Maximum number of towns
+#1:辺境2:テルモラ3:モリバント4:アングウィル5:ズル6:NO_TOWN(ダンジョン内ブラマなど)　これに1加えた値を設定する
+#7→12へ
+#150901 廃洋館追加 13へ 
+#v1.1.64 彼岸を加えて15へ。守矢神社を入れたとき14に増やすのを忘れていた。
+#セーブデータ互換性はどうなるのかと思って調べたが、増やす分には同バージョン間でも問題ない。
+#スコアサーバも問題なく処理されてる。
+#ただしnew_store_name[]とnew_store_owner_name[]に追加が必要。でないと店に入るときクラッシュする。
+#ないと思うが30になったらビットが足りなくなる
+#v1.1.86 偽天棚を加えて16へ
+
+M:T:16
+
+# Maximum number of quests
+M:Q:100
+
+# Maximum x size of the wilderness
+M:WX:99
+
+# Maximum y size of the wilderness
+M:WY:66
+
+# Maximum number of monsters in r_info.txt
+M:R:1366
+
+# Maximum number of items in k_info.txt
+M:K:897
+
+# Maximum number of vaults in v_info.txt
+M:V:129
+
+# Maximum number of terrain features in f_info.txt
+M:F:255
+
+# Maximum number of artifacts in a_info.txt
+M:A:340
+
+# Maximum number of ego-items in e_info.txt
+#これは数が合わなくても問題ないらしいのでそのままにしとく
+M:E:255
+
+# Maximum number of dungeon types in d_info.txt
+M:D:32
+
+# Maximum size for "o_list[]"
+M:O:1024
+
+# Maximum size for "m_list[]"
+M:M:1024
+

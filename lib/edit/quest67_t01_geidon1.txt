@@ -1,0 +1,86 @@
+# quest67_t01_geidon1.txt
+
+Q:$67:N:Geidontei at Evening
+Q:67:N:宵口の鯨呑亭にて
+
+# Definition 
+Q:$67:Q:6:0:0:0:30:0:0:0:6
+Q:67:Q:6:0:0:0:30:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST67 2]
+Q:$67:T:Owner - 'One of my patrons said they have seen youkai 
+Q:$67:T: screaming near the store at midnight. They couldn't clearly
+Q:$67:T: tell if that was a human or a monster. They might have simply
+Q:$67:T: been drunk and seeing things, but just to be sure, couldn't
+Q:$67:T: you check it out, and if there's something here, exterminate
+Q:$67:T: it?'
+Q:67:T:店主「深夜に店の近くで妙な叫び声を上げる妖怪を見たって常連さんが言ってるんだ。
+Q:67:T:　人のようだったり怪物のようだったりはっきりしない見た目だったそうだ。
+Q:67:T:　まあそいつが酔っ払って幻覚を見ただけかもしれんが、
+Q:67:T:　悪いが店の近くを見回って何かいたら退治してくれないか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST67 3]
+Q:$67:T:Owner - 'So that was the work of bake-danuki?
+Q:$67:T: There's been plenty of youkai around here lately.
+Q:$67:T: In any case, you've helped us. Take this as a reward.
+Q:$67:T: It'll come in handy if you need to strike down monsters.'
+Q:67:T:店主「へえ、化け狸の仕業だったのか。
+Q:67:T:　最近うちは妙に妖怪と縁がある気がするな。
+Q:67:T:　いや助かったよ。お礼にこれを使ってくれ。
+Q:67:T:　物の怪を打ち倒すありがたい杖なんだと。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST67 5]
+Q:$67:T:Owner - 'So, they say it was a bake-danuki. They also say
+Q:$67:T: someone has seen a line of ghost lanterns disappearing into
+Q:$67:T: the forest. It's all so confusing. In any case, all those
+Q:$67:T: scares have boosted the number of curious patrons, so we're
+Q:$67:T: prospering.'
+Q:67:T:店主「どうもあれは化け狸だったという話だ。
+Q:67:T:　ひとしきり騒いだら化け提灯の行列になって森のほうに消えていったんだとさ。
+Q:67:T:　全く物騒な話だよ。
+Q:67:T:　まあ店のほうは怖いもの見たさの客が増えて大繁盛なんだけどねえ。」
+
+?:1
+
+# 化け狸
+F:Y:TREE:8:w1228
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+F:-:GRASS:8
+
+# Trees
+F:T:TREE:1
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXTTTT-T   <    T-TTXXXXXXXXXXXX
+D:XXXT-TTT        T-T-TXXXXXXXXXXXX
+D:XXXTTTTT        TT-TTXXXXXXXXXXXX
+D:XXXT-T-           -T-XXXXXXXXXXXX
+D:XXXT---            --------TTTT-X
+D:XXXT---            -------T-TT--X
+D:XXXT---            ------TT Y-YTX
+D:XXXT---            ----TTTTTTYTYX
+D:XXXT---            --T---TTTYTY-X
+D:XXXT---            --T--TTTTT---X
+D:XXXT---            --TTTTTTTTTTTX
+D:XXXT---            --XXXXXXXXXXXX
+D:XXXT---            --XXXXXXXXXXXX
+D:XXXT---            TTXXXXXXXXXXXX
+D:XXXT---            TTXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+# Starting position
+P:3:12
+
+
+
+

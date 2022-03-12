@@ -1,0 +1,45 @@
+
+# Name
+Q:$66:N:Serial Comatose Incident I
+Q:66:N:連続昏睡事件Ⅰ
+
+# Definition
+Q:$66:Q:9:0:0:0:45:0:0:1
+Q:66:Q:9:0:0:0:45:0:0:1
+
+?:[LEQ $QUEST66 2]
+Q:$66:T:Chen - 'I've been working with Ran-sama to investigate
+Q:$66:T: the ghosts in Netherworld! I'm ashamed to say it, but I ran
+Q:$66:T: away! I can't find Yukari either, so I don't know what to do!
+Q:$66:T:
+Q:$66:T: That's it, they might have possessed Marisa!
+Q:$66:T: If you find Marisa acting weird, be careful. She's probably
+Q:$66:T: possessed by a vengeful spirit! If you find some suspicious
+Q:$66:T: sake, please bring it here!'
+Q:66:T:橙「藍様と一緒に頑張って冥界中の幽霊を調べたのに！
+Q:66:T:　とっくに逃げてたなんて悔しいー！
+Q:66:T:　紫様も見つからないしどうしよう！
+Q:66:T:
+Q:66:T:　そうだ、ひょっとしたらまた魔理沙に取り憑いてるかも！
+Q:66:T:　様子のおかしい魔理沙を見つけたら気をつけて。たぶん怨霊に取り憑かれているわ！
+Q:66:T:　もし怪しいお酒を持ってたらここに持ってきて！」
+?:1
+
+?:[EQU $QUEST66 3]
+Q:$66:T:Ran - 'You really found it? I have to say, it was pretty
+Q:$66:T: devious. We're going to keep it sealed in a barrier before
+Q:$66:T: transfering it underground. I'd like to give you a reward in
+Q:$66:T: stead of my owner. Please take this as a sign of gratitude.'
+Q:66:T:藍「なんと、本当に見つかるとは。奴も迂闊な真似をしたものだ。
+Q:66:T:　地底に引き渡すまで結界で雁字搦めにしておこう。
+Q:66:T:　さて、主に代わり礼を言います。感謝の印としてこれを役立ててください。」
+?:1
+
+?:[EQU $QUEST66 5]
+Q:$66:T:Chen - 'You haven't found it?
+Q:$66:T: Vengeful spirit, just where have you gone?
+Q:$66:T: If you pop up in front of me, I'll scratch you!'
+Q:66:T:橙「見つからなかったの？
+Q:66:T:　もう怨霊の奴、一体どこに行ったのよ！
+Q:66:T:　私の前に現れたら引っ掻いてやるんだから！」
+?:1

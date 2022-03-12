@@ -1,0 +1,84 @@
+# Name
+Q:$23:N:Assassinate Kaguya
+Q:23:N:輝夜への刺客
+
+# Definition
+Q:$23:Q:1:0:0:1:80:1112:0:0:6
+Q:23:Q:1:0:0:1:80:1112:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST23 2]
+Q:$23:T:Mokou - 'You! You're the one who killed me earlier!
+Q:$23:T:I'm so tired of all those assassins coming after me!
+Q:$23:T:Okay, this time, you go to Eientei and make that Kaguya
+Q:$23:T:drop down!'
+Q:23:T:妹紅「あ、貴方は！この前はよくもやってくれたわね！
+Q:23:T:なんで私ばっかり何度も何度も刺客送られるのよ！
+Q:23:T:今度は私の代わりに永遠亭へ行って輝夜の奴の横っ面張り倒して来なさい！」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST23 3]
+Q:$23:T:Mokou - 'Well, that Kaguya's pretty good, and you're not 
+Q:$23:T:bad either.
+Q:$23:T:What? A reward?
+Q:$23:T:I don't have anything. Except, perhaps, my guts?
+Q:$23:T:I'm joking. Just wait a bit...'
+Q:23:T:妹紅「ふん輝夜の奴いい気味よ。貴方もなかなかやるじゃない。
+Q:23:T:え？報酬？
+Q:23:T:と言っても私何も持ってないし。私の生き胆でも要る？
+Q:23:T:冗談よ。ちょっと待ってて……」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST23 5]
+Q:$23:T:Mokou - 'Ugh! Why does nothing go right for me?
+Q:$23:T:That Kaguya... That Kaguya...'
+Q:$23:T:
+Q:$23:T:　　Suddenly, temperature in the shop starts rising. You and
+Q:$23:T:   the other visitors run away.
+Q:23:T:妹紅「むきー！なんで私のやること成す事うまくいかないの！
+Q:23:T:そう、あの忌々しい晩もそうだった。あの輝夜の奴が…」
+Q:23:T:
+Q:23:T:　　急に店の温度が上がり始めた。あなたは他の客と一緒に逃げ出した。
+?:1
+
+F:D:CLOSED_DOOR:8
+F:,:FLOOR:12
+# Object 0 levels out of depth on no Teleportation grid
+F:q:FLOOR:12:0:*0
+# Object 10 levels out of depth on no Teleportation grid
+F:Q:FLOOR:12:0:*10
+
+#輝夜
+F:A:FLOOR:12:1112
+#てゐ
+F:W:FLOOR:8:w1109
+#うどんげ
+F:U:FLOOR:8:w1110
+#妖怪兎(人型)
+F:Y:FLOOR:8:w1083
+#EX妖精
+F:F:FLOOR:8:w17
+#永琳
+F:Z:FLOOR:8:w1111
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X..............X..............X........qq........X......qqQqq........X.........FQQF............XFF....YYYYY....YY.F.XQQq...................X,,,,,,,,,,,,,,,,,,,X
+D:X.....Y.Y......X..............X....YYY.FF..YYY...X...................X..Y.Y..YYYFFYYY..YYY.....X..FFFFFFFFFFFFFYY.F.XQQq.....YY..YY..F.FF.FX,,,,,,,,,,,,,,,,,,,X
+D:X......Y.......X....YYYYYY....X....YYY.....YYY...X...YYYYYYYYYYYYY...X..YYY...Y...YYY..YYY.....XYY....YYYYY....YY.FFXQQq.FFF.YYYYYY.F.FF.FFX,,,,,,,,,,,,,,,,,,,X
+D:X..............X..............X..................X...................X.........................XYY.............YY.F.XQQq...................X,,,,,,,,,,,,,,,,,,,X
+D:XXXXXXXDDXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXDDXXXXXXXXXXDDXXXXXXXXXXXXXXXXXXXXXDDXDDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDXXXXXXX,,,,,,,,,,,,,,,,,,,X
+D:X...............Y.............Y.Y......YY.....YY.............Y...Y.............FFYYY...FF................FYFYFYFYFYFYF..YYYY...F.F.F.F.F.F.D,,,,,,,,,,,,,,,,,,,X
+D:X<...............Y.............Y.......YYW....YY..............Y.Y.Y............U.YYY...FF...............................Y..Y....F.F.F.F.F..D,,,,,,,,,,,Z,,A,,,,X
+D:X...............Y.............Y.Y......YY.....YY...............Y...Y...........FFYYY...FF................FYFYFYFYFYFYF..YYYY...F.F.F.F.F.F.D,,,,,,,,,,,,,,,,,,,X
+D:XXXXXXXDDXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXDDXXXXXXXXXXDDXXXXXXXXXXXXXXXXXXXXXDDXDDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDXXXXXXX,,,,,,,,,,,,,,,,,,,X
+D:X..............X..............X..................X...................X.........................XYY..YFFY.......YY.F.XQQq...................X,,,,,,,,,,,,,,,,,,,X
+D:X......Y.......X....YYYYYY....X....YYY......YYY..X...YYYYYYYYYYYYY...X..YYY...Y...YYY..YYY.....XYY..FYYF...FF..YY.FFXQQq.FFF.YYYYYY.F.FF.FFX,,,,,,,,,,,,,,,,,,,X
+D:X.....Y.Y......X..............X....YYY..FF..YYY..X...................X..Y.Y..YYYFFYYY..YYY.....XF...YFFY..YYYY.YY.F.XQQq.....YY..YY..F.FF.FX,,,,,,,,,,,,,,,,,,,X
+D:X..............X..............X.........qq.......X.......qqQqq.......X.........FQQF............XF..............YY.F.XQQq...................X,,,,,,,,,,,,,,,,,,,X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# Starting position
+P:8:2
+

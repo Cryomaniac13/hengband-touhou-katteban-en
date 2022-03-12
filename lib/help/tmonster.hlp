@@ -1,0 +1,33 @@
+モンスター
+
+　慧音「あなたを倒そうと立ち塞がってくる敵について説明しよう。」
+
+    (a) 変愚蛮怒のモンスター        (tmonster.txt)
+    (b) モンスターの分類と記号      (tmonster.txt#MonsterSymbols)
+    (c) モンスターのレベル          (tmonster.txt#MonsterLevel)
+    (d) モンスターの能力            (tmonster.txt#MonsterAbl)
+    (e) モンスターの通常攻撃        (tmonster.txt#MonsterMelee)
+    (f) モンスターの魔法など        (tmonster.txt#MonsterPower)
+    (g) モンスターの思い出と調査    (tmonster.txt#MonsterMemory)
+    (h) ユニークモンスター          (tmonster.txt#Uniques)
+    (i) 配下について                (tmonster.txt#Pets)
+    (j) 騎乗について                (tmonster.txt#Riding)
+    (k) 配下への命令                (tmonster.txt#Order)
+    (l) 友好的なモンスター          (tmonster.txt#Friendly)
+
+    (?) ヘルプシステムの使用法      (jhelpinfo.txt)
+
+
+***** [a] tmonster.txt
+***** [b] tmonster.txt#MonsterSymbols
+***** [c] tmonster.txt#MonsterLevel
+***** [d] tmonster.txt#MonsterAbl
+***** [e] tmonster.txt#MonsterMelee
+***** [f] tmonster.txt#MonsterPower
+***** [g] tmonster.txt#MonsterMemory
+***** [h] tmonster.txt#Uniques
+***** [i] tmonster.txt#Pets
+***** [j] tmonster.txt#Riding
+***** [k] tmonster.txt#Order
+***** [l] tmonster.txt#Friendly
+

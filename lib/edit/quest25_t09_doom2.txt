@@ -1,0 +1,109 @@
+# quest25_t09_doom2.txt
+# a quick creation by Jeff Coleburn <vsp@netaxs.com>
+#↑をいろいろ改変：みやまさ
+
+# Name
+Q:$25:N:Doom Quest 2
+Q:25:N:破滅のクエスト２
+
+# Definition
+Q:$25:Q:6:0:0:0:55:0:0:0:6
+Q:25:Q:6:0:0:0:55:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST25 2]
+Q:$25:T:Byakuren - 'Demons from other worlds are planning to invade
+Q:$25:T:this temple. I tried talking to them many times, but they just
+Q:$25:T:won't listen. It's regrettable, but looks like fighting is the
+Q:$25:T:only choice. However, I have to stay at this temple to protect
+Q:$25:T:weaker youkai. Couldn't you enter their nest and deal with them,
+Q:$25:T:please?'
+Q:25:T:白蓮「異界の悪鬼がこの寺へ侵攻を企てています。
+Q:25:T:何度も対話を試みましたがあちらは聞く耳を持ちません。
+Q:25:T:残念ながら戦うしかないようです。
+Q:25:T:しかしこちらは寺や弱い妖怪を守るのに手一杯で人手が足りないのです。
+Q:25:T:貴方なら悪鬼の巣窟へ侵入して首魁を倒せるかもしれません。お願いできますか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST25 3]
+Q:$25:T:Byakuren - 'The demons are extreminated. You've done splendid
+Q:$25:T:work. Please take this. It's a powerful magic device that can
+Q:$25:T:heal your wounds in an instant.'
+Q:25:T:白蓮「悪鬼たちは退散したようです。見事なお手並みでした。
+Q:25:T:これをお持ち下さい。一瞬で傷を癒やすことのできる強力な魔道具です。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST25 5]
+Q:$25:T:Byakuren - 'You weren't strong enough...
+Q:$25:T:At this point, I'll have to ask other people for help.
+Q:$25:T:My head hurts when I think about what'll happen next, but I
+Q:$25:T:guess I have no choice. In any case, thank you.'
+Q:25:T:白蓮「力及びませんでしたか…
+Q:25:T:事ここに至っては他の有力者達に助力を乞うしかありませんね。
+Q:25:T:その後のことを考えると頭が痛いですが背に腹は代えられません。
+Q:25:T:お疲れ様でした。」
+?:1
+
+# Floor with Manes
+F:a:FLOOR:8:128
+
+# Floor with Imp
+F:b:FLOOR:8:296
+
+# Floor with Flying Skull
+F:c:FLOOR:8:273
+
+# Floor with Arch-Vile
+F:d:FLOOR:8:357
+
+# Floor with Revenant
+F:e:FLOOR:8:555
+
+# Floor with Baron of Hell
+F:f:FLOOR:8:609
+
+# Floor with Iron Lich
+F:g:FLOOR:8:666
+
+# Floor with Maulotaur
+F:h:FLOOR:8:723
+
+# Floor with Hell Knight
+F:i:FLOOR:8:731
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTT..f..a..b..c..d..e..d..c..b..a..b..c..d..e..d..c..b..a%.XXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.XXXXX
+D:Xb...b.b..b.X.......XX..X......X........X......X..........D.....XXXXX
+D:X%XXXXX..c.cX.......XaXX%..b...D........X......X..b.......D.....XXXXX
+D:XaaaaaX.....X.......X.XXX..c...X........X...d..X..........D.....XXXXX
+D:XXXXXaX.....X.......X.XXX......X...T....D......X.b.c......X%%%%%XXXXX
+D:X...XaX.b.TcX.......XXcXX......X........X......X.......c..XeeeeeXXXXX
+D:X<..%aX.....X........XXcXXXDXXXXXXXXXXXXXXDXXXXX..........XabcdeXXXXX
+D:X...XaX.....X..XXXXXDXXcX......XTT...c.cX......X...b......X%%%%%XXXXX
+D:XXXXXaX.ccb.X..XeXX.XXXbX......X...T.dbaX...e..X.......c..X.....XXXXX
+D:XaaaaaX.....X..XX..XX.X.X......X.T.c.cbaX......X.a........Xf...fXXXXX
+D:XXXXXXXXXDXXX..X.XXX.X.XX.bbb..X..d.caaaX......X....a..b..X.....XXXXX
+D:XTXX.......XX..X.Xb.XXXXXXXXDXXXXXXXXXXXDXXXDXXX....g.....X.....XXXXX
+D:XdXX......XX...X.XX.XXXXX......X........X......X.a.c......XT.f.TXXXXX
+D:XDXX.....XX....XX.X.X.XXX......X..aaa...X......X....a.c...X%%%%%XXXXX
+D:X.......XX.....X.XX..X.XX......X...aaa..X......X.........XX.....XXXXX
+D:X......XXTT....XX.XcdX.XX......D....ccc.D...T..X..b...b..XX.....XXXXX
+D:X.....XXXXXXDXXXX..XX.XXX..T...X........X......XX......d.XXg...gXXXXX
+D:X....XXXXXXDXDXXeXX..XXXXXXXXXXXXXXXXXXXXXXXXXX%XX..a...XX......XXXXX
+D:X...XXXXXXXXDXXXXXXXXXXXXXXT..................XXfX...c..XXT....TXXXXX
+D:X..XXf..........e....T...eX.c.................XDXX......XX%%%%%%XXXXX
+D:X.XXXXX...................X....................XXXXX..a.XX%%%%%%XXiXX
+D:X.XX......................Xg..T................XXXXX....XX......XX.XX
+D:X.XX.....d................Xe...................XXXXX.b..XX......XX.XX
+D:X.XX......................X....................XXXXX...XX........%XXX
+D:XdXX..........d..........TX.c..................XXXX...XXTT........XXX
+D:Xd%%................e.....XT....................D....XXTTT..h...TTTXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:8:1
+

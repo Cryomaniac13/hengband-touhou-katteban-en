@@ -1,0 +1,106 @@
+# quest51_t03_maricon.txt
+
+# Name
+Q:$51:N:Marisa Conflict
+Q:51:N:マリサ・コンフリクト
+
+# Definition 
+Q:$51:Q:11:0:0:0:60:0:723:0:6
+Q:51:Q:11:0:0:0:60:0:723:0:6
+
+# Description for quest
+?:[LEQ $QUEST51 2]
+Q:$34:T:There's a library at the Palace of Earth Spirits.
+Q:$34:T:You wanted to sneak in and check out some interesting books,
+Q:$34:T:but the owner has read your intentions.
+Q:$34:T:It's time to go in borrowing through the front door. You've
+Q:$34:T:brought just the right souvenirs to deal with the satori youkai.
+Q:34:T:地霊殿には図書館があるそうだ。
+Q:34:T:面白い本がありそうなので忍び込みたいが、すでに主に意図がばれている。
+Q:34:T:いっそ正面から堂々と借りに行こう。覚妖怪に丁度いい手土産を思いついた。
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST51 3]
+Q:$34:T:You managed to borrow a powerful spellbook in the ensuing chaos.
+Q:34:T:混乱に乗じて強力な魔法書を借り受けることに成功した。
+Q:34:T:
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST51 5]
+Q:$34:T:Looks like she didn't enjoy your souvenirs.
+Q:$34:T:You decide to give up on attacking Palace of Earth Spirits.
+Q:34:T:せっかくの手土産も主のお気には召さなかったようだ。
+Q:34:T:地霊殿の本気の迎撃を前に謹んで辞去することにした。
+?:1
+
+F:p:FLOOR:8:0:723
+
+#光るガラスの床
+F:,:GLASS_FLOOR:10:
+
+#図書館防衛ゴーレム
+F:b:FLOOR:8:f1187
+#図書館防衛ゴーレム大
+F:c:FLOOR:8:f1188
+
+#こいし
+F:a:FLOOR:8:w1131
+#さとり
+F:e:FLOOR:8:w1128
+#お燐
+F:f:FLOOR:8:w1129
+#お空
+F:g:FLOOR:8:w1130
+
+#ゾンビフェアリー
+F:h:FLOOR:8:w15
+#怨霊 
+F:i:FLOOR:8:w1200
+#怨霊(大) 
+F:j:FLOOR:8:w1199
+# 地獄の河童
+F:k:FLOOR:8:w1225
+# 山犬
+F:l:FLOOR:8:w179
+# 山猫
+F:m:FLOOR:8:w180
+# ハシビロコウ
+F:n:FLOOR:8:w1245
+# コモドドラゴン
+F:o:FLOOR:8:w1246
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX..............ccc.<.ccc..............XXX
+D:XXX.....bbb.......cc...cc.......bbb.....XXX
+D:X.....bbbbbbb......ccccc......bbbbbbb.....X
+D:X....bbbbbbbbbcccbbbbbbbbbcccbbbbbbbbb....X
+D:X......bbbbb...c...bbbbb...c...bbbbb......X
+D:X.bb................bbb................bb.X
+D:X.bb....cccc........cccc........cccc...bb.X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X.........................................X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX.....X..XXX..XXX..XXX..XXX.iXXX..XXX....X
+D:XX...X.X..XXX..XXX..XXX..XXX..XXX.iXXX....X
+D:XX...XpX..XXX..XXX..XXX..XXXi.XXX..XXX.i..X
+D:XX...XXX..XXX..XXX..XXX..XXX.iXXXi.XXX..i.X
+D:X.........................ii.hhhhh..i..i..X
+D:XXX.a..........g..........i.hhjjjhh.i.i.XXX
+D:XX.......k.k......ln.e.omi.hhj.f.jhh.i..XXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:2:21
+

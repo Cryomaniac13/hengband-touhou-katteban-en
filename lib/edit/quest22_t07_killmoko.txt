@@ -1,0 +1,92 @@
+# quest22_t07_killmoko.txt
+
+# Name
+Q:$22:N:Assassinate Mokou
+Q:22:N:妹紅への刺客
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$22:Q:6:0:0:0:65:1113:0:0:6
+Q:22:Q:6:0:0:0:65:1113:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST22 2]
+Q:$22:T:Kaguya - 'You look pretty strong.
+Q:$22:T:Wouldn't you do something for me?
+Q:$22:T:It's simple. You just have to kill a certain someone.
+Q:$22:T:　
+Q:$22:T:Please wait.
+Q:$22:T:Don't worry, it's fine. Don't hold back, she's the kind of
+Q:$22:T:person who wouldn't die no matter how many times you kill her.
+Q:$22:T:Also, watch out for potential fire incidents.'
+Q:22:T:輝夜「あら、貴方けっこうやりそうね。
+Q:22:T:ねえちょっと仕事を頼まれてみない？
+Q:22:T:簡単よ。人を一人殺してくるだけ。
+Q:22:T:　
+Q:22:T:待ちなさいよ。
+Q:22:T:大丈夫大丈夫。何度殺しても死なない奴だから遠慮は要らないわ。
+Q:22:T:あ、火事には気を付けてね。ブン屋が煩いから。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST22 3]
+Q:$22:T:Kaguya - 'Mission complete? Well done.
+Q:$22:T:I'm giving you this as a reward.
+Q:$22:T:I don't know what's inside, but it's probably 
+Q:$22:T:not something too weird.'
+Q:22:T:輝夜「上首尾のようね？ご苦労様。
+Q:22:T:ご褒美にこれをあげるわ。
+Q:22:T:何が入っているのか知らないけど、まあ変な物はないでしょ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST22 5]
+Q:$22:T:Kaguya - 'Oh, my.
+Q:$22:T:I guess I won't get anything done if I just sit here
+Q:$22:T:by myself?'
+Q:22:T:輝夜「あらあら。
+Q:22:T:まつかひもない、ってところかしら？」
+?:1
+
+# Grass
+F: :GRASS:8
+F:!:FLOOR:8
+
+# Tree
+F:T:TREE
+
+#a:妹紅
+F:a:FLOOR:8:1113
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTTTT  TTT TTTT  TTT TTTTTTTTTTTTT   TTX
+D:XTTTTTTTT TTTTTTTTXXXXXXXXXXXXXXXXTTTTTTTTTT T   TTX
+D:XTTTT TTTTTTTTTTTTXXXXXXXXXXXXXXXXT  TTTTTT   TTTTTX
+D:X TTTTTTTTTTTTTTTTXXXXXXXXXXXXXXXXTTTTTTTT TTT T TTX
+D:XTTT TTTTT  TTTTTTXXXXXXX!!XXXXXXXTTTTT TTTTTTTTTTTX
+D:XTTTTTTTTTTTTTTTTTTTT   !a!!   TT TTTTTTTTT  TT TTTX
+D:X TTTTTTTTT  TTTTTTTTT        TTTTTTTT TT  TTTTTTTTX
+D:X TTT TT TTTTT TTTTTT T     TT TTT TTTTTTTT   TTTTTX
+D:XTTTTTTTTT TTTTTTT TT TT   TT TTTTTTT TT TTTTTT TTTX
+D:XTTT TTTTTTTTT T TTTTT     TTTTTT TTTTTTT TT TTTTTTX
+D:XTTTTTTT  TT TTTTTTT       TT TTTTT TT TTTTTTTTT TTX
+D:XT TT TTTTTT TTTTTT        TTTTT TTTTTTTTTTTT TTTTTX
+D:XTTTTTTTTTTTTTTTT   T TT T  TTTTTTTT TTTT TTTTTTTTTX
+D:XTTTTT   TTTT TT   TTTT  TT  T TTTT TT TTTTT T TTTTX
+D:XTTT TTTTTTTT    TTTTTTTTTTT  TTT TTTTTT TT TTTT TTX
+D:XT TTTTTTT     TTTTTTTTT TTTT  TTTTT TT TTTTTT TTTTX
+D:XTTT TTT     TTTTTTTT TTTT T T  TTTTTTTTT TTTTTTTTTX
+D:XTTTTTT   TTTTTTTTTTTTTTTTTTT T                    X
+D:XTTTTT   TTTTTTTTTTTT TT  TTTTTTTTTTTTTTT TTTTT TTTX
+D:XTTTT   TTTTTTTT TTTTTTTTTTTTTTTTT TTTTTTTTTTTTTTTTX
+D:XTTT   TTTTTTTTTTTT TTTTT TTT TTTTTTTTT TTT TTTTTTTX
+D:XTT   TTTTTTTTTTTTTTTTT T TTTTTTTTT TTTTTTTTTTTTTTTX
+D:X     TTTTTTTTT TTTTTTTTTTT TTTTTTTTTT TTTTTTT  TTTX
+D:X<  TTTTTTTTTTTTTTTTT TT TT  TTTTTTTTTTTTTTTTTTTTTTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+
+# Starting position
+P:23:2
+

@@ -1,0 +1,36 @@
+戦闘のシステム
+
+　慧音「さあいよいよモンスターとの戦闘だ。
+  戦闘に関するシステムについてやや詳しく説明しよう。
+  あなたが初心者なら分からないところは適当に読み飛ばしていい。」
+
+    (a) 行動順について           (tbattle.txt#Energy)
+    (b) 武器攻撃について         (tbattle.txt#Meleeweapon)
+    (c) 射撃について             (tbattle.txt#Shootingweapon)
+    (d) 格闘について             (tbattle.txt#Martialarts)
+    (e) 投擲について             (tbattle.txt#Throwing)
+    (f) 会心の一撃について       (tbattle.txt#Critical)
+    (g) 補助効果について         (tbattle.txt#Buff)
+    (h) バッドステータスについて (tbattle.txt#BadStatus)
+    (i) 属性について             (tbattle.txt#Attack_type)
+    (j) 弱点について             (tbattle.txt#Weak_point)
+    (k) 低層戦術                 (tbattle.txt#Tactics1)
+    (l) 中層戦術                 (tbattle.txt#Tactics2)
+    (m) 深層戦術                 (tbattle.txt#Tactics3)
+
+    (?) ヘルプシステムの使用法      (jhelpinfo.txt)
+
+
+***** [a] tbattle.txt
+***** [b] tbattle.txt#Meleeweapon
+***** [c] tbattle.txt#Shootingweapon
+***** [d] tbattle.txt#Martialarts
+***** [e] tbattle.txt#Throwing
+***** [f] tbattle.txt#Critical
+***** [g] tbattle.txt#Buff
+***** [h] tbattle.txt#BadStatus
+***** [i] tbattle.txt#Attack_type
+***** [j] tbattle.txt#Weak_point
+***** [k] tbattle.txt#Tactics1
+***** [l] tbattle.txt#Tactics2
+***** [m] tbattle.txt#Tactics3

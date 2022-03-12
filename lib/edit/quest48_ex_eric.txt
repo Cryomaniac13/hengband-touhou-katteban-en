@@ -1,0 +1,87 @@
+#quest48_ex_eric
+# q000eric.txtをEXモード用に改変
+
+# Name
+Q:$48:N:Eric's Stronghold
+Q:48:N:エリックの要塞
+
+Q:$48:Q:1:0:0:1:90:813:0:0:6
+Q:48:Q:1:0:0:1:90:813:0:0:6
+
+#テキストは使わない
+
+# Deep water
+F:W:DEEP_WATER:8
+
+# Tree
+F:T:TREE
+
+# Normal wall
+F:#:GRANITE
+
+# Floor + black knight 
+F:a:FLOOR:8:442
+
+# Floor + ninja
+F:b:FLOOR:8:485
+
+# Floor + Logrus master
+F:c:FLOOR:8:498
+
+# Floor + death knight
+F:d:FLOOR:8:597
+
+# Floor + enchantress
+F:e:FLOOR:8:636
+
+# Floor + sorcerer
+F:f:FLOOR:8:638
+
+# Floor + ultra-elite paladin
+F:g:FLOOR:8:699
+
+#混沌の王族→アンバライトにした
+F:h:FLOOR:8:1178
+
+# Floor + Eric + item
+F:E:FLOOR:8:813:*
+#F:C:FLOOR:8:f820:*
+
+# Trap
+F:^:FLOOR:8:0:0:0:0:*
+
+# Trap or OOD item
+F:$:FLOOR:8:0:*10:0:0:*
+
+# Eric's stronghold
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XTTTTTTTTTTT...........T..TT.TTTTTTTTTTTTTTTTTTTTTTTTT.TTT...........TTTTX
+D:XTTTTTTTTT......WWWWW...T..TTTTT.T..TT.TTTTTT.TT.TTT....T...WWWWW......TTX
+D:XTTTTTTT.......WW#a#WW.......T............TT...............WW#a#WW....T.TX
+D:XTTTT<TT.......W##c##WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW##e##W...TT.TX
+D:XTTT.TT........W#aaa###########.#################.###########aaa#W..TTTTTX
+D:XTT.TT...TT....WafdaD^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DadafW...TT.TX
+D:XTT....TTT.....W#aaa##############D##########################aaa#W....TTTX
+D:XT......TTT....W##e##^^^^^^^^^^^^DbD^^^^^^^^^^^^^^#****c#gg###c##W..TTTTTX
+D:XT....TTT.TT...WW####^############D#############^^#####D#gg#b#D#WW...TTTTX
+D:XT.........TT...WW#a#^#......Dggggggggggggggggg#^^^^^^^^Dgg#bbb#W...TT.TTX
+D:XT.....TT.TT.....W#D#^#...###############################DD##D##W..TT..TTX
+D:XT......TTT.......D^^^#####***DhheeddgggDgggfgggegggdgggDccD***#W..TT...TX
+D:XT........TT......D^^^#####**EDhheeddgggDgggfgggegggdgggDccD***#W.TT....TX
+D:XTTT.......T.....W#D#^#...###############################DD##D##W.TT...TTX
+D:XTTTT...........WW#a#^#......Dggggggggggggggggg#^^^^^^^^Dgg#bbb#W..TT.TTTX
+D:XTT......T.....WW####^############D#############^^#####D#gg#b#D#WW..TTTTTX
+D:XT..TT....T....W##c##^^^^^^^^^^^^DbD^^^^^^^^^^^^^^#****c#gg###d##W...TTTTX
+D:XT.TT..T.TT....W#aaa##############D##########################aaa#W....TTTX
+D:XTTTT..TTT.....WafdaD^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DacfaW...TTTTX
+D:XTTTTTTTT......W#aaa###########.#################.###########aaa#W...TTTTX
+D:XT..TTTT.......W##e##WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW##e##W..TTTTTX
+D:XTT..TT........WW###WW............TTT......................WW#a#WW.TTTTTTX
+D:XTTTTTTTT.......WWWWW.....TTT...TTT.TTTTTT..TTT.TTTT..TTT...WWWWW..TTTTTTX
+D:XTTTTTTTTTTT.TT........TTTT....TT.TTTTTT.TTTT.TTTT.TTTTTTTT.......TTTTTTTX
+D:XTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:5:5

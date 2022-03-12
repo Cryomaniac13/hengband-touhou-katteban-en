@@ -1,0 +1,81 @@
+# quest50_t07_moonvault.txt
+
+Q:$50:N:Lunar Capital Exhibition
+Q:50:N:月都万象展
+
+# Definition 
+#未編集
+Q:$50:Q:3:0:0:0:70:0:234:0:6
+Q:50:Q:3:0:0:0:70:0:234:0:6
+
+# Description for quest
+?:[LEQ $QUEST50 2]
+Q:$50:T:There's an exhibition of Lunarian items at Eientei.
+Q:$50:T:There's very few events that would interest your collector
+Q:$50:T:soul as this one. The item you've set your eyes upon is a
+Q:$50:T:hagoromo moon rabbits have brought from the Moon.
+Q:$50:T:Keep in mind Eientei has very strict security systems.
+Q:50:T:永遠亭で月の物品の展覧会が開かれている。
+Q:50:T:これほどコレクター魂がくすぐられる催しは滅多にない。
+Q:50:T:目当ては月の兎が月から持ってきたという羽衣だ。
+Q:50:T:永遠亭の警備体制はかなり厳重らしい。
+Q:50:T:どんな仕掛けがあるかわからないのでできるだけの準備をして挑もう。
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST50 3]
+Q:$50:T:(This message shouldn't be displayed)
+Q:50:T:(このメッセージは出ないはず)
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST50 5]
+Q:$50:T:(This message shouldn't be displayed)
+Q:50:T:(このメッセージが出たらバグ)
+?:1
+
+# Hard-Locked Glass Door
+#F:+:JAMMED_GLASS_DOOR_7:8
+F:+:GLASS_WALL:12
+
+
+# Normal floor
+F: :FLOOR:8
+# Floor prohibits Teleport
+F:x:FLOOR:12
+
+# Alarm Traps
+F:^:TRAP_ALARM:12
+
+#ガトリング砲
+F:a:FLOOR:12:0:701
+#月のイルメナイト
+F:b:FLOOR:12:0:507
+#永琳の酒
+F:c:FLOOR:12:0:652
+#星条旗
+F:d:FLOOR:12:0:740
+
+#月の羽衣
+F:e:FLOOR:12:0:0:0:234
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXxxxaxxxXXXXXXXxxxbxxxXXXXXXXxxxcxxxXXXXXXXxxxdxxxXXXXXXXxxxexxxXXXXXXXXXXX
+D:XXXXXXXXXXXXXX+++++++XXXXXXX+++++++XXXXXXX+++++++XXXXXXX+++++++XXXXXXX+++++++XXXXXXXXXXX
+D:Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                +xxxxX
+D:Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                +xxxxX
+D:X<xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                +xxxxX
+D:Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                +xxxxX
+D:Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                +xxxxX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:5:3
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+慧音「冒険を開始する前に、あなたは自分が何者なのかを示す必要がある。」
+
+    (a) キャラクターメイキング            (tbirth.txt)
+    (b) 難易度設定                        (tbirth.txt#Difficulty)
+    (c) 主要能力値                        (tbirth.txt#Status_main)
+    (d) その他のパラメータ                (tbirth.txt#Status_other)
+    (e) 種族選択                          (tbirth.txt#Race)
+    (f) 職業選択                          (tbirth.txt#Class)
+    (g) ユニーククラスとは                (tbirth.txt#UniqueClass)
+    (h) 外来人とは                        (tbirth.txt#Outsider)
+    (i) 性格選択                          (tbirth.txt#Personality)
+    (j) 魔法領域の選択                    (tbirth.txt#Realm)
+    (k) ボーナスポイントの割り振り        (tbirth.txt#BonusPoint)
+    (l) 初期オプション設定                (tbirth.txt#BirthOptions)
+    (m) 生い立ちエディタ                  (tbirth.txt#BackgroundEditor)
+    (n) 名前決定                          (tbirth.txt#Name)
+    (o) クイックスタート                  (tbirth.txt#QuickStart)
+
+    (?) ヘルプシステムの使用法            (jhelpinfo.txt)
+
+
+***** [a] tbirth.txt
+***** [b] tbirth.txt#Difficulty
+***** [c] tbirth.txt#Status_main
+***** [d] tbirth.txt#Status_other
+***** [e] tbirth.txt#Race
+***** [f] tbirth.txt#Class
+***** [g] tbirth.txt#UniqueClass
+***** [h] tbirth.txt#Outsider
+***** [i] tbirth.txt#Personality
+***** [j] tbirth.txt#Realm
+***** [k] tbirth.txt#BonusPoint
+***** [l] tbirth.txt#BirthOptions
+***** [m] tbirth.txt#BackgroundEditor
+***** [n] tbirth.txt#Name
+***** [o] tbirth.txt#QuickStart

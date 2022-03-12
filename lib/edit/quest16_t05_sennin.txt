@@ -1,0 +1,116 @@
+# quest16_t05_sennin.txt
+
+# Name
+Q:$16:N:Hermits Aren't Scary
+Q:16:N:仙人なんて怖くない
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$16:Q:6:0:0:0:65:0:0:0:6
+Q:16:Q:6:0:0:0:65:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST16 2]
+Q:$16:T:Kagerou - 'A recently emerged sect of saints around here keeps
+Q:$16:T:on gaining new disciples. We'll have to beat them up before
+Q:$16:T:they pose a threat to us. Break into their territory and make
+Q:$16:T:know how terrifying we youkai are!'
+Q:16:T:影狼「最近現れた聖人の一派が弟子を増やし一大勢力となりつつあるわ。
+Q:16:T:これ以上我々の生活を脅かされる前に叩かないといけない。
+Q:16:T:あのにわか仙人たちの住処に乗り込み、妖怪の恐ろしさを教えてやるのよ！」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST16 3]
+Q:$16:T:Kagerou - 'Very well, I guess they'll be staying quiet from now.
+Q:$16:T:Here's a present from all of us. Use it well.'
+Q:16:T:影狼「よし、これであいつらも当分はおとなしくしてるでしょ。
+Q:16:T:これは皆からのプレゼントよ。これを使ってもっと活躍してね。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST16 5]
+Q:$16:T:Kagerou - 'Uhh... Everyone's alive?
+Q:$16:T:We'll have to stay low. Hermits are scary, so scary...'
+Q:16:T:影狼「うう……みんな生きてる？
+Q:16:T:もうおとなしくしていましょう。怖いわ―仙人怖いわー……」
+?:1
+
+# Grass
+F:;:GRASS
+
+# Tree
+F:T:TREE
+
+# Normal wall
+F:#:GRANITE
+
+# 財宝とか
+F:1:FLOOR:8:0:*1
+F:2:FLOOR:8:0:*5
+F:3:FLOOR:8:0:*7
+F:4:FLOOR:8:0:*10
+
+F:p:FLOOR:8:45
+
+#神子
+F:a:FLOOR:8:1144
+#布都
+F:b:FLOOR:8:1143
+#屠自古
+F:c:FLOOR:8:1142
+
+#新米仙人
+F:e:FLOOR:8:1194
+#仙人
+F:f:FLOOR:8:1195
+
+#小神霊
+F:g:FLOOR:8:984
+F:h:FLOOR:8:1021
+F:i:FLOOR:8:1032
+
+#中神霊
+F:j:FLOOR:8:1040
+#大神霊
+F:k:FLOOR:8:1041
+
+# Castle Montsalvat
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XTT;TTT<;TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XTTTT;.................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;TTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XTT;;..;;;;;;;;;TT;;;;....................................;;;;TTT;;;;TTTTTTTTTTTTTTTTX
+D:XTTT;.;;;TT;;;;TTTT;;T;;XXXXXT;;;;;;;;;;TT;;;;;TTTT;;;;;;............;T;T;TTTTTTTTTTTX
+D:XT....;;TTTT;TTTTTT;TTT;X...XTT;;;;;;;TTXXXXXXXXXTTTTT;;;;;;;;;;;;;;......;;;TTTTTTTTX
+D:XT.;;;;TTTTTTTTTTTTTTT;;X.g.XTTTTTT;TTTTX.......XTTTTTTTT;;TTT;T;T;;T;;;;........TTTTX
+D:XT.;XXXXXXXXXXXXXXXXXXXXX...XXXXXXXXXXXXX.......XXXXXXXXXXXXXXXXXXXXXXXXX;;;.;;;.;TTTX
+D:XT.;X..........h.........h..................g........XX.................X;;;;;;;.TTTTX
+D:XT.;X...X...X...X...X...X...X...X...X...X.........i..XX..........a......XXXXXXXX.;TTTX
+D:XT.;XX..e...e...e.................e.e................XX........b...c....X112211X.;;TTX
+D:XT.;eX..e...e...e........g........efeXX...i.....i....XX.................X123321X.;;TTX
+D:XT...D..e...e...e...f.............e.eXX.....g........XX.................D234432X.;;;TX
+D:XT.;eX..e...e...e............h....efeXX..............XX.................X123321X.;;;TX
+D:XT.;XX..e...e...e.......g......g..e.e..........g.....XX.................X112211X.;;TTX
+D:XT.;X...X...X...X...X...X...X...X...X...X............XX.................XXXXXXXX.;;TTX
+D:XT.;X..i..........h.......h..............i...........XX.................X;;;;;;;.;;;TX
+D:XT.;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......XXXXXXXXXXXXXXXX....XXXXX;;;;;;;.;;TTX
+D:XT.;;;;;;;;;TTTTTTTTX....j.....eee..............XTTTTTTTT;;;;;;X....X;;;;;;TT;;;.;;TTX
+D:XT....i...;;T;TTTTTTX..........eee..............D...TTTThi.gh.gX....X;;;;;TTTT;;.;TTTX
+D:XTTT;;;;;.;T;TTTTT;TX........j.....j.....XXXXXXXXTT.....g.h.i.XXXDDXXX;;TTTTTT;;.;;TTX
+D:XTTTTT;;;i;;TTT;TTTTX....j...............XTTTTTTTTT;TXXXXXXi.jjXX..XX;;;;TTT;;;;.;;;TX
+D:XTTTTTTTg.;TTTTT;TTTX............j.......XTTTTTTT;;TXX....XXjjk.X..XTTT;;;;;;....;;TTX
+D:XTTTTTTT;ih;T;TTTTTTX....................XTTTTT;;;TXX......XX..kX..XTTT;;;;;;.;;;;;TTX
+D:XTTTTT;h;.;g;TTTTTTTX...eee.eee.eee.eee..XXXXXXXXXXX...f.k..XXXXX..X;;;;;;;;;.;;;TTTTX
+D:XTTTgi;WWWW;;;TTTTTTX....f...f...f...f................ffk.k..D.....X..........;TTTTTTX
+D:XTT;;;WWWWW;gTTTTTTTX....................XXXXXXXXXXX...f.k..XXXXXXXX;;;;;;;TTTTTTTTTTX
+D:XTT;;WWWWWWW;TTTTTTTX.....jj...jj........X;;;;;;;;;XX......XX;;;TTT;;;;;TTTTTTTTTTTTTX
+D:XTT;h;WWWWW;TTTTTTTTX....................X;;;TTT;;;;XX....XX;;;;;;;;;TTTTTTTTTTTTTTTTX
+D:XTTT;;hWWWg;TTTTTTTTX....................X;;TTTT;T;;;XXXXXX;;;;;;;;TTTTTTTTTTTTTTTTTTX
+D:XT;TTT;;;;;TTTTTTTTTXXXXXXXXXXXXXXXXXXXXXX;TTTTTT;T;;;;;;;;;;;;TTTTTTTTTTTTTTTTTTTTTTX
+D:XTTTTT;TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:5:5
+

@@ -1,0 +1,99 @@
+# Name
+Q:$55:N:Typhoon Damage Control
+Q:55:N:暴風被害対策任務
+
+# Definition
+Q:$55:Q:6:0:0:0:35:0:0:0:6
+Q:55:Q:6:0:0:0:35:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST55 2]
+Q:$55:T:An unusually large storm is approaching the Human Village.
+Q:$55:T:Looks like that's a typhoon youkai from the Outside World.
+Q:$55:T:You've been given orders to deal with it in secret.
+Q:55:T:例年にない暴風が人里に近づいている。
+Q:55:T:これは台風と呼ばれる外界の妖怪らしい。
+Q:55:T:密約に基づきこれを秘密裏に撃退せよとの指令が下った。
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST55 3]
+Q:$55:T:You've successfully accomplished your mission.
+Q:$55:T:You were given a high quality tokin as a reward.
+Q:55:T:任務は大過なく果たされた。
+Q:55:T:報酬として高級な頭襟を支給された。
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST55 5]
+Q:$55:T:You have failed to stop the storm.
+Q:$55:T:Some people from Human Village went to deal with it,
+Q:$55:T:and even though they managed to stop it, the damage was
+Q:$55:T:severe. The Great Tengu then severely scolded all of you.
+Q:55:T:あなたたちは暴風の被害を抑え込むのに失敗した。
+Q:55:T:始末に手間取っているうちに人里から出てきて気絶した粗忽者がおり、
+Q:55:T:どうにか揉み消して事無きを得たもののあわや大問題となるところであった。
+Q:55:T:あなたたちは全員並んで大天狗から大目玉を食らうはめになった。
+?:1
+
+# ロイガー..は増えるからやめた
+#F:S:DIRT:8:w682
+# 盲目のもの
+F:V:DIRT:8:w580
+# 風のエレメンタル
+F:U:DIRT:8:w526
+
+# 椛(友好) プレイヤーのクラスのときは出ない
+F:s:DIRT:8:f1118
+?:[EQU $CLASS Momizi]
+F:s:DIRT:8:
+?:1
+# はたて(友好) プレイヤーのクラスのときは出ない
+F:t:DIRT:8:f1163
+?:[EQU $CLASS Hatate]
+F:t:DIRT:8:
+?:1
+
+# 白狼天狗(友好)
+F:u:DIRT:8:f660
+# 鴉天狗(友好)
+F:v:DIRT:8:f827
+# 天狗の使い(友好)
+F:w:DIRT:8:f1205
+
+
+F:T:TREE
+F:.:DIRT:8
+F:-:GRASS:8
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTT---TTT............................................TTTTTT-TTT-TTTX
+D:XT-TTTT-TTTT...................UUUUU.................TTTTTT-TTT-TTTTX
+D:XTTTT-T-TTT-T.................U..V..U................T--T-TTT--TTTT-X
+D:X---TTT-TT-TTT...............U..VVV..U..............T--T---T-TTTT-TTX
+D:X-TTT-TTTT---TTT..............U..V..U............-TTTTTT-TTTTTTTTT--X
+D:XTT--TT--TTTTTT-TT.............UUUUU..........----TTTT-TTT-TTTTTTTT-X
+D:XTTTTT--TTTT--TT-TT-........................T--TT-TT-------TT-TTTT--X
+D:XTTTTTTT---TT-TT-TTT---...................T--TT----TTT-TTTTTT-TT----X
+D:XTTTT--T--TT----TT--T------.............TTT-----TT----TTT--TTT--TTTTX
+D:XTT---TTTTTT-TT-T--TT--TT---------..-.-T-------TT--TTT-TTTTTT-TTT---X
+D:XTT-TTT--TTT--TTTT-T----T-T------------T--TTT-TTTTT-T-TTTT--TT-TTTTTX
+D:XTTTTTTTTT---TTT-T---TT-T---T------------TT--TTTT--TTT-TTTTTT-TT----X
+D:XTTTTT-TTT--TTT-T-TTT----T-T-T---------TT-----TTT---TTT-T-TTT-TTTT--X
+D:XTTTT-TTTTT--------TTTTT-T----------------T-TT-T-TTT-TTTT--TTTTTT-TTX
+D:XTTTT-TT-TT-TT-T---TT-TT----T--------------T-TT-TT-TTTTT--TTTTT-T-TTX
+D:XTTT-TTTTTTTT---------TTT-T----------wwwT-T---TTT-TTT-TTTT-TTTTT---TX
+D:X--TTTT-TTTTT--TTT---TT----T--u-u----www-TTTT-T--TT--TTT--TTTT-T-TT-X
+D:XTTTTTTTTT--T--TT-TT-T--T-T--u-s-u------T-TT-TTT---TTT-TTTT-TTTTTTTTX
+D:XT-T--T-TTTT-T-TTT--TTT-T-TTT-u-u----vtv--TT----TTTTT-TTT-TTT-TTTTT-X
+D:XTTTTT-TTT---TT---TTT---T-T-T----------TT-----TTTT--T--TTTTT-TTT--T-X
+D:XTT-TTT--T-----TTT-T-TTT--TT-----------T-TT-TTTTTTT-T-TTT--TTTT-T-TTX
+D:XTTT---TT-TT-T-----TT-TT-TT------<------T--T-TTTT--TTT-T-TTTT-T-TTT-X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+# Starting position
+P:20:33
+

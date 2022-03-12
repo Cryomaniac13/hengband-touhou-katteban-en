@@ -1,0 +1,18 @@
+慧音「魔法や特技、レイシャルパワーについて説明しよう。」
+
+    (a) 魔法と特技とレイシャルパワー      (tmagic.txt)
+    (b) 魔法の学習と使用                  (tmagic.txt#MagicUse)
+    (c) 攻撃魔法の範囲                    (tmagic.txt#MagicBlast)
+    (d) 魔法の領域                        (tmagic.txt#Realm)
+    (e) 魔法領域への適性                  (tmagic.txt#RealmApt)
+    (f) 魔法の熟練度                      (tmagic.txt#MagicSkill)
+
+    (?) ヘルプシステムの使用法            (jhelpinfo.txt)
+
+
+***** [a] tmagic.txt
+***** [b] tmagic.txt#MagicUse
+***** [c] tmagic.txt#MagicBlast
+***** [d] tmagic.txt#Realm
+***** [e] tmagic.txt#RealmApt
+***** [f] tmagic.txt#MagicSkill

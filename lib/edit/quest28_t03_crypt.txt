@@ -1,0 +1,168 @@
+# quest28_t03_crypt.txt
+
+# Name
+Q:$28:N:The Royal Crypt
+Q:28:N:王家の墓
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$28:Q:1:0:0:5:85:776:0:0:6
+Q:28:Q:1:0:0:5:85:776:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST28 2]
+Q:$28:T:Satori - 'I'm having trouble sleeping lately, since I'm reading
+Q:$28:T:ominous thoughts somewhere from below. I've looked there and 
+Q:$28:T:discovered some old ruins infested by powerful evil spirits.
+Q:$28:T:My pets have established a route leading there, but the enemies
+Q:$28:T:ended up too strong for them to defeat. Wouldn't you do something
+Q:$28:T:about it?
+Q:$28:T:Defeating five Archliches - powerful magicians - should
+Q:$28:T:get the job done.'
+Q:28:T:さとり「最近下の方から禍々しい思念が伝わってきて夢見が悪いのです。
+Q:28:T:探ってみると地下深くに遺跡らしいものが出現し、
+Q:28:T:そこにかなり強力な悪霊が巣食っていました。
+Q:28:T:ペット達に言って何とかそこまでの通路は作りましたが、
+Q:28:T:いざ倒そうとすると予想以上に厄介な敵でどうにも対処に困っています。
+Q:28:T:貴方ならなんとかできますか？
+Q:28:T:アーチリッチという名の強力な術師を五体全て倒してくれれば結構です。
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST28 3]
+Q:$28:T:Satori - 'Thank you very much. Finally, I can sleep well.
+Q:$28:T:By the way, I've heard there was plenty of treasure in those
+Q:$28:T:ruins? Since it was my pets who established the route, that is
+Q:$28:T:going to be your reward.
+Q:$28:T:
+Q:$28:T:...That won't do it? Very well, take this item then.'
+Q:28:T:さとり「ありがとうございます。これで久しぶりに安眠できそうです。
+Q:28:T:ところで遺跡にはなかなかの宝が眠っていたようですね？
+Q:28:T:そこまでの道を開いたのはこちらのペットなのでそれを報酬ということにしましょう。
+Q:28:T:
+Q:28:T:……駄目ですか。ではこれを持って行ってください。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST28 5]
+Q:$28:T:Satori - 'You don't have to tell me, I understand. I don't
+Q:$28:T:even need to read your mind. Those evil spirits that chased
+Q:$28:T:you out are now rampaging through the town. It's going to be
+Q:$28:T:so much trouble...'
+Q:28:T:さとり「……言わなくてもわかります。というか心を読まなくてもわかります。
+Q:28:T:なにしろ貴方を追ってきた悪霊たちが街で大暴れしているのですから。
+Q:28:T:街の者達にかなり大きな借りを作ることになりそうですよ。全く面倒な……」
+
+?:1
+
+# Floor, dark, no teleport
+F:,:FLOOR:12
+
+# Deep water
+F:W:DEEP_WATER:12
+
+# Locked door (power 6)
+F:+:LOCKED_DOOR_7:12
+
+# Broken door
+F:':BROKEN_DOOR:12
+
+# Trap
+F:^:FLOOR:12:0:0:0:0:*
+
+# Normal wall
+F:#:GRANITE:12
+
+
+# Floor + crypt creep 
+F:a:FLOOR:12:124
+
+# Floor + phantom beast 
+F:b:FLOOR:12:385
+
+# Floor + greater mummy 
+F:c:FLOOR:12:522
+
+# Floor + grey wraith 
+F:d:FLOOR:12:554
+
+# Floor + master vampire 
+F:e:FLOOR:12:520
+
+# Floor + crypt thing 
+F:f:FLOOR:12:577
+
+# Floor + black wraith 
+F:g:FLOOR:12:607
+
+# Floor + monastic lich 
+F:h:FLOOR:12:611
+
+# Floor + nether wraith 
+F:i:FLOOR:12:612
+
+# Floor + vampire lord
+F:j:FLOOR:12:623
+
+# Floor + master lich 
+F:k:FLOOR:12:658
+
+# Floor + iron lich 
+F:l:FLOOR:12:666
+
+# Floor + dread 
+F:m:FLOOR:12:667
+
+# Floor + dreadmaster
+F:n:FLOOR:12:690
+
+# Floor + lesser black reaver
+F:o:FLOOR:12:694
+
+# Floor + demilich
+F:p:FLOOR:12:742
+
+# Floor + eye druj
+F:q:FLOOR:12:749
+
+# Floor + skull druj
+F:r:FLOOR:12:750
+
+# Floor + shadowlord
+F:s:FLOOR:12:774
+
+# Floor + archlich
+F:t:FLOOR:12:776
+
+# Floor + black reaver
+F:u:FLOOR:12:798
+
+# up staircase
+F:<:UP_STAIR:12
+
+# The Royal Catacoombs
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:Xf,,X,XbXaaaaaX,#,,,,,X,+,,,,,,#,,#u#,,+,,,,,,,,,,,,,,,,,,,,,,,,+,,,,,X
+D:X,,,X,XbXaaaaaX,X,,s,,X,XXXXXXXX,,###,,XXXXXXXXXXXXXXXXXXXXXXXXXX,###,X
+D:XXXX',#bX#aaaXX,XX,,,XX,X##,,,,XX,,,,,XX^^^^^^^^^^^^^^^^^^XX#X#X#,#u#,X
+D:X,,,,,XbbXXaXX,,,XX,XX,,,XX,,t,,XX,,,XX^XXXXXXXXXXXXXXXXX^X#X#X#X,###,X
+D:XXXXX,X#bbX,X,,,,,X,X,,,,,X,,,,,,XXXXX^^Xt#p#p#o#o#l#l#k#^#XXXXXX,,,,,X
+D:X,X,XX,XXXX,X,,t,,X,X,,s,,X,,t,,XXqXrXX^XXXXXXXXXXXXXXXXX^XXXqXrXX,,,,X
+D:X,,,,XX,,,,,X,,,,,X,#,,,,,X,,,,XX.....XX^^^^^^^^^^^^^^^^^^XX.....XXX+XX
+D:X,,,,,XXXXX,XXXXXXXXXXXXXXXXXXXX.......XXXXXXXXXXXXXXXXXXXX.......Xj,jX
+D:X,,,,,+,,,,,X###################.......##########<#########.......XX,XX
+D:X,,,,,XXXXX#X#XXXXXXXXXXXXXXXXXX.......XXXXXXXXXXXXXXXXXXXX.......Xj,jX
+D:X,,,,XX,,,X,X,+,,,,,X,,,,,+,,,,XX.....XXWWWWWWWWWWWWWWWWWWXX.....XXX+XX
+D:X,X,XX,dd,X,X,X,XXX,X,X#X,X,XXX,XXrXqXXWXXXXXXXXXXXXXXXXXXWXXrXqXX,,,,X
+D:XXXXX,ggd,X,X,X,Xm#,X,Xm#,X,Xm#X,XXXXXWXX,,X,X,X,X,X,X,X,XXWXXXXX,####X
+D:X,,,+,igd,,,X,X,X#X,X,XXX,X,XnmX,+,,,+WX,t,'^s^'^n^'^n^',,#W+,,,+,#oooX
+D:XX,XX,ggd,X,X,X,,,,,+,,,,,X,XXXX,XXXXXWXX,,X,X,X,X,X,X,X,XXWXXXXX,####X
+D:X,,,XX,dd,XXX#XXXXXXXXXXXXX,,,,,XX,,,XXWXXXXXXXXXXXXXXXXXXW#X,,,XX,,,,X
+D:XXX,,XX,,,XeXeXeXeXeX^^^^^XXX+XXX,#+#,XXWWWWWWWWWWWWWWWWWWXX,#+#,XXXXXX
+D:Xb##,,XXXXX+X+X+X+X+X^,,,^Xn+,+nX,#s#,XXXXXXXXXXXXXXXXXXXXX,,#s#,,X^^^X
+D:Xbb#X,,,,,,,,,,,,,,,X^,,,^XXX,XXX,###,+^^^^^^^^^^^^^^^^^^^+,,###,,#^^^X
+D:XbbbX,X,X,X,X,X,X,X,X^^^^^#n+,+nX,,,,,XcXcXcXcXcXcXcXcXcXcX,,,,,,,X^^^X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:9:3
+

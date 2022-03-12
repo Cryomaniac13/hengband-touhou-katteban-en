@@ -1,0 +1,41 @@
+# 
+
+# Name
+Q:$36:N:The Trump Card is Always a Bad Move
+Q:36:N:切り札はいつだって悪手
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$36:Q:1:0:0:1:70:1279:0:13
+Q:36:Q:1:0:0:1:70:1279:0:13
+
+# Description for quest
+?:[LEQ $QUEST36 2]
+Q:$36:T:Marisa - 'Hey, won't you mind taking a request from me?
+Q:$36:T:There's a route to Dream World near the mountain lake.
+Q:$36:T:Go there and investigate.
+Q:$36:T:If there's some bad person in the depths, defeat them.
+Q:$36:T:Good luck.'
+Q:36:T:魔理沙「なあ、私からの依頼を受けてみる気はないか？
+Q:36:T:山の湖の近くに夢の世界へ通じる通路があるんだが、
+Q:36:T:そこに行って調査をしてきて欲しい。
+Q:36:T:もし奥に悪そうな奴がいたら倒してくれ。よろしく頼んだぜ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST36 3]
+Q:$36:T:'A hell goddess...?
+Q:$36:T:You're amazing, being able to defeat someone like that.
+Q:$36:T:I actually was asked to do this in first place, but I felt
+Q:$36:T:something was off and wasn't interested.
+Q:$36:T:Oh, almost forgot about your reward.
+Q:$36:T:I've found it at the bottom of the lake; it looks valuable,
+Q:$36:T:but it's hard for me to use. Don't hesitate to take it.'
+Q:36:T:「地獄の女神……だと？
+Q:36:T:そんなのを倒すとは凄いなお前。
+Q:36:T:元々は私が他から受けた依頼だったんだが、
+Q:36:T:どうもこの件は何から何まで胡散臭くて気に入らなかったんだよな。
+Q:36:T:おっと報酬を忘れるところだった。
+Q:36:T:湖の底から見つけた値打ち物だが私には使いづらくてな。
+Q:36:T:遠慮なく持って行ってくれ。」
+?:1
+

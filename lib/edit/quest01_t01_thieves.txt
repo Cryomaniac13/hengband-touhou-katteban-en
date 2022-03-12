@@ -1,0 +1,68 @@
+# quest01_t01_thieves.txt
+
+# Name
+Q:$1:N:Thieves Hideout
+Q:1:N:盗賊の隠れ家
+
+# Definition
+Q:$1:Q:6:0:0:0:5:0:0:0:2
+Q:1:Q:6:0:0:0:5:0:0:0:2
+
+# Description for quest
+?:[LEQ $QUEST1 2]
+Q:$1:T:Akyuu - 'Lately, a band of thieves has been committing robberies
+Q:$1:T:in the village. Looks like the vacant house on village outskirts
+Q:$1:T:is their base of operations. Villagers will start getting
+Q:$1:T:anxious if this keeps up, so could you please take care of them?'
+Q:1:T:阿求「最近見覚えのないならず者が里で盗みを働いているのです。
+Q:1:T:どうやら町外れの空き家が根城になっているようです。
+Q:1:T:あまり事を大きくしても皆が不安になりますので、
+Q:1:T:あなたが彼らを追い払って下さいませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST1 3]
+Q:$1:T:Akyuu - 'Thank you for your hard work. I guess you can't just leave
+Q:$1:T:a vacant house unattended. Are you planning to explore the cave
+Q:$1:T:that had recently appeared? Feel free to use that house as your base.'
+Q:1:T:阿求「お疲れ様でした。
+Q:1:T:やはり空き家を放置しておくと何かと物騒ですね。
+Q:1:T:あなたも最近出現した例の洞窟を探索するおつもりなのですね？
+Q:1:T:あの家を拠点として使っていただいても構いませんよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST1 5]
+Q:$1:T:This message should not appear, this is a bug
+Q:1:T:このメッセージが出たらバグ
+?:1
+
+# Floor with Novice rogue
+F:a:FLOOR:8:44
+
+# Floor with Bandit
+F:b:FLOOR:8:150
+
+F:j:FLOOR:8:0:*7
+
+#このクエスト再挑戦時にはアイテムが落ちていないようにする
+?:[EQU $RETRY1 1]
+F:T:FLOOR:8:
+F:j:FLOOR:8:
+?:1
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXX
+D:X....a....X..jX
+D:X.........D...X
+D:X.........Xb..X
+D:XXXXX.....XXXXX
+D:XT..D........aX
+D:X.b.X.........X
+D:XXXXX.........X
+D:X<..D.........X
+D:XXXXXXXXXXXXXXX
+
+# Starting position
+P:8:1
+

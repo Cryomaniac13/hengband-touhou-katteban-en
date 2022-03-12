@@ -1,0 +1,89 @@
+# Name
+Q:$57:N:Moriya Schemes I
+Q:57:N:守矢の策動Ⅰ
+
+# Definition
+Q:$57:Q:1:0:0:5:20:1307:0:0:6
+Q:57:Q:1:0:0:5:20:1307:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST57 2]
+Q:$57:T:Kanako - 'The frogs at Great Toad Pond are attacking by the
+Q:$57:T:hunger-inducing hidarugami. I cannot overlook this threat to 
+Q:$57:T:my allies on the mountain. Drive the evil spirits out in the
+Q:$57:T:name of Moriya Shrine! Also, be sure to bring lots of food
+Q:$57:T:with you.'
+Q:57:T:神奈子「大蝦蟇の池の蛙が飢餓をもたらすヒダル神に襲われているという。
+Q:57:T:山の仲間の危機とあっては見過ごしてはおけません。
+Q:57:T:さあ、守矢神社の名において悪霊たちを懲らしめるのです！
+Q:57:T:あ、ちゃんと食料を沢山持っていくのよ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST57 3]
+Q:$57:T:Kanako - 'We managed to set up a branch shrine near the
+Q:$57:T:shrine by that pond. That'll give us more faith from the
+Q:$57:T:Human Village. Well down. Take this.'
+Q:57:T:神奈子「あの池の祠の横にうちの分社を置けることになったわ。
+Q:57:T:これで人里の信仰を増やす足がかりがまた一つできたわね。
+Q:57:T:ご苦労様。これを取らせましょう。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST57 5]
+Q:$57:T:Kanako - 'In the end, the Great Toad came out and swallowed
+Q:$57:T:all of the evil spirits. We missed such a good opportunity...'
+Q:57:T:神奈子「結局池の大蝦蟇が出てきて悪霊を全部呑んでしまったようね。
+Q:57:T:まったく、せっかくの機会を逸するとは不甲斐ないわ。」
+
+?:1
+
+# Grass
+F:;:GRASS
+
+# Dirt
+F:,:DIRT:8:
+
+# Tree
+F:T:TREE
+
+
+# 水+アマガエル友好
+F:q:DEEP_WATER:8:f56
+
+# 水+ピンクガエル友好
+F:r:DEEP_WATER:8:f121
+
+# 水+蝦蟇友好
+F:s:DEEP_WATER:8:f1309
+
+# 水+ヒダル神
+F:t:DEEP_WATER:8:1307
+
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X;T;TTTTWWqWWsWWWWWWWWWWWWWWWWWWWqWWWWWT;TTTT;TTT;TTTT;TTX
+D:XTTTTTTTWWWWWWWWWWWqWTTWWWqWWWWWWWWWWT;;TTTTTT;T;;TTTTTT;X
+D:XT;;WWWWWWWqWWtWWWWWWTTWWWWWWWtWWWWWT;T;;T;TT;T;;;;TT;TTTX
+D:XTWWWWrWWWWWWWWWWWsWWWrWWWWWsWWWrWWWWWTTT;;;T;TT;TTTT;TTTX
+D:XTTWWWWWWWWWWWWW;;WWWWWWWtWWWWWWWWWWTTTTTTTTTTTTTTTTTTTTTX
+D:XTT;TWWWWsWWWWWW;;WWWWWWWWWWWWWWWWW;T;TTTTTTTTTTT;TT;;TTTX
+D:XT;T;TTWWWWWWtWWWqWWWWtWWWWWWWWWWW;T;T;;;;T;T;;TT;TTTT;;;X
+D:X;T;TTT;TTWWWWWWWWWWWWWWWWrWWWWWWW;T;TT;;;;T;TTTT;;T;TTTTX
+D:XT;;TTTT;;TWWWWWWWWWWWWWWWWWWWWTTT;TT;TT;TTT;;TTTTT;TTTT;X
+D:XT;TTT;;TTTTTTWWWWWWWWWWWWWWWWTTTTTT;TTTTT;TT;TT;T;;;TTTTX
+D:X;;TTT;TTT;;T;;XX.;,,;;,;,;,;TTTTTTT;TT;T;T;T;T;T;TTT;...X
+D:X;TT;TTTTTT;;T;X....;;;;;;;;;TTT;;T;TTT;TTT;TTTTTTT;T;.<.X
+D:XT;TTTTT;TTT;TTXX.T..........TT;TT;;;;;T;;;;;;TT;;;......X
+D:X;T;T;TTT;;TTT;T;TTT;.......TTT;TTTTTTTTTTTTTTTTT.....TT;X
+D:X;T;T;TT;T;T;;TTT;TTT;T...;TTTT;;TTT;;T;T;TTTTT....TTTTTTX
+D:X;TTT;TTT;;TTTTT;TTT;;T...TTT;;;T;TT;TTTT;T;T....TT;T;TTTX
+D:XTT;;TT;TTT;;T;;TTT;TT;....;TTTT;TTTTT;;;TT...TT;;TT;TT;TX
+D:XTTT;TTTTT;T;;T;TT;T;T;;....TT.......TTTT....;;TTTTTTTT;TX
+D:X;T;TT;TT;T;TTTTTTTTTTT;;;.................TTT;TT;T;TTT;;X
+D:XTTTT;;TTT;;T;;;TTT;T;T;T.....T;;TTTT...;TTT;TTT;TT;;TTT;X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:13:55
+

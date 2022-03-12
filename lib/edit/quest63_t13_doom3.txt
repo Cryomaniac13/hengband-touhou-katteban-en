@@ -1,0 +1,119 @@
+# Name
+Q:$63:N:Doom Quest 3
+Q:63:N:破滅のクエスト３
+#本家激戦場クエストマップを流用
+
+# Definition
+Q:$63:Q:1:0:0:1:70:816:0:0:6
+Q:63:Q:1:0:0:1:70:816:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST63 2]
+Q:$63:T:Keiki - 'The animals are again attacking the Primate Garden.
+Q:$63:T: They have to know that my idols are impervious to spiritual
+Q:$63:T: attacks, so probably they've brought some help. Wouldn't
+Q:$63:T: you go to the front lines and take a look? Of course,
+Q:$63:T: I don't mind if you defeat that support as well.'
+Q:63:T:袿姫「畜生どもがまた霊長園に攻めてくるらしい。
+Q:63:T:　私の偶像達には霊体の攻撃なんて効かないってことは奴らも分かってるし、
+Q:63:T:　多分また何処からか助っ人を連れてきているはず。
+Q:63:T:　ちょっと奴らの前線基地へ様子を見に行ってくれないか？
+Q:63:T:　もちろん助っ人を倒してしまっても構わないわよ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST63 3]
+Q:$63:T:Keiki - 'I can't believe you actually took it down.
+Q:$63:T: The strength on Human Realm residents is truly unbelievable.
+Q:$63:T: Well, I have to reward you with something.
+Q:$63:T: Here's my newest work, please take it.'
+Q:63:T:袿姫「まさか本当に倒してくるなんて、
+Q:63:T:　人間界の住人の強さはとんでもないわね。
+Q:63:T:　さて、何か褒美を取らさないとね。
+Q:63:T:　私の新作だったんだけど貴方にあげるわ。」
+Q:63:T:　
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST63 5]
+Q:$63:T:Keiki - 'That's the kind of weapons they use in the 
+Q:$63:T: Outside World? It's powerful, but it's lacking in beauty.
+Q:$63:T: I'll have to work fast and develop an explosion-proof 
+Q:$63:T: sculpture. I'll have to tell Mayumi to revise her formation...
+Q:$63:T: 
+Q:$63:T: Even so, did those animal ghosts really call in
+Q:$63:T: something like this to take over us?'
+Q:63:T:袿姫「外の世界ではあんな武器が使われているのか。
+Q:63:T:　強力だけど美しさに欠けているわね。
+Q:63:T:　急いで防爆構造の開発を進めましょう。
+Q:63:T:　磨弓に言って陣形の見直しもさせないと……
+Q:63:T:　
+Q:63:T:　それにしてもあの畜生ども、
+Q:63:T:　あんなものを呼び込んで手綱を握れるつもりでいるのかしら？」
+?:1
+
+#レヴナント
+F:W:FLOOR:8:555
+
+#地獄の公爵
+F:b:FLOOR:8:609
+
+#地獄の騎士
+F:c:FLOOR:12:731
+
+#マウロタウロス
+F:w:FLOOR:12:723
+
+# サイバーデーモン(ターゲット)
+F:M:FLOOR:12:816
+
+# Trap
+F:^:FLOOR:8:0:0:0:0:*
+
+# Trees
+F:T:TREE
+
+# No tele
+F:s:FLOOR:12
+
+# Wall
+F:#:GRANITE:8
+
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTT.TTTT..XTT^^T^^^T^^T^^T^^^T^^^TTT^^^TTTT^^TTTTT^^^^TTTTTTTTTX
+D:XT..TT.TTT.TTT.X^TTTT^TTTTT^TTTTTTTTTTTTTTTTTTT^TTT^TTTTTTTTTTTTTTT^X
+D:XTTT....TT.....X^TTTTTTTT^TTTTT^TTT^TTTTTTT^TTT^TTTTT^TTTT^TT^TT^TT^X
+D:XT..TTT..T.....X^TTTTT^TTTTTT^TTTTTT^TT^TTTT^TTTTTTTWTT^T^TTTTTTT^T^X
+D:XTT...TTT....T^X^TTT^TTTTTT^TTTTTT^TTTTTTTWTTTTTT^TTTTTTTTT^TTT^T^T^X
+D:XTT.TT.TT.T..T.X^WTTTTTTTTTTTTT^XXXXX^TTTTTTTTTWTTTTTTTTT^XXXXX^T^^^X
+D:XT.T........T..X............b.b^XsbsX^^^^^^^^^^^^^^^^^^^^^XscsX^^^TTX
+D:XTT.......T....XXXXXXXXXXXX^^^^^XsssXXXXXXXXXXXXXXXXXXXXXXXsssX^^TT^X
+D:XT.T...........................XXXXsssssssssssssssssssssssssXXXTTT^^X
+D:X...................X.X.X.......^^XXssssswsssssssssssssssssXX^^^TTT^X
+D:X....W.....^........................ssssssssssssssssssssssXX^TTTT^T^X
+D:X...................................ssssssssssssssssssssssX^^TTT^TTTX
+D:X...........W.......X.X.X...........ssssssssssssssssssssssXTTTTTTTTTX
+D:X......W............................sssssssssssMsssssssssssTTTTTTTTTX
+D:X...........^.......X.X.X...........ssssssssssssssssssssssXTTTTTTTTTX
+D:X............^..^...................ssssssssssssssssssssssX^^TTTTTT^X
+D:X.............W.^...................ssssssssssssssssssssssXX^^TT^^T^X
+D:XTTT..........^.....X.X.X.......^^XXssssswsssssssssssssssssXX^^^TTT^X
+D:XTTT..........W................XXXXssssssssssssssssssssssssXXXTTT^^^X
+D:XTTT..........WXXXXXXXXXXXX^^^^^XsssXXXXXXXXXXXXXXXXXXXXXXsssX^^^TTTX
+D:XTTTTT....^...WX^........^..b.b^XsbsX^^^^^^^^^^^^^^^^^^^^XscsX^TTT^^X
+D:XTTTTTT........X^TTTTTTTTTTT^TT^XXXXX^WTWTWTWTTTTTTWTWTW^XXXXX^^^^TTX
+D:XT.....XXXXXXXXX^TTTT^TTTTT^TTTTTTTTTTTTTTTTTTT^TTT^TTTTTTTTTTTTTTT^X
+D:XT.............X^TTTTTTTT^TTTTT^TTT^TTTTTTT^TTT^TTTTT^TTTT^TT^TT^TT^X
+D:XT<............X^TTTTT^TTTTTT^TTTTTT^TT^TTTT^TTTTTTTTTT^T^TTTTTTT^T^X
+D:XTT..........T^X^TTT^TTTTTT^TTTTTT^TTTTTTTTTTTTTT^TTTTTTTTT^TTT^T^T^X
+D:XTTT....^......X^TT^TT^TTTTTTTT^^^^^^^TTTT^TTTTTT^TTTT^T^^^^^^^T^TT^X
+D:XTT.T.T.TT^TTTTX^TTTTTTTTTTTT^TTTTTTTTTTT^TTTTTTTTTTTTTTTTTTTT^T^^T^X
+D:XTTTTTTTTTTTTTTX^^TTT^TTTTTTT^TTT^TTTTT^TT^^^TT^TTTTTTTTTT^T^TTTTTT^X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:25:3
+
+

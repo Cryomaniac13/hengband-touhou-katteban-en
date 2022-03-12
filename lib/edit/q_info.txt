@@ -1,0 +1,258 @@
+# File: q_info.txt
+
+# Includes all the quest files
+
+# Quest feature preferences
+%:q_pref.txt
+
+#ここから下は、p_ptr->inside_questの値により対応するクエストのファイルだけ読み込まれる
+
+# 変更　盗賊のアジト
+?:[EQU $QUEST_NUMBER 1]
+%:quest01_t01_thieves.txt
+
+# 変更　オーククエ
+?:[EQU $QUEST_NUMBER 2]
+%:quest02_t01_orc.txt
+
+# 変更　ログルス使い+α
+?:[EQU $QUEST_NUMBER 3]
+%:quest03_t02_outsiders.txt
+
+# 変更　幽霊屋敷
+?:[EQU $QUEST_NUMBER 4]
+%:quest04_t03_haunted_house.txt
+
+# 変更　謎の瘴気
+?:[EQU $QUEST_NUMBER 5]
+%:quest05_t10_vapor.txt
+
+# 変更　ミミック
+?:[EQU $QUEST_NUMBER 6]
+%:quest06_t08_mimic.txt
+
+# 変更　デスソード
+?:[EQU $QUEST_NUMBER 7]
+%:quest07_t08_deathsword.txt
+
+# 変更　Oberon→下水道
+?:[EQU $QUEST_NUMBER 8]
+%:quest08_t01_sewer.txt
+
+# 変更　破滅1
+?:[EQU $QUEST_NUMBER 9]
+%:quest09_t04_doom1.txt
+
+# 変更　ツパイ
+?:[EQU $QUEST_NUMBER 10]
+%:quest10_t01_tupai.txt
+
+# 　クローン地獄
+?:[EQU $QUEST_NUMBER 11]
+%:quest11_t08_clone.txt
+
+#ドラゴン退治
+?:[EQU $QUEST_NUMBER 12]
+%:quest12_t05_chaos_wyrm.txt
+
+# 移動　柳じじい
+?:[EQU $QUEST_NUMBER 13]
+%:quest13_t07_oldwillow.txt
+
+
+# 変更　火竜討伐
+?:[EQU $QUEST_NUMBER 14]
+%:quest14_t03_shootingstar.txt
+
+# 京丸牡丹求む
+?:[EQU $QUEST_NUMBER 15]
+%:quest15_t04_deliver_hematite.txt
+
+# 仙人なんて怖くない（モンサルバトから変更）
+?:[EQU $QUEST_NUMBER 16]
+%:quest16_t05_sennin.txt
+
+# 墓地警備員急募
+?:[EQU $QUEST_NUMBER 17]
+%:quest17_t09_gravedancer.txt
+
+# 大亀退治
+?:[EQU $QUEST_NUMBER 18]
+%:quest18_t04_fastitocalon.txt
+
+# 変更　古い城
+?:[EQU $QUEST_NUMBER 19]
+%:quest19_t02_oldcastle.txt
+
+# 変更　鏡の国の怪物
+?:[EQU $QUEST_NUMBER 20]
+%:quest20_t10_lookingglass.txt
+
+# 変更　フラン
+?:[EQU $QUEST_NUMBER 21]
+%:quest21_t04_flandre.txt
+
+# 妹紅への刺客
+?:[EQU $QUEST_NUMBER 22]
+%:quest22_t07_killmoko.txt
+
+# 輝夜への刺客
+?:[EQU $QUEST_NUMBER 23]
+%:quest23_t01_killguya.txt
+
+# ミスリル探索
+?:[EQU $QUEST_NUMBER 24]
+%:quest24_t09_deliver_mithril.txt
+
+# 破滅2　移動
+?:[EQU $QUEST_NUMBER 25]
+%:quest25_t09_doom2.txt
+
+# 変更　ゲリラライブ
+?:[EQU $QUEST_NUMBER 26]
+%:quest26_t01_live.txt
+
+# ダークエルフの王　移動
+?:[EQU $QUEST_NUMBER 27]
+%:quest27_t06_darkelf.txt
+
+# 王家の墓 
+?:[EQU $QUEST_NUMBER 28]
+%:quest28_t03_crypt.txt
+
+# 神への挑戦
+?:[EQU $QUEST_NUMBER 29]
+%:quest29_t02_moriya_dedication.txt
+
+# 宴会幹事
+?:[EQU $QUEST_NUMBER 30]
+%:quest30_t05_deliver_alcohol.txt
+
+# 狐狸戦争
+?:[EQU $QUEST_NUMBER 31]
+%:quest31_t06_kori.txt
+
+# お尋ね者を捕まえろ
+?:[EQU $QUEST_NUMBER 32]
+%:quest32_t02_wanted_seija.txt
+
+# 増殖地獄　移動
+?:[EQU $QUEST_NUMBER 33]
+%:quest33_t06_spawning_pit.txt
+
+# さとりコンフリクト
+?:[EQU $QUEST_NUMBER 34]
+%:quest34_t03_satocon.txt
+
+# ようこそ幻想郷へ
+?:[EQU $QUEST_NUMBER 35]
+%:quest35_t05_wanted_sumireko.txt
+
+# ヘカーティア退治
+?:[EQU $QUEST_NUMBER 36]
+%:quest36_t10_hecatia.txt
+
+# 紫
+?:[EQU $QUEST_NUMBER 37]
+%:quest37_yukari.txt
+
+# オベロン（移動）
+?:[EQU $QUEST_NUMBER 38]
+%:quest38_oberon.txt
+
+# サーペント（移動）
+?:[EQU $QUEST_NUMBER 39]
+%:quest39_serpent.txt
+
+
+# Random quests (always adressed with number 40)
+#40-48はランクエ用に予約されている
+?:[EQU $QUEST_NUMBER 40]
+%:q_random.txt
+
+# 月都万象展(魔理沙専用)
+?:[EQU $QUEST_NUMBER 50]
+%:quest50_t07_moonvault.txt
+
+# マリサ・コンクリフト(魔理沙専用)
+?:[EQU $QUEST_NUMBER 51]
+%:quest51_t03_maricon.txt
+
+# 宝物庫再実装
+?:[EQU $QUEST_NUMBER 52]
+%:quest52_t11_vault.txt
+
+# 五つの難題
+?:[EQU $QUEST_NUMBER 53]
+%:quest53_t07_deliver_five_treasures.txt
+
+# シェロブ退治
+?:[EQU $QUEST_NUMBER 54]
+%:quest54_t03_shelob.txt
+
+# 暴風被害対策任務
+?:[EQU $QUEST_NUMBER 55]
+%:quest55_t02_typhoon.txt
+
+# 急流下り
+?:[EQU $QUEST_NUMBER 56]
+%:quest56_t02_torrent.txt
+
+# 守矢の策動1
+?:[EQU $QUEST_NUMBER 57]
+%:quest57_t12_moriya_1.txt
+
+# 採用試験二次募集
+?:[EQU $QUEST_NUMBER 58]
+%:quest58_t10_okina.txt
+
+# 本居小鈴の失踪
+?:[EQU $QUEST_NUMBER 59]
+%:quest59_t01_kosuzu.txt
+
+# 夢は現実化する
+?:[EQU $QUEST_NUMBER 60]
+%:quest60_t12_dreamdweller.txt
+
+#v1.1.49 運松庵の暑気払い
+?:[EQU $QUEST_NUMBER 61]
+%:quest61_t01_deliver_eel.txt
+
+#v1.1.64 水際作戦再発令
+?:[EQU $QUEST_NUMBER 62]
+%:quest62_t13_shoreline_operation2.txt
+
+#v1.1.64 破滅のクエスト3
+?:[EQU $QUEST_NUMBER 63]
+%:quest63_t13_doom3.txt
+
+#v1.1.65 羽衣婚活の顛末
+?:[EQU $QUEST_NUMBER 64]
+%:quest64_t05_deliver_hagoromo.txt
+
+#v1.1.78 宴の始末
+?:[EQU $QUEST_NUMBER 65]
+%:quest65_t05_miyoi.txt
+
+#v1.1.84 連続昏睡事件Ⅰ
+?:[EQU $QUEST_NUMBER 66]
+%:quest66_t05_deliver_ghost_sake.txt
+
+#v1.1.85 鯢呑亭クエスト
+?:[EQU $QUEST_NUMBER 67]
+%:quest67_t01_geidon1.txt
+
+?:[EQU $QUEST_NUMBER 68]
+%:quest68_t01_geidon2.txt
+
+#v1.1.86 守矢の策動Ⅱ
+?:[EQU $QUEST_NUMBER 69]
+%:quest69_t14_moriya_2.txt
+
+#v1.1.86 巫女警報発令中
+?:[EQU $QUEST_NUMBER 70]
+%:quest70_t14_reimu_attack.txt
+
+
+
+

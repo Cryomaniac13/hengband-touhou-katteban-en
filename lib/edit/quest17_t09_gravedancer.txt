@@ -1,0 +1,100 @@
+# quest17_t09_gravedancer.txt
+
+# Name
+Q:$17:N:Cemetery Guards Wanted
+Q:17:N:墓地警備員急募
+
+# Definition
+Q:$17:Q:6:0:0:0:40:0:0:0:6
+Q:17:Q:6:0:0:0:40:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST17 2]
+Q:$17:T:Byakuren - 'At this temple, we hold funeral and burial rites for the departed
+Q:$17:T:residents of Human Village. However, recently we've sighted several misguided
+Q:$17:T:fellows who were defiling the graves. Could you patrol the cemetery, and if
+Q:$17:T:someone like that comes, give them a stern lecture and make them desist?
+Q:$17:T:...Though I guess it might get a little rough.'
+Q:17:T:白蓮「人里のある方がお亡くなりになりまして、
+Q:17:T:当寺にて葬儀と埋葬を執り行うことになりました。
+Q:17:T:しかし困ったことに、ここ数日墓地を荒らす不心得者が出没しているらしいのです。
+Q:17:T:墓地を見張ってもし不心得者が来たら止めるよう説得して頂けませんか？
+Q:17:T:この際です。多少は手荒になっても仕方ないでしょう。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST17 3]
+Q:$17:T:Byakuren - 'Thank you for your support. I hope this will be an opportunity
+Q:$17:T:for those offenders to change their mind. Please take this with you. It will
+Q:$17:T:grant you power in your quest.'
+Q:17:T:白蓮「お力添えありがとうございました。
+Q:17:T:彼の者たちもこの機会に心を入れ替えてくれるとよいのですが。
+Q:17:T:どうぞこれをお持ちになって下さい。貴方の旅路に力を与えてくれることでしょう。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST17 5]
+Q:$17:T:Byakuren - '......I hold no grudge towards you. It's all because of my
+Q:$17:T:incompetence that I've misjudged the difference in our power.'
+Q:17:T:白蓮「……貴方が気に病むことはありません。
+Q:17:T:彼我の力量差を見誤った私の至らなさによるものです。」
+?:1
+
+# Grass
+F:;:GRASS
+# Trees
+F:T:TREE:1
+
+#お燐
+F:a:GRASS:8:1129
+#小傘
+F:b:FLOOR:8:1133
+#芳香
+F:c:FLOOR:8:1140
+
+#悪魔崇拝者
+F:e:FLOOR:8:1008
+#食屍鬼
+F:f:FLOOR:8:w418
+#食屍鬼の王
+F:g:FLOOR:8:w483
+
+#浮遊霊
+F:h:GRASS:8:w133
+#怨霊
+F:i:TREE:8:w1200
+#怨霊(大)
+F:j:TREE:8:w1199
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTT;TTTTTTTTTTiTjTTTTTTTTT;;TTTTTTTTTX
+D:XTT;TThTTTTTiiiiTT;;;;T;;TiiiTTTTTTT;TTT;TX
+D:XTTjTTT;;;;;;;;;;;;;;;;;;;;;;;;;;;;TTT;a;;X
+D:XThXXX;;;XXX;;;XXXfffffffXXX;;;XXX;;TXXXTTX
+D:Xh;XXX;;;XXX;;;XXXfffgfffXXX;;;XXX;h;XXXTTX
+D:X..eee...........fffffffff...............TX
+D:X;hXXX;;hXXX;;;XXXfffffffXXX;;;XXX;;;XXX;;X
+D:X;;XXX;;;XXX;;;XXX.......XXX;;;XXX;;hXXXT;X
+D:X.........................................X
+D:X;;XXX;h;XXX;;;XXX.......XXX;;;XXX;;;XXXT;X
+D:X;hXXX;;;XXX;;;XXX.......XXX;;;XXX;;;XXX;;X
+D:X.........................................X
+D:X;;XXX;;;XXX;h;XXX....c..XXX;;;XXX;;;XXXT;X
+D:X;;XXX;;;XXX;;;XXX.......XXX;;;XXX;;;XXX;;X
+D:X.........................................X
+D:X;;XXX;;;XXX;;;XXX.......XXX;;;XXX;;;XXX;;X
+D:X;;XXX;;;XXX;;;XXX.......XXX;;;XXX;;;XXXTTX
+D:X.........................................X
+D:X;;XXX;;TXXX;;;XXX.......XXX;;;XXX;;;XXX;;X
+D:X;;XXX;TTXXX;;;XXXb......XXX;;;XXX;;hXXX;;X
+D:X.........................................X
+D:X;jXXX;;;XXX;;hXXX.......XXXh;;XXX;;;XXX;;X
+D:X;;XXX;;;XXX;;;XXX.......XXX;;;XXX;;;XXX;;X
+D:X.........................................X
+D:X;;;;;;;;;;;;;;;;;;;;<;;;;;;;;;;;;;;;;;;;;X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:24:21
+

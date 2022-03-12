@@ -1,0 +1,101 @@
+# quest34_t03_satocon.txt
+
+# Name
+Q:$70:N:Shrine Maiden Alert!
+Q:70:N:巫女警報発令中！
+
+# Definition
+Q:$70:Q:1:0:0:1:36:1226:0:0:6
+Q:70:Q:1:0:0:1:36:1226:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST70 2]
+Q:$70:T:Takane - 'It's a disaster! The Hakurei shrine maiden
+Q:$70:T: is attacking out hideout! She's screaming about us attacking
+Q:$70:T: and deceiving humans, but we've done no such thing!
+Q:$70:T: Please, help us! Before we get wiped out!'
+Q:70:T:たかね「大変だ！博麗の巫女がアジトを襲撃してきた！
+Q:70:T:　人間を襲ったとか嘘を吐いて騙したとか喚いてるが、
+Q:70:T:　私達はそんなことやってない！
+Q:70:T:　頼む、助けてくれ！このままじゃ全滅だ！」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST70 3]
+Q:$70:T:Takane - 'Whew, you drove her away.
+Q:$70:T: She's like a natural disaster to us youkai.
+Q:$70:T: 
+Q:$70:T: Well, I'm not leaving you without a reward.
+Q:$70:T: First, take this coin. Now, exchange that coin for this
+Q:$70:T: card. Very well, you can keep the card. Sorry for the
+Q:$70:T: weird procedure, but rules are rules.'
+Q:70:T:たかね「ふう、なんとか追い払えたか。
+Q:70:T:　アレは私達妖怪にとっては天災そのものだよ。
+Q:70:T:　
+Q:70:T:　さて、あんたには礼をしなくてはな。
+Q:70:T:　まずこのコインを受け取ってくれ。
+Q:70:T:　受け取ったな？ではそれをこのカードと交換してくれ。
+Q:70:T:　これでよし。そのカードを持っていくといい。
+Q:70:T:　妙な手順を踏ませて悪いが、まあ色々と掟があってね。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST70 5]
+Q:$70:T:Takane - 'She destroyed it all. Our business is ruined.
+Q:$70:T: I guess some mountain hermit has protected us from harm,
+Q:$70:T: so we're going to make some trouble in future. We'll get
+Q:$70:T: our payback.'
+Q:70:T:たかね「派手に壊されちまったな。こりゃ当分商売どころじゃない。
+Q:70:T:　なんか知らんが山の仙人が私達を保護してくれるそうだから、
+Q:70:T:　しばらくは厄介になることにするよ。
+Q:70:T:　捨てる神あれば拾う神ありってやつだな。いつか借りを返さねば。」
+?:1
+
+# Tree
+F:T:TREE
+
+
+#霊夢
+F:a:FLOOR:8:w1226
+
+#たかね
+F:e:FLOOR:8:f1358
+#ユニーククラスのたかねでプレイ中は誰もいない
+?:[EQU $CLASS Takane]
+F:e:FLOOR:8
+?:1
+
+
+#山童
+F:f:FLOOR:8:f239
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTXXXXXXXXXXXXXXXXXXXX.*****XXXXXTTTTTX
+D:XTTTTTXXXXXXXXXXXXXX.......*****XXXXXTTTTTX
+D:X......XXXXXXXXXXXXX...XXX.*****XXXX......X
+D:X.......XXXXXXXXXXXX...XXXXXXXXXXXX.......X
+D:X........XXXXXXXXXXXDDDXXXXXXXXXXX........X
+D:XXX.......XXXXXXXXXXfffXXXXXXXXXX.......XXX
+D:XXX........XXXXXXXXX.<.XXXXXXXXX........XXX
+D:XXX..................e..................XXX
+D:XXX.........f..f..f.....f..f..f.........XXX
+D:XXX................XXXXX................XXX
+D:XXX............f...........f............XXX
+D:XXX.....................................XXX
+D:XXX.....................................XXX
+D:XXX.......X.....................X.......XXX
+D:XXX.......X.....................X.......XXX
+D:XXX.......X.....................X.......XXX
+D:XXX.......X.....................X.......XXX
+D:XXX.......X.....................X.......XXX
+D:XXXTTTTTT...........................TTTTXXX
+D:XXXTTTTTTT...........a............TTTTTTXXX
+D:XXXTTTTTTTT.....................TTTTTTTTXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:12:21
+
+

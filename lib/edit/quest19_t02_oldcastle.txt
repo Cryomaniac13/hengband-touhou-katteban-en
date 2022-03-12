@@ -1,0 +1,246 @@
+# quest19_t02_oldcastle.txt
+# The Old Castle
+# By Shayne Steele (steele@cs.fsu.edu)
+# ↑にいろいろ変更
+
+# Name
+Q:$19:N:Old Castle
+Q:19:N:古い城
+
+# Definition 
+Q:$19:Q:6:0:0:0:50:0:0:0:6
+Q:19:Q:6:0:0:0:50:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST19 2]
+Q:$19:T:Hatate - 'There's an old castle nearby that has been there for a
+Q:$19:T:long time, but some strangers have settled in there recently.
+Q:$19:T:By the way, they're not your ordinary strangers - there are
+Q:$19:T:mountain-sized giants and living dragon skeletons.
+Q:$19:T:Our patrol tengu tried investigating, but they were outmatched.
+Q:$19:T:We're desperate; couldn't you help us?'
+Q:19:T:はたて「ずーっと昔の城塞が近くにあるんだけどさ。
+Q:19:T:なんかそこにまた余所者が棲みついたみたいなの。
+Q:19:T:ところがその余所者がこの前のとは訳が違ってねー。
+Q:19:T:山のような巨人だの竜の生ける屍だの性質が悪そうなのばっかり。
+Q:19:T:それなのにまずは順序とか言って下っ端の天狗が行ってるんだけど、
+Q:19:T:まあやっぱどう見ても歯が立ちそうにないの。
+Q:19:T:可哀そうだから貴方加勢に行ってあげてくれない？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST19 3]
+Q:$19:T:Hatate - 'You took them all out? Well, you're pretty good!
+Q:$19:T:It's not quite a reward, but I'd like you to have this.
+Q:$19:T:It's one of Great Tengu's armaments I've managed to obtain.
+Q:$19:T:Don't worry, it's fine; it has been collecting dust in a 
+Q:$19:T:warehouse for hundreds of years without anyone paying attention.'
+Q:19:T:はたて「まさか全部倒しちゃうなんて。貴方けっこうやるのねー。
+Q:19:T:報酬ってわけでもないけどこれ使ってよ。
+Q:19:T:大天狗様が使うはずだった武装の一つを掠めてきたの。
+Q:19:T:大丈夫大丈夫。どうせ何百年も倉庫で埃被ってたんだし誰も数えちゃいないって。」
+
+
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST19 5]
+Q:$19:T:Hatate - 'It was too tough for you?
+Q:$19:T:Looks like Great Tengu is going to deal with it, so it'll be
+Q:$19:T:fine. They're calling for me as well, though; it's such a
+Q:$19:T:bother...'
+Q:19:T:はたて「あーやっぱダメだった？
+Q:19:T:でもまあそろそろ大天狗様達も出るみたいだしそれで何とかなるでしょ。
+Q:19:T:ていうか私にも召集掛かってるんだけどね。はー面倒…」
+?:1
+
+# The Monsters
+# Roper (level:27, Speed:115, XP:235, #:3)
+F:r:FLOOR:8:426
+
+# Lesser Wall Monster (level:28, Speed:110, XP:600, #:5) 
+F:w:FLOOR:8:448
+
+# Mithril Golem (level:30, Speed:110, XP:500, #:2)
+F:g:FLOOR:8:464
+
+# Anti-Paladin (level:33, Speed:120, XP:450, #:5)
+F:a:FLOOR:8:497
+
+# Master Vampire (level:34, Speed:110, XP:750, #:1) on no Teleportation grid
+F:P:FLOOR:12:520
+
+# Greater Mummy (level:34, Speed:110, XP:800, #:4)
+F:M:FLOOR:8:522
+
+# Eog Golem (level:35, Speed:100, XP:1200, #:2)
+F:G:FLOOR:8:530
+
+# Olog  (level:35, Speed:110, XP:450, #:2)
+F:o:FLOOR:8:538
+
+# Sea Troll (level:35, Speed:110, XP:440, #:6) in deep water
+F:x:DEEP_WATER:8:544
+
+# Revenant (level:36, Speed:110, XP:725, #:4)
+F:R:FLOOR:8:555
+
+# Raal's Tome of Destruction (level:36, Speed:120, XP:1500, #:4) on no
+# Teleportation grid
+F:m:FLOOR:12:557 
+
+# Time bomb (level:36, Speed:130, XP:50, #:6)
+F:d:FLOOR:8:567
+
+# Mummified Troll (level:37, Speed:110, XP:420, #:2)
+F:O:FLOOR:8:575
+
+# Crypt thing (level:37, Speed:120, XP:2000, #:1)
+F:C:FLOOR:8:577
+
+# Death knight (level:38, Speed:120, XP:1111, #:2)
+F:H:FLOOR:8:597
+
+# Monastic lich (level:39, Speed:120, XP:5000, #:1)
+F:l:FLOOR:8:611
+
+# Vampire Lord (level:39, Speed:120, XP:1800, #:6)
+F:L:FLOOR:8:623
+
+# Lesser Titan (level:40, Speed:120, XP:3500, #:2)
+F:t:FLOOR:8:634
+
+# Enchantress (level:40, Speed:130, XP:2100, #:1)
+F:E:FLOOR:8:636
+
+# Sorcerer (level:40, Speed:130, XP:2150, #:1)
+F:S:FLOOR:8:638
+
+# Death Drake (level:40, Speed:120, XP:3500, #:1)
+F:K:FLOOR:8:643
+
+# Ancient Red Dragon (level:40, Speed:120, XP:2750, #:2)
+F:N:FLOOR:8:644
+
+# Fallen Angel (level:41, Speed:130, XP:15000, #:1)
+F:A:FLOOR:8:652
+
+# Iron Lich (level:42, Speed:120, XP:9000, #:1)
+F:I:FLOOR:8:666
+
+# DracoLich (level:46, Speed:120, XP:18000, #:1)
+F:z:FLOOR:8:701
+
+# Greater Titan (level:46, Speed:120, XP:13500, #:2)
+F:Z:FLOOR:8:702
+
+# Random monster 0 levels out of depth and on no Teleportation grid
+F:5:FLOOR:12:*0
+
+# The doors and floors
+# Floor on no Teleportation grid
+F:,:FLOOR:12
+
+# Normal floor (ToDo: prevent drops on these tiles)
+F: :FLOOR:8
+
+# Rubble on no Teleportation grid
+F:]:RUBBLE:12
+
+# Secret door
+F:s:GRANITE:8:0:0:0:0:CLOSED_DOOR
+
+# Secret door on no Teleportation grid 
+F:u:GRANITE:12:0:0:0:0:CLOSED_DOOR
+
+# Door on no Teleportation grid
+F:U:CLOSED_DOOR:12
+
+# Rubble
+F:;:RUBBLE:8
+
+# locked door
+F:|:LOCKED_DOOR_7:8
+
+# The Objects
+# Book of the Unicorn on no Teleportation grid
+F:c:FLOOR:12:0:3
+
+# Pattern Sorcery on no Teleportation grid
+F:p:FLOOR:12:0:7
+
+# Natures Gift's on no Teleportation grid
+F:n:FLOOR:12:0:11
+
+# Chaos Channels on no Teleportation grid
+F:i:FLOOR:12:0:15
+
+# Black channels on no Teleportation grid
+F:b:FLOOR:12:0:19
+
+# Trumps of Doom on no Teleportation grid
+F:f:FLOOR:12:0:23
+
+# Note of Acting Master on no Teleportation grid
+F:y:FLOOR:12:0:27
+
+# Demonthoughts on no Teleportation grid
+F:k:FLOOR:12:0:31
+
+# Exorcism and Dispelling on no Teleportation grid
+F:B:FLOOR:12:0:3
+
+# *HEALING* potion
+F:Y:FLOOR:8:0:557
+
+# *IDENTIFY* scroll on no Teleportation grid
+F:e:FLOOR:12:0:470
+
+# Object 0 levels out of depth
+F:h:FLOOR:8:0:*0
+
+# Object 0 levels out of depth on no Teleportation grid
+F:q:FLOOR:12:0:*0
+
+# Object 7 levels out of depth
+F:j:FLOOR:8:0:*7
+
+# Object 7 levels out of depth on no Teleportation grid
+F:Q:FLOOR:12:0:*7
+
+# locked door on no Teleportation grid
+F:v:LOCKED_DOOR_7:12
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XxxWWWWWWxX%sTTTTTT%XX%XXX%X%X,<,X%XTT  sM      M%%%TThTTXXX%XXX%%%%hTX
+D:XWWWWWWWWXXR%%%%%%%sXX%%%%XX%X,,,X%XT  XXXX    XXX%%T   TXXX%XXX%%T  TX
+D:XxxX  XXXXR%      %R%XXX%XX%XX]]]X%XjThXM        %%%%%D%%%%X%X% D    TX
+D:XxXX  %%%%%   w w  %%XX%%%%XXX,P,X%XXXXXXX              %%%X%X  %%  hTX
+D:XXX     s D    w   %%XX%XXX%%XDDDX%Xh sM           %%%% O %% O %%%C%%%X
+D:XXX   %%%%%   w w  %%XX%%%XX%g   g%XXXXXX         %%  %%%    %X%%h   TX
+D:XX%   %%%%%%      %R%XXXX%%%       %%%XX%r        D   I%%%  %%Xj    TTX
+D:XX%   %%%%%%%    %%%%XTTT%%%d     d%%%%XX%%%s%XXXX%%%%%%X%% %%X%%%s%%%X
+D:XX%%  %%%%%%%%r  D %%XT  sL         L%%%XX%  XX%%%%%%%%XX%%s%%%%%% %%%X
+D:XX    XXXXXX%%%%%X  %XTTT%%%d     d%%%%%%%%   ; %%XXXXXX%      %%XsXXXX
+D:XX    XqqqqX%%%%%X%  %%%%%L         L%%%XXXXX%%   %%%%%            %%%X
+D:XX    |,,,QXXXXXXX%%  %%%%%%d     d%%%%XXThTX%%%% s%%              %%%X
+D:XXz   XqqqqXpmfmiX%%%    sL         L%%X%T TXX%%%%%                 %YX
+D:XX%%  XXXXXXcenekX%%%%%%%%%%       %%%%%%%s%%XX t D              Z  % X
+D:XX%%%  %%%%XmbBymX%%%%%%%  D       D              D                 DhX
+D:XX%%  %%%%%X%%s%%X%%%%%%   D G   G D              D                 DhX
+D:XX%%%  %%%%%%    XX%%%     %%%DDD%%%%%%%s%%%%%% t D              Z  % X
+D:XX%%%%  %         %%N     %%%%   %%%%%%T T%%%%%%%%%                 %YX
+D:XX%%%  %% E        D    %%%%%% K %%%XXX   XXXXXXXX%%%              %%%X
+D:X%o    %% S        D N%%%%%%%%DDD%%%%%ThThT%%%%%%%%%%%%           %%%%X
+D:X     o%%         %%%%%%%%%% a   a %%XXXXXXXXXXXXXXXXX%%%      %%XXXXXX
+D:X   %%%%XXX%%     %%%ThhT%%%   a   s ;|;|;;;;%%%%%%%%%%%%%%%%s%%%X,,,5X
+D:X  %%%%TTTX%%%%%s%%%%%DD%%%%   A   %XXXuXXXXXXXXXXXXXXXXXXX%%    v,,,,X
+D:X    s TTT% r %   %H      H%  a a  %X5,,,X,,,,,,,,X5,,X,,,XXXXXXXX,,,,X
+D:X%l  %%%%%%   %%s%%        %%%%s%%%%XX,,,U,,,X,,,,X,,,X,,,,,,,,,,,,,,,X
+D:X%%                   %%         %%%X5,,,X,,,X5,,,,,,,U,,,X5,,X,,,X,,5X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:1:31
+

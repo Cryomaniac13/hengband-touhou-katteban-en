@@ -1,0 +1,33 @@
+# quest53_t07_deliver_five_treasures.txt
+
+# Name
+Q:$53:N:Five Impossible Requests
+Q:53:N:五つの難題
+
+# Definition
+Q:$53:Q:9:0:0:0:120:0:0:1
+Q:53:Q:9:0:0:0:120:0:0:1
+
+?:[LEQ $QUEST53 2]
+Q:$53:T:Kaguya - 'Have you heard about my impossible requests?
+Q:$53:T:They actually might really exist in very depths of the dungeon.
+Q:$53:T:Could you go look for them?
+Q:$53:T:To be honest, you won't easily find them, but still keep
+Q:$53:T:that in mind. No need to hurry. I have all the eternity to
+Q:$53:T:spare.'
+Q:53:T:輝夜「私の難題の話は知っているわね。
+Q:53:T:ダンジョンの深奥にはそれが本当にあるかもしれないわ。あなたも挑戦してみない？
+Q:53:T:ま、そうそう見つかるものじゃないだろうし心の片隅にでも置いておいて。
+Q:53:T:急いではいないわ。どうせ時間は永遠にあるんだし。
+?:1
+
+?:[EQU $QUEST53 3]
+Q:$53:T:Kaguya - 'I can't believe it, you actually found it. Shall
+Q:$53:T:we get married right now?
+Q:$53:T:
+Q:$53:T:I'm kidding. Please take this.'
+Q:53:T:輝夜「まさか本当に持ってくるなんてね。この場で私に求婚してみる？
+Q:53:T:
+Q:53:T:冗談よ。ご褒美にこれをあげるわ。」
+?:1
+

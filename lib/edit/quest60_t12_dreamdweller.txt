@@ -1,0 +1,89 @@
+# Name
+Q:$60:N:Dreams Do Come True
+Q:60:N:夢は現実化する
+
+# Definition
+Q:$60:Q:1:0:0:1:90:1237:0:0:6
+Q:60:Q:1:0:0:1:90:1237:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST60 2]
+Q:$60:T:Doremy - 'Your Dream World version has broken out and entered
+Q:$60:T:  the real world. It has to be returned back as soon as 
+Q:$60:T:  possible. It's getting too strong for anyone to handle;
+Q:$60:T:  You can say you brought it upon yourself, so go ahead and
+Q:$60:T:  capture it.'
+Q:60:T:ドレミー「夢の世界の貴方が槐安通路を突破して現の世界に出てきました。
+Q:60:T:　すぐに捕まえて夢の世界に戻すべきなのですが、
+Q:60:T:　もう誰にも手がつけられないほどの暴れっぷりです。
+Q:60:T:　これも自業自得と思って貴方が捕まえてきてください。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST60 3]
+Q:$60:T:Doremy - 'Yes, I've taken in your dream doppelganger.
+Q:$60:T:  Leave everything else to me.
+Q:$60:T: 
+Q:$60:T:  Let me offer you this as a reward and an apology.
+Q:$60:T:  It's a treasure of the land of dreams.'
+Q:60:T:ドレミー「はい、確かに夢の世界の貴方をお預かりしました。
+Q:60:T:　あとはお任せください。
+Q:60:T:　
+Q:60:T:　ご尽力のお礼と不始末のお詫びを兼ねてこれを差し上げましょう。
+Q:60:T:　ドリームランドの宝物ですよ？」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST60 5]
+Q:$60:T:Doremy - 'Oh, you ran away?
+Q:$60:T:It'll probably get bored after a while and return by itself.
+Q:$60:T:Try living a less stressful life from now on.'
+Q:60:T:ドレミー「あら、逃げてきたのです？
+Q:60:T:まああの様子なら一か月も暴れれば飽きて夢の世界に帰ってくるでしょう。
+Q:60:T:これからはもう少しストレスを溜めない生活を心掛けてくださいね。」
+?:1
+
+# Grass
+F:;:GRASS
+# Trees
+F:T:TREE:1
+
+#＠
+F:a:GRASS:8:w1237
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTT;TTTTT;TTTTTT;TTTTTTTTTTTTTX
+D:XTT;TTTTTTTTTTTTTTTTTTT;TTTTTTTTTTT;TT;TTTX
+D:XTTTTT;TTTT;TTTTTT;TTTTTTTT;TTT;TTTTTTTT;TX
+D:X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;T;;T;;;;;;;;X
+D:X;;X;;;;;;;;;;;;;;;;;<;;;;;;;;;;;;;;;;;X;;X
+D:X;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;XXXXXXXXXXXXXXXXXX...XXXXXXXXXXXXXXXXXX;X
+D:X;;X;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;X;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;...a...;;;;;;;;;;;;;;;;;X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:15:21
+

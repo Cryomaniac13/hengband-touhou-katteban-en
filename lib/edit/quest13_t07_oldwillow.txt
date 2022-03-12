@@ -1,0 +1,90 @@
+# q0willow.txt
+# Old Man Willow Quest
+# By Shayne Steele (steele@cs.fsu.edu)
+# ↑にいろいろ変更　みやまさ
+
+# Name Old Man Willow Quest
+Q:$13:N:Old Man Willow
+Q:13:N:柳じじい
+
+# Definition 
+Q:$13:Q:6:0:0:0:22:0:0:0:6
+Q:13:Q:6:0:0:0:22:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST13 2]
+Q:$13:T:Eirin - 'Looks like there's some previously unseen tree youkai
+Q:$13:T:in Bamboo Forest that are attacking our rabbits. I'm busy, so
+Q:$13:T:couldn't you exterminate them instead? Looks like their boss,
+Q:$13:T:a willow youkai, has hypnotic powers, so be prepared.'
+Q:13:T:永琳「竹林の中に見慣れない木の妖怪が居て兎達を脅かしているらしいわ。
+Q:13:T:私はちょっと手が離せないから代わりに退治してきてくれない？
+Q:13:T:親玉の柳の妖怪は催眠能力を持つらしいから対策してから行きなさい。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST13 3]
+Q:$13:T:Eirin - 'Thank you for your hard work. By the way, here's an
+Q:$13:T:item one of my patients gave me instead of paying the fee.
+Q:$13:T:I don't need it, but it might be useful for you.'
+Q:13:T:永琳「お疲れ様。ところで今患者さんから診療費代わりにこれを受け取ったの。
+Q:13:T:悪いけど私には不要なものだから貴方が役立ててあげて。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST13 5]
+Q:$13:T:Eirin - 'Oh, my. Looks like I've misjudged your strength.
+Q:$13:T:Very well, I'll deal with it once I'm free.'
+Q:13:T:永琳「あら。私としたことが貴方を買い被っていたのかしら？
+Q:13:T:仕方ないわね。用も済んだし私が行きます。」
+
+?:1
+
+# The Monsters
+# Vorpal bunny (level:11, Speed:120, XP:40, #:6, Tot:240)
+F:r:FLOOR:8:205
+
+# Old Man Willow (level:11, Speed:110, XP:150, #:1, Tot:150)
+F:M:FLOOR:8:206
+
+# Huorn (level:19, Speed:110, XP:75, #:8, Tot:600)
+F:H:FLOOR:8:329
+
+# Saber-tooth tiger (level:20, Speed:120, XP:120, #:2, Tot:240)
+F:f:FLOOR:8:339
+
+# Sasquatch (level:20, Speed:120, XP:180, #:6, Tot:1080)
+F:Y:FLOOR:8:343
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+
+# Trees
+F:T:TREE:1
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTTTT             X
+D:XT         Y  TTT TTHTTTTTTTT X
+D:XT H    H     TTTY        r T X
+D:XT            TTTTTTTTTTTTT T X
+D:XT     M    H TTT       r T T X
+D:XT  H    H    TTT TTTTTTT T T X
+D:XT            TTT     r T T T X
+D:XT Y    Y  Y  HTTTTTTTT T T T X
+D:XT    Y               T T T T X
+D:XTTTTTTTTTTTTTTTTTTTT T T T T X
+D:XTTTTTTTTTTTTTTTTTTTT   T   T X
+D:XTTTTTTTTTTTTTTTTTTTTTTTTTTTT X
+D:Xr                          f X
+D:XrTTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:Xr                       f    X
+D:XTTHTTTTTTTTTTTTTTTTTTTTTTTTT X
+D:X                             X
+D:X<TTTTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:18:1
+

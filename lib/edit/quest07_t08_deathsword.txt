@@ -1,0 +1,92 @@
+# quest07_t08_deathsword.txt
+# Thieves Quest 2
+# By Shayne Steele (steele@cs.fsu.edu)
+#いろいろ変更
+
+# Name Tengu and Death Swords
+Q:$7:N:Phase Spiders and Death Swords
+Q:7:N:フェイズとデスソード
+
+# Definition 
+Q:7:Q:6:0:0:0:25:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST7 2]
+Q:$7:T:Rinnosuke - 'I've requested kappas to set up my warehouse with
+Q:$7:T:further security measures to avoid more trouble, but looks like
+Q:$7:T:they went too far, and now nobody can get inside. I'm sorry,
+Q:$7:T:but wouldn't you clean up my warehouse for me again?'
+Q:7:T:霖之助「最近何かと物騒だから倉庫の警備装置増設を河童に頼んだんだが、
+Q:7:T:どうもあいつら張り切りすぎたみたいで誰も倉庫に入れなくなったんだ。
+Q:7:T:悪いがまた倉庫の中を片付けてくれないか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST7 3]
+Q:$7:T:Rinnosuke - 'Thank you very much. Please take this as your reward.'
+Q:7:T:霖之助「お疲れさま。礼と言っては何だがこれをあげよう。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST7 5]
+Q:$7:T:Rinnosuke - 'You couldn't do it?
+Q:$7:T:Looks like I have no choice but to consult that youkai...'
+Q:7:T:霖之助「駄目だったか。
+Q:7:T:あのあまり借りを作りたくない妖怪に相談するしかないか…」
+?:1
+
+# The Monsters
+# Death sword (level:6, Speed:130, XP:30, #:16, Tot:480) with object 10 levels out of depth.
+F:|:FLOOR:8:107:*10
+
+# Death sword (level:6, Speed:130, XP:30, #:16, Tot:480) with object 1 levels out of depth.
+F:1:FLOOR:8:107:*1
+
+# テング→フェイズスパイダー
+F:u:FLOOR:8:331
+
+# Gelatinous cube (level:16, Speed:110, XP:80, #:4, Tot:320) on no-teleport grid.
+F:j:FLOOR:12:286
+
+# The doors, floors and treasures
+# Floor with amulet of Anti-Teleportation
+F:":FLOOR:8:0:310
+
+# Normal floor
+F: :FLOOR:8
+# Floor prohibits Teleport
+F:x:FLOOR:12
+
+# Alarm Traps
+F:^:TRAP_ALARM:12
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXX
+D:XxxxxxxxxxxxxxxxxxxxX
+D:Xxjxxxxx^^^^^xxxxxjxX
+D:Xxx%%%%%%DDD%%%%%%xxX
+D:Xxx%             %xxX
+D:Xxx%  | u | u |  %xxX
+D:Xxx%             %xxX
+D:Xxx%  u 1 1 1 u  %xxX
+D:Xxx%             %xxX
+D:Xxx%  | 1 " 1 |  %xxX
+D:Xxx%             %xxX
+D:Xxx%  u 1 1 1 u  %xxX
+D:Xxx%             %xxX
+D:Xxx%  | u | u |  %xxX
+D:Xxx%             %xxX
+D:Xxx%%%%%%%%%%%%%%%xxX
+D:Xxjxxxxxx^^^xxxxxxjxX
+D:Xxxxxxxxx^<^xxxxxxxxX
+D:XXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:17:10
+
+
+
+
+
+
+

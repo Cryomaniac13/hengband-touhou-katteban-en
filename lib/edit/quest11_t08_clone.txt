@@ -1,0 +1,165 @@
+# quest11_t08_clone.txt
+# The Cloning Pits
+# By Shayne Steele (steele@cs.fsu.edu)
+# （↑を一部変更：みやまさ）
+
+# Name The Cloning Pits
+Q:$11:N:The Cloning Pits
+Q:11:N:クローン地獄
+
+# Definition 
+Q:$11:Q:6:0:0:0:45:0:0:0:6
+Q:11:Q:6:0:0:0:45:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST11 2]
+Q:$11:T:Rinnosuke - 'Truth to be told, I was devising a plan to counter
+Q:$11:T:the invaders from other worlds. I've been secretly cooperating
+Q:$11:T:with mountain gods, kappa and the underground youkai to create
+Q:$11:T:an army of soldiers with the same abilities as those invaders.
+Q:$11:T:...And for some reason, they've became uncontrollable, even
+Q:$11:T:the security robots. Before looking into what could've caused
+Q:$11:T:it, we have to stop it first. Wouldn't you help?'
+Q:11:T:霖之助「実は異界の妖物の侵攻に対抗するための策を練っていたんだ。
+Q:11:T:山の神と河童、そして地底の妖怪が非公式ながら協力して、
+Q:11:T:異界の連中とそっくり同じ能力を持つ兵士たちを大量に創りだそうとしたんだよ。
+Q:11:T:……それがどういうわけか先ほど暴走した。保安ロボットまで巻き込んでね。
+Q:11:T:原因究明より先に先ずは何とか止めないといけない。君に頼めるだろうか？
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST11 3]
+Q:$11:T:Amazing!! I'd like you to have this.
+Q:$11:T:It's a treasured item with divine power residing in it; you'd
+Q:$11:T:be a fitting owner.
+Q:11:T:素晴らしい!! ぜひこれを受け取ってほしい。
+Q:11:T:神の力の宿った秘蔵の逸品だが、君ならこの品の主となるに相応しいだろう。
+
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST11 5]
+Q:$11:T:You couldn't handle it? I guess I have no choice...
+Q:$11:T:I'm going to use a cleaning device underground engineers
+Q:$11:T:gave me. It's called 'New-clear Fusion', and it cleans 
+Q:$11:T:everything up; it makes everything 'new' and 'clear', and
+Q:$11:T:the 'Fusion' part gives it that novel tone...
+Q:$11:T:
+Q:$11:T:
+Q:$11:T:　　　　　　　　　　　　　　　　　　　　　You ran away.
+Q:11:T:無理だったか。仕方がないな……
+Q:11:T:それじゃ地底の技術者から手に入れた掃除機を使おう。
+Q:11:T:名前は「ニュークリアフュージョン」、用途は「全てを綺麗にする」というものだ。
+Q:11:T:新しさを意味する「ニュー」と清潔を意味する「クリア」が重なり、
+Q:11:T:そして「フュージョン」は聞くところによると斬新な音色を……
+Q:11:T:
+Q:11:T:
+Q:11:T:　　　　　　　　　　　　　　　　　　　　　あなたは逃げ出した。
+
+?:1
+
+# The Monsters
+# Fang, Farmer Maggot's dog (level:2, Speed:120, XP:30, #:6) *Monster food*
+F:c:FLOOR:8:c55
+
+# Freesia (level:2, Speed:120, XP:33, #:6) *Monster food*
+F:f:FLOOR:8:c57
+
+# It (level:24, Speed:110, XP:400, #:3)
+F:I:FLOOR:8:c393
+
+# Barney the Dinosaur (level:29, Speed:120, XP:500, #:3) 
+F:R:FLOOR:8:c441
+
+# The Ultimate Dungeon Cleaner (level:28, Speed:120, XP:555, #:6) 
+F:g:FLOOR:8:c451
+
+# Bokrug (level:33, Speed:110 XP:1600, #:3)
+F:S:FLOOR:8:c489
+
+# Grendel (level:27, Speed:120, XP:1500, #:5)                
+F:O:FLOOR:8:c431
+
+# Tom the Stone Troll (level:33, Speed:110, XP:2000, #:5) 
+F:M:FLOOR:8:c495
+
+# Fasolt the Giant (level:33, Speed:110, XP:2000, #:5) 
+F:P:FLOOR:8:c506
+
+# Jurt the Living Trump (level:34, Speed:120, XP:1200, #:3)
+F:p:FLOOR:8:c517
+
+# The Borshin (level:10, Speed:110, XP:45, #:4)
+F:t:FLOOR:8:c177
+
+# Rogrog the Black Troll (level:36, Speed:120, XP:5000, #:5)
+F:r:FLOOR:8:c551
+
+# The Queen Ant (level:37, Speed:120, XP:1000, #:3)
+F:a:FLOOR:8:c581
+
+# Father Dagon (level:38, Speed:120, XP:3250, #:3)
+F:u:FLOOR:8:c595
+
+# Random monster 5 levels out of depth
+F:5:FLOOR:8:*5
+
+# The Doors, Floors, an Features 
+
+# Normal floor 
+F: :FLOOR:8
+
+# locked door
+F:|:LOCKED_DOOR_7:8
+
+# Trees
+F:E:TREE:1
+
+# Deep Lava
+F:L:DEEP_LAVA:3
+
+# Chasm
+F:C:DARK_PIT:1
+
+# The Objects
+# *HEALING* potion
+F:Y:FLOOR:8:0:557
+
+# Piece of Elvish Waybread
+F:e:FLOOR:8:0:598
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X                    |              | |  | |              |                    X
+D:X  O  E         O    |   r          | |  | |       M      |      P       E  P  X
+D:X        O         %%%         EE   %%%gg%%%   EE         %%%                  X
+D:X   E              %       E        LCW  WCL        E       % P            E   X
+D:X            O     %  r   E  r      LCW  WCL     M   E   M  %    P    P        X
+D:X                  %      E         LCW  WCL         E      %                  X
+D:X   O      %%%%%%%%%   r            LCW  WCL                %%%%%%%%%          X
+D:X        %%%                       LLCW  WCLL      M                %%%        X
+D:X||%%%%%%%   r       EE E         LLCCW  WCCLL          E EE    M     %%%%%%%||X
+D:X  %                              LCCWW  WWCCL                              %  X
+D:X  %LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLCWW    WWCLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL%  X
+D:X  %CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCW %%%% WCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC%  X
+D:X||%WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW %<|| WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW%||X
+D:X  g                                  %%%%                                  g  X
+D:X  g                                                                        g  X
+D:XEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE%%||%%EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEX
+D:XCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC%%E  E%%CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCX
+D:XEEEEEEEEEEEEEECEEEEEEEEEEECEEEEEEEE%CE  EC%EEEEEEEECEEEEEEEEEEECEEEEEEEEEEEEEEX
+D:X%%%%%%%%%%%% ECE %%%%%%% ECE %%%%%%%CE  EC%%%%%%% ECE %%%%%%% ECE %%%%%%%%%%%%X
+D:X  5 % S  S % ECE % I   % ECE % p   %CE  EC% u   % ECE % R   % ECE % a  a % 5  X
+D:X    %      % ECE %   I % ECE %   p %CE  EC%   u % ECE %   R % ECE %      %    X
+D:X 5      S  % ECE % I   % ECE % p   %CE  EC% u   % ECE % R   % ECE %  a      5 X
+D:X   5       % ECE %     % ECE %     %CEttEC%     % ECE %     % ECE %       5   X
+D:X%%%%%    %%% ECE %%   %% ECE %%   %%CE  EC%%   %% ECE %%   %% ECE %%%    %%%%%X
+D:Xccc |        ECE         ECE        CEttEC        ECE         ECE        | fffX
+D:Xccc |        ECE         ECE                      ECE         ECE        | fffX
+D:X%%%%%        ECE         ECE         %%%%         ECE         ECE        %%%%%X
+D:Xeee %                               %%YY%%                               % eeeX
+D:Xeee |                               |    |                               | eeeX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:13:39

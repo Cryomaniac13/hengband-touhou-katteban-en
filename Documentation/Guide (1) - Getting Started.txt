@@ -1,0 +1,282 @@
+Original is from Touhou Hengband wiki:
+https://w.atwiki.jp/hengtouhou/pages/407.html
+
+Guide - Getting Started (Game start - exploration base - Dreams Mausoleum exploration)
+
+1. Buy equipment and supplies using your starting money
+2-A. Clear the Thieves Hideout quest and get an exploration base
+2-B. Raise your level and grind money at Dreams Mausoleum
+
+Very early game is also described in details in the help file 'Beginner's Guide'.
+
+* Shopping list for very start of the game
+
+- General Store ('1')
+
+Brass Lantern - Illuminates larger area compared to torches
+Flasks of Oil - Refuel your lantern with 'F' command when it runs out of fuel.
+                You want to carry several of those with you.
+Torches       - Can be used as light source as well, but you also can throw
+                them with 'v' command to deal significant damage
+Food Rations  - Eat with 'E' command when you get hungry. Several races
+                like vampires or tsukumogami require other methods of satiation.
+Shovel        - Wield it and use 'T' command to tunnel through walls. Can be used
+                for farming money in early game if you have Scrolls of Treasure Detection.
+
+- Armoury ('2')
+
+Buy some affordable equipment like leather caps, boots, cloaks.
+Wear/wield items with 'w' command.
+If you're playing as a spellcaster, you will get spellcasting penalties if you
+wear gloves. Also, if you have low strength and wear too heavy armor, you will
+get penalties to spellcasting and martial art combat.
+
+- Weapon Store ('3')
+
+If you don't have a weapon, you can buy an affordable one for $100-$300.
+Short blades (like knives/dagger) cannot be held with both hands, so they're
+not recommended for early game.
+
+- Scroll Store ('5')
+
+Scroll of Teleportation   - Use it to escape when surrounded by enemies. Read scrolls with
+                            'r' command.
+Scroll of Holy Chant      - Use it to become 'blessed', slightly raising your accuracy and AC.
+~ of Monster Confusion    - Use it to make the next melee attack you land confuse the enemy.
+~ of Treasure Detection   - Read it in the dungeon to detect treasures buried in walls and dig
+                            them out with a shovel.
+
+- Magic Store ('6')
+
+Ring of Warning   - Warns you when you're about to walk into a dangerous location
+                    (like a hidden trap) if you're wearing it.
+
+- Potion Store ('4')
+
+Potion of Cure Serious Wounds - Slightly recovers HP and cures confusion/stunning when drunk.
+                                Buy those with any surplus money you have left. As soon as 
+                                you have enough money, you should switch to the superior
+                                Potions of Cure Critical Wounds.
+
+- Pawn Shop ('7')
+
+Sells various stuff, but at high price. You're not likely to afford shopping here at this
+point, come back when you gather enough money.
+
+
+Shop inventories change as the game time passes; if you don't like what is being sold right
+now, use 'R' command to rest for about 1000 turns.
+
+
+* Important buildings in Human Village
+
+(In towns, the door symbol '+' depicts the entrance of a building)
+
+Inn                         Close the the eastern entrance
+
+You can rest here for cheap or buy food and drink. Listening to rumors give you some random
+basic advice.
+
+Hieda House                 Center area (to the north)
+
+Can identify items for cheap. Gives the Thieves Hideout quest.
+
+Divine Spirit Mausoleum     Southwest
+
+Can transport you to large towns or dungeons you've already visited. Also can recharge
+your magic devices. You're going to use it a lot in the future.
+
+Hina Dolls Sales Office     North, outside village walls
+
+You can buy a doll for $100 to remove curses on your equipment and restore drained
+experience.
+
+Weaponsmith                 Center area (to the south)
+
+Can enhance weapons/armor and give detailed analysis of your weapon's power.
+You don't need it that much in early game.
+
+
+* 'Look' command
+
+Use 'l' command to look around. Since it's just to get information about your
+nearby area, it doesn't take a turn. If you use it, a cursor appears on screen;
+move it with arrow keys to look at various things around you. If you point it at
+a monster and press 'r', you'll view that monster's name, description, and any of
+its special abilites you've learned about. Get used to 'l'ook at anything unfamiliar
+appearing in your sight.
+Once you get used to the game and learn monster abilities by yourself, you might
+simply display a list of all monsters in sight in a separate window.
+
+
+* Farmer Maggot
+
+A friendly monster called 'Farmer Maggot' might be wandering around the village.
+He's strong if you fight him at level 1, but if you buy a lot of torches and keep
+throwing them for afar, you should be able to defeat him. He has a high chance to
+drop a powerful equipment upon being defeated.
+
+You can't simply attack friendly monster in melee, you instead push past them.
+But you can attack by holding Ctrl as you press the arrow key. There's no particular
+penalty for defeating them; however, it might affect your future a bit if you're
+playing as a stray god.
+
+
+* Thieves Hideout quest
+
+Enter Hieda house and press 'q' to accept the quest; she wants you to drive away
+bandits who have settled in a vacant house. After accepting the quest, a '>' will
+appear in a building to the north-west, depicting the quest entrance. If you stand
+there and enter with '>', you will go into a special dungeon where you fight four
+thieves. Don't forget to prepare your equipment and items before going in.
+
+A powerful character can take them out at level 1. If you use Scrolls of Holy Chant,
+Scrolls of Monster Confusion and throw torches, even a weaker class probably can
+clear this quest. Defeated monsters can drop items. Pick them up with 'g' to add
+them to your inventory.
+
+If you're about to lose, temporarily retreat with '<' while standing on top of
+stairs. If you leave a normal quest like that, you will fail it, but you can
+attempt quests that open up an exploration base as many times as you like.
+However, if you leave, any items lying on the floor will disappear.
+
+If you don't think you can clear it at this point, train for a bit at Dreams
+Mausoleum at first.
+
+Once you defeat all of them, a message will appear saying you've completed the
+quest. Return to Hieda House, and you'll be able to use that hideout as your
+exploration base. Most of the quests follow this 'Accept quest -> Enter special
+dungeon -> Defeat all enemies' pattern.
+
+
+* Identifying items
+
+You should be carrying some new items with you by this point. However, most of the
+potions, scrolls, staves, etc. you pick up have some weird names and their true
+identity is unknown. You might identify them if you try using them, but it's not a
+good idea, since some of them are pretty dangerous. You can identify them at Hieda
+House for $25.
+
+While you always know the names of equipment items, some of them might be cursed,
+so you shouldn't blindly equip them. Once you identify them, you will learn their
+base properties. Even if you can't identify them, if you carry them around with you
+for a while, you will get a general feeling about them like 'average' or 'cursed'.
+At this point, you can drop off items you don't need.
+
+If you equip a cursed item, you can buy a Scroll of Remove Curse to uncurse it.
+(However, there are strong curses that can't be removed with ordinary Remove Curse)
+
+Drop items on the floor with 'd' command.
+
+
+* Global map
+
+Use the global map mode once you leave the village. Press '<' while you're on surface
+and there are no enemies nearby; the screen will switch to a global map depicting
+all of Gensoukyou on a single screen.
+
+A single step in that mode is effectively moving from one map edge to the other.
+Amount of game time and satiation spent with each step increases proportionally as well.
+
+You can't use many commands while in this mode, but you can check towns/dungeons
+with 'l'ook command. Human Village is in the center, Hakurei Shrine is to south-east,
+Forest of Magic and Kourindou are to the west, Scarlet Devil Mansion is to the north.
+You can go back to normal map with '>' command.
+
+As you move around on global map, you might get ambushed, forcibly returning you
+to ordinary map. At that point, you'll be surrounded by enemies, so you can't
+immediately return to global map unless you fight or run away. If there are too
+many enemies, use a Scroll of Teleportation to escape and run to an edge of the map
+to leave the screen. Be careful - if you're not levitating and you walk through
+forest terrain, you will move more slowly, making it harder to get away.
+
+The strength of monsters outside depends on global map terrain. Monsters on roads
+(white '.') aren't that strong, so keep to the roads in early game. Monsters in
+forests (green '#'), mountains (umber '^') and swamps (blue '.') are very strong,
+so be very careful when going there.
+
+
+* Exploring Dreams Mausoleum
+
+Once you leave the Human Village, Myouren Temple is a bit to the south-east.
+It has a building where you can buy food $1 and get exploration advice from
+Nazrin. There's a dungeon entrance on its map depicted with purple '>'.
+
+This is a dungeon called 'Dreams Mausoleum'.
+It's a beginner dungeon with no gimmicks and not many strong enemies.
+Once you go deeper inside, you might find valuable gemstones.
+If you're not used to the game yet, feel free to raise your level here and
+learn about exploration basics.
+
+If you find treasure veins (orange '*'), you can get some money if you wield
+a shovel and tunnel with 'T'. Read a Scroll of Treasure Detection to detect
+a lot of hidden treasure veins, and gain money by digging them up.
+
+
+* Dungeon exploration basics
+
+- Dungeon basics
+
+Once you leave a dungeon, all of its levels get reset and will be randomly 
+generated once again when you return. If you just go up/down while in a dungeon,
+the level layout will be retained.
+
+The game is turn-based, feel free to think before making your move.
+In particular, this applies to times when you get into trouble.
+
+Read 'Dungeon exploration' help file for more details.
+
+- Monsters
+
+Various monsters walk around the dungeons.
+Generally, monster level matches the dungeon level it starts appearing at.
+A level 30 monster is normally encountered starting from dungeon level 30.
+If you look at a monster with 'l', if its HP gauge on the left side of screen
+is green, it's awake; if gauge is blue, the monster is asleep. If you have
+low stealth, monsters are quick to wake up and go after you. Some monsters start
+out awake. There are also one of a kind 'unique monster' that are stronger compared
+to other monsters of their level.
+
+
+- Traps and hidden doors
+
+You might end up in a dead end while exploring. In most cases, there's a hidden
+door nearby. Press 's' key several times at a location that looks suspicious.
+
+Also, sometimes there are traps on the floor or chests lying around. If you
+carelessly open a chest or step on the floor, you will trigger the trap.
+You can discover a trap on a chest by identifying it or pressing 's' several times
+after you put it down on the floor.
+In order to detect floor traps, switch to searching mode with 'S' command,
+use devices of Trap Detection or wear a Ring of Warning. Searching mode effectively
+makes you perform 's' command with each step you take, but you spend twice as much
+time as well. It's automatically cancelled if there are enemies nearby.
+
+Chance to detect hidden things while searching is determined by you Searching skill.
+If it's high enough, you can detect hidden things by walking around even without
+searching.
+
+
+* Dangerous monsters in very early game
+
+Large brown snake               Umber 'J'   Level 1
+
+Comparatively high attack power and defense for a level 1 enemy. Moves slowly.
+
+Giant white mouse               White 'r'   Level 1
+
+Quickly multiplies if you leave it alone. Dangerous if you get surrounded.
+
+Insect swarm                    Umber 'I'   Level 1
+
+Low HP, but moves quickly and hits hard.
+
+Bandit                          Grey 'p'    Level 8
+
+Two of those appear in Thieves Hideout quest.
+Strong for low level players, so handle them with caution.
+
+Freesia                         Umber 'f'   Level 2
+
+Beginner killer that is well-known even in the original version.
+If your level is low, run away instead of fighting it.

@@ -1,0 +1,125 @@
+N:*:Default
+of Magic
+of Gimmick
+of Superalloy
+of Wilderness
+of 23rd Century
+of Gunmania
+of Ian Flemming
+of Helicopter Ben
+'Gimmick Arm'
+'Douglas Shoot'
+of Tokoro
+of Official
+of Pirate Dora
+'Super Star Gun'
+'This Week's Mecha'
+of Queen Emeraldas
+of Major Bancoran
+of Duke Togo
+of Tomoe Mami
+'Tamanegi No. 84'
+of Sixth Heaven Demon King
+of Ijuin Hayato
+of Major Stroheim
+of Sergeant Sanders
+of Colonel Bakuryu
+of Nanjo
+of Leila the Vampire Hunter
+of Barreta the Dark Hunter
+of Dr Eggman
+of John Grey A.
+'Robopiccha'
+of Sailor Uniform
+of Karl Haushofer
+of Sergeant Hartman
+of Tonpo the Mad Clown
+of Randolph Carter
+of Vincent Valentine
+of Barry Burton
+of James Bond
+of Colonel Straydam
+of John McClane
+of Frank Drebin
+of Sergent Albert
+of Akihiko Sakata
+of Heinkel Woofer
+of Takeshi Kovac
+'TATSUJIN'
+of Smithsonian Museum
+of Aberdeen Tank Museum
+of Cape Canaveral
+'My Two Hands'
+of R. Tanaka Ichiro
+'Goutengo'
+of Heavenly Thunder
+of Taiyi Zhenren
+of Masirito
+of Mustadio
+of Randall
+of Smash Blockbuster
+of Clanton Family
+of Masujiro Omura
+of Hachiban Kinbei
+of Calamity Jane
+of Henry VIII
+of Mariette
+of Waterloo
+of Nadesby
+of Okehazam
+of Kowloon
+of Saigon
+of Johanessburg
+'Neo Armstrong Cyclone Jet'
+of Yakuza
+of Decker
+of Lonely Soul
+of Tanegashima
+of the Wind Valley
+of Federation
+of the Machine Kingdom
+of the Mechanic City
+of Umbrella Corporation
+of Melchia Armed Forces
+of Camp Swampy
+of Gunhill
+'Mesopotamia Colt'
+'Harmonium'
+'Concertina'
+'Ondes Martenot'
+'Celesta'
+'Clavichord'
+'Organ'
+'Gong'
+'Temple Block'
+'Wind Chime'
+'Triangle'
+'Cymbal'
+'Chime'
+'Cowbell;
+'Vibraslap'
+'Kokiriko'
+'Xylophone'
+'Ratchet'
+'Harp'
+'Balalaika'
+'Sitar'
+'Banjo'
+'Lute'
+'Yueqin'
+'Fiddle'
+'Hurdy-Gurdy'
+'Eolian Harp'
+'Toumbarine'
+'Bagpipe'
+'Auros'
+'Hichiriki'
+'Piccolo'
+'Flute'
+'Euphonium'
+'Roar!'
+'Howl!'
+'Resound'
+'Scream!'
+'Shine!'
+'Shoot!'

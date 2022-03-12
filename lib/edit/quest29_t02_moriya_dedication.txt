@@ -1,0 +1,91 @@
+# quest29_t09_moriya_dedication.txt
+
+# Name
+Q:$29:N:Challenge a God
+Q:29:N:神への挑戦
+
+# Definition
+Q:$29:Q:6:0:0:0:70:0:0:0:6
+Q:29:Q:6:0:0:0:70:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST29 2]
+Q:$29:T:There's a paper on the wall of the bar...
+Q:$29:T:　　
+Q:$29:T:　　******New Year Ceremony******
+Q:$29:T:　　　  Challenge Kanko Yasaka 
+Q:$29:T:      to a one-on-one fight
+Q:$29:T:　  We're awaiting challengers!
+Q:$29:T:　　　　　　   Moriya Shrine
+Q:29:T:酒場の壁に張り紙が貼ってある……
+Q:29:T:　　
+Q:29:T:　　＊＊＊新春奉納演武＊＊＊
+Q:29:T:　　　八坂の神との一騎打ち
+Q:29:T:　我こそはと思う者の挑戦を待つ
+Q:29:T:　　　　　　守矢神社
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST29 3]
+Q:$29:T:Sanae - 'Well done! You managed to defeat two gods.
+Q:$29:T:Take this as your prize, for good fortune in coming year.'
+Q:29:T:早苗「お見事です！あのお二柱を相手に勝ってしまうなんて。
+Q:29:T:それではこちらが賞品になります。新春運試しですね。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST29 5]
+Q:$29:T:Sanae - 'Thank you. You're not hurt?
+Q:$29:T:If you could, I'd like you to take this challenge next 
+Q:$29:T:year as well. My gods will get sad if there will be no
+Q:$29:T:challengers like previous year...'
+Q:29:T:早苗「お疲れ様でした。お怪我はありませんか？
+Q:29:T:できれば来年も挑戦してくれると嬉しいです。
+Q:29:T:去年みたいに挑戦者ゼロだとうちの神様寂しがるので……」
+?:1
+
+# Grass
+F:;:GRASS
+# Trees
+F:T:TREE:1
+
+#神奈子
+F:a:GRASS:8:w1121
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTTT;TTTTT;TTTTTT;TTTTTTTTTTTTTX
+D:XTT;TTTTTTTTTTTTTTTTTTT;TTTTTTTTTTT;TT;TTTX
+D:XTTTTT;TTTT;TTTTTT;TTTTTTTT;TTT;TTTTTTTT;TX
+D:X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;T;;T;;;;;;;;X
+D:X;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;X
+D:X;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;;X
+D:X;XXXXXXXXXXXXXXXXXX...XXXXXXXXXXXXXXXXXX;X
+D:X;;X;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;X;;X
+D:X;;;;;;;;;;;;;;;;;...a...;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;XX;;;;;;;XX;;;;.......;;;;XX;;;;;;;XX;;X
+D:X;;;;;;;;;;;;;;;;;.......;;;;;;;;;;;;;;;;;X
+D:X;;;;;;;;;;;;;;;;;...<...;;;;;;;;;;;;;;;;;X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:29:21
+

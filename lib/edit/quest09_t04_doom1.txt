@@ -1,0 +1,70 @@
+# quest09_t04_doom1.txt
+# a quick creation by Jeff Coleburn <vsp@netaxs.com>
+#いろいろ変更
+
+# Name
+Q:$9:N:Doom Quest 1
+Q:9:N:破滅のクエスト１
+
+# Definition
+Q:$9:Q:6:0:0:0:15:0:0:0:6
+Q:9:Q:6:0:0:0:15:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST9 2]
+Q:$9:T:Cirno - 'There's something weird living near my house!
+Q:$9:T:A ball of fire flew out of nowhere and scorched me real bad!
+Q:$9:T:I really hate heat, so you do something about it!'
+Q:9:T:チルノ「家の近くに変なのが棲みついたの！
+Q:9:T:何もないところから火の玉が飛んできて熱いったらありゃしないわ！
+Q:9:T:あたい暑いの嫌だからあんた何とかしてよ！」
+
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST9 3]
+Q:$9:T:Cirno - 'You're not bad!
+Q:$9:T:Take this, I've picked it up at the lake!'
+Q:9:T:チルノ「中々やるじゃない！
+Q:9:T:これこの前湖で拾ったんだけどあなたにあげるわ！」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST9 5]
+Q:$9:T:Cirno - 'What is going on! This has to be the work of those
+Q:$9:T:three! Alright, I'm just going to freeze the entire shrine now!'
+Q:9:T:チルノ「もー何だってのよ！わかったあの三人組の仕業ね！
+Q:9:T:よーし今から神社ごと凍らせてやる！」
+
+?:1
+
+# Floor with Manes
+F:a:FLOOR:8:128
+
+# Floor with Imp
+F:b:FLOOR:8:296
+
+# Floor with Flying Skull
+F:c:FLOOR:8:273
+
+# Floor with Arch-Vile
+F:d:FLOOR:8:357
+
+# Rubble
+F:;:RUBBLE:8
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XT....c..aaaa...XT...aX.......DcD...ca...;X.TTX
+D:XT..aaa.XXXXXX..X.bcb.D..b.b..DcD..b...XXXcc.TX
+D:X.b.....Xb......X..b..X..a....DcD....XXXX.c..TX
+D:XXXXX...X.T...b.X.....X.b..TT.DcD.aXXXXX....d.X
+D:XT..D...X......XXXXXDXX.b..TT.DcD.aXXXXX....d.X
+D:XTb.Xaa.X...b.XX......X..a....DcD...TXXXX.c..TX
+D:XXXXX...X..XXXX.c.....X..b.b..DcD..b...XXXcc.TX
+D:X<..D..aX...b........TX.......DcD...ca...;X.TTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:8:1
+

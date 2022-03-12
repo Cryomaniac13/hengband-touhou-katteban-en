@@ -1,0 +1,44 @@
+# Name
+Q:$35:N:Welcome to Gensoukyou
+Q:35:N:ようこそ幻想郷へ
+
+# Definition
+Q:$35:Q:10:0:0:1:48:1267:0:0:0
+Q:35:Q:10:0:0:1:48:1267:0:0:0
+
+# Description for quest
+?:[LEQ $QUEST35 2]
+Q:$35:T:Mamizou - 'Hey, you.
+Q:$35:T:If you have some free time, could you help me?
+Q:$35:T: 
+Q:$35:T:There's a girl from Outside World running around Gensoukyou.
+Q:$35:T:She can use mental powers and is trying to break down 
+Q:$35:T:Gensoukyou's barrier. Right now, we're all trying to catch
+Q:$35:T:her and teach her a lesson. She might look light a normal
+Q:$35:T:human girl, but don't underestimate her.'
+Q:35:T:マミゾウ「のう、そこのお前さん。
+Q:35:T:退屈しとるなら儂らの計画に付き合ってみんか？
+Q:35:T:　
+Q:35:T:外から来た娘が一人、幻想郷のあちこちを逃げ回っておる。
+Q:35:T:その娘は超能力の使い手での、
+Q:35:T:事も有ろうに幻想郷に対して結界破りを仕掛けよったんじゃ。
+Q:35:T:今は儂の策に嵌って幻想郷から出られずにおるから、
+Q:35:T:そこを皆で追いかけ回してちょいと懲らしめてやろうという寸法じゃ。
+Q:35:T:人間の小娘だからって油断するでないぞ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST35 3]
+Q:$35:T:Mamizou - 'Something unexpected has happened - looks like
+Q:$35:T:Reimu ended up dealing with her. You also did your work well.
+Q:$35:T:Take this.'
+Q:35:T:マミゾウ「何やら最後に想定外のことが起こったようじゃが、
+Q:35:T:霊夢の奴が何とかしてくれたようじゃの。
+Q:35:T:お主もご苦労じゃったな。これを取っておけ。」
+?:1
+
+?:[EQU $QUEST35 5]
+Q:$35:T:This message shouldn't be displayed
+Q:35:T: このメッセージは出ないはず
+?:1
+

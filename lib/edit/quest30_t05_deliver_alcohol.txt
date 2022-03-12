@@ -1,0 +1,41 @@
+# quest30_t05_deliver_alcohol.txt
+
+# Name
+Q:$30:N:Banquet Preparations
+Q:30:N:宴会幹事
+
+# Definition
+Q:$30:Q:9:0:0:0:40:0:0:1
+Q:30:Q:9:0:0:0:40:0:0:1
+
+?:[LEQ $QUEST30 2]
+Q:$30:T:Reimu - 'What a bother. I don't have sake to bring for next
+Q:$30:T:cherry blossom viewing. ......Hey, you, over there. Help 
+Q:$30:T:me get prepared for upcoming banquet. The participants will 
+Q:$30:T:come as they please, so there's no need to send invitations.
+Q:$30:T:Just bring me some alcohol. It doesn't have to be strong
+Q:$30:T:enough to knock an oni out, but I'd like at least something
+Q:$30:T:to drop a tengu unconscious.'
+Q:30:T:霊夢「困ったわ。次の花見に持ち寄るお酒がないわね。
+Q:30:T:……あらそこのあんた丁度いいわ。次の宴会の幹事をやりなさい。
+Q:30:T:参加者は勝手に来るから呼ばなくていいわよ。あんたはお酒を持って来て。
+Q:30:T:そうね、鬼と言わないまでも天狗くらいは潰せるような強いお酒がいいわ。」
+?:1
+
+?:[EQU $QUEST30 3]
+Q:$30:T:Reimu - 'Well, that's pretty good. Thanks.
+Q:$30:T:Here's your reward. Also, I'm giving you a discount on my
+Q:$30:T:healing and curse removal services.'
+Q:30:T:霊夢「へえ、これはなかなか良さそうね。ありがとう。
+Q:30:T:これはお礼よ。あと次からは解呪や治療を安くやってあげる。」
+?:1
+
+?:[EQU $QUEST30 5]
+Q:$30:T:Reimu - 'It's not a banquet without some sake!
+Q:$30:T:And what's up with all those youkai coming to my shrine,
+Q:$30:T:anyway? Alright, the next banquet is going to be dedicated to
+Q:$30:T:youkai extermination.'
+Q:30:T:霊夢「お酒無しじゃ宴会にならないじゃない！
+Q:30:T:そもそもなんでいつも神社に妖怪ばっかり来るのよ？
+Q:30:T:次の宴会は妖怪退治会に変更ね。」
+?:1

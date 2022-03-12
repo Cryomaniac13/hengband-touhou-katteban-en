@@ -1,0 +1,92 @@
+# q0000022.txt
+# a quick creation by Jeff Coleburn <vsp@netaxs.com>
+
+# Name
+Q:$2:N:Orc Camp
+Q:2:N:オークのキャンプ
+
+# Definition
+Q:$2:Q:6:0:0:0:15:0:0:0:6
+Q:2:Q:6:0:0:0:15:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST2 2]
+Q:$2:T:Keine - 'There are monsters from other world gathering in 
+Q:$2:T:the cave to the west. They look like pig beastmen; I think
+Q:$2:T:they're called 'orcs'. Looks like they have a leader powerful
+Q:$2:T:enough to lead them. Children can't play outside while they're
+Q:$2:T:here. Could you exterminate them?'
+Q:2:T:慧音「西の洞穴に異界の怪物が武装して集まっているんだ。
+Q:2:T:豚の獣人みたいな連中で、オークと呼ばれているらしい。
+Q:2:T:そこそこの力を持つリーダーが居て連中を率いているようだ。
+Q:2:T:これでは子供たちを外で遊ばせることもできない。何とか退治できないだろうか？
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST2 3]
+Q:$2:T:Well done. As a reward, I want you to have this.
+Q:$2:T:Some of those otherworldly monsters are very strong. An item
+Q:$2:T:like this might prove useful in your quest.
+Q:2:T:よし、よくやってくれた。礼と言っては何だがこれを持っていくといい。
+Q:2:T:異界の魔物の中にはかなり手強いのも居るらしい。
+Q:2:T:今後探索を進める上ではこういう物も役に立つことだろう。
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST2 5]
+Q:$2:T:I see that was too hard for you. We're dealing with a stronger
+Q:$2:T:group than I've thought. I'll start organizing a subjugation team.
+Q:$2:T:You should rest for now.
+Q:2:T:駄目だったか。思ったより手強い連中のようだな。
+Q:2:T:すぐに討伐隊を組織しよう。お前は休んでいてくれ。
+?:1
+
+# Floor with Snaga
+F:a:FLOOR:8:118
+
+# Floor with Hill orc
+F:b:FLOOR:8:149
+
+# Floor with Orc shaman
+F:c:FLOOR:8:162
+
+# Floor with Golfimbul, the Hill Orc Chief
+F:d:FLOOR:8:215
+
+# Floor with Black orc
+F:e:FLOOR:8:244
+
+# Floor with Orc captain
+F:f:FLOOR:8:285
+
+# Floor with Snaga sapper
+F:g:FLOOR:8:251
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXX..<.........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXX..................c...........XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXX...aaa.aa.a...............................XXXXXXXXXXXXXXX
+D:XXXXXXXXXXX.....aaa.a.a...............b...b.b..b.....XXXXXXXXXXXXXXXX
+D:XXXXXXXXXXX..................XX......................XXXXXXXXXXXXXXXX
+D:XXXXXXXXXX.........aaaa.....XXXX............e..........XXXXXXXXXXXXXX
+D:XXXXXXXXXXX................XXXX.........................XXXXXXXXXXXXX
+D:XXXgggXXXXXXX........f......XXXXX.......................XXXXXXXXXXXXX
+D:XXXXXg.XXXX......c........XXXXXX......a.a..............g...XXXXXXXXXX
+D:XXXXX..XXX.................XXX......b.....a..............XXXXXXXXXXXX
+D:XXXXXXee.XXXX.......b.bb.b............c.c.........f.......XXXXXXXXXXX
+D:XXXXX...............................b.....b............XXXXXXXXXXXXXX
+D:XXXX...............e..................e.b......XXXXXX....XXXXXXXXXXXX
+D:XXXX..f....................................XXXXXXXXXXX....XXXXXXXXXXX
+D:XX...................XXXXXXXXX..........bbbb.XXXXXXXXXX.......g.XXXXX
+D:XXXXXXX.............XXXXXXXXXXXbb.b.......eeee.XXXXXX.............XXX
+D:XXXXXXXX.............XXXXXXXXX..........bbbbdbbbb..................XX
+D:XXXXXXXX..................................bbbbb..f...............XXXX
+D:XXXXXXXXXXX......e.e........c............f....................XXXXXXX
+D:XXXXXXXXXXXXXX..........................................XXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX...................................XXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:1:33
+

@@ -1,0 +1,92 @@
+# Name
+Q:$21:N:Stop the Little Sister
+Q:21:N:妹様を止めて
+
+# Definition
+Q:$21:Q:6:0:0:0:70:0:0:0:6
+Q:21:Q:6:0:0:0:70:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST21 2]
+Q:$21:T:Patchouli - 'The little sister is throw a tantrum and
+Q:$21:T:rampaging! She has to be stopped before the library
+Q:$21:T:is destroyed! Her power is outright extraordinary. Be sure
+Q:$21:T:to bring plenty of healing potions with you!'
+Q:21:T:パチュリー「妹様が癇癪起こして暴れてるの！
+Q:21:T:図書館が壊れる前に何とか止めてちょうだい！
+Q:21:T:妹様の力は規格外よ。回復薬をありったけ持っていきなさい！」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST21 3]
+Q:$21:T:Patchouli - 'She has calmed down and returned to the basement.
+Q:$21:T:Thank you for your help. Please take this. I've been refining
+Q:$21:T:it for ten years.'
+Q:21:T:パチュリー「妹様はおとなしく地下へ戻ったみたい。おかげで助かったわ。
+Q:21:T:これを持って行きなさい。十年かけて精製した取っておきよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST21 5]
+Q:$21:T:You run away for your life together with Patchouli.
+Q:$21:T:Half of the mansion is destroyed, and the library is
+Q:$21:T:engulfed in flames. Patchouli falls to the ground, her
+Q:$21:T:shoulders slumped. You leave her be.
+Q:21:T:あなたとパチュリーは命からがら逃げ出した。
+Q:21:T:紅魔館は半壊し図書館は炎に包まれている。
+Q:21:T:パチュリーは地面に突っ伏して肩を震わせている。
+Q:21:T:あなたはそっとその場を後にした。
+?:1
+
+F:A:FLOOR:8:1095
+
+# Rubble on no Teleportation grid
+F:;:RUBBLE:8
+# Floor on no Teleportation grid
+F:,:FLOOR:12
+# Object 0 levels out of depth on no Teleportation grid
+F:q:FLOOR:12:0:*0
+# Object 7 levels out of depth on no Teleportation grid
+F:Q:FLOOR:12:0:*7
+
+# *HEALING* potion
+F:Y:FLOOR:8:0:557
+# HEALING potion
+F:Z:FLOOR:8:0:556
+# restore potion
+F:W:FLOOR:8:0:560
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX................XX;;;........................................;;XXX
+D:XXX................;;;............................................XXX
+D:XXX........;;;...............................A....................XXX
+D:XXX...........;..;;;..............................................XXX
+D:XXX...........X.....;;............................................XXX
+D:XXX............;.....;...;......................................;;XXX
+D:XXX...........X;;..............................................;;;XXX
+D:XXX.............;.;;....;..................%%%%%;%;%%%%%%%%%%%%%%%XXX
+D:XXX...........X.....;......................%XXXXXXXXXXXXXXXXXXXX%XXXX
+D:XXX................;......;................%XXXXXXXXXXXXXXXXXXX%XXXXX
+D:XXX...........X.....;.;.;.....;............%XXX%%%%%%%%%%%%%%%%%%%XXX
+D:XXX.............;..;...;....;;.............%XXX%,,,,,,,,,,,,,,,,,,XXX
+D:XXX...........X..;........X......;.........%XXX%,,,,,,,,,,,,,,,,,qXXX
+D:XXX...............;..;..........;....;.....%XXX%,,,,,,,,,,,,,,,,qqXXX
+D:XXX...........X.......;...X....;;...;......%XXX%,,,,,,,,,,,,,,,qqQXXX
+D:XXX................;;......;..;............%XXX%,,,,,,,,,,,,,,qqQQXXX
+D:XXX.................;;..;...........;......%XXX%,,,,,,,,,,,,,qqQQQXXX
+D:XXX%%%%%%%%%%%%%;;.;..;..;%%%%%%%%%%%%%%%%%%XXX%%%%%%%%%%%%%%%%%%%XXX
+D:XXXXXXXXXXXXXXX%.;.;.;.;;%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXX%....;..;.%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXX%......;..%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX.YYY..................%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX<ZZZ.............;....%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX.WW.........%...;;....%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:26:6
+

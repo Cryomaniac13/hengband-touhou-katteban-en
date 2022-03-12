@@ -1,0 +1,36 @@
+# quest24_t09_deliver_mithril.txt
+
+# Name
+Q:$24:N:Search for Mithril
+Q:24:N:ミスリル探索
+
+# Definition
+Q:$24:Q:9:0:0:0:40:0:0:1
+Q:24:Q:9:0:0:0:40:0:0:1
+
+?:[LEQ $QUEST24 2]
+Q:$24:T:Nazrin - 'I'm looking for a rare metal called mithril.
+Q:$24:T:I've found out you're likely to find it at level 45 in
+Q:$24:T:Angband or Muenzuka, but that area is too dangerous for me.
+Q:$24:T:If you find some, won't you bring it to me? Naturally,
+Q:$24:T:there will be a reward.'
+Q:24:T:ナズーリン「『ミスリル』という珍しい金属を探しているんだ。
+Q:24:T:鉄獄か無縁塚の45階辺りで見つかるらしいことは突き止めたんだが、
+Q:24:T:残念ながら私ではあの辺りは危険すぎてね。
+Q:24:T:もし見つけたら持って来てくれないか？些少だが報酬も用意してある。」
+?:1
+
+?:[EQU $QUEST24 3]
+Q:$24:T:Nazrin - 'Ah, it looks so brilliant. It's solid, but it's
+Q:$24:T:light as well. This certainly is the mithril I've heard about.
+Q:$24:T:Thank you for your hard work. This item will come useful in
+Q:$24:T:your exploration.'
+Q:24:T:ナズーリン「ふうむ、見事な輝きだ。硬いのにそれでいて実に軽い。
+Q:24:T:これこそが話に聞くミスリルに間違いないな。
+Q:24:T:ご苦労だったね。これを今後の探索に役立てるといい。」
+?:1
+
+?:[EQU $QUEST24 5]
+Q:$24:T:Nazrin - 'What, you're giving up? I guess I misjudged you.'
+Q:24:T:ナズーリン「何だ、諦めたのかい？見込み違いだったか。」
+?:1

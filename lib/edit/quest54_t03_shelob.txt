@@ -1,0 +1,86 @@
+# Name
+Q:$54:N:Unfriendly Neighborhood Monster
+Q:54:N:モンスター隣人
+
+# Definition
+Q:$54:Q:1:0:0:1:32:481:0:0:6
+Q:54:Q:1:0:0:1:32:481:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST54 2]
+Q:$54:T:Yamame - 'A new resident has recently settled in this
+Q:$54:T:neighborhood. She's extremely violent, and I can't even talk
+Q:$54:T:to her. Could you drive her out?'
+Q:54:T:ヤマメ「近所に新入りが住み付いたんだけどねえ。
+Q:54:T:そいつが碌に話も通じない乱暴者でほとほと困ってるのさ。
+Q:54:T:あんた、何とかあいつを追っ払ってやっちゃくれないかね？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST54 3]
+Q:$54:T:Yamame - 'Good, good. Well done.
+Q:$54:T:Take this. It's one of my finest works.'
+Q:54:T:ヤマメ「よしよし、良くやってくれたよ。
+Q:54:T:これを持ってお行き。丹精込めて仕上げた自慢の一本さ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST54 5]
+Q:$54:T:Yamame - 'I guess I shouldn't have relied on you.
+Q:$54:T:I have no choice but to ask oni for help.'
+Q:54:T:ヤマメ「やれやれ頼りないねえ。
+Q:54:T:鬼の連中に何とか頼み込むしかないか。」
+?:1
+
+# シェロブ
+F:S:DIRT:8:481
+# 闇の森蜘蛛
+F:s:DIRT:8:277
+# Kinoko...
+F:m:DIRT:8:40
+# 木
+F:T:TREE
+# 草地
+F: :GRASS:8
+# 床→砂地
+F:.:DIRT:8
+
+# Rubble on no Teleportation grid
+F:;:RUBBLE:8
+# Floor on no Teleportation grid
+F:,:DIRT:12
+# Object 0 levels out of depth on no Teleportation grid
+F:q:DIRT:12:0:*0
+# Object 7 levels out of depth on no Teleportation grid
+F:Q:DIRT:12:0:*7
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXqqqqXXXXXsssXXXXX.....XX..XXXXXXXXXXXXXXXXXXX
+D:XXXXqqQQqqXXsss.sss.sss..ss..s..XXXXXXXXXXXXXXXXXX
+D:XXXXmqqqq,XX.s.ss.ss........s....XXXXXXXXXXXXXXXXX
+D:XXXXXXXX,,,X.sss.s.ss.sXXXs.....XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXX.sXsssS.ssss.XXXX....XXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXX.ss.s.ssss..XXXXX..s......XXXXXXXXXXXXXXX
+D:XXXXXXXXXX..sss..ss.XXXXXX...........XXXXXXXXXXXXX
+D:XXXXXXXXXXXs..sss..XXXXXXXXX..XX.....XXXXXXXXXXXXX
+D:XXXXXXXXXXXX.s...XXXXXXXXXXXXXX.....XXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.....XXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.......XXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXX..........XXXXXXXXXXXX
+D:XTTTTTT T  TT TTTTTTT      ............     TTTTTX
+D:XTTTT   T T     TTTT   T     .........    T     TX
+D:XTT TTT     T T T   T    T    ........ T         X
+D:XTTT T   T                 T   .......     T    TX
+D:XT            T  TT T   T     ......... T        X
+D:X  T  T     T     TT          .........       T  X
+D:X   T<   T     T      T   T    .........        TX
+D:X  T    T    T    T             .........      TTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:22:7
+

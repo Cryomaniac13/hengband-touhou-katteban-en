@@ -1,0 +1,60 @@
+# quest10_t01_tupai.txt
+
+Q:$10:N:Have You Seen Our Tupai?
+Q:10:N:うちのツパイ知りませんか
+
+# Definition
+Q:$10:Q:6:0:0:0:10:0:0:0:6
+Q:10:Q:6:0:0:0:10:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST10 2]
+Q:$10:T:Sakuya - 'While I was away, Mistress's pet has disappeared.
+Q:$10:T:It's a rare animal called a tupai; have you seen it around here?
+Q:$10:T:You can recognize it by its sharp fangs and long claws
+Q:$10:T:that can shred anything to pieces.'
+Q:10:T:咲夜「私が留守にしている間にお嬢様のペットがいなくなってまして。
+Q:10:T:ツパイという珍しい動物なのですが、この辺で見かけたりしませんでした？
+Q:10:T:何でも切り裂く長い爪と鋭い牙が特徴です。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST10 3]
+Q:$10:T:Sakuya - 'Thank you very much! Here's a letter from Mistress.'
+Q:10:T:咲夜「ありがとうございます！主から書簡を預かって参りました。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST10 5]
+Q:$10:T:Sakuya - 'Where could have it gone...'
+Q:10:T:咲夜「それにしても、どこに逃げちゃったのかしら……」
+?:1
+
+
+# チュパカブラ
+F:Y:FLOOR:8:1207
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+
+# Trees
+F:T:TREE:1
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTTTTTTTTT T   TT      TTTX
+D:XTTTTT  T     T T T TTT TT T  X
+D:XTTTTTTT  T T TT T    T   T T X
+D:XTTTT   T      T T TTT TT T   X
+D:XTTT  YT T T  TT  TTTT  T    <X
+D:XTT T   TT T T TT  T  T T T   X
+D:XTT  T T  TT  TTT TT TT T  T  X
+D:XTTTT   TT   TT T TT  T T T T X
+D:XTT TT TTTTTT TT T TT T TT  T X
+D:XTTTTTTTT TTTTTTTTTTTTT T TTTTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:6:27
+

@@ -1,0 +1,36 @@
+慧音「アイテムの種類、システム、銘などについて説明しよう。」
+
+    (a) 変愚蛮怒のアイテム             (tobjects.txt)
+    (b) 持ち物と装備について           (tobjects.txt#EquipInvent)
+    (c) アイテムの使い方               (tobjects.txt#UseItem)
+    (d) 装備品の発動                   (tobjects.txt#Activate)
+    (e) アイテム鑑定の種類と方法       (tobjects.txt#Ident)
+    (f) 呪われたアイテム               (tobjects.txt#CursedItem)
+    (g) エゴアイテムとアーティファクト (tobjects.txt#EgoObjects)
+    (h) アイテムの破壊                 (tobjects.txt#DestroyItem)
+    (i) アイテムの消滅                 (tobjects.txt#DestroyItem2)
+    (j) 装備品の基本的な表記ルール     (tobjects.txt#Object_param)
+    (k) 武器の特殊効果の詳細           (tobjects.txt#Magic_weapon)
+    (l) 装備品がもつ耐性の詳細         (tobjects.txt#Resist)
+    (m) 装備品の能力上昇効果の詳細     (tobjects.txt#Pval)
+    (n) 装備品のその他の効果の詳細     (tobjects.txt#Misc)
+    (o) アイテムの銘について           (tobjects.txt#Inscriptions)
+
+    (?) ヘルプシステムの使用法         (jhelpinfo.txt)
+
+
+***** [a] tobjects.txt
+***** [b] tobjects.txt#EquipInvent
+***** [c] tobjects.txt#UseItem
+***** [d] tobjects.txt#Activate
+***** [e] tobjects.txt#Ident
+***** [f] tobjects.txt#CursedItem
+***** [g] tobjects.txt#EgoObjects
+***** [h] tobjects.txt#DestroyItem
+***** [i] tobjects.txt#DestroyItem2
+***** [j] tobjects.txt#Object_param
+***** [k] tobjects.txt#Magic_weapon
+***** [l] tobjects.txt#Resist
+***** [m] tobjects.txt#Pval
+***** [n] tobjects.txt#Misc
+***** [o] tobjects.txt#Inscriptions

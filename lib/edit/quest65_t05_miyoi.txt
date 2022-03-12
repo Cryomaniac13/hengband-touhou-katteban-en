@@ -1,0 +1,71 @@
+# quest65_miyoi.txt
+#やられてもゲームオーバーにならない特殊クエスト
+Q:$65:N:Dream Eater's Drinking Disaster
+Q:65:N:ドリームイーターの酔災
+
+# Definition
+Q:$65:Q:6:0:0:0:50:0:0:0:6
+Q:65:Q:6:0:0:0:50:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST65 2]
+Q:$65:T:Doremy - 'Lately, many people have been getting nightmares
+Q:$65:T:of getting drunk and going on a rampage; eating those dreams
+Q:$65:T:gives me hangover, so I'm in trouble as well. There has to
+Q:$65:T:be some drunkard mastermind behind all of this. Wouldn't
+Q:$65:T:you join the next banquet to discipline them?'
+Q:65:T:ドレミー「このところ酔っ払って大暴れする悪夢を見る人が多くて、
+Q:65:T:夢を食べてる私まで悪酔いしてしまいそうで困り果てております。
+Q:65:T:どうやら酔魔のような力を振るっている黒幕がいる様子。
+Q:65:T:次の宴会に参加して黒幕を懲らしめてくれませんか？」
+
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST65 3]
+Q:$65:T:Doremy - 'Thank you for your help.
+Q:$65:T:She seems to have gone somewhere, but probably everything's
+Q:$65:T:going to be alright now. Please take this.'
+Q:65:T:ドレミー「お陰で助かりました。
+Q:65:T:あの子はどこかに消えてしまったようですが、
+Q:65:T:恐らくこれがなければ悪さはできないでしょう。
+Q:65:T:貴方が預かっておいて下さい。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST65 5]
+Q:$65:T:Doremy - 'You couldn't handle it?
+Q:$65:T:I guess it's up to me to do something about it.
+Q:$65:T:Well, the taste of your nightmares wasn't that bad.'
+Q:65:T:ドレミー「駄目でしたか。
+Q:65:T:やはり私が何とかするしか無いようですね。
+Q:65:T:まあ貴方の悪夢の味は中々悪くなかったので良しとしましょう。」
+
+?:1
+# Normal floor
+F:-:GRASS:8
+
+# Trees
+F:T:TREE:1
+
+F:d:GRASS:8:1354
+F:e:GRASS:8:1355
+
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X--TTTT-TTTT---------.......----------T--TTTT-TT-T-T-X
+D:XT-TTTTT--TT---------.......-----------TTT-T-TT--TTTTX
+D:XTTTTTT--TT----------.......----------T--T-TT--TTTTTTX
+D:XTTT-TT-TTT----------.......-----------T-TT-TTTTTTTTTX
+D:XTTTT-TTTTTT---------.......----d-----TTT-TTTTTTTTTT-X
+D:X-TT-TTTTTTT---------.......----------TT--TTTTTTTT-T-X
+D:XTTTT--TTTTT---------.......----------TTT----TTTTTTT-X
+D:X-TTT-TTT------------.......------------T-TT-TTTTeTTTX
+D:XTT-T-TTT------------.XXXXX.------------TTT--TTT--TTTX
+D:XTTTT-TTT---X<XXXXXXXXXXXXXXXXXXXXXXX---TT-TTT-TTTT-TX
+D:XTTTT-T-T--TXXXXXXXXXXXXXXXXXXXXXXXXX---TTTTT-TTTTTT-X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:10:8
+

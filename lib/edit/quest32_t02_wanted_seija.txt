@@ -1,0 +1,44 @@
+# Name
+Q:$32:N:Capture the Wanted Person
+Q:32:N:お尋ね者を捕まえろ
+
+# Definition
+Q:$32:Q:10:0:0:1:50:1150:0:0:0
+Q:32:Q:10:0:0:1:50:1150:0:0:0
+
+# Description for quest
+?:[LEQ $QUEST32 2]
+Q:$32:T: ---------------------------------------------
+Q:$32:T: |                 WANTED                    |
+Q:$32:T: |               Seija Kijin                 |
+Q:$32:T: |               $1,000,000                  |
+Q:$32:T: |       And a Scroll of Artifact Creation   |
+Q:$32:T: |                                           |
+Q:$32:T: |   She stole powerful magic devices from   |
+Q:$32:T: |     prominent residents of Gensoukyou     |
+Q:$32:T: |    and is hiding in Angband right now     |
+Q:$32:T: ---------------------------------------------
+Q:32:T: ---------------------------------------------
+Q:32:T: |                 WANTED                    |
+Q:32:T: |               鬼人　正邪                  |
+Q:32:T: |               $1,000,000                  |
+Q:32:T: |       副賞：アーティファクト生成の巻物    |
+Q:32:T: |                                           |
+Q:32:T: | 幻想郷各地の有力者から強力な魔道具を盗み、|
+Q:32:T: | 現在は鉄獄に潜伏している模様              |
+Q:32:T: ---------------------------------------------
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST32 3]
+Q:$32:T:As you read the notice once again, a chest falls out of the sky.
+Q:$32:T:Looks like it's your reward.
+Q:32:T:再び手配書を見ていると、空から宝箱がドスンと落ちてきた。
+Q:32:T:どうやらこれが捕物の報酬らしい。
+?:1
+
+?:[EQU $QUEST32 5]
+Q:$32:T:This message shouldn't be displayed
+Q:32:T: このメッセージは出ないはず
+?:1
+

@@ -1,0 +1,38 @@
+
+# Name
+Q:$64:N:Hagoromo Wedding Tradition
+Q:64:N:羽衣婚活の顛末
+
+# Definition
+Q:$64:Q:9:0:0:0:50:0:0:1
+Q:64:Q:9:0:0:0:50:0:0:1
+
+?:[LEQ $QUEST64 2]
+Q:$64:T:Tenshi - 'Hey, you. Yes, you, over there.
+Q:$64:T:I'm a celestial, Tenshi Hinanawi.
+Q:$64:T:I'm giving you the opportunity to accumulate virtue in Heaven
+Q:$64:T:as you are crawling upon the earth!
+Q:$64:T:Just bring me a 'special' hagoromo!'
+Q:64:T:天子「そこのお前。そうお前よ。
+Q:64:T:私は天人の比那名居天子。
+Q:64:T:惨めに地を這うお前に天に徳を積む機会を与えてやろう！
+Q:64:T:何も言わずに【特別製】の羽衣を持ってきなさい！」
+?:1
+
+?:[EQU $QUEST64 3]
+Q:$64:T:Tenshi - 'Well done! You've met my expectations.
+Q:$64:T:Well, take this.
+Q:$64:T:It's a valuable item from Heaven. Feel free to accept it.'
+Q:64:T:天子「よくやったぞ！私の見る目は確かだったようだな。
+Q:64:T:それじゃ褒美をやろう。
+Q:64:T:天界でも貴重な品だぞ。有り難く拝領するがいいわ。」
+?:1
+
+?:[EQU $QUEST64 5]
+Q:$64:T:Tenshi - 'Sigh, I guess inferior people like you won't do.
+Q:$64:T:Well, I'll leave it this request to Iku, she'll handle it.'
+Q:64:T:天子「やれやれ、下賤の者は心に余裕がないねえ。
+Q:64:T:ま、衣玖に任せとけば何とかうまく執り成してやるでしょ。」
+
+
+?:1

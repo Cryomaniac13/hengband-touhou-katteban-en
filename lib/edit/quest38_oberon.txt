@@ -1,0 +1,22 @@
+# quest38_oberon.txt
+
+# Name
+Q:$38:N:Oberon
+Q:38:N:オベロン
+
+# Definition
+Q:$38:Q:1:0:0:1:100:860:0:1
+Q:38:Q:1:0:0:1:100:860:0:1
+
+# Description for quest
+?:[LEQ $QUEST38 2]
+Q:$38:T:Oberon has traveled from parallel world, leading Lords of Amber and
+Q:$38:T:forces of Law into the Chaos Territory for the decisive battle.
+Q:$38:T:His invasion route went through lower depths of Gensoukyou, and
+Q:$38:T:it led to the invasion of monsters from other worlds.
+Q:$38:T:Drive him away, so that Gensoukyou won't become a battlefield.
+Q:38:T:オベロンはアンバーの王族と秩序の勢力を率いて平行世界を渡り、
+Q:38:T:混沌の領域へ最終決戦を挑もうとしている。
+Q:38:T:その進軍ルートが幻想郷の地下と繋がって幻想郷に異界の怪物が溢れ出した。
+Q:38:T:彼を追い払い、幻想郷が戦場になることを防ごう。
+?:1

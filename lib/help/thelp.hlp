@@ -1,0 +1,40 @@
+ 慧音「それではこれより特別授業《変愚蛮怒(勝手版)教室》を始めよう。 
+ 改造版のヘルプという性質上、色々とメタい事も言うがその辺は大目に見てくれ。 
+ さて、何を知りたい？」
+
+ (a)変愚蛮怒(勝手版)とは？(tgeneral    .hlp) 
+ (b)キャラクターの作成    (tbirth      .hlp)  
+ (c)種族、職業、性格詳細  (traceclas   .hlp) 
+ (d)マップと町の設備      (ttown       .hlp)
+ (e)ダンジョンの探険      (tdungeon    .hlp)
+ (f)アイテム              (tobjects    .hlp)
+ (g)モンスター            (tmonster    .hlp)
+ (h)戦闘システムと戦術    (tbattle     .hlp)
+ (i)魔法や特技            (tmagic      .hlp)
+ (j)コマンドの解説        (tcommand    .hlp)
+ (k)オプションの一覧      (toption     .hlp)
+ (l)その他                (tother      .hlp)
+ (m)ユーザー設定ファイル  (tpref       .hlp)
+ (n)自動拾い、破壊エディタ(teditor     .txt)
+
+[[[[B| (o)***初心者ガイド***  (instruction .txt)
+
+ (p)本家変愚蛮怒のヘルプファイル(参考)( jhelp.hlp)
+[[[[y| (?)ヘルプシステムの使用法      (jhelpinfo.txt)
+
+***** [a] tgeneral.hlp
+***** [b] tbirth.hlp
+***** [c] traceclas.hlp
+***** [d] ttown.hlp
+***** [e] tdungeon.hlp
+***** [f] tobjects.hlp
+***** [g] tmonster.hlp
+***** [h] tbattle.hlp
+***** [i] tmagic.hlp
+***** [j] tcommand.hlp
+***** [k] toption.hlp
+***** [l] tother.hlp
+***** [m] tpref.hlp
+***** [n] teditor.txt
+***** [o] instruction.txt
+***** [p] jhelp.hlp

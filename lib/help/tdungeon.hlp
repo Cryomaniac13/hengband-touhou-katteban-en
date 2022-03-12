@@ -1,0 +1,29 @@
+ダンジョンの探検
+
+慧音「いよいよダンジョンの探検だ。
+あなたがダンジョンで出会うものについて説明しよう。」
+
+    (a) ダンジョンの探検                (tdungeon.txt)
+    (b) ダンジョンに入る準備            (tdungeon.txt#Prepare)
+    (c) 地形を示す文字(詳細)            (tdungeon.txt#MapSymbols)
+    (d) モンスターを示す文字            (tdungeon.txt#MonSymbols)
+    (e) アイテムを示す文字              (tdungeon.txt#Objects)
+    (f) 階の雰囲気                      (tdungeon.txt#Feelings)
+    (g) ダンジョン内の特殊な構造物      (tdungeon.txt#Vault)
+    (h) ランダムクエスト                (tdungeon.txt#RandomQuests)
+    (i) ダンジョンの種類                (tdungeon.txt#Dungeons)
+    (j) ダンジョンの特産物              (tdungeon.txt#Souvenir)
+
+    (?) Help System Commands                  (helpinfo.txt)
+
+
+***** [a] tdungeon.txt
+***** [b] tdungeon.txt#Prepare
+***** [c] tdungeon.txt#MapSymbols
+***** [d] tdungeon.txt#MonSymbols
+***** [e] tdungeon.txt#Objects
+***** [f] tdungeon.txt#Feelings
+***** [g] tdungeon.txt#Vault
+***** [h] tdungeon.txt#RandomQuests
+***** [i] tdungeon.txt#Dungeons
+***** [j] tdungeon.txt#Souvenir

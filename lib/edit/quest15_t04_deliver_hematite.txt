@@ -1,0 +1,36 @@
+# quest15_t04_deliver_hematite.txt
+
+# Name
+Q:$15:N:Request for Kyoumarubotan
+Q:15:N:京丸牡丹求む
+
+# Definition
+Q:$15:Q:9:0:0:0:20:0:0:0
+Q:15:Q:9:0:0:0:20:0:0:0
+
+?:[LEQ $QUEST15 2]
+Q:$15:T:Patchouli - 'I've heard there's a flower called
+Q:$15:T:Kyoumarubotan growing at Genbu lake. According to my books,
+Q:$15:T:it's a large tree peony that's also an excellent magic material.
+Q:$15:T:Could you find me some?'
+Q:15:T:パチュリー「玄武の沢に京丸牡丹と呼ばれる花が咲くらしいの。
+Q:15:T:文献によるとそれは見事な大輪の牡丹で魔法の素材としても優秀だとか。
+Q:15:T:貴方ちょっと摘んできてくれない？」
+?:1
+
+?:[EQU $QUEST15 3]
+Q:$15:T:Patchouli - 'So that's a Kyoumarubotan? It's not what I
+Q:$15:T:expected. However, it's still an excellent material; I feel
+Q:$15:T:there's something special about it. Well done. Take this as
+Q:$15:T:your reward.'
+Q:15:T:パチュリー「これが京丸牡丹？思っていたのとずいぶん違うのね。
+Q:15:T:でも優秀な素材なのは確かなようね。特異な気質を感じるわ。
+Q:15:T:ご苦労様。報酬にこれを持っていきなさい。」
+?:1
+
+?:[EQU $QUEST15 5]
+Q:$15:T:Patchouli - 'Oh, you couldn't find it?
+Q:$15:T:Very well, I'll ask Sakuya. You're free to go.'
+Q:15:T:パチュリー「あら、見つからなかったの？
+Q:15:T:それじゃ咲夜にでも頼もうかしら。貴方はもういいわ。」
+?:1

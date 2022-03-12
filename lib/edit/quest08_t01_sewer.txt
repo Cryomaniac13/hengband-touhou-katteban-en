@@ -1,0 +1,111 @@
+# quest08_sewer.txt
+
+# Name
+Q:$8:N:The Sewer
+Q:8:N:下水道
+
+# Definition
+Q:$8:Q:6:0:0:0:15:0:0:0:6
+Q:8:Q:6:0:0:0:15:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST8 2]
+Q:$8:T:Akyuu - 'Kappas have built us a sewer system, but lately,
+Q:$8:T:there's been odd noises and odd unpleasant smells, making
+Q:$8:T:making the villagers nervous. Could you take a look?'
+Q:8:T:阿求「河童たちが整備してくれた下水道なのですが、
+Q:8:T:最近妙な物音と異臭がして里の者が不安がっているのです。
+Q:8:T:ちょっと様子を見てきてくれませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST8 3]
+Q:$8:T:'Lumps of rotting flesh and a giant crocodile...
+Q:$8:T:I never knew it would get that bad. I'll get it all disinfected.
+Q:$8:T:Thank you very much; take this item as your reward. It's very
+Q:$8:T:useful for writing, but it should help you in dungeon exploration
+Q:$8:T:as well.'
+Q:8:T:「腐肉に粘液に巨大なワニですか…
+Q:8:T:知らないうちにそんなに酷いことになっていたのですね。
+Q:8:T:いずれ大規模に消毒してもらうことにします。ともあれ有難うございました。
+Q:8:T:これを差し上げます。書き物に重宝していましたが洞窟探索にも便利なはずです。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST8 5]
+Q:$8:T:'Sigh, I never knew it would get that bad. I'd like to get it
+Q:$8:T:all eventually disinfected. Thanks for your work. Also, please
+Q:$8:T:stay away from there for now.'
+Q:8:T:「はあ、知らないうちにそんなに酷いことになっていたのですね。
+Q:8:T:いずれ大規模に消毒してもらおうと思います。ともあれ有難うございました。
+Q:8:T:あ、出来ればそれ以上近づかないようにお願いしますね。」
+?:1
+
+# Floor with Giant white rat
+F:a:FLOOR:8:86
+
+# Floor with Snotling
+F:b:FLOOR:8:202
+
+# Shallow water with Giang slug
+F:c:SHALLOW_WATER:8:120
+
+# Floor with devilfish
+F:d:SHALLOW_WATER:8:918
+
+# Floor with Wererat
+F:e:FLOOR:8:270
+
+# Floor with Blue icky thing
+F:f:FLOOR:8:252
+
+# Floor with Giant spider
+F:g:FLOOR:8:175
+
+# Floor with Gremlin
+F:h:FLOOR:8:153
+
+# Floor with Metallic green centipede
+F:i:FLOOR:8:42
+
+# Floor with Nether worm mass
+F:j:FLOOR:8:213
+
+# Deep water with Deep puddle
+F:k:DEEP_WATER:8:944
+
+# Shallow water with Shallow puddle
+F:l:SHALLOW_WATER:8:885
+
+# Deep water with White crocodile
+F:m:DEEP_WATER:8:1044
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:Xa..<.............%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%X
+D:XVlVVVlVVVVVVVVVV.........%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%X
+D:Xa.....a........VVVVVVVVV.....................%%%%%%%%%%%%%%%%%%%%%%X
+D:X%%%%%%%%%%%%%%.........VVVVVVVVVVVVVVVVVVVVV...........WWWWW%%%%%%%X
+D:X%%%%%%%%%%%%%%%%%%%%%%..V.%................VVVVVVVV...WWWWWWW%%%%%%X
+D:X%%%%%%%%%%%%%%%%%%%%%%%.V.%%%%%%%%%%%%%%%%........VVVVWWWWWWW%%%%%%X
+D:X%%%%%%%%%%%%%%%%%%%%%%%.V.........bb%%%%%%%%%%%%%h....WWWWWWW%%%%%%X
+D:X%%%%%%%%%%%%%%%%%%%%%%%.VVVVVVVVVVVb%%%%%%%%%%%%%%%%%%kWWWW%%%%%%%%X
+D:X%%%%%%%%%%%%%%%%%%%%%%%.......WWWWV.%%%%%%WWWWW%%%%%%%%%%%%%%%%W%%%X
+D:X%%%%%dVd%%%%%%%%%%%%%i........WWWWV.%%%%%%WWWWW%%%%%%%%%%%%..WWW.%%X
+D:X%%%%%.V.%%%%%%%%%%%%%.VVVVVVVVVVVVV.%%%%%%%WWWW%%%%%%%%%%%%j..WW.%%X
+D:X%%%%%.V.%%%%%%%%%%%%..V.............%%%%%%%.WWf%%%%%%%%%%%.....k.%%X
+D:X%%%%%%V%%%%%%%%%%%%%.VV.%%%%%%%%%%%%%%%%%%%%...%%%%%%%%%%%%.%%.%%%%X
+D:X%%%%%%V%%%%%%%%%%%...V..%%%%%%%%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%.%%%%X
+D:X%%%%%%V%%%%%%%%%%%.VVV.%%%%%%%%%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%.%%%%X
+D:X%%%%%%lVVVVVVcVVVVVV....e..........%%%%%%%%%%.%%%%%%%%%%%%%%%%.%%%%X
+D:X%%%%%%%%%%%%%%%%%%.VVVVVVVVVVVVVVV..................%%%%%%%%%%.%%%%X
+D:X%%%%%%%%%%%%%%%%%%..V............VVVVVVVVVVVVlVVVVV.%%%%%%%%%%.%%%%X
+D:X%%%%%%%%%%mW%%%%%%%%V%%%%%%%%%%%..................V............%%%%X
+D:X%%%%%%%%%%WW%%%%%%%%V%%%%%%%%%%%%%%%%%%%%%%%%%%%%.VVVVVVVVVVVl.....X
+D:X%%%%%%%%%%VVVVVVVVVVV%%%%%%%%%%%%%%%%%%%%%%%%%%%%gggggg......VVVVV.X
+D:X%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.......X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:1:4
+

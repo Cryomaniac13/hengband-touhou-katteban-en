@@ -1,0 +1,149 @@
+N: 1:BIAS_ELEC
+'Thunder Dragon'
+'Thor's Hammer'
+'Brionac'
+'Claimh Solais'
+'Answerer'
+'Vajra'
+of Hephaestus
+
+N: 2:BIAS_POIS
+'Scylla'
+'Typhoon'
+'Styx'
+'Yurlungur'
+'Jormungardr'
+'Antares'
+'Smoking Dragon'
+
+N: 3:BIAS_FIRE
+'Cerberus'
+'Orthros'
+'Salamander'
+'Phelegeton'
+'Tarrasque'
+'Shooting Star'
+'Saint Elmo Explosion'
+'Hell and Heaven Meltdown'
+'Flame of Prometeus'
+
+N: 4:BIAS_COLD
+'Polaris Unique'
+'Sirius'
+'Cocytus'
+'Bramd'
+'Arcturus'
+'Canopis'
+
+N: 5:BIAS_ACID
+'Gargoyle'
+'Ganymede'
+'Goliath'
+'Lethe'
+'Eibra'
+'Spiritus Galaxy'
+'Triton'
+
+N:12:BIAS_CHAOS
+'Lethal Weapon'
+'Narse'
+'Ouroboros'
+'Forbidden Fruit'
+'Unknown X'
+'Lunatic Dream Shoot'
+'Lunar Rainbow'
+
+N:13:BIAS_PRIESTLY
+'Hiroari Shoots a Strange Bird'
+'Minotaka'
+'Reverse Invoker'
+
+N:14:BIAS_NECROMANTIC
+'Acheron'
+'Nidhogg'
+'Garm'
+'Hell Catastrophe'
+'Charon'
+
+N:15:BIAS_LAW
+'Heaven's Gate'
+'Mycen'
+'Agasteria'
+'Amaterasu'
+
+N:16:BIAS_ROGUE
+'Cuelebre'
+'Fafner'
+'Gun of Avalon'
+from a Wandering Star
+
+N:17:BIAS_MAGE
+'Argoth'
+'Hugin'
+'Munin'
+of Hestia
+'Medusa'
+'Deneb'
+
+N:18:BIAS_WARRIOR
+'Albion'
+'Behemoth'
+of Ares
+of Apollo
+
+N:19:BIAS_RANGER
+'Der Freischutz'
+'Luminous Ricochet'
+'Light Flash of the Netherworld'
+'Wind God Fan'
+of Artemis
+'Cosmic Radiation'
+
+N:*:Default
+'Spirit Hand'
+'Shoot the Moon'
+'Super Perseid'
+'Starbow Break'
+'Arrowhead'
+'Last Dancer'
+'Curtain Call'
+'Septentrion'
+'Nemesis Stronghold'
+'Phobos'
+'Deimos'
+'Metis'
+'Io'
+'Pandora'
+'Hyperion'
+'Vega'
+'Proxion'
+'Betelgeuse'
+'Achemar'
+'Altair'
+'Fomalhaut'
+'Regules'
+'Benetnasch'
+'Avior'
+'Atlia'
+'Alfard'
+'Mira'
+'Deneb Kaitos'
+'Algol'
+'Zahakk'
+'Radon'
+'The Great Ragtime Show'
+of Super Space-Time
+of Infinity
+of Super-Ancient Civilization
+of Antimatter
+'Mimi-chan'
+of Kotohime
+of Rikako Asakura
+of Chiyuri Kitashirakawa
+of Professor Okazaki
+'Army of One'
+'Cyberdemon
+'Megiddo Fire'
+'Eyesight Cleaning'
+'Dantalian Flute'
+of Coppelia

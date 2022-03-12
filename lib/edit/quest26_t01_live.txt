@@ -1,0 +1,150 @@
+# quest26_t01_live.txt
+
+# Name
+Q:$26:N:Infiltrate Guerilla Live
+Q:26:N:ゲリラライブに乱入せよ
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$26:Q:6:0:0:0:75:0:0:0:6
+Q:26:Q:6:0:0:0:75:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST26 2]
+Q:$26:T:Keine - 'Recently, there has been a noisy group loudly singing
+Q:$26:T:in the middle of night in forest near the village. They're youkai;
+Q:$26:T:they're dangerous, and loud noise alone wouldn't warrant their
+Q:$26:T:extermination. However, lately there has been even more noise...
+Q:$26:T:I'm hearing trumpets, biwa and drums all the night, as if they're
+Q:$26:T:trying to compete with each other, and our villagers start 
+Q:$26:T:having trouble sleeping.
+Q:$26:T:Wouldn't you go and calm them down?
+Q:$26:T:You're probably going to end up in the middle of an excited
+Q:$26:T:youkai throng. Be careful.'
+Q:26:T:慧音「数日に一度、真夜中に里の近くの森で大声で歌って騒ぐ連中が居るのだ。
+Q:26:T:相手は妖怪、危険もあるし騒音程度で退治に向かうほどでもないと思っていたのだが。
+Q:26:T:最近明らかに音源が増えてな……
+Q:26:T:トランペットだの琵琶だの果ては大小様々な太鼓が競い合うように一晩中鳴り響いて、
+Q:26:T:とうとう不眠に悩まされる里の者も出始めた。
+Q:26:T:何とかあの連中を黙らせてくれないだろうか？
+Q:26:T:恐らく興奮した妖怪たちの真っ只中に飛び込むことになる。気をつけてくれ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST26 3]
+Q:$26:T:Keine - 'Thank you, now we can sleep in quiet.
+Q:$26:T:Take this with you. It's a powerful magic device that can
+Q:$26:T:replenish your mana. It's a one of a kind precious item. Be
+Q:$26:T:careful and don't get it broken or burnt up.'
+Q:26:T:慧音「ありがとう、これで皆安眠できるだろう。
+Q:26:T:これを持っていくといい。魔力を回復してくれる強力な魔道具だ。
+Q:26:T:二本とない貴重品だからな。うっかり壊したり燃やされたりするんじゃないぞ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST26 5]
+Q:$26:T:Keine - 'You couldn't do it either? Looks like there's some
+Q:$26:T:powerful youkai there. I'm going to contact the shrine maiden
+Q:$26:T:as soon as possible. Anyway, thank you.'
+Q:26:T:慧音「貴方でも手が出なかったか。相当に強力な妖怪が混じっているようだな。
+Q:26:T:急いで巫女に使いを出すとしよう。ご苦労だった。」
+?:1
+
+# Grass
+F: :GRASS:8
+# 光っている床
+F:!:FLOOR:10
+
+# Tree
+F:T:TREE
+
+#モンスターidxの頭にwをつけると配置されるとき起きているようにした
+#a:雷鼓
+F:a:FLOOR:10:w1152
+#b:八橋
+F:b:FLOOR:10:w1149
+#c:弁々
+F:c:FLOOR:10:w1148
+#d:ルナサ
+F:d:FLOOR:10:w1099
+#e:メルラン
+F:e:FLOOR:10:w1100
+#f:リリカ
+F:f:FLOOR:10:w1101
+#g:ミスティア
+F:g:FLOOR:10:w1107
+#h:響子
+F:h:FLOOR:10:w1139
+
+#i:EX妖精
+F:i:GRASS:8:w17
+
+#j:大妖精
+F:j:GRASS:8:w16
+#k:中妖精
+F:k:GRASS:8:w13
+#l:付喪神（古）
+F:l:GRASS:8:w19
+#m:付喪神（中）
+F:m:GRASS:8:w52
+#n:妖怪兎
+F:n:GRASS:8:w1067
+#o:妖怪兎人型
+F:o:GRASS:8:w1083
+#p:怨霊（大）
+F:p:GRASS:8:w1199
+#q:浮遊霊
+F:q:GRASS:8:w133
+#r:神霊（中）
+F:r:GRASS:8:w1040
+#s:神霊（大）
+F:s:GRASS:8:w1041
+#t:大天狗
+F:t:GRASS:8:w883
+#u:河童
+F:u:GRASS:8:w224
+#v:山童
+F:v:GRASS:8:w239
+#w:河童のエンジニア
+F:w:GRASS:8:w320
+#y:狼男
+F:y:GRASS:8:w1189
+#z:狼女
+F:z:GRASS:8:w1190
+
+
+
+
+
+
+# Castle Montsalvat
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTTTTTT  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     TTTTX
+D:XTTTTT   !!!!!!!b!!!!!!!!a!!!!!!!!d!!!!!!!     pTTTX
+D:XTTuw    !!!!!!!!!!!!!!!!!!!!!!!!!!!e!!!!!     qqTTX
+D:XTuuw    !!!c!!!!!!!!!!!!!!!!!!!!!!!!!f!!!     pqpTX
+D:XTuuw     !!!!!!!!!!g!!!!!!!!!h!!!!!!!!!!     py qqX
+D:X vvw     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    pp qq X
+D:Xvvvvw    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  yypp k  X
+D:X  mml       !!!!!!!!!!!!!!!!!!!!!!!!    zrzsr     X
+D:X   mmllr                               yyzy r  i  X
+D:X  r mmmmlooo                         rsys r   q   X
+D:Xk     mloooooor                   rqsyrr  r       X
+D:X      r nnnnnnnooooiiiiiiiiiiiiqrrzrr kkkk    k  kX
+D:X         nnnnnnnonnjkkkkjjjjjjrqyzq rkkk          X
+D:X   q j       r  nn  k jkjkj    q           j    k X
+D:X        k            jkjkjkj      rr    k         X
+D:X r   q     q       j       kk            kk   r   X
+D:X      q      i  k     k        i            kk  TTX
+D:XTT q     k                 r       k   r        TTX
+D:XTTTT k       q r    k            qq     TTT q     X
+D:X TTq        q    TTTTTT   TT  i       TTT  T   T tX
+D:XTTTTT  TTT  TTT   q   TTT  TTT TT TT   TTTT     TTX
+D:XTTTTTTT   TTTTTTr  TTT i TTTTTT TT  TTT TTT       X
+D:XTTTTTTT  qTTT    q TTTTT TTTTTT TTT T T  TTT     TX
+D:XTTTTqTT q TTT rTT  TTT TTTTT TT TT TTTTTTTTT      X
+D:XTTTTTTTTTTTTT     qTTT   TTTTTTTTT  TTT  TT    T <X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:7:25
+

@@ -1,0 +1,70 @@
+# quest12_chaos_wyrm.txt
+Q:$12:N:Dragon Extermination
+Q:12:N:ドラゴン退治
+
+# Definition
+Q:$12:Q:6:0:0:0:65:0:0:0:6
+Q:12:Q:6:0:0:0:65:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST12 2]
+Q:$12:T:Sunnymilk - 'There's a creepy bad dragon wandering near house!'
+Q:$12:T:Lunachild - 'Huh? I thought it was pretty cool-looking.'
+Q:$12:T:Star Sapphire - 'Could you drive it away, please? We're in
+Q:$12:T:trouble.'
+Q:12:T:サニーミルク「私たちの家の周りを気持ち悪い竜がうろついてるの！」
+Q:12:T:ルナチャイルド「えー？けっこう格好良かったけどなぁ。」
+Q:12:T:スターサファイア「どうか追い払って頂けませんか？本当に困っているのです。」
+
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST12 3]
+Q:$12:T:Sunnymilk - 'At last! I'm going to go back and take a nap.'
+Q:$12:T:Lunachild - 'You'd have to give a reward first...'
+Q:$12:T:Star Sapphire - 'Take this. I think it's a valuable item that's
+Q:$12:T:normally hard to find.'
+Q:12:T:サニーミルク「あー良かった。帰ってお昼寝しましょ。」
+Q:12:T:ルナチャイルド「その前に何かお礼しないと…」
+Q:12:T:スターサファイア「これを差し上げます。滅多に手に入らない値打ち物ですよ？」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST12 5]
+Q:$12:T:Sunnymilk - 'Eh, you ran away?'
+Q:$12:T:Lunachild - 'We have to move again? I'm not done with my pickles...'
+Q:$12:T:Star Sapphire - *sob*
+Q:12:T:サニーミルク「えー、逃げ帰ってきたの？」
+Q:12:T:ルナチャイルド「また引っ越し？香の物もまた漬け直しじゃない…」
+Q:12:T:スターサファイア「使えないわねえ…(ぼそっ」
+
+?:1
+# Normal floor
+F: :GRASS:8
+
+# Trees
+F:T:TREE:1
+
+F:d:GRASS:8:783
+
+
+# Node of Chaos layout 
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XTT    T T TTTTTTTTTTTTTTTTTTTTTTTTTTX
+D:X           T T    X    TTTTTT TTTTTTX
+D:X T   d          XXXXX TXT    TT TTTTX
+D:X          XXTXXXXXXXXXXX      T T TTX
+D:X            XXXXXXXXXXXXXXX      TTTX
+D:X   T     T XXXXXXXXXXXXXXX    T  T TX
+D:X         XXXXXXXXXXXXXXXXXX     T T X
+D:X  T        XXXXXXXXXXXXXXXXX       TX
+D:X          XXXXXXXXXXXXXXXX        T X
+D:X             XXXXXXXXXXX X          X
+D:X   TT     T     XXXXX             TTX
+D:X                                   TX
+D:X<                    TTTTT  TT TT TTX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:12:1
+

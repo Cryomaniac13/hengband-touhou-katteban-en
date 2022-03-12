@@ -1,0 +1,35 @@
+慧音「オプション設定について説明しよう。サブウィンドウの扱い方もここで触れる。
+なお、ここから先はほとんど変愚本家のヘルプファイルを流用している。」
+
+    (a) 変愚蛮怒(勝手版) オプション一覧     (toption.txt)
+    (b) オプション1 -- キー入力             (toption.txt#Input)
+    (c) オプション2 -- マップ画面           (toption.txt#MapScreen)
+    (d) オプション3 -- テキスト表示         (toption.txt#TextDisplay)
+    (e) オプション4 -- ゲームプレイ         (toption.txt#GamePlay)
+    (f) オプション5 -- 行動中止             (toption.txt#Disturbance)
+    (g) オプション6 -- 簡易自動破壊         (toption.txt#AutoDestroyer)
+    (h) オプションR -- プレイ記録           (toption.txt#PlayRecord)
+    (i) オプションD -- 基本ウェイト量       (toption.txt#BaseDelay)
+    (j) オプションH -- 低ヒットポイント警告 (toption.txt#Hitpoint)
+    (k) オプションA -- 自動セーブオプション (toption.txt#Autosave)
+    (l) オプションW -- ウィンドウ フラグ    (toption.txt#Window)
+    (m) オプションC -- 詐欺オプション       (toption.txt#Cheating)
+    (n) 初期オプション                      (toption.txt#Birth)
+
+    (?) ヘルプシステムの使用法      (jhelpinfo.txt)
+
+
+***** [a] toption.txt
+***** [b] toption.txt#Input
+***** [c] toption.txt#MapScreen
+***** [d] toption.txt#TextDisplay
+***** [e] toption.txt#GamePlay
+***** [f] toption.txt#Disturbance
+***** [g] toption.txt#AutoDestroyer
+***** [h] toption.txt#PlayRecord
+***** [i] toption.txt#BaseDelay
+***** [j] toption.txt#Hitpoint
+***** [k] toption.txt#Autosave
+***** [l] toption.txt#Window
+***** [m] toption.txt#Cheating
+***** [n] toption.txt#Birth

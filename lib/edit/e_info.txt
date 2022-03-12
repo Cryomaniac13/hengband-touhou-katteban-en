@@ -1,0 +1,1591 @@
+# File: e_info.txt
+#JZ# Zangband “ϊ–{κ–σ: ”Β‘q
+#JZ# u#J0#v‚Εn‚ά‚ιƒRƒƒ“ƒg‚Ν“ϊ–{κ”Β Angband ‚Μ‚µ‚Ζ‚µ‚ρ‚³‚ρ‚Ι‚ζ‚ι
+#JZ# ‚ΰ‚Μ‚ΕAu#JZ#v‚Εn‚ά‚ιƒRƒƒ“ƒg‚Ν“ϊ–{κ”Ε Zangband ‚ΕV‚½‚Ι
+#JZ# ‰Α‚ν‚Α‚½€–Ϊ‚Ε‚·B“ϊ–{κƒAƒ“ƒOƒoƒ“ƒh“―—lA„i”Β‘qjΘO‚Μ•ϋ‚Μ
+#JZ# ƒRƒƒ“ƒg‚Ι‚Ν‚»‚Μ•ϋ‚Μ–Ό‘O‚π‹LΪ‚µ‚Δ‚Ά‚ά‚·B
+#JZ#
+
+
+# This file is used to initialize the "lib/raw/e_info.raw" file, which is
+# used to initialize the "ego-item" information for the Angband game.
+
+# Do not modify this file unless you know exactly what you are doing,
+# unless you wish to risk possible system crashes and broken savefiles.
+
+# After modifying this file, delete the "lib/raw/e_info.raw" file.
+
+# The ego-item indexes are defined in "defines.h", and must not be changed.
+
+# Ego-items 1-63 are "armor", and 64-127 are "weapons"
+
+# Note that every "ego-item" type has a different "index", and can only be
+# created from items that belong to a certain "slot" in the equipment, if
+# one assumes that "ammo" belongs to an imaginary slot (23).  However, it
+# is possible for several "ego-item" types to have the same "textual name",
+# such as with "Armor of Resistance" and "Shield of Resistance".
+
+# === Understanding e_info.txt ===
+
+# N: serial number : ego type
+# X: inventory slot : rating
+# C: max to-hit : max to-dam : max to-ac : pval
+# W: depth : rarity : weight : cost
+# F: flag | flag | etc
+
+# 'N' indicates the beginning of an entry. The serial number must
+# increase for each new item.
+
+# 'X' is for extra information - inventory slot and rating. Slots
+# range from 23 (for ammunition) to 35 (for boots). Rating affects
+# level feelings.
+
+# 'C' is for creation bonusses - maximum to-hit, to-dam, to-ac, and
+# pval. Cursed ego-items will negate the given value.
+
+# 'W' is for extra information. Depth is the depth the object is
+# normally found at, rarity determines how common the object is,
+# weight is in tenth-pounds and cost is the items value.
+
+# 'F' is for flags. These are fairly self-explanatory. As many F:
+# lines may be used as are needed to specify all the flags and flags
+# are separated by the '|' symbol.
+
+
+# Version stamp (required)
+
+V:0.0.1
+
+### ‹| slot:22 ###
+
+N:1:‚Έ“x‚Μ
+E:of Accuracy
+X:22:10
+W:0:5:0:1000
+C:5:0:0:0
+
+N:2:‚‘¬“x‚Μ
+E:of Velocity
+X:22:10
+W:0:5:0:1000
+C:0:5:0:0
+
+N:3:„—Ν‚Μ
+E:of Extra Might
+X:22:20
+W:0:18:0:10000
+C:0:5:0:0
+F:XTRA_MIGHT | XTRA_RES
+
+N:4:‘‚‚Ώ‚Μ
+E:of Extra Shots
+X:22:20
+C:5:0:0:0
+W:0:18:0:10000
+F:XTRA_SHOTS | XTRA_POWER
+
+N:5:•l‚Μ
+E:of the Warrior
+X:22:35
+W:0:60:0:30000
+C:5:5:0:3
+F:XTRA_RES | CON | STR
+
+N:6:λl‚Μ
+E:of the Hunter
+X:22:35
+W:0:60:0:30000
+C:5:5:0:3
+F:XTRA_POWER | STEALTH | ESP_ANIMAL | DEX
+
+### –ξ’e slot:23 ###
+
+N:7:λl‚Μ
+E:of Hurt Animal
+X:23:10
+W:0:18:0:25
+F:SLAY_ANIMAL
+
+N:8:”j–‚‚Μ
+E:of Holy Might
+X:23:20
+W:0:36:0:60
+C:5:5:0:0
+F:SLAY_EVIL | SLAY_DEMON | SLAY_UNDEAD | BRAND_FIRE | BLESSED
+F:SLAY_KWAI
+F:IGNORE_FIRE | IGNORE_ACID
+
+N:9:—³E‚µ‚Μ
+E:of Hurt Dragon
+X:23:10
+F:SLAY_DRAGON
+W:0:18:0:35
+C:5:5:0:0
+
+N:10:“d‚‚Μ
+E:of Shocking
+X:23:10
+F:BRAND_ELEC | IGNORE_ELEC
+W:0:12:0:30
+
+N:11:‰Ξ‰‚Μ
+E:of Flame
+X:23:10
+F:BRAND_FIRE | IGNORE_FIRE
+W:0:12:0:30
+
+N:12:—β‹C‚Μ
+E:of Frost
+X:23:10
+F:BRAND_COLD | IGNORE_COLD
+W:0:12:0:25
+
+N:13:“VΧ‹S‚Μ
+E:of Amanojaku
+X:23:0
+W:0:12:0:0
+C:30:30:0:0
+F:SLAY_GOOD | KILL_GOOD
+
+### ’Κν•ν slot:24 ###
+
+N:14:‰p—Y‚Μ
+E:(Heroic)
+X:24:40
+W:0:72:0:30000
+C:10:10:5:4
+F:WIS |
+F:SLAY_EVIL | SLAY_UNDEAD | SLAY_DEMON | XTRA_H_RES
+F:SEE_INVIS | BLESSED | RES_FEAR | ONE_SUSTAIN |
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:SLAY_KWAI
+
+N:15:ημÒ‚Μ
+E:(Defender)
+X:24:25
+W:0:48:0:20000
+C:4:4:8:4
+F:STEALTH |
+F:FREE_ACT | SEE_INVIS | LEVITATION | REGEN | BLESSED | RES_FEAR
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | ONE_SUSTAIN | XTRA_H_RES |
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:16:‹S‚Μ
+E:of Oni
+X:24:20
+W:0:24:0:2000
+C:0:10:0:0
+
+N:17:‹Ζ•¨‚Μ
+E:of Sharpness
+X:24:20
+W:0:18:0:5000
+C:5:5:0:0
+F:VORPAL
+
+N:18:‘ε‹Ζ•¨‚Μ
+E:of *Sharpness*
+X:24:35
+W:0:60:0:15000
+C:10:10:0:3
+F:VORPAL | TUNNEL
+
+N:19:—•‘‚Μ
+E:of the Boisterous Dance
+X:24:25
+W:0:24:0:12000
+C:0:0:0:3
+F:BLOWS
+
+N:20:——Ν‚Μ
+E:of Force
+X:24:20
+W:0:18:0:8000
+C:3:3:0:2
+F:INT | WIS |
+F:FORCE_WEAPON | SEE_INVIS
+
+N:21:’n—μ‚Μ
+E:of Earthquakes
+X:24:20
+W:10:18:0:6000
+C:0:0:0:3
+F:TUNNEL | IMPACT | ACTIVATE
+U:QUAKE
+
+N:22:X‚Με‚Μ
+E:of the Lord of the Forest
+X:24:20
+W:0:24:0:8000
+F:BRAND_ACID | RES_ACID | IGNORE_ACID
+
+N:23:—‹b‚Μ
+E:of Raijuu
+X:24:20
+W:0:18:0:4500
+F:BRAND_ELEC | RES_ELEC | IGNORE_ELEC
+
+N:24:Ο‰Ξ‚Μ
+E:of Kitsune
+X:24:15
+W:0:12:0:3000
+F:BRAND_FIRE | RES_FIRE | IGNORE_FIRE | LITE
+
+N:25:•XΈ‚Μ
+E:of Ice Fairies
+X:24:15
+W:0:12:0:2500
+F:BRAND_COLD | RES_COLD | IGNORE_COLD
+
+N:26:—ι—–‚Μ
+E:of Suzuran
+X:24:20
+W:0:24:0:4500
+F:BRAND_POIS | RES_POIS
+
+N:27:Έ—μ‚Μ
+E:(Elemental)
+X:24:25
+W:0:36:0:10000
+C:4:4:0:0
+F:BRAND_FIRE | BRAND_COLD | BRAND_ELEC | LITE
+F:RES_FIRE | RES_COLD | RES_ELEC
+F:IGNORE_FIRE | IGNORE_COLD | IGNORE_ELEC | IGNORE_ACID
+
+N:28:‹z‹S‚Μ
+E:(Vampiric)
+X:24:20
+W:0:24:0:10000
+F:VAMPIRIC | RES_NETHER
+
+N:29:…—΄‚Μ
+E:of the Water Dragon
+X:24:25
+W:20:32:0:12000
+C:4:4:0:2
+F:SLAY_EVIL | TELEPORT | FREE_ACT | SEARCH |
+F:REGEN | SLOW_DIGEST | ACTIVATE | XTRA_H_RES
+F:RES_WATER
+U:TELEPORT
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+
+N:30:—΄_‚Μ
+E:of the Dragon God
+X:24:40
+W:0:60:0:30000
+C:10:10:0:3
+F:STR | CON | DEX | BLESSED
+F:SLAY_EVIL | SLAY_DEMON | SLAY_UNDEAD |
+F:FREE_ACT | SEE_INVIS | XTRA_H_RES | XTRA_POWER
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:31:”—ν‚Μ
+E:(Hakurei)
+X:24:50
+W:0:240:0:50000
+C:15:15:0:3
+F:SLAY_EVIL | SLAY_DEMON | SLAY_UNDEAD | ESP_EVIL
+F:FREE_ACT | SEE_INVIS | XTRA_H_RES | XTRA_POWER
+F:RES_FEAR | XTRA_DICE | SEARCH
+F:SLAY_KWAI | ESP_KWAI | RES_HOLY | BLESSED
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:32:‰…—μ‚Μ
+E:of Vengeful Spirits
+X:24:0
+W:0:12:0:0
+C:0:0:10:0
+F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
+F:SLAY_UNDEAD | SLAY_HUMAN | BRAND_POIS | ESP_UNDEAD |
+F:RES_COLD | RES_NETHER |
+F:RANDOM_CURSE2 | XTRA_DICE
+
+N:33:«–‚‚Μ
+E:(Demonic)
+X:24:0
+W:0:36:0:0
+C:10:10:10:0
+F:SEE_INVIS | CURSED | SH_FIRE |
+F:SLAY_HUMAN | BRAND_POIS |
+F:RES_FIRE | RES_NETHER |
+F:RANDOM_CURSE2 |
+
+N:34:Χ_‚Μ
+E:of the Evil God
+X:24:0
+W:0:240:0:0
+C:20:20:30:0
+F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
+F:SLAY_UNDEAD | SLAY_HUMAN | SLAY_ANIMAL | BRAND_POIS | BRAND_FIRE |
+F:RES_FIRE | RES_NETHER | RES_FEAR | RES_POIS | RES_DARK
+F:RANDOM_CURSE2 | XTRA_DICE | REGEN
+F:DRAIN_EXP | RES_INSANITY
+F:SLAY_GOOD
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:35:¬“Χ‚Μ
+E:(Chaotic)
+X:24:20
+W:0:24:0:10000
+F:CHAOTIC | RES_CHAOS | IGNORE_ELEC | IGNORE_ACID | IGNORE_FIRE | XTRA_RES
+F:SLAY_GOOD | ESP_GOOD
+
+N:36:_E‚µ‚Μ
+E:(Godslayer)
+X:24:35
+W:0:48:0:20000
+C:5:5:0:3
+F:STR | XTRA_H_RES
+F:SLAY_DEITY | ESP_DEITY
+
+N:37:bλ‚θ‚Μ
+E:of Beast Hunting
+X:24:18
+C:0:0:0:3
+W:0:18:0:6000
+F:SLAY_ANIMAL | ESP_ANIMAL | INT | REGEN
+
+N:38:«—μ‘ήU‚Μ
+E:of Spirit Exorcism
+X:24:18
+C:0:0:0:3
+W:0:18:0:7000
+F:SLAY_UNDEAD | ESP_UNDEAD | SEE_INVIS | RES_NETHER | WIS
+
+N:39:—d‰φ‘ή΅‚Μ
+E:of Youkai Extermination
+X:24:18
+C:0:0:0:3
+W:0:18:0:5000
+F:XTRA_H_RES | BLESSED | FREE_ACT
+F:SLAY_KWAI | ESP_KWAI | CHR
+
+N:40:«–‚βP‚Ά‚Μ
+E:of Demon Purification
+X:24:18
+C:0:0:0:3
+W:0:18:0:7000
+F:SLAY_DEMON | ESP_DEMON | RES_DARK | RES_FEAR | WIS
+
+N:41:—³E‚µ‚Μ
+E:(Dragonslayer)
+X:24:24
+W:0:24:0:8000
+C:0:0:0:3
+F:CON | SLAY_DRAGON | XTRA_E_RES | XTRA_D_RES | ESP_DRAGON
+
+N:42:l‹ς‚Ά‚Μ
+E:(Man-Eater)
+X:24:20
+W:0:20:0:7000
+C:0:0:0:3
+F:DEX | SLAY_HUMAN | ESP_HUMAN
+
+
+### Body Armor ###
+
+N:43:l‹›‚Μ
+E:of Mermaid
+X:31:18
+W:0:16:0:2000
+F:XTRA_RES
+F:RES_WATER
+
+N:44:‰Ν“¶‚Μ
+E:of Kappa
+X:31:20
+C:0:0:0:3
+W:0:18:0:3000
+F:XTRA_POWER | RES_ACID | RES_FIRE | STEALTH
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:45:–ε”Τ‚Μ
+E:of the Gatekeeper
+X:31:15
+C:0:0:5:3
+W:0:15:0:2000
+F:XTRA_POWER | RES_ELEC | RES_COLD | SEARCH
+
+N:46:—dΈ‚Μ
+E:of Fairy
+X:31:10
+W:0:12:0:1000
+F:XTRA_E_RES | LEVITATION
+
+N:47:“VE‚Μ
+E:(Celestial)
+X:31:40
+W:0:120:0:30000
+C:0:0:10:0
+F:SUST_STR | SUST_DEX | SUST_CON | SUST_INT | SUST_WIS | SUST_CHR |
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | LEVITATION
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
+
+N:48:‹S‚Μ
+E:of Oni
+X:31:30
+W:0:30:0:18000
+C:0:0:15:3
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | STR | SUST_STR
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
+
+N:49:“V‹η‚Μ
+E:of Tengu
+X:31:25
+W:0:24:0:15000
+C:0:0:10:3
+F:STEALTH |
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
+
+N:50:‹S_’·‚Μ
+E:of Kishin Lord
+X:31:70
+W:0:80:0:44444
+C:5:5:10:3
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS
+F:FREE_ACT | RES_FEAR | RES_NETHER | SEE_INVIS
+F:STR | DEX| CON | SUST_STR | SUST_DEX | SUST_CON
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:REGEN | SHOW_MODS
+
+N:51:–‚E_‚Μ
+E:of Makai God
+X:31:80
+W:0:240:0:66666
+C:0:0:30:4
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | INT | WIS| CON | CHR
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
+F:XTRA_POWER | FREE_ACT | RES_FEAR | RES_CONF | SEE_INVIS | SLOW_DIGEST
+F:RES_TIME | RES_INSANITY | RES_BLIND | RES_NETHER | RES_DARK
+
+N:52:‹΄•P‚Μ
+E:of the Bridge Princess
+X:31:0
+W:0:72:0:0
+C:0:0:20:0
+F:CURSED | HEAVY_CURSE
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_SOUND | NO_MAGIC
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD |
+
+N:53:€—μ‚Μ
+E:of Ghosts
+X:31:0
+W:0:8:0:0
+C:0:0:10:0
+F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
+F:ESP_UNDEAD | RES_COLD | RES_NETHER |
+F:RANDOM_CURSE2 | NO_TELE
+
+
+### Shields ###
+
+N:54:Έ—μ‚Μ
+E:(Elemental)
+X:25:12
+W:0:10:0:3000
+F:XTRA_D_RES | XTRA_POWER
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:55:”’T“V‹η‚Μ
+E:of White Wolf Tengu
+X:25:20
+W:0:18:0:3500
+C:0:0:5:0
+F:IGNORE_FIRE | XTRA_E_RES | XTRA_H_RES | IGNORE_ACID
+
+N:56:ημÒ‚Μ
+E:(Defender)
+X:25:25
+W:0:48:0:15000
+C:0:0:10:0
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
+
+N:57:ƒIƒ‹ƒƒAƒ“‚Μ
+E:(Orlean)
+X:25:40
+W:0:96:0:25000
+C:0:0:20:0
+F:RES_LITE | RES_DARK | RES_FEAR | XTRA_H_RES
+F:RES_HOLY
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:58:ƒfƒ…ƒ‰ƒnƒ“‚Μ
+E:of Dullahan
+X:25:0
+W:0:72:0:0
+F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
+F:ESP_UNDEAD | ESP_HUMAN | RES_NETHER |
+F:RANDOM_CURSE2 | SHOW_MODS
+
+N:59:«—μ‚Μ
+E:of Evil Spirits
+X:25:0
+W:0:8:0:0
+C:0:0:20:0
+F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
+F:ESP_UNDEAD | RES_COLD | RES_NETHER |
+F:RANDOM_CURSE2 | NO_TELE
+
+
+### Crowns and Helms ###
+
+N:60:‹³t‚Μ
+E:of the Teacher
+X:33:16
+C:0:0:0:3
+W:0:12:0:1300
+F:INT | FREE_ACT
+
+N:61:–‚—‚Μ
+E:of the Witch
+X:33:25
+W:0:48:0:8000
+C:0:0:3:3
+F:INT | WIS | SUST_INT | SUST_WIS
+F:XTRA_RES | XTRA_POWER
+
+N:62:“Vl‚Μ
+E:of Celestials
+X:33:30
+W:0:72:0:16000
+C:0:0:5:3
+F:LITE | RES_LITE | CON | RES_CONF
+F:RES_HOLY | XTRA_RES
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:63:€_‚Μ
+E:of Shinigami
+X:33:20
+W:0:30:0:5000
+C:0:0:0:6
+F:SEARCH | RES_BLIND | SEE_INVIS | RES_NETHER
+
+N:64:«Ò‚Μ
+E:of the Magi
+X:33:40
+W:0:120:0:25000
+C:0:0:0:3
+F:INT | SUST_INT | WIS | SUST_WIS | RES_BLIND
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_CONF
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:XTRA_H_RES | XTRA_POWER
+
+N:65:“V‹η‚Μ
+E:of Tengu
+X:33:20
+W:0:10:0:8000
+F:RES_POIS | FREE_ACT | SEE_INVIS
+
+N:66:ημÒ‚Μ
+E:(Defender)
+X:33:25
+W:0:48:0:10000
+C:0:0:10:2
+F:FREE_ACT | SEE_INVIS | RES_BLIND
+F:CON | SUST_CON
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:XTRA_POWER | XTRA_RES | ONE_SUSTAIN
+
+N:67:‹S‚Μ
+E:of Oni
+X:33:30
+W:0:48:0:12000
+C:0:0:0:3
+F:STR | DEX | CON | SUST_STR | SUST_DEX | SUST_CON
+F:RES_FEAR | FREE_ACT | XTRA_H_RES
+
+N:68:bl‚Μ
+E:of Beastmen
+X:33:12
+W:0:10:0:2000
+C:0:0:0:8
+F:INFRA | REGEN | HIDE_TYPE
+
+N:69:‚³‚Ζ‚θ‚Μ
+E:of Satori
+X:33:20
+W:0:36:0:15000
+
+N:70:•PN‚Μ
+E:of the Princess
+X:33:30
+W:0:80:0:20000
+C:0:0:10:7
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
+F:CHR | XTRA_POWER | XTRA_H_RES | SUST_CHR | RES_DISEN
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:71:‘›—μ‚Μ
+E:of Poltergeists
+X:33:0
+W:0:24:0:0
+C:0:0:0:10
+F:TELEPORT | STEALTH | RES_NETHER | RES_SOUND
+
+N:72:–Y‹p‚Μ
+E:of Obliviousness
+X:33:0
+C:0:0:0:5
+W:0:24:0:0
+F:INT | WIS | CHR | NO_MAGIC
+
+N:73:βM‚θ_‚Μ
+E:of Scourge God
+X:33:0
+C:0:0:0:5
+W:0:18:0:0
+F:STR | DEX | CON | NO_TELE
+
+### Cloaks ###
+
+N:74:£‰ϊ‚Μ
+E:of Patrolling
+X:32:10
+W:0:5:0:1500
+C:0:0:10:3
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:SEARCH
+
+N:75:υw–ΐΚ
+E:(Optical Camouflage)
+X:32:10
+W:0:5:0:1000
+C:0:0:0:3
+F:STEALTH
+
+N:76:–ι–¶‚Μ
+E:of the Night Fog
+X:32:30
+W:0:48:0:10000
+C:0:0:0:5
+F:STEALTH | SEARCH | ESP_HUMAN
+
+N:77:Ήl‚Μ
+E:of Saint
+X:32:25
+W:0:36:0:15000
+C:0:0:20:3
+F:STEALTH | XTRA_H_RES | XTRA_POWER
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:78:’n–ιλ‚Μ
+E:of Hell Raven
+X:32:20
+W:0:30:0:9000
+C:0:0:5:0
+F:IGNORE_FIRE | SH_FIRE | RES_FIRE
+F:RES_LITE | RES_NETHER
+
+N:79:—³‹{‚Μg‚Ά‚Μ
+E:of Dragon Palace Messenger
+X:32:20
+W:0:20:0:6000
+C:0:0:4:0
+F:IGNORE_ELEC | SH_ELEC | RES_ELEC
+F:LEVITATION | XTRA_RES
+
+N:80:α—‚Μ
+E:of Yuki-Onna
+X:32:20
+W:0:20:0:3000
+C:0:0:4:0
+F:SH_COLD | RES_COLD
+F:XTRA_POWER
+
+N:81:‹z‹S‚Μ
+E:of Vampire
+X:32:45
+W:0:100:0:30000
+C:5:5:0:5
+F:SPEED | LEVITATION | RES_DARK | SEE_INVIS | INFRA | STEALTH | RES_NETHER
+F:SHOW_MODS
+
+N:82:“y’wε‚Μ
+E:of Tsuchigumo
+X:32:0
+W:0:48:0:0
+C:0:0:20:4
+F:STR | INT | WIS | DEX | CON | CHR
+F:HEAVY_CURSE | CURSED | RES_POIS | RES_DARK
+F:RES_BLIND | FREE_ACT | RES_FEAR | SEE_INVIS
+
+N:83:•‚—V—μ‚Μ
+E:of Floating Spirits
+X:32:0
+W:0:8:0:0
+C:10:10:0:3
+F:STR | INT | LEVITATION
+F:HEAVY_CURSE | CURSED |
+
+
+### Gloves ###
+
+N:84:—dΈ‚Μ
+E:of Fairy
+X:34:10
+F:FREE_ACT | XTRA_POWER
+W:0:8:0:1200
+
+N:85:‰Ν“¶‚Μ
+E:of Kappa
+X:34:18
+W:0:12:0:2000
+C:0:0:0:5
+F:DEX | HIDE_TYPE
+
+N:86:’Bl‚Μ
+E:of Mastery
+X:34:20
+W:0:16:0:2500
+C:10:10:0:0
+F:SHOW_MODS
+
+N:87:“V‰Ί–³‘o‚Μ
+E:of Peerlessness
+X:34:30
+W:0:48:0:50000
+C:5:5:0:3
+F:DEX | SHOW_MODS | HIDE_TYPE
+F:GENZI
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:88:‹S‚Μ
+E:of Oni
+X:34:25
+W:0:36:0:10000
+C:5:5:5:5
+F:STR | SHOW_MODS | HIDE_TYPE | XTRA_H_RES
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:89:¬«–‚‚Μ
+E:of Imp
+X:34:20
+W:0:16:0:3000
+C:0:0:0:4
+F:MAGIC_MASTERY | HIDE_TYPE
+
+N:90:ƒLƒ‡ƒ“ƒV[‚Μ
+E:of Jiangshi
+X:34:0
+W:0:12:0:0
+C:0:0:0:5
+F:INT | WIS | DEX | REGEN | RES_NETHER
+
+#ECC³‘ε•‘‰Α
+N:91:‹Φυ‚Μ
+E:of Taboo
+X:34:0
+W:0:72:0:0
+C:0:0:50:0
+F:AGGRAVATE | HEAVY_CURSE | CURSED | ADD_H_CURSE | SHOW_MODS
+
+### Boots ###
+
+N:92:—dΈ‚Μ
+E:of Fairy
+X:35:10
+W:0:8:0:500
+F:LEVITATION
+
+N:93:‘ε—dΈ‚Μ
+E:of Great Fairy
+X:35:25
+W:0:36:0:5000
+F:LEVITATION | FREE_ACT | XTRA_H_RES | XTRA_POWER | ACTIVATE
+U:PHASE_DOOR
+
+N:94:‰Ν“¶‚Μ
+E:of Kappa
+X:35:12
+W:0:12:0:1000
+C:0:0:0:3
+F:STEALTH
+
+N:95:ιλ“V‹η‚Μ
+E:of Crow Tengu
+X:35:40
+W:0:60:0:40000
+C:0:0:0:10
+F:LEVITATION | SPEED |
+
+N:96:•t‘r_‚Μ
+E:of Tsukumogami
+X:35:25
+W:0:36:0:8000
+F:FREE_ACT | WARNING | ONE_SUSTAIN | XTRA_RES | XTRA_POWER
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+#‰B–§A‰Α‘¬‘‰Α—\’θ
+N:97:‰ΞΤ‚Μ
+E:of Kasha
+X:35:0
+W:0:48:0:0
+C:0:0:0:2
+F:FREE_ACT | SPEED | STEALTH
+F:TY_CURSE | HEAVY_CURSE | CURSED | RES_NETHER | RES_FIRE
+
+N:98:Vl“Α—L‚ΜƒAƒ‚Μ
+E:of the Old Man
+X:35:0
+W:0:8:0:0
+C:0:0:10:3
+F:INT | WIS | HEAVY_CURSE | CURSED |
+F:TELEPORT | RES_SOUND
+
+N:99:’n”›—μ‚Μ
+E:of Earthbound Spirits
+X:35:0
+W:0:16:0:0
+C:0:0:10:5
+F:SPEED | WIS | HEAVY_CURSE | CURSED |
+F:NO_TELE | RES_NETHER
+
+
+N:100:–ο_‚Μ
+E:of Misfortune God
+X:35:0
+W:0:48:0:0
+C:0:0:20:0
+F:LEVITATION | RES_NETHER | RES_DARK
+F:AGGRAVATE | HEAVY_CURSE | CURSED | ADD_H_CURSE
+F:RES_HOLY
+
+
+# Destroyed Weapon
+N:101:‚Φ‚µά‚κ‚½
+E:(Shattered)
+X:24:0
+W:0:0:0:0
+C:5:5:0:0
+
+# Destroyed Body Armor
+
+N:102:‘ε‚ΜJ‚Ά‚½
+E:(Pierced)
+X:31:0
+W:0:0:0:0
+C:0:0:10:0
+
+
+# Ego Lite
+N:103:υ–Ύ‚Μ
+E:of Extra Light
+X:30:5
+W:0:9:0:200
+C:0:0:0:0
+
+N:104:‘Ύ—z‚Μ
+E:of the Sun
+X:30:20
+W:30:36:0:7000
+C:0:0:0:0
+F:ACTIVATE | RES_FIRE | SH_FIRE | RES_LITE
+U:LIGHT
+
+N:105:—db‚Μ
+E:of Youkai Beast
+X:30:5
+W:0:18:0:500
+C:0:0:0:8
+F:INFRA
+
+N:106:‘ε—e—Κ‚Μ
+E:of Duration
+X:30:10
+W:0:9:0:100
+C:0:0:0:0
+
+N:107:ªΕ‚Μ
+E:of Darkness
+X:30:0
+W:0:36:0:0
+C:0:0:0:0
+
+N:108:—HΊ‚Μ
+E:(Mysterious)
+X:30:20
+W:0:36:0:5000
+C:0:0:0:0
+F:RES_BLIND | SEE_INVIS
+
+##################### Ego Ring ###################
+
+
+N:109:—E‹C‚Μ
+E:and Heroism
+X:27:10
+W:5:0:0:300
+C:0:0:0:0
+F:ACTIVATE
+U:HELO
+
+N:110:–³‘o‚Μ
+E:and Matchlessness
+X:27:10
+W:0:0:0:8000
+#C:10:10:0:0
+F:WARNING
+
+N:111:C—…“Ή‚Μ
+E:of Shugendo
+X:27:15
+W:30:0:0:8000
+#C:0:30:-30:0
+F:ACTIVATE | STEALTH
+U:BERSERK
+
+N:112:‘ε‚Ά‚Θ‚ι
+E:(Extra Armor)
+X:27:5
+W:0:0:0:700
+#C:0:0:12:0
+F:FREE_ACT
+
+N:113:Λ“I‚Μ
+E:and Magic Missile
+X:27:5
+W:2:0:0:200
+C:0:0:0:0
+F:ACTIVATE
+U:BO_MISS_1
+
+N:114:υό‚Μ
+E:and Laser Beams
+X:27:10
+W:50:0:0:1500
+C:0:0:0:0
+F:ACTIVATE
+U:BO_MANA
+
+N:115:‰Ξ‹…‚Μ
+E:and Fire ball
+X:27:10
+W:40:0:0:1500
+C:0:0:0:0
+F:ACTIVATE
+U:BA_FIRE_1
+
+N:116:α‚Μ
+E:and Blizzard
+X:27:10
+W:40:0:0:1500
+C:0:0:0:0
+F:ACTIVATE
+U:BA_COLD_2
+
+N:117:—‹‹…‚Μ
+E:and Ball Lightning
+X:27:10
+W:40:0:0:1500
+C:0:0:0:0
+F:ACTIVATE
+U:BA_ELEC_2
+
+N:118:_‚Μ‹…‚Μ
+E:and Acid ball
+X:27:10
+W:40:0:0:1500
+C:0:0:0:0
+F:ACTIVATE
+U:BA_ACID_1
+
+N:119:–‚—Ν‚Μ—’‚Μ
+E:and Mana Storm
+X:27:25
+W:100:0:0:8000
+C:0:0:0:0
+F:ACTIVATE
+U:BA_MANA
+
+N:120:“ρ’i‰Α‘¬‚Μ
+E:and Haste
+X:27:20
+W:90:0:0:30000
+C:0:0:0:0
+F:ACTIVATE
+U:SPEED
+
+
+N:121:λl‚Μ
+E:of Hunter
+X:27:10
+W:30:0:0:8000
+C:0:0:0:3
+F:STEALTH
+
+N:122:ƒƒCƒh’·‚Μ
+E:of Chief Maid
+X:27:30
+W:30:0:0:2500
+C:0:0:0:3
+F:DEX | CHR
+F:RES_TIME
+
+# ”­“®‹­—ΝβΞ“‚°
+N:123:“Vθ—Ν’j–½‚Μ
+E:of Ame-no-Tajikarao
+X:27:25
+W:30:0:0:2500
+C:0:0:0:4
+F:STR | CON
+
+N:124:—Ν‚Μ
+E:and Regeneration
+X:27:5
+W:30:0:0:800
+C:0:0:0:0
+F:REGEN
+
+N:125:‹P‚«‚Μ
+E:and Brilliance
+X:27:5
+W:30:0:0:500
+C:0:0:0:0
+F:LITE
+
+N:126:’n–¨‚Μ
+E:and Hell Ears
+X:27:5
+W:30:0:0:1000
+C:0:0:0:0
+F:ACTIVATE
+U:DETECT_ALL_MONS
+
+N:127:”E‚Ρ‚Μ
+E:and Stealth
+X:27:5
+W:30:0:0:500
+C:0:0:0:0
+F:STEALTH
+
+N:128:‘ΌÒ
+E:and Teleport Other
+X:27:10
+W:45:0:0:2000
+C:0:0:0:0
+F:ACTIVATE
+U:TELE_AWAY
+
+N:129:Έ–­‚Μ
+E:and Accuracy
+X:27:5
+W:30:0:0:2500
+C:10:0:0:0
+
+N:130:Π—Ν‚Μ
+E:and Damage
+X:27:5
+W:30:0:0:2500
+C:0:10:0:0
+
+N:131:‘Ο‘Mυ‚Μ
+E:and Resist Light
+X:27:10
+W:30:0:0:2000
+C:0:0:0:0
+F:RES_LITE
+
+N:132:‘ΟΓ•‚Μ
+E:and Resist Darkness
+X:27:10
+W:30:0:0:2000
+C:0:0:0:0
+F:RES_DARK
+
+N:133:–‚–@g‚Ά‚Μ
+E:and Wizardry
+X:27:10
+W:30:0:0:1500
+C:0:0:0:0
+F:EASY_SPELL
+
+N:134:—΄_‚Μ
+E:of Dragon God
+X:27:50
+W:100:0:0:100000
+C:0:0:20:5
+F:ACTIVATE | RES_DARK | RES_CHAOS | STR | CON | STEALTH
+F:ESP_EVIL
+U:ULTIMATE_RESIST
+
+N:135:Χ_‚Μ
+E:of Wicked God
+X:27:50
+W:100:0:0:100000
+C:20:20:20:5
+F:RES_LITE | RES_NETHER | STR | INT | CON |
+F:ESP_GOOD | RES_HOLY
+F:AGGRAVATE | HEAVY_CURSE | CURSED | PERMA_CURSE | DRAIN_EXP
+
+N:136:o±’l‹zϋ‚Μ
+E:and Experience Drain
+X:27:0
+W:0:0:0:0
+C:0:0:0:0
+F:DRAIN_EXP | CURSED | HEAVY_CURSE
+
+N:137:”ρ–\—Ν‚Μ
+E:of Pacifist
+X:27:0
+W:0:0:0:0
+C:20:20:0:3
+F:CURSED | HEAVY_CURSE | STR | DEX
+
+N:138:”½΄‚Μ
+E:and Aggravate
+X:27:0
+W:0:0:0:0
+C:0:0:0:0
+F:AGGRAVATE | CURSED | HEAVY_CURSE
+
+N:139:‰…”O‚Μ
+E:and Ancient Foul Curse
+X:27:0
+W:0:0:0:0
+C:0:0:0:0
+F:TY_CURSE | CURSED | HEAVY_CURSE
+
+N:140:‹σ‘Ο«‚Μ
+E:and Resist Time
+X:27:25
+W:30:0:0:7500
+C:0:0:0:0
+F:RES_TIME
+
+N:141:•sΐ’θ‚Μ
+E:and Random Teleportation
+X:27:3
+W:30:0:0:100
+C:0:0:0:0
+F:TELEPORT
+
+N:142:ƒAƒ‹ƒrƒm‚Μ
+E:and Albino
+X:27:0
+W:0:0:0:0
+C:0:0:20:3
+F:CURSED | HEAVY_CURSE | CON
+
+
+########################### Ego Amulet ####################
+N:143:εl‚Μ
+E:of Hermit
+X:29:5
+W:30:0:0:200
+C:0:0:0:3
+F:SLOW_DIGEST
+F:INFRA
+F:SEE_INVIS
+
+N:144:‹σ‘Ο«‚Μ
+E:and Resist Time
+X:29:25
+W:30:0:0:7500
+C:0:0:0:0
+F:RES_TIME
+
+N:145:o±’l‹zϋ‚Μ
+E:and Experience Drain
+X:29:0
+W:0:0:0:0
+C:0:0:0:0
+F:DRAIN_EXP | CURSED | HEAVY_CURSE
+
+N:146:”p–Ο‚Μ
+E:and Stupidity
+X:27:0
+W:30:0:0:0
+C:0:0:0:5
+F:INT | WIS | CURSED | HEAVY_CURSE
+
+N:147:”½΄‚Μ
+E:and Aggravation
+X:29:0
+W:0:0:0:0
+C:0:0:0:0
+F:AGGRAVATE | CURSED | HEAVY_CURSE
+
+N:148:‰…”O‚Μ
+E:and Ancient Foul Curse
+X:29:0
+W:0:0:0:0
+C:0:0:0:0
+F:TY_CURSE | CURSED | HEAVY_CURSE
+
+N:149:η‚θ‚Μ
+E:and Protection
+X:29:5
+W:0:0:0:200
+C:0:0:8:0
+
+N:150:’m―‚Μ
+E:and Lore
+X:29:15
+W:60:0:0:8000
+C:0:0:0:0
+F:ACTIVATE
+U:ID_PLAIN
+
+N:151:ημÒ‚Μ
+E:(Defender)
+X:29:25
+W:0:0:0:20000
+C:0:0:12:4
+F:REGEN | FREE_ACT | SEE_INVIS | CON
+
+N:152:“ρd
+E:(Duplex)
+X:29:35
+W:50:0:0:20000
+C:0:0:0:0
+F:ACTIVATE |
+U:RESIST_ALL
+
+N:153:”E‚Ρ‚Μ
+E:and Stealth
+X:29:10
+W:0:0:0:500
+C:0:0:0:0
+F:STEALTH
+
+N:154:’µ–τ‚Μ
+E:and Jumping
+X:29:5
+W:5:0:0:500
+C:0:0:0:0
+F:ACTIVATE
+U:PHASE_DOOR
+
+N:155:“]Ϊ‚Μ
+E:at Will
+X:29:5
+W:10:0:0:1000
+C:0:0:0:0
+F:ACTIVATE
+U:TELEPORT
+
+N:156:³‚Μ
+E:and Dimension Door
+X:29:30
+W:100:0:0:30000
+C:0:0:0:0
+F:ACTIVATE
+U:DIM_DOOR
+
+
+N:157:•‚—V‚Μ
+E:and Levitation
+X:29:5
+W:0:0:0:1000
+C:0:0:0:0
+F:LEVITATION
+
+N:158:—d‰φ‚Μ
+E:of Youkai
+X:29:15
+W:50:0:0:30000
+C:0:0:5:0
+F:RES_BLIND | RES_CONF | WARNING | FREE_ACT | RES_INSANITY | INT | WIS
+F:ACTIVATE
+F:RES_TIME
+U:DIM_DOOR
+
+
+N:159:‚Μ
+E:of the Moon
+X:29:35
+W:50:0:0:30000
+C:0:0:5:0
+F:RES_BLIND | RES_CONF | RES_POIS | FREE_ACT |INT | WIS
+F:WARNING |
+F:RES_HOLY | RES_TIME
+
+N:160:΄’m‚Μ
+E:and Detection
+X:29:20
+W:30:0:0:2000
+C:0:0:0:3
+F:SEARCH | ACTIVATE
+U:DETECT_ALL
+
+
+N:161:‘Ο‰Ξ‚Μ
+E:and Resist Fire
+X:29:5
+W:0:0:0:500
+C:0:0:0:0
+F:RES_FIRE
+
+N:162:*‘Ο‰Ξ*‚Μ
+E:and *Resist* Fire
+X:29:15
+W:50:0:0:5000
+C:0:0:0:0
+F:RES_FIRE | ACTIVATE
+U:RESIST_FIRE
+
+N:163:‘Ο—β‚Μ
+E:and Resist Cold
+X:29:5
+W:0:0:0:500
+C:0:0:0:0
+F:RES_COLD
+
+N:164:*‘Ο—β*‚Μ
+E:and *Resist* Cold
+X:29:15
+W:50:0:0:5000
+C:0:0:0:0
+F:RES_COLD | ACTIVATE
+U:RESIST_COLD
+
+N:165:‘Ο“d‚Μ
+E:and Resist Lightning
+X:29:5
+W:0:0:0:500
+C:0:0:0:0
+F:RES_ELEC
+
+N:166:*‘Ο“d*‚Μ
+E:and *Resist* Lightning
+X:29:15
+W:50:0:0:5000
+C:0:0:0:0
+F:RES_ELEC | ACTIVATE
+U:RESIST_ELEC
+
+N:167:‘Ο_‚Μ
+E:and Resist Acid
+X:29:5
+W:0:0:0:500
+C:0:0:0:0
+F:RES_ACID
+
+N:168:*‘Ο_*‚Μ
+E:and *Resist* Acid
+X:29:15
+W:50:0:0:5000
+C:0:0:0:0
+F:RES_ACID | ACTIVATE
+U:RESIST_ACID
+
+#######Ribbon#####
+
+N:169:Τ‚Ά
+E:(Red)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:STR
+
+N:170:‡‚Μ
+E:(Purple)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:INT
+
+N:171:‰©F‚Ά
+E:(Yellow)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:WIS
+
+N:172:Β‚Ά
+E:(Blue)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:DEX
+
+N:173:—Ξ‚Μ
+E:(Green)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:CON
+
+N:174:ς‚Μ
+E:(Orange)
+X:26:5
+W:10:10:0:500
+C:0:0:0:0
+F:CHR
+
+N:175:”’‚Ά
+E:(White)
+X:26:15
+W:25:25:0:3000
+C:0:0:0:0
+
+N:176:μ•„‚Μ
+E:of Protection
+X:26:15
+W:25:25:0:3000
+C:0:0:0:0
+
+N:177:“ψF‚Μ
+E:(Rainbow)
+X:26:20
+W:30:35:0:5000
+C:0:0:0:0
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
+
+N:178:•‚Ά
+E:(Black)
+X:26:25
+W:50:50:0:15000
+C:0:0:0:0
+F:SPEED
+
+N:179:‹P‚­
+E:of Brilliance
+X:26:25
+W:60:60:0:15000
+C:0:0:0:0
+
+N:180:–δ—l‚Μ
+E:(Patterned)
+X:26:30
+W:70:70:0:25000
+C:0:0:0:0
+
+N:181:‘N‚Μ
+E:(Bloodstained)
+X:26:0
+W:50:0:0:0
+F:CURSED | HEAVY_CURSE | AGGRAVATE
+F:RANDOM_CURSE2
+
+#–ξ’e—p’Η‰Α
+
+N:182:“Ε‚Μ
+E:of Poison
+X:23:10
+F:BRAND_POIS
+W:0:12:0:30
+
+#’Κν•ν—p’Η‰Α
+N:183:•—_‚Μ
+E:of the Wind God
+X:24:32
+W:0:48:0:12000
+C:5:5:0:0
+F:THROW | BOOMERANG
+
+#–Xq‚Ζ¥
+N:184:“Ή‰»t‚Μ
+E:of the Clown
+X:33:20
+W:0:32:0:8000
+C:0:0:0:3
+F:DEX | FREE_ACT | XTRA_RES
+
+#eκ—pƒGƒS‚Ά‚­‚Β‚©’Η‰Α ƒ_ƒ[ƒW‚βƒ_ƒCƒX—‚ΝƒvƒƒOƒ‰ƒ€“ΰ‚Εs‚¤
+
+N:185:‘e«•i‚Μ
+E:(Inferior)
+X:21:0
+W:0:10:0:0
+
+N:186:‘ε‰Π’Γ“ϊ‚Μ
+E:of Magatsuhi
+X:21:0
+W:25:80:0:0
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:RES_NETHER | SEE_INVIS | ESP_HUMAN | XTRA_DICE
+F:CURSED | HEAVY_CURSE | TY_CURSE | AGGRAVATE
+F:RANDOM_CURSE2
+
+N:187:–@‹V®Ο‚έ…‹β’e“ª‚Μ
+E:of Mercury Bullets
+X:21:40
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:BLESSED
+W:20:60:0:20000
+
+N:188:‚Μ
+E:of the Moon
+X:21:40
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:RES_BLIND | SEE_INVIS | XTRA_H_RES
+W:20:60:0:25000
+
+N:189:ƒƒ“ƒIƒuƒTƒEƒUƒ“ƒh‚Μ
+E:(One-of-Thousand)
+X:21:30
+W:0:25:0:12000
+F:XTRA_SHOTS
+
+N:190:ƒiƒp[ƒ€
+E:of Napalm
+X:21:15
+W:0:15:0:4000
+
+N:191:ƒvƒ‰ƒYƒ}
+E:of Plasma
+X:21:15
+W:10:25:0:8000
+
+N:192:‰Ν“¶‚Μ
+E:of Kappa
+X:21:20
+W:15:30:0:10000
+F:IGNORE_ACID
+F:XTRA_POWER
+
+N:193:”ª@‰G‚Μ
+E:of Yatagarasu
+X:21:50
+W:30:90:0:30000
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:RES_FIRE | RES_LITE | LEVITATION | LITE
+
+N:194:ƒ}ƒbƒhƒTƒCƒGƒ“ƒeƒBƒXƒg‚Μ
+E:of Mad Scientist
+X:21:30
+W:15:40:0:16000
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:XTRA_H_RES | XTRA_POWER
+
+# ƒΟκ—p
+N:195:ƒ‰»
+E:(Purified)
+X:0:0
+W:0:0:0:1
+C:0:0:0:0
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:196:•n–R_‚Μ
+E:of Poverty
+X:31:0
+W:0:48:0:0
+C:0:0:0:0
+F:CURSED | HEAVY_CURSE
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_DISEN
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD |
+
+N:197:•…I‚Μ
+E:of Melting
+X:23:10
+F:BRAND_ACID | IGNORE_ACID
+W:0:12:0:30
+
+N:198:“V’T—‚Μ
+E:of Track Deity
+X:23:10
+F:SLAY_DEITY
+W:30:24:0:40
+C:5:5:0:0
+
+#–Xq‚Μ‚έ
+N:199:’T’γ‚Μ
+E:of Detective
+X:33:12
+W:0:32:0:2500
+C:0:0:0:4
+F:INT | SEARCH | RES_CONF

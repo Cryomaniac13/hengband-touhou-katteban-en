@@ -1,0 +1,18 @@
+# quest37_yukari.txt
+
+# Name
+Q:$37:N:Defeat Yukari Yakumo
+Q:37:N:‘å—du”ª‰_‡v‚ğ“|‚¹
+
+# Definition
+Q:$37:Q:1:0:0:1:50:1105:0:1
+Q:37:Q:1:0:0:1:50:1105:0:1
+
+# Description for quest
+?:[LEQ $QUEST37 2]
+Q:$37:T:A suspicious cave has appeared to the west of Human Village, teeming
+Q:$37:T:with previously unseen monsters. Looks like Yukari Yakumo is in the
+Q:$37:T:depths of that cave. Let's go beat her up.
+Q:37:T:l—¢‚Ì¼‚É‰ö‚µ‚¢“´ŒA‚ªoŒ»‚µAŒ©‚½‚±‚Æ‚à‚È‚¢‰ö•¨‚ªˆì‚ê‚¾‚µ‚½B
+Q:37:T:“´ŒA‚Ì‰œ‚É‚Í”ª‰_‡‚ªwæ‚Á‚Ä‚¢‚é‚ç‚µ‚¢B‚Æ‚¢‚¤‚í‚¯‚Å“|‚µ‚És‚±‚¤B
+?:1

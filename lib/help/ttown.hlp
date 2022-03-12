@@ -1,0 +1,19 @@
+マップ表示と街の設備
+
+慧音「画面に映る文字や記号の説明をしよう。
+それから店や町の設備についても触れる。」
+
+    (a) マップ表示(基本)                   (ttown.txt)
+    (b) 店の概要                           (ttown.txt#Shopping)
+    (c) その他の建物                       (ttown.txt#Buildings)
+    (d) 固定クエスト                       (ttown.txt#FixedQuests)
+    (e) 広域マップ                         (ttown.txt#WorldMap)
+
+    (?) ヘルプシステムの使用法             (jhelpinfo.txt)
+
+
+***** [a] ttown.txt
+***** [b] ttown.txt#Shopping
+***** [c] ttown.txt#Buildings
+***** [d] ttown.txt#FixedQuests
+***** [e] ttown.txt#WorldMap

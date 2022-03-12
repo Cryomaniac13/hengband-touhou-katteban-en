@@ -1,0 +1,384 @@
+* General
+
+- Made it more 'Touhou-like' by having nobody die (or at least being plausibly not dead).
+  Removed all corpse items and changed all 'You have killed X' messages I could find.
+
+- Most of the options at the start of the game are now set as 'difficulty level' you pick.
+
+- Yukari is the midboss at level 50 in Angband, Oberon is final boss at level 100.
+  On EASY difficulty level game ends once you defeat Yukari, on NORMAL you can retire
+  after defeating Yukari.
+
+- Score is sent to this katteban's separate server. Unlike original version, save data is
+  written directly, so please do not write down your personal information.
+  (Translated version doesn't send score to server)
+
+* Commands
+
+- Classes that don't use spellbooks use their special abilities with 'J' command,
+  instead of 'm' or 'U'. (Mindcrafters use 'm' command)
+
+- 'j' command browses special abilities.
+
+- (With roguelike commands on, 'S' uses special abilities, 'P' browses them)
+
+- 'b' command browses spells, class special abilities and racial powers.
+
+- Removed 'jam' action.
+
+- Several special items can be used with 'u' command from your inventory.
+
+* Classes
+
+- Added special classes called 'Unique classes'. Basically, they let you roleplay as
+  the Touhou characters, giving you fixed race, sex and name. Unique classes can change
+  their class name with the name change command.
+
+- Most general classes were replaced or had their abilities altered.
+
+- If something class-like comes up in a future Touhou work, more changes might be
+  implemented.
+
+* Races
+
+- Limited races only to those appearing in Touhou works (with some exceptions). Changed
+  existing races somewhat.
+- Caution: Vampires entering bodies of water without levitation will start drowning
+  regardless of encumbrance and resistance.
+- Unique classes can't change their race (with some exceptions).
+
+* Magic
+
+- Significantly remade the magic system.
+
+- Amount of realms increased from 10(+1) to 13. They're split into 'Major Realms', if
+  your second studied realm belongs to other major realm than your first, you receive
+  penalties. Read help files for more details.
+
+- Each race has its own aptitude for different realms. It changes spell difficulty
+  and minimum level to learn it. Some races can't study certain realms at all.
+
+- Basically, all classes study and cast spells with intelligence. Wisdom influences
+  maximum MP and greatly increases protection from magic.
+
+- If you're wearing gloves unsuitable for spellcasting, not only your MP is reduced,
+  but your failure rate goes higher as well. High dexterity reduces this penalty.
+
+- If you're wearing heavy armor, not only your MP is reduced, but spell MP cost is
+  increased as well. High strength reduces this penalty, and it is lower for dual
+  classes.
+
+* Dungeons/Map
+
+- Anti-melee cave replace by Hermit training ground, anti-magic cave replaced by
+  Inverted Castle.
+
+- Beginner dungeon similar to Yeek Cave is the Hall of Dreams' Great Mausoleum 
+  at Myouren Temple close to Human Village.
+
+- If you visit Eientei after winning, you can challenge the EX dungeon. It might
+  be extremely difficult to clear depending on your class.
+
+* Quests
+
+- Implemented item delivery quests. If you visit the quest giver while carrying
+  the specified item, you can give it through item selection menu, completing the
+  quest. If you visit them without the proper item, you can decline and intentionally
+  fail the quest.
+
+- Implemented quests to defeat a wanted person. Unlike Warg Quest, nothing happens
+  if you visit the quest level in the dungeon. After receiving the quest, the wanted
+  person will be able to get randomly generated in dungeons; defeat them to complete
+  the quest.
+
+- In several quests, several enemies start out awake. Be warned, some quests can get
+  very dangerous if you act carelessly at the start.
+
+* Elements/Resistances
+
+- Added water resistance. If you have it, water attacks won't destroy your items,
+  and you won't drown if you enter water overencumbered (aside from vampires)
+
+- Added holy energy resistance. Priest-class monsters use holy attacks instead of
+  curses. It's somewhat difficult to cover.
+
+- Some races and magic realms are vulnerable to holy attacks. Youkai and like take 
+  33% more damage, undead and demons take 33% more damage on top of that, and if 
+  you're studying darkness or necromancy realm, that extra 33% damage.
+
+- Added (space-)time resistance. Protects against time/nexus/gravity attacks and
+  teleport away, but very difficult to cover.
+
+- Added insanity resistance. Protects from eldritch horrors and cosmic horrors
+  (see below). Very difficult to cover, but undead and demon races have it covered
+  from the beginning.
+
+- Removed nexus resistance. Changed nexus attacks into power space-time attacks used
+  by endgame enemies. Cannot teleport you to another level.
+
+- Combined Hold Life with nether resistance.
+
+- Added equipment ability 'Swift movement'. Increases your movement speed depending
+  on your level (up to double), but it's fairly difficult to obtain.
+
+- Added tornado elemnt. Can't be resisted, but you can protect yourself with levitation
+  or carrying a lot of weight.
+
+- Removed radioactive waste element.
+
+- Added nuclear heat element. It's half fire and half light. Godzilla/Gachapin breath it
+  instead of radioactive waste, be careful
+
+- Changed plasma element to composite of fire and lightning. You can protect yourself
+  with resistances, but it hits harder.
+
+- Renamed force element to 'Ki'. Removed force breath, added 'Ki sphere'. Power depends
+  on HP, is used by Meiling and Nappa.
+
+- Some endgame enemies now can use hellfire element attacks. Celestials/Moon rabbits/Lunarians
+  take great damage from it. Cannot be resisted.
+
+* Monsters
+
+- Changed 'good/evil' enemies to 'lawful/chaotic'.
+  To avoid dividing Touhou characters into 'good' or 'evil', all of them don't belong to
+  either of those groups.
+
+- Changed some monster symbols.
+  c: Combined with spiders  t: Townsfolk -> Tengu  y: Yeek -> Small youkai
+  F: Dragonfly -> Fairy  H: Combined with yeti  I: Combined with beetles/dragonflies
+  K: Beetle -> Kappa  S: Spider -> Deity  Y: Yeti -> Large/humanoid youkai
+  Be careful not to mistake Atlach-Nacha/Defiler/Lady Suwako for a regular mob.
+
+- Changed monster classification in regards to ESP/slays.
+  Combined orcs/trolls/giants (as humanoids) with humans.
+  Added youkai and deity slay/ESP.
+  Added lawful (good) slay for weapons.
+
+- Added around 300 monsters. Mainly Touhou characters, but not limited to them.
+
+- Removed townsfolk, yeeks and some joke monsters.
+
+- Added/changed various monster spells. Some dangerous ones: Exorcism 1-4 (similar to curse,
+  but hits with holy energy + stuns), cosmic horror (if you don't resist insanity, unresistable 
+  powerful mental attack + extra effects), meteor strike (large ball spells that deals meteor
+  element damage), wide laser (beam of nuclear heat), holy breath, elemental storms, teleport
+  next to player without having line of sight.
+
+- Made Lords of Amber stronger. In particular, Eric, Corwin and Benedict are very powerful,
+  so watch out. All of them are lawful, so unlike original version, slay evil won't work.
+
+- Since Oberon is the final boss, he became even stronger than before. He counts as a deity,
+  and human slays won't work. Having shard/light/holy resistances will be important. I can't
+  recommend fighting using your followers.
+
+- Several Cthulhu-class uniques got the aforementioned cosmic horror spells and got powered up.
+
+- Tyrannosaurus, Wyrms of Space-Time, tanuki (changed to youkai tanuki/elder youkai tanuki),
+  Stormbringer (changed to Elric) were powered up from their original version and now appear
+  on deeper levels.
+
+- Changed names for several monsters like Hell Wyrms or Water Hounds.
+
+- Many Gensoukyou monsters use 'Danmaku' attack. Non-elemental, damage is equal to enemy level.
+
+- Added new kinds of melee attacks. For example: 'Wound (causes wounds, damage can be reduced
+  by AC)', 'Drown (stuns if you don't resist water)', 'Invite to death (stuns a lot if you don't
+  resist nether)', 'Attack with elements (random basic element attack)'
+
+- Reimu and Marisa are special unique monsters with variable parameters. They keep on appearing
+  no matter how many times you defeat them. They drop valuable items on deeper levels, but they're
+  also ridiculously powerful at that point.
+
+- Implemented random uniques. You can somewhat tell their strength and affinity by their name,
+  but don't get overconfident.
+
+* Battle System
+
+- Removed launcher slot, replaced with 'Ribbon'.
+
+- Bows now are weapons you hold with both hands. You can hold them along with another weapon
+  or a shield, but you will receive penalties.
+
+- If your riding skill is high enough, your mount won't move by itself if you let go of reins,
+  and as you get even more skilled, you can control your mount even without holding the reins.
+
+- Split Aggravate Monsters into 'Shriek' and 'Alarm'. Former wakes upon enemies in nearby
+  area, but does not haste them. Latter works like the original Aggravate Monsters.
+
+- Several races/classes/mutations might have equipment restrictions. For example, maids have
+  to wear a maid uniform, tengu have to wear a tokin, if you grow large horns, you can't wear
+  helmets.
+
+- If your equipment becomes unusable after you change your race, it will drop to the ground.
+  Be careful.
+
+- Weapon proficiency is split between classes of weapons instead of each item having its own
+  proficiency level. The classes are: Short Blades, Long Blades, Katanas, Blunt Weapon, Staves,
+  Axes, Spears, Polearms, Bows, Crossbows and Guns.
+
+- Proficiency for Martial Arts, Shields, Riding, Dual-Wielding and Throwing is raised in a 
+  similar way.
+
+- You can hold any weapon aside from short blades with both hands. It's weird to hold a rapier
+  or hatchet with both hands, but that's the mechanic.
+
+- Wielding short blades with high proficiency level raises amount of blows.
+
+- Added a lot of 'gun' items, and greatly changed related system. In short, it's now
+  'a rod you can equip'. Since there's little chance to use guns unless you're playing as
+  a class with high aptitude for them, added a gameplay option that prevents guns from
+  being generated. For more details, read the 'Other' help file.
+
+- Slightly increased strength bonus for holding a weapon with both hands, also your maximum
+  amount of blows in melee will be increased by 1.
+
+- Proficiency level aptitude depends on class; it affects how quickly you gain proficiency
+  and your maximum attainable level. Changed proficiency display from 'Novice/Expert/etc'
+  to numeric value up to 50.
+
+- Any class can deal several blows with martial arts. Blow amount depends on martial art
+  aptitude/class/level/dexterity/etc. Wearing heavy armor or using a shield reduces the
+  amount of blows. Having high strength increases the heavy armor limit.
+
+- Martial art attacks can differ depending on race/mutations/special transformations.
+  If you're not a martial art class, youkai/were-beasts/oni deal more powerful blows
+  than humans.
+
+- If you have certain mutations or are proficient enough in martial arts or shields,
+  you can get additional attacks when fighting with weapons.
+
+- If you fight with martial arts, the damage per turn displayed with 'C' commmand can
+  vary - that's a feature.
+
+- Being terrified now lowers ranged accuracy and increases spell failure rate.
+
+- Unique classes have many special abilities with power depending on charisma.
+
+- If your followers (pets) are of higher level than you, you get a penalty on their
+  maintenance cost. (there are exceptions)
+
+- Increased penalties while drowning.
+
+* Mutations
+
+- Several mutation - horns or your lower body turning into a merfolk tail - can
+  make you unable some pieces of your equipment, dropping them on the floor.
+  Be careful.
+
+- Several races have their physical characteristics treated as mutations.
+  They can't be removed with curing mutations or Potion of New Life.
+
+- Made all of your mutations go away when you change your race. 'Lucky' personality's
+  white aura won't go away.
+
+- The asthma mutation can make you occasionally fail to read scrolls if it worsens.
+  Be careful.
+
+* Items
+
+- As mentioned earlier, removed all corpses. Also removed bounty hunt system.
+
+- Removed iron spikes/statues/junk items.
+
+- Added 'ribbon' equipment items. They don't have many artifacts, you're mainly
+  using their ego-items to complete the resistance puzzle.
+
+- Changed some base weapon/armor items. Changed resistances for high level dragon
+  scale mail.
+
+- Changed various ego-items.
+
+- Changed/added artifacts. Stormbringer was significantly powered up, but now it's
+  permanently cursed, so be careful.
+
+- Implemented 'Sake' category. If you drink it, your drunkedness level increases.
+  At first it grants heroism, then it causes several effects to occur at random,
+  then it causes even more effects to occur at random, and then it knocks you
+  unconscious. Depending on your race and sake kind, you might get knocked out in a
+  single drink, so be careful. If you have 'Alcoholic' mutation, you won't get
+  knocked out no matter how much you drink, but your parameters get lowered once you're
+  sober.
+
+- Implemented 'Material' category. They can be used as catalysts for several spells,
+  for powering up weapons or creating other items. You can exchange them for points
+  at Kirisame Magic Shop.
+
+- Implemented 'Curio' category. They're primarily exchanged for money at Kourindou,
+  but you can use some with 'u' command.
+
+- Some other changes to other categories.
+
+- 'Searching' parameters affects probability of material items being generated.
+  Some materials can only be generated at special dungeons.
+
+- There are other items affected by Searching, aside from materials. For example,
+  on lower levels of Scarlet Devil Mansion, high level spellbooks can be found
+  more often.
+
+- I thought weapon weight was unrealistically large, so I made them lighter.
+  It might make getting extra blows too easy, though.
+
+- Scrolls of Artifact Creation can be used on rings/amulets/ribbons as well.
+
+- Made powerful random artifacts slightly more likely to get generated on
+  deep levels.
+
+- Made white aura effect stronger. It's particularly useful at the point
+  ego-items and random artifacts are generated.
+
+- Changed Capture balls to 'Demon books'. They're occasionally sold at the bookstore
+  in Human Village. They're used in the same way.
+
+- Made dice bonus (like for using a lance while riding) get reflected on the
+  equipment screen.
+
+* Towns/etc
+
+- From role-playing perspective, you don't have an exploration base (your home) at first.
+  By clearing quests (Thieves Hideout at Human Village, Logrus Master at Tengu Village,
+  Haunted House at Former Hell) you can obtain an exploration base there.
+
+- Renamed museum to 'House Entrance'. Located at the same building as your exploration
+  base. It's close to house entrance, so be careful not to accidentally drop off something
+  important.
+
+- Removed Bounty Hunter and Arena.
+
+- Removed Casino, but you can gamble on teams of monsters fighting each other at
+  Hakurei Shrine.
+
+- Combined Weaponmaster, bow/ammo enchantment and weapon/armor enchantment into a single
+  building.
+
+- Combined Trump Tower and Sage Tower. Teleportation to other towns is performed at this
+  building instead of inns.
+
+- Eientei can cure mutations (located in lower middle on world map).
+
+- Items can be *identified* at Scarlet Devil Mansion or Kourindou.
+
+- Implemented Kirisame Magic Shop. You can accumulate points by giving items like materials,
+  and then exchange those points for items.
+
+* Other
+
+- Changed autoroller to Wizardry-like bonus point system. It's harder to get a lot of bonus
+  points compared to Wizardry; 25 is a good amount.
+
+- Changed parameter display from 18/100 to plain numbers. Normal limit is 40, but several
+  potions, special abilities and spells can temporarily increase them up to 50.
+
+- Removed height, weight, age and social status.
+
+- Slightly changed score calculation; it is normally shown during gameplay at top of screen.
+  Score is influenced by experience (up to 10,000,000), total amount of money (including
+  items in inventory and at home, up to $10,000,000), most expensive treasure 
+  (up to $1,000,000), defeated uniques, completed quests, amount of game days elapsed,
+  with race/class modifiers on top of that.
+
+- Added option to display items on the floor in a subwindow. It displays a list of items
+  beneath player's feet or at the cursor position.
+
+- The option 'Interrupt when a high level monster moves' now works even you're not aware
+  of the actual level of monster.

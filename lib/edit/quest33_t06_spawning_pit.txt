@@ -1,0 +1,95 @@
+# q0000023.txt
+# a quick creation by Jeff Coleburn <vsp@netaxs.com>
+# ↑をセリフやクエスト番号変更　みやまさ
+
+# Name
+Q:$33:N:Spawning Pits
+Q:33:N:増殖地獄
+# Definition
+Q:$33:Q:6:0:0:0:65:0:0:0:6
+Q:33:Q:6:0:0:0:65:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST33 2]
+Q:$33:T:Nitori - 'Something horrible has happened in a cave near our
+Q:$33:T:water source! I saw something weird moving in the shadows,
+Q:$33:T:and then monsters popped out of nowhere! Our water source is
+Q:$33:T:going to get destroyed at this rate! Please, do something
+Q:$33:T:about it!'
+Q:33:T:にとり「水源の近くの洞窟で何かとんでもない事が起こっているんだ！
+Q:33:T:物陰にチラッと変なのが見えたと思ったらそこら中に化け物が湧いてくるんだよ！
+Q:33:T:このままじゃ水源が潰されちまう！何とかしておくれよ！」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST33 3]
+Q:$33:T:Nitori - 'Thank you very much! You're the hero of our
+Q:$33:T:village! We'll make a huge robot of your form in your honor!
+Q:$33:T:Eh? You don't need it? That's sad...
+Q:$33:T:Very well, take this instead. It's the venerable armor of the
+Q:$33:T:guardian god of our village.'
+Q:33:T:にとり「うおーありがとう！あんたは里の英雄だ！
+Q:33:T:貴方の姿の巨大ロボを作ってこの偉業を語り継ぐよ！
+Q:33:T:え？要らない？そりゃ残念……
+Q:33:T:それじゃ代わりにこれをあげる。里の守り神として伝わる由緒ある鎧だよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST33 5]
+Q:$33:T:Nitori - 'Our water source...
+Q:$33:T:We'll have to turn into yamawaro at this rate...'
+Q:33:T:にとり「ああ、水源が……
+Q:33:T:今日から皆で山童になるしかないのか……」
+?:1
+
+# Floor with Quylthulg
+F:a:FLOOR:8:342
+
+# Floor with Rotting quylthulg
+F:b:FLOOR:8:633
+
+# Floor with Demonic quylthulg
+F:c:FLOOR:8:727
+
+# Floor with Draconic quylthulg
+F:d:FLOOR:8:759
+
+# Floor with Master quylthulg 
+F:e:FLOOR:8:800
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXX..<.........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXX9.............................XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXX..........................................XXXXXXXXXXXXXXX
+D:XXXXXXXXXXX...........................9..............XXXXXXXXXXXXXXXX
+D:XXXa.bXXXXX....9............XXXXXXXX............9....XXXXXXXXXXXXXXXX
+D:XXX.9..XXX...............XXXXXXXXXXXXXX................XXXXXXXXXXXXXX
+D:XX..a.XXXXX.............................................XXXXXXXXXXXXX
+D:XXX...XXXXXXX.....XX..XX..XX..XX..XX..XX..XX..XX........XXXXXXXXXXXXX
+D:XXXXX..XXXX.......XX..XX..XX..XX..XX..XX..XX..XX...a.......XXXXXXXXXX
+D:XXXXX..XXX........XX..XX..XX..XX..XX..XX..XX..XX.........XXXXXXXXXXXX
+D:XXXXXX...XXXX.....XX..XX..XX..XX..XX..XX..XX..XX..........XX9.d.9XXXX
+D:XXXXX.............XXa.XXb.XXc.XXd.XXc.XXb.XXa.XX.......XXXXX....XXXXX
+D:XXXX..............XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.........XXX....XXXXX
+D:XXXX....................XX.c..9.XX@..b..XX................XX....XXXXX
+D:XX@...........a.........XX......XX......XX......................XXXXX
+D:XXXXXXX.................XX......XX......XX........a...............XXX
+D:XXXXXXXX...........................................................XX
+D:XXXXXXXX.............................................@...........XXXX
+D:XXXXXXXXXXX..9................XXXX............................XXXXXXX
+D:XXXXXb9............a........XXXXXXXX.a........................9b.XXXX
+D:XXXXXXXXXXX.................X......X..........................XXXXXXX
+D:XXXXXc9.....................X.X..X.X..........................9.dXXXX
+D:XXXXXXXXXXX................XX.X..X.XX..................a......XXXXXXX
+D:XXXXXd9...................XX.XX9eXX.XX........................9.cXXXX
+D:XXXXXXXXXXX...............XX.XXXXXX.XX........9...............XXXXXXX
+D:XXXXXcd...................XX........XX.........................bbXXXX
+D:XXXXXXXXXXX................XXXX..XXXX.........................XXXXXXX
+D:XXXXXXXXXXXXXX..............XXX..XXX....................XXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX...................................XXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:1:33
+

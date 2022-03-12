@@ -1,0 +1,208 @@
+# File: w_info.txt
+
+# Defines the layout of the wilderness
+
+# W:F:letter:wilderness_type:level:town_number:road:name
+
+# Road Flags: Sum of NORTH 1, SOUTH 2, EAST 4, WEST 8
+
+?:[EQU $WILDERNESS NORMAL]
+
+# Edge of the world
+W:F:#:0
+
+# Grass
+W:F:.:6:5
+
+# Dirt
+W:F:,:5:10
+
+# Desert
+W:F:D:8:20
+
+# Forest
+W:F:T:7:20
+
+# Shallow Water
+W:F:_:3:25
+
+# Deep Water
+W:F:~:2:30
+
+
+# Mountain
+W:F:^:11:25
+
+# Volcano
+W:F:&:10:40
+
+# Shallow Volcano
+W:F:$:9:35
+
+# Swanp
+W:F:=:4:25
+
+#v1.1.32 terrain=12の地形は「特殊街」とした。mon_hook_special_town()を通るモンスターしか出ない。
+
+# Town 1
+W:E:1:1:0:1:1:Human Village
+W:J:1:1:0:1:1:人里
+
+# Town 2
+W:E:2:11:25:2:0:Tengu Village
+W:J:2:11:25:2:0:天狗の里
+
+# Town 3
+W:E:3:9:30:3:1:Former Hell
+W:J:3:8:30:3:1:旧地獄街道
+
+# Town 4
+W:E:4:7:15:4:1:Devil Mansion
+W:J:4:12:30:4:1:紅魔館
+
+# Town 5
+W:E:5:2:15:5:1:Hakurei Shrine
+W:J:5:12:70:5:1:博麗神社
+
+# Town 6
+W:E:6:4:20:6:0:Kappa Bazaar
+W:J:6:4:20:6:0:河童のバザー
+
+# Town 7
+W:E:7:2:35:7:1:Eientei
+W:J:7:12:50:7:1:永遠亭
+
+# Town 8
+W:E:8:2:12:8:0:Kourindou
+W:J:8:12:1:8:1:香霖堂
+
+# Town 9
+W:E:9:2:90:9:0:Myoren Temple
+W:J:9:12:65:9:1:命蓮寺
+
+# Town 10
+W:E:0:7:18:10:0:Kirisame Shop
+W:J:0:7:18:10:0:霧雨魔法店
+
+# Town 11
+W:E:A:7:18:11:0:Ruined Mansion
+W:J:A:7:18:11:0:廃洋館
+
+# Town 12
+W:E:B:2:18:12:1:Moriya Shrine
+W:J:B:12:65:12:1:守矢神社
+
+# v1.1.64 Town 13
+W:E:C:2:18:13:0:Higan
+W:J:C:12:65:13:0:彼岸
+
+# v1.1.86 Town 14
+W:E:E:2:25:14:0:Fls Heaven Shelf
+W:J:E:11:20:14:0:偽天棚
+
+
+
+#v1.1.64追加:三途の河用のレベル50の深い水
+W:F:S:2:50
+
+# Grassland with road
+W:F:*:6:3:0:1
+
+# Dirt with road
+W:F:!:5:8:0:5
+
+# Forest with road
+W:F:+:7:15:0:10
+
+# Wilderness layout
+W:D:###################################################################################################
+W:D:#,=_,=,,,=,,,,,,.........^^^^^^^^TT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~^^^^^^^TTSSSSSS......C...#
+W:D:#,,=,,=,_,=,,,....TT..T^^^^^^^TTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~^^^^^^^^^TTSSSSSSSS.......#
+W:D:#=,_,=,_,,,,.....,..,,^T^^^^^T^^^T^T^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~^^^^^^^^^^TTSSSSSSSSSSSSSS#
+W:D:#,_,=,,,=,,,.....,..,.^^^..TT^^^^^^^^^.E^^^^^T^^^^^^^^^^^^^^^^^^^^^~.B.TT^^^^^^^^^^TTTTSSSSSSSSSSS#
+W:D:#,=,,,=,,.....,........^^^TTT^T^^.^^^^..^^^^^^^TTT^T^TTT^^^^^^^^^^~_.*.TT^^^^^^^^^^^^^^^^.SSSSSSSS#
+W:D:#,_,,..........,....,....TT^^^^^T^^T^^^^^^^T^^^^TT_^,T.TT^^^^^^^^^^_T*TTT^^^^^^^^^^^^^^^^......***#
+W:D:#,,.........,.............^^,,^^.^^^.^^^^^T.TT^^^_~_^.T^TT^^^^^^^^^~T*TT^^^^^^^^^^^^^^^^^^.....T+T#
+W:D:#........,.................T,,,^^^^.^^^^^T.TT..^^,_^T^2T^.^^^^^^^_~^^*^^^^^^^^^^^^^^^^^^^^....TTTT#
+W:D:#.................,.........T,^,,^^^^^T^^T^..,^^^_^^^^T^.^^^^^^^~~~^^*^^^^^^^^^^^^^^^^^^^T^..TTTTT#
+W:D:#...............,............^^^^^^^T^^T^^T^T^^,^_T^TT^T^^^^^^^^~^^^,^^^^^^^^^^^^^^^^^^^^^T.TTTTTT#
+W:D:#TTTT...............TTT......,^^^^^^T^..^^^^^^^^TT_^^^^^^^^^^^^^~^^^^,^^^^^^^^^^^^^^^^^^TT...T.T*T#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTT....,,^^^^^^..^^^.^^^~~_T^.^^^^T^^^^^^~^,,,^^^^^^^^^^T^^^^^T^^...TT.TT*.#
+W:D:#TTTTTTTTTTTTTTTTT.TTTT..........^T^T^^^^^^^^^^^~TT^^^T^^^^^^^^^~^,^^^^T^^^^^^^^^^^^^^^TTT...TT.*.#
+W:D:#TTTTTTTTTTTTTTTTTTTT..............^T^TT^.^^TT^^_^^T^^^^^T^^^^^^~^,^^T^^^^^^^T^^^^^^^^^TTT...TT.*.#
+W:D:#TTTTTTTTTTTTTTTTTTTTT..............^^T^T^^^.^^^_^.T^^^^^^^^^^^^~^^,^^^^^TTT^^^^^^^^^^^.TTT...T.*.#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTT............^^^^.^^^.^T~^^^^^^^^^^^^^^~_^^,^^^^T6T^^^^^^^^^^T.........**#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTTTT...........^^^..^^T^=~^^^T^^^^^^^^T~~~~~,^^~~TT^^^^^^^^^TTTTT..T....*#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTTT..............^^^^^^T^~^TT^^T^^^T^^T~_^^,~~_^^^^^^^^^^^^T^^..TT..T...T#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTT.................TTT.TT.....,^^T^T^=_~~T,T^^^~___^^__^^^^=^^TTTTTTTTTTT#
+W:D:#TTTTTTTTTTTTTTTTTTTATTTTTTT.................TT.T...._T_TTT^==~~~T.T^^T^^^^^==^^~~~TTT^TTTTTTTTTTT#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTTT................TTTT4~~~~~~~~~~~~~~T^^.^T^^^T^^^^^^TTT~~~_^T^TTTTTTTTT#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTTTTT...............TT._~~~~~_..=..=TT^^^.^^^T^^^T^^TTTT^TT^^____TTTTTTTT#
+W:D:#TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT...........__~~~~~~~TT.T...^^T^.^T^^^TTTT^^^^^TTTTTT^_^,TT,T,,^#
+W:D:#TTTTTTTTTTTTTTTTTTT.....TTTTTTTTTTTTTTTT...TT_..~~~~~.TT......^......TTTTTTTTTTTTTTTTT^^TT.TT.TTT#
+W:D:#TTTTTTTTTTTTTTTTT..............................._~~~T..........,,,,,..TTTTTTTTTTT=TTTT^T^T.TT=T=.#
+W:D:#TTTTTTTTTTTTTTTT..............................._.................,,,..TTTTTTTTTTTTT=TTTTT=T=T=TTT#
+W:D:#TTTTTTTTTTT...TT..............................__..................T.T,,..**8TTTTTTTTTT^T^.T==TTTT#
+W:D:#TTTTTTTT...=.TT..............................._.................TT....T..TTT.TTT...TT=T=TT=TTT=TT#
+W:D:#TTTTT..=T_..=TTTTT................................................T..T..T.TTTT..TTTT.T0TTT=TTT=TT#
+W:D:#TTTTTT.~,.=.TTTTTTT...................................^^...........T...T.TTTTTTTTTTTTT=TT=TTT=T=T#
+W:D:#TTTTT..,^.T.==TTTT.T......................T..........^^^^............T....TTTTTTTTTTTTT=T=T=TTTT=#
+W:D:#TTTTTTT,,.^.......T.......................T.........TT^^..................TTTTTTTTTTTTTTTTT=T=TT=#
+W:D:#TTTTTTTTT..TT..T.TT......................TTTTTT..TT..T^.................TT.TTTTTTTTTTTTTT=TTT=TT=#
+W:D:#TTTTTTTTTTT...TTT.....................1***********TTTT*******......TTT.......TTTTTTTTTTTTTTTTT===#
+W:D:#T.TTTTTTTTT.TT.TT.......................*TTTTT...******..^^^****..TTTTT......TT.TTTTTTTTT=TTTT=TT#
+W:D:#TTTTTTTT.TTT............................*.TTTT.T...T..TT...^^^.*.TTTTTTT..TTTTTTTTTTTTTTTTTTTTTTT#
+W:D:#TTT.T.TTTTT.............................*..T^^TTT..............****TTTTTTTT..TTTTTTTTTTTTT=TT=TT=#
+W:D:#T.TTTT.T.T..............................**9TT^^TT.................*****TTT.T..T.TTTTTTTTTTT=TTTTT#
+W:D:#TTT.T.TTTT,,............................*.TT^^.TTT....................**......TTTTTTTTTTTTTTT==T=#
+W:D:#T.TTTTT.TT,............................**..TT..........................**..T..TTTTTTTTTTTTTTTTTTT#
+W:D:#TTTTT.TTTT.............................*.........^^^^...................*.....T.TTTTTTTTTTTTTTTTT#
+W:D:#TTT.TTTTT..............................*..........^^........TTT..TTT....*...T...T.TTTTTTTTTTT..TT#
+W:D:#T.TTTT.TTT.............................*...........T.......TT.TTTT.TT...**....T..T.TTTTT..,TTTT.T#
+W:D:#T.TT.T.T..T.T.........................**.............TT.........TT..T....***...T.T..TT.T,,T...T..#
+W:D:#TTTT...T.T..^.^^^^^...................*............T.......T.T..TTT..TT....***....TT..TT..TTTT..T#
+W:D:#TTT......T.^TT,T^^^^.............TTTTT+TTTTTTTTTTT......TTT,TTT....T....T....***....T.TTTTTTTTTTT#
+W:D:#TTTT..T......^T,T,,^............TTTTTT+++TTTTTTT.....T.TT.TTTTT,T.....T........*****.TT.TTTT,TTTT#
+W:D:#TTTTT....T..^,,,,,^^............TTTTTTTT+++TTTTTT...T....TT.TTTT...TTTT.T..........**.TTTT,TT,TT^#
+W:D:#TTTTTTT...^^^^^..T.....T.....TTTTTTTTTTTTT+TTTTTTTT....TT..TTTT..T.TTT...T..........***TTT,TTTT^^#
+W:D:#TTTTTT...T....T^^T..T......TTTTTTTTTT++++++TTTTTTTTT..T.....TT......TTT.......TTTTTTTT++T^++++T^T#
+W:D:#TTTTTT......T......T......T...TTTTTTT+TTTTTTTTTTTTTTTTTT.T.....TTTT..........TTTTTTTTTT++++^T+TTT#
+W:D:#TTTTTT.....T....T...T...T...TTTTT+++++TTTTTTTTTTTTTTTTTT,...TTTT.......T....TTTTTTTTTTTTT^T^T+TTT#
+W:D:#TTT^T^.TT...T....T.T..T....TTTTTT+TTTTTTTTTTTTTTTTTTTT....TT.....T.T........TTTTTTTTT^TTT^TT^+TT^#
+W:D:#^^T^^TTT.T...T..T....T...TTTTTTTT+TTTTTTTTTTTTTTTTTTTTTT.T.....T.....T....^TTTTTTTT^TTT^TTTTT+TTT#
+W:D:#TTTT^^TT^TT....T...T...TTTTTTTTTT+++TTTTTTTTT7TTTTTTTTTTT..T...........T..TTTTTTT^TT^TTTTTTTT+TTT#
+W:D:#TTTTTTT,TT.T...T......TTTTTTTTTTTTT+++TTTTTTT+TTTTTTTTTT..,.,.T...T..T.T...TTTTTTTTT^T^T^TTTT5TTT#
+W:D:#TT^TTT,,TTTTT...T....TTTTTTTTTTTTTTTT+++T+++++TTTTTTTTT.,.T...,.T..,......TTTTTTT^TTT^T^TTTTTTTTT#
+W:D:#TTT^TT,TTT^^^T...TTTTTTTTTTTTTTTTTTTTTT+++TTTTTTTTTTTTTTTT.T.T..,,..,,T..TTTTTTTTTT^^T^T^TTTTTTTT#
+W:D:####T,TTT##########################################################################################
+W:D:#####T,T####.T#############D=#=#######~~~##########################################################
+W:D:####,T.####D,,D##__^=,,###,##,#D######~~~#######^=,=#############D,,###,,,,,,,,=###################
+W:D:###,,####^^D#,D_^^^_=#,,D,D,^^==^,,,!!!!!!!,,,,,=^^^^DDDDD^D^#DDD,D=,__,,,,,,,,,^,#################
+W:D:###,D,,^D^=####DD__=####,^,D^^^=DD,##~~~~~~######=_##,####,,D^^,^###~~~,,,,,3,,,,,,#,,,############
+W:D:####^DD,D,##########################~~~~~~~~######_~~######$$$&#,###~~~,&&&,,,,^^&&,$##############
+W:D:###################################################################################################
+
+# Starting position
+W:P:34:39
+
+?:[EQU $WILDERNESS NONE LITE]
+
+#ここから下は荒野なしオプションのためのダミーデータと思われる
+
+# Edge of the world
+W:F:#:0
+
+# Town 1
+W:E:1:1:0:1:0:Town
+W:J:1:1:0:1:0:街
+
+# Wilderness layout
+W:D:###
+W:D:#1#
+W:D:###
+
+# Starting position
+W:P:1:1
+
+?:1
+

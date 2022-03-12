@@ -1,0 +1,764 @@
+Original is from Touhou Hengband wiki:
+https://w.atwiki.jp/hengtouhou/pages/455.html
+
+Basically, the lower a unique class score multiplier is, the stronger it is;
+however, it reflects strength assuming you know how to properly use this class's abilities.
+There are classes that have low score multiplier but are very gimmicky, so they're
+probably going to be unreasonably difficult for beginners.
+Here, the approximate ease of use for unique classes is expressed with * through *****.
+(* - hard to use, ***** - easy to use)
+
+That being said, that's only for clearing dungeon level 100 of Angband; proceeding into
+postgame isn't taken into account.
+
+
+* Regular Protagonists
+
+Reimu               ****
+
+Power depends on amount of money in donation box; any money donated on earlier attempts
+will get carried over if you start a new character from the same save file. Weak at the
+beginning, but if you keep trying enough, early game eventually will become a breeze.
+
+
+Marisa              ****
+
+It requires some knowledge to use your powers to full extent, but she's strong enough to
+push through with brute force. Good for getting training in playing spellcasters.
+
+
+* Embodiment of Scarlet Devil
+
+Rumia               **
+
+Comparatively decent in early game, but has trouble past midgame.
+
+
+Cirno               **
+
+Has low base stats, and all of her special abilities are cold-themed. Oriented to
+those who understand gameplay systems and can raise their characters strategically.
+
+
+Meiling             ***
+
+Focused on martial art combat, so equipment restrictions are fairly strict. Has high
+potential, but requires a somewhat unique approach.
+
+
+Patchouli           ***
+
+Can study all four realms of Arcane Arts, but is frail and has asthma. For intermediate
+players that are used to playing mages and know monster parameters in general.
+
+
+Sakuya              ***
+
+A special class that can freely walk through dungeon while time is stopped. Requires
+a somewhat technical approach to combat. Strict equipment restriction (maid uniform only).
+
+
+Remilia             *****
+
+Her race has a lot of weaknesses, but her base stats are high enough to forget about
+that. Just be careful around holy attacks. Somewhat weaker during daytime, so stay until
+the night at the inn before heading out.
+
+
+Flandre             ****
+
+Great stats, great resistances, powerful special abilities; she's strong, but she
+has nasty gimmicks as well. She's a berserker magical girl that can occasionally disenchant
+her weapon or accidentally break her magic devices and spellbooks.
+
+
+* Perfect Cherry Blossom
+
+Letty               **
+
+Specializes in cold and sleep inducing attacks; strong against living beings, but has
+a hard time dealing with non-living enemies. Early game is doable, but it will get tough
+later on.
+
+
+Chen                ***
+
+Surprisingly strong until you get hit by water. Focuses on martial art combat, so equipment
+restrictions are fairly strict. Her shikigami power will vanish if she gets hit by
+water; you can recover it by visiting your exploration base.
+
+
+Alice               *
+
+She lets her dolls wield weapons instead of using them herself; she's a glass cannon
+character with several special mechanics. Strong if properly used, but is very gimmicky.
+Not recommended for beginners.
+
+
+Lily White          *
+
+She's not only weak, but you'll get a game over if you spend over 30 game days.
+A challenge class for pros.
+
+
+Prismriver Sisters  ***
+
+Unlike Three Fairies of Light, you're controlling them one at a time. It's a class
+that can perform 'job change', so to speak, but it's difficult to use unless you have
+enough experience playing various classes. They're ghosts, and their ability to pass
+through walls is useful.
+
+
+Youmu               ****
+
+Starts the game with powerful weapons. Dual-wielding penalty is high on low levels,
+so start off using only one of your blades.
+
+
+Yuyuko              ****
+
+A powerful class that's good both at close combat and using magic, and also can pass
+through walls. Damage output is a bit low, and you get hungry faster than usual.
+
+
+Ran                 *
+
+Very strong, but you get a game over unless you win in 7 in-game days. 
+Speedrun challenge class for pros.
+
+
+Yukari              **
+
+Very strong, but you won't use her to full potentially unless you're maniacally
+aware of inner game workings (there's fair amount of Hengband players like that).
+
+
+* Imperishable Night
+
+Wriggle             **
+
+Lacking both in base stats and special abilities. While she doesn't have any critical
+weak points, that's still a class for intermediate players who want to play a weak character.
+
+
+Mystia              **
+
+She seems to be a bard, but actually she's closer to an assassin-like class.
+Can't say she's easy to use.
+
+
+Keine               ****
+
+Pretty flexible class with excellent parameters and special abilities.
+At night on days 15, 45, 75... you grow horns, which automatically removes any helmet
+you might be wearing, so be careful.
+
+
+Tewi                ****
+
+Starts out with $1,000,000; early game will be fun in its own unique way.
+While you can buy your way out of early game, going past midgame will be tough.
+
+
+Udonge              ****
+
+An easy to use class with fairly high parameters and skill levels, and excellent
+special abilities. You can power yourself up three times with Grand Patriot Elixir,
+but you should stop at that point.
+
+
+Eirin               *
+
+A NPC Kaguya always stays with you, so you have to fight while protecting her.
+For people tired of standard gameplay.
+
+
+Kaguya              ***
+
+Isn't that strong in early game, but can demonstrate her true power once you clear
+the base game.
+
+
+Mokou               ****
+
+A rule-breaking class; she's not that strong, but she can resurrect by using up MP
+upon being defeated. Keep around 50-100 MP to stay on the safe side. Watch out for
+monsters that drain MP.
+
+
+* Phantsmagoria of Flower View
+
+Medicine            ***
+
+Class with a special race that gains experience depending on value of equipped
+items. Has abilities related to poison. Gimmicky and not recommended for beginners.
+
+
+Yuuka               *****
+
+Borderline cheat tier class; she's both strong and starts out with an extremely
+powerful weapon. You'll be able to deal with most enemies by running into them.
+
+
+Komachi             ****
+
+A robust class with high endurance and most of vital early game resistances
+covered from the start.
+
+
+Eiki                *****
+
+An easy to use class; she's resilient to status abnormalities and has many 
+excellent special abilities. The power of her fixed weapon is hard to estimate
+at first glance, but it's actually top tier.
+
+
+* Mountain of Faith
+
+Shizuha             *
+
+Martial art class. Her racial abilities can change during gameplay (stray god
+feature), so she might end up being strong in endgame, but otherwise she's weak.
+
+
+Minoriko            **
+
+Dual class. Her racial abilities can change during gameplay (stray god feature), 
+so she might end up being strong in endgame, but otherwise she's weak.
+
+
+Hina                *
+
+A special class with risky combat style utilizing cursed items. Not suited for
+beginners at all.
+
+
+Nitori              ***
+
+Engineer class with some tweaks added. Fights by paying Engineers Guild to get
+weapons and supplies. Requires spare time, but she's strong.
+
+
+Momiji              ****
+
+Comparatively strong in close combat, and also has good detection abilities.
+
+
+Aya                 *****
+
+She's the fastest out of all characters. Basic stats and special abilities 
+are excellent as well.
+
+
+Sanae               **
+
+A special class that requires chanting for some time before using special
+abilities. Can't say she's easy to use.
+
+
+Kanako              ***
+
+Gains power depending on amount of uniques defeated. Very strong in endgame,
+but pretty average early on.
+
+
+Suwako              ***
+
+She can use all realms of Sorcery Arts, but you can use them to full extent
+only past midgame. There's plenty of gimmicky spells in Sorcery Arts, and you
+need to be careful with her hibernation ability.
+
+
+* Subterranean Animism
+
+Kisume              *
+
+Extremely strict equipment restrictions on top of hard to use special abilites.
+A class for experienced players.
+
+
+Yamame              **
+
+Uses poison and spiderwebs (obstructs movement). Can be somewhat decent in early game,
+but past midgame your abilities will be less effective; it's going to be tough.
+
+
+Parsee              **
+
+Becomes stronger when going against powerful enemies or being low on HP, but...
+You have to fight in close combat, and you're not good at it.
+
+
+Yuugi               ****
+
+Strict equipment restrictions and has difficulty raising skills, but that aside,
+her physical power is overwhelming.
+
+
+Satori              **
+
+Fights by reading enemy mind and copying their powers. Strong if used properly,
+but requires knowledge about monsters and a unique approach.
+
+
+Rin                 **
+
+Somewhat gimmicky character that can focus either on martial arts or magic;
+can be decent if you go past midgame. You can carry extra items around in your
+cart, which is pretty handy.
+
+
+Utsuho              ****
+
+A class focused on scorching everything in sight. Early game is pretty easy,
+but you have to carefully pick your fights past midgame.
+
+
+Koishi              ***
+
+Assassin-like class that can constantly land critical hits without being
+noticed by enemies. However, you teleport and lose your memories at random,
+so she's not suited for relaxed play.
+
+
+* Undefined Fantastic Object
+
+Nazrin              **
+
+Has several detection abilities, but weak at combat.
+
+
+Kogasa              ***
+
+The weapon she's holding (her true umbrella body) slowly powers up as you
+level up. However, she's not that good at defense, and will easily get
+defeated if you get careless.
+
+
+Ichirin             ***
+
+Focuses on martial arts. Has pretty good defenses and can use some
+ranged attacks.
+
+
+Minamitsu           **
+
+Focuses on martial arts. An ominous class that floods nearby area with water
+and drowns living beings. Strong if you pick your fights properly, but
+isn't suited for beginners.
+
+
+Shou                ****
+
+Excellent warrior class. However, you start out with very low weapon skills,
+so you have to practice on weaker enemies before you become somehow proficient.
+
+
+Byakuren            ***
+
+Powerful martial art class, but weak unless she's applying her physical
+enhancement spell. Has low MP, which makes early game tough.
+
+
+Nue                 *****
+
+You don't need to carry a light source. Normally takes the form of a monstrosity
+and powers up, but this effect gets dispelled if an enemy sees through her
+deception. She's pretty strong even without it, though.
+
+
+* Ten Desires
+
+Kyouko              **
+
+Low base stats, and many abilities are hard to use (they're sound attacks that
+wake up nearby enemies).
+
+
+Yoshika             ***
+
+Very high endurance, plenty of resistances and resilient to status abnormalities.
+If you don't spend enough bonus points on dexterity, you won't get many blows
+per round. Perception and magic device skills are extremely low, so you'll have
+trouble past midgame.
+
+
+Seiga               ***
+
+Magic specialist that's not good at close combat. Playing spellcasters generally
+requires more game knowledge and strategic approaches compared to other classes.
+Comparatively easily for a spellcaster class, but still not that suited for
+beginners.
+
+
+Tojiko              ***
+
+Ranged combat + lightning user. Can pass through walls, but has the disadvantage
+of being unable to use footwear.
+
+
+Mononobe            ***
+
+Ranged class with gimmicky special abilities that use plates. Can use magic to
+some extent as well. Hard to use until you get used to her special abilities.
+
+
+Miko                ****
+
+She might be a genius who excels at everything, but she's hard to master
+unless you're knowledgeable enough about using spells. Might not be the best
+choice for beginners.
+
+
+Mamizou             ****
+
+Powerful if you master her 'Transform' special ability, but it's very unique
+one and not suited for beginners. But even without using it, she's clearly
+above average in terms of strength.
+
+
+* Double Dealing Character
+
+Wakasagihime        *
+
+Weak outside water, and you don't get abilities to create water on your own
+until late game. Has many restrictions like being unable to use footwear or
+moving slower on land without levitation.
+
+
+Sekibanki           **
+
+A class that fights with the support of her head clones. Can be overwhelmed
+by enemy summoners past midgame. Her combat skills are average without using clones.
+
+
+Kagerou             ***
+
+Her parameters aren't that high, but she has useful special abilities and can
+fight pretty well to some extent. She can't read scrolls in her wolf form, so if
+you get surrounded, transform before you get low on health.
+
+
+Benben              **
+
+Dual class + gimmicky support special abilities. Strong in endgame, but hard to use.
+
+
+Yatsuhashi          **
+
+Spellcaster + gimmicky support special abilities. Strong in endgame, but hard to use.
+
+
+Seija               *
+
+Has extremely low stats and can't use magic; you'll have to fight using your
+special abilities. Not suited for beginners at all.
+
+
+Shinmyoumaru        ****
+
+She became human-sized through the power of Miracle Mallet. Starts out with a good
+weapon, making early game combat easier. Her Miracle Mallet special abilities can
+be very useful, but you should carefully check what demerits they might have.
+
+
+Raiko               ***
+
+A special class that learns an ability powering her up depending on wielded weapon.
+Strong but not suited for beginners.
+
+
+* Legacy of Lunatic Kingdom
+
+Seiran              **
+
+Weak if you don't find a good gun, and guns themselves are hard to use.
+
+
+Ringo               ***
+
+Her parameters aren't high, but she powers up by eating dango. Eat them
+without hesitation before going against powerful enemies. Also has several
+exploration-related special abilities.
+
+
+Doremy              ***
+
+A class that demonstrates her true power in the dangerous Dream World dungeon.
+
+
+Sagume              *
+
+Spellcaster class that has a very special mechanic changing usual effects of
+scrolls she reads. For those who have grown tired of normal gameplay.
+
+
+Clownpiece          *
+
+Starts with 30000 HP and very high parameters, but cannot recover HP at all.
+You'll be able to take down anyone for a while, but you need experience in
+order to minimize damage taken and clear the game. Completely different gameplay style.
+
+
+Junko               **
+
+Gacha-like spellmaster that also has combat skills. Strong even without prior
+knowledge, but spends a lot of resources. Once you understand how to use her
+various special abilities, you'll be able to do anything. For those used to the game.
+
+
+Hecatia             ***
+
+She can change bodies, swapping equipment, personality and studied magic realm.
+Top class in terms of strength, but it's hard to say she's suited for beginners.
+
+
+* Hidden Star in Four Seasons
+
+Eternity Larva      *
+
+As you level up, your stats greatly increase and you gain mutations. However,
+your stats are despairingly low in early game.
+
+
+Nemuno              ***
+
+Close combat class that can designate a room in the dungeon as her 'sanctuary',
+increasing her power as she defends it. Pretty strong, but not good at facing
+powerful enemy summoners.
+
+
+Aunn                ***
+
+An average level martial art class with good detection and defensive abilities.
+
+
+Narumi              ***
+
+Strong and endurant, despite being a spellcaster class. If you pick her special
+personality, her special abilities become more combat oriented.
+
+
+Satono              **
+
+Special riding class that controls follower by dancing behind their backs.
+Magic oriented. Has lot of gimmicks and isn't suited for beginners.
+
+
+Mai                 ***
+
+Special riding class that controls follower by dancing behind their backs.
+Physical combat oriented. Has lot of gimmicks and isn't suited for beginners.
+
+
+Okina               *****
+
+Comparatively weak in early game compared to other strong classes, but
+she eventually learns cheat tier abilities, becoming one of the strongest
+classes in endgame
+
+
+* Wily Beast and the Weakest Creature
+
+Eika                *
+
+Has some defensive skills, but severaly lacks in offense. Bad at using weapons
+(aside from throwing). Her racial abilities can change during gameplay (stray
+god feature), so she might end up being powerful in endgame, but she's weak
+otherwise.
+
+
+Urumi               ****
+
+Warrior class that can use some slightly different support abilities. It feels
+good to slow enemies down or power up your critical hits. Keep in mind
+she show her true potential only at later stages.
+
+
+Kutaka              ***
+
+Dual class leaning toward spellcasting. Has many useful abilities like
+detection, water generation, powerful massacre. If you make preparations to use 
+her Old Castle reward - Chicken Knife - her melee attack power will be devastating.
+Maybe suited for people beginners who want a slightly more difficult class?
+
+
+Yachie              ****
+
+Monk that can study a realm of Sorcery Arts, and also with counter-summoning
+special abilties. Body armor and head equipment restrictions might be somewhat
+overwhelming.
+
+
+Mayumi              *****
+
+Warrior/cavalry/haniwa summoner. A cavalry unique class with excellent
+starting equipment and stats. Your strength and constituion can't go below
+your wisdom, so you'll have high stats in early game.
+
+
+Keiki               *****
+
+Secondhand dealer/jeweler with high stats and versatile special abilities.
+You can comfortably play around with items.
+
+
+Saki                *****
+
+An excellent class that can use most of spells you want to use for close combat,
+along with high aptitude for riding and dual gun combat. Very strong and
+has no gimmicks; recommended for beginners.
+
+
+* Unconnected Marketeers
+
+Takane              **
+
+Can carry more cards than average card trader + has defensive abilities.
+Incredibly strong in late game, but has trouble early on; can't say she's
+suited for beginners.
+
+
+Sannyo              (???)
+
+Card trader + continuous debuff special abilities
+
+
+Momoyo              *****
+
+Extremely good at close combat and can buff herself, but she's horrible at searching.
+
+
+* Tasogare Danmaku Action
+
+Suika               *****
+
+Highest HP out of all classes (Clownpiece aside), incredibly good at close
+combat, can power herself up even more with special abilities. She gets weaker
+if she sobers up, but she can drink sake by activating her gourd.
+
+
+Iku                 ****
+
+Decent both at close combat and magic, and starts out with a powerful
+cloak that she has to keep equipped. Very quick at sensing floor danger level.
+
+
+Tenshi              ****
+
+Good at close combat and has high parameters. Starts out with a powerful weapon,
+but it's force branded and drains your MP when you attack, making it somewhat
+difficult to use.
+
+
+Kokoro              ***
+
+Can create masks by defeating enemies with a special ability, and then use
+that enemy's powers while wearing that mask. Very strong if you master her,
+but not suited for beginners.
+
+
+Shinmyoumaru II     **
+
+This is the Urban Legend in Limbo version that rides in a bowl. High stealth
+and fairly high attack power, but her HP is too low. You have to keep
+movement order in mind. If you pick her special personality, you'll be able
+to summon other Gensoukyou residents, but be careful not to get hit by their
+attacks.
+
+
+Renko               ***
+
+Mindcrafter + some extra mindcraft abilities mainly related to throwing
+objects. Uses both 'm' and 'J' commands, keep that in mind. High combat power,
+but requires a somewhat special approach.
+
+
+Joon                ***
+
+Special martial artist that can equip up to 8 rings at once. Excellent firepower
+and special abilities in late game, but might be somewhat hard to use in
+early-mid game.
+
+
+Shion               *
+
+She can't buy anything at stores, and her equipment gets seized after a certain
+time period. Has a very unique gameplay where you keep possessing monsters one
+after another, since you hardly can fight by yourself. Requires very careful
+planning; not recommended for beginners.
+
+
+* Other works
+
+Three Fairies       **
+
+Very flexible equipment-wise, since you're effectively controlling three
+people at once. If you can set up your equipment properly, combined with
+their magic-sealing silence ability, they're surprisingly strong past midgame.
+Has hard time in early game and requires discerning which enemies would be
+affected by silence, so it's a class for more skilled players.
+
+
+Sunnymilk           *
+
+Stronger during daytime, weaker at night. However, her base parameters are
+very low. A challenge class for experienced players.
+
+
+Lunachild           *
+
+Stronger at night, weaker during daytime. However, her base parameters are
+very low. A challenge class for experienced players.
+
+
+Star Sapphire       *
+
+Can sense living beings from the start, but fragile. Her base parameters are
+very low. A challenge class for experienced players.
+
+
+Kasen               *****
+
+A rare close combat class skilled both in martial arts and riding. Her stats
+are high all around as well. Keep in mind you can't wear heavy armor if
+you'll focus on the martial art side.
+
+
+Hatate              ***
+
+Fairly high stats and useful special abilities; however, she's proficient in
+comparatively minor weapons like crossbows and guns.
+
+
+Rei'sen             **
+
+Neither her stats or special abilities are combat oriented.
+
+
+Toyohime            ***
+
+She starts out with the latest Lunarian weapon, making early game very easy.
+Past midgame, you'll have to watch out for enemies that can high your
+vulnerabilities. Somewhat difficult to use, since she's focused on spellcasting
+and summoning.
+
+
+Yorihime            ****
+
+Starts out with a powerful katana, making early game very easy. Past midgame, 
+you'll have to watch out for enemies that can high your vulnerabilities. 
+Has somewhat gimmicky special abilities.
+
+
+Kosuzu              *
+
+Very weak in combat by herself; you'll have to master her transformation
+abilities and the powerful scrolls she starts the game with. Not suited
+for beginners at all.
+
+
+Clownpiece (alt)    **
+
+This is the Sangatsusei version. Has low base stats and fairly gimmicky
+special abilities.

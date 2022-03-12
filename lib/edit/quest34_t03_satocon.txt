@@ -1,0 +1,128 @@
+# quest34_t03_satocon.txt
+
+# Name
+Q:$34:N:Satori Conflict
+Q:34:N:サトリ・コンフリクト
+
+# Definition
+Q:$34:Q:1:0:0:1:66:1227:0:0:6
+Q:34:Q:1:0:0:1:66:1227:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST34 2]
+Q:$34:T:Satori - 'A human magician has visited me a bit earlier,
+Q:$34:T:and I accidentally told her about my book collection.
+Q:$34:T:That human has started thinking about commiting burglary.
+Q:$34:T:She's going to have a hard time with my pets around,
+Q:$34:T:but I've read a though like 'If I use this...' as she was
+Q:$34:T:leaving. I have a bad feeling about this. Couldn't you
+Q:$34:T:lend me a hand?'
+Q:34:T:さとり「この前人間の魔法使いが訪ねて来たのですが、
+Q:34:T:適当に相手をしているうちに書斎のことをうっかり喋ってしまって、
+Q:34:T:あの人間ったら家探しとか強盗とか碌でもないこと考え始めたのです。
+Q:34:T:こちらにもペット達がいるのでそう簡単には手を出せないはずですが、
+Q:34:T:去り際に『そうだアレを使えば……』みたいな思念をちらりと感じました。
+Q:34:T:どうも不安なので頭数を集めているところなのです。
+Q:34:T:良ければ貴方も手伝ってくれませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST34 3]
+Q:$34:T:Satori - 'I can't believe she brought something like this.
+Q:$34:T:Even then, we managed to drive her away. Thank you.
+Q:$34:T:　
+Q:$34:T:...Oh, you have some interest in my book collection as well?
+Q:$34:T:It's not that valuable to me, so please take this.'
+Q:34:T:さとり「まさかあんな物を持ち出してくるとはね。
+Q:34:T:でもどうにか撃退できました。礼を言います。
+Q:34:T:　
+Q:34:T:……あら、書斎に気になる本があるようですね？
+Q:34:T:私にはあまり価値のないものですし、どうぞ差し上げますよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST34 5]
+Q:$34:T:Satori - 'I can't believe she brought something like this...
+Q:$34:T:We got absolutely overwhelmed. Oh, what should I do if she
+Q:$34:T:decides to read my studies...'
+Q:34:T:さとり「まさかあんな物を持ち出してくるとは……
+Q:34:T:混乱に乗じてごっそりやられてしまったわ。
+Q:34:T:ああ、もしあの習作の内容を表沙汰にされたら私はどうすれば……」
+?:1
+
+
+#光るガラスの床
+F:,:GLASS_FLOOR:10:
+
+#魔理沙
+F:a:FLOOR:8:w1227
+#図書館防衛ゴーレム
+F:b:FLOOR:8:w1187
+#図書館防衛ゴーレム大
+F:c:FLOOR:8:w1188
+
+#以下、特殊処理で友好的
+#さとり
+F:e:FLOOR:8:f1128
+#お燐
+F:f:FLOOR:8:f1129
+#お空
+F:g:FLOOR:8:f1130
+
+#ゾンビフェアリー
+F:h:FLOOR:8:f15
+#怨霊 
+F:i:FLOOR:8:f1200
+#怨霊(大) 
+F:j:FLOOR:8:f1199
+# 地獄の河童
+F:k:FLOOR:8:f1225
+# 山犬
+F:l:FLOOR:8:f179
+# 山猫
+F:m:FLOOR:8:f180
+# ハシビロコウ
+F:n:FLOOR:8:f1245
+# コモドドラゴン
+F:o:FLOOR:8:f1246
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXX..............ccc.a.ccc..............XXX
+D:XXX.....bbb.......cc...cc.......bbb.....XXX
+D:X.....bbbbbbb......ccccc......bbbbbbb.....X
+D:X....bbbbbbbbbcccbbbbbbbbbcccbbbbbbbbb....X
+D:X......bbbbb...c...bbbbb...c...bbbbb......X
+D:X.bb................bbb................bb.X
+D:X.bb....cccc........cccc........cccc...bb.X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X....,,,,,,,....,,,,,,,....,,,,,,,......XXX
+D:X.........................................X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX.iXXX..XXX....X
+D:XX...XXX..XXX..XXX..XXX..XXX..XXX.iXXX....X
+D:XX...XXX..XXX..XXX..XXX..XXXi.XXX..XXX.i..X
+D:XX...XXX..XXX..XXX..XXX..XXX.iXXXi.XXX..i.X
+D:X.........................ii.hhhhh..i..i..X
+D:XXX............g..........i.hhjjjhh.i.i.XXX
+
+?:[EQU $CLASS Satori]
+D:XX<......k.k......ln...omi.hhj.f.jhh.i..XXX
+P:26:21
+?:1
+?:[NOT [EQU $CLASS Satori]]
+D:XX<......k.k......ln.e.omi.hhj.f.jhh.i..XXX
+P:24:4
+?:1
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+

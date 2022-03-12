@@ -1,0 +1,39 @@
+# quest30_t05_deliver_alcohol.txt
+
+# Name
+Q:$61:N:Unshoan and Summer Heat
+Q:61:N:運松庵の暑気払い
+
+# Definition
+Q:$61:Q:9:0:0:0:20:0:0:1
+Q:61:Q:9:0:0:0:20:0:0:1
+
+?:[LEQ $QUEST61 2]
+Q:$61:T:Unsho - 'This unbearable heat is bringing me down.
+Q:$61:T:I won't be able to go fishing like this.
+Q:$61:T:Could you bring me some eel?
+Q:$61:T:By the way, I like it roasted.'
+Q:61:T:運松翁「この只ならぬ暑さには儂もすっかりやられてしもうたわい。
+Q:61:T:これではとても釣りになど出られん。
+Q:61:T:かの二川随筆の逸話のようにどこからか鰻が現れたりしないものかの？
+Q:61:T:ちなみに蒲焼きもよいが儂は素焼きのほうが好みじゃ。」
+?:1
+
+?:[EQU $QUEST61 3]
+Q:$61:T:Unsho - 'Ooh, you're a very kind person.
+Q:$61:T:As a reward, here's the last of my kappa medicine.
+Q:$61:T:It's valuable, but don't hesitate to use it if you have to.'
+Q:61:T:運松翁「おお、さても親切な若者よ。
+Q:61:T:お礼に河童の秘薬の最後の残りをやろう。
+Q:61:T:貴重な品だが、使うべきときには躊躇わずに使うのじゃぞ。」
+?:1
+
+?:[EQU $QUEST61 5]
+Q:$61:T:Unsho - 'Sigh, you're so impatient.
+Q:$61:T:You might end up losing everything if you keep running
+Q:$61:T:ahead like this, you know that?'
+Q:61:T:運松翁「やれやれ、辛抱が足りとらんのう。
+Q:61:T:釣りも冒険もあまり先走って無茶をすると全てを失うことになるぞい？」
+
+
+?:1

@@ -1,0 +1,79 @@
+# quest68_t01_geidon1.txt
+
+Q:$68:N:Geidontei at Midnight
+Q:68:N:深夜の鯨呑亭にて
+
+# Definition 
+Q:$68:Q:6:0:0:0:45:0:0:0:6
+Q:68:Q:6:0:0:0:45:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST68 2]
+Q:$68:T:Suika - 'Something's foul is going in the village. There's
+Q:$68:T: some fairly rude beings I don't know wandering about. They
+Q:$68:T: look like creepy shape-shifting screaming lumps of flesh.
+Q:$68:T: That's probably some monsters from Outside World. I'm
+Q:$68:T: leaving this to you. Teach them our rules.'
+Q:68:T:萃香「最近里がキナ臭いねえ。私の知らない無作法な連中がうろついてる。
+Q:68:T:　次々に形を変えながら妙な叫び声を上げる不気味な肉塊らしい。
+Q:68:T:　たぶん外界から来た怪物だな。
+Q:68:T:　この件はあんたに任せよう。ここのルールを叩き込んで来な。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST68 3]
+Q:$68:T:Mamizou - 'Well done! Fitting the name of Silkworm
+Q:$68:T: Geidontei. How about this as a reward? If you're not in
+Q:$68:T: town, feel free to use it to blow beings like these away.'
+Q:68:T:マミゾウ「おう流石じゃのう。蚕食鯨呑の名に相応しいわい。
+Q:68:T:　後のことは儂が上手く誤魔化しておこう。
+Q:68:T:　さて、仕事の報酬にこんなのはどうじゃ？
+Q:68:T:　あんな連中、街中でないなら遠慮なく吹き飛ばしてやればいい。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST68 5]
+Q:$68:T:Mamizou - 'You couldn't do it?
+Q:$68:T: Very well. Leave it to me.'
+Q:68:T:マミゾウ「やれやれ情けないのう。
+Q:68:T:　まあいい。あとは儂に任せよ。」
+
+?:1
+
+# ショゴス
+F:Y:TREE:8:w685
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+F:-:GRASS:8
+
+# Trees
+F:T:TREE:1
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXTTTT-T   <    T-TTXXXXXXXXXXXX
+D:XXXT-TTT        T-T-TXXXXXXXXXXXX
+D:XXXTTTTT        TT-TTXXXXXXXXXXXX
+D:XXXT-T-           -T-XXXXXXXXXXXX
+D:XXXT---            --------TTTT-X
+D:XXXT---            -------T-TT--X
+D:XXXT---            ------TT T-YTX
+D:XXXT---            ----TTTTTTYTYX
+D:XXXT---            --T---TTTTTY-X
+D:XXXT---            --T--TTTTT---X
+D:XXXT---            --TTTTTTTTTTTX
+D:XXXT---            --XXXXXXXXXXXX
+D:XXXT---            --XXXXXXXXXXXX
+D:XXXT---            TTXXXXXXXXXXXX
+D:XXXT---            TTXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+# Starting position
+P:3:12
+
+
+
+

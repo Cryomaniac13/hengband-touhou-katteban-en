@@ -1,0 +1,40 @@
+# 
+
+# Name
+Q:$62:N:Coastal Operation, Again
+Q:62:N:水際作戦再発令
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$62:Q:1:0:0:1:66:1347:0:14
+Q:62:Q:1:0:0:1:66:1347:0:14
+
+# Description for quest
+?:[LEQ $QUEST62 2]
+Q:$62:T:Kutaka - 'Saki Kurokuma has given up on her earlier plan to
+Q:$62:T:invade the surface, but this time she's planning to invade
+Q:$62:T:another area of Hell, which will cause even more chaos in an
+Q:$62:T:already tumultous region. However, right now we don't have
+Q:$62:T:anyone free to deal with her. If you're certain of your
+Q:$62:T:own strength, could you help us subdue this animal ghost?'
+Q:62:T:久侘歌「前回の作戦で地上侵攻を諦めた『驪駒　早鬼』が、
+Q:62:T:今度は地獄の別のエリアへの侵攻を企てています。
+Q:62:T:只でさえ混乱している地獄をこれ以上引っ掻き回されるわけにはいきません。
+Q:62:T:とはいえ現状全く手が足りていない状況です。
+Q:62:T:腕に覚えがあるならあの動物霊の抑え込みに協力して下さいませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST62 3]
+Q:$62:T:Kutaka - 'She has been disciplined, and for now it looks
+Q:$62:T:like she's focused on taking over Animal Realm.
+Q:$62:T:That being said, we're not interested in internal affairs
+Q:$62:T:of that realm. Thank you for your cooperation. Here's your
+Q:$62:T:reward from Ministry of Right and Wrong. I'm sorry, but with
+Q:$62:T:out limited budget, we can't provide anything more.'
+Q:62:T:久侘歌「彼女もようやく懲りたようで、
+Q:62:T:当分は畜生界の支配に注力するつもりのようです。
+Q:62:T:まあ畜生界内部のことはこちらの関知することではありません。
+Q:62:T:ご協力誠にありがとうございました。こちらは是非曲直庁からの謝礼です。
+Q:62:T:申し訳ありませんが、予算の都合がつかず現物支給となります。」
+?:1
+

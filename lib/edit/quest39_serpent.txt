@@ -1,0 +1,22 @@
+# quest39_serpent.txt
+
+# Name
+Q:$39:N:Serpent of Chaos
+Q:39:N:混沌のサーペント
+
+# Definition
+Q:$39:Q:1:0:0:1:127:862:0:12:1
+Q:39:Q:1:0:0:1:127:862:0:12
+
+# Description for quest
+?:[LEQ $QUEST39 2]
+Q:$39:T:Your final quest is the ultimate quest that has always been
+Q:$39:T:required of you. You must enter the realm of the Serpent,
+Q:$39:T:travel deep, and defeat this source of all our problems.
+Q:$39:T:Be prepared, be patient, and good luck. May the light shine on you.
+Q:39:T:最後のクエストは究極のクエストだ。
+Q:39:T:あなたはサーペントの領域に入り込み、深く潜り、全ての元凶である
+Q:39:T:サーペントを倒さねばならない。充分用心し、忍耐強く、そして幸運を。
+Q:39:T:勇敢な冒険者に光あれ。
+?:1
+

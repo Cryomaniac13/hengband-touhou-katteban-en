@@ -1,0 +1,85 @@
+# quest06_t08_mimic.txt
+# By Shayne Steele (steele@cs.fsu.edu)
+#いろいろ変更
+
+# Name The Mimic's Treasure
+Q:$6:N:The Mimic's Treasure
+Q:6:N:ミミックの財宝
+
+# Definition 
+Q:$6:Q:6:0:0:0:25:0:0:0:6
+Q:6:Q:6:0:0:0:25:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST6 2]
+Q:$6:T:Rinnosuke - 'I bought a rare box from a merchant from the
+Q:$6:T:the underground, but looks like it was possessed by something.
+Q:$6:T:The doors and items in my warehouse started rampaging on their own!
+Q:$6:T:Could you go inside and clean it up?'
+Q:6:T:霖之助「この前地底の行商人から珍しい箱を買ったんだがね。
+Q:6:T:何か妙なものが憑いていたらしくて、
+Q:6:T:倉庫の扉や品物が勝手に暴れまわるようになってしまったんだ。
+Q:6:T:何とか倉庫の中を片づけてくれないか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST6 3]
+Q:$6:T:Rinnosuke - 'Thank you very much. As a reward, I want to give you
+Q:$6:T:this. That's a really pretty item that I... oh well, nevermind.'
+Q:6:T:霖之助「お疲れさま。礼と言っては何だがこれをあげよう。
+Q:6:T:それにしても本当に綺麗にしてくれたものだな…まあ不問にしよう。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST6 5]
+Q:$6:T:Rinnosuke - 'It looks like now it's even noisier than before...
+Q:$6:T:I guess I'll have to think of another way to deal with this.'
+Q:6:T:霖之助「何だか前より騒ぎが大きくなっているようだが…
+Q:6:T:やれやれ。何かほかの手段を考えるとしよう。」
+?:1
+
+# The Monsters
+# Lurker (level:14, Speed:110, XP:80, #:4, Tot:320)
+F:.:FLOOR:8:247
+
+# Potion Mimic (level:18, Speed:110, XP:60, #:4, Tot:240)
+F:!:FLOOR:8:310
+
+# Door Mimic (level:18, Speed:110, XP:70, #:12, Tot:840)
+F:+:FLOOR:8:311
+
+# Chest Mimic (level:21, Speed:110, XP:70, #:4, Tot:280)
+F:~:FLOOR:8:353
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+
+# Floor on no Teleportation grid
+F:,:FLOOR:12
+
+# Object 10 levels out of depth
+F:O:FLOOR:8:0:*10
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXX
+D:XOOO%!O!%!O!%OOOX
+D:XOTO%OOO%OOO%OTOX
+D:XT~T%O~O%O~O%T~TX
+D:X+++%+++%+++%+++X
+D:X,,,%,,,%,,,%,,,X
+D:X,,           ,,X
+D:X   % . % . %   X
+D:X   %   %   %   X
+D:X . %   %   % . X
+D:X               X
+D:XDD%%%%%%%%%%%DDX
+D:X               X
+D:X       <       X
+D:XXXXXXXXXXXXXXXXX
+
+# Starting position
+P:13:8
+
+
+

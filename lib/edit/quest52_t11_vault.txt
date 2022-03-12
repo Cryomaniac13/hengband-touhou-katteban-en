@@ -1,0 +1,188 @@
+# quest52_t12_vault.txt
+#本家宝物庫からセリフと報酬リストと配置モンスター変更　レベル30→35
+#対象アイテムが全くない場合、適当なアイテムの☆を探すクエストになる
+
+# Name
+Q:$52:N:Basement of Ruined Mansion
+Q:52:N:廃洋館の地下室
+
+# Definition
+Q:$52:Q:3:0:0:0:30:0:0:0:6
+Q:52:Q:3:0:0:0:30:0:0:0:6
+
+# Random Reward (can set less than 30 items)
+Q:52:R:45:59:62:72:74:85:90:97:98:99:105:131:133:151:155:157:158:159:173:176:193:195:211:213:313:314:315
+
+# Description for quest
+?:[LEQ $QUEST52 2]
+Q:$52:T:Lunasa - 'So, you like visiting ruined buildings like this.'
+Q:$52:T:Merlin - 'Hey, can we play a game?
+Q:$52:T:　　　　　Go search for treasure inside.
+Q:$52:T:　　　　　If you find something, that'll be your present!'
+Q:$52:T:Lyrica - 'That room? Is it going to be okay?'
+Q:52:T:ルナサ　「こんな廃屋を訪ねてくるなんて物好きなことね。」
+Q:52:T:メルラン「ねえねえ、ちょっと遊んでいかない？
+Q:52:T:　　　　　奥の部屋で宝探しゲームよ。
+Q:52:T:　　　　　もし見つけて持ってこれたら貴方にプレゼントするわ！」
+Q:52:T:リリカ　「あの部屋で？大丈夫かなあ…」
+?:1
+
+# Description for quest rewarding
+?:[EQU $QUEST52 3]
+Q:$52:T:Merlin - 'Cool! Did you have fun?'
+Q:$52:T:Lunasa - 'As promised, take it as your reward.'
+Q:52:T:メルラン「すごーい！楽しんでくれたかしら？」
+Q:52:T:ルナサ「まあ約束だからね。それは持って行っていいよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST52 5]
+Q:$52:T:Lyrica - 'Sigh, even Lunasa went along with it.
+Q:$52:T:But yes, we poltergeists pull pranks like this sometimes.'
+Q:52:T:リリカ「まったく、ルナサ姉さんまで悪乗りが過ぎるんだから。
+Q:52:T:でもまあ騒霊としてはたまにはこういう悪戯もやんなきゃね。」
+?:1
+
+# No-teleport Floor with rewarding artifact e.g."Sting" and Death sword 
+F:a:FLOOR:12:0:0:0:!
+
+# No-teleport with base object of artifact e.g."Small sword" and Death sword
+F:b:FLOOR:12:0:!
+
+# Random monster 7 levels out of depth and on no Teleportation grid
+#→巨像
+F:*:FLOOR:12:558
+
+#アダマンタイトコイン→地獄の鉄槌
+F:$:FLOOR:8:627
+#ミスリルコイン→ヘルブレード
+F:m:FLOOR:8:420
+
+# アダマンタイトコイン→黒の剣
+F:1:FLOOR:8:1177
+
+# ミスリルゴーレム→リビングアーマー
+F:2:FLOOR:8:1035
+
+
+# Chest mimic
+F:&:FLOOR:8:353
+# Ring mimic
+F:=:FLOOR:8:457
+# Scroll mimic
+F:?:FLOOR:12:352
+# Floor with Raal's!
+F:!:FLOOR:12:557
+
+# Red dragon with Object 5 levels out of depth
+#F:3:FLOOR:8:589:*5
+# fire vortex
+#F:f:FLOOR:8:354
+# Fire trolls→魔法陣赤
+F:F:FLOOR:8:1208
+# Fire Elemental
+#F:7:FLOOR:8:510
+
+
+
+# White dragon with Object 5 levels out of depth
+#F:4:FLOOR:8:549:*5
+# Ice trolls→魔法陣白
+F:I:FLOOR:8:1210
+# cold vortex
+#F:c:FLOOR:8:358
+# White wraith→鉄ゴーレム
+F:W:FLOOR:8:367
+# Ice Elemental
+#F:8:FLOOR:8:570
+
+
+# Black dragon with Object 5 levels out of depth
+#F:5:FLOOR:8:592:*5
+# water vortex
+#F:w:FLOOR:8:355
+# Pukelman→クローカー
+F:P:FLOOR:8:243
+# Black Orc→宝珠
+F:o:FLOOR:8:912
+# Stone Troll
+F:S:FLOOR:8:107
+# Earth Elemental
+#F:9:FLOOR:8:525
+
+
+# Blue dragon with Object 5 levels out of depth
+#F:6:FLOOR:8:560:*5
+# young blUe dragon→魔法陣青
+F:d:FLOOR:8:1209
+# energy vortex
+#F:e:FLOOR:8:359
+# Colbran
+#F:C:FLOOR:8:435
+# Grave wight →魔法陣小
+F:G:FLOOR:8:1241
+# sTorm giant→魔法陣(大)
+F:T:FLOOR:8:1211
+# Air Elemental
+#F:0:FLOOR:8:526
+
+# Alarm Traps
+F:^:TRAP_ALARM:12
+# Teleport Traps
+F:+:TRAP_TELEPORT:8
+
+# Dungeon
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+?:[EQU $RANDOM4 0]
+D:XXXXXXXXXXXXXXXXXXXXX.+b+a+b+..XXXXXXXXXXXXXXXXXXXXX
+?:[NOT [EQU $RANDOM4 0]]
+D:XXXXXXXXXXXXXXXXXXXXX.+b+b+b+..XXXXXXXXXXXXXXXXXXXXX
+?:1
+D:XXXXXXXXXXXXXXXXXX$.............W.XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXo...........P..oXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX......G.G.G.......XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX..%.%.%^%^%.%.%.%.XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX...S.m^^1^^m.S.S..XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX.....^.^^^.^......XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX...^.......^....XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX..^.........^...XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXX2..++++..2XXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXX..XXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXX........^.XXXXXXXXXX..XXXXXXXXXX^...W.....XXXXX
+D:XX.&.%S..I..^%...2XXXXXXX..XXXXXXX2...^....S.%.T..XX
+D:XX....%....^%.m...XXXXXXX..XXXXXXX.....^....%P....XX
+D:X+.....%..^%......+XXXXX++++XXXXX+......^..%...m..+X
+?:[EQU $RANDOM4 1]
+D:Xb......%^%.W.....+D....+<.+....D+......S^%.......aX
+?:[NOT [EQU $RANDOM4 1]]
+D:Xb......%^%.W.....+D....+<.+....D+......S^%.......bX
+?:[EQU $RANDOM4 2]
+D:Xa...$..P%..S.....+D....+..+....D+.......%........bX
+?:[NOT [EQU $RANDOM4 2]]
+D:Xb...$..P%..S.....+D....+..+....D+.......%........bX
+?:1
+D:X+......%^%.......+XXXXX++++XXXXX+..m.S.%^........+X
+D:XX.....%..^%..m...XXXXXXX..XXXXXXX.....%^....$....XX
+D:XX.=..%S.I.^%....2XXXXXXX..XXXXXXX2...%^..........XX
+D:XXXXX.......^..XXXXXXXXXX..XXXXXXXXXX.^...d...dXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXX..XXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXDDXXXXXXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXXXXX2..++++..2XXXXXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX^^^^.......^^S..XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX^^%^Sm...^^.....XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX^^!%....^^S...%.W.XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX^%%%%%^^......%...XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX^^.%F^......%%%%%.XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXX...%.........F%P..XXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX.......*.....%..XXXXXXXXXXXXXXXXXX
+D:XXXXXXXXXXXXXXXXXX.$.........m....XXXXXXXXXXXXXXXXXX
+?:[EQU $RANDOM4 3]
+D:XXXXXXXXXXXXXXXXXXXXX.+b+b+a+..XXXXXXXXXXXXXXXXXXXXX
+?:[NOT [EQU $RANDOM4 3]]
+D:XXXXXXXXXXXXXXXXXXXXX.+b+b+b+..XXXXXXXXXXXXXXXXXXXXX
+?:1
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:17:25

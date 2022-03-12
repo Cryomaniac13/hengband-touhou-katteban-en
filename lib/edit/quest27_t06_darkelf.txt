@@ -1,0 +1,86 @@
+# qdarkelf.txt
+# Dark Elven Lords Quest
+# By Shayne Steele (steele@cs.fsu.edu)
+#↑を色々変更　みやまさ
+
+# Name Dark Elven Lords Quest
+Q:$27:N:Dark Elven Lords
+Q:27:N:ダークエルフの王
+
+# Definition 
+Q:$27:Q:6:0:0:0:25:0:0:0:6
+Q:27:Q:6:0:0:0:25:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST27 2]
+Q:$27:T:Yamawaro - 'Lately, some creepy strangers were wandering in
+Q:$27:T:nearby forest. They're good at using some weird magic, so
+Q:$27:T:we're at disadvantage. Looks like their lair is close by.
+Q:$27:T:Can't you do something about them?'
+Q:27:T:山童の娘「最近森の中に顔色の悪い余所者が出没するのだ。
+Q:27:T:食物を巡ってたまに争うのだが妙な術を使う奴が多くどうも旗色が悪い。
+Q:27:T:この近くに奴らの巣があるらしい。お前なら何とかできるか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST27 3]
+Q:$27:T:Yamawaro - 'Well done. Here's your reward.
+Q:$27:T:It's something valuable we managed to get from them earlier.
+Q:$27:T:You're free to use it.'
+Q:27:T:山童の娘「よし上首尾だ。礼を言うぞ。
+Q:27:T:これは以前奴らから手に入れた何やら貴重そうなものだ。お前が使うといい。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST27 5]
+Q:$27:T:Yamawaro - 'Looks like you were all talk.
+Q:$27:T:Very well, we'll have to attack them all at once.'
+Q:27:T:山童の娘「なんだ口ほどにもないな。
+Q:27:T:まあいい。今総攻撃を掛ければなんとかなるだろう。」
+?:1
+
+# The Monsters
+# Dweller on the threshold (level:15, Speed:110, XP:50, #:6, Tot:300)
+F:y:FLOOR:8:263
+
+# Stone Giant (level:18, Speed:110, XP:90, #:4, Tot:360)
+F:P:FLOOR:8:321
+
+# Stone Golem (level:19, Speed:100, XP:100, #:4, Tot:400)
+F:g:FLOOR:8:323
+
+# Stunwall (level:18, Speed:110, XP:50, #:6, Tot:300)
+F:#:FLOOR:8:326
+
+# Dark eleven lord (level:20, Speed:120, XP:500, #:5, Tot:2500)
+F:h:FLOOR:8:348
+
+# The doors, floors and treasures
+# Normal floor
+F: :FLOOR:8
+
+# Dungeon layout
+D:XXXXXXXXX
+D:X       X
+D:X h h h X
+D:X       X
+D:X h   h X
+D:X       X
+D:XP P g gX
+D:XDDD%DDDX
+D:X   %   X
+D:Xy y%# #X
+D:Xy y%# #X
+D:Xy y%# #X
+D:X   %   X
+D:X   %   X
+D:XDDD%DDDX
+D:XP P%g gX
+D:X       X
+D:X       X
+D:X  %%%  X
+D:X   <   X
+D:XXXXXXXXX
+
+# Starting position
+P:19:4

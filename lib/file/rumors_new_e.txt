@@ -1,0 +1,417 @@
+#新しい噂と一部設備説明など。
+#ここの文章は\で改行される。自動改行処理はされない。display_rumor_new()を参照。一行40文字程度、15行まで。
+
+N:0:Moon Rabbit Rumors (endgame)
+Lady Toyohime was very depressed the other day.\The youkai from Earth stole a valuable drink.
+Lady Yorihime was very angry the other day.\The youkai from Earth stole a valuable drink.
+Fly me to the moon, and let me play among the stars~
+That youkai lady on Earth is pretty cute.
+Lady Toyohime said\that the depths of that cavern on Earth are connected to some absurd place.
+The princesses have been going down to Earth lately,\so maybe I'll just play outside for a bit...
+It's just a rumor, right? In the center... something might be happening there.
+I've heard there are powerful items that are permanently cursed.
+If a Potion of Death or Detonations gets broken at your feet,\it'll be real bad. Be careful when facing white dragons.
+Lords of Amber can invoke an incredible curse upon defeat.\If your protection from magic isn't high enough, you might be unable to move.
+It's very dangerous to fight enemies in the depths with\AC below 120. You want it to be 150 at very least.
+Damage from melee attacks like those that confuse or poison\cannot be reduced even if you're wearing heavy armor.
+It's very difficult to cover all possible resistances;\sometimes it's better to leave some open and avoid enemies\that use them.
+You shouldn't fight every enemy in the depths of the dungeon.\Getting a Staff of *Destruction* will help a lot.
+You need some proper skill to use high level magic devices.\Raise your intelligence and magic device skill\with equipment if required.
+If you get hit be nexus, your body will be dragged into\another world, warping it. Time resistance\will protect you from those effects.
+Shattering attack cause earthquakes. If rubble falls on top\of your head, it'll hurt a lot.\You'll be fine if you're a ghost, though.
+If a non-spellcaster uses a Scroll of Recharging to\recharge a magic device, they might fail\and break some or all of them.
+I've heard the our hagoromo was stolen, but when I went to\check on it, it still was there.\Who's spreading those rumors?
+It's difficult to obtain time resistance.\Maybe if you use that hagoromo?
+Time resistance protects you against...\Gravity, time, teleport away, and nexus?\I think there's also something else...
+Powerful demons and spellcasters can drain energy from\your magic device by touching you.\It'll be gone in a moment.
+Those 'demon books' can capture not only youkai, but\humans as well. What is going on...
+Evil gods from other worlds can use unbelievably strong\mental attacks. Looks like you can protect\yourself with insanity resistance...
+There's a powerful attack called 'hellfire'.\It's likely to wipe us out in an instant.\You also cannot resist it by using equipment.
+There is a point in raising your stats above 40.\It's still going to stay at the limit if the stat gets drained.
+I've heard a sudden scream and a lot of commotion.\Looks like there was a caterpillar on the collar\of one of our Earth forces.
+Hey, once the Earth purification plan is completed,\are we going to get thrown away?
+Putting strawberries inside dango!? I can't comprehend\how those people on Earth though of this.\No, that's all right, though...
+Dango on Earth has a lot of various flavors, but\you might get used to it and turn it into a habit.
+Hey, is the capital we're in right now\the real capital...
+I'm not that traitor Reisen!
+'The Lunar Capital is already destroyed!'\'''W-W-What!?'''
+Listen! I've thought up a joke to make\Sagume laugh!
+This is Seiran, I've sighted hostile... Gachapin?
+This is Seiran, I've found a cute doll.\I'm going to... Gas attack! Gas attack!
+This is Seiran, I've lost track of my position\in the Bamboo Forest. Requiring assistance.
+This is Seiran, I've sighted a friendly aquatic\beast. It's cute!
+You can't be resistant to hellfire attacks,\but Lady Yorihime channeled some deity and deflected\it as she was dancing. Just what I expected of her!
+I used 'Final Strike', and broke my sword.\I really liked it.\I don't think anyone can fix it now.
+Finally, new training companion has arrived!!!
+
+
+N:1:Human Village Rumors (basic)
+Don't forget a light source before exploring dungeons.\It's better to buy a lantern and some oil instead of using torches.
+Experienced adventurers start out by buying\Scrolls of Teleportation, Confuse Monster, healing potions,\some armor and a lantern.
+I've occasionally seen people lying down in front of\the general store. When I try to talk to them, they reply\'I couldn't buy a lantern and lost interest in adventuring.'
+If you wish to get some training,\I've heard it's a good idea to explore the cave at\Myouren Temple. It's a bit to the east of the village.
+I've heard that half-youkai shopkeeper at the forest\frequently stocks some rare items.
+I've seen more and more youkai close to the village.\They don't look powerful, but it'll be trouble if they\attack you all at once.
+There's some large creepy cave that has appeared to the west.\Keine we shouldn't approach it because it's too dangerous.
+Akyuu is busy gathering information about new monsters.
+Suzunaan has started to sell spellbooks and scrolls.
+Suzunaan has started selling some 'Demon Books'...\Did that girl do something again?
+Particularly valuable spellbooks don't get burned up.
+I've heard that thieves sneaking into the depths of\Scarlet Devil Mansion come back all charred.
+There's a lot of things I'd like to request at the\Hakurei Shrine... But I can't go to a dangerous place like this.
+Traveling by the road should be relatively safe.\Don't stray from the path if you leave the village.
+Forests and bodies of water are dangerous.\Don't go inside unless you're a skilled adventurer.
+Do you want to go to the Youkai Mountain or\the underground town? It's very dangerous. Please reconsider\unless you're confident in your skills.
+If you wish to explore dangerous places,\you should find a way to protect yourself from paralysis\as soon as possible.
+Watch out for swords lying on the ground.\They might attack you if you get too close.
+If you manage to reach Eientei, they'll be able\to cure any of your illnesses.
+The potion merchant sold me a 'Potion of Cure Critical Wounds'.\Drinking it will cure poison, wounds and stunning... Is it OK?
+You don't know where a Scroll of Teleportation\might take you, but you won't end up in a wall.
+Armor of tengu craftsmanship is both light and durable.
+Reading a Scroll of Word of Recall returns you from\dungeon to the surface. However, the effect is not immediate.
+Lady Toyosatomimi has opened up her shop.\It just sprung out from the ground the other day.
+The Kirisame girl has opened up a store in Forest of Magic.\Though I don't think any humans would go there...
+If you tunnel through walls with a digging tool,\you might make a profit by excavating gemstones.
+If you try to dual-wield without being properly skilled,\you're not going to land a hit on anything.
+I've heard kappas are occasionally opening up a\bazaar at the mountains. I'd like to go and see it, but that's\too dangerous for me...
+Why there are no townsfolk in the village?\It's hard to explain, but, basically, the tengu did it.
+The village exorcist has invented staves that can\detect monsters from far away. They're being sold at the magic store.
+Myouren Temple is not far away from the village.\If you pick a fight there, their priest might discipline you...
+The Hakurei shrine maiden is sending special amulets to the\magic store. They let you know if there are any youkai nearby.\They're a bit expensive, though...
+The weapon store occasionally sells hunting rifles.\However, you can't use them well if you're unskilled.
+If you're bad at combat, try carrying around plenty of torches\to throw at the enemies. It works particularly well against ghosts.
+Outside the village, there's a doll sales stand that people\rarely approach. I've heard it can help if you had your life force drained.
+I see many adventurers charging out holding a shield and a sword,\but I think holding a sword with both hands might be more effective.
+
+
+N:2:Tengu Village Rumors (basic combat tactics, race/class)
+The dungeon gets far deadlier from level 45.\Enemies beyond level 40 are in their own class of power.\You should train for a bit if you have less than 350 HP at that point.
+Sometimes it's hard to get basic elements resistance.\You want to resist fire at level 20, acid/lightning/cold at level 30,\and poison at level 40.
+When you go beyond level 40,\you'll start running into powerful enemies using high elements like\light, darkness, shards and nether.\You won't be able to resist all of them.\Remember which one of them uses what kind of attacks,\and avoid nasty enemies during exploration.
+You can't move on since you don't have proper resistences?\It's fine! You can go pretty far if you're being careful!
+Ah, the oni blacksmithes are so good at their job.\You won't find anyone like this on surface.
+Several tengu came to explore that new cave, and they\came back with severe injuries.\It's simply massive, and it gets really dangerous as you go deep in.
+There are beings who can grow in power depending on moon phase.\Vampires in particular are very strong under full moon.
+Kappa machines are all waterproof and work well.\Other races have hard time matching them.
+The engineers sure are a stingy bunch.\I guess that's what happens when you need money to properly do your job.
+If you're fast, you might easily win if you fight back\as you're running away! Unless the enemy uses spells or something.
+You can get double resistance to acid, lightning,\fire, cold and poison, greatly reducing the damage you take.\This is extremely important; remember it well.
+There are monsters that can confuse you with their attacks.\If you're not resistant, you'll get beaten up.
+If you get terrified,\you won't be able to attack enemies in melee,\and you'll be worse at shooting and spellcasting.
+If you're blind, you can't read scrolls or spellbooks.\Your accuracy also suffers, so cure it as fast as you can.
+Ghosts can pass through walls.\They can flee further in and recover as they fight enemies.
+You want to face enemies one on one?\Dig a tunnel in a wall and wait there for the enemies to come.
+White wolf tengu\are pretty good at surviving on their own.
+Some fairy kids are getting interested in this incident\as well. I don't expect too much from them, though.
+I've heard from shinigami\that there are assassins from hell hunting hermits\and celestials in the dungeon.
+Crow tengu are strong, but they're not that suited for\dungeon exploration. They can fly across the surface\pretty fast, though.
+We tengu have to wear a tokin on our head.\As for footwear, you're free to remodel any into geta.
+Moon rabbits often look at the moon all alone while\muttering something. Who are they talking to?
+I've heard there are youkai dolls that grow more powerful\depending on their equipment.
+A tower has grown out of the bottom of valley a bit\earlier on. Some hermit with weird hair opened up a store there.\She's pretty brave to pull something like that at Youkai Mountain.
+You can equip two shields at once.\It doesn't look pretty, but it might be useful.
+Did you know Wands of Trap Destruction can destroy\secret doors as well?
+Nameless youkai and fairies generally aren't that strong,\but you might get hit by painful danmaku if you're careless.
+There's a technique called 'LoS trick'.\Explaining it would take too long, but, basically,\keep it in mind when using ranged combat or spells.
+Kappas sometimes open a bazaar just across the waterfall.\They sell interesting machines, but I've heard they can\cause injury, so be careful.
+There's a cave in Former Hell where oni dwell.\Sometimes a terrible roar can be heard around there.
+You don't get much experience from defeating enemies on surface.
+Stray gods can greatly power up if they gain fame.\You gain fame by defeating other well known powerful enemies.\If they're evil, your fame will go up even more.\On the other hand, gods that pick on weak humans are hated.
+Sometimes potion merchants come to Hell Valley to gather\ingredients. That's certainly a job that requires patience.\Just how great are those potions they're making?
+I've recently seen people using some unusual 'occult' spells.\However, our bookstore doesn't sell ridiculous books like this.
+I've seen a haniwa get attacked by ghosts, but those attacks had\no effect at all. By the way, why are those haniwa moving?\Is this some new kind of golem?
+A zashiki-warashi came to stay here a while ago.\I've heard they can't leave their household, but they\can move around if they dwell in some weird jar.\It was talking something about wanting a more powerful house.
+There was some weird fellow who kept following me no matter\how many tornados I've launched at her. Apparently, that was\a danmakulogist looking for weak enemies that can cast tornados.\How rude!
+
+
+N:3:Underground Town Rumors (midgame tactics)
+Remember the number 533.\That's the maximum amount of damage you take if you get hit with\a basic element breath with only a single resistance.\That's a guideline for level 60.\I don't know what can happen on lower floors.
+Light element attacks pass through glass walls.\Sometimes there are glass walls in dungeons,\so be careful if there are enemies that can breath light\or fire lasers on the other side.
+Are you looking out for traps?\Deep underground, some of them are extremely dangerous.\Be careful.
+What happens if your wall-walking spell runs out\while you're in a wall? Don't worry! You won't die right away!
+I've heard there are some terrifying book monsters.
+Disenchantment attacks degrade your equipment.\Even a legendary sword might end up turning dull.
+Shard attacks cause wounds along with damage.\Which will cause even more damage.
+If you get hit by chaos without resistance,\very bad things are going to happen.
+Undead use nether attacks very well.\In addition to damage, it drains your life force.
+People who fight while riding beasts are strong.\Their enemies have to split their attack between two targets.
+People who can shoot fast are strong.\They leave less openings compared to fighting in melee.
+Time attacks? Haven't heard of them.
+Holy attacks? I don't want to hear of them.
+If you're in a forest or in a wall, you take\half damage from breath attacks and explosive spells.
+There are some horrible otherworldly monsters\that can make you go crazy if you look at them.\If you're already crazy, though, no need to worry.
+A strange building came down from the ceiling\the other day, almost going through Palace of Earth Spirits.\It's some hermit's store.\Just what is she thinking...
+If you have Scrolls of Teleport Level, you'll be\almost guaranteed to escape from trouble.\That is, if you can read it.
+You absolutely have to be resistant to paralysis\at this point. Be careful not to lose your free action\as you change your equipment.
+If you defeated an enemy, but there's no open space nearby,\all of their dropped item will disappear.\Keep that in mind if you're fighting in water or around traps.
+Are you using the 'LoS trick'? It's useful, but don't\get overconfident. Powerful enemies might counterattack by calling for help.
+Upon hearing about that weird cave popping up,\several of us went there to play and test their strength.\I've heard they couldn't find a staircase past midway\because that annoying person got in the way.
+I was digging out a new tunnel, and a dragon suddenly came out.\That was just one of monsters from other world, but\it's still pretty strong.
+People skilled with using shield can use them to slam enemies\while fighting, breaking their posture. Even a small trick like this\might come in handy when facing powerful opponents.
+Be careful of hostile enemies summoned by traps\or your own failed summoning spells.\Unlike monsters summoned by other enemies, they might strike you right here and now.
+
+N:5:Grassroots Network Mask Roundtable at Hakurei Shrine (early-midgame advice)
+[[]] 'Did you know?\ You can't use items on the floor while blind.'
+[[[]] 'I was walking around on level 45,\ a beautiful cloud of poisonous gas came out down from corridor!\ I couldn't detect it through telepathy,\ but that was a strong, cool and friendly golem!'\[[] 'That's scary!'
+[[[]] 'There are many people concerned about\ counteracting poison attacks. I remember that black and white\ magician selling a Ring of Poison Resistance.\ It's a bargain at 700 points.'
+[[[]] 'Poison attack won't work at all on\ demons or undead. You'll have to learn other methods\ of attacking as well.'
+[[[]] 'Watching the arena fights might be an\ educating experience. You'll remember what kind of\ attacks strong enemies will use'
+[[]] 'There's something I realized.\ Instead of trying to defeat enemies,\ it might be better to ran away from those\ who are stronger than you.'
+[[]] 'I've seen a person going underground carrying\ a large chest. Apparently, if you open a chest deep underground,\ you'll obtain better items.\ What a weirdo!'
+[[]] 'I've seen that small oni fight as she was\ drinking sake. She was awesome. I couldn't do\ anything to her, no matter what I tried.'
+[[]] 'I'm tired of eating venison-. \ There have been a lot of humans smelling of\ outside recently, I wonder if it's\ okay to eat them a bit-.'\[[] 'I'm not stopping you, but be careful.\ Everyone seems to be skilled in combat lately.'
+[[] 'Marisa told me I just have to buy a\ lantern from General Store and defeat the Serpent.\ I've bought the lantern, but where's that Serpent?'
+[[] 'Hey, Wakasagihime- Why do we have to wear\ those masks?'\(()){ '...You'll understand when you'll grow up.'
+[[] 'I'll tell you something that happened yesterday!\ So I came to play at Scarlet Devil Mansion, but then a maid\ suddenly appeared in front of me, and before I knew it,\ I was at the gates of Human Village!'
+[[] 'Worry about your life more than about your supplies!\ If you get defeated, it's all over.'
+[[] 'I specialize in cold attacks, so if you protect yourself\ with spells or potions, I'm giving up.\ If you combine resistance from equipment with temporary resistance,\ I'm only at one ninth of my power!'
+[[] 'Keep your weak points in mind.\ We all are vulnerable to holy attacks, so we stay away\ from shrine maidens and hermits.\ As for others... I'm weak to fire, she's weak to light,\ and you over there are weak to disenchantment?'\[[]] 'Uh. I hate bright light.'\{} 'I don't like fire either. I was traumatized when\that black and white almost ruined my hair...'\[[] 'But me and Star aren't vulnerable to holy attacks, right?'\ [[[[]]] 'Please don't say our names...'
+[[] 'If you're not good at close combat or magic,\ buy a crossbow. Even though it's harder to use now that you\ have to hold it with both hands if you want to hit something.'」\[] 'Why was it easier to use before?'
+[[] 'Don't be foolish and face groups of enemies head on.\ Dig a tunnel in a wall and fight them one by one;\ if there's a lot of strong enemies, teleport all but one of them\ away. You want to get wands of Stone to Mud and Teleport Away\ as soon as you can.'
+[[] 'If you have to fight a strong enemy, try making them weaker.\ A Scroll of Confuse Monster will make many enemies early on\ easy to defeat.'
+[[] 'Confusion is annoying.\ You won't be able to cast spells or read scrolls,\ and you have hard time using magic devices as well.\ The worst is when an enemy inflicts confusion by hitting you.\ They're going to beat you down until you are defeated.'
+[[] 'If you're terrified, you can't fight in melee, and your\ spells will fail more often. It's not that hard to deal with, though.\ Just drink something that grants you courage.\ Also, since getting terrified isn't a death sentence,\ you shouldn't focus on getting fear resistance.'
+[[] 'Paralysis and sleeping attacks are terrifying.\ Never forget about them after early stages. \ Fortunately, there's plenty of armor and accessories granting free action.'
+[[] 'If you go blind, you won't be able to see around you or read\ scrolls and spellbooks. You can cure it by drinking a somewhat\ expensive potion, but it might give enemies time\ to attack you...'
+[[] 'There are indescribably terrifying beings that can make you\ go crazy even if you just look at them.\ It might drain your intelligence and wisdom, drain your mana,\ or even give a nasty mutation...\ While it's possible to obtain resistance to those\ effects, it's pretty rare...'
+[[]] 'If you're feeling heroic, your attacks will be more accurate!\ Even if you don't have potions or spells, drinking sake\ will boost your courage times hundred!\ Just don't drink too much!'
+[[]] 'If you're feeling blessed, enemies will have harder time\ hitting you! By the way, why it doesn't hurt us to get blessed?'
+[[] 'If we pass through a wall, \ any breath or explosive spell hitting the wall will\ be slightly off-center, effectively halving the damage.\ That's useful.'
+[[] 'Rare items can fetch a different price depending on where\ you're selling them. I've found a weird machine earlier on,\ and the General Store didn't offer too much, but I sold it for\ quite the sum at Kourindou.'
+[[] 'It's fun to bring multiple weapons with you and try\ them out. Though big sis is telling me I'm on my own if I\ accidentally lose an important resistance.'\[[] '...Keep quiet for a moment.'
+[[] 'If you teleport because you're wounded, you might get\ attacked again at your destination if you're unlucky, so that's\ not a 100% safe escape method. \ Scrolls of Teleport Level or *Destruction* are more reliable.\ Of course, you also have to counteract paralysis, confusion and blindness.'
+[[] 'I saw a falling board moving on its own, and when I\ turned it over, some large insect came out.\ It grabbed me with its tentacles, and I couldn't move...\ At level 20, there are nasty enemies that can paralyze or put you to sleep.'
+[[] 'You shouldn't just summon one strong ally to fight along with you.\ Even weak ones can be reliable if you surround the enemy and\ beat them down. Though it's painful to see your friends get beat up...'
+[[] 'White worm masses are very weak, but they can multiply.\ Fledgling adventurers often train their skills fighting them.\ Though if I see someone beating down weak worms like that,\ I'll give them a kick from behind.'
+[[] 'They're not completely safe, but Scrolls of Teleportation are\ a basic means of escaping. Try to carry at least 10 of them with you.'
+[[[]] 'If you value your life~\ Never enter the sunflower field~'
+[[[]] 'Magicians aren't scary~\ I'll daze them with my song~'
+[[[]] 'If you wear a Ring of Speed~\ Your agility will go way up~'
+{} 'Disenchantment attacks are horrible.\ They not only drain combat and armor bonuses, but they might\ reduce stat bonuses as well. \ They're our great weakness, but we will overcome it!'
+{} 'Everyone tends to quickly destroy cursed equipment,\ but some of it might be useful.\ Try using some once in a while.'
+{} 'I was in a bad mood yesterday, so I drank some sake;\ I didn't expect it, but I liked it.\ However, I drank too much, and by the time I came to my senses,\ my geta went missing...'
+{} 'I saw that jiangshi at the graveyard the other day;\ she got attacked by a Death Sword and screamed\ 'Woah-! What the-?'\ However, no matter how many times she was cut,\ it didn't seem to affect her.\ By the way, is the one of our allies?'
+(()){ 'Looks like hitting spellcasters with water messes them up.'
+(()){ 'I once tried swimming up the river from the lake.\ Of course, I couldn't get up the waterfall, but\ I found a kappa villages over there.\ They had tasty cucumbers.'
+(()){ 'If you enter water while carrying too much,\ you won't be able to swim and start drowning.\ However, water resistance will prevent this.'
+(()){ 'I've heard that vampires drown in water even if\ they're not carrying too much and have water resistance.'
+(()){ 'Do you know about the 'LoS trick'?\ Instead of aiming directly at the target, aim behind them\ in a way so that they're still in the line of fire.\ You'll be able to hit them with ranged attacks or\ beams before they see you.\ Please keep this in mind.'
+{{} 'I saw a cool-looking skeleton horse,\ but my head went spinning just as it touched me,\ and I was in no form to fight.\ I drank some potions at random; one of them was\ a Potion of Speed, and I managed to escape.\ Next time I meet it, I'll tame and ride it.'
+{{} 'Riding a mount makes you fast and strong,\ but I've seen unskilled riders try riding a strong\ mount, and then they get thrown off and get into trouble.\ If a skilled rider lets go of reins, the mount will move\ on its own, but a very skilled person can control their\ mount even without holding reins.'
+{{} 'Wolves and zephyr hounds prefer to hide and avoid\ coming out into open, but they'll charge at you if you're\ wounded. I don't like it.'\{} 'They only fight enemies they expect to defeat.\ I understand them. Must be some animal instinct.'
+{} 'An ordinary Scroll of Identify won't fully tell\ you about an item's abilities. In my opinion, identifying\ them at Kourindou is the cheapest option.'
+{} 'Breath attacks are stronger the healthier their user is.\ That's huge dragons breathe with such immense power.\ I almost got a full-body afro.'
+{} 'I don't like heavy armor. If you wear gloves, you can't\ use your claws, and they get in the way of spellcasting.\ And if you wear heavy armor, you'll spend more mana to cast spells.'
+{} 'I frequently have trouble with invisible enemies.\ I can discern their position if I squint or listen carefully,\ but it's better to bring magic equipment that lets you\ see them in first place.'
+{} 'There are spells that turn you into a huge beast or a dragon.\ My identity is-...\ However, where does your equipment go while you're transformed?'
+{} 'They say torches are useless tools, but they hurt\ a lot if you throw them...'
+{} 'Some people can break or remove cursed equipment by force.\ But you also can persuade those items to let go if you speak\ to them patiently enough.'\{} 'Sis, I think that works only for us tsukumogami.'
+{} 'It's not a bad idea to identify unknown staves or wands\ by using them, but doing this to scrolls or potions is suicidal.'
+{} 'I've seen some really strong people break apart equipment\ lying around without even identifying it.\ Legendary items can't get destroyed, and they don't need anything else.\ How horrible...'
+{} 'My sister quickly gets hurt once enemies start\ attacking her. It's better to slowly pick them off with\ ranged attacks or spells.'
+{} 'Staves, wands and rods are difficult to use.\ Even a skilled person can fail at properly handling a magic device.\ Don't count on them too much to get you out of trouble.'
+[[[[]]]] 'You can jump through a trapdoor\ from midair to go to the lower floor. Of course, you won't be able to go back~'
+[[[]]]]] 'You think only cowards run away and hide?\ You'll change your mind once you reach level 50~'\[[] 'What are you saying, Star! An adventurer beats\ everyone up!'\[[[[]]]] 'I told you, don't say our... Oh well, it's fine.'
+
+N:6:Kappa Village (early game strong enemies)
+For fledgling adventurers, even crows and worm masses pose some danger.\But you should be fine, considering you've came here.
+Have you heard about Death Swords?\It looks like an ordinary sword lying on the ground,\but it'll slash you when you approach it. You'll be able to notice it\if you're careful, so take a good look at swords lying around.
+Have you heard about insects called hummerhorns?\They have confusion inducing poison and multiply quickly.\If you get surrounded by them, it's over.
+There are few enemies with confusing attacks, but they're all dangerous.\Hummerhorns, umber hulks, pink horrors, daemonettes of Slaanesh...\One particularly dangerous is Nightmare.\Those appear deeper in the dungeon, but don't approach them unless\you're confusion resistant.
+Have you heard of the tsuchigumo Yamame Kurodani?\She's a nasty enemy that can inflict poison, sickness and slowness.
+Have you heard of one-eyed giants called cyclopses?\They're dangerously strong, and also are fast despite their size.\You'll get beat down if you're careless.
+Bring a Staff of Probing with you if you can.\It can help you recognize which enemies are particularly dangerous.\However, as you go deeper, it's dangerous to spend your time while\there are awake enemies close by.
+You probably won't be fully satisfied with your equipment at\dungeon level 20, but at very least try to cover fire resistance and free action.
+Watch out for It.\No, I'm talking about a monster called 'It'. It's a weird invisible\being that's hard to notice even if you can see it.\If you're not a skilled adventurer, it's wise to escape once you see it.
+Have you heard of the ghosts called Phantom beasts?\They're normally visible ghosts, but their bite hurts a lot.\I've heard of careless spellcasters getting defeated in a single blow.
+There's a terrible beast called Gachapin.\It's dangerous. Very, very dangerous. Run away, run away!
+Have you heard of weird strangers called nibelungs?\They're unpleasant fellows that like pickpocketing.\Their leaders have disenchantment attacks as well.\Don't get too close to them.
+Have you heard of demons called Arch-viles?\They start pursuing you from afar, and keep throwing fireballs at\impressive speed. They're the reason you want fire resistance\at level 20.
+Speaking of dark elves, their warlocks are more terrifying than\their lords. They cast mana bolts of unbelievable power. Not only\that, but sometimes they might quickly cast two in a row.\On top of all that, they appear in groups. Fortunately, they're frail,\so you can sneak up on them and take them out one by one.
+Have you heard of an ogre called Grendel?\He moves fast and hits hard in close combat.\He's also surrounded by his minions - it's going to be a tough\battle even if you're confident in your skill.
+Have you heard of weird dog-like monsters called hounds?\They stay in groups, keep their distance and hit you with\breath attacks, and then charge at you once you're weak enough.\You should dig a deep tunnel, lure them in and deal with them one by one.\Also, high level hounds are absurdly strong.
+Have you heard of weird beings called disenchanter beasts?\They can disenchant items by touching them with their long trunk.\Artifacts aren't an exception.
+Strong and fast enemies start appearing from around level 30.\You'll be at disadvantage unless you're hasted yourself. Anyone\can use Potions of Speed, but they're consumables, so try looking\for a Staff of Speed.\As for resistances, you have to cover base elements and free action;\confusion and fear resistance and see invisible are desirable as well.
+There are powerful warrior from other worlds - black knights\and white knights. Physically they're as good as a well trained\human, but what's really dangerous about them is their spells.
+Trolls aren't that tough despite their size,\but eldraks, war trolls and troll kings are dangerous enemies\you shouldn't get careless around.
+Have you heard of weird people called logrus masters?\They're skilled at using chaos magic, if you get hit without chaos resistance,\very bad things will happen.
+Have you heard of the puppeteer Alice Margatroid?\The dolls she summons are dangerous, so don't fight her in an open area.
+Have you heard of the tengu Aya Shameimaru?\She chases after you, casting tornadoes, then takes your photo\and runs away. However, you won't get blown away by a tornado\if you're carrying a lot of items.
+Have you heard of the oni Yuugi Hoshiguma?\It looks like she's playing around and holding back,\but she still might take you down in a single strike.
+While fairies generally are common enemies, you should\be careful around EX fairies.
+Have you heard of a book monster called\Raal's Tome of Destruction?\It looks like a book, but then it starts casting powerful spells.\Don't get careless.
+Have you heard of monks?\They have different colors like ebony, topaz or jade, but all of them\are proficient in close combat.
+Once you get past level 40, you'll meet strong enemies using\high elements like nether, shards or chaos. Avoid approaching them\without proper resistance. You'll have to remember what enemies\can use what kinds of attacks.
+Have you heard of golems called drolems?\They're dragon-shaped golems that breathe really dangerous\poisonous gas. Nothing can save you if you don't have poison\resistance. And even that might not be enough...\Also, since they're golems, it's hard to detect them from distance,\and they're resistant to being teleported away.
+Does it feel good to defeat weak dragons?\Dragons around level 40 are far stronger.\In particular, their breath attacks hit far harder.\If you want to fight them, bolster your defenses and be sure\to fight one on one. The rewards you get are also far greater.
+Have you heard of the man called Jack of Shadows?\He moves incredibly fast and casts devastating darkness spells.\If you get close, he'll pick your pockets and run away,\but that might be the best outcome.
+Have you heard of the dark elf Malekith?\He's unbelievable powerful for a dark elf.\And if you try to escape by teleporting, he'll follow after you!\Be prepared in case you run into him.
+Hermits and large divine spirits occasionally appear in the dungeon.\Their spells are very dangerous to us.
+Have you heard of Sakuya Izayoi?\She rarely leaves Scarlet Devil Mansion, but she's incredibly strong\for a human. She got me shredded before I knew what happened...
+Have you heard of the shinigami Komachi Onozuka?\She has various nasty attacks like water, nether and holy energy.\On top of that, she resists being teleported away, and she will\pursue you if you try to escape by teleporting!\I don't think you can escape without *Destruction* or\Teleport Level.
+Have you heard of the wanted youkai, Seija Kijin?\She's not that strong by herself, but she attacks using\powerful magic devices.
+We don't know what's below level 50,\but according to rumors, the enemies there are even stronger than those\around level 40.\Oni sometimes buy Mega Crash from us.\Are those enemies really strong even for the oni...
+Have you heard of huge reptiles called tyrannosauruses?\You might be done for if one of them bites you.
+Hydras are stronger the more heads they have.\Nine- and eleven-headed hydras are nastier than some weaker dragons.
+Have you heard of giants called greater titans?\They hit unbelievably hard.\On top of that, they can summon plenty of monsters. That's the kind of\enemy you don't want to fight no matter who you are.
+Have you heard of undead called iron liches?\They look like huge skulls, but they powerfully breathe fire.\Their spells are strong as well.
+Have you heard of weird enemies called color from outer space?\If terrain or items before you suddenly change colors, you've\encountered one of them. Avoid getting touched by them. Their breath\is powerful as well.
+Have you heard of the giant Utgard-Loke?\He's a king of giants surrounded by his minions.\His cold breath is as powerful as that of a high level dragon.
+Have you heard of the deity Quachil Uttaus?\...To be honest, I don't want to recall it.\Don't get too close. Don't even get in sight.
+Have you heard of weird monsters called shoggoths?\It's a sticky mass that charges at you at tremendous speed and\hits hard with acid.\Unprotected armor will get destroyed in an instant.
+Have you heard of a terrifying being called Yibb-Tstll?\It's an unmoving pitch-black giant.\Its breath attack is tremendously powerful.
+Have you heard of a terrifying monster called Zhar?\It attacks with unbelievably destructive power.
+
+
+
+N:9:Nazrin's advice (dungeon exploration)
+You'll find plenty of various mushrooms early in the dungeon.\Most of them aren't useful, but if you gather enough,\you might exchange them a Kirisame Magic Shop for good items.
+The first wall you might run into is level 20.\At that point, you need fire resistance, free action and\ability to see invisible. You can sense most of dangerous enemies at\levels 20-35 with Staff of Detect Chaotic.
+At level 30-40 you'll start running into enemies you might be\unable to defeat in combat.\Don't be stubborn and run away. Your life is precious.\You'll be able to defeat them if you keep on training.
+Beyond level 40, enemy attacks become far stronger than before.\It'd be wise to collect equipment and supplies at this point to raise\your own strength.
+I've heard minor youkai have set up a mutual aid network to\exchange information and items. One of their branches is at the\back of the shrine. I can't participate because of my position, though.
+Around level 30 it becomes important to detect enemies from afar.\I have good ears for this,\and several magic realms have spells for monster detection.\ \If you can't use spells or ears...\You'll have to find a rare Rod of Detection.
+Are you using pawn shops?\They often sell powerful equipment and useful supplies.\It's very expensive, but check it out if you have the money.
+Have you heard of 'double resistance'?\It applies to acid, lightning, fire, cold and poison attacks;\if you get resistance from a piece of equipment and then also gain\temporary resistance from a spell or a potion, you'll greatly\reduce the damage you're taking.\That's essential to know around level 40.
+Weapon proficiency can be surprisingly important.\If you won't work on it, you won't be able to properly land a hit on powerful enemies.\Well, when our priest gets serious, she can land a hit even with\weapons she's not skilled with.
+Around level 30 enemies that inflict hallucination will start appearing.\You can protect yourself with chaos resistance, but it's hard to obtain.\You have to use a Potion or Staff of Curing to heal hallucinations.
+Equipment that grants telepathy is valuable.\You'll be able to sense most of the enemies from afar at all times,\making exploration far safer once you obtain it.
+Be cautious around swords and cloaks lying around in the dungeon.\It might be a monster that looks just like an item.\You might get taken out in an instant if you're just starting out.\Be very careful.
+A creepy cave has opened up to the west a while ago.\It's very deep, and I'm sensing something incredible residing in its depths.
+There's a cave at the back of the temple.\It used to hold some nasty fellows sealed, but right now it's a hangout\for people with free time. It's also a good place to get some training.\You can find many gemstones in the depths.
+Genbu Lake is around Forest of Magic and Youkai Mountain.\It occasionally has rare materials, and there aren't many powerful\enemies there, so that's a good location to explore.
+Mushrooms grow very well in the Forest of Magic.\There's plenty of rare mushrooms deep inside, but watch out for magic\mushrooms that might attack you.
+There's plenty of magic items deep in Scarlet Devil Mansion.\At the very end, valuable spellbooks can be easily found as well, but\the head maid is going to cut you up in an instant if she notices you.
+Many rare items can be found at Muenzuka, so that's a good location\for treasure hunting. However, sometimes there are\nasty enemies walking around as well.
+There's an underground tunnel that leads to the lair of a powerful\dragon from other world. There's also a lot of treasure...\Remember, your life is more precious.
+Former Hell of Blazing Fires is a fitting name.\If you can't fly, going in is suicidal.\There's a lot of fire-breathing enemies and very little space to hide;\that's not a location I'd like to explore.
+In the forest to south-west, there's a path leading to a hermit residence.\There's quite a lot of strong enemies there.\And for some reason, my physical attacks don't work there.
+To the north-west there's an inverted castle floating in the sky.\It used to be a resistance base, but now it's a monster lair.\Looks like you can't cast spells in it for some reason.
+You can find many golden nuggets and magic materials\in the Hell Valley. However, watch out for gasses and vengeful spirits.\It's a dangerous place.
+There's a route to the Dream World around the lake of Youkai Mountain.\Those who sleep and see dreams enter this place, so everyone's awake\because they're sleeping in the first place.\As you go deeper inside, you can find many vaults there.\You can obtain some rare materials unavailable otherwise here, but it's\not a place for unskilled adventurers.
+You easily can get lost if you walk around the bamboo forest\near Eientei. You can avoid this if you're flying.
+Are you worried about money?\The deeper you go in, the better items you will find, so quickly\diving might be a good item. If you're not confident in your skills,\you can dig up treasures on early levels with a digging implement and\Scrolls of Treasure Detection.
+Hmm. Do you understand what you have to take with you\into the dungeon? Take plenty of Scrolls of Teleportation and\healing potions, 2-3 Scrolls of Word of Recall, and bring several\various staves of detection if you can.
+You might get a disturbing feeling as you explore the dungeon.\That might there might be rare treasures or powerful monsters around.\Stay on your guard and explore.
+Ordinary means of identification might not tell you all about\abilities of certain powerful items. There are several ways to perform\a more detailed *identification*, the easiest of them is visiting Kourindou.
+Get equipment with resistances to protect yourself from enemy\special attacks. Finding equipment that both provides resistances and has\good stats is one of the pleasures of dungeon exploration.
+You want to cover resistance to fire and free action by the\time you reach dungeon level 20. If possible, also cover resistance to\acid, cold, confusion, and get the ability to see invisible.
+If you want to fight in close combat, aim for strength and\dexterity of at least 20; otherwise, you won't get many blows per round.
+You can increase amount of blows in melee by holding your weapon\with both hands. If your strength is low, that might be better than\carrying a weapon and a shield.
+Oni weapons are powerful, but they are very heavy.\If you can wield them properly, though, you'll get more critical hits\the heavier your weapon is.
+Are you good at collection mushrooms and materials?\If your Searching skill is low, you'll have hard time finding those\special items in the dungeon.
+
+N:7:Talking to Kaguya
+Kaguya - 'How are you, hero? You've became really strong.\ \By the way, an otherworldly cave has appeared at the Moon as well.\The capital is about to be attacked by monsters and consumed by impurity.\Toyohime and Yorihime are doing their best, but it doesn't look good.\Could you help if you have the time?\I'll open a path leading to the Moon.'
+
+N:10:Kirisame Magic Shop explanation
+'Glad you asked. I'll explain how the Kirisame Magic Shop\works. First of all, you look for something valuable and bring it here.\I'd like something that can be used as magic material.\Spellbooks are fine too, but I want only the valuable ones.\Then, I'll appraise the item and give you corresponding amount of\MARIPO. It's short for 'Material Points'.\If you collect enough points, you can exchange them for a present.\The points are good for use until I die, so don't worry about it for now.'
+
+N:11:Ruined Mansion (if @ isn't Prismriver)
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+There's nobody here...
+You don't see anyone, but you hear sounds around you.
+You hear a laughing voice out of nowhere...
+You hear an instrument playing out of nowhere...
+You hear a sad violin melody out of nowhere...
+You hear a cheerful trumpet melody out of nowhere...
+You hear strange sounds out of nowhere...
+Suddenly there is a loud sound, and you hear glass breaking.
+Lyrica - 'Yes, are you requesting a performance? What, you don't?'
+
+N:12:Moriya Shrine new arena
+                         NIGHTMARE DIARY\                          HOW TO USE IT\ \-If you read it, you'll get attacked by dream residents.\-If you are defeated in a nightmare, it's not a game over in real world.\-You don't get experience or items for defeating monsters in Nightmare World.\-You cannot perform destruction or distortion in Nightmare World.\-You cannot banish or charm monsters in Nightmare World.\-All beneficial effects are dispelled once you enter Nightmare World.\-Your allies are instantly banished from Nightmare World (aside from mounts)\-You can challenge new nightmare stages once you win enough times.\-Any consumables used in Nightmare World will stay used up once you return.\-You cannot fly in the Nightmare World.\-Since this is Dream World as well, I can show my true potential.
+
+N:20:Archer Guild explanation
+Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materials：\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
+
+N:21:Engineer Guild explanation
+Create machines:\Create a machine after paying required expenses.\Amount of available machines increases with your level, intelligence and dexterity.\ \Request supplies:\Purchase gunpowder/energy packs/etc. Price might vary.
+
+N:22:Kirisame Magic Shop explanation (for Marisa)
+Study spells:\Think up of a new spell. You can get inspiration from various spellbooks.\Extract mana from materials:\Extracts mana that you use to create spells from mushrooms/ores/etc.\Confirm mana stockpile:\Browse mana stockpile you've accumulated in your house.\Create spells:\Use recipes and mana to create certain-kill spells!\Carry spells:\You can't use spells you made if you don't take them with you (up to 16 kinds).
+
+N:23:GrassNet EXTRA
+[[] 'I can't take this mask off! Somebody, help!'\{} 'You don't have any more Scrolls of Remove Curse?\ I told you to let me, a tsukumogami, try it on first.'
+{} 'My wounds heal faster when I'm wearing this hat,\ but somehow I feel I'm getting hungry faster as well-'\[[] 'Do you have unidentified mushrooms you can eat?\ Some of them might drain your stats a bit, but that's fine.'
+[[[]] 'What does this staff do? I'm using it in front of enemies, but\ nothing's happening.'\[[] 'Umm, try letting someone who's wounded use it.'
+{} 'What does this scroll do? I'll try reading it!'\[[]] 'Wait! What if your umbrella gets broken?'
+[[] 'Here's a weird scroll that won't burn up. I'll try reading it.'\ \ （*BOOM*）\ \[[] 'Wah-!'\{} 'Ouch!'
+[[] 'That's not good. I don't have much lantern oil left.\ I'll have to rest in bright rooms as I turn my lantern off.'\ \[[]] 'What's this sword? It glows when I hold it!'\[[] 'Sis, watch out! It's probably alright, though.'
+{} 'That collossus is a powerful enemy.\ I had to use my potions I've saved up to this point.'\[[] 'Hey, couldn't you use this card to create water and stop it?'\{} 'If only I had noticed that sooner...'
+[[[]] 'I've found an interesting item card, but I couldn't carry any more~'\[[]] 'Hmm, there's too many cards to choose from.\ I don't have means of healing right now, so I'm saving those up.'
+[[] 'This card with a fan drawn on it looks useful, but you\ have to carry spellbooks with you to use it.'\{} 'Could you use it at the next quest?'
+[[] 'I saw that black and white magician.\ She's holding some really useful items, so I'd like to steal some.'\{} 'But she's very strong despite being a human...'
+[[] 'I'm scared to drink unidentified potions.\ Some of them can be really dangerous.'\[[] 'I have a feeling that potions lying on ground in large piles\ aren't that valuable. Still, is it okay to throw them away?'
+[[] 'I can't find that many cards.'\{} 'It's easier to look for them if you have something like Nazrin's pendant.\ It'd be nice if she lends it to you.'
+[[]] 'Be careful of using too many scrolls or potions.\ You'll get in trouble on lower levels if you use them all up.'
+[[] 'This card with a bent umbrella drawn on it is pretty valuable.'\{{} 'I'll use it when I clear the next quest.\ It sends all items to your exploration base.'
+(()){ 'Aah, I wonder when those gloves will come off...'\{{} 'I didn't expect that curse to be too strong for the hina dolls,\so I had no choice but to ask the shrine maiden.'\(()){ 'I'm going to turn into a mermaid mummy...'
+[[] 'This card can rank monsters up.'\[[]] 'Hey! If you befriend a dragon and power it up,\ it'll help a lot, right?'\[[] 'But you also can power a hostile dragon up\ and then strike it with a poison needle!'
+{} 'This armor... I feel it's excellent.'\[[] 'So try wearing it. If you know what it does, you'll be able\ to rely on it.'\{} 'Hey, sis, it doesn't look like it has a black aura, but\ did you examine it carefully?'
+[[] 'This is my follower! It's so strong!'\[[] 'It's srtong, but it looks like it can't move, right?'\[[] 'It's fine! I always can just push it around!'\[[] 'Got it!'\[[]] 'No, no, you won't be able to navigate corridors like that.'
+{} 'I ran into some trouble earlier on.\ I was exploring a house and then suddenly got attacked by orcs.'\{{} 'Search while wearing a cloak of concealment next time.'
+{} 'I wonder what was that sword in that creepy room.\ It looked pretty powerful.'\{} 'I don't think it's always on your side.\ Stay alert and don't get too close.'
+{} 'You know, my workplace is in this cave.\ If you need your metallic items refined, leave it to me!'\[[] 'Eh? Do you have to wait one day?'\{} 'Umm, if I try hard, I can get it done in 3 hours!'
+(()){ 'I bought a potion from a rabbit merchant around here.\ If I drink it, I'll become a new me!'\{{} 'You'll turn into seafoam and disappear?'
+{} 'Nazrin is looking for Jeweled Pagoda.\ If you find it, she'll buy it off you for $1000000.'
+[[] 'Those roast sweet potato gods are really kind.'\{} 'They saved me as I was getting hungry and didn't have any money.'
+{} 'That's a good armor. But I'll lose poison resistance\ if I wear it.'\{} 'I shouldn't have thrown my Ring of Poison Resistance into that crack\ in the barrier. I'll get it if I see that kasha again.'\[[[]] 'Until then, I'm using that armor!'
+[[] 'It's the Miracle Mallet card! I'm powering up!'\[[] 'This mallet is a replica. Carefully read the card description.'
+[[] 'What's this card? A bucket?'\{} 'Umm, I think that ship ghost from the temple was using it?'\[[] 'What about this watering can?'\(()){ 'I have a feeling I've seen it somewhere...'
+
+
+N:94:Talk to Kaguya (allied with Junko)
+There's a cause behind current incident.\Looks like that cause is planning to invade Lunar Capital.\ \You can either go and defeat it, or just watch as the\ Lunar Capital gets destroyed.
+
+N:95:Talk to Kaguya (Lunarian)
+Kaguya - 'You're a hero on Earth.\ However, there's big trouble. I've confirmed that a foul dungeon has\ appeared at Lunar Mare. At this rate, Lunar Capital is going to get\ consumed by impurity.\ Please come back.'
+
+N:96:Talk to Kaguya (Kaguya 1)
+You've saved Gensoukyou, but you haven't found your treasures.\They're probably even deeper down.\ \In order to go even deeper, you open a route to the Moon...
+
+N:97:Talk to Kaguya (Kaguya 2)
+Lunar Capital is under heavy assault.\It's a great opportunity to test the power of your treasures.\ \In order to go even deeper, you open a route to the Moon...
+
+N:98:Talk to Kaguya (Eirin)
+Kaguya - 'Lunar Capital is under heavy assault.\ Hey, Eirin, how about we go and beat up the cause behind this incident?\ It's fine, we can do it!\ I've told Toyohime to open us an entrance.'
+
+N:99:Town rumors (LUNATIC)
+Aieeee!
+Power calls upon power! Mutants are the law!
+Mutants are the root of all evil!\All for creating a perfect society! 
+Make computers control everythings!\All for creating a perfect society! 
+Leave the rabbit hole and return to nature!\We can take on our true form in the nature!
+Let's return to the good old times!\We should all be free!
+All the wise men have the means to acquire enlightenment.\Now, take this pill.
+Power is everything. Weaklings are just livestock.\We know the true way.
+Let's get in touch with the moon rabbits who have escaped to Earth.\It's the perfect business opportunity!
+Destroooooooooooooooooooooooooooooooooooooooooooy!
+Lady Yukari, there's no doubt about rebellious intentions of @.
+Lady Chang'e, there's no doubt about rebellious intentions of @.
+Ia! Ia! Cthulhu fhtagn! Ph'nglui mglw'nafh Cthulhu R'lyeh wgah-nagl fhtagn!
+Ia! Ia! Hastur!
+Hou
+Buuuuuuuuuuummmmmmmmmmmmmmm..........
+Beta testing is over, let's proceed to release.
+ \ \ \ \ \         Wow, the owner here is sick
+ \ \ \ \ \         Thanks for your hard work... is what I'd like, to say,\          but I'll make you disappear.
+Oppeke Peppo Peppo\ \    Ajarakamokuren!!
+STAY ALERT!\TRUST NO-ONE!\KEEP YOUR LASER HANDY!
+Death is just an opportunity to get new clothes. 
+Don't shoot until you see the whites of their eyes.
+How pitiful...
+Unending nightmare...... how pitiful...... stay strong......
+ \ \ \ \ \ \ \ \ \ \                m('U')m Kilroy was here
+
+N:*:Default rumor error message
+ERROR:No proper entry in rumors_new_e.txt
+

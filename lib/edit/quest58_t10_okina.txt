@@ -1,0 +1,109 @@
+# Name
+Q:$58:N:Recruitment Test
+Q:58:N:採用試験二次募集
+
+# Definition
+Q:$58:Q:6:0:0:0:75:0:0:0:6
+Q:58:Q:6:0:0:0:75:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST58 2]
+Q:$58:T:Mai - 'We tested so many people, but everyone got rejected.'
+Q:$58:T:Satono - 'Our master is going to get angry.'
+Q:$58:T:Mai - 'Hm? By the way, I remember seeing you.
+Q:$58:T: Did you also come to see our master?'
+Q:$58:T:Satono - 'You look pretty powerful.
+Q:$58:T: Very well, go through the door in this jizo's back!'
+Q:$58:T:Narumi - 'I don't like how you say it.'
+Q:58:T:舞「頑張ってテストしたけど、結局みんな不採用だったね。」
+Q:58:T:里乃「お師匠様に怒られちゃうわ。」
+Q:58:T:舞「…ん？　そういえばそこの君も中々見どころがあったね。
+Q:58:T:　君もお師匠様に会ってみないか？」
+Q:58:T:里乃「そうねえ、貴方の力はまあまあだったわ。
+Q:58:T:　さあ、この地蔵の背中の扉から中に入って！」
+Q:58:T:成美「何それ聞いてない。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST58 3]
+Q:$58:T:Mai - 'Our master has taken interest in you. We're
+Q:$58:T:   relieved as well.'
+Q:$58:T:Satono - 'Take this as a reward for entertaining us.'
+Q:58:T:舞「お師匠様は君のことを気に入ったようだね。僕達も一安心だよ。」
+Q:58:T:里乃「楽しませてくれた褒美にとこれを預かっているわ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST58 5]
+Q:$58:T:Satono - 'She did get angry after all.'
+Q:$58:T:Mai - 'You're still here? We don't need you any more.'
+Q:58:T:里乃「やっぱり怒られちゃったわ。」
+Q:58:T:舞「まだ居たのかい？もう君に用はないよ。」
+
+?:1
+
+# Grass
+F:;:GRASS
+
+# Dirt
+F:,:DIRT:8:
+
+# Tree
+F:T:TREE
+
+
+# okina
+F:q:FLOOR:8:w1316
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X..........XXX..........XXX............X<X.........XX.X<.X
+D:X..........X<XX.......X<X<X..........XXX..X<XX.....X<.XX.X
+D:XX...........<X.XXX...XXX....XX......X<X..XXX<.XX..XX....X
+D:X<....X<X....XX.X<XX.........<X.XX..........XX.X<..<X.XXXX
+D:XX...XXXX.........<X.........XX.X<.............X<.XXX.X<XX
+D:X....X<......X<<X.XX.XXXXX<<X...X<............XXX.X<X....X
+D:X....XX......XXX<....X<X<XXXX...XX............X<X....XX..X
+D:X..............XX..X<X...X<X.........................<XX.X
+D:X..................XXXX<X............................XX<.X
+D:X............XXX.X<<X.XXX...q.........................XX.X
+D:X............X<XXXXXX...............................X<X..X
+D:X...XXX.......X<XX...........................XX.....XXX..X
+D:X...X<X.........X<<X............XXX......XXX.<X.XXX......X
+D:X..X<X..........XXXX.......XX...X<X......X<X.XX.X<X...XX.X
+D:X..XXX.XX................XX<X.............XX.XX.......<X.X
+D:X....XX<X................X<XX.............X<.<X...XX..XX.X
+D:X....X<XX................XX........XXX....XX.XX...X<.....X
+D:X.........................XXX......X<X............XX.....X
+D:X...................X<X<X.X<X........XXX.................X
+D:X...................XXXXX...XX..XXX..X<X.......X<X.......X
+D:X...XXXXX...................X<..X<X........XX..XXX.......X
+D:XX..X<<<X................X<<XXX......XX....<X........X<X.X
+D:X<.....XX................XXXX<X......X<..X<XX........XXX.X
+D:XX.....X<.....XX.....................XX..XXX.............X
+D:X......XX.....X<.......................X<X...............X
+D:X..XX.....XX..XX.X<X.X<X...............XXX...............X
+D:X..X<X<<X.<X.....XXX.XXX...................XXX...XX......X
+D:X..XXXXXXXXX....X<X....................XXXXX<X...<X......X
+D:X........X<.....XXX...........XXX......X<<X......XX......X
+D:X........XX...................X<X...................XXX..X
+D:X........X<.......................X<X..........XXX..X<X..X
+D:X........XX..X<X<X................XXX.X<X<X....X<X.......X
+D:X............XXXXX...................XXXXXX..............X
+D:X....................................<X..................X
+D:X................<.XX.X<X..........X<XX..................X
+D:X..................X<.XXX..........XXX..XX...............X
+D:X..XX.......XXXXXX.XX...................X<...............X
+D:X..X<.......X<XX<X...X<X<X..............XX...............X
+D:X..XX.......XX.......XXXXXX...XX...........X<X...........X
+D:X...........X<...........X<...X<...........XXX...........X
+D:X...........XX.X<X<X.....XX.XXXX......XXX................X
+D:X...XXX........XXXXX........<X........X<X................X
+D:X...X<X.........X<X...XXX...XX...........................X
+D:X....................XX<X...................X<X..........X
+D:X....................X<.....................XXX..........X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+# Starting position
+P:28:28
+

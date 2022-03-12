@@ -1,0 +1,110 @@
+
+# Name
+Q:$5:N:Haunted Mansion in the Forest
+Q:5:N:森の幽霊洋館
+
+# Definition
+Q:$5:Q:6:0:0:0:25:0:0:0:6
+Q:5:Q:6:0:0:0:25:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST5 2]
+Q:$20:T:Youmu - 'Looks like the spirits living in a nearby empty house
+Q:$20:T:are being threatened by some weird things. I've went there to
+Q:$20:T:take a look; I didn't see anything, but I certainly have felt some
+Q:$20:T:odd presence. Maybe you can clear this up?'
+Q:20:T:妖夢「この近くの空き家に住んでいる幽霊たちが、
+Q:20:T:妙なものに脅かされているらしいのです。
+Q:20:T:私もさっき行ってみたんですが別に何もいないみたいで
+Q:20:T:でも確かに妙な気配はするんです。貴方は何かわかりますか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST5 3]
+Q:$20:T:Youmu - 'So it was a kappa warehouse? I've been training my mind's
+Q:$20:T:eye, but looks like I still have ways to go... By the way, Lady
+Q:$20:T:Yuyuko gave me this item. I don't clearly understand what it is, so
+Q:$20:T:I'm giving it to you as a reward.'
+Q:20:T:妖夢「何と、ここは河童たちの倉庫だったのですか。
+Q:20:T:こんな時の為に心眼を鍛えていたのに、まだまだ修行が足りません…
+Q:20:T:あ、そういえば幽々子様がこれを持たせてくれていたんです。
+Q:20:T:どういうものなのかよく分からなかったのですが、お礼に貴方に差し上げますね。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST5 5]
+Q:$20:T:Youmu - 'Just what is going on? There's clearly someone inside.
+Q:$20:T:I'm so troubled. What if they're ghosts...'
+Q:20:T:妖夢「どうしたんですその有様は？やはり何か中にいるんですね。
+Q:20:T:困ったなあ。お化けだったらどうしよう…」
+
+?:1
+
+# スペースモンスター→怨霊(小)
+F:a:FLOOR:8:1200
+
+# Floor with Clear mushroom patch
+F:b:FLOOR:8:184
+
+# 風のスピリット→亡霊
+F:c:FLOOR:8:1198
+
+# Floor with Lurker
+F:d:FLOOR:8:247
+
+# クリアハウンド→浮遊霊
+F:e:FLOOR:8:133
+
+# Floor with Stunwall
+F:f:FLOOR:8:326
+
+# Floor with Landmine
+F:g:FLOOR:8:333
+
+# 吸血霧→河童の運送係
+F:h:FLOOR:8:1260
+
+# Floor with Black
+#F:i:FLOOR:8:402
+
+#不可解な煙霧→河童のエンジニア
+F:j:FLOOR:8:320
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X.T...........T.%T.....%.....T..D....%..D..%.jX
+D:X..hahahahahah..%%.....%.hhhh..%%h...%..%.TD.TX
+D:X................%%...j%.hhhh.%%.....%.%%%%%%%X
+D:X%%%D%%%%%%%%D%%%%%%...%...g.%%..Th..%.%hhhhhhX
+D:X.................%%%D%%%%%D%%%h..h..%.%%%%%D%X
+D:X..............j..%...........%h...h.%g%......X
+D:X.................%...........%..h...%.%..T...X
+D:X%%%%%%%gg%%%%%%%%%......a....%%%%%%%%.%%%D%%%X
+D:X%%%%%%%..%....c.....................%.D......X
+D:X%%TT%%%..%............fff...........%.%%%%%%%X
+D:X%%dd%%%T.%......d..d..%%f..a..e.e...%.%......X
+D:X%....%%..%....a.......%%f...........%.D......X
+D:X%....%%..%............fff...........%.%......X
+D:X%..a.%%..%.....................e....%.%......X
+D:X%....%%..%...............c..........%.%..T...X
+D:X%....%%..%%%%%%%%%...........%%%%%%%%.%%%%%%%X
+D:X%.a..%%..%...T...%...........%f..........%.a.X
+D:X%....%%..D......T%....bbb....%f.....e....%...X
+D:X%....%%..%%%%%%%%%%%%%%D%%%%%%f.....e....%...X
+D:X%....%%e.........%.....d.....%f....e.....%.c.X
+D:X%.h..%%....c.....%...........%f....e.e...%...X
+D:X%....%%e.........%...........%f..........%...X
+D:X%....%%..........%...c.......%f..........D...X
+D:X%....%%%%%D%%%%%%%...........%%..........%...X
+D:X%....bb.....%.a..D...........D....e......%.T.X
+D:X%....bb.....%....%.bbbbbbbbb.%%...e......%...X
+D:X%....%%%....D....%.bbbbbbbbb.%f......e...%.c.X
+D:X%....%%%....%.a..%...........%f......e...%...X
+D:X%....he.....%....%...........%f...e......%...X
+D:X%....ab.....%.c..%...<.......%f..........%..cX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:30:23
+
+

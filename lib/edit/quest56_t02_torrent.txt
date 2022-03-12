@@ -1,0 +1,99 @@
+# Name
+Q:$56:N:Down the Rapids
+Q:56:N:急流下り
+
+# Definition
+Q:$56:Q:4:0:0:0:35:0:0:0:6
+Q:56:Q:4:0:0:0:35:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST56 2]
+Q:$56:T:There's a paper on the wall.
+Q:$56:T:　
+Q:$56:T:~~~~~~~New Year Rapids Downhill Racing Tournament~~~~~~~
+Q:$56:T:  - The goal is to arrive from starting point to finish 
+Q:$56:T:    in minimum time.
+Q:$56:T:  - You can either ride boats or swim.
+Q:$56:T:  - Flying or teleportation is forbidden.
+Q:$56:T:  - You are responsible for your own safety.
+Q:$56:T:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Q:56:T:壁に張り紙が張られている...
+Q:56:T:　
+Q:56:T:～～～～～～～～～～～新春急流下り大会～～～～～～～～～～～
+Q:56:T:　一、開始より所定地点到達までの経過時間を競うものとする。
+Q:56:T:　一、小舟を貸与する。水泳による到達も可とする。
+Q:56:T:　一、飛行及び術法的な瞬間移動はこれを禁ずる。
+Q:56:T:　一、水没事故の責は各々に帰するものとする。
+Q:56:T:～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST56 3]
+Q:$56:T:(This message should not be displayed)
+Q:56:T:(このメッセージが出たらバグ)
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST56 5]
+Q:$56:T:You refrain from participating at the last minute.
+Q:56:T:あなたは無様にも土壇場で棄権した。
+?:1
+
+#クエスト出口(出口到達クエストは別地形)
+F:>:QUEST_EXIT:12
+# 木
+F:T:TREE:8:
+
+
+# 小舟(特殊モンスター)
+F:B:DEEP_WATER:8:p1306
+
+#ジャイアント・ピラニア
+F:a:DEEP_WATER:8:w187
+
+#フオルン
+F:b:TREE:8:w329
+#タツノオトシゴ
+F:c:DEEP_WATER:8:443
+#バラクーダ
+F:d:DEEP_WATER:8:w96
+#ジョーズ
+F:e:DEEP_WATER:8:w467
+#山童
+F:f:GRASS:8:w239
+#河童
+F:g:DEEP_WATER:8:f237
+#チョウチンアンコウ
+F:h:DEEP_WATER:8:918
+#空飛ぶ鯨
+F:i:DEEP_WATER:8:594
+#地蔵尊の蛸
+F:j:DEEP_WATER:8:w1065
+#万歳楽
+F:k:GRASS:8:w1259
+#カツオノエボシ
+F:l:DEEP_WATER:8:w160
+
+# Rubble on no Teleportation grid
+F:;:RUBBLE:8
+F: :GRASS:8
+# Floor on no Teleportation grid
+F:,:DIRT:12
+# Object 0 levels out of depth on no Teleportation grid
+F:q:DIRT:12:0:*0
+# Object 7 levels out of depth on no Teleportation grid
+F:Q:DIRT:12:0:*7
+
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X<...WWWWWWW;;;;;;WWWWWWa;;aWWWWWc;;WdWaWWWWWWWWW ; WWWlWWd ;WW;;;cW;WWW;WWWWWW;aWW ;WW;aWW;WWW ;;;;;;;;;WWWWW;WWWaWW;;;aWWWWWWW;;c;;WWWW;;;gggggg;WW; WWWWWdWWaWW;;;WWWWWWWWWWWWWWW;;;;;;;;XX
+D:X...WWWWWaWWW;;WWWWWW;WWW;;;;WWW;;;WWWW;;WWW;;WWWaWWWWWWWWaW WWW;;;WW;WWWWW;WaWWWWWWWWdWWWWdWWWW;;WWaWWWWWWWWWaWWWWWW;;WhW;WWWW;WW;;WWWWWW;WWWWWWWWWWWWWdWWW;WWWWWW;;;WWWWWWWWWWWWWWWWW;WWWW>X
+D:X..BWWWaWWWWWWWWWWWWWWWWWW;;WWW;;WWWWWWWWWWW;;;WWWWWWdWWWWWWWWWWW;;;;;WWWWW TTTWW;WWaWWW;;;;;;WWWWW;;   TWWWWWWW;WWdWWiWWWWaWWWWaWdWW;WWWWWWW;;W;;WWWWWWWWW;;;WWWWaWWWWWWWWWWWWWWWWWW;;WWWeW>X
+D:XWWWWWWWWWWWWaWWWWW;;WWWWWWWWaWWWWWWW;;;lWWWWWWWWW;;;WWWWWWdWWWWWWWWWWaWW;TTTbTTT;;WWW;WW;;;;WWWWW;;;  k  TWWWWWWWWWW;;;;;;WWWaW;;WW;;WW;;WWWWWWWWWWWdWdW;WWhWW;WWWWWWWWWWWWWWWWWWWWWWWW;WWW>X
+D:XWWWWWWWWWWWWWWWW;;;;;WWWWWWWWWWWWWWWWdWWWWWWWaWWWWWWWW;;;WWWWWdWWW;;WWWWTTTTTTbTT  WWWWWWjjjW;W;;;;     T  WWWaWWWWWWWWWWWW;;WWWWWWWWW;;W;TffffffT WWWW;;;;;;;;;WhW;;;WWWWWWWWWWWWW;;;;;;;;XX
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# Starting position
+P:2:2
+
+

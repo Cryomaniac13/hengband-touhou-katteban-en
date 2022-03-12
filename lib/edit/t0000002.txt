@@ -1,0 +1,381 @@
+# File: t0000002.txt
+
+# 天狗の里
+
+#v1.1.18以降、少しマップを模様替えしログルス使いと古い城を同じ建物にした
+############### Quest 3 - Logrus Master ###############
+F:q:PERMANENT:3
+F:r:PERMANENT:3
+B:$1:N:Ruins at Village Outskirts:Aya Shameimaru:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:射命丸文:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+?:[EQU $QUEST3 0]
+F:b:BUILDING_1:3:0:0:0:0:NONE:3
+
+?:[EQU $QUEST3 1]
+F:q:QUEST_ENTER:3:0:0:0:0:NONE:3
+F:b:BUILDING_1:3:0:0:0:0:NONE:3
+
+# Quest 3 completed
+?:[EQU $QUEST3 2]
+F:b:BUILDING_1:3:0:0:0:0:NONE:3
+
+#クエスト3が済んだら19へ
+?:[EQU $QUEST3 3]
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+F:r:HOME:3
+F:q:MUSEUM:3
+B:$1:N:Ruins at Village Outskirts:Hatate Himekaidou:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:姫海棠はたて:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+# Quest 3 finished
+?:[EQU $QUEST3 4]
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+F:r:HOME:3
+F:q:MUSEUM:3
+B:$1:N:Ruins at Village Outskirts:Hatate Himekaidou:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:姫海棠はたて:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+# Quest 3 failed, だがfailにはならないはず？
+?:[EQU $QUEST3 5]
+F:b:BUILDING_1:3:0:0:0:0:NONE:3
+?:[EQU $QUEST3 6]
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+?:1
+
+####################Quest19 古い城###################
+F:s:PERMANENT:3
+F:t:FLOOR:3
+
+# Quest 19 assigned, entrance is quest entrance
+?:[EQU $QUEST19 1]
+F:s:QUEST_ENTER:3:0:0:0:0:NONE:19
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+B:$1:N:Ruins at Village Outskirts:Hatate Himekaidou:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:姫海棠はたて:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+# Quest 19 completed
+?:[EQU $QUEST19 2]
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+B:$1:N:Ruins at Village Outskirts:Hatate Himekaidou:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:姫海棠はたて:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+# Quest 19 rewarding クエスト済んだら無人に
+?:[EQU $QUEST19 3]
+F:b:BUILDING_1:3
+F:t:FLOOR:3:0:600
+B:$1:N:Ruins at Village Outskirts:Empty: 
+B:1:N:里の外れの廃墟:無人:　
+
+# Quest 19 finished
+?:[EQU $QUEST19 4]
+F:b:BUILDING_1:3
+B:$1:N:Ruins at Village Outskirts:Empty: 
+B:1:N:里の外れの廃墟:無人:　
+
+# Quest 19 failed
+?:[EQU $QUEST19 5]
+F:b:BUILDING_1:3:0:0:0:0:NONE:19
+B:$1:N:Ruins at Village Outskirts:Hatate Himekaidou:Tengu
+B:$1:A:0:Quest:0:0:q:6:0
+B:1:N:里の外れの廃墟:姫海棠はたて:天狗
+B:1:A:0:クエスト:0:0:q:6:0
+
+# Quest 19 failed but done
+?:[EQU $QUEST19 6]
+F:b:BUILDING_1:3
+B:$1:N:Ruins at Village Outskirts:Empty: 
+B:1:N:里の外れの廃墟:無人:　
+
+?:1
+
+
+#v1.1.24
+###############################Quest56 急流下り#############
+F:z:FLOOR:3
+F:A:FLOOR:3
+
+?:[EQU $QUEST56 0]
+F:a:BUILDING_0:3:0:0:0:0:NONE:56
+
+?:[EQU $QUEST56 1]
+F:z:QUEST_ENTER:3:0:0:0:0:NONE:56
+F:a:BUILDING_0:3:0:0:0:0:NONE:56
+
+?:[EQU $QUEST56 2]
+F:a:BUILDING_0:3:0:0:0:0:NONE:56
+
+#報酬生成　特殊箱
+?:[EQU $QUEST56 3]
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+F:A:FLOOR:3:0:819
+
+?:[EQU $QUEST56 4]
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+?:[EQU $QUEST56 5]
+F:a:BUILDING_0:3:0:0:0:0:NONE:56
+
+?:[EQU $QUEST56 6]
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+?:1
+
+
+###############################Quest29 神への挑戦#############
+F:v:TREE:3
+F:w:FLOOR:3
+
+#?:[EQU $QUEST29 0]
+#F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+?:[EQU $QUEST29 1]
+F:v:QUEST_ENTER:3:0:0:0:0:NONE:29
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+?:[EQU $QUEST29 2]
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+#報酬：*獲得*の巻物
+?:[EQU $QUEST29 3]
+F:a:BUILDING_0:3
+F:w:FLOOR:3:0:498
+
+?:[EQU $QUEST29 4]
+F:a:BUILDING_0:3
+
+?:[EQU $QUEST29 5]
+F:a:BUILDING_0:3:0:0:0:0:NONE:29
+
+?:[EQU $QUEST29 6]
+F:a:BUILDING_0:3
+
+?:1
+
+
+###############################Quest32 お尋ね者を捕まえろ#############
+F:y:GRASS:3
+
+?:[EQU $QUEST32 0]
+F:d:BUILDING_3:3:0:0:0:0:NONE:32
+
+?:[EQU $QUEST32 1]
+F:d:BUILDING_3:3:0:0:0:0:NONE:32
+
+?:[EQU $QUEST32 2]
+F:d:BUILDING_3:3:0:0:0:0:NONE:32
+
+# Quest 26 rewarding, 
+?:[EQU $QUEST32 3]
+F:d:BUILDING_3:3
+F:y:FLOOR:3:0:680
+
+# Quest 26 finished,
+?:[EQU $QUEST32 4]
+F:d:BUILDING_3:3
+
+?:1
+
+###############################Quest55 防風対策任務(鴉天狗、白狼天狗専用)#############
+F:x:GRASS:3
+F:u:FLOOR:3
+
+?:[EQU $QUEST55 0]
+F:g:BUILDING_6:3:0:0:0:0:NONE:55
+
+?:[EQU $QUEST55 1]
+F:x:QUEST_ENTER:3:0:0:0:0:NONE:55
+F:g:BUILDING_6:3:0:0:0:0:NONE:55
+
+?:[EQU $QUEST55 2]
+F:g:BUILDING_6:3:0:0:0:0:NONE:55
+
+?:[EQU $QUEST55 3]
+F:g:BUILDING_6:3
+F:u:FLOOR:3:0:815
+
+?:[EQU $QUEST55 4]
+F:g:BUILDING_6:3
+
+?:[EQU $QUEST55 5]
+F:g:BUILDING_6:3:0:0:0:0:NONE:55
+
+?:[EQU $QUEST55 6]
+F:g:BUILDING_6:3
+
+?:1
+
+#################### Buildings ####################
+
+
+B:$0:N:Bar:Drunk Tengu:Tengu
+B:$0:A:0:Quest:0:0:q:6:0
+B:0:N:酒場:天狗の酔客たち:天狗
+B:0:A:0:クエスト:0:0:q:6:0
+
+B:$2:N:Divine Mausoleum Branch Office:Toyosatomimi no Miko:Saint
+B:$2:A:0:Recall to dungeon:100:200:r:33:0
+B:$2:A:1:Teleport to a dungeon level:1000000:1000000:t:34:0
+B:$2:A:2:Teleport to another location:300:300:m:42:0
+B:$2:A:3:Recharging:0:0:c:25:0
+B:$2:A:4:Recharge all items:0:0:a:45:0
+B:$2:M:0:0:0:0:0:2:0:0:0:0
+B:2:N:神霊廟出張所:豊聡耳　神子:聖人
+B:2:A:0:ダンジョンへ帰還:100:200:r:33:0
+B:2:A:1:階を指定してテレポート:1000000:1000000:t:34:0
+B:2:A:2:他の町へ移動:300:300:m:42:0
+B:2:A:3:再充填:0:0:c:25:0
+B:2:A:4:全てのアイテムを再充填:0:0:a:45:0
+B:2:M:0:0:0:0:0:2:0:0:0:0
+
+B:$3:N:Alley:Empty:　
+B:$3:A:0:Read the paper on a wall:0:0:q:6:0
+B:3:N:路地裏:無人:　
+B:3:A:0:壁に貼られた手配書を見る:0:0:q:6:0
+
+B:$4:N:Tengu Inn:Tengu Girl:Tengu
+B:4:N:天狗の宿屋:天狗の看板娘:天狗
+B:$4:A:0:Rest for the night:20:20:r:17:0
+B:4:A:0:一泊する:20:20:r:17:0
+B:$4:A:1:Buy food and drink:10:10:f:18:1
+B:4:A:1:食事をする:10:10:f:18:1
+B:$4:A:2:Listen for rumors:3:3:u:9:0
+B:4:A:2:噂を聞く:3:3:u:9:0
+B:$4:R:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:0:0:0:0:0:1:1:0:1:0:1:1:1:0
+B:4:R:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:0:0:0:0:0:1:1:0:1:0:1:1:1:0
+
+B:$5:N:Blacksmith:Tengu Blacksmith:Yamabushi Tengu
+B:$5:A:0:Enchant weapon:400:400:a:23:0
+B:$5:A:1:Enchant armor:300:300:b:24:0
+B:$5:A:2:Enchant bow:500:500:c:31:0
+B:$5:A:3:Enchant arrows:20:20:d:30:0
+B:$5:A:4:Compare weapons:100:100:e:21:0
+B:$5:A:5:Evaluate defense:100:100:f:46:0
+B:5:N:鍛冶屋:天狗の鍛冶師:山伏天狗
+B:5:A:0:武器を強化する:400:400:a:23:0
+B:5:A:1:防具を強化する:300:300:b:24:0
+B:5:A:2:弓を強化する:500:500:c:31:0
+B:5:A:3:矢を強化する:20:20:d:30:0
+B:5:A:4:武器を比較する:100:100:e:21:0
+B:5:A:5:防御について調べる:100:100:f:46:0
+
+B:$6:N:Conference Room:Great Tengu: 
+B:$6:A:0:Quest:0:0:q:6:0
+B:6:N:会議室:大天狗: 
+B:6:A:0:クエスト:0:0:q:6:0
+
+B:$8:N:Jeweller Guild: :Tengu Blacksmith
+B:$8:A:0:Rent workshop:0:0:a:57:0
+B:$8:A:1:Explanation:0:0:b:58:0
+B:8:N:鍛冶宝飾ギルド:　:天狗の鍛冶師
+B:8:A:0:工房を借りる:0:0:a:57:0
+B:8:A:1:説明を聞く:0:0:b:58:0
+
+B:$10:N:Chemist Guild: :Tengu Chemist
+B:$10:A:0:Browse pharmacy notes:0:0:a:74:0
+B:$10:A:1:Rent pharmacy room:0:0:b:73:0
+B:10:N:薬師ギルド:　:天狗の薬師
+B:10:A:0:調剤書を確認する:0:0:a:74:0
+B:10:A:1:調剤室を借りる:0:0:b:73:0
+
+D:######################################################################################################################################################################################################
+D:#..TTTTTTTTT----TTTTT-TTTT----------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^TTTTTTTTTTTTTTTT-TTTTTTTTTTTTTTTTTTTTT-v-TTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#-..---------TTTTT-TTT--TT-----------------------------------^^^^^###^^^^^^^^^^^^^^^^^^^TTTTTTTTTTTT-TTTTTTTTTTTTT-TTTTTTTTTT--TTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#T-........#####TTT--------------------------------------------^^^###^^^^^^^^^^^^^^^^^^^^^^TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT--TTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#TTT-.----.##1##-----------------------------------------------^^^###^^^^^^^^^^^#####^^^^^^^^TTTTTTTTTTT-TT-TTT-TTTTT#####T---TTTTTTTTTWWW^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#TT##3##--............T#T#-------------------------------------^^^^^^^^^^^^^^^^^#####^^^^^^^TTTTTTTTTTTTTTTTTTTTTTTTT#####TT--TTTTTTTTTWWWWW^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#TT########2###------.#T#T#---------------------------------^^^^^^^^^^^^^^^^^^^^##k##^^^^^TTTTTTTTTTTTTTTTTTTTTTTTTTT#####TT-TTTTTTTTTT-WWWWWW^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#TT############------.####T#---------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^...^^^^^TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-TTTTTTTTTTTTTWWWWWWWW^^^^^---------------------------------------^^^^^^^^#
+D:#TT############------.6####T--------------------------^^#-###################-#^^^.^^^^TTTTTTTTTTT###########TTTTTTTTTTTT--TTTTTTTTTTTTTTTWWWWWWW^^^^^---------------------------------------^^^^^^^^#
+D:#TT#####-------------.####T#-------------------------^^^-#####################-^^^--TTTTTTTTTTTTTT###########TTTTTTTTTTT--TTTTTTTTTTTTTTTTTWWWWWW^^^^^---------------------------------------^^^^^^^^#
+D:#TT#####-------------.#T#T#--------############-----^^^^#######################^^---TTTTTTTTTTTTTT###########TTTTTTTTTT-TTTTTTTTTTTTTTTTTTTTWWWW_^^^^^----#-----------------------------#----^^^^^^^^#
+D:#---TTTT-------------.T#T#---------######7#####----^^^^^-#####################-^----TTTTTTTTTTTTTT#####-#####TTTTTTTTT-TTTTTTTTTTTTTTTTTTTTTTTTTT^^^^^-----#############################-----^^^^^^^^#
+D:#------TTTT----------.TT-TT-----TTTT-----------------^^^#-#########g#########-#-------TTTTTTTTTTTTTTTT---TTTTTTTTTTTT-#####TTTTTTTT#####TTTTTTT^T^^^^^-----#############################-----^^^^^^^^#
+D:#----TTT--###--------.-TTTTT----TTTT-------------------------------u--------------------------------------------------#####TTTTTTTT#####TTTTTTTT^^^^^^-----#############################-----^^^^^^^^#
+D:#---------##5--------.-TTT--------------------------------------------------------------------------------------------#####TTTTTTTT#####TTTTTTT^T^^^^^-----#############################-----^^^^^^^^#
+D:#---------###-----###.###--------TTTTT-------------------------------------------------------------------------------TTTTTTTTTTTTTTTTTTTTTTTTTTTT^^^^^-----#############################-----^^^^^^^^#
+D:###---------------###.###TTT-----TTTTTTTT----,,,---------------------------------------------------------------------------TTTTTTTTTTTTTTTTTTTTTT^^^^^-----#############################-----^^^^^^^^#
+D:###------##9##----###e###TT####TTT########TT,,CCCCC..CC-----------------------------------------------------------------^^^^^^^TTTTTTTTTTTTTTTTT^^^^^^-----#############################-----^^^^^^^^#
+D:#^#------#####-^^-#######--####---########CCCCCCCCC..CCCCCCCCCCCC--------------------------TT^^-----------------------^^^#####^^^^^^TTTTTTTTTTT^^^^^^^-----##############.##############-----^^^^^^^^#
+D:#^^^--TTT#####^^--#######--####---###CCCCCCCCCCC;,--...TT--CCCCCCC----------------------^T^^^T^^^^-------------------^^^^#####^^^^^^^TTTTTTTTTT^T^^^^^-----#############...#############-----^^^^^^^^#
+D:#^^^^--TTT^TTT----#######--####.,,,,CCCCCCCCCC;;,-###4###TTTCCCCCCCC,,----------------^^T^^^^^^T^^^^-TTTT-----------^^^^^^^^^^^^^^^^^^TTTTTTTTTT^^^^^^----#-------------...-------------#----^^^^^^^^#
+D:#^^^^^,^,,,^^,,,,,#######,T-T,,,,CCCCCCCTT-------T#######TTT.CCCCCCCCCCC,,-----------^^^^^^^####^^^^^^^TTT-TTT------^^^^^^^^^^^^^^^^^-TTTTTTTTTTT^^^^^---------------------------------------^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCC,,,,CCCCCCCCCCTT----###############--CCCCCCCCCCCCC------^^^^^^^^^^f###^^^^^T^^^^-TTTT-------^^^^^^^^^^^^^---TTTTTTTTTTT^^^^^---------------------------------------^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC----###############-,,CCCCCCCCCCC,.,CC,^^^^^^T^^^T####^^^^^^^###i#TTTT--------------------TTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC,,,--#######-,,,CCCCCCCCCCCCCCC.CCCCCCCC,^^^T^^^TT^T^^^^^^#####TTTTT----------------T---TTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCC,-###a###-,CCCCCCCCCCCCCCCCC.CCCCCCCCCCCC^^^^^^^^^TT^^^#####TTTT-------------------TTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC,,-.wA-,CCCCCCCCCCCCCCCC#CC.CC#CCCCCCCCCCCCC^^^^^^^^TTTTTTTTT---------------------TTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCC^CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC,...CCCCCCCCCCCCCCCCCCC##c##CCCCCCCCCCCCCCCC^^^^^TTTTTTT------------------------TTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCC^^^CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC#C#######C#CCCCCCCCCCCCCC^^^TTTTT---------######---------TT-TTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCC^CCCCCCCCCCCCCCTT-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC#########CCCCCCCCCCCCCCCC,,--------------######---------T--TTTTTTTTTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCC---CCCCCCCCCCCCCCCCCT-CCCCCCCCCC^CCCCCCCCCCCC---CCCCCCCCCCCCCC#C#######C#CCCCCCCCCC^CCCCC.----------------------------TTT-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCC--T--CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-TTT-CCCCCCCCCCCCCCCC#####CCCCCCCCCCCCCCCCCCCC.-------------######---------T--TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCC---CCCCCCCCCCCCCTTCCCCCCCCCCCCCCCCCCCCCCCCCC-T^T-CCCCCCCCCCCCCCC#CCCCC#CCCC^CCCCCCCCCCCCCCC-------------######----------TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT^^^^^^^^^^^^^^^^^^^^^^^#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-TTT-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCT^^,CCC,----------------TTTTTTTTTTTTTTTTTTTTTTTT-----------------------------^^^^^^^^^^T^^^^^T--#
+D:#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^^CCCCCCCCCCCC---CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCT^CCCCCCCC,,,--------T----TTTTTTTTTTTTTTTTTTT---------------------------------^^^^^^TTT^^^^T---#
+D:#CCCCCCCCCCCCCCCCCCCCCCC--CCCCCCCCCCCCCCC^^CCCCCCCCCCCCCCCCC-CCCCCCCCCCC----CCCCCCCCCC^CCCCCCCCC^CCCCCC-CCCCCCCCCCCCC,,-------T-----TTTTTTTTTTTTT-------#######------#######------------^^^^^^T^^T---#
+D:#,,,---,,--,,,CCCCC,,----CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-^-CCCCCCCCCCCTT--CCCCCCCCCCCCCCCCCCCCCCCCC^C-TTCCCCCCCCCCCCC,,---T--T------TTTTTTTT---TTT---#######------#######---------------^^^^^^^^^-#
+D:#--------------CCC------,,,---TTCCCCCCCCCCCCCCCCCCCCCCCCCCCC-CCCCCCCCCCCCT^-CCCCCCCCCCCCCCC--CCCCCCCC^,CC^,TCCCCCCCCCCCCC-----------T----TT--------TT---#######------#######-----------------^^^^TT^-#
+D:#---------------W-###-------,--,T-TTCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC---CCCCCCCCCC^CCCCC--CCCCC^,,C-TCTTC,-CCCCCCCCCCC,---T----------------------------------------------------------------^^^^--#
+D:#---------------V-z##----------------------CCCCCCCCCCCCCCCCCCCCCCCC^^-CCCCC-CCCCCCCCCCCCCCCCCCCCCCCCCCCC^T^C,CC-CCCCCCCCCCCC-------------------------------------------------------------------------#
+D:#--------------.V-###---------------------------CCCCCCCCCCCCCCCCCCC^^^CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCTTT^C^CC^C-CCCCCCCCCCCCCC,--------------------------------------------------TTTTTTT-------------#
+D:#---------------V--------------------------------CCCCCCCCCCCCCCCCC^^^--,,,CCCCCCCC^CCCCCCCCCCCCC^CCCT^^^T-,,^,^TCCCCCCCCCCCCCCC--------------------------------#####----------TTTTTTTTTTT------------#
+D:#--------------WWW---------------TTT-------------------------------^-------CCCCC--^^T^--CCCCCCCCCCC^TT^^CCCC,CTCCCCCCCCCCCCCCCCCCC,,,--------------------------#####--------TTTTTTTTTTTTTTTT---------#
+D:#TT--TTTTT--TTTWW---------------TTTTT--------------------------------------CCCC---^^^-CCC----T------,,^TCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC,,,CC,,,CCC,..-.-.------#####----TTTTTTTTTTTTTTTTTTTTTTTT-----#
+D:#TTT-##q##---TTV-----------------TTT----------------------------------------CCCCCC--CCC-CCCTTTT--------------CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^^CCCCCC,,,--#####--TTTTTTTTTTTTTTTTTTTTTTTT-------#
+D:#TT-T#####--TTTVT----------------------------------------------------T-------CCCCCCCCCCCCCCT-TTTTT----------CCCCC-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC----------------TTTTTTTTTTTTTT---T---T-------#
+D:#TT-T####r---TTV-T.#####-#####-#####-#####-#####-#####T#####T#####--TT---------CCCCCC-TTTTT,TTTTTTTTTT-------CCCCCC--CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC---------TTTTTTTT-TTTTTTTTT----------------#
+D:#^^T-#####---T-VTTT#####yd####-#####-#####-#####-#####-#####T#####-TTT----------CCCTTT^^TTTT^^TTTTTTTTTTTTTT----CCCC----TTTTCCCCCCC^^CCCCCCCCCCCCCCCCCCCCCCC--TTTTTTTTT---T----TTTT----T-------------#
+D:#^^^T#####-TTTTVTTT#####T#####T#####-#####-#####-#####-#####T#####TTTT--------TTTT,TTTT^^^---TT---------TT-TTTCCCCCTTTTTTTTTTT-CCC-TCCCCCCCCCCCCCCCCCCCCCCCCCCCCTTTTTT------------T------------------#
+D:#^^^^TTT--TTTTVVTTT---TTTTTTTTTTTTTTTTTT--------------------TTTTTTTTTTTTT---------CCCTCCCCC----....------TCC-T-TTTTTTTT-TTTT-CCCCCCCCCCCCCCCC^^C--CCCCCCCCCCCCCTTTTTT--------T------------------.^---#
+D:#^^^^^^TTTTTTTV--TT----TT#####T#####T#####-#####-#####-#####-#####TTTTTTTT---------CCCT-CCC-CCCCCCCCCCCCCCCCCCCCC^^TTTTTTTTTCCCCCCCCCCCCC^TTC^^^^-,CCCCCCCCCC---^--------------------T--T----^^^.^^^^#
+D:#^^^^^^^^TTTTTV,------TTT#####T#####T#####-#####-#####-#####-#####TTTTTTT---------CCT^^^^--,CCCCCCCCCCCCCCCCCCCCCTTT^TT,TT-TT-CCCCCCCCCCCTT####TT^CCCCCCCCCCCCCC------------^-----------^--#####s#####
+D:#^^^^^^^^^^^^WW^^^-----TT#####T#####T#####-#####-#####-#####-#####TTTTTTTT-------CC-^^T^^-CCCCCCCCCCCCCCCCCCCCCCCC-TTT,TTTT-TTCCCCCCC,CCC-^####T^CCCCCCCCCCCCCCCCCCCC--------------TTT^^^--###########
+D:#^^^^^T^^^^^WW^^^----TTTTTTTTTTTT--TTTT----------------------TTTTTTTTTTTT----CCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCCTTTTTTTTTTTCCCCCCCCCCCCC^-..###^---CCCCCCCCCCCCCCCCCCCCC--^-------T^^^^^T^^###########
+D:#^^^^^^^T^^WWWWW^^^^TTTTT#####T#####T#####T#####T#####;#####T#####TTTTTTTT----CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC,#####TCCCCCCCCCCCCCCCCCTT^####^--CCCCCCCCCCCCCCCCCCCCCC---------^^^^^^^^^^###########
+D:#^^^^T^T^T^WWWWWW^^^^;TTT#####T#####T#####T#####T#####;#####T#####TTTTTTTTTTT-CCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCT#...#CCCCCCC^^CCCCCCCC,TT-####,,CCCCCCCCCCCCCCCCCCCCCCCCCCC------TTT^^^^^T###########
+D:#^^^T^T^^^WWWWWWWW^^^^^--#####-#####^#####-#####-#####;#####-#####TTTT^TT--T-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCT#.b.#TCCCCCCCCCCCCCCCCCCT-C^^--CCCC^^^,,^^^CCCCCCCCCCCCCCCCCCC-----^^^^^^^^^^^^^^^^^#
+D:#^^^^^^^^^WWWWWWWWW^^^^^----------^^^^^^-------------------------TTTTT^CCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCCCCCCC..t..CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^^,,CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCT^^T^^^^^^^^^^#
+D:#^^^T^^^^^^WWWWWWW^^^^^^^^^TT^^----^^--^^---TTTT-----------^^-TT^^CCCCCCCCCCCCCCCCCCCCCCCCCCCC^^,CCCCCCCCCCCCCCCCC...CCCCCCCCCCCCCCCCCTCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCCCCCCCCCCCCCCCCC^^T^^^#
+D:#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^--^--^^^-TTTTTTTTT^^-^-^TT^TTT^^^CCCCCCCCCCCCCCTTCCCCCCCCCCC,,CCCCCCCCC^CCCCCCCCCCCCCCCCCCCCCCCCCC^^CCCCCCCC^CCCCCCCCCCCCCCCCCC,,^^CCCCCCCCCC^CCCCCCCC^CCCCCCCCCCC#
+D:#^T^^^^T^####^^^T^^^^^^####^^T^^^T^^^^^-TTTT^--TTTT^^T^^T^T-TT^^CCCCCCCCCCCCCCCCC,,CCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCCCC^^CCCCCCCCCC-^-CCCCCCC^^^CCCCCCCCCCCCCCCCC,TT-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC#
+D:#^^^^^^^^#####^^^T^T^^^####^^T^T^^^^^^T^-TTT-^TTTT^TTT-TTCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCC-CCCCCCCCC^CCCCCCCCCCCCCCCCCCCTTCCCCCCCCCCCCCCC^CCCCCCCCCCCCCCCC#
+D:#^^^^T^^^#####^^^^^^^^^####^^^^^^^^T^T^^T-TTTT-TT^TTT-T-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC---CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCC#
+D:#^T^^^^^^^####^^^T^^^T^^^^^^^^^^^^^^^^^^TT^^^--^^TT-^^TT-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC--x--CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC^CCCCCCCCCCCCCCCCCCCCCCCC#
+D:#^^^^TT^^^T^^^^T^^^^^^^^^^^^^^^^^^^^^^^^^^TT-^^^-^-^^TTTCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-------CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC#
+D:######################################################################################################################################################################################################
+
+# Default starting position
+?:[EQU $LEAVING_QUEST 0]
+P:33:67
+
+# Starting position when coming from quest 3
+?:[EQU $LEAVING_QUEST 3]
+P:42:7
+
+# Starting position when coming from quest 19
+?:[EQU $LEAVING_QUEST 19]
+P:48:192
+
+# Starting position when coming from quest 56
+?:[EQU $LEAVING_QUEST 56]
+P:39:17
+
+# Starting position when coming from quest 29
+?:[EQU $LEAVING_QUEST 29]
+P:2:125
+
+# Starting position when coming from quest 55
+?:[EQU $LEAVING_QUEST 55]
+P:62:92
+

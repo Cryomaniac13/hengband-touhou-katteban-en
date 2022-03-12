@@ -1,0 +1,73 @@
+# Name
+Q:$59:N:Disappearance of Kosuzu Motoori
+Q:59:N:本居小鈴の失踪
+
+# Definition
+Q:$59:Q:6:0:0:0:50:0:0:0:6
+Q:59:Q:6:0:0:0:50:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST59 2]
+Q:$59:T:Akyuu - 'Kosuzu Motoori from the Suzunaan bookstore has
+Q:$59:T:suddenly disappeared. It might end up being a major incident
+Q:$59:T:caused by youkai, so we have to find her before it's too
+Q:$59:T:late. Couldn't you search for her as well?'
+Q:59:T:阿求「貸本屋『鈴奈庵』の娘の本居小鈴が突然失踪してしまいました。
+Q:59:T:里としては妖怪の起こした重大事件として認識しているのですが、
+Q:59:T:大事になる前に見つかればそれに越したことはありません。
+Q:59:T:どうか貴方も捜索に加わって頂けませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST59 3]
+Q:$59:T:Akyuu - 'Thanks for your help with Kosuzu.
+Q:$59:T:We've found her luggage in the forest; looks like she has
+Q:$59:T:taken that picture scroll and other dangerous scrolls from
+Q:$59:T:the store. It's dangerous to return them to her right now,
+Q:$59:T:so take them instead.'
+Q:59:T:阿求「小鈴の件では大変お世話になりました。
+Q:59:T:彼女の荷物を森の中で見つけたのですが、
+Q:59:T:どうやらあの絵巻の他にも危険な巻物を色々店から持ち出していたようです。
+Q:59:T:今の彼女に返すのは危ういので、貴方が引き取ってくださると助かります。
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST59 5]
+Q:$59:T:Akyuu - 'You saw Kosuzu at the shrine?
+Q:$59:T:That probably was a tanuki taking her form.
+Q:$59:T:Kosuzu was spirited away, but now she's back, safe and sound.
+Q:$59:T:This is the truth for the Human Village.'
+Q:59:T:阿求「小鈴が神社に現れたと？
+Q:59:T:恐らくそれは狸に化かされたのでしょう。
+Q:59:T:小鈴は神隠しに遭いましたが無事に戻りました。
+Q:59:T:それが人間の里においての真実です。」
+?:1
+
+# Grass
+F:-:GRASS
+# Tree
+F:T:TREE
+
+# kosuzu
+F:q:GRASS:8:w1318
+
+D:XXXXXXXXXXXXXX
+D:X<----------TX
+D:X-----TT----TX
+D:XXXX--TT----TX
+D:XXXX--------TX
+D:XXXX--------TX
+D:XXXX------q-TX
+D:XXXX--------TX
+D:XXXX---T-T--TX
+D:XXXX-----XXXTX
+D:XXXX-----XXX-X
+D:X--------XXXTX
+D:X----------TTX
+D:X------TTT-TTX
+D:XXXXXXXXXXXXXX
+
+
+# Starting position
+P:6:6
+

@@ -1,0 +1,77 @@
+# Name
+Q:$69:N:Moriya Schemes II
+Q:69:N:守矢の策動Ⅱ
+
+# Definition
+Q:$69:Q:4:0:0:0:25:0:0:0:6
+Q:69:Q:4:0:0:0:25:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST69 2]
+Q:$69:T:Sanae - 'Are you planning to participate in the ability card
+Q:$69:T: exchange event sponsored by Moriya Shrine? If you don't have
+Q:$69:T: any cards to exchange, it's still fine! The marketplace
+Q:$69:T: goddess will create an ability card for you just one time,
+Q:$69:T: and you'll be able to exchange it!
+Q:$69:T: The venue is that table over there on cliffside! Please join us!
+Q:$69:T:
+Q:$69:T:　...Oh, so you noticed the logs falling down the cliff?
+Q:$69:T:　She said it's absolutely necessary to establish a market...'
+Q:69:T:早苗「貴方も守矢神社共催のアビリティカード交換会に参加されますか？
+Q:69:T:　交換するカードがなくても大丈夫です！
+Q:69:T:　市場の神様が一度だけ貴方のカードを作って下さいますのでそれを交換しましょう！
+Q:69:T:　会場は崖の中腹に見えますあちらのテーブルです！どうぞ奮ってご参加下さい！
+Q:69:T:　
+Q:69:T:　……あ、崖の上から次々落ちてくるあの丸太がやっぱり気になりますか？
+Q:69:T:　市場を成立させる為にはどうしてもあれが必要だと神様達が……」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST69 3]
+Q:$69:T:Desperately dodging the falling logs, you finally arrive
+Q:$69:T:at card exchange venue. You don't recall the details of
+Q:$69:T:exchange you performed, but you certainly feel the power
+Q:$69:T:from the card you're holding.
+Q:69:T:あなたは必死で丸太を掻い潜りながらカード交換を成立させた。
+Q:69:T:誰と何のカードを交換したのかも覚えていないが、
+Q:69:T:交換したカードからは確かな力が感じられる。
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST69 5]
+Q:$69:T:You ran away from that weird card exchange event.
+Q:$69:T:While you've received a card in advance, it seems like
+Q:$69:T:it's just a piece of paper without any powers.
+Q:69:T:あなたはカード交換会という名の奇祭から逃亡した。
+Q:69:T:事前にカードのようなものを受け取っていたが、
+Q:69:T:全くなんの力も感じられない唯の紙屑だ。
+?:1
+
+#クエスト出口(出口到達クエストは別地形)
+F:>:QUEST_EXIT:14
+# 木
+F:T:TREE:14:
+
+
+# Rubble on no Teleportation grid
+F:;:RUBBLE:14
+#テレポートできない光る床
+F:,:DIRT:14
+
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X;;;;;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWW,,,,,,,,,,,,,,T,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:X;;...,,,,,;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWW,,,,,,,,,,,,,,,,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:X.....,,,,;;;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TTTTTTTTTTT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWW,,,,,,,,,,,,,,,T,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:X.....,,,,,;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,;;,,,,,,,,,,,,,,,,,,,TTTTT;;TTTTTT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWW,,,,,,,,,,,,,,,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,>>>,,X
+D:X.....,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TTT,,,,,,,,,,;;,,,,,,,,,,,,,,,,,,,,TTTTTTTTTT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWWWW,,,,,,,,,,,,,T,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,>>>,,X
+D:X..<..,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWWWWWWW,,,,,,,,,,,,,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,>>>,,X
+D:X.....,,,,,,,,,,,,,,,,;;;;;;;;;,,,,,,,,;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWWWWWWWWWW,,,,,,,,,,T,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:X.....,,,,,,,,,,,,,,,;;;;;;;;;;;;;;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWWWWW;;WWWWWWWW,,,,,,,,,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:X.....,,,,,,,,,,,,,,,,;;;;;;;;;;;;;;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,WWWWWWWWWWW;;;;WWWWWWWWW,,,,,,T,T,T,T,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# Starting position
+P:8:2
+
+

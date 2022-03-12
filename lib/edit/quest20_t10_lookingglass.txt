@@ -1,0 +1,77 @@
+# quest20_t10_lookingglass.txt
+
+# Name
+Q:$20:N:Monster from the Looking Glass
+Q:20:N:鏡の国の怪物
+
+# Definition
+Q:$20:Q:6:0:0:0:60:0:0:0:6
+Q:20:Q:6:0:0:0:60:0:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST20 2]
+Q:$20:T:Alice - 'A creepy monster has came out of a mirror in my house
+Q:$20:T:where I'm making my dolls. I didn't expect this attack, and
+Q:$20:T:left most of my armaments inside... I'm sorry, but can't you
+Q:$20:T:do something about it?'
+Q:20:T:アリス「家で人形を作ってたら鏡の中から気味の悪い魔物が現れたの。
+Q:20:T:こんな襲撃は想定外だったわ。倒すにも武装をほとんど家に置いたままで…
+Q:20:T:情けない話だけど貴方何とかできない？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST20 3]
+Q:$20:T:Alice - 'My dolls are fine now. Thank you very much.
+Q:$20:T:Take this as your reward. It'll be useful in dungeon
+Q:$20:T:exploration.'
+Q:20:T:アリス「人形たちも無事のようね。ありがとう助かったわ。
+Q:20:T:お礼にこれをあげる。ダンジョン探索がぐっと捗るはずよ。」
+?:1
+
+# Description for quest failed
+?:[EQU $QUEST20 5]
+Q:$20:T:Marisa - 'Couldn't do it? Very well, now it's my turn.
+Q:$20:T:Don't worry, I'll get my reward from Alice.'
+Q:20:T:魔理沙「お前じゃ無理だったか。それじゃ真打登場といくか。
+Q:20:T:なあに気にするな。報酬はたっぷりアリスから頂くぜ。」
+?:1
+
+# Hard-Locked Glass Door
+F:+:JAMMED_GLASS_DOOR_7:8
+# Locked Glass Door
+F:4:LOCKED_GLASS_DOOR_7:8
+# Locked Door
+F:1:LOCKED_DOOR_7:8
+# Opened Door
+F:2:OPEN_DOOR:8
+# Floor with Light
+F: :FLOOR:10
+
+# Small wooden chest
+F:&:FLOOR:8:0:363
+# dress
+F:~:FLOOR:8:0:178
+
+
+# ジャバウォック
+F:0:FLOOR:8:778
+
+
+# Dungeon layout
+D:XXXXXXXXXXXXXXXXXXXXXX
+D:X...................<X
+D:X...........X++++++X.X
+D:X...........X      X.X
+D:X.XXXX++++XXXX4444XX.X
+D:X.X                X.X
+D:X.+                +.X
+D:X.+                +.X
+D:X.X                +.X
+D:X.X  XDDDXDDX  0   +.X
+D:X.X  X   X  X      X.X
+D:X.1  X& &X~~X      X.X
+D:XXXXXXXXXXXXXXXXXXXXXX
+
+# Starting position
+P:1:20
+

@@ -1,0 +1,22 @@
+慧音「コマンド入力について詳しく説明しよう。」
+
+    (a) 変愚蛮怒本家との違い　      (tcommand.txt)
+    (b) コマンドと行動順消費　      (tcommand.txt#Turn)
+    (c) キー配置の二種類のモード　  (tcommand.txt#Keymapmode)
+    (d) コマンドウィンドウ　        (tcommand.txt#ComWindow)
+    (e) 特殊なコマンド    　        (tcommand.txt#SpecialKey)
+    (f) オリジナルキー配置一覧      (tcommand.txt#OriginalKeyset)
+    (g) ローグ風キー配置一覧        (tcommand.txt#RogueKeyset)
+    (h) マクロ設定の基本的な例      (tcommand.txt#Macro)
+
+    (?) ヘルプシステムの使用法      (jhelpinfo.txt)
+
+
+***** [a] tcommand.txt
+***** [b] tcommand.txt#Turn
+***** [c] tcommand.txt#Keymapmode
+***** [d] tcommand.txt#ComWindow
+***** [e] tcommand.txt#SpecialKey
+***** [f] tcommand.txt#OriginalKeyset
+***** [g] tcommand.txt#RogueKeyset
+***** [h] tcommand.txt#Macro

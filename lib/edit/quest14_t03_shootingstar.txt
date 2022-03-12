@@ -1,0 +1,36 @@
+# 
+
+# Name
+Q:$14:N:Defeat the Evil Fire Dragon
+Q:14:N:炎の邪竜を討伐せよ
+
+# type:num_mon:cur_num:max_num:level:r_idx:k_idx
+Q:$14:Q:1:0:0:1:50:972:0:8
+Q:14:Q:1:0:0:1:50:972:0:8
+
+# Description for quest
+?:[LEQ $QUEST14 2]
+Q:$14:T:Satori - 'There's a violent dragon from other world living in
+Q:$14:T:the depths of Former Hell. It's a very powerful fire dragon.
+Q:$14:T:To be honest, I'm reluctant to ask the oni to help me in my
+Q:$14:T:affairs, so wouldn't you defeat it?
+Q:$14:T:...I understand. Of course, you can expect a reward.'
+Q:14:T:さとり「旧灼熱地獄の最深部に異界の凶暴な竜が棲み付きました。
+Q:14:T:どうやらかなり強力な火竜のようです。
+Q:14:T:私の管轄区域のことで鬼達の力を借りるのは正直気が進まないので、
+Q:14:T:できれば貴方が倒してきてくれませんか？
+Q:14:T:……ええわかっています。報酬についても期待して頂いて結構ですよ。」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST14 3]
+Q:$14:T:Satori - 'You've completed your mission. Well done.
+Q:$14:T:I'm giving you this as the reward. It's a powerful magic
+Q:$14:T:device my pets have found somewhere in lava. Please be
+Q:$14:T:careful with it.'
+Q:14:T:さとり「首尾は今確認しました。お見事です。
+Q:14:T:報酬としてこれを差し上げます。
+Q:14:T:ペットが溶岩の中から見つけてきた強力な魔道具です。
+Q:14:T:まあ貴方ならそう胡乱な使い方はしないでしょうから。」
+?:1
+
