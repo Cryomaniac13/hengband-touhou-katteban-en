@@ -2048,12 +2048,13 @@ D:巫女の装束だ。胴と袖が分かれた独特のフォルムだ。
 
 
 N:187:桶
-E:& Oke~
+E:& Bucket~
 G:[:u
 I:41:1:0
 W:1:5:40:5
 A:1/5
 P:4:0d0:-2:0:0
+D:$An ordinary large bucket. You can use it as armor if you remove its bottom.
 D:何の変哲もない大型の桶だ。底を抜けば鎧として使えなくもないかもしれない。
 
 N:188:軟革よろい
@@ -3879,7 +3880,7 @@ P:0:2d4:0:0:0
 
 
 N:374:中からカタカタ音が聞こえる箱
-E:Box with rattling sounds
+E:Box with something rattling inside
 G:&:r
 I:60:19:0
 W:1:0:30:100
@@ -3927,7 +3928,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 #破壊の杖
 N:379:爆発物注意と書かれた細長い箱
-E:Long box labeled 'DANGER: EXPLOSIVE'
+E:Long box labeled 'DANGER - EXPLOSIVE'
 G:&:r
 I:60:24:0
 W:1:0:30:100
