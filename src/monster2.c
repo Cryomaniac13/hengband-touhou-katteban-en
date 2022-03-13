@@ -2005,7 +2005,11 @@ void monster_desc(char *desc, monster_type *m_ptr, int mode)
 		else
 
 		/* It could be a Unique */
+#ifdef JP
 		if ((r_ptr->flags1 & RF1_UNIQUE) && !(p_ptr->image && !(mode & MD_IGNORE_HALLU)))
+#else
+        if (((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2)) && !(p_ptr->image && !(mode & MD_IGNORE_HALLU)))
+#endif
 		{
 			/* Start with the name (thus nominative and objective) */
 			if ((m_ptr->mflag2 & MFLAG2_CHAMELEON) && !(mode & MD_TRUE_NAME))

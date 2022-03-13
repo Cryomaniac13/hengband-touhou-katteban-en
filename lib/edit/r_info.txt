@@ -3183,7 +3183,7 @@ D:$A small relative of the dragon that inhabits dark caves.
 D:暗い洞窟に生息するドラゴンの小型の近隣種だ。
 
 N:194:ホフゴブリン
-E:hohgoblin
+E:Hobgoblin
 G:o:g
 I:110:5d5:20:32:50
 W:6:1:0:15:0:0
@@ -3191,6 +3191,8 @@ B:HIT:HURT:1d9
 F:FORCE_SLEEP | MALE | 
 F:FRIENDS | DROP_60 | RAND_50 | GEN_NEUTRAL
 F:OPEN_DOOR | KWAI | HURT_HOLY
+D:$Youkai who came to Human Village replacing the zashiki-warashi
+D:$They were too terrifying, and eventually got driven out.
 D:座敷童の代わりに人里にやってきた妖怪だ。
 D:働き者なのだが見た目が怖すぎて人里から追い出された。
 
@@ -3252,13 +3254,14 @@ D:欲望を持って忍び寄る大きな黒いネコ科の生物だ。それは冒険者を食料ぐらいに
 D:しか考えていない。
 
 N:199:人魚
-E:mermmaid
+E:Mermaid
 G:n:B
 I:110:8d8:20:20:50
 W:8:3:0:30:0:0
 B:STRIKE:SUPERHURT:1d15
 F:FEMALE | KWAI | DEMIHUMAN | GEN_FRIENDLY | DROP_90
 F:FORCE_SLEEP | RES_WATE | IM_ACID | AQUATIC | CAN_SWIM | HURT_HOLY
+D:$Half-human, half-fish youkai. Normally peaceful.
 D:半人半魚の妖怪だ。普段はおとなしい。
 
 #JZ#
@@ -3689,7 +3692,7 @@ D:(Ｈ・Ｐ・ラヴクラフト、大瀧啓裕訳「未知なるカダスを夢に求めて」
 D:『ラヴクラフト全集６』、創元推理文庫、p.193)
 
 N:224:河童
-E:kappa
+E:Kappa
 G:K:g
 I:110:14d14:10:30:1
 W:14:1:4:80:1000:320
@@ -26394,6 +26397,8 @@ F:UNDEAD | IM_FIRE | IM_POIS | IM_ELEC | RES_NETH | RES_DARK | RES_TIME | GEN_WA
 F:NO_CONF | NO_SLEEP | STAY_AT_HOME2
 S:1_IN_3 | 
 S:SCARE | HOLD | CAUSE_4 | BRAIN_SMASH | HAND_DOOM | TPORT | BA_ELEC | THUNDER_STORM
+D:$A soul that got distorted by intense malice. It is forever imprisoned
+D:$in Hell without being given a chance to reincarnate.
 D:強烈な悪意に歪みきった霊魂だ。輪廻にすら値せず永久に地獄に幽閉される定めだ。
 
 N:1352:すっぽん
@@ -26464,6 +26469,7 @@ B:CLAW:HURT:1d6
 B:CLAW:HURT:1d6
 F:RAND_25 | WILD_GRASS | WILD_WOOD | WILD_MOUNTAIN
 F:ANIMAL | GEN_NEUTRAL
+D:$An animal that digs deep burrows with its sharp claws. Its meat is delicious.
 D:鋭い爪で深く入り組んだ巣穴を掘る動物だ。タヌキなどと一緒くたにムジナと呼ばれることもある。肉は脂が乗って美味いらしい。
 
 
