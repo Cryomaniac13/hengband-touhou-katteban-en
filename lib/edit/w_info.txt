@@ -53,15 +53,15 @@ W:E:2:11:25:2:0:Tengu Village
 W:J:2:11:25:2:0:“V‹ç‚Ì—¢
 
 # Town 3
-W:E:3:9:30:3:1:Former Hell
+W:E:3:8:30:3:1:Former Hell
 W:J:3:8:30:3:1:‹Œ’n–ŠX“¹
 
 # Town 4
-W:E:4:7:15:4:1:Devil Mansion
+W:E:4:12:30:4:1:Devil Mansion
 W:J:4:12:30:4:1:g–‚ŠÙ
 
 # Town 5
-W:E:5:2:15:5:1:Hakurei Shrine
+W:E:5:12:70:5:1:Hakurei Shrine
 W:J:5:12:70:5:1:”—í_Ğ
 
 # Town 6
@@ -69,15 +69,15 @@ W:E:6:4:20:6:0:Kappa Bazaar
 W:J:6:4:20:6:0:‰Í“¶‚ÌƒoƒU[
 
 # Town 7
-W:E:7:2:35:7:1:Eientei
+W:E:7:12:50:7:1:Eientei
 W:J:7:12:50:7:1:‰i‰“’à
 
 # Town 8
-W:E:8:2:12:8:0:Kourindou
+W:E:8:12:1:8:1:Kourindou
 W:J:8:12:1:8:1:èÁ“°
 
 # Town 9
-W:E:9:2:90:9:0:Myoren Temple
+W:E:9:12:65:9:1:Myoren Temple
 W:J:9:12:65:9:1:–½˜@›
 
 # Town 10
@@ -89,15 +89,15 @@ W:E:A:7:18:11:0:Ruined Mansion
 W:J:A:7:18:11:0:”p—mŠÙ
 
 # Town 12
-W:E:B:2:18:12:1:Moriya Shrine
+W:E:B:12:65:12:1:Moriya Shrine
 W:J:B:12:65:12:1:ç–î_Ğ
 
 # v1.1.64 Town 13
-W:E:C:2:18:13:0:Higan
+W:E:C:12:65:13:0:Higan
 W:J:C:12:65:13:0:”ŞŠİ
 
 # v1.1.86 Town 14
-W:E:E:2:25:14:0:Fls Heaven Shelf
+W:E:E:11:20:14:0:Fls Heaven Shelf
 W:J:E:11:20:14:0:‹U“V’I
 
 
