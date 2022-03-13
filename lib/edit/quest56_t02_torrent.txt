@@ -9,7 +9,7 @@ Q:56:Q:4:0:0:0:35:0:0:0:6
 # Description for quest
 ?:[LEQ $QUEST56 2]
 Q:$56:T:There's a paper on the wall.
-Q:$56:T:Å@
+Q:$56:T: 
 Q:$56:T:~~~~~~~New Year Rapids Downhill Racing Tournament~~~~~~~
 Q:$56:T:  - The goal is to arrive from starting point to finish 
 Q:$56:T:    in minimum time.
