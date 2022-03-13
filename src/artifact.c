@@ -3119,7 +3119,11 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 		return FALSE;
 	}
 
+#ifdef JP
 	object_desc(name,o_ptr,OD_NAME_ONLY|OD_NO_PLURAL);
+#else
+    object_desc(name,o_ptr,OD_NAME_ONLY|OD_NO_PLURAL|OD_OMIT_PREFIX);
+#endif
 
 	/* Activate for attack */
 	switch (act_ptr->index)
@@ -4236,9 +4240,9 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 		{
 			//v1.1.31 ‘º‰J’Ç‰Á
 			if(o_ptr->name1 == ART_MURASAME)
-				msg_format("%s‚©‚ç…‚ª•¬‚«o‚µ‚½I", name);
+				msg_format(_("%s‚©‚ç…‚ª•¬‚«o‚µ‚½I", "Water spouts from %s!"), name);
 			else
-				msg_format("%s‚ªÔ‚­‹P‚¢‚½...", name);
+				msg_format(_("%s‚ªÔ‚­‹P‚¢‚½...", "The %s glows red..."), name);
 
 			if ((o_ptr->tval == TV_RING) && (o_ptr->sval == SV_RING_FLAMES))
 			{
