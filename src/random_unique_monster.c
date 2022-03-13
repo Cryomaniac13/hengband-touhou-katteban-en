@@ -4187,8 +4187,10 @@ void get_random_unique_name(int r_idx, monster_race *r_ptr, int power, int bias)
 	while(1)
 	{
 		/*:::ランダムな接頭語を得る。レベルとパワーで4段階*/
+#ifdef JP
 		if(get_rnd_line(_("ru_name_prefix.txt", "ru_name_prefix_e.txt"),namepower,name_prefix))
             msg_print(_("ERROR:ランダムユニーク名接頭語を得られない", "ERROR: Failed to get random unique name prefixes"));
+#endif // JP
 
 		/*:::バイアスに応じて職業っぽい中間名を得る。パワーが高いほど配列の後のものが出やすいようにしておく*/
 		switch(bias)
