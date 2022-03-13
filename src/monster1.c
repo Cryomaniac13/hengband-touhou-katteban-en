@@ -3453,7 +3453,7 @@ void roff_top(int r_idx)
 
 #ifndef JP
 	/* A title (use "The" for non-uniques) */
-	if (!(r_ptr->flags1 & RF1_UNIQUE))
+	if (!((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2)))
 	{
 		Term_addstr(-1, TERM_WHITE, "The ");
 	}
