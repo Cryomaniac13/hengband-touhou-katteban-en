@@ -2582,7 +2582,7 @@ D:人間型の姿をしていて後足で立って歩く。この種族は
 D:混沌に熱狂的に仕え、他の種族から恐れられている。
 
 N:159:野鉄砲
-E:mami
+E:Nodeppou
 G:C:U
 I:120:6d8:20:20:5
 W:8:2:0:40:0:0
@@ -2592,6 +2592,8 @@ B:BITE:HURT:1d5
 F:ANIMAL | KWAI | FRIENDS | GEN_NEUTRAL
 S:1_IN_3
 S:SHOOT
+D:$An animal similar to a tanuki that has became a youkai after
+D:$tasting human blood.
 D:人の血の味を覚えて妖怪化した、タヌキに似た動物だ。
 
 #JZ#

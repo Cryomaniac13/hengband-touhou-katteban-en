@@ -4260,7 +4260,8 @@ put_str("今ここで受けられるクエストはないようだ。", 8, 0);
 			}
 			/*:::アイテムがないか渡すのを断った。クエスト放棄確認。放棄の場合失敗メッセージと失敗処理。*/
 			///mod151112 輝夜クエストの場合放棄されない
-			else if(q_index != QUEST_KAGUYA && get_check_strict("このクエストを放棄しますか？", CHECK_OKAY_CANCEL))
+			else if(q_index != QUEST_KAGUYA && get_check_strict(_("このクエストを放棄しますか？",
+                                                                "Abandon this quest?"), CHECK_OKAY_CANCEL))
 			{
 				q_ptr->complev = (byte)p_ptr->lev;
 				q_ptr->status = QUEST_STATUS_FAILED;
