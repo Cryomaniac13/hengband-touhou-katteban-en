@@ -9275,7 +9275,7 @@ static cptr essence_name[] =
 	"Resist Nether",
 	"Resist Water",
 	"Resist Chaos",
-	"Resist Disenchantment",
+	"Resist Disenchant",
 	"Resist Holy",
 	"Resist Time",
 	"Free Action",
@@ -9318,12 +9318,16 @@ static void display_essence(void)
 #ifdef JP
 	prt("エッセンス   個数     エッセンス   個数     エッセンス   個数", 1, 8);
 #else
-	prt("Essence      Num      Essence      Num      Essence      Num ", 1, 8);
+	prt("Essence          Num        Essence          Num        Essence          Num ", 1, 8);
 #endif
 	for (i = 0; essence_name[i]; i++)
 	{
 		if (!essence_name[i][0]) continue;
+#ifdef JP
 		prt(format("%-12s %5d", essence_name[i], p_ptr->magic_num1[i]), 2+num%20, 4+num/20*22);
+#else
+        prt(format("%-18s %5d", essence_name[i], p_ptr->magic_num1[i]), 2+num%20, 4+num/20*28);
+#endif
 		num++;
 	}
 #ifdef JP

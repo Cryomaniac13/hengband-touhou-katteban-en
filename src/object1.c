@@ -445,7 +445,7 @@ static cptr item_activation_aux(object_type *o_ptr)
 #ifdef JP
 	char timeout[32];
 #else
-    char timeout[40];
+    char timeout[42];
 #endif
 	int constant, dice;
 	const activation_type* const act_ptr = find_activation_info(o_ptr);
