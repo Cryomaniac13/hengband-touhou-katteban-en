@@ -8,6 +8,7 @@ Q:$7:N:Phase Spiders and Death Swords
 Q:7:N:フェイズとデスソード
 
 # Definition 
+Q:$7:Q:6:0:0:0:25:0:0:0:6
 Q:7:Q:6:0:0:0:25:0:0:0:6
 
 # Description for quest
