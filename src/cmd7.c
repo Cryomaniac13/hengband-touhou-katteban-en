@@ -1477,8 +1477,14 @@ void search_specific_object(int mode)
 	}
 	else
 	{
+#ifdef JP
 		char msg_mode[24];
 		char msg_dist[16];
+#else
+        char msg_mode[32];
+        char msg_dist[26];
+#endif
+
 
 		if(mode == 1) my_strcpy(msg_mode,_(" ‚Ìd–‚Ì­Õ", "traces of craftsmanship"),sizeof(msg_mode)-2);
 		if(mode == 2) my_strcpy(msg_mode,_("“`à‚Æ‚Ìç®ç", "chance encounter with a legend"),sizeof(msg_mode)-2);

@@ -15759,7 +15759,7 @@ static cptr do_new_spell_foresee(int spell, int mode)
 	case 6:
 		if (name) return _("恐怖のビジョン", "Vision of Terror");
 		if (desc) return _("指定した一体のターゲットに恐ろしい幻覚を見せて恐怖させる。ユニークモンスターには効かず、高レベルな敵には効きにくい。",
-                            "Scares target by showing them terrifying visions. Doesn't affect unique monsters and is less effective against high level enemies.;");
+                            "Scares target by showing them terrifying visions. Doesn't affect unique monsters and is less effective against high level enemies.");
 		{
 			int power = plev + 25;
 			if (cast)
