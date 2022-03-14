@@ -9170,7 +9170,7 @@ essence_type essence_info[] =
 	{ESSENCE_SLAY_GLOVE, "Gloves of Slaying", 1, TR_ES_ATTACK, 200},
 	{ESSENCE_TMP_RES_ALL, "Temp Resistance", 7, -1, 150 },
 
-	{ ESSENCE_WHIRL_WIND, "Act: Kamaitaich", 7, -1, 25 },
+	{ ESSENCE_WHIRL_WIND, "Act: Kamaitachi", 7, -1, 25 },
 	{ ESSENCE_TIM_INC_DICE, "Act: Dice Bonus", 7, -1, 50 },
 	{ ESSENCE_PSY_SPEAR, "Act: Psycho-Spear", 7, -1, 20 },
 	{ ESSENCE_L_RANGE_ATTACK, "Act: Long Range Attack", 7, -1, 25 },
@@ -11003,7 +11003,7 @@ static bool add_essence(int mode)
 				prt(format("   %-43s %6s/%s", "能力(必要エッセンス)", "必要数", "所持数"), 1, x);
 
 #else
-				prt(format("   %-43s %6s/%s", "Ability (needed essence)", "Needs", "Possess"), 1, x);
+				prt(format("   %-53s %6s/%s", "Ability (needed essence)", "Needs", "Possess"), 1, x);
 #endif
 				/* Print list */
 				for (ctr = 0; ctr < max_num; ctr++)
@@ -11163,11 +11163,11 @@ static bool add_essence(int mode)
 
 					if (es_ptr->essence != -1)
 					{
-						sprintf(dummy2, "%-49s %3d/%d", dummy, es_ptr->value, (int)p_ptr->magic_num1[es_ptr->essence]);
+						sprintf(dummy2, _("%-49s %3d/%d", "%-59s %3d/%d"), dummy, es_ptr->value, (int)p_ptr->magic_num1[es_ptr->essence]);
 					}
 					else
 					{
-						sprintf(dummy2, "%-49s %3d/(\?\?)", dummy, es_ptr->value);
+						sprintf(dummy2, _("%-49s %3d/(\?\?)", "%-59s %3d/(\?\?)"), dummy, es_ptr->value);
 					}
 
 					c_prt(col, dummy2, ctr+2, x);
