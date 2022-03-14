@@ -4090,6 +4090,11 @@ static bool get_player_race(void)
 	char	sym[MAX_RACES];
 	char    p2 = ')';
 	char    buf[80], cur[80];
+#ifdef JP
+	int     col_size = 18;
+#else
+    int     col_size = 20;
+#endif
 
 	int	old_cur_pos = 0, new_cur_pos = 0;//古いカーソル位置と新しいカーソル位置　race_idx_list[]のインデックスに対応
 	int	selecting_race_idx;
@@ -4149,12 +4154,12 @@ static bool get_player_race(void)
 			sym[n] = I2A(n);
 		else
 			sym[n] = ('A' + n - 26);
-		sprintf(buf, "%c%c%s", sym[n], p2, str);
+		sprintf(buf, "%c%c %s", sym[n], p2, str);
 
 		if (rp_ptr->flag_nofixed)
-			c_put_str(TERM_L_DARK, buf, 12 + (n / 5), 1 + 18 * (n % 5));
+			c_put_str(TERM_L_DARK, buf, 12 + (n / 5), 1 + col_size * (n % 5));
 		else
-			put_str(buf, 12 + (n / 5), 1 + 18 * (n % 5));
+			put_str(buf, 12 + (n / 5), 1 + col_size * (n % 5));
 
 	}
 
@@ -4166,7 +4171,7 @@ static bool get_player_race(void)
 #ifdef JP
 	sprintf(cur, "%c%c%s", '*', p2, "ランダム");
 #else
-    sprintf(cur, "%c%c%s", '*', p2, "Random");
+    sprintf(cur, "%c%c %s", '*', p2, "Random");
 #endif
 
 	//キー入力を受け付け、方向キーが入力されたらカーソルを描画しそこの色を変えて元の場所の色を戻す
@@ -4183,9 +4188,9 @@ static bool get_player_race(void)
 
 			//前にカーソルがあった場所の再描画。未実装個所は暗くする。最初にこのループに入ったとき「ランダム」のエントリが初めて描画される
 			if (os >= 0 && race_info[os].flag_nofixed)
-				c_put_str(TERM_L_DARK, cur, 12 + (old_cur_pos / 5), 1 + 18 * (old_cur_pos % 5));
+				c_put_str(TERM_L_DARK, cur, 12 + (old_cur_pos / 5), 1 + col_size * (old_cur_pos % 5));
 			else
-				c_put_str(TERM_WHITE, cur, 12 + (old_cur_pos / 5), 1 + 18 * (old_cur_pos % 5));
+				c_put_str(TERM_WHITE, cur, 12 + (old_cur_pos / 5), 1 + col_size * (old_cur_pos % 5));
 
 			//画面上の各種族パラメータ情報欄と現在カーソルが当たっている場所の再描画
 			put_str("                                   ", 3, 40);
@@ -4194,7 +4199,7 @@ static bool get_player_race(void)
 #ifdef JP
 				sprintf(cur, "%c%c%s", '*', p2, "ランダム");
 #else
-				sprintf(cur, "%c%c%s", '*', p2, "Random");
+				sprintf(cur, "%c%c %s", '*', p2, "Random");
 #endif
 				put_str("                                               ", 4, 40);
 				put_str("                                               ", 5, 40);
@@ -4203,7 +4208,7 @@ static bool get_player_race(void)
 			{
 				rp_ptr = &race_info[cs];
 				str = rp_ptr->title;
-				sprintf(cur, "%c%c%s", sym[new_cur_pos], p2, str);
+				sprintf(cur, _("%c%c%s", "%c%c %s"), sym[new_cur_pos], p2, str);
 				c_put_str(TERM_L_BLUE, rp_ptr->title, 3, 40);
 				///mod140105 スコア倍率記述
 #ifdef JP
@@ -4229,7 +4234,7 @@ static bool get_player_race(void)
 
 				c_put_str(TERM_L_BLUE, buf, 5, 40);
 			}
-			c_put_str(TERM_YELLOW, cur, 12 + (new_cur_pos / 5), 1 + 18 * (new_cur_pos % 5));
+			c_put_str(TERM_YELLOW, cur, 12 + (new_cur_pos / 5), 1 + col_size * (new_cur_pos % 5));
 			old_cur_pos = new_cur_pos;
 		}
 
@@ -7079,9 +7084,9 @@ static bool player_birth_aux(void)
 			"b)幻想郷の名もなき住人だ。",
 			"c)幻想郷？何だそれは？",
 #else
-            "a)A somewhat known resident of Gensoukyou.",
-			"b)An unknown resident of Gensoukyou.",
-			"c)Gensoukyou? What's that?",
+            "a) A somewhat known resident of Gensoukyou.",
+			"b) An unknown resident of Gensoukyou.",
+			"c) Gensoukyou? What's that?",
 #endif
 		};
 

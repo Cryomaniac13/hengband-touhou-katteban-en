@@ -1,162 +1,192 @@
-=== 初心者ガイド ===
+=== Beginner's Guide ===
 
-慧音「なに！？　変愚蛮怒本家をやったことがなくこの勝手版が初めての変愚だと？
-よし分かった落ち着け。先生が手取り足取り教えてやるからな。
+Keine - 'What? You're starting off with this mod without having played the
+original Hengband? Very well, I understand, calm down. I'll teach you.
 
-このファイルは/lib/help/instruction.txtだ。
-メモ帳か何かで開き直してゲーム画面の横に出しておくほうが遊びやすいかもしれない。
+This file is /lib/help/instruction_en.txt.
+It might be a good idea to open it in Notepad and place it to the side of the
+game window as you play the game.
 
-ゲームのウィンドウはマウスドラッグで大きくできるぞ。
-この勝手版はデフォルトのウィンドウサイズでは遊びにくいから少し広げておいたほうがいい。
+You can change the game window size by dragging the border with mouse.
+This mod might be difficult to play with default window size, so it's a good
+idea to make it bigger.
 
+Anyway, let's start with the Warrior class.
+In early game, warriors fight essentialy by holding down arrow keys, so
+you'll be able to learn the basic game controls.
 
-とりあえず職業は戦士で始めよう。
-序盤の戦士はほとんど移動キーだけで戦闘ができるから、
-まずはこれで様々な基本操作を覚えるんだ。
+Oni, WhiteWolf-Tengu, Celestials, Shinigami and Great-Youkai are strong
+races that are easy to use. If you want to play as a Touhou character, then
+Youmu, Tewi, Yuuka, Momiji, Eiki, Tenshi and Clownpiece are easy for beginners
+to handle.
 
-種族は鬼、白狼天狗、天人、死神、大妖辺りが分かりやすくて強いな。
-あるいは妖夢、てゐ、幽香、椛、映姫、天子、クラウンピース辺りが初心者でも取っ付き易いだろう。
+Aim for around 20 bonus points.
+You can reroll bonus points by pressing ESC at the allocation screen and then
+pressing 'r'. Allocate points in strength, dexterity and constitution; if you
+put those stats over 20, you might allocate the rest in charisma.
+If you set the 'Fixed amount of bonus points' option to 'on', you'll always
+get 20 bonus points to allocate, making it less annoying.
 
-ボーナスポイントは20くらいは狙ったほうがいい。
-ボーナスポイント選択画面でESCとrを交互に押せばボーナスポイントが再計算される。
-腕力、器用、耐久に割り振って、全部20超えるようなら残りは魅力にでも割り振っておくといい。
-あるいは「ボーナスポイントを固定」オプションをONにすれば20に固定されて面倒がないな。
+Now, that the game has started, do you see those colorful symbols that make up
+the 'town'? This is the game screen. Old computer games before NES era looked
+like this. This is the Human Village of Gensoukyou. The '@' symbol close to
+the entrance is you.
 
-ゲームが開始されると、カラフルな文字や記号で街のようなものが表現されているのが見えるな？
-実はこれがゲーム画面だ。ファミリーコンピュータより昔のコンピュータゲームはこういうものだった。
-ここは幻想郷の人里だ。入口近くにある白い「＠」マークがあなた自身だ。
-
-このゲームはゲームパッドなどというハイカラなものには対応していない。
-すべての操作はキーボードからのコマンドだ。
-コマンドの種類は百種類くらいあるが、
-まずは地下20階程度に進むまでに最低限必要なコマンドを記しておく。
-それ以外のコマンドはEnterキーのウィンドウから探して使い、
-よく使うものからゆっくり覚えればいい。
+This game doesn't work with controllers like gamepads.
+All command are performed with keyboard.
+There's around a hundred of different commands in total, but at first, let's
+learn the basic list of commands required to progressing to around dungeon
+level 20. You can look for other commands through a window you open by
+pressing Enter. You'll be using them often, so try and remember them.
 
 --------------------------------------------------------------------------------
-　Enterキー　	選択式のコマンドウィンドウが出てきて何をするか選べる。
-　
-　方向キー(テンキー)　	＠が移動する。移動先に敵がいると攻撃する。
-　Shift+方向キー　	何か障害物に当たるまで＠が一気に移動する。
-　			NumlockがOFFになっていないと動かない。
-  Ctrl + 方向キー　	その場を動かずキーを押した方向へ攻撃する。
-
-　5 その場で何もしない。
-　  近くのモンスターが寄ってくるのを待ち受けたりちょっと休憩するのに使ってくれ。
-  s 自分の周りを探索する。隠し扉、地面の罠、地面に置かれた箱の罠を発見できるぞ。
-    探索技能が低い場合何度も探さないと見つからないことも多い。
-　< 階段を登る。地上で使うと全体マップモードに移行できる。
-　> 階段を下りる。全体マップで使うと通常マップに移行する。
   
-　g (get)足元のアイテムを拾う。
-　d (drop)アイテムを地面に落とす。
-　e (equip)装備品の一覧を表示する。
-　i (inventory)所持品の一覧を表示する。
-　w (wield)アイテムを装備する。
-　t (takeoff)装備を外す。
+  Enter         Lets you pick a command from a command window
 
-　E (eat) 食料を食べる。食料がなくなったら人里の"1"と書かれた店に売っているぞ。
-　q (quaff)薬を飲む。未鑑定の薬を不用意に飲むのは止めたほうがいい。
-　r (read)巻物を読む。混乱していたり盲目になっていたり明かりが消えていると読めないぞ。
-　F (fuel)ランタンに油を補給する。
-　  ダンジョンの中でランタンから油が切れたら周りが見えなくなって非常に危険だ。
-　a,z,u(aim,zap,usestaff) それぞれ魔法棒、ロッド、杖を使う。
-　  使うのに失敗することもある。未鑑定のものを不用意に使うのはおすすめしない。
+  Arrow keys    Move the '@'. If there's an enemy in the way, attack it.
+  Shift + arrow keys    Makes you run in that direction until you hit an
+                        obstacle. Doesn't work if Numlock is on.
+  Ctrl + arrow keys     Attacks in that direction without trying to move.
+  5     Stand still and do nothing.
+        You can use it for resting while you wait for nearby monsters to
+        come closer
+  s     Search your surroundings. Detects hidden doors, traps on the floor and
+        traps on nearby chests on the floor. If your Searching skill is too
+        low, you might fail to find anything even after searching for a while.
+  <     Go up a staircase. If used on surface, switches to global map mode.
+  >     Go down a staircase. If used in global map mode, moves to normal map.
 
-　o (open)ドアや箱を開く。鍵がかかっていた場合自動的に解錠に挑戦する。
-　c (close)ドアを閉じる。
-  D (Disarm)箱や地面の罠を解除する。解除技能が低いと失敗して罠にかかることもある。
+  g (get)       Pick up an item beneath your feet.
+  d (drop)      Drop an item on floor.
+  e (equip)     Display your current equipment.
+  i (inventory) Display your inventory.
+  w (wield)     Wield/wear an item.
+  t (takeoff)   Take off a piece of equipment.
 
-　J (Job Skill)職業による特殊能力を使う。職業によっては何もできない。
-　U (Use SpecialSkill)種族や突然変異による特殊能力を使う。
-　  例えばてゐや椛は耳を澄まして周りのモンスターの場所を知ることができて便利だ。
+  E (eat)       Eat some food. If you don't have food, buy some from the '1'
+                shop in Human Village.
+  q (quaff)     Quaff a potion. Don't carelessly drink unknown potions.
+  r (read)      Read a scroll. You can't read if you're confused, blind, or
+                in a non-illuminated area.
+  F (fuel)      Refuels your lantern with oil.
+                If your lantern runs out of fuel during your dungeon trip,
+                you won't be able to see anything; this is very dangerous.
+  a,z,u         Uses a wand/rod/staff. You might fail to use the device.
+  (aim,zap,use) I can't recommend carelessly using unknown items.
 
-　l (look)周りを調べる。
-　  コマンドを押した後「*」キーや方向キーなどを押せば、
-　  周りのモンスターなどにカーソルが移る。
-　  モンスターにカーソルが移った状態で「r」キーを押せば、
-　  そのモンスターについて知っている情報を表示できるぞ。
-　C (Character)プレイヤーの情報を調べる。
-　  コマンド入力後、hを押すたびに表示される情報が切り替わるぞ。
+  o (open)      Open a door or a chest. If it's locked, you automatically
+                attempt to unlock it.
+  c (close)     Closes a door.
+  D (disarm)    Disarm a trap on floor/chest. If your disarming skill is low,
+                you might fail and trigger the trap instead.
+
+  J (Job skill) Uses special abilities of your class. Some classes don't have
+                special abilities.
+  U (Use Special Skill)     Uses racial/mutation special abilities.
+                For example, Tewi and Momiji can use their keen hearing to
+                detect nearby monsters.
+  
+  l (look)      Look around.
+                If you press '*' or arrow keys after using this command, you
+                can move the cursor around. If you point it at a monster and
+                press 'r', it will display information you know about that
+                monster at this point.
+  C (Character) Browse player info.
+                You can switch to other information screens by pressing 'h'
+                after using this command.
 
 --------------------------------------------------------------------------------
 
-最低限のコマンドはこんなところか。
+This is the minimum list of commands you'll need.
 
-　ゲームを開始したら、まずはオプション設定をしておこう。
-「=」コマンドからオプション画面に入り、「H」→「5」と入力する。
-これでHPが半分になったとき警告が出る。
-それからESCで一つ前に戻って、次は「D」→「1か2」と入力し、
-敵が撃った魔法などが飛ぶ軌跡が画面に出るようにしておく。
+  After the game has started, let's set up some options first.
+Open the options menu with '=' command, then press 'H' and 5.
+This will give you a warning once your HP falls below 50%.
+Go back with ESC, then press 'D' and 1 or 2.
+This will display the trajectory of spells cast by enemies.
 
-　次は手持ちのお金で装備を整えよう。
-人里マップの"1"と書かれた店で真鍮のランタンと油つぼ、
-"2"と書かれた店で鎧や帽子や靴やクローク（盾は要らないだろう）、
-"5"と書かれた店でテレポートの巻物数枚、
-さらに売っていればパニックモンスターの巻物数枚と余裕があれば帰還の詔の巻物、
-"6"と書かれた店でもし売っていれば警告の指輪を買う。
-残りは"4"と書かれた店で重症の治癒の薬をあるだけ買っておけ。
-欲しい品が売り切れていた場合しばらく経ってまた来れば在庫が更新されている。
-宿に泊まって時間を進めるのもいい。
+  Next, let's prepare your equipment with money you currently have.
+-Buy a lantern and flasks of oil at the '1' store.
+-Buy body armor/cap/shoes/cloak at '2' store (you probably won't 
+ need a shield)
+-Buy Scrolls of Teleportiation at '5' store;
+ If they're selling Scrolls of Monster Confusion, buy some, and if you have
+ spare money, buy Scroll of Word of Recall
+-If a Ring of Warning is being sold at '6' store, buy one
+-Buy some Potions of Cure Serious Wounds at '4' store with your 
+ remaining money
+If the stores aren't selling items you want, spend some time so that they'll
+restock. You can spend it by resting at the inn.
 
-妖夢で始めた場合は刀を片方外して一刀両手持ちにしたほうがいい。
-最初から二刀流などしてもそうそう当たらないからな。
-てゐで始めた場合は大量の資金を持っているから、
-好きな店に行って強そうなものを片端から買うといい。序盤だけならてゐが最強かもしれないな。
+If you're playing as Youmu, take off one of your katanas and fight with
+holding one with both of your hands. In early game, you'll hardly hit anything
+while dual-wielding.
+If you're playing as Tewi, you start out with a large sum of money. Go to
+whatever stores you like and buy items that look strong. Tewi's probably the
+strongest in early game.
 
-　一通り買い物が済んだらダンジョンへ行ってみよう。
-「<」キーで全体マップを表示すると、＠の少し右下に命蓮寺がある。
-全体マップを歩いているとモンスターに襲撃されて通常マップに戻されることがあるが、
-今作ったようなキャラクターならそうそう負けないはずだ。
-HPが減ってきたら薬を飲んで回復したりテレポートの巻物で逃げろ。
-マップ端まで行けば隣のマップに行けて、一度マップを切り替えれば元いた敵は全て消える。
+  Once you've done shopping, let's go to a dungeon.
+Press '<' to switch to global map view; there's Myouren Temple slightly to
+the right and bottom of '@'. You can get ambushed by monsters while you walk
+around on global map, returning you to normal map view, but the character
+you've made shouldn't have problems with this. If your HP gets low, drink a
+healing potion or escape with a teleportation scroll. If you reach the edge of
+the map, you can go to the neighbouring map area; once you return, all the
+enemies will be gone.
 
-　命蓮寺に着いたら「>」キーで通常マップに戻る。
-命蓮寺のマップの右上あたりに赤い>マークが見えるかな？
-これは夢殿大祀廟の入り口だ。強い敵の出にくい初心者ダンジョンとなっている。
-まずはここに入ってしばらく戦闘や移動の基礎を学ぶといいだろう。
-ダンジョンの中にある記号はほとんど地形かアイテム、アルファベットはほとんどモンスターだ。
-'l'コマンドを使ってカーソルを方向キーなどで移動すればそれがなにか調べることができる。
+  Once you arrive at Myouren Temple, press '>' to return to normal map.
+See this purple '>' in top-right area of the map? This is the entrance to
+Hall of Dreams' Great Mausoleum. It's a beginner dungeon where strong enemies
+hardly appear. It's a good idea to go here to learn basics of combat and
+exploration. The symbols in the dungeon are mainly terrain and items, the
+alphabet characters are mainly monsters. Use 'l' command and move the cursor
+to examine them.
 
-白イモムシの大群(白いw)が見つかれば経験値稼ぎのチャンスだ。
-Ctrl+方向キーで部屋の入口から剣を振り続ければ増殖するイモムシが勝手にどんどん倒れてくれる。
-これでレベル6くらいまでは上がるだろう。
+If you find a white worm mass (white 'w'), that's your chance to grind some
+experience. Stand at the room entrance and keep swinging your sword with
+Ctrl + arrow key; you'll keep defeating the multiplying worm masses. You
+probably can reach around level 6 with this method.
 
-　「赤い薬」「○○○○○○と書かれた巻物」などの
-効果のよくわからないアイテムがたくさん見つかると思う。
-また武器防具なども装備してみると呪われているかもしれないな。
-これらは「鑑定」をすることで基本的な効果がわかる。
-鑑定は人里の稗田邸（人里マップ中央上部の+と書かれた入り口）で
-「アイテム鑑定」を選べば行える。$25取られるが。
-もしかすると「妖精のレザーブーツ」のように少し変わった名前のアイテムになるかもしれないな。
-これは高級なアイテムだ。大事に使ってくれ。
-高級なアイテムは紅魔館や香霖堂で詳しく調べてもらえばさらに特殊な効果がわかることがある。
+  You'll probably find a lot of items with unkown effects like 'Red Potion' 
+or 'Scroll labeled '******''. Also, if you attempt to equip weapon/armor you
+find, they might end up being cursed. 
+You can learn more about items with 'identification'.
+You can identify items at Hieda House in Human Village (center-top area).
+It costs $25.
+You also might find items with a slightly odd name like 'Pair of Leather Boots
+of Fairy'. Those are ego-items. Use them well.
+You can perform detailed identification at Scarlet Devil Mansion or Kourindou
+to learn everything about their special effects.
 
-　さて、レベル6程度になったらクエストを受けてみよう。
-人里の稗田邸で「q)クエスト」を選ぶと、ならず者の退治を依頼される。
-人里左上に行けば新しい階段ができていて、中に入ると盗賊団との戦闘になる。
-今のあなたなら負けることはないだろう。
-万全を期すならパニック・モンスターの巻物を読んでみるといい。
-その後攻撃した時に一度だけ敵を混乱させることができる。
-序盤の敵はこれで大体簡単に倒せるぞ。
+  Well, now that's you're around level 6, let's take on a quest.
+Pick 'q) Quest' at the Hieda House in Human Village; you'll be asked to drive
+out some bandits. If you go to the top-left area of Human Village, you'll
+discover a new staircase there; if you enter it, you'll start the fight with
+the group of bandits.
+You shouldn't lose this fight at your current level.
+If you get in trouble, try reading a Scroll of Monster Confusion. It will make
+your next melee attack confuse the enemy. It's a simple way of dealing with
+most of early game enemies.
 
-盗賊団を全員倒すと「クエストを達成した！」と表示される。
-稗田邸に報告に行くとクエスト完了となり、
-以後この建物を探索拠点としてアイテムなどを置いておくことができるようになる。
-（エントランスはアイテムを飾る場所だ。ここにアイテムを置くと二度と使えないので注意してくれ）
+Once you've defeated them all, a message will appear reporting the quest being
+completed. Go back to Hieda House and report, finishing the quest and turning
+that building into your exploration base where you can place your items.
+(The entrance is where you put up items to decorate your house. If you put an
+item here, you won't be able to get it back, so be careful)
 
-最初の流れはこんな所だな。
-このあとは夢殿大祀廟をさらに深くまで潜ったり、
-遠くの鉄獄や玄武の沢へ足を伸ばしたり、
-別のクエストを受けたりしながら、
-レベルを上げ装備を整え様々なアイテムの使い方を覚えていく、という流れだ。
-20階から奥に行くなら麻痺耐性、火炎耐性、透明視認の能力がほしいな。
-その辺りは他のヘルプファイルを見てくれ。
+Basically, that's the early game pattern.
+After that, explore deeper into Hall of Dreams' Great Mausoleum, travel to
+distant locations like Angband or Genbu Lake, clear other quests, raise your
+level, prepare your equipment and remember how to use different items.
+If you want to go deeper below dungeon level 20, you'll want free action,
+fire resistance, and the ability to see invisible. Check the other help files
+for more details.
 
-ダンジョンの奥から「帰還の詔の巻物」を読んでしばらく待てば地上へと戻れる。
-また、人里の神霊廟出張所から「ダンジョンへ帰還」を選べば、
-ダンジョンのこれまで探索した一番深い階へ送ってくれるぞ。
+If you read a Scroll of Word of Recall in a dungeon, it will return you to
+the surface after a slight delay. If you pick 'Recall to dungeon' at the
+Divine Shrine Mausoleum Branch Office in the Human Village, it'll send you to
+the deepest dungeon level you've reached up to this point.
 
-難しければ性格「いかさま」や難易度EASYでやってみるのも良いだろう。
-幸運を祈る。」
-
+If the game is hard for you, feel free to pick the 'Munchkin' personality
+or play on Easy difficulty.
+Good luck.'
