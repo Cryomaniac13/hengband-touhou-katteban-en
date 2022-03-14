@@ -6931,11 +6931,11 @@ void display_player(int mode)
 		//display_player_one_line(ENTRY_ALIGN, format("%s" ,your_alignment()), TERM_L_BLUE);
 
 
-	if(difficulty == DIFFICULTY_EASY)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,"EASY"), TERM_L_GREEN);
-	if(difficulty == DIFFICULTY_NORMAL) display_player_one_line(ENTRY_SOCIAL, format("%s" ,"NORMAL"), TERM_L_WHITE);
-	if(difficulty == DIFFICULTY_HARD)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,"HARD"), TERM_L_BLUE);
-	if(difficulty == DIFFICULTY_LUNATIC)display_player_one_line(ENTRY_SOCIAL, format("%s" ,"LUNATIC"), TERM_VIOLET);
-	if(difficulty == DIFFICULTY_EXTRA)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,"EXTRA"), TERM_L_RED);
+	if(difficulty == DIFFICULTY_EASY)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("EASY", "Easy")), TERM_L_GREEN);
+	if(difficulty == DIFFICULTY_NORMAL) display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("NORMAL", "Normal")), TERM_L_WHITE);
+	if(difficulty == DIFFICULTY_HARD)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("HARD", "Hard")), TERM_L_BLUE);
+	if(difficulty == DIFFICULTY_LUNATIC)display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("LUNATIC", "Lunatic")), TERM_VIOLET);
+	if(difficulty == DIFFICULTY_EXTRA)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("EXTRA", "Extra")), TERM_L_RED);
 	//スコア表示　キャラクターメイク時には表示しない
 	//v1.1.53b スコア上限40億に拡張 luはunsigned long
 	if(character_generated) display_player_one_line(ENTRY_ALIGN, format("%lu" ,total_points_new(FALSE)), TERM_L_WHITE);

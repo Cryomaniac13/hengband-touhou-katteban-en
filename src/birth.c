@@ -5917,22 +5917,22 @@ const	cptr select_unique_entry[ENTRY_MAX] = {
 		"o)黄昏弾幕アクション",
 		"p)その他の作品",
 #else
-        "a)Regular protagonists",
-		"b)Embodiment of Scarlet Devil",
-		"c)Perfect Cherry Blossom",
-		"d)Imperishable Night",
-		"e)Phantasmagoria of Flower View",
-		"f)Mountain of Faith",
-		"g)Subterranean Animism",
-		"h)Undefined Fantastic Object",
-		"i)Ten Desires",
-		"j)Double Dealing Character",
-		"k)Legacy of Lunatic Kingdom",
-		"l)Hidden Star in Four Seasons",
-		"m)Wily Beast and Weakest Creature",
-		"n)Unconnected Marketeers",
-		"o)Tasogare Danmaku Action",
-		"p)Other works",
+        "a) Regular protagonists",
+		"b) Embodiment of Scarlet Devil",
+		"c) Perfect Cherry Blossom",
+		"d) Imperishable Night",
+		"e) Phantasmagoria of Flower View",
+		"f) Mountain of Faith",
+		"g) Subterranean Animism",
+		"h) Undefined Fantastic Object",
+		"i) Ten Desires",
+		"j) Double Dealing Character",
+		"k) Legacy of Lunatic Kingdom",
+		"l) Hidden Star in Four Seasons",
+		"m) Wily Beast and Weakest Creature",
+		"n) Unconnected Marketeers",
+		"o) Tasogare Danmaku Action",
+		"p) Other works",
 #endif
 	};
 
@@ -6935,11 +6935,11 @@ static bool player_birth_aux(void)
 		char temp[80*9];
 		cptr t;
 		cptr select_difficulty[5] = {
-			"a)EASY",
-			"b)NORMAL",
-			"c)HARD",
-			"d)LUNATIC",
-			"e)EXTRA",
+			_("a)EASY", "a) Easy"),
+			_("b)NORMAL", "b) Normal"),
+			_("c)HARD", "c) Hard"),
+			_("d)LUNATIC", "d) Lunatic"),
+			_("e)EXTRA", "e) Extra"),
 		};
 
 #ifdef JP

@@ -2375,11 +2375,11 @@ static void prt_frame_basic(void)
 	int i;
 
 
-	if(difficulty == DIFFICULTY_EASY)	c_put_str(TERM_L_GREEN, "EASY", ROW_DIFFICULTY, COL_DIFFICULTY+6);
-	if(difficulty == DIFFICULTY_NORMAL)	c_put_str(TERM_WHITE, "NORMAL", ROW_DIFFICULTY, COL_DIFFICULTY+4);
-	if(difficulty == DIFFICULTY_HARD)	c_put_str(TERM_L_BLUE, "HARD", ROW_DIFFICULTY, COL_DIFFICULTY+6);
-	if(difficulty == DIFFICULTY_LUNATIC)	c_put_str(TERM_VIOLET, "LUNATIC", ROW_DIFFICULTY, COL_DIFFICULTY+3);
-	if(difficulty == DIFFICULTY_EXTRA)	c_put_str(TERM_RED, "EXTRA", ROW_DIFFICULTY, COL_DIFFICULTY+5);
+	if(difficulty == DIFFICULTY_EASY)	c_put_str(TERM_L_GREEN, _("EASY", "Easy"), ROW_DIFFICULTY, COL_DIFFICULTY+6);
+	if(difficulty == DIFFICULTY_NORMAL)	c_put_str(TERM_WHITE, _("NORMAL", "Normal"), ROW_DIFFICULTY, COL_DIFFICULTY+4);
+	if(difficulty == DIFFICULTY_HARD)	c_put_str(TERM_L_BLUE, _("HARD", "Hard"), ROW_DIFFICULTY, COL_DIFFICULTY+6);
+	if(difficulty == DIFFICULTY_LUNATIC)	c_put_str(TERM_VIOLET, _("LUNATIC", "Lunatic"), ROW_DIFFICULTY, COL_DIFFICULTY+3);
+	if(difficulty == DIFFICULTY_EXTRA)	c_put_str(TERM_RED, _("EXTRA", "Extra"), ROW_DIFFICULTY, COL_DIFFICULTY+5);
 
 	put_str(format("Score:%lu",total_points_new(FALSE)),ROW_SCORE,COL_SCORE);
 
