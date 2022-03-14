@@ -442,7 +442,11 @@ static cptr item_activation_aux(object_type *o_ptr)
 {
 	static char activation_detail[256];
 	cptr desc;
+#ifdef JP
 	char timeout[32];
+#else
+    char timeout[40];
+#endif
 	int constant, dice;
 	const activation_type* const act_ptr = find_activation_info(o_ptr);
 
@@ -474,7 +478,7 @@ static cptr item_activation_aux(object_type *o_ptr)
 		case GUN_FIRE_MODE_SPARK:
 			project_desc = _("大型ビーム", "large beam");break;
 		default:
-			project_desc = _("射撃", "attack");break;
+			project_desc = _("射撃", "shooting attack");break;
 		}
 
 		sprintf(timeout, _("%dターン毎(銃熟練度で増減)",
