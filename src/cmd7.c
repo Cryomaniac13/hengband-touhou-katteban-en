@@ -2630,7 +2630,7 @@ cptr cast_monspell_new_aux(int num, bool only_info, bool fail, int xtra)
 		cast_lev = p_ptr->lev * 2;
 		cast_hp = p_ptr->chp;
 		if (p_ptr->lev > 44) powerful = TRUE;
-		msg = "行使した！";
+		msg = _("行使した！", "use");
 	}
 	else if (p_ptr->pclass == CLASS_RESEARCHER)
 	{
