@@ -11,14 +11,15 @@ Q:$52:Q:3:0:0:0:30:0:0:0:6
 Q:52:Q:3:0:0:0:30:0:0:0:6
 
 # Random Reward (can set less than 30 items)
+Q:$52:R:45:59:62:72:74:85:90:97:98:99:105:131:133:151:155:157:158:159:173:176:193:195:211:213:313:314:315
 Q:52:R:45:59:62:72:74:85:90:97:98:99:105:131:133:151:155:157:158:159:173:176:193:195:211:213:313:314:315
 
 # Description for quest
 ?:[LEQ $QUEST52 2]
 Q:$52:T:Lunasa - 'So, you like visiting ruined buildings like this.'
 Q:$52:T:Merlin - 'Hey, can we play a game?
-Q:$52:T:　　　　　Go search for treasure inside.
-Q:$52:T:　　　　　If you find something, that'll be your present!'
+Q:$52:T:       Go search for treasure inside.
+Q:$52:T:       If you find something, that'll be your present!'
 Q:$52:T:Lyrica - 'That room? Is it going to be okay?'
 Q:52:T:ルナサ　「こんな廃屋を訪ねてくるなんて物好きなことね。」
 Q:52:T:メルラン「ねえねえ、ちょっと遊んでいかない？

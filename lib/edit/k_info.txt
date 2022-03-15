@@ -2927,7 +2927,7 @@ F:SEARCH | HIDE_TYPE
 
 
 N:270:¸–­:È‚ß‚Ì‚¤‚Ì
-E:Accuracy:Onyx
+E:Accuracy:Striped Agate
 G:=:R
 I:47:24:0
 W:20:0:2:500
@@ -3028,7 +3028,7 @@ F:RES_NETHER
 
 #‘Ï…À‘•Œã
 N:282:‘Ï…:‹à‚Ì
-E:Nexus Resistance:Gold
+E:Water Resistance:Gold
 G:=:y
 I:47:36:0
 W:32:0:2:3000
@@ -3085,7 +3085,7 @@ F:RES_BLIND
 
 #w—Ö‚Å‚È‚­ƒAƒ~ƒ…‚É‚·‚é
 N:289:‘Ï”j×:”’–Ø‚Ì
-E:Blindness Resistance:Plain Wood
+E:Holy Resistance:Plain Wood
 G:":y
 #I:47:43:0
 I:48:29:0
