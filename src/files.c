@@ -1778,7 +1778,7 @@ static struct
 	{29, 20, 21, "Play time"},
 	{53, 10, -1, "Fighting   : "},
 	{53, 11, -1, "Shooting   : "},
-	{53, 12, -1, "SavingThrow: "},
+	{53, 12, -1, "ProtFrMagic: "},
 	{53, 13, -1, "Stealth    : "},
 	{53, 15, -1, "Perception : "},
 	{53, 16, -1, "Searching  : "},
