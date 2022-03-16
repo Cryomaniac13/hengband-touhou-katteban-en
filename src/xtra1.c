@@ -11371,7 +11371,7 @@ void calc_bonuses(void)
 #ifdef JP
 		msg_print("‚±‚Ì‘•”õ‚È‚çxá‚È‚­“®‚¯‚»‚¤‚¾B");
 #else
-			msg_print("You feel able to move encumbered with your current equipment.");
+			msg_print("You feel able to move unencumbered with your current equipment.");
 #endif
 
 	}
