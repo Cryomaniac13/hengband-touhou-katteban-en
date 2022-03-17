@@ -1075,30 +1075,30 @@ else                            hooked_roff("ë∂ç›");
 #ifdef JP
 	if (flags4 & RF4_WAVEMOTION)  {vp[vn] = "îgìÆñCÇî≠éÀÇ∑ÇÈ";color[vn++] = TERM_WHITE;}
 #else
-	if (flags4 & RF4_ROCKET)  {vp[vn] = "shoot a rocket";color[vn++] = TERM_UMBER;}
+	if (flags4 & RF4_WAVEMOTION)  {vp[vn] = "fire a wave-motion cannon";color[vn++] = TERM_UMBER;}
 #endif
 
 #ifdef JP
 	if (flags4 & RF4_BA_FORCE) {vp[vn] = "ãCÇï˙Ç¡ÇƒçUåÇÇ∑ÇÈ";color[vn++] = TERM_YELLOW;}
 #else
-	if (flags4 & RF4_SHOOT) {vp[vn] = "fire an arrow";color[vn++] = TERM_UMBER;}
+	if (flags4 & RF4_BA_FORCE) {vp[vn] = "attack by releasing Ki";color[vn++] = TERM_UMBER;}
 #endif
 #ifdef JP
 	if (flags4 & RF4_DANMAKU) {vp[vn] = "íeñãÇï˙Ç¡ÇƒçUåÇÇ∑ÇÈ";color[vn++] = TERM_RED;}
 #else
-	if (flags4 & RF4_SHOOT) {vp[vn] = "fire an arrow";color[vn++] = TERM_UMBER;}
+	if (flags4 & RF4_DANMAKU) {vp[vn] = "fire danmaku";color[vn++] = TERM_UMBER;}
 #endif
 
 #ifdef JP
 	if (flags4 & RF4_SHOOT) {vp[vn] = "âìäuçUåÇÇÇ∑ÇÈ";color[vn++] = TERM_UMBER;}
 #else
-	if (flags4 & RF4_SHOOT) {vp[vn] = "fire an arrow";color[vn++] = TERM_UMBER;}
+	if (flags4 & RF4_SHOOT) {vp[vn] = "attack from distance";color[vn++] = TERM_UMBER;}
 #endif
 
 #ifdef JP
 	if (flags6 & (RF6_SPECIAL) || flags4 & (RF4_SPECIAL2)) {vp[vn] = "ì¡ï Ç»çsìÆÇÇ∑ÇÈ";color[vn++] = TERM_VIOLET;}
 #else
-	if (flags6 & (RF6_SPECIAL)) {vp[vn] = "do something";color[vn++] = TERM_VIOLET;}
+	if (flags6 & (RF6_SPECIAL) || flags4 & (RF4_SPECIAL2)) {vp[vn] = "do something";color[vn++] = TERM_VIOLET;}
 #endif
 
 	/* Describe inate attacks */
