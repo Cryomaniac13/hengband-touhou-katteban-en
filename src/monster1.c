@@ -2337,7 +2337,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 #ifdef JP
 	if (flagsr & RFR_RES_HOLY) {vp[vn] = "îjé◊";color[vn++] = TERM_L_WHITE;}
 #else
-	if (flagsr & RFR_RES_HOLY) {vp[vn] = "nexus";color[vn++] = TERM_VIOLET;}
+	if (flagsr & RFR_RES_HOLY) {vp[vn] = "holy energy";color[vn++] = TERM_L_WHITE;}
 #endif
 
 #ifdef JP
@@ -2363,7 +2363,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 #ifdef JP
 	if (flagsr & RFR_RES_TIME) {vp[vn] = "éûãÛçUåÇ";color[vn++] = TERM_L_BLUE;}
 #else
-	if (flagsr & RFR_RES_TIME) {vp[vn] = "time";color[vn++] = TERM_L_BLUE;}
+	if (flagsr & RFR_RES_TIME) {vp[vn] = "space-time attacks";color[vn++] = TERM_L_BLUE;}
 #endif
 ///mod131231 èdóÕëœê´çÌèú
 /*
@@ -2376,7 +2376,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 #ifdef JP
 	if (flagsr & RFR_RES_ALL) {vp[vn] = "Ç†ÇÁÇ‰ÇÈçUåÇ";color[vn++] = TERM_YELLOW;}
 #else
-	if (flagsr & RFR_RES_ALL) {vp[vn] = "all";color[vn++] = TERM_YELLOW;}
+	if (flagsr & RFR_RES_ALL) {vp[vn] = "any sort of attacks";color[vn++] = TERM_YELLOW;}
 #endif
 
 #ifdef JP
