@@ -15,8 +15,8 @@ Q:$69:T: goddess will create an ability card for you just one time,
 Q:$69:T: and you'll be able to exchange it!
 Q:$69:T: The venue is that table over there on cliffside! Please join us!
 Q:$69:T:
-Q:$69:T:　...Oh, so you noticed the logs falling down the cliff?
-Q:$69:T:　She said it's absolutely necessary to establish a market...'
+Q:$69:T: ...Oh, so you noticed the logs falling down the cliff?
+Q:$69:T: She said it's absolutely necessary to establish a market...'
 Q:69:T:早苗「貴方も守矢神社共催のアビリティカード交換会に参加されますか？
 Q:69:T:　交換するカードがなくても大丈夫です！
 Q:69:T:　市場の神様が一度だけ貴方のカードを作って下さいますのでそれを交換しましょう！
