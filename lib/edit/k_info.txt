@@ -6818,77 +6818,86 @@ F:INSTA_ART
 D:ナズーリンが愛用する首飾り・・だったものだ。
 
 N:663:赤魔法お化け:胞子に覆われた
-E:of Magic (Red):Spore-Covered
+E:Magic (Red):Spore-Covered
 G:,:r
 I:74:22:300
 W:20:0:2:50
 A:1/255
+D:$Gives fire resistance for a short time if eaten.
 D:それは食べると短時間火炎への耐性をもたらす。
 
 N:664:白魔法お化け:丸い
-E:of Magic (White):Round
+E:Magic (White):Round
 G:,:w
 I:74:23:300
 W:20:0:2:50
 A:1/255
+D:$Gives cold resistance for a short time if eaten.
 D:それは食べると短時間冷気への耐性をもたらす。
 
 N:665:青魔法お化け:仄かに光る
-E:of Magic (Blue):Faintly Glowing
+E:Magic (Blue):Faintly Glowing
 G:,:B
 I:74:24:300
 W:20:0:2:50
 A:1/255
+D:$Gives lightning resistance for a short time if eaten.
 D:それは食べると短時間電撃への耐性をもたらす。
 
 N:666:黒魔法お化け:毒々しい
-E:of Magic (Black):Toxic-Looking
+E:Magic (Black):Toxic-Looking
 G:,:D
 I:74:25:300
 W:20:0:2:50
 A:1/255
+D:$Gives acid resistance for a short time if eaten.
 D:それは食べると短時間酸への耐性をもたらす。
 
 N:667:緑魔法お化け:肉厚の
-E:of Magic (Green):Thick
+E:Magic (Green):Thick
 G:,:g
 I:74:26:300
 W:20:0:2:200
 A:1/255
+D:$Gives poison resistance for a short time is eaten.
 D:それは食べると短時間毒への耐性をもたらす。
 
 N:668:極彩色魔法お化け:サイケデリックな
-E:of Magic (Iridescent):Psychedelic
+E:Magic (Iridescent):Psychedelic
 G:,:v
 I:74:27:300
 W:20:0:2:300
 A:1/255
+D:$Gives chaos resistance for a short time if eaten.
 D:それは食べると短時間カオスへの耐性をもたらす。
 
 N:669:灰色魔法お化け:不気味な
-E:of Magic (Ashen):Creepy
+E:Magic (Ashen):Creepy
 G:,:W
 I:74:28:300
 W:20:0:2:300
 A:1/255
+D:$Gives nether resistance for a short time if eaten.
 D:それは食べると短時間地獄への耐性をもたらす。
 
 N:670:無色魔法お化け:固い
-E:of Magic (Colorless):Hard
+E:Magic (Colorless):Hard
 G:,:w
 I:74:29:300
 W:20:0:2:500
 A:1/255
+D:$Increases your AC for a short time if eaten.
 D:それは食べると短時間AC上昇をもたらす。
 
 N:671:スーパー魔法お化け:巨大な
-E:of Magic (Super):Huge
+E:Magic (Super):Huge
 G:,:y
 I:74:30:7500
 W:20:0:200:30000
 A:1/255
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:FIXED_FLAVOR
+D:$Turns you gigantic for a short time if eaten.
 D:それは食べると短時間とんでもないことになる。
 
 N:672:鉄鐸
@@ -6908,6 +6917,8 @@ I:78:28:2000
 W:0:0:10:250
 A:1/255
 P:0:1d1:0:0:0
+D:$Mystic liquor brewed by hermits. Cleanses your mind if your drink it,
+D:$restoring 100 MP.
 D:仙人が作った神秘の酒だ。飲むと精神が研ぎ澄まされ、MPが100回復する。
 
 
@@ -6958,11 +6969,12 @@ D:妖怪たちは「これを持っている人間は食べてもいい」と認識している。
 
 
 N:678:水色魔法お化け:妙に軽い
-E:of Magic (Aqua):Strangely Light
+E:Magic (Aqua):Strangely Light
 G:,:B
 I:74:31:300
 W:20:0:2:50
 A:1/255
+D:$Nothing happens if you eat it.
 D:それは食べても何も起こらない。
 
 N:679:紫の袱紗
@@ -8229,13 +8241,13 @@ D:$souls of corpses buried under sakura trees.
 D:妖気を放つ鉱石だ。桜の木の下の死体の魂が長い年月をかけて結晶化した姿であるという。
 
 N:794:折れた針
-E:& Broken Needle~
+E:& Pile~ of Broken Needles
 G:~:W
 I:73:38:0
 W:10:0:10:0
 A:20/7:50/3
 P:0:1d5:0:0:0
-D:$A bunch of long bent and broken needles.
+D:$A bunch of bent and broken long needles.
 D:曲がったり折れたりした長い針の束だ。
 D:「多くの血を吸った針は曰くつきのマジックアイテムさ」(東方茨歌仙 6)
 
@@ -8333,7 +8345,7 @@ D:$A powerful, large-caliber pistol.
 D:強力な弾薬を扱う大口径の拳銃だ。
 
 N:802:レーザーライフル
-E:& Laser GRifle~
+E:& Laser Rifle~
 G:}:y
 I:33:9:0
 W:60:0:60:20000
