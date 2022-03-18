@@ -2167,7 +2167,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 ///mod131231 モンスターフラグ変更 岩石妖怪弱点RF3からRFRへ
 	if (flagsr & RFR_HURT_ROCK) {vp[vn] = "岩を除去するもの";color[vn++] = TERM_UMBER;}
 #else
-	if (flags3 & RFR_HURT_ROCK) {vp[vn] = "rock remover";color[vn++] = TERM_UMBER;}
+	if (flagsr & RFR_HURT_ROCK) {vp[vn] = "rock remover";color[vn++] = TERM_UMBER;}
 #endif
 
 #ifdef JP
@@ -2175,21 +2175,21 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 	if (flagsr & RFR_HURT_LITE) {vp[vn] = "明るい光";color[vn++] = TERM_YELLOW;}
 	//if (flags3 & RF3_HURT_LITE) {vp[vn] = "明るい光";color[vn++] = TERM_YELLOW;}
 #else
-	if (flags3 & RFR_HURT_LITE) {vp[vn] = "bright light";color[vn++] = TERM_YELLOW;}
+	if (flagsr & RFR_HURT_LITE) {vp[vn] = "bright light";color[vn++] = TERM_YELLOW;}
 #endif
 
 #ifdef JP
 ///mod131231 モンスターフラグ変更 火炎弱点RF3からRFRへ
 	if (flagsr & RFR_HURT_FIRE) {vp[vn] = "炎";color[vn++] = TERM_RED;}
 #else
-	if (flags3 & RFR_HURT_FIRE) {vp[vn] = "fire";color[vn++] = TERM_RED;}
+	if (flagsr & RFR_HURT_FIRE) {vp[vn] = "fire";color[vn++] = TERM_RED;}
 #endif
 
 ///mod131231 モンスターフラグ変更 冷気弱点RF3からRFRへ
 #ifdef JP
 	if (flagsr & RFR_HURT_COLD) {vp[vn] = "冷気";color[vn++] = TERM_L_WHITE;}
 #else
-	if (flags3 & RFR_HURT_COLD) {vp[vn] = "cold";color[vn++] = TERM_L_WHITE;}
+	if (flagsr & RFR_HURT_COLD) {vp[vn] = "cold";color[vn++] = TERM_L_WHITE;}
 #endif
 #ifdef JP
 	if (flagsr & RFR_HURT_ELEC) {vp[vn] = "電撃";color[vn++] = TERM_BLUE;}
