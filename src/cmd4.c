@@ -10029,7 +10029,11 @@ static void do_cmd_knowledge_quests_current(FILE *fff)
  */
 void do_cmd_knowledge_quests_completed(FILE *fff, int quest_num[])
 {
+#ifdef JP
 	char tmp_str[160];
+#else
+    char tmp_str[220];
+#endif
 	char str_time[20];
 	int i;
 	int total = 0;
@@ -10109,7 +10113,7 @@ void do_cmd_knowledge_quests_completed(FILE *fff, int quest_num[])
 #ifdef JP
 						"  %-40s (%3dŠK)            - ƒŒƒxƒ‹%2d%s\n",
 #else
-						"  %-40s (Dungeon level: %3d) - level %2d\n",
+						"  %-40s (Dungeon level: %3d) - level %2d %s\n",
 #endif
 						r_name+r_info[quest[q_idx].r_idx].name,
 						quest[q_idx].level,
@@ -10123,8 +10127,8 @@ void do_cmd_knowledge_quests_completed(FILE *fff, int quest_num[])
 				sprintf(tmp_str, "  %-40s (ŠëŒ¯“x:%3dŠK‘Š“–) - ƒŒƒxƒ‹%2d%s\n",
 					quest[q_idx].name, quest[q_idx].level, quest[q_idx].complev,str_time);
 #else
-				sprintf(tmp_str, "  %-40s (Danger  level: %3d) - level %2d\n",
-					quest[q_idx].name, quest[q_idx].level, quest[q_idx].complev);
+				sprintf(tmp_str, "  %-40s (Danger  level: %3d) - level %2d %s\n",
+					quest[q_idx].name, quest[q_idx].level, quest[q_idx].complev,str_time);
 #endif
 			}
 
