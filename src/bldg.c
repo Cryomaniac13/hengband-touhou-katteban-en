@@ -8706,9 +8706,9 @@ bool check_quest_unique_text(void)
 #else
                 strcpy(quest_text[line++], "The results are...");
 				strcpy(quest_text[line++], " ");
-				strcpy(quest_text[line++], format("1st place ÅF%s",name_list[0]));
-				strcpy(quest_text[line++], format("2nd place ÅF%s",name_list[1]));
-				strcpy(quest_text[line++], format("3rd place ÅF%s",name_list[2]));
+				strcpy(quest_text[line++], format("1st place  : %s",name_list[0]));
+				strcpy(quest_text[line++], format("2nd place  : %s",name_list[1]));
+				strcpy(quest_text[line++], format("3rd place  : %s",name_list[2]));
 #endif
 
 			}
