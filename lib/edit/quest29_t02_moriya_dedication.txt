@@ -11,12 +11,12 @@ Q:29:Q:6:0:0:0:70:0:0:0:6
 # Description for quest
 ?:[LEQ $QUEST29 2]
 Q:$29:T:There's a paper on the wall of the bar...
-Q:$29:T:　　
-Q:$29:T:　　******New Year Ceremony******
-Q:$29:T:　　　  Challenge Kanko Yasaka 
-Q:$29:T:      to a one-on-one fight
-Q:$29:T:　  We're awaiting challengers!
-Q:$29:T:　　　　　　   Moriya Shrine
+Q:$29:T:  
+Q:$29:T:   ******New Year Ceremony******
+Q:$29:T:      Challenge Kanako Yasaka 
+Q:$29:T:       to a one-on-one fight
+Q:$29:T:    We're awaiting challengers!
+Q:$29:T:           Moriya Shrine
 Q:29:T:酒場の壁に張り紙が貼ってある……
 Q:29:T:　　
 Q:29:T:　　＊＊＊新春奉納演武＊＊＊
