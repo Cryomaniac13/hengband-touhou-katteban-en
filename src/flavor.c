@@ -1071,6 +1071,9 @@ static char *get_ability_abbreviation(char *ptr, object_type *o_ptr, bool kanji,
 	{
 		if (kanji)
 			ADD_INSC("+");
+#ifndef JP
+        ADD_INSC("+");
+#endif
 	}
 	ptr = inscribe_flags_aux(flag_insc_plus, flgs, kanji, ptr);
 
@@ -1099,7 +1102,7 @@ static char *get_ability_abbreviation(char *ptr, object_type *o_ptr, bool kanji,
 			ADD_INSC("r");
 		else if (ptr != prev_ptr)
 		{
-			ADD_INSC(";");
+			ADD_INSC(";r");
 			prev_ptr = ptr;
 		}
 	}
