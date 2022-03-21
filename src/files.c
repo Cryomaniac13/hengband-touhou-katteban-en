@@ -8498,7 +8498,8 @@ static void dump_aux_skills(FILE *fff)
 	    "Guns"};
 #endif
 
-	fprintf(fff, "\n  [ãZî\àÍóó]\n");
+	fprintf(fff, _("\n  [ãZî\àÍóó]\n",
+                   "\n  [Skills List]\n"));
 #ifdef JP
 	fprintf(fff, "ãZî\ÇÃéÌóﬁ    ìKê´    ãZî\ÉåÉxÉã\n");
 #else
@@ -8514,7 +8515,7 @@ static void dump_aux_skills(FILE *fff)
 			continue;
 		}
 		skill_exp = ref_skill_exp(i);
-		fprintf(fff, "%-12s ", skill_name[i]);
+		fprintf(fff, "%-14s ", skill_name[i]);
 
 		if(cp_ptr->skill_aptitude[i] == 0) fprintf(fff, _("(äFñ≥)", "(n/a)"));
 		if(cp_ptr->skill_aptitude[i] == 1) fprintf(fff, "( E )");
@@ -8525,8 +8526,8 @@ static void dump_aux_skills(FILE *fff)
 
 
 		fprintf(fff, "     %d",skill_exp / SKILL_LEV_TICK);
-		if (skill_exp > cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, _("(ê¨í∑è„å¿ìÀîj)", "(beyond limit)"));
-		else if (skill_exp == cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, _("(ê¨í∑è„å¿)", "(at limit)"));
+		if (skill_exp > cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, _("(ê¨í∑è„å¿ìÀîj)", " (beyond limit)"));
+		else if (skill_exp == cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, _("(ê¨í∑è„å¿)", " (at limit)"));
 		else fprintf(fff, " ");
 
 		fprintf(fff, "\n");
