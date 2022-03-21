@@ -1395,7 +1395,7 @@ if (flags5 & (RF5_BA_DARK))         {vp[vn] = "à√çïÇÃóí";color[vn++] = TERM_L_DA
 #ifdef JP
 if (flags5 & (RF5_BA_LITE))         {vp[vn] = "ëMåıÇÃóí";color[vn++] = TERM_YELLOW;}
 #else
-	if (flags5 & (RF5_BA_LITE))         {vp[vn] = "invoke starburst";color[vn++] = TERM_YELLOW;}
+	if (flags5 & (RF5_BA_LITE))         {vp[vn] = "invoke light storms";color[vn++] = TERM_YELLOW;}
 #endif
 
 #ifdef JP
