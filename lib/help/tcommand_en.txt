@@ -1,258 +1,267 @@
-=== 変愚蛮怒本家とのコマンドの違い ===
+=== Commands Different from Original Hengband ===
 
-慧音「多くの人は本家との違いだけわかれば十分だろうから最初に説明しよう。
+Keine - 'For many people, it's most important to know differences in commands
+compared to the original, so I'll start with that.
 
-まず重要なことだが、
-この勝手版では職業ごとの特技は'm'コマンドでなくほとんど'J'コマンドから使う。
-'j'コマンドからは職業特技の説明を見られる。
-ローグ風配置では'S'から特技を使用する。特技の説明は'P'コマンドから見てくれ。
+First of all, an important detail:
+In this mod, class special abilities are used through 'J' command instead of
+'m'. 'j' command lets you browse your class special abilities.
+In roguelike layout, 'S' uses special abilities, 'P' browses them.
 
-また、'b'コマンドから魔法だけでなくJコマンドによる職業特技、
-Uコマンドによるレイシャルパワーの説明も見られるようになった。
+Also, 'b' command lets you browse not only spells, but also the special class
+abilities from 'J' command and racial powers from 'U' command.
 
-次に、「くさびを打つ」コマンドは廃止された。くさびというアイテムもない。
+The 'jam a door' command was removed, along with iron spike items.
 
-それから、オリジナル配置の場合'x'キーではコマンドウィンドウが出なくなった。
-'x'キーは今空いているのでマクロにでも使ってくれ。
+'x' key in original layout no longer opens command window; it's free to use
+for macros.
 
-バージョン1.1.27以降では魔法職に限りCtrl+'g'コマンドで「結界ガード」が使えるようになった。
-詳しくは「その他」の項目を見てほしい。」
+Starting from version 1.1.27, spellcaster classes can use 'Barrier Guard' with
+Ctrl-'g'. It's explained in more details in 'Other' section.'
 
 ***** <Turn>
-=== 行動コマンドとそれ以外のコマンド ===
+=== Action Commands and Other Commands ===
 
-慧音「コマンドには大きく分けて二種類ある。
-あなたが何か行動をするコマンド、
-それ以外の何かを見たり調べたり設定するコマンドだ。
+Keine - 'There are two kinds of commands.
+One of them involves you performs some action, and others let you look/examine
+something or change options.
 
-行動をすると行動順を消費して周りのモンスターが動くが、
-それ以外のコマンドは行動順を消費しない。
-好きなだけ周りを見回したり装備を確認したりオプションを設定したりするといい。
-
+If you perform an action, you consume energy and let nearby monsters take a
+turn; other commands don't consume energy.
+You're free to look around, check your equipment or set options.'
 
 ***** <Keymapmode>
-=== キー配置の二種類のモード ===
+=== Keyboard Layout Modes ===
 
-慧音「キーボードのコマンド配列には二種類のモードがある。
+Keine - 'There are two modes for keyboard commands.
 
-ひとつは「オリジナルキー配置」だ。
-テンキーから方向入力ができるので直感的に扱いやすいが、
-右手が何度もテンキーとアルファベットキーを往復するから少し効率が悪い。
+One of them is 'Original keyboard layout'.
+It's easy to use since you move directly with arrow keys, but it's slightly
+inefficient, since your right hand will move between arrow keys and letters.
 
-もうひとつは「ローグ風キー配置」だ。
-これはテンキーを使わず、通常のキーボードだけで操作ができる。
-方向キーはviのカーソル移動に似てる……と言って通じるだろうか？
-やや取っつきにくいな。
-だがテンキーのないノートPCでも遊べるし、右手があちこち動かないから効率がいい。
+Another of them is 'Roguelike keyboard layout'.
+You use only normal keyboard, without arrow keys.
+Directional movement resembles cursor movement in vi... do you understand
+what I'm talking about?
+It's somewhat difficult to grasp, but you'll be able to play on a laptop
+without arrow keys, and your right hand will move more efficiently.
 
-初期状態ではオリジナルキー配置になっている。
-このヘルプファイルもオリジナルキーを前提にコマンドを解説している。
-オプションコマンド('=')から設定を変更できるぞ。」
+It's set to original layout by default.
+This help file also starts by describing original layout commands.
+You can change this setting through options command ('=').
 
 ***** <ComWindow>
-===　コマンドウィンドウ ====
+=== Command Window ====
 
-慧音「変愚蛮怒の全ての行動は基本的にキーボードからのコマンド入力で行う。
-コマンドの種類は100近くになり、初心者にはかなり敷居が高いだろうな。
+Keine - 'In Hengband, all actions are performed by entered commands with
+keyboards. Total amount of commands is close to 100, which is probably a lot
+for beginners.
 
-だが安心してほしい。コマンド入力のとき「Enterキー」を叩いてみてくれ。
-某国民的RPGのようなコマンドウィンドウが出る。
-ここから簡単に必要なコマンドを探すことができるんだ。
-まずはこのコマンドウィンドウで操作し、よく使うコマンドから順に覚えていくといい。」
+However, don't worry! Try pressing the Enter key.
+A command window resembling a certain JRPG will appear.
+You'll be abel to find the command you need here.
+Start off by using commands through this window, and remember them starting
+from those you're using a lot.'
 
 ***** <SpecialKey>
-=== 特殊なコマンド ===
+=== Special Commands ===
 
-慧音「やや特殊なコマンドの説明をしておく。
+Keine - 'Now, let's go over some special commands.
 
-・コマンドメニューの使用
-　さっきも言ったがEnterキーだ。
+- Open command menu
+  As I said before, use Enter key.
 
-・取り消し
-  コマンド入力中に戻りたくなったら'ESC'キーを押すといい。
+- Cancel
+  If you decide against performing some action, press ESC key.
 
-・直前のキーの繰り返し
-  'n'キーで行う。このコマンドは通常時だけでなく店の中でも使える。
+- Repeat previous command
+  'n' key. Can be used in stores as well.
 
-・回数指定リピート
-  '0'キーを入力した後、回数を数値で入力し、
-  その後繰り返したいコマンドを入力する。
-  トラップ解除、穴掘りなどはこのコマンドでなくても自動的にリピートされる。
+- Repeat a command several times
+  Press '0' key, then enter amount of times you want to repeat, then enter the
+  command you want to repeat.
+  Commands like trap disarming or tunneling will be automatically repeated
+  even without using this command.
 
-・コントロールキー
-　もちろんCtrlキーと同時押しすればいいのだが、環境によってはOSに回収されて
-　うまく働かないかもしれない。そんなときは'^'キーを押してみろ。
-　その後に押したキーがCtrlキーと同時押しされたものとして扱われる。
-
+- Control key
+  Naturally, you can use Ctrl key along with another input, but depending on
+  your environment and OS, it might not work properly.
+  In this case, press '^' key; the key you enter next will be treated as if
+  you pressed it with 'Ctrl'.
 
 ***** <OriginalKeyset>
-=== オリジナル・キー配置の簡略な一覧 ===
+=== Original Keyboard Layout ===
 
-     オリジナルキー配置の方向キー
+     Original layout directional keys
 
               7  8  9
               4     6
               1  2  3
 
- リターンキー コマンドメニューを開く
- a  魔法棒で狙う<aim>                    A  装備品の魔法を発動<activate>
- b  呪文の説明を読む<browse>             B  ドアに体当たりする<bash>
- c  ドアを閉じる<close>                  C  キャラクター情報表示<character>
- d  アイテムを落とす<drop>               D  トラップを解除する<disarm>
- e  装備一覧表示<equipment>              E  食料を食べる<eat>
- f  射撃武器を撃つ<fire>                 F  ランタン/松明に燃料補給する<fuel>
- g  その場にとどまる(拾う反転)           G  新たな呪文/祈りを獲得する<gain>
- h  (未使用)                             H  (未使用)
- i  持ち物一覧表示<inventory>            I  *鑑定*されたアイテムを調べる<item>
- j  職業特技の説明を見る                 J  職業特技を使用する<Jobskill>
- k  アイテムを壊す                       K  (未使用)
- l  回りを調べる<look>                   L  地図上での現在位置の確認<locate>
- m  呪文やその他の魔法や技を使う<magic>  M  ダンジョン全体図表示<map>
- n  直前のコマンド繰り返し               N  (未使用)
- o  ドアや箱を開ける<open>               O  (未使用)
- p  ペットに命令する<pet>                P  (未使用)
- q  薬を飲む<quaff>                      Q  冒険を終える(放棄する)<quit>
- r  巻物を読む<read>                     R  しばらく休む<rest>
- s  トラップやドアを探索する<search>     S  探索モードのオン/オフ<search mode>
- t  装備をはずす<take off>               T  穴を掘る<tunnel>
- u  杖を使う<use>                        U  種族、職業や変異の特殊能力を使う<use>
- v  アイテムを投げる                     V  バージョン情報<version>
- w  アイテムを装備する<wield>            W  (未使用)
- x  (未使用)                             X  (未使用)
- y  (未使用)                             Y  (未使用)
- z  ロッドを振る(zap)                    Z  (未使用)
- !                                      ^A  (特殊キー:デバッグ・コマンド)
- @  マクロの設定                        ^B  (未使用)
- #  (未使用)                            ^C  (特殊キー:ブレーク)
- $  自動拾い/破壊ファイルの読み込み     ^D  (未使用)
- %  画面表示の設定                      ^E  チョイス・ウィンドウの切り替え
- ^  (特殊キー:CTRLキー)                 ^F  その階の雰囲気を再表示<feeling>
- &  カラーの設定                        ^G  結界ガード
- *  怪物や場所をターゲット指定する      ^H  (未使用)
- (  ファイルに書き出した画面を表示      ^I  (特殊キー:TABキー)
- )  画面をファイルに書き出す            ^J  (特殊キー:ライン・フィード)
- {  アイテムに銘を刻む                  ^K  (未使用)
- }  アイテムの銘を消す                  ^L  (未使用)
- [  (未使用)                            ^M  統一コマンドメニューを開く
- ]  (未使用)                            ^N  (未使用)
- -  歩く(拾う反転)                      ^O  (未使用)
- _  自動拾い/破壊ファイルの編集         ^P  以前のメッセージを表示<previous>
- +  攻撃、ドアの開閉、穴掘り等          ^Q  現在のクエスト情報を表示
- =  オプションを変更するメニュー        ^R  画面を書き直す<redraw>
- ;  歩く(拾いながら)                    ^S  セーブするがゲームはやめない<save>
- :  メモを取る                          ^T  (未使用)
- '  (未使用)                            ^U  (未使用)
- "  設定変更コマンドの入力              ^V  ランダムアーティファクトのリスト出力
- ,  その場にとどまる(拾いながら)        ^W  (特殊キー:ウィザード・モード)
- <  階段を上る(地上では広域マップに入る)^X  セーブしてゲームをやめる
- .  走る                                ^Y  (未使用)
- >  階段を下る(地上では元のマップに戻る)^Z  (未使用)
- \  (特殊キー キーマップを無視して入力)  |  プレイ記録の操作、確認
- `  (特殊キー ESCキー)                   ~  様々な情報を表示するメニュー
- /  文字の説明を表示                     ?  ヘルプの表示
+ 'Return' opens command window
+ a  Aim a wand <aim>                   A  Activate equipment <activate>
+ b  Browse spells <browse>             B  Bash down a door <bash>
+ c  Close a door <close>               C  Display character screen <character>
+ d  Drop an item <drop>                D  Disarm a trap <disarm>
+ e  Display equipment <equipment>      E  Eat food<eat>
+ f  Fire ranged weapon <fire>          F  Refuel lantern/torch <fuel>
+ g  Stay still (flip pickup)           G  Learn new spells <gain>
+ h  (unused)                           H  (unused)
+ i  Display inventory <inventory>      I  Examine *ID*'d item <item>
+ j  Browse class abilities             J  Use class abilities <Jobskill>
+ k  Destroy an item                    K  (unused)
+ l  Look around <look>                 L  Locate player on map <locate>
+ m  Use spells/other magic <magic>     M  View dungeon map <map>
+ n  Repeat previous command            N  (unused)
+ o  Open door/chest <open>             O  (unused)
+ p  Command followers <pet>            P  (unused)
+ q  Quaff a potion <quaff>             Q  Quit (abandon your quest) <quit>
+ r  Read a scroll <read>               R  Take a rest <rest>
+ s  Search for traps/doors <search>    S  Search mode on/off <search mode>
+ t  Take off equipment <take off>      T  Dig a tunnel <tunnel>
+ u  Use a staff <use>                  U  Use racial/mutation powers <use>
+ v  Throw an item                      V  Version info <version>
+ w  Wield/wear an item <wield>         W  (unused)
+ x  (unused)                           X  (unused)
+ y  (unused)                           Y  (unused)
+ z  Zap a rod (zap)                    Z  (unused)
+ !                                    ^A  (Special: Debug command)
+ @  Macro settings                    ^B  (unused)
+ #  (unused)                          ^C  (Special: Break)
+ $  Reload Auto-picker prefs          ^D  (unused)
+ %  Interact with visuals             ^E  Toggle choice window
+ ^  (special: control key)            ^F  Display level feeling <feeling>
+ &  Interact with colors              ^G  Barrier Guard
+ *  Target monster/location           ^H  (unused)
+ (  Load screen dump                  ^I  (Special: Tab)
+ )  Save screen dump                  ^J  (Special: Linefeed)
+ {  Incribe an object                 ^K  (unused)
+ }  Uninscribe an object              ^L  (unused)
+ [  (unused)                          ^M  Open unified command menu
+ ]  (unused)                          ^N  (unused)
+ -  Walk (flip pickup)                ^O  (unused)
+ _  Edit auto-picker/destroyer prefs  ^P  Show previous messages <previous>
+ +  Attack/open door/tunnel           ^Q  Display quest info
+ =  Options menu                      ^R  Redraw screen <redraw>
+ ;  Walk (with pickup)                ^S  Save and don't quit <save>
+ :  Take notes                        ^T  (unused)
+ '  (unused)                          ^U  (unused)
+ "  Enter a user pref command         ^V  Output randart list
+ ,  Stay still (with pickup)          ^W  (Special: Wizard mode)
+ <  Go up a staircase/global map      ^X  Save and quit
+ .  Run                               ^Y  (unused)
+ >  Go down a staircase/normal map    ^Z  (unused)
+ \  (Special: Bypass keymap)           |  Check play record
+ `  (Special: Escape key)              ~  Check various information
+ /  Identify symbol                    ?  Help
 
 
 ***** <RogueKeyset>
-=== ローグ風キー配置の簡略な一覧 ===
+=== Roguelike keyboard layout ===
 
-     ローグ風キー配置の方向キー
+     Roguelike layout directional keys
 
               y  k  u
               h     l
               b  j  n
 
- リターンキー コマンドメニューを開く
- a  ロッドを振る(始動させる)<activate>   A  装備品の魔法を発動<activate>
- b  (歩く - 南西)                        B  (走る - 南西)
- c  ドアを閉じる<close>                  C  キャラクター情報表示<character>
- d  アイテムを落とす<drop>               D  トラップを解除する<disarm>
- e  装備一覧表示<equipment>              E  食料を食べる<eat>
- f  ドアに体当たりする<force>            F  ランタン/松明に燃料補給する<fuel>
- g  その場にとどまる(拾う反転)           G  新しい呪文/祈りを獲得する<gain>
- h  (歩く - 西)                          H  (走る - 西)
- i  持ち物一覧表示<inventory>            I  *鑑定*されたアイテムを調べる<item>
- j  (歩く - 南)                          J  (走る - 南)
- k  (歩く - 北)                          K  (走る - 北)
- l  (歩く - 東)                          L  (走る - 東)
- m  呪文やその他の魔法や技を使う<magic>  M  ダンジョンの全体図を表示<map>
- n  (歩く - 南東)                        N  (走る - 南東)
- o  ドアか箱を開ける<open>               O  種族、職業や変異の特殊能力を使う
- p  ペットに命令する<pet>                P  呪文の説明を読む<peruse>
- q  薬を飲む<quaff>                      Q  冒険を終える(放棄する)<quit>
- r  巻物を読む<read>                     R  しばらく休む<rest>
- s  トラップかドアを探す<search>         S  職業特技を使う<jobSkill>
- t  射撃武器を撃つ<throw>                T  装備をはずす<take off>
- u  (歩く - 北東)                        U  (走る - 北東)
- v  アイテムを投げる                     V  バージョン情報<version>
- w  アイテムを装備する<wield>            W  地図上の位置を確認する<where>
- x  回りを調べる<examine>                X  (未使用)
- y  (歩く - 北西)                        Y  (走る - 北西)
- z  魔法棒で狙う(振る)<zap>              Z  杖を使う(振る)<zap>
- !  (未使用)                            ^A  (特殊キー:デバッグ・コマンド)
- @  マクロの設定                        ^B  (攻撃、ドアの開閉、穴掘り等 - 南西)
- #  探索モードのオン/オフ               ^C  (特殊キー:ブレーク)
- $  自動拾い/破壊ファイルの読み込み     ^D  アイテムを壊す<destory>
- %  画面表示の設定                      ^E  チョイス・ウィンドウの切り替え
- ^  (特殊キー:CTRLキー)                 ^F  その階の雰囲気を再表示<feeling>
- &  カラーの設定                        ^G  結界ガード
- *  怪物か場所をターゲット指定する      ^H  (攻撃、ドアの開閉、穴掘り等 - 西)
- (  ファイルに書き出した画面を表示      ^I  (特殊キー:TABキー)
- )  画面をファイルに書き出す            ^J  (攻撃、ドアの開閉、穴掘り等 - 南)
- {  アイテムに銘を刻む                  ^K  (攻撃、ドアの開閉、穴掘り等 - 北)
- }  アイテムの銘を消す                  ^L  (攻撃、ドアの開閉、穴掘り等 - 東)
- [  直前のコマンド繰り返し              ^M  統一コマンドメニューを開く
- ]  (未使用)                            ^N  (攻撃、ドアの開閉、穴掘り等 - 南東)
- -  歩く(拾う反転)                      ^O  (未使用)
- _  自動拾い/破壊ファイルの編集         ^P  以前のメッセージを表示<previous>
- +  攻撃、ドアの開閉、穴掘り等          ^Q  現在のクエスト情報を表示
- =  オプションを変更するメニュー        ^R  画面を書き直す<redraw>
- ;  歩く(拾いながら)                    ^S  セーブするがゲームはやめない<save>
- :  メモを取る                          ^T  穴を掘る
- '  (未使用)                            ^U  (攻撃、ドアの開閉、穴掘り等 - 北東)
- "  設定変更コマンドの入力              ^V  ランダムアーティファクトのリスト出力
- ,  走る                                ^W  (特殊キー:ウィザード・モード)
- <  階段を上る(地上では広域マップに入る)^X  セーブしてゲームをやめる
- .  その場にとどまる(拾いながら)        ^Y  (攻撃、ドアの開閉、穴掘り等 - 北西)
- >  階段を下る(地上では元のマップに戻る)^Z  (未使用)
- \  (特殊キー:内部的キー配置を入力)      |  プレイ記録の操作、確認
- `  (特殊キー:ESCキー)                   ~  様々な情報を表示するメニュー
- /  文字の説明を表示する                 ?  ヘルプの表示
+ 'Return' opens command window
+ a  Zap a rod <activate>               A  Activate equipment <activate>
+ b  (Walk - southwest)                 B  (Run - southwest)
+ c  Close a door <close>               C  Display character screen <character>
+ d  Drop an item <drop>                D  Disarm a trap <disarm>
+ e  Display equipment <equipment>      E  Eat food <eat>
+ f  Bash down a door <force>           F  Refill lantern/torch <fuel>
+ g  Stay still (flip pickup)           G  Learn new spells <gain>
+ h  (Walk - west)                      H  (Run - west)
+ i  Display inventory <inventory>      I  Examine *ID*'d item <item>
+ j  (Walk - south)                     J  (Run - south)
+ k  (Walk - north)                     K  (Run - north)
+ l  (Walk - east)                      L  (Run - east)
+ m  Use spells/other magic <magic>     M  View dungeon map <map>
+ n  (Walk - southeast)                 N  (Run - southest)
+ o  Open a door <open>                 O  Use racial/mutation powers
+ p  Command followers <pet>            P  Browse spells <peruse>
+ q  Quaff a potion <quaff>             Q  Quit (abandon your quest) <quit>
+ r  Read a scroll <read>               R  Take a rest <rest>
+ s  Search for traps/doors <search>    S  Use class abilities <jobSkill>
+ t  Fire a ranged weapon <throw>       T  Take off equipment <take off>
+ u  (Walk - northeast)                 U  (Run - northeast)
+ v  Throw an item                      V  Version info <version>
+ w  Wield/wear an item <wield>         W  Locate player on map <where>
+ x  Look around <examine>              X  (unused)
+ y  (Walk - northwest)                 Y  (Run - northwest)
+ z  Aim a wand <zap>                   Z  Use a staff <zap>
+ !  (unused)                          ^A  (Special: Debug command)
+ @  Macro settings                    ^B  (Alter grid - southwest)
+ #  Search mode on/off                ^C  (Special: Break)
+ $  Reload Auto-picker prefs          ^D  Destroy an item <destroy>
+ %  Interact with visuals             ^E  Toggle choice window
+ ^  (Special: Control key)            ^F  Display level feeling <feeling>
+ &  Interact with colors              ^G  Barrier Guard
+ *  Target monster/location           ^H  (Alter grid - west)
+ (  Load screen dump                  ^I  (Special: Tab)
+ )  Save screen dump                  ^J  (Alter grid - south)
+ {  Inscribe an object                ^K  (Alter grid - north)
+ }  Uninscribe an object              ^L  (Alter grid - east)
+ [  Repeat previous command           ^M  Open unified command menu
+ ]  (unused)                          ^N  (Alter grid - southeast)
+ -  Walk (flip pickup)                ^O  (unused)
+ _  Edit auto-picker/destroyer prefs  ^P  Show previous messages <previous>
+ +  Attack/open door/tunnel           ^Q  Display quest info
+ =  Options menu                      ^R  Redraw screen <redraw>
+ ;  Walk (with pickup)                ^S  Save and don't quit <save>
+ :  Take notes                        ^T  Dig a tunnel
+ '  (unused)                          ^U  (Alter grid - northeast)
+ "  Enter a user pref command         ^V  Output randart list
+ ,  Run                               ^W  (Special: Wizard mode)
+ <  Go up a staircase/global map      ^X  Save and quit
+ .  Stay still (with pickup)          ^Y  (Alter grid - northwest)
+ >  Go down a staircase/normal map    ^Z  (unused)
+ \  (Special: Bypass keymap)           |  Check play record
+ `  (Special: Escape key)              ~  Check various information
+ /  Identify symbol                    ?  Help
 
 
 ***** <Macro>
-=== マクロ設定の基本的な例 ===
+=== Macro Settings and Basic Examples ===
 
-慧音「マクロ設定について説明しよう。
-マクロとは、指定したキーに別の機能のコマンド群を割り当てる方法だ。
-マクロ関係のコマンドは'@'キーから行う。
+Keine - 'Now I'll explain about using macros.
+Macros are a method of assigning different functions to a specified key.
+You can perform macro-related command with '@'.
 
-マクロはあなたの冒険を飛躍的に効率的にするが、
-特殊な銘なども関わるので不慣れなうちはかなり難しい。
-射撃職や魔法職のための例を少しここで紹介しておく。
-それ以外のマクロは初心者のうちは触らなくていいだろう。
+Macros can drastically increase effeciency of your exploration, but they
+also involve concepts like special inscriptions, so they're very difficult
+to understand for new players.
+Here are some examples for ranged/spellcaster classes.
+If you're a beginner, you probably shouldn't go deeper beyond that.
 
-まず射撃用のマクロだ。
-'@'→'4'(マクロ登録)→登録するキーを聞かれるので'x'を入力して1秒ほど待つ
-→「\e\e\ef1*t\e」と入力→'2'(マクロをファイル保存)
-次に、持っている矢に'{'コマンドから「=g@f1」と銘を彫る。
-これでxキーを押すだけで一番近くのモンスターに射撃をするようになった。
-また、撃った矢は上を歩くだけで自動的に拾う。
-xキーの部分は好きなキーを使うといい。上のコマンド一覧で未使用のキーがいい。
-F1～F12もキーに割り当てられる。
+Let's start with ranged attack macro.
+'@'->'4' (Record a macro) -> When asked for a key, input 'x' and wait for
+around 1 second -> input '\e\e\ef1*t\e' -> '2' (Save macro to file)
+Next, inscribe arrows you're carrying ('{' command) with '=g@f1'.
+This makes you shoot at the monsters closest to you when you press 'x'; also,
+you automatically pick up arrows you've shot.
+You may use any key you like instead of 'x'; feel free to use on of those
+that are marked (unused) in command lists above.
+F1~F12 keys can be used as well.
 
-次に魔法用のマクロだ。
-'@'→'4'(マクロ登録)→'x'を入力して1秒ほど待つ→「\e\e\emaa\e」と入力
-→'2'(マクロをファイル保存)
-次に使いたい魔法書に、'{'コマンドから「@ma」と銘を彫る。
-これでxキーを押したときに魔法書の最初の魔法を使える。
-もし攻撃魔法なら「\e\e\emaa*t\e」と入れてくれ。
-一番近くの敵に魔法を撃つはずようになるはずだ。
-二番目の魔法ならmaaの部分をmabに変えてくれ。
+Next up is spellcaster macro.
 
-マクロ構文の中の'\e'とはESCキーを表す。
-コマンド待ち受けの時以外にうっかりマクロキーを押したらどんな行動をとるか分からないから、
-最初にESCを連打しておくことでそれまでの行動を中断しておくというわけだ。
-ほかにリターンキーを表す'\r'などがある。
+'@'->'4' (Record a macro) -> Input 'x' and wait for around 1 second -> input
+'\e\e\emaa\e' -> '2' (Save macro to file)
+Next, inscribe the spellbook you wish to use ('{' command) with '@ma'.
+This makes you cast the first spell in that spellbooks when you press 'x'.
+If it's an attack spell, input '\e\e\emaa*t\e' instead. It should cast that
+spell at the monster closest to you. If you want to use the second spell,
+replace 'maa' with 'mab'
 
-マクロについて詳しく知りたくなったらユーザー設定ファイルのヘルプを見てくれ。」
+The '\e' in macro strings represents ESC key.
+You don't know what you could end up doing if you accidentally press the
+macro key when the game isn't specifically waiting for a command input, so at
+first is interrupts any other actions with repeating ESC keypresses.
+You also can use '\r', representing 'return' (Enter) key.
+
+If you want to know more details about macros, check out the help file for
+user setting preferences.'
 

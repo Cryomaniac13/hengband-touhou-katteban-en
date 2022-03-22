@@ -9518,7 +9518,7 @@ const option_type option_info[] =
 	"ignore_unview",                "視界外のモンスターの行動を表示しない" },
 #else
 	{ &ignore_unview,               FALSE, OPT_PAGE_TEXT, 2, 13,
-	"ignore_unview",                "Ignore whenever any monster does" },
+	"ignore_unview",                "Ignore whenever any monster performs an action" },
 #endif
 
 #ifdef JP

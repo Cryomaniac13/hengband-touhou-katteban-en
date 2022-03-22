@@ -1,338 +1,380 @@
 
 ***** <Mutation>
-=== 突然変異 ===
+=== Mutations ===
 
-慧音「時には探索中に突然変異というものを受けることがあるかもしれない。
-突然変異とはあなたの肉体や精神の一部が変質する現象だ。
-猫耳が生える程度の可愛らしいもの、パラメータが上がる便利なものもあるが、
-中には急いで治療しないとゲームオーバーになるような物騒なものもある。
+Keine - 'You might gain mutations during your exploration.
+This is a phenomenon that alters your body and/or mind.
+Some of them are harmless, like growing cat ears; some of them are useful
+mutations that raise your parameters; some of them can lead to a game over
+unless you cure them quickly enough.
 
-突然変異をもたらす原因としては、
-・混沌耐性なしでカオス攻撃を受けるとランダムな変異を得る
-・突然変異の薬を飲むと高確率で突然変異を複数得る
-・自己変容や肉体変容などの魔法で突然変異を得る
-・狂気をもたらす攻撃を受けたとき低確率で有害な突然変異を得る
-主にこんなところだ。
+Mutations are mainly caused by following reasons:
+- Getting hit by chaos element attack without chaos resistance can give a
+  random mutation
+- Drinking a Potion of Mutation has a high chance of giving you several
+  mutations
+- Some spells like Alter Self can give you mutations
+- Getting hit by an insanity-inducing attack has a low chance of giving
+  you a harmful mutation
 
-また、突然変異から回復する手段としては、
-・永遠亭で治療してもらうとランダムな変異が一つ消える($3000)
-・突然変異の薬を飲むと低確率で突然変異がすべて消える
-・一部の薬や魔法による「新生」「種族変容」などで全ての突然変異が消える
-主にこんなところだ。
+Here's the main ways of curing mutations:
+- Curing mutations at Eientei removes a random mutation ($3000)
+- Drinking a Potion of Mutation has a low chance of curing all of your
+  mutations
+- Some potions and spells like 'New Life' or racial transformation cure
+  all of your mutations
 
-覚えておいてほしいんだが、
-突然変異があるとその数に応じてHPやMPの自動回復が少しずつ遅くなる。
-わざとカオス攻撃を受けて有用な変異を得ようとするテクニックがあるが、
-程々にしておかないと探索に差し支えるぞ。
+You should remember that the more mutations you have, the slower your HP/MP
+regeneration will be. There are some techniques involving deliberately
+getting hit by chaos element attacks in order to obtain beneficial mutations;
+but if you overdo it, you'll have harder time exploring.
 
-なお、鬼の角や人魚の尻尾など、
-一部の種族は最初から変異と同じものを持っている。
-これらの種族由来の変異は消えることはなく、回復速度にも影響しない。」
+Several races essentially start out with mutations - Oni have horns, Merfolk
+have tails.
+Those innate racial characteristics cannot be removed and do not affect
+regeneration rate.'
 
+--- Changing your Race ---
+Keine - 'There are extremely powerful spells and curses that can change your
+race. You're not likely to run into them too often, but here's a list of
+most common reasons:
 
---- 種族変容 ---
-慧音「極めて強力な魔法や呪いによって、あなたの種族が変化してしまうことがある。
-滅多に見ないだろうが、原因としては主に以下のようなものだ。
+- If you attract attention of a Chaos Patron, they might decide to change
+  your race
+- Spells like Alter Self have low chance of changing your race
+- The spells 'Rebirth' (Transformation realm) and 'Demon God of Netherworld'
+  (Necromancy realm) change your race
+- Equipping some special artifacts changes your race (It will give you a
+  warning)
 
-・混沌の神々の庇護を受けているとき、彼らの気まぐれで種族変容を受けることがある
-・自己変容などの魔法で低確率で種族変容を受ける
-・変容領域の「転生」や死霊領域の「幽冥の鬼神」の魔法で転生する
-・一部の特殊なアーティファクトを装備する(警告が出る)
+After transformation, your current level will be recalculated according to
+your new race's experience modifier. Your score will be calculated using the
+lowest score modifier among the races you've been. If you win the game with
+a strong race and then transform into a weaker one, your score won't go up.
 
-変容したあと、現在のレベルは新しい種族の経験値補正に応じて再計算される。
-また、スコアはこれまでなったことのある種族から一番低いスコア倍率の種族で計算される。
-強い種族で*勝利*したあと弱い種族に変身してゲーム終了してもスコアは上がらないぞ。
-
-妖怪人形や野良神様など一部の種族は種族変容を受けない。
-また、あなたがユニーククラスなら転生の魔法とアーティファクト以外による種族変容を受けることはない。」
-
+Several races like Youkai-Dolls or Stray-Gods can't be affected by this.
+Also, if you're playing as an unique class, you can't change your races by
+means other than spells and special artifacts.'
 
 ***** <Extra_mode>
-=== EXTRAモード ===
+=== Extra Mode ===
 
-慧音「バージョン1.0.99より難易度"EXTRA"が追加された。
-EXTRAモードでは他の難易度とは全く違った趣の冒険をすることになるだろう。
-他の難易度との違いを詳しく説明しよう。
+Keine - '"Extra" difficulty level was added in v 1.0.99.
+It makes your adventure completely different compared to other difficulty
+levels. Here's the detailed list of differences:
 
-・鉄獄1階から開始され降りることしかできない
-	ゲームは人里からではなくいきなり鉄獄1階のランダムな場所から開始される。
-	階段は下りしかなく、テレポート・レベルを使っても下にしか行けない。
-	帰還の魔法や道具を使ってダンジョンから出ることはできず、
-	また現実変容やシャドウシフトなどのフロア再生成魔法も効果を発揮しない。
-	2フロア分一度に降りる坑道も出現しない。
-	やり直しなしの100フロアかっきりで勝利を手にしてほしい。
+- You start from level 1 of Angband and can only go down
+  You start at a random position on level 1 of Angband insted of the Human
+  Village. Staircases lead only downward, and using Teleport Level always
+  teleports you to the lower level.
+  You cannot use spells/devices of Recall to leave the dungeon, and spells
+  that recreate current level like Alter Reality or Shadowshift won't work
+  either.
+  Shafts that make you go down 2 levels at once don't appear.
+  You have to clear 100 levels without going back.
 
-・レベルアップが早い
-	EXTRAモードでは次のレベルまでの必要経験値が二分の一になる。
-	よほど経験値ペナルティの重いキャラクターでない限りレベル不足に悩むことはないだろう。
-	妖怪人形の必要強化度は他の難易度と同じだが、	
-	良い装備品が出やすいのでやはりレベルアップが早くなるだろう。
+- You level up fast
+  In Extra mode, amount of experience required to gain next level is halved.
+  Unless you have a severe experience penalty, you probably won't be concerned
+  about being underleveled.
+  Youkai-Dolls still require the same level of equipment power to level up,
+  but you'll probably still level up faster since good equipment is easier to
+  find.
 
-・良いアイテムが出やすく、一部消耗品は複数まとめて手に入る
-	EXTRAモードでは現在の階より高いレベルのアイテムがよく落ちている。
-	高級な装備品やアーティファクトが手に入りやすく、
-	薬や巻物や魔法棒などは複数まとめて落ちていることも多い。
-	特定のユニークモンスターが特定の固定アーティファクトを落とす確率は二倍になっている。
+- Good items generated more often, some consumables are generated in stacks
+  In Extra mode, out-of-depth items get generated more often.
+  You'll get more ego-items and artifacts, and items like potions/scrolls
+  or wands can be generated several at a time.
+  Unique monsters that can drop their special artifact are twice as likely
+  to drop it.
 
-・「アイテムカード」が存在する
-	EXTRAモードには陰陽玉や八卦炉といった物品の描かれた不思議なカードが存在する。
-	これらはザックに入れておいても何も起こらないが、
-	Uコマンドを使うと8種類まで専用スロットにセットしてそこから発動することができる。
-	発動すると、夢想封印やマスタースパークといった様々な特技が放たれる。
-	MPを消費せず発動失敗もしないが一度使うと一枚無くなる消耗品だ。
-	攻撃用だけでなく防御や補助に役立つカードも多い。
-	カードをrコマンドで読むとどんな効果があるのか知ることができるぞ。
+- Item Cards
+  There are mysterious cards with objects like Ying-Yang Ball or Hakkero
+  drawn on them. Nothing happens if you carry them with you in your inventory,
+  but by using 'U' command, you can set up to 8 different kinds of them in
+  special slots and activate them later on.
+  Activating them uses various special abilities like Fantasy Seal or Master
+  Spark. It doesn't consume MP and never fails, but they're consumables -
+  each activation uses up one card.
+  Aside from offensive cards, there are defense and support-oriented as well.
+  By reading the cards with 'r' command you can learn what effect they have.
 
-	これらのカードはユニークモンスターを倒すと中確率で手に入る。
-	幻想郷の名のある者達を倒せば、高確率で彼女たちに縁のあるものが手に入るだろう。
-	また、フロアにカードが落ちていることもある。
-	ダンジョン特産物と同様、探索能力が高いと見つかりやすいようだ。
-	
-	EXTRAモードではとにかく様々な局面で色々なものが不足する。
-	アイテムカードを使って上手く乗り切ってほしい。
+  You have medium chance of getting those cards by defeating unique monsters.
+  If you defeat a well-known resident of Gensoukyou, you have a high chance
+  to obtain something connected to her.
+  There also are cards lying around on the floor.
+  Having high Searching skill makes them easier to find.
 
-・「エクストラクエスト」が発生する
-	EXTRAモードの鉄獄ではランダムクエストが発生しない。
-	その代わりに、10,20,30..90階で9種類の特別なクエストが発生する。
-	これらの階に下りると特定のクエストダンジョンと同じ造りになっており、
-	フロアの敵を倒すとクエスト達成となり階段の近くに報酬の品が出現する。
+  You'll be lacking in various areas in Extra mode.
+  Use the item cards to counteract that.
 
-	フロアの階段は下り階段になっていてクエスト達成前に下りると放棄扱いとなる。
-	テレポート・レベルを行ってもクエスト放棄となって下の階へ飛ぶ。
-	*破壊*や抹殺が使えないのは通常のクエストダンジョンと同じだ。
-	召喚を使う敵は何とかして迅速に倒したいところだな。
+- Extra Quests
+  In Extra mode, Angband's random quests aren't generated.
+  Instead, there are 9 special quests on level 10, 20, 30, ..., 90.
+  When you enter one of them, the map layout will be exactly the same as that
+  of some quest dungeon; complete the quest by defeating all enemies, which
+  will also drop several rewards close to the staircase.
 
-・フロアに特殊な建物が出現する
-	クエストが行われない階では、フロアのどこかに小さな建物がある。
-	これは武器屋などの店のこともあれば、解呪や鑑定、魔道具充填など特殊な設備のこともある。
-	これらの建物の出現率は現在の階層やあなたの職業により多少変動する。
-	攻略に欠かせない重要な施設もあるので、なるべく探して立ち寄っておきたい。
-	稀に建物で敵が出現して突然襲われることもあるから、HPの低い時に怪しい場所を家探しするのはお勧めしない。
+  If you go down the stairs before completing the quest, it counts as
+  abndoning the quest. If you use Teleport Level, you abandon the quest and
+  move down to the next level.
+  Just like in normal quest dungeons, you can't use *Destruction* or Massacre.
+  You'll want to deal with summoning enemies as quick as you can.
 
-・フロアの構造が少し違うことがある
-	時々、フロアの構造が魔法の森や無縁塚に似たものになったりほかの独特なものになる。
-	またあまりに狭すぎるフロアは出現しない。
-	PITやNESTといった長方形のモンスター部屋は出現しにくく、地下街が少し出やすい。
+- Special Buildings
+  There's a small building somewhere on levels without a quest.
+  This might be a shop like Weapon Store, or a special building that can
+  remove curses, identify items, recharge devices, etc.
+  Some of them are vital for completing your adventure, so find as many as you
+  can. Sometimes you may get attacked by enemies as you explore a building, so
+  don't search suspicious places if you're low on health.
 
-・スコアはNORMALの4倍HARDの2倍になる
-	クエスト数が少ない分、クエスト達成ボーナスと階層到達ボーナスが他のモードより高くなる。
-	さらにEXTRAモードのシステムにあまりに向かないクラス、
-	もしくは逆にEXTRAモードの制限にデメリットの少ない一部のクラスはスコア倍率に特別な補正がかかる。
-	一部の開始時オプションは、ほかの難易度と違ったスコア倍率が適用される。
+- Level layout might be slightly different
+  Sometimes, levels will resemble levels in Forest of Magic or Muenzuka,
+  or have some other specific layout.
+  Especially small levels don't get generated.
+  Pits/nests are rarely generated, and dungeon towns can be found more often.
 
-・ほか
-	フロアの店の在庫はあまり多くなく、いくら待っても更新されない。
+- Score is 4x compared to Normal, and 2x compared to Hard
+  Since there aren't as many quests, bonus for competing quests and reaching
+  new dungeon levels is higher compared to other difficulties.
+  Also, some classes that aren't suited for Extra mode, or, the other way
+  around, classes that aren't restricted too much by Extra mode, have their
+  score modifier altered.
+  Several birth options apply different score modifier compared to other
+  difficulties.
 
-	他の難易度で特定のクエストにしか出現しない一部のユニークモンスターがダンジョンに通常出現するようになる。
-	とくに妖怪狸の親玉には気を付けてくれ。
+- Other
+  Stores in dungeon don't have much in stock, and will never restock no matter
+  how long you wait.
 
-	召喚や時間経過により新たにフロアに現れた非ユニークモンスターを倒してもあまりアイテムや経験値を得られない。
-	召喚持ちのモンスターに雑魚を呼ばせたり探索済みのフロアで粘って稼ぐのは少し難しくなるということだ。
+  Several unique monsters that appear only in specific quests on other
+  difficulties can be normally encountered in the dungeon.
+  Be especially careful around the youkai tanuki boss.
 
-	
-だいたいこんな所だ。
-EXTRAモードで勝利するには、キャラクターの性能やプレイヤーの戦略は勿論、ある程度の時の運も問われるだろう。
-健闘を祈る。」
+  New non-unique monsters that get summoned or generated due to passage of
+  time don't give too much items and experience.
+  It's going to be slightly more difficult to clean up explored levels if
+  summoners call for support.
 
---- EXTRAモードで探索拠点を利用する方法---
+That's the main differences.
+Winning in Extra mode requires not only character skills and your own
+experience, but a certain amount of luck as well.
+I wish you good luck.'
 
-慧音「EXTRAモードでは街に戻って探索拠点を利用することができない。ここがEXTRAモードの厳しいところだ。
-しかしダンジョン内で一時的に拠点を使う手段がいくつかある。
-この手段をどう確保するかが冒険の成否を分けると言っても過言じゃないだろう。
-拠点を利用する方法をここで紹介しておこうと思う。
+--- How to use your Exploration Base in Extra mode ---
 
-・アイテムカードを利用する
-	アイテムカード「捻じ曲がった日傘」「魔法の小瓶」を使うことで探索拠点を利用できる。
+Keine - 'In Extra mode, you can't just return to town and visit you
+exploration base. That's one of its severe restrictions. However, you might
+find some means of temporarily accessing it in the dungeon.
+The success of your quest greatly depends on whether you'll be able to find
+and properly utilize them.
+Here's a list of those methods:
 
-	日傘はその場に拠点への入り口を開く強力なものだが、クエスト実行中のフロアでは使用できない。
-	ボス打倒前の最深階でも使用できないので、決戦準備は最深階に下りる前に済ませておくことだ。
-	クエストを達成した後ならたとえエクストラクエストの固定ダンジョン内でも使用できるぞ。
+- Using Item Cards
+  You can access your exploration base with item 'Twisted Parasol' and
+  'Magic Vial'.
 
-	小瓶はいつでも使えるが、拠点から一度出たら効果が終わってしまう。
-	日傘と違い、床にアイテムをばら撒いてゆっくり整頓するようなことはできないということだ。
-	また拠点使用中にはアイテムカードスロットの出し入れもできない。
-	小瓶を使う前には何を拠点に入れて何を拠点から出すのかをよく考えるべきだな。
+  Parasol is a powerful card that creates an entrance to exploration base
+  at your current location, but you can't use it on quest levels.
+  You also can't use it on the lowest level before you've defeated the boss,
+  so make preparations for the final battle before you enter the lowest level.
+  You can't use it on the Extra Quest levels even after you've completed the
+  quest.
 
-	アイテムカードを入手する方法は、ユニークモンスターを倒すか探索能力を上げてフロアを探すかだ。
-	この二つのカードはやや珍しくて入手しづらいが、
-	『八雲紫』や中層以降の『霧雨魔理沙』を倒すとこれらのカードを落とす可能性が比較的高い。
-	序盤でフロアに落ちていた場合、フロアの雰囲気がかなり変わるので見落とすことはないだろう。
+  Vial can be used at any time, but the effect ends once you leave the base.
+  Unlike Parasol, you can't use it to store various items scattered around on
+  the floor. Also, while you're accessing the exploration base, you can't
+  interact with your item card slots.
+  Carefully think about what you want to store and what you want to take out
+  before using the Vial.
 
-・魔法や道具でアイテムを拠点へ転送する
-	一部のアーティファクトや魔法を使ってアイテムを拠点へ転送することができる。
-	召喚領域、自然領域、混沌領域にその魔法がある。
-	ただしこれは拠点への一方的な転送で、拠点からアイテムを持ち出すことはできない。
-	方法によっては重量制限があったり低確率でアイテムが消滅することもある。
+  You can get item cards by defeating unique monsters or raising your
+  Searching skill and looking for them in the dungeon.
+  Those two cards are rare and hard to obtain, but you have a comparatively
+  high chance of getting them by defeating Yukari Yakumo or a post-midgame 
+  Marisa Kirisame. If they get generated in early game, the level feeling
+  will significantly change, so you shouldn't miss them.
 
-・フロアの施設を利用する
-	EXTRAモードではクエストのないフロアに小さな建物が出現するが、
-	中には拠点とアイテムをやりとりできる施設がある。
-	「神霊廟出張所」ではアイテムを自宅まで送ってくれる。
-	『火焔猫 燐』という妖怪がいる「開けた場所」では、
-	アイテムを自宅へ運んだりアイテムを一つだけ自宅から持って来てもらえる。
-	結界の綻びがある「奇妙な場所」ではうまくいけば一度だけ自宅を利用できることがあるようだ。
-	ただし失敗するとスキマに呑み込まれて突然変異を受けてしまう。
-	手先が器用な者ほど成功しやすいようだが。
+- Send items to Exploration Base with spells/devices.
+  Some artifacts and spells can send items to your exploration base.
+  Summoning, Nature and Chaos realms have those spells.
+  However, it's a one-way transport to the base, you can't use it to take
+  items out of there. There might be a weight limit on transported items,
+  or a low chance of making the item disappear.
 
-	それから、草の根妖怪ネットワークのキャンプなどでカード交換を申し込んで
-	先述のアイテムカードを手に入れる方法もある。
-	かなり価値の高いカードだが、ひょっとすると誰かが交換に応じてくれるかもしれない。
-	ただしこちらも強力なカードを数枚から数十枚提示しないと見せてくれないだろうな。」
+- Use special facilities
+  In Extra mode, small buildings appear or non-quest levels, and some of
+  them offer services to access your exploration base.
+  'Divine Spirit Mausoleum Branch Office' can send items to your house.
+  At an 'Open area' with the youkai Rin Kaenbyou, you can have her either
+  carry items to your house or deliver one item from your house to you.
+  At a 'Strange place' with a crack in the barrier, you can access your
+  exploration base one item. However, if you fail, you will get sucked in,
+  obtaining a mutation. Having high manual dexterity makes it easier to use.
 
+  Also, you can exchange cards at Grassroots Youkai Network camps; it's one
+  way to obtain to aforementioned item cards.
+  It's a very valuable card, but someone might offer it in exchange.
+  However, you'll also have to present very valuable cards as well.'
 
 ***** <Gun>
-=== 「銃」分類の武器について ===
+=== Gun Class Weapons ===
 
-慧音「v.1.1.04より、『銃』分類の武器の仕様が大きく変更された。
-新たな銃の仕様についてこれから説明しよう。
-コマンドはオリジナルキー配列とする。
+Keine - 'Gun class weapons underwent big changes in version 1.1.04.
+Let's look over the new gun mechanics.
+Commands are for standard keyboard layout.
 
-・基本的な使い方
-	右手あるいは左手に装備し、'A'でなく'f'コマンドから射撃を行う。
-	コマンド入力後ターゲット選択になり、ターゲットが決まったら成功判定が行われる。
-	成功したらターゲットに向けて射撃が行われる。
-	その後成功失敗にかかわらずエネルギーが消費され、
-	装弾数を使い切ったら最低一発ぶん充填されるまで使えなくなる。
+- How to Use
+  Equip it in your right or left hand, and fire with 'f' command (not 'A').
+  After you enter the command, you will go to target selection; once you pick
+  the target, a success check will be made.
+  If you succeed, you will shoot at the target.
+  No matter if you succeed or fail, you will use spend energy, and once you
+  use up all of your bullets, you can't fire until you replenish at least
+  one shot.
 
-・装弾数
-	銃には装弾数が設定されている。
-	 ★進化する銃『クリムゾン』 (0d0) (+20,+20) (+4加速)(6/6)
-	 一番後ろの(6/6)が装弾数だ。一発撃つごとに(5/6),(4/6)..と減っていく。
+- Bullet Count
+  Each gun has its own bullet count.
+  The Evolving Gun "Crimson" (0d0) (+20, +20) (+4 speed) (6/6)
+  The (6/6) at the end is bullet count. Each time you shoot, it will go down:
+  (5/6), (4/6), ...
 
-・二挺拳銃
-	左右の手に別々の銃を装備することも可能だ。
-	その場合ターゲット選択後にそれぞれの銃で成功判定と射撃が行われる。
-	行動力の消費は通常通りだが、射撃の成功率はかなり落ちる。
-	二刀流ボーナスのある小手や手袋を装備しているとペナルティが緩和されるぞ。
-	なお、重すぎる銃を装備した場合はどちらの手の銃も撃てなくなる。
-	
-・射撃の成功率
-	射撃の成功率には、「撃つ銃の強さ」「射撃技能と魔道具技能の高いほうの値」「銃の熟練度」
-	「器用さ」「防具やアクセサリによる命中修正値」「銃の命中修正値」が関わってくる。
-	銃一つを両手で持っていれば成功率にボーナスがつく。
-	逆に恐怖・混乱・二挺拳銃のときには成功率が大幅に落ちる。
-	銃や射撃の適性が低い職で強力な銃が手に入っても、残念ながらあまり当てにはできないかもしれない。
+- Dual-wielding Guns
+  You can hold different guns in both of your hands.
+  In this case, after picking the target, separate success checks are made for
+  both of them. You still consume the same amount of energy, but your shooting
+  success rate is significantly decreased.
+  Wearing gloves with dual wielding bonus reduces that penalty.
+  Also, if you're holding a too heavy gun, you won't be able to fire either
+  of them.
 
-・充填時間の短縮
-	射撃が済んだ銃は充填状態になって使えなくなり、充填時間は銃の種類によって変わる。
-	ただし特定の条件では充填時間が短縮される。
-	銃の熟練度が高いとき(四段階)、銃に高速射撃能力がついているとき、
-	銃を持った手に追加射撃の指輪をつけているとき、性格がトリガーハッピーのときだ。
-	好条件がそろったときには通常の四～五倍くらいの速さで充填が完了するだろう。
+- Shooting Success Rate
+  Shooting success rate depends on power of the gun you're using, your
+  Shooting or Magic Device skill (whichever one is higher), dexterity,
+  accuracy modifiers from your equipment and accuracy modifier on the gun.
+  Shooting a gun while holding it in both hands increases success rate.
+  Being terrified, confused or dual-wielding guns significantly reduces
+  success rate. Classes with low aptitude for guns/shooting won't be able to
+  properly shoot even if they find a powerful gun.
 
-・銃の威力
-	銃の威力は完全に銃の性能だけで決まる。
-	特定の固定アーティファクトを除き、シンプルにダイスとダメージ修正の合計値だ。
-	ただし一部の銃では火炎や破邪など属性が付いた射撃になり、
-	その場合は敵の耐性や弱点によってダメージが増減する。
+- Reducing Reloading Time
+  Once you've used up all of your bullets, the gun starts reloading; the
+  time depends on the kind of the gun;
+  However, you can reduce it under some special conditions:
+  * Your gun proficiency is high enough (4th stage)
+  * The gun has the ability to shoot faster than usual
+  * You're wearing a Ring of Extra Shots on the hand you're holding the
+    gun with
+  * Your personality is Trigger-Happy
+  With those conditions being met, you can reload your guns up to 4-5 times
+  as fast as usual.
 
-・射撃に関する情報の確認
-	現在装備中の銃の射撃成功率と再充填時間は、'C'コマンドのステータス画面から確認することができる。
-	また、銃を*鑑定*してIコマンドから情報を見れば射撃の属性などを確認することができる。
+- Gun Power
+  Gun power completely depends on gun characteristics.
+  Several special fixed artifacts aside, it's calculated as a simple dice roll
+  plus damage bonus.
+  Some guns use elements like fire or holy; in this case, damage can increase
+  if it hits an enemy's weakness.
 
-・銃装備時の格闘
-	銃を装備していてほかに近接武器を持たないとき、銃器を使った隣接攻撃を行うことができる。
-	これは格闘攻撃として扱われ、格闘熟練度や腕力や器用さが関わってくる。
-	時には充填中の銃で零距離射撃を見舞うこともあるがあまり深く考えないでほしい。
-	「歩兵銃」は銃剣が取り付けられているのでこの攻撃の威力が高い。
+- Checking Shooting Attack Details
+  You can confirm shooting success rate and reloading time for the gun you're
+  holding at status screen through 'C' command. Once a gun is *identified*,
+  you can check its element and other specifics with 'I' command.
 
-・反射
-	銃をIコマンドで確認したとき、射撃時の効果が「ボルト」と表記されているものは、
-	一部の敵に反射されることがある。
-	「射撃」としか書かれていないものは反射されない。
+- Martial Arts with Guns
+  If you're holding a gun without any other melee weapon, you can use the gun
+  to attack in melee. It is treated as a martial art attack, and depends on
+  your Martial Art proficiency, strength, and dexterity.
+  You sometimes will be able to fire at point blank range even if your gun is
+  reloading, but don't think too much about it.
+  Infantry guns have a bayonet attached to them, making their attack power
+  higher.
 
-・エゴアイテムとランダムアーティファクト
-	銃がエゴアイテムやランダムアーティファクトとして出現するようになった。
-	このとき射撃の属性や種類が変わることがある。
-	ダイスが大幅に増加した銃は射撃が元素属性になっていることが多いので、
-	使う時には敵の耐性に気を付けてくれ。
+- Reflection
+  When you inspect your gun with 'I' command, if its shooting attack effect
+  is described as 'bolt', some enemies might reflect it.
+  If it is described as a plain 'shooting attack', it won't be reflected.
 
-・「銃が出現しない」オプションの追加
-	プレイ中に「銃が出現しない」オプションをONにすると銃分類の武器が出現しなくなる。
-	いつでもON/OFFを切り替えることができ、ペナルティもボーナスもない。
-	幻想郷に硝煙の匂いなど似合わないと思ったらONにしてくれ。」
+- Ego-items and Random Artifacts
+  Ego-item and randart guns can be generated.
+  Their shooting element and type might be changed.
+  Guns that receive significant dice boost often shoot using some element,
+  so pay attention to enemy resistance when using them.
 
-
-
-***** <Score_server>
-=== スコアサーバー ===
-
-慧音「この勝手版では長らくスコア送信機能が切られていたが、
-バージョン1.1.25で独自スコアサーバが稼働開始した。
-引退時やゲームオーバー時にゲームデータをサーバに送ることができるので、
-ぜひあなたの冒険譚を皆に伝えてほしい。
-
-なお、勝手版のスコアサーバへは本家と違いセーブファイルを直接送信する。
-このデータを使って今後色々なランキングやデータ集計ができるようになる予定だ。
-
-居ないとは思うが、
-暗証番号などの機密情報をゲームのメモ機能に記録している人は送信前に消しておくように。
-スコア送信をしたくない場合、
-オプション設定のプレイオプション項目からスコア送信をOFFにすることができる。
-
-
+- 'No guns are generated' option
+  If you set 'No guns are generated option' to 'on', gun type weapons won't
+  be generated. You always can switch it between 'on' and 'off', and there's
+  no penalty or bonus of any kind.
+  If you think gunpowder smell doesn't suit Gensoukyou, feel free to switch it
+  to 'on'.
 
 ***** <Mana_shield>
-=== 「結界ガード」について ===
+=== About Barrier Guard ===
 
-慧音「バージョン1.1.27以降、魔法職でCtrl+'g'コマンドを使うと「結界ガード」状態になる。
-この状態で敵の攻撃を受けるとダメージの半分がHPでなくMPのほうに行く。
-HPが低くなりがちな魔法職でも中盤以降のダンジョンを歩きやすくなるだろう。
+Keine - 'Starting from version 1.1.27, spellcaster classes can use 'Barrier
+Guard' with Ctrl-'g' command.
+While in this state, half of the damage you receive is taken from your MP
+instead of HP. It makes late-midgame dungeon exploration easier for mages
+with low HP.
 
-ただし、一度に多くのダメージを受けたりMPが0になると「ガードブレイク」して結界が壊れ朦朧状態になってしまう。
-また、麻痺、混乱、意識不明瞭、ひどい朦朧、反魔法状態になると結界は消える。」
-
-
+However, if you receive too much damage at once or your MP reaches 0, you will
+suffer a 'Guard Break', breaking the barrier and stunning you.
+Also, the barrier will vanish if you wear anti-magic equipment or become 
+paralyzed, confused, knocked out or heavily stunned.'
 
 ***** <AbilityCard>
-=== アビリティカード ===
+=== Ability Cards ===
 
-慧音「バージョン1.1.86より、『アビリティカード』というマジックアイテムが追加された。
-発動して使うタイプのカードと、
-所持しているだけで効果が発揮されるタイプの二種類がある。
-難易度EXTRAで出てくる『アイテムカード』とは全く別物なので気をつけてくれ。」
+Keine - 'Ability Cards are magic items added in version 1.1.86.
+There are two kinds of them: Some can be activated, others have passive
+effects that apply when you're carrying them.
+Keep in mind they're completely unrelated to the Item Cards that appear in
+Extra difficulty level.'
 
---- アビリティカードの入手 ---
-慧音「一部の職業を除くとアビリティカードの入手の機会は非常に限られている。
-バージョン1.1.86時点では『偽天棚』と呼ばれる場所のクエストで手に入る二枚だけだ。
-しかし夜に守矢神社の月虹市場に行くと、
-このアビリティカードを同じくらいのランクの別のカードとトレードすることができる。
+--- Obtaining Ability Cards ---
+Keine - 'Aside from some classes, there's very few opportunities to obtain
+ability cards. In version 1.1.86, you can get two from quests at the location
+'False Heaven Shelf'.
+However, if you visit Lunar Marketplace at Moriya Shrine at night, you can
+trade those ability cards for other ones of around the same rank.
 
-今「ランク」と言ったが、カードには1から4までのランクが設定されていて、
-1のカードが手に入りやすく4のカードが手に入りにくい。
-ランク4のカードともなれば一枚あるだけで冒険に大きな影響を与えるくらいの力があるが、
-普通の職業では相当な幸運に恵まれないと手に入らないだろう。
+Each card has its own rank, ranging from 1 to 4; cards with rank 1 are easy
+to obtain, cards with rank 4 are rare.
+Obtaining even one rank 4 card can significantly affect your adventure, but
+it requires getting lucky enough for normal classes.
 
-『カード売人』などの一部の職業は、
-守矢神社の密売所や偽天棚の賭場などで大量のカードを手に入れることができる。
-なお、ザックのアイテム欄一箇所に重ねられるアビリティカードは9枚までだ。」
+Some classes like 'Card-Trader' can obtain a lot of cards at facilities in
+Moriya Shrine and False Heaven Shelf. Also, you can carry up to 9 ability
+cards of the same kind in a single inventory slot.'
 
---- 発動タイプのアビリティカード ---
-慧音「発動タイプのアビリティカードは、
-'u'コマンド(オリジナルキー配置時)を入力してからカードを選択することで発動する。
-発動には成功率があり、発動に失敗すると一行動が無駄になる。
-成功率は魔道具技能により決まり、技能をいくら高めても100%にすることはできない。
-発動し終えたカードはチャージ状態になり、一定ターンが経過したらチャージが完了して再び使えるようになる。
-要するにロッドと同じ感覚で使ってくれていい。
+--- Activated Ability Cards ---
+Keine - 'You can activate ability cards through 'u' command (in original
+keyboard layout). You can fail to activate it, making you waste an action.
+Success rate depends on Magic Device skill; it never will be 100%, no matter
+how high your skill is. An activated card starts recharging and will be
+available for use once again after several turns.
+In other words, the work more or less like rods.
 
-ただし、チャージ状態のアビリティカードを『魔力充填の巻物』などで充填することはできない。
-時間経過によるチャージを待つしかない。
-所持タイプのアビリティカードの中には他のカードの充填を早める効果があるものもある。」
+However, you cannot speed up recharging with something like Scroll of
+Recharging; you have to wait for it to charge on its own.
+Some passive ability cards speed up recharging for other cards.'
 
---- 所持タイプのアビリティカード ---
-慧音「所持タイプのアビリティカードは、ザックに入れておけば効果が発揮される。
-古道具屋などザック以外に追加でアイテム箱を持っている職業の場合、
-そこにカードを入れていても問題なく効果が発揮されるぞ。
-家や床に置いているカードの効果は発揮されない。
+--- Passive Ability Cards ---
+Keine - 'Passive ability cards apply their effect if you're carrying them in
+your inventory. If you're a class with a separate inventory like Secondhand
+Dealer, those cards still work even if they're located there.
+Cards you leave at home or lying on the floor don't apply their effects.
 
-同じ種類の所持タイプカードを2枚以上持っている場合、枚数に応じてカードの効果がパワーアップする。
-さっき言ったとおり普通の職業ではアビリティカードを大量に手に入れることはできないが、
-カード売人などが強力なカードをひたすら買い漁れば凄まじいほどの効果を享受できるだろう。」
+If you're carrying 2 or more passive cards of the same kind, their effect
+power will increase depending on their amount. As I said before, normal
+classes can't get a lot of ability cards, but if a Card-Trader collects
+enough powerful cards, their effect will be tremendous.'
 
-
---- アビリティカードの調査 ---
-慧音「アビリティカードは入手時点で*鑑定*が済んでおり、Iコマンドから性能を知ることができる。
-所持タイプのカードが複数重なっているときに調べれば重なった状態での効果がわかるようになっている。
-なお'r'コマンドで読んでも同じように性能を知ることができるが、このときはIコマンドと違って行動力を消費する。
-敵が近くにいるときには気をつけてくれ。」
+--- Inspecting Ability Cards ---
+Keine - 'You can learn about an *identified* ability card's effect with
+'I' command. If you inspect a stack of passive cards, you will learn the total
+effect of that stack.
+Using 'r' command also lets you know that information about cards, but unlike
+'I' command, it consumes energy, so be careful if there are enemies nearby.'
 

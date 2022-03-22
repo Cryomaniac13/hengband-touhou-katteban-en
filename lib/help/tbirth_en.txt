@@ -1,368 +1,431 @@
-=== キャラクターメイキング ===
+=== Character Creation ===
 
-慧音「これから冒険の開始というわけだが、そのまえに必要なことがある。
-あなたは何の種族でどんな職業でどのような能力を持っているのか。
-この冒険はどの程度困難な物なのか。それを宣言してもらおう。」
+Keine - 'Before you start your adventure, there's something you need to do.
+What race are you? What class are you? What stats do you have?
+How difficult your quest is going to be? Let's answer those questions.'
 
 ***** <Difficulty>
-=== 難易度設定 ===
+=== Difficulty Level ===
 
-慧音「まずは冒険の難易度を決めてもらう。
-難易度はEASY,NORMAL,HARD,LUNATIC,EXTRAの5つから選べる。
-少し詳しく説明するぞ。
+Keine - 'First of all, let's pick the difficulty level of your quest.
+The difficulties are Easy, Normal, Hard, Lunatic and Extra.
+Here's more detailed description:
 
-　"EASY"は簡単な練習用モードだ。
-あなたは不自然なほど強いし、敵は弱いし、冒険は簡単だ。
-しかも、もし倒れたらいくらでもコンティニューしていい。
-右も左もわからない初心者はこの難易度を選ぶのもいいだろう。
-ちなみにこのモードは50階で八雲紫を倒したらクリアだ。その先はない。
-スコアも哀れなほど下がる。まあその程度の難易度だな。
+  "Easy" is a simple mode for training.
+You are unnaturally strong, your enemies are weak; your quest will be easy.
+Also, even if you get defeated, you still can continue. Feel free to pick
+this difficulty level if you're a complete newcomer. 
+By the way, once you defeat Yukari Yakumo at dungeon level 50 in this mode, 
+you've cleared the game. You can't go any further. Also, your score will be
+extremely lowered.
 
-　"NORMAL"は通常のモードだ。といっても変愚蛮怒本家よりはだいぶ簡単だ。
-敵の体力は変愚蛮怒本家の75%相当しかない。
-また敵はあなたの行動を挟まずに魔法やブレスを連続で放つことはない。
-それにあなたがどんな属性に弱いかを全く考慮しないで攻撃してくる。
-あと、50階で八雲紫を倒すまではダンジョンに強力な敵が出現しにくい。
-このモードは50階で八雲紫を倒したらクリア扱いになるが、
-その先に進みたければ進むこともできるぞ。
-慎重に進めばわりと簡単にクリアできるだろう。
+  "Normal" is normal mode. That being said, it's notably easier compared
+to original Hengband. Enemy health is only 75% of the original. Also,
+enemies cannot cast spells or use breath attacks several times in a row
+without giving you a turn. You're free to attack without worrying too much
+about what elements you're vulnerable to.
+Once you defeat Yukari Yakumo in this mode, it counts as you having cleared
+the game, but you still can go further on. If you play carefully enough, you
+should clear this difficulty with comparative ease.
 
-　"HARD"は変愚蛮怒本家と同じくらいの設定だ。
-敵はあなたにどんな属性が効いたか学んで効果が低い攻撃をしなくなる。
-時には急に素早く動いて強烈な連続攻撃をしてくるかもしれないな。
-あなたをあっという間に倒してしまうような強敵が出てくることもあるだろう。
-スコアはNORMALの倍になる。
-変愚蛮怒本家の経験者ならこれくらいでないと物足りないだろうな。
+  "Hard" is around the same level as original Hengband.
+Enemies learn what elements are effective against you and won't use
+ineffective attacks. You also might get hit by multiple powerful attacks in
+a row from a fast-moving enemy. There also will be strong enemies that easily
+can defeat you in no time if you're careless.
+Score is doubled compared to Normal.
+If you're an experienced Hengband player, you probably won't be satisfied
+with playing on a lower difficulty.
 
-　"LUNATIC"は変愚蛮怒本家でいう「悪夢モード」に近い。
-全ての敵の加速が+5され、さらにHPが30000を上限に二倍になる。
-そして最初から起きていて、あなたの弱点属性を最初から知っている。
-それだけでも大変なのだが、その上ダンジョンのごく浅い階でも深層の強敵がうろついていることがある。
-出くわしたら念仏でも唱えるしかないな。
+  "Lunatic" is close the the 'Nightmare Mode' from original Hengband.
+All enemies get +5 to speed, and their health is doubled, with an upper limit
+of 30000. They always start out awake and know all of your vulnerabilities
+from the start. That's not all; powerful enemies might be lurking around
+early dungeon levels. If you run into one, start praying.
 
-さらに、毎日零時に災厄が降りかかる。
-宿で寝ると悪夢を見て狂気に冒される。
-能力値維持が時々効かずさらに能力値減少が時々永久減少になる。
-突然変異が時々治らなくなる。
-召喚や襲撃で出てきた敵に不意打ちされやすくなる。
-鉱石を掘っているとたまに落盤に襲われる。
-配下を維持するコストが倍かかる。
+On top of that, bad things can happen at midnight.
+If you sleep at an inn, you see insanity-inducing nightmares.
+Stat sustaining abilities won't always work, and stat drain might end up
+being permanent.
+Mutations can occasionally be incurable.
+You are more likely to get caught off-guard by summoned enemies or being
+ambushed.
+If you dig up dungeon walls, you may cause a cave-in.
+Maintenance cost for followers is doubled.
 
-まあゲームに慣れて理不尽な敗北が懐かしくなったら試してみるといい。
-スコアはNORMALの八倍だ。
+Feel free to try if you've gotten used to the game and miss getting defeated
+in completely unreasonable ways. Score is multiplied eight times compared to
+Normal difficulty.
 
-　"EXTRA"は極めて特殊なモードで、様々な独自のルールがある。
-詳しく説明すると長くなるので別項に回す。スコアはNORMALの四倍だ。」
+  "Extra" is an extremely special game mode with its own unique rules.
+Explaining it would take too long, so we'll do it somewhere else.
+Score is quadrupled compared to Normal difficulty.'
 
 
 ***** <Status_main>
-=== 主要能力値 ===
+=== Primary Stats ===
 
-慧音「次に種族や職業を決めるのだが、その前に能力値の説明をしておこう。
-能力値は文字通りあなたの能力であり強さだ。
+Keine - 'Next, you'll have to pick your race and class, but let's take a look
+at your stats first. You can say they're the statistics representing your
+abilities.
 
-まず6つの主要能力値の説明をする。
-腕力・知能・賢さ・器用・耐久・魅力だ。
-能力値の解釈や役割が変愚蛮怒本家と少し違っているので気を付けてくれ。
+We'll start with the 6 primary stats:
+Strength, Intelligence, Wisdom, Dexterity, Constitution, and Charisma.
+Their interpretation and role have changed slightly from original Hengband,
+so keep that in mind.
 
-・"腕力"は力の強さだ。
-白兵攻撃力、持てる装備の重さ、武器の攻撃回数、持ち運べる荷物の量などに影響する。
-戦士系にとって重要なのはもちろんだが、
-装備が重すぎると魔法を唱えるのに必要なMPが多くなるから術師系でも疎かにはできないな。
+- "Strength" is your physical strength.
+It affects your combat attack power, equipment weight you're comfortable with,
+amount of weapon attacks per round, and how much weight you can comfortably
+carry around.
+Of course, it's important for warriors, but since your spell MP cost gets
+higher if you're wearing too heavy equipment, mages can't neglect it either.
 
-・"知能"は頭の回転の速さや記憶力だ。
-魔法の成功率、魔法を習得できる数、魔道具の使用の成功率などに影響する。
-術師系にとってはかなり重要だが戦士にはあまり要らないかもしれない。
-変愚蛮怒本家と違い、巫女なども知能で魔法の成功を判定するようになった。
+- "Intelligence" represents how smart are you and how good is your memory.
+It affects spell failure rate, amount of spells you can learn, success rate
+for magic devices and so on.
+It's very important for spellcasters, and warriors might not need it as much.
+In contrast to original Hengband, classes like Shrine Maidens still use 
+Intelligence to calculate spell failure rate.
 
-・"賢さ"は精神力や信仰心など、まあ心の強さだ。
-MPの量、魔法防御力に影響する。
-純粋な戦士にはあまり必要ないが、それ以外の職業には重要だな。
-とくに純粋な術師にとっては、戦闘能力に直結する能力だ。
+- "Wisdom" is your spiritual power and faith.
+It affects amount of MP and protection from magic.
+It's not that important for pure warriors, but other classes will need it.
+In particular, it's directly linked to combat capability for pure mages.
 
-・"器用"は手先の器用さや動作の俊敏さだ。
-物理防御力、武器の攻撃回数、格闘の攻撃回数、罠解除能力などに影響する。
-戦士系には重要だが術師にはあまり必要ない。
-あまり低すぎると泥棒に大事なものを盗まれて泣きを見るかもしれないが。
+- "Dexterity" is both your manual dexterity and agility in general.
+It affects armor class, amount of weapon attack per round, amount of attacks
+per round in martial art combat, disarming skill, etc.
+It's important for warrior classes, but spellcasters don't need it as much.
+If it's too low, you might end up crying after a thief steals something
+important from you.
 
-・"耐久"は肉体の頑健さだ。
-HPの量、状態異常からの回復速度に影響する。
-戦士はもちろん術師にも最重要な能力だ。
-中盤以降のダンジョンは、ある程度のHPを確保しないと危険でとても踏み込めないぞ。
+- "Constitution" is your physical sturdiness.
+It affects your HP and how quickly you recover from status abnormalities.
+Naturally, it's important for warriors, but it's vital for spellcasters as
+well. Past midgame, you'll be in danger unless you have enough HP left;
+this is a stat you can't neglect.
 
-・"魅力"は美しさや人気だ。
-主に店での取引に影響する。魅力が低いと資金繰りに悩まされるだろうな。
-あと、後述のユニーククラスの特技は魅力が高いと威力が上がるものが多い。
-『弾幕は美しさを競う勝負』というわけだ。
+- "Charisma" is your attractiveness and popularity.
+It mainly affects buying/selling prices in stores. If your charisma is low,
+you might have trouble getting enough money.
+Also, the unique classes we'll talk about later on have many special
+abilities that increase in power depending on your charisma.
+After all, "Danmaku is a contest of beauty".
 
-これらの能力値はレベルアップのときに時々上がる。
-また強力なな装備品を身につけたり魔法の薬を飲んで上げることもできるぞ。
-種族・職業・性格・装備の絡まない純粋な主要能力値の最大値は30だ。
-それら込みで40、特殊な方法で一時的に強化すれば50まで行くことがある。
+Those stats will occasionally increase as you level up.
+They also might increase if you wear a powerful piece of equipment or drink
+a magical potion.
+Maximum stat value, without taking race/class/personality/equipment
+modifiers into account, is 30.
+With those modifiers, the maximum is 40; there are some special ways to
+temporarily increase them up to 50.
 
-余談だが変愚蛮怒本家では18を超えると「18/40」のように表示され、
-最大でも「18/***」で19には届かなかった。
-D&Dの「19は神の領域」という設定に基づく由緒正しい記述法だったのだが、
-まあ幻想郷には神様とかわりとそこら辺に居るからな……」
+By the way, in original Hengband, stats beyond 18 were shown as, for example,
+'18/40'; they went up to '18/***', never reaching 19.
 
+It was a reference to D&D setting that '19 is reserved for gods', but
+there already are gods in Gensoukyou, so...'
 
 ***** <Status_other>
-=== その他のパラメータ ===
+=== Other Parameters ===
 
-慧音「さて、次に主要能力値以外の能力値について解説しよう。
-あなたが右も左も分からない初心者なら少し読み飛ばしてくれてもいいぞ。
-地下30階くらいまで降りられるようになったらまた来てくれ。
+Keine - 'Next, let's talk about parameters other than primary stats.
+If you're a complete newcomer, feel free to skip this.
+Come back once you've reached around dungeon level 30.
 
-・"隠密"は寝ている敵を起こさない能力だ。
-隠密が低いと近くの敵が次々に起きて寄ってきて、
-ダンジョンの探索がだいぶ難しくなるぞ。
-隠密能力は種族基本値、職業基本値、装備品でほぼ決まる。
-レベルアップで隠密が上がる職業はほとんどない。
+- "Stealth" is the ability to avoid waking up enemies.
+If your stealth is low, nearby enemies will keep waking up and coming
+after you, making dungeon exploration harder.
+Stealth is affected by your race, class and equipment.
+There are very few classes that increase stealth as they level up.
 
-・"加速"は素早く動く能力だ。+10で倍、+20で三倍の速さで動ける。
-移動だけじゃなく全ての行動が影響を受けるぞ。強敵と戦う時には重要だ。
-装備品で加速を上げられるのは主に中盤以降で、序盤は「スピードの薬」など
-を使って一時的に加速を稼ぐことになる。
-ダンジョンの深層へ行くには+20以上は欲しいところだな。
-+30辺りからは上げてもあまり効果が変わらなくなる。
+- "Speed" is the ability to act quickly. +10 makes you act twice as often,
++20 makes you act three times as often.
+It doesn't affect just your movement, it affects all actions you perform.
+It's very important when going against powerful enemies.
+Equipment with speed bonus will be mainly available post midgame, in early
+game you can temporarily increase your speed with something like 
+'Potion of Speed'.
+Once you go very deep into the dungeon, you want speed of at least +20.
+Once you reach +30, raising it further won't have much effect.
 
-・"赤外線視力"は体温のある生物を暗闇の中で感知する能力だ。
-+1当たり10フィート、マス目にして1つ分遠くの敵が見えるようになる。
-序盤はそれなりに役に立つが、中盤以降は悪魔やアンデッドなど体温を持たない敵が増えてくる。
-その頃にはESPなど別の手段で敵を感知する必要があるだろうな。
+- "Infravision" is the ability to see warm-blooded living beings in
+darkness. +1 to infravision lets you see enemies from distance of 10 feet, 
+or one grid on the screen.
+It's somewhat useful in early game, but past midgame there will be many
+cold-blooded enemies like demons and undead.
+You'll have to get other means of sensing enemies like telepathy by then.
 
-・"掘削"は壁を掘る能力だ。高いほど壁を早く掘れる。
-壁に埋まった財宝を掘り出すためにはつるはしなどを装備して掘削能力を稼ぐのが定石だ。
-中盤以降はよほど高くないとあまり役に立つ機会はないだろうな。
+- "Tunneling" is the ability to dig through walls. The higher it is, the
+faster you dig up walls.
+In order to dig up treasures buried in walls, you have to raise this parameter
+by, for example, wielding a digging tool.
+Past midgame, it's not going to be very useful unless it's high enough.
 
-・"探索"はダンジョンを探索するための能力だ。
-高いとトラップや隠しドアを見つけやすく、階の雰囲気を素早く感じ取る。
-また、ダンジョンごとの特産品素材などが手に入りやすくなるぞ。
-高いに越したことはないが無いなら無いでそれほど困るものでもない。
+- "Searching" is the ability to search the dungeon.
+If it is high, you'll have easier time discovering traps and hidden doors,
+and you'll be able to quicker get a general feeling about the level.
+Also, you'll find more special items (like materials) in dungeons.
+You can't have too much of Searching, but you shouldn't be too concerned
+with having low Searching either.
 
-・"魔道具"は魔道具を使用するための能力だ。
-杖、魔法棒、ロッド、それから装備品の発動の成功率に影響する。
-序盤はまあ無くてもどうとでもなるが、終盤はかなり重要な能力になる。
-ダンジョンの深層ではどんなに強くても捌ききれないほどの敵が出るから、
-*破壊*の杖や体力回復の杖といった強力な魔道具が必須になるんだ。
-純戦士系は魔道具能力が低いから何とかして装備品で稼ぐ必要があるな。
+- "Magic Devices" is the ability to use magic devices.
+It affects your success rate of using staves/wands/rods or activating
+equipped items.
+It's not that important in early game, but becomes a very vital parameter
+at endgame. Deep in the dungeon, no matter how strong you are, you always
+might run into enemies you can't handle; you need powerful magic devices
+like Staves of *Destruction* or Staves of Healing.
+Pure warriors aren't good at this, so you'll need to raise this skill with 
+equipment.
 
-・"魔防"は魔法に対する防御力だ。
-と言っても高ければすべての魔法を防げるというものではない。
-「呪い」や「精神攻撃」に対する抵抗力だ。
-抵抗に成功したらダメージを受けずに済む。
-中盤以降は強力な攻撃が増えるから高いに越したことはないな。
-魔法防御の高さは主に種族、職業、レベル、賢さで決まる。
-一部の特殊な技や「反魔法」装備で上昇させることができるぞ。
-あと、この勝手版においては「祝福」状態になると少し上がる。
+- "Protection from Magic" (also can be called "Saving Throw") represents
+your resistance to magic.
+It doesn't protect you from magic in general, though; it lets you resist
+effects like 'curse' or 'mental attack'/'mind blasting'.
+If you manage to resist the effect, you take no damage.
+There will be many powerful attacks past midgame, so you never can have
+enough of this skill.
+Its value mainly depends on you race, class, level, and wisdom.
+You also can raise it with some special abilities or equipment with
+'anti-magic'. Also, in this mod, it is slightly increased if you're
+temporarily blessed.
 
-・"解除"は罠を解除したり鍵のかかったドアを開錠する能力だ。
-主に種族、職業、レベル、器用さで上下する。
-ただ中盤以降はあまり使わないな。魔道具で開錠した方が早くて安全だ。
+- "Disarming" is the ability to disarm traps and unlock doors.
+Mainly depends on your race, class, level and dexterity.
+However, it's not that useful past midgame. It's faster and safer to disarm
+using magic devices.
 
-・"打撃"は格闘や武器による攻撃能力だ。
-攻撃の命中率に影響するので、つまり攻撃力に直結することになる。
-これはほとんど職業とレベルで決まるが、序盤のうちは種族の影響も軽視できないな。
-鬼や吸血鬼などは高く、魔法使いや小人などは低い。
+- "Fighting" is your skill at martial arts and weapon combat.
+It affects your accuracy, indirectly increasing attack power.
+It is mainly dependent on your class and level, but in early game you can't
+ignore your racial modifier as well.
+Oni and vampires are good at it, magicians and inchlings aren't.
 
-・"射撃"は射撃や投擲による攻撃能力だ。
-これも攻撃の命中率に影響し、ほとんど職業とレベルで決まる。
+- "Shooting" is your skill at shooting or throwing.
+It also affects your accuracy and mainly depends on your class and level.
 
-・"HP"はまあ言うまでもないな。マイナスになったらゲームオーバーだ。
-これはレベルと耐久力、そして種族や職業によって決まる。
-同じ職業、レベル、耐久力でも小人と鬼ではHPの高さはだいぶ違う。
+- "HP" should be obvious. Once you go below zero, it's game over.
+Amount of HP depends on your constitution, race and class.
+An oni and an inchling of the same level, class and constitution
+will have very different amounts of HP.
 
-・"MP"もまあ言うまでもないな。足りないと魔法が使えない。
-MPはレベルと職業、賢さで大体決まる。また種族の賢さ修正値によって数%変化する。
-魔法は常にMPを使うが、職業による特殊技はMPでなくHPを使うものもある。
-種族による特殊技(レイシャルパワー)の使用は基本的にMPを使うがMPが足りなくなったらHPを使う。
-戦士にも少しはMPがあるが、「理力」武器を装備した時くらいしか使わないだろうな。
-魔法や特技、レイシャルパワーについては後の項で説明しよう。
+- "MP" should be obvious as well. You can't cast spells if you don't have
+enough.
+Amount of MP depends mainly on level, class, and wisdom. Your race's wisdom
+modifier also affects it somewhat.
+Spells usually use MP, but some class special abilities might use HP instead.
+Racial powers mainly use MP; if you don't have enough, they use HP as well.
+Even warriors have a bit of MP, but they probably aren't going to use it
+unless wielding a 'force-branded' weapon.
+Spells, special abilities and racial powers will be covered in details
+later on.
 
-・"経験値"もお馴染みだろう。レベルが上がるのに必要だ。
-変愚蛮怒のゲーム内ではこの値を「経験値」と呼んだり「生命力」と呼んだりする。
-少々解釈に悩むが、まあ好きに考えてくれ。
-地獄属性の攻撃を受けたりアンデッドに攻撃されると一時的に減らされる。
-経験値復活の薬などを飲めば元に戻るぞ。
+- "Experience" should sound familiar. It is required to raise your level.
+In-game, this value is called both 'experience' and 'life force'.
+It's a bit hard to interpret; think of it as you like.
+It can temporarily decrease if you get hit by nether element attacks or 
+attacked by undead.
+If you drink a Potion of Restore Life Levels, it will return to normal.
 
-・"AC"はアーマークラスの略だ。高ければ高いほど敵からの通常攻撃に強くなる。
-150を超えたぶんはやや効果が薄い。
+- "AC" is short for Armor Class. The higher it is, the less likely you are
+to get hit by enemy melee attacks. Its effect becomes less noticeable once
+you go past 150.
 
-能力値はこんなところだな。
-これらの数値は'C'コマンドで確認できるぞ。」
-
+Those are your parameters.
+You can check those values with 'C' command.'
 
 ***** <Race>
-=== 種族 ===
+=== Races ===
 
-慧音「幻想郷には実に様々な生態の者たちが暮らしている。
-あなたはどんな種族なのかをここで選んでくれ。
-種族によってあなたの能力、職業への適性、敵の攻撃への耐性、
-全てが大きく変化することになる。
-冒険に不慣れなうちは、鬼や大妖や天人など成長が遅くても強力な種族が無難だ。
-獣人や玉兎など耳の良い種族も敵の位置を把握できるから良いな。
-人間や妖精や小人といった能力の低い種族、
-吸血鬼や妖怪人形といった個性の強すぎる種族は慣れてからの方がいいぞ。
-とはいえあれこれ考えず心の赴くままに選ぶのが一番楽しいのかもしれない。
+Keine - 'Various beings live in Gensoukyou.
+At this point, pick which race you are.
+Race greatly affects your stats, class aptitude, and resistance to enemy 
+attacks. If you're not used to adventuring, pick a powerful race that gains
+levels slowly like Oni, Great-Youkai or Celestial.
+Races with good hearing like Beastman or Moon-Rabbit can detect enemies.
+Humans, Fairies and Inchlings have low stats, and races like Vampires or
+Youkai-Dolls have very specific games, so it's probably to leave them for
+later until you get used to the game.
+That being said, you also can have fun by picking the one you like the most
+without thinking too much about it.
 
-種族の詳しい情報については稿を改めて説明する。」
+Races will be explored in more details later on.'
 
 ***** <Class>
-=== 職業 ===
+=== Classes ===
 
-慧音「職業の選択は重要だ。
-職業によりあなたのダンジョンでの戦略は全く違ったものになるだろう。
+Keine - 'Picking your class is very important.
+Different classes can have completely different strategies for clearing the
+dungeon.
 
-戦士系の職業なら良い武器を揃えて腕力と器用さと耐久力を鍛えるのが基本だ。
-序盤ならとりあえず殴りかかれば大抵の敵は倒せるが、
-中盤以降に敵が多彩な攻撃をしてくるようになると苦戦しがちだな。
+For warrior classes, you need a good weapon and high enough strength, 
+dexterity and constitution. In early game, you'll be able to deal with most 
+of the enemies by hitting them, but it'll be tough past midgame once enemies
+start using various special attacks.
 
-術師系の職業なら知能と賢さを高めて魔法を沢山撃てるようにするべきだ。
-そして自分と敵の力を見極めて勝てる状況を正確に判断しないといけない。
-中盤以降のややこしい局面でもさまざまに対応できるが慣れが必要だな。
+Spellcaster classes require high intelligence and wisdom, and they fight
+by using many spells. You have to properly assess the situation by observing
+both your and enemy strength. You'll get plenty of tools to deal with various
+situations past midgame, but you'll have to get used to properly utilizing
+them.
 
-他にも武器も魔法もそれなりに使える職業、
-それらのどれとも違う特殊な戦い方をする職業がある。
-不慣れなうちは戦士や射手といった戦士系職業を選ぶといいだろう。
+There also are classes competent both with weapon combat and spellcasting,
+and some classes have their own special way of combat. If you're not that
+experienced, pick a warrior class like Warrior or Marksman.
 
-職業の詳しい情報については稿を改めて説明する。
+Classes will be explored in more details later on.
 
-種族や職業のおおまかな特徴は選択時に表示される。
-ゲーム中に'~'コマンドから「自分に関する情報」を選択すれば
-いつでも見られるぞ。」
+Race/class characteristics are roughly described at the point you pick them.
+By pressing '~' during game and picking 'About yourself' you can check
+them again.'
 
 ***** <UniqueClass>
-=== ユニーククラスとは？ ===
+=== What are Unique Classes? ===
 
-慧音「ほかに特殊な職業が存在する。
-幾度となく起こった異変により幻想郷にその名を知られた少女たちだ。
-あなたがそのうちの一人だというのなら名乗ってくれ。
-専用の職業が設定されて種族と性別と名前が固定される。
-ちなみにゲーム中にCコマンドから職業名の表記を変更できるぞ。
-勿論変愚蛮怒本家には存在しない要素だ。便宜的にユニーククラスと呼ぶ。
+Keine - 'There are other special classes.
+They're the girls of Gensoukyou known due to many incidents.
+If you're one of them, say your name.
+They have their own special class, and their race, gender and name are fixed.
+By the way, you change change your class name in-game through 'C' command.
+Of course, there's no such thing in original Hengband. 
+They're called 'unique classes' for convenience.
 
-v1.1.17でユニーククラスの実装は全て完了した。
-阿求や霖之助など戦いに無縁な者達を除けば全ての登場人物でゲームプレイできるはずだ。
-今後新作の発表などで登場人物が増えたらまた追加されるだろう。」
-
+As of v1.1.17, all unique classes are implemented.
+Aside from people with no combat skills like Akyuu or Rinnosuke, you can
+play as any of the characters.
+New classes will be added as new characters will appear in further works.'
 
 ***** <Outsider>
-=== 外来人とは？ ===
+=== Who are Outsiders? ===
 
-慧音「何？ 幻想郷なんて聞いたこともなくいつの間にかここにいただと？
-そうか、あなたは外の世界から来た外来人だったのか。
+Keine - 'What? How did you get here without having heard of Gensoukyou?
+Right, you're an human who came here from the Outside World?
 
-悪いことは言わない。生きて外に帰りたければ人里のはるか南東の博麗神社に行くことだ。
-そこには博麗霊夢という巫女がいて、頼めば外へ送り帰してもらえる。
-いいか、間違っても異変に首を突っ込もうなどと考えるなよ？」
-
+It'd be the best for you to just come back alive; go to south-east from the
+Human Village to the Hakurei Shrine.
+The shrine maiden, Reimu Hakurei, will send you back outside if you ask her.
+Just don't even think of getting involved in the incident, okay?'
 
 ***** <Personality>
-=== 性格 ===
+=== Personality ===
 
-慧音「あなたは理知的かもしれないし喧嘩っ早いかもしれない。
-そういった性格は能力値にわずかに影響を与える。まあ好きに選ぶといい。
-性格「いかさま」を選ぶとあなたの全てが馬鹿げたほどに強化されるが、これは練習モードみたいなものだと思ってくれ。
+Keine - 'You might be calculating or you might be quick to pick a fight.
+Personalities like this slightly affect your parameters. Well, pick the one
+you like.
+The 'Munchkin' personality ridiculously powers you up in all aspects; think
+of it as a training mode.
 
-他にも明らかにふざけた性格がいくつかあるが、これらは不慣れな人にはお勧めしない。」
-
+There also are some other obviously weird personalities, but I can't recommend
+them to new players.'
 
 ***** <Realm>
-=== 魔法領域の選択 ===
+=== Choosing your Magic Realm ===
 
-慧音「いくつかの職業は魔法を習得できる。
-ここでいう魔法とは、魔法書を入手して学習し、
-魔法書を持って'm'コマンドからMPを消費して使用するもののことを指す。
-魔法は一定のレベルに達しないと学習できないし、頭が悪いと失敗しやすい。
-ほかにも色々制限があるがその分強力で多様だ。
-冒険に不慣れなうちは魔法を使えない職のほうが扱いやすいが、
-いずれは魔法も使いこなせるようになってほしい。
+Keine - 'Several classed can learn spells.
+In this context, the 'spells' refers to magic you learn from a spellbook
+that you can use with 'm' command when you are carrying that spellbook and
+have enough MP.
+You can't learn spells unless you reach high enough level, and you will often
+fail to cast them properly unless you're smart enough.
+There are some other restrictions, but those spells are powerful and diverse.
+If you're not an experienced adventurer, classes that don't cast spells will
+be easier for you to handle, but you eventually want to learn how to use
+spellcasters.
 
-魔法は「魔術・仙術・妖術」の3つの大領域と12の領域に分かれている。
-魔術には元素、予見、付与、召喚の領域があり、
-仙術には神秘、生命、破邪、自然の領域があり、
-妖術には変容、暗黒、死霊、混沌の領域がある。
-各領域には第一巻から最終巻まで四冊の魔法書があり、
-各魔法書には8つの魔法が記されている。
+Spells are divided in 3 major realms - Arcane Arts, Hermit Arts, 
+and Sorcery Arts.
+Arcane Arts has the Elements, Divination, Enchantment and Summoning realms.
+Hermit Arts has the Mysticism, Life, Exorcism and Nature realms.
+Sorcery Arts has the Transformation, Darkness, Necromancy and Chaos realms.
+Each realm has 4 spellbooks - from the 1st volume to the final one, and each
+of the spellbooks has 8 spells in it.
 
-本家の経験者なら一目でわかるだろうが、
-この改造版では魔法領域が大きく変わっている。
-混沌は本家のカオス領域と大体同じだ。
-生命と自然と破邪は半分以上本家と同じだな。
-召喚は本家のトランプに、付与は本家の匠領域に似ている。
-あとの領域は大きく入れ替えたり新しく作ったものが多い。
+Those who are familiar with base version probably already understand that,
+but this mod greatly changes the magic realms.
+Chaos is basically the same as the original Chaos realm.
+Life, Nature and Exorcism are 50%+ the same as original realms.
+Summoning resembles Trump realm, Enchantment resembles Craft realm.
+Many of the other realms have been greatly changed or replaced by new ones.
 
-この12領域の中から習得できるのは基本的にあなたが今選ぶ領域だけだ。
-だがメイジ、教師、巫女などいくつかの職は魔法を2領域使うことができる。
-第二領域は少し魔法の習得が遅くなるがいつでも変更できるぞ。
-ただし一度変更したら元の領域の魔法は全て忘れてしまう。
-覚えられる呪文の数には限りがあるからあまり無節操に領域を変更するのは
-勧められないな。あと第二領域が第一領域と違う大領域だと、
-第二領域の魔法はかなり使いにくくなるから気を付けてくれ。
+Out of those 12 realms, you'll be able to study only one of them you choose.
+However, several classes like Mage, Teacher, Shrine-Maiden can study 2
+realms. You learn spells from your second realm at a slightly slower pace, but
+you can change it at any time. However, once you've changed it, you'll forget
+all spells you've learned from your previous realm.
+There's a limit on how many spells you can learn in total, so I don't
+recommend changing your realms without a good reason. Also, if your second
+realm belongs to a different major realm than your first, its spells will
+be very difficult for you to cast. Keep that in mind.
 
-それから、魔法領域は職業によって適性が存在する。
-例えば、探検家と魔術師が同じ元素領域を選択していたとしよう。
-両者が同じ知能を持っていたとしても、探検家は魔術師に比べて魔法を習得
-するためにより高いレベルが必要だ。それに魔法を使うのにMPの消費が多く
-失敗もしやすい。高位のいくつかの魔法は習得できないかもしれない。
+Classes have their own aptitudes to the magic realms.
+Let's take a look at an Explorer and a Mage studying realm of Elements.
+Even if they have the same intelligence, Explorer will have to be at higher
+level to learn spells compared to Mage; MP cost will be higher as well,
+along with failure rate. And several high-end spells will be simply
+unavailable.
 
-種族によっても職業ほどではないが適性が存在する。
-例えば妖怪たちは仙術が苦手で妖術が得意な者が多い。仙人や天人は逆だな。
-魔法使いは魔術が大得意で他の魔法もそれなりに使える。
+Races also have aptitudes, though not to the same extent.
+For example, youkai are bad at Hermit Arts but good at Sorcery Arts.
+Hermits and Celestial have it the other way around.
+Magicians are very good at Arcane Arts, but still can use other realms
+with some level of competence.
 
-なおバージョン1.1.08以降、これに加えて「秘術」なる13番目の領域が追加された。
-これは本家変愚蛮怒の秘術とほとんど完全に別物になっている。
+Version 1.1.08 introduced a 13th realm, 'Occult'.
 
-概要としてはこんなものか。
-魔法の詳細については稿を改めて説明する。」
+That's it for the general description.
+Magic will be described in more details later on.'
 
 
 ***** <BirthOptions>
-=== 初期オプション ===
+=== Birth Options ===
 
-慧音「ゲームの難易度とは別に、
-いくつかのオプションを選択して難易度を調整したりゲームに制限をつけることができる。
-難しいオプションをONにして冒険したらスコアが上がるぞ。
-各オプションの設定項目のところで'?'を押せばそのオプションの詳しい説明が見られるだろう。」
-
+Keine - 'Aside from the game difficulty level,
+there are some options you can pick that change the difficulty and add
+some restrictions.
+If you're on a quest with difficult options set to 'on', your score will be
+increased.
+By pressing '?', you can view detailed information about a given option.'
 
 ***** <BonusPoint>
-=== ボーナスポイントの割り振り ===
+=== Allocating Bonus Points ===
 
-慧音「種族と職業と性格が決まったら、あなたの基本の主要能力が決まる。
-その腕力・知能・賢さ・器用・耐久・魅力にボーナスポイントを上積みして増やすことができる。
+Keine - 'Your base primary stats depend on the race, class and personality
+you picked. You can increase them by allocating bonus points.
 
-ボーナスポイントの量は完全に運で決まる。
-不満なら割り振り決定後にrキーで再ロールすることができるぞ。
-某有名ダンジョンゲームに比べるとややボーナスが跳ねにくい。25もあれば上出来だろう。
-面倒なら初期オプションでボーナスポイントを固定することもできるぞ。
+Amount of bonus points depends on your luck.
+If you don't like it, press 'r' key after finishing allocation to reroll.
+It's similar to a certain famous dungeon crawler game, but it's a bit hard
+to get a good amount of bonus points here. Getting 25 will be good enough.
+If it's annoying, you can use a birth option to set bonus points to a fixed
+amount.
 
-余談だがテスト時の最高値は41だ。うっかりキャンセルしてしまったようだが。」
-
+By the way, the largest amount during testing was 41.'
 
 ***** <BackgroundEditor>
-=== 生い立ちエディタ ===
+=== Background Editor ===
 
-慧音「あなたはどこで生まれ、どんな暮らしをしていたのか？
-そして何を思ってダンジョンに身を投じるのか？
-それを表明したいならここに書き記すのもいいだろう。
-存分にあなたの思いを込めてくれ。
-一度書いたら*特殊な例*を除いて変更はされない。」
-
+Keine - 'Where were you born, and how were you raised?
+And why did you decide to enter the dungeon?
+If you wish to express that, write it down here.
+Put your thoughts in it.
+Once you've written it down, it can't be changed expect for some
+*special cases*.'
 
 ***** <Name>
-=== 名前・職業名 ===
+=== Name/Class Name ===
 
-慧音「さて、遅くなったがあなたの名前を聞こうか。
-あなたがユニーククラスならすでに名前が知られているから言わなくていい。
-あなたの職業が「普通の住人」ならここで一度だけ職業名を変えられる。
-ゲームを「新規」から始めた場合、ここでセーブファイル名も決めてくれ。」
-
+Keine - 'Now that we're here, let's hear your name.
+If you're an unique class, your name is already known.
+If your class is 'Civilian', you can change your class name at this point.
+If you started a 'New Game', you also write down your savefile name here.'
 
 ***** <QuickStart>
-=== クイック・スタート ===
+=== Quick Start ===
 
-慧音「もしあなたが力及ばず倒れた場合、何度も言ったようにゲームは最初からだ。
-しかしこのキャラクターメイクの情報は保存されていて、
-望むなら前回の冒険開始時と全く同じ状態で新たな冒険を始められる。」
+Keine - 'If you get defeated, you have to start the game over from the
+beginning. However, information about character you've created is preserved,
+and you can start your new quest in the exact same state you started your
+previous one.'
 

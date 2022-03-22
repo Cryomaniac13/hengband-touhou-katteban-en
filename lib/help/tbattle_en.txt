@@ -1,667 +1,798 @@
 ***** <Energy>
-=== 行動順について ===
-慧音「まずは行動の順番について説明しておこう。
-ローグライクを特徴づける要素の一つに、『敵と自分は交互に行動する』というのがある。
-ところが実はこれは変愚蛮怒にはちょっと当てはまらない。
-自分の行動番になったらいくら時間をかけて考えてもいいのは変愚蛮怒でも同じなのだが、
-同じ行動速度の者が必ず交互に行動するとは限らないんだ。
+=== About Movement Order ===
+Keine - 'Let's start with explaining movement order.
+One of specific features of roguelike games is 'You and enemies take turns
+performing actions'. However, that's not quite the case with Hengband.
+While you still can take any amount of time thinking once it's your turn to
+act, there's no guarantee that two beings with the same speed will always
+take turns one after another.
 
-ここからは少し細かい話になる。
-あなたを含む全てのキャラクターは、行動したら次の行動までにある程度の時間を要する。
-その時間の計算には「基礎消費行動力」と「加速」が使われ、
-そこにさらに「乱数」が適用される。
+Let's go a bit deeper into the details.
+All characters, including you, have to wait for some time before taking
+their next turn once they've performed an action. That amount of time is
+calculated using 'energy consumption amount' and 'speed', with a random number
+being applied on top of that.
 
-基礎消費行動量は今終えた行動で変わる。ほぼ全ての行動で同じだが、
-ごく一部の行動だけは通常の行動と違う数値が適用される。
-「アイテムを落とす」「高速で射撃や投擲をする」「警告を受けて行動中断する」などは
-次の行動までにあまり時間を使わないな。
+Amount of energy consumed depends on the action you just performed. Most
+of the actions use up the same amount of energy, but some use up a different
+amount. Actions like 'drop an item', 'shoot/throw at high speed', 'stop
+movement after receiving a warning' use very little time before next action.
 
-次に加速についてだが、これはもちろん高ければ高いほど次の行動までの時間が短くなる。
-+10で無加速の倍、+20なら三倍の速さで行動できると思っていい。
-だが+30なら四倍かというとそうでもない。+25辺りから加速による効果が弱くなっていって、
-+40と+50ではもう誤差程度の違いしかない。
+Next up is speed; of course, having higher speed means waiting less time for
+your next action. At +10 you perform actions twice as fast, at +20 you perform
+actions three times as fast. However, at +30 doesn't make you four times as
+quick. Around +25, the effect of speed starts to diminish; the difference
+between +40 and +50 is hardly noticeable.
 
-そして乱数だが、これは普段はあまり気にならないがたまに驚くほど大きな影響を与える。
-加速+30あっても加速+10の敵に連続で行動されることだって起こりうる。
+And then, you add in a random number; usually this doesn't do too much, but at
+times, it can have a surprisingly significant impact. There are cases of
+enemies at +10 speed taking multiple turns while the player was at +30 speed.
 
-これをスリリングと見るか戦略性を損なうと見るかは人によるが、
-ともあれ変愚蛮怒ではそういうシステムで行動順が決まっている。
-「いかにギリギリの戦いを潜り抜けるか」でなく
-「いかに戦力を整えて常に万全の状態で戦うか」に知恵を絞るべきだな。
+It is argued where this mechanic is thrilling or just harmful for strategic
+combat, but that's the system used to determine move order in Hengband.
+It's less about pulling through battles with all of your strength and more
+about always being prepared to fight in top condition.
 
-それから、ユニーク以外のモンスターの加速値は個体によって最大±50%くらい変動する。
-騎乗用の配下がほしいときはできるだけ素早い奴を狙うといい。」
-
+Also, non-unique monsters can have variance in their speed up to +/- 50%.
+If you want a follower for riding, aim for a fast one.'
 
 ***** <Meleeweapon>
-=== 武器攻撃について ===
+=== About Weapon Combat ===
 
-慧音「さて、では隣接した敵に対する攻撃について説明しよう。
-何度か言ったが、移動コマンドで隣接した敵の方向を入力すればそれで自動的に攻撃が行われる。
-まずは剣や槍など隣接武器を使った攻撃だ。
+Keine - 'Now, let's talk about attacking adjacent monsters in melee.
+I've said it several times; by using movement commands to move into an
+adjacent monsters, you automatically attack this monster. Let's talk about
+fighting in melee with weapons like swords or spears.
 
-一度のコマンド入力で攻撃回数分の攻撃が行われる。
-攻撃回数は職業、腕力、器用さ、武器の軽さ、あと装備品による追加攻撃修正で決まるかな。
-攻撃回数の上限は職業ごとに決まっている。
-一本の武器を両手で持っているときは攻撃回数が上がりやすい。
-短剣を両手で持つことはできないが、短剣だけは熟練度が高いと攻撃回数にボーナスが付くぞ。
+With one command input, you perform several weapon attacks.
+Amount of blows depends on your class, strength, dexterity, weapon weight,
+and possibly extra blows modifiers from your equipment.
+Each class has a maximum limit on attacks per round.
+Holding a weapon with both hands makes it easier to get extra attacks.
+You can't hold a short blade with both hands, but you get a bonus to
+blows per round once your proficiency becomes high enough.
 
-攻撃の命中率は、かなり色々な要素が関わってくるな。
-まず敵のレベルやACが高いと当たりにくい。
-直接攻撃に向いた種族、職業、性格だと当たりやすい。
-あなたの腕力と器用さが高いと当たりやすい。
-あなたのレベルが上がると当たりやすくなるがその上昇値は職業の影響が大きい。
-もちろん武器や他の装備品で命中率修正が増えると当たりやすくなる。
-他にも補助による一時効果やバッドステータスによるペナルティなど様々なことが影響する。
-命中率は結局トータルのダメージに関わってくるから疎かにしてはいけない。
+Attack accuracy depends on various factors.
+First of all, high level enemies and enemies with high AC are harder to hit.
+Melee-focused races, classes, personalities are better at landing hits.
+High strength and dexterity makes you more accurate.
+As you level up, your accuracy increases, but this increment greatly depends
+on your class.
+And of course, your weapon or other pieces of equipment might have accuracy
+modifiers, changing your ability to land hits.
+Some temporary effects or negative conditions might affect it further.
+Ultimately, your accuracy is linked to your total damage; you shouldn't
+neglect it.
 
-攻撃一撃ごとの威力は、まず武器の威力と他の装備品による修正によって決まる。
-それからあなたの腕力が高いとダメージが増える。
-そして重要なのが、武器の属性、スレイといった武器と敵の相性だ。
-属性やスレイなどについて詳しく知りたければアイテムの項を見直してくれ。
+Each attack's power depends on weapon power and equipment modifiers.
+If you have high strength, it will increase damage dealt.
+A major factor is your weapon's elemental brands/slays and how they interact
+with the enemy you're hitting. If you wish to know more about brands/slays,
+check out the items help section.
 
-通常の武器攻撃の威力は'C'コマンドで、
-スレイなどを含めた詳細な威力は鍛冶屋で知ることができる。」
+You can check your base weapon attack power with 'C' command, and learn
+more details including slay effectiveness at a blacksmith.'
 
---- 二刀流 ---
+--- Dual Wielding ---
 
-慧音「二本の武器を両手に一本ずつ持つことができる。攻撃力もそのまま二本分だ。
-一見強そうだが、そう甘い話はない。二刀流にすると命中率にかなり大きなペナルティがかかる。
-特に敵のACが高いと半可な技能ではほとんど当たらなくなってしまうぞ。
+Keine - 'You can hold two weapons at once, one in each hand. The attack
+power will be equal to those two weapons combined. It looks strong it first,
+but there's a catch. If you dual-wield, you get a very large penalty to
+accutacy. If enemy AC is high and you're not proficient enough, you'll hardly
+be able to land a hit.
 
-二刀流技能の適性の高い戦士や剣術家なら選択肢になりうるだろう。
-一部の装備は二刀流ペナルティを下げるから、そういう物を使うのも手だ。」
-
+Warriors and Samurai have high aptitude for dual-wielding, so they might
+pick this option. Some equipment might have an ability that reduces dual
+wielding penalties; that's another way to get around this.
 
 ***** <Shootingweapon>
-=== 射撃攻撃について ===
+=== About Ranged Attacks ===
 
-慧音「次は弓やクロスボウの扱いについて説明しよう。
-変愚蛮怒本家では弓やクロスボウは弓専用の装備枠に装備していたが、
-この勝手版では普通に手に持つようになった。基本的に両手で扱う。
-盾や近接武器をもう片方の手に持つこともできるが、
-命中率や射撃回数にペナルティが発生するぞ。
+Keine - 'Now, let's talk about using bows and crossbows.
+In original Hengband, you had a separate equipment slot for using a ranged
+weapon, but in this mod, you have to hold them in your hands. They're mainly
+held with both hands. You can hold a shield or a melee weapon in other hand,
+but this will give you penalties to accuracy and amount of shots per round.
 
-射撃は'f'コマンドから行う。コマンド入力後、どの矢を撃つか選んで
-それからターゲットを決定したら射撃が行われる。
-撃った矢は拾えばまた使えるが、撃ったとき壊れて消えてしまうこともある。
+Shooting is performed with 'f' command. After using it, pick ammo you want
+to use, then choose your target to perform the attack.
+If you pick up the arrow you've shot you can use it again, but the ammo you
+use might break and disappear.
 
-射撃のたびにいちいちコマンドを入力するのは手間なので通常はマクロを使う。
-マクロについては後の項でまた説明しよう。
+Since it takes time to input commands every time you want to shoot, people
+usually use macros for that. Macros will be described in more details in
+another section.
 
-射撃の威力は弓と矢の質でほとんど決まる。
-弓を装備した状態なら矢のところに攻撃の威力(一撃威力/ターン威力)が表示されるはずだ。
-射撃の命中率はまあ近接攻撃と似たような計算だ。直接攻撃技能でなく射撃技能が関わる。
-弓よりクロスボウのほうがやや命中率が高くなるな。
-命中率や射撃回数は'C'コマンドで確認できる。
+Shooting attack power mainly depends on bow and arrow quality.
+If you're holding a bow, arrows should display their attack power in format
+like ([single shot power]/[total power per round]).
+Accuracy is calculated in a way similar to melee attacks, only it depends
+on your ranged combat skill.
+Crossbows have somewhat better accuracy compared to bows.
+You can check your accuracy and amount of shots per round with 'C' command.
 
-弓の射撃回数は、近接攻撃の攻撃回数とは扱いが大きく違う。
-近接攻撃は通常の一行動力を使って攻撃回数分の攻撃を行うが、
-射撃は(通常の一行動力/射撃回数)の行動力を使って一回の射撃を行う。
-射撃回数が4なら通常の行動の1/4の行動時間で一発射撃をするわけだな。
-実はこの特性により射撃は近接攻撃に比べてかなり有利だ。
+Amount of shots per round is treated in a very different manner compared
+to amount of blows in melee.
+In close combat, you perform several attacks in a single action; when 
+shooting, each attack consumes only (base energy consumption/shots per round)
+energy of base consumption amount.
+For example, if you perform 4 shots per round, you will perform each shot
+spending only 1/4 as much energy compared to a normal action.
+This feature makes ranged combat very advantageous compared to melee combat.
 
-先ほども説明したが、変愚蛮怒ではあなたと敵の行動順は一定ではない。
-深層で敗北を喫する大きな原因として、敵の思わぬ連続攻撃がある。
-例えHPが800以上あったとしても、敵がたまたま連続行動してきて
-しかもその二回がたまたま強烈なブレスや魔法攻撃だった場合、
-あっさりゲームオーバーになってしまう。
-他のローグライクではあまり見られない、変愚蛮怒の理不尽ともいえる一面だ。
-しかし射撃回数が多い状態で射撃で攻撃していると、
-一発撃つごとに次に何をするか選べるから敵からの連続攻撃を受けないんだ。
+As it was explained earlier, movement order in Hengband isn't fixed.
+A major cause of defeat on lower levels is enemies unexpectedly performing
+multiple attacks in a row.
+Even if your HP is above 800, if an enemy takes several turns in a row and
+uses a powerful breath attack or spell, it's game over.
+It's one of Hengband's unreasonable moments rarely seen in other roguelikes.
+However, if you're shooting when you have many shots per round, enemies will
+be less likely to get several turns to attack you.
 
-ゲームに慣れてきて初めてのクリアを目指すなら、レンジャーや射手といった
-弓の得意な職をお勧めする。危険な深層でも比較的安定した戦いができるはずだ。」
-
+If you've gotten used to the game and aim to clear it, I can recommend a
+class proficient with bows like Ranger or Marksman. Even on lower levels, it's
+a comparatively safe way of combat.'
 
 ***** <Martialarts>
-=== 格闘について ===
+=== About Martial Arts ===
 
-慧音「格闘は素手による攻撃だ。近接武器を装備していないときに行われる。
-変愚蛮怒本家では格闘ができるのは一部の職だけだったが、
-この勝手版ではどんな職業でも格闘攻撃ができるようになった。
+Keine - 'Martial arts refers to attacking with your bare hands - that is,
+without having a melee weapon equipped. Original Hengband had only some 
+classes being capable at martial arts, but in this mod, any class can fight
+in this manner.
 
-格闘の攻撃回数は基本的にレベルと器用さと格闘熟練度で決まる。
-格闘の適性が高い者は格闘攻撃回数の最大値も高い。
-もちろん追加攻撃の装備品でも格闘回数は増えるぞ。
+Amount of blows per round for martial arts mainly depends on your level,
+dexterity, and martial art proficiency. Those who have high aptitude for
+martial arts have a high upper limit on blows per round as well.
+Of course, 'extra blows' abilities on your equipment also affect the amount
+of blows per round you perform.
 
-格闘の威力は、まずあなたの腕力、それから指輪など装備品による修正、
-そして格闘攻撃の種類で決まる。
-格闘攻撃の種類とは、「殴る」「蹴る」「引っ掻く」などの攻撃手段だ。
-これらの攻撃種類にはそれぞれダイスと重量と追加効果が設定されていて、
-強い種類の攻撃が何度も出れば敵に与えるダメージも高くなるというわけだ。
-格闘攻撃の種類はどう決まるかと言うと、基本的にはレベル、種族、職業で決まる。
-たとえばあなたの種族が鬼の場合、普通に殴っただけでも「強烈な鉄拳」が出て
-並みの格闘職と遜色ない威力が出るだろう。
-人魚の尻尾もかなりの威力だな。
-突然変異によって角や尻尾が生えた場合それによる格闘攻撃が出ることもある。
-それから、特殊な魔法などで変身した場合もそれに応じた格闘攻撃になる。
+Martial art power depends, first of all, on your strength, then the damage
+modifiers on your equipment are taken into account.
+After that, it depends on kind of martial art attack you're doing.
+Martial arts have varied means of attack like 'punch', 'kick', 'scratch'.
+Each of them has its own damage and extra effects; if you manage to use
+a powerful attack several times, damage you deal will increase.
+The kind of attacks you'll be using depends mainly on your level, race and
+class. For example, if you're an oni, you will use more powerful punch
+attacks. Merfolk also can deal major damage by striking with their tails.
+If you grow horns/tail from getting a mutation, you'll be able to use them
+in martial art combat as well.
+Also, transforming yourself with special spells changes your martial arts
+corresponding to your new form.
 
-格闘の威力は'C'コマンドで確認できるが、今言ったように格闘の計算はややこし過ぎて
-正確な期待値を求められないのでサンプリング値が表示される。
-'C'コマンドを押すたびに格闘の威力表示値が変わってしまうがこれはそういう仕様だ。」
+You can confirm martial art power with 'C' command, but since martial art
+calculation is fairly complex, it'll give you a sample value instead of a
+proper expected amount of damage dealt.
+Each time you use 'C' command, the displayed value of your martial art
+power will be changed; that's a feature.'
 
---- 武器攻撃時の追加格闘について ---
+--- Extra martial art attacks during weapon combat ---
 
-慧音「実は武器攻撃のときにも格闘はできる。 
-尻尾や角などを持っているとき、格闘熟練度が高いとき、盾熟練度が高いときだ。
-これらの能力や特性があると武器攻撃のあとでときどき格闘攻撃を見舞うことがある。
-棒系の武器を両手で持っているときはは追加格闘が出やすいようだ。」
-
+Keine - 'You also can perform martial art combat as you fight in melee with
+a weapon. It occurs if you have a tail/horns and your martial art proficiency
+is high enough, or if you're holding a shield and you shield proficiency is
+high enough.
+You'll be able to occasioanlly perform additional martial art attacks as you
+fight with your weapon. If you're holding a staff weapon with both of your
+hands, extra martial art attacks are more likely to occur.'
 
 ***** <Throwing>
-=== 投擲について ===
-慧音「アイテムを敵に投げつけて攻撃することもできる。
-投擲熟練度が高ければ通常の行動より素早く物を投げることができるだろう。
+=== About Throwing ===
 
-近接武器以外のアイテムを投げてもあまり威力はない。
-例外は爆発の薬などの特殊な薬だな。
+Keine - 'You can attack by throwing items at enemies.
+If your throwing proficiency is high enough, you'll be able to do it faster
+compared to performing a normal action.
 
-投擲の射程はあまり長くなく、腕力が低いとほとんど遠くに届かない。
-投擲の威力はアイテムの種類、武器のスレイや属性など敵との相性、あなたの腕力で決まる。
-魔法の「強力投擲」を使った場合や「投擲の指輪」を装備している場合は投擲の威力が増す。
+Aside from melee weapons, thrown items generally don't have much powers.
+One of exceptions are special potions like Potion of Detonations.
 
-命中率は投擲熟練度、射撃技能、器用さで決まるかな。
-投げた薬などは割れて中の薬が飛び散る。
-投げた武器がアーティファクトでない場合たまに壊れて消えることがある。
+You throwing range isn't long, and you won't be able to throw items far away
+if your strength is low.
+Throwing power depends on item kind, weapon brand/slay interaction with the
+enemy being hit, and your strength.
+If you use a 'Mighty Throw' spell or wear a Ring of Mighty Throw, your throw
+power will increase.
 
-忘れてはいけないのがナイフやジャベリンなど「投擲に向いた武器」の存在だ。
-投擲に向いた武器は命中しやすく威力が増す。
-とくにアーティファクトならかなりの威力が期待できるだろう。
-元々投擲に向いていない武器でも投擲に向いた高級品やアーティファクトになることがある。
-あと、滅多に見られないが「投げると戻ってくる武器」というのも存在する。
-ただし常に戻ってくるとは限らないし戻ってきても受け損ねて足元に落とすかもしれない。
-器用さが高いほどそうしたミスは起こりにくいようだ。
+Accuracy depends on your throwing proficiency, ranged combat skill, and
+dexterity.
+A thrown potion will always break, applying its effect.
+Thrown non-artifact weapon can occasionally break and disappear.
 
-投擲はどんな職業でも少しは使えるが、投擲の得意な職業は少ないな。」
+Don't forget that some weapons like knives or javelins are 'suitable for
+throwing'.
+They have higher accuracy and increased power when thrown.
+Artifacts in particular can be very powerful in this regard.
+Some ego-items and artifacts can be suitable for throwing, even if their
+base item isn't.
+Also, there are only few of them, but there are weapons that come back when
+thrown. However, they might not always come back, and even if they come back,
+you might fail to catch them, and they'll drop beneath your feet. Success
+rate depends on your dexterity.
 
+Any classes can use throwing to some extent, but there are only few classes
+that are proficient at it.'
 
 ***** <Critical>
-=== 会心の一撃について ===
-慧音「今まで挙げた様々な攻撃で、「会心の一撃」が出ることがある。
-これが出ると攻撃の威力、とくにダイス部分が跳ね上がる。
-基本的に武器が重ければ重いほど会心の一撃が出やすい。」
+=== About Critical Hits ===
 
+Keine - 'All of those various attacks described above can deal critical hits.
+A critical hit deals more damage, particularly affecting the damage dice part.
+Basically, the more heavy your weapon is, the more critical hits you get.'
 
 ***** <Buff>
-=== 補助効果について ===
+=== About Temporary Effects ===
 
-慧音「何の準備もせずに強敵と戦うのは無謀だ。
-変愚蛮怒には自分の力を一時的に底上げする様々な手段が揃っている。
-いくつか基本的なものを紹介しよう。多くは薬や魔法で得られる。
+Keine - 'It's reckless to fight powerful enemies without preparations.
+In Hengband, there are various means of raising your power.
+Here's a list of some basic ones. Many of them can be obtained through
+potions or spells.
 
-・士気高揚
-　気分が高揚した状態だ。HPとACが10上がり、近接攻撃が少し敵に命中しやすくなる。
-  それから恐怖状態を治し、恐怖にかからなくなる。
-　魔法や薬で得られるが、酒を飲んでも得ることができる。
-　ただし酒は飲みすぎると体調を崩すぞ。
-　
-・祝福
-　神様の祝福を受けた状態だ。どの神様かは知らないが。
-　ACが10上がり、近接攻撃が少し敵に命中しやすくなる。
-  また、この勝手版ではわずかに魔法防御力が上がるぞ。
-　祝福の魔法や「聖唱歌の巻物」で得ることができる。
-  巻物屋に売っているから余裕があるなら持っておくといい。
+- Heroism
+  Raises your spirits. Increases HP and AC by 10, and slightly increases
+  melee accuracy. Cures 'terrified' condition, and makes you resistant to
+  fear. Can be obtained by using potions or spells, or by drinking sake.
+  However, your can get sick from drinking too much alcohol.
 
-・耐火/冷/電/酸/毒
-　一時的に属性への耐性を得た状態だ。
-　対応する元素、毒攻撃いずれかのダメージを1/3に抑える。
-　既に何度か説明したが重要なことなのでもう一度説明しておこう。
-　装備品で耐性がある状態でさらに一時的な耐性を得ると「二重耐性」となり、
-  元の1/9にまでダメージを軽減することができる。
-　ただしこれは上に挙げた元素と毒の五種類の属性だけの話だ。
-  一時的にカオスや地獄などの耐性を得る魔法もあるが、
-  それらの魔法でカオスや地獄への二重耐性を得られたりはしない。
+- Blessing
+  You become blessed by some deity, though you're not certain which one.
+  Increases AC by 10 and slightly increases melee accuracy.
+  In this mod, it also slightly increases protection from magic.
+  Can be obtained by using blessing spells or Scroll of Holy Chant.
+  The scrolls are being sold at stores; buy some if you have spare money.
 
-  一時耐性を得る手段は魔法や薬が主だ。
-　あなたが耐性魔法を使えない職業なら、質屋で耐性の薬を見たら逃さず買うことだな。
-  
-・混乱の手
-　パニック・モンスターの巻物を読むと手が光ってこの状態になる。
-　この状態で敵を攻撃すると敵を混乱させることがある。
-　序盤の強敵は混乱の効く敵が多いから惜しみなく使いたい。
-　中盤以降はほとんど当てにならないが。
+- Resist Fire/Cold/Electricity/Acid/Poison
+  Makes you temporarily resistant to an element.
+  Reduces damage received from basic elements and poison to 1/3.
+  I've already explained this many times, but since it's so important, let's
+  go over it again. If you gain a temporary resistance while already being
+  resistant to that element from your equipment, you will become 'double
+  resistant', reducing damage to 1/9 of its base value.
+  However, this applies only to the base elements and poison.
+  There are spells that give temporary resistance to elements like chaos or
+  nether, but they can't give you a double resistance.
 
-・加速
-　加速が+10される。強敵と戦うときは必須だ。
-　「スピードの薬」は序盤からわりと手に入るが消耗品だ。
-　できれば早いうちに「スピードの杖」を手に入れたい。
-  自分を加速させる魔法もいくつか存在する。
+  Temporary resistance is mainly obtained through spells or potions.
+  If your class can't use resistance spells, look for Potions of Resistance
+  in the Pawn Shop.
 
-・強化
-　筋力増強の魔法などで手に入る。対応する基本パラメータを増加させるものだ。
-　基本パラメータの上限は基本的に40だが、上限を突破する強力な強化魔法もある。
+- Hand of Confusion
+  Your hands will start glowing once you read a Scroll of Monster Confusion.
+  If you hit an enemy in this state, that enemy can get confused.
+  Many powerful enemies in early game are vulnerable to confusion, so don't
+  hesitate to use it. That being said, it becomes far less effective past
+  midgame.
 
-基本的なのはこんな所か。この勝手版には百種類を超える一時効果がある。」
+- Haste
+  Increases speed by +10. Vital when facing against powerful enemies.
+  Potions of Speed are comparatively easy to obtain from the early game.
+  If possible, get yourself a Staff of Speed.
+  There also are some spells that temporarily increase your speed.
 
+- Empowerment
+  Obtained through some physical augmentation spells. Increases your base
+  parameters. The normal limit for your stats is 40, but there are some
+  powerful spells that can go beyond that limit.
+
+Those are basic temporary effects. In this mod, there's over a hundred of
+different temporary effects in total.'
 
 ***** <BadStatus>
-=== バッドステータスについて ===
+=== About Bad Status Conditions ===
 
-慧音「敵の攻撃などによってあなたは一時的に不調になるかもしれない。
-それらの状態について説明しよう。
-多くのバッドステータスは時間経過で回復するが、すぐ治す方法も教えておく。
+Keine - 'You may get temporarily impaired by some enemy attacks.
+Let's go over those conditions.
+Many of them go away once enough time passes, but I'll also tell you how to
+quickly cure them.
 
-・毒
-　時間経過でHPやMPが回復しなくなり、少しずつダメージを受ける。
-　「解毒の薬」「致命傷治癒の薬」「体力回復の薬」などで治せる。
-　また、毒耐性があると毒状態にならない。
+- Poison
+  Makes you unable to regenerate HP and MP, and deals damage over time.
+  Can be cured with Potions of Cure Poison, Potions of Cure Critical Wounds,
+  and Potions of Healing.
+  If you resist poison, you can't be poisoned.
 
-・恐怖
-　恐慌状態になり、隣の敵に攻撃ができなくなる。
-　さらにこの勝手版では、魔法の失敗率が上昇し射撃の命中率が低下する。
-  士気高揚効果のある薬や酒で治せる。
-　恐怖耐性があると恐怖にならない。
+- Fear
+  If you're terrified, you can't attack enemies in melee.
+  In this mod, it also increases spell failure rate and reduces ranged attack
+  accuracy.
+  Can be cured by drinking a potion with heroism effect or drinking sake.
+  If you resist fear, you can't be terrified.
 
-・混乱
-  頭がパニックになり、指定した方向への移動や攻撃ができなくなる。
-　さらに魔法や特技も使えなくなり、巻物を読めなくなり、
-　杖などの魔道具もほぼ失敗する。
-　「重傷治癒の薬」以上の治療薬で治り、混乱耐性で防げる。
+- Confusion
+  You start moving in random directions.
+  Also, you can't use spells or special abilities, can't read scrolls,
+  and are likely to fail to activate magic devices like staves.
+  Can be cured with Potions of Cure Serious Wounds or higher equivalent,
+  and being resistant to confusion protects you from it.
 
-・盲目
-　目が見えなくなり、周囲の物が分からなくなる。
-　さらに巻物や魔法書が使えなくなる。
-　また、足元に落ちているアイテム類を使えなくなる。
-　これまで覚えた地形は忘れていないし、テレパシーなどによる感知は通常通りだ。
-　「重傷治癒の薬」以上の治療薬で治り、盲目耐性で防げる。
+- Blindness
+  Makes you unable to see your surroundings.
+  You won't be able to use scrolls or spellbooks.
+  Also, you can't use items lying beneath your feet.
+  You won't forget map layout you've learned up to this point, and you
+  still can sense enemies with telepathy.
+  Can be cured with Potions of Cure Serious Wounds or higher equivalent,
+  and being resistant to blindness protects you from it.
 
-・麻痺
-　何度も説明したな。数ターン動けなくなって、多くはそのままゲームオーバーだ。
-　麻痺耐性で麻痺攻撃を防ぐことができるが、
-  飢餓状態やドア破壊失敗などで耐性があっても麻痺を受けることがある。
+- Paralysis
+  Should be self explanatory. Makes you unable to move for several turns,
+  and is likely to lead to a game over if it lasts for too long.
+  Having free action protects you from paralyzing attacks, but you still
+  can get paralyzed by fainting from lack of food or failing to break down
+  a door.
 
-・幻覚
-　目に見えるものが全て変なものになる。
-  モンスターもアイテムも何が何だか判別できないだろう。
-  しかしなぜか魔法書や巻物は普通に読める。
-　幻覚を治療するには癒しの薬や杖などやや特殊な手段が必要になる。
-  時間経過ではなかなか治らないことがある。
-  混沌耐性があると防ぐことができる。
+- Hallucination
+  You start seeing weird things.
+  You'll be unable to properly perceive monsters and items.
+  However, for some reason, you still can use scrolls and spellbooks.
+  Curing hallucinations requires special means like Potions or Staves 
+  of Curing, and it might take a while for it to go away on its own.
+  Being resistant to chaos protects you from hallucinating.
 
-・減速
-　加速が-10される。そのまま戦い続けるのは危険だな。
-  この効果は加速と相殺されるぞ。
-　
-・彫像化
-　麻痺と同じだが、なんと麻痺耐性があっても動けなくなる。
-　太古の怨念や後で説明する血の呪いで稀にこの状態になる。
-　魔法防御が高いと防ぐことができる。
+- Slowness
+  Reduces your speed by -10. It's dangerous to keep fighting in this state.
+  This effect and 'Haste' neutralize each other.
 
-・能力値低下
-　敵の攻撃などで基礎能力値が一時的に減少する。
-　これは時間経過で治らないが、対応する「○○復活の薬」で戻る。
-　能力維持があれば対応する能力の低下を防げる。
-　ただし時間逆転攻撃による能力値低下は時空耐性でないと防げない。
+- Statue
+  Same as paralysis, except it ignores free action.
+  Can be rarely inflicted by Ancient Foul Curse or blood curse.
+  If your protection from magic is high enough, you'll be able to resist it.
 
-・経験値低下
-　地獄属性攻撃や経験値吸収打撃、カオス攻撃などで経験値が減らされ、
-　場合によってはレベルも下げられることがある。
-  これは時間経過で治らない。「経験値復活の薬」を飲めば戻る。
-  地獄耐性を持っていれば経験値低下をかなり軽減することができる。
-  
-・切り傷
-　放置しているとターン毎にダメージを受ける。
-　敵の斬撃攻撃、呪い、破片属性などで切り傷を受け、
-  あまり傷がひどいと100以上のダメージを受けることもある。
-  治療薬で治る。「致命傷治癒の薬」以上の薬なら一瞬でどんな切り傷も治る。
-　切り傷を防ぐ耐性はないが、ゴーレムや幽霊や付喪神などは切り傷を受けない。
+- Stat drain
+  Some enemy attacks can temporarily reduce your primary stats.
+  They won't recover by themselves as time passes, you have to restore them
+  with Potions of Restore [stat].
+  If your stat is sustained, it protects that stat from being drained.
+  However, time element attacks can drain stats even you have them sustained
+  unless you resist time.
 
-・朦朧
-　魔法の成功率が下がる。
-  敵の打撃攻撃、轟音攻撃、水攻撃、プラズマ攻撃などで朦朧になる。
-  朦朧の度合いは累積し、もし朦朧値が一定を超えると気絶してその場に倒れてしまう。
-　当然その後も攻撃を受け続け、ゲームオーバーはほぼ不可避だな。
-  「重傷治癒の薬」以上の治療薬で朦朧から回復できる。
-  轟音耐性や水耐性などで対応する属性による朦朧を防げる。
-　打撃による朦朧を防ぐ耐性はないが、ゴーレムは朦朧を受けない。
+- Experience drain
+  Your experience can be reduced by nether or chaos element attacks, or by
+  melee attacks that drain experience. It might end up reducing your character
+  level as well.
+  You don't recover experience as time passes; drinking a Potion of Restore
+  Life Levels will give you back your drained experience.
+  If you resist nether, amount of experience you lose will be greatly reduced.
 
-概ねこんな所か。
-致命傷治癒の薬はそこそこの体力を回復する上に多くのステータス異常を治す。
-資金が許すなら常に数十本持ち歩くくらいでも多すぎはしないだろう。」
+- Wounds
+  Deals damage over time.
+  You can get wounded by enemy attacks, curses, or shard element attacks;
+  if your wounds are too severe, you might end up taking 100 damage or more.
+  Can be healed with potions. Potions of Cure Critical Wounds or higher
+  equivalents instantly cure any wounds.
+  You can't get resistance to this effect, but some races like Golems, Ghosts
+  or Tsukumogami can't be wounded.
 
+- Stunning
+  Increases spell failure rate.
+  You can get stunned by enemy attacks, or sound/water/plasma element attacks.
+  Stunning can get more severe, and if you get stunned hard enough, you'll be
+  knocked out, making you collapse on the spot.
+  Naturally, you'll still keep being attacked after that, making a game over
+  almost certain.
+  Potions of Cure Serious Wounds or higher equivalents cure stunning.
+  Resistance to sound/water prevents you from being stunned by those attacks.
+  There's no resistance to getting stunned by enemy melee attacks, but Golems
+  can't be stunned at all.
+
+Potions of Cure Critical Wounds recover you health somewhat and cure a lot
+of bad status effects. If you have enough money, carrying dozens of those
+with you won't be an overkill.'
 
 ***** <Attack_type>
-=== 属性について ===
-慧音「変愚蛮怒の魔法や技は様々な属性を持つ。
-ここでは主に敵が使ってくる攻撃の属性について説明しよう。
-モンスター特技や耐性について説明したときとかなり重複するかもしれないが、
-まあけっこう重要なのでもう一度まとめて触れておこう。
+=== About Elements ===
 
-・酸
-　強酸による攻撃で、酸耐性で軽減できる。
-  装備中の防具を傷めたりザックの中の杖や巻物などを溶かすことがある。
-  二重耐性や免疫があると酸のダメージがさらに軽減され、アイテムを全く溶かされなくなる。
-  酸で防具が傷むときはあなたへのダメージが少し減る。
+Keine - 'Spells and abilities in Hengband use various elements.
+Let's go over elements that will be mainly used by enemy attacks.
+I may repeat something I've already explained during talking about monster
+special abilities and resistances, but it's very important, so let's examine
+it once more.
 
-・電撃
-　電気による攻撃で、電撃耐性で軽減できる。
-  ザックの中の指輪や魔法棒を壊すことがある。
-  二重耐性や免疫があると電撃のダメージがさらに軽減され、アイテムを全く破壊されなくなる。
-　
-・火炎
-　火による攻撃で、火炎耐性で軽減できる。
-  ザックの中の杖や巻物などを燃やすことがある。
-  二重耐性や免疫があると火炎ダメージがさらに軽減され、アイテムを全く燃やされなくなる。
+- Acid
+  Attacks with strong acid, can be resisted.
+  Can damage your equipped armor and melt staves and scrolls in your backpack.
+  Having double resistance or immunity further reduces the damage received and
+  protects your items.
+  If acid damages your armor, you take slightly less damage.
 
-・冷気
-　冷気による攻撃で、冷気耐性で軽減できる。
-  ザックの中の薬を割ることがある。
-  二重耐性や免疫があると冷気ダメージがさらに軽減され、アイテムを全く割られなくなる。
+- Lightning
+  Attacks with electricity, can be resisted.
+  Can destroy rings or wands in your inventory.
+  Having double resistance or immunity further reduces the damage received and
+  protects your items.
 
-・毒
-　毒物による攻撃だ。あなたを毒に冒すことがある。
-  毒耐性があるとダメージを軽減でき、毒状態にならない。
-  二重耐性だとダメージをさらに軽減する。
+- Fire
+  Attacks with fire, can be resisted.
+  Can burn up staves or scrolls in your inventory.
+  Having double resistance or immunity further reduces the damage received and
+  protects your items.
 
-・水
-　激流や水塊による攻撃だ。水耐性で軽減できる。
-  耐性を持たずに受けると朦朧としたり薬が割られることがある。
+- Cold
+  Attacks with cold, can be resisted.
+  Can break potions in your inventory.
+  Having double resistance or immunity further reduces the damage received and
+  protects your items.
 
-・破邪
-　聖なる攻撃だ。破邪耐性でダメージを半減できる。
-　あなたが妖怪やアンデッドなど破邪に弱い種族だとダメージが大きくなってしまう。
+- Poison
+  Attacks with poison; can poison you.
+  If you have poison resistance, you take less damage and won't be poisoned.
+  Having double resistance further reduces the damage received.
 
-・閃光
-　高密度の光線による攻撃だ。あなたを盲目状態にすることがある。
-　閃光耐性があるとダメージを軽減でき、閃光による盲目を防ぐ。
-  
-・暗黒
-　謎の暗黒パワーによる攻撃だ。あなたを盲目状態にすることがある。
-　暗黒耐性があるとダメージを軽減でき、暗黒による盲目を防ぐ。
+- Water
+  Attacks with torrents and globes of water, can be resisted.
+  If you get hit without being resistant, you get stunned, and your potions
+  might get shattered.
 
-・破片
-　高速で飛来する硬質の物体による攻撃だ。
-  攻撃を受けると切り傷を受け薬が割られる。
-　破片耐性があるとダメージを軽減して切り傷を防ぎ、
-  薬の破壊を「ほとんど」防ぐことができる。
-　
-・轟音
-　衝撃波による攻撃だ。あなたを朦朧状態にしたり薬を割ることがある。
-　轟音耐性があるとダメージを軽減でき、轟音による薬の破壊を防ぐ。
-　轟音を始めとするいくつかの属性による朦朧も防げる。
+- Holy
+  Attacks with holy energy; being resistant can reduce the damage by half.
+  If your race is vulnerable to holy attacks (like youkai or undead), you
+  take more damage.
 
-・地獄
-　死の力による攻撃だ。アンデッドが多用する。
-　攻撃を受けると経験値の一部が一時的に失われ、レベルが下がることもある。
-  地獄耐性があるとダメージと経験値減少を軽減できる。
+- Light
+  Attacks with high-density rays of light. Can make you go blind.
+  You take less damage and don't get blinded if you resist light.
 
-・カオス
-　宇宙創成以前の無秩序のエネルギーによる攻撃らしい。
-　攻撃を受けると、混乱、経験値減少、幻覚、突然変異、アイテム破壊といった様々な嫌なことが起こる。
-　混乱は混乱耐性で、経験値減少は混沌耐性か地獄耐性で、幻覚と突然変異は混沌耐性で防げる。
-　アイテム破壊は混沌耐性でほとんど防げるが完全にではない。
-  とにかく厄介な属性だ。
+- Darkness
+  Attacks with mysterious power of darkness. Can make you go blind.
+  You take less damage and don't get blinded if you resist darkness.
 
-・劣化
-　魔力や活力を失わせる特殊なエネルギーによる攻撃だ。
-　攻撃を受けると装備品の品質が下がり、アーティファクトですら劣化させられてしまうことがある。
-  劣化耐性があるとダメージを軽減し、劣化属性による装備品の劣化を防ぐことができる。
+- Shards
+  Attacks with solid objects flying at high speed.
+  If you get hit, you get wounded, and your potions might get shattered.
+  If you resist shards, you take less damage, don't get wounded, and your
+  potions are mostly safe from being broken.
 
-・プラズマ
-　電撃を伴う高熱の攻撃のようだ。
-　火炎と電撃の両方の属性として扱われる。また、轟音耐性がないと朦朧状態になる。
+- Sound
+  Attacks with a shockwave. Can stun you and shatter your potions.
+  If you resist sound, you take less damage, and your potions won't get
+  shattered.
+  Sound resistance also prevents you from getting stunned by some elements,
+  including sound.
 
-・核熱
-　火炎と閃光の複合属性だ。威力の半分ずつがそれぞれの耐性で軽減される。
+- Nether
+  Attacks with power of deaths. Frequently used by undead.
+  If you get hit by it, you will temporarily lose part of your experience,
+  which might lower your level.
+  If you resist nether, you take less damage and lose less experience.
 
-・汚染
-　毒と劣化の複合属性だ。威力の半分ずつがそれぞれの耐性で軽減される。
+- Chaos
+  Attacks with primordial chaos energy, or something like that.
+  If you get hit by it, bad things will happen: you get confused, lose 
+  experience, start hallucinating, gain mutations, and your items might get
+  destroyed.
+  Resisting confusion will prevent confusion, experience loss can be reduced
+  with nether or chaos resistance, resisting chaos prevents hallucinations and
+  mutations.
+  Chaos resistance also protects items from being destroyed, but it's not
+  guaranteed to work.
+  That's a very nasty element.
 
-・竜巻
-　激しく渦巻く風による攻撃だ。吹き飛ばされて薬が割られる。
-　これに対する耐性はないが、その代わりに所持品が重いとき吹き飛ばされずダメージを大幅に軽減できる。
-　また浮遊があれば吹き飛ばされてもダメージを多少軽減し薬が割られなくなる。
+- Disenchantment
+  Attacks will special energy that drains mana.
+  If you get hit by it, quality of your equipment will be reduced, and even
+  artifacts can get disenchanted.
+  If you resist disenchantment, you take less damage and your items won't get
+  disenchanted.
 
-・重力
-　重力場を作り出す攻撃のようだ。
-　攻撃を受けると吹き飛ばされたうえ朦朧状態にされたり減速させられたり薬が割れる。
-　時空耐性があればダメージを軽減したうえ追加効果を防げる。
-　時空耐性がなくても浮遊があればほとんどの追加効果を防げるだろう。
+- Plasma
+  A high-temperature electric attack.
+  Treated as combination of fire and lightning. Also, unless you resist sound,
+  you will get stunned.
 
-・時間逆転
-　時間を逆転させて能力を低下させる攻撃らしい。
-  攻撃を受けると、一時的に能力値や経験値を大幅に下げられる。
-　この効果は能力維持や地獄耐性でも防げない。
-　時空耐性があれば防ぐことができるだろう。
+- Nuclear Heat
+  An attack that is half fire and half light. Resisting fire and/or light will
+  reduce damage you take.
 
-・因果混乱
-　何やら時空の法則に干渉するらしい、奇怪かつ強力な攻撃だ。
-  攻撃を受けると大ダメージを受けた上奇妙なことが起こる。
-　どこかにテレポートさせられるかもしれないし、突然変異するかもしれないし、
-　酷い時にはあなたのパラメータが入れ替えられてしまう。
-  時空耐性があるとダメージを軽減して奇妙な効果を防ぐことができる。
-　時空耐性は手に入りにくいが、幸い因果混乱攻撃をする敵はほとんどいない。
-　
-・遅鈍
-　あなたの動きを妨害する攻撃だ。粘液や粘糸だろうか？
-　攻撃を受けると、一時的に減速状態(加速-10)になる。
-　加速状態だったら相殺されて効果が失われる。
-　耐性で防ぐことができないが、ダメージはそれほど大きくはならない。
-　
-・気
-　生命エネルギーの放出らしい。
-　この攻撃は耐性で軽減されない。また、轟音耐性がないと朦朧状態になる。
+- Pollution
+  An attack that is half poison and half disenchantment. Both elemental
+  resistances will be applied.
 
-・魔力
-　純粋な魔力の放射だ。
-　この攻撃は耐性で軽減されない。
+- Tornado
+  Attacks with fiercely swirling winds. Can blow you away and shatter your
+  potions. There's no specific resistance against this element; instead, if
+  you're carrying enough weight, you won't get blown away and will take far
+  less damage. If you're levitating, you still get blown away, but you take
+  somewhat less damage, and your potions won't shatter.
 
-・分解
-　物質を分解消滅させる強力な攻撃だ。
-　この攻撃は耐性で軽減されない。
+- Gravity
+  Attacks by creating a gravitational field.
+  If you get hit, you get teleported, stunned, slowed down, and your potions
+  might shatter.
+  If you resist time, you take less damage and won't receive the additional
+  effects. Even if you don't have time resistance, having levitation will
+  mostly protect you from additional effects.
 
-・隕石
-　高速で飛来する大質量による攻撃だ。所持品が燃やされたり薬が割られたりすることもある。
-　この攻撃は耐性で軽減されない。破片耐性があればアイテム破壊を高確率で防げる。
+- Time
+  Lowers your parameters by making time flow back.
+  If you get hit, your stats and experience will be greatly drained.
+  This effect ignores stat sustains and nether resistance.
+  If you resist time, those effects won't be applied.
 
-・光の剣
-　強大な精神力が生み出す凝縮されたエネルギーらしい。
-　この攻撃は耐性で軽減されず、魔法の鎧や幽体化や無敵化などのあらゆる防御を貫通する。
+- Nexus
+  Attacks by interfering with laws of space-time or something like that;
+  it's a weird and powerful attack.
+  It might teleport you somewhere, might cause mutations, and if you're
+  particularly unlucky, it might shuffle your stats.
+  If you resist time, you take less damage, and those weird effects won't
+  be applied. Time resistance is difficult to acquire, but, fortunately,
+  there are only few enemies that use nexus attacks.
 
-・地獄の劫火
-　極めて危険な攻撃だ。耐性は存在せず、どんな種族でもダメージを受ける。
-  そして、あなたが天人や月人や玉兎ならさらにダメージが増えてしまう。
-  この攻撃を使う敵は極めて限られている。
+- Inertia
+  Attacks by slowing down your movements.
+  If you get hit, you will temporarily slow down (speed -10).
+  If you're hasted, those two effects will negate each other.
+  You can't resist this element, but it doesn't deal that much damage.
 
-こんな所か。
-何度も言うが、あなたが耐性をもたない属性の攻撃を持つ敵とは戦わないのが基本だ。」
+- Ki
+  Attacks by using life energy.
+  Cannot be resisted, and will stun you unless you resist sound.
 
+- Mana
+  Attacks with pure mana.
+  Cannot be resisted.
+
+- Disintegration
+  A powerful attack that disintegrates matter.
+  Cannot be resisted.
+
+- Meteor
+  Attacks with a lot of fast-flying objects. Can burn items in your inventory
+  or shatter your potions.
+  Cannot be resisted, but being resistant to shards will protect your items
+  from destruction with high probability.
+
+- Psycho-Spear
+  Attacks with powerful condensed mental power.
+  Cannot be resisted, and ignores any defenses like magic armor, wraithform or
+  invulnerability.
+
+- Hellfire
+  Extremely dangerous attack. Cannot be resisted, and will deal damage to any
+  race. If you're a Celestial, Lunarian or Moon-Rabbit, you will take more
+  damage.
+  There are very few enemies that can use this attack.
+
+Again, it's essential that you avoid fighting enemies who can use attacks
+you don't resist.'
 
 ***** <Weak_point>
-=== 弱点について ===
+=== About Vulnerabilities ===
 
-慧音「ひょっとするとあなたは特定の属性を弱点とするかもしれない。
+Keine - 'You might be vulnerable to some elements.
 
-代表的なものは破邪弱点だ。
-多くの妖怪が該当し、破邪攻撃を受けたときのダメージが+33%されてしまう。
-アンデッドや悪魔などの種族は+66%となり
-さらに暗黒や死霊の魔法を習得していると+25%～+33%される。
-例えばレミリアが暗黒領域魔法を習得していると、破邪攻撃で合計二倍のダメージを受けてしまう。
-深層で耐性が抜けていると巫女やシルバーワイアームの一撃でゲームオーバーになりかねないぞ。
+A typical one is vulnerability to holy energy.
+Many youkai have it, and they take +33% damage from holy attacks.
+Undead/demon races take +66% damage.
+If you're studying magic realms of Darkness or Necromancy, you take
++25%~+33% extra damage.
+For example, if Remilia would study Darkness realm, she'd receive double
+damage from holy attacks.
+If you lack resistance on lower levels, you might get one-shotted by shrine
+maidens or silver wyrms.
 
-ほかにもチルノやレティが火に弱かったり付喪神や妖怪人形が劣化に弱かったりと様々な弱点がある。
-これらの弱点は'C'コマンドで耐性画面を表示すれば該当の属性部分が赤く表示されているからすぐわかる。
-ただ、実際にどれくらいダメージが増えるのかは食らって覚えるしかないな。
-まあ何にせよ弱点属性を使う敵にはできるだけ近寄らないことだ。」
-
+There are other vulnerabilities; Cirno and Letty are weak to fire, Tsukumogami
+and Youkai-Dolls are weak to disenchantment.
+Those vulnerabilities will be highlighted in red on the resistance screen in
+'C' command.
+However, you have to use trial and error to figure out exactly how much extra
+damage you take.
+Do your best to avoid enemies that use elements you are vulnerable to.'
 
 ***** <Tactics1>
-=== 低層戦術 ===
+=== Early Game Tactics ===
 
-慧音「ここからは探索のレベルに合わせて有効な戦術をいくつか紹介していこうか。
-まずは低層、まあせいぜい20階前後までの戦術だ。」
+Keine - 'Now, let's introduce some effective combat tactics to match your
+current exploration level. First of all, let's talk about early game tactics,
+covering around up to dungeon level 20'.
 
---- 探鉱夫 ---
-慧音「序盤の金策に悩んでいないか？
-そんなときはつるはしを担いで採掘に励むのも一手だ。
-まず里の雑貨屋で「つるはし」を、巻物店で「財宝感知の巻物」を買う。
-少し高いが魔法店で「財宝感知の杖」を買ってもいい。
-そして近くのダンジョン(命蓮寺の洞窟がいいかな)の入り口から何度か出入りし、
-壁に鉱脈がいくつか見えているような場所を見つけたら財宝感知をする。
-そうすると周囲の壁の中に含まれたたくさんの財宝が見つかるだろう。
-つるはしを装備してこの壁を'T'コマンドで掘ることでお金を稼ぐというわけだ。
-しばらく粘れば数千のゴールドを貯められる。
-ただし近くのモンスターには気をつけろ。白鼠が大増殖していたりするとピンチになる。」
+--- Digging ---
+Keine - 'Are you concerned about money in early game?
+If that's the case, it's a good idea to get a pick and start mining.
+Purchase a Pick from General Store and Scrolls of Treasure Detection from the
+Scroll Store. It's a bit expensive, but you also can buy a Staff of Treasure
+Detection from Magic Store.
+Then, enter the first level of a nearby dungeon (like the cave at Myouren
+Temple), and once you see treasure veins in the walls, use Treasure Detection.
+You'll probably discover many buried treasures around there.
+Equip your pick and tunnel with 'T' command to excavate treasure.
+You can collect several thousands if you keep doing this for a while.
+However, don't forget about nearby monsters. If white mice start multiplying,
+you'll be in trouble.'
 
---- 序盤から使える補助効果 ---
-慧音「序盤のまだ装備が整わないうちは少し強い程度のモンスターでもかなりの強敵だろう。
-序盤から使える補助手段をいくつか紹介しておく。
-・聖唱歌の巻物
-　読んだら祝福状態になり防御と攻撃が上がる。巻物店で売っているぞ。
-・パニック・モンスターの巻物
-  読んでから物理攻撃をすると、一度だけ敵を混乱させられる。
-　序盤のモンスターにはだいたい効く。巻物店で売っているぞ。
-・酒など
-　飲んだら士気高揚状態になり攻撃と防御とHPが上がって恐怖しなくなる。
-　あまり飲みすぎると危険だから程々にな。
-　特に、店で売られていない凄く強そうな酒を見つけても不用意に飲まないことだ。
-・スピードの薬
-　序盤の切り札と言っていい便利な薬だ。飲むと倍の速さで動けるぞ。
-　普通の薬屋には売られておらず、ときどき質屋に売られている。
-　ダンジョンの床に落ちていることも多いので、
-　地上からダンジョンへ出入りしながらアイテム感知の巻物や杖を使って探すのも一手だ。」
+--- Beneficial Effects in Early Game ---
+Keine - 'In early game, while you still don't have good equipment available,
+even monsters that are slightly stronger than usual can be powerful enemies.
+Here's several methods to gain advantage in early game:
 
---- クロスボウ ---
-慧音「肉弾戦は苦手だし魔法も火力が低いとお悩みなら、クロスボウを使うことを勧める。
-クロスボウは技能が低くても比較的命中しやすい。
-ショート・テレポートの巻物で常に敵と距離を取ればそれなりの強敵とも渡り合えるだろう。
-まあ所詮は序盤をしのぐ程度のものでしかないが。」
+- Scrolls of Holy Chant
+  If you read it, you become blessed, raising your defense and accuracy.
+  They're sold in stores.
+- Scrolls of Monster Confusion
+  If you read it, you'll confuse an enemy with your next physical attack.
+  It's effective against most of early game monsters. The scrolls are sold
+  in stores.
+- Sake and other alcohol
+  If you drink it, you become heroic, raising your defense, accuracy,  HP,
+  and making you resistant to fear.
+  However, it's dangerous to drink too much.
+  In particular, if you find some very strong alcohol that's not available in
+  stores, you should refrain from drinking it.
+- Potions of Speed
+  It's your trump card in early game. If you drink it, you'll start moving
+  twice as fast.
+  They're not being sold in usual potion stores, but are occasionally
+  available in Pawn Shop.
+  Since quite a few of those are lying around on dungeon floor, it's a good
+  idea to bring scrolls or staves of Object Detection with you.'
 
---- テレポート・アウェイ ---
-慧音「変愚蛮怒で最強の魔法を教えよう。それは『テレポート・アウェイ』だ。
-『テレポート・アウェイの魔法棒』を振るとビームが出て、ビームに当たった敵を強制的にテレポートさせる。
-序盤から終盤まで無用な戦闘回避に大活躍するだろう。
-ただしテレポート耐性をもつ敵にはやや効きにくく、テレポート耐性をもつユニークモンスターには全く効果がない。」
+--- Crossbows ---
+Keine - 'If you're not good at physical combat and don't have powerful spells,
+I can recommend using a crossbow.
+It's comparatively easy to land a hit with a crossbow even if your skill is
+low. If you use Scrolls of Phase Door to keep your distance, you should be
+able to comfortably fight strong enemies.
+That being said, that tactic is mainly for pushing through early game.'
 
+--- Teleport Away ---
+Keine - 'Let me teach you about the most powerful spell in Hengband.
+It's called 'Teleport Away'.
+If you use a 'Wand of Teleport Away', a beam will shoot out, forcibly
+teleporting any monsters that get hit.
+It'll help you a lot in avoiding unnecessary battles along the whole game.
+However, it doesn't work too well against enemies with teleportation
+resistance, and doesn't affect unique monsters with teleportation resistance
+at all.'
 
 ***** <Tactics2>
-=== 中層戦術 ===
-慧音「30～60階くらいをとりあえず中盤と呼ぼうか。
-職業ごとの個性がだんだん出てくる頃だ。
-装備が充実してくる一方で必要な耐性も増えてきて装備の組み合わせに頭を悩ませるだろう。」
+=== Midgame Tactics ===
+Keine - 'Midgame generally refers to dungeon levels 30-60.
+The specific individualities of each class become apparent at this point.
+While you start obtaining better equipment, you also have to cover more
+resistances; setting up a proper combination of items can be difficult.'
 
---- 穴熊戦術 ---
-慧音「大広間で強敵に囲まれながら戦うような命知らずは流石にいないな？
-通路に引っこんで一体ずつ相手するのが鉄則だが、
-それでも相手がブレスや魔法を持っていると後方からどんどん攻撃されてしまう。
-そんなときは岩石溶解の魔法棒でジグザグに穴を掘れ。
-図にするとこんな感じか。
-■■■■■■■
-■＠■Ｚ■Ｄ■Ｚ
-■■Ｚ■Ｚ■ＺＺＺ
-■■■■■■■■Ｚ
-■■■■■■■■■
-これなら攻撃してくる敵を大幅に減らすことができる。
-ただし分解属性攻撃や地震攻撃や壁掘り移動をする敵がいるとこの戦術は通用しない。」
+--- Tunnelling Tactics ---
+Keine - 'You're not reckless enough to keep fighting while being
+surrounded by strong enemies in an open area, right?
+While the basic tactic is to retreat into a corridor and fight them one by
+one, the enemies from behind still will be using spells and breath attacks.
+In this case, dig a zig-zagging corridor with a Wand of Stone to Mud.
+Like this:
 
---- LOSトリック ---
-慧音「もう射撃や魔法のターゲット指定には慣れたか？
-実はこのターゲット指定には便利な使い方がある。
-岩などに遮られて見えない敵にはターゲット指定することができないが、
-ターゲット指定の状態から'*'を押してターゲットを手動指定するモードにし、
-ターゲット位置を敵から少し後ろにずらして射線がギリギリ敵に当たるようにする。
-この状態で撃てば射線上の敵に攻撃が当たる。
-敵が視界に入って来る前に攻撃することができるわけだ。
-ただしこの手が使えるのは射撃やボルト、ビームなどだ。ボールや呪いでは使えない。」
+######
+#@#Z#D#Z
+##Z#Z#ZZZ
+#######Z
+########
 
-　＠＊＊＊＊
-■■■■■■ｐ＊＊○　
-■■■■■■
+With this, you'll greatly reduce amount of enemies capable of attacking.
+However, this tactic doesn't work against enemies with disintegration or
+earthquake attacks, or enemies that can dig through walls.'
 
-（○の位置を狙うことで、通常はターゲットできないｐに当たる）
+--- LoS Trick ---
+Keine - 'Have you got used to picking targets for ranged attacks and spells?
+There's a handy way of targeting a specific location.
+If you can't target an enemy because there's something in the way, you can
+press '*' to manually move target location; if you keep targeting slightly
+behind the enemy, they might end up being in your aiming trajectory.
+If you shoot at this point, you'll hit the enemy on that line.
+This lets you attack before the enemy enters your line of sight.
+However, this trick works only for shooting attacks, bolts and beams.
+You can't use it with ball spells or curses.'
 
---- 毒針 ---
-慧音「某国民的RPGでお馴染みの『毒針』という武器がある。
-これを装備して敵を突けば時々一撃で倒すことができる。
-そう、たとえHP5000の巨大なドラゴンであろうともだ。
-毒針を持って「竜の棲家」に行き、ワイアームなどの強敵を狙うんだ。
-数回つついて駄目ならこちらのHPが尽きる前に逃げる。
-うまくいけば数万の経験値と十数個の上質アイテムが手に入るだろう。
-勿論危険は大きいし、ある程度のHPに二重耐性、感知手段など色々準備や工夫もいる。
+ @*****
+#####p**o
+#####
 
-こういう行為を「スカム」(美味しいところを掠め取る行為)として嫌う人もいるが、
-まあ反則ではない。中盤の打開に詰まったら自己責任で挑戦してみるのもいいだろう。
-ああ、言っておくがユニークモンスターに毒針は効かないぞ。
-それから、この勝手版では毒針の最大ダメージは9999だ。」
+(By aiming around 'o', you might be able to hit 'p' you normally wouldn't
+be able to target)
 
---- ドーピング ---
-慧音「装備を整えるのも大事だが、基礎能力値を底上げしないと中層の打開は難しい。
-基礎能力値を上げるためには、「腕力の薬」などの薬を探してどんどん飲むことだ。
-ダンジョンの30-45階辺りが出やすいだろうか。
-「上質なアイテム」しか落とさない敵からはこれらの薬は手に入らない。
-竜の棲家で毒針ばかり使っていると逆に打開が遅くなるかもしれないぞ。」
+--- Poison Needle ---
+Keine - 'There's a weapon called Poison Needle from a certain famous JRPG.
+If you wield it and hit an enemy, you might be able to defeat them in a single
+strike - even a huge dragon with 5000 HP.
+You can go to Dragon's Lair and hunt for powerful enemies like wyrms.
+If you hit several times and it doesn't work, retreat before your HP runs out.
+If you use it well, you can get several ten thousands experience points and
+dozens of good items.
+Of course, it's very dangerous; you'll need a certain amount of HP, along with
+means of double resistance and detection.
 
+Some people hate this 'scumming' tactic, but it's not against the rules.
+If you're stuck in midgame, try it out at your own risk.
+I also should mention that poison needles won't work against unique monsters.
+Also, in this mod, maximum damage you can deal with it is 9999.'
+
+--- Stat Gain ---
+Keine - 'While preparing your equipment is important, you'll have trouble
+getting past midgame unless you raise your stats as well.
+In order to raise them, you have to search for potions like 'Potion of 
+Strength' and drink them.
+They're generally found around dungeon level 30-45.
+Enemies that drop only 'good items' won't drop consumables.
+If you keep using poison needles in Dragon Lair, you might end developing
+slowly in this regard.'
 
 ***** <Tactics3>
-=== 深層戦術 ===
-慧音「60～70階以降へ足を踏み入れる頃には、
-あなたは幻想郷の大物達とも渡り合える強さになっているだろう。
-いよいよ決戦に備えて上限までのレベルアップと最終装備の獲得を目指す段階だ。
-この頃には戦略など十人十色だが、最低限知っておかないと危険なことだけ紹介しておく。」
+=== Lower Level Tactics ===
+Keine - 'Once you reach dungeon levels 60-70,
+you'll probably be strong enough to match the more powerful residents of
+Gensoukyou.
+It's time to level up to upper limit and look for endgame equipment as you
+prepare for the final battle.
+At this point, there's a multitude of possible combat tactics, so I'll
+cover only a few absolutely vital topics.'
 
---- *破壊* ---
-慧音「深層にはしばしば大量の敵が出現する。
-それに強敵の多くは強力な召喚魔法を持っている。
-これらの敵をいちいち相手などしていられない。こんなとき必要なのが*破壊*だ。
-読み方か？元気よく「はかい！」とでも呼ぶといい。
+--- *Destruction* ---
+Keine - 'Many enemies appear on lower levels.
+Many strong enemies have powerful summoning spells.
+You'll have hard time trying to fight them one by one. In this case,
+what you need is *Destruction*.
+How do you read it? Feel free to shout 'Destruction!'.
 
-*破壊*が発動するとあなたの周辺12～17くらいの範囲が壊される。
-具体的には、全てのモンスターとアイテムが消滅し、地形が岩と床のランダムな形状になる。
-消滅したモンスターは上下のどこかの階に吹き飛ばされたものとでも考えてくれ。
-ユニークモンスターは*破壊*に巻き込まれてもいずれまたどこかで出てくる。
-*破壊*を行う手段は、杖か巻物か一部の魔法だ。混沌、予見、破邪にそれらの魔法がある。
+Once you use *Destruction*, the area in radius of 12-17 grids around you
+will be destroyed. All monsters and items will diseappear, and terrain will
+be turned to either open floor or walls. The monsters caught up in the blast
+are probably thrown to the lower or upper dungeon level. Any unique monsters
+caught in that area of effect still can appear later in the game.
+You can use *Destruction* from scrolls, staves or some spells. Realms of
+Chaos, Divination and Exorcism have spells with this effect.
 
-巻物は消耗品なので多くは杖に頼ることになるが、
-*破壊*の杖はけっこう魔道具の難易度が高い。
-魔道具の苦手な戦士や剣術家やエンジニアなどは、
-魔道具能力を上昇させる装備をしないと深層での戦いは厳しいな。」
+Since scrolls are consumables, you'll be relying on staves, but Staves of
+*Destruction* are difficult to use. Warriors, Samurai, Engineer and other
+classes who aren't proficient with magic devices will have a hard time on
+lower floors without raising that skill with equipment.'
 
---- 緊急回避手段 ---
-慧音「深層では強力な遠隔攻撃を使う敵が起きていることが多く、
-不用意なテレポートは危険だ。とくに体力が減っているときにはな。
-だが強敵との戦いで強烈な魔法を食らった直後に召喚で周囲を囲まれたときなど、
-危険なテレポートをせざるを得ない状況もあるだろう。
+--- Emergency Escapes ---
+Keine - 'On lower levels, there are many enemies with powerful ranged
+attacks, so simply teleporting away is dangerous - especially if you're low
+on health. However, if, for example, you get surrounded by summoned monsters
+after getting hit by a powerful spell, you have to teleport away.
 
-そんなときはいっそのこと戦闘を放棄して別のフロアへ逃げ出してしまおう。
-もちろんせっかく倒しかけた敵の経験値やアイテムが手に入らなくなるが、命あっての物種だ。
-逃げるためには「テレポート・レベル」の巻物をお勧めする。
-これを読めばあなたは別の階に飛び、そこで改めて行動を起こせる。
-ときどき質屋などに巻物がまとめて売られているから深層では数枚持っておけ。
+At that point, you might abandon the fight and escape to another floor.
+Of course, you'll miss out on experience and items, but your life is more
+important. I recommend using Scrolls of Teleport Level to escape.
+If you read one, you will move to another level, where you'll be able to act
+once again.
+They're sometimes being sold at the Pawn Shop; carry several of them with you
+when exploring lower levels.
 
-ほかに*破壊*の巻物も緊急回避手段に使えなくはない。
-*破壊*の杖はどうなのかと思うかもしれないが、杖やロッドは時々使用に失敗する。
-魔法の得意な職業なら難しい魔道具を使っても滅多に失敗しないが、
-それでもここぞという時に運悪く失敗してゲームオーバー、というのもよくある話だ。
+Scrolls of *Destruction* also can be used as an emergency escape.
+What about Staves of *Destruction*? You might fail to properly use a staff or 
+a rod. If you're proficient with magic, you'll have low failure rate even when
+using complex magic devices, but you still might get a game over if you get
+unlucky.
 
-これらの手段で戦闘を回避した後は周りに敵が見えなくても急いで回復することだ。
-ダンジョンでは何が起こるか分からないからな。
-言うまでもないが、混乱や盲目になると巻物を読めないから耐性にも気を配っておくんだぞ。」
+After getting out of a fight in this manner, heal up as fast as possible
+even if you don't see other enemies nearby.
+You don't know who's awake in the dungeon.
+Needless to say, you can't read scrolls if you're blinded or confused, so
+keep those resistances in mind as well.'
 
---- アンバーの王族と血の呪い ---
-慧音「『アンバーの王族』と呼ばれる者達がいる。
-見た目は人間と変わらないが、非常に長命でとんでもなく頑健な体を持ち、
-その上望むままに並行世界を渡り歩くことができる者達だ。
-変愚蛮怒には十二人のアンバーの王族が登場する。
-彼らはあなたの冒険の終盤に強大な障害となって立ちふさがることだろう。
+--- Lords of Amber and Blood Curse ---
+Keine - 'There are people called 'Lords of Amber'.
+They look like ordinary humans, but they're very long-lived, extremely
+resilient, and can walk across parallel worlds at will.
+There are twelve Lords of Amber in Hengband.
+They're going to be a major obstacle at the end of your adventure.
 
-……まさか「なんだオリキャラ無双か」などと失礼な事を考えた奴はいないな？
-念のために説明しておこう。
-アンバーの王族とは、アメリカの作家『ロジャー・ゼラズニイ』による著作の、
-『真世界アンバー』と呼ばれるシリーズに出てくる一族だ。
-Angbandから派生したZangbandで実装され、
-そこから派生した変愚蛮怒本家でも重要な位置を占める。
-真世界アンバーシリーズの日本語訳は絶版だが、機会があるなら是非読んでみてくれ。
-圧倒的なスケールをもつファンタジーにしてコンゲームの傑作だ。
+Is there anyone who's thinking rude things like 'Who are those invincible
+OCs'? Let me explain, just in case.
+Lords of Amber are a royal family appearing in Roger Zelazny's work, the 
+Chronicles of Amber series.
+They were added in Zangband (which was derived from Angband), and they
+occupy an important position in the original Hengband as well.
 
-話を戻そう。
-アンバーの王族は皆相当強いのだが、一番の脅威は「血の呪い」と呼ばれる最終攻撃だ。
-アンバーの王族を倒したとき、彼らは1/2の確率であなたに恐ろしい呪いをかけてくる。
-呪いをかけられると、以前説明した太古の怨念の強化版みたいなことが起こる。
-運が悪いと敵に囲まれた上彫像化してそのままゲームオーバーだな。
-対策としては、魔法防御が「伝説的[2]」くらいあれば彫像化は起こらない。
-高レベルの巫女などは素でそれくらいの魔法防御力を持つが、
-そうでない職業なら反魔法装備を使ってでも魔法防御を確保したほうがいいかもしれない。
-ちなみに、アンバーの王族を倒すごとにスコアが少し上がる。」
+Now that we have that out of the way...
+All of the Lords of Amber are pretty strong, but what's most terrifying about
+them is their final attack called 'Blood Curse'.
+Once you defeat one of them, they have 50% to cast a terrible curse at you.
+If they do, a more powerful version of Ancient Foul Curse I've explained
+earlier will go off. With bad luck, you can get surrounded by enemies and then
+turned into a statue, leading to a game over.
+To counteract this, raise your protection from magic to around Legendary[2];
+this will prevent you from being turned into a statue.
+High level Shrine-Maidens will naturally have enough magic protection,
+and other classes might guarantee it by using equipment with anti-magic.
+By the way, defeating Lords of Amber slightly raises your score.'
 
 
