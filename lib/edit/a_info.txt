@@ -4871,7 +4871,7 @@ U:BFG9000
 D:巨大なエネルギー弾を放つ兵器だ。極めて強力だが扱いが難しい。
 
 N:302:天使銃
-E:of Angel
+E:Angel Gun
 I:33:9:0
 W:75:20:100:70000
 P:0:0d0:0:500:0
@@ -5269,7 +5269,7 @@ U:TRANSFORM
 D:変幻自在の海神プロテウスの力が秘められた指輪だ。
 
 N:338:マグマの杖
-E:of Magma
+E:Staff of Magma
 I:27:3:3
 W:25:4:60:65000
 P:0:2d4:12:12:0
@@ -5278,6 +5278,8 @@ F:DEC_MANA | SH_FIRE | TUNNEL
 F:BRAND_FIRE | RES_FIRE | ACTIVATE | SHOW_MODS
 F:XTRA_RES_OR_POWER
 U:MAKE_MAGMA
+D:$This staff has the power of magma sealed inside, powerful enough to melt
+D:$even rock.
 D:巨岩をも溶かすマグマの力が封じ込められた杖だ。
 
 N:339:雪の女王の

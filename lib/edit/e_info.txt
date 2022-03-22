@@ -150,7 +150,7 @@ F:SLAY_GOOD | KILL_GOOD
 ### ’Κν•ν slot:24 ###
 
 N:14:‰p—Y‚Μ
-E:(Heroic)
+E:@Heroic
 X:24:40
 W:0:72:0:30000
 C:10:10:5:4
@@ -171,7 +171,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | ONE_SUSTAIN | XTRA_H_RES |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:16:‹S‚Μ
-E:of Oni
+E:@Oni
 X:24:20
 W:0:24:0:2000
 C:0:10:0:0
@@ -244,7 +244,7 @@ W:0:24:0:4500
 F:BRAND_POIS | RES_POIS
 
 N:27:Έ—μ‚Μ
-E:(Elemental)
+E:@Elemental
 X:24:25
 W:0:36:0:10000
 C:4:4:0:0
@@ -253,7 +253,7 @@ F:RES_FIRE | RES_COLD | RES_ELEC
 F:IGNORE_FIRE | IGNORE_COLD | IGNORE_ELEC | IGNORE_ACID
 
 N:28:‹z‹S‚Μ
-E:(Vampiric)
+E:@Vampiric
 X:24:20
 W:0:24:0:10000
 F:VAMPIRIC | RES_NETHER
@@ -281,7 +281,7 @@ F:FREE_ACT | SEE_INVIS | XTRA_H_RES | XTRA_POWER
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:31:”—ν‚Μ
-E:(Hakurei)
+E:@Hakurei
 X:24:50
 W:0:240:0:50000
 C:15:15:0:3
@@ -302,7 +302,7 @@ F:RES_COLD | RES_NETHER |
 F:RANDOM_CURSE2 | XTRA_DICE
 
 N:33:«–‚‚Μ
-E:(Demonic)
+E:@Demonic
 X:24:0
 W:0:36:0:0
 C:10:10:10:0
@@ -325,14 +325,14 @@ F:SLAY_GOOD
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:35:¬“Χ‚Μ
-E:(Chaotic)
+E:@Chaotic
 X:24:20
 W:0:24:0:10000
 F:CHAOTIC | RES_CHAOS | IGNORE_ELEC | IGNORE_ACID | IGNORE_FIRE | XTRA_RES
 F:SLAY_GOOD | ESP_GOOD
 
 N:36:_E‚µ‚Μ
-E:(Godslayer)
+E:@Godslayer
 X:24:35
 W:0:48:0:20000
 C:5:5:0:3
@@ -369,14 +369,14 @@ W:0:18:0:7000
 F:SLAY_DEMON | ESP_DEMON | RES_DARK | RES_FEAR | WIS
 
 N:41:—³E‚µ‚Μ
-E:(Dragonslayer)
+E:@Dragonslayer
 X:24:24
 W:0:24:0:8000
 C:0:0:0:3
 F:CON | SLAY_DRAGON | XTRA_E_RES | XTRA_D_RES | ESP_DRAGON
 
 N:42:l‹ς‚Ά‚Μ
-E:(Man-Eater)
+E:@Man-Eater
 X:24:20
 W:0:20:0:7000
 C:0:0:0:3
@@ -386,14 +386,14 @@ F:DEX | SLAY_HUMAN | ESP_HUMAN
 ### Body Armor ###
 
 N:43:l‹›‚Μ
-E:of Mermaid
+E:@Mermaid
 X:31:18
 W:0:16:0:2000
 F:XTRA_RES
 F:RES_WATER
 
 N:44:‰Ν“¶‚Μ
-E:of Kappa
+E:@Kappa
 X:31:20
 C:0:0:0:3
 W:0:18:0:3000
@@ -408,13 +408,13 @@ W:0:15:0:2000
 F:XTRA_POWER | RES_ELEC | RES_COLD | SEARCH
 
 N:46:—dΈ‚Μ
-E:of Fairy
+E:@Fairy
 X:31:10
 W:0:12:0:1000
 F:XTRA_E_RES | LEVITATION
 
 N:47:“VE‚Μ
-E:(Celestial)
+E:@Celestial
 X:31:40
 W:0:120:0:30000
 C:0:0:10:0
@@ -423,7 +423,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | LEVITATION
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:48:‹S‚Μ
-E:of Oni
+E:@Oni
 X:31:30
 W:0:30:0:18000
 C:0:0:15:3
@@ -431,7 +431,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | STR | SUST_STR
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:49:“V‹η‚Μ
-E:of Tengu
+E:@Tengu
 X:31:25
 W:0:24:0:15000
 C:0:0:10:3
@@ -482,14 +482,14 @@ F:RANDOM_CURSE2 | NO_TELE
 ### Shields ###
 
 N:54:Έ—μ‚Μ
-E:(Elemental)
+E:@Elemental
 X:25:12
 W:0:10:0:3000
 F:XTRA_D_RES | XTRA_POWER
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:55:”’T“V‹η‚Μ
-E:of White Wolf Tengu
+E:@White Wolf Tengu
 X:25:20
 W:0:18:0:3500
 C:0:0:5:0
@@ -504,7 +504,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:57:ƒIƒ‹ƒƒAƒ“‚Μ
-E:(Orlean)
+E:@Orlean
 X:25:40
 W:0:96:0:25000
 C:0:0:20:0
@@ -513,7 +513,7 @@ F:RES_HOLY
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:58:ƒfƒ…ƒ‰ƒnƒ“‚Μ
-E:of Dullahan
+E:@Dullahan
 X:25:0
 W:0:72:0:0
 F:SEE_INVIS | AGGRAVATE | HEAVY_CURSE | CURSED | SH_COLD |
@@ -548,7 +548,7 @@ F:INT | WIS | SUST_INT | SUST_WIS
 F:XTRA_RES | XTRA_POWER
 
 N:62:“Vl‚Μ
-E:of Celestials
+E:@Celestial
 X:33:30
 W:0:72:0:16000
 C:0:0:5:3
@@ -557,7 +557,7 @@ F:RES_HOLY | XTRA_RES
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:63:€_‚Μ
-E:of Shinigami
+E:@Shinigami
 X:33:20
 W:0:30:0:5000
 C:0:0:0:6
@@ -574,7 +574,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:XTRA_H_RES | XTRA_POWER
 
 N:65:“V‹η‚Μ
-E:of Tengu
+E:@Tengu
 X:33:20
 W:0:10:0:8000
 F:RES_POIS | FREE_ACT | SEE_INVIS
@@ -590,7 +590,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:XTRA_POWER | XTRA_RES | ONE_SUSTAIN
 
 N:67:‹S‚Μ
-E:of Oni
+E:@Oni
 X:33:30
 W:0:48:0:12000
 C:0:0:0:3
@@ -598,7 +598,7 @@ F:STR | DEX | CON | SUST_STR | SUST_DEX | SUST_CON
 F:RES_FEAR | FREE_ACT | XTRA_H_RES
 
 N:68:bl‚Μ
-E:of Beastmen
+E:@Werebeast
 X:33:12
 W:0:10:0:2000
 C:0:0:0:8
@@ -650,7 +650,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:SEARCH
 
 N:75:υw–ΐΚ
-E:(Optical Camouflage)
+E:@Optical Camouflage
 X:32:10
 W:0:5:0:1000
 C:0:0:0:3
@@ -664,7 +664,7 @@ C:0:0:0:5
 F:STEALTH | SEARCH | ESP_HUMAN
 
 N:77:Ήl‚Μ
-E:of Saint
+E:of the Saint
 X:32:25
 W:0:36:0:15000
 C:0:0:20:3
@@ -724,13 +724,13 @@ F:HEAVY_CURSE | CURSED |
 ### Gloves ###
 
 N:84:—dΈ‚Μ
-E:of Fairy
+E:@Fairy
 X:34:10
 F:FREE_ACT | XTRA_POWER
 W:0:8:0:1200
 
 N:85:‰Ν“¶‚Μ
-E:of Kappa
+E:@Kappa
 X:34:18
 W:0:12:0:2000
 C:0:0:0:5
@@ -753,7 +753,7 @@ F:GENZI
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:88:‹S‚Μ
-E:of Oni
+E:@Oni
 X:34:25
 W:0:36:0:10000
 C:5:5:5:5
@@ -761,7 +761,7 @@ F:STR | SHOW_MODS | HIDE_TYPE | XTRA_H_RES
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:89:¬«–‚‚Μ
-E:of Imp
+E:of the Small Devil
 X:34:20
 W:0:16:0:3000
 C:0:0:0:4
@@ -785,34 +785,34 @@ F:AGGRAVATE | HEAVY_CURSE | CURSED | ADD_H_CURSE | SHOW_MODS
 ### Boots ###
 
 N:92:—dΈ‚Μ
-E:of Fairy
+E:@Fairy
 X:35:10
 W:0:8:0:500
 F:LEVITATION
 
 N:93:‘ε—dΈ‚Μ
-E:of Great Fairy
+E:@Great Fairy
 X:35:25
 W:0:36:0:5000
 F:LEVITATION | FREE_ACT | XTRA_H_RES | XTRA_POWER | ACTIVATE
 U:PHASE_DOOR
 
 N:94:‰Ν“¶‚Μ
-E:of Kappa
+E:@Kappa
 X:35:12
 W:0:12:0:1000
 C:0:0:0:3
 F:STEALTH
 
 N:95:ιλ“V‹η‚Μ
-E:of Crow Tengu
+E:@Crow Tengu
 X:35:40
 W:0:60:0:40000
 C:0:0:0:10
 F:LEVITATION | SPEED |
 
 N:96:•t‘r_‚Μ
-E:of Tsukumogami
+E:@Tsukumogami
 X:35:25
 W:0:36:0:8000
 F:FREE_ACT | WARNING | ONE_SUSTAIN | XTRA_RES | XTRA_POWER
@@ -856,7 +856,7 @@ F:RES_HOLY
 
 # Destroyed Weapon
 N:101:‚Φ‚µά‚κ‚½
-E:(Shattered)
+E:@Shattered
 X:24:0
 W:0:0:0:0
 C:5:5:0:0
@@ -864,7 +864,7 @@ C:5:5:0:0
 # Destroyed Body Armor
 
 N:102:‘ε‚ΜJ‚Ά‚½
-E:(Pierced)
+E:@Pierced
 X:31:0
 W:0:0:0:0
 C:0:0:10:0
@@ -1375,49 +1375,49 @@ U:RESIST_ACID
 #######Ribbon#####
 
 N:169:Τ‚Ά
-E:(Red)
+E:@Red
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:STR
 
 N:170:‡‚Μ
-E:(Purple)
+E:@Purple
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:INT
 
 N:171:‰©F‚Ά
-E:(Yellow)
+E:@Yellow
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:WIS
 
 N:172:Β‚Ά
-E:(Blue)
+E:@Blue
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:DEX
 
 N:173:—Ξ‚Μ
-E:(Green)
+E:@Green
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:CON
 
 N:174:ς‚Μ
-E:(Orange)
+E:@Orange
 X:26:5
 W:10:10:0:500
 C:0:0:0:0
 F:CHR
 
 N:175:”’‚Ά
-E:(White)
+E:@White
 X:26:15
 W:25:25:0:3000
 C:0:0:0:0
@@ -1429,14 +1429,14 @@ W:25:25:0:3000
 C:0:0:0:0
 
 N:177:“ψF‚Μ
-E:(Rainbow)
+E:@Rainbow
 X:26:20
 W:30:35:0:5000
 C:0:0:0:0
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
 
 N:178:•‚Ά
-E:(Black)
+E:@Black
 X:26:25
 W:50:50:0:15000
 C:0:0:0:0
@@ -1449,13 +1449,13 @@ W:60:60:0:15000
 C:0:0:0:0
 
 N:180:–δ—l‚Μ
-E:(Patterned)
+E:@Patterned
 X:26:30
 W:70:70:0:25000
 C:0:0:0:0
 
 N:181:‘N‚Μ
-E:(Bloodstained)
+E:@Bloodstained
 X:26:0
 W:50:0:0:0
 F:CURSED | HEAVY_CURSE | AGGRAVATE
@@ -1488,7 +1488,7 @@ F:DEX | FREE_ACT | XTRA_RES
 #eκ—pƒGƒS‚Ά‚­‚Β‚©’Η‰Α ƒ_ƒ[ƒW‚βƒ_ƒCƒX—‚ΝƒvƒƒOƒ‰ƒ€“ΰ‚Εs‚¤
 
 N:185:‘e«•i‚Μ
-E:(Inferior)
+E:@Inferior
 X:21:0
 W:0:10:0:0
 
@@ -1522,24 +1522,24 @@ W:0:25:0:12000
 F:XTRA_SHOTS
 
 N:190:ƒiƒp[ƒ€
-E:of Napalm
+E:@Napalm
 X:21:15
 W:0:15:0:4000
 
 N:191:ƒvƒ‰ƒYƒ}
-E:of Plasma
+E:@Plasma
 X:21:15
 W:10:25:0:8000
 
 N:192:‰Ν“¶‚Μ
-E:of Kappa
+E:@Kappa
 X:21:20
 W:15:30:0:10000
 F:IGNORE_ACID
 F:XTRA_POWER
 
 N:193:”ª@‰G‚Μ
-E:of Yatagarasu
+E:@Yatagarasu
 X:21:50
 W:30:90:0:30000
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
@@ -1554,7 +1554,7 @@ F:XTRA_H_RES | XTRA_POWER
 
 # ƒΟκ—p
 N:195:ƒ‰»
-E:(Purified)
+E:@Purified
 X:0:0
 W:0:0:0:1
 C:0:0:0:0

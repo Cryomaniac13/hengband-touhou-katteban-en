@@ -24473,7 +24473,7 @@ S:BLIND | CONF | SCARE | HOLD | BLINK | TPORT
 D:長く生きて力を蓄えた強力な妖怪狸だ。
 
 N:1230:化け狸十変化『二ッ岩　マミゾウ』
-E:Mamizou Futatsuiwa, Bake-danuki with Ten Transformations
+E:Mamizou Futatsuiwa, Monster Tanuki with Ten Transformations
 G:Y:u
 I:120:24d220:50:130:50
 W:63:20:0:25000:0:0

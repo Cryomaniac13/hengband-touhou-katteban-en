@@ -953,8 +953,8 @@ static flag_insc_table flag_insc_slay[] =
 static flag_insc_table flag_insc_esp1[] =
 {
 	{ "Tele", TR_TELEPATHY, -1 },
-	{ "Evil", TR_ESP_EVIL, -1 },
-	{ "Good", TR_ESP_GOOD, -1 },
+	{ "Chs", TR_ESP_EVIL, -1 },
+	{ "Law", TR_ESP_GOOD, -1 },
 	{ "Nolv", TR_ESP_NONLIVING, -1 },
 	{ "Uniq", TR_ESP_UNIQUE, -1 },
 	{ NULL, 0, -1 }
@@ -1455,6 +1455,8 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 
 	bool            show_weapon = FALSE;
 	bool            show_armour = FALSE;
+
+	bool            ego_prefix = FALSE;
 
 	cptr            s, s0;
 	char            *t;
@@ -2101,6 +2103,14 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 		}
 	}
 
+    // Confirm if the ego-item name is a prefix
+	if (object_is_ego(o_ptr)) {
+        ego_item_type *e_ptr = &e_info[o_ptr->name2];
+        if (my_strchr(e_name + e_ptr->name, '@')) {
+            ego_prefix = TRUE;
+        }
+	}
+
 	/* Use full name from k_info or a_info */
 	if (aware && have_flag(flgs, TR_FULL_NAME))
 	{
@@ -2164,7 +2174,7 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 
 		if (p_ptr->pclass == CLASS_SHION && o_ptr->tval >= TV_EQUIP_BEGIN && o_ptr->tval <= TV_EQUIP_END && o_ptr->xtra5)
         {
-            t = object_desc_str(t, "(Seized)");
+            t = object_desc_str(t, "(Seized) ");
         }
 
 		/* No prefix */
@@ -2187,15 +2197,27 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 		}
 
 		/* Hack -- The only one of its kind */
-		else if (known && object_is_artifact(o_ptr))
+		else if (known && (object_is_artifact(o_ptr) || o_ptr->art_name))
 
 		//else if ((known && object_is_artifact(o_ptr)) ||
 		        // ((o_ptr->tval == TV_CORPSE) &&
 		        //  (r_info[o_ptr->pval].flags1 & RF1_UNIQUE)))
 
 		{
-			t = object_desc_str(t, "The ");
-		}
+			//t = object_desc_str(t, "The ");
+			if (object_is_fixed_artifact(o_ptr)) t = object_desc_str(t, "* ");
+            //八雲紫の日傘とベースアイテムを共用したら不具合出たので重量で区別
+            else if (o_ptr->tval == TV_STICK && o_ptr->sval == SV_WEAPON_KOGASA && o_ptr->weight == 30) t = object_desc_str(t, "<> ");
+            else if (o_ptr->art_name)
+            {
+                if(o_ptr->tval == TV_MASK)
+                    t = object_desc_str(t, "() ");
+                else if (o_ptr->tval == TV_PHOTO && o_ptr->sval == SV_PHOTO_NIGHTMARE); //弾幕夢の写真には☆をつけない
+                else if (o_ptr->tval == TV_ABILITY_CARD); //v1.1.86 アビリティカードにも☆をつけない
+                else
+                    t = object_desc_str(t, "X ");
+            }
+        }
 
 		/* A single one */
 		else
@@ -2207,6 +2229,11 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 			case '#': vowel = is_a_vowel(modstr[0]); break;
 			case '%': vowel = is_a_vowel(*kindname); break;
 			default:  vowel = is_a_vowel(*s); break;
+			}
+
+			if (ego_prefix == TRUE) {
+                ego_item_type *e_ptr = &e_info[o_ptr->name2];
+                vowel = is_a_vowel(*((e_name + e_ptr->name) + 1));
 			}
 
 			if (vowel)
@@ -2248,10 +2275,27 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 		}
 
 		/* Hack -- The only one of its kind */
-		else if (known && object_is_artifact(o_ptr))
+		else if (known && (object_is_artifact(o_ptr) || o_ptr->art_name))
+
+		//else if ((known && object_is_artifact(o_ptr)) ||
+		        // ((o_ptr->tval == TV_CORPSE) &&
+		        //  (r_info[o_ptr->pval].flags1 & RF1_UNIQUE)))
+
 		{
-			t = object_desc_str(t, "The ");
-		}
+			//t = object_desc_str(t, "The ");
+			if (object_is_fixed_artifact(o_ptr)) t = object_desc_str(t, "* ");
+            //八雲紫の日傘とベースアイテムを共用したら不具合出たので重量で区別
+            else if (o_ptr->tval == TV_STICK && o_ptr->sval == SV_WEAPON_KOGASA && o_ptr->weight == 30) t = object_desc_str(t, "<> ");
+            else if (o_ptr->art_name)
+            {
+                if(o_ptr->tval == TV_MASK)
+                    t = object_desc_str(t, "() ");
+                else if (o_ptr->tval == TV_PHOTO && o_ptr->sval == SV_PHOTO_NIGHTMARE); //弾幕夢の写真には☆をつけない
+                else if (o_ptr->tval == TV_ABILITY_CARD); //v1.1.86 アビリティカードにも☆をつけない
+                else
+                    t = object_desc_str(t, "X ");
+            }
+        }
 
 		/* Hack -- single items get no prefix */
 		else
@@ -2267,7 +2311,7 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 	if (object_is_smith(o_ptr))
 	{
 		if(o_ptr->xtra3 == SPECIAL_ESSENCE_ONI)//武器修復品
-			t = object_desc_str(t, _("◇", ""));
+			t = object_desc_str(t, _("◇", "<> "));
 		else if(p_ptr->pclass == CLASS_TSUKUMO_MASTER)//付喪神使いの妖器
 		{
 			if(o_ptr->xtra1 >= 100)	t = object_desc_str(t, _("(*妖器*)", "(*Youkai*)"));
@@ -2342,6 +2386,13 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
                 t = object_desc_str(t, temp);
                 t = object_desc_str(t, " ");
             }
+        }
+        // If an ego-item name starts with '@', it's a prefix
+        // Put it before item name
+        else if (object_is_ego(o_ptr) && ego_prefix == TRUE) {
+            ego_item_type *e_ptr = &e_info[o_ptr->name2];
+			t = object_desc_str(t, (e_name + e_ptr->name) + 1);
+			t = object_desc_str(t, " ");
         }
     }
 #endif
@@ -2542,7 +2593,8 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 		/* Grab any ego-item name */
 		else
 		{
-			if (object_is_ego(o_ptr))
+		    // Do not add ego-item name after the main object name if it was a prefix
+			if (object_is_ego(o_ptr) && ego_prefix != TRUE)
 			{
 				ego_item_type *e_ptr = &e_info[o_ptr->name2];
 
@@ -2742,10 +2794,10 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 	{
 		if(show_special_info && (o_ptr->ident & IDENT_MENTAL))
 			t = object_desc_str(t, format(_("・特別特集＃%04d・%s",
-                                            " - Special Feature#%04d - %s"),o_ptr->xtra5,r_name+r_info[o_ptr->pval].name));
+                                            " - Special Feature #%04d - %s"),o_ptr->xtra5,r_name+r_info[o_ptr->pval].name));
 		else
 			t = object_desc_str(t, format(_("・特別特集＃%04d",
-                                            " - Special Feature#%04d"),o_ptr->xtra5));
+                                            " - Special Feature #%04d"),o_ptr->xtra5));
 	}
 	else if(o_ptr->tval == TV_ITEMCARD)
 	{
