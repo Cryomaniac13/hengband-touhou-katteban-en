@@ -196,7 +196,7 @@ static cptr race_jouhou[MAX_RACES] =
 
 "You are a shinigami. Shinigami are residents of Higan and have various positions like boatman of Sanzu river or Yama's judicial record keeper. You're good at combat and are resistant to several attacks like paralysis or confusion. If you equip a scythe, its power will be increased.",
 
-"You are a beastman. Beastmen have characteristics of both humans and beasts; some are born beastmen, some are transformed humans, some are beasts that have taken some human attributes. Many beastmen are more physically capable than humans, but their intelligence is lower. They grow stronger on the night of full moon. Their keen sense can warn them of danger.",
+"You are a werebeast. Werebeasts have characteristics of both humans and beasts; some are born werebeasts, some are transformed humans, some are beasts that have taken some human attributes. Many werebeasts are more physically capable than humans, but their intelligence is lower. They grow stronger on the night of full moon. Their keen sense can warn them of danger.",
 
 "You are a tsukumogami. Tsukumogami are old tools that have gained sentience; while technically they're deities they're essentially youkai. Their combat skills are a bit low, but understanding hearts of tools makes them great at disarming traps and using magic devices. As they gain levels, they can become less affected by equipped cursed items. Not being living organisms, they're resistant to poison and blindness. Instead of eating food, they drain charges from magic devices. They're weak to holy attacks and disenchantment.",
 

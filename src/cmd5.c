@@ -572,7 +572,7 @@ void do_cmd_browse(void)
 #ifdef JP
 		msg_print("本を読むことができない！");
 #else
-		msg_print("You cannot read books!");
+		msg_print("You cannot read spellbooks.");
 #endif
 
 		return;
@@ -856,7 +856,7 @@ void do_cmd_study(void)
 #ifdef JP
 msg_print("あなたは魔法書を読むことができない。");
 #else
-		msg_print("You cannot read books!");
+		msg_print("You cannot read spellbooks.");
 #endif
 
 		return;

@@ -1848,7 +1848,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"獣人",
 #endif
-		"Beastman",
+		"Werebeast",
 
 		{ 1, -1, -2, 2, 2, -2 },
 		-2, -3, -3, 2, 14, 15, 10, -5,
@@ -9080,7 +9080,7 @@ const cptr window_flag_desc[32] =
 #endif
 
 	///mod140428
-	"足元のアイテム一覧",
+	_("足元のアイテム一覧", "Display items at player location"),
 	NULL,
 #ifdef JP
 	"ボーグ・メッセージ",
@@ -9228,7 +9228,7 @@ const option_type option_info[] =
 	"target_pet",                   "ペットをターゲットにする" },
 #else
 	{ &target_pet,                  FALSE, OPT_PAGE_INPUT, 2, 5,
-	"target_pet",                   "Allow targetting pets" },
+	"target_pet",                   "Allow targetting followers" },
 #endif
 
 #ifdef ALLOW_EASY_OPEN
@@ -9627,7 +9627,7 @@ const option_type option_info[] =
 	"always_check_arms",             "右手と左手に別々の物を持つとき常に確認する" },
 #else
     { &always_check_arms,            FALSE, OPT_PAGE_GAMEPLAY, 7, 12,
-	"always_check_arms",             "Confirm when holding different items in right and left hands" },
+	"always_check_arms",             "Prompt for holding items in both hands" },
 #endif
 
 #ifdef JP
@@ -9754,7 +9754,7 @@ const option_type option_info[] =
 	"disturb_pets",                 "視界内のペットが動いたら行動を中止する" },
 #else
 	{ &disturb_pets,                FALSE, OPT_PAGE_DISTURBANCE, 5, 6,
-	"disturb_pets",                 "Disturb when visible pets move" },
+	"disturb_pets",                 "Disturb when visible followers move" },
 #endif
 
 #ifdef JP
@@ -9916,7 +9916,7 @@ const option_type option_info[] =
 	"ironman_no_fixed_art",             "固定アーティファクトが出現しない(*)" },
 #else
 	{ &ironman_no_fixed_art,            FALSE, OPT_PAGE_BIRTH, 6, 4,
-	"ironman_no_fixed_art",             "Don't generate fixed artifacts(*)" },
+	"ironman_no_fixed_art",             "Don't generate fixed artifacts (*)" },
 #endif
 
 #ifdef JP
@@ -9940,7 +9940,7 @@ const option_type option_info[] =
 	"no_capture_book",                  "妖魔本が出現しない(*)" },
 #else
 	{ &no_capture_book,                 FALSE, OPT_PAGE_BIRTH, 6, 13,
-	"no_capture_book",                  "Don't generate demon books(*)" },
+	"no_capture_book",                  "Don't generate demon books (*)" },
 #endif
 
 	//左利き 6,13→6,15
@@ -10176,7 +10176,7 @@ const option_type option_info[] =
 	"record_named_pet",             "名前つきペットの情報を記録する" },
 #else
 	{ &record_named_pet,            FALSE, OPT_PAGE_PLAYRECORD, 4, 23,
-	"record_named_pet",             "Record informations of named pets" },
+	"record_named_pet",             "Record informations of named followers" },
 #endif
 
 	/*** End of Table ***/
@@ -12522,7 +12522,7 @@ const cptr ident_info[] =
 	"h:Demihuman",
 	"i:Icky Thing",
 	"j:Jelly",
-	"k:Kobold/Beastman",
+	"k:Kobold/Werebeast",
 	"l:Aquatic monster",
 	"m:Mold",
 	"n:Naga",
