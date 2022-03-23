@@ -7319,8 +7319,8 @@ static void do_cmd_knowledge_skill_exp(void)
 		if (skill_exp > cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, "(¬’·ãŒÀ“Ë”j)");
 		else if (skill_exp == cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, "(¬’·ãŒÀ)");
 #else
-        if (skill_exp > cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, "(beyond limit)");
-		else if (skill_exp == cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, "(at limit)");
+        if (skill_exp > cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, " (beyond limit)");
+		else if (skill_exp == cp_ptr->skill_aptitude[i] * SKILL_LEV_TICK * 10) fprintf(fff, " (at limit)");
 #endif
 		else fprintf(fff, " ");
 

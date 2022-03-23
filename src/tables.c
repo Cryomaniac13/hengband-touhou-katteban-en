@@ -2155,7 +2155,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"ñÏó«ê_ól",
 #endif
-		"Stray-god",
+		"Stray-God",
 
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  10,  0,  0,  0,
@@ -2545,7 +2545,7 @@ const player_class class_info[MAX_CLASS] =
 		"ê_äØ",
 		"õﬁèó",
 #endif
-		"Oracle",
+		"Priest",
 		"Shrine-Maiden",
 
 		{0, 1, 3, -1, 0, 2},

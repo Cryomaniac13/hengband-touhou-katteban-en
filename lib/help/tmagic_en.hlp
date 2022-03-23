@@ -1,0 +1,18 @@
+Keine - 'Spells, special abilities, and racial powers will be covered here.
+
+    (a) Spells/Abilities/Racial Powers  (tmagic_en.txt)
+    (b) Learning and Casting Spells     (tmagic_en.txt#MagicUse)
+    (c) Spell Area of Effect            (tmagic_en.txt#MagicBlast)
+    (d) Magic Realm                     (tmagic_en.txt#Realm)
+    (e) Realm Aptitude                  (tmagic_en.txt#RealmApt)
+    (f) Spell Proficency                (tmagic_en.txt#MagicSkill)
+
+    (?) Help System Commands            (helpinfo.txt) 
+
+
+***** [a] tmagic_en.txt
+***** [b] tmagic_en.txt#MagicUse
+***** [c] tmagic_en.txt#MagicBlast
+***** [d] tmagic_en.txt#Realm
+***** [e] tmagic_en.txt#RealmApt
+***** [f] tmagic_en.txt#MagicSkill

@@ -1,0 +1,36 @@
+Keine - 'Item kinds, mechanics, inscriptions will be covered here.'
+
+    (a) Hengband Items                  (tobjects_en.txt)
+    (b) Inventory and Equipment         (tobjects_en.txt#EquipInvent)
+    (c) Using Items                     (tobjects_en.txt#UseItem)
+    (d) Activating Equipment            (tobjects_en.txt#Activate)
+    (e) Identifying Items               (tobjects_en.txt#Ident)
+    (f) Cursed Items                    (tobjects_en.txt#CursedItem)
+    (g) Ego-Items and Artifacts         (tobjects_en.txt#EgoObjects)
+    (h) Item Destruction                (tobjects_en.txt#DestroyItem)
+    (i) Item Disappearance              (tobjects_en.txt#DestroyItem2)
+    (j) Equipment Notation Basics       (tobjects_en.txt#Object_param)
+    (k) Weapon Special Effects          (tobjects_en.txt#Magic_weapon)
+    (l) Equipment Resistances           (tobjects_en.txt#Resist)
+    (m) Equipment Parameter Bonuses     (tobjects_en.txt#Pval)
+    (n) Other Equipment Effects         (tobjects_en.txt#Misc)
+    (o) Inscriptions                    (tobjects_en.txt#Inscriptions)
+
+    (?) Help System Commands            (helpinfo.txt) 
+
+
+***** [a] tobjects_en.txt
+***** [b] tobjects_en.txt#EquipInvent
+***** [c] tobjects_en.txt#UseItem
+***** [d] tobjects_en.txt#Activate
+***** [e] tobjects_en.txt#Ident
+***** [f] tobjects_en.txt#CursedItem
+***** [g] tobjects_en.txt#EgoObjects
+***** [h] tobjects_en.txt#DestroyItem
+***** [i] tobjects_en.txt#DestroyItem2
+***** [j] tobjects_en.txt#Object_param
+***** [k] tobjects_en.txt#Magic_weapon
+***** [l] tobjects_en.txt#Resist
+***** [m] tobjects_en.txt#Pval
+***** [n] tobjects_en.txt#Misc
+***** [o] tobjects_en.txt#Inscriptions

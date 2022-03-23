@@ -9804,7 +9804,7 @@ void do_cmd_help(void)
 	//(void)show_file(TRUE, "jhelp.hlp", NULL, 0, 0);
 	(void)show_file(TRUE, "thelp.hlp", NULL, 0, 0);
 #else
-	(void)show_file(TRUE, "help.hlp", NULL, 0, 0);
+	(void)show_file(TRUE, "thelp_en.hlp", NULL, 0, 0);
 #endif
 
 

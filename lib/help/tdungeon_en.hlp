@@ -1,0 +1,29 @@
+Dungeon Exploration
+
+Keine - 'Now, let's talk about dungeon exploration.
+I'll explain what you could encounter in dungeons.'
+
+    (a) Dungeon Exploration             (tdungeon_en.txt)
+    (b) Before Exploring the Dungeon    (tdungeon_en.txt#Prepare)
+    (c) Terrain Symbols (Detailed)      (tdungeon_en.txt#MapSymbols)
+    (d) Monster Symbols                 (tdungeon_en.txt#MonSymbols)
+    (e) Item Symbols                    (tdungeon_en.txt#Objects)
+    (f) Level Feelings                  (tdungeon_en.txt#Feelings)
+    (g) Special Dungeon Features        (tdungeon_en.txt#Vault)
+    (h) Random Quests                   (tdungeon_en.txt#RandomQuests)
+    (i) List of Dungeons                (tdungeon_en.txt#Dungeons)
+    (j) Dungeon Souvenirs               (tdungeon_en.txt#Souvenir)
+
+    (?) Help System Commands            (helpinfo.txt)
+
+
+***** [a] tdungeon_en.txt
+***** [b] tdungeon_en.txt#Prepare
+***** [c] tdungeon_en.txt#MapSymbols
+***** [d] tdungeon_en.txt#MonSymbols
+***** [e] tdungeon_en.txt#Objects
+***** [f] tdungeon_en.txt#Feelings
+***** [g] tdungeon_en.txt#Vault
+***** [h] tdungeon_en.txt#RandomQuests
+***** [i] tdungeon_en.txt#Dungeons
+***** [j] tdungeon_en.txt#Souvenir

@@ -1,0 +1,36 @@
+Keine - 'Before starting your adventure, you'll have to decide who you are.'
+
+    (a) Character Creation         (tbirth_en.txt)
+    (b) Difficulty Levels          (tbirth_en.txt#Difficulty)
+    (c) Primary Stats              (tbirth_en.txt#Status_main)
+    (d) Other Parameters           (tbirth_en.txt#Status_other)
+    (e) Races                      (tbirth_en.txt#Race)
+    (f) Classes                    (tbirth_en.txt#Class)
+    (g) Unique Classes             (tbirth_en.txt#UniqueClass)
+    (h) Outsiders                  (tbirth_en.txt#Outsider)
+    (i) Personalities              (tbirth_en.txt#Personality)
+    (j) Magic Realms               (tbirth_en.txt#Realm)
+    (k) Bonus Point Allocation     (tbirth_en.txt#BonusPoint)
+    (l) Birth Options              (tbirth_en.txt#BirthOptions)
+    (m) Background Editor          (tbirth_en.txt#BackgroundEditor)
+    (n) Name                       (tbirth_en.txt#Name)
+    (o) Quick Start                (tbirth_en.txt#QuickStart)
+
+    (?) Help System Commands       (helpinfo.txt)
+
+
+***** [a] tbirth_en.txt
+***** [b] tbirth_en.txt#Difficulty
+***** [c] tbirth_en.txt#Status_main
+***** [d] tbirth_en.txt#Status_other
+***** [e] tbirth_en.txt#Race
+***** [f] tbirth_en.txt#Class
+***** [g] tbirth_en.txt#UniqueClass
+***** [h] tbirth_en.txt#Outsider
+***** [i] tbirth_en.txt#Personality
+***** [j] tbirth_en.txt#Realm
+***** [k] tbirth_en.txt#BonusPoint
+***** [l] tbirth_en.txt#BirthOptions
+***** [m] tbirth_en.txt#BackgroundEditor
+***** [n] tbirth_en.txt#Name
+***** [o] tbirth_en.txt#QuickStart

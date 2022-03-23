@@ -1,0 +1,36 @@
+Combat System
+
+Keine - 'Now we've reached combat with monsters.
+   Here, combat-related mechanics will be covered in more details.
+   If you're a newcomer, feel free to skip places you don't understand.'
+
+    (a) Movement Order             (tbattle_en.txt#Energy)
+    (b) Melee Weapons              (tbattle_en.txt#Meleeweapon)
+    (c) Ranged Weapons             (tbattle_en.txt#Shootingweapon)
+    (d) Martial Arts               (tbattle_en.txt#Martialarts)
+    (e) Throwing                   (tbattle_en.txt#Throwing)
+    (f) Critical Hits              (tbattle_en.txt#Critical)
+    (g) Beneficial Effects         (tbattle_en.txt#Buff)
+    (h) Status Abnormalities       (tbattle_en.txt#BadStatus)
+    (i) Elements                   (tbattle_en.txt#Attack_type)
+    (j) Vulnerabilities            (tbattle_en.txt#Weak_point)
+    (k) Early Game Tactics         (tbattle_en.txt#Tactics1)
+    (l) Midgame Tactics            (tbattle_en.txt#Tactics2)
+    (m) Endgame Tactics            (tbattle_en.txt#Tactics3)
+
+    (?) Help System Commands       (helpinfo.txt)
+
+
+***** [a] tbattle_en.txt
+***** [b] tbattle_en.txt#Meleeweapon
+***** [c] tbattle_en.txt#Shootingweapon
+***** [d] tbattle_en.txt#Martialarts
+***** [e] tbattle_en.txt#Throwing
+***** [f] tbattle_en.txt#Critical
+***** [g] tbattle_en.txt#Buff
+***** [h] tbattle_en.txt#BadStatus
+***** [i] tbattle_en.txt#Attack_type
+***** [j] tbattle_en.txt#Weak_point
+***** [k] tbattle_en.txt#Tactics1
+***** [l] tbattle_en.txt#Tactics2
+***** [m] tbattle_en.txt#Tactics3

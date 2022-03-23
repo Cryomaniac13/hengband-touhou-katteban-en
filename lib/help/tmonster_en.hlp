@@ -1,0 +1,34 @@
+Monsters
+
+  Keine - 'Enemies that will stand in your way, trying to defeat you
+  will be covered here.'
+
+    (a) Hengband Monsters          (tmonster_en.txt)
+    (b) Monster Symbols            (tmonster_en.txt#MonsterSymbols)
+    (c) Monster Level              (tmonster_en.txt#MonsterLevel)
+    (d) Monster Abilities          (tmonster_en.txt#MonsterAbl)
+    (e) Monster Melee Attacks      (tmonster_en.txt#MonsterMelee)
+    (f) Monster Spells/etc         (tmonster_en.txt#MonsterPower)
+    (g) Monster Memory             (tmonster_en.txt#MonsterMemory)
+    (h) Unique Monsters            (tmonster_en.txt#Uniques)
+    (i) Followers                  (tmonster_en.txt#Pets)
+    (j) Riding                     (tmonster_en.txt#Riding)
+    (k) Follower Orders            (tmonster_en.txt#Order)
+    (l) Friendly Monsters          (tmonster_en.txt#Friendly)
+
+    (?) Help System Commands       (helpinfo.txt) 
+
+
+***** [a] tmonster_en.txt
+***** [b] tmonster_en.txt#MonsterSymbols
+***** [c] tmonster_en.txt#MonsterLevel
+***** [d] tmonster_en.txt#MonsterAbl
+***** [e] tmonster_en.txt#MonsterMelee
+***** [f] tmonster_en.txt#MonsterPower
+***** [g] tmonster_en.txt#MonsterMemory
+***** [h] tmonster_en.txt#Uniques
+***** [i] tmonster_en.txt#Pets
+***** [j] tmonster_en.txt#Riding
+***** [k] tmonster_en.txt#Order
+***** [l] tmonster_en.txt#Friendly
+

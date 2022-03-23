@@ -1095,7 +1095,7 @@ static byte choose_realm(int *count)
 #ifdef JP
 			show_help("tmagic.txt#Realm");
 #else
-			show_help("magic.txt#MagicRealms");
+			show_help("tmagic_en.txt#Realm");
 #endif
 		}
 		else if (c == '=')
@@ -4321,7 +4321,7 @@ static bool get_player_race(void)
 #ifdef JP
 			sprintf(help_entry, "traceclas.txt#%s", rp_ptr->E_title);
 #else
-            sprintf(help_entry, "traceclas.txt#%s", rp_ptr->title);
+            sprintf(help_entry, "traceclas_en.txt#%s", rp_ptr->title);
 #endif
 			show_help(help_entry);
 
@@ -4368,12 +4368,17 @@ static bool get_player_class(void)
 	char    p2 = ')';
 	char    buf[80], cur[80];
 	cptr    str;
+#ifdef JP
+	int     col_size = 19;
+#else
+    int     col_size = 20;
+#endif
 
 	cptr help_index[MAX_CLASS_CHOICE+1] =
-	{"Warrior","Mage","Priest","Explorer","Ranger","Paladin",
+	{"Warrior","Mage","Shrine-Maiden","Explorer","Ranger","Protector",
 	"Teacher","Maid","Martial-Artist","Mindcrafter","High-Mage","Civilian",
-	"Syugen","Magic-Knight","Danmakulogist","Archer","Magic-Eater","Engineer",
-	"Librarian","Samurai","Soldier","Chemist","Cavalry","Tsukumo-Master","Secondhand-dealer","Jeweler",
+	"Shugenja","Magic-Knight","Danmakulogist","Marksman","Magic-Eater","Engineer",
+	"Librarian","Samurai","Soldier","Chemist","Cavalry","Tsukumo-Master","Secondhand-Dealer","Jeweler",
 	"Ninja", "Card-Trader",""};
 
 	/* Extra info */
@@ -4423,8 +4428,8 @@ static bool get_player_class(void)
 			sprintf(buf, "%c%c %s", sym[n], p2, str);
 #endif
 
-		if(cp_ptr->flag_nofixed) c_put_str(TERM_L_DARK, buf, 13 + (n/4), 2 + 19 * (n%4));
-		else put_str(buf, 13+ (n/4), 2 + 19 * (n%4));
+		if(cp_ptr->flag_nofixed) c_put_str(TERM_L_DARK, buf, 13 + (n/4), 2 + col_size * (n%4));
+		else put_str(buf, 13+ (n/4), 2 + col_size * (n%4));
 	}
 
 #ifdef JP
@@ -4442,9 +4447,9 @@ static bool get_player_class(void)
 		/* Move Cursol */
 		if (cs != os)
 		{
-			if(os != MAX_CLASS_CHOICE && cp_ptr->flag_nofixed) c_put_str(TERM_L_DARK, cur, 13 + (os/4), 2 + 19 * (os%4));
-			else c_put_str(TERM_WHITE, cur, 13 + (os/4), 2 + 19 * (os%4));
-			put_str("                                   ", 3, 40);
+			if(os != MAX_CLASS_CHOICE && cp_ptr->flag_nofixed) c_put_str(TERM_L_DARK, cur, 13 + (os/4), 2 + col_size * (os%4));
+			else c_put_str(TERM_WHITE, cur, 13 + (os/4), 2 + col_size * (os%4));
+			put_str("                                    ", 3, 40);
 			if(cs == MAX_CLASS_CHOICE)
 			{
 #ifdef JP
@@ -4502,7 +4507,7 @@ static bool get_player_class(void)
 						cp_ptr->c_adj[4], cp_ptr->c_adj[5], cp_ptr->c_exp, mul_score);
 					c_put_str(TERM_L_BLUE, buf, 5, 40);
 			}
-			c_put_str(TERM_YELLOW, cur, 13 + (cs/4), 2 + 19 * (cs%4));
+			c_put_str(TERM_YELLOW, cur, 13 + (cs/4), 2 + col_size * (cs%4));
 			os = cs;
 		}
 
@@ -4571,12 +4576,8 @@ static bool get_player_class(void)
 		if (c == '?' && cs < MAX_CLASS_CHOICE+1)
 		{
 			char help_entry[64];
-			sprintf(help_entry,"traceclas.txt#%s",help_index[cs]);
-#ifdef JP
+			sprintf(help_entry,_("traceclas.txt#%s", "traceclas_en.txt#%s"),help_index[cs]);
 			show_help(help_entry);
-#else
-			show_help("raceclas.txt#TheRaces");
-#endif
 		}
 		else if (c == '=')
 		{
@@ -4805,11 +4806,8 @@ static bool get_player_seikaku(void)
 		else k = -1;
 		if (c == '?')
 		{
-#ifdef JP
-			show_help("traceclas.txt#ThePersonalities");
-#else
-			show_help("raceclas.txt#ThePersonalities");
-#endif
+			show_help(_("traceclas.txt#ThePersonalities",
+                        "traceclas_en.txt#ThePersonalities"));
 		}
 		else if (c == '=')
 		{
@@ -5233,7 +5231,7 @@ static bool get_bonus_points(void)
 			break;
 */
 		case '?':
-			show_help("tbirth.txt#BonusPoint");
+			show_help(_("tbirth.txt#BonusPoint", "tbirth_en.txt#BonusPoint"));
 			break;
 
 		default:
@@ -6547,7 +6545,7 @@ static bool get_unique_player(void)
 			if (c == '8' && cs > 0) cs--;
 			if (c == '?')
 			{
-				show_help("tbirth.txt#Class");
+				show_help(_("tbirth.txt#Class", "tbirth_en.txt#Class"));
 			}
 
 			if (c >= 'a' && c <= 'a'+ENTRY_MAX-1)
@@ -6619,7 +6617,7 @@ static bool get_unique_player(void)
 			if (c == '8' && cs > 0) cs--;
 			if (c == '?')
 			{
-				show_help("tbirth.txt#Class");
+				show_help(_("tbirth.txt#Class", "tbirth_en.txt#Class"));
 			}
 
 			if (c >= 'a' && c <= 'a'+cnt_table-1)
@@ -6998,7 +6996,12 @@ static bool player_birth_aux(void)
 			}
 			if (c == '?')
 			{
-				show_help("tbirth.txt#Difficulty");
+#ifdef JP
+			    show_help("tbirth.txt#Difficulty");
+#else
+			    show_help("tbirth_en.txt#Difficulty");
+#endif // JP
+				//show_help(_("tbirth.txt#Difficulty", "tbirth_en.txt#Difficulty"));
 			}
 
 		}
@@ -7129,7 +7132,7 @@ static bool player_birth_aux(void)
 			}
 			if (c == '?')
 			{
-				show_help("tbirth.txt#Class");
+				show_help(_("tbirth.txt#Class", "tbirth_en.txt#Class"));
 			}
 		}
 	}
@@ -8040,7 +8043,7 @@ static bool ask_quick_start(void)
 #ifdef JP
 			show_help("tbirth.txt#QuickStart");
 #else
-			show_help("birth.txt#QuickStart");
+			show_help("tbirth_en.txt#QuickStart");
 #endif
 		}
 		else if ((c == 'y') || (c == 'Y'))

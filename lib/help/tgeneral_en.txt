@@ -1,99 +1,106 @@
-=== 変愚蛮怒とは何か？ ===
+=== What is Hengband? ===
 
-慧音「変愚蛮怒は、日本製のローグライクのバリアントの一つだ。
+Keine - 'Hengband is one of Japanese roguelike variants.
 
-「ローグライク」という言葉は知っているな？ 
-1980年、コンピュータゲーム黎明期に作られたダンジョン探索RPGが"Rogue" だ。
-このゲームを祖とするダンジョン探索RPGを総称してローグライクという。
-特徴としては「ランダムダンジョンを探索し敵を倒して宝を集め、
-行動はターン制で倒れたらそこで終わり」といったところか。
+Do you know what a 'roguelike' is?
+In 1980, the early days of computer games, there was a dungeon exploration RPG
+called "Rogue". Dungeon exploration RPGs derived from this game are called
+'roguelikes'. Their special characteristics are exploring randomly generated
+dungeons, defeating enemies and collecting treasure; they're turn-based, and
+the game ends when you are defeated.
 
-「バリアント」とは、派生作品という意味だ。
-ローグライクは様々に枝分かれしつつ多様なバリアントが作られた。
-その中で"Rogue"→"Moria"→"Angband"→"Zangband"→"変愚蛮怒"という
-流れで作られたのが変愚蛮怒だ。
+A 'variant' is a derivative work.
+Roguelikes have many various branches and variants. Hengband belongs to the
+following line:
+"Rogue" -> "Moria" -> "Angband" -> "Zangband" -> "Hengband".
 
-Moria-Angbandではトールキン関係の要素が大量に取り入れられた。
-若い人には「指輪物語」より「ロード・オブ・ザ・リング」と言ったほうが通じるかな？
-さらにZangbandではクトゥルフ神話や真世界アンバーなどの、
-スケールの大きい要素がまた大量に取り入れられた。
-そして変愚蛮怒ではジャパンアニメなどのこれまた様々な要素が山ほど詰め込まれ、
-実に混沌としたゲームになりつつも遊び応えのあるシステムはしっかり受け継がれている。
+Moria-Angband added a large amount of Tolkien-related content.
+Zangband added a lot more content, including Cthulhu mythos and Chronicles
+of Amber. Hengband added even more various content related to anime; while
+the game ended up being very chaotic, the base gameplay system remains the
+same.
 
-変愚蛮怒などの初期ローグライクは実にシンプルなゲームだ。
-グラフィックは文字のみ、音声など全くなし、
-ゲーム世界を形作るのはプレイヤーの想像力のみだ。
-だが元々ロールプレイングゲームとは空想の中を冒険するものだった。
-コンピュータゲームの進化は目覚ましいものだが、
-たまには古いものに触れてみるのもいいものだぞ。」
-
+Early roguelikes like Hengband are simple games. Their graphical display is
+limited to symbols, there's no sound effects/BGM; the game world is created
+by the player's imagination - however, the very original roleplaying games
+already were imaginary adventures.'
 
 ***** <Katte>
-=== 勝手版とは何か？ ===
+=== What is Katteban? ===
 
-慧音「変愚蛮怒はプログラムコードが無料で公開されている。
-これを書き換えてコンパイルすることで、
-誰でも独自の変愚蛮怒を作ることができるというわけだ。
-これが「勝手版」「改造版」あるいは「私家版」などと呼ばれている。
-このゲームもそれらの勝手版の一つだ。
+Keine - 'Hengband's source code is freely available, and anyone can create
+their own version by changing and re-compiling it. It's frequently called
+a 'katteban'/'mod'/'personal version'. This game is one of those mods.
 
-自分で勝手版を作ってみたくなった人もいるかもしれないが、
-その際は著作権や引用ルールや無償公開原則を守ってくれ。
-詳しくは変愚蛮怒本家のサイトやヘルプを見て欲しい。」
+Some of you might want to make their own mod; in this case, follow the
+licensing rules and distribute it freely. For more details, check the
+official original Hengband website.'
 
 
 ***** <First>
-=== ゲームの目的 ===
+=== Game Goal ===
 
-慧音「さて。では話は幻想郷に移る。
-人里の西に怪しい洞窟が出現し、中から凶暴な怪物たちがあふれ出したのだ。
-洞窟に潜り、この異変を解決するのがあなたの冒険の目的となる。
+Keine - 'Now, let's move on to Gensoukyou.
+A suspicious cave has appeared to the west of Human Village, and violent
+monsters are coming out of it. The goal of your adventure is to explore
+that dungeon and resolve this incident.
 
-冒険を始めたばかりのあなたは野良犬に噛まれて泣き出すほど弱い。
-しかしダンジョンを探索し経験を積み装備を整えることで、
-いずれはどのような強大な存在とも渡り合えるようになるだろう。」
+At the start of your adventure, you might be weak to the point even a
+stray dog can hurt you greatly. However, as you explore the dungeon, gain
+experience, and obtain equipment, you'll be a match for many powerful
+beings.'
 
 
 ***** <Gameover>
-=== ゲームオーバー ===
+=== Game Over ===
 
-慧音「先ほど『ローグライクは倒れたらそこで終わり』と言ったが、
-あれは誇張でも例えでもない。
-あなたのHPがマイナスになった瞬間、あなたがこれまで稼いだお金も経験値も
-家に溜め込んだ宝物の数々もすべてが消滅する。ゲームは再び最初からだ。
-しかし二つだけ残るものがある。
-あなたが数々の冒険で記録したモンスターの情報、
-そしてあなたの中に蓄積される経験だ。
-初めはちょっとしたことでバタバタ倒れるだろう。
-しかしあなたは倒れるたびにより良い振る舞い方を学び、
-やがてあなたをまぐれ以外で倒せる者などほぼいなくなるはずだ。
+Keine - 'I've said earlier that the game ends when you get defeated in as
+roguelike; that's no exaggeration. The moment your HP drops below zero,
+you lose all of your money, experience and items you've accumulated up to
+this point, and have to restart the game from the beginning.
+Several things remain, however - it's the monster memory you've built up
+to this point, and your own personal experience as a player.
+At first, you'll frequently get defeated over and over; however, if you
+learn from your mistakes every time, eventually you're going to get defeated
+only due to random chance.
 
-……まあ妹紅だけは倒れても終わりにならないが、それは例外だ。
-難易度をEASYにすれば妹紅でなくても復活することができるぞ。」
+...As an exception, Mokou still can go on even after getting defeated.
+If you pick the Easy difficulty level, you can resurrect even without being
+Mokou.'
 
 
 ***** <Web>
-=== WEB上の変愚蛮怒(勝手版)サイト ===
+=== Hengband (Katteban) Website ===
 
-慧音「この勝手版を起動している時点で知らないはずはないのだが一応載せておくか。
-この変愚蛮怒(勝手版)はここで公開されている。
+Keine - 'You should know this already by the point you've launched this mod,
+but I'm going to say this anyway.
+This Hengband Katteban is being officially distributed here:
 
 --- http://www.miyamasa.net/heng_th_katte.html ---
 
-質問、バグ報告、不自然なメッセージ、ゲームバランスなど指摘したいことがあったら
-遠慮無く掲示板に書いてほしい。
-製作者の能力の問題もあり、すべてに応じられるかどうかは何ともいえないが。
+The address below is the official site of original Hengband; it's not
+related to this mod, so don't bring questions/bugs related to this mod there.'
+
+-------------------Quoted below-------------------------------
+
+(http://hengband.sourceforge.jp/en/)
+
+http://hengband.sourceforge.jp/en/ is the official Hengband website.
+It includes information on where to download the Hengband source code
+and current executables for most popular operating systems as well as
+information on current development issues.
+
+------------------------------------------------------------------------------
+
+Also, if you're reading this file, you're playing the English translation of
+this version. The translation is done by a separate person and is hosted as
+following github project:
+
+https://github.com/Cryomaniac13/hengband-touhou-katteban-en
 
 
-それから、下のアドレスは変愚蛮怒本家の公式サイトだ。
-この勝手版に関する質問やバグ報告は、
-本家には関係ないので本家に持ち込まないように。」
+The translated version still might have some typos, mistranslations, or new
+bugs that don't exist in original Japanese mod; please report anything
+that looks suspicious there.
 
--------------------以下引用-------------------------------
 
---- http://hengband.sourceforge.jp/ ---
-
-http://hengband.sourceforge.jp/ は 変愚蛮怒の公式サイトです。ここには
-最新のソースコードやバイナリ、スポイラーへのリンク、また役に立つページ
-や面白いページへのリンクがあります。また英語版のページへのリンクもあり
-ます。

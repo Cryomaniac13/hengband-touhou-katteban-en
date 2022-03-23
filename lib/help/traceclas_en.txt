@@ -1,2686 +1,2815 @@
 
 ***** <TheRaces>
-=== 種族 ===
+=== Races ===
 
-慧音「各種族についての詳細な情報を教えよう。
-面倒くさければ読み飛ばしてくれていいぞ。
-細かい情報を見ながら強いキャラクターを考えるのも楽しいが、
-相性度外視全くの好みでキャラクターを作るのも楽しいものだ。
+Keine - 'Let's look over special characteristics of each race.
+Feel free to skip parts that look too bothersome.
+You might have fun looking at detailed information to create a powerful
+character, or you might just create a character you like regardless
+of their compatibility.
 
-ヒットダイスとはHP決定の係数のようなもので10が基本だ。
-経験値ペナルティは高ければ高いほどレベルが上がりにくくなる。
-強くて長命な種族ほど高くなりがちだな。
-スコア倍率はスコアにかかる係数だ。強い種族ほど低くなる。
+Hit Dice is related to HP calculation; base value is 10.
+The higher your experience penalty is, the more slowly you gain levels.
+Strong and long-living races tend to require a lot of experience.
+Score modifier affects your score. The stronger you are, the lower it is.
 
-耐性・能力・身体特性の横の数字はその能力を獲得できるレベルだ。
-数字が書かれていない能力はレベル1から持っている。
+Numbers in brackets after resistances/abilities/characteristics represent
+the level at which you obtain it. If there's no numbers, you have this at
+level 1.
 
-魔法領域適性は5が普通で高いほど得意だ。0だと全く習得できない。
-元素/予見/付与/召喚 - 神秘/生命/破邪/自然 - 変容/暗黒/死霊/混沌、
-という順で書かれている。
-バージョン1.1.08で「秘術」という領域が追加されたが、
-秘術に対しての適性はどの種族も普通なので省略する。
+Base value for magic realm aptitude is 5; there higher it is, the more
+proficient you are. If it's 0, you can't study this realm at all.
 
-初心者は探索に時間が掛かるから、
-経験値ペナルティが高くてもあまり苦にならないと思う。
-だからペナルティを気にせず強い種族にすることをお勧めするぞ。」
+Aptitudes are written in following order:
+
+Elements/Divination/Enchantment/Summoning - 
+Mysticism/Life/Exorcism/Nature - 
+Transformation/Darkness/Necromancy/Chaos
+
+Version 1.1.08 adds the Occult realm, but all races have standard aptitude
+for it, so it's omitted.
+
+If you're a beginner, you'll spend a lot of time exploring, so a high XP
+penalty shouldn't bother you too much. That's why I recommend picking a
+strong race disregarding experience penalty.'
 
 
 ***** <Human>
---- 人間 ---
-腕力:0 知能:0 賢さ:0 器用:0 耐久:0 魅力:0
-解除:0 魔導:0 魔防:0 隠密:0 探索:0
-打撃:0 射撃:0
-赤外線視力:0
-ヒットダイス:10
-経験値ペナルティ:0
-スコア倍率:100%
+--- Human ---
+Str: 0 Int: 0 Wis: 0 Dex: 0 Con: 0 Chr: 0
+Dsm: 0 MDev: 0 MProt: 0 Stl: 0 Srh: 0
+Fighting: 0 Shooting: 0
+Infravision: 0
+Hit Dice: 10
+XP Penalty: 0
+Score: 100%
 
-耐性・能力・身体特性:
-  なし
-魔法領域適性:
+Resistances/abilities/characteristics:
+  None
+Magic realm aptitude:
   5/5/5/5 - 5/5/5/5 - 5/5/5/5
-その他:
-  なし
+Other:
+  None
 
-慧音「普通の人間だ。全く何の特徴もない。しいて言えば成長が早いくらいか。
-身体能力は標準だが他の種族は人外だらけなので相対的には弱いほうだ。
-ただし弱点らしい弱点もないのでどんな職業でもそれなりにこなせる。
-魔法職なら成長の早さを活かしやすいだろうな。
-複合職も悪くないが自前の耐性がないから装備の確保に難儀するかもしれない。
-馴染み深いので初心者が選びやすいが、あまり初心者向けではない。」
+Keine - 'Ordinary humans without any special characteristics, except perhaps
+levelling up quickly. Their physical stats are average, but they're weak
+compared to many other non-human races. However, they don't have any weak
+points in particular, and are capable of being any class.
+Their fast growth might make playing a spellcaster easier. They're not bad
+at being dual classes as well, but since they don't have innate resistances,
+obtaining proper equipment might be difficult.
+It's a familiar race that beginners frequently pick, but it's not that
+suited for beginners.'
 
 
 ***** <Youkai>
---- 妖怪 ---
-腕力:2  知能:-2 賢さ:-3 器用:0 耐久:2 魅力:-2
-解除:-3 魔導:-5 魔防:0  隠密:0 探索:0
-打撃:10 射撃:-5
-赤外線視力:3
-ヒットダイス:11
-経験値ペナルティ:25%
-スコア倍率:100%
+--- Youkai ---
+Str: 2  Int: -2 Wis: -3 Dex: 0 Con: 2 Chr: -2
+Dsm: -3 MDev: -5 MProt: 0  Stl: 0 Srh: 0
+Fighting: 10 Shooting: -5
+Infravision: 3
+Hit Dice: 11
+XP Penalty: 25%
+Score: 100%
 
-耐性・能力・身体特性:
-  破邪弱点33%
-魔法領域適性:
+Resistances/abilities/characteristics:
+  33% vulnerablity to holy attacks
+Magic realm aptitude:
   4/4/4/4 - 2/2/1/3 - 7/7/6/6
-その他:
-  なし
+Other:
+  None
 
-慧音「妖怪と言ってもいろいろ居るが、
-その中で比較的外見に特徴のない妖怪たちだ。
-ルーミア辺りを思い浮かべてもらうと分かりやすいか。
-人間と比べると明らかに身体能力が高いが、その分頭のほうは今一つだな。
-妖術使いなら魔法職も悪くないだろう。 
-また、妖怪たちは一般に破邪攻撃に弱い。」     
+Keine - 'There are many various kinds of youkai, but this category includes
+comparatively ordinary-looking ones (like, for example, Rumia). Their physical
+stats are clearly higher compared to humans, but they're not that smart.
+However, they still might be decent at studying Sorcery Arts.
+Also, youkai are generally vulnerable to holy attacks.'
 
 
 ***** <Half-Youkai>
---- 半妖 ---
-腕力:1 知能:0  賢さ:-1 器用:0 耐久:1 魅力:-1
-解除:0 魔導:-1 魔防:1  隠密:0 探索:0 
-打撃:3 射撃:0
-赤外線視力:0
-ヒットダイス:10
-経験値ペナルティ:20%
-スコア倍率:90%
+--- Half-Youkai ---
+Str: 1 Int: 0  Wis: -1 Dex: 0 Con: 1 Chr: -1
+Dsm: 0 MDev: -1 MProt: 1  Stl: 0 Srh: 0 
+Fighting: 3 Shooting: 0
+Infravision: 0
+Hit Dice: 10
+XP Penalty: 20%
+Score: 90%
 
-耐性・能力・身体特性:
-  遅消化
-  毒耐性(20)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Slow digestion
+  Poison resistance (20)
+Magic realm aptitudes:
   5/5/5/5 - 4/4/4/4 - 5/5/5/5
-その他:
-  なし
+Other:
+  None
 
-慧音「人間と妖怪のハーフで、能力値も概ねその範囲だ。
-しかし半妖は体の免疫力が意外に高くついでに小食らしい。
-弱点らしい弱点もないのでどんな職でもこなせるだろう。
-人間や妖怪より少しスコアが下がる。」
-    
+Keine - 'Half human, half youkai, with stats somewhere in between.
+They're surprisingly resilient to poisons, and they don't require much food.
+They don't have any weak points in particular and are capable of being any
+class. Their score is slightly lowered compared to humans and youkai.'
 
-***** <Sennin>
---- 仙人 ---
-腕力:-1 知能:2  賢さ:3 器用:0 耐久:0 魅力:2
-解除:2  魔導:10 魔防:8 隠密:1 探索:5 
-打撃:0 射撃:-10
-赤外線視力:2
-ヒットダイス:10
-経験値ペナルティ:50%
-スコア倍率:75%
+***** <Hermit>
+--- Hermit ---
+Str: -1 Int: 2  Wis: 3 Dex: 0 Con: 0 Chr: 2
+Dsm: 2  MDev: 10 MProt: 8 Stl: 1 Srh: 5 
+Fighting: 0 Shooting: -10
+Infravision :2
+Hit Dice: 10
+XP Penalty: 50%
+Score: 75%
 
-耐性・能力・身体特性:
-  遅消化
-  破邪・混沌・毒・地獄・暗黒のいずれかの耐性(20)
-  賢さ維持(25)
-  混乱耐性(30)
-  明鏡止水(30 MPをわずかに回復する)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Slow digestion
+  Resistance to either holy/chaos/poison/nether/darkness (20)
+  Sustain wisdom (25)
+  Confusion resistance (30)
+  Clear Mind (30; slightly restores MP)
+Magic realm aptitudes:
   6/6/6/5 - 9/9/8/9 - 4/6/5/4
-その他:
-　満腹度の消費がかなり遅い
-  近寄った死神がすぐに起きて敵対
-  レベル20以降ときどき地獄からの刺客に襲われる
- 
-慧音「山に篭もって日々修行に勤しむ仙人たちだ。
-純粋な身体能力は意外にあまり大したことがないが、
-それを補って余りある様々な不思議な力を持っている。
-魔法職もいいが、複合職でMP自前回復を活かすのが定石だろう。
+Other:
+  Satiation level lowers very slowly
+  Aggravates nearby shinigami
+  Starting from level 20, will be attacked by assassins from hell
 
-地獄からの刺客とは、主に死神だ。
-ダンジョンの深層に潜るほど手強い刺客に襲われるらしい。
-スコアや経験値のペナルティはやや重い。」
+Keine - 'Hermits spend their days training secluded in the mountains. Their
+physical stats by themselves aren't that high, but they also hold a bit of
+mysterious power. They do fine as spellcasters, and their natural MP recovery
+is a solid asset for dual classes.
 
-***** <Tennin>
---- 天人 ---
-腕力:2 知能:3  賢さ:3  器用:2 耐久:3 魅力:3
-解除:0 魔導:12 魔防:12 隠密:0 探索:5 
-打撃:10 射撃:10
-赤外線視力:2
-ヒットダイス:12
-経験値ペナルティ:85%
-スコア倍率:60%
+The assassins from hell are mainly shinigami. The deeper down you go, the more
+powerful assassins will come after you. They have fairly large score and XP
+penalties.'
 
-耐性・能力・身体特性:
-  破邪免疫
-  浮遊
-  恐怖耐性
-  麻痺耐性
-  地獄の劫火属性弱点33%
-  透明体視認(10)
-  混乱耐性(15)
-  閃光耐性(20)
-  賢さ維持(25)
-  明鏡止水(30 MPをわずかに回復する)
-魔法領域適性:
+***** <Celestial>
+--- Celestial ---
+Str: 2 Int: 3 Wis: 3 Dex: 2 Con: 3 Chr: 3
+Dsm: 0 MDev: 12 MProt: 12 Stl: 0 Srh: 5 
+Fighting: 10 Shooting: 10
+Infravision: 2
+Hit Dice: 12
+XP Penalty: 85%
+Score: 60%
+
+Resistances/abilities/characteristics:
+  Immune to holy attacks
+  Levitation
+  Fear resistance
+  Free action
+  33% vulnerability to hellfire
+  See invisible (10)
+  Confusion resistance (15)
+  Light resistance (20)
+  Sustain wisdom (25)
+  Clear Mind (30; slightly restores MP)
+Magic realm aptitude:
   6/7/6/5 - 9/9/9/7 - 0/0/0/2
-その他:
-  ACにボーナス
-  近寄った死神がすぐに起きて敵対
-  レベル20以降ときどき地獄からの刺客に襲われる
+Othor
+  AC bonus
+  Aggravates nearby shinigami
+  Starting from level 20, will be attacked by assassins from hell
 
-慧音「ただでさえ強い仙人をさらに二回り強くした感じか。
-序盤の戦いで後れを取るようなことはほとんどないだろう。
-とにかく強いがペナルティは激烈に重い。いわゆる初心者向けだ。
-地獄の劫火が弱点だが、まあ普通の*勝利*までならそれほど問題にならないだろう。」
+Keine - 'More or less a stronger version of the already strong hermits.
+You're not likely to have hard time in early game combat. You're strong, but
+your penalties are severe at well. Suitable for beginners.
+You're vulnerable to hellfire, but it's not going to be a concern until the
+very end.'
 
 
 ***** <Fairy>
---- 妖精 ---
-腕力:-4 知能:-4 賢さ:-4 器用:-2 耐久:-3 魅力:-2
-解除:-5 魔導:-5 魔防:10 隠密:5  探索:0 
-打撃:-20 射撃:-10
-赤外線視力:5
-ヒットダイス:7
-経験値ペナルティ:50%
-スコア倍率:200%
+--- Fairy ---
+Str: -4 Int: -4 Wis: -4 Dex: -2 Con: -3 Chr: -2
+Dsm: -5 MDev: -5 MProt: 10 Stl: 5  Srh: 0 
+Fighting: -20 Shooting: -10
+Infravision: 5
+Hit Dice: 7
+XP Penalty: 50%
+Score: 200%
 
-耐性・能力・身体特性:
-  遅消化
-  急回復
-  浮遊
-  破邪耐性(20)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Slow digestion
+  Regeneration
+  Levitation
+  Holy energy resistance (20)
+Magic realm aptitude:
   3/1/1/1 - 2/4/1/7 - 1/1/1/1
-その他:
-　満腹度の消費がかなり遅い
-　短剣を両手持ちできる
-　ランダムに何らかの特技あるいは特性を一つ持つ
-　(「自分に関する情報」コマンドから確認できる）
-　
-慧音「幻想郷のどこにでも現れる妖精だ。
-何を考えて危険なダンジョンに挑むのか。恐らく何も考えていないのだろう。
-弱さが極まるぶんスコアは人間の倍になる。
-腕に自信があるなら挑戦してみるといい。」
+Other:
+  Satiation level lowers very slowly
+  Can hold short blades with both hands
+  Has a random special ability
+  (You can check it with 'Display about yourself')
+
+Keine - 'Fairies appear all over Gensoukyou. What are they thinking, going
+into a dangerous dungeon like that? They're probably not thinking at all.
+They're extremely weak, and their score is doubled compared to humans. Pick
+this race if you're confident in your skills and are looking for a challenge.'
 
 
 ***** <Kappa>
---- 河童 ---
-腕力:0  知能:1  賢さ:-3 器用:2 耐久:1 魅力:-1
-解除:20 魔導:-4 魔防:3  隠密:2 探索:3 
-打撃:5 射撃:10
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:10%
-スコア倍率:90%
+--- Kappa ---
+Str: 0  Int: 1  Wis: -3 Dex: 2 Con: 1 Chr: -1
+Dsm: 20 MDev: -4 MProt: 3 Stl: 2 Srh: 3 
+Fighting: 5 Shooting: 10
+Infravision: 0
+Hit Dice: 11
+XP Penalty: 10%
+Score: 90%
 
-耐性・能力・身体特性:
-  水耐性
-  電撃弱点+33%
-  破邪弱点+33%
-  水鉄砲(12 水属性のボルト)
-  酸耐性(15)
-  通背(25 少し離れた場所に物理攻撃をするが攻撃回数は下がる)
-  引きずり込む(35 隣接攻撃　水辺でないと使えない)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Water resistance
+  33% vulnerability to lightning
+  33% vulnerability to holy attacks
+  Water Gun (12; fires a bolt of water)
+  Acid resistance (15)
+  Tongbeiquan (25; attacks at a distance, slightly lowers amount of blows)
+  Drag In (35; attacks adjacent monster, requires standing in water terrain)
+Magic realm aptitude:
   3/2/2/2 - 3/2/1/5 - 7/6/5/5
-その他:
-  きゅうりを食べると満腹になる
-  水地形の上では腕力耐久+2と急回復を得る
-  エンジニアになったとき、機械が水によって故障しない
+Other:
+  Eating a cucumber makes you satiated
+  +2 STR/CON and regeneration while in water
+  If you're an Engineer, your machines won't malfunction when hit by water
 
-慧音「河童は実に手先が器用だ。
-腕っ節はそれほどでもないが水中では見違えるように強くなる。
-いつも湿っぽいせいか破邪のほか電撃も苦手なようだ。
-向く職業はやはりエンジニアだろう。戦士系も悪くない。」
-  
+Keine - 'Kappas are very dextrous. Usually they're not that strong, but they
+become far more stronger in water. Aside from holy attacks, they're vulnerable
+to lightning. They make good Engineers, but they're not bad as warriors
+either'.
+
 
 ***** <Magician>
---- 魔法使い ---
-腕力:-2 知能:4  賢さ:3  器用:-1 耐久:-1 魅力:0
-解除:5  魔導:15 魔防:10 隠密:1  探索:5 
-打撃:-10 射撃:-10
-赤外線視力:5
-ヒットダイス:8
-経験値ペナルティ:30%
-スコア倍率:75%
+--- Magician ---
+Str: -2 Int: 4 Wis: 3 Dex: -1 Con: -1 Chr: 0
+Dsm:  5 MDev: 15 MProt: 10 Stl: 1 Srh: 5 
+Fighting: -10 Shooting: -10
+Infravision: 5
+Hit Dice: 8
+XP Penalty: 30%
+Score: 75%
 
-耐性・能力・身体特性:
-  浮遊(10)
-  透明視認(15)
-  混乱耐性(20)
-  知能維持(25)
-  魔力奪取(25 敵に触れてMPを奪う)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Levitation (10)
+  See invisible (15)
+  Confusion resistance (20)
+  Sustain intelligence (25)
+  Drain Mana (25; drain MP from enemies by touch)
+Magic realm aptitude:
   9/9/9/9 - 7/6/6/7 - 7/7/8/8
-その他:
-  一切の食事が必要ない(食べ過ぎにはなる)
+Other:
+  Does not require food at all (but can overeat)
 
-慧音「その名の通り、魔法のスペシャリストだ。
-メイジになればどんどん呪文を覚えてガンガン撃てて実に爽快だ。
-魔力の回復手段を持っているので魔法剣士なども向いている。
-ただしやや打たれ弱いから体力には気を付けろ。
-好奇心旺盛なので成長はやや早いがスコアはけっこう減る。」
+Keine - 'As their name implies, they specialize in magic.
+They learn spells quickly and can efficiently use them. Since they have a
+MP recovery power, they're suited for classes like Magic-Knight as well.
+However, they're fairly weak physically, so keep an eye on your health.
+They level up fairly quickly due to their curiousity, but their score is
+lowered.'
 
 
-***** <Karasu-Tengu>
---- 鴉天狗 ---
-腕力:1 知能:2 賢さ:0 器用:4 耐久:2 魅力:0
-解除:5 魔導:7 魔防:6 隠密:2 探索:5 
-打撃:10 射撃:10
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:40%
-スコア倍率:70%
+***** <Crow-Tengu>
+--- Crow Tengu ---
+Str: 1 Int: 2 Wis: 0 Dex: 4 Con: 2 Chr: 0
+Dsm: 5 MDev: 7 MProt: 6 Stl: 2 Srh: 5 
+Fighting: 10 Shooting: 10
+Infravision: 0
+Hit Dice: 11
+XP Penalty: 40%
+Score: 70%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  写真撮影(写真を撮る)
-  浮遊
-  急加速(20 視界内の離れた位置へ一瞬で移動する。障害物に当たると止まる)
-  高速移動(25)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Take a Photo (takes a photograph)
+  Levitation
+  Burst of Speed (20; instantly moves to a distant location in sight.
+                      Stops if you hit an obstacle)
+  Swift movement (25)
+Magic realm aptitude:
   4/5/4/3 - 5/3/2/8 - 6/7/6/5
-その他:
-  加速 +レベル/7
-  敵のボルト系攻撃を高確率で無効化する
-  頭装備は頭襟のみ
-  酒を飲んだとき酔いにくい
+Other:
+  Speed +level/7
+  Negates enemy bolt spells with high probability rate
+  Can only wear a tokin on head
+  Harder to get drunk
 
-慧音「風評被害でお馴染みの鴉天狗だ。とにかく動きが素早い。
-その上腕っ節も頭の回転も優れていて万能の強さだ。
-ただし頭には常に頭襟をつけないといけないようだ。
-ポリシーなのか規則なのか知らないが、
-伝説の兜を前に涙を呑むこともあるだろう。
-ペナルティも重い。」
+Keine - 'Crow tengu, well known for their reputation-harming rumors.
+They can move quite fast. They're also dextrous and smart, making them good
+all around. However, they have to wear a tokin on their head. I don't know if
+a policy or rule of theirs, but it can make you cry when you see an artifact
+helmet. Has heavy penalties as well.'
 
-***** <Hakurou-Tengu>
---- 白狼天狗 ---
-腕力:3 知能:-2 賢さ:-2 器用:2 耐久:3 魅力:-2
-解除:8 魔導:-3 魔防:0  隠密:2 探索:10
-打撃:15 射撃:5
-赤外線視力:8
-ヒットダイス:12
-経験値ペナルティ:35%
-スコア倍率:85%
 
-耐性・能力・身体特性:
-  透明視認
-  破邪弱点+33%
-  モンスター感知(3 近くのモンスターの位置を知る)
-  食料生成(15 食料を作る)
-  モンスター調査(30 周囲のモンスターの能力を調べる)
-  警告(30)
-  毒耐性(35)
-魔法領域適性:
+***** <WhiteWolf-Tengu>
+--- White Wolf Tengu ---
+Str: 3 Int: -2 Wis:-2 Dex: 2 Con: 3 Chr: -2
+Dsm: 8 MDev: -3 MProt: 0  Stl: 2 Srh: 10
+Fighting: 15 Shooting: 5
+Infravision: 8
+Hit Dice: 12
+XP Penalty: 35%
+Score: 85%
+
+Resistances/abilities/characteristics:
+  See invisible
+  +33% vulnerability to holy attacks
+  Detect Monsters (3; detects nearby monsters)
+  Create Food (15; creates a food ration)
+  Probing (30; learns abilities of nearby monsters)
+  Warning (30)
+  Poison resistance (35)
+Magic realm aptitude:
   2/3/1/1 - 1/2/1/4 - 5/5/4/4
-その他:
-  頭装備は頭襟のみ
-  酒を飲んだとき酔いにくい
+Other:
+  Can only wear a tokin on head
+  Harder to get drunk
 
-慧音「山の見張り番の白狼天狗だ。索敵と物探しはお手の物らしい。
-白兵戦能力も見た目相応に高い。ただし術は苦手のようだな。
-鴉天狗と同様、頭襟を外そうとしない。」
-　
+Keine - 'White wolf tengu patrol the Youkai Mountain. They're good at
+locating enemies and objects, and they're as good at close combat as they
+look. However, they're bad at spellcasting. Just like crow tengu, they have
+to wear a tokin.'
+
 
 ***** <Oni>
---- 鬼 ---
-腕力:7   知能:-3 賢さ:1 器用:1  耐久:4 魅力:0
-解除:-10 魔導:5  魔防:0 隠密:-3 探索:-3
-打撃:30 射撃:0
-赤外線視力:0
-ヒットダイス:18
-経験値ペナルティ:65%
-スコア倍率:60%
+--- Oni ---
+Str: 7   Int: -3 Wis:1 Dex: 1  Con: 4 Chr: 0
+Dsm: -10 MDev: 5  MProt: 0 Stl: -3 Srh: -3
+Fighting: 30 Shooting: 0
+Infravision: 0
+Hit Dice: 18
+XP Penalty: 65%
+Score: 60%
 
-耐性・能力・身体特性:
-  恐怖耐性
-  急回復
-  破邪弱点+33%
-  暗黒耐性(10)
-  狂戦士化(12 狂戦士状態になる)
-  腕力維持(20)
-  耐久維持(20)
-  咆哮(25 大声で轟音攻撃をする　周囲の寝ている敵が起きる)
-  狂気耐性(35)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Fear resistance
+  Regeneration
+  +33% vulnerability to holy attacks
+  Darkness resistance (10)
+  Berserk Rage (12; makes you berserk)
+  Sustain strength (20)
+  Sustain constitution (20)
+  Roar (25; sonic attack with a loud shout, wakes up nearby enemies)
+  Insanity resistance (35)
+Magic realm aptitude:
   5/5/5/5 - 5/4/2/3 - 5/7/5/6
-その他:
-  大きな角を持っている
-  満腹度減少が早い
-  酒を飲んだときかなり酔いにくい
+Other:
+  Has large horns
+  Satiation level decreases quickly
+  Very hard to get drunk
 
-慧音「泣く子も黙る鬼だ。馬鹿げた腕力と底なしの体力を持つ。
-コソコソと細かいことをするのは嫌いなようで、解除や隠密の技能は低い。
-しかし魔法や魔法道具への適性はそれほど低くはない。
-もちろん戦士向きだが、体力の高さはどんな職にとっても有益だ。
-ペナルティが重いが序盤の殴り合いなら最強だろう。初心者向けだ。
+Keine - 'The oni that keep crying children silent. They have astounding
+strength and immense resilience. However, they're bad at more precise
+actions, though their aptitude for spellcasting and magic devices isn't
+that low. Naturally, they make excllent warriors, but any class can take
+advantage of their resilience. High penalties, but probably the best at
+early game combat. Suited for beginners.
 
-鬼はみな立派な角を頭に生やしている。
-隣接攻撃の時には角で強力な攻撃をすることができるが、
-角が邪魔でヘルメットを被ることができないようだ。」
+Oni have splendid horns on their head.
+They can use them to deliver powerful attacks during melee combat, but those
+horns prevent them from wearing helmets.'
 
 
-***** <Death>
---- 死神 ---
-腕力:2  知能:1 賢さ:2  器用:-1 耐久:2 魅力:-3
-解除:-3 魔導:8 魔防:25 隠密:3  探索:0
-打撃:15 射撃:-10
-赤外線視力:8
-ヒットダイス:12
-経験値ペナルティ:60%
-スコア倍率:75%
+***** <Shinigami>
+--- Shinigami ---
+Str: 2  Int: 1 Wis:2  Dex: -1 Con: 2 Chr: -3
+Dsm: -3 MDev: 8 MProt: 25 Stl: 3  Srh: 0
+Fighting: 15 Shooting: -10
+Infravision: 8
+Hit Dice: 12
+XP Penalty: 60%
+Score: 75%
 
-耐性・能力・身体特性:
-  地獄耐性
-  麻痺耐性
-  透明視認(10)
-  混乱耐性(20)
-  死者ESP(25)
-  人間ESP(25)
-  暗黒耐性(35)
-  狂気耐性(45)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Nether resistance
+  Free action
+  See invisible (10)
+  Confusion resistance (20)
+  Undead ESP (25)
+  Human ESP (25)
+  Darkness resistance (35)
+  Insanity resistance (45)
+Magic realm aptitude:
   5/5/5/5 - 3/0/2/2 - 4/7/9/6
-その他:
-  大鎌を装備したときダイスボーナス
+Other:
+  Gets dice bonus when wielding scythes.
 
-慧音「誰もが恐れる死神だ。恐れられすぎて街での買い物に少し苦労する。
-少々動きが鈍いが打撃も魔法も得意で、さらに様々な耐性をもちタフだ。
-大鎌を構えた姿は実にサマになる。
-序盤に失敗しがちな麻痺や混乱や透明の対策が揃っており初心者向けだ。
-閻魔様の部下なだけあり破邪攻撃を弱点としないのも強みだな。
-ペナルティはそこそこ重い。」
+Keine - 'The grim reapers feared by everyone. Due to their reputation,
+shopping in towns might be somewhat tough. They're a bit slow, but proficient
+both at combat and spellcasting, and they are resilient and have various
+resistances. A scythe is a weapon most appropriate for them.
+They're protected against common sources of early game accidents - paralysis,
+confusion, invisible monsters - which makes them suitable for beginners.
+As subordinates of Yama, they're not vulnerable to holy attacks, which is also
+a plus. They have fairly high penalties.'
 
 
-***** <Warbeast>
---- 獣人 ---
-腕力:1  知能:-1 賢さ:-2 器用:2 耐久:2 魅力:-2
-解除:-2 魔導:-3 魔防:-3 隠密:2 探索:4
-打撃:10 射撃:-5
-赤外線視力:10
-ヒットダイス:11
-経験値ペナルティ:40%
-スコア倍率:75%
+***** <Werebeast>
+--- Werebeast ---
+Str: 1  Int: -1 Wis:-2 Dex: 2 Con: 2 Chr: -2
+Dsm: -2 MDev: -3 MProt: -3 Stl: 2 Srh: 4
+Fighting: 10 Shooting: -5
+Infravision: 10
+Hit Dice: 11
+XP Penalty: 40%
+Score: 75%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  モンスター感知(3 近くのモンスターの位置を知る)
-  狂戦士化(25 狂戦士状態になる)
-  警告(30)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks 
+  Detect Monsters (3; detects nearby monsters)
+  Berserk Rage (25; makes you berserk)
+  Warning (30)
+Magic realm aptitude:
   4/4/4/3 - 3/4/2/6 - 8/5/6/5
-その他:
-  加速 +レベル/15
-  満月(15+30x日目)の夜に全能力+2
+Other:
+  Speed +level/15
+  During full moon night, +2 to all stats
 
-慧音「人と獣の両方の特徴を持つのが獣人だ。
-人化した妖獣と獣に変身する人間の両方が含まれる。
-俊敏でタフだが頭は少々弱いようだ。
-便利な特技を多く持っており、その割にペナルティや制限がやや軽い。
+Keine - 'Werebeasts have features of both humans and beasts. This category
+includes both youkai beasts transformed into human shape and humans that
+transform into a bestial form. They're nimble and tough, but they're not that
+smart. They have useful abilities, and their penalties and restriction are
+comparatively light.
 
-なお少々メタな話になるが、
-幻想郷では獣人と妖獣はかなり違うがこの変愚勝手版では同一視されている。
-注意されたし。」
+Slightly meta statement:
+In Gensoukyou, were-beasts and youkai beasts are very different, but they've
+been unified for this mod.'
 
 
-***** <Tsukumo>
---- 付喪神 ---
-腕力:-1 知能:-1 賢さ:-1 器用:0 耐久:1 魅力:-1
-解除:15 魔導:16 魔防:8  隠密:1 探索:2
-打撃:0 射撃:-5
-赤外線視力:2
-ヒットダイス:9
-経験値ペナルティ:20%
-スコア倍率:80%
+***** <Tsukumogami>
+--- Tsukumogami ---
+Str: -1 Int: -1 Wis:-1 Dex: 0 Con: 1 Chr: -1
+Dsm: 15 MDev: 16 MProt: 8  Stl: 1 Srh: 2
+Fighting: 0 Shooting: -5
+Infravision: 2
+Hit Dice: 9
+XP Penalty: 20%
+Score: 80%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  劣化弱点+33%
-  毒耐性
-　盲目耐性
-　透明視認(10)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  +33% vulnerability to disenchantment
+  Poison resistance
+  Blindness resistance
+  See invisible (10)
+Magic realm aptitude:
   3/4/7/3 - 5/3/3/3 - 7/5/4/5
-その他:
-  呪われたアイテムを解呪せずに外せる(失敗することもある)
-  アイテムの呪いの発動を止めることがある
-  装備品による反感を軽減する
-  切り傷や病気を受けない
-  通常の食料でなく杖か魔法棒の魔力を食べる
+Other:
+  Can remove cursed items without uncursing (might fail)
+  Can prevent item curses from activating
+  Reduces aggravation from equipment
+  Cannot get wounded/diseased
+  Eats magical energy from staves/wands instead of normal food
 
-慧音「古い道具や捨てられた道具が動き出したのが付喪神だ。
-使い終わった道具はこうなる前にちゃんと供養するようにな。
-もとが道具なだけあり、アイテム全般の扱いが大得意なようだ。
-反感装備には強力なものが多いので装備品の選択肢の幅が大きく広がるだろう。
-さらに体の構造が(妖怪の中でも)普通ではないため毒や切り傷などを受けない。
-ただし純粋な身体能力は低い。」
+Keine - 'Tsukumogami are old and discarded tools that have obtained sentience.
+Tools that are no longer usable should be properly memorialized to avoid
+that. Since they were ordinary tools themselves, they're very good at using
+items. There are many powerful items that aggravate monsters, which greatly
+widens their equipment selection. Also, due to their unusual body structure
+(even for a youkai), they can't be poisoned or wounded. However, their
+physical stats are low.'
 
 
 ***** <Youkai-Doll>
---- 妖怪人形 ---
-腕力:1 知能:-1 賢さ:-2 器用:0 耐久:1 魅力:0
-解除:0 魔導:5 魔防:-5  隠密:2 探索:-2
-打撃:5 射撃:5
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:(特殊)
-スコア倍率:75%
+--- Youkai Doll ---
+Str: 1 Int: -1 Wis:-2 Dex: 0 Con: 1 Chr: 0
+Dsm: 0 MDev: 5 MProt: -5  Stl: 2 Srh: -2
+Fighting: 5 Shooting: 5
+Infravision: 0
+Hit Dice: 11
+XP Penalty: (special)
+Score: 75%
 
-耐性・能力・身体特性:
-　自己修復(1 自分の躰の傷や破損を修復する)
-  破邪弱点+33%
-  劣化弱点+33%
-  毒耐性
-  冷気耐性
-　麻痺耐性
-　透明視認(10)
-　恐怖耐性(20)
-　狂気耐性(40)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Self-repair (1; repairs damage done to your body)
+  +33% vulnerability to holy attacks
+  +33% vulnerability to disenchantment
+  Poison resistance
+  Cold resistance
+  Free action
+  See invisible (10)
+  Fear resistance (20)
+  Insanity resistance (40)
+Magic realm aptitude:
   3/4/7/3 - 5/3/3/3 - 7/5/4/5
-その他:
-  戦闘で経験値を得られず、装備したものの価値の合計が経験値として扱われる
-　種族変容を受けず、他の種族が変容して妖怪人形になることもない
-  切り傷や病気を受けない
-  通常の食料でなく杖か魔法棒の魔力を食べる
-  (v1.66以降)切り傷と朦朧を受けないが破損状態になることがある
+Other:
+  Doesn't gain experience trhough combat; treats total value of equipment
+    as experience
+  Cannot change race, and other races can't change into Youkai Dolls
+  Cannot get wounded/diseased
+  Eats magical energy from staves/wands instead of normal food
+  (from v.1.66) Cannot get wounded/stunned, but can get 'broken'
 
-慧音「人形の付喪神だな。他のどの種族とも一線を画する特殊な種族だ。
-この種族はいくら戦ってもレベルアップしない。
-身につける装備品の魔力と同化して自らの力にするんだ。
-装備品を全て外すといつでもレベル1に戻ってしまう。
+Keine - 'Doll tsukumogami. It's a very special rate set apart from the others.
+No matter how much you fight, you won't level up, but you can empower yourself
+by becoming one with magical power of your equipment. Once you take off all
+of your equipment, you will return to level 1.
 
-最序盤に運良く強力なアイテムを見つけて一気にレベルアップできる可能性があるが、
-中盤以降にレベルと耐性とパラメータを同時に確保するのが難しくなる。
-特に、必要なパラメータの多い複合職では装備品を揃えるのがかなり困難だろう。
-指輪とアミュレットと光源はレベルの判定に関係しない。
+If you get lucky and find a powerful item in early game, you'll be able to
+quickly level up; however, at midgame, balancing your level, resistance and
+parameters a the same time is going to be tough. In particular, dual classes
+that rely on several stats will have a lot of trouble preparing their
+equipment. Rings, amulets, and light sources don't affect your level.
 
-再びメタな話をするが、もちろん幻想郷の妖怪人形にそんな設定は一切ない。
-変愚蛮怒本家の「アンドロイド」の仕様を引き継いでいる。」
+Another meta statement: Of course, the youkai dolls in Gensoukyou don't work
+like that. That's a feature taken from original Hengband's Androids.'
 
 
-***** <Gyokuto>
---- 玉兎 ---
-腕力:0  知能:0 賢さ:-1 器用:2 耐久:1 魅力:1
-解除:8 魔導:8 魔防:8 隠密:2 探索:2
-打撃:5 射撃:15
-赤外線視力:7
-ヒットダイス:10
-経験値ペナルティ:50%
-スコア倍率:85%
+***** <Moon-Rabbit>
+--- Moon Rabbit ---
+Str: 0  Int: 0 Wis:-1 Dex: 2 Con: 1 Chr: 1
+Dsm: 8 MDev: 8 MProt: 8 Stl: 2 Srh: 2
+Fighting: 5 Shooting: 15
+Infravision: 7
+Hit Dice: 10
+XP Penalty: 50%
+Score: 85%
 
-耐性・能力・身体特性:
-  破邪耐性
-  地獄の劫火弱点(+20%)
-  噂を聞く(いつでも玉兎たちの噂を聞ける)
-  モンスター感知(5 近くのモンスターの位置を知る)
-  ショート・テレポート(10 近距離のテレポートをする)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Holy energy resistance
+  +20% vulnerability to hellfire
+  Listen to Rumors (listens to rumors among moon rabbits)
+  Detect Monsters (5; detects nearby monsters)
+  Blink (10; short range teleport)
+Magic realm aptitude:
   4/4/4/3 - 5/5/4/3 - 4/2/2/4
-その他:
-  なし
+Other:
+  None
 
-慧音「月の兎らしい。なぜ地上にいるのかは不明だ。
-獣人に似ているが獣人ほど戦闘能力は高くない。
-しかし訓練を受けているらしく道具などの技能は高い。
-穢れなき月の民だそうで破邪攻撃を弱点としない。
-大きな耳を使って何やら交信している姿が稀に目撃される。
-月に地上の情報を送っているのかもしれない。」
+Keine - 'Rabbits from the Moon. It's unclear what they're doing on Earth.
+They resemble werebeasts, but they're not as proficient at combat. However,
+with the training they've received, their skills like magic device use are
+high. As citizens of the Moon devoid of impurity, they're not vulnerable to
+holy energy. They're rarely being seen communicating with someone using
+their large ears. They might be relying information they've collected back
+to Moon.'
 
 
-***** <Youko>
---- 妖狐 ---
-腕力:-1  知能:3 賢さ:3 器用:2 耐久:0 魅力:1
-解除:2 魔導:10 魔防:16 隠密:3 探索:4
-打撃:-10 射撃:-10
-赤外線視力:7
-ヒットダイス:9
-経験値ペナルティ:70%
-スコア倍率:75%
+***** <Youkai-Fox>
+--- Youkai Fox ---
+Str: -1  Int: 3 Wis:3 Dex: 2 Con: 0 Chr: 1
+Dsm: 2 MDev: 10 MProt: 16 Stl: 3 Srh: 4
+Fighting: -10 Shooting: -10
+Infravision: 7
+Hit Dice: 9
+XP Penalty: 70%
+Score: 75%
 
-耐性・能力・身体特性:
-  破邪弱点(+33% 妖術使いでないときレベル30で消える)
-  透明視認
-  モンスター感知(5 近くのモンスターの位置を知る)
-  混乱耐性(10)
-  精神攻撃(15 敵一体に精神波で攻撃)
-  警告(20)
-  幻惑(25 視界内のモンスターを混乱・朦朧・恐怖させる)
-  混沌耐性(30)
-  テレパシー(40)
-  破邪耐性(45 妖術使いでないとき)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerablity to holy attacks; goes away at level 30 if you're not
+    studying Sorcery Arts
+  See invisible
+  Detect Monsters (5; detects nearby monsters)
+  Confusion resistance (10)
+  Mind Blast (15; mental attack against a single enemy)
+  Warning (20)
+  Dazzle (25; confuses, stuns, and terrifies all monsters in sight)
+  Chaos resistance (30)
+  Telepathy (40)
+  Holy resistance (45; only if you're not studying Sorcery Arts)
+Magic realm aptitude:
   7/8/7/7 - 7/5/5/7 - 9/7/7/7
-その他:
-  油揚げを食べるとMPがわずかに回復する
-  妖術使いのとき妖術の熟練度が上がりやすい
+Other:
+  Slightly recovers MP by eating fried tofu
+  Sorcery Arts spell proficiency is easy to raise
 
-慧音「妖怪狐だ。宴会で同じ顔が二人酔っぱらっていたら少なくとも片方はこいつだ。
-妖怪には珍しく高い知性を持ち術師に向いている。
-身体能力も低くはなく、極めて勘が鋭いので生存能力が高い。
+Keine - 'Fox youkai. If you see two people with the same face getting
+drunk at a banquest, one of them is a youkai fox. With their intelligence,
+they're suited for spellcasting. Their physical stats aren't that low either,
+and they have extremely sharp intuition.
 
-第一領域が妖術以外のときは経験を積むと破邪攻撃を弱点としなくなる。
-神格を得てお狐様になるのだろう。
-もし第一領域が妖術の場合は、その代わりに妖術の熟練度が上がりやすいようだ。
-何でも、妖術を鍛える施設というものがどこかにあるらしい。
+If your first realm doesn't belong to Sorcery Arts, your vulnerability to
+holy energy will go away as you accumulate enough experience. You'll become
+a deified fox.
+If you are studying Sorcery Arts as your first realm, your spell proficency
+will rise faster.
 
-高レベルになると相当に強力だが、ペナルティはかなり重い。」
+They're powerful at high levels, but their penalties are high as well.'
 
 
 ***** <Yamawaro>
---- 山童 ---
-腕力:1  知能:-1  賢さ:-3 器用:1 耐久:2 魅力:-1
-解除:15 魔導:-6 魔防:0  隠密:2 探索:5 
-打撃:15 射撃:10
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:25%
-スコア倍率:90%
+--- Yamawaro ---
+Str: 1  Int: -1  Wis:-3 Dex: 1 Con: 2 Chr: -1
+Dsm: 15 MDev: -6 MProt: 0  Stl: 2 Srh: 5 
+Fighting: 15 Shooting: 10
+Infravision: 0
+Hit Dice: 11
+XP Penalty: 25%
+Score: 90%
 
-耐性・能力・身体特性:
-  水耐性
-  破邪弱点+33%
-  通背(25 少し離れた場所に物理攻撃をするが攻撃回数は下がる)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Water resistance
+  +33% vulnerability to holy attacks
+  Tongbeiquan (25; attacks at a distance, slightly lowers amount of blows)
+Magic realm aptitude:
   3/2/2/2 - 3/2/1/5 - 7/6/5/5
-その他:
-  森地形で腕力耐久+2と急回復を得る
-  森地形に浮遊なしで侵入しても減速しない
-  山脈地形に浮遊なしで侵入することができる
-  
+Other:
+  +2 STR/CON and regeneration while in forest
+  Does not move slowly through forest terrain without levitation
+  Can move through mountain chains without levitation
 
-慧音「河童が山に登ったら山童になるらしい。
-作業服から登山服に着替えただけに見えるが。
-河童に比べると、白兵能力が上がって電撃弱点が消えている。
-また水関係の能力がいくつか消えて代わりに森や山関係の能力を得たようだ。」
+
+Keine - 'Kappas that climb mountain become yamawaro, though it looks like
+they just have exchanged their work clothes for mountaineering equipment.
+They're more proficient in combat compared to kappas, and are no longer
+vulnerable to lightning. Their water-related abilities are gone, replaced
+by forest and mountain related ones.'
 
 
 ***** <Bake-danuki>
---- 化狸 ---
-腕力:0  知能:1 賢さ:1 器用:-1 耐久:1 魅力:-1
-解除:2 魔導:2 魔防:3 隠密:4 探索:0
-打撃:7 射撃:0
-赤外線視力:5
-ヒットダイス:11
-経験値ペナルティ:40%
-スコア倍率:80%
+--- Bake-danuki ---
+Str: 0  Int: 1 Wis:1 Dex: -1 Con: 1 Chr: -1
+Dsm: 2 MDev: 2 MProt: 3 Stl: 4 Srh: 0
+Fighting: 7 Shooting: 0
+Infravision: 5
+Hit Dice: 11
+XP Penalty: 40%
+Score: 80%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  モンスター感知(5 近くのモンスターの位置を知る)
-  テレポート(12 中距離のテレポートをする)
-  透明視認(15)
-  変わり身(30 敵の攻撃を受けたときダメージを受けずにテレポートする)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Detect Monsters (5; detects nearby monsters)
+  Teleport (12; medium range teleport)
+  See invisible (15)
+  Kawarimi (30; when hit by an enemy attack, teleports away without
+                receiving damage)
+Magic realm aptitude:
   5/4/4/5 - 3/4/2/5 - 8/6/5/7
-その他:
-　特になし
+Other:
+  Nothing in particular
 
-慧音「妖怪狸だ。妖狐とは仲が悪いようだな。
-化けたり消えたり隠れるのが得意で、
-比較的癖のない能力と便利な特技を持っている。
-概ねどんな職業でもそれなりにこなせるだろう。
-ペナルティはどちらかというとやや重いほうか。」
+Keine - 'Youkai tanuki. They really don't get along with youkai foxes.
+They're good at transforming, disappearing, and hiding; their stats and
+special abilities make them comparatively simple to use.
+They're decent at being almost any class. Their penalties are fairly high.'
 
-***** <Ningyo>
---- 人魚 ---
-腕力:0  知能:0  賢さ:0 器用:1 耐久:1 魅力:1
-解除:0 魔導:7 魔防:7  隠密:2 探索:2 
-打撃:0 射撃:-5
-赤外線視力:0
-ヒットダイス:10
-経験値ペナルティ:10%
-スコア倍率:95%
 
-耐性・能力・身体特性:
-  水耐性
-  破邪弱点+33%
-魔法領域適性:
+***** <Merfolk>
+--- Merfolk ---
+Str: 0  Int: 0  Wis:0 Dex: 1 Con: 1 Chr: 1
+Dsm: 0 MDev: 7 MProt: 7  Stl: 2 Srh: 2 
+Fighting: 0 Shooting: -5
+Infravision: 0
+Hit Dice: 10
+XP Penalty: 10%
+Score: 95%
+
+Resistances/abilities/characteristics:
+  Water resistance
+  +33% vulnerability to holy attacks
+Magic realm aptitude:
   6/6/7/5 - 5/5/3/4 - 8/6/7/6
-その他:
-  靴を装備できない
-  直接攻撃時、尻尾による強力な格闘攻撃が出る
-  浮遊なしで地面の上にいるとき移動時間+33%
-  水上にいるとき加速+(3+レベル/15)と高速移動を得る 浮遊していても可
+Other:
+  Cannot use footwear
+  Can deal powerful martial art attacks with tail in close combat
+  Movement on ground costs 33% without levitation
+  Speed +(3+level/15) and swift movement while in water;
+    applies even when levitating
 
-慧音「下半身が大きな魚の尻尾になっている妖怪だ。　
-陸上では動きにくそうだが水中では見違えるように素早くなる。
-身体能力は人間と大して変わらないようだが、魔法への適性はやや高い。」
+Keine - 'Youkai with a large fish tail instead of their lower body.
+They move slowly on ground, but are very swift in water. Their physical
+stats don't differ too much from humans, but they're fairly proficient
+at using magic.
 
 
-***** <Hofgoblin>
---- ホフゴブリン ---
-腕力:-1  知能:-1  賢さ:-2 器用:1 耐久:2 魅力:-4
-解除:7 魔導:5 魔防:3  隠密:2 探索:2 
-打撃:5 射撃:5
-赤外線視力:4
-ヒットダイス:8
-経験値ペナルティ:10%
-スコア倍率:100%
+***** <Hobgoblin>
+--- Hobgoblin ---
+Str: -1  Int: -1  Wis:-2 Dex: 1 Con: 2 Chr: -4
+Dsm: 7 MDev: 5 MProt: 3  Stl: 2 Srh: 2 
+Fighting: 5 Shooting: 5
+Infravision: 4
+Hit Dice: 8
+XP Penalty: 10%
+Score: 100%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  遅消化
-  麻痺耐性
-  食料生成(5 食料を作る)
-　毒耐性(15)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Slow digestion
+  Free action
+  Create Food (5; creates a food ration)
+  Poison resistance (15)
+Magic realm aptitude:
   5/5/5/5 - 3/3/2/4 - 5/5/5/5
-その他:
-  なし
+Other:
+  None
 
-慧音「ホフゴブリンを覚えているだろうか？
-座敷童が消えたとき里にやってきて巫女に追い出された不気味な妖怪だ。　
-幼児並みの体格なのであまり強くなさそうだが、
-意外に小器用にいろいろこなすようだ。何よりペナルティが軽い。」
+Keine - 'Do you remember the hobgoblins?
+They're creepy youkai that came to the village after the zashiki-warashi
+have vanished, but they were driven away by the shrine maiden. They aren't
+strong due to their infant-like physical build, but they're surprisingly
+dextrous. Their penalties are light.'
 
 
-***** <Nyudo>
---- 入道 ---
-腕力:3  知能:-1  賢さ:-2 器用:-3 耐久:3 魅力:-1
-解除:-4 魔導:-3 魔防:0  隠密:2 探索:2 
-打撃:20 射撃:0
-赤外線視力:0
-ヒットダイス:13
-経験値ペナルティ:50%
-スコア倍率:75%
+***** <Nyuudou>
+--- Nyuudou ---
+Str: 3  Int: -1  Wis:-2 Dex: -3 Con: 3 Chr: -1
+Dsm: -4 MDev: -3 MProt: 0  Stl: 2 Srh: 2 
+Fighting: 20 Shooting: 0
+Infravision: 0
+Hit Dice: 13
+XP Penalty: 50%
+Score: 75%
 
-耐性・能力・身体特性:
-  破邪弱点+33%
-  ショート・テレポート(5 近距離のテレポート)
-  麻痺耐性(10)
-  破片耐性(20)
-  テレポート・バック(25 離れた場所にいる敵を近くへ引き寄せる)
-  轟音耐性(30)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Blink (5; short range teleport)
+  Free action (10)
+  Shards resistance (20)
+  Teleport To (25; teleports a distant enemy close to you)
+  Sound resistance (30)
+Magic realm aptitude:
   2/3/2/2 - 2/1/1/3 - 8/4/4/3
-その他:
-  ACにボーナス
+Other:
+  AC bonus
 
-慧音「入道にもいろいろいるが、どの入道も立派な体格をしていて
-それでいてどうにも捉えどころのない実体が曖昧な妖怪だ。
-肉弾戦に強く防御面もかなり優秀だが、ペナルティはやや重い。」
+Keine - 'There are various nyuudou, but all of them are physically strong.
+Still, they are elusive youkai with only a vaguely-defined body.
+They're strong at physical combat and excel at defense as well, but their
+penalties are high.'
 
 
 ***** <Imp>
---- 小悪魔 ---
-腕力:-1  知能:2  賢さ:-2 器用:1 耐久:0 魅力:-2
-解除:5 魔導:10 魔防:10  隠密:2 探索:2 
-打撃:0 射撃:0
-赤外線視力:6
-ヒットダイス:9
-経験値ペナルティ:30%
-スコア倍率:80%
+--- Imp ---
+Str: -1  Int: 2  Wis:-2 Dex: 1 Con: 0 Chr: -2
+Dsm: 5 MDev: 10 MProt: 10  Stl: 2 Srh: 2 
+Fighting: 0 Shooting: 0
+Infravision: 6
+Hit Dice: 9
+XP Penalty: 30%
+Score: 80%
 
-耐性・能力・身体特性:
-  暗黒耐性
-　狂気への完全な耐性
-  破邪弱点+66%
-  地獄耐性(20)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Darkness resistance
+  Immune to insanity
+  +66% vulnerability to holy attacks
+  Nether resistance (20)
+Magic realm aptitude:
   8/7/9/7 - 3/2/0/2 - 7/9/7/8
-その他:
-  なし
+Other:
+  None
 
-慧音「悪魔であるがあまり強力な力は持たないようだ。
-異世界から召喚されてきたという噂で、
-そのせいか異世界の悍ましい怪物を見ても怯むことがない。
-ほかにも暗黒と地獄への耐性を持つが、破邪攻撃には極めて弱い。
-どちらかというと術師寄りの能力を持っているが、
-特性を生かすためには複合職のほうが向いているかもしれない。」
+Keine - 'Imps, also called 'small devils' or similar names, are demons
+without much power. According to rumors, they were summoned from other worlds,
+making them completely unaffected by otherworldly horrors. They also are
+resistance to darkness and nether, but are very vulnerable to holy attacks.
+Though they're suited for spellcaster classes, you might pick a dual class to
+make use of their characteristics.'
 
 
 ***** <Golem>
---- ゴーレム ---
-腕力:4  知能:-5  賢さ:-5 器用:-3 耐久:5 魅力:-2
-解除:-10 魔導:-10 魔防:20  隠密:-2 探索:-3 
-打撃:20 射撃:0
-赤外線視力:0
-ヒットダイス:14
-経験値ペナルティ:60%
-スコア倍率:80%
+--- Golem ---
+Str: 4  Int: -5  Wis:-5 Dex: -3 Con: 5 Chr: -2
+Dsm: -10 MDev: -10 MProt: 20  Stl: -2 Srh: -3 
+Fighting: 20 Shooting: 0
+Infravision: 0
+Hit Dice: 14
+XP Penalty: 60%
+Score: 80%
 
-耐性・能力・身体特性:
-　自己修復(1 自分の躰の傷や破損を修復する)
-　劣化弱点(+33%)
-  電撃耐性
-  火炎耐性
-  冷気耐性
-  毒耐性
-  恐怖耐性
-  盲目耐性
-  麻痺耐性
-  透明視認
-  急回復(20)
-  遅消化(20)
-  岩食い(25 ダンジョンの掘削可能な壁を食べて栄養を得る)
-  地獄耐性(30)
-  狂気耐性(30)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Self-repair (1; repairs damage done to your body)
+  +33% vulnerability to disenchantment
+  Lightning resistance
+  Fire resistance
+  Cold resistance
+  Poison resistance
+  Fear resistance
+  Blindness resistance
+  Free action
+  See invisible
+  Regeneration (20)
+  Slow digestion (20)
+  Eat Wall (25; eats diggable walls in dungeon, raising satiation level)
+  Nether resistance (30)
+  Insanity resistance (30)
+Magic realm aptitude:
   6/2/6/3 - 2/1/1/1 - 5/4/4/3
-その他:
+Other:
 
-  石塊や鉱石類で食事をとる
-  ACに大幅ボーナス
-  加速 -3 + (レベル/15)
-  彫像化を受けない
-  (v1.66以降)切り傷と朦朧を受けないが破損状態になることがある  
+  Eats only stones/ore
+  Large AC bonus
+  Speed -3 + (level/15)
+  Cannot be turned into a statue by Ancient Foul Curse
+  (from v.1.66) Cannot get wounded/stunned, but can get 'broken'
 
-慧音「魔法で動く石塊だ。魔法使いなどにより造り出されるらしい。
-某普通の魔法使いにそっくりのゴーレムの軍勢が紅魔館に攻め込んだという噂がある。
-石の体なだけにとにかく力強くて丈夫だ。しかし知性はほとんど見られない。
-戦士向きと言いたいところだが、これほど極端だと逆に苦労するかもしれない。」
+Keine - 'A stone statue animated by magic. There are rumors that an army
+of golems made in form of a certain ordinary magician has attacked Scarlet
+Devil Mansion. They're very strong, due to being made out of stone. However,
+they hardly have intelligence to speak of. I'd like to say they're suited for
+warriors, but you might have trouble with such unbalanced characteristics.'
 
 
-***** <Kobito>
---- 小人 ---
-腕力:-5  知能:0  賢さ:0 器用:0 耐久:-4 魅力:0
-解除:20 魔導:12 魔防:0  隠密:20 探索:20 
-打撃:-20 射撃:-5
-赤外線視力:0
-ヒットダイス:5
-経験値ペナルティ:-50%
-スコア倍率:100%
+***** <Inchling>
+--- Inchling ---
+Str: -5  Int: 0  Wis:0 Dex: 0 Con: -4 Chr: 0
+Dsm: 20 MDev: 12 MProt: 0  Stl: 20 Srh: 20 
+Fighting: -20 Shooting: -5
+Infravision: 0
+Hit Dice: 5
+XP Penalty: -50%
+Score: 100%
 
-耐性・能力・身体特性:
-  なし
-魔法領域適性:
+Resistances/abilities/characteristics:
+  None
+Magic realm aptitude:
   5/5/5/5 - 5/5/5/5 - 5/5/5/5
-その他:
-  ACにボーナス（攻撃が当たりにくいので）
-  持ち運べる重量が少ない
-　重い武具を装備できない
-　短剣を両手持ちできる
+Other:
+  AC bonus (because they're hard to hit)
+  Low carry weight limit
+  Cannot use heavy equipment
+  Can hold short blades with both hands
 
 
-慧音「最近確認された、私の膝くらいの背丈しか持たない一族だ。
-とんでもない貧弱さととんでもない成長の早さが際立っている。
-恐らく日常生活が既に命懸けの修行なのだろう。
-隠れることにかけては群を抜いて優れている。魔道具の扱いも得意なようだ。」
+Keine - 'It's a recently discovered race; they're about up to my knee in
+height. They're incredibly weak, but level up extremely quickly as well.
+That's probably their everyday life already is dangerous for them.
+They're unmatched at stealth, and they're not bad at handling magic devices
+either.'
 
 
-***** <Zombie>
---- キョンシー ---
-腕力:2  知能:-4  賢さ:-3 器用:-2 耐久:3 魅力:-3
-解除:-5 魔導:-6 魔防:5  隠密:2 探索:-2 
-打撃:10 射撃:-5
-赤外線視力:0
-ヒットダイス:12
-経験値ペナルティ:50%
-スコア倍率:80%
+***** <Jiangshi>
+--- Jiangshi ---
+Str: 2  Int: -4  Wis:-3 Dex: -2 Con: 3 Chr: -3
+Dsm: -5 MDev: -6 MProt: 5  Stl: 2 Srh: -2 
+Fighting: 10 Shooting: -5
+Infravision: 0
+Hit Dice: 12
+XP Penalty: 50%
+Score: 80%
 
-耐性・能力・身体特性:
-  破邪弱点(+66%)
-  地獄耐性
-  冷気耐性
-  毒耐性
-  恐怖耐性
-  麻痺耐性
-  狂気耐性
-  透明視認(15)
-  急回復(15)
-  遅消化(15)
-  暗黒耐性(30)
-  浮遊(30)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +66% vulnerability to holy attacks
+  Nether resistance
+  Cold resistance
+  Poison resistance
+  Fear resistance
+  Insanity resistance
+  See invisible (15)
+  Regeneration (15)
+  Slow digestion (15)
+  Darkness resistance (30)
+  Levitation (30)
+Magic realm aptitude:
   3/2/3/2 - 1/1/1/1 - 3/3/8/3
-その他:
-  切り傷を受けない
+Other:
+  Cannot be wounded
 
-慧音「怪しい術で操られている死体で、意思の疎通も困難だ。
-体が丈夫(物理的に)で腕っ節も強い。
-ただし関節が硬くて動きにくいようだ。
-死体なので破邪攻撃を受けるとひとたまりもない。」
-
+Keine - 'Corpses animated by dark magic that have hard time thinking.
+Their bodies are physically strong, but stiff, limiting their movement
+ability. Since they're corpses, getting hit by holy attacks hurts them a lot.'
 
 ***** <Vampire>
---- 吸血鬼 ---
-腕力:4  知能:2  賢さ:1 器用:2 耐久:7 魅力:2
-解除:-2 魔導:6 魔防:10  隠密:3 探索:1
-打撃:20 射撃:0
-赤外線視力:10
-ヒットダイス:16
-経験値ペナルティ:75%
-スコア倍率:65%
+--- Vampire ---
+Str: 4  Int: 2  Wis:1 Dex: 2 Con: 7 Chr: 2
+Dsm: -2 MDev: 6 MProt: 10  Stl: 3 Srh: 1
+Fighting: 20 Shooting: 0
+Infravision: 10
+Hit Dice: 16
+XP Penalty: 75%
+Score: 65%
 
-耐性・能力・身体特性:
-  破邪弱点(+66%)
-  閃光弱点(+50%)
-  水弱点(+50%)
-  地獄耐性
-  暗黒への完全な耐性
-  冷気耐性
-  毒耐性
-  透明視認
-  急回復
-  遅消化
-  生命力吸収(敵に噛みついて血を吸い満腹度回復)
-  狂気耐性(20)
-  浮遊(35)
-  高速移動(40)
+Resistances/abilities/characteristics:
+  +66% vulnerability to holy attacks
+  +50% vulnerability to light
+  +50% vulnerability to water
+  Nether resistance
+  Immunity to darkness
+  Cold resistance
+  Poison resistance
+  See invisible
+  Regeneration
+  Slow digestion
+  Drain Life (drains blood from enemies, satiating your hunger)
+  Insanity resistance (20)
+  Levitation (35)
+  Swift movement (40)
 
-魔法領域適性:
+Magic realm aptitude:
   7/7/7/7 - 1/0/0/1 - 8/8/9/6
-その他:
-  通常の食事をとれず、生命力吸収で飢えを満たす
-  体が僅かに光っている(光源がないとき半径1の光源として機能する)
-  昼間は全能力-2(閃光耐性があると-1ですむ)
-  満月(15+30x日目)の夜に全能力+3
-  加速+(レベル/10)
-  格闘時にときどきHP吸収攻撃をする
-  浮遊せず水に入った時、重量や水耐性を無視して溺れる
-　溺れているときのペナルティがかなり重い
+Other:
+  Cannot eat normal food and have to sustain themselves by draining life
+  Body emits a faint glow (1 light radius if not using a light source)
+  -2 to all stats during daytime (-1 if you resist light)
+  +3 to all stats at full moon night (day 15+30x)
+  Speed +(level/10)
+  Occasionally drains HP in martial art combat
+  When you enter water without levitation, you will start drowning regardless
+    of the weight you're carrying and your water resistance
+  Very severe penalties when drowning
 
-慧音「強大な存在として知られる吸血鬼だ。
-身体能力、魔法への適性、耐性、特技、どれをとっても強力なのだが、
-弱点もかなり多く癖の強い特性も多い。ペナルティもかなり重い。
-強いんだが初心者にも上級者にも扱いやすいとは言えない種族だ。」
+Keine - 'Vampires are well known as powerful beings. It's a gimmicky race with
+great stats, magic aptitude, resistances, and special abilities, but with
+a lot of vulnerabilities as well. Penalties are very high, too.
+While this race is strong, I can't say it's easy to handle either for 
+beginners or more proficient players.'
 
 
-***** <Spectre>
---- 幽霊 ---
-腕力:-3  知能:0  賢さ:0 器用:-1 耐久:-2 魅力:-2
-解除:3 魔導:7 魔防:5  隠密:4 探索:1
-打撃:-10 射撃:-15
-赤外線視力:8
-ヒットダイス:7
-経験値ペナルティ:70%
-スコア倍率:50%
+***** <Ghost>
+--- Ghost ---
+Str: -3  Int: 0  Wis:0 Dex: -1 Con: -2 Chr: -2
+Dsm: 3 MDev: 7 MProt: 5  Stl: 4 Srh: 1
+Fighting: -10 Shooting: -15
+Infravision: 8
+Hit Dice: 7
+XP Penalty: 70%
+Score: 50%
 
-耐性・能力・身体特性:
-  破邪弱点(+66%)
-  閃光弱点(+50%)
-  浮遊
-  麻痺耐性
-  地獄属性を吸収
-  透明視認
-  毒耐性
-  破片耐性
-  冷気耐性
-  テレパシー(35)
+Resistances/abilities/characteristics:
+  +66% vulnerability to holy attacks
+  +50% vulnerability to light
+  Levitation
+  Free action
+  Drains nether attacks
+  See invisible
+  Poison resistance
+  Shards resistance
+  Cold resistance
+  Telepathy (35)
 
-魔法領域適性:
+Magic realm aptitude:
   5/5/5/5 - 1/0/1/1 - 5/7/9/5
-その他:
-  壁をすり抜ける(ダメージを受けるがHP0未満にはならない)
-  切り傷を受けない
-
-慧音「強い念で現世に留まる死者の魂だ。
-最大の強みとして、壁をすり抜けることができる。
-これがダンジョンでどれほどの優位性を持つか、容易に想像できるだろう。
-戦闘中に壁の中に逃げて安全なところで回復することもできるし、
-壁の中にいると敵のブレスやボール系攻撃のほとんどは威力が半減する。
-体が希薄な分効きにくい属性も多い。その上地獄属性を吸収する。
-身体能力はかなり低いが、それでも最強種族のひとつと言えるな。
-無論ペナルティは重い。スコアは人間の半分、妖精の1/4まで下がる。
-
-またまたメタなことを言うが、幻想郷には
-「幽霊」「亡霊」「怨霊」「騒霊」「神霊」などが存在しそれぞれ性質が違う。
-この変愚蛮怒(勝手版)では霊体のプレイヤー種族を全部一緒くたに幽霊と称し、
-幽霊の特性を本家変愚蛮怒に近いものに設定している。注意されたし。」
+Other:
+  Can pass through walls (you receive damage, but your HP won't go below zero)
+  Cannot be wounded
 
 
-***** <Stray-god>
---- 野良神様 ---
-基礎パラメータ:不定
-ヒットダイス:11(場合により増えることがある)
-経験値ペナルティ:50%
-スコア倍率:80%
+Keine - 'Souls of the dead lingering in this world.
+Their greatest asset is their ability to pass through walls. It's easy to
+imagine just how usefual it is in the dungeon. You can flee through walls
+during a battle to a safe place in order to recover HP, and you receive only
+half damage from enemy breath/ball attacks while in a wall.
+Their body is faint, providing them many elemental resistances, along with
+ability to absorb nether attacks. Their physical stats are low, but they're
+still one of the strongest races.
+Naturally, their penalties are high. Their score will be half of that of a
+human, and a quarter of that of a fairy.
 
-耐性・能力・身体特性:
-  不定
-魔法領域適性:
+Yet another meta statement:
+In Gensoukyou, 'ghosts', 'spirits', 'vengeful spirits', 'poltergeist' have
+their own qualities. In this mod, all of those are grouped in this race, and
+their characteristics are based on original Hengband's Spectre.'
+
+
+***** <Stray-God>
+--- Stray God ---
+Primary stats: undefined
+Hit Dice: 11 (might change)
+XP Penalty: 50%
+Score: 80%
+
+Resistances/abilities/characteristics:
+  Undefined
+Magic realm aptitude:
   5/5/5/5 - 5/5/5/5 - 5/5/5/5
-　（場合により上がることがある）
-その他:
-　一切の種族変容を受けず、他の種族が野良神様になることもない
-  「秩序度」「好戦度」「名声」の徳性パラメータがあり、ゲーム中の行動で変動する
-　（博麗神社の霊夢のところで大まかな値を知ることができる）
-　レベル30、45になったときその時点での徳性パラメータによって種族特性が大きく変わる
-　(過去に持っていた耐性、レイシャルパワーなどは引き継がれる)
+　（might change）
+Other:
+  Cannot change their race, and other races cannot become stray gods
+  Has virtue-like parameters - Alignment, Love of combat, Fame. They change
+    depending on ingame actions
+    (Reimu at Hakurei Shrine can roughly tell you about your current values)
+  At levels 30/45, racial characteristics get significantly changed depending
+    on virtue parameters
+    (Resistances and racial powers you had earlier on are inherited)
 
-慧音「祀られる神社がなく仕える神職のいないマイナーな八百万の神様たちだ。
-最初はほとんど信仰されていないため大して強くないが、
-冒険をしているうちに様々な評判を得るとそれが新たな信仰につながる。
-それによりやがて新たな神性を獲得し、種族的な能力・耐性・特技などが大きく変わる。
-しかしクエストを放棄し続けたり卑劣な戦い方をしていると、
-悪評が集まって変な神様になってしまうぞ。
-大抵は最終的にかなり強力な神格になるようだ。」
+Keine - 'They're minor gods among the Myriads of Gods, without their own
+shrine or established followers. At first, hardly anyone has faith in them,
+so they're not strong, but they can build their reputation during their
+adventure, gathering more faith. This allows them to take on new divine
+aspects, greatly changing racial stats/resistances/special abilities.
+However, if you keep failing quests and fight by cowardly means, you'll gather
+infamy and might become some weird god.
+You're likely to end up being fairly powerful in the end.'
 
 
-***** <Daiyoukai>
---- 大妖 ---
-腕力:4  知能:3 賢さ:1 器用:2 耐久:4 魅力:2
-解除:2 魔導:10 魔防:20  隠密:1 探索:8
-打撃:15 射撃:5
-赤外線視力:8
-ヒットダイス:13
-経験値ペナルティ:100%
-スコア倍率:60%
+***** <Great-Youkai>
+--- Great Youkai ---
+Str: 4  Int: 3 Wis:1 Dex: 2 Con: 4 Chr: 2
+Dsm: 2 MDev: 10 MProt: 20  Stl: 1 Srh: 8
+Fighting: 15 Shooting: 5
+Infravision: 8
+Hit Dice: 13
+XP Penalty: 100%
+Score: 60%
 
-耐性・能力・身体特性:
-  破邪弱点(+33%)
-  浮遊
-　暗黒耐性
-　麻痺耐性
-　透明視認
-　火炎耐性(5)
-  冷気耐性(10)
-  電撃耐性(15)
-  酸耐性(20)
-  毒耐性(25)
-  混沌耐性(30)
-  恐怖耐性(35)
-  遅消化(40)
-  急回復(40)
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Levitation
+  Darkness resistance
+  Free action
+  See invisible
+  Fire resistance (5)
+  Cold resistance (10)
+  Lightning resistance (15)
+  Acid resistance (20)
+  Poison resistance (25)
+  Chaos resistance(30)
+  Fear resistance (35)
+  Slow digestion (40)
+  Regeneration (40)
   
-魔法領域適性:
+Magic realm aptitude:
   7/6/6/7 - 4/3/0/3 - 7/9/6/7
-その他:
-  なし
+Other:
+  None
 
-慧音「長い長い年月を経て力を蓄えた大妖怪だ。
-全てにおいて普通の妖怪を遥かに上回る力を持つが、やはり破邪には弱い。
-ペナルティも極めて重く、レベルアップには人間の倍の経験値が必要になる。
-いわゆる初心者向けだな。」
+Keine - 'Great youkai have been living for a long, long time, accumulating
+power. They're far more powerful compared to usual youkai in all regards, but
+they're still vulnerable to holy attacks. Their penalties are extremely high;
+they take twice as much experience as humans to level up. Recommended for
+beginners.'
 
 
-***** <Demigod>
---- 現人神 ---
-腕力:1 知能:1 賢さ:1 器用:1 耐久:1 魅力:1
-解除:0 魔導:3 魔防:3 隠密:0 探索:3
-打撃:3 射撃:3
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:25%
-スコア倍率:75%
+***** <Arahitogami>
+--- Arahitogami ---
+Str: 1 Int: 1 Wis:1 Dex: 1 Con: 1 Chr: 1
+Dsm: 0 MDev: 3 MProt: 3 Stl: 0 Srh: 3
+Fighting: 3 Shooting: 3
+Infravision: 0
+Hit Dice: 11
+XP Penalty: 25%
+Score: 75%
 
-耐性・能力・身体特性:
-  透明視認
-  遅消化(25)
-  急回復(25)  
-魔法領域適性:
+Resistances/abilities/characteristics:
+  See invisible
+  Slow digestion (25)
+  Regeneration (25)  
+Magic realm aptitude:
   6/6/6/6 - 6/6/6/6 - 6/6/6/6
-その他:
-  なし
+Other:
+  None
 
-慧音「神の血を引く人間、人々から崇められて神格を得た人間は現人神と呼ばれる。
-見た目は普通の人間と変わらないが、能力値は全体的にやや高めだ。
-普通の人には見えないものを見る能力が備わっている。」
+Keine - 'Arahitogami are humans with divine blood in their veins, or humans
+that have obtained divinity through being worshipped by people. They look
+just like ordinary humand, but all of their parameters are slightly higher.
+They can see things ordinary people are unable to.'
 
 
 ***** <Lunarian>
---- 月の民 ---
-腕力:-2 知能:7 賢さ:5 器用:2 耐久:1 魅力:2
-解除:10 魔導:15 魔防:12 隠密:3 探索:10
-打撃:-30 射撃:15
-赤外線視力:0
-ヒットダイス:11
-経験値ペナルティ:90%
-スコア倍率:70%
+--- Lunarian ---
+Str: -2 Int: 7 Wis:5 Dex: 2 Con: 1 Chr: 2
+Dsm: 10 MDev: 15 MProt: 12 Stl: 3 Srh: 10
+Fighting: -30 Shooting: 15
+Infravision: 0
+Hit Dice: 11
+XP Penalty: 90%
+Score: 70%
 
-耐性・能力・身体特性:
-  破邪免疫
-  暗黒弱点(+33%)
-  地獄弱点(+33%)
-  気弱点(+33% 職業格闘家の時除く)
-  地獄の業火弱点(+33%)
-  透明視認
-  知能維持
-  帰還(5)
-  混乱耐性(10)
-  警告(20)
-  配下召喚(25)
-  魔法難度低下(30)
-  時空耐性(40)
-魔法領域適性:
+Resistances/abilities/characteristics:
+  Immune to holy energy
+  +33% vulnerability to darkness
+  +33% vulnerability to nether
+  +33% vulnerability to Ki (unless your class is Martial Artist)
+  +33% vulnerability to hellfire
+  See invisible
+  Sustain intelligence
+  Recall (5)
+  Confusion resistance (10)
+  Warning (20)
+  Summon followers (25)
+  Lower spell failure rate (30)
+  Space-time resistance (40)
+Magic realm aptitude:
   8/8/8/8 - 9/2/9/2 - 4/0/0/4
-その他:
-  MP回復速度二倍
-  一部の食物を食べられない
-  「生命の薬」を飲めない
-  
-慧音「月におわす清浄なる貴人様と聞く。
-とにかく頭が回るようだが明らかに地上人を見下していて何だか感じの悪い連中だ。
-月の民は穢れが大嫌いらしい。
-暗黒や地獄や地獄の劫火だけでなく生命のエネルギーも彼らにとっては不浄な穢れのようで、
-これらの攻撃で大ダメージを受ける。」
+Other:
+  MP regeneration is doubled
+  Cannot eat some food
+  Cannot drink Potions of Life
+
+Keine - 'Nobles of the Lunar Civilization free from impurity.
+They're unpleasant people who are clearly far smarter compared to people
+on Earth, and always keep looking down on them. Lunarians can't stand
+impurity. It's not only darkness, nether, and hellfire - even life energy
+is impure to them, dealing significant damage.'
 
 
 ***** <Half-Ghost>
---- 半人半霊 ---
-腕力:-1  知能:1  賢さ:1 器用:0 耐久:-1 魅力:-1
-解除:2 魔導:5 魔防:3  隠密:3 探索:2
-打撃:-5 射撃:-5
-赤外線視力:0
-ヒットダイス:9
-経験値ペナルティ:50%
-スコア倍率:90%
+--- Half-Ghost ---
+Str: -1  Int: 1  Wis:1 Dex: 0 Con: -1 Chr: -1
+Dsm: 2 MDev: 5 MProt: 3  Stl: 3 Srh: 2
+Fighting: -5 Shooting: -5
+Infravision: 0
+Hit Dice: 9
+XP Penalty: 50%
+Score: 90%
 
-耐性・能力・身体特性:
-  破邪弱点(+33%)
-  地獄耐性
-  遅消化
-  透明視認(20)
-  冷気耐性(10)
-  
-
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Nether resistance
+  Slow digestion
+  See invisible (20)
+  Cold resistance (10)
+Magic realm aptitude:
   5/5/5/5 - 5/3/3/3 - 7/5/8/5
-その他:
-  なし
-  
-慧音「時々冥界から里に使いに来る魂魄妖夢がこの種族だ。
-一見普通の人間なのだが、よく見ると人魂のようなものがふわふわ浮かんでいてこれも体の一部だ。
-人間と幽霊の合いの子...というか先祖代々そういう体質らしい。
-文字通りに半分死んでいるので地獄属性の攻撃に対して耐性を持っている。
-妖夢を見ているととてもそうは思えないが、妖術や隠密行動にも向いているようだ。
-長命な種族なので成長にはやや時間がかかる。」
+Other:
+  None
+
+Keine - 'Konpaku Youmu, who occasionally leaves Netherworld to visit the
+village on an errand, is one of those. They look just like ordinary humans,
+but there's something always floating around them - that's another one of
+their bodies. Since they're literally half dead, they resist nether attacks.
+You wouldn't think of it by looking at Youmu, but they're also proficient at
+Sorcery Arts and stealth. As a long-lived race, they gain experience levels
+slowly.'
 
 
 ***** <Haniwa>
---- 埴輪 ---
-腕力:1  知能:-3  賢さ:-2 器用:-2 耐久:1 魅力:-1
-解除:-5 魔導:-3 魔防:50  隠密:2 探索:-3
-打撃:5 射撃:5
-赤外線視力:0
-ヒットダイス:10
-経験値ペナルティ:50%
-スコア倍率:70%
+--- Haniwa ---
+Str: 1  Int: -3  Wis:-2 Dex: -2 Con: 1 Chr: -1
+Dsm: -5 MDev: -3 MProt: 50  Stl: 2 Srh: -3
+Fighting: 5 Shooting: 5
+Infravision: 0
+Hit Dice: 10
+XP Penalty: 50%
+Score: 70%
 
-耐性・能力・身体特性:
-  破片弱点(+25%)
-  轟音弱点(+25%)
-  地獄免疫
-  火炎耐性
-  毒耐性
-  麻痺耐性
-  急回復
-  透明視認(20)
+Resistances/abilities/characteristics:
+  +25% vulnerability to shards
+  +25% vulnerability to sound
+  Immunity to nether
+  Fire resistance
+  Poison resistance
+  Free action
+  Regeneration
+  See invisible (20)
 
-魔法領域適性:
+Magic realm aptitude:
   3/3/3/3 - 3/3/3/3 - 3/3/3/3
-その他:
-  切り傷と朦朧を受けないが破損状態になることがある
-  彫像化を受けない
-  空腹にも満腹にもならない
-  吸血を受けても敵の体力が回復しない
-  あらゆる精神攻撃を無効化する
-  霊体(Gシンボル)モンスターの直接攻撃を無効化する
-  
-慧音「なぜだか知らないが最近地獄から湧いてきた人間大のハニワだ。
-	お馴染みの土人形のようなものから一見して人間と変わらないものまで造形のレベルに違いがあるようだ。
-	何でもこれらのハニワは魂を持っているが霊体を持っていないらしく、
-	霊体モンスターによる攻撃のほとんどを無効化してしまう。
-	ゴーレムのようなものなので毒や麻痺などの攻撃にも強い。
-	ただし中が空っぽなので強い衝撃を受けると割れてしまうようだ。
-	割れてもしばらく経ったら直るようだが、直るまでは戦うどころではないだろうな。」
+Other:
+  Cannot get wounded/stunned, but can get 'broken'
+  Cannot be turned into a statue by Ancient Foul Curse
+  Cannot become hungry or full
+  Enemies can't drain health from you
+  Ignores various mental attacks
+  Ignores melee attacks from ghost monsters ('G' symbol)
+
+Kein - 'Human-shaped haniwa that, for some reason, recently have been
+emerging from Hell. Instead of having the familiar clay doll shape, they look
+just like humans - the sculptor's skill must be immense. They ignore attacks
+from ghost monsters, and like golems, are resistant to poison and paralysis.
+However, since they're hollow inside, they can break upon receiving a powerful
+impact, though they can repair themselves after a while.'
 
 
 ***** <Animal-Ghost>
---- 動物霊 ---
-腕力:1  知能:-1 賢さ:-2 器用:2 耐久:2 魅力:-3
-解除:-5 魔導:-3 魔防:5 隠密:3 探索:0
-打撃:10 射撃:-5
-赤外線視力:12
-ヒットダイス:11
-経験値ペナルティ:60%
-スコア倍率:70%
+--- Animal Ghost ---
+Str: 1  Int: -1 Wis:-2 Dex: 2 Con: 2 Chr: -3
+Dsm: -5 MDev: -3 MProt: 5 Stl: 3 Srh: 0
+Fighting: 10 Shooting: -5
+Infravision: 12
+Hit Dice: 11
+XP Penalty: 60%
+Score: 70%
 
-耐性・能力・身体特性:
-  破邪弱点(+66%)
-  閃光弱点(+50%)
-  地獄属性を吸収
-  急回復
-  浮遊
-  麻痺耐性
-  透明視認
-  毒耐性
-  冷気耐性
-  警告(30)
-  
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +66% vulnerability to holy attacks
+  +50% vulnerability to light
+  Drains nether attacks
+  Regeneration
+  Levitation
+  Free action
+  See invisible
+  Poison resistance
+  Cold resistance
+  Warning (30)  
+Magic realm aptitude:
   3/3/3/3 - 2/0/0/3 - 8/7/8/6
-その他:
-  所属勢力によって習得可能なレイシャルパワーが変わる
-  加速 +レベル/15
-  通常の食料ではほとんど栄養を得られず、生物かアンデッドを倒すことで活力を得る
-  切り傷を受けない
-  吸血打撃を受けても敵のHPが回復しない
+Other:
+  Has different racial powers depending on what group you belong to
+  Speed +level/15
+  Hardly gains satiation from ordinary food, has to sustained themselves by
+    defeating living beings or undead
+  Cannot be wounded
+  Enemies can't drain health from you
 
-慧音「動物霊といえばほとんどは益体もない小動物の霊だが、
-ここで紹介する動物霊は地の底の畜生界で弱肉強食の争いを繰り返す凶悪な連中だ。
-ほぼどの動物霊も何処かの暴力組織に属しており、一匹狼はあまり居ないらしい。
-能力としては獣人にアンデッド系の耐性と弱点を持たせたような感じでなかなか強い。
-ただし霊とはいっても壁抜けは苦手なようだな。」
+Keine - 'Most animal ghosts are minor spirits without much power,
+but those are violent ghosts from the Animal Realm, where only the strongest
+survive. Most of them belong to some violent organization, but there are
+solitary ones as well. They have stats similar to those of werebeasts, along
+with undead resistances and vulnerabilities; they're fairly strong. However,
+despite being ghosts, they can't pass through walls.'
 
 
-***** <Zashikiwarashi>
---- 座敷わらし ---
-腕力:-2  知能:2  賢さ:1 器用:0 耐久:-3 魅力:5
-解除:16 魔導:6 魔防:6  隠密:5 探索:10
-打撃:-30 射撃:-10
-赤外線視力:0
-ヒットダイス:7
-経験値ペナルティ:10%
-スコア倍率:80%
+***** <Zashiki-Warashi>
+--- Zashiki-Warashi ---
+Str: -2  Int: 2  Wis:1 Dex: 0 Con: -3 Chr: 5
+Dsm: 16 MDev: 6 MProt: 6  Stl: 5 Srh: 10
+Fighting: -30 Shooting: -10
+Infravision: 0
+Hit Dice: 7
+XP Penalty: 10%
+Score: 80%
 
-耐性・能力・身体特性:
-  破邪弱点(+33%)
-  警告
-  人間ESP(30)
-  
-
-魔法領域適性:
+Resistances/abilities/characteristics:
+  +33% vulnerability to holy attacks
+  Warning
+  Human ESP (30)
+Magic realm aptitude:
   5/9/7/5 - 6/6/4/5 - 4/5/5/3
-その他:
-  通常の装備品とは別に「移動式屋敷」として特殊な物品を一つ装備する必要がある
-  新しい屋敷になるものを見つけたらレイシャルパワーから転居することができる
-  移動式屋敷の種類により能力値やレイシャルパワーが一部変化する
-    
-慧音「座敷わらしは人家に棲み着く珍しい妖怪だ。
-ずっと屋敷とその住人を見続けていて、
-何かトラブルの芽があると住人に教えてくれるので有難がられている。
-ところが最近は屋敷から出歩く座敷わらしが出始めた。
-何でも、家と見なした物品に取り憑いて移動式屋敷として持ち歩くことで
-人里から離れることができるようになったらしい。
-妖怪も色々と進歩するものだな。
-取り憑いた物品が由緒あるものだと、それに応じた新たな能力や特技を得ることもあるようだ。
-座敷わらしは注意深く観察力があるので探索や隠密の能力が非常に高い。
-だが体格はその名の通り子供そのものなので荒事には全く向いていないだろうな。」
+Other:
+  Aside from standard equipment, they have to use a special item called a
+    'mobile household'
+  If you discoved a potential new household, you can move there using your
+    racial power
+  Stats and racial powers might change depending on what househould you are
+    inhabiting
+
+Keine - 'Zashiki-Warashi are a rare kind of youkai residing in human houses.
+They keep watching that household and its owner, and inform them if there's
+any trouble about to happen. Recently, zashiki-warashi have been spotted
+walking outside houses. They can possess some items they view as 'households',
+and walk around carrying them, which lets them leave the Human Village.
+Depending on the household they inhabit, they might obtain new abilities and
+powers. Zashiki-Warashi are very observant, granting them high Stealth and
+Searching skills. However, they're physically frail.'
 
 
 
 ***** <TheClasses>
-=== 職業 ===
+=== Classes ===
 
-慧音「次は、基本的な職業についての詳細だ。
-技能の値が12(8)などと書かれているが、
-これは初期値が12でレベル10当たり8上昇するという意味だ。
-魔法や技能の適性はAが最も高い。
-配下コスト係数は低いほど強力な配下を多く維持できる。」
+Keine - 'Next, let's look over details for basic classes.
+Their skills are written like 12(8); it means the starting value is 12, and
+it increases by 8 each ten levels. For magic/skill aptitudes, A is highest
+value. The lower follower cost coefficient is, the more powerful followers you
+can maintain.'
 
 
 ***** <Warrior>
---- 戦士 ---
-腕力:4  知能:-2 賢さ:-2 器用:2 耐久:2 魅力:-1
-解除:25(9) 魔導:18(7) 魔防:31(10)  隠密:1(0) 探索:14(0)
-打撃:70(30) 射撃:55(30)
-ヒットダイス:+9
-経験値ペナルティ:0
-スコア倍率:100%
-基礎最大攻撃回数：6
-MP：E
-配下コスト係数：60
+--- Warrior ---
+Str: 4  Int: -2 Wis:-2 Dex: 2 Con: 2 Chr: -1
+Dsm: 25(9) MDev: 18(7) MProt: 31(10)  Stl: 1(0) Srh: 14(0)
+Fighting: 70(30) Shooting: 55(30)
+Hit Dice: +9
+XP Penalty: 0
+Score: 100%
+Base max amount of blows: 6
+MP: E
+Follower cost coefficient: 60
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘B   盾A 騎乗C 二刀A   投擲B
-  短剣B 長剣A   刀B 鈍器A     棒A 　
-  斧A     槍A 長柄A   弓B 機械弓B
-  銃D
+Skill aptitude:
+  Martial Arts  B    Shields      A      Riding      C       Dual-Wielding A
+  Throwing      B    Short Blades B      Long Blades A       Katanas       B
+  Blunt Weapons A    Staves       A      Axes        A       Spears        A
+  Polearms      A    Bows         A      Crossbows   B       Guns          D
 
-職業特技：
-　なし
+Class special abilities:
+  None
 
-耐性など：
-  恐怖耐性(30)
-  急回復(45)
+Resistances/etc:
+  Fear resistance (30)
+  Regeneration (45)
 
-その他：
-  射撃回数増加(弓、クロスボウ) 0.02*レベル/ターン
-  レベル40で近接武器攻撃回数+1
+Other:
+  Amount of shots (bow/crossbow) increased by 0.02*level per turn
+  +1 melee attack/round at level 40
 
-慧音「戦士は最も基本的な職業だ。近接職の代表でもある。
-武器の扱いのスペシャリストで打たれ強く成長が早いが、肉弾戦以外にはほとんど何もできない。
-序盤のうちは強いしやることが分かりやすいから初心者向けの職業と言えるだろう。
-しかし中盤以降は戦闘補助手段の乏しさから厳しい戦いを強いられがちだ。
-ゲームに慣れてきて初勝利を目指すなら他の職業のほうが簡単かもしれない。」
+Keine - 'Warriors are the most basic class, and the best known close combat
+specialists. They're very skilled at using weapons and level up quickly,
+but can't do much outside of physical combat. You can say they're a class
+suited for beginners due to their simplicity and strength in early game.
+However, by the time you'll reach midgame, you'll have trouble due to lack
+of combat support. Once you've became familiar with the game, it's better
+to pick anouther class if you're aiming for your first victory.'
 
 
 
 ***** <Mage>
---- メイジ ---
-腕力:-3  知能:3 賢さ:1 器用:0 耐久:-2 魅力:1
-解除:30(12) 魔導:40(15) 魔防:40(13)  隠密:3(0) 探索:21(3)
-打撃:34(6) 射撃:20(7)
-ヒットダイス:+0
-経験値ペナルティ:30%
-スコア倍率:85%
-基礎最大攻撃回数：3
-MP：B
-配下コスト係数：30
+--- Mage ---
+Str: -3  Int: 3 Wis:1 Dex: 0 Con: -2 Chr: 1
+Dsm: 30(12) MDev: 40(15) MProt: 40(13)  Stl: 3(0) Srh: 21(3)
+Fighting: 34(6) Shooting: 20(7)
+Hit Dice: +0
+XP Penalty: 30%
+Score: 85%
+Base max amount of blows: 3
+MP: B
+Follower cost coefficient: 30
 
-魔法領域適性：
-  二領域習得
-  全領域B
+Magic realm aptitude:
+  Can study two realms
+  Aptitude B for all realms
 
-技能適性：
-　格闘E   盾E 騎乗E 二刀E   投擲C
-  短剣C 長剣D   刀E 鈍器D     棒C 　
-  斧E     槍E 長柄E   弓E 機械弓E
-  銃D
+Skill aptitude:
+  Martial Arts  E    Shields      E      Riding      E       Dual-Wielding E
+  Throwing      C    Short Blades C      Long Blades D       Katanas       E
+  Blunt Weapons D    Staves       C      Axes        E       Spears        E
+  Polearms      E    Bows         E      Crossbows   E       Guns          D
 
-職業特技：
-　魔力食い(25 魔道具から充填を吸収しMPを回復)
+Class special abilities:
+  Eat Magic (25; recovers MP by draining charges from magic devices)
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  一部の魔法や魔道具関係の判定が少し有利になる
+Other:
+  Slightly better at using some spells/magic devices
 
-慧音「最も基本的な魔法職だ。最初に選択した魔法領域によって職業名の表記が変わる。
-魔法を二領域習得でき、なかなか上達が早い。
-魔法だけでなく魔道具の扱いも得意で、さらにレベルが上がるとMPを回復する特技が使えるようになる。
-しかし肉弾戦はからっきしだ。MPの残量には常に気を配ることだ。
+Keine - 'The most basic spellcaster class. Their class name changes according
+to the first realm they pick. They can study two realms, and do it at a pretty
+fast rate. They're good at using magic devices as well, and will get a special
+ability to recover MP as they level up. However, they're very bad at physical
+combat. Always keep an eye on how much MP you have left.
 
-魔法職はHPが低いから耐性のない攻撃を受けるとすぐに倒れてしまう。
-また混乱や盲目になると魔法書が読めなくなって何もできなくなる。
-敵への攻撃には当然魔法を使うが、魔法の属性と敵の相性によってはほとんど効果がない。
-強い敵を相手にすると、MPが尽きるまで魔法を撃ってもとどめに至らないかもしれない。
-つまり魔法職では他の職よりも慎重に相手を選んで戦略を練る必要があるわけだ。
-基本的な属性や危険なモンスターについてそれなりの知識がないと魔法職で戦い抜くのは難しいな。
-中盤以降に強力な魔法を使えるようになると、一気に戦略の幅が広がることだろう。」
-
-
-
-***** <Priest>
---- 神官/巫女 ---
-腕力:0  知能:1 賢さ:3 器用:-1 耐久:0 魅力:2
-解除:25(7) 魔導:35(11) 魔防:50(15)  隠密:2(0) 探索:18(1)
-打撃:40(13) 射撃:40(12)
-ヒットダイス:+4
-経験値ペナルティ:65%
-スコア倍率:80%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：40
+Spellcasters have low HP, so they might get taken down pretty quickly upon
+getting hit by an unresisted attack. If they get confused or blinded, they
+can't read spellbooks and are unable to do anything. They attack enemies with
+spells, which might end up completely ineffective depending on spell element
+and enemy resistance. When facing a tough enemy, you might not be able to
+finish them off even after you exhaust all of your MP. Therefore, spellcasters
+have to be more careful picking their fights and developing tactics. If you're
+not that familiar with elements and dangerous monsters, playing a spellcaster
+will be tough. Once you obtain more powerful spells at midgame, you'll be
+able to use far more various strategies.'
 
 
-魔法領域適性：
-  二領域習得
-  生命・破邪・暗黒・死霊B  神秘・自然・変容・混沌C
-  (第一領域と違う大領域の領域は習得できない)
 
-技能適性：
-　格闘C   盾D 騎乗E 二刀E   投擲D
-  短剣C 長剣D   刀C 鈍器B     棒B 　
-  斧E     槍D 長柄D   弓C 機械弓E
-  銃E
+***** <Shrine-Maiden>
+--- Priest/Shrine Maiden ---
+Str: 0  Int: 1 Wis:3 Dex: -1 Con: 0 Chr: 2
+Dsm: 25(7) MDev: 35(11) MProt: 50(15)  Stl: 2(0) Srh: 18(1)
+Fighting: 40(13) Shooting: 40(12)
+Hit Dice: +4
+XP Penalty: 65%
+Score: 80%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 40
 
-職業特技：
-　奉納(1 アイテムを神に捧げて経験値を得る)
-  祝福(30 武器に神からの祝福を付与する。妖術習得時には使用不可)
 
-耐性など：
-  恐怖耐性(30)
-  破邪耐性(40 仙術習得時のみ)
-  地獄耐性(40 妖術習得時のみ)
-　狂気耐性(45)
+Magic realm aptitude:
+  Can study two realms
+  Life/Exorcism/Darkness/Necromancy     - B
+  Mysticism/Nature/Transformation/Chaos - C
+  (Cannot study realms belonging to different major realms)
 
-その他：
-  一部の魔法や魔道具関係の判定が少し有利になる
-  ふさわしくない武器を装備しているとき、攻撃力と魔法成功率にペナルティ
-  武器「大幣」を装備しているとき大幅なダイスボーナス
-  武器「針」を投擲した時大幅なダイスボーナス
-  巫女(性別女性)のとき、防具「巫女装束」に能力アップボーナス
+Skill aptitude:
+  Martial Arts  C    Shields      D      Riding      E       Dual-Wielding E
+  Throwing      D    Short Blades C      Long Blades D       Katanas       C
+  Blunt Weapons B    Staves       B      Axes        E       Spears        D
+  Polearms      D    Bows         C      Crossbows   E       Guns          E
 
-慧音「神官あるいは巫女は神への信仰の賜物で魔法を扱う。
-そのため信仰する神に応じた大領域の魔法しか行使できない。
-仙術と妖術のどちらを習得するかによって、
-ふさわしいとされる武器や奉納で喜ばれるアイテムの種類が変わる。
-仙術のときは祝福された物が喜ばれ刃のある武器や呪われた物は嫌われる。
-妖術の時は逆に祝福された物が嫌われるらしい。
-どちらの神様もお酒を捧げると特に喜ぶようだ。
+Class special abilities:
+  Offering (1; offers an item to your deity, obtaining experience)
+  Blessing (30; bestows your deity's blessing upon a weapon; cannot be used
+                if you study Sorcery Arts)
 
-白兵戦をそこそここなし、その上魔法を扱える職業だ。
-このような職業は一般にデュアルクラス、あるいは複合職と呼ばれる。
-デュアルクラスは序盤には少し苦労することが多い。
-必要なパラメータが多く成長が遅い上に戦闘での決定打に欠けるからな。
-序盤のうちは魔法は補助用と割り切って身体能力を集中して伸ばすのも一手だ。
-終盤まで辿り着けばかなり強力だぞ。」
+Resistances/etc:
+  Fear resistance (30)
+  Holy energy resistance (40; only if you study Hermit Arts)
+  Nether resistance (40; only if you study Sorcery Arts)
+  Insanity resistance (45)
+
+Other:
+  Slightly better at using some spells/magic devices
+  Receives penalties to attack power and spell failure rate when holding an
+    unsuitable weapon
+  Large dice bonus when holding an Oonusa (weapon)
+  Large dice bonus when throwing needles
+  Stat bonus when wearing shrine maiden clothes if you're a shrine maiden
+    (female class title)
+
+Keine - 'Priests and shrine maiden can use magic through faith in their deity.
+Because of that, they can only study major realms that are governed by deity
+they worship. Depending on whether you study Hermit or Sorcery Arts, items
+suitable for wielding or offering will be different. If you study Hermit Arts,
+your deity likes blessed weapons, but dislikes edged weapons and cursed items.
+If you study Sorcery Arts, it's the other way around - blessed items are
+unsuitable for you. Any deity enjoys a lot when you offer them alcohol.
+
+This class is capable of both close combat and spellcasting. Classes like
+this are often called 'dual' or 'composite' classes. Dual classes might have
+some trouble in early game - you have to focus on multiple stats, you gain
+levels slowly, and you're not that strong in combat. In early game, it might
+be a good idea to focus on your physical stats, relegating spellcasting to
+support role. You're going to end up powerful if you reach endgame.'
 
 
 
 ***** <Explorer>
---- 探検家 ---
-腕力:1  知能:1 賢さ:-2 器用:2 耐久:1 魅力:0
-解除:45(15) 魔導:37(12) 魔防:36(10)  隠密:4(1) 探索:40(7)
-打撃:48(16) 射撃:43(18)
-ヒットダイス:+4
-経験値ペナルティ:20%
-スコア倍率:85%
-基礎最大攻撃回数：5
-MP：C
-配下コスト係数：55
+--- Explorer ---
+Str: 1  Int: 1 Wis:-2 Dex: 2 Con: 1 Chr: 0
+Dsm: 45(15) MDev: 37(12) MProt: 36(10)  Stl: 4(1) Srh: 40(7)
+Fighting: 48(16) Shooting: 43(18)
+Hit Dice: +4
+XP Penalty: 20%
+Score: 85%
+Base max amount of blows: 5
+MP: C
+Follower cost coefficient: 55
 
-魔法領域適性：
-  一領域習得
-  全領域E
+Magic realm aptitude:
+  Can study one realm
+  Aptitude E for all realms
 
-技能適性：
-　格闘C   盾D 騎乗D 二刀B   投擲B
-  短剣A 長剣C   刀C 鈍器D     棒D 　
-  斧D     槍D 長柄E   弓D 機械弓B
-  銃C
+Skill aptitude:
+  Martial Arts  C    Shields      D      Riding      D       Dual-Wielding B
+  Throwing      B    Short Blades A      Long Blades C       Katanas       C
+  Blunt Weapons D    Staves       D      Axes        D       Spears        D
+  Polearms      E    Bows         D      Crossbows   B       Guns          C
 
-職業特技：
-  トラップ感知(10)
-  ヒット＆アウェイ(20 隣接した敵に一撃を加え、すぐにテレポートする。失敗することもある)
-  鑑定(30)
-  調査(40)
+Class special abilities:
+  Detect Traps (10)
+  Hit and Away (20; attacks an adjacent enemy, then immediately teleports
+                    away; might fail)
+  Identify (30)
+  Probing (40)
 
-耐性など：
-  透明体視認(30)
-  強力投擲(40)
+Resistances/etc:
+  See invisible (30)
+  Powerful throwing (40)
 
-その他：
-  射撃回数増加(クロスボウ) 0.02*レベル/ターン
-  短剣装備時に攻撃回数+1
+Other:
+  Amount of shots (crossbow) increased by 0.02*level per turn
+  +1 melee attack/round for short blades
 
-慧音「様々な便利な特技を持つ小器用な職業だ。
-ダンジョン探索には強いんだが、強敵を打倒する突破力にはやや欠けるかな。
-投擲や魔道具やヒット＆アウェイを駆使して慎重に戦うことだ。
-魔法も一応使えるがかなり習得が遅く、一部の強力な魔法は習得不可能だ。」
+Keine - 'This class has high dexterity along with various useful abilities.
+They're good at exploring the dungeon, but a bit lacking in power to defeat
+strong enemies. You'll have to fight carefully using throwing, magic devices
+and Hit & Away. They can use some magic, but they learn spells very slowly,
+and are unable to learn the more powerful ones.'
 
 
 
 ***** <Ranger>
---- レンジャー ---
-腕力:2  知能:0 賢さ:-1 器用:3 耐久:1 魅力:-1
-解除:30(10) 魔導:23(9) 魔防:36(10)  隠密:3(2) 探索:35(5)
-打撃:60(21) 射撃:72(32)
-ヒットダイス:+5
-経験値ペナルティ:30%
-スコア倍率:70%
-基礎最大攻撃回数：5
-MP：C
-配下コスト係数：40
+--- Ranger ---
+Str: 2  Int: 0 Wis:-1 Dex: 3 Con: 1 Chr: -1
+Dsm: 30(10) MDev: 23(9) MProt: 36(10)  Stl: 3(2) Srh: 35(5)
+Fighting: 60(21) Shooting: 72(32)
+Hit Dice: +5
+XP Penalty: 30%
+Score: 70%
+Base max amount of blows: 5
+MP:  C
+Follower cost coefficient: 40
 
 
-魔法領域適性：
-  一領域習得
-  自然・変容C
+Magic realm aptitude:
+  Can study one realm
+  Nature/Transformation - C
 
-技能適性：
-　格闘C   盾D 騎乗B 二刀C   投擲B
-  短剣A 長剣B   刀D 鈍器C     棒C 　
-  斧A     槍C 長柄C   弓A 機械弓C
-  銃C
+Skill aptitude:
+  Martial Arts  C    Shields      D      Riding      B       Dual-Wielding C
+  Throwing      B    Short Blades A      Long Blades B       Katanas       D
+  Blunt Weapons C    Staves       C      Axes        A       Spears        C
+  Polearms      C    Bows         A      Crossbows   C       Guns          C
 
-職業特技：
-  早持ち替え(10 素早い装備変更)
-  調査(25)
+Class special abilities:
+  Quick Swap (10; changes equipment quickly)
+  Probing (25)
 
-耐性など：
-  麻痺耐性(20)
-  動物ESP(30)
-  毒耐性(40)
+Resistances/etc:
+  Free action (20)
+  Animal ESP (30)
+  Poison resistance (40)
 
-その他：
-  射撃回数増加(クロスボウ) 0.02*レベル/ターン
-  射撃回数増加(弓) 0.04*レベル/ターン
-  森林地形を通過するとき減速しない
+Other:
+  Amount of shots (crossbow) increased by 0.02*level per turn
+  Amount of shots (bow) increased by 0.04*level per turn
+  Does not slow down while walking through forest terrain
 
-慧音「戦闘関連の様々な技能に優れた強力なデュアルクラスだ。
-肉弾戦も射撃も得意でさらに騎乗もこなせるから、序盤から終盤まで比較的安定した戦いができることだろう。
-魔法も領域が限られるもののそこそこ巧みに扱え、補助や感知手段にも不自由しない。
-魔道具の扱いだけは少し苦手だ。」
-
-
-
-***** <Paladin>
---- 守護者 ---
-腕力:1  知能:-2 賢さ:2 器用:-1 耐久:2 魅力:3
-解除:16(7) 魔導:20(10) 魔防:37(14)  隠密:1(0) 探索:18(2)
-打撃:68(24) 射撃:40(15)
-ヒットダイス:+8
-経験値ペナルティ:45%
-スコア倍率:75%
-基礎最大攻撃回数：5
-MP：C
-配下コスト係数：40
+Keine - 'A powerful dual class with various combat-related skills. They're
+good at both close and ranged combat, and are skilled at riding; they'll be
+able to fight comparatively comfortably starting from the early game all the
+way to the end. While their selection of magic realms is limited, they can
+use magic relatively well, and aren't lacking in support and detection.
+However, they're not that good at using magic devices.'
 
 
-魔法領域適性：
-  なし
 
-技能適性：
-　格闘D   盾A 騎乗B 二刀C   投擲D
-  短剣C 長剣A   刀B 鈍器C     棒C 　
-  斧C     槍A 長柄B   弓D 機械弓D
-  銃E
+***** <Protector>
+--- Protector ---
+Str: 1  Int: -2 Wis:2 Dex: -1 Con: 2 Chr: 3
+Dsm: 16(7) MDev: 20(10) MProt: 37(14)  Stl: 1(0) Srh: 18(2)
+Fighting: 68(24) Shooting: 40(15)
+Hit Dice: +8
+XP Penalty: 45%
+Score: 75%
+Base max amount of blows: 5
+MP: C
+Follower cost coefficient: 40
 
-職業特技：
-  主に防御系の特技を数種類習得  
 
-耐性など：
-  恐怖耐性(20)
-  破邪耐性(40)
+Magic realm aptitude:
+  None
 
-その他：
-  祝福された武器を装備しているときダイスボーナス
-  呪われた武器を装備しているとき攻撃力にペナルティ
-  混沌勢力の配下のコストが10倍
+Skill aptitude:
+  Martial Arts  D    Shields      A      Riding      B       Dual-Wielding C
+  Throwing      D    Short Blades C      Long Blades A       Katanas       B
+  Blunt Weapons C    Staves       C      Axes        C       Spears        A
+  Polearms      B    Bows         D      Crossbows   D       Guns          E
 
-慧音「いわゆる聖騎士、あるいは守り人といった感じの職業だ。
-耐久力が高く白兵戦に優れ、騎乗が得意で結界や治療などを使える。
-ただし混沌勢力のモンスターを配下にするのは難しいため騎乗の候補はやや限られる。
-手先もあまり器用ではなく、解除や魔道具は苦手だ。」
+Class special abilities:
+  Learns various defense-related special abilities
+
+Resistances/etc:
+  Fear resistance (20)
+  Holy energy resistance (40)
+
+Other:
+  Gets dice bonus while wielding a blessed weapon
+  Receives attack power penalties while wielding a cursed weapon
+  Maintenance cost for chaotically aligned follower is 10x
+
+Keine - 'This class is similar to paladins or other guardian knights.
+They have high endurance and excel at combat, are skilled at riding, and can
+use various abilities like setting barriers or healing. However, since they
+have hard time controlling chaotic followers, their choices for riding are
+limited. They're not very dextrous, and aren't skilled at disarming traps
+or using magic devices.'
 
 
 
 ***** <Teacher>
---- 教師 ---
-腕力:0  知能:2 賢さ:0 器用:1 耐久:0 魅力:1
-解除:30(9) 魔導:35(10) 魔防:36(10)  隠密:2(0) 探索:20(1)
-打撃:45(15) 射撃:45(15)
-ヒットダイス:+3
-経験値ペナルティ:25%
-スコア倍率:80%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：45
+--- Teacher ---
+Str: 0  Int: 2 Wis:0 Dex: 1 Con: 0 Chr: 1
+Dsm: 30(9) MDev: 35(10) MProt: 36(10)  Stl: 2(0) Srh: 20(1)
+Fighting: 45(15) Shooting: 45(15)
+Hit Dice: +3
+XP Penalty: 25%
+Score: 80%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 45
 
 
-魔法領域適性：
-  二領域習得
-  全領域C
+Magic realm aptitude:
+  Can study two realms
+  Aptitude C for all realms
 
-技能適性：
-　格闘C   盾C 騎乗C 二刀C   投擲C
-  短剣C 長剣C   刀C 鈍器C     棒C 　
-  斧C     槍C 長柄C   弓C 機械弓C
-  銃C
+Skill aptitude:
+  Martial Arts  C    Shields      C      Riding      C       Dual-Wielding C
+  Throwing      C    Short Blades C      Long Blades C       Katanas       C
+  Blunt Weapons C    Staves       C      Axes        C       Spears        C
+  Polearms      C    Bows         C      Crossbows   C       Guns          C
 
-職業特技：
-  なし
+Class special abilities:
+  None
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  全ての武器熟練度が最初からやや高い
+Other:
+  Starts out with fairly high proficiency for all weapon kinds
 
-慧音「何でもできるがあまり特徴のないデュアルクラスだ。
-技能の伸び代も少ないから何をしていいものやら悩ましい。
-探索で手に入る物に合わせて臨機応変に戦い方を切り替えていくべきだろうな。」
-
+Keine - 'A dual classes that can do anything, but doesn't specialize in
+anything in particular. Their skill growth is limited, so you might have
+trouble deciding what to focus on. You should adapt your strategy
+corresponding to items you find during exploration.'
 
 
 ***** <Maid>
---- 執事/メイド ---
-腕力:0  知能:1 賢さ:1 器用:1 耐久:1 魅力:1
-解除:40(12) 魔導:30(12) 魔防:36(12)  隠密:3(0) 探索:25(3)
-打撃:63(22) 射撃:50(18)
-ヒットダイス:+3
-経験値ペナルティ:25%
-スコア倍率:85%
-基礎最大攻撃回数：5
-MP：C
-配下コスト係数：50
+--- Butler/Maid ---
+Str: 0  Int: 1 Wis:1 Dex: 1 Con: 1 Chr: 1
+Dsm: 40(12) MDev: 30(12) MProt: 36(12)  Stl: 3(0) Srh: 25(3)
+Fighting: 63(22) Shooting: 50(18)
+Hit Dice: +3
+XP Penalty: 25%
+Score: 85%
+Base max amount of blows: 5
+MP: C
+Follower cost coefficient: 50
 
-魔法領域適性：
-  一領域習得
-  全領域D
+Magic realm aptitude:
+  Can study one realm
+  Aptitude D for all realms
 
-技能適性：
-　格闘C   盾B 騎乗E 二刀B   投擲B
-  短剣B 長剣B   刀B 鈍器B     棒B 　
-  斧B     槍B 長柄B   弓D 機械弓D
-  銃D
+Skill aptitude:
+  Martial Arts  C    Shields      B      Riding      E       Dual-Wielding B
+  Throwing      B    Short Blades B      Long Blades B       Katanas       B
+  Blunt Weapons B    Staves       B      Axes        B       Spears        B
+  Polearms      B    Bows         D      Crossbows   D       Guns          D
 
-職業特技：
-  様々な非戦闘便利系特技を習得
+Class special abilities:
+  Learns several non-combat related useful abilities
 
-耐性など：
-  器用維持(25)
-  耐久維持(25)
-  恐怖耐性(40)
+Resistances/etc:
+  Sustain dexterity (25)
+  Sustain constitution (25)
+  Fear resistance (40)
 
-その他：
-  レベルアップ時、主から報酬あるいは懲罰を受ける
-  胴防具に執事はスーツ、メイドはメイド服しか装備できない
-  カオスパトロン・ゾムの変異を受けない
+Other:
+  Can receive a reward or a punishment from their master upon levelling up
+  Has to wear a suit (butler) or maid uniform (maid)
+  Cannot receive Chaos Patron/Xom mutations
 
-慧音「白兵戦が得意で、さらに魔法や特技で補助や探索を補うことができるデュアルクラスだ。
-ペナルティの低さの割に強力な職業なのだが、どうにも安定性に欠ける面がある。
-胴防具が限られるから耐性を埋めるのが難しいし、
-近接主体の職業の割にアーマークラスを稼ぎづらくHPも少し伸びにくい。
-あまりに運が悪いと主からの理不尽な懲罰で大ピンチに陥るかもしれない。
-運が良ければ主からの強力な報酬でどんどん探索が捗るんだがな。」
+Keine - 'A dual class that's proficient at combat, and is also capable of
+using support/exploration spells and special abilities. It's a strong class
+for its low penalties, but there are some drawbacks. With your body armor
+restriction, it's hard to cover required resistances; you have harder time
+building AC compared to other combat oriented classes, and your HP isn't
+that high. If you're really unlucky, you might get into major trouble due
+to an unreasonable punishment from your master. However, if you're lucky,
+you might receive a powerful reward.'
 
 
 
 ***** <Martial-Artist>
---- 格闘家 ---
-腕力:2  知能:-2 賢さ:1 器用:3 耐久:1 魅力:1
-解除:20(10) 魔導:18(7) 魔防:26(14)  隠密:2(1) 探索:22(3)
-打撃:55(28) 射撃:30(12)
-ヒットダイス:+4
+--- Martial Artist ---
+Str: 2  Int: -2 Wis:1 Dex: 3 Con: 1 Chr: 1
+Dsm: 20(10) MDev: 18(7) MProt: 26(14)  Stl: 2(1) Srh: 22(3)
+Fighting: 55(28) Shooting: 30(12)
+Hit Dice: +4
 
-経験値ペナルティ:20%
-スコア倍率:80%
-基礎最大攻撃回数：5
-MP：E
-配下コスト係数：80
+XP Penalty: 20%
+Score: 80%
+Base max amount of blows: 5
+MP: E
+Follower cost coefficient: 80
 
-魔法領域適性：
-  なし
+Magic realm aptitude:
+  None
 
-技能適性：
-　格闘A   盾E 騎乗E 二刀E   投擲C
-  短剣D 長剣E   刀E 鈍器E     棒B 　
-  斧E     槍E 長柄E   弓E 機械弓E
-  銃E
+Skill aptitude:
+  Martial Arts  A    Shields      E      Riding      E       Dual-Wielding E
+  Throwing      C    Short Blades D      Long Blades E       Katanas       E
+  Blunt Weapons E    Staves       B      Axes        E       Spears        E
+  Polearms      E    Bows         E      Crossbows   E       Guns          E
 
-職業特技：
-　気合溜め(MPを最大値を超えて増やす)
-  その他、主に「気」を使う特技を十数種類習得。多くは素手でないと使えない
+Class special abilities:
+  Focus (increases MP, can go over maximum value)
+  Learns many other special abilities, mainly using 'Ki'; many of them cannot
+    be used if you're holding something in your hands
 
-耐性など：
-  恐怖耐性(20)
-  腕力維持(30)
-  浮遊(40)
+Resistances/etc:
+  Fear resistance (20)
+  Sustain strength (30)
+  Levitation (40)
 
-その他：
-  格闘の攻撃回数が伸びやすい
-  棒を両手持ちしたとき追加攻撃回数が増えやすい
-  装備と運搬の重量限界が低く、盾を装備した時のペナルティがやや重い
-  理力武器が効果を発揮しない
-  「気」属性の攻撃を受けたときダメージをレベル*3軽減する
-  装備が軽いとき加速に(レベル+5)/15のボーナス
-  装備が軽いときACに(レベル+10)/2のボーナス
-  中～低確率で敵からのブレスや魔法などの特殊攻撃を回避する
-  (高レベルな敵、力強い敵の攻撃は回避しにくい)
-  気を溜めてMPが最大より増えている状態だと、攻撃力やACや特技の威力が上昇する
-  
-慧音「近接職の一種だ。特に格闘に優れている。
-レベルや熟練度の上昇に伴い武器の獲得に左右されずに安定して強くなっていく。
-攻撃面では強力な武器を持つ戦士に勝るとも劣らないだろう。
-殴る蹴るだけが能ではなく、気を溜めて強力な遠隔攻撃や補助的な特技を使うこともできるぞ。
+Other:
+  Easier to get more blows/round in martial art combat
+  Easier to get more blows/round when holding a staff with both hands
+  Low weight limit on equipment, with fairly heavy penalties for holding
+    a shield
+  Force branded weapons don't work
+  Reduces Ki damage received by (level * 3)
+  Speed +(level+5)/15 when using light equipment
+  AC +(level+10) when using light equipment
+  Can dodge enemy breath/spell attacks with medium-low probability rate
+    (Attacks from powerful or high level enemies are harder to dodge)
+  When your MP goes over maximum value, your attack power, AC, and
+    special ability power is increased
 
-ただ防御面には不安がある。
-格闘家は通常は武器を持たないし、盾を持ったり重い鎧を着ると動きが鈍って攻撃力が低下してしまう。
-それらの制限の上で十分な耐性やパラメータを確保しないといけないわけだ。
-その上、近接職としては意外にHPが上がりにくく打たれ弱い。
-格闘攻撃で敵を朦朧とさせたり特技で敵の特殊攻撃を回避することもできるが、
-どれも確実とは言い切れないので、ある程度のリスクは覚悟する必要があるだろう。
-他の近接職と同様、魔道具の扱いは苦手だ。」
+Keine - 'One of the close combat classes, specialising in martial art combat.
+They're guaranteed to grow in power as they gain levels and proficiency,
+without having to obtain a powerful weapon, and are as good at combat as an
+armed warrior. They're not limited to punches and kicks, they can focus and
+use powerful special abilities for ranged attacks or support.
+
+However, they're lacking defense-wise.
+Martial artists usually don't use weapons, and using shield or heavy armor
+slows down their movement, reducing attack power. You'll have to cover your
+resistances and raise parameters while keeping this limit in mind. On top of
+that, they have surprisingly low HP for a close combat class.
+They can stun enemies with martial art combat or avoid their special attacks,
+but there's always an element of risk present. Like other close combat
+specialists, they're not good at using magic devices.'
 
 
 ***** <Mindcrafter>
---- 超能力者 ---
-腕力:0  知能:-1 賢さ:3 器用:1 耐久:0 魅力:2
-解除:30(12) 魔導:33(11) 魔防:38(12)  隠密:3(0) 探索:24(4)
-打撃:50(18) 射撃:45(18)
-ヒットダイス:+3
+--- Mindcrafter ---
+Str: 0  Int: -1 Wis:3 Dex: 1 Con: 0 Chr: 2
+Dsm: 30(12) MDev: 33(11) MProt: 38(12)  Stl: 3(0) Srh: 24(4)
+Fighting: 50(18) Shooting: 45(18)
+Hit Dice: +3
 
-経験値ペナルティ:20%
-スコア倍率:60%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：30
+XP Penalty: 20%
+Score: 60%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 30
 
-魔法領域適性：
-  特殊(超能力)
+Magic realm aptitude:
+  Special (Mindcraft)
 
-技能適性：
-　格闘B   盾D 騎乗E 二刀E   投擲B
-  短剣B 長剣B   刀D 鈍器C     棒C 　
-  斧C     槍C 長柄C   弓D 機械弓D
-  銃E
+Skill aptitude:
+  Martial Arts  B    Shields      D      Riding      E       Dual-Wielding E
+  Throwing      B    Short Blades B      Long Blades B       Katanas       D
+  Blunt Weapons C    Staves       C      Axes        C       Spears        C
+  Polearms      C    Bows         D      Crossbows   D       Guns          E
 
-職業特技：
-  明鏡止水(15 MPを少し回復する)
+Class special abilities:
+  Clear Mind (15; slightly recovers MP)
 
-耐性など：
-  恐怖耐性(10)
-  賢さ維持(20)
-  浮遊(25)
-  混乱耐性(30)
-  テレパシー(40)
+Resistances/etc:
+  Fear resistance (10)
+  Sustain wisdom (20)
+  Levitation (25)
+  Confusion resistance (30)
+  Telepathy (40)
 
-その他：
-  格闘時に強力な特殊攻撃が出る
+Other:
+  Can perform powerful special attacks in martial art combat
 
-慧音「デュアルクラスの一種だが、魔法の代わりに超能力という技を使う。
-超能力は知能でなく賢さで成功判定されるため、知能を全く上げなくても問題なく能力を使えるメリットがある。
-新しい超能力の技は特定のレベルになると習得し、防御に補助に感知と便利な技が揃っている。
-変愚蛮怒本家の超能力者より身体能力と格闘が強くなっていてかなり強力だ。
-その分スコアはかなり低くなり、いわゆる初心者向けの職業となっている。」
+Keine - 'One of dual classes that uses 'mindcraft' instead of magic.
+Failure rate for mindcraft depends on your wisdom instead of intelligence,
+so you're still able to use your abilities without problems even if you don't
+invest in intelligence. You learn new mindcraft powers depending on your
+level, and there are many useful abilities for defense, support, and
+detection. They also have better physical stats and martial art proficiency
+compared to their original version counterparts, so they're very strong.
+Due to that, their score is significantly lowered; it's a class suited for
+beginner players.'
 
 
 
 ***** <High-Mage>
---- ハイ=メイジ ---
-腕力:-4  知能:4 賢さ:2 器用:-1 耐久:-2 魅力:0
-解除:30(7) 魔導:40(18) 魔防:40(13)  隠密:3(0) 探索:18(2)
-打撃:34(6) 射撃:20(7)
-ヒットダイス:+0
-経験値ペナルティ:10%
-スコア倍率:90%
-基礎最大攻撃回数：3
-MP：A
-配下コスト係数：25
+--- High Mage ---
+Str: -4  Int: 4 Wis:2 Dex: -1 Con: -2 Chr: 0
+Dsm: 30(7) MDev: 40(18) MProt: 40(13)  Stl: 3(0) Srh: 18(2)
+Fighting: 34(6) Shooting: 20(7)
+Hit Dice: +0
+XP Penalty: 10%
+Score: 90%
+Base max amount of blows: 3
+MP: A
+Follower cost coefficient: 25
 
 
-魔法領域適性：
-  一領域習得
-  全領域A
+Magic realm aptitude:
+  Can study one realm
+  Aptitude A for all realms
 
-技能適性：
-　格闘E   盾E 騎乗E 二刀E   投擲D
-  短剣C 長剣D   刀E 鈍器D     棒C 　
-  斧E     槍E 長柄E   弓E 機械弓E
-  銃E
+Skill aptitude:
+  Martial Arts  E    Shields      E      Riding      E       Dual-Wielding E
+  Throwing      D    Short Blades C      Long Blades D       Katanas       E
+  Blunt Weapons D    Staves       C      Axes        E       Spears        E
+  Polearms      E    Bows         E      Crossbows   E       Guns          E
 
-職業特技：
-　魔力食い(25 魔道具から充填を吸収しMPを回復)
+Class special abilities:
+  Eat Magic(25; recovers MP by draining charges from magic devices)
 
-耐性など：
-  警告(20 予見領域のときのみ)
-  急回復(20 変容、生命領域のときのみ)
+Resistances/etc:
+  Warning (20; only if you study Divination realm)
+  Regeneration (20; only if you study Life/Transformation realm)
 
-その他：
-  一部の魔法や魔道具関係の判定が少し有利になる
-  元素あるいは混沌領域の時、呪文詠唱の行動時間消費が(レベル/2)%少なくなる
-  予見領域の時、レベル35以降に周囲の全ての敵を感知するようになる
-  召喚領域の時、全ての配下の維持コストが1/3
-  付与領域の時、レベル40以降は魔道具の使用と発動が必ず成功する
-  神秘領域の時、レベル40以降攻撃回数+1
-  生命領域の時、レベル40以降にHP自然回復速度とリアクティブヒールの効果が飛躍的に上昇する
-  破邪領域の時、レベル40以降に神降ろしを二つ同時に行える
-  自然領域の時、自然界の生物と特定の聖獣の配下の維持コストが1/3
-  変容領域の時、ドラゴン変身時のパラメータが高い
-  死霊領域の時、アンデッドの配下の維持コストが1/3
-  暗黒領域の時、悪魔の配下の維持コストが1/3
-  秘術領域の時、レベル40で狂気耐性を得る
+Other:
+  Slightly better at using some spells/magic devices
+  If studying Elements/Chaos realm, energy consumption for casting spells
+    is reduced by (level/2)%
+  If studying Divination realm, can sense all nearby enemies at level 35
+  If studying Summoning realm, maintenance cost for followers is 1/3
+  If studying Enchantment realm, always succeeds at using magic devices
+    at level 40
+  If studying Mysticism realm, +1 melee blow/round at level 40
+  If studying Life realm, drastically increases natural HP regeneration
+    and Reactive Heal effect at level 40
+  If studying Exorcism realm, can perform two divine possessions at the
+    same time starting from level 40
+  If studying Nature realm, maintenace cost for animals and specific
+    sacred beast followers is 1/3
+  If studying Transformation realm, raises parameters while in dragon form
+  If studying Necromancy realm, maintenance cost for undead followers is 1/3
+  If studying Darkness realm, maintenance cost for demon followers is 1/3
+  If studying Occult realm, insanity resistance at level 40
 
-慧音「この魔法職は一領域しか魔法を習得できず領域変更も不可能だ。
-しかしその領域に関しては誰よりも巧みに魔法を操る。MPもかなり多い。
-魔法領域の選択は重要だ。強力な攻撃魔法を使える領域を選んで感知や防御は道具に頼るのが基本だな。」
+Keine - 'This spellcaster class studies only one realm of magic and cannot
+change it. However, they're incredibly good at using magic of their realm, and
+have a lot of MP. It's important to carefully pick your realm. If you pick a
+realm with powerful offensive spells, you have to rely on devices for 
+detection and defense.'
 
 
 
 ***** <Civilian>
---- 普通の住人 ---
-腕力:0  知能:0 賢さ:0 器用:0 耐久:0 魅力:0
-解除:25(12) 魔導:20(9) 魔防:30(9)  隠密:3(0) 探索:20(2)
-打撃:43(12) 射撃:25(10)
-ヒットダイス:+3
-経験値ペナルティ:0%
-スコア倍率:150%
-基礎最大攻撃回数：4
-MP：D
-配下コスト係数：80
+--- Civilian ---
+Str: 0  Int: 0 Wis:0 Dex: 0 Con: 0 Chr: 0
+Dsm: 25(12) MDev: 20(9) MProt: 30(9)  Stl: 3(0) Srh: 20(2)
+Fighting: 43(12) Shooting: 25(10)
+Hit Dice: +3
+XP Penalty: 0%
+Score: 150%
+Base max amount of blows: 4
+MP: D
+Follower cost coefficient: 80
 
-魔法領域適性：
-  一領域習得
-  全領域E
+Magic realm aptitude:
+  Can study one realm
+  Aptitude E for all realms
 
-技能適性：
-　格闘C   盾C 騎乗C 二刀C   投擲C
-  短剣C 長剣C   刀C 鈍器C     棒C 　
-  斧C     槍C 長柄C   弓C 機械弓C
-  銃C
+Skill aptitude:
+  Martial Arts  C    Shields      C      Riding      C       Dual-Wielding C
+  Throwing      C    Short Blades C      Long Blades C       Katanas       C
+  Blunt Weapons C    Staves       C      Axes        C       Spears        C
+  Polearms      C    Bows         C      Crossbows   C       Guns          C
 
-職業特技：
-  なし
+Class special abilities:
+  None
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  ゲーム開始時の所持金二倍
-  ゲーム開始時に一度だけ職業名表記を変更できる
+Other:
+  Starts out with double amount of money
+  Can change their class title at the start of the game
 
-慧音「幻想郷の一般的な住人だ。人里の人間だけでなく里の外で暮らす妖怪や妖精なども含まれる。
-基本的に戦闘向きではなく、白兵戦にも魔法にも特技にも見るべきところはない。
-ハイスコアを狙いたいときやロールプレイにこだわりたいときに考えてみてくれ。」
+Keine - 'An average Gensoukyou resident. Includes not only residents of Human
+Village, but various youkai and fairies living outside as well. They're not
+suited for battle, and don't have any special abilities either for physical
+combat or spellcasting. Pick this if you're aiming for a high score or
+roleplaying.'
 
 
 
-***** <Syugen>
---- 修験者 ---
-腕力:1  知能:0 賢さ:2 器用:1 耐久:1 魅力:0
-解除:25(7) 魔導:30(10) 魔防:36(15)  隠密:2(0) 探索:24(2)
-打撃:60(18) 射撃:40(16)
-ヒットダイス:+4
-経験値ペナルティ:25%
-スコア倍率:75%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：55
+***** <Shugenja>
+--- Shugenja ---
+Str: 1  Int: 0 Wis:2 Dex: 1 Con: 1 Chr: 0
+Dsm: 25(7) MDev: 30(10) MProt: 36(15)  Stl: 2(0) Srh: 24(2)
+Fighting: 60(18) Shooting: 40(16)
+Hit Dice: +4
+XP Penalty: 25%
+Score: 75%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 55
 
-魔法領域適性：
-  一領域習得
-  神秘・生命・破邪・自然・変容・死霊C
+Magic realm aptitude:
+  Can study one realm
+  Mysticism/Life/Exorcism/Nature/Transformation/Necromancy - C
 
-技能適性：
-　格闘A   盾E 騎乗D 二刀E   投擲C
-  短剣C 長剣D   刀B 鈍器D     棒A 　
-  斧D     槍D 長柄D   弓E 機械弓E
-  銃E
+Skill aptitude:
+  Martial Arts  A    Shields      E      Riding      D       Dual-Wielding E
+  Throwing      C    Short Blades C      Long Blades D       Katanas       B
+  Blunt Weapons D    Staves       A      Axes        D       Spears        D
+  Polearms      D    Bows         E      Crossbows   E       Guns          E
 
-職業特技：
-  明鏡止水(30 MPを少し回復する)
+Class special abilities:
+  Clear Mind (30; slightly recovers MP)
 
-耐性など：
-  恐怖耐性(20)
-  混乱耐性(30)
-  破邪耐性(45 仙術習得時のみ)
+Resistances/etc:
+  Fear resistance (20)
+  Confusion resistance (30)
+  Holy energy resistance (45; only if studying Hermit Arts)
 
-その他：
-  特になし
+Other:
+  Nothing
 
-慧音「格闘の得意なデュアルクラスだ。やや習得が遅いが魔法もそれなりに使いこなせる。
-格闘攻撃はレベル・器用さ・熟練度などで攻撃回数が決まる。
-序盤のうちは格闘の攻撃力が比較的伸びにくいので武器を使って戦う方がいいかもしれないな。
-最終的には強力な魔法と近接攻撃を使いこなせるようになるだろう。」
+Keine - 'A dual class proficient in martial art. Can use magic as well, though
+learns spells somewhat slowly. Amount of blows per round in martial art combat
+is determined by level, dexterity, and proficiency. In early game, it's
+comparatively difficult to raise power of your martial art, so it might be
+better to use a weapon. In endgame, they might become masters of both magic
+and close combat.'
 
 
 
 ***** <Magic-Knight>
 --- 魔法剣士 ---
-腕力:1  知能:2 賢さ:0 器用:1 耐久:0 魅力:1
-解除:28(9) 魔導:40(12) 魔防:34(11)  隠密:2(0) 探索:17(1)
-打撃:50(16) 射撃:33(10)
-ヒットダイス:+4
-経験値ペナルティ:45%
-スコア倍率:75%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：50
+Str: 1  Int: 2 Wis:0 Dex: 1 Con: 0 Chr: 1
+Dsm: 28(9) MDev: 40(12) MProt: 34(11)  Stl: 2(0) Srh: 17(1)
+Fighting: 50(16) Shooting: 33(10)
+Hit Dice: +4
+XP Penalty: 45%
+Score: 75%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 50
 
-魔法領域適性：
-  一領域習得
-  元素・予見・付与・召喚・暗黒・混沌C
+Magic realm aptitude:
+  Can study one realm
+  Elements/Divination/Enchantment/Summoning/Darkness/Chaos - C
 
-技能適性：
-　格闘D   盾C 騎乗D 二刀B   投擲D
-  短剣B 長剣A   刀B 鈍器E     棒E 　
-  斧E     槍E 長柄E   弓E 機械弓E
-  銃E
+Skill aptitude:
+  Martial Arts  D    Shields      C      Riding      D       Dual-Wielding B
+  Throwing      D    Short Blades B      Long Blades A       Katanas       B
+  Blunt Weapons E    Staves       E      Axes        E       Spears        E
+  Polearms      E    Bows         E      Crossbows   E       Guns          E
 
-職業特技(元素)：
-  炎の魔法剣(8)
-  氷の魔法剣(16)
-  雷の魔法剣(24)
-  酸の魔法剣(32)
-職業特技(予見)：
-  予見の魔法剣(32)
-職業特技(召喚)：
-  歪曲の魔法剣(20)
-職業特技(付与)：
-  強化の魔法剣(25)
-職業特技(暗黒)：
-  魔剣(25)
-職業特技(混沌)：
-  混沌の魔法剣(20)
+Class special abilities (Elements):
+  Magic Sword (Fire)       (8)
+  Magic Sword (Frost)      (16)
+  Magic Sword (Lightning)  (24)
+  Magic Sword (Acid)       (32)
+Class special abilities (Divination):
+  Magic Sword (Foresight)  (32)
+Class special abilities (Summoning):
+  Magic Sword (Distortion) (20)
+Class special abilities (Enchantment):
+  Magic Sword (Enchanted)  (25)
+Class special abilities (Darkness):
+  Demonblade               (25)
+Class special abilities (Chaos):
+  Magic Sword (Chaos)      (20)
 
-耐性など：
-  透明視認(20)
-  急回復(30)
+Resistances/etc:
+  See invisible (20)
+  Regeneration (30)
 
-その他：
-  特になし
+Other:
+  None
 
-慧音「剣を得意とするスタンダードなデュアルクラスだ。やや習得が遅いが魔法もそれなりに使いこなせる。
-また武器に特殊な属性や効果を持たせる「魔法剣」を習得することができる。
-剣以外の武器は苦手なので、強い装備の確保には多少の運が絡む。
-強力な武器を持って魔法や特技と敵の相性が噛み合えばかなりの強さだ。」
-
-
-
-***** <Bullet-Researcher>
---- 弾幕研究家 ---
-腕力:-2 知能:3  賢さ:1  器用:1 耐久:0 魅力:-2
-解除:24(10) 魔導:32(12) 魔防:33(11)  隠密:2(0) 探索:21(3)
-打撃:40(10) 射撃:20(8)
-ヒットダイス:+2
-経験値ペナルティ:30
-スコア倍率:70%
-基礎最大攻撃回数：3
-MP：C
-配下コスト係数：30
-
-魔法領域適性：
-  使用不可
-
-技能適性：
-　格闘D   盾E 騎乗D 二刀E   投擲D
-  短剣C 長剣D   刀E 鈍器D     棒D 
-  斧E     槍E 長柄E   弓E 機械弓E
-  銃D
-
-職業特技：
-  特技(1 習得した特技を使用)
-  モンスター調査(20)
-  気合い溜め(30)
-  魔力集中(40)
-
-耐性など：
-  透明視認(15)
-  盲目耐性(30)
-
-その他：
-  モンスターが使用した特技を観察して習得することができる
-
-慧音「モンスターの魔法やブレスなどの特技を習得して使えるようになる変わり者のメイジだ。
-特技を習得するにはモンスターがその特技を使うところを観察しないといけない。
-モンスターが他のモンスターに魔法を使うところを見てもある程度は学ぶことができるが、
-完全に習得するには自分でその魔法を受ける必要があるようだ。
-
-終盤のモンスターが使う魔法は非常に強力だが、
-習得中に耐えきれず倒れてしまっては元も子もない。
-最低限必要なものだけを習得するか圧倒的な力を求めて何度も危険を冒すかを慎重に考えるべきだろう。
-
-本家青魔導師に似ているが、こちらはテレポートや治癒など補助魔法を習得することもできるようになっている。」
+Keine - 'A standard dual class proficient with using swords. Can use magic
+as well, though learns spells somewhat slowly. Also can learn various 'Magic
+Sword' abilities that bestow elements/effects on their weapon. They're bad at
+using weapons other than swords, making it somewhat difficult to obtain
+powerful equipment. Very strong if you use powerful weapons and match spells
+and abilities you're using to enemy characteristics.'
 
 
 
-***** <Archer>
---- 射手 ---
-腕力:2  知能:-1 賢さ:-2 器用:3 耐久:1 魅力:0
-解除:40(13) 魔導:24(10) 魔防:35(10)  隠密:3(0) 探索:30(3)
-打撃:45(15) 射撃:85(40)
-ヒットダイス:+4
-経験値ペナルティ:10
-スコア倍率:85%
-基礎最大攻撃回数：4
-MP：E
-配下コスト係数：60
+***** <Danmakulogist>
+--- Danmakulogist ---
+Str: -2 Int: 3  Wis:1  Dex: 1 Con: 0 Chr: -2
+Dsm: 24(10) MDev: 32(12) MProt: 33(11)  Stl: 2(0) Srh: 21(3)
+Fighting: 40(10) Shooting: 20(8)
+Hit Dice: +2
+XP Penalty: 30
+Score: 70%
+Base max amount of blows: 3
+MP: C
+Follower cost coefficient: 30
+
+Magic realm aptitude:
+  Cannot use
+
+Skill aptitude:
+  Martial Arts  D    Shields      E      Riding      D       Dual-Wielding E
+  Throwing      D    Short Blades C      Long Blades D       Katanas       E
+  Blunt Weapons D    Staves       D      Axes        E       Spears        E
+  Polearms      E    Bows         E      Crossbows   E       Guns          D
+
+Class special abilities:
+  Special Technique (1; uses learned special technique)
+  Analyze Monsters (20; probing)
+  Focus (30)
+  Concentrate (40)
+
+Resistances/etc:
+  See invisible (15)
+  Blindness resistance (30)
+
+Other:
+  Can learn special techniques monsters use by observing them
+
+Keine - 'An odd mage that learns monster special techniques (like spells and
+breath attacks) and uses them. You have to observe a monster using a technique
+in order to learn it. You can learn to some extent by observing monsters
+casting spells at other monsters, but you have to get hit by it yourself in
+order to learn it perfectly.
+
+Monsters in endgame use very powerful spells, however, you might end up being
+taking down as you attempt to learn them. Carefully think about whether you
+want to learn only the most necessary techniques, or if you desire
+overwhelming power and are prepare to brave danger.
+
+They're similar to Blue Mages from original Hengband, but they can use support
+spells like teleportation or healing as well.'
 
 
-魔法領域適性：
-  使用不可
 
-技能適性：
-　格闘D   盾E 騎乗E 二刀E   投擲B
-  短剣C 長剣C   刀D 鈍器D     棒D 　
-  斧D     槍D 長柄D   弓A 機械弓A
-  銃B
-
-職業特技：
-　矢生成(5 森林地形で矢を生成する)
-  ボルト生成(10 森林地形でクロスボウの矢を生成する)
-
-耐性など：
-  透明視認(20)
-  盲目耐性(40)
-
-その他：
-  射撃回数増加(弓) (0.5 + 0.05*レベル)/ターン
-  射撃回数増加(クロスボウ) (0.04*レベル)/ターン
-  射出した矢やクロスボウの矢が壊れにくい
-  射手ギルドに素材を持って行って矢を強化することができる
+***** <Marksman>
+--- Marksman ---
+Str: 2  Int: -1 Wis:-2 Dex: 3 Con: 1 Chr: 0
+Dsm: 40(13) MDev: 24(10) MProt: 35(10)  Stl: 3(0) Srh: 30(3)
+Fighting: 45(15) Shooting: 85(40)
+Hit Dice: +4
+XP Penalty: 10
+Score: 85%
+Base max amount of blows: 4
+MP: E
+Follower cost coefficient: 60
 
 
-慧音「射撃専門の戦士だ。
-近接戦闘は苦手だが射撃の威力はしばしば戦士の近接攻撃をも上回る。
-木から矢を作ったり、素材を使って矢に属性を付与することもできるぞ。
-この勝手版では変愚蛮怒本家と違って弓専用の装備枠がなくなっていて、
-盾や近接武器を装備していると射撃に差し支えるようになった。
-かなりの弱体化だが、それでもけして弱くはない。」
+Magic realm aptitude:
+  Cannot use
+
+Skill aptitude:
+  Martial Arts  D    Shields      E      Riding      E       Dual-Wielding E
+  Throwing      B    Short Blades C      Long Blades C       Katanas       D
+  Blunt Weapons D    Staves       D      Axes        D       Spears        D
+  Polearms      D    Bows         A      Crossbows   A       Guns          B
+
+Class special abilities:
+  Create Arrows (5; creates arrows from forest terrain)
+  Create Bolts (10; creates crossbow bolts from forest terrain)
+
+Resistances/etc:
+  See invisible (20)
+  Blindness resistance (40)
+
+Other:
+  Amount of shots (bow) increased by (0.5 + 0.04*level) per turn
+  Amount of shots (crossbow) increased by 0.04*level per turn
+  Arrows/bolts you shoot are less likely to break
+  Can enmpower arrows with materials at Archers Guild
+
+
+Keine - 'A warrior specialising in ranged combat. They're not good at melee,
+but their shooting power might exceed warrior's melee combat. They can make
+arrows from trees and imbue them with elements using materials. In this mod,
+ranged weapon equipment slot got replaced, and holding a shield or a melee
+weapons will interfere with shooting. They're a lot weaker compared to
+original Hengband, but they're still strong.'
 
 
 
 ***** <Magic-Eater>
---- 魔道具使い ---
-腕力:-1 知能:3  賢さ:1  器用:1 耐久:-2 魅力:0
-解除:30(10) 魔導:45(22) 魔防:36(10)  隠密:3(0) 探索:22(2)
-打撃:45(12) 射撃:35(10)
-ヒットダイス:+2
-経験値ペナルティ:30
-スコア倍率:80%
-基礎最大攻撃回数：4
-MP：C
-配下コスト係数：50
+--- Magic Eater ---
+Str: -1 Int: 3  Wis:1  Dex: 1 Con: -2 Chr: 0
+Dsm: 30(10) MDev: 45(22) MProt: 36(10)  Stl: 3(0) Srh: 22(2)
+Fighting: 45(12) Shooting: 35(10)
+Hit Dice: +2
+XP Penalty: 30
+Score: 80%
+Base max amount of blows: 4
+MP: C
+Follower cost coefficient: 50
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘E   盾C 騎乗E 二刀E   投擲C
-  短剣C 長剣D   刀D 鈍器D     棒C 
-  斧D     槍D 長柄D   弓D 機械弓D
-  銃C
+Skill aptitude:
+  Martial Arts  E    Shields      C      Riding      E       Dual-Wielding E
+  Throwing      C    Short Blades C      Long Blades D       Katanas       D
+  Blunt Weapons D    Staves       C      Axes        D       Spears        D
+  Polearms      D    Bows         D      Crossbows   D       Guns          C
 
-職業特技：
-  魔道具吸収(1 杖・魔法棒・ロッドを取り込む)
-  魔力充填Ⅰ(10 杖・魔法棒・ロッドの使用回数を回復させる)
-  魔力充填Ⅱ(20 取り込んだ魔道具の使用回数を回復させる)
-  魔力充填Ⅲ(30 発動した装備品の充填時間を短縮する)
-  強力発動(40 取り込んだ魔道具の威力や効果を高めて使用する)
+Class special abilities:
+  Absorb Magic Device (1; absorb staff/wand/rod)
+  Replenish Magic I (10; recharges staff/wand/rod)
+  Replenish Magic II (20; recharges absorbed staves/wands/rods)
+  Replenish Magic III (30; reduces charged time of a recharging equipped item)
+  Powerful Activation (40; uses an absorbed magic device with heightened power
+                           and effect)
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  探索拠点に戻ると取り込んだ魔道具の使用回数が回復する
-  魔力復活の薬などを使用すると取り込んだ魔道具の使用回数の1/3程度が回復する
-  同じ魔道具の二つ目以降を取り込むときは最初の取り込みに比べて使用回数が伸びにくい
-  
-慧音「デュアルクラスの一種で、魔法書を習得できない代わりにマジックアイテムで戦う。
-一番の特徴として、杖・魔法棒・ロッドといった魔道具を体に取り込む能力を持っている。
-取り込まれた魔道具はアイテム欄に関係なく持ち歩くことができ、mコマンドから使用できる。
-魔道具のほぼ全種類を使用回数99回まで取り込めるぞ。
-また、「火炎の指輪」などの発動して使える装備品を、発動後に充填することもできる。
+Other:
+  Replenishes amount of charges in absorbed magic devices upon visiting
+    exploration base
+  Restores 1/3 of charges in absorbed magic devices upon drinking Potion
+    of Restore Mana
+  If you absorb a second or further device of the same kind, you get less
+    extra charges compared to amount you got from absorbing it for the
+    first time
 
-魔道具をほとんど好きなだけ持てるわけだから、鑑定や感知をし放題になる。
-ダンジョンの探索は極めて快適になるだろう。
-ザックが空のままダンジョンの深層に飛び込めるのは魔道具使いくらいなものだ。
+Keine - 'A dual class that cannot study spellbooks, instead fighting using
+magic items. Their most notable ability is to absorb staves, wands and rods,
+storing their power. The items you absorb don't take up inventory space,
+and you can use them with 'm' command. You can absorb up to 99 charges for
+each magic device. Also, you can recharge activated items like Rings of 
+Flames.
 
-一方で序盤中盤の戦闘能力は不安定だ。
-序盤の攻撃用魔道具は威力が低く、連打しているとすぐに回数が尽きてしまう。
-自身の近接戦闘能力もあまり高くなく、戦闘補助の役割を持つ魔道具は意外に少ない。
-さらに必要パラメータが多い上に自前の耐性を持たないから装備を整えるのが大変だ。
-地道に探索して強力な装備品や魔道具を根気よく集めないと中盤を越えるのは難しいな。
-終盤に入って物が揃えば相当に強くなるだろう。」
+Since you can hold as many devices as you want, you have plenty of
+identification and detection sources, which will help a lot during dungeon
+exploration. Probably only a Magic Eater can dive deep into the dungeon
+without anything in inventory.
+
+However, you're not that good at combat in early and middle game.
+Offensive magic devices in early game aren't powerful, and you'll quickly
+use up their charges. Your own close combat abilities aren't high either,
+and there aren't many combat support magic devices. Also, since you rely
+on multiple stats, and you don't have any innate resistances, preparing
+your equipment will be difficult. If you don't gather enough powerful
+equipment and magic devices, you'll have difficulty going past midgame.
+If you manage to find what you need, you'll be considerably strong in
+late game.'
 
 
 
 ***** <Engineer>
---- エンジニア ---
-腕力:1  知能:3 賢さ:-3 器用:2 耐久:0 魅力:0
-解除:40(20) 魔導:15(6) 魔防:20(8)  隠密:2(0) 探索:25(4)
-打撃:47(16) 射撃:55(24)
-ヒットダイス:+2
-経験値ペナルティ:20
-スコア倍率:85%
-基礎最大攻撃回数：4
-MP：D
-配下コスト係数：80
+--- Engineer ---
+Str: 1  Int: 3 Wis:-3 Dex: 2 Con: 0 Chr: 0
+Dsm: 40(20) MDev: 15(6) MProt: 20(8)  Stl: 2(0) Srh: 25(4)
+Fighting: 47(16) Shooting: 55(24)
+Hit Dice: +2
+XP Penalty: 20
+Score: 85%
+Base max amount of blows: 4
+MP: D
+Follower cost coefficient: 80
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘C   盾C 騎乗E 二刀E   投擲B
-  短剣B 長剣D   刀D 鈍器B     棒C 　
-  斧D     槍D 長柄D   弓D 機械弓B
-  銃B
+Skill aptitude:
+  Martial Arts  C    Shields      C      Riding      E       Dual-Wielding E
+  Throwing      B    Short Blades B      Long Blades D       Katanas       D
+  Blunt Weapons B    Staves       C      Axes        D       Spears        D
+  Polearms      D    Bows         D      Crossbows   B       Guns          B
 
-職業特技：
-  バックパックに機械を格納、使用、あるいは外したり説明を見たり弾薬を補充できる
-  一斉射撃(30 バックパックに装備した全ての射撃装備で攻撃する)
+Class special abilities:
+  Can install, use, or remove machines on their backpack; can replenish ammo
+  Salvo (30; attacks with all ranged weaponry installed on your backpack
+             at once)
 
-耐性など：
-  浮遊
-  盲目耐性(25)
-  破片耐性(40)
+Resistances/etc:
+  Levitation
+  Blindness resistance (25)
+  Shards resistance (40)
 
-その他：
-  射撃回数増加(クロスボウ) (0.01*レベル)/ターン
-  バックパックの格納可能数(2+レベル/6)
-　バックパックに格納された機械は水や電撃で一時故障することがある。故障確率は攻撃の威力と機械の種類で変わる。
-  エンジニアギルドで新しい機械を作ることができる(有料。作れる機械の種類はレベル・知能・器用で変わる)
-  エンジニアギルドで弾薬やエネルギーパックを調達することができる(有料で変動相場制)
-  武器『クリムゾン』の発動に必ず成功する
+Other:
+  Amount of shots (crossbow) increased by 0.01*level per turn
+  Can install (2+level/6) machines on backpack
+  Installed machines can temporarily malfunction when you get hit by water or
+    lightning. Malfunction probability depends on attack power and machine.
+  Can create new machines at Engineer Guild (requires money; machines you can
+    create depend on your level, intelligence, and dexterity)
+  Can request ammo/energy packs at Engineer Guild (requires money, floating
+    exchange rate)
+  Always succeeds at activating the Gun 'Crimson'
 
-慧音「一応デュアルクラスに分類されるがやや毛色の変わった職業だ。
-街のエンジニアギルドの工房で機械を作り、それをバックパックに格納して戦闘に使う。
-機械による攻撃は非常に強力で、攻撃以外にも様々な優秀な機能を持つ機械を製作できる。
+Keine - 'Classified as a dual class, but has its own unique characteristics.
+You can create machines at Engineer Guild in town, install those on your
+backpack, and use them in combat. Machine attacks are very powerful, and you
+can also make various excellent non-combat machines.
 
-強力な職業だが、もちろん欠点もいくつかある。
-魔道具技能や魔法防御力が最低クラスなこと、
-電撃や水を受けると時々一部の機械が故障すること、
-そして何よりも機械や弾薬の購入にとにかくお金がかかることだ。
-格下の敵が相手なら弾薬を節約してクロスボウや銃で頑張る必要があるだろう。」
+This is a powerful class, but it has its drawbacks. They're very bad at magic
+device use and protection from magic, their machines might malfunction upon
+getting hit by lightning or water, and most of all, creating machines and
+obtaining ammo requires money. You'll probably want to use a crossbow or a
+gun to deal with weaker enemies.'
 
 
 
 ***** <Librarian>
---- 司書 ---
-腕力:1  知能:2 賢さ:-1 器用:1 耐久:1 魅力:0
-解除:20(7) 魔導:34(11) 魔防:34(11)  隠密:3(0) 探索:16(2)
-打撃:55(17) 射撃:25(11)
-ヒットダイス:+4
-経験値ペナルティ:30%
-スコア倍率:75%
-基礎最大攻撃回数：5
-MP：B
-配下コスト係数：60
+--- Librarian ---
+Str: 1  Int: 2 Wis:-1 Dex: 1 Con: 1 Chr: 0
+Dsm: 20(7) MDev: 34(11) MProt: 34(11)  Stl: 3(0) Srh: 16(2)
+Fighting: 55(17) Shooting: 25(11)
+Hit Dice: +4
+XP Penalty: 30%
+Score: 75%
+Base max amount of blows: 5
+MP: B
+Follower cost coefficient: 60
 
-魔法領域適性：
-  全領域習得済み(ただし二冊目まで。秘術領域は使用不可)
+Magic realm aptitude:
+  Has finished learning all realms (only up to 2nd volume; cannot use Occult)
 
-技能適性：
-　格闘D   盾C 騎乗D 二刀D   投擲C
-  短剣B 長剣B   刀C 鈍器B     棒D 　
-  斧D     槍E 長柄E   弓D 機械弓C
-  銃D
+Skill aptitude:
+  Martial Arts  D    Shields      C      Riding      D       Dual-Wielding D
+  Throwing      C    Short Blades B      Long Blades B       Katanas       C
+  Blunt Weapons B    Staves       D      Axes        D       Spears        E
+  Polearms      E    Bows         D      Crossbows   C       Guns          D
 
-職業特技：
-  高速詠唱(40 素早く呪文を詠唱するが消費MPが30%増加する)
+Class special abilities:
+  High-Speed Casting (40; casts spells quickly, but they cost 30% more MP)
 
-耐性など：
-  特になし
+Resistances/etc:
+  None
 
-その他：
-  魔法書の価格交渉が得意(売買時に魅力+10扱いになる)
+Other:
+  Good at shopping for spellbooks (+10 CHR for purposes of buying/selling)
 
-慧音「特殊なデュアルクラスだ。
-呪文を学習しなくてもレベルが足りていて本を持っていれば魔法を使える。
-ただし使えるのは二冊目までの初歩的な魔法で、魔法を使えるようになるレベルもかなり遅い。
-感知や補助の手段が豊富だから序盤は楽だが、終盤は魔法も白兵戦も決め手に欠けて苦戦するかもしれない。」
+Keine - 'A special dual class.
+They can cast spells without having to learn them - they just have to be at
+high enough level. However, they can only use basic magic - as in, spellbooks
+up to 2nd volume, and their level requirement for spellcasting is very high.
+They have an easy early game due to available means of detection/support, but
+in late game, they're lacking both in spellcasting and combat.'
 
 
 
 ***** <Samurai>
---- 剣術家 ---
-腕力:3  知能:-2 賢さ:1 器用:2 耐久:1 魅力:0
-解除:25(12) 魔導:18(7) 魔防:32(10)  隠密:2(0) 探索:16(1)
-打撃:70(23) 射撃:40(18)
-ヒットダイス:+6
-経験値ペナルティ:30
-スコア倍率:90%
-基礎最大攻撃回数：5
-MP：E
-配下コスト係数：60
+--- Samurai ---
+Str: 3  Int: -2 Wis:1 Dex: 2 Con: 1 Chr: 0
+Dsm: 25(12) MDev: 18(7) MProt: 32(10)  Stl: 2(0) Srh: 16(1)
+Fighting: 70(23) Shooting: 40(18)
+Hit Dice: +6
+XP Penalty: 30
+Score: 90%
+Base max amount of blows: 5
+MP: E
+Follower cost coefficient: 60
 
-魔法領域適性：
-  特殊(武芸)
+Magic realm aptitude:
+  Special (Sword techniques)
 
-技能適性：
-　格闘D   盾E 騎乗C 二刀A   投擲B
-  短剣B 長剣A   刀A 鈍器D     棒B 　
-  斧D    槍C 長柄C   弓B 機械弓D
-  銃E
+Skill aptitude:
+  Martial Arts  D    Shields      E      Riding      C       Dual-Wielding A
+  Throwing      B    Short Blades B      Long Blades A       Katanas       A
+  Blunt Weapons D    Staves       B      Axes        D       Spears        C
+  Polearms      C    Bows         B      Crossbows   D       Guns          E
 
-職業特技：
-  気合溜め(一時的にMPを最大を超えて大幅に増加させる)
-  型(25 特殊な構えをとり、耐性やステータスが変化する)
+Class special abilities:
+  Focus (increases MP, can go over maximum value)
+  Assume Posture (25; assumes specific posture, changing resistance/status)
 
-耐性など：
-  恐怖耐性(30)
+Resistances/etc:
+  Fear resistance (30)
 
-その他：
-  刀を装備しているとき武器ダイスがレベル25で+1、レベル45で+2増加する
-  理力武器が効果を発揮しない
+Other:
+  If wielding a katana, +1 to weapon dice at level 25;
+    increases to +2 at level 45
+  Force branded weapons don't work
 
-慧音「近接職の一種だ。特に刀の扱いに優れている。
-武芸とは武器を使った技で、武芸書を手に入れて読めば現在のレベルで使える技を習得できる。
-武器のダイスを増加させたり武器に属性を持たせて攻撃するような技が多いようだ。
-変愚蛮怒本家と違って、一部の技は対応する分類の武器でしか使用できない。
-敵の耐性をある程度把握しておかないと戦いにくいが、技と敵の相性が合えば極めて強力だ。
-戦士と同様、戦闘以外のことはあまり得意ではないようだ。」
+Keine - 'A close combat class, especially skilled at using katanas.
+Their 'sword techniques' are weapon-based; if you get a book of sword
+techniques, you can learn them if your level is high enough. There's plenty
+of techniques that increase your weapon's dice or attack with an elemental
+brand. In contrast to original Hengband, you have to wield a weapon of a
+specific kind in order to use some techniques. You'll have trouble fighting
+if you don't understand enemy resistances to some degree, but you're extremely
+powerful if you use appropriate techniques. Just like warriors, they're not
+that good at skills other than combat.'
 
 ***** <Soldier>
---- 兵士 ---
-腕力:2  知能:1 賢さ:-1 器用:2 耐久:2 魅力:-3
-解除:32(14) 魔導:20(8) 魔防:20(8)  隠密:4(0) 探索:28(4)
-打撃:55(20) 射撃:60(25)
-ヒットダイス:+4
-経験値ペナルティ:50
-スコア倍率:80%
-基礎最大攻撃回数：5
-MP：D
-配下コスト係数：120
+--- Soldier ---
+Str: 2  Int: 1 Wis:-1 Dex: 2 Con: 2 Chr: -3
+Dsm: 32(14) MDev: 20(8) MProt: 20(8)  Stl: 4(0) Srh: 28(4)
+Fighting: 55(20) Shooting: 60(25)
+Hit Dice: +4
+XP Penalty: 50
+Score: 80%
+Base max amount of blows: 5
+MP: D
+Follower cost coefficient: 120
 
-魔法領域適性：
-  なし
+Magic realm aptitude:
+  None
 
-技能適性：
-　格闘B   盾E 騎乗E 二刀B   投擲B
-  短剣A 長剣C   刀C 鈍器C     棒D 　
-  斧  D   槍E 長柄E   弓D 機械弓B
-  銃  A
+Skill aptitude:
+  Martial Arts  B    Shields      E      Riding      E       Dual-Wielding B
+  Throwing      B    Short Blades A      Long Blades C       Katanas       C
+  Blunt Weapons C    Staves       D      Axes        D       Spears        E
+  Polearms      E    Bows         D      Crossbows   B       Guns          A
 
-職業特技：
-　技能習得(レベルアップに伴い技能習得ポイントを獲得し、ポイントを消費して特技やパラメータアップを得る)
+Class special abilities:
+  Learn skills (you gain skill points as you level up, and you can spend them
+                to learn special abilities and raise your parameters)
 
-耐性など：
-　火炎耐性(20)
-  恐怖耐性(30)
-  警告(40)
+Resistances/etc:
+  Fire resistance (20)
+  Fear resistance (30)
+  Warning (40)
 
-その他：
-クロスボウの射撃速度に(レベル*0.02)のボーナス
+Other:
+  Amount of shots (crossbow) increased by 0.02*level per turn
 
-慧音「銃とナイフで武装した近代的な兵士だ。
-成長に伴って様々な技能を主体的に学ぶことで、
-白兵戦が得意になったり遠距離戦が得意になったり破壊工作が得意になったりするようだ。」
+Keine - 'Modern soldier equipped with guns and knives. By learning new skills
+as they level up, they might specialise in close combat, ranged combat, or
+sabotage and engineering.'
 
 ***** <Chemist>
---- 薬師 ---
-腕力:-1 知能:4 賢さ:0 器用:1 耐久:0 魅力:2
-解除:37(11) 魔導:32(12) 魔防:32(10)  隠密:4(0) 探索:36(5)
-打撃:47(18) 射撃:52(20)
-ヒットダイス:+3
-経験値ペナルティ:50
-スコア倍率:100%
-基礎最大攻撃回数：4
-MP：C
-配下コスト係数：60
+--- Chemist ---
+Str: -1 Int: 4 Wis:0 Dex: 1 Con: 0 Chr: 2
+Dsm: 37(11) MDev: 32(12) MProt: 32(10)  Stl: 4(0) Srh: 36(5)
+Fighting: 47(18) Shooting: 52(20)
+Hit Dice: +3
+XP Penalty: 50
+Score: 100%
+Base max amount of blows: 4
+MP: C
+Follower cost coefficient: 60
 
-魔法領域適性：
-  特殊(調剤)
+Magic realm aptitude:
+  Special (chemistry)
 
-技能適性：
-　格闘C   盾D 騎乗E 二刀E   投擲B
-  短剣B 長剣D   刀D 鈍器C     棒C 　
-  斧D   槍D   長柄E   弓D 機械弓C
-  銃D
+Skill aptitude:
+  Martial Arts  C    Shields      D      Riding      E       Dual-Wielding E
+  Throwing      B    Short Blades B      Long Blades D       Katanas       D
+  Blunt Weapons C    Staves       C      Axes        D       Spears        D
+  Polearms      E    Bows         D      Crossbows   C       Guns          D
 
-職業特技：
-  薬箱(専用アイテム領域「薬箱」を扱う)
-  応急手当(5 HPを少し回復し毒などを治療する)
-  成分分析(10 キノコや薬を鑑定する)
-  食料生成(16 食料を調達する)
-  植生調査(24 フロアにあるキノコや素材を大まかに感知する)
+Class special abilities:
+  Medicine box (treated as separate inventory)
+  First Aid (5; slightly recovers HP and cures poison/other bad effects)
+  Component Analysis (10; identifies mushrooms/potions)
+  Create Food (16; creates a food ration)
+  Vegetation Survey (24; roughly detects mushrooms/materials on current level)
 
-耐性など：
-  麻痺耐性(15)
-  毒耐性(30)
+Resistances/etc:
+  Free action (15)
+  Poison resistance (30)
 
-その他：
-  browseコマンドからアイテム「調剤の秘伝書」を確認できる
-  街の調剤室を借りて薬や素材アイテムを合成し新しい薬を作ることができる
-  合成の成功率はレベル・知能・場所・該当品目の秘伝書の有無、作ったことがある薬かなどで変化
-  薬を飲むのが少し早い
-  レベル40以降、持っている薬が冷気攻撃などで割られなくなる
+Other:
+  Can browse Pharmacy Recipes with 'b'rowse command
+  Can use Pharmacy in town to create new potions by combining potions and
+    materials; success depends on your level, intelligence, location,
+    whether you have the proper book, and if you made that potion before; 
+  Consumes slightly less energy when quaffing potions
+  At level 40, potions in your inventory won't get shattered by attacks
 
-慧音「特殊な職業だ。戦いは苦手だが薬を作ることができる。
-作れる薬は強酸や爆薬、変身薬などどれも強力だ。
-しかし薬の材料は貴重なので無計画に薬に頼ることはできないだろうな。
+Keine - 'A special class; they're bad at fighting, but they can make potions.
+The potions they can make include strong acid, explosive, and transformation
+potions - all of them are powerful. However, the materials you'll have to
+use are valuable, so plan carefully.
 
-薬の材料を採取するためには危険なダンジョンを探索する必要がある。
-探索には探索能力の他に隠密能力、そしてもちろん最低限の戦闘能力も必要だ。
-また、どこにどんな材料があるか、どんな敵にどの属性が効くかといった知識が要求されるだろう。
-入念に準備さえすれば、かなりの強敵が相手でもあっさり倒せるかもしれないぞ。
+In order to gather required materials, you have to explore dangerous dungeons.
+Aside from Searching skill, that requires stealth, and at least some degree
+of combat ability. You also have to be aware of what enemies are vulnerable
+to which elements. With proper preparations, you might be able to easily 
+defeat even very strong foes.
 
-調剤の秘伝書を読めば薬の作り方が載っているが、これはあくまでも一例だ。
-色々な組み合わせを試してみるといい。」
+By reading pharmacy recipes you can learn how you can make potions, but those
+are just examples. Feel free to try different combinations.'
 
 ***** <Cavalry>
---- 騎兵 ---
-腕力:2  知能:-2 賢さ:-2 器用:2 耐久:2 魅力:0
-解除:20(10) 魔導:18(7) 魔防:32(10)  隠密:1(0) 探索:16(0)
-打撃:60(22) 射撃:66(26)
-ヒットダイス:+5
-経験値ペナルティ:20
-スコア倍率:90%
-基礎最大攻撃回数：5
-MP：E
-配下コスト係数：35
+--- Cavalry ---
+Str: 2  Int: -2 Wis:-2 Dex: 2 Con: 2 Chr: 0
+Dsm: 20(10) MDev: 18(7) MProt: 32(10)  Stl: 1(0) Srh: 16(0)
+Fighting: 60(22) Shooting: 66(26)
+Hit Dice: +5
+XP Penalty: 20
+Score: 90%
+Base max amount of blows: 5
+MP: E
+Follower cost coefficient: 35
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘E   盾B 騎乗A 二刀C   投擲D
-  短剣D 長剣B   刀C 鈍器B     棒B 　
-  斧C    槍A 長柄A   弓B 機械弓C
-  銃D
+Skill aptitude:
+  Martial Arts  E    Shields      B      Riding      A       Dual-Wielding C
+  Throwing      D    Short Blades D      Long Blades B       Katanas       C
+  Blunt Weapons B    Staves       B      Axes        C       Spears        A
+  Polearms      A    Bows         B      Crossbows   C       Guns          D
 
-職業特技：
-  荒馬馴らし(10 騎乗可能な敵モンスターに飛び乗って無理矢理手懐ける)
+Class special abilities:
+  Tame Unruly Mount (10; jumps on a rideably hostile monster, forcibly taming
+                         them)
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  ゲーム開始時に馬を連れている
-  射撃回数増加(弓) (0.03*レベル)/ターン
-  乗馬中、乗馬に不適な武器を装備していてもペナルティが少ない
-  乗馬中のモンスターの配下維持コストが低くなる
+Other:
+  Starts the game out with a horse
+  Amount of shots (bow) increased by 0.03*level per turn
+  Less penalty for wielding a weapon unsuitable for riding while riding
+  Lesser maintenance cost for the follower you're riding
 
-慧音「近接職の一種だ。特に乗馬に優れている。
-詳しくは騎乗の項を見て欲しいが、騎乗は強力な技能だ。
-特に中盤以降、普通の戦士に比べて戦闘や装備確保が各段に楽に感じられることだろう。
-射撃も上手いため弓を使えば深層でもピンチになりにくい。
-ただし戦闘以外の補助的なことはやはり苦手だ。」
+Keine - 'A close combat class, especially skilled at riding.
+Check 'Riding' section for more details; in short, riding is a powerful
+skill. Especially starting from midgame, combat starts to feel far more
+enjoyable compared to ordinary warriors. They're decent at shooting as well;
+using a bow might help you stay out of trouble even at lower levels. However,
+they're not good at support skills aside from fighting.'
 
 
 
 ***** <Tsukumo-Master>
---- 付喪神使い ---
-腕力:1  知能:2 賢さ:-1 器用:1 耐久:1 魅力:-2
-解除:40(13) 魔導:36(14) 魔防:35(12)  隠密:2(0) 探索:24(3)
-打撃:50(18) 射撃:45(15)
-ヒットダイス:+4
-経験値ペナルティ:35
-スコア倍率:80%
-基礎最大攻撃回数：4
-MP：C
-配下コスト係数：25
+--- Tsukumo Master ---
+Str: 1  Int: 2 Wis:-1 Dex: 1 Con: 1 Chr: -2
+Dsm: 40(13) MDev: 36(14) MProt: 35(12)  Stl: 2(0) Srh: 24(3)
+Fighting: 50(18) Shooting: 45(15)
+Hit Dice: +4
+XP Penalty: 35
+Score: 80%
+Base max amount of blows: 4
+MP: C
+Follower cost coefficient: 25
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot learn
 
-技能適性：
-　格闘D   盾D 騎乗D 二刀D   投擲A
-  短剣B 長剣C   刀C 鈍器B     棒C 　
-  斧B    槍C 長柄C   弓E 機械弓D
-  銃E
+Skill aptitude:
+  Martial Arts  D    Shields      D      Riding      D       Dual-Wielding D
+  Throwing      A    Short Blades B      Long Blades C       Katanas       C
+  Blunt Weapons B    Staves       C      Axes        B       Spears        C
+  Polearms      C    Bows         E      Crossbows   D       Guns          E
 
-職業特技：
-  付喪神化(3 武器を配下モンスターとして戦わせる)
-  アイテム・トラップ感知(9)
-  トラップ破壊(15)
-  鑑識(24)
-  帰還命令(30 配下の付喪神を回収する)
+Class special abilities:
+  Turn into Tsukumogami (3; makes a weapon fight along with you as a follower)
+  Detect Items and Traps (9)
+  Destroy Traps (15)
+  Identify (24)
+  Recall Order (30; recovers all of your tsukumogami followers)
 
-耐性など：
-  透明視認(10)
+Resistances/etc:
+  See invisible (10)
 
-その他：
-  同時に付喪神化可能な数：1+(レベル-5)/10
-  固定アーティファクト以外の武器を装備して戦っているとき、武器が妖器化して最大2回新たな能力を得る
-  呪われた装備品を解呪せずに外せる(失敗することもある)
-  付喪神の攻撃による経験値とアイテムを自分が得ることができる
+Other:
+  Can control up to 1+(level-5)/10 tsukumogami at once
+  When fighting with a weapon other than a fixed artifact, the weapon may
+    obtain youkai powers and gain up to 2 new abilities
+  Can take off cursed equipment without uncursing (might fail)
+  Gains experience and items from tsukumogami attacks
 
-慧音「武器を妖怪化させて戦わせる極めて特殊な職業だ。
-付喪神となった武器は配下として扱われ、その能力値は元の武器の強さによって変化する。
-さらに、その付喪神の攻撃は自分自身の攻撃と同様に扱われる。
-付喪神の攻撃で経験値やアイテムを得ることができるし、ユニークモンスターを倒すこともできる。
-強力な武器が手に入れば付喪神化して適当に放つだけでどんどん経験値が溜まるぞ。
-また、装備中の武器が付喪神化して妖器となりパワーアップすることがある。
-どんなパワーアップをするかはやや予測しづらいが、かなり強力な武器になることだろう。
+Keine - 'A very special class that fights by imbuing weapons with youkai
+powers. A weapon that becomes a tsukumogami is treated as a follower, and
+its parameters change according to power of original weapon. Also, tsukumogami
+attacks are treated as your own - you gain experience and items from monsters
+they defeat, and they can defeat unique monsters. If you find a powerful
+weapon and turn it into a tsukumogami, you'll be able to steadily accumulate
+experience. Also, the weapon you wield might get imbued with youkai power,
+powering it up. It's hard to guess what kind of power up it will be, but it
+might end up a very powerful weapon.
 
-道具のスペシャリストでもあり、解除技能や魔道具技能も高い。
-ただし純粋な戦闘能力はお世辞にも高いとはいえない。
-ダンジョンの探索にあたっては独特の戦略が要求されるだろうな。」
+As tool specialists, their disarming and magic device use skills are high.
+However, they're not that proficienct at direct combat. You'll have to use
+a unique approach to dungeon exploration.'
 
 
 
-***** <Secondhand-dealer>
---- 古道具屋 ---
-腕力:1  知能:2 賢さ:0 器用:1 耐久:0 魅力:-1
-解除:40(12) 魔導:30(12) 魔防:30(10)  隠密:3(0) 探索:35(6)
-打撃:48(17) 射撃:45(18)
-ヒットダイス:+4
-経験値ペナルティ:35
-スコア倍率:80%
-基礎最大攻撃回数：5
-MP：D
-配下コスト係数：70
+***** <Secondhand-Dealer>
+--- Secondhand Dealer---
+Str: 1  Int: 2 Wis:0 Dex: 1 Con: 0 Chr: -1
+Dsm: 40(12) MDev: 30(12) MProt: 30(10)  Stl: 3(0) Srh: 35(6)
+Fighting: 48(17) Shooting: 45(18)
+Hit Dice: +4
+XP Penalty: 35
+Score: 80%
+Base max amount of blows: 5
+MP: D
+Follower cost coefficient: 70
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘E   盾C 騎乗D 二刀C   投擲C
-  短剣C 長剣C   刀C 鈍器C     棒C 　
-  斧C    槍C 長柄C   弓C 機械弓B
-  銃C
+Skill aptitude:
+  Martial Arts  E    Shields      C      Riding      D       Dual-Wielding C
+  Throwing      C    Short Blades C      Long Blades C       Katanas       C
+  Blunt Weapons C    Staves       C      Axes        C       Spears        C
+  Polearms      C    Bows         C      Crossbows   B       Guns          C
 
-職業特技：
-  目利き(5 鑑定)
-  掘り出し物感知(20 フロアに高級なアイテムや珍品などがあれば察知できる)
-  真・目利き(40 周囲に落ちているアイテムを全て鑑定する)
+Class special abilities:
+  Appraise (5; identify)
+  Detect Lucky Finds (20; roughly searchs for ego-items/curios/etc on
+                          current level)
+  True Appraisal (40; identifies all nearby items on the ground)
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  ザックや装備品とは別の道具箱を持っており、5種類までのアイテムを格納できる
-  街のギルドで一部の装備品や素材などから能力(エッセンス)を抽出し、他の装備品へ1つ付加できる
-  運搬可能重量が25%多い
-  射撃回数増加(クロスボウ) (0.01*レベル)/ターン
-  店で売買するとき、価格決定に「魅力」か「知能+5」の高いほうが使われる
-  「固定アーティファクトが出現しない」オプションONのときのスコア上昇率がやや低い
-  
-慧音「武具を改良する特技を持つ近接職だ。
-自前の耐性を持たないが、防具の改良のおかげで耐性に苦労することはあまりないだろう。
-沢山物を持つことができ鑑定能力に優れているので探索は快適だ。
-だが敵感知や戦闘補助の特技は一切持たず純粋な戦闘能力もあまり高くない。
+Other:
+  Has a toolbox as a separate inventory with 5 item slots
+  Can use guilds in town to extract essences from pieces of equipment or
+    materials, and imbue other items with those essences
+  Can carry 25% more weight
+  Amount of shots (crossbow) increased by 0.01*level per turn
+  When buying/selling in stores, uses the highest of CHR and (INT + 5)
+  'No fixed artifacts generated' option doesn't raise your score as much
 
-変愚蛮怒本家の鍛冶師に似ているが、こちらの古道具屋はやや近接戦闘が苦手になっている。
-それにエッセンスの抽出をダンジョン内で行えず、いちいち町まで戻らないといけない。
-その代わりに魔道具技能と鑑定技能が上昇し、
-切れ味・理力・高速射撃といったエッセンスも扱えるようになった。
-強敵相手にはエッセンスを付加した矢とクロスボウで戦うのも悪くないな。」
+Keine - 'A close combat combat with ability to enchance weapons and armor.
+They don't have innate resistances, but they probably won't have much trouble
+due to their ability to enhance armor. They can carry a lot of items, and
+are great at identification, making them suited for exploration. However,
+they don't have any monster detection or combat support abilities, and they're
+not that great in combat by themselves.
+
+They're close to Weaponsmith in original Hengband, but somewhat worse at close
+combat. They also can't extract essences in dungeon and have to return to
+town. In return, they have better magic device use and identification skills,
+and can handle essences like sharpness, force, or extra shots. They're not
+bad at fighting powerful enemies with essence-imbued crossbow and bolts.'
 
 
 
 ***** <Jeweler>
---- 宝飾師 ---
-腕力:-2  知能:2 賢さ:0 器用:2 耐久:-2 魅力:2
-解除:30(10) 魔導:40(17) 魔防:36(12)  隠密:2(0) 探索:24(3)
-打撃:48(16) 射撃:30(10)
-ヒットダイス:+2
-経験値ペナルティ:50
-スコア倍率:80%
-基礎最大攻撃回数：4
-MP：B
-配下コスト係数：45
+--- Jeweler ---
+Str: -2  Int: 2 Wis:0 Dex: 2 Con: -2 Chr: 2
+Dsm: 30(10) MDev: 40(17) MProt: 36(12)  Stl: 2(0) Srh: 24(3)
+Fighting: 48(16) Shooting: 30(10)
+Hit Dice: +2
+XP Penalty: 50
+Score: 80%
+Base max amount of blows: 4
+MP: B
+Follower cost coefficient: 45
 
-魔法領域適性：
-  一領域習得
-　全領域B
+Magic realm aptitude:
+  Can study one realm
+  Aptitude B for all realms
 
-技能適性：
-　格闘E   盾D 騎乗E 二刀E   投擲D
-  短剣B 長剣C   刀D 鈍器C     棒D 　
-  斧D    槍D 長柄D   弓D 機械弓D
-  銃E
+Skill aptitude:
+  Martial Arts  E    Shields      D      Riding      E       Dual-Wielding E
+  Throwing      D    Short Blades B      Long Blades C       Katanas       D
+  Blunt Weapons C    Staves       D      Axes        D       Spears        D
+  Polearms      D    Bows         D      Crossbows   D       Guns          E
 
-職業特技：
-  魔力食い(25 宝石から魔力を吸い取りMPを回復する)
+Class special abilities:
+  Eat Magic (25; recovers MP by draining mana from gemstones)
 
-耐性など：
-  盲目耐性(20)
+Resistances/etc:
+  Blindness resistance (20)
 
-その他：
- 街のギルドで装飾品や素材などから能力(エッセンス)を抽出し、他の装飾品へ1つ付加できる
-  「固定アーティファクトが出現しない」オプションONのときのスコア上昇率がやや低い
+Other:
+  Can use guilds in town to extract essences from accessories or materials,
+    and imbue other items with those essences
+  'No fixed artifacts generated' option doesn't raise your score as much
 
-  
-慧音「装飾品を改良する特技を持つ、やや魔法職寄りのデュアルクラスだ。
-エッセンスの抽出は指輪・アミュレット・リボン類・光源(松明以外)・素材・一部の珍品から行える。
-またエッセンスの付与は近接武器、指輪・アミュレット・リボン類・頭装備・光源(松明以外)に対して行える。
-武具からのエッセンス抽出ができないため、武器属性などのエッセンスは素材や宝石から得ることになる。
-吸血や理力などの強力な武器属性は終盤にならないと得られないだろうな。
-攻撃魔法主体の領域を選択するか補助魔法主体の領域を選択するかで様々な戦略が大きく変わるだろう。」
 
+Keine - 'A dual class leaning towards spellcasting with ability to enhance
+accessories. They can extract essences from rings, amulets, ribbons, light
+sources (aside from torches), material, and some curios. They can imbue
+melee weapons, rings, amulets, ribbons, headwear, and light sources (aside
+from torches) with those essences. They can't extract essences from weapons,
+but they can obtain essences like element brands from materials and gemstones.
+You're probably not going to get powerful brands like vampirism or force
+until the end of the game. Your strategy will greatly change depending on
+whether you pick a realm with offensive or support spells.'
 
 
 
 ***** <Ninja>
---- 忍者 ---
-腕力:0  知能:1 賢さ:0 器用:3 耐久:0 魅力:-2
-解除:45(15) 魔導:27(12) 魔防:27(10)  隠密:5(2) 探索:33(6)
-打撃:55(24) 射撃:63(18)
-ヒットダイス:+2
-経験値ペナルティ:45
-スコア倍率:80%
-基礎最大攻撃回数：4
-MP：C
-配下コスト係数：90
+--- Ninja ---
+Str: 0  Int: 1 Wis:0 Dex: 3 Con: 0 Chr: -2
+Dsm: 45(15) MDev: 27(12) MProt: 27(10)  Stl: 5(2) Srh: 33(6)
+Fighting: 55(24) Shooting: 63(18)
+Hit Dice: +2
+XP Penalty: 45
+Score: 80%
+Base max amount of blows: 4
+MP: C
+Follower cost coefficient: 90
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘A   盾E 騎乗E 二刀B   投擲A
-  短剣A 長剣D   刀C 鈍器D     棒E 　
-  斧E    槍E 長柄E   弓C 機械弓C
-  銃E
+Skill aptitude:
+  Martial Arts  A    Shields      E      Riding      E       Dual-Wielding B
+  Throwing      A    Short Blades A      Long Blades D       Katanas       C
+  Blunt Weapons D    Staves       E      Axes        E       Spears        E
+  Polearms      E    Bows         C      Crossbows   C       Guns          E
 
-職業特技：
-  主に探索や補助に優れた忍術を習得
 
-耐性など：
-  遅消化
-  透明視認(10)
-  麻痺知らず(15)
-  毒耐性(20)
-  高速移動(20)
-  器用維持(25)
-  恐怖耐性(30)
-  強力投擲(35)
-  暗黒耐性(40)
-  毒二重耐性(45)
+Class special abilities:
+  Learns ninjutsu mainly focused on exploration and support
 
-その他：
-　全ての盾と一定以上の重さの武器防具を装備できない
-　暗いところにいる時「超隠密」状態となり敵から認識されにくい
-　眠っている敵や逃げる敵を攻撃した時ダメージボーナス
-　格闘・短剣で攻撃したとき敵を一撃で倒したり会心の一撃以上の強烈な一撃が出ることがある
-　暗闇でも周囲を見通せる
-　加速+(レベル+15)/20
-　AC+(レベル/2)+5
-　武器攻撃時、突然変異以外の追加格闘は出ない
-　暗闇の魔法を使う敵が代わりにライトエリアを使うようになる
-　防具・装飾品による命中・ダメージ修正値が半分しか有効にならない
-　武器を投擲した時に投擲した武器が壊れにくい
-　運搬限界重量が通常の職の2/3
-　暗闇の杖や暗闇の巻物を使っても盲目にならない
-　
-慧音「かなり特殊な近接職だ。基本的に光源を持たずに暗闇の中で戦うことになる。
-暗闇の中にいると敵に認識されにくくなり、不意打ちなどで大ダメージを与えやすくなる。
-さらに格闘や短剣で戦っているとき、しばしば急所を突いて強烈な一撃を見舞う。
-この一撃は武器のダイスと修正値がまとめて数倍になる強力なものだ。
-もしダイス目の大きい短剣を持っていれば反則的な大打撃を与えることだろう。
-良い武器が見つからなければ素手で戦ってもいい。
-序盤の素手攻撃は弱いが、終盤では下手な武器より素手のほうが強くなるかもしれない。
+Resistances/etc:
+  Slow digestion  
+  See invisible (10)
+  Free action (15)
+  Poison resistance (20)
+  Swift movement (20)
+  Sustain dexterity (25)
+  Fear resistance (30)
+  Powerful throw (35)
+  Darkness resistance (40)
+  Double poison resistance (45)
 
-また、投擲についても優れている。
-序盤はダガーやナイフを沢山買っておけば大抵の敵を近寄らせずに倒せるだろう。
-もし優秀な投擲向きのアーティファクトが手に入ればこれまた強烈な威力を発揮するはずだ。
+Other:
+  Cannot use shields or weapon/armor above a specific weight limit
+  Gains 'superstealth' in dark areas, making it harder for enemies to
+    perceive you
+  Extra damage when attacking sleeping or fleeing enemies
+  When using martial art combat or short blades, can deliver a powerful
+    attack stronger than an ordinary critical hit
+  Can see in darkness
+  Speed +(level+15)/20
+  AC +(level/2)+5
+  Performs no extra martial art attacks when attacking with a weapon, aside
+    from mutation-related ones
+  Enemies use Light Area instead of darkness spells
+  Accuracy/damage bonuses on equipment are only half as effective
+  Thrown weapons are less likely to break
+  Can carry 2/3 of normal weight compared to other classes
+  Using Staves/Scrolls of Darknes doesn't make you blind
 
-優秀な耐性を持つが、防具に関する制限がかなり厳しくHPの伸びも悪い。
-防御が整わないままの探索を強いられがちだから、
-こまめに周囲を探索して勝てる敵だけを確実に仕留めていくことだな。」
+Keine - 'A very unusual close combat class. They can fight in the dark
+without requiring a light source. While in the dark, enemies are less likely
+to notice them, allowing them to deliver devastating sneak attacks. Also,
+when using martial art combat or short blades, they might occasionally hit
+the enemy in a vital spot, dealing extreme damage in a single strike. This
+strike multiplies total damage you deal, potentially letting you deal
+absurd amounts of damage. If you can't find a good weapon, fighting with
+martial arts works well, too. Your barehanded attacks are weak in early game,
+but they're going to be stronger compared to weaker weapons by the endgame.
+
+They're also good at throwing. If you buy a lot of daggers/knives in early
+game, you'll be able to defeat most of the enemies from distance. If you
+happen to find an excellent artifact suitable for throwing, you'll deal a lot
+of damage.
+
+While they have excellent resistances, their armor restrictions are very
+severe, and their HP is low. Since you'll probably have to explore without
+good defense, you have to be very careful and don't get into fights you can't
+win.'
 
 
 
 ***** <Card-Dealer>
---- カード売人 ---
-腕力:-1  知能:1 賢さ:0 器用:1 耐久:-1 魅力:3
-解除:30(10) 魔導:32(16) 魔防:30(10)  隠密:2(0) 探索:27(3)
-打撃:48(16) 射撃:30(10)
-ヒットダイス:+1
-経験値ペナルティ:30
-スコア倍率:80%
-基礎最大攻撃回数：4
-MP：C
-配下コスト係数：75
+--- Card Trader ---
+Str: -1  Int: 1 Wis:0 Dex: 1 Con: -1 Chr: 3
+Dsm: 30(10) MDev: 32(16) MProt: 30(10)  Stl: 2(0) Srh: 27(3)
+Fighting: 48(16) Shooting: 30(10)
+Hit Dice: +1
+XP Penalty: 30
+Score: 80%
+Base max amount of blows: 4
+MP: C
+Follower cost coefficient: 75
 
-魔法領域適性：
-  一領域習得
-　全領域C
+Magic realm aptitude:
+  Can study one realm
+  Aptitude C for all realms
 
-技能適性：
-　格闘D   盾D 騎乗E 二刀E   投擲C
-  短剣C 長剣C   刀D 鈍器C     棒C
-  斧D    槍D 長柄D   弓D 機械弓D
-  銃C
+Skill aptitude:
+  Martial Arts  D    Shields      D      Riding      E       Dual-Wielding E
+  Throwing      C    Short Blades C      Long Blades C       Katanas       D
+  Blunt Weapons C    Staves       C      Axes        D       Spears        D
+  Polearms      D    Bows         D      Crossbows   D       Guns          C
 
-職業特技：
-  カードケースからカードを出し入れする特技を習得
-  鑑定(20)
-  カード買取り(30)
+Class special abilities:
+  Can carry cards around in a card case
+  Identify (20)
+  Buy Cards (30)
 
-耐性など：
-  なし
+Resistances/etc:
+  None
 
-その他：
-  施設「カード販売所」や賭場などでカードを仕入れることができる
+Other:
+  Can use card trading/gambling facilities
 
-慧音「最近『アビリティカード』という新型のマジックアイテムが流通している。
-このカードを持っていれば幻想郷の名の知れた人妖たちとそっくりの技を使えるようだ。
-このアビリティカードを買い占めて一攫千金を狙う連中がいる。それがカード売人だ。
+Keine - 'Recently, new magic items called 'ability cards' have been going
+around. Holding those cards lets you use abilities similar to those of
+well-known humans and youkai of Gensoukyou. Card trader buy up those cards,
+planning to make a lot of money.
 
-売人たちは守矢神社や偽天棚の辺りでカードを仕入れている。
-カードを持っている人妖から直接買い付けることもあるようだ。
-戦闘能力のほうは物理も魔法もあまりぱっとしないが、
-大量のアビリティカードに身を固めれば眼を見張るほどの強さになるだろう。
-ただしカードの価格は日を追うごとにどんどん高騰していくので、
-カードを大量に仕入れるためには文字通り寝る間もなく金策に駆け回ることになるだろうな。」
+You can purchase cards from traders at Moriya Shrine and False Heaven Shelf,
+or you can directly buy them from humans and youkai who are holding them.
+Card traders aren't that greate at physical combat or using magic, but they
+can become astoundingly strong if they collect enough ability cards. However,
+card prices will keep on rising, so if you want to obtain a large amount, 
+you'll have to keep making money.'
 
 
 
 ***** <Outsider>
---- 外来人 ---
-腕力:-3  知能:-3 賢さ:-3 器用:-3 耐久:-3 魅力:-3
-解除:10(10) 魔導:10(10) 魔防:10(10)  隠密:1(1) 探索:10(1)
-打撃:30(12) 射撃:30(12)
-ヒットダイス:+1
-経験値ペナルティ:30
-スコア倍率:300%
-基礎最大攻撃回数：3
-MP：E
-配下コスト係数：90
+--- Outsider ---
+Str: -3  Int: -3 Wis:-3 Dex: -3 Con: -3 Chr: -3
+Dsm: 10(10) MDev: 10(10) MProt: 10(10)  Stl: 1(1) Srh: 10(1)
+Fighting: 30(12) Shooting: 30(12)
+Hit Dice: +1
+XP Penalty: 30
+Score: 300%
+Base max amount of blows: 3
+MP: E
+Follower cost coefficient: 90
 
-魔法領域適性：
-  使用不可
+Magic realm aptitude:
+  Cannot use
 
-技能適性：
-　格闘D   盾D 騎乗D 二刀D   投擲D
-  短剣D 長剣D   刀D 鈍器D     棒D 　
-  斧D     槍D 長柄D   弓D 機械弓D
-  銃D
+Skill aptitude:
+  Martial Arts  D    Shields      D      Riding      D       Dual-Wielding D
+  Throwing      D    Short Blades D      Long Blades D       Katanas       D
+  Blunt Weapons D    Staves       D      Axes        D       Spears        D
+  Polearms      D    Bows         D      Crossbows   D       Guns          D
 
-職業特技：
-　なし
+Class special abilities:
+　None
 
-耐性など：
-　なし
+Resistances/etc:
+　None
 
-その他：
- 開始時種族は人間で固定
- 所持金0で開始する
- 食料も松明も持たないが「スマートフォン」を持っている
- 博麗神社で外の世界に送ってもらうことができ、いつでも引退可能
+Other:
+  Always starts out as a human
+  Starts out with 0 money
+  Only has a smartphone in inventory, without food or torches
+  Can leave to Outside World from Hakurei Shrine, can always retire
 
-慧音「神隠しによって幻想郷に迷い込んだ、外の世界の住人だ。
-見ての通り、絶望的なほどに無力だ。
-無事に神社にたどり着いてくれるといいのだが、
-無警戒に異変に首を突っ込もうとする者が後を絶たない。」
+Keine - 'Ordinary people from Outside World that were spirited away into
+Gensoukyou. They're as powerless as they look. Reaching Hakurei Shrine
+safely would be good enough, but there's no end to reckless people trying
+to investigate this incident.'
 
 
 
 ***** <ThePersonalities>
-=== 性格 ===
+=== Personalities ===
 
-慧音「次は性格についての資料だ。
-中には性格といえない変なのもあるが、
-まあ不慣れなうちは気にしなくていい。」
+Keine - 'Next up is information on personalities.
+Some of them are weird and can't really be called a 'personality', but
+don't think about it too much.'
 
 ***** <Ordinary>
---- 極めて普通 ---
-腕力:0  知能:0 賢さ:0 器用:0 耐久:0 魅力:0
-解除:0 魔導:0 魔防:0  隠密:0 探索:0
-打撃:0 射撃:0
-ヒットダイス補正:0
-その他:
-  なし
+--- Ordinary ---
+Str: 0  Int: 0 Wis:0 Dex: 0 Con: 0 Chr: 0
+Dsm: 0 MDev: 0 MProt: 0  Stl: 0 Srh: 0
+Fighting: 0 Shooting: 0
+Hit Dice modifier: 0
+Other:
+  None
 
 ***** <Mighty>
---- 力自慢 ---
-腕力:2  知能:-2 賢さ:-1 器用:0 耐久:1 魅力:0
-解除:-5 魔導:-5 魔防:-3  隠密:-1 探索:-2
-打撃:10 射撃:0
-ヒットダイス補正:1
-その他:
-  魔法などの失敗率が1%上昇
+--- Mighty ---
+Str: 2  Int: -2 Wis:-1 Dex: 0 Con: 1 Chr: 0
+Dsm: -5 MDev: -5 MProt: -3  Stl: -1 Srh: -2
+Fighting: 10 Shooting: 0
+Hit Dice modifier: 1
+Other:
+  Spell/etc failute rate +1%
 
 ***** <Shrewd>
---- 切れ者/聡明 ---
-腕力:-2  知能:2 賢さ:1 器用:0 耐久:-1 魅力:0
-解除:3 魔導:8 魔防:2  隠密:0 探索:3
-打撃:-8 射撃:-5
-ヒットダイス補正:-1
-その他:
-  魔法などの失敗率が3%低下
+--- Shrewd/Clever ---
+Str: -2  Int: 2 Wis:1 Dex: 0 Con: -1 Chr: 0
+Dsm: 3 MDev: 8 MProt: 2  Stl: 0 Srh: 3
+Fighting: -8 Shooting: -5
+Hit Dice modifier: -1
+Other:
+  Spell/etc failure rate -3%
 
-***** <Pious>
---- のんき ---
-腕力:0  知能:-1 賢さ:2 器用:-1 耐久:1 魅力:1
-解除:-5 魔導:2 魔防:6  隠密:-1 探索:0
-打撃:-3 射撃:-6
-ヒットダイス補正:0
-その他:
-  なし
+***** <Easygoing>
+--- Easygoing ---
+Str: 0  Int: -1 Wis:2 Dex: -1 Con: 1 Chr: 1
+Dsm: -5 MDev: 2 MProt: 6  Stl: -1 Srh: 0
+Fighting: -3 Shooting: -6
+Hit Dice modifier: 0
+Other:
+  None
     
 ***** <Nimble>
---- すばしっこい ---
-腕力:-1  知能:1 賢さ:-1 器用:2 耐久:-1 魅力:-1
-解除:7 魔導:2 魔防:-1  隠密:1 探索:5
-打撃:0 射撃:10
-ヒットダイス補正:0
-その他:
-  なし
+--- Nimble ---
+Str: -1  Int: 1 Wis:-1 Dex: 2 Con: -1 Chr: -1
+Dsm: 7 MDev: 2 MProt: -1  Stl: 1 Srh: 5
+Fighting: 0 Shooting: 10
+Hit Dice modifier: 0
+Other:
+  None
 
 ***** <Fearless>
---- 命知らず/おてんば ---
-腕力:2  知能:1 賢さ:1 器用:-1 耐久:-1 魅力:0
-解除:-5 魔導:5 魔防:-2  隠密:0 探索:2
-打撃:10 射撃:10
-ヒットダイス補正:-1
-その他:
-  なし
+--- Fearless/Tomboy ---
+Str: 2  Int: 1 Wis:1 Dex: -1 Con: -1 Chr: 0
+Dsm: -5 MDev: 5 MProt: -2  Stl: 0 Srh: 2
+Fighting: 10 Shooting: 10
+Hit Dice modifier: -1
+Other:
+  None
     
 ***** <Combat>
---- トリガーハッピー ---
-腕力:0  知能:4 賢さ:4 器用:2 耐久:-4 魅力:5
-解除:-10 魔導:10 魔防:-10  隠密:-3 探索:-5
-打撃:5 射撃:50
-ヒットダイス補正:-3
-その他:
-  魔法などの失敗率が5%低下
-  射撃速度(レベル/50)回増加
-  投擲の消費時間-20%
-  エンジニアの機械による射撃の消費時間-20%
-  銃の充填時間が少し早くなる
+--- Trigger-Happy ---
+Str: 0  Int: 4 Wis:4 Dex: 2 Con: -4 Chr: 5
+Dsm: -10 MDev: 10 MProt: -10  Stl: -3 Srh: -5
+Fighting: 5 Shooting: 50
+Hit Dice modifier: -3
+Other:
+  Spell/etc failure rate -5%
+  Amount of shots per turn increased by level/50
+  Throwing consumes 20% less energy
+  Shooting with machines as an Engineer consumes 20% less energy
+  Guns reload somewhat faster
 
 ***** <Elegant>
---- ダンディ/瀟洒 ---
-腕力:-1  知能:1 賢さ:0 器用:1 耐久:-1 魅力:3
-解除:3 魔導:3 魔防:0  隠密:-1 探索:3
-打撃:-5 射撃:5
-ヒットダイス補正:0
-その他:
-　所持品重量限界-20%
+--- Dandy/Elegant ---
+Str: -1  Int: 1 Wis:0 Dex: 1 Con: -1 Chr: 3
+Dsm: 3 MDev: 3 MProt: 0  Stl: -1 Srh: 3
+Fighting: -5 Shooting: 5
+Hit Dice modifier: 0
+Other:
+  Carry weight limit -20%
 
-***** <Sexy>
---- キャノンボーラー ---
-腕力:1  知能:1 賢さ:1 器用:1 耐久:1 魅力:3
-解除:10 魔導:5 魔防:3  隠密:0 探索:2
-打撃:10 射撃:10
-ヒットダイス補正:0
-その他:
-  常に反感状態
-　*勝利*してゲームを終えるとき経過日数に応じスコアにボーナス
+***** <Cannonballer>
+--- Cannonballer ---
+Str: 1  Int: 1 Wis:1 Dex: 1 Con: 1 Chr: 3
+Dsm: 10 MDev: 5 MProt: 3  Stl: 0 Srh: 2
+Fighting: 10 Shooting: 10
+Hit Dice modifier: 0
+Other:
+  Always aggravates monsters
+  Receives score bonus depending on amount of in-game days spent when you
+    finish the game after *winning*
     
 ***** <Lucky>
---- ラッキーマン/ラッキーガール ---
-腕力:-2  知能:-2 賢さ:-2 器用:-2 耐久:-2 魅力:2
-解除:10 魔導:7 魔防:3  隠密:2 探索:10
-打撃:15 射撃:15
-ヒットダイス補正:0
-その他:
-  突然変異「幸運の白いオーラ」が常に付与される
-　(アイテム生成などが有利になる)
+--- Lucky ---
+Str: -2  Int: -2 Wis:-2 Dex: -2 Con: -2 Chr: 2
+Dsm: 10 MDev: 7 MProt: 3  Stl: 2 Srh: 10
+Fighting: 15 Shooting: 15
+Hit Dice modifier: 0
+Other:
+  Always has the 'White Aura' mutation'
+    (has beneficial effects on item generation/etc)
 
 ***** <Patient>
---- がまんづよい ---
-腕力:-1  知能:-1 賢さ:1 器用:-2 耐久:2 魅力:0
-解除:-5 魔導:-3 魔防:3  隠密:1 探索:0
-打撃:-6 射撃:-6
-ヒットダイス補正:1
-その他:
-  魔法などの失敗率が1%上昇
+--- Patient ---
+Str: -1  Int: -1 Wis:1 Dex: -2 Con: 2 Chr: 0
+Dsm: -5 MDev: -3 MProt: 3  Stl: 1 Srh: 0
+Fighting: -6 Shooting: -6
+Hit Dice modifier: 1
+Other:
+  Spell/etc failure rate +1%
   
 ***** <Munchkin>
---- いかさま ---
-腕力:10  知能:10 賢さ:10 器用:10 耐久:10 魅力:10
-解除:20 魔導:40 魔防:30  隠密:10 探索:40
-打撃:80 射撃:80
-ヒットダイス補正:15
-その他:
-  盲目耐性
-　混乱耐性
-　光源持ち
-　レベル/10+5の加速
-　ゲーム開始時に$1000万持っている
-  フロアの地形とアイテムが全て感知されている
-  アイテム生成で良いものが出やすい
-  拾ったアイテムがすぐに鑑定される
-　スコアが1/100になる
+--- Munchkin ---
+Str: 10  Int: 10 Wis:10 Dex: 10 Con: 10 Chr: 10
+Dsm: 20 MDev: 40 MProt: 30  Stl: 10 Srh: 40
+Fighting: 80 Shooting: 80
+Hit Dice modifier: 15
+Other:
+  Blindness resistance
+  Confusion resistance
+  Constant light
+  Speed +5+(level/10)
+  Starts out with $10000000
+  Always knows level layout and item locations
+  Good items appear more often
+  Picked up items are immediately identified
+  Score is 1%
 
 ***** <Berserk>
---- 狂気の ---
-腕力:5  知能:-5 賢さ:-5 器用:5 耐久:5 魅力:-5
-解除:-50 魔導:-50 魔防:-50  隠密:-10 探索:-50
-打撃:150 射撃:0
-ヒットダイス補正:10
-その他:
-　常に狂乱状態
-　腕力と耐久力の限界値が高い
-　腕力知能耐久維持、急回復、麻痺耐性、恐怖耐性、狂気免疫、彫像化無効
-　高レベルで高速移動と朦朧耐性を得る
-　泥酔しても倒れない
-　ドアを叩き壊しやすい
-　レベルが上がると加速、打撃能力、攻撃回数にボーナス
-　巻物、杖、魔法棒、ロッドの使用とアイテム発動に必ず失敗する(一部職業に例外あり)
-　魔法の威力が上昇するが失敗率が一定値以下に下がらず失敗時に魔法が暴発してマイナス効果が起こる
-　レイシャルパワーとして「帰還」を使える
-　EXTRAモードのアイテムカードを使用できない
-　配下や友好モンスターのほうへ移動しようとしたとき押しのけずに攻撃する
-　恐怖の仮面が生成されるとき太古の呪いなどが付かない
-　隣接攻撃が1/2の確率で無傷球を貫通する
-　敵の*破壊*の魔法に巻き込まれたとき1/7の確率でしか吹き飛ばされない(ダメージは受ける)
-　スコアは半分になる
-　
-　
+--- Berserk ---
+Str: 5  Int: -5 Wis:-5 Dex: 5 Con: 5 Chr: -5
+Dsm: -50 MDev: -50 MProt: -50  Stl: -10 Srh: -50
+Fighting: 150 Shooting: 0
+Hit Dice modifier: 10
+Other:
+  Always berserk
+  Higher normal limit for strength/constitution
+  Sustain strrength/intelligence/constitution, regeneration, free action,
+    fear resistance, immune to insanity, cannot be turned into statue
+  Gets swift movement and stun resistance on higher levels
+  Cannot get knocked out by drinking too much
+  Easily bashes down doors
+  Gains bonuses to speed, fighting skill, amount of blows as you level up
+  Always fails to use scrolls/staves/wands/rods or activate items
+    (some classes have exceptions)
+  Spells are more powerful, but their failure rate has a lower limit, and
+   failing to cast a spell might destroy the spellbook
+  Has 'Recall' as racial power
+  Cannot use item cards in Extra mode
+  Cannot push past friendly/follower monsters, attacks them instead
+  Terror Mask gets generated without Ancient Foul Curse/etc
+  Melee attacks have 50% to pierce invulnerability
+  Has only 1/7 chance to get teleported away by an enemy *Destruction* spell
+  Score is halved
+
 

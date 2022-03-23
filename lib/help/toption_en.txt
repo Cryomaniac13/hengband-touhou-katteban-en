@@ -1,922 +1,938 @@
-=== オプションとその効果 ===
+=== Options and Effects ===
 
-ほとんどの「オプション」はゲーム中に '=' コマンドを使用することにより
-変更することができます。プレイヤーは「オプション」を変更することによ
-り、ゲームの様々な設定を自分好みのものにすることができます。
+Most of the "options" are accessible through the '=' command, which
+provides an interface to the various "sets" of options available to the
+player.
 
-以下ではそれぞれのオプションが次のような構成で解説されています。
+In the descriptions below, each option is listed as the textual summary
+which is shown on the "options" screen, plus the internal name of the
+option in brackets, followed by a textual description of the option.
 
-オプションの簡略な要旨  [正式なオプション名]
-    オプションを切り換えたときの効果等、そのオプションについての詳細な
-    説明文。………
+Note that the internal name of the option can be used in user pref
+files to force the option to a given setting (see pref.txt#Options [a]
+for more info).
 
-このファイルの説明文を読む便利な方法はオプション設定中に'?'を使う事で
-す。'='コマンドの中で'?'を押すと現在のカーソル位置のオプションに対応す
-る項目が自動的に表示されます。
-
-アルファベットで書かれた正式なオプション名はユーザー設定ファイル内でオ
-プションを設定するためにも使用することができます。詳細についてはユーザー
-設定ファイルについてのヘルプ(jpref.txt#Options [a])を参照して下さい。
-
-以下の詳細に述べられている言葉で、分かりにくいものを説明しておきます。
-「行動中止」とは、引き続いて行われようとしている走りや休憩や繰り返しの
-コマンドを中断することを言います。「入力をクリア」とは既に押されている
-キー入力をすべて破棄することで、引き続いて行われようとしているマクロも
-同様に破棄されます。「画面描き直し」とは現在の状態を画面に描き直すこと
-を言います。「サブウィンドウ」については下を見て下さい。
-
+Various concepts are mentioned in the descriptions below, including
+"disturb", (cancel any running, resting, or repeated commands, which
+are in progress), "flush" (forget any keypresses waiting in the keypress
+queue, including any macros in progress), "fresh" (dump any pending
+output to the screen).
 
 ***** <Input>
-=== オプション1 -- キー入力オプション ===
+=== Option Set 1 -- Input from keyboard ===
 
 ***** <rogue_like_commands>
-ローグ風キー配置を使用する  [rogue_like_commands]
-    ローグ風キーセットを選択します（'command.txt'を参照して下さい）。
+Rogue-like commands    [rogue_like_commands]
+    Selects the "roguelike" command set. 
 
 ***** <always_pickup>
-常にアイテムを拾う  [always_pickup]
-    アイテムの上に立ったとき、自動的に物を拾います。これがoffの場合、
-    物を拾うには'g'コマンド、もしくは歩いているときなら'-'コマンドを使
-    う必要があります。簡易アイテム自動破壊(destroy_items)オプションは、
-    この always_pickup オプションよりも優先されます。つまり2つのオプショ
-    ンを同時に使うとガラクタや死体を自動的に破壊した後で残ったアイテム
-    のみを自動的に拾います。しかし、自動拾い/自動破壊の設定ファイル'
-    picktype.prf'によって自動破壊するアイテムを登録してある場合は、
-    always_pickup オプションの方が優先されます。これは普段は自動破壊す
-    る物を今だけは一時的に拾いたいと思ったとき等にわざわざ 
-    'picktype.prf' を書き変えずに拾えるようにするための仕様です。
+Pick things up by default    [always_pickup]
+    Tells the game that walking onto an item should attempt to pick it
+    up. Otherwise, you must use the "g" command, or the "-" command
+    while walking. Combined with "carry_query_flag", allows you to
+    selectively pick up all items which you step on.
 
 ***** <carry_query_flag>
-アイテムを拾う前に確認する  [carry_query_flag]
-    アイテムを拾い上げる前に確認してきます。always_pickup オプションと
-    共に使うと良いでしょう。アイテム自動拾い/破壊の設定による自動拾い
-    の場合は例外で、確認してきません。
+Prompt before picking things up    [carry_query_flag]
+    Forces the game to ask you if you want to pick something up when
+    you do something that would normally cause the item to be picked
+    up.
 
 ***** <quick_messages>
-クイック・メッセージを使用する  [quick_messages]
-    '-more-'に対する応答として任意のキー入力を受け付けます。同時
-    に、'[y/n]'に対する応答として、ほとんどのキーを'no'として認識する
-    ようにします。
+Activate quick messages    [quick_messages]
+    Allows the use of any keypress as a response to the "-more-" prompt
+    (useful for monster farming). Allows most keys to mean "no" to any
+    "[y/n]" prompt.
 
 ***** <auto_more>
-キー待ちしないで連続でメッセージを表示する  [auto_more]
-    -more-でキー入力待ちをせずに全てのメッセージを連続で表示します。サ
-    ブウィンドウでメッセージを表示するか、メッセージ履歴コマンド ^P で
-    度々履歴を確認する必要がありますが、非常に快適にプレイが出来ます。
-    ただし、敵からダメージを受けた直後のメッセージは非常に重要で読み飛
-    ばすと危険なので、そのような場合には auto_more の設定にかかわらず
-    に-more-のキー入力待ちをします。また、サブウィンドウでメッセージを
-    読んでいるときは一画面分のメッセージが一度に流れた時点で一度キー入
-    力待ちをします。
-    
+Automatically clear '-more-' prompts    [auto_more] 
+    The game does not wait for a keypress when it comes to a -more-
+    prompt, but carries on going. You'll have to display messages in a
+    subwindow or check previous messages with ^P, but it makes playing
+    very comfortable. However, since the messages right after receiving
+    damage from an enemy are very important and skipping them is
+    dangerous, in this case the game will wait for a keypress at -more-
+    prompt regardless of this option setting.    
 
 ***** <command_menu>
-メニューによりコマンド選択を有効にする  [command_menu]
-    このオプションを有効にすると、リーターンキーかもしくは'x'キー(オリ
-    ジナルキー配列のときのみ)を押すと、ほとんど全てのコマンドを統一し
-    たコマンドメニューを開きます。まだ、コマンド文字を覚えていない初心
-    者には便利なオプションです。
+Enable command selection menu    [command_menu]
+    If this option is active, pressing Return key will open a unified
+    command menu for most of the ingame commands. It's a useful
+    option for beginners who haven't learned command keys yet.
 
 ***** <other_query_flag>
-床上のアイテムを使用するときに確認する  [other_query_flag]
-    床の上のアイテムを'-'で選択したときに、本当にそのアイテムで良いか
-    どうか確認してきます。ただし、easy_floorオプションが有効なときは確
-    認しません。なぜなら、easy_floor を使用中はに'-'を押すと自動的に床
-    の上のアイテムのリストを表示して選択を要求されるからです。
+Prompt for floor item selection    [other_query_flag]
+    Forces the game to ask you before select an item on floor.
+    Does not ask if easy_floor option is set, because in this
+    case pressing '-' will automatically display the list of items
+    on floor, requiring a selection.
 
 ***** <use_old_target>
-常に以前のターゲットを指定する  [use_old_target]
-    'direction'で方向入力時、ターゲティングモードの使用を許可している
-    全てのコマンドにおいて、前に選択したターゲットをデフォルトとして使
-    うようにします。このオプションはターゲットが地面だったとき、よく確
-    認しないと危険なことがあります。
+Use old target by default    [use_old_target] 
+    Forces all commands which normally ask for a "direction" to use the
+    current "target" if there is one. Use of this option can be
+    dangerous if you target locations on the ground, unless you clear
+    them when done.
 
 ***** <always_repeat>
-コマンド自動繰り返し  [always_repeat]
-    'open', 'bash', 'tunnel', 'disarm' の各コマンドについて、自動的
-    に99回（もしくはコマンド成功または何かに邪魔される）まで繰り返しま
-    す。
+Repeat obvious commands    [always_repeat]
+    Tells the game that when you attempt to "open" a door or chest,
+    "bash" a door, "tunnel" through walls, or "disarm" traps or chests,
+    that you wish to "repeat" the command 99 times.
 
 ***** <confirm_destroy>
-「無価値」なアイテムを破壊する時確認する  [confirm_destroy]
-    通常は、アイテムを破壊するコマンドで呪われたアイテムを選択したとき
-    は何も確認せずに破壊します。しかし、このオプションをONにすると価値
-    がないとわかっているアイテムを壊すときでさえも確認を求めてくるよう
-    になります。
+Prompt for destruction of known worthless items    [confirm_destroy]
+    Normally, no confirmation will be asked if you attempt to destroy
+    an object which you know to be worthless.  If this option is set,
+    the Destroy command always asks for confirmation.
 
 ***** <confirm_wear>
-呪われた物を装備する時確認する  [confirm_wear]
-    中には時折、タイプミスのせいで呪われているとわかっていたアイテムを
-    装備してしまう人もいるでしょう。このオプションをONにしていれば、こ
-    のようなタイプミスによる事故を防ぐことができます。もし呪われている
-    ことがわかっているアイテムを装備しようとすると、確認してくるように
-    なるのです。
+Confirm to wear/wield known cursed items    [confirm_wear] 
+    Some players may occasionally, due to a typing mistake, find
+    themselves wearing an item which they knew was cursed. If this
+    option is set, you should be safe from such typing mistakes: you
+    will be prompted if you attempt to wear or wield an item if your
+    character knows it is cursed.
 
 ***** <confirm_quest>
-クエストを諦めて階段で逃げる前に確認する  [confirm_quest]
-    ダンジョンの中の通常の階段は自由に登り降りして元の場所に戻れますが。
-    クエストのフロア内では階段を登った瞬間にクエスト失敗になり二度と戻
-    れない事があります。このオプションをONにすれば、元の場所に戻れない
-    事を警告され、確認が求められるようになります。
+Prompt before exiting a quest level    [confirm_quest]
+    In the dungeon, you can freely climb up/down stairs and can return
+    to former floors normally.  But in some quest levels, including
+    random quests, you can not return once you escaped from the level.
+    If this option is set, the program asks for confirmation before
+    you go up the stairs from such quest levels.
 
 ***** <target_pet>
-ペットをターゲットにする  [target_pet]
-    通常はマジックミサイルの魔法や射撃等でペットを間違って攻撃しないよ
-    うに、ペットはターゲットの選択の対象になりません。しかし、何かの理
-    由でペットをターゲットにしたいときにはこのオプションを有効にすれば、
-    他の敵対的なモンスターと同様にターゲットになります。
+Allow targetting followers    [target_pet]
+    Normally, the program doesn't automatically choose followers as 
+    target in the targeting mode of attack spells. If this option is 
+    set, the program always chooses every monster in sight as target.
 
-    魔法アイテムのなかにはモンスターを加速したり、回復する効果を持つも
-    のがありますが、そのような魔法のターゲットを選択中には target_pet 
-    を設定にかかわらず、ペットが選択対象になります。したがって、このオ
-    プションが有用になる状況はほとんど無いでしょう。
+    There are some magic items that can haste/heal monsters; those
+    always can target your followers regardless of this option. There's
+    very little cases for setting this option.
 
 ***** <easy_open>
-自動的にドアを開ける  [easy_open]
-    ドアにぶつかることで、自動的にそれを開けるようになります。また、ド
-    アや箱を開ける(o)コマンドを使用する時にも、隣接するドアや箱が一つ
-    であれば方向入力なしにそれを開けます。ただし、壁抜け能力を持ってい
-    る場合は、通常はドアを開ける必要がないのでドアにぶつかるだけでは自
-    動的には開けません。
+Automatically open doors    [easy_open]
+    Makes it easy for your character to open a door: simply by walking
+    into it! Also the open command will automatically select one
+    direction if only one door is near you. However, if you're able to
+    pass through walls, you normally don't have to open doors, so you
+    won't automatically open them by walking into them.
 
 ***** <easy_disarm>
-自動的に罠を解除する  [easy_disarm]
-    罠にぶつかることで、自動的にそれを解除するようになります。ただし耐
-    性や能力によって、罠の害を完全に無力化できるときは自動的には解除し
-    ません。また、トラップを解除する(D)コマンドでも、隣接する罠や罠の
-    かかった箱が一つのみであれば方向入力なしにそれを解除します。
+Automatically disarm traps    [easy_disarm] 
+    Makes it easy for your character disarms a trap: simply by walking into
+    it! However, you won't disarm traps that can't harm you due to your
+    abilities. Also the disarm command will automatically select one
+    direction if only one known trap is near you.
 
 ***** <easy_floor>
-床上で重なったアイテムをリストする  [easy_floor]
-    床に積み重なっているアイテムのリストから選択できるようになります。
-    また、見るコマンド 'l'/'x' で複数のアイテムの山を選択すると、それ
-    を「n個のアイテムの山がある」と表示し、さらに 'x' を押すと山の内
-    容をリスト表示します。
+Display floor stacks in a list    [easy_floor]
+    Lets you select an item from a stack on the floor by browsing a
+    list.  Also the look command will describe floor stack as "You see
+    a stack of n items.", when there is more than one item on a floor
+    grid, and display a list of items when you press 'x' at that time. 
 
 ***** <use_command>
-「使う(a)」コマンドでアイテムを何でも使える  [use_command]
-    発動 'A' 薬 'q' 巻物 'r' ロッド 'z'/'a' 魔法棒 'a'/'z' 杖 'u'/'Z' 
-    を使う全てのコマンドを統合し、一つの「使う」コマンドにします。オリ
-    ジナルキーセットでは'u'、ローグ風キーセットでは'a'です。これをONに
-    してもそれぞれのコマンドは有効で、マクロで使われます。
+Allow unified use command    [use_command] 
+    Unifies the item commands like "zap a rod", "use a staff", "eat
+    food", "aim a wand", ... into a general "use object" command. The
+    command in the original keymap is "u", and "a" in the roguelike
+    mode. The standard commands for eat, quaff, read, zap, aim, ... are
+    still available, but can be used for macros. 
 
 ***** <over_exert>
-MPが足りなくても魔法に挑戦する  [over_exert]
-    このオプションを有効にしていると、MPが足りないときに魔法を使おうと
-    すると、確認のメッセージが表示され 'y' で答えると無理矢理魔法を使
-    おうとします。この場合、失敗率が非常に高いだけでなく耐久力が下った
-    り体が麻痺してしまう事があり間違って使ってしまうと非常に危険です。
-    このオプションを無効にすれば、このような無理矢理な挑戦はせずに、MP
-    が足りないといってコマンドが自動的にキャンセルされます。
+Allow casting spells when short of mana    [over_exert]
+    If this option is set, if you try to cast a spell while you don't
+    have enough MP, and answer 'y' to the confirmation prompt, you
+    will attempt to cast the spell regardless. In this case, not only
+    your failure rate is very high, but it might drain your constitution
+    or paralyse you, making it very dangerous if you accidentally cast
+    a spell in this manner. If this option is turned off, you won't be 
+    able to do this, and the command will be automatically cancelled if 
+    you don't have enough MP.
 
 ***** <numpad_as_cursorkey>
-エディタ内でテンキーをカーソルキーとして使う  [numpad_as_cursorkey]
-    このオプションを有効にしていると、文字列を入力する時にテンキーがカー
-    ソル移動キーとして働きます。無効にすると数値を入力するキーとして働
-    きます。
+Use numpad keys as cursor keys in editor mode    [numpad_as_cursorkey] 
+    This option makes numpad keys work as cursor movement keys while
+    text editing mode.  Which include auto-picker editor, inputing an
+    inscription, a macro action, and etc.
 
 
 ***** <MapScreen>
-=== オプション2 -- マップ画面オプション ===
+=== Option set 2 -- Map Screen ===
 
 ***** <center_player>
-常にプレイヤーを中心に置く(*遅い*)  [center_player]
-    通常はプレイヤーが移動して画面の端に近付いたときに画面が切り替わっ
-    て隣の画面が見えるようになりますが、このオプションを有効にすると常
-    にプレイヤーが中心に表示されるように画面をスクロールします。
+Center map while walking (*slow*)    [center_player]
+    The map always centers on the player with this option on. With it off, it
+    is divided into 25 sections, with coordinates (0,0) to (4,4), and will 
+    show one section at a time.
 
 ***** <center_running>
-走っている時でも中心に置く  [center_running]
-    center_player オプションが有効のとき、さらにこのオプションを有効に
-    すると シフトキー + 方向キー等で走っているときにも常に画面をスクロー
-    ルしてプレイヤーを中心に表示し続けます。
+Centering even while running    [center_running]
+    Normally, the map does not center on the player if the player
+    moves with the "run" command, only when the running finishes.  If
+    this option is set, the map always centers on the player. 
 
 ***** <view_yellow_lite>
-明かりの範囲を特別な色で表示する  [view_yellow_lite]
-    特定の状況において（'view_granite_lite'と'view_special_lite'を参照
-    ）、松明で照らされたマスに特別な色を使うようにします。このオプショ
-    ンをOFFにするとゲーム実行がわずかに高速化されます。
+Use special colors for torch-lit grids    [view_yellow_lite]
+    This option causes special colors to be used for "torch-lit" grids
+    in certain situations (see the entries for"view_granite_lite" and
+    "view_special_lite"). Turning this option off will slightly improve
+    game speed.
 
 ***** <view_bright_lite>
-視界の範囲を特別な色で表示する  [view_bright_lite]
-    特定の状況において（'view_granite_lite'と'view_special_lite'を参照
-    ）、視界外のマスに対して特別な色を使うようにします。このオプション
-    がONの時、床は通常白色で表示されますが、そこが現在視界外であれば
-    ダークグレーで表示されます。これによって、視界内がより明るく表示さ
-    れることとなり、あるマスが視界内にあるかどうか判断しやすくなりま
-    す。このオプションをOFFにするとおそらくゲームの実行が高速化されま
-    す。
+Use special colors for 'viewable' grids    [view_bright_lite]
+    This option causes special colors to be used for non "viewable"
+    grids in certain situations (see "view_granite_lite" and
+    "view_special_lite"). When this option is set, floor grids which
+    are normally drawn in "white" but which are not currently
+    "viewable" by the player are instead drawn in "dark gray". This
+    makes the "viewable" grids to appear "brighter" than the others,
+    allowing the player to easily determine which floor grids are in
+    "line of sight". Turning this option off will probably increase the
+    speed of the game.
 
 ***** <view_granite_lite>
-壁を特別な色で表示する(重い)  [view_granite_lite]
-    壁に対して特別な色を使うようにします。通常は白色です。プレイヤーが
-    盲目状態になればそれはダークグレーで表示され、壁が松明で照らされて
-    いれば黄色または白色（'view_yellow_lite'オプションに依存します
-    ）、'view_bright_lite'オプションがONでかつ視界内にない壁はダークグ
-    レー、部分的にしか照らされていない壁はグレー、それ以外は通常色であ
-    る白色でそれぞれ表示されます。このオプションをOFFにするとおそらく
-    ゲームの実行が高速化されます。
+Use special colors for wall grids (slow)    [view_granite_lite]
+    This option activates a special color scheme for all "wall" grids
+    which are normally drawn in "white" (as walls and rubble normally
+    are). When the player is blind, we use "dark gray", else if the
+    grid is torch-lit, we use "yellow" (or "white") depending on the
+    "view_yellow_lite" option, else if the "view_bright_lite" option
+    is set, and the grid is not in line of sight, or the grid is dark,
+    or the grid is only "partially" lit, then we use "gray", otherwise
+    we use the normal "white". Turning this option off will probably
+    increase the speed of the game.  This option may not work well if
+    the attr/char codes for walls/veins have been changed.
 
 ***** <view_special_lite>
-床を特別な色で表示する(重い)  [view_special_lite]
-    床に対して特別な色を使うようにします。通常は白色です。プレイヤーが
-    盲目状態になればそれはダークグレー、床が松明で照らされていれば黄色
-    または白色（'view_yellow_lite'オプションに依存します）、そこが暗所
-    ならばダークグレー、'view_bright_lite'オプションがONでかつ視界内に
-    ない床はグレー、それ以外は通常色である白色でそれぞれ表示されます。
-    このオプションをOFFにするとおそらくゲームの実行が高速化されます。
+Use special colors for floor grids (slow)    [view_special_lite] 
+    This option activates a special color scheme for all "floor" grids
+    which are normally drawn in "white" (as they normally are). When
+    the player is blind, we use "dark gray", else if the grid is
+    torch-lit, we use "yellow" (or "white") depending on the
+    "view_yellow_lite" option, else if the grid is "dark", we use
+    "dark gray", else if the "view_bright_lite" option is set, and the
+    grid is not in line of sight, we use "gray", otherwise we use the
+    normal "white". Turning this option off will probably increase the
+    speed of the game.  This option may not work well if the attr/char
+    codes for walls/veins have been changed 
 
 ***** <view_perma_grids>
-明るい場所はそのままにする  [view_perma_grids]
-    プレイヤーが実際に目で確認した、永久的に照らされた全ての床を記憶し
-    ます（明るいままの表示にされる）。このオプションは永久的に照らされ
-    た床であればどこを探索したのか確認するのが容易になりますが、探索し
-    ていない場所と暗い場所を区別できません。このオプションをOFFにする
-    と視線が遮られていない範囲が常にわかるようになりますが、これ
-    は'view_bright_lite'オプションでそうしたほうがよいです。注意しなけ
-    ればならないのは、床以外のオブジェクトは、プレイヤーが目視すれば全
-    て記憶され、「オブジェクト」は、そのオブジェクトが存在する場所の床
-    とは独立して記憶されます。
+Map remembers all perma-lit grids    [view_perma_grids] 
+    Memorize all perma-lit floor grids which are seen by the player.
+    This option allows you to keep track of which explored floor grids
+    were perma-lit, but does not distinguish between dark floor grids,
+    unexplored floor grids, and unknown grids.  Turning off this option
+    allows the player to always know which lit floor grids are in line
+    of sight, but this is better accomplished by the "view_bright_lite"
+    option.  Note that any non-floor grids which is seen by the player
+    are always memorized, and "object" which is seen by the player is
+    memorized independently from the memorization of the grid itself.
 
 ***** <view_torch_grids>
-明かりで照らした場所はそのままにする  [view_torch_grids]
-    プレイヤーが実際に目で確認した、全ての（松明で照らされた）床を記憶
-    します。このオプションは探索した場所を記憶するだけではなく、「暗い
-    」場所も記憶します。これは、このオプションをONにすると特別な色彩設
-    計が使われるようになり、「暗い」マスはダークグレー、「明るい」マス
-    は白、そして（'view_bright_lite'オプションがONならば）視界内のマス
-    はオレンジで表示されます。現在松明で照らされているマスは「明るい」
-    マスとみなされ、'view_yellow_lite'オプションがONになっていない限り
-    （ONになっていれば、それらは黄色です）白色で描画されます。
+Map remembers all torch-lit grids    [view_torch_grids]
+    Memorize all (torch-lit) floor grids which are seen by the player.
+    This option not only allows you to keep track of which floor grids
+    have been explored, but also which ones are "dark", because the use
+    of this option activates a special "color scheme" for the display
+    of floor grids, in which "dark" grids are drawn in "dark gray",
+    "lit" grids are drawn in "white", and (if the "view_bright_lite"
+    option is set) "lit" grids which are also in line of sight are
+    drawn in "orange". Note that grids which are currently "torch-lit"
+    are considered to be "lit", and are thus drawn in "white", unless
+    the "view_yellow_lite" option is set, in which case they are drawn
+    in "yellow".
 
 ***** <view_unsafe_grids>
-トラップ感知済みでない場所を表示する  [view_unsafe_grids]
-    未知の地形のうち、トラップ感知済みでない領域を灰色の'x'で表示しま
-    す。トラップを感知済みがどうかがわかりやすくなりますが、魔法の地図
-    等で地形を感知済みの時は区別できません。
+Map marked by detect traps    [view_unsafe_grids]
+    Unknown grids that have not been traversed previously, or had a
+    detect trap spell cast on them are marked with a grey 'x'. This
+    allows you to determine where in the dungeon you have cast detect
+    traps, but does not ensure that grids not marked with a grey 'x'
+    are trap free. This option has no effect on surface grids, but
+    outdoor locations cannot be trapped.
 
 ***** <view_reduce_view>
-街では視野を狭くする  [view_reduce_view]
-    街にいるとき、見える範囲を狭くします。これは街中でよりスムーズに走
-    れるようになり、ある程度離れた生物を無視できるようになります。街に
-    は遠距離攻撃を仕掛けてくる敵はいないので、通常はこれでも安全です。
+Reduce view-radius in town    [view_reduce_view]
+    Reduce the "radius" of the player's "view" by half when the player
+    is in town.  This makes running faster in town, and also allows the
+    player to ignore monsters in town which are more than ten grids
+    away, which is usually safe, since none have distance attacks. 
 
 ***** <fresh_before>
-連続コマンド中に画面を再描画し続ける  [fresh_before]
-    コマンド実行の前に全画面を書き直します。これは表示されるべき全ての
-    情報を出力しますが、ゲームの実行が多少遅くなるかもしれません。この
-    コマンドが有効なのは、マクロ、休息、走る、その他繰り返しコマンドの
-    実行時にかぎられます。なぜなら、出力はゲームがキー入力待ち状態の時
-    は常に即座に表示されるからです。
+Flush output while continuous command    [fresh_before]
+    This option forces the game to flush all output before every
+    command. This will give you maximal information, but may slow down
+    the game somewhat. Note that this option is only useful when using
+    macros, resting, running, or repeating commands, since the output
+    is always flushed when the game is waiting for a keypress from the
+    user.
 
 ***** <fresh_after>
-コマンド後に画面を常に再描画し続ける  [fresh_after]
-    コマンド実行後のみならず、怪物やオブジェクトに関する全ての処理の後
-    に全画面を書き直します。これは表示されるべき全ての情報を出力します
-    が、特に低速なマシンではゲームの実行は相当遅くなるでしょう。また、
-    高速なマシンでは通常このオプションの効果を体感できることはありませ
-    ん。
+Flush output after monster's move    [fresh_after]
+    This option forces the game to flush all output after not only
+    every player command, but also after every round of processing
+    monsters and objects, which will give you maximal information, but
+    may slow down the game a lot, especially on slower machines, and on
+    faster machines you normally do not have a chance to see the
+    results anyway.
 
 ***** <fresh_message>
-メッセージの後に画面を再描画する  [fresh_message]
-    メッセージが表示される度に全画面を書き直します。これは表示されるべ
-    き全ての情報を表示しますが、ゲーム実行に多少影響を与えるかもしれま
-    せん。
+Flush output after every message    [fresh_message]
+    This option forces the game to flush all output after every message
+    displayed by the game.  This will give you maximal information, but
+    may slow down the game somewhat.
 
 ***** <hilite_player>
-プレイヤーにカーソルを合わせる  [hilite_player]
-    プレイヤーの場所にカーソルを表示します。これはUNIX系のマシンではよ
-    く見えることがありますが、その他のグラフィカルな環境ではあまりよく
-    ありません。中にはカーソルを表示しないようにできる環境もあります
-    が、このような環境ではカーソルを表示しないことでゲームのスピードア
-    ップと見た目の改善が行えるでしょう。
+Hilite the player with the cursor    [hilite_player]
+    Place the visible cursor on the player. This looks fine on some
+    Unix machines, but horrible on most graphics machines. Note that
+    only some machines are able to *not* show the cursor, but on those
+    machines, hiding the cursor often speeds up the game and looks
+    better.
 
 ***** <display_path>
-魔法や矢の軌跡を表示する  [display_path]
-    ターゲットの選択中に現在のカーソルの位置へ魔法や矢がどの様な軌跡で
-    飛ぶかを表示し続けます。
+Display actual path before shooting    [display_path]
+    When this option is set, the targeting mode will show path from
+    you to current target point continuously.
 
 
 ***** <TextDisplay>
-=== オプション3 -- テキスト表示 ===
+=== Option set 3 -- Text Display ===
 
 ***** <plain_descriptions>
-アイテムの記述を簡略にする  [plain_descriptions]
-    変愚蛮怒では、このオプションをONにすることで識別済みの「色」を持っ
-    たオブジェクトのフルネームを表示しないようになります。言い換えれば、
-    もしこのオプションがOFFであれば、識別したスピードの薬は（例えば）
-    灰色のスピードの薬と表示されます。あなたがシンプルな表示を好み、冗
-    長な表現を望まないのであればこのオプションをONにして下さい。
-
-***** <plain_pickup>
-「拾った」メッセージを簡略化する  [plain_pickup]
-    アイテムを拾って手持ちのアイテムに重ねたときに、通常は「3本拾って、
-    12本の矢を持っている。」等のように拾った数を表示しますが、このオプ
-    ションを有効にすると拾った数の表示を省略する。
+Plain object descriptions    [plain_descriptions]
+    This option disables "full" names for identified 'flavored'
+    objects, in other words, if this option is not in use, an
+    identified Potion of Speed could be listed (for example) as a Blue
+    Potion of Speed. If you prefer simpler, less verbose descriptions,
+    set this option.
 
 ***** <always_show_list>
-選択時には常に一覧を表示する  [always_show_list]
-    通常はアイテムの選択時にはまず選択範囲のアルファベットのみか表示さ
-    れ、スペースキーか'*'を押すと選択可能なアイテムのリストが表示され
-    ますが、このオプションを有効にすると最初からリストが表示されるよう
-    になります。
+Always show list when choosing items    [always_show_list]
+    When this option is set, all commands which lets you to choose an
+    item from inventory or equipment list will automatically show list
+    when activated.
 
 ***** <depth_in_feet>
-ダンジョンの深さをフィートで表示する  [depth_in_feet]
-    ダンジョンの階数を'feet'で表示します。これは怪物の思い出の表示の際
-    にも影響します。
+Show dungeon level in feet    [depth_in_feet]
+    Display the dungeon depth in "feet" instead of as an actual level.
+    This also affects the monster memory display.
 
 ***** <show_labels>
-装備一覧で装備場所を表示する  [show_labels]
-    「装備」リスト中のオブジェクトに「ラベル」を表示し、「装備」が表示
-    されている全てのウインドウに対して行います。これらのラベルが、プレ
-    イヤーが使っているアイテムに「右手」「左手指」「体」「足」といった
-    形で装備欄が表示されます。少しプレイすれば、この情報はもう便利では
-    なくなり、かえって邪魔になるでしょう。
+Show labels in object listings    [show_labels]
+    Display the "labels" for objects in the "equipment" list, and in
+    any "special" window which is displaying the "equipment". These
+    labels indicate what the player is "using" the object for, such as
+    "wielding" or "wearing" (in a given location). After you have
+    played for a while, this information is no longer useful, and can
+    be annoying.
 
 ***** <show_weights>
-アイテム一覧で重量を表示する  [show_weights]
-    持ち物、および装備リスト、それに店の販売品リストで各アイテムの重さ
-    を表示します。
+Show weights in object listings    [show_weights]
+    Display the weights of objects in the "inventory" and "equipment"
+    lists, and in "stores", and in any "special" window which is
+    displaying any of these lists.
 
 ***** <show_item_graph>
-アイテムのシンボルを表示する  [show_item_graph]
-    持ち物、装備リストで床の上にあるときと同じ文字と色でアイテムのシン
-    ボルを表示します。
+Show items graphics    [show_item_graph]
+    Displays small icons of the items in your "inventory" list,
+    "equipment" list and "stores".
 
 ***** <equippy_chars>
-ステータスに文字で装備を表示する  [equippy_chars]
-    メイン画面左端にあなたの装備している装備をグラフィカルに表現します。
-    このキャラクタはそれぞれのアイテムの標準的なシンボルを使います。
+Display 'equippy' chars    [equippy_chars]
+    This option will show you a graphical representation of your worn
+    equipment on the main screen.  The 'equippy' chars will use the
+    standard symbols of the respective items.
 
 ***** <display_mutations>
-'C'コマンドで突然変異を表示する  [display_mutations]
-
-    通常、もしキャラクタが突然変異すると、そのことは情報表示メニュー'~' 
-    コマンドの中でそれを確認する事ができます。このオプションを有効にす
-    るとそれに加えて'C'キャラクター情報コマンドで'h'で数回モードを切り
-    変えると突然変異が表示されるようになります。
+Display mutations in 'C'haracter Display    [display_mutations]
+    Normally, if your character has gained mutations, they will be
+    displayed in an extra 'h' mode window under the 'C'haracter
+    Description command. Some players may wish to view mutations only
+    via the knowledge command ('~' or '|') and do not want any extra
+    screens in the Character Description: they should set this option.
 
 ***** <compress_savefile>
-セーブ・ファイル中のメッセージを圧縮する  [compress_savefile]
-    最近表示されたメッセージだけを記録することで、セーブファイルを圧縮
-    します。これはセーブファイルのサイズを劇的に減少させますが、過去の
-    メッセージの損失も引き起こします。
+Compress messages in savefiles    [compress_savefile]
+    Compress the savefile, by only saving the most recent "messages"
+    that the player has received. This can cut the size of the savefile
+    by a drastic amount, but will result in the loss of message
+    information.
 
-***** [b] tobjects.txt#Magic_weapon
+***** [b] tobjects_en.txt#Magic_weapon
 ***** <abbrev_extra>
-アイテムに追加耐性/能力の略称を刻む  [abbrev_extra]
-    装備可能な*鑑定*されたアイテムを表示する時、自動的に追加耐性や追加
-    能力を現わす略称文字列を付加します。例えば「耐火の」エゴ防具に固定
-    で備わっている火への耐性については表示しませんが、浮遊の靴にランダ
-    ムに追加される耐性等は表示されます。
+Describe obj's extra resistances by abbreviation  [abbrev_extra]
+    When an *identified* equipment is displayed, an abbreviation
+    string for the object's extra resitances and extra abilities are
+    added as fake inscriptions of the object.
 
-    それぞれの略称に対応する能力のリストは 
-    (tobjects.txt#Magic_weapon [b]) から下を参照してください。
+    A word "EXTRA" means that the ability must not be obvious from the
+    objects name.  For example, a pair of boots of Levitation
+    sometimes has EXTRA shard resistance.  But fire resistance of an
+    armor of Resist Fire is not an EXTRA resistance.
+
+    The list of abbreviations for each resistances and abilities are
+    described in (tobjects_en.txt#Magic_weapon [b]).
 
 ***** <abbrev_all>
-アイテムに全ての耐性/能力の略称を刻む  [abbrev_all]
-    装備可能な*鑑定*されたアイテムを表示する時、自動的に全ての耐性や能
-    力を現わす略称文字列を付加します。
+Describe obj's all resistances by abbreviation  [abbrev_all]
+    When an *identified* equipment is displayed, an abbreviation
+    string for all the object's resitances and abilities are added as
+    fake inscriptions of the object. 
 
-    それぞれの略称に対応する能力のリストは 
-     (tobjects.txt#Magic_weapon [b]) から下を参照してください。
+    The list of abbreviations for each resistances and abilities are
+    described in (tobjects_en.txt#Magic_weapon [b]).
 
 ***** <exp_need>
-次のレベルに必要な経験値を表示する  [exp_need]
-    このオプションをONにするとメイン画面の左にある経験値の欄に現在の経
-    験値ではなく、次のレベルに必要な経験値を表示します。
+Show the experience needed for the next level    [exp_need]
+    Setting this option to yes alters the display of experience on the
+    left of the main screen to the experience needed to reach the next
+    character level, instead of the character's current total
+    experience.
 
 ***** <ignore_unview>
-視界外のモンスターの行動を表示しない  [ignore_unview]
-    視界外でかつテレパシーなどで見えているだけのモンスターが行動しても
-    そのメッセージを表示しません。ただし実際にはそのモンスターは行動し
-    ているため、モンスターの行動は記憶に残ります。
+Ignore whenever any monster performs an action  [ignore_unview]
+    If this option is set, no messages will be displayed for monsters
+    out of sight (that you, for example, have sensed through ESP)
+    performing any actions. However, you still will have memory of those
+    monster actions.
 
 ***** <refresh_mon_list>
-視界内モンスターリストに画面外のモンスターも表示
-    慧音「サブウィンドウに「感知しているモンスター表示」をしている場合、
-    　　このオプションをONにしておくと画面外の感知中のモンスターも表示される。」
+Show offscreen monsters in visible monster list
+    Keine - 'If you're using a subwindow to display detected monsters,
+    if this option is set, detected monsters that are currently off
+    screen will be listed there as well.'
 
 ***** <show_throwing_dam>
-武器の投擲ダメージを表示する
-    慧音「このオプションをONにすると、近接武器の表示名の最後に、
-    　　(投擲一回のダメージ/ターンダメージ換算)の投擲ダメージが表示される。」
+Show weapon throwing damage
+    Keine - 'If this option is set, weapon throwing damage will be
+    displayed after melee weapon's name in following format:
+    (damage per throw/damage per round)'
 
 ***** <show_special_info>
-アイテムのその他の特殊な情報を表示する
-    慧音「最近追加したばかりのオプションだ。
-    　　このオプションをONにすると、アイテムの特殊な情報が表示される。
-    　　基本的にフレーバー的な情報だけで、ゲームプレイには直接関係ない。
-    　　現在は、既読の新聞にモンスター名が一緒に表記されるようになるだけだ。」
+Show other special item information
+    Keine - 'This is a recently added option.
+    If it is active, some special information will be shown.
+    It's mostly for flavor only and isn't related to gameplay.
+    Right now, it only displays monster names for newspaper articles
+    you've read.'
 
 ***** <GamePlay>
-=== オプション4 -- ゲームプレイ ===
+=== Option set 4 -- Game playing ===
 
 ***** <stack_force_notes>
-異なる銘のアイテムをまとめる  [stack_force_notes]
-    同じアイテムであれば、一方が銘を持っていてもう一方が持たない場合で
-    も重ねます。この場合、銘は維持されます（銘を持った方に統一されると
-    いうこと）。
+Merge inscriptions when stacking    [stack_force_notes]
+    Force otherwise identical objects to merge, even if one has an
+    empty inscription and the other does not. The resulting stack keeps
+    the non-empty inscription.
 
 ***** <stack_force_costs>
-異なる割引表示のアイテムをまとめる  [stack_force_costs]
-    同じアイテムであれば、一方が安売りされていた品でもう一方が通常の品
-    であっても重ねます。この場合、もっとも大きな割引率に統一されます。
+Merge discounts when stacking    [stack_force_costs]
+    Force otherwise identical objects to merge, even if they have
+    different discounts. The resulting stack keeps the largest
+    discount. This option may cause you to lose "value", but will give
+    you optimal pack usage.
 
 ***** <expand_list>
-「一覧」コマンドを拡張する  [expand_list]
-    見るコマンド、ターゲットコマンドや、モンスターの思い出コマンドで、
-    スペースキーを押して項目を順番に調べているとき、最後の項目でスペー
-    スを押すと最初の項目に戻るようになります。
+Expand the power of the list commands    [expand_list]
+    Expand the "listing" commands so that they "wrap" at the "edges" of
+    the appropriate list.  This allows the "look" and "target" commands
+    to "cycle" through all appropriate grids forever, and the "identify
+    symbol" to browse through all of the monsters of a given type.
 
 ***** <small_levels>
-非常に小さいフロアの生成を可能にする  [small_levels]
-    全体のサイズが違う階ができるようになります。どの位小さくなるかはラ
-    ンダムに決定されます。普通に探検しているだけではほとんど違いがわか
-    らないような大きさの事もあるでしょう。街と同じような1画面程度の階
-    ができる可能性もあります。これは特にレベルの低いキャラクタにとって
-    は危険なものとなり得ます。このオプションを使用する場合、一部が*破
-    壊*された階が生成される事もあります。
+Allow unusually small dungeon levels    [small_levels]
+    This option enables the creation of levels of varying sizes. Levels
+    that are as small as the town level (i.e. 1 'screen') are possible,
+    yet they can be dangerous, especially for a low level character.
+    Note that this option has the side effect of enabling / disabling
+    'destroyed' levels (they are enabled if small levels are).
 
 ***** <always_small_levels>
-常に非常に小さいフロアを生成する  [always_small_levels]
-    このオプションをONにすると、全ての階が通常より小さくなります。どの
-    位小さくなるかはランダムに決定されます。普通に探検しているだけでは
-    ほとんど違いがわからないような大きさの事もあるでしょう。また、「イー
-    クの洞穴」では実際にどう設定しているかに関わらず、常にこのオプショ
-    ンが有効扱いになっています。上の'非常に小さいフロアの生成を可能に
-    する'も参照して下さい。
+Always create unusually small dungeon levels    [always_small_levels]
+    If this option is enabled, then every level will be smaller than
+    usual. See the 'Allow unusually small dungeon levels' option
+    above.
 
 ***** <empty_levels>
-空っぽの「アリーナ」レベルの生成を可能にする  [empty_levels]
-    通常の階は大部分が岩盤からできています。このオプションをONにする
-    と、岩盤のかわりに空の階が生成される可能性があります（これ
-    はNetHackの'big-room'を思い起こさせます）。この階は身を隠す場所が
-    ほとんどないため、特にブレス攻撃できる怪物が存在すると非常に危険な
-    ものになります。アリーナレベルは普通の階同様に地下室や怪物の巣を持
-    つ可能性があります。中には真っ暗なアリーナレベルもありますが、通常
-    は明るく照らされています。
+Allow empty 'arena' levels    [empty_levels]
+    Normal dungeon levels consist mostly of rock. If this option is in
+    use, levels which have empty floor instead of solid rock may also 
+    be created (somewhat reminiscent of Nethack's "big-room" levels). 
+    These levels can be extremely deadly, especially with breathing
+    monsters (since there are few obstructions to shield). Arena levels
+    may have vaults, nests and pits in them like normal levels. Some
+    arena levels are dark when they are created, but most are lit.
 
 ***** <bound_walls_perm>
-ダンジョンの外壁を永久岩にする  [bound_walls_perm]
-    ダンジョンの外壁は各ダンジョンで異なった外見を示しますが、それ以上
-    先に進めない境界はあります。このオプションをONにすると、そのような
-    境界が明示的な外壁となり、永久岩で生成されるようになります。一部の
-    魔法では境界が床に見えていれば床であるように扱われます。このオプ
-    ションの設定は次の新しいダンジョン生成から有効になります。
+Boundary walls become 'permanent wall'  [bound_walls_perm]
+    If this option is set, boundaries of dungeon floors will
+    explicitly look like permanent walls.  If unset, those will look
+    like normal walls, but still behave as permanent walls.
     
 ***** <gun_free_world>
-銃が出現しない  [gun_free_world]
-    このオプションをONにすると、「銃」に分類される武器が通常出現しなくなります。
-    幻想郷に銃など似つかわしくないと思うとき、
-    または銃の苦手な職業で不要なアイテム生成を望まないときにONにしてください。
-    このオプションによるスコアの増減などはありません。
-    
+No guns are generated   [gun_free_world]
+    If this option is set, "gun" kind weapons won't be usually generated.
+    If you don't think guns suit Gensoukyou, or if you're playing a
+    class that can't use guns and don't want more unusable items, set
+    this option to on. This option has no effect on your score.
+
 ***** <always_check_arms>
-右手と左手に別々の物を持つとき常に確認する  [always_chesk_arms]
-    このオプションをONにすると、装備の変更により両手に別々のものを持つようになるときに、
-    いま装備しているものと入れ替えるかどうかを確認されます。
-    
-    例えば現在弓だけを装備しているときに新たに剣を装備しようとするとき、
-    このオプションがOFFのときは剣と弓を両方装備します。
-    しかしONになっていると「一緒に装備しますか？」と確認が出て、
-    nを押すと弓の装備を外して剣だけを手に持つようになります。
-    
-    近接武器と射撃武器を細かく切り替えて戦いたい時にONにしてください。
-   
+Prompt for holding items in both hands   [always_check_arms]
+    If this option is set, when you end up holding different items in
+    both of your hands, you will be ask which one you want to swap out.
+
+    For example, if you're holding only a bow and attempt to wield a
+    sword, with this option off, you'll end up wielding both of those 
+    items. However, if it is set to on, you will be prompted "Do you 
+    want to put it in your free hand?". If you answer with 'n', you
+    will unwield your bow, holding only the sword.
+
+    Set this option to on if you want to fight while switching between
+    ranged an melee weapons.   
 
 ***** <last_words>
-ゲーム終了時に一言コメントを残す  [last_words]
-    ゲームオーバーのとき、'death_j.txt'からランダムに一行選んで表示し、
-    さらにあなたがその場で捨て台詞を編集できるようになります。
-    存分に思いの丈をぶち撒けてください。
+Leave last words when your character dies    [last_words] 
+    Display a random line from the "death.txt" file when you get a
+    game over and then allow you to rewrite this last line.
     
-    また、見事*勝利*して引退するときにコメントを一言だけダンプファイルに残せるようになります。
+    Also lets you leave a comment if you retire after winning.
 
 ***** <ex_attack_msg>
-武器攻撃時のメッセージに変化をつける
-    通常、武器攻撃時には「○○を攻撃した。」と表示されます。
-    このオプションをONにすると、装備している武器に対応して
-    「突いた」「斬った」「殴った」など多様なメッセージが出ます。
-    ゲームプレイ自体には何の関係もなく、あくまでもただのフレーバーです。
+Change messages when attacking with weapons
+    Usually, if you're attacking with a weapon, the message "You hit ###."
+    will be displayed. If this option is set, then, depending on the
+    weapon you're wielding, you might get various messages like
+    "thrust", "slash", "strike". It's purely for flavor and does not
+    affect gameplay.
 
 ***** <auto_dump>
-ダンプファイル名を自動設定する
-	ゲームオーバー・引退・放棄のときにはキャラクターダンプファイル名の入力を求められます。
-	このときファイル名を入力しないとダンプファイルが出力されませんが、
-	このオプションがONのときは、ファイル名を入力しなかった時は
-	「autodump_プレイヤー名.txt」というファイル名でダンプが自動出力されます。
-	何らかのファイル名でダンプが出力されるまで先に進みません。
+Automatically generate character dump file name
+    When you get a game over, retire, or abandon your quest, you'll be
+    asked to enter a character dump file name. If you don't, no dump
+    file will be generated; however, if this option is set, a file named
+    'autodump_[player name].txt' will be automatically generated. You
+    won't be able to progress until you make a successful character dump.
 
 ***** <allow_debug_opts>
-デバッグ/詐欺オプションを許可する  [allow_debug_opts]
-    デバッグコマンド(^A)、ウィザードモード(^W)、各種詐欺オプション(オ
-    プション画面の'C'の項目)は一度でも使用するとスコアの登録が出来なく
-    なる為、操作を間違って使用してしまわないように使用制限が付けられて
-    います。allow_debug_optsを有効にするとこの使用制限を解除します。
+Allow use of debug/cheat options  [allow_debug_opts]
+    Since use of debug command(^A), wizard mode(^W), and Cheating
+    options ('C' in options panel) mark the player as "Cheater" who
+    can't register their score, these debug/cheat options are
+    forbidden to use on default.  The allow_debug_opts option removes
+    these restrictions, and allow the player to become "Cheater".
 
 
 ***** <Disturbance>
-=== オプション5 -- 行動中止 ===
+=== Option set 5 -- Disturbance ===
 
 ***** <find_ignore_stairs>
-階段は通過する  [find_ignore_stairs]
-    走っているとき、階段を無視します。
-
+Run past stairs    [find_ignore_stairs]
+    Ignore stairs when running.
+    
 ***** <find_ignore_doors>
-ドアは通過する  [find_ignore_doors]
-    走っているとき、開いているドアを無視します。
+Run through open doors    [find_ignore_doors]
+    Ignore open doors when running.
 
 ***** <find_cut>
-曲り角を斜めに最短距離で通過する  [find_cut]
-    走っているとき、既に見えている曲がり角はなるべく最短距離になるよう
-    に、必要なら斜めに通過します。結果として「速く」走ることができます
-    が、怪物が待ち伏せている中に飛び込んでしまうこともあります。
+Run past known corners    [find_cut]
+    Cut sharply around "known" corners when running. This will result
+    in "faster" running, but may cause you to run into a "lurking"
+    monster.
 
 ***** <check_abort>
-連続コマンドはキー入力で中断する  [check_abort]
-    休息、走る、その他繰り返しコマンドの実行中、キー入力の監視を止めま
-    す。これはゲームを（多くのシステム上で）かなり能率的にするだけでな
-    く、例えば「このオプションをON -> 全回復するまで休息 -> このオプシ
-    ョンをOFF -> 呪文を唱える」というようなマクロの実行も可能にしま
-    す。注意点として、このオプションの使用は特定の「グラフィカル」なプ
-    ラットホーム上では危険なことがあります。また、このオプションを使っ
-    て長時間の休息を取るのも危険です。下手をすると、飢えの為にダメージ
-    を受けるまで延々と休み続ける羽目になります。
+Check for user abort while continuous command    [check_abort]
+    Avoid checking to see if the user has pressed a key during resting
+    or running or repeated commands.  This not only makes the game much
+    more efficient (on many systems), but also allows the use of
+    certain obscure macro sequences, such as turning this option on,
+    resting until done, turning this option off, and casting a spell.
+    Note that the use of this option may be dangerous on certain
+    "graphic" machines. Resting for long periods of time with this
+    option set is dangerous since the resting may not stop until the
+    user takes damage from starvation.
 
 ***** <flush_failure>
-様々なミス発生時に入力をクリアする  [flush_failure]
-    何か「失敗」があったとき、例えば呪文を失敗したとか、wandの使用に失
-    敗したときなどにそれまでのキー入力を無効にします。これはあなたが方
-    向指定を含むマクロを使っていて、その実行に失敗したときは非常に便利
-    です。これによって、マクロで指定したコマンドが失敗したときでもその
-    方向に進むことが防げます。
+Flush input on various failures    [flush_failure]
+    This option forces the game to flush all pending input whenever
+    various "failures" occur, such as failure to cast a spell, failure
+    to use a wand, etc. This is very useful if you use macros which
+    include "directional" components with commands that can fail, since
+    it will prevent you from walking towards monsters when your spells
+    fail.
 
 ***** <flush_disturb>
-障害発生時に入力をクリアする  [flush_disturb]
-    キャラクタが何か「邪魔」をされたとき、それまでのキー入力を無効にし
-    ます。これは時間のかかるマクロを使用しているときに便利です。という
-    のも、怪物から攻撃を受けた場合マクロがキャンセルされるためです。
+Flush input whenever disturbed    [flush_disturb]
+    This option forces the game to flush all pending input whenever
+    the character is "disturbed". This is useful if you use macros
+    which take time, since it will prevent you from continuing your
+    macro while being attacked by a monster.
 
 ***** <disturb_move>
-どこのモンスターが動いても行動を中止する  [disturb_move]
-    怪物が動いたり、現れたり、消えたときに行動をキャンセルします。これ
-    にはテレパシーによって見えている怪物も含みます。そのため、こちらに
-    気づいていない怪物のそばで休息したい場合などは、このオプション
-    をOFFにすべきです。
+Disturb whenever any monster moves    [disturb_move]
+    Disturb the player when any monster moves, appears, or disappears.
+    This includes monsters which are only visible due to telepathy, so
+    you should probably turn this option off if you want to "rest" near
+    such monsters.
 
 ***** <disturb_high>
-レベルの高いモンスターが動いたら行動を中止する  [disturb_high]
-    プレイヤーよりもレベルの高い怪物が動いたり、現れたり、消えたときに
-    行動をキャンセルします。これにはテレパシーによって見えている怪物も
-    含みます。
-    
-    なお、この勝手版ではレベルが不明な敵が動いたときもこのオプションに
-    よって行動中止が行われます。
-    
+Disturb whenever high-level monster moves    [disturb_high]
+    Disturb the player when any monster whose level is higher than the
+    player moves, appears, or disappears.  This includes monsters
+    which are only visible due to telepathy.
+
+    In this mod, this option applies to monsters whose level is unknown
+    right now as well.    
 
 ***** <disturb_near>
-視界内のモンスターが動いたら行動を中止する  [disturb_near]
-    見えている怪物が動いたり、怪物が視界に初めて入ってきたり、視界内の
-    怪物が視界外に出たときに行動をキャンセルします。このオプションでは、
-    テレパシーで見えている怪物の存在は無視されます。'view_reduce_view'
-    オプションも参考にして下さい。
+Disturb whenever viewable monster moves    [disturb_near]
+    Disturb the player when any viewable monster moves, whenever any
+    monster becomes viewable for the first time, and also whenever any
+    viewable monster becomes no longer viewable. This option ignores
+    the existence of "telepathy" for the purpose of determining whether
+    a monster is "viewable". See also the "view_reduce_view" option.
 
 ***** <disturb_pets>
-視界内のペットが動いたら行動を中止する  [disturb_pets]
-    プレイヤーは、disturbance オプションのいくつかはペットに対しては適
-    用したくないと思うかもしれません。例えば、もし休息が時々よってくる
-    ペットの犬のためにいちいち妨げられるようなことがあれば、きっといら
-    いらするに違いありません。デフォルトでは、たとえ全ての disturbance
-    オプションがONになっていたとしてもペットはあなたの行動を妨げませ
-    ん。もしペットも通常の怪物同様あなたの行動を妨げるようにしたいので
-    あれば、このオプションをONにしてください。
+Disturb when visible followers move    [disturb_pets]
+    The player may wish that some of the disturbance options do not
+    apply to follower: for example, it can be annoying if your rest is
+    always disturbed by a your follower who pops in every now and then. By
+    default, followers do not disturb you even if full monster disturbance
+    options are set. If you want your followers to disturb you like normal
+    monsters, set this option.
 
 ***** <disturb_panel>
-画面スクロール時に行動を中止する  [disturb_panel]
-    画面がスクロールして切り変わった時、行動をキャンセルします。
+Disturb whenever map panel changes    [disturb_panel]
+    This option causes you to be disturbed by the screen "scrolling",
+    as it does when you get close to the "edge" of the screen.
 
 ***** <disturb_state>
-自分のステータス変化時に行動を中止する  [disturb_state]
-    プレイヤーの状態が変わったときに行動をキャンセルします。これには空
-    腹や耐性、混乱などが含まれます。
+Disturb whenever player state changes    [disturb_state]
+    This option causes you to be disturbed whenever the player state
+    changes, including changes in hunger, resistance, confusion, etc.
 
 ***** <disturb_minor>
-些細なことが起きても行動を中止する  [disturb_minor]
-    どんなつまらないことが起きたときでも行動をキャンセルします。これに
-    は怪物がドアを破ったり、持ち物の雰囲気がわかったり、光源の燃料が切
-    れ掛かったりするようなことが含まれます。
+Disturb whenever boring things happen    [disturb_minor]
+    This option causes you to be disturbed by various bring things,
+    including monsters bashing down doors, inventory feelings, and
+    beginning to run out of fuel.
 
 ***** <ring_bell>
-エラー時にビープ音を鳴らす  [ring_bell]
-    何らかのエラーが発生したときベルを鳴らそうとします。
+Audible bell (on errors, etc)    [ring_bell]
+    Attempt to make a "bell" noise when various "errors" occur.
 
 ***** <disturb_trap_detect>
-トラップ感知範囲外に出る直前に行動を中止する  [disturb_trap_detect]
-    走っているときにトラップ感知済みの領域の端まで到達したら行動を中止
-    します。
+Disturb when leaving trap detected area    [disturb_trap_detect]
+    This option causes you to be disturbed when the player is running
+    out of trap-detected area. 
 
 ***** <alert_trap_detect>
-トラップ感知範囲外に出る直前に警告する  [alert_trap_detect]
-    移動中にトラップ感知済みの領域の端まで到達したらメッセージを出して
-    警告します。
+Alert when leaving trap detected area    [alert_trap_detect]
+    This option alerts you with message when the player is moving out
+    of the trap-detected area. 
 
 
 ***** <AutoDestroyer>
-=== オプション6 -- 簡易アイテム自動破壊 ===
+=== Option set 6 -- Easy Auto-Destroyer ===
 
 ***** <destroy_items>
-アイテムの自動破壊を使用する  [destroy_items]
-    このオプションを有効にすると、床に落ちているアイテムに触るだけで自
-    動的に破壊するようになります。destroy_items 単体では全てのアイテム
-    を破壊しようとするので、以下のオプションのいくつかを有効にして必要
-    なアイテムを破壊しないようにする必要があります。
+Use easy auto-destroyer    [destroy_items]
+    If this option is set, you will automatically destroy all
+    objects which you touch unless the object is protected by various
+    'leave_...'  options below.
 
 ***** <destroy_feeling>
-簡易鑑定したとき自動破壊を適用する  [destroy_feeling]
-    このオプションを有効にすると持っているアイテムの雰囲気がわかった瞬
-    間に自動破壊を適用します。典型的には{呪われている}とわかった瞬間に
-    破壊する事になります。何かの理由で正しくアイテムの雰囲気を知る事が
-    できない状態のときは、このオプションは「いいえ」にするべきでしょう。
+Apply auto-destroy as sense feeling    [destroy_feeling]
+    If this option is set, you will apply auto-destroyer on an
+    item just when you sensed its feeling.  Typically it will destroy
+    {cursed} items just after the sensing.
 
 ***** <destroy_identify>
-鑑定したとき自動破壊を適用する  [destroy_identify]
-    このオプションを有効にすると、巻物や呪文等でアイテムを鑑定した瞬間
-    にそのアイテムに対して自動破壊を適用します。呪われていたり、不要な
-    アイテムとして自動破壊設定に登録してあるアイテムがすぐに破壊されま
-    す。
+Apply auto-destroy as identify an item    [destroy_identify]
+    If this option is set, you will apply auto-destroyer on an
+    item just when you identified it using magical items or spells.
+    Typically it will destroy {cursed} items and other useless items
+    which you set up to be auto-destroyed. 
 
 ***** <leave_worth>
-価値が$1以上のアイテムは壊さない  [leave_worth]
-    価値があるアイテム、すなわち店で売却可能なアイテムを自動破壊の対象
-    にしないようにします。
+Auto-destroyer leaves known worthy items    [leave_worth]
+    This option protects known objects that can be sold in stores from 
+    auto-destruction by the destroy_items option.
 
 ***** <leave_equip>
-武器/防具は壊さない  [leave_equip]
-    あらゆる武器、防具を自動破壊の対象にしないようにします。呪われてい
-    ても破壊しません。
+Auto-destroyer leaves weapons and armour    [leave_equip]
+    This option protects all weapons and armour from auto-destruction
+    by the destroy_items option.
 
 ***** <leave_chest>
-開封されていない箱は壊さない  [leave_chest]
-    中身の入っている箱を自動破壊の対象にしないようにします。
+Auto-destroyer leaves closed chests    [leave_chest]
+    This option protects all chests which are not yet opened from
+    auto-destruction by the destroy_items option.
 
 ***** <leave_special>
-今の種族/職業に有用なアイテムは壊さない
-慧音「このオプションをONにすると、特定の種族・職業のときに
-通常は破壊される特定の無価値なアイテムを残すようになる。
-具体的には、
-	スピード・モンスターの魔法棒(騎乗技能B以上の職)
-	回復モンスターの魔法棒(騎乗技能B以上の職)
-	暗闇エゴの光源(忍者)
-	毒の薬、猛毒の薬(メディスン)
-	キノコ(魔理沙)
-	石塊(種族がゴーレム)
-	召喚の杖、サモン・モンスターの巻物(種族が吸血鬼)
-	写真(種族が鴉天狗)
-	
-以上の設定が登録されている。」
+Auto-destroyer leaves items your race/class needs  [leave_special]
+Keine - 'If this option is set, auto-destroyer will leave otherwise
+         worthless items depending on your race/class. To be more specific:
+            Wands of Speed Monster (if your Riding skill is B or higher)
+            Wands of Heal Monster (if your Riding skill is B or higher)
+            Light sources of Darkness (Ninja)
+            Potions of Poison/Severe Poison (Medicine Melancholy)
+            Mushrooms (Marisa)
+            Stones (Golem race)
+            Staves/Scrolls of Summoning (Vampire race)
+            Photographs (Crow-Tengu race)'
 
 ***** <PlayRecord>
-=== オプションR -- プレイ記録オプション ===
+=== Option set R -- Play-record ===
 
 ***** <record_fix_art>
-固定アーティファクトの入手を記録する  [record_fix_art]
-    固定アーティファクトの入手が鑑定によって(名前まで)判明した時点で記
-    録します。
+Record fixed artifacts    [record_fix_art]
+    If this option is set, names of fixed artifacts you discover will
+    be written in the Play-record. 
 
 ***** <record_rand_art>
-ランダムアーティファクトの入手を記録する  [record_rand_art]
-    ランダムアーティファクトの入手が鑑定によって(名前まで)判明した時点
-    で記録します。
+Record random artifacts    [record_rand_art]
+    If this option is set, names of random artifacts you discover will
+    be written in the Play-record.
 
 ***** <record_destroy_uniq>
-ユニークモンスターを倒したときを記録する  [record_destroy_uniq]
-    ユニークモンスターを倒した瞬間に記録します。
+Record when you defeat unique monsters    [record_destroy_uniq]
+    If this option is set, names of unique monsters you defeated will
+    be written in the Play-record.
 
 ***** <record_fix_quest>
-固定クエストの達成を記録する  [record_fix_quest]
-    固定クエストを達成したか、逃げだして失敗したときに記録します。
+Record fixed quests    [record_fix_quest]
+    If this option is set, result of every fixed quest will be
+    written in the Play-record.
 
 ***** <record_rand_quest>
-ランダムクエストの達成を記録する  [record_rand_quest]
-    ランダムクエストを達成したか、逃げだして失敗したときに記録します。
+Record random quests    [record_rand_quest]
+    If this option is set, result of every random quest will be
+    written in the Play-record.
 
 ***** <record_maxdepth>
-最深階を更新したときに記録する  [record_maxdepth]
-    帰還が設定されている階よりも深い階に移動したときに記録されます。リ
-    セットリコールの巻物等で設定階を変えた場合は同じ階で2度以上記録し
-    てしまう事もあります。
+Record movements to deepest level    [record_maxdepth]
+    If this option is set, deepest level will be written in the
+    Play-record when you reached new deepest level.
 
 ***** <record_stair>
-階の移動を記録する  [record_stair]
-    階段や帰還等で階を移動する度に記録されます。
+Record recall and stair movements    [record_stair]
+    If this option is set, every move using stairs will be written in
+    the Play-record.
 
 ***** <record_buy>
-アイテムの購入を記録する  [record_buy]
-    アイテムを買ったときにその個数と共に記録されます。
+Record purchased items    [record_buy]
+    If this option is set, names and numbers of every items you
+    purchased will be written in the Play-record.
 
 ***** <record_sell>
-アイテムの売却を記録する  [record_sell]
-    アイテムを売ったときにその個数と共に記録されます。
+Record sold items    [record_sell]
+    If this option is set, names and numbers of every item you sold
+    will be written in the Play-record.
 
 ***** <record_danger>
-ピンチになったときを記録する  [record_danger]
-    ＨＰのダメージがオプションの設定によって定められた警告レベル以上に
-    なった瞬間を記録します。
+Record hitpoint warning    [record_danger]
+    If this option is set, a record of hitpoint warnings will be written
+    in the Play-record when you take major hitpoint damage.
 
 ***** <record_arena>
-アリーナでの勝利を記録する  [record_arena]
-    アリーナ(闘技場)で勝利したり敗北して放り出されたときに記録されます。
+Record arena victories    [record_arena]
+    If this option is set, every victory and defeated game will be
+    written in the Play-record.
 
 ***** <record_ident>
-未判明のアイテムの識別を記録する  [record_ident]
-    効果が分らなかったアイテムを始めて識別したときに記録されます。
+Record first identified items    [record_ident]
+    If this option is set, names of objects identified for the first
+    time will be written in the Play-record.
 
 ***** <record_named_pet>
-名前つきペットの情報を記録する  [record_named_pet]
-    ペットに名前を付けたり、名前を付けてあるペットが死亡したり行方不明
-    になったときに記録されます。
+Record informations of named followers    [record_named_pet]
+    If this option is set, every action with your followers which are 
+    given their own name will be written in the Play-record.
 
 
 ***** <BaseDelay>
-=== オプションD -- 基本ウェイト量 ===
+=== Option D -- Base Delay Factor ===
 
-基本ウェイト量の値は、0以外の場合ゲームを「遅く」するように働きます。
-これは魔法のアニメーションの効果を観察したい場合に便利です。実際の遅れ
-は基本ウェイト量の３乗 (msec) となります。
+The "delay_factor" value, if non-zero, is used to "slow down" the
+game, which is useful to allow you to "observe" the temporal effects
+of bolt, beam, and ball attacks. The actual delay is equal to
+"delay_factor" cubed, in milliseconds.
 
 
 ***** <Hitpoint>
-=== オプションH -- 低ヒットポイント警告 ===
+=== Option H -- Hitpoint Warning ===
 
-低ヒットポイント警告の値は、0以外の場合、最大HPに対するパーセンテージ
-を示し、HPがそれ以下になるとキャラクタが死にそうだとプレイヤーに警告し
-ます。また、これ以下になるとHPやmanaが赤で表示されます。
+The "hitpoint_warn" value, if non-zero, is the percentage of maximal
+hitpoints at which the player is warned that he may die. It is also
+used as the cut-off for using red to display both hitpoints and mana.
 
 
 ***** <Autosave>
-=== オプションA -- 自動セーブオプション ===
+=== Option A -- Autosave Options ===
 
-実際、ゲームはこんなオプションが不必要なくらい安定していれば理想的で
-す。しかし、仮にゲームの安定度が100%信頼できるものであっても（率直に言
-えばおそらくそんなことはないのですが）、ユーザはそんなことは忘れている
-でしょうし、ハードウェアその他の原因によってゲームがクラッシュすること
-もあります。このような理由によって、あなたは以下のオプションを使いたい
-と思うかもしれません。
+Ideally, the game should be so stable that these options are not
+needed at all. However, even if the game were 100% reliable (which it,
+to be frank, probably is not), the user might forget to and his
+hardware could fail him. For all of these reasons, you may want to use
+these options:
 
 ***** <autosave_l>
-新しい階に入る度に自動セーブする  [autosave_l]
-        このオプションがONになっていれば、プログラムはプレイヤーが新し
-        い階に到達する毎にセーブするかどうか尋ねてきます。新しい階の生
-        成時にハングアップした経験があれば、このオプションは便利です。
+Autosave when entering new levels    [autosave_l]
+        If this option is set, the program will attempt to save your
+        character every time before creating a new dungeon level.
+        Useful if you experience hangups in level generation.
 
 ***** <autosave_t>
-一定ターン毎に自動セーブする  [autosave_t]
-        このオプションがONになっていれば、プログラムはnターン経過する
-        毎にセーブするかどうか尋ねてきます。この周期を設定するには'F'
-        キーを押します。押す度に、周期が50, 100, 250, 500, 1000, 2500,
-        5000, 10000 そして 25000ターンに一度になります。この機能を使う
-        為には、このオプションがONでかつ周期が0以外である必要がありま
-        す。
+Timed autosave    [autosave_t]
+        If this option is set, the program will attempt to save your
+        character every n game turns, where n is the "frequency".  To
+        set frequency press n: it will increase the frequency to the
+        next category (and from 25000 to 0), the categories being
+        every 50, 100, 250, 500, 1000, 2500, 5000, 10000 and 25000
+        turns. Note that the frequency must be higher than 0 and the
+        "Timed autosave" set to "yes" for timed autosaves to take
+        place.
 
 
 ***** <Window>
-=== オプションW -- ウィンドウフラグ ===
+=== Option W - Window Flags ===
 
-慧音「このアプリケーションのメニューバーから「ウィンドウ」→「表示」で、
-サブウィンドウを8つまで追加表示できる。
-これらのウィンドウには装備品一覧、モンスターの思い出、視界内モンスターなど
-様々な便利な情報を常に表示しておくことができるんだ。
-サブウィンドウに表示する情報を決めるにはここでフラグを設定する。
-例えばサブウィンドウ3に足元のアイテム一覧を表示したければ、
-Term-3と書かれている下の.マークの、「足元のアイテム一覧」の右でYキーを押して
-'.'が'X'になるようにすればいい。
-ちなみにこの足元アイテム一覧表示機能はこの勝手版で新たに追加された。」
-
+Keine - 'You can display up to 8 subwindows through Window -> Visibility
+in the application menu bar.
+You can display various useful information there, like your current
+equipment, monster memory, list of monsters in sight. You can set flags
+here to determine what kind of information you want displayed.
+For example, if you want to display a list of items at your current location
+in subwindow 3, press 'Y' at the '.' mark below 'Term-3' and to the right
+of 'Display items at player location', changing the '.' mark to 'X'.
+By the way, this function to display list of items beneath your feet is one
+of the additions of this mod.'
 
 ***** <Cheating>
-=== オプションC -- 詐欺オプション ===
+=== Option C - Cheating Options ===
 
-cheatingオプションを使うと、キャラクタは'cheater'であると見なされ、ハ
-イスコアリストに載ることはありません。これはその後オプションをOFFにし
-ても変わりません。そのため、以下のオプションを使用する際にはよく考えて
-からにして下さい。
+Using the cheating options marks your character as "Cheater" and
+you won't get into the high-score list.  Turning off the cheating
+options later does NOT allow your character to get a highscore entry,
+so think twice before using any cheat.
 
 ***** <cheat_peek>
-アイテムの生成をのぞき見る  [cheat_peek]
-    アイテムの生成過程をこっそり見ることができます。
+Peek into object creation    [cheat_peek]
+    Cheaters never win.  But they can peek at object creation.
 
 ***** <cheat_hear>
-モンスターの生成をのぞき見る  [cheat_hear]
-    怪物の生成過程をこっそり見ることができます。
+Peek into monster creation    [cheat_hear]
+    Cheaters never win.  But they can peek at monster creation.
 
 ***** <cheat_room>
-ダンジョンの生成をのぞき見る  [cheat_room]
-    部屋の生成過程をこっそり見ることができます。
+Peek into dungeon creation    [cheat_room]
+    Cheaters never win.  But they can peek at room creation.
 
 ***** <cheat_xtra>
-その他の事をのぞき見る  [cheat_xtra]
-    デバッグメッセージを見ることができます
+Peek into something else    [cheat_xtra]
+    Cheaters never win.  But they can see debugging messages.
 
 ***** <cheat_know>
-完全なモンスターの思い出を知る  [cheat_know]
-    怪物たちに関する全てを最初から知っています
+Know complete monster info    [cheat_know]
+    Cheaters never win.  But they can know all about monsters.
 
 ***** <cheat_live>
-死を回避することを可能にする  [cheat_live]
-    死を回避することができます。回避されると町に移動して復活します。
+Allow player to avoid death    [cheat_live]
+    Cheaters never win.  But they can cheat death.
 
 ***** <cheat_save>
-死んだ時セーブするか確認する  [cheat_save]
-    このオプションを有効にするとキャラクターが死んだときに強制的にはセー
-    ブをしなくなり、以前のセーブデータから復活できるようになります。
+Ask for saving death    [cheat_save]
+    Cheaters never win.  But they can choose whether they save dead
+    character data or not when they die. 
 
 
 ***** <Birth>
-=== 初期オプション ===
+=== Birth options ===
 
-
-以下のオプションは変愚蛮怒を難しくしたり簡単にしたりします。初期オプショ
-ンはキャラクタ生成時にのみ、'='キーを押すことによって設定できます('='
-を押さなくても一度は必ずオプション設定画面に入ります)。その後はオプショ
-ンを変更することはできません。
+The following options can make this game harder or easier. The birth
+options can only be accessed while creating a new character (press '='
+while creating the character). There is no way to turn them off after 
+the creation is finished!
 
 ***** <ironman_shops>
-（鉄人用）店と我が家を使用しない(*)  [ironman_shops]
-    すべての店が常に閉店状態となります。街での補給なしでダンジョンの奥
-    深くで生き延びるよう努力して下さい。このオプションを有効にするとス
-    コアの評価が上ります。
+Stores are permanently closed (*)    [ironman_shops]
+    This option closes all shops. Try to survive in the deeps of
+    the dungeon without supplies from town. Turning this option on
+    raises your score.
 
 ***** <ironman_small_levels>
-（鉄人用）常に非常に小さいフロアを生成(*)  [ironman_small_levels]
-    このオプションをONにすると、全ての階が通常より小さくなります。上の'
-    非常に小さいフロアの生成を可能にする'も参照して下さい。このオプショ
-    ンを有効にするとスコアの評価が上ります。
-
+Always create unusually small dungeon levels (*)    [ironman_small_levels]
+    If this option is enabled, then every level will be smaller than
+    usual. See the 'Allow unusually small dungeon levels' option above.
+    Turning this option on raises your score.
 
 ***** <ironman_empty_levels>
-（鉄人用）常に空っぽのアリーナレベルを生成(*)  [ironman_empty_levels]
-    always_empry_levels を永久的に有効にします。このオプションを有効に
-    するとスコアの評価が上ります。
+Always create empty 'arena' levels (*)    [ironman_empty_levels]
+    If this option is enabled, then every level will be empty 'arena'
+    level. See the "Allow empty 'arena' levels" option above. Turning
+    this option on raises your score.
 
 ***** <ironman_no_fixed_art>
-固定アーティファクトが出現しない(*)  [ironman_no_fixed_art]
-慧音「一切の固定アーティファクトが出現しなくなる。
-    エゴアイテムかランダムアーティファクトで耐性を埋めることになるな。
-    その代わりに、多少ランダムアーティファクトが出やすくなっている。
-    スコアの評価が少し上がるぞ。」
-    
+Don't generate fixed artifacts (*)   [ironman_no_fixed_art]
+Keine - 'Prevents fixed artifacts from being generated. You'll have
+         to cover your resistances with ego-items and randarts. It also
+         makes randarts slightly more likely to be generated. Turning
+         this option on slightly raises your score.'
 
 ***** <ironman_rooms>
-（鉄人用）常に普通でない部屋を生成する(*)  [ironman_rooms]
-    このオプションを有効にすると、部屋という部屋が全て vault (宝物庫)
-    になります。このオプションを有効にすると難易度によりスコアの評価が上下します。
+Always generate very unusual rooms (*)    [ironman_rooms]
+    If this option is enabled, every room becomes a vault. Turning
+    this option on changes your score depending on difficulty level.
 
 ***** <no_capture_book>
-妖魔本が出現しない(*)  [no_capture_book]
-慧音「この勝手版オリジナルのオプションだ。
-    妖魔本、すなわち本家でいうモンスターボールが出現しなくなる。
-    スコアの評価がわずかに上がるぞ。」
+Don't generate demon books (*)   [no_capture_book]
+Keine - 'This is a new option for this mod. It prevents demon books - 
+         reflavored capture balls - from being generated. Turning this
+         option on slightly raises your score.'
 
 ***** <left_hander>
-左利きである [left_hander]
-慧音「あなたが左利きならONにしてくれ。
-	武器などが基本的に左手で装備されるようになる。
-	装備画面の表記以外に何のボーナスもペナルティもない。」
+Left-Hander    [left_hander]
+Keine - 'Enable this option if you're left-handed. You'll be usually
+         holding your weapon with your left hand. Doesn't have any
+         bonuses or penalties.'
 
 ***** <preserve_mode>
-伝説のアイテムを取り逃しても再生成される(*)  [preserve_mode]
-    アーティファクトの保存モードを有効にします。保存モードが無効のとき
-    は、階と一緒にあるいはモンスターを倒して生成された固定アーティファ
-    クトはゲームオーバーになるまで二度と生成されません。つまりアーティ
-    ファクトを拾わずにその階を離れてしまった場合、永遠に失われることに
-    なります。一方保存モードが有効の場合はアーティファクトを鑑定しない
-    限りそのようなことは起こりません。したがって階を完全に探索するまえ
-    に離れることがより安全になります。見逃した固定アーティファクトが他
-    の階でもう一度出現するかも知れないからです。このオプションを有効に
-    するとスコアの評価が下ります。
-
-
+Preserve artifacts (*)    [preserve_mode]
+    In non-preserve mode, once a fixed artifact is generated (either
+    on the dungeon floor or in a monster drop), it will never be
+    generated again during that game.  This means that if you miss the
+    artifact by leaving the level before you pick it up it is gone
+    forever. On the other hand, in preserve mode this behavior is only
+    exhibited once you have identified the artifact. It is therefor
+    safer to leave a level before it is completely explored as any
+    fixed artifact can be regenerated in subsequent levels.
 
 ***** <powerup_home>
-我が家を拡張する(*)  [powerup_home]
-    このオプションを有効にすると、我が家に保存できるアイテムの数が10倍
-    になり、20ページまで保管できるようになります。このオプションを有効
-    にするとスコアの評価が下ります。
+Increase capacity of your home (*)    [powerup_home]
+    If this option is enabled, the capacity of your home will be expanded
+    to 20 pages. If not, capacity is only 2 pages. Turning this option on
+    lowers your score.
 
 ***** <birth_bonus_20>
 ***** <birth_bonus_10>
 ***** <ironman_no_bonus>
-ボーナスポイントを固定(*)  [birth_bonus_20]
-ボーナスポイントが少ない(*)  [birth_bonus_10]
-(鉄人用)ボーナスポイントなし(*)  [ironman_no_bonus]
-    慧音「キャラメイクの時に効果が発揮されるオプションだ。
-    ボーナスポイントを割り振るとき、
-    固定にすると20、少ないにすると10に数値が固定される。
-    難易度がEASYの場合はこれに+10される。
-    またスコアはボーナスポイント20のとき+5%、10のとき+20%、0のとき+50%増加する。
-    これらのオプションを複数設定した場合、一番厳しいものが適用される。」
+Fixed amount of bonus points (*)   [birth_bonus_20]
+Low amount of bonus points (*)   [birth_bonus_10]
+No bonus points (*)   [ironman_no_bonus]
+Keine - 'This option affect character creation. When you start allocating
+         bonus points, their amount will be 20 if it's 'fixed', and 10 if
+         it's 'low'. If you're playing on Easy difficulty, it will be
+         increased by 10.
+         Playing with 20 bonus points increases your score by 5%.
+         Playing with 10 bonus points increases your score by 20%.
+         Playing with no bonus points increases your score by 50%.
+         If you have several of those options set at the same time, the
+         strictest one will be applied.'
 
 
 --

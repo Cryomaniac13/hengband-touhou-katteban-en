@@ -1,0 +1,41 @@
+Keine - 'Let's start the special class on Hengband (Katteban).
+  Due to this being a help file for a mod, there will be many various
+  meta concepts mentioned; please take a good look at that.
+  Well, what do you want to learn about?'
+
+ (a) What is Hengband (Katteban)?  (tgeneral_en .hlp) 
+ (b) Character Creation            (tbirth_en   .hlp)  
+ (c) Races/Classes/Personalities   (traceclas_en.hlp) 
+ (d) Map/Town                      (ttown_en    .hlp)
+ (e) Dungeon Exploration           (tdungeon_en .hlp)
+ (f) Items                         (tobjects_en .hlp)
+ (g) Monsters                      (tmonster_en .hlp)
+ (h) Combat System and Tactics     (tbattle_en  .hlp)
+ (i) Spells/Special Abilities      (tmagic_en   .hlp)
+ (j) Commands                      (tcommand_en .hlp)
+ (k) List of Options               (toption_en  .hlp)
+ (l) Other                         (tother_en   .hlp)
+ (m) User Settings                 (tpref_en    .hlp)
+ (n) Auto-picker/destroyer editor  (teditor_en  .txt)
+
+[[[[B| (o) ***Beginner's Guide***        (instruction_en .txt)
+
+ (p) Original Hengband help files  (help.hlp)
+[[[[y| (?) Help System Commands          (helpinfo.txt)
+
+***** [a] tgeneral_en.hlp
+***** [b] tbirth_en.hlp
+***** [c] traceclas_en.hlp
+***** [d] ttown_en.hlp
+***** [e] tdungeon_en.hlp
+***** [f] tobjects_en.hlp
+***** [g] tmonster_en.hlp
+***** [h] tbattle_en.hlp
+***** [i] tmagic_en.hlp
+***** [j] tcommand_en.hlp
+***** [k] toption_en.hlp
+***** [l] tother_en.hlp
+***** [m] tpref_en.hlp
+***** [n] teditor_en.txt
+***** [o] instruction_en.txt
+***** [p] help.hlp

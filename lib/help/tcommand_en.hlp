@@ -1,0 +1,22 @@
+Keine - 'Command input will be covered in more details here.'
+
+    (a) Differences from Hengband  (tcommand_en.txt)
+    (b) Commands and Turn Order    (tcommand_en.txt#Turn)
+    (c) Key Layouts                (tcommand_en.txt#Keymapmode)
+    (d) Command Window             (tcommand_en.txt#ComWindow)
+    (e) Special Commands           (tcommand_en.txt#SpecialKey)
+    (f) Original Layout            (tcommand_en.txt#OriginalKeyset)
+    (g) Roguelike Layout           (tcommand_en.txt#RogueKeyset)
+    (h) Sample Macros              (tcommand_en.txt#Macro)
+
+    (?) Help System Commands       (helpinfo.txt)
+
+
+***** [a] tcommand_en.txt
+***** [b] tcommand_en.txt#Turn
+***** [c] tcommand_en.txt#Keymapmode
+***** [d] tcommand_en.txt#ComWindow
+***** [e] tcommand_en.txt#SpecialKey
+***** [f] tcommand_en.txt#OriginalKeyset
+***** [g] tcommand_en.txt#RogueKeyset
+***** [h] tcommand_en.txt#Macro
