@@ -1852,7 +1852,7 @@ and close combat.'
 
 
 ***** <Magic-Knight>
---- –‚–@Œ•Žm ---
+--- Magic Knight ---
 Str: 1  Int: 2 Wis:0 Dex: 1 Con: 0 Chr: 1
 Dsm: 28(9) MDev: 40(12) MProt: 34(11)  Stl: 2(0) Srh: 17(1)
 Fighting: 50(16) Shooting: 33(10)
@@ -2568,7 +2568,7 @@ win.'
 
 
 
-***** <Card-Dealer>
+***** <Card-Trader>
 --- Card Trader ---
 Str: -1  Int: 1 Wis:0 Dex: 1 Con: -1 Chr: 3
 Dsm: 30(10) MDev: 32(16) MProt: 30(10)  Stl: 2(0) Srh: 27(3)
