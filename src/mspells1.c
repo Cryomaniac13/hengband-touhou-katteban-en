@@ -775,13 +775,15 @@ void curse_equipment(int chance, int heavy_chance)
 
 	if(p_ptr->pclass == CLASS_HINA)
 	{
-		msg_format("装備品が呪われかけたが、あなたが呪いを吸い取った。");
+		msg_format(_("装備品が呪われかけたが、あなたが呪いを吸い取った。",
+                    "Your equipment was about to get cursed, but you absorbed it."));
 		hina_gain_yaku(chance * 2 + heavy_chance * 5 +  randint1(30));
 		return;
 	}
 	if (p_ptr->pclass == CLASS_SHION)
 	{
-		msg_format("装備品が呪われかけたが、あなたが代わりに不幸を背負った。");
+		msg_format(_("装備品が呪われかけたが、あなたが代わりに不幸を背負った。",
+                    "Your equipment was about to get cursed, but you took it in as your misfortune instead."));
 		p_ptr->magic_num1[1] += (chance * 10 + heavy_chance * 50 + randint1(1000));
 		return;
 	}
@@ -802,7 +804,7 @@ void curse_equipment(int chance, int heavy_chance)
 	//v1.1.15 純狐の純化済み装備品は呪われない
 	if(p_ptr->pclass == CLASS_JUNKO && o_ptr->xtra3 == SPECIAL_ESSENCE_OTHER)
 	{
-		msg_format("%sは呪いを跳ね返した！", o_name);
+		msg_format(_("%sは呪いを跳ね返した！", "%s resists being cursed!"), o_name);
 		return;
 	}
 
@@ -853,7 +855,7 @@ msg_format("悪意に満ちた黒いオーラが%sをとりまいた...", o_name);
 #endif
 
 		if(p_ptr->pclass == CLASS_KOGASA && o_ptr->tval == TV_STICK && o_ptr->sval == SV_WEAPON_KOGASA && o_ptr->weight == 30)
-			msg_format("何だか体調が悪い気がする...");
+			msg_format(_("何だか体調が悪い気がする...", "You don't feel so good..."));
 
 		o_ptr->feeling = FEEL_NONE;
 	}
