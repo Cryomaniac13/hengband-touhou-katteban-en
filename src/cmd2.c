@@ -5378,8 +5378,8 @@ void do_cmd_fire_gun_aux(int slot, int dir)
 	if(dice && sides) dam += damroll(dice,sides);
 	if(dam < 1)
 	{
-		object_desc(o_name, o_ptr, OD_NAME_ONLY);
-		msg_format(_("%sは不発だ！", "%s misfires!"),o_name);
+		object_desc(o_name, o_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
+		msg_format(_("%sは不発だ！", "Your %s misfires!"),o_name);
 		return;
 	}
 
@@ -5661,9 +5661,9 @@ void do_cmd_fire_gun_aux(int slot, int dir)
 	//発動失敗判定
 	if(randint1(100) > chance)
 	{
-		object_desc(o_name, o_ptr, OD_NAME_ONLY);
+		object_desc(o_name, o_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
 		msg_format(_("%sの射撃に失敗した！弾はあらぬ方向へ飛んでいった..",
-                    "%s misfires! The bullet gets launched in wrong direction..."),o_name);
+                    "Your %s misfires! The bullet gets launched in wrong direction..."),o_name);
 		return;
 	}
 
