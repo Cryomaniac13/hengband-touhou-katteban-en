@@ -622,7 +622,7 @@ static void do_cmd_eat_food_aux(int item)
 			{
 				if (shion_comment_food(FALSE, "grain")) break;
 
-				msg_print("Fragrant but blandÅB");
+				msg_print("Fragrant but bland.");
 				ident = TRUE;
 				break;
 			}

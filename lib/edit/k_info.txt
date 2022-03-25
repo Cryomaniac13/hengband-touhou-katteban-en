@@ -3640,7 +3640,7 @@ I:55:24:8
 W:50:0:50:1200
 A:50/1
 P:0:1d2:0:0:0
-D:$It does 80 damage to all evil monsters in sight when you use it.
+D:$It does 80 damage to all chaotic monsters in sight when you use it.
 D:それは使うと視界内の混沌の勢力のモンスターに80のダメージを与える。
 
 N:350:力:クルミの
@@ -3661,7 +3661,7 @@ W:70:0:50:4500
 A:70/2
 P:0:1d2:0:0:0
 D:$It does 150 damage to all evil monsters in sight, gives temporary
-D:$protection from lesser evil creature, cures poison, stuuned, cuts, removes
+D:$protection from lesser evil creature, cures poison, stunning, cuts, removes
 D:$fear and heals you 50 when you use it.
 D:それは使うと視界内の邪悪なモンスターに150のダメージを与え、
 D:一時的に弱い邪悪な者の攻撃を回避しやすくなる結界を張り、
@@ -3718,8 +3718,8 @@ A:85/4
 P:0:1d2:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 D:$It produces a huge mana ball (damage of core: (300+d200)*2) centered on you
-D:$when you use it. If you are neither mage, high-mage, sorcerer, magiceater
-D:$nor blue-mage, you take 50 damage.
+D:$when you use it. If you're not a class proficient with spellcasting, you
+D:$take 50 damage as well.
 D:それは使うと中心部ダメージ(300+d200)*2の巨大な純粋な魔力の球を自分を
 D:中心として発生する。魔法が得意な職でなければ自分も50のダメージを受ける。
 
@@ -4252,7 +4252,7 @@ I:65:17:9
 W:30:0:10:1500
 A:30/2
 P:0:1d1:0:0:0
-D:$It charms a monster into your pet when you use it.
+D:$It charms a monster into your follower when you use it.
 D:それは使うと1体のモンスターを魅了して配下にする。
 
 N:412:ファイア・ボルト:銅の
@@ -4714,7 +4714,8 @@ I:66:28:250
 W:100:0:15:150000
 A:50/32:100/8
 P:0:1d1:0:0:0
-D:$It is capable of firing almost anything, at random.
+D:$It hits everything in sight with a random element (damage: 1d777)
+D:$when you zap it.
 D:それは振ると1d777ダメージの全くランダムな属性の視界内攻撃をする。
 
 N:455:岩石溶解:アダマンタイトの
@@ -4801,7 +4802,7 @@ G:?:w
 I:70:6:0
 W:30:0:5:1000
 A:30/2
-D:$It summons a monster as your pet when you read it.
+D:$It summons a monster as your follower when you read it.
 D:それは読むと1体のモンスターを配下として召喚する。
 
 N:464:トラップ創造:文味 倒魑 扈
@@ -5201,7 +5202,8 @@ G:?:w
 I:70:54:0
 W:30:0:5:1000
 A:30/2
-D:$It summons a monster corresponds to your race as your pet when you read it.
+D:$It summons a monster corresponds to your race as your follower when you
+D:$read it.
 D:それは読むと自分の種族に対応したモンスター1体を配下として召喚する。
 
 
@@ -6458,7 +6460,7 @@ P:0:5d5:0:0:0
 D:黄玉とも呼ばれる黄色透明の宝石だ。十一月の誕生石でもある。
 
 N:626:ラピスラズリ
-E:Lapis lazuli
+E:Lapis Lazuli
 G:*:b
 I:73:23:100
 W:30:0:1:5000
@@ -6467,7 +6469,7 @@ P:0:5d5:0:0:0
 D:青金石、群青とも呼ばれる青色半透明の宝石だ。十二月の誕生石でもある。
 
 N:627:隕鉄
-E:Meteoric iron
+E:Meteoric Iron
 G:*:D
 I:73:24:1000
 W:85:0:80:120000
@@ -6476,7 +6478,7 @@ P:0:5d5:0:0:0
 D:鉄分を多く含む隕石だ。なぜか鳥居のような形の傷が刻まれている・・
 
 N:628:不死鳥の羽
-E:Phoenix feather
+E:Phoenix Feather
 G:*:o
 I:72:3:100
 W:90:0:4:160000
