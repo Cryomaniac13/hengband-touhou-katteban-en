@@ -2529,11 +2529,11 @@ void compound_drug(void)
 		if(flag2)
 		{
 			object_desc(m2_o_name, m2_o_ptr, (OD_NO_FLAVOR | OD_OMIT_PREFIX | OD_NO_PLURAL | OD_NAME_ONLY));
-			c_put_str(TERM_WHITE,format(_("b)ëfçﬁ2:%s", "b)Material 2: %s"), m2_o_name),10,10);
+			c_put_str(TERM_WHITE,format(_("b)ëfçﬁ2:%s", "b)Material 2: %s"), m2_o_name),11,10);
 		}
 		else
 		{
-			c_put_str(TERM_WHITE,format(_("b)ëfçﬁ2:ñ¢ëIë", "b)Material 2: Not chosen")),10,10);
+			c_put_str(TERM_WHITE,format(_("b)ëfçﬁ2:ñ¢ëIë", "b)Material 2: Not chosen")),11,10);
 		}
 		if(flag3)
 		{

@@ -16656,10 +16656,10 @@ msg_print("ここにはクエストの入口はない。");
 				screen_save();
 				for (i = 1; i<9; i++)Term_erase(12, i, 255);
 
-				put_str("どの勢力につきますか？", 1, 40);
+				put_str(_("どの勢力につきますか？", "Join which forces?"), 1, 40);
 				if (selectable_flags & ANIMAL_GHOST_ALIGN_KEIGA) put_str(_("a) 勁牙組", "a) Keiga Family"), 3, 40);
 				if (selectable_flags & ANIMAL_GHOST_ALIGN_KIKETSU) put_str(_("b) 鬼傑組", "b) Kiketsu Family"), 4, 40);
-				if (selectable_flags & ANIMAL_GHOST_ALIGN_GOUYOKU) put_str(_("c) 剛欲同盟", "c) Gouyoku Alliance"), 5, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_GOUYOKU) put_str(_("c) 剛欲同盟", "c) Gouyouku Alliance"), 5, 40);
 				if (selectable_flags & ANIMAL_GHOST_ALIGN_HANIWA) put_str(_("d) 埴輪兵団", "d) Haniwa Corps"), 6, 40);
 				if (selectable_flags & ANIMAL_GHOST_ALIGN_KILLTHEMALL) put_str(_("e) 全員倒す", "e) Defeat them all"), 7, 40);
 
