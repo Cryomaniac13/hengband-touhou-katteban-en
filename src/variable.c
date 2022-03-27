@@ -1437,6 +1437,8 @@ s16b feat_deep_poisonous_puddle;
 s16b feat_poisonous_puddle;
 s16b feat_deep_miasma;
 s16b feat_thin_miasma;
+//v1.1.91
+s16b feat_oil_field;
 
 
 
@@ -1627,8 +1629,11 @@ byte dimension_door_distance = 0;
 u32b hack_gun_fire_critical_flag = 0L;
 //銃の命中修正値　クリティカル処理に使う
 int	 hack_gun_fire_critical_hit_bonus = 0;
-//銃を撃つときTRUEになり、project_mで経験値処理
+
+//銃を撃つときTRUEになり、project_mで経験値処理。
+//銃には広範囲に攻撃するものがあり、複数のモンスターに攻撃したときその一体一体で熟練度が入ったら変なので最初に当たった一体だけ熟練度処理する
 bool hack_flag_gain_gun_skill_exp = FALSE;
+
 int hack_der_freischutz_basenum = 0;
 
 //v1.1.24 レーザートラップ用　project()を＠やモンスターの場所以外から撃ちたいときに
@@ -1661,7 +1666,8 @@ int count_damage_guard_break;
 bool flag_friendly_attack = FALSE;
 
 //v1.1.32 ロープウェイに乗っているフラグ p_ptr->teleport_townと一緒に使う
-bool flag_riding_ropeway = FALSE;
+//v1.1.91 魔法の森から旧地獄市街に行くときにも使うことにしたので、boolのフラグでなくintのモード値にする
+int teleport_town_mode = 0;
 
 //v1.1.35 get_itemでリピートのとき別のアイテムが選ばれることを許容しないフラグ
 bool item_tester_not_allow_different_repeat = FALSE;
@@ -1720,3 +1726,9 @@ u32b	total_pay_cardshop = 0;
 
 //店の在庫を'x'で調べるときにTRUEになる一時フラグ
 bool hack_flag_store_examine = FALSE;
+
+//テスト用
+int	gv_test1=0;
+int	gv_test2=0;
+int	gv_test3=0;
+int	gv_test4=0;

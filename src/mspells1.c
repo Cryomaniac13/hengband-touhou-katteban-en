@@ -488,7 +488,12 @@ static void remove_bad_spells(int m_idx, u32b *f4p, u32b *f5p, u32b *f6p, u32b *
 	}
 	if (smart & (SM_RES_WATER))
 	{
-		if(is_hurt_water() < 0)
+
+		if (m_ptr->r_idx == MON_YUMA)
+		{
+			; //尤魔のメイルシュトロムは回復行動も兼ねているので＠に水耐性があっても止めない
+		}
+		else if(is_hurt_water() < 0)
 		{
  			f4 &= ~(RF4_BR_AQUA);
 			f5 &= ~(RF5_BO_WATE);
@@ -1107,7 +1112,7 @@ bool dispel_check(int m_idx)
 	if (IS_INVULN() && !(p_ptr->special_defense & MUSOU_TENSEI) && !SUPER_SHION) return (TRUE);
 
 	//v1.1.44 イビルアンジュレーション
-	if (p_ptr->special_defense & CHECK_EVIL_UNDULATION_MASK) return (TRUE);
+	if (p_ptr->special_defense & EVIL_UNDULATION_MASK) return (TRUE);
 
 	if(p_ptr->tim_superstealth) return (TRUE);
 	if(p_ptr->tim_sh_death) return (TRUE);
@@ -1186,6 +1191,7 @@ bool dispel_check(int m_idx)
 		else if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39));//非対象
 		else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29));//非対象
 		else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29));//非対象
+		else if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29));
 		else
 		{
 			if (!p_ptr->immune_fire && (p_ptr->oppose_fire || music_singing(MUSIC_NEW_LYRICA_SOLO) || music_singing(MUSIC_RESIST))) return (TRUE);
@@ -1782,6 +1788,12 @@ bool make_attack_spell(int m_idx, int special_flag)
 	//職業ぬえのとき敵が正体不明を見破る確率の係数(%) 負になると必ず見破られる
 	int nue_check_mult = 100;
 
+	//v1.1.95 狂戦士化状態だと魔法や特殊行動を使えない
+	if (MON_BERSERK(m_ptr))
+	{
+		return (FALSE);
+	}
+
 	/* Cannot cast spells when confused */
 	if (MON_CONFUSED(m_ptr))
 	{
@@ -1841,6 +1853,11 @@ bool make_attack_spell(int m_idx, int special_flag)
 	/* Extract the monster level */
 	rlev = ((r_ptr->level >= 1) ? r_ptr->level : 1);
 
+	//v1.1.94 モンスター魔法力低下中はレベル判定値25%カット
+	if (MON_DEC_MAG(m_ptr))
+	{
+		rlev = (rlev * 3 + 1) / 4;
+	}
 
 	/*:::閃光、分解ブレスの特殊優先処理*/
 	///system 閃光ブレスの優先使用処理　閃光属性レーザーとか実装したら追加すべきだろう
@@ -1889,7 +1906,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 		f9 &= ~(RF9_TELE_APPROACH | RF9_TELE_HI_APPROACH);
 	}
 	///mod140714 ＠から離れた敵はメイルシュトロムを使わないようにする v1.1.64 7→4
-	if ((f9 & RF9_MAELSTROM) && m_ptr->cdis > 4 && !(r_ptr->flags2 & RF2_STUPID))
+	if ((f9 & RF9_MAELSTROM) && m_ptr->cdis > 4 && !(r_ptr->flags2 & RF2_STUPID) )
 	{
 		f9 &= ~(RF9_MAELSTROM);
 	}
@@ -1948,6 +1965,14 @@ bool make_attack_spell(int m_idx, int special_flag)
 		f4 &= ~(RF4_SPECIAL2);
 	}
 
+	//v1.1.91 尤魔はHPが減ってて周囲に石油地形があるときにしか特別行動をしない。あと闘技場やアリーナでは特別行動をしない。
+	if (m_ptr->r_idx == MON_YUMA)
+	{
+		if (p_ptr->inside_arena || p_ptr->inside_battle || (m_ptr->hp > m_ptr->maxhp * 3 / 4) || yuma_vacuum_oil(m_ptr->fy,m_ptr->fx,TRUE,0) < 1)
+		{
+			f4 &= ~(RF4_SPECIAL2);
+		}
+	}
 
 	//v1.1.36 小鈴は付喪神がフロアにいるかダメージを受けていないと特別行動をしない
 	if(m_ptr->r_idx == MON_KOSUZU)
@@ -2197,6 +2222,14 @@ bool make_attack_spell(int m_idx, int special_flag)
 			f5 &= (RF5_INT_MASK);
 			f6 &= (RF6_INT_MASK);
 			f9 &= (RF9_INT_MASK);
+
+			//v1.1.91 尤魔の特別行動とメイルシュトロムは回復も兼ねているので省かない
+			if (m_ptr->r_idx == MON_YUMA)
+			{
+				f4 |= RF4_SPECIAL2;
+				f9 |= RF9_MAELSTROM;
+			}
+
 		}
 
 		/* Hack -- decline "teleport level" in some case */
@@ -2228,7 +2261,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 		f6 &= ~(RF6_SUMMON_MASK | RF6_TELE_LEVEL);
 		f9 &= ~(RF9_SUMMON_MASK);
 
-		if (m_ptr->r_idx == MON_F_SCARLET) f6 &= ~(RF6_SPECIAL);
+		if (m_ptr->r_idx == MON_FLAN) f6 &= ~(RF6_SPECIAL);
 		if (m_ptr->r_idx == MON_ROLENTO) f6 &= ~(RF6_SPECIAL);
 		if (m_ptr->r_idx == MON_OKINA) f4 &= ~(RF4_SPECIAL2);
 		if (m_ptr->r_idx == MON_SATONO || m_ptr->r_idx == MON_MAI) f6 &= ~(RF6_SPECIAL); //v1.1.32
@@ -2313,10 +2346,10 @@ bool make_attack_spell(int m_idx, int special_flag)
 				f6 &= ~(RF6_SPECIAL);
 			}
 			/*:::フラン特殊処理　分身が既に居るときはフォーオブアカインドを使わない*/
-			if(m_ptr->r_idx == MON_F_SCARLET)
+			if(m_ptr->r_idx == MON_FLAN)
 			{
 				int j;
-				for (j = 1; j < m_max; j++) if(m_list[j].r_idx == MON_F_SCARLET_4) f6 &= ~(RF6_SPECIAL);
+				for (j = 1; j < m_max; j++) if(m_list[j].r_idx == MON_FLAN_4) f6 &= ~(RF6_SPECIAL);
 			}
 			///mod140626 霊夢は壁際では夢想封印を使えない
 			if(m_ptr->r_idx == MON_REIMU)
@@ -2503,6 +2536,9 @@ bool make_attack_spell(int m_idx, int special_flag)
 	/* Hack -- Stupid monsters will never fail (for jellies and such) */
 	if (r_ptr->flags2 & RF2_STUPID) failrate = 0;
 
+	//v1.1.94 魔法力低下中はさらに失敗率25%上昇
+	if (MON_DEC_MAG(m_ptr)) failrate += 25;
+
 	//v1.1.46 女苑「プラックピジョン」による魔法失敗率上昇
 	failrate += pluck_pigeon_magic_fail(m_ptr);
 
@@ -2531,7 +2567,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 	if(p_ptr->pclass == CLASS_MERLIN && !spell_is_inate(thrown_spell) &&  music_singing(MUSIC_NEW_MERLIN_SOLO) && distance(py,px,m_ptr->fy,m_ptr->fx) < MAX_RANGE)
 	{
 		//v1.1.65 三項演算子の優先順位を間違えててtmp値が1か2になってしまっていたので修正
-		int tmp = r_ptr->level * ((r_ptr->flags2 & RF2_POWERFUL)?2:1);
+		int tmp = rlev * ((r_ptr->flags2 & RF2_POWERFUL)?2:1);
 
 		if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND)) tmp *= 2;
 
@@ -2576,14 +2612,14 @@ bool make_attack_spell(int m_idx, int special_flag)
 		return (TRUE);
 	}
 
-	if (spell_is_summon(thrown_spell) && CHECK_USING_SD_UNIQUE_CLASS_POWER(CLASS_NEMUNO) && randint1(r_ptr->level) < p_ptr->lev)
+	if (spell_is_summon(thrown_spell) && CHECK_USING_SD_UNIQUE_CLASS_POWER(CLASS_NEMUNO) && randint1(rlev) < p_ptr->lev)
 	{
 		msg_format(_("%^sが何かを召喚しようとしたが、あなたは不躾な来訪者を拒絶した。",
                     "%^s tries to summon help, but you reject the uninvited guests."), m_name);
 		return (TRUE);
 	}
 
-	if (spell_is_summon(thrown_spell) && SUPER_SHION && randint1(r_ptr->level) < p_ptr->lev)
+	if (spell_is_summon(thrown_spell) && SUPER_SHION && randint1(rlev) < p_ptr->lev)
 	{
 		msg_format(_("%^sがモンスターを召喚したが、モンスターは回れ右して帰っていった。",
                     "%^s summons a monster, but it turns around and returns."), m_name);
@@ -2647,7 +2683,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 
 
 	//v1.1.73 八千慧のモンスター買収フラグ処理
-	if (spell_is_summon(thrown_spell) && p_ptr->pclass == CLASS_YACHIE && p_ptr->magic_num1[0] && randint1(r_ptr->level) < p_ptr->lev)
+	if (spell_is_summon(thrown_spell) && p_ptr->pclass == CLASS_YACHIE && p_ptr->magic_num1[0] && randint1(rlev) < p_ptr->lev)
 	{
 		flag_bribe_summon_monsters = TRUE;
 	}
@@ -3086,11 +3122,10 @@ else msg_format("%^sが暗黒のブレスを吐いた。", m_name);
 		{
 			disturb(1, 1);
 			if (m_ptr->r_idx == MON_JAIAN)
-#ifdef JP
-				msg_format("「ボォエ～～～～～～」");
-#else
-				msg_format("'Booooeeeeee'");
-#endif
+				msg_format(_("「ボォエ～～～～～～」", "'Booooeeeeee'"));
+			else if(m_ptr->r_idx == MON_KUTAKA)
+				msg_format(_("「コ　ケ　コ　ッ　コ　ー　！」", "'Cock-a-doodle-doo!'"));
+
 #ifdef JP
 else if (blind) msg_format("%^sがあなたに向けて衝撃波を放った！", m_name);
 #else
@@ -3344,13 +3379,13 @@ else msg_format("%^sが魔力のブレスを吐いた。", m_name);
 			disturb(1, 1);
 
 			//フラン特殊攻撃　必中破滅の手+ランダム切り傷+経験値減少+全能力低下　隣接してなければHP700でまあ即死はしないはず
-			if(m_ptr->r_idx == MON_F_SCARLET)
+			if(m_ptr->r_idx == MON_FLAN)
 			{
 				if (!direct) return (FALSE);
 				if (!blind)
 				{
-					msg_format(_("%^sはあなたを見つめて拳を握った。",
-                                "%^s stares at you and closes her fist."), m_name);
+					msg_format(_("%^sはあなたを見てニヤリと笑うと拳を握りしめた。",
+                                "%^s grins at you and closes her fist."), m_name);
 					msg_print(NULL);
 				}
 				dam = (((s32b) ((40 + randint1(20)) * (p_ptr->chp))) / 100);
@@ -3361,7 +3396,7 @@ else msg_format("%^sが魔力のブレスを吐いた。", m_name);
 			//v1.1.49 隠岐奈特殊行動　ランダムユニーク召喚
 			else if (m_ptr->r_idx == MON_OKINA)
 			{
-				if (summon_named_creature(0, m_ptr->fy, m_ptr->fx, MON_RANDOM_UNIQUE_2, PM_ALLOW_SPECIAL_UNIQUE))
+				if (summon_named_creature(0, m_ptr->fy, m_ptr->fx, MON_RANDOM_UNIQUE_2, PM_ALLOW_SP_UNIQUE))
 					msg_format(_("%^sは新たなモンスターを創り出した！",
                                 "%^s creates a new monster!"), m_name);
 
@@ -3457,6 +3492,21 @@ else msg_format("%^sが魔力のブレスを吐いた。", m_name);
 					msg_format(_("%^sは周囲の付喪神を吸収した！", "%^s absorbs nearby tsukumogami!"), m_name);
 					absorb_tsukumo(m_idx);
 			}
+			else if (m_ptr->r_idx == MON_YUMA)
+			{
+				int oil_field_num;
+				int tmp_hp;
+				msg_format(_("%^sは周囲の石油を吸い込んで吸収した！",
+                            "%^s sucks up and absorbs the oil around her!"), m_name);
+				oil_field_num = yuma_vacuum_oil(m_ptr->fy, m_ptr->fx, FALSE, 0);
+
+				//ないと思うがオーバーフロー防止のために一時変数を経由
+				tmp_hp = m_ptr->hp + oil_field_num * 100;
+				if (tmp_hp > m_ptr->maxhp) tmp_hp = m_ptr->maxhp;
+				m_ptr->hp = tmp_hp;
+				if (p_ptr->health_who == m_idx) p_ptr->redraw |= (PR_HEALTH);
+			}
+
 			else
 			{
 				msg_format(_("ERROR: %^sの特別な行動2は定義されていない。",
@@ -4903,10 +4953,10 @@ msg_format("%sは無傷の球の呪文を唱えた。", m_name);
 
 				break;
 
-			case MON_F_SCARLET:
+			case MON_FLAN:
 				{
 					for (k = 0; k < 3; k++)
-						count += summon_named_creature(m_idx, m_ptr->fy, m_ptr->fx, MON_F_SCARLET_4, mode);
+						count += summon_named_creature(m_idx, m_ptr->fy, m_ptr->fx, MON_FLAN_4, mode);
 				}
 				break;
 				//正邪特殊行動
@@ -5947,7 +5997,7 @@ else msg_format("%^sが魔法で天使を召喚した！", m_name);
 
 			if ((r_ptr->flags1 & RF1_UNIQUE) && !easy_band)
 			{
-				num += r_ptr->level/40;
+				num += rlev/40;
 			}
 
 			for (k = 0; k < num; k++)
@@ -6871,8 +6921,14 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 	//		if (!direct) return (FALSE);
 			disturb(1, 1);
 
-            if (blind) msg_format(_("突然大渦に呑み込まれた！", "You are suddenly engulfed in a maelstrom!"), m_name);
-            else msg_format(_("%^sがメイルシュトロムの呪文を詠唱した。", "%^s casts a maelstrom."), m_name);
+			//v1.1.91 特殊処理　尤魔のメイルシュトロムは石油地形を作る
+
+			if (blind)
+				msg_format(_("突然大渦に呑み込まれた！", "You are suddenly engulfed in a maelstrom!"), m_name);
+			else if (m_ptr->r_idx == MON_YUMA)
+				msg_format(_("%^sが石油の大渦を巻き起こした！", "%^s conjures a huge whirlpool of oil!"),m_name);
+			else
+				msg_format(_("%^sがメイルシュトロムの呪文を詠唱した。", "%^s conjures a maelstrom."), m_name);
 
 			if (r_ptr->flags2 & RF2_POWERFUL)
 			{
@@ -6884,9 +6940,16 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 				dam = (rlev * 5) + randint1(rlev * 3);
 				rad = 6;
 			}
-			(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP), FALSE);
-			(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, rad, GF_WATER_FLOW, (PROJECT_GRID | PROJECT_ITEM | PROJECT_JUMP | PROJECT_HIDE), FALSE);
-
+			if (m_ptr->r_idx == MON_YUMA)
+			{
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP | PROJECT_HIDE), FALSE);
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_DIG_OIL, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_JUMP), FALSE);
+			}
+			else
+			{
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP), FALSE);
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, rad, GF_WATER_FLOW, (PROJECT_GRID | PROJECT_ITEM | PROJECT_JUMP | PROJECT_HIDE), FALSE);
+			}
 			update_smart_learn(m_idx, DRS_WATER);
 			break;
 		}

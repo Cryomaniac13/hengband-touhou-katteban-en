@@ -64,7 +64,7 @@ const	battle_mon_special_team_type	battle_mon_special_team_list[BATTLE_MON_SPECI
 	{255,"(ダミー)",
 		{0, 0, 0, 0, 0, 0, 0, 0}},
 	{60,_("『紅魔館』", "Scarlet Devil Mansion"),
-		{MON_REMY, MON_F_SCARLET, MON_SAKUYA, MON_PATCHOULI, MON_MEIRIN, MON_KOAKUMA, MON_CHUPACABRA,0}},
+		{MON_REMY, MON_FLAN, MON_SAKUYA, MON_PATCHOULI, MON_MEIRIN, MON_KOAKUMA, MON_CHUPACABRA,0}},
 	{50,_("『アンノウン』", "TheUnknown"),
 		{MON_NUE, MON_RANDOM_UNIQUE_1, MON_RANDOM_UNIQUE_2, 0, 0, 0, 0, 0}},
 	{75,_("『最後のトリニティリリージョン』", "Last Trinity Religion"),
@@ -79,7 +79,7 @@ const	battle_mon_special_team_type	battle_mon_special_team_list[BATTLE_MON_SPECI
 	{55,_("『姉連合』", "Big Sisters Union"),
 		{MON_REMY, MON_LUNASA, MON_SHIZUHA, MON_SATORI, MON_BENBEN, MON_SHION_1, 0, 0}},
 	{60,_("『妹連合』", "Little Sisters Union"),
-		{MON_F_SCARLET, MON_LYRICA, MON_MINORIKO, MON_KOISHI, MON_YATSUHASHI, MON_JYOON, 0, 0}},
+		{MON_FLAN, MON_LYRICA, MON_MINORIKO, MON_KOISHI, MON_YATSUHASHI, MON_JYOON, 0, 0}},
 	{20,_("『幽霊楽団』", "Phantom Ensemble"),
 		{MON_LUNASA, MON_MERLIN, MON_LYRICA, 0, 0, 0, 0, 0}},
 	{0,_("『鳥獣伎楽』", "Choujuu Gigaku"),
@@ -468,7 +468,7 @@ int	calc_battle_mon_spell_dam(int r_idx, int enemy_r_idx, int *spell_score_mult,
 
 	if(r_ptr->flags4 & RF4_SPECIAL2) //フラン特技以外は発生抑止する予定なのでカウントしない
 	{
-		if(r_idx == MON_F_SCARLET)
+		if(r_idx == MON_FLAN)
 			dam = 1600; //フラン特技
 		else
 			dam = 0;
@@ -3384,7 +3384,7 @@ void exbldg_search_around(void)
 			else
 			{
 				object_prep(o_ptr, (int)lookup_kind(TV_ITEMCARD, SV_ITEMCARD));
-				apply_magic_itemcard(o_ptr,dun_level,MON_F_SCARLET);//フランのカード入手
+				apply_magic_itemcard(o_ptr,dun_level,MON_FLAN);//フランのカード入手
 				object_desc(o_name,o_ptr,0);
 				msg_format(_("%sを見つけた！", "You have discovered %s!"),o_name);
 				inven_carry(o_ptr);
@@ -4373,6 +4373,8 @@ static bool monster_hook_nightmare_diary(int r_idx)
 	//v1.1.86 虹龍洞
 	if (r_idx >= MON_MIKE && r_idx <= MON_MOMOYO) return TRUE;
 
+	//v1.1.91 剛欲異聞
+	if (r_idx == MON_YUMA) return TRUE;
 
 	return FALSE;
 }

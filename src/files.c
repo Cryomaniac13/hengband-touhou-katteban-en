@@ -235,6 +235,7 @@ struct named_num
 
 ///mod131229 GF_xxxの追加
 //spell.xx.prfの記述と内部的なGF_XXXの値を対応付けるための表
+//GF_XXXの順番どおりでなくてもいいがなるべく揃えときたい
 /* Index of spell type names */
 static named_num gf_desc[] =
 {
@@ -261,18 +262,29 @@ static named_num gf_desc[] =
 	{"GF_METEOR",				GF_METEOR			},
 	{"GF_ICE",					GF_ICE				},
 	{"GF_CHAOS",				GF_CHAOS				},
+	//30
 	{"GF_NETHER",				GF_NETHER			},
 	{"GF_DISENCHANT",			GF_DISENCHANT		},
 	{"GF_NEXUS",				GF_NEXUS				},
 	{"GF_TIME",					GF_TIME				},
 	{"GF_GRAVITY",				GF_GRAVITY			},
+	{"GF_DEC_ATK",				GF_DEC_ATK },
+	{"GF_DEC_DEF",				GF_DEC_DEF },
+	{"GF_DEC_MAG",				GF_DEC_MAG },
+	{"GF_DEC_ALL",				GF_DEC_ALL },
 	{"GF_KILL_WALL",			GF_KILL_WALL		},
 	{"GF_KILL_DOOR",			GF_KILL_DOOR		},
 	{"GF_KILL_TRAP",			GF_KILL_TRAP		},
-//	{"GF_MAKE_WALL",			GF_MAKE_WALL		},
+	{ "GF_NO_MOVE",				GF_NO_MOVE },
+	{ "GF_BERSERK",				GF_BERSERK },
+	{ "GF_SUPER_EGO",			GF_SUPER_EGO },
+
 	{"GF_MAKE_DOOR",			GF_MAKE_DOOR		},
 	{"GF_MAKE_TRAP",			GF_MAKE_TRAP		},
 	{"GF_MAKE_TREE",			GF_MAKE_TREE		},
+	{ "GF_DIG_OIL",			GF_DIG_OIL },
+	{ "GF_ALCOHOL",			GF_ALCOHOL },
+
 	{"GF_OLD_CLONE",			GF_OLD_CLONE		},
 	{"GF_OLD_POLY",			GF_OLD_POLY			},
 	{"GF_OLD_HEAL",			GF_OLD_HEAL			},
@@ -390,6 +402,7 @@ static named_num gf_desc[] =
 	{ "GF_MAKE_POISON_PUDDLE",			GF_MAKE_POISON_PUDDLE },
 	{ "GF_MAKE_ACID_PUDDLE",			GF_MAKE_ACID_PUDDLE },
 	{ "GF_MAKE_STORM",			GF_MAKE_STORM },
+
 
 
 	{NULL, 						0						}
@@ -2473,6 +2486,9 @@ int calc_martialarts_dam_x100(hand_idx)
 				int j;
 				for (j = 0; (ma_blows_new[j].method != 0 && mode_cnt < 50); j++)
 					if (ma_blows_new[j].method == martial_arts_method)mode_pick[mode_cnt++] = j;
+
+				if (!mode_cnt) return 0;//v1.1.92 専用格闘攻撃を設定し忘れてキャラメイク画面でクラッシュしたので追加
+
 				ma_ptr = &ma_blows_new[mode_pick[randint0(mode_cnt)]];
 				min_level = ma_ptr->min_level;
 			} while ((min_level > p_ptr->lev) || (randint1(p_ptr->lev) < ma_ptr->chance));
@@ -3748,6 +3764,10 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 24)		add_flag(flgs, TR_ESP_NONLIVING);
 		break;
 
+	case CLASS_MIKE:
+		if(plev > 29) add_flag(flgs, TR_RES_HOLY);
+
+		break;
 	case CLASS_TAKANE:
 
 		if (plev > 24) add_flag(flgs, TR_RES_CONF);
@@ -4495,6 +4515,9 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 				case SV_SOUVENIR_ELDER_THINGS_CRYSTAL:
 					add_flag(flgs, TR_SH_COLD);
 					break;
+
+					//酔魔の酒の空き瓶　能力なし　レイシャルオーク召喚
+
 
 
 				default:
@@ -8434,37 +8457,60 @@ static void dump_aux_race_history(FILE *fff)
 
 	if (p_ptr->pclass == CLASS_JYOON)
 	{
-		fprintf(fff, _("\n  [散財]",
-                        "\n  [Money wasting]"));
-		if (!p_ptr->magic_num1[0] && !p_ptr->magic_num1[1])
+		//専用性格のときには油の量(石油地形に変えたグリッド数)を表示する
+		//さらにツケを残したまま勝利引退した場合専用メッセージ入れよう
+		if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON))
 		{
-			fprintf(fff, _("\nあなたはこの冒険で$1たりとも無駄にしなかった。 \n",
-                            "\nYou didn't waste even $1 during your quest. \n"));
-		}
-		else if (p_ptr->magic_num1[1] > 1000)
-		{
-			fprintf(fff, _("\nあなたはこの冒険で$%d,%03d,%03d,%03dを散財した。 \n",
-                            "\nYou wasted $%d,%03d,%03d,%03d during your quest. \n"), p_ptr->magic_num1[1] / 1000, p_ptr->magic_num1[1] % 1000, p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
+			fprintf(fff, _("\n  [油の量]", "\n  [Oil amount]"));
+			if(p_ptr->magic_num1[1])
+				fprintf(fff, _("\nあなたはこの冒険で%d%06d リットルもの油を撒き散らした。 \n",
+                            "\nYou've excavated %d%06d liters of oil during your adventure. \n"), p_ptr->magic_num1[1], p_ptr->magic_num1[0]);
+			else
+				fprintf(fff, _("\nあなたはこの冒険で%d リットルの油を撒き散らした。 \n",
+                            "\nYou've excavated %d liters of oil during your adventure. \n"), p_ptr->magic_num1[0]);
 
-		}
-		else if (p_ptr->magic_num1[1])
-		{
-			fprintf(fff, _("\nあなたはこの冒険で$%d,%03d,%03dを散財した。 \n",
-                            "\nYou wasted $%d,%03d,%03d during your quest. \n"), p_ptr->magic_num1[1] % 1000, p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
+			if (p_ptr->magic_num1[4]>0 && finish_the_game)
+			{
+				fprintf(fff, _("\n  [ツケ]", "\n  [Bill]"));
+				fprintf(fff, _("\nあなたは$%dのツケの支払いから逃げ切った！\n",
+                            "\nYou got away from paying your bill of $%d!\n"), p_ptr->magic_num1[4]);
 
+			}
 		}
-		else if (p_ptr->magic_num1[0] > 1000)
-		{
-			fprintf(fff, _("\nあなたはこの冒険で$%d,%03dを散財した。 \n",
-                            "\nYou wasted $%d,%03d during your quest. \n"), p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
+	    else
+        {
+            fprintf(fff, _("\n  [散財]", "\n  [Money wasting]"));
+            if (!p_ptr->magic_num1[0] && !p_ptr->magic_num1[1])
+            {
+                fprintf(fff, _("\nあなたはこの冒険で$1たりとも無駄にしなかった。 \n",
+                                "\nYou didn't waste even $1 during your quest. \n"));
+            }
+            else if (p_ptr->magic_num1[1] > 1000)
+            {
+                fprintf(fff, _("\nあなたはこの冒険で$%d,%03d,%03d,%03dを散財した。 \n",
+                                "\nYou wasted $%d,%03d,%03d,%03d during your quest. \n"), p_ptr->magic_num1[1] / 1000, p_ptr->magic_num1[1] % 1000, p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
 
-		}
-		else
-		{
-			fprintf(fff, _("\nあなたはこの冒険で$%dを散財した。 \n",
-                            "\nYou wasted $%d during your quest. \n"), p_ptr->magic_num1[0] % 1000);
+            }
+            else if (p_ptr->magic_num1[1])
+            {
+                fprintf(fff, _("\nあなたはこの冒険で$%d,%03d,%03dを散財した。 \n",
+                                "\nYou wasted $%d,%03d,%03d during your quest. \n"), p_ptr->magic_num1[1] % 1000, p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
 
-		}
+            }
+            else if (p_ptr->magic_num1[0] > 1000)
+            {
+                fprintf(fff, _("\nあなたはこの冒険で$%d,%03dを散財した。 \n",
+                                "\nYou wasted $%d,%03d during your quest. \n"), p_ptr->magic_num1[0] / 1000, p_ptr->magic_num1[0] % 1000);
+
+            }
+            else
+            {
+                fprintf(fff, _("\nあなたはこの冒険で$%dを散財した。 \n",
+                                "\nYou wasted $%d during your quest. \n"), p_ptr->magic_num1[0] % 1000);
+
+            }
+        }
+
 
 
 	}
@@ -8745,7 +8791,9 @@ static void dump_aux_inventory2(FILE *fff)
                         "  [In medicine box]\n\n"));break;
 	case CLASS_TAKANE:
 	case CLASS_CARD_DEALER:
-		fprintf(fff, _("  [ケースの中]\n\n",
+	case CLASS_SANNYO:
+	case CLASS_MIKE:
+		fprintf(fff, _("  [カードケースの中]\n\n",
                         "  [In card case]\n\n")); break;
 	default:
 		fprintf(fff, _("  [追加インベントリ]\n\n",
@@ -10548,6 +10596,13 @@ if(test) msg_format("EXP(MAX1000k):%d",p_ptr->max_exp / 10);
 	}
 
 	if(value_items<10000000) value_items += p_ptr->au;
+
+	//v1.1.92 女苑(専用性格)がツケを未精算の場合計算から差っ引く
+	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && p_ptr->magic_num1[4])
+	{
+		value_items -= p_ptr->magic_num1[4];
+	}
+
 	//v1.1.47 大借金抱えてプレイ開始する＠のために下限追加
 	if (value_items < 0) value_items = 0;
 	//所持金+所持品の価値/10(上限1000000)

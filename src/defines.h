@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 1
 #define H_VER_MINOR 1
-#define H_VER_PATCH 90
+#define H_VER_PATCH 95
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -224,8 +224,9 @@
 #define QUEST_GEIDON_KWAI	68	//鯢呑亭クエスト(妖怪用)
 #define QUEST_MORIYA_2		69 //守矢の策動Ⅱ
 #define QUEST_REIMU_ATTACK	70 //巫女警報発令中
+#define QUEST_YAKUZA_1		71
 
-#define QUEST_MAX			71 //クエストの最後の番号+1
+#define QUEST_MAX			72 //クエストの最後の番号+1
 
 //v1.1.24 急流下りクエストでこのターン数以下で入賞
 #define QT_TURN1			250
@@ -497,8 +498,8 @@
 
 /* Monk martial arts... */
 # define MAX_MA 17
-# define MA_KNEE 1
-# define MA_SLOW 2
+//# define MA_KNEE 1
+//# define MA_SLOW 2
 
 /* Mindcraft */
 #define MAX_MIND_POWERS  21
@@ -1311,16 +1312,18 @@
 #define CLASS_CHIMATA			147
 #define CLASS_MOMOYO			148
 
+#define CLASS_YUMA				149
+
 
 /*Maximum number of player "class" types (see "table.c", etc)*/
 /*:::class_info[]の項目数 CLASS_**の最終+1　キャラメイク時のクラス数はbirth.cのMAX_CLASS_CHOICEなので注意*/
-#define MAX_CLASS            149
+#define MAX_CLASS            150
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
 #define CLASS_RIDING_BACKDANCE	(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO)
 
 //v1.1.87 アビリティカードを扱う職業
-#define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER)
+#define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_MIKE || p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER)
 //v1.1.90 駒草山如にカード売人系特技と吟遊詩人系特技を持たせようとしたらp_ptr->magic_num[]の使われる場所が被ったので弥縫策でカード売人系特技の使用箇所をシフトさせる
 #define ABLCARD_MAGICNUM_SHIFT (p_ptr->pclass == CLASS_SANNYO ? 32:0)
 
@@ -1361,8 +1364,9 @@
 #define SEIKAKU_SPECIAL_3_FAIRIES	9
 #define SEIKAKU_SPECIAL_ORIN		10
 #define SEIKAKU_SPECIAL_AYA			11
+#define SEIKAKU_SPECIAL_JYOON		12
 
-#define MAX_SEIKAKU_SPECIAL			12 //一つ上の最大+1
+#define MAX_SEIKAKU_SPECIAL			13 //一つ上の最大+1
 
 
 
@@ -1596,6 +1600,7 @@
 /* #define FF_OIL           50 */
 ///mod150719 布都追加
 #define FF_PLATE    51
+#define FF_OIL_FIELD	 52 //v1.1.91
 /* #define FF_CAN_CLIMB     52 */
 #define FF_CAN_FLY       53
 #define FF_CAN_SWIM      54
@@ -1803,6 +1808,7 @@
 #define ART_POWER               13
 #define ART_AHO                 14
 #define ART_PALANTIR			15
+#define ART_CRIMSON             16
 
 #define ART_SOULKEEPER			19
 #define ART_JULIAN              23
@@ -1882,6 +1888,7 @@
 #define ART_CHINGRONG			187
 #define ART_AMENONUBOKO			188
 #define ART_AEGISFANG           193
+#define ART_TETSUGETA			194
 #define ART_NAIN_PICK			195
 #define ART_GOTHMOG             196
 #define ART_FUNDIN              198
@@ -1890,14 +1897,15 @@
 #define ART_CHARMED_PENDANT		203
 #define ART_BARD                122
 #define ART_BRAND               123
-#define ART_CRIMSON             16
 #define ART_GOGO				204
 #define ART_ROBIN_HOOD          205
 #define ART_AESCULAPIUS			209
+#define ART_SPECTRAL_DRAGON		210
 #define ART_BARD_ARROW          148
 #define ART_ELMI				212
 #define ART_HEAVENLY_MAIDEN     216
 
+#define ART_ZOKU				226
 #define ART_ODUNU				228
 #define ART_MENPO				229
 #define ART_QUEEN_OF_RED		231
@@ -1988,6 +1996,13 @@
 #define ART_ONIKIRIMARU		333
 #define ART_BILLY_THE_KID	334
 #define ART_HANGOKU_SAKE	335
+#define ART_MAGMA			338
+#define ART_TOUTETSU		340
+#define ART_FLAN			341
+#define ART_TARNKAPPE		342
+#define ART_CHIYOU			343
+#define ART_OOONOTE			344
+#define ART_NOMINOSUKUNE	345
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/
@@ -2388,6 +2403,8 @@
 #define ACT_TRANSFORM			185
 #define ACT_MAKE_MAGMA			186
 #define ACT_MAKE_BLIZZARD		187
+#define ACT_DIG_OIL				188
+#define ACT_BLAST_MISSILES		189
 
 
 #define ACT_CAST_OFF            250
@@ -2442,16 +2459,10 @@
 #define TV_BOOK_HISSATSU	13
 #define TV_BOOK_MEDICINE	14
 #define TV_BOOK_OCCULT		15
+//tval16～19は将来の魔法領域追加のために使わずにおく。
+//魔法書のtvalと職業データの魔法領域適性リストを対応付けたせいで拡張しにくくなってしまった
 #define TV_BOOK_END		15
 
-///mod151226 14→256にした。特技コマンドからしか使ってないから問題ないはず？
-#define TV_BOOK_MUSIC	256
-
-
-#define TV_GOLD			16
-
-#define OBJ_GOLD_LIST   53     /* First "gold" entry *//*:::TVALでなくk_idx*/
-#define MAX_GOLD        18      /* Number of "gold" entries */
 
 #define TV_BULLET		20
 #define TV_ARROW		21
@@ -2492,6 +2503,12 @@
 #define TV_WHISTLE		49
 #define TV_MASK			50 //こころ専用
 
+//v1.1.94 魔法領域の拡張性確保のためTV_GOLDを16→51に
+#define TV_GOLD			51
+#define OBJ_GOLD_LIST   53     /* First "gold" entry (注意:この53はtvalでなくk_idxの値)*/
+#define MAX_GOLD        18      /* Number of "gold" entries */
+
+
 #define TV_STAFF		55
 
 #define TV_MACHINE		57
@@ -2525,6 +2542,9 @@
 #define TV_ANTIQUE		84 //*真・勝利*後にブラマに生成される高額品
 
 #define TV_ABILITY_CARD	85	///v1.1.86 アビリティカード
+
+#define TV_BOOK_MUSIC	256 //歌系特技を使うクラスがdo_spellを呼び出すためのダミーtval番号となっている。
+
 
 //本家用魔導書
 /*
@@ -2869,6 +2889,8 @@
 #define SV_RING_WARNING                 49
 #define SV_RING_MUSCLE                  50
 
+#define SV_RING_MAX						50 //抗争クエスト1の全滅報酬生成に使う
+
 //SVAL:アミュレット TV:48
 #define SV_AMULET_TELEPORT               1
 #define SV_AMULET_RESIST_ELEC            2
@@ -2905,7 +2927,7 @@
 #define SV_AMULET_FOX					33
 #define SV_AMULET_HAKUREI				34
 #define SV_AMULET_SHIOMITSUTAMA			35
-
+#define SV_AMULET_SUKUNE				36
 
 ///SVAL笛:TVAL49
 #define SV_WHISTLE                  	1
@@ -3057,6 +3079,8 @@
 
 //v1.1.87 10連ガチャ箱
 #define SV_CHEST_10_GACHA		58
+//v1.1.91 動物霊戦争1
+#define SV_CHEST_YAKUZA1		59
 
 //SVAL:人形 TV:61
 #define SV_FIGURINE_NORMAL	0
@@ -3228,6 +3252,7 @@
 #define SV_SOUVENIR_MOON_COMPUTER		29
 #define SV_SOUVENIR_NODENS_CHARIOT		30
 #define SV_SOUVENIR_ELDER_THINGS_CRYSTAL	31	//v1.1.80
+#define SV_SOUVENIR_EMPTY_BOTTLE		32
 
 
 
@@ -3403,7 +3428,7 @@
 #define SV_ALCOHOL_KUMO	10
 #define SV_ALCOHOL_90	11
 #define SV_ALCOHOL_SCARLET	12
-#define SV_ALCOHOL_DOBUROKU	13
+#define SV_ALCOHOL_VINTAGE_WINE	13
 #define SV_ALCOHOL_SYOUTYUU	14
 #define SV_ALCOHOL_PONSYU	15
 #define SV_ALCOHOL_KOKO	16
@@ -3422,9 +3447,8 @@
 #define SV_ALCOHOL_MANZAIRAKU	29
 #define SV_ALCOHOL_UMESHU	30
 #define SV_ALCOHOL_MAMUSHI	31
-
-
-
+#define SV_ALCOHOL_GEIDON	32
+#define SV_ALCOHOL_DOBUROKU	33
 
 
 
@@ -3436,6 +3460,8 @@
 #define SV_SWEETS_DANGO				4
 #define SV_SWEETS_PEACH				5
 #define SV_SWEETS_MANJYU			6
+//新しく珍しいのを追加したらgrassroots_trading_cards()の尤魔のところに処理追加
+
 
 //SVAL 食料:TVAL80
 #define SV_FOOD_RATION                  0
@@ -3449,6 +3475,9 @@
 #define SV_FOOD_TENTAN				8 //天人の丹
 #define SV_FOOD_MAGIC_WATERMELON	9 //魔法スイカ
 #define SV_FOOD_DATURA				10 //チョウセンアサガオの葉
+#define SV_FOOD_FORBIDDEN_FRUIT		11
+
+//新しく珍しいのを追加したらgrassroots_trading_cards()の尤魔のところに処理追加
 
 
 //薬師合成専用品のSVAL Tval:81
@@ -3761,21 +3790,22 @@
 /*
  * Bit flags for the place_monster_???() (etc)
  */
-#define PM_ALLOW_SLEEP    0x00000001
-#define PM_ALLOW_GROUP    0x00000002
-#define PM_FORCE_FRIENDLY 0x00000004
-#define PM_FORCE_PET      0x00000008
-#define PM_NO_KAGE        0x00000010
-#define PM_NO_PET         0x00000020
-#define PM_ALLOW_UNIQUE   0x00000040
-#define PM_IGNORE_TERRAIN 0x00000080
-#define PM_HASTE          0x00000100
-#define PM_KAGE           0x00000200
-#define PM_MULTIPLY       0x00000400
-#define PM_EPHEMERA       0x00000800
-#define PM_NO_ENERGY      0x00001000 //召喚時に行動力がチャージされない
-#define PM_ALLOW_SPECIAL_UNIQUE	0x00002000 //ランダムユニークなどの特殊ユニークを召喚する
-#define PM_FORCE_ENEMY	  0x00002000 //v1.1.64 友好設定の敵でも敵として呼ばれる。友好フラグの敵の救援召喚など
+#define PM_ALLOW_SLEEP		0x00000001
+#define PM_ALLOW_GROUP		0x00000002
+#define PM_FORCE_FRIENDLY	0x00000004
+#define PM_FORCE_PET		0x00000008
+#define PM_NO_KAGE			0x00000010
+#define PM_NO_PET			0x00000020
+#define PM_ALLOW_UNIQUE		0x00000040
+#define PM_IGNORE_TERRAIN	0x00000080
+#define PM_HASTE			0x00000100
+#define PM_KAGE				0x00000200
+#define PM_MULTIPLY			0x00000400
+#define PM_EPHEMERA			0x00000800
+#define PM_NO_ENERGY		0x00001000 //召喚時に行動力がチャージされない
+#define PM_ALLOW_SP_UNIQUE	0x00002000 //クエストフロアにもランダムユニークなどの特殊ユニークを召喚する
+#define PM_FORCE_ENEMY		0x00004000 //v1.1.64 友好設定の敵でも敵として呼ばれる。友好フラグの敵の救援召喚など
+#define PM_SET_MFLAG_SP		0x00008000	//呼び出したモンスターにMFLAG_SPECIAL(職業ごとに役割の違う特殊フラグ)を立てる
 
 
 /* Bit flags for monster_desc() */
@@ -3872,11 +3902,14 @@
 #define SD_EVIL_UNDULATION_1	0x02000000 //うどんげ特殊性格「イビルアンジュレーション」
 #define SD_EVIL_UNDULATION_2	0x04000000
 #define SD_EVIL_UNDULATION_3	0x08000000
-#define CHECK_EVIL_UNDULATION_MASK 0x0E000000
+#define EVIL_UNDULATION_MASK	0x0E000000
 //今更ながら、特定のユニーククラスでしか使わないspecial_defenseをここに統一することにした。
 //アイテムカードなどで他のクラスからも使える特技はこのビットを使わないこと。
 //いずれもしspecial_defenseのフラグビットが足りなくなるようなら咲夜や雛のフラグビットをこれに吸収して再利用してもいい。
 #define SD_UNIQUE_CLASS_POWER	0x10000000
+#define SD_GLASS_SHIELD			0x20000000
+
+
 //クラス専用のSPECIAL_DEFENSEフラグが現在有効になっているかどうかを確認する
 #define CHECK_USING_SD_UNIQUE_CLASS_POWER(CLASS_ID) ((p_ptr->pclass == CLASS_ID) && (p_ptr->special_defense & SD_UNIQUE_CLASS_POWER))
 
@@ -3999,6 +4032,7 @@
 #define SUMMON_GENSOUKYOU	101 //幻想郷住人　GEN_***のフラグ持ち
 #define SUMMON_HANIWA		102	//v1.1.64
 #define SUMMON_AQUATIC		103 //v1.1.69
+#define SUMMON_ONE_ORC			104
 
 /*
  * Spell types used by project(), and related functions.
@@ -4014,6 +4048,7 @@
 #define GF_ACID         3
 #define GF_COLD         4
 #define GF_FIRE         5
+
 #define GF_PSY_SPEAR    9
 #define GF_MISSILE      10
 #define GF_ARROW        11
@@ -4025,7 +4060,7 @@
 /*:::閃光弱点の敵にしか効かない閃光らしい*/
 #define GF_LITE_WEAK    17
 #define GF_DARK_WEAK    18
-#define GF_MAKE_STORM	19 //v1.1.85 魔法の雷雲
+#define GF_MAKE_STORM	19 //v1.1.85 魔法の雷雲生成
 #define GF_SHARDS       20
 #define GF_SOUND        21
 #define GF_CONFUSION    22
@@ -4045,16 +4080,27 @@
 #define GF_NEXUS        33
 #define GF_TIME         34
 #define GF_GRAVITY      35
+//v1.1.94 追加
+#define GF_DEC_ATK		36 //攻撃低下
+#define GF_DEC_DEF		37 //防御低下
+#define GF_DEC_MAG		38 //魔法低下
+#define GF_DEC_ALL		39 //全能力低下
 /*:::岩石溶解*/
 #define GF_KILL_WALL    40
 /*:::トラップ・ドア破壊*/
 #define GF_KILL_DOOR    41
 /*:::トラップ解除*/
 #define GF_KILL_TRAP    42
+#define GF_NO_MOVE	43 //v1.1.95 移動禁止状態にする
+#define GF_BERSERK		44 //v1.1.95 狂戦士化状態にする
+#define GF_SUPER_EGO	45
+
 //#define GF_MAKE_WALL    45 v1.1.56 壁生成がGF_STONE_WALLと重複しておりこれは使われてないらしいのでコメントアウトしとく
 #define GF_MAKE_DOOR    46
 #define GF_MAKE_TRAP    47
 #define GF_MAKE_TREE    48
+#define GF_DIG_OIL		49 //v1.1.91
+#define GF_ALCOHOL		50 //v1.1.94
 #define GF_OLD_CLONE    51
 /*:::チェンジモンスター*/
 #define GF_OLD_POLY             52
@@ -4343,7 +4389,9 @@
 //このフラグはフロアに既に憑りつかれたモンスターが居るかどうかの判定にだけ使う。
 #define MFLAG_POSSESSED_BY_SHION 0x00020000
 //v1.1.73 孤立状態の敵　ほかの敵から敵対される
-#define MFLAG_ISOLATION 0x00040000
+#define MFLAG_ISOLATION			0x00040000
+//v1.1.94 すでに行動遅延した敵は行動遅延を受けなくなる。このフラグはこのモンスターの行動開始時にリセットされる
+#define MFLAG_ALREADY_DELAYED	0x00080000
 
 
 
@@ -4550,7 +4598,10 @@
 #define TR_HOUSE					126	//v1.1.79 種族「座敷わらし」が移動屋敷として住めるアイテム
 //あとひとつだけフラグを増やせると思う
 #define TR_FLAG_MAX            127 //v1.1.79 TR_HOUSE追加のため126→127
-#define TR_FLAG_SIZE           4
+
+//v1.1.94 TR_FLAG_SIZEを4→8にした
+#define TR_FLAG_OLD_SIZE       4
+#define TR_FLAG_SIZE           8
 
 
 
@@ -5278,7 +5329,7 @@
 #define RF6_NOMAGIC_MASK \
 	(RF6_BREATH_MASK | RF6_SPECIAL)
 
-#define RF9_NOMAGIC_MASK 0UL
+#define RF9_NOMAGIC_MASK 0L
 
 
 /*
@@ -5313,6 +5364,8 @@
 
 #define MR1_SINKA 0x01
 
+//v1.1.94 魔法的な特技を一つでも持っているかどうか
+#define HAS_ANY_MAGIC(R_PTR) (((R_PTR)->flags4 & ~(RF4_NOMAGIC_MASK)) || ((R_PTR)->flags5 & ~(RF5_NOMAGIC_MASK)) || ((R_PTR)->flags6 & ~(RF6_NOMAGIC_MASK)) || ((R_PTR)->flags9 & ~(RF9_NOMAGIC_MASK)))
 
 #define is_friendly(A) \
 	 (bool)(((A)->smart & SM_FRIENDLY) ? TRUE : FALSE)
@@ -6044,9 +6097,12 @@ extern int PlayerUID;　
 #define BACT_BUY_ABILITY_CARD		86 //v1.1.87
 #define BACT_CHECK_ABILITY_CARD		87 //v1.1.87
 #define BACT_SELL_ABILITY_CARD		88 //v1.1.87
+#define BACT_GO_UNDERGROUND			89
+#define BACT_DESTROY_ITEM			90 //v1.1.92
+#define BACT_EX_RUMOR_NEW			91
 
 //*::: MAX_BACTは現在特に使われてないらしい*/
-#define MAX_BACT                    	88
+#define MAX_BACT                    	91
 
 /*
  * Quest status
@@ -6542,9 +6598,13 @@ extern int PlayerUID;　
 #define MON_NIGHTCRAWLER  744
 #define MON_CHAOS_VOR     751
 #define MON_THURINGWETHIL 755
+#define MON_WYRM_RED		756
 #define MON_AETHER_VOR    752
 #define MON_FUNDIN        762
 #define MON_DWORKIN       763
+#define MON_URIEL			764
+#define MON_AZRIEL			765
+
 #define MON_ANCALAGON		766
 #define MON_NIGHTWALKER   768
 #define MON_RAPHAEL       769
@@ -6705,7 +6765,7 @@ extern int PlayerUID;　
 #define MON_PATCHOULI	1092
 #define MON_SAKUYA      1093
 #define MON_REMY		1094
-#define MON_F_SCARLET   1095
+#define MON_FLAN   1095
 #define MON_LETTY   1096
 #define MON_CHEN		1097
 #define MON_ALICE   1098
@@ -6828,7 +6888,7 @@ extern int PlayerUID;　
 #define MON_MAGIC_MUSHROOM_GRAY		1219
 #define MON_MAGIC_MUSHROOM_CLEAR	1220
 
-#define MON_F_SCARLET_4   1221
+#define MON_FLAN_4   1221
 #define MON_TATARI	1222
 #define MON_CIRNO_ICE		1223
 #define MON_SEIJA_D		1224
@@ -6932,6 +6992,7 @@ extern int PlayerUID;　
 #define MON_HANIWA_C2		1337
 #define MON_ANIMAL_G_KEIGA	1338 //動物霊勁牙
 #define MON_ANIMAL_G_KIKETSU 1339 //動物霊鬼傑
+#define MON_ANIMAL_G_GOUYOKU 1340
 
 #define MON_EIKA			1341
 #define MON_URUMI			1342
@@ -6955,10 +7016,14 @@ extern int PlayerUID;　
 #define MON_MEGUMU			1362
 #define MON_CHIMATA			1363
 #define MON_MOMOYO			1364
+
 #define MON_MARUTA			1365
 
+//v1.1.91
+#define MON_YUMA			1366
+#define MON_MIMIC_ALCOHOL	1367
 
-#define MON_IDX_MAX			1366	//最大IDX+1
+#define MON_IDX_MAX			1367	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -7037,18 +7102,18 @@ extern int PlayerUID;　
 #define HISSATSU_NYUSIN 8
 #define HISSATSU_FUKI   9
 #define HISSATSU_MAJIN  10
-#define HISSATSU_BOOMER 11
+//#define HISSATSU_BOOMER 11
 #define HISSATSU_DRAIN  12
 #define HISSATSU_SEKIRYUKA 13
-#define HISSATSU_OTAKEBI 14
-#define HISSATSU_SHOUGE 15
-#define HISSATSU_CONF   16
+//#define HISSATSU_OTAKEBI 14
+//#define HISSATSU_SHOUGE 15
+#define HISSATSU_CONF   16 //混乱の手と同じ効果。技としては使われていない
 #define HISSATSU_ISSEN  17
 #define HISSATSU_KYUSHO 18
 #define HISSATSU_DOUBLE 19
-#define HISSATSU_HYAKU  20
+//#define HISSATSU_HYAKU  20
 #define HISSATSU_MINEUCHI 21
-#define HISSATSU_MEKIKI 22
+//#define HISSATSU_MEKIKI 22
 #define HISSATSU_ZANMA  23
 #define HISSATSU_UNDEAD 24
 #define HISSATSU_HAGAN  25
@@ -7059,7 +7124,7 @@ extern int PlayerUID;　
 #define HISSATSU_100NIN 30
 
 #define HISSATSU_TRIANGLE	31 //入身のあと離脱
-
+#define HISSATSU_COUNTER_SPEAR 32 //槍技能ボーナス　敵の攻撃時に一撃だけカウンター
 #define HISSATSU_KAPPA  40
 
 #define HISSATSU_LONGARM  41
@@ -7222,10 +7287,14 @@ extern int PlayerUID;　
 #define SAVE_ITEM_DS           0x00000800
 #define SAVE_ITEM_IDENT        0x00001000
 #define SAVE_ITEM_MARKED       0x00002000
+
+//v1.1.94  art_flags拡張のついでにフラグに関わらずすべて保存することにした。
+//この4つはセーブ時には使われないがv1.1.93以前のデータをロードするために使われる。
 #define SAVE_ITEM_ART_FLAGS0   0x00004000
 #define SAVE_ITEM_ART_FLAGS1   0x00008000
 #define SAVE_ITEM_ART_FLAGS2   0x00010000
 #define SAVE_ITEM_ART_FLAGS3   0x00020000
+
 #define SAVE_ITEM_CURSE_FLAGS  0x00040000
 #define SAVE_ITEM_HELD_M_IDX   0x00080000
 #define SAVE_ITEM_XTRA1        0x00100000
@@ -7306,6 +7375,16 @@ extern int PlayerUID;　
 #define SUB_ALIGN_NEUTRAL 0x0000
 #define SUB_ALIGN_EVIL    0x0001
 #define SUB_ALIGN_GOOD    0x0002
+//v1.1.91 クエストダンジョンで複数勢力が殴り合うためのSUBALIGN追加
+//m_ptr->sub_alignはbyteだから2桁なんじゃないかと思いつつ放置
+#define SUB_ALIGN_TEAM_A  0x0004
+#define SUB_ALIGN_TEAM_B  0x0008
+#define SUB_ALIGN_TEAM_C  0x0010
+#define SUB_ALIGN_TEAM_D  0x0020
+#define SUB_ALIGN_TEAM_E  0x0040
+#define SUB_ALIGN_TEAM_F  0x0080
+#define SUB_ALIGN_QUEST_MASK	0x00FC
+
 
 /* Temporary flags macro */
 ///class 型や歌を含む一時効果判定
@@ -7325,7 +7404,8 @@ extern int PlayerUID;　
 
 /* Multishadow effects is determined by turn */
 //v1.1.60 針妙丸の分身は6/7の確率で攻撃を回避する
-#define CHECK_MULTISHADOW() (p_ptr->multishadow && (p_ptr->pclass == CLASS_SHINMYOUMARU ? (turn % 7) : (turn & 1)))
+//v1.1.92 女苑特殊性格に関する処理追加
+#define CHECK_MULTISHADOW() (p_ptr->multishadow && (p_ptr->pclass == CLASS_SHINMYOUMARU ? (turn % 7) : (turn & 1)) || is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && !p_ptr->multishadow &&  (turn % 6) == 0)
 
 /* Is "teleport level" ineffective to this target? */
 /*
@@ -7393,7 +7473,24 @@ extern int PlayerUID;　
 #define MTIMED_MONFEAR  5 /* Monster is afraid */
 #define MTIMED_INVULNER 6 /* Monster is temporarily invulnerable */
 
-#define MAX_MTIMED      7
+//v1.1.94 追加
+#define MTIMED2_DEC_ATK  7 //攻撃力低下
+#define MTIMED2_DEC_DEF  8 //防御低下
+#define MTIMED2_DEC_MAG  9 //魔法成功率低下？魔法威力低下？まだ決めてない
+#define MTIMED2_DRUNK    10 //泥酔
+#define MTIMED2_NO_MOVE	 11 //v1.1.95 移動禁止
+#define MTIMED2_BERSERK  12 //v1.1.95 狂戦士化
+#define MTIMED2_XXX13    13
+#define MTIMED2_XXX14    14
+#define MTIMED2_XXX15    15
+//memo:今後種類を増やすときは、
+//・process_monsters_mtimed_aux()にmtimed[]の減少処理記述
+//・delete_monster_idx()に状態異常解除処理記述
+//モンスターをこの状態異常にするときの処理とメッセージ追加
+//モンスターがこの状態異常になっているとき何が起こるかの処理を追加
+//mtimed[]の増減にはset_monster_timed_status_add()を使う
+
+#define MAX_MTIMED      16
 
 #define MON_CSLEEP(M_PTR)   ((M_PTR)->mtimed[MTIMED_CSLEEP])
 #define MON_FAST(M_PTR)     ((M_PTR)->mtimed[MTIMED_FAST])
@@ -7402,6 +7499,13 @@ extern int PlayerUID;　
 #define MON_CONFUSED(M_PTR) ((M_PTR)->mtimed[MTIMED_CONFUSED])
 #define MON_MONFEAR(M_PTR)  ((M_PTR)->mtimed[MTIMED_MONFEAR])
 #define MON_INVULNER(M_PTR) ((M_PTR)->mtimed[MTIMED_INVULNER])
+
+#define MON_DEC_ATK(M_PTR)   ((M_PTR)->mtimed[MTIMED2_DEC_ATK])
+#define MON_DEC_DEF(M_PTR)     ((M_PTR)->mtimed[MTIMED2_DEC_DEF])
+#define MON_DEC_MAG(M_PTR)     ((M_PTR)->mtimed[MTIMED2_DEC_MAG])
+#define MON_DRUNK(M_PTR)  ((M_PTR)->mtimed[MTIMED2_DRUNK])
+#define MON_NO_MOVE(M_PTR)  ((M_PTR)->mtimed[MTIMED2_NO_MOVE])
+#define MON_BERSERK(M_PTR)  ((M_PTR)->mtimed[MTIMED2_BERSERK])
 
 /*
  * Bit flags for screen_object()
@@ -7523,12 +7627,15 @@ extern int PlayerUID;　
 #define STAT_HYPERMAX 50
 
 
+//格闘攻撃のとき選ばれる格闘の種類を制限・変更するためのフラグ値
 #define MELEE_FIND_DEFAULT	0
-#define MELEE_FIND_NOHAND   1
-#define MELEE_FIND_LONGARM  2
-#define MELEE_FIND_EX_CLAW	3
-#define MELEE_FIND_SNEAKING_KILL	4
-#define MELEE_FIND_SUMIREKO_DISTANT	5
+#define MELEE_FIND_NOHAND   1		//腕がふさがってるとき
+#define MELEE_FIND_LONGARM  2		//河童の伸腕など
+#define MELEE_FIND_EX_CLAW	3		//爪強化時
+#define MELEE_FIND_SNEAKING_KILL	4	//兵士暗殺攻撃
+#define MELEE_FIND_SUMIREKO_DISTANT	5	//菫子遠隔格闘攻撃
+
+
 
 /*:::素手攻撃分類*/
 //注：一分類辺り50種類まで
@@ -7537,11 +7644,9 @@ extern int PlayerUID;　
 #define MELEE_MODE_BITE			3	//噛み付く
 #define MELEE_MODE_CLAW			4	//引っ掻く
 #define MELEE_MODE_SHIELD		5   //盾熟練度高いとき
-
 #define MELEE_MODE_PUNCH2		6	//殴る　格闘適性高めのとき
 #define MELEE_MODE_KICK2		7	//蹴る　格闘適性高めのとき
 #define MELEE_MODE_MA			8	//格闘家専用
-
 #define MELEE_MODE_FISH_TAIL	20	//人魚、人魚変異用　高威力
 #define MELEE_MODE_PUNCH_ONI	21	//鬼用パンチ
 #define MELEE_MODE_HEADBUTT		22  //頭突き　石頭変異時
@@ -7627,13 +7732,12 @@ extern int PlayerUID;　
 #define MELEE_MODE_ONI_KASEN	102	//華扇専用性格
 #define MELEE_MODE_3_FAIRIES_2	103 //三月精専用性格
 #define MELEE_MODE_SUIKEN		104 //v1.1.78 酔拳
+#define MELEE_MODE_JYOON_3		105 //v1.1.92 女苑専用性格用
 
-/*:::追加効果分類*/
+/*:::格闘効果の特殊効果分類*/
 #define MELEE_STUN				1	//朦朧
 #define MELEE_STUN2				2	//朦朧2
 #define MELEE_STUN3				3	//朦朧3
-
-
 #define MELEE_ELEC				10	//羽衣ドリルなど 雷スレイ+耐性のない敵に朦朧
 #define MELEE_KASEN				11	//華扇の包帯　アンデッド、動物スレイ
 #define MELEE_VAMP				12 //吸血効果
@@ -7649,6 +7753,26 @@ extern int PlayerUID;　
 #define MELEE_WATER				22 //水攻撃　水、朦朧耐性のない敵を朦朧とさせ水弱点の敵にスレイ
 #define MELEE_NEKOGURUMA		23 //お燐の猫車　猫車の中身の重量が重量と朦朧判定値になる
 #define MELEE_SLEEP				24 //ドレミー専用　ダンジョン「夢の世界」でダイス倍増、そうでないとき攻撃回数ループ終了後に相手を眠らせる判定
+#define MELEE_DEC_ATK			25 //v1.1.94 攻撃力低下
+#define MELEE_DEC_DEF			26 //防御力低下
+#define MELEE_DEC_MAG			27 //魔法力低下
+#define MELEE_DEC_ALL			28 //全能力低下
+#define MELEE_DELAY				29 //行動遅延
+
+
+//v1.1.94 格闘や武器で隣接攻撃をするとき敵に与える効果
+#define	ATTACK_EFFECT_NONE		0	//なし
+#define	ATTACK_EFFECT_STUN		1	//朦朧付与
+#define	ATTACK_EFFECT_SLOW		2	//減速付与
+#define	ATTACK_EFFECT_DEC_ATK	3	//攻撃力低下
+#define	ATTACK_EFFECT_DEC_DEF	4	//防御力低下
+#define	ATTACK_EFFECT_DEC_MAG	5	//魔法力低下
+#define	ATTACK_EFFECT_DEC_ALL	6	//全能力低下
+#define	ATTACK_EFFECT_DELAY		7	//行動遅延
+
+
+
+
 
 
 #define TIM_GENERAL_MAX			5	//p_ptr->tim_general[]の要素数　ここを変更した時はセーブデータの互換性がなくなる
@@ -7697,6 +7821,11 @@ extern int PlayerUID;　
 #define TOWN_HIGAN	13 //v1.1.64 彼岸
 #define TOWN_KOURYUU 14//v1.1.86 偽天棚(なんて読むのか分からん)
 #define TOWN_MAX	15 //最大+1であること
+
+//v1.1.91
+#define TELE_TOWN_MODE_NORMAL		0 //通常
+#define TELE_TOWN_MODE_ROPEWAY		1 //人里⇔守矢神社
+#define TELE_TOWN_MODE_CHIREIKOUDOU	2 //魔法の森⇔旧地獄市街
 
 /*:::泥酔度*/
 /* v1.1.19 閾値変更
@@ -8004,11 +8133,13 @@ extern int PlayerUID;　
 #define BLDG_EX_LARVA		36 //ラルバの別荘
 #define BLDG_EX_KEIKI		37 //霊長園
 #define BLDG_EX_CHIMATA		38 //月虹市場
+#define BLDG_EX_YUMA		39 //尤魔
 
-#define BLDG_EX_MAX			39 //最後の建物番号+1
+#define BLDG_EX_MAX			40 //最後の建物番号+1
+
+
 
 #define CAST_MONSPELL_EXTRA_KYOUKO_YAMABIKO -1
-
 
 //銃アイテム発動の射撃の種類
 #define	GUN_FIRE_MODE_DEFAULT	0	//射撃
@@ -8431,6 +8562,34 @@ extern int PlayerUID;　
 
 
 
+//畜生界関係のクエストの所属勢力情報など
+//p_ptr->animal_ghost_align_flagに記録する
+#define ANIMAL_GHOST_ALIGN_KEIGA		0x00000001L
+#define ANIMAL_GHOST_ALIGN_KIKETSU		0x00000002L
+#define ANIMAL_GHOST_ALIGN_GOUYOKU		0x00000004L
+#define ANIMAL_GHOST_ALIGN_HANIWA		0x00000008L
+#define ANIMAL_GHOST_ALIGN_XXX1			0x00000010L //予備勢力 正体不明の寄生体とかそんなのが出たら
+#define ANIMAL_GHOST_ALIGN_XXX2			0x00000020L
+#define ANIMAL_GHOST_ALIGN_XXX3			0x00000040L
+#define ANIMAL_GHOST_ALIGN_KILLTHEMALL	0x00000080L //全員倒すを選択した場合
+#define ANIMAL_GHOST_Q1_DONE			0x00000100L //クエスト1を勝ち負け関係なく終わらせた
+#define ANIMAL_GHOST_Q1_COMP			0x00000200L //クエスト1を勝って終わらせた
+#define ANIMAL_GHOST_Q1_ACHIEVE			0x00000400L //クエスト1を味方勢力ボス生存で勝って終わらせた
+#define ANIMAL_GHOST_Q1_XXX				0x00000800L //予備領域
+
+
+//v1.1.92 女苑(専用性格)がツケで買い物をできるかどうか
+#define JYOON_LIMIT	(EXTRA_MODE?5:7)
+#define CHECK_JYOON_BUY_ON_CREDIT (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && turn < (TURNS_PER_TICK * TOWN_DAWN * JYOON_LIMIT))
+//女苑(専用性格)のとき紫苑がキレる判定ライン
+#define SHION_OIL_BOMB_LIMIT (p_ptr->lev * p_ptr->lev * 10)
+
+//v1.1.94 p_ptr->magic_num1(2)[]の配列サイズを108から256に変更する。
+#define MAGIC_NUM_SIZE_OLD	108
+#define MAGIC_NUM_SIZE		256
+
+//v1.1.94 防御低下状態になったモンスターのACを計算。 -25か-25%の低い方(最低0)
+#define MONSTER_DECREASED_AC(AC) ( MAX(0, (MIN((AC) - (AC) / 4, (AC) - 25))))
 
 
 

@@ -109,6 +109,7 @@ N:14:BIAS_NECROMANTIC
 『ネクロファンタジア』
 『ゴーストリード』
 天香香背男命の
+強欲な獣の
 
 N: 8:BIAS_WIS
 N:13:BIAS_PRIESTLY

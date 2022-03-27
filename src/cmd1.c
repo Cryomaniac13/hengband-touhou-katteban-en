@@ -13,6 +13,377 @@
 #include "angband.h"
 #define MAX_VAMPIRIC_DRAIN 50
 
+//v1.1.94 理力が効いたかどうか確認するためのグローバルフラグ
+bool gflag_force_effect = FALSE;
+
+
+
+
+
+//v1.1.94
+//刀の特殊クリティカル「必殺の一太刀」が出るかどうかの判定
+//刀を装備していることは外で判定済みであること
+//r_ptr:ターゲット種族
+//mode:HISSATSU_XXXなどの攻撃モード
+bool check_katana_critical(monster_type *m_ptr, int mode)
+{
+
+	int power;
+	monster_race    *r_ptr = &r_info[m_ptr->r_idx];
+	int katana_skill_exp = ref_skill_exp(TV_KATANA);
+
+	if (randint1(katana_skill_exp) < 3200) return FALSE;
+
+	//見えない敵には出ない
+	if (!m_ptr->ml) return FALSE;
+
+	//lev40:178 lev50:210
+	power = p_ptr->lev + katana_skill_exp / 50;
+
+	//寝ている敵や朦朧としている敵には出やすい
+	if (MON_CSLEEP(m_ptr) || MON_STUNNED(m_ptr)) power += 60;
+
+	//二刀流の時出づらい
+	if (p_ptr->migite && p_ptr->hidarite) power -= 30;
+
+	//巨大な敵には出づらい
+	if (r_ptr->flags2 & RF2_GIGANTIC) power -= 30;
+
+	//普通の生物の形をしていない敵には出づらい
+	if (r_ptr->flags1 & RF1_SHAPECHANGER || r_ptr->flags2 & RF2_PASS_WALL || !my_strchr("abcdfghklnopqrstuwyzABCDFGHIJKLMOPRSTUVWXYZ", r_ptr->d_char))
+		power -= 30;
+
+	if (power <= 0) return FALSE;
+
+	switch (mode)
+	{
+		//捨て身や居合の型のとき出やすい
+	case HISSATSU_IAI:
+	case HISSATSU_SUTEMI:
+	case HISSATSU_SEKIRYUKA:
+	case HISSATSU_UNDEAD:
+	case HISSATSU_MAJIN: //刀では使えないが将来なにか仕様変えたときのために
+	case HISSATSU_ATTACK_ONCE:
+		power *= 2;
+		break;
+
+		//普通の攻撃や属性攻撃系は修正なし
+	case HISSATSU_NONE:
+	case HISSATSU_FIRE:
+	case HISSATSU_COLD:
+	case HISSATSU_POISON:
+	case HISSATSU_ELEC:
+	case HISSATSU_DRAIN:
+	case HISSATSU_DOUBLE:
+	case HISSATSU_ZANMA:
+	case HISSATSU_QUAKE:
+	case HISSATSU_COUNTER:
+		break;
+
+		//遠距離からの攻撃は出づらい
+	case HISSATSU_ISSEN:
+	case HISSATSU_2:
+	case HISSATSU_NYUSIN:
+	case HISSATSU_HARAI:
+	case HISSATSU_TRIANGLE:
+	case HISSATSU_KAPPA:
+		power -= 50;
+		break;
+
+		//ほか広範囲攻撃など特殊な技では出ない
+	default:
+		return FALSE;
+	}
+
+	if (cheat_xtra) msg_format("katana critical:power%d/rlev%d",power,r_ptr->level);
+
+	if (randint1(power) > r_ptr->level) return TRUE;
+	else return FALSE;
+
+}
+
+
+
+//v1.1.94 モンスターに対する行動遅延
+//add_energy:energy_need値に加算される値
+bool monster_delay(int m_idx, int add_energy)
+{
+
+	if (m_idx <= 0 || m_idx >= m_max)
+	{
+		msg_format(_("ERROR:monster_delay()に渡されたm_idxがおかしい(%d)",
+                    "ERROR: Weird m_idx (%d) passed to monster_delay()"), m_idx);
+		return FALSE;
+	}
+
+	//200以上加算されない。平均的には一行動に100かかる
+	add_energy = (add_energy > 200) ? 200 : (add_energy < 0) ? 0 : add_energy;
+
+	//すでに行動遅延しているモンスターはそのモンスターが再び行動するまで行動遅延を受けない
+	if (m_list[m_idx].mflag & MFLAG_ALREADY_DELAYED)
+	{
+		if (cheat_xtra) msg_format("ALREADY DELAYED - m_idx:%d", m_idx);
+		return FALSE;
+	}
+
+	if (cheat_xtra) msg_format("DELAY - m_idx:%d energy_need %d -> %d", m_idx, m_list[m_idx].energy_need, m_list[m_idx].energy_need + add_energy);
+
+	m_list[m_idx].energy_need += add_energy;
+
+	m_list[m_idx].mflag |= MFLAG_ALREADY_DELAYED;
+
+	return TRUE;
+
+}
+
+
+
+
+
+
+
+//近接攻撃追加効果の朦朧付与やAC低下などの判定と適用を行う。
+//critical_rank:会心や不意打ちなどが決まったとき増える　最大5
+//effect_type: ATTACK_EFFECT_??? 混乱や睡眠は処理がややこしくなるので外で別にやっている
+//skill_exp:この攻撃に関係する技能の現在値 0~8000
+//ref_effect_turns: 効果が持続するターン数 0なら中で適当に決める
+void apply_special_effect(int m_idx, int special_effect_type, int critical_rank, int skill_exp, int ref_effect_turns, bool flag_test)
+{
+	monster_type *m_ptr;
+	monster_race *r_ptr;
+	int mon_resist = 0;
+	int effect_turns = ref_effect_turns;
+	char m_name[160];
+
+	bool flag_not_usual_shape = FALSE;
+
+	int power;
+
+	if (m_idx <= 0 || m_idx >= m_max)
+	{
+		msg_format(_("ERROR:apply_special_effect()に渡されたm_idxがおかしい(%d)",
+                    "ERROR: Weird m_idx (%d) passed to apply_special_effect()"), m_idx);
+		return;
+	}
+	if (critical_rank < 0 || critical_rank > 5)
+	{
+		msg_format(_("ERROR:apply_special_effect()に渡されたcritical_rankがおかしい(%d)",
+                    "ERROR: Weird critical_rank (%d) passed to apply_special_effect()"), critical_rank);
+		return;
+	}
+
+	if (!special_effect_type) return;
+
+
+
+	m_ptr = &m_list[m_idx];
+
+	if (!m_ptr->r_idx) return;
+
+	r_ptr = &r_info[m_ptr->r_idx];
+
+	if(flag_test) gv_test1++;//朦朧付与とかの発生率チェック用 関数に入った数
+
+	//低熟練ではクリティカル時除き発生しないことにしておく
+	if (!critical_rank && skill_exp < (4000 + randint1(4000))) return;
+
+	if (r_ptr->flagsr & RFR_RES_ALL) return;
+
+	//攻撃タイプごとのモンスターの抵抗力計算
+	mon_resist = 100 + r_ptr->level * 2;
+	//v1.1.95 防御低下状態なら抵抗力が下がることにした
+	if (MON_DEC_DEF(m_ptr)) mon_resist -= mon_resist / 4;
+
+	if ((r_ptr->flags1 & RF1_UNIQUE) || r_ptr->flags7 & RF7_UNIQUE2) mon_resist *= 2;
+	if (r_ptr->flags2 & RF2_POWERFUL) mon_resist += 200;
+
+	if (r_ptr->flags1 & RF1_SHAPECHANGER || r_ptr->flags2 & RF2_PASS_WALL || !my_strchr("abcdfghklnopqrstuwyzABCDFGHIJKLMOPRSTUVWXYZ", r_ptr->d_char)) flag_not_usual_shape = TRUE;
+
+	switch (special_effect_type)
+	{
+	case	ATTACK_EFFECT_STUN:
+
+		if (r_ptr->flags2 & RF2_GIGANTIC) mon_resist += 200;
+		if (r_ptr->flags3 & RF3_NO_STUN)  mon_resist += 200;
+		if (flag_not_usual_shape) mon_resist += 200;
+		if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND) || !monster_living(r_ptr)) mon_resist += 200;
+
+		break;
+	case ATTACK_EFFECT_SLOW:
+
+		//ユニークに減速格闘は効かない
+		if ((r_ptr->flags1 & RF1_UNIQUE) || r_ptr->flags7 & RF7_UNIQUE2) return;
+
+		if (r_ptr->flags1 & RF1_NEVER_MOVE) mon_resist += 200;
+
+		if (flag_not_usual_shape) mon_resist += 200;
+
+		if (r_ptr->flags2 & RF2_GIGANTIC) mon_resist += 200;
+		if (r_ptr->flagsr & RFR_RES_INER) mon_resist += 200;
+		break;
+
+	case ATTACK_EFFECT_DEC_ATK:
+		if (r_ptr->flags2 & RF2_GIGANTIC) mon_resist += 200;
+		if (r_ptr->flags2 & RF2_REGENERATE) mon_resist += 200;
+		if (flag_not_usual_shape) mon_resist += 200;
+
+		break;
+
+	case ATTACK_EFFECT_DEC_DEF:
+		if (r_ptr->flags2 & RF2_GIGANTIC) mon_resist += 200;
+		if (r_ptr->flags2 & RF2_REGENERATE) mon_resist += 200;
+		if (flag_not_usual_shape) mon_resist += 200;
+		break;
+
+	case ATTACK_EFFECT_DEC_MAG:
+		if (r_ptr->flags2 & RF2_SMART) mon_resist += 200;
+		if (r_ptr->flags2 & RF2_REGENERATE) mon_resist += 200;
+		if (r_ptr->flags3 & RF3_DEITY) mon_resist += 200;
+		break;
+
+	case ATTACK_EFFECT_DEC_ALL:
+		if (r_ptr->flags2 & RF2_REGENERATE) mon_resist += 200;
+		if (r_ptr->flags3 & RF3_DEITY) mon_resist += 200;
+		break;
+
+	case ATTACK_EFFECT_DELAY:
+		//モンスターの行動までに二回以上の行動遅延はかからない
+		if (!flag_test && (m_ptr->mflag & MFLAG_ALREADY_DELAYED)) return;
+
+		if (r_ptr->flags2 & RF2_GIGANTIC) mon_resist += 200;
+		if (flag_not_usual_shape) mon_resist += 200;
+		break;
+
+	default:
+		msg_format(_("ERROR:未定義のspecial_effect_type(%d)",
+                    "ERROR: Undefined special_effect_type (%d)"), special_effect_type);
+		return;
+	}
+
+	//memo
+	//旧格闘朦朧付与率
+	//if (p_ptr->lev > randint1(r_ptr->level + resist_stun + 10))
+	//STUN1,2,3とも付与率は同じで重量や会心も無関係
+	//resist_stun値はラーヴァDが187,オベ187,モル275,J407
+	//plev50でD19%,オベ16%,モル12.5%,J9%
+
+	//格闘会心確率(plev=50,plus=45,to_h=100)
+	//重量8  (     2:10% 3:6% 4:4%)
+	//重量12 (     2:4%  3:7% 4:13%)
+	//重量16 (           3:4% 4:18% 5:7%)
+
+	//武器会心確率(plev=50,plus=20,to_h=100)
+	//重量50  12%	(1:6.5% 2:5.5%                        )
+	//重量100 13%	(1:5.5% 2:6.5%                        )
+	//重量200 15%	(1:4.6% 2:6.9% 3:3.5%                 )
+	//重量400 19%	(       2:8.8% 3:5.8% 4:4.4%          )
+	//重量800 27%	(              3:4.1% 4:16.6% 5:6.2%  )
+	//重量1k  31%	(                     4:14.3% 5:16.7% )
+	//重量2k  51%	(                             5:51.0% )
+
+
+	//該当熟練レベルが30ならレベル60、40なら80、MAXならレベル100相当の判定になるように
+	power = MAX((skill_exp / 80), p_ptr->lev);
+
+	//クリティカルのときモンスターのレジスト値低下
+	switch (critical_rank)
+	{
+	case 1://手応え
+		mon_resist = mon_resist * 75 / 100;
+		break;
+	case 2://かなりの手応え
+		mon_resist = mon_resist * 60 / 100;
+		break;
+	case 3://会心
+		mon_resist = mon_resist * 40 / 100;
+		break;
+	case 4://最高の会心
+		mon_resist = mon_resist * 25 / 100;
+		break;
+	case 5://比類なき最高の会心
+		mon_resist = mon_resist * 10 / 100;
+		break;
+	}
+
+	if (cheat_xtra) msg_format("special_effect%d: pow:%d/resist:%d",special_effect_type,power,mon_resist);
+
+	if (flag_test) gv_test3 += MIN(1000, (power * 1000 / mon_resist));//朦朧付与とかの発生率チェック用 成功率の値を合計してあとで平均を出す　なんかこの計算の仕方おかしい気もする
+
+	//判定に失敗すると終了
+	if (power <= randint1(mon_resist)) return;
+
+	if (flag_test) gv_test2++;//朦朧付与とかの発生率チェック用 判定を通った数
+
+	if (effect_turns <= 0) effect_turns = 4 + randint1(4);
+
+	monster_desc(m_name, m_ptr, 0);
+
+	//判定に通ったので追加効果付与処理
+	switch (special_effect_type)
+	{
+
+	case	ATTACK_EFFECT_STUN:
+		if (set_monster_stunned(m_idx, MON_STUNNED(m_ptr) + effect_turns))
+			msg_format(_("%^sはフラフラになった。", "%^s is dazed."), m_name);
+		else
+			msg_format(_("%^sはさらにフラフラになった。", "%^s is even more dazed."), m_name);
+
+		break;
+	case ATTACK_EFFECT_SLOW:
+		if (set_monster_slow(m_idx, MON_SLOW(m_ptr) + effect_turns))
+			msg_format(_("%^sの動きが遅くなった。", "%^s starts moving slower."), m_name);
+
+		break;
+
+	case ATTACK_EFFECT_DEC_ATK:
+
+		if(set_monster_timed_status_add(MTIMED2_DEC_ATK,m_idx,effect_turns))
+			msg_format(_("%^sの攻撃力が下がった！", "The attack power of %^s is decreased!"), m_name);
+
+		break;
+
+	case ATTACK_EFFECT_DEC_DEF:
+
+		if (set_monster_timed_status_add(MTIMED2_DEC_DEF, m_idx, effect_turns))
+			msg_format(_("%^sの防御力が下がった！", "The defense power of %^s is decreased!"), m_name);
+
+		break;
+
+	case ATTACK_EFFECT_DEC_MAG:
+
+		if (set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, effect_turns))
+		msg_format(_("%^sの魔法力が下がった！", "The magic power of %^s is decreased!"), m_name);
+		break;
+
+	case ATTACK_EFFECT_DEC_ALL:
+	{
+		bool flag_ok = FALSE;
+		if (set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, effect_turns)) flag_ok = TRUE;
+		if (set_monster_timed_status_add(MTIMED2_DEC_DEF, m_idx, effect_turns)) flag_ok = TRUE;
+		if (set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, effect_turns)) flag_ok = TRUE;
+
+		if(flag_ok)
+			msg_format(_("%^sの全能力が下がった！", "All of the abilities of %^s are decreased!"), m_name);
+
+		break;
+
+	}
+	case ATTACK_EFFECT_DELAY:
+
+		if (monster_delay(m_idx, 25 + randint1(25)))
+			msg_format(_("%^sは体勢を崩したようだ。", "The posture of %^s looks broken."), m_name);
+
+		break;
+
+	default:
+		msg_format(_("ERROR:未定義のspecial_effect_type(%d)",
+                    "ERROR: Undefined special_effect_type (%d)"), special_effect_type);
+		return;
+	}
+
+
+}
+
 
 /*
  * Determine if the player "hits" a monster (normal combat).
@@ -65,9 +436,12 @@ bool test_hit_norm(int chance, int ac, int vis)
 	/* Percentile dice */
 	k = randint0(100);
 
+	if (cheat_xtra) msg_format("test_hit_norm - chance:%d ac:%d" , chance,ac);
+
 	/* Hack -- Instant miss or hit */
 	/*:::もしk<10なら50%の確率でTrueかFalseを返す。命中保証値の5%と絶対失敗率の5%を二行で済ませるテクニックらしい:::*/
 	if (k < 10) return (k < 5);
+
 
 
 	///seikaku なまけもの命中失敗
@@ -161,18 +535,21 @@ s16b critical_shot(int weight, int plus, int dam)
  *
  * Factor in weapon weight, total plusses, player level.
  */
-/*:::クリティカルヒットによるdam値補正計算*/
-/*:::weight:武器重量
- *:::plus:武器ヒット修正値
- *:::dam:ダイスダメージ
- *:::meichuu:＠のヒット修正値
- *:::mode:剣術などの攻撃のとき
+/*クリティカルヒットによるdam値補正計算*/
+/*weight:武器重量
+ *plus:武器ヒット修正値
+ *dam:ダイスダメージ
+ *meichuu:＠のヒット修正値
+ *mode:剣術などの攻撃のとき
+ *critical_level クリティカルのとき度合いによって値が入る
  *:::武器が重く武器命中修正が高いほどクリティカルになりやすい。武器が重いほどよいクリティカルになりやすい。
  */
-s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
+s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode, int *critical_level)
 {
 	int i, k;
 	int chance = 5000;
+
+	int rank = 0;
 
 	if(p_ptr->pclass == CLASS_NINJA) chance = 4444;
 	else if(p_ptr->pclass == CLASS_YUGI) chance = 3500;
@@ -183,21 +560,27 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 		int old_weight = weight;
 		weight = weight * p_ptr->lev * 8 / 50;
 
-		if (weight > 2000) weight = MAX(2000,old_weight);
-
 	}
+
+	//v1.1.94 重量2000を上限に(キスメ飛び上がり時除く)
+	if (!(p_ptr->pclass == CLASS_KISUME && p_ptr->concent) && weight > 2000) weight = 2000;
 
 	/* Extract "blow" power */
 	i = (weight + (meichuu * 3 + plus * 5) + (p_ptr->lev * 3));
 
 	if (cheat_xtra)
-		msg_format("(critical_norm) weight:%d i:%d", weight, i);
+		msg_format("(critical_norm) weight:%d plus:%d meichuu:%d i:%d", weight, plus,meichuu,i);
 
 	/* Chance */
 	///class クリティカル判定　忍者と剣術家の特殊処理
 	if ((randint1(chance) <= i) || (mode == HISSATSU_MAJIN) || (mode == HISSATSU_3DAN))
 	{
-		k = weight + randint1(650);
+		//v1.1.94
+		//k = weight + randint1(650);
+		k = randint1(weight) + randint1(650);
+
+		if (mode == HISSATSU_COUNTER_SPEAR) k += randint1(ref_skill_exp(TV_SPEAR) / 10);
+
 		if ((mode == HISSATSU_MAJIN) || (mode == HISSATSU_3DAN)) k+= randint1(650);
 		if(mode == HISSATSU_MAJIN && k < 700) k = 700;
 
@@ -209,6 +592,7 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 			msg_print("It was a good hit!");
 #endif
 
+			rank = 1;
 			dam = 2 * dam + 5;
 		}
 		else if (k < 700)
@@ -219,6 +603,7 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 			msg_print("It was a great hit!");
 #endif
 
+			rank = 2;
 			dam = 2 * dam + 10;
 		}
 		else if (k < 900)
@@ -229,6 +614,7 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 			msg_print("It was a superb hit!");
 #endif
 
+			rank = 3;
 			dam = 3 * dam + 15;
 		}
 		else if (k < 1300)
@@ -239,6 +625,7 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 			msg_print("It was a *GREAT* hit!");
 #endif
 
+			rank = 4;
 			dam = 3 * dam + 20;
 		}
 		else
@@ -249,9 +636,12 @@ s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode)
 			msg_print("It was a *SUPERB* hit!");
 #endif
 
+			rank = 5;
 			dam = ((7 * dam) / 2) + 25;
 		}
 	}
+
+	if (*critical_level < rank) *critical_level = rank;
 
 	return (dam);
 }
@@ -354,6 +744,9 @@ static int mult_brand(int mult, const u32b* flgs, const monster_type* m_ptr)
 
 		if (have_flag(flgs, p->brand_flag))
 		{
+			bool brand_hit = FALSE;
+			int mult_effect = 10;
+
 			/* Notice immunity */
 			if (r_ptr->flagsr & p->resist_mask)
 			{
@@ -371,13 +764,34 @@ static int mult_brand(int mult, const u32b* flgs, const monster_type* m_ptr)
 				{
 					r_ptr->r_flagsr |= p->hurt_flag;
 				}
+				brand_hit = TRUE;
 
-				mult = MAX(mult, 50);
+				//mult = MAX(mult, 50);
+				mult_effect = 50;
 			}
 			else
 			{
-				mult = MAX(mult, 25);
+				brand_hit = TRUE;
+				mult_effect = 25;
+				//mult = MAX(mult, 25);
 			}
+
+			//v1.1.91 石油地形上のダメージ増加
+			//mult値にダメージ補正値を適用するためにbrand_hitという属性がヒットしたフラグとmult_effectという仮倍率みたいな数値を作った
+			//この処理の場合、火炎ブレスとかのproject()経由の攻撃は耐性があろうがなかろうがダメージが増えるがここの武器属性処理は耐性抜けにしかダメージが増えない。
+			//まあ武器属性は元々そういうものだしそれでいいか。なんか想像すると妙な絵面だが。
+			if (brand_hit && p->brand_flag == TR_BRAND_FIRE && cave_have_flag_bold(m_ptr->fy, m_ptr->fx, FF_OIL_FIELD))
+			{
+				mult_effect = oil_field_damage_mod(mult_effect, m_ptr->fy, m_ptr->fx);
+			}
+
+			if (cheat_xtra) msg_format("MULT:%d", mult_effect);
+
+			if (brand_hit)
+			{
+				mult = MAX(mult, mult_effect);
+			}
+
 		}
 	}
 
@@ -517,6 +931,8 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 				p_ptr->csp -= (1+(o_ptr->dd * o_ptr->ds / 5));
 				p_ptr->redraw |= (PR_MANA);
 				mult = mult * 3 / 2 + 20;
+
+				gflag_force_effect = TRUE;//理力が効いたかどうか確認するためのフラグ
 			}
 
 
@@ -2198,7 +2614,7 @@ cptr msg_py_atk(object_type *o_ptr,int mode)
 	if(tv == TV_AXE)
 	{
 		if(one_in_(2)) return _("を叩き斬った。", "cleave");
-		return _("へ斧を振り下ろした。", "bring down your axe on");
+		return _("へ武器を叩きつけた。", "bring down your weapon on");
 	}
 
 	if(tv == TV_SPEAR)
@@ -2521,7 +2937,9 @@ int find_martial_arts_method(int findmode)
 		break;
 
 	case CLASS_JYOON:
-		if (p_ptr->special_attack & ATTACK_WASTE_MONEY)
+		if(is_special_seikaku(SEIKAKU_SPECIAL_JYOON))
+			return MELEE_MODE_JYOON_3;
+		else if (p_ptr->special_attack & ATTACK_WASTE_MONEY)
 			return MELEE_MODE_JYOON_2;
 		else
 			return MELEE_MODE_JYOON_1;
@@ -2679,13 +3097,20 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 	bool			weapon_invalid = FALSE;
 
+	//刀熟練度ボーナスの「必殺の一太刀」が出たときのフラグ　扱いはfuiuchi+忍者ヒットと同じ
+	bool			flag_katana_critical = FALSE;
+
 	//二丁拳銃格闘　残弾消費
 	bool		flag_gun_kata = FALSE;
 
 	//v1.1.42 ドレミー・スイートの格闘攻撃でモンスターを眠らせるフラグカウント
 	bool		counting_sheep = 0;
 
-	int				martial_arts_method = 0;
+	int			martial_arts_method = 0;//格闘のときにランダムに選ばれる格闘分類タイプ MELEE_MODE_***
+
+	//v1.1.94
+	int		skill_type = 0;	//該当するスキル ref_skill_exp()に使う
+
 
 
 	//v1.1.69 潤美特技発動のとき武器攻撃が加重モードになる
@@ -2695,6 +3120,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		mode = HISSATSU_URUMI;
 	}
 
+	//v1.1.94 槍によるカウンター攻撃は槍でないと発動しない
+	if (mode == HISSATSU_COUNTER_SPEAR && o_ptr->tval != TV_SPEAR) return;
 
 	///mod140914 剣術家の必殺技では向いていない武器の攻撃が無効化される
 	if((mode == HISSATSU_2 || mode == HISSATSU_ISSEN || mode == HISSATSU_UNDEAD) && o_ptr->tval != TV_KATANA) return;
@@ -2714,6 +3141,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 	if(check_invalidate_inventory(INVEN_RARM + hand)) weapon_invalid = TRUE;
 
+	//職業ごとに不意打ち判定などの特殊処理
 	switch (p_ptr->pclass)
 	{
 	case CLASS_KOISHI:
@@ -2831,19 +3259,34 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		break;
 	}
 
-	if(p_ptr->tim_unite_darkness)
+	//職業以外による不意打ち判定など
+	if (!fuiuchi && !backstab && !stab_fleeing)
 	{
-		if(!(cave[py][px].info & CAVE_GLOW)  && m_ptr->ml && (MON_CSLEEP(m_ptr) || randint1(p_ptr->lev * 3 + (p_ptr->skill_stl + 10) * 4) > r_ptr->level * 2)) fuiuchi = TRUE;
+		if (p_ptr->tim_unite_darkness)
+		{
+			if (!(cave[py][px].info & CAVE_GLOW) && m_ptr->ml && (MON_CSLEEP(m_ptr) || randint1(p_ptr->lev * 3 + (p_ptr->skill_stl + 10) * 4) > r_ptr->level * 2)) fuiuchi = TRUE;
+		}
+
+		if (o_ptr->tval == TV_KATANA && check_katana_critical(m_ptr, mode))
+		{
+			fuiuchi = TRUE;
+			flag_katana_critical = TRUE;
+
+		}
+
 	}
+
 
 	/*:::素手のとき格闘技能を得る*/
 	//if (!o_ptr->k_idx) /* Empty hand */
 	if(monk_attack)
 	{
+		skill_type = SKILL_MARTIALARTS;
+
 		if(p_ptr->pclass == CLASS_MEIRIN)
 			do_cmd_concentrate(0);
 		///mod131226 skill 技能と武器技能の統合
-		gain_skill_exp(SKILL_MARTIALARTS, m_ptr);
+		gain_skill_exp(skill_type, m_ptr);
 		/*
 		if ((r_ptr->level + 10) > p_ptr->lev)
 		{
@@ -2866,8 +3309,10 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	//v1.1.14 祇園様発動効果は除く
 	else if (object_is_melee_weapon(o_ptr) && mode != HISSATSU_GION)
 	{
-		///mod131227 skill 技能と武器技能の統合
-		gain_skill_exp(o_ptr->tval,m_ptr);
+
+		skill_type = o_ptr->tval;
+
+		gain_skill_exp(skill_type,m_ptr);
 	/*
 		if ((r_ptr->level + 10) > p_ptr->lev)
 		{
@@ -2920,6 +3365,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 	}
 
+	if (mode == HISSATSU_COUNTER_SPEAR) chance += 60;
+
 	if (mode == HISSATSU_IAI) chance += 60;
 	if (mode == HISSATSU_GION) chance += 60;
 	if (p_ptr->special_defense & KATA_KOUKIJIN) chance += 150;
@@ -2950,7 +3397,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	e_j_mukou = ((o_ptr->name1 == ART_EXCALIBUR_J) && (r_ptr->d_char == 'c'));
 
 	///sys item 必殺剣、毒針の攻撃回数修正
-	if ((mode == HISSATSU_ATTACK_ONCE) || (mode == HISSATSU_KYUSHO) || (mode == HISSATSU_MINEUCHI) || (mode == HISSATSU_3DAN) || (mode == HISSATSU_IAI)) num_blow = 1;
+	if ((mode == HISSATSU_COUNTER_SPEAR) || (mode == HISSATSU_ATTACK_ONCE) || (mode == HISSATSU_KYUSHO) || (mode == HISSATSU_MINEUCHI) || (mode == HISSATSU_3DAN) || (mode == HISSATSU_IAI)) num_blow = 1;
 
 	else if (mode == HISSATSU_COLD) num_blow = p_ptr->num_blow[hand]+2;
 	/*:::河童レイシャルの通背　攻撃回数が距離に応じ減少*/
@@ -3004,8 +3451,22 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	/*:::攻撃回数ごとに判定*/
 	while ((num++ < num_blow) && !p_ptr->is_dead)
 	{
+		//v1.1.94
+		int		attack_effect_type = ATTACK_EFFECT_NONE; //朦朧など敵にステータス異常を付与するとき
+		int		critical_rank = 0; //クリティカルや切れ味や不意打ちなどが決まったとき増える
+		int		effect_turns = 0; //朦朧などのステータス異常を与えるターン数
+
 		bool dokubari = FALSE;
 		bool sinker = FALSE;
+
+		int mon_ac = r_ptr->ac;
+
+		//v1.1.94 モンスター防御力低下中はAC25%カット
+		if (MON_DEC_DEF(m_ptr))
+		{
+			mon_ac = MONSTER_DECREASED_AC(mon_ac);
+		}
+
 		///sys item 毒針命中判定
 		///mod131223 tval
 		if ((!weapon_invalid && (o_ptr->tval == TV_KNIFE) && (o_ptr->sval == SV_WEAPON_DOKUBARI)) || (mode == HISSATSU_KYUSHO))
@@ -3033,7 +3494,10 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		///映姫は攻撃が必中
 		else if(p_ptr->pclass == CLASS_EIKI) success_hit = TRUE;
 		/*:::通常の命中処理*/
-		else success_hit = test_hit_norm(chance, r_ptr->ac, m_ptr->ml);
+		else success_hit = test_hit_norm(chance, mon_ac, m_ptr->ml);
+
+		//v1.1.94
+		if (backstab || fuiuchi || stab_fleeing) critical_rank = 3;
 
 		///mod141102 さとり命中率特殊補正..しようかと思ったけどやめた
 		//if(p_ptr->pclass == CLASS_SATORI && !p_ptr->blind && !p_ptr->image && p_ptr->confused && m_ptr->ml && !(r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND))
@@ -3072,19 +3536,32 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 			/* Message */
 			///sys 攻撃時メッセージ　武器ごとに変更しようか？
-			if(p_ptr->pclass == CLASS_KISUME && p_ptr->concent && !monk_attack)
+			if (p_ptr->pclass == CLASS_KISUME && p_ptr->concent && !monk_attack)
+			{
 				 msg_format(_("あなたは武器を構えて%sへ向けて落下した！",
-                                "You hold your weapon and charge at %s!"), m_name);
+                                "You hold your weapon and drop down on %s!"), m_name);
+			}
 			else if(mode == HISSATSU_GION)
+            {
 				msg_format(_("祇園様の剣が%sを切り裂いた！",
                                 "Sword of Gion cuts down %s!"), m_name);
-			else if(sneakingkill && monk_attack); //兵士の格闘不意打ちはここではメッセージを出さない
+            }
+			else if(sneakingkill && monk_attack)
+            {
+                ; //兵士の格闘不意打ちはここではメッセージを出さない
+            }
 			else if (backstab || sneakingkill)
+            {
 				msg_format(_("あなたは冷酷にも眠っている無力な%sへ奇襲を仕掛けた！",
                                 "You cruelly attack the helpless sleeping %s!"), m_name);
+            }
 			else if (fuiuchi)
 			{
-				msg_format(_("不意を突いて%sに強烈な一撃を喰らわせた！",
+				if(flag_katana_critical)
+					msg_format(_("%sに気合の一撃を放った！",
+                                "You focus and strike at %s!"), m_name);
+				else
+                    msg_format(_("不意を突いて%sに強烈な一撃を喰らわせた！",
                                 "You deliver a sudden, powerful blow to %s!"), m_name);
 			}
 			else if (stab_fleeing)
@@ -3178,11 +3655,12 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 			if (monk_attack)
 			{
 				int mult = 100;
-				int special_effect = 0, stun_effect = 0, times = 0, max_times;
+				int special_effect = 0, times = 0, max_times;
+				//int stun_effect = 0;
 				int min_level = 1;
 				//const martial_arts *ma_ptr = &ma_blows[0], *old_ptr = &ma_blows[0];
 				const martial_arts_new *ma_ptr = &ma_blows_new[0], *old_ptr = &ma_blows_new[0];
-				int resist_stun = 0;
+				//int resist_stun = 0;
 				int weight = 8;
 				int findmode = 0;
 
@@ -3201,6 +3679,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 				if(mode == HISSATSU_UNZAN) martial_arts_method = MELEE_MODE_ICHIRIN2;
 
+				/* v1.1.94 ここの処理はapply_special_effect()に移動
 				if (r_ptr->flags1 & RF1_UNIQUE) resist_stun += 88;
 				if (r_ptr->flags2 & RF2_GIGANTIC) resist_stun += 88;
 				if (r_ptr->flags3 & RF3_NO_STUN) resist_stun += 66;
@@ -3209,6 +3688,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				if (r_ptr->flags2 & RF2_POWERFUL) resist_stun += 33;
 				if ((r_ptr->flags3 & RF3_UNDEAD) || (r_ptr->flags3 & RF3_NONLIVING))
 					resist_stun += 66;
+				*/
 				/*
 				if (p_ptr->special_defense & KAMAE_BYAKKO)
 					max_times = (p_ptr->lev < 3 ? 1 : p_ptr->lev / 3);
@@ -3256,7 +3736,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						{
 							if(mode_cnt < 3)
 							{
-								msg_format(_("ERROR:菫子遠隔攻撃候補が足りない",
+								msg_print(_("ERROR:菫子遠隔攻撃候補が足りない",
                                             "ERROR: Not enough ranked attacks for Sumireko"));
 								return;
 							}
@@ -3347,28 +3827,30 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 					if (p_ptr->tim_general[2] && (r_ptr->flags3 & RF3_DRAGON) && mult < 300)//ドラゴンイーター
 						mult = 300;
-
-
-
 				}
 
 				switch(ma_ptr->effect)
 				{
 				case MELEE_STUN:
-					stun_effect = 3 + randint0(3);
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 3 + randint0(3);
 					break;
 				case MELEE_STUN2:
-					stun_effect = 5 + randint0(5);
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 5 + randint0(5);
 					break;
 				case MELEE_STUN3:
-					stun_effect = 10 + randint0(10);
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 10 + randint0(10);
 					break;
 				//霊夢格闘など
 				case MELEE_SLAY_EVIL:
 					if(r_ptr->flags3 & (RF3_UNDEAD | RF3_DEMON | RF3_KWAI))
 					{
 						if(mult < 250) mult = 250;
-						stun_effect = 5 + randint0(5);
+						attack_effect_type = ATTACK_EFFECT_STUN;
+						effect_turns = 5 + randint0(5);
+
 					}
 					break;
 				///mod140217 衣玖の羽衣格闘など　電撃耐性のない敵にスレイ+朦朧
@@ -3376,17 +3858,20 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					if(!(r_ptr->flagsr & (RFR_RES_ALL | RFR_IM_ELEC)))
 					{
 						if(mult<200) mult=200;
-						stun_effect = 10 + randint0(5);
+						attack_effect_type = ATTACK_EFFECT_STUN;
+						effect_turns = 10 + randint0(5);
+
 					}
 					break;
 				///mod140309 華扇の包帯格闘　アンデッドスレイ+朦朧
 				///mod141231 動物スレイも追加
 				case MELEE_KASEN:
-					stun_effect = 5 + randint0(5);
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 5 + randint0(5);
 					if(r_ptr->flags3 & (RF3_UNDEAD) || r_ptr->flags3 & (RF3_ANIMAL))
 					{
 						if(mult < 300) mult = 300;
-						stun_effect = 10 + randint0(10);
+						effect_turns = 10 + randint0(10);
 					}
 					break;
 				/*:::Hack 格闘吸血処理*/
@@ -3417,6 +3902,10 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					{
 						if(r_ptr->flagsr & RFR_HURT_FIRE && mult<500) mult = 500;
 						else if(mult<300) mult=300;
+
+						//v1.1.91 石油地形火炎ダメージ
+						if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) mult = oil_field_damage_mod(mult, y, x);
+
 					}
 					break;
 					//火炎攻撃
@@ -3426,6 +3915,10 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					{
 						if(r_ptr->flagsr & RFR_HURT_FIRE && mult<300) mult = 300;
 						else if(mult<200) mult=200;
+
+						//v1.1.91 石油地形火炎ダメージ
+						if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) mult = oil_field_damage_mod(mult, y, x);
+
 					}
 					break;
 					//冷気、氷攻撃
@@ -3439,7 +3932,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					break;
 
 				case MELEE_SLOW:
-					special_effect = MA_SLOW;
+					attack_effect_type = ATTACK_EFFECT_SLOW;
+					effect_turns = 5 + randint0(5);
+
 					break;
 
 				case MELEE_POIS: //毒耐性のない敵に大ダメージ
@@ -3455,12 +3950,15 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 							sinker = TRUE;
 						//breakしない
 				case MELEE_WATER:
-					if(	(r_ptr->flags7 & RF7_AQUATIC)
-						|| (r_ptr->flagsr & RFR_RES_WATE)) mult = 50;
+					if ((r_ptr->flags7 & RF7_AQUATIC) || (r_ptr->flagsr & RFR_RES_WATE))
+					{
+						mult = 50;
+					}
 					else
 					{
-						if(!(r_ptr->flags3 & RF3_NO_STUN)) stun_effect = 3 + randint0(3);
-						if(r_ptr->flagsr & RFR_HURT_WATER) mult = 200;
+						if (r_ptr->flagsr & RFR_HURT_WATER) mult = 200;
+						attack_effect_type = ATTACK_EFFECT_STUN;
+						effect_turns = 10 + randint0(10);
 					}
 					break;
 				case MELEE_CONFUSE: //混乱付与
@@ -3497,7 +3995,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						if(cheat_xtra) msg_format("weight:%d",weight);
 						if(nekoguruma_weight > 200)
 						{
-							stun_effect = nekoguruma_weight / 100 + randint1(nekoguruma_weight / 100);
+							attack_effect_type = ATTACK_EFFECT_STUN;
+							effect_turns = nekoguruma_weight / 100 + randint1(nekoguruma_weight / 100);
+
 						}
 					}
 					break;
@@ -3512,6 +4012,22 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					{
 						counting_sheep++;
 					}
+					break;
+
+				case MELEE_DEC_ATK:
+					attack_effect_type = ATTACK_EFFECT_DEC_ATK;
+					break;
+				case MELEE_DEC_DEF:
+					attack_effect_type = ATTACK_EFFECT_DEC_DEF;
+					break;
+				case MELEE_DEC_MAG:
+					attack_effect_type = ATTACK_EFFECT_DEC_MAG;
+					break;
+				case MELEE_DEC_ALL:
+					attack_effect_type = ATTACK_EFFECT_DEC_ALL;
+					break;
+				case MELEE_DELAY:
+					attack_effect_type = ATTACK_EFFECT_DELAY;
 					break;
 
 				default:
@@ -3592,7 +4108,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 				/*:::格闘攻撃のクリティカル処理*/
 
-				k = critical_norm(p_ptr->lev * weight, min_level, k, p_ptr->to_h[0], 0);
+				k = critical_norm(p_ptr->lev * weight, min_level, k, p_ptr->to_h[0], 0, &critical_rank);
 
 
 				//v1.1.46 女苑の特殊処理　モードによって金を奪ったり消費したりする
@@ -3651,6 +4167,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				}
 
 
+#if 0	//v1.1.94 格闘の状態異常付与処理は apply_special_effect()に持っていった
 				if ((special_effect == MA_KNEE) && ((k + p_ptr->to_d[hand]) < m_ptr->hp))
 				{
 #ifdef JP
@@ -3678,7 +4195,6 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						m_ptr->mspeed -= 10;
 					}
 				}
-
 				if (stun_effect && ((k + p_ptr->to_d[hand]) < m_ptr->hp))
 				{
 					if (p_ptr->lev > randint1(r_ptr->level + resist_stun + 10))
@@ -3701,6 +4217,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						}
 					}
 				}
+#endif
+
+			//格闘攻撃のダイス・スレイ・クリティカルなど終了
 			}
 
 			/* Handle normal weapon */
@@ -3708,6 +4227,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 			else if (o_ptr->k_idx)
 			{
 				int wgt = o_ptr->weight;
+
+				//武器への追加ダイス処理
 				/*:::武器ダイス+追加ダイス（今のところ乗馬のランスのみ？）*/
 				///mod150510 映姫武器の特殊処理
 				if(o_ptr->name1 == ART_EIKI)
@@ -3715,9 +4236,14 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				else
 					k = damroll(o_ptr->dd + p_ptr->to_dd[hand], o_ptr->ds + p_ptr->to_ds[hand]);
 
+				//tot_dam_aux()で理力が効いたかどうか確認するためのフラグ
+				gflag_force_effect = FALSE;
 
 				/*:::ダイスにスレイなど適用*/
 				k = tot_dam_aux(o_ptr, k, m_ptr, mode, FALSE);
+
+				if (gflag_force_effect && critical_rank < 1) critical_rank = 1;
+				gflag_force_effect = FALSE;
 
 				if (backstab)
 				{
@@ -3732,10 +4258,11 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					k = (3 * k) / 2;
 				}
 
-				if ((p_ptr->impact[hand] && ((k > 50) || one_in_(7))) ||
-					 (chaos_effect == 2) || (mode == HISSATSU_QUAKE))
+				//if ((p_ptr->impact[hand] && ((k > 50) || one_in_(7))) || (chaos_effect == 2) || (mode == HISSATSU_QUAKE))
+				if ((p_ptr->impact[hand] && (randint1(1000)<wgt || one_in_(7))) || (chaos_effect == 2) || (mode == HISSATSU_QUAKE))
 				{
 					do_quake = TRUE;
+					if (critical_rank < 2) critical_rank = 2;
 				}
 				//キスメ飛び上がりの重量加算
 				if(p_ptr->pclass == CLASS_KISUME && p_ptr->concent)
@@ -3744,7 +4271,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				/*:::クリティカル処理*/
 			//	if ((!(o_ptr->tval == TV_SWORD) || !(o_ptr->sval == SV_DOKUBARI)) && !(mode == HISSATSU_KYUSHO))
 				if ((!(o_ptr->tval == TV_KNIFE) || !(o_ptr->sval == SV_WEAPON_DOKUBARI)) && !(mode == HISSATSU_KYUSHO))
-					k = critical_norm(wgt, o_ptr->to_h, k, p_ptr->to_h[hand], mode);
+					k = critical_norm(wgt * 3 / 2 + p_ptr->lev * 2, o_ptr->to_h * 2, k, p_ptr->to_h[hand], mode,&critical_rank);
 
 				drain_result = k;
 
@@ -3850,13 +4377,25 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						}
 					}
 					drain_result = drain_result * 3 / 2;
+
+					//v1.1.94
+					if (critical_rank < mult-1) critical_rank = mult-1;
+					if (critical_rank > 5) critical_rank = 5;
+
 				}
 
 				k += o_ptr->to_d;
 				drain_result += o_ptr->to_d;
+			/*:::武器攻撃処理ここまで。ここから格闘/武器共通*/
 			}
 
-			/*:::武器攻撃処理ここまで。ここから格闘/武器共通*/
+			//v1.1.94
+			if ((p_ptr->special_attack & ATTACK_CHAOS) && !(r_ptr->flagsr & RFR_RES_CHAO))
+			{
+				attack_effect_type = ATTACK_EFFECT_STUN;
+				effect_turns = 10 + randint0(10);
+			}
+
 
 			//パルスィダイスブースト
 			if(p_ptr->pclass == CLASS_PARSEE && r_ptr->level > p_ptr->lev)
@@ -3867,6 +4406,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				else k = k * 3 / 2;
 
 				if(cheat_xtra) msg_format(_("パルスィのダイスブースト:%d→%d", "Parsee dice boost: %d->%d"),k_old, k);
+
+				if (one_in_(2)) critical_rank++;
+				if (critical_rank > 5) critical_rank = 5;
 
 			}
 
@@ -3896,6 +4438,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				msg_print("You cannot cut such a elastic thing!");
 #endif
 				k = 0;
+				critical_rank = 0;//paranoia
 			}
 
 			if (e_j_mukou)
@@ -3908,8 +4451,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				k /= 2;
 			}
 
-			if (mode == HISSATSU_MINEUCHI
-				|| ((p_ptr->special_attack & ATTACK_CHAOS) && !(r_ptr->flagsr & RFR_RES_CHAO) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2)&& (p_ptr->lev > randint1(r_ptr->level * (r_ptr->flags2 & RF2_POWERFUL || r_ptr->flags2 & RF2_GIGANTIC)?20:10))))
+			if (mode == HISSATSU_MINEUCHI )
 			{
 				int tmp = (10 + randint1(15) + p_ptr->lev / 5);
 
@@ -3962,7 +4504,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 			///mod131223 tval
 			if ((!weapon_invalid && (o_ptr->tval == TV_KNIFE) && (o_ptr->sval == SV_WEAPON_DOKUBARI)) || (mode == HISSATSU_KYUSHO))
 			{
-				if ((randint1(randint1(r_ptr->level/7)+5) == 1) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2))
+				if ((randint1(randint1(r_ptr->level / 7) + 5) == 1) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2))
 				{
 					k = m_ptr->hp + 1;
 #ifdef JP
@@ -3975,98 +4517,126 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				}
 				else k = 1;
 			}
-			/*:::忍者ヒット*/
-			///class 忍者ヒット
-			///mod140511 こいしも似たようなことする
-			else if ((p_ptr->pclass == CLASS_KOISHI && fuiuchi) ||
-				(p_ptr->pclass == CLASS_NINJA) && (o_ptr->tval == TV_KNIFE || monk_attack) && ((p_ptr->cur_lite <= 0) || one_in_(7)))
+			//v1.1.94 無傷球やはぐれメタル相手のときこれらのダメージや特殊効果は発生しないようにする
+			else if (k > 1)
 			{
-				int maxhp = maxroll(r_ptr->hdice, r_ptr->hside);
-				if (one_in_(backstab ? 13 : (stab_fleeing || fuiuchi) ? 15 : 27))
+				/*:::忍者ヒット*/
+				///class 忍者ヒット
+				///mod140511 こいしも似たようなことする
+				if ((p_ptr->pclass == CLASS_KOISHI && fuiuchi) ||(flag_katana_critical) ||
+					(p_ptr->pclass == CLASS_NINJA) && (o_ptr->tval == TV_KNIFE || monk_attack) && ((p_ptr->cur_lite <= 0) || one_in_(7)))
 				{
-					k *= 5;
-					drain_result *= 2;
+					int maxhp = maxroll(r_ptr->hdice, r_ptr->hside);
+					//v1.1.94 少し出やすく
+					//if (one_in_(backstab ? 13 : (stab_fleeing || fuiuchi) ? 15 : 27))
+					if (one_in_(backstab ? 9 : (stab_fleeing || fuiuchi) ? 12 : 24))
+                    {
+						k *= 5;
+                        drain_result *= 2;
 #ifdef JP
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("%sは全く無防備に一撃を受けた！", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("刃が%sに深々と突き刺さった！", m_name);
-					else
-						msg_format("鋭い一撃が%sに突き刺さった！", m_name);
+                        if(p_ptr->pclass == CLASS_KOISHI)
+                            msg_format("%sは全く無防備に一撃を受けた！", m_name);
+                        else if (flag_katana_critical)
+							msg_print("必殺の一太刀だ！");
+						else if(o_ptr->k_idx)
+                            msg_format("刃が%sに深々と突き刺さった！", m_name);
+                        else
+                            msg_format("鋭い一撃が%sに突き刺さった！", m_name);
 #else
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("You caught %s totally off guard!", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("Your blade deeply pierces %s!", m_name);
-					else
-						msg_format("%s is pierced by a sharp blow!", m_name);
+                        if(p_ptr->pclass == CLASS_KOISHI)
+                            msg_format("You caught %s totally off guard!", m_name);
+                        else if (flag_katana_critical)
+							msg_print("That was a critical blow!");
+						else if(o_ptr->k_idx)
+                            msg_format("Your blade deeply pierces %s!", m_name);
+                        else
+                            msg_format("%s is pierced by a sharp blow!", m_name);
 #endif
-				}
-				else if (((m_ptr->hp < maxhp/2) && one_in_((p_ptr->num_blow[0]+p_ptr->num_blow[1]+1)*10)) || ((one_in_(666) || ((backstab || fuiuchi) && one_in_(11))) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2)))
-				{
-					if ((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2) || (m_ptr->hp >= maxhp/2))
-					{
-						k = MAX(k*5, m_ptr->hp/2);
-						drain_result *= 2;
+                    }
+					//else if (((m_ptr->hp < maxhp / 2) && one_in_((p_ptr->num_blow[0] + p_ptr->num_blow[1] + 1) * 10)) || ((one_in_(666) || ((backstab || fuiuchi) && one_in_(11))) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2)))
+					else if (((m_ptr->hp < maxhp / 2) && one_in_((p_ptr->num_blow[0] + p_ptr->num_blow[1] + 1) * 6)) || ((one_in_(66) || ((backstab || fuiuchi) && one_in_(11))) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & RF7_UNIQUE2)))
+                    {
+						if ((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2) || (m_ptr->hp >= maxhp / 2) && !one_in_(4))
+						{
+							k = MAX(k * 5, m_ptr->hp / 2);
+							drain_result *= 2;
 #ifdef JP
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("%sは全く無防備に一撃を受けた！", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("刃が%sの急所を貫いた！", m_name);
-					else
-						msg_format("%sの急所へ強烈な一撃を加えた！", m_name);
+                            if(p_ptr->pclass == CLASS_KOISHI)
+                                msg_format("%sは全く無防備に一撃を受けた！", m_name);
+                            else if (flag_katana_critical)
+								msg_print("必殺の一太刀だ！");
+							else if(o_ptr->k_idx)
+                                msg_format("刃が%sの急所を貫いた！", m_name);
+                            else
+                                msg_format("%sの急所へ強烈な一撃を加えた！", m_name);
 #else
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("You caught %s totally off guard!", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("Your blade hits %s in a critical spot!", m_name);
-					else
-						msg_format("You powerfully hit %s in a critical spot!", m_name);
+                            if(p_ptr->pclass == CLASS_KOISHI)
+                                msg_format("You caught %s totally off guard!", m_name);
+                            else if (flag_katana_critical)
+                                msg_print("That was a critical blow!");
+                            else if(o_ptr->k_idx)
+                                msg_format("Your blade hits %s in a critical spot!", m_name);
+                            else
+                                msg_format("You powerfully hit %s in a critical spot!", m_name);
 #endif
+                        }
+                        else
+                        {
+                            k = m_ptr->hp + 1;
+#ifdef JP
+                            if(p_ptr->pclass == CLASS_KOISHI)
+                                msg_format("%sの意識は途切れた。", m_name);
+                            else if (flag_katana_critical)
+								msg_format("%sを一刀のもとに斬り伏せた！", m_name);
+							else if(o_ptr->k_idx)
+                                msg_format("刃が%sの急所を貫いた！", m_name);
+                            else
+                                msg_format("%sを昏倒させた。", m_name);
+#else
+                            if(p_ptr->pclass == CLASS_KOISHI)
+                                msg_format("%s loses consciousness.", m_name);
+                            else if (flag_katana_critical)
+								msg_format("You strike %s down with your katana!", m_name);
+							else if(o_ptr->k_idx)
+                                msg_format("Your blade hits %s in a critical spot!", m_name);
+                            else
+                                msg_format("You have taken %s down.", m_name);
+#endif
+                        }
 					}
-					else
+				}
+				//村紗特殊攻撃　ユニーク、水棲、水耐性のときこのフラグは立たない
+                else if(sinker)
+                {
+					int resist = 100 + r_ptr->level * 6;
+					if (r_ptr->flags2 & RF2_POWERFUL) resist = resist * 3 / 2;
+					if (r_ptr->flags2 & RF2_GIGANTIC) resist *= 2;
+					if (r_ptr->flags7 & RF7_CAN_FLY) resist *= 2;
+
+					if (randint1(resist) < p_ptr->lev)
 					{
-						k = m_ptr->hp + 1;
-#ifdef JP
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("%sの意識は途切れた。", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("刃が%sの急所を貫いた！", m_name);
-					else
-						msg_format("%sを昏倒させた。", m_name);
-#else
-					if(p_ptr->pclass == CLASS_KOISHI)
-						msg_format("%s loses consciousness.", m_name);
-					else if(o_ptr->k_idx)
-						msg_format("Your blade hits %s in a critical spot!", m_name);
-					else
-						msg_format("You have taken %s down.", m_name);
-#endif
-					}
-				}
-			}
-			//村紗特殊攻撃　ユニーク、水棲、水耐性のときこのフラグは立たない
-			else if(sinker)
-			{
-				int resist = 100 + r_ptr->level * 6;
-				if(r_ptr->flags2 & RF2_POWERFUL) resist = resist * 3 / 2;
-				if(r_ptr->flags2 & RF2_GIGANTIC) resist *= 2;
-				if(r_ptr->flags7 & RF7_CAN_FLY) resist *= 2;
+                            k = m_ptr->hp + 1;
+                            msg_format(_("%sを溺れさせた。", "You drown %s."), m_name);
 
-				if(randint1(resist) < p_ptr->lev)
+                    }
+                }
+
+                //v1.1.21 兵士(スニーキング判定成功)
+                else if(sneakingkill)
+                {
+                    k = m_ptr->hp + 1;
+                    msg_format(_("%sを無力化した。", "You incapacitate %s."), m_name);
+
+                }
+                //v1.1.94 攻撃後の朦朧付与などをここで行う
+				else
 				{
-						k = m_ptr->hp + 1;
-						msg_format(_("%sを溺れさせた。", "You drown %s."), m_name);
+					if (skill_type == TV_HAMMER) attack_effect_type = ATTACK_EFFECT_STUN;
+					if (skill_type == TV_AXE) attack_effect_type = ATTACK_EFFECT_DEC_DEF;
+					if (skill_type == TV_POLEARM) attack_effect_type = ATTACK_EFFECT_DELAY;
 
+					apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,TRUE);
 				}
-			}
-
-			//v1.1.21 兵士(スニーキング判定成功)
-			else if(sneakingkill)
-			{
-				k = m_ptr->hp + 1;
-				msg_format(_("%sを無力化した。", "You incapacitate %s."), m_name);
-
 			}
 
 
@@ -4581,6 +5151,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		}
 		backstab = FALSE;
 		fuiuchi = FALSE;
+		flag_katana_critical = FALSE;
 
 	}	//←攻撃回数ループ終了
 
@@ -4703,6 +5274,8 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 	//bool            is_lowlevel = (r_ptr->level < (p_ptr->lev - 15));
 	bool flag_gain_exp = FALSE;
 
+	int skill_type;
+
 	//int				martial_arts_method = 0;
 	int i;
 
@@ -4719,11 +5292,13 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 	/*:::まず攻撃可能な手段をmethod[]に格納*/
 
 	/*:::盾熟練度に応じシールドバッシュ 熟練度20から出始めて50で100%*/
-	if(	(!check_invalidate_inventory(INVEN_RARM) &&inventory[INVEN_RARM].tval == TV_SHIELD || !check_invalidate_inventory(INVEN_LARM) &&inventory[INVEN_LARM].tval == TV_SHIELD)
-		&& randint0(4800) < ref_skill_exp(SKILL_SHIELD)-3200)
+	//v1.1.94 二発まで出るようにしよう
+	if(	(!check_invalidate_inventory(INVEN_RARM) &&inventory[INVEN_RARM].tval == TV_SHIELD || !check_invalidate_inventory(INVEN_LARM) &&inventory[INVEN_LARM].tval == TV_SHIELD))
 	{
-		method[num_blow++] = MELEE_MODE_SHIELD;
-	//	msg_format("shield");
+		if(ref_skill_exp(SKILL_SHIELD) > 3200 + randint0(4800))
+			method[num_blow++] = MELEE_MODE_SHIELD;
+		if (ref_skill_exp(SKILL_SHIELD) > 4800 + randint0(3200))
+			method[num_blow++] = MELEE_MODE_SHIELD;
 
 	}
 	/*:::武器攻撃をした時か両手に荷物を持っているとき、体術熟練度に応じ追加で格闘 格闘熟練度が20以上か石頭変異所持時*/
@@ -4738,13 +5313,17 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 		}
 		//棒を両手持ちしていて格闘技能が高いとき、さらに追加格闘が出る
 		///mod150428 少し判定修正し、装備が重い時回数上がりにくくした
+		//v1.1.94 格闘技能だけでなく棒技能と格闘技能の平均で判定することにした
 		if(inventory[INVEN_RARM].k_idx && inventory[INVEN_RARM].tval == TV_STICK && p_ptr->ryoute)
 		{
 			int num_xtra = 0;
+			int skill_exp;
+
+			skill_exp = (ref_skill_exp(SKILL_MARTIALARTS) + ref_skill_exp(TV_STICK)) / 2;
 			if(p_ptr->pclass == CLASS_MARTIAL_ARTIST) num_xtra++;
-			if(randint1(ref_skill_exp(SKILL_MARTIALARTS)) > 3000) num_xtra++;
-			if(randint1(ref_skill_exp(SKILL_MARTIALARTS)) > 4500) num_xtra++;
-			if(randint1(ref_skill_exp(SKILL_MARTIALARTS)) > 6000) num_xtra++;
+			if(randint1(skill_exp) > 3000) num_xtra++;
+			if(randint1(skill_exp) > 4500) num_xtra++;
+			if(randint1(skill_exp) > 6000) num_xtra++;
 			if(heavy_armor()) num_xtra /= 2;
 			for(;num_xtra>0;num_xtra--) method[num_blow++] = find_martial_arts_method(MELEE_FIND_NOHAND);
 		}
@@ -4784,26 +5363,37 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 	{
 		bool sinker = FALSE;
 		int mult = 100;
-		/*:::経験値を得る　盾以外は格闘扱い*/
-		if(method[num] == MELEE_MODE_SHIELD) gain_skill_exp(SKILL_SHIELD, m_ptr);
+		int mon_ac = r_ptr->ac;
+
+		//v1.1.94
+		int		attack_effect_type = ATTACK_EFFECT_NONE; //朦朧など敵にステータス異常を付与するとき
+		int		critical_rank = 0; //クリティカルや切れ味や不意打ちなどが決まったとき増える
+		int		effect_turns = 0; //朦朧などのステータス異常を与えるターン数
+
+		//v1.1.94 モンスター防御力低下中はAC25%カット
+		if (MON_DEC_DEF(m_ptr))
+		{
+			mon_ac = MONSTER_DECREASED_AC(mon_ac);
+		}
+
+		/*:::経験値を得る　今の所盾以外は全て格闘*/
+		if (method[num] == MELEE_MODE_SHIELD)
+		{
+			skill_type = SKILL_SHIELD;
+		}
 		else if(!flag_gain_exp)
 		{
-			flag_gain_exp = TRUE;
-			gain_skill_exp(SKILL_MARTIALARTS, m_ptr);
+			skill_type = SKILL_MARTIALARTS;
+			flag_gain_exp = TRUE; //盾格闘は一度しか出ないがそれ以外は何度も出るので一度しか経験値を得られないようにしている
 		}
+		gain_skill_exp(skill_type, m_ptr);
 
 		/*:::装備品などの修正を再計算する*/
 		bonus_h = ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 		bonus_d = ((int)(adj_str_td[p_ptr->stat_ind[A_STR]]) - 128);
-		if(method[num] == MELEE_MODE_SHIELD)
 		{
-			bonus_h +=  p_ptr->lev / 2 * ref_skill_exp(SKILL_SHIELD) / 8000;
-			bonus_d +=  p_ptr->lev / 4 * ref_skill_exp(SKILL_SHIELD) / 8000;
-		}
-		else
-		{
-			int tmp =  p_ptr->lev / 2 * ref_skill_exp(SKILL_MARTIALARTS) / 8000;
-			if(heavy_armor()) tmp /= 2;
+			int tmp =  p_ptr->lev / 2 * ref_skill_exp(skill_type) / 8000;
+			if(heavy_armor() && method[num] != MELEE_MODE_SHIELD) tmp /= 2;
 			bonus_h += tmp;
 			bonus_d += tmp/2;
 		}
@@ -4830,16 +5420,17 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 		chance = (p_ptr->skill_thn + (bonus_h * BTH_PLUS_ADJ));
 
 		/* Test for hit */
-		if ( test_hit_norm(chance, r_ptr->ac, m_ptr->ml))
+		if ( test_hit_norm(chance, mon_ac, m_ptr->ml))
 		{
-			int resist_stun = 0;
-			int special_effect = 0, stun_effect = 0, times = 0, max_times;
+			//int resist_stun = 0;
+			//int stun_effect = 0;
+			int special_effect = 0, times = 0, max_times;
 			int min_level = 1;
 			const martial_arts_new *ma_ptr = &ma_blows_new[0], *old_ptr = &ma_blows_new[0];
 			int weight = 8;
 
 			k = 1;
-
+			/*
 			if (r_ptr->flags1 & RF1_UNIQUE) resist_stun += 88;
 			if (r_ptr->flags2 & RF2_GIGANTIC) resist_stun += 88;
 			if (r_ptr->flags3 & RF3_NO_STUN) resist_stun += 66;
@@ -4847,9 +5438,9 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			if (r_ptr->flags3 & RF3_NO_SLEEP) resist_stun += 33;
 			if (r_ptr->flags2 & RF2_POWERFUL) resist_stun += 33;
 			if ((r_ptr->flags3 & RF3_UNDEAD) || (r_ptr->flags3 & RF3_NONLIVING)) resist_stun += 66;
+			*/
 
-			if(method[num] == MELEE_MODE_SHIELD)  max_times = ref_skill_exp(SKILL_SHIELD) / 2000 + 1;
-			else max_times = ref_skill_exp(SKILL_MARTIALARTS) / 2000 + 1;
+			max_times = ref_skill_exp(skill_type) / 2000 + 1;
 
 			/*:::指定攻撃エフェクトから数回選定し一番高レベルなのを決定*/
 			for (times = 0; times < max_times; times++)
@@ -4898,35 +5489,54 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			switch(ma_ptr->effect)
 			{
 			case MELEE_STUN:
-				stun_effect = 3 + randint0(3);
+				attack_effect_type = ATTACK_EFFECT_STUN;
+				effect_turns = 3 + randint0(3);
 				break;
 			case MELEE_STUN2:
-				stun_effect = 5 + randint0(5);
+				attack_effect_type = ATTACK_EFFECT_STUN;
+				effect_turns = 5 + randint0(5);
 				break;
 			case MELEE_STUN3:
-				stun_effect = 10 + randint0(10);
+				attack_effect_type = ATTACK_EFFECT_STUN;
+				effect_turns = 10 + randint0(10);
 				break;
+
 			//霊夢格闘など
 			case MELEE_SLAY_EVIL:
 				if(r_ptr->flags3 & (RF3_UNDEAD | RF3_DEMON | RF3_KWAI))
 				{
 					if(mult < 250) mult = 250;
-					stun_effect = 5 + randint0(5);
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 5 + randint0(5);
+
 				}
 				break;
+
+			case MELEE_ELEC:
+				if (!(r_ptr->flagsr & (RFR_RES_ALL | RFR_IM_ELEC)))
+				{
+					if (mult<200) mult = 200;
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 10 + randint0(5);
+
+				}
+				break;
+			case MELEE_KASEN:
+				attack_effect_type = ATTACK_EFFECT_STUN;
+				effect_turns = 5 + randint0(5);
+				if (r_ptr->flags3 & (RF3_UNDEAD) || r_ptr->flags3 & (RF3_ANIMAL))
+				{
+					if (mult < 300) mult = 300;
+					effect_turns = 10 + randint0(10);
+				}
+				break;
+
 
 			case MELEE_VAMP:
 				if (monster_living(r_ptr))
 				{
 					can_drain = TRUE;
 					can_feed = TRUE;
-				}
-				break;
-			case MELEE_ELEC:
-				if(!(r_ptr->flagsr & (RFR_RES_ALL | RFR_IM_ELEC)))
-				{
-					if(mult<200) mult=200;
-					stun_effect = 10 + randint0(5);
 				}
 				break;
 
@@ -4946,6 +5556,10 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 				{
 					if(r_ptr->flagsr & RFR_HURT_FIRE && mult<500) mult = 500;
 					else if(mult<300) mult=300;
+
+					//v1.1.91 石油地形火炎ダメージ
+					if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) mult = oil_field_damage_mod(mult, y, x);
+
 				}
 				break;
 			//火炎攻撃
@@ -4955,6 +5569,10 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 				{
 					if(r_ptr->flagsr & RFR_HURT_FIRE && mult<300) mult = 300;
 					else if(mult<200) mult=200;
+
+					//v1.1.91 石油地形火炎ダメージ
+					if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) mult = oil_field_damage_mod(mult, y, x);
+
 				}
 				break;
 			//冷気、氷攻撃
@@ -4967,7 +5585,9 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 				}
 				break;
 			case MELEE_SLOW:
-				special_effect = MA_SLOW;
+				attack_effect_type = ATTACK_EFFECT_SLOW;
+				effect_turns = 5 + randint0(5);
+
 				break;
 			case MELEE_POIS: //毒耐性のない敵に大ダメージ
 				if(r_ptr->flagsr & RFR_RES_ALL) k=0;
@@ -4982,14 +5602,17 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 						sinker = TRUE;
 					//breakしない
 			case MELEE_WATER:
-				if(	(r_ptr->flags7 & RF7_AQUATIC)
-					|| (r_ptr->flagsr & RFR_RES_WATE)) mult = 50;
+				if ((r_ptr->flags7 & RF7_AQUATIC) || (r_ptr->flagsr & RFR_RES_WATE))
+				{
+					mult = 50;
+				}
 				else
 				{
-					if(!(r_ptr->flags3 & RF3_NO_STUN)) stun_effect = 3 + randint0(3);
-					if(r_ptr->flagsr & RFR_HURT_WATER) mult = 200;
+					if (r_ptr->flagsr & RFR_HURT_WATER) mult = 200;
+					attack_effect_type = ATTACK_EFFECT_STUN;
+					effect_turns = 10 + randint0(10);
 				}
-					break;
+				break;
 			case MELEE_CONFUSE: //混乱付与
 				if(r_ptr->flags3 & RF3_NO_CONF)
 				{
@@ -5024,17 +5647,37 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 					if(cheat_xtra) msg_format("weight:%d",weight);
 					if(nekoguruma_weight > 200)
 					{
-						stun_effect = nekoguruma_weight / 100 + randint1(nekoguruma_weight / 100);
+						attack_effect_type = ATTACK_EFFECT_STUN;
+						effect_turns = nekoguruma_weight / 100 + randint1(nekoguruma_weight / 100);
+
 					}
+					break;
 				}
 
+			case MELEE_DEC_ATK:
+				attack_effect_type = ATTACK_EFFECT_DEC_ATK;
+				break;
+			case MELEE_DEC_DEF:
+				attack_effect_type = ATTACK_EFFECT_DEC_DEF;
+				break;
+			case MELEE_DEC_MAG:
+				attack_effect_type = ATTACK_EFFECT_DEC_MAG;
+				break;
+			case MELEE_DEC_ALL:
+				attack_effect_type = ATTACK_EFFECT_DEC_ALL;
+				break;
+			case MELEE_DELAY:
+				attack_effect_type = ATTACK_EFFECT_DELAY;
+				break;
 			}
 			k = k * mult / 100;//格闘擬似スレイ
 			/*:::攻撃によるメッセージ*/
 			msg_format(ma_ptr->desc, m_name);
-			k = critical_norm(p_ptr->lev * weight, min_level, k, bonus_h, 0);
+			k = critical_norm(p_ptr->lev * weight, min_level, k, bonus_h, 0, &critical_rank);
 			k += bonus_d;
 			drain_result = k;
+
+			/*
 			if (stun_effect && k < m_ptr->hp)
 			{
 				if (p_ptr->lev > randint1(r_ptr->level + resist_stun + 10))
@@ -5057,6 +5700,7 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 					}
 				}
 			}
+			*/
 
 			/* No negative damage */
 			if (k < 0) k = 0;
@@ -5066,21 +5710,29 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			k = mon_damage_mod(m_ptr, k, (bool)(( p_ptr->pseikaku == SEIKAKU_BERSERK) && one_in_(2)));
 
 
-			//村紗特殊攻撃　ユニーク、水棲、水耐性のときこのフラグは立たない
-			if(sinker)
-			{
-				int resist = 100 + r_ptr->level * 6;
-				if(r_ptr->flags2 & RF2_POWERFUL) resist = resist * 3 / 2;
-				if(r_ptr->flags2 & RF2_GIGANTIC) resist *= 2;
-				if(r_ptr->flags7 & RF7_CAN_FLY) resist *= 2;
+            if (k > 1)
+            {
+                //村紗特殊攻撃　ユニーク、水棲、水耐性のときこのフラグは立たない
+                if(sinker)
+                {
+					int resist = 100 + r_ptr->level * 6;
+					if (r_ptr->flags2 & RF2_POWERFUL) resist = resist * 3 / 2;
+					if (r_ptr->flags2 & RF2_GIGANTIC) resist *= 2;
+					if (r_ptr->flags7 & RF7_CAN_FLY) resist *= 2;
 
-				if(randint1(resist) < p_ptr->lev)
+					if (randint1(resist) < p_ptr->lev)
+					{
+                            k = m_ptr->hp + 1;
+                            msg_format(_("%sを溺れさせた。", "You drown %s."), m_name);
+
+                    }
+                }
+				//v1.1.94 攻撃後の朦朧付与などをここで行う
+				else
 				{
-						k = m_ptr->hp + 1;
-						msg_format(_("%sを溺れさせた。", "You drown %s."), m_name);
-
+					apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,FALSE);
 				}
-			}
+            }
 
 			/* Complex message */
 			if (p_ptr->wizard || cheat_xtra)
@@ -5160,11 +5812,6 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			drain_result = 0;
 
 			if(*mdeath) break;
-
-
-
-
-
 
 			/* Anger the monster */
 			if (k > 0) anger_monster(m_ptr);
@@ -5273,13 +5920,27 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 	u32b flgs[TR_FLAG_SIZE]; //切れ味
 	bool            is_human = (r_ptr->d_char == 'p');
 
+	//刀熟練度ボーナスの「必殺の一太刀」が出たときのフラグ
+	bool			flag_katana_critical = FALSE;
+
 	int total_blow_num = 0;
 	int attack_doll_array[100];
 	int i;
+	int mon_ac = r_ptr->ac;
+
 
 	if(p_ptr->pclass != CLASS_ALICE)
-		{msg_format(_("ERROR:クラスがアリス以外の時alice_attack_aux()が呼ばれた",
-                    "ERROR: alice_attack_aux() called for non-Alice")); return;}
+	{
+	    msg_print(_("ERROR:クラスがアリス以外の時alice_attack_aux()が呼ばれた",
+                    "ERROR: alice_attack_aux() called for non-Alice"));
+        return;
+    }
+
+	//v1.1.94 モンスター防御力低下中はAC25%カット
+	if (MON_DEC_DEF(m_ptr))
+	{
+		mon_ac = MONSTER_DECREASED_AC(mon_ac);
+	}
 
 	/*:::人形の攻撃回数を求め、順番をランダムに設定する*/
 	for(i=0;i<100;i++) attack_doll_array[i]=0;
@@ -5287,8 +5948,17 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 	{
 		int j;
 		int tmp_blow_num = calc_doll_blow_num(i);//人形一体の攻撃回数計算
+
+		 //v1.1.94 槍による迎撃
+		if (mode == HISSATSU_COUNTER_SPEAR)
+		{
+			if (inven_add[i].tval != TV_SPEAR) continue;
+			tmp_blow_num = 1;
+		}
+
 		for(j=0;j<tmp_blow_num;j++)
 		{
+
 			if(!i)
 			{
 				attack_doll_array[total_blow_num] = i;//一番上の上海人形は普通に格納
@@ -5305,12 +5975,12 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 			}
 			total_blow_num++;
 			if(total_blow_num == 100)
-			{msg_format(_("ERROR:alice_attack_aux()の攻撃回数が100以上",
+			{msg_print(_("ERROR:alice_attack_aux()の攻撃回数が100以上",
                         "ERROR: blow count in alice_attack_aux() is over 100")); return; }
 		}
 	}
 	if(!total_blow_num)
-	{msg_format(_("ERROR:alice_attack_aux()で攻撃回数が0",
+	{msg_print(_("ERROR:alice_attack_aux()で攻撃回数が0",
                 "ERROR: blow count in alice_attack_aux() is 0")); return;}
 
 
@@ -5318,6 +5988,12 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 	if(p_ptr->tim_unite_darkness)
 	{
 		if(!(cave[py][px].info & CAVE_GLOW)  && m_ptr->ml && (MON_CSLEEP(m_ptr) || randint1(p_ptr->lev * 3 + (p_ptr->skill_stl + 10) * 4) > r_ptr->level * 2)) fuiuchi = TRUE;
+	}
+
+	//刀の一撃目に必中とボーナスを乗せる
+	if(check_katana_critical(m_ptr, mode))
+	{
+		flag_katana_critical = TRUE;
 	}
 
 	(void)set_monster_csleep(c_ptr->m_idx, 0);
@@ -5330,17 +6006,42 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 		bool dokubari = FALSE;
 		int doll_num = attack_doll_array[num];
 
+		bool flag_katana_critical_done = FALSE;
+
+		//v1.1.94
+		int		skill_type = 0;	//該当するスキル ref_skill_exp()に使う
+		int		attack_effect_type = ATTACK_EFFECT_NONE; //朦朧など敵にステータス異常を付与するとき
+		int		critical_rank = 0; //クリティカルや切れ味や不意打ちなどが決まったとき増える
+		int		effect_turns = 0; //朦朧などのステータス異常を与えるターン数
+
 		o_ptr =  &inven_add[doll_num];
 		if(!object_is_melee_weapon(o_ptr))
 		{msg_format(_("ERROR:武器を持たない人形が呼ばれた(%d)",
                     "ERROR: Called doll without a weapon (%d)"),doll_num); return;}
 
+		skill_type = o_ptr->tval;
+
+		if (flag_katana_critical && o_ptr->tval == TV_KATANA) flag_katana_critical_done = TRUE;
+
 		//得られる熟練度は1/10程度にしておく
-		if(one_in_(10)) gain_skill_exp(o_ptr->tval,m_ptr);
+		if(one_in_(10)) gain_skill_exp(skill_type,m_ptr);
 
 		//calc_bonuses()で計算していない武器熟練度をここで反映
-		bonus = p_ptr->to_h[0] + o_ptr->to_h + (ref_skill_exp(o_ptr->tval) - WEAPON_EXP_BEGINNER) / 200;
+		//v1.1.94 剣の命中率に熟練度ボーナス反映
+		if (o_ptr->tval == TV_SWORD)
+		{
+			bonus = p_ptr->to_h[0] + o_ptr->to_h + (ref_skill_exp(skill_type) - 2500) / 125;
+		}
+		else
+		{
+			bonus = p_ptr->to_h[0] + o_ptr->to_h + (ref_skill_exp(skill_type) - WEAPON_EXP_BEGINNER) / 200;
+		}
+
+
 		chance = (p_ptr->skill_thn + (bonus * BTH_PLUS_ADJ));
+
+		if (mode == HISSATSU_COUNTER_SPEAR) chance += 60;
+
 
 		///sys item 毒針命中判定
 		///mod131223 tval
@@ -5350,11 +6051,18 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 			success_hit = one_in_(3);
 		}
 
-		else if (( fuiuchi && !(r_ptr->flagsr & RFR_RES_ALL))) success_hit = TRUE;
-		/*:::通常の命中処理*/
+		else if ((fuiuchi && !(r_ptr->flagsr & RFR_RES_ALL)))
+		{
+			success_hit = TRUE;
+		}
+		else if (flag_katana_critical_done)
+		{
+			success_hit = TRUE;
+		}
 		else
 		{
-			success_hit = test_hit_norm(chance, r_ptr->ac, m_ptr->ml);
+			/*:::通常の命中処理*/
+			success_hit = test_hit_norm(chance, mon_ac, m_ptr->ml);
 			//オーラによる命中率減少
 			if(r_ptr->flags2 & RF2_AURA_FIRE && one_in_(20)) success_hit = FALSE;
 			if(r_ptr->flags2 & RF2_AURA_COLD && one_in_(20)) success_hit = FALSE;
@@ -5366,12 +6074,18 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 		{
 			int vorpal_chance;
 
+			//v1.1.94
+			if ( fuiuchi ) critical_rank = 3;
+
 			/* Sound */
 			sound(SOUND_HIT);
 
 			if (fuiuchi)
 				msg_format(_("%sは不意を突いて%sに強烈な一撃を喰らわせた！",
                             "%s catches %s unaware, delivering a powerful blow!"),alice_doll_name[doll_num], m_name);
+			else if (flag_katana_critical_done)
+				msg_format(_("%sは%sにからくり抜刀術を披露した！",
+                            "%s hits %s with a mechanical katana strike!"), alice_doll_name[doll_num], m_name);
 #ifdef JP
 			else if(ex_attack_msg)
 				msg_format("%sが%s%s",alice_doll_name[doll_num], m_name, msg_py_atk(o_ptr,mode));
@@ -5416,7 +6130,7 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 			/*:::ダイスにスレイなど適用*/
 			k = tot_dam_aux(o_ptr, k, m_ptr, mode, FALSE);
 
-			if (fuiuchi)
+			if (fuiuchi || flag_katana_critical_done)
 			{
 				k = k*(5+(p_ptr->lev*2/25))/2;
 			}
@@ -5424,7 +6138,11 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 
 			/*:::クリティカル処理*/
 			if (!dokubari)
-			k = critical_norm(o_ptr->weight, o_ptr->to_h, k, p_ptr->to_h[0], mode);
+			k = critical_norm(o_ptr->weight * 3 / 2 + p_ptr->lev * 2, o_ptr->to_h*2, k, p_ptr->to_h[0], mode, &critical_rank);
+			//v1.1.94 重量アップ
+			//k = critical_norm(o_ptr->weight, o_ptr->to_h, k, p_ptr->to_h[0], mode, &critical_rank);
+
+
 
 			drain_result = k;
 			/*:::ヴォーパルヒット処理*/
@@ -5453,12 +6171,23 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 					//default: msg_format("%sを細切れにした！", m_name); break;
 				}
 				drain_result = drain_result * 3 / 2;
+
+				//v1.1.94
+				if (critical_rank < mult - 1) critical_rank = mult - 1;
+				if (critical_rank > 5) critical_rank = 5;
+
 			}
 
 			k += o_ptr->to_d;
 			drain_result += o_ptr->to_d;
 			k += p_ptr->to_d[0];
 			drain_result += p_ptr->to_d[0];
+
+			if (flag_katana_critical_done && weird_luck())
+			{
+				msg_print(_("必殺の一太刀だ！", "That was a critical blow!"));
+				k *= 5;
+			}
 
 			/* No negative damage */
 			if (k < 0) k = 0;
@@ -5477,6 +6206,17 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 				}
 				else k = 1;
 			}
+			//v1.1.94 攻撃後の朦朧付与などをここで行う
+			else
+			{
+				if (skill_type == TV_HAMMER) attack_effect_type = ATTACK_EFFECT_STUN;
+				if (skill_type == TV_AXE) attack_effect_type = ATTACK_EFFECT_DEC_DEF;
+				if (skill_type == TV_POLEARM) attack_effect_type = ATTACK_EFFECT_DELAY;
+
+				apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,TRUE);
+			}
+
+
 
 			if( k > 9999) k = 9999;
 			/* Complex message */
@@ -5636,6 +6376,8 @@ static void py_attack_aux_alice(int y, int x, bool *fear, bool *mdeath, int mode
 
 		}
 		fuiuchi = FALSE;
+		if(flag_katana_critical_done) flag_katana_critical = FALSE;
+
 
 		num++;
 	}
@@ -5693,11 +6435,13 @@ bool py_attack(int y, int x, int mode)
 		return FALSE;
 	}
 
+	//美鈴格闘の消費行動力減少処理
 	if(p_ptr->pclass == CLASS_MEIRIN && p_ptr->do_martialarts)
 	{
 		energy_use = p_ptr->magic_num1[0];
 		if(cheat_xtra) msg_format("Energy_use:%d",energy_use);
 	}
+	//雷鼓プリスティンビートの消費行動力減少処理
 	else if(p_ptr->pclass == CLASS_RAIKO && music_singing(MUSIC_NEW_RAIKO_PRISTINE))
 	{
 		energy_use = 75 - p_ptr->concent * 5;
@@ -5705,14 +6449,14 @@ bool py_attack(int y, int x, int mode)
 
 		if(cheat_xtra) msg_format("Energy_use:%d",energy_use);
 	}
-	else if(mode == HISSATSU_GION || mode == HISSATSU_DOUBLESCORE)
+	else if(mode == HISSATSU_GION || mode == HISSATSU_DOUBLESCORE || mode == HISSATSU_COUNTER_SPEAR)
 	{
 		; //カウンター系の攻撃は行動消費なし
 	}
 	else
 		energy_use = 100;
 
-	if(IS_METAMORPHOSIS && r_info[MON_EXTRA_FIELD].flags1 & RF1_NEVER_MOVE)
+	if(IS_METAMORPHOSIS && r_info[MON_EXTRA_FIELD].flags1 & RF1_NEVER_BLOW)
 	{
 		msg_print(_("この身体は直接攻撃に向かないようだ。", "This body isn't suitable for attacking directly."));
 		return FALSE;
@@ -5852,9 +6596,9 @@ bool py_attack(int y, int x, int mode)
 
 		else
 #ifdef JP
-			msg_format ("そっちには何か恐いものがいる！");
+			msg_print ("そっちには何か恐いものがいる！");
 #else
-			msg_format ("There is something scary in your way!");
+			msg_print ("There is something scary in your way!");
 #endif
 
 		/* Disturb the monster */
@@ -5948,20 +6692,20 @@ bool py_attack(int y, int x, int mode)
 	/*:::格闘のときはmigiteのみTRUEになってるはず*/
 	/*:::↑弓枠変更により、クロスボウか銃を持っているときはhidariteがTRUEになって格闘をすることになった。*/
 	///mod150808 アリス特殊処理追加
+
+	//モンスター変身時隣接攻撃
 	if(IS_METAMORPHOSIS)
 	{
-		//モンスター変身時隣接攻撃
 		monplayer_attack_monst(c_ptr->m_idx);
 	}
+	//アリス人形隣接攻撃
 	else if(p_ptr->pclass == CLASS_ALICE && !p_ptr->do_martialarts)
 	{
-		//アリス人形隣接攻撃
 		py_attack_aux_alice(y, x, &fear, &mdeath, mode);
 	}
+    //咲夜ソウルスカルプチュア
 	else if(mode == HISSATSU_SOULSCULPTURE && p_ptr->pclass == CLASS_SAKUYA)
 	{
-
-		//咲夜ソウルスカルプチュア
 		if (p_ptr->migite && inventory[INVEN_RARM].tval == TV_KNIFE)
 			py_attack_aux(y, x, &fear, &mdeath, 0, mode);
 		if (p_ptr->hidarite && !mdeath && inventory[INVEN_RARM].tval == TV_KNIFE)
@@ -5984,7 +6728,7 @@ bool py_attack(int y, int x, int mode)
 		py_attack_aux2(y,x,&fear,&mdeath);
 
 	/* Mutations which yield extra 'natural' attacks */
-	///sys 変異部位攻撃　ここは追加格闘
+	///sys 変異部位攻撃　ここの内容は↑のpy_attack_aux2()に移した
 #if 0
 	if (!mdeath)
 	{
@@ -6000,9 +6744,6 @@ bool py_attack(int y, int x, int mode)
 			natural_attack(c_ptr->m_idx, MUT2_BIGTAIL, &fear, &mdeath);
 	}
 #endif
-
-
-
 
 	/* Hack -- delay fear messages */
 	if (fear && m_ptr->ml && !mdeath)
@@ -7069,6 +7810,13 @@ void move_player(int dir, bool do_pickup, bool break_trap)
 	{
 		if ((p_ptr->pclass != CLASS_RANGER && !prace_is_(RACE_YAMAWARO))  && (!p_ptr->riding || !(riding_r_ptr->flags8 & RF8_WILD_WOOD))) energy_use *= 2;
 	}
+
+	//v1.1.91 石油地形上で減速する処理
+	else if (have_flag(f_ptr->flags, FF_OIL_FIELD) && !p_ptr->levitation)
+	{
+		if ((p_ptr->pclass != CLASS_YUMA )) energy_use *= 2;
+	}
+
 
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
@@ -8186,6 +8934,10 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	int targetlevel = r_ptr->level;
 	int skill_max;
 
+	//v1.1.41 舞と里乃の特殊騎乗は熟練度が入らない
+	if (CLASS_RIDING_BACKDANCE && skill_num == SKILL_RIDING) return;
+
+
 	/*:::武器TVAL(23～)を対応する技能値配列項目(10～)に変換する*/
 	if(skill_num >= TV_KNIFE) n = skill_num -= SKILL_WEAPON_SHIFT;
 
@@ -8220,8 +8972,6 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	//既に上限の場合終了
 	if(p_ptr->skill_exp[n] >= skill_max) return;
 
-	//v1.1.41 舞と里乃の特殊騎乗は熟練度が入らない
-	if (CLASS_RIDING_BACKDANCE && n == SKILL_RIDING) return;
 
 	//msg_format("TEST:RIDINGLEV:%d",ridinglevel);
 
@@ -8237,6 +8987,8 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	else if(old_skill_lev < 30) amount += 2;
 	else if(old_skill_lev < 40) amount += 1;
 
+	//v1.1.94 銃は熟練度が上がりにくいとよく聞くのでちょっと調整しよう
+	if (skill_num == TV_GUN) amount += randint1(amount);
 
 	/*:::ターゲットや＠が弱いと上がりにくい*/
 	if((targetlevel < old_skill_lev / 4) ) amount /= 10;

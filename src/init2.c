@@ -1793,7 +1793,8 @@ static errr init_feat_variables(void)
 	feat_poisonous_puddle = f_tag_to_index_in_init("SHALLOW_POISONOUS_PUDDLE");
 	feat_deep_miasma = f_tag_to_index_in_init("DEEP_MIASMA");
 	feat_thin_miasma = f_tag_to_index_in_init("THIN_MIASMA");
-
+	//v1.1.91
+	feat_oil_field = f_tag_to_index_in_init("OIL_FIELD");
 
 
 	/* Unknown grid (not detected) */
@@ -2683,15 +2684,15 @@ note("[ユーザー設定ファイルを初期化しています...]");
  */
 cptr get_check_sum(void)
 {
-	return format("%02x%02x%02x%02x%02x%02x%02x%02x%02x", 
-		      f_head.v_extra, 
-		      k_head.v_extra, 
-		      a_head.v_extra, 
-		      e_head.v_extra, 
-		      r_head.v_extra, 
-		      d_head.v_extra, 
-		      m_head.v_extra, 
-		      s_head.v_extra, 
+	return format("%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+		      f_head.v_extra,
+		      k_head.v_extra,
+		      a_head.v_extra,
+		      e_head.v_extra,
+		      r_head.v_extra,
+		      d_head.v_extra,
+		      m_head.v_extra,
+		      s_head.v_extra,
 		      v_head.v_extra);
 }
 

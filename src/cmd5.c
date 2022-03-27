@@ -2841,6 +2841,13 @@ bool rakuba(int dam, bool force)
 			int rakubalevel = r_ptr->level;
 			if (p_ptr->riding_ryoute) rakubalevel += 20;
 
+			//v1.1.95 狂戦士化した乗馬は乗りこなしにくいことにする
+			if (MON_BERSERK(m_ptr))
+			{
+				rakubalevel = rakubalevel * 3 / 2;
+			}
+
+
 			///mod140705 乗馬スキルが極めて高いと落馬回避判定にボーナス　騎兵とかでレベルの上がったパワーDに乗るための修正
 			///mod141011 やはり中止。落馬計算式で調整する
 			//if(cur > 6400) rakubalevel = MAX(rakubalevel-20,0);

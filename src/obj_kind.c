@@ -13,6 +13,13 @@ bool object_is_potion(object_type *o_ptr)
 	return (k_info[o_ptr->k_idx].tval == TV_POTION);
 }
 
+
+//v1.1.92 do_spellから移動してきてstatic外した
+bool item_tester_hook_cursed(object_type *o_ptr)
+{
+	return (bool)(object_is_cursed(o_ptr));
+}
+
 ///sysdel 賞金首
 ///del131221 賞金首判別
 #if 0
@@ -68,7 +75,7 @@ bool object_is_favorite(object_type *o_ptr)
 		u32b flgs[TR_FLAG_SIZE];
 		object_flags_known(o_ptr, flgs);
 
-		if (!have_flag(flgs, TR_BLESSED) && 
+		if (!have_flag(flgs, TR_BLESSED) &&
 		    !(o_ptr->tval == TV_HAMMER || o_ptr->tval == TV_STICK))
 			return FALSE;
 		break;
@@ -307,14 +314,14 @@ bool object_is_ammo(object_type *o_ptr)
 ///mod131223
 bool object_is_armour(object_type *o_ptr)
 {
-	if (	o_ptr->tval == TV_SHIELD 
-		||	o_ptr->tval == TV_CLOTHES 
+	if (	o_ptr->tval == TV_SHIELD
+		||	o_ptr->tval == TV_CLOTHES
 		||	o_ptr->tval == TV_ARMOR
-		||	o_ptr->tval == TV_DRAG_ARMOR 
+		||	o_ptr->tval == TV_DRAG_ARMOR
 		||	o_ptr->tval == TV_CLOAK
-		||	o_ptr->tval == TV_HEAD 
-		||	o_ptr->tval == TV_GLOVES 
-		||	o_ptr->tval == TV_BOOTS 
+		||	o_ptr->tval == TV_HEAD
+		||	o_ptr->tval == TV_GLOVES
+		||	o_ptr->tval == TV_BOOTS
 		) return TRUE;
 
 	return FALSE;
@@ -345,6 +352,24 @@ bool object_is_melee_weapon(object_type *o_ptr)
 
 	return FALSE;
 }
+
+/* 近接武器から特殊アイテムの毒針とTV_MAGICWEAPONを除いたもの*/
+// 武器修復素材と付喪神変化のアイテム指定に使う
+// もともとbldg.cにあるitem_tester_hook_melee_weaponという関数だったが、
+// object_is_melee_weapon()と紛らわしいのでv1.1.93 で名称変更しobj_kind.cに移動してきた
+// cmd3.cにもitem_tester_hook_melee_weaponがあったが削除
+bool object_is_melee_weapon_except_strange_kind(object_type *o_ptr)
+{
+
+	if (o_ptr->tval == TV_KNIFE && o_ptr->sval == SV_WEAPON_DOKUBARI) return (FALSE);
+	if (o_ptr->tval == TV_MAGICWEAPON) return (FALSE);
+
+	return (object_is_melee_weapon(o_ptr));
+
+}
+
+
+
 ///mod131229 刃のある武器のときTRUEを返す (注：ランスなど刃がないがプリースト向きではない武器もあるのでこの関数だけではプリースト向き武器を判別できない）
 bool object_has_a_blade(object_type *o_ptr)
 {
@@ -400,7 +425,7 @@ bool object_is_equipment(object_type *o_ptr)
 bool object_refuse_enchant_weapon(object_type *o_ptr)
 {
 	if (o_ptr->tval == TV_KNIFE && o_ptr->sval == SV_WEAPON_DOKUBARI
-		|| o_ptr->tval == TV_MAGICITEM 
+		|| o_ptr->tval == TV_MAGICITEM
 		|| o_ptr->tval == TV_MAGICWEAPON) return TRUE;
 
 	return FALSE;
@@ -487,7 +512,7 @@ bool object_is_nameless(object_type *o_ptr)
 
 bool object_is_shooting_weapon(object_type *o_ptr)
 {
-	if(o_ptr->tval == TV_BOW || o_ptr->tval == TV_CROSSBOW || o_ptr->tval == TV_GUN ) return (TRUE); 
+	if(o_ptr->tval == TV_BOW || o_ptr->tval == TV_CROSSBOW || o_ptr->tval == TV_GUN ) return (TRUE);
 	else return (FALSE);
 }
 /*
@@ -528,8 +553,8 @@ bool object_allow_two_hands_wielding(object_type *o_ptr)
 
 int shootable(int *tester)
 {
-	object_type *rarm_o_ptr = &inventory[INVEN_RARM]; 
-	object_type *larm_o_ptr = &inventory[INVEN_LARM]; 
+	object_type *rarm_o_ptr = &inventory[INVEN_RARM];
+	object_type *larm_o_ptr = &inventory[INVEN_LARM];
 	int hand=0;
 
 	/*:::獣変身などのとき射撃不可*/
@@ -546,7 +571,7 @@ int shootable(int *tester)
 			hold_wgt *= 2;
 
 		//二丁拳銃
-		if(rarm_o_ptr->tval == TV_GUN && larm_o_ptr->tval == TV_GUN) 
+		if(rarm_o_ptr->tval == TV_GUN && larm_o_ptr->tval == TV_GUN)
 		{
 			if(rarm_o_ptr->weight < hold_wgt && larm_o_ptr->weight < hold_wgt)
 			{
@@ -639,21 +664,21 @@ int shootable(int *tester)
 
 	///mod151205 三月精特殊処理　重量過多でなければペナルティなし
 	//射撃武器を両手持ちしてるときはペナルティなし　ただし射撃武器が重すぎると射撃不可
-	else if(object_is_shooting_weapon(rarm_o_ptr) && ((empty_hands(TRUE) & EMPTY_HAND_LARM) || p_ptr->pclass == CLASS_3_FAIRIES)) 
-	{ 
+	else if(object_is_shooting_weapon(rarm_o_ptr) && ((empty_hands(TRUE) & EMPTY_HAND_LARM) || p_ptr->pclass == CLASS_3_FAIRIES))
+	{
 		if(rarm_o_ptr->weight / 20 > p_ptr->stat_use[A_STR])
 			*tester = SHOOT_HEAVY_WEAPON;
-		else 
+		else
 		{
 			hand = 1;
 			*tester = SHOOT_NO_PENALTY;
 		}
 	}
-	else if(object_is_shooting_weapon(larm_o_ptr) && ((empty_hands(TRUE) & EMPTY_HAND_RARM)|| p_ptr->pclass == CLASS_3_FAIRIES)) 
-	{ 
+	else if(object_is_shooting_weapon(larm_o_ptr) && ((empty_hands(TRUE) & EMPTY_HAND_RARM)|| p_ptr->pclass == CLASS_3_FAIRIES))
+	{
 		if(larm_o_ptr->weight / 16 > p_ptr->stat_use[A_STR])
 			*tester = SHOOT_HEAVY_WEAPON;
-		else 
+		else
 		{
 			hand = 2;
 			*tester = SHOOT_NO_PENALTY;
@@ -672,7 +697,7 @@ int shootable(int *tester)
 		if(object_is_shooting_weapon(larm_o_ptr)) hand = 2;
 
 		//射撃武器（銃以外）と近接武器を持っている場合ペナルティ重い
-		if(object_is_melee_weapon(rarm_o_ptr) || object_is_melee_weapon(larm_o_ptr)) *tester = SHOOT_HIGH_PENALTY; 
+		if(object_is_melee_weapon(rarm_o_ptr) || object_is_melee_weapon(larm_o_ptr)) *tester = SHOOT_HIGH_PENALTY;
 
 		//それ以外はペナルティ軽い
 		else *tester = SHOOT_LOW_PENALTY;

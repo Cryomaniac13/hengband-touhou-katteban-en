@@ -4035,7 +4035,8 @@ void set_hostile(monster_type *m_ptr)
 				add++;
 			}
 			//サトリコンクリフトと狐狸戦争では友好的な敵に攻撃すると全ての友好敵が敵対する
-			else if(is_friendly(m2_ptr) && (p_ptr->inside_quest == QUEST_SATORI || p_ptr->inside_quest == QUEST_KORI))
+			//v1.1.91 ヤクザ戦争も
+			else if(is_friendly(m2_ptr) && (p_ptr->inside_quest == QUEST_SATORI || p_ptr->inside_quest == QUEST_KORI || p_ptr->inside_quest == QUEST_YAKUZA_1))
 			{
 
 				m2_ptr->smart &= ~SM_FRIENDLY;
@@ -4189,6 +4190,14 @@ bool monster_can_enter(int y, int x, monster_race *r_ptr, u16b mode)
 
 static bool check_hostile_align(byte sub_align1, byte sub_align2)
 {
+
+	//v1.1.91 クエストダンジョンで複数勢力のモンスターが殴り合う用
+	if ((sub_align1 & SUB_ALIGN_QUEST_MASK) && (sub_align1 & SUB_ALIGN_QUEST_MASK))
+	{
+		if (sub_align1 != sub_align2) return TRUE;
+		else return FALSE;
+	}
+
 	if (sub_align1 != sub_align2)
 	{
 		if (((sub_align1 & SUB_ALIGN_EVIL) && (sub_align2 & SUB_ALIGN_GOOD)) ||

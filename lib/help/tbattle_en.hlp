@@ -10,13 +10,14 @@ Keine - 'Now we've reached combat with monsters.
     (d) Martial Arts               (tbattle_en.txt#Martialarts)
     (e) Throwing                   (tbattle_en.txt#Throwing)
     (f) Critical Hits              (tbattle_en.txt#Critical)
-    (g) Beneficial Effects         (tbattle_en.txt#Buff)
-    (h) Status Abnormalities       (tbattle_en.txt#BadStatus)
-    (i) Elements                   (tbattle_en.txt#Attack_type)
-    (j) Vulnerabilities            (tbattle_en.txt#Weak_point)
-    (k) Early Game Tactics         (tbattle_en.txt#Tactics1)
-    (l) Midgame Tactics            (tbattle_en.txt#Tactics2)
-    (m) Endgame Tactics            (tbattle_en.txt#Tactics3)
+    (g) Proficiency Level          (tbattle_en.txt#Skilllevel)
+    (h) Beneficial Effects         (tbattle_en.txt#Buff)
+    (i) Status Abnormalities       (tbattle_en.txt#BadStatus)
+    (j) Elements                   (tbattle_en.txt#Attack_type)
+    (k) Vulnerabilities            (tbattle_en.txt#Weak_point)
+    (l) Early Game Tactics         (tbattle_en.txt#Tactics1)
+    (m) Midgame Tactics            (tbattle_en.txt#Tactics2)
+    (n) Endgame Tactics            (tbattle_en.txt#Tactics3)
 
     (?) Help System Commands       (helpinfo.txt)
 
@@ -27,10 +28,11 @@ Keine - 'Now we've reached combat with monsters.
 ***** [d] tbattle_en.txt#Martialarts
 ***** [e] tbattle_en.txt#Throwing
 ***** [f] tbattle_en.txt#Critical
-***** [g] tbattle_en.txt#Buff
-***** [h] tbattle_en.txt#BadStatus
-***** [i] tbattle_en.txt#Attack_type
-***** [j] tbattle_en.txt#Weak_point
-***** [k] tbattle_en.txt#Tactics1
-***** [l] tbattle_en.txt#Tactics2
-***** [m] tbattle_en.txt#Tactics3
+***** [g] tbattle_en.txt#Skilllevel
+***** [h] tbattle_en.txt#Buff
+***** [i] tbattle_en.txt#BadStatus
+***** [j] tbattle_en.txt#Attack_type
+***** [k] tbattle_en.txt#Weak_point
+***** [l] tbattle_en.txt#Tactics1
+***** [m] tbattle_en.txt#Tactics2
+***** [n] tbattle_en.txt#Tactics3

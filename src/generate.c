@@ -757,9 +757,16 @@ bool place_quest_monsters(void)
 
 		r_ptr = &r_info[quest[i].r_idx];
 
-		/* Hack -- "unique" monsters must be "unique" */
-		if ((r_ptr->flags1 & RF1_UNIQUE) &&
-		    (r_ptr->cur_num >= r_ptr->max_num)) continue;
+		//v1.1.92
+		//畜生界やくざ戦争クエストで早鬼を倒したら水際作戦クエストで出現しなくなったので、
+		//クエスト対象ユニークがすでに倒れていたら復活させることにする。
+		//副作用としてごく稀にランクエのモンスターをすでに倒していたときの「この階は以前は誰かによって守られていたようだ」が起こらなくなるはず。
+		//まあ専用フロアがあるほうのクエストでターゲットになっていれば打倒済みでも自動復活するのでランクエやダンジョン内クエストでも同じようにするほうが整合性が取れるだろう。
+		if (r_ptr->flags1 & RF1_UNIQUE)
+		{
+			r_ptr->cur_num = 0;
+			r_ptr->max_num = 1;
+		}
 
 		mode = (PM_NO_KAGE | PM_NO_PET);
 

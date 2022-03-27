@@ -741,6 +741,23 @@ static void do_cmd_eat_food_aux(int item)
 
 			}
 			break;
+			//v1.1.91
+			case SV_FOOD_FORBIDDEN_FRUIT:
+			{
+				msg_print(_("甘美なる死と背徳の味がする。", "It has the sweet taste of death and immorality."));
+
+				if (do_inc_stat(A_INT));
+				set_tim_addstat(A_INT, 110, 100, FALSE);
+				set_tim_addstat(A_WIS, 110, 100, FALSE);
+				player_gain_mana(999);
+
+				//野良神様が食べたら激烈にカオス寄りになる
+				set_deity_bias(DBIAS_COSMOS, -250);
+				set_deity_bias(DBIAS_REPUTATION, 100);
+
+			}
+			break;
+
 
 		}
 	}
@@ -1455,6 +1472,7 @@ static bool item_tester_hook_eatable(object_type *o_ptr)
 	if (o_ptr->tval==TV_FOOD) return TRUE;
 	if (o_ptr->tval==TV_MUSHROOM) return TRUE;
 	if (o_ptr->tval==TV_SWEETS) return TRUE;
+
 
 	/*:::昔は骸骨が骨を食べることができたらしい*/
 #if 0
@@ -2984,8 +3002,8 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 		case SV_POTION_NEO_TSUYOSHI:
 			if(no_bad_effect)
 			{
-				msg_print(_("色々とそれっぽいのが入っているようだ。",
-                            "Looks like there's something really weird mixed in here."));
+				/*msg_print(_("色々とそれっぽいのが入っているようだ。",
+                            "Looks like there's something really weird mixed in here.")); ←これはネオつよしでなく漢方マサルダイナミックだった */
 				ident=TRUE;
 				break;
 			}

@@ -242,6 +242,15 @@ void delete_monster_idx(int i)
 	if (MON_MONFEAR(m_ptr)) (void)set_monster_monfear(i, 0);
 	if (MON_INVULNER(m_ptr)) (void)set_monster_invulner(i, 0, FALSE);
 
+	//v1.1.94 追加一時ステータス
+	if (MON_DEC_ATK(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_DEC_ATK, i, 0);
+	if (MON_DEC_DEF(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_DEC_DEF, i, 0);
+	if (MON_DEC_MAG(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_DEC_MAG, i, 0);
+	if (MON_DRUNK(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_DRUNK, i, 0);
+	if (MON_NO_MOVE(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_NO_MOVE, i, 0);
+	if (MON_BERSERK(m_ptr)) (void)set_monster_timed_status_add(MTIMED2_BERSERK, i, 0);
+
+
 	/*:::モンスターのターゲット、HPバー表示フラグなどを解除する*/
 	/* Hack -- remove target monster */
 	if (i == target_who) target_who = 0;
@@ -1134,6 +1143,13 @@ static bool summon_specific_aux(int r_idx)
 			break;
 
 		}
+		case SUMMON_ONE_ORC:
+		{
+			okay = (r_ptr->d_char == 'o');
+			break;
+
+		}
+
 		case SUMMON_LUNARIAN:
 		{
 			okay = (r_ptr->flags3 & RF3_GEN_MOON);
@@ -3368,8 +3384,18 @@ static bool monster_hook_chameleon(int r_idx)
 	if (r_ptr->flags7 & (RF7_FRIENDLY | RF7_CHAMELEON)) return FALSE;
 	if (r_ptr->flags7 & (RF7_VARIABLE | RF7_TANUKI)) return FALSE;
 
+	//v1.1.91 召喚を持つモンスターに変身しないようにする。狐狸戦争クエストのバランス調整用
+	if (r_ptr->flags4 & RF4_SUMMON_MASK) return FALSE;
+	if (r_ptr->flags5 & RF5_SUMMON_MASK) return FALSE;
+	if (r_ptr->flags6 & RF6_SUMMON_MASK) return FALSE;
+	if (r_ptr->flags9 & RF9_SUMMON_MASK) return FALSE;
+
+
 	///mod160316 EASYなどのとき発生抑止モンスターに変身しないようにする
 	if(!check_rest_f50(r_idx) ) return FALSE;
+
+	//v1.1.91 フロアレベル/2以下にはならない
+	if (r_ptr->level < MIN(dun_level / 2, 40)) return FALSE;
 
 	if ((r_ptr->blow[0].method == RBM_EXPLODE) || (r_ptr->blow[1].method == RBM_EXPLODE) || (r_ptr->blow[2].method == RBM_EXPLODE) || (r_ptr->blow[3].method == RBM_EXPLODE))
 		return FALSE;
@@ -4580,6 +4606,9 @@ static bool place_monster_one(int who, int y, int x, int r_idx, u32b mode)
 	/* Paranoia */
 	if (!r_ptr->name) return (FALSE);
 
+	if (cheat_hear) msg_format("mode:%04x", mode);
+
+
 	/*:::パターン上や進入不可能地形には配置できない。ただしチェンジモンスターの再生成のときはPM_IGNORE_TERRAINがONになってて配置可能である*/
 	if (!(mode & PM_IGNORE_TERRAIN))
 	{
@@ -4743,7 +4772,7 @@ static bool place_monster_one(int who, int y, int x, int r_idx, u32b mode)
 		//永琳のときの輝夜は出る
 		//v1.1.42 「夢は現実化する」クエストのときはランダムユニーク1を出す
 		if ((r_ptr->flags7 & RF7_UNIQUE2) && (r_ptr->flags7 & RF7_VARIABLE)
-			&& !(mode & PM_ALLOW_SPECIAL_UNIQUE)
+			&& !(mode & PM_ALLOW_SP_UNIQUE)
 			&& (dungeon_type != DUNGEON_ANGBAND)
 			&& (quest_number(dun_level) && !(p_ptr->inside_quest == QUEST_SATORI || p_ptr->inside_quest == QUEST_REIMU_ATTACK && r_idx == MON_REIMU || p_ptr->inside_quest == QUEST_DREAMDWELLER && r_idx == MON_RANDOM_UNIQUE_1))
 			&& r_idx != MON_MASTER_KAGUYA)
@@ -4950,7 +4979,11 @@ msg_print("守りのルーンが壊れた！");
 		if (m_list[who].mflag2 & MFLAG2_KAGE) m_ptr->mflag2 |= MFLAG2_KAGE;
 	}
 
-
+	//v1.1.93 特殊フラグを立てて召喚するモード
+	if (mode & PM_SET_MFLAG_SP)
+	{
+		m_ptr->mflag |= MFLAG_SPECIAL;
+	}
 
 
 
@@ -4971,6 +5004,48 @@ msg_print("守りのルーンが壊れた！");
 			m_ptr->sub_align = m_list[who].sub_align;
 		else
 			m_ptr->sub_align = SUB_ALIGN_NEUTRAL;
+
+	}
+	//v1.1.91 ヤクザ戦争も
+	else if (p_ptr->inside_quest == QUEST_YAKUZA_1)
+	{
+
+		switch (r_idx)
+		{
+		case MON_SAKI:
+		case MON_ANIMAL_G_KEIGA:
+			m_ptr->sub_align = SUB_ALIGN_TEAM_A;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KEIGA) set_friendly(m_ptr);
+			break;
+		case MON_YACHIE:
+		case MON_ANIMAL_G_KIKETSU:
+		case MON_WYRM_RED:
+			m_ptr->sub_align = SUB_ALIGN_TEAM_B;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KIKETSU) set_friendly(m_ptr);
+			break;
+		case MON_YUMA:
+		case MON_ANIMAL_G_GOUYOKU:
+			m_ptr->sub_align = SUB_ALIGN_TEAM_C;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_GOUYOKU) set_friendly(m_ptr);
+			break;
+		case MON_MAYUMI:
+		case MON_HANIWA_A1:
+		case MON_HANIWA_A2:
+		case MON_HANIWA_C1:
+		case MON_HANIWA_C2:
+		case MON_HANIWA_F1:
+		case MON_HANIWA_F2:
+			m_ptr->sub_align = SUB_ALIGN_TEAM_D;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_HANIWA) set_friendly(m_ptr);
+			break;
+
+		default:
+			if (who > 0)
+				m_ptr->sub_align = m_list[who].sub_align;
+			else
+				m_ptr->sub_align = SUB_ALIGN_NEUTRAL;
+
+		}
 
 	}
 
@@ -5068,9 +5143,6 @@ msg_print("守りのルーンが壊れた！");
 	}
 
 
-
-
-
 	/* Pet? */
 	if (mode & (PM_FORCE_PET | PM_EPHEMERA))
 	{
@@ -5087,15 +5159,28 @@ msg_print("守りのルーンが壊れた！");
 		{
 			set_friendly(m_ptr);
 		}
+		else if (p_ptr->inside_quest == QUEST_YAKUZA_1)
+		{
+			; //やくざ戦争クエストでは指定以外の友好処理が行われない
+
+		}
 		else if (!p_ptr->inside_arena) //v1.1.51 アリーナ内では以下の友好処理がされないよう設定
 		{
 			/* Friendly? */
 			/*:::モンスター生成時の友好設定*/
+			//TODO:この処理適当に増やしすぎたし抜けも多そうだからいずれちゃんと見直したい
+
+			//v1.1.93 強制友好召喚のときmonster_has_hostile_alignの判定をしないことにした
+			if (mode & PM_FORCE_FRIENDLY)
+			{
+				if (cheat_hear) msg_print("(FORCE_FRIENDLY)");
+				set_friendly(m_ptr);
+			}
 			///mod141231 街住みのモンスターは全て友好にした
-			if (((r_ptr->flags7 & RF7_FRIENDLY) || (r_ptr->flags3 & RF3_ANG_FRIENDLY) || (r_ptr->flags3 & RF3_GEN_FRIENDLY)
+			else if (((r_ptr->flags7 & RF7_FRIENDLY) || (r_ptr->flags3 & RF3_ANG_FRIENDLY) || (r_ptr->flags3 & RF3_GEN_FRIENDLY)
 				|| (r_ptr->flags8 & (RF8_WILD_TOWN) && !(r_ptr->flags3 & (RF3_GEN_WARLIKE)) && !(r_ptr->flags3 & (RF3_ANG_WARLIKE)))
 				|| you_are_human_align() && (r_ptr->flags3 & RF3_GEN_HUMAN) && p_ptr->inside_quest != QUEST_SENNIN && !(EXTRA_MODE && dun_level == 80) // Hack - 仙人クエスト除外
-				|| (mode & PM_FORCE_FRIENDLY) || is_friendly_idx(who)) && !(r_ptr->flags1 & RF1_QUESTOR))
+				|| is_friendly_idx(who)) && !(r_ptr->flags1 & RF1_QUESTOR))
 			{
 				if (!monster_has_hostile_align(NULL, 0, -1, r_ptr)) set_friendly(m_ptr);
 			}
@@ -6319,8 +6404,8 @@ void message_pain(int m_idx, int dam)
 	else if(my_strchr("t", r_ptr->d_char)) // 天狗
 	{
 		if(percentage > 80) msg_format(_("%^sは不敵な笑みを浮かべている。", "%^s hovers with a fearless smile."), m_name);
-		else if(percentage > 60) msg_format(_("%^sは怯んだ。", "%^s shivers."), m_name);
-		else if(percentage > 40) msg_format(_("%^sは悪態をついた。", "%^s curses."), m_name);
+		else if(percentage > 60) msg_format(_("%^sは悪態をついた。", "%^s curses."), m_name);
+		else if(percentage > 40) msg_format(_("%^sはたじろいだ。", "%^s flinches."), m_name);
 		else if(percentage > 15) msg_format(_("%^sはふらついた。", "%^s staggers about."), m_name);
 		else msg_format(_("%^sは今にも倒れそうだ。", "%^s is about to collapse."), m_name);
 

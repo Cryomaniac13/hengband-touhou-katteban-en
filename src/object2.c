@@ -4636,11 +4636,17 @@ static bool monster_is_target_of_paparazzi(int r_idx)
 {
 	monster_race *r_ptr = &r_info[r_idx];
 
+	//v1.1.92 除外
+	if (r_idx == MON_EXTRA_FIELD) return FALSE;
+	if (r_idx == MON_SUMIREKO_2) return FALSE;
+
 	if(r_idx == MON_MASTER_KAGUYA) return FALSE; //永琳専用特殊モンスターを除外
 	if(is_gen_unique(r_idx)) return TRUE;
 	if(r_ptr->flags7 & RF7_VARIABLE) return FALSE;//ランダムユニーク、可変パラメータ特殊モンスター(レイマリ除く)は非対象
 	if(r_ptr->rarity > 100) return FALSE; //通常出現しないモンスターはパス
 	if(!r_ptr->rarity) return FALSE; //Dead monsterらしいがこんなモンスターいるのか？
+
+
 
 	return TRUE;
 }

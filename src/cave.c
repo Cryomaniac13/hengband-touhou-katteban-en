@@ -1405,6 +1405,9 @@ void map_info(int y, int x, byte *ap, char *cp, byte *tap, char *tcp)
 						*cp = c;
 					}
 				}
+
+				if (MON_BERSERK(m_ptr) && one_in_(2)) *ap = TERM_RED;
+
 			}
 		}
 	}
@@ -5235,12 +5238,22 @@ bool projectable(int y1, int x1, int y2, int x2)
  *
  * Currently the "m" parameter is unused.
  */
+//指定ポイントから射線の通った距離d以内のランダムな地点を返す
+//もし壁の中で使ったら指定ポイントと同じ座標が返るはず
 void scatter(int *yp, int *xp, int y, int x, int d, int m)
 {
 	int nx, ny;
 
 	/* Unused */
 	m = m;
+
+	//v1.1.92 念の為追加
+	if (!in_bounds(y, x))
+	{
+		msg_print(_("ERROR:scatter()に不正なx,yが渡された",
+                    "ERROR: Incorrect x,y passed to scattter()"));
+		return;
+	}
 
 	/* Pick a location */
 	while (TRUE)

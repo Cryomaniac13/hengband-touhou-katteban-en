@@ -253,6 +253,9 @@
 ?:[EQU $QUEST_NUMBER 70]
 %:quest70_t14_reimu_attack.txt
 
+#v1.1.91 ヤクザバトル1
+?:[EQU $QUEST_NUMBER 71]
+%:quest71_t03_yakuza_battle1.txt
 
 
 

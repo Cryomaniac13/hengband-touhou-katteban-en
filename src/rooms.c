@@ -6803,6 +6803,14 @@ byte calc_ex_dun_bldg_prob(int ex_bldg_idx)
 		if (CHECK_ABLCARD_DEALER_CLASS) return 100;
 		else				return 0;
 
+		//v1.1.92 尤魔
+	case BLDG_EX_YUMA:
+		if (lev < 30) return 5;
+		else if (lev < 60) return 10;
+		else return 15;
+
+
+
 	default:
 		return 0;
 
@@ -6832,6 +6840,7 @@ byte	get_extra_dungeon_building_idx(void)
 		{
 			tester += calc_ex_dun_bldg_prob(j);
 		}
+		if (cheat_xtra) msg_format("room_kind_prob:%d", tester);
 		tester = randint1(tester);
 		for(j=1;j<BLDG_EX_MAX;j++)
 		{
@@ -7203,9 +7212,9 @@ void	init_extra_dungeon_buildings(void)
 			if(p_ptr->grassroots)
 			{
 				//talk_kagerou()のネットワーク加入後にもこれと同じ処理をしている
-				sprintf(building[i].act_names[6],_("噂を聞く", "Hear rumors"));
+				sprintf(building[i].act_names[6],_("雑談をする", "Chat"));
 				building[i].letters[6] = 'r';
-				building[i].actions[6] = BACT_RUMORS_NEW;
+				building[i].actions[6] = BACT_EX_RUMOR_NEW;
 			}
 		}
 		break;
@@ -7396,6 +7405,26 @@ void	init_extra_dungeon_buildings(void)
 		break;
 
 
+		case BLDG_EX_YUMA:
+		{
+			sprintf(building[i].name, _("奇妙な場所", "Strange place"));
+			sprintf(building[i].owner_name, _("饕餮　尤魔", "Yuuma Toutetsu"));
+
+			sprintf(building[i].act_names[0], _("話を聞く", "Talk"));
+			building[i].letters[0] = 'a';
+			building[i].actions[0] = BACT_EX_RUMOR_NEW;
+
+
+			sprintf(building[i].act_names[2], _("食料とアイテムカードを交換する", "Exchange food for item cards"));
+			building[i].letters[2] = 't';
+			building[i].actions[2] = BACT_ITEMCARD_TRADING;
+
+			sprintf(building[i].act_names[4], _("呪われた装備品を食べてもらう", "Feed cursed equipment"));
+			building[i].letters[4] = 'e';
+			building[i].actions[4] = BACT_DESTROY_ITEM;
+
+		}
+		break;
 
 	}
 	}
@@ -7428,7 +7457,7 @@ static byte build_type_ex(void)
 	building_ex_idx[0] = get_extra_dungeon_building_idx();
 
 	//テスト用
-	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_CHIMATA;
+	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_YUMA;
 
 	/* Find and reserve some space in the dungeon.  Get center of room. */
 	if (!find_space(&yval, &xval, ysize, xsize)) return 0;

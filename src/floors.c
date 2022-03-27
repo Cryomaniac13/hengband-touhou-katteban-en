@@ -1297,6 +1297,13 @@ void change_floor(void)
 					(void)set_monster_confused(i, 0);
 					(void)set_monster_monfear(i, 0);
 					(void)set_monster_invulner(i, 0, FALSE);
+
+					//v1.1.94 ’Ç‰Á
+					(void)set_monster_timed_status_add(MTIMED2_DEC_ATK, i, 0);
+					(void)set_monster_timed_status_add(MTIMED2_DEC_DEF, i, 0);
+					(void)set_monster_timed_status_add(MTIMED2_DEC_MAG, i, 0);
+
+
 				}
 
 				/* Extract real monster race */

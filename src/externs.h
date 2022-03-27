@@ -658,6 +658,10 @@ extern s16b feat_poisonous_puddle;
 extern s16b feat_deep_miasma;
 extern s16b feat_thin_miasma;
 
+//v1.1.91
+extern s16b feat_oil_field;
+
+
 
 extern byte dungeon_type;
 extern s16b *max_dlv;
@@ -748,7 +752,7 @@ extern void glow_deep_lava_and_bldg(void);
 extern bool test_hit_fire(int chance, int ac, int vis);
 extern bool test_hit_norm(int chance, int ac, int vis);
 extern s16b critical_shot(int weight, int plus, int dam);
-extern s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode);
+//extern s16b critical_norm(int weight, int plus, int dam, s16b meichuu, int mode);
 extern s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bool thrown);
 extern void search(void);
 extern void py_pickup_aux(int o_idx);
@@ -990,6 +994,9 @@ extern void curse_equipment(int chance, int heavy_chance);
 extern void mon_take_hit_mon(int m_idx, int dam, bool *fear, cptr note, int who);
 extern bool process_the_world(int num, int who, bool vs_player);
 extern void monster_gain_exp(int m_idx, int s_idx);
+
+//v1.1.94
+extern bool set_monster_timed_status_add(int mtimed_type, int m_idx, int v);
 
 /* monster1.c */
 extern void roff_top(int r_idx);
@@ -1954,7 +1961,8 @@ extern const martial_arts_new ma_blows_new[];
 extern bool fire_ball_jump(int typ, int dir, int dam, int rad, cptr msg);
 
 ///mod140222 project()による固定ダメージを与える入身
-extern bool rush_attack2(int len, int type, int dam);
+//v1.1.92 半径指定追加
+extern bool rush_attack2(int len, int type, int dam,int rad);
 ///mod140222 stat_ind[]を放り込んで使う数列
 extern const int adj_general[STAT_HYPERMAX-2];
 ///mod140222 汎用時限処理
@@ -2073,7 +2081,8 @@ extern bool apply_mon_race_marisa(void);
 extern void cast_musou_hu_in(int reimu_idx);
 
 extern byte rakuba_type;
-extern bool item_tester_hook_melee_weapon(object_type *o_ptr);
+
+extern bool object_is_melee_weapon_except_strange_kind(object_type *o_ptr);
 
 
 ///mod140714 付喪神使い専用
@@ -2498,7 +2507,8 @@ extern bool set_mana_shield(bool set, bool guard_break);
 extern void check_mana_shield(int *dam, int damage_type);
 
 extern bool flag_friendly_attack;
-extern bool flag_riding_ropeway;
+
+extern int teleport_town_mode;
 
 //v1.1.32 特殊性格実装関連
 extern const player_seikaku * get_ap_ptr(int race_idx, int class_idx, int seikaku_idx);
@@ -2678,3 +2688,26 @@ extern void make_ability_card_store_list();
 extern bool hack_flag_store_examine;
 extern int calc_ability_card_price(int card_idx);
 extern bool	buy_abilitycard_from_mon(void);
+
+//v1.1.90
+extern bool	mon_saving_throw(monster_type *m_ptr, int power);
+
+//v1.1.91
+extern int oil_field_damage_mod(int src_dam, int y, int x);
+extern int yuma_vacuum_oil(int y, int x, bool check, int rad);
+
+//v1.1.92
+extern bool item_tester_hook_cursed(object_type *o_ptr);
+
+//v1.1.93
+extern bool set_tim_aggravation(int v, bool do_dec);
+
+//テスト用
+extern int	gv_test1;
+extern int	gv_test2;
+extern int	gv_test3;
+extern int	gv_test4;
+
+//v1.1.95
+extern int check_player_is_seen(void);
+

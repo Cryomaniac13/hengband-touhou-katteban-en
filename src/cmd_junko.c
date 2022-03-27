@@ -3152,7 +3152,7 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_type *naap_ptr)
 {
 	int gf_idx, elem_idx,art_idx;
-	byte tmp_flags[108];
+	byte tmp_flags[MAGIC_NUM_SIZE];
 	int loop_max = 100;
 	int plev = p_ptr->lev;
 	int i;

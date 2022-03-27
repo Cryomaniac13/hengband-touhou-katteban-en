@@ -368,6 +368,8 @@ N:23:GrassNet EXTRA
 [[] 'It's the Miracle Mallet card! I'm powering up!'\[[] 'This mallet is a replica. Carefully read the card description.'
 [[] 'What's this card? A bucket?'\{} 'Umm, I think that ship ghost from the temple was using it?'\[[] 'What about this watering can?'\(()){ 'I have a feeling I've seen it somewhere...'
 
+N:24:EXTRA - Yuuma explanation
+ \ \ Yuuma - 'I've picked up a lot of item cards, \ but I grew bored because I couldn't eat them.\ I'll give you them in exchange for something edible.\ \ Also, if you have any cursed items, I can eat them.\ Of course, there's going to be nothing left behind.'
 
 N:94:Talk to Kaguya (allied with Junko)
 There's a cause behind current incident.\Looks like that cause is planning to invade Lunar Capital.\ \You can either go and defeat it, or just watch as the\ Lunar Capital gets destroyed.

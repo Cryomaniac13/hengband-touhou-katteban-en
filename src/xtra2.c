@@ -15,6 +15,26 @@
 #define REWARD_CHANCE 10
 
 
+//11.1.91 石油地形での火炎ダメージ上昇処理
+//火炎属性かどうかの判定は外で行う
+int oil_field_damage_mod(int src_dam, int y, int x)
+{
+	int mod_dam;
+
+	//石油地形でなければそのまま帰す
+	if (!cave_have_flag_bold(y, x, FF_OIL_FIELD)) return src_dam;
+
+	//ダメージ+33%
+	mod_dam = src_dam * 4 / 3;
+
+	msg_print(_("石油が燃え上がった！", "The oil is set ablaze!"));
+
+
+	return mod_dam;
+
+}
+
+
 /*:::モンスターが＠のキャラクターかどうか判定　*/
 /*:::同じキャラクターの場合モンスター名表示に(2P)とつけておくための処理*/
 //v1.1.51 monster_hookから使うことになったので効率化のためにswitch文で書き直した
@@ -102,7 +122,7 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MYSTIA) return TRUE;
 			else return FALSE;
 		case CLASS_FLAN:
-			if (r_idx == MON_F_SCARLET) return TRUE;
+			if (r_idx == MON_FLAN) return TRUE;
 			else return FALSE;
 		case CLASS_SHOU:
 			if (r_idx == MON_SHOU) return TRUE;
@@ -369,7 +389,9 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_SANNYO) return TRUE;
 			else return FALSE;
 
-
+		case CLASS_MIKE:
+			if (r_idx == MON_MIKE) return TRUE;
+			else return FALSE;
 
 	}
 
@@ -933,6 +955,55 @@ void complete_quest(int quest_num)
 		msg_print(_("クエストを達成した！", "You just completed your quest!"));
 		msg_print(NULL);
 	}
+
+
+
+	//v1.1.91 抗争クエストでは追加で勢力フラグを管理する
+	if (quest_num == QUEST_YAKUZA_1)
+	{
+		int check_r_idx = 0;
+		//抗争クエスト1のクエスト成功フラグ
+		p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q1_COMP;
+
+		switch (p_ptr->pclass)
+		{
+			//これらの職業は自動的に完全達成
+		case CLASS_SAKI:
+		case CLASS_YACHIE:
+		case CLASS_YUMA:
+		case CLASS_MAYUMI:
+		case CLASS_KEIKI:
+			p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q1_ACHIEVE;
+			break;
+
+		default:
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KEIGA) check_r_idx = MON_SAKI;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KIKETSU) check_r_idx = MON_YACHIE;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_GOUYOKU) check_r_idx = MON_YUMA;
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_HANIWA) check_r_idx = MON_MAYUMI;
+			break;
+		}
+
+		if (check_r_idx)
+		{
+			int i;
+
+
+			//指定したモンスターがフロアに生存しているかチェック
+			for (i = m_max - 1; i >= 1; i--)
+			{
+				//生存していれば抗争クエスト1の完全達成フラグを立てる
+				if (m_list[i].r_idx == check_r_idx)
+				{
+					if (cheat_xtra) msg_format("idx%d:check ok",check_r_idx);
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q1_ACHIEVE;
+					break;
+				}
+			}
+		}
+
+	}
+
 }
 
 static int count_all_hostile_monsters(void)
@@ -2563,6 +2634,18 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			(void)drop_near(q_ptr, -1, y, x);
 		}
 	break;
+	//v1.1.91　上位天使ユニーク　知恵の木の実
+	case MON_URIEL:
+	case MON_AZRIEL:
+	case MON_RAPHAEL:
+		if (drop_chosen_item)
+		{
+			q_ptr = &forge;
+			object_prep(q_ptr, lookup_kind(TV_FOOD, SV_FOOD_FORBIDDEN_FRUIT));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+		break;
 
 	//v1.1.80 古のもの　5%で水晶
 	case MON_ELDER_THING:
@@ -2574,6 +2657,16 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			(void)drop_near(q_ptr, -1, y, x);
 		}
 	break;
+	//v1.1.9 ミミック(酒) 1/3で空き瓶
+	case MON_MIMIC_ALCOHOL:
+		if (drop_chosen_item && one_in_(3))
+		{
+			q_ptr = &forge;
+			object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_EMPTY_BOTTLE));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+		break;
 
 
 	default:
@@ -2922,6 +3015,11 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			chance = 100;
 			break;
 
+		case MON_FLAN:
+			a_idx = ART_FLAN;
+			chance = 100;
+			break;
+
 		case MON_KASEN:
 			a_idx = ART_ONIKIRIMARU;
 			chance = 25;
@@ -3215,6 +3313,12 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			a_idx = ART_ANDVARI;
 			chance = 50;
 			break;
+
+		case MON_YUMA:
+			a_idx = ART_TOUTETSU;
+			chance = 66;
+			break;
+
 
 
 
@@ -5000,7 +5104,7 @@ cptr look_mon_desc(monster_type *m_ptr, u32b mode)
 	}
 	else if(m_ptr->mflag & MFLAG_EPHEMERA)
 	{
-		if(m_ptr->r_idx == MON_YOUMU || m_ptr->r_idx == MON_F_SCARLET_4 ) clone = "(分身)";
+		if(m_ptr->r_idx == MON_YOUMU || m_ptr->r_idx == MON_FLAN_4 ) clone = _("(分身)", "(clone)");
 		else clone = "";
 	}
 	else if(monster_is_you(m_ptr->r_idx))
@@ -9344,3 +9448,29 @@ void clownpiece_likes_fire(int typ)
 	set_hero(5 + randint1(5), FALSE);
 
 }
+
+//v1.1.95 ＠が他のモンスターから見られているかチェック
+//モンスターが起きていて直接視線が通っているかどうか
+//見ているモンスターがいたらm_idxを、いなければ0を返す
+int check_player_is_seen(void)
+{
+	int i;
+
+	for (i = 1; i < m_max; i++)
+	{
+		monster_type *m_ptr = &m_list[i];
+		if (!m_ptr->r_idx) continue;
+		if (!player_has_los_bold(m_ptr->fy, m_ptr->fx)) continue;
+		if (r_info[m_ptr->r_idx].flags2 & RF2_EMPTY_MIND) continue;
+		if (MON_CONFUSED(m_ptr)) continue;
+		if (MON_CSLEEP(m_ptr)) continue;
+
+		return i;
+	}
+
+	return 0;
+
+}
+
+
+

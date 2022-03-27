@@ -171,10 +171,17 @@ static void wr_item(object_type *o_ptr)
 
 	if (flags & SAVE_ITEM_MARKED) wr_byte(o_ptr->marked);
 
-	if (flags & SAVE_ITEM_ART_FLAGS0) wr_u32b(o_ptr->art_flags[0]);
-	if (flags & SAVE_ITEM_ART_FLAGS1) wr_u32b(o_ptr->art_flags[1]);
-	if (flags & SAVE_ITEM_ART_FLAGS2) wr_u32b(o_ptr->art_flags[2]);
-	if (flags & SAVE_ITEM_ART_FLAGS3) wr_u32b(o_ptr->art_flags[3]);
+
+	//v1.1.94 art_flags拡張のついでにフラグにかかわらずすべて保存することにした
+	//if (flags & SAVE_ITEM_ART_FLAGS0) wr_u32b(o_ptr->art_flags[0]);
+	//if (flags & SAVE_ITEM_ART_FLAGS1) wr_u32b(o_ptr->art_flags[1]);
+	//if (flags & SAVE_ITEM_ART_FLAGS2) wr_u32b(o_ptr->art_flags[2]);
+	//if (flags & SAVE_ITEM_ART_FLAGS3) wr_u32b(o_ptr->art_flags[3]);
+	for (i = 0; i < TR_FLAG_SIZE; i++)
+	{
+		wr_u32b(o_ptr->art_flags[i]);
+	}
+
 
 	if (flags & SAVE_ITEM_CURSE_FLAGS) wr_u32b(o_ptr->curse_flags);
 
@@ -278,6 +285,7 @@ static void wr_monster(monster_type *m_ptr)
 	wr_byte(m_ptr->mspeed);
 	wr_s16b(m_ptr->energy_need);
 
+	//↓一部のモンスター一時効果はbyteで保存されている。set_monster_***のところで200を超えないようになってはいるが。
 	if (flags & SAVE_MON_FAST)
 	{
 		tmp8u = (byte)m_ptr->mtimed[MTIMED_FAST];
@@ -319,9 +327,16 @@ static void wr_monster(monster_type *m_ptr)
 	///mod140517
 	if (flags & SAVE_MON_MFLAG) wr_u32b(m_ptr->mflag);
 
+	//v1.1.94 MAX_MTIMEDを7→16に増加
+	//既存の0-6まではこれまで通り保存するが追加分はフラグ処理とかせずそのまま書き込む
+	for (i = 7; i < MAX_MTIMED; i++)
+	{
+		wr_s16b(m_ptr->mtimed[i]);
+	}
+
 	//v1.1.81 拡張用変数追加
-	for(i=0;i<MAX_MTIMED;i++)
-		wr_s16b(m_ptr->mtimed_2[i]);
+	for(i=0;i<7;i++)
+		wr_s16b(m_ptr->future_use[i]);
 	wr_u32b(m_ptr->mflag3);
 	wr_u32b(m_ptr->mflag4);
 
@@ -863,8 +878,10 @@ static void wr_extra(void)
 	///mod131226 skill skill_exp[]を武器技能値と統合するため10→21まで拡張
 	//for (i = 0; i < 10; i++) wr_s16b(p_ptr->skill_exp[i]);
 	for (i = 0; i < SKILL_EXP_MAX; i++) wr_s16b(p_ptr->skill_exp[i]);
-	for (i = 0; i < 108; i++) wr_s32b(p_ptr->magic_num1[i]);
-	for (i = 0; i < 108; i++) wr_byte(p_ptr->magic_num2[i]);
+
+	//v1.1.94 magic_numのサイズを108から256へ
+	for (i = 0; i < MAGIC_NUM_SIZE; i++) wr_s32b(p_ptr->magic_num1[i]);
+	for (i = 0; i < MAGIC_NUM_SIZE; i++) wr_byte(p_ptr->magic_num2[i]);
 
 	wr_byte(p_ptr->start_race);
 	wr_s32b(p_ptr->old_race1);
@@ -905,7 +922,7 @@ static void wr_extra(void)
 
 	///mod150919 v1.0.74のとき将来的拡張用領域追加。
 	//1.0.73以前のセーブファイルでは下二行の書き込みは行われていないことに注意
-	//Future use 
+	//Future use
 	for (i = 0; i < 21; i++)wr_s16b(0);
 
 	//v1.1.56 スペカにs16bを2つ使用
@@ -922,7 +939,7 @@ static void wr_extra(void)
 	for (i = 0; i < NIGHTMARE_DIARY_MONSTER_MAX; i++)
 		wr_s16b(nightmare_mon_r_idx[i]);
 
-	//Future use 
+	//Future use
 	for (i = 0; i < 22; i++)wr_u32b(0L);
 
 
@@ -985,13 +1002,13 @@ static void wr_extra(void)
 	wr_s16b(p_ptr->metamor_r_idx);
 	wr_s16b(p_ptr->abilitycard_price_rate);
 	wr_s16b(p_ptr->superstealth_type);
-	wr_s16b(p_ptr->future_use_counter4);
+	wr_s16b(p_ptr->tim_aggravation);
 	wr_s16b(p_ptr->future_use_counter5);
 	wr_s16b(p_ptr->future_use_counter6);
 	wr_s16b(p_ptr->future_use_counter7);
 	wr_s16b(p_ptr->future_use_counter8);
 
-	wr_u32b(p_ptr->ptype_new_flags1);
+	wr_u32b(p_ptr->animal_ghost_align_flag);
 	wr_u32b(p_ptr->ptype_new_flags2);
 	wr_u32b(p_ptr->ptype_new_flags3);
 	wr_u32b(p_ptr->ptype_new_flags4);
@@ -1009,7 +1026,7 @@ static void wr_extra(void)
 	wr_u32b(total_pay_cardshop);
 	wr_s16b(buy_gacha_box_count);
 	//v1.1.86 月虹市場トレード回数を記録することにした
-	wr_s16b(ability_card_trade_count);     
+	wr_s16b(ability_card_trade_count);
 	wr_s16b(p_ptr->sc);
 	wr_s16b(p_ptr->concent);
 
@@ -1351,7 +1368,7 @@ static void wr_saved_floor(saved_floor_type *sf_ptr)
 				    && template[i].cave_xtra_flag == c_ptr->cave_xtra_flag
 				    && template[i].cave_xtra1 == c_ptr->cave_xtra1
 				    && template[i].cave_xtra2 == c_ptr->cave_xtra2
-					
+
 					)
 				{
 					/* Same terrain is exist */
@@ -1445,12 +1462,12 @@ static void wr_saved_floor(saved_floor_type *sf_ptr)
 				    template[i].feat == c_ptr->feat &&
 				    template[i].mimic == c_ptr->mimic &&
 				    template[i].special == c_ptr->special
-					
+
 					//v1.1.33
 				    && template[i].cave_xtra_flag == c_ptr->cave_xtra_flag
 				    && template[i].cave_xtra1 == c_ptr->cave_xtra1
 				    && template[i].cave_xtra2 == c_ptr->cave_xtra2
-					
+
 					)
 					break;
 			}
@@ -2424,7 +2441,7 @@ bool load_player(void)
 	///system 一部削除予定
 	if (!err)
 	{
-///\131117 sysdel バージョンリセット FAKE_VER定義値使用中止 
+///\131117 sysdel バージョンリセット FAKE_VER定義値使用中止
 #if 0
 		/* Give a conversion warning */
 		if ((FAKE_VER_MAJOR != z_major) ||

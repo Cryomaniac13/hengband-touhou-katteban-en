@@ -285,10 +285,13 @@ bool teleport_barrier(int m_idx)
 {
 	monster_type *m_ptr = &m_list[m_idx];
 
-	if((p_ptr->pclass == CLASS_KOMACHI || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_REMY) && m_idx == p_ptr->magic_num1[0]) return TRUE;
+	//if((p_ptr->pclass == CLASS_KOMACHI || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_REMY) && m_idx == p_ptr->magic_num1[0]) return TRUE;
+
+	//v1.1.95 ˆÚ“®•s‰Âó‘Ô
+	if (MON_NO_MOVE(m_ptr)) return TRUE;
 
 	///mod140321 ”O”› Lev/10‚Ü‚Å‚Ì‹——£‚Ì“G‚ÌƒeƒŒƒ|‘jŠQ
-	if(p_ptr->nennbaku && m_ptr->cdis < (p_ptr->lev / 10)) return TRUE; 
+	if(p_ptr->nennbaku && m_ptr->cdis < (p_ptr->lev / 10)) return TRUE;
 
 	//—ƒeƒŒƒ|‘jŠQ
 	if (p_ptr->pclass == CLASS_HINA && m_idx == p_ptr->magic_num1[2])

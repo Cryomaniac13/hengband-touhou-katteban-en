@@ -606,6 +606,10 @@ bool zashiki_moving(void)
 			msg_print(_("この水晶の中には魔力が満ちている！",
                         "This crystal is full of magical power!"));
 
+		if (o_ptr->sval == SV_SOUVENIR_EMPTY_BOTTLE)
+			msg_print(_("ひどい悪臭がする...", "It smells terrible..."));
+
+
 	}
 	else
 	{
@@ -1831,6 +1835,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_SHINMYOU:
 		case MIMIC_GIGANTIC:
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			break;
@@ -1838,6 +1844,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_BEAST:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			else if(command == -2)
@@ -1937,6 +1945,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_SLIME:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			else if(command == -2)
@@ -1953,6 +1963,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_MARISA:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			else if(command == -2)
@@ -1966,7 +1978,7 @@ static bool cmd_racial_power_aux(s32b command)
 			{
 				int len=p_ptr->lev / 7;
 				int damage =  p_ptr->lev * 2;
-				if (!rush_attack2(len,GF_MISSILE,damage)) return FALSE;
+				if (!rush_attack2(len,GF_MISSILE,damage,0)) return FALSE;
 			}
 			else if(command == -4)
 			{
@@ -1980,6 +1992,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_MIST:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			else if(command == -2)
@@ -1993,6 +2007,7 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_DRAGON:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
 				set_mimic(0,0,TRUE);
 			}
 			else if(command == -2)
@@ -2086,6 +2101,8 @@ static bool cmd_racial_power_aux(s32b command)
 		case MIMIC_CAT:
 			if(command == -1)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				set_mimic(0,0,TRUE);
 			}
 			break;
@@ -2103,6 +2120,8 @@ static bool cmd_racial_power_aux(s32b command)
 			}
 			else if(command == -2)
 			{
+				if (!get_check_strict(_("元の姿に戻りますか？", "Return to your original form?"), CHECK_DEFAULT_Y)) return FALSE;
+
 				p_ptr->special_defense &= ~(SD_METAMORPHOSIS);
 				p_ptr->special_flags &= ~(SPF_IGNORE_METAMOR_TIME);
 
@@ -2395,7 +2414,7 @@ static bool cmd_racial_power_aux(s32b command)
 			if(command == -2)
 			{
 				int len=p_ptr->lev / 5;
-				if (!rush_attack2(len,0,0)) return FALSE;
+				if (!rush_attack2(len,0,0,0)) return FALSE;
 				break;
 			}
 		}
@@ -2855,6 +2874,12 @@ static bool cmd_racial_power_aux(s32b command)
 				{
 					msg_print(_("どこへ移動しますか？", "Teleport where?"));
 					if (!dimension_door(D_DOOR_NORMAL)) return FALSE;
+
+				}
+				else if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_EMPTY_BOTTLE)
+				{
+					if (!summon_specific(0, py, px, plev, SUMMON_ONE_ORC, PM_FORCE_PET | PM_ALLOW_UNIQUE | PM_ALLOW_GROUP))
+						msg_print(_("何も現れなかった。", "Nobody has appeared."));
 
 				}
 
@@ -5210,6 +5235,18 @@ strcpy(power_desc[num].name, "地獄の波動");
 					break;
 				}
 
+				//空き瓶　オーク召喚
+				if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_EMPTY_BOTTLE)
+				{
+					strcpy(power_desc[num].name, _("オークの召喚", "Summon Orc"));
+					power_desc[num].level = 10;
+					power_desc[num].cost = 5;
+					power_desc[num].stat = A_CHR;
+					power_desc[num].fail = 30;
+					power_desc[num].info = _("一体のオークやゴブリンを召喚する。", "Summons an orc or goblin.");
+					power_desc[num++].number = -2;
+					break;
+				}
 
 
 			}

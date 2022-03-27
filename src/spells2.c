@@ -5376,12 +5376,14 @@ bool genocide_aux(int m_idx, int power, bool player_cast, int dam_side, cptr spe
 
 	if (player_cast && dam_side)
 	{
+
+		char death_reason[160];
+
+		//v1.1.92 take_hitにformat()の戻り地を渡すのはまずいらしいので修正
+		sprintf(death_reason, _("%sの呪文を唱えた疲労", "the strain of casting %s"), spell_name);
+
 		/* Take damage */
-#ifdef JP
-		take_hit(DAMAGE_GENO, randint1(dam_side), format("%^sの呪文を唱えた疲労", spell_name), -1);
-#else
-		take_hit(DAMAGE_GENO, randint1(dam_side), format("the strain of casting %^s", spell_name), -1);
-#endif
+		take_hit(DAMAGE_GENO, randint1(dam_side), death_reason, -1);
 	}
 
 	/* Visual feedback */
@@ -5712,6 +5714,8 @@ bool probing(void)
 		monster_type *m_ptr = &m_list[i];
 		monster_race *r_ptr = &r_info[m_ptr->r_idx];
 
+		int mon_ac;
+
 		/* Paranoia -- Skip dead monsters */
 		if (!m_ptr->r_idx) continue;
 
@@ -5792,18 +5796,19 @@ bool probing(void)
 			if ((r_ptr->flags3 & (RF3_ANG_CHAOS | RF3_ANG_COSMOS)) == (RF3_ANG_CHAOS | RF3_ANG_COSMOS)) align = "good&evil";
 			else if (r_ptr->flags3 & RF3_ANG_CHAOS) align = "chaotic";
 			else if (r_ptr->flags3 & RF3_ANG_COSMOS) align = "lawful";
-			else if ((m_ptr->sub_align & (SUB_ALIGN_EVIL | SUB_ALIGN_GOOD)) == (SUB_ALIGN_EVIL | SUB_ALIGN_GOOD)) align = "neutral(good&evil)";
-			else if (m_ptr->sub_align & SUB_ALIGN_EVIL) align = "neutral(chaotic)";
-			else if (m_ptr->sub_align & SUB_ALIGN_GOOD) align = "neutral(lawful)";
+			else if ((m_ptr->sub_align & (SUB_ALIGN_EVIL | SUB_ALIGN_GOOD)) == (SUB_ALIGN_EVIL | SUB_ALIGN_GOOD)) align = "neutral (good&evil)";
+			else if (m_ptr->sub_align & SUB_ALIGN_EVIL) align = "neutral (chaotic)";
+			else if (m_ptr->sub_align & SUB_ALIGN_GOOD) align = "neutral (lawful)";
 			else align = "neutral";
 #endif
 
 			/* Describe the monster */
-#ifdef JP
-sprintf(buf,"%s ... 属性:%s HP:%d/%d AC:%d 速度:%s%d 経験:", m_name, align, m_ptr->hp, m_ptr->maxhp, r_ptr->ac, (speed > 0) ? "+" : "", speed);
-#else
-sprintf(buf, "%s ... align:%s HP:%d/%d AC:%d speed:%s%d exp:", m_name, align, m_ptr->hp, m_ptr->maxhp, r_ptr->ac, (speed > 0) ? "+" : "", speed);
-#endif
+			mon_ac = r_ptr->ac;
+			if(MON_DEC_DEF(m_ptr)) mon_ac = MONSTER_DECREASED_AC(mon_ac);
+
+            sprintf(buf,_("%s ... 属性:%s HP:%d/%d AC:%d 速度:%s%d 経験:",
+                        "%s ... align:%s HP:%d/%d AC:%d speed:%s%d exp:"), m_name, align, m_ptr->hp, m_ptr->maxhp, mon_ac, (speed > 0) ? "+" : "", speed);
+
 			if (r_ptr->next_r_idx)
 			{
 				strcat(buf, format("%d/%d ", m_ptr->exp, r_ptr->next_exp));
@@ -6496,7 +6501,8 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 		/* Take some damage */
 		if (damage)
 		{
-			char *killer;
+			char death_reason[160] = "";
+			//char *killer;
 
 			if (m_idx)
 			{
@@ -6506,22 +6512,16 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 				/* Get the monster's real name */
 				monster_desc(m_name, m_ptr, MD_IGNORE_HALLU | MD_ASSUME_VISIBLE | MD_INDEF_VISIBLE);
 
-#ifdef JP
-				killer = format("%sの起こした地震", m_name);
-#else
-				killer = format("an earthquake caused by %s", m_name);
-#endif
+				//v1.1.92 take_hit()にformat()の戻り値を渡したらまずいらしいので修正
+				sprintf(death_reason, _("%sの起こした地震", "an earthquake caused by %s"), m_name);
+				//killer = format("%sの起こした地震", m_name);
 			}
 			else
 			{
-#ifdef JP
-				killer = "地震";
-#else
-				killer = "an earthquake";
-#endif
-			}
+				sprintf(death_reason, _("地震", "an earthquake"));
+            }
 
-			take_hit(DAMAGE_ATTACK, damage, killer, -1);
+			take_hit(DAMAGE_ATTACK, damage, death_reason, -1);
 		}
 	}
 
@@ -7478,7 +7478,7 @@ bool fire_ball_jump(int typ, int dir, int dam, int rad, cptr msg)
 		msg_print(_("視界内の一点を狙わないといけない。", "You have to aim at location in your sight."));
 		return (FALSE);
 	}
-	//v1.1.53 壁の中は狙えないことにした(壁の向こうを一方的に攻撃できるので)
+	//v1.1.53 壁の中は狙えないことにした(半径ありのボールだと壁の向こうを一方的に攻撃できるので)
 	if(rad > 0 && cave_have_flag_bold(ty,tx,FF_WALL))
 	{
 		msg_print(_("壁の中を狙うことはできない。", "You cannot aim at a wall."));
@@ -8672,7 +8672,8 @@ bool kawarimi(bool success)
 ///mod140222
 /*:::入身2　通常攻撃でなく指定属性による固定ダメージ*/
 /*:::typeが0の場合移動だけで攻撃しない*/
-bool rush_attack2(int len, int type, int dam)
+//v1.1.92 ボールの半径を指定できるようにした
+bool rush_attack2(int len, int type, int dam, int rad)
 {
 	int dir;
 	int tx, ty;
@@ -8778,15 +8779,15 @@ bool rush_attack2(int len, int type, int dam)
 			/* Get the monster name (BEFORE polymorphing) */
 			monster_desc(m_name, m_ptr, 0);
 #ifdef JP
-		if(type)msg_format("あなたは%sへ突進した！", m_name);
+		if(type)msg_format("あなたは%sへ飛びかかった！", m_name);
 #else
-			msg_format("You quickly jump in and attack %s!", m_name);
+			if(type)msg_format("You quickly leap at %s!", m_name);
 #endif
 		}
 		if (!player_bold(ty, tx)) teleport_player_to(ty, tx, TELEPORT_NONMAGICAL);
 		moved = TRUE;
 
-		if(type) project(0, 0, ny, nx, dam, type, PROJECT_KILL | PROJECT_JUMP, -1);
+		if(type) project(0, rad, ny, nx, dam, type, PROJECT_KILL | PROJECT_JUMP, -1);
 
 		break;
 	}

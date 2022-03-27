@@ -39,6 +39,8 @@ int calc_inven2_num(void)
 	else if (pc == CLASS_TAKANE) num = 16;
 	//山如　常に8
 	else if (pc == CLASS_SANNYO) num = 8;
+	//ミケ　常に8
+	else if (pc == CLASS_MIKE) num = 8;
 
 
 
@@ -446,6 +448,7 @@ bool put_item_into_inven2(void)
 		break;
 	case CLASS_TAKANE:
 	case CLASS_SANNYO:
+	case CLASS_MIKE:
 	case CLASS_CARD_DEALER:
 		item_tester_hook = item_tester_inven2_card_dealer;
 
@@ -476,7 +479,7 @@ bool put_item_into_inven2(void)
 
 	amt = 1;
 	/*:::個数指定　ここで指定されていないアリスやエンジニア、咲夜などは常に一つずつ*/
-	if (o_ptr->number > 1 && ( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER) )
+	if (o_ptr->number > 1 && ( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_MIKE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER) )
 	{
 		/*:::数量を入力。アイテム個数以上にはならないよう処理される。*/
 		amt = get_quantity(NULL, o_ptr->number);
@@ -523,7 +526,7 @@ bool put_item_into_inven2(void)
 
 	/*:::自動的にまとめられるか判定しつつアイテムを自動的に空いてる追加インベントリに入れる職業（薬師、お燐）*/
 	/*:::エンジニアは1スロット1つしか入れないがどうせ機械はまとまらないのでこのルーチンのままで問題ないはず*/
-	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER)
+	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_MIKE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER)
 	{
 		int freespace = 99;
 		/*:::まとめられるか判定*/
@@ -787,6 +790,7 @@ bool put_item_into_inven2(void)
 		else if (pc == CLASS_UDONGE) msg_format(_("%sを薬籠に入れた。", "You put %s in medicine chest."), o_name);
 		else if (pc == CLASS_JYOON) msg_format(_("%sを装備した。", "You put %s on."), o_name);
 		else if (pc == CLASS_TAKANE) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
+		else if (pc == CLASS_MIKE) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_SANNYO) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else msg_format(_("ERROR:追加インベントリにアイテム入れたときのメッセージがない",
@@ -841,6 +845,8 @@ bool put_item_into_inven2(void)
 		else if (pc == CLASS_UDONGE) msg_format(_("薬籠には%sを入れる隙間がない。",
                                                     "You don't have space for %s in medicine chest."), o_name);
 		else if (pc == CLASS_TAKANE) msg_format(_("ケースには%sを入れる隙間がない。",
+                                                    "You don't have space for %s in card case."), o_name);
+		else if (pc == CLASS_MIKE) msg_format(_("ケースには%sを入れる隙間がない。",
                                                     "You don't have space for %s in card case."), o_name);
 		else if (pc == CLASS_SANNYO) msg_format(_("ケースには%sを入れる隙間がない。",
                                                     "You don't have space for %s in card case."), o_name);
@@ -974,6 +980,7 @@ bool takeout_inven2(void)
 	else if (pc == CLASS_UDONGE) msg_format(_("薬籠から%sを出した。", "You take %s out of medicine chest."), o_name);
 	else if (pc == CLASS_JYOON) msg_format(_("%sを指から外した。", "You remove %s from your finger."), o_name);
 	else if (pc == CLASS_TAKANE) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
+	else if (pc == CLASS_MIKE) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_SANNYO) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else msg_format(_("ERROR:追加インベントリからアイテム出したときのメッセージがない",
@@ -5481,7 +5488,8 @@ bool cast_monspell_new(void)
 	{
 		//レベルが足りていない(直前に経験値減少攻撃受けてレベルが下がったなど)ときはリピートしても選択済みフラグが立たず選択し直し。
 		//ただしドレミーと里乃はレベル制限無視
-		if ( monspell_list2[num].level <=  p_ptr->lev || p_ptr->pclass == CLASS_DOREMY || p_ptr->pclass == CLASS_SATONO) flag_choice = TRUE;
+		//v1.1.94 モンスター変身中にもレベル制限無視
+		if ( monspell_list2[num].level <=  p_ptr->lev || (IS_METAMORPHOSIS) || p_ptr->pclass == CLASS_DOREMY || p_ptr->pclass == CLASS_SATONO) flag_choice = TRUE;
 
 		//依姫神降ろしは使う度に効果が変わるのでリピート不可
 		if(p_ptr->pclass == CLASS_YORIHIME) flag_choice = FALSE;
@@ -7634,12 +7642,20 @@ bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_pt
 			monster_type *m_ptr = &m_list[c_ptr->m_idx];
 			monster_race *r_ptr = &r_info[m_ptr->r_idx];
 
+			int mon_ac = r_ptr->ac;
+
+			//v1.1.94 モンスター防御力低下中はAC25%カット
+			if (MON_DEC_DEF(m_ptr))
+			{
+				mon_ac = MONSTER_DECREASED_AC(mon_ac);
+			}
+
 			visible = m_ptr->ml;
 			hit_body = TRUE;
 
 			/* Did we hit it (penalize range) */
 			//ハルコンネン2と二宮金次郎像は必中
-			if (test_hit_fire(chance - cur_dis, r_ptr->ac, m_ptr->ml) || mode == 5 || mode == 6)
+			if (test_hit_fire(chance - cur_dis, mon_ac, m_ptr->ml) || mode == 5 || mode == 6)
 			{
 				bool fear = FALSE;
 
@@ -8677,7 +8693,7 @@ cptr use_marisa_magic(int num, bool only_info)
 			int len = 10 + plev / 10;
 			int damage = 150 + plev * 5;
 			if(only_info) return format(_("射程:%d 損傷:%d", "len: %d, dam: %d"),len,damage);
-			if (!rush_attack2(len,GF_MANA,damage)) return NULL;
+			if (!rush_attack2(len,GF_MANA,damage,0)) return NULL;
 			break;
 		}
 		break;
@@ -11516,6 +11532,7 @@ void erase_nemuno_sanctuary(bool force,bool redraw)
 }
 
 //v1.1.46 女苑が浪費した金額をp_ptr->magic_num1[0][1]に記録する。$999,999,999,999が上限
+//v1.1.92 専用性格のときには地形変化して石油地形にしたグリッド数をカウントすることにする
 void	jyoon_record_money_waste(int sum)
 {
 	int dig1, dig2;
@@ -11554,7 +11571,7 @@ void shion_seizure(int slot)
 	char o_name[160];
 	object_type *o_ptr = &inventory[slot];
 	int value;
-	u32b flgs[4];
+	u32b flgs[TR_FLAG_SIZE];
 
 	if (p_ptr->pclass != CLASS_SHION) return;
 	if (!o_ptr->k_idx) return;

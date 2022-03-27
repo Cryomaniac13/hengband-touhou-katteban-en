@@ -661,14 +661,28 @@ void wilderness_gen(void)
 	}
 
 	//v1.1.32 索道
-	if(flag_riding_ropeway)
+	//v1.1.91 地霊虹洞も
+	if(teleport_town_mode)
 	{
 		int building_num;
 
-		if(p_ptr->town_num == TOWN_MORIYA)
-			building_num = 1;
+		if (teleport_town_mode == TELE_TOWN_MODE_ROPEWAY)
+		{
+			//出てくる建物の番号 t00000xx.txt参照
+			if (p_ptr->town_num == TOWN_MORIYA)
+				building_num = 1;
+			else
+				building_num = 11;
+		}
 		else
-			building_num = 11;
+		{
+			if (p_ptr->town_num == TOWN_CHITEI)
+				building_num = 6;
+			else
+				building_num = 3;
+
+		}
+
 
 		for (y = 0; y < cur_hgt; y++)
 		{
@@ -689,7 +703,7 @@ void wilderness_gen(void)
 			}
 		}
 
-		flag_riding_ropeway = FALSE;
+		teleport_town_mode = 0;
 		p_ptr->teleport_town = FALSE;
 	}
 	/*:::街移動で町に来た場合？*/
@@ -824,6 +838,19 @@ void wilderness_gen_small()
 
 		if (wilderness[j][i].town)
 		{
+			// -HACK- 河童のバザーをワールドマップから見えなくする
+			//v1.1.91 もうそろそろ隠し街にしなくてもいいか。あまりユーザフレンドリーと言えんし原作でもそれほど隠れてはいない
+			/*
+			if (wilderness[j][i].town != TOWN_KAPPA)
+			{
+				cave[j][i].feat = feat_town;
+			}
+			else
+			{
+				cave[j][i].feat = conv_terrain2feat[wilderness[j][i].terrain];
+			}
+			*/
+
 			cave[j][i].feat = feat_town;
 			cave[j][i].special = wilderness[j][i].town;
 		}

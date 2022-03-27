@@ -532,6 +532,9 @@ static void prt_stat(int stat)
 #define BAR_LETTY_POWERUP		105 //v1.1.85 レティ耐性貫通
 #define BAR_SUPERSTEALTH_FOREST	106 //v1.1.88 木隠れの技術
 #define BAR_MOMOYO_EAT			107 //v1.1.89 百々世の何とかイーター
+#define BAR_TIM_AGGRAVATION		108 //v1.1.93 一時反感
+#define BAR_GLASS_SHIELD		109 //v1.1.94 硝子の盾
+#define BAR_COUNTER				110
 
 //ここの値は127が現在の限界である。(v1.1.46で95から拡張)
 
@@ -659,6 +662,10 @@ static struct {
 	{ TERM_GREEN, "森", "超隠密(森)" },
 
 	{ TERM_RED, "喰", "暴食" },
+	{ TERM_RED, "怒", "反感" },
+	{ TERM_WHITE, "盾", "硝子の盾" },
+	{ TERM_RED, "反", "カウンター" },
+
 
 	{0, NULL, NULL}
 };
@@ -779,6 +786,10 @@ static struct {
 	{ TERM_GREEN, "For", "FrstSlth" },
 
 	{ TERM_RED, "Eat", "Glutton" },
+	{ TERM_RED, "Agr", "Aggrav" },
+	{ TERM_WHITE, "GlS", "GlssShld" },
+	{ TERM_RED, "Ctr", "Counter" },
+
 
 	{0, NULL, NULL}
 };
@@ -836,6 +847,8 @@ static void prt_status(void)
 	/* Timed regenerate */
 	if (p_ptr->tim_regen) ADD_FLG(BAR_REGENERATION);
 
+	if(p_ptr->counter || p_ptr->pclass == CLASS_KOKORO && p_ptr->tim_general[0])ADD_FLG(BAR_COUNTER);
+
 	/* Timed infra-vision */
 	if (p_ptr->tim_infra) ADD_FLG(BAR_INFRAVISION);
 
@@ -879,6 +892,8 @@ static void prt_status(void)
 	if (p_ptr->shield) ADD_FLG(BAR_STONESKIN);
 
 	if (p_ptr->special_defense & NINJA_KAWARIMI) ADD_FLG(BAR_KAWARIMI);
+
+	if (p_ptr->special_defense & SD_GLASS_SHIELD) ADD_FLG(BAR_GLASS_SHIELD);
 
 	/* Oppose Acid */
 	if (p_ptr->special_defense & DEFENSE_ACID) ADD_FLG(BAR_IMMACID);
@@ -946,7 +961,7 @@ static void prt_status(void)
 	}
 
 	//v1.1.44
-	if(p_ptr->special_defense & CHECK_EVIL_UNDULATION_MASK)
+	if(p_ptr->special_defense & EVIL_UNDULATION_MASK)
 		ADD_FLG(BAR_EVIL_UNDULATION);
 
 	///mod140502
@@ -990,6 +1005,10 @@ static void prt_status(void)
 	{
 		if (p_ptr->tim_general[1] || p_ptr->tim_general[2] || p_ptr->tim_general[3]) ADD_FLG(BAR_MOMOYO_EAT);
 	}
+
+	//v1.1.93 一時反感
+	if (p_ptr->tim_aggravation)  ADD_FLG(BAR_TIM_AGGRAVATION);
+
 
 	for(i=0;i<6;i++) if(p_ptr->tim_addstat_count[i])  ADD_FLG(BAR_EXSTAT);
 
@@ -1937,6 +1956,20 @@ sprintf(text, "  %2d", command_rep);
 			strcpy(text, _("鈍足", "Slow"));
 		}
 	}
+	//v1.1.91 石油地形減速
+	else if (have_flag(f_ptr->flags, FF_OIL_FIELD) && (p_ptr->pclass != CLASS_YUMA ))
+	{
+		if (p_ptr->speedster)
+		{
+			attr = TERM_WHITE;
+			strcpy(text, _("徒歩", "Walk"));
+		}
+		else
+		{
+			attr = TERM_L_UMBER;
+			strcpy(text, _("鈍足", "Slow"));
+		}
+	}
 
 	else
 	{
@@ -2336,6 +2369,8 @@ static void health_redraw(bool riding)
 
 		/* Afraid */
 		else if (MON_MONFEAR(m_ptr)) attr = TERM_VIOLET;
+		//v1.1.94 能力低下中は灰色に
+		else if (MON_DEC_ATK(m_ptr) || MON_DEC_DEF(m_ptr) || MON_DEC_MAG(m_ptr)) attr = TERM_UMBER;
 
 		/* Healthy */
 		else if (pct >= 100) attr = TERM_L_GREEN;
@@ -5891,6 +5926,15 @@ void calc_bonuses(void)
 	case CLASS_JYOON:
 		if (plev > 19) p_ptr->free_act = TRUE;
 		if (plev > 34) p_ptr->resist_lite = TRUE;
+
+
+		if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29))
+		{
+			p_ptr->oppose_fire = 1;
+			p_ptr->redraw |= PR_STATUS;
+
+		}
+
 		break;
 
 	case CLASS_SHION:
@@ -6008,6 +6052,11 @@ void calc_bonuses(void)
 			p_ptr->redraw |= PR_STATUS;
 		}
 
+
+		break;
+
+	case CLASS_MIKE:
+		if (plev > 29) p_ptr->resist_holy = TRUE;
 
 		break;
 
@@ -7131,6 +7180,11 @@ void calc_bonuses(void)
 	}
 
 
+	//v1.1.93 一時反感
+	if (p_ptr->tim_aggravation)
+	{
+		p_ptr->cursed |= (TRC_AGGRAVATE);
+	}
 
 	/* Sexy Gal */
 	if (p_ptr->pseikaku == SEIKAKU_SEXY) p_ptr->cursed |= (TRC_AGGRAVATE);
@@ -9566,6 +9620,10 @@ void calc_bonuses(void)
 		penalty1 = ((100 - ref_skill_exp(SKILL_2WEAPONS) / 160) - (130 - inventory[INVEN_RARM].weight) / 8);
 		penalty2 = ((100 - ref_skill_exp(SKILL_2WEAPONS) / 160) - (130 - inventory[INVEN_LARM].weight) / 8);
 
+		//長柄武器はペナルティ大きめ
+		if (inventory[INVEN_RARM].tval == TV_POLEARM) penalty1 += 10;
+		if (inventory[INVEN_LARM].tval == TV_POLEARM) penalty2 += 10;
+
 		//v1.1.62 二刀流計算順番変更
 		//源氏エゴなど
 		if (easy_2weapon)
@@ -9577,8 +9635,10 @@ void calc_bonuses(void)
 		//刺セットボーナス
 		if ((inventory[INVEN_RARM].name1 == ART_QUICKTHORN) && (inventory[INVEN_LARM].name1 == ART_TINYTHORN))
 		{
-			penalty1 = penalty1 / 2 - 5;
-			penalty2 = penalty2 / 2 - 5;
+			if (penalty1 > 0) penalty1 /= 2;
+			if (penalty2 > 0) penalty2 /= 2;
+			penalty1 -= 5;
+			penalty2 -= 5;
 			new_speed += 7;
 			p_ptr->to_a += 10;
 			p_ptr->dis_to_a += 10;
@@ -9625,8 +9685,13 @@ void calc_bonuses(void)
 
 		}
 
-		if (inventory[INVEN_RARM].tval == TV_POLEARM) penalty1 += 10;
-		if (inventory[INVEN_LARM].tval == TV_POLEARM) penalty2 += 10;
+		//v1.1.94 技能が高いときもう少しボーナス プラスになることもある
+		if (ref_skill_exp(SKILL_2WEAPONS) > 4000)
+		{
+			penalty1 -= (ref_skill_exp(SKILL_2WEAPONS) - 4000) / 160;
+			penalty2 -= (ref_skill_exp(SKILL_2WEAPONS) - 4000) / 160;
+		}
+
 		p_ptr->to_h[0] -= penalty1;
 		p_ptr->to_h[1] -= penalty2;
 		p_ptr->dis_to_h[0] -= penalty1;
@@ -9730,22 +9795,35 @@ void calc_bonuses(void)
 	p_ptr->to_h[1] += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 	p_ptr->to_h_b  += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 	p_ptr->to_h_m  += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
-
-	if(!alice_doll_attack)
-	{
-		p_ptr->to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-		p_ptr->to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-		p_ptr->to_h_b  += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-		p_ptr->to_h_m  += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-	}
 	/* Displayed Modifier Bonuses (Un-inflate stat bonuses) */
 	p_ptr->dis_to_a += ((int)(adj_dex_ta[p_ptr->stat_ind[A_DEX]]) - 128);
 	p_ptr->dis_to_h[0] += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 	p_ptr->dis_to_h[1] += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
-	p_ptr->dis_to_h_b  += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
-	p_ptr->dis_to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-	p_ptr->dis_to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
-	p_ptr->dis_to_h_b  += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+	p_ptr->dis_to_h_b += ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
+
+	//v1.1.94 アリスは腕力による命中修正を知能で行う
+	//この処理ってどっかで実装していたと思うんだが今ざっと見たら見当たらんし追加しておく。重複してしまうかもしれない
+	if(alice_doll_attack)
+	{
+		p_ptr->to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->to_h_b  += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->to_h_m  += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->dis_to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->dis_to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+		p_ptr->dis_to_h_b += ((int)(adj_str_th[p_ptr->stat_ind[A_INT]]) - 128);
+	}
+	else
+	{
+		p_ptr->to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->to_h_b += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->to_h_m += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->dis_to_h[0] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->dis_to_h[1] += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+		p_ptr->dis_to_h_b += ((int)(adj_str_th[p_ptr->stat_ind[A_STR]]) - 128);
+	}
+
 
 
 	/* Obtain the "hold" value */
@@ -9792,7 +9870,7 @@ void calc_bonuses(void)
 	//	if (o_ptr->k_idx && !p_ptr->heavy_shoot)
 
 		{
-
+			int bow_skill_exp=0;
 
 			/* Extra shots */
 			/*:::装備、職業による追加射撃処理*/
@@ -9801,68 +9879,31 @@ void calc_bonuses(void)
 
 			if(p_ptr->pseikaku == SEIKAKU_TRIGGER) p_ptr->num_fire += (p_ptr->lev * 2);
 
-			/* Hack -- Rangers love Bows */
-			if ((p_ptr->pclass == CLASS_RANGER || p_ptr->pclass == CLASS_EIRIN) &&
-			    (p_ptr->tval_ammo == TV_ARROW))
+			//v1.1.94 射撃速度へのボーナスを職業ごとでなく熟練レベルボーナスに置き換える
+			switch (p_ptr->tval_ammo)
 			{
-				p_ptr->num_fire += (p_ptr->lev * 4);
-			}
+			case TV_ARROW:
+				bow_skill_exp = ref_skill_exp(TV_BOW);
 
-			if ((p_ptr->pclass == CLASS_CAVALRY || p_ptr->pclass == CLASS_TOZIKO || p_ptr->pclass == CLASS_FUTO || p_ptr->pclass == CLASS_MAYUMI) &&
-			    (p_ptr->tval_ammo == TV_ARROW))
-			{
-				p_ptr->num_fire += (p_ptr->lev * 3);
-			}
+				//熟練レベル30で追加射撃+0.5,40で+1.5,50で+2.5相当のボーナス
+				if (bow_skill_exp > 4000)
+					p_ptr->num_fire += (bow_skill_exp - 4000) / 16;
 
-			if (p_ptr->pclass == CLASS_ARCHER)
-			{
-				if (p_ptr->tval_ammo == TV_ARROW)
-					p_ptr->num_fire += ((p_ptr->lev * 5)+50);
-				else if ((p_ptr->tval_ammo == TV_BOLT))
-					p_ptr->num_fire += (p_ptr->lev * 4);
-			}
-			if (p_ptr->pclass == CLASS_HATATE || p_ptr->pclass == CLASS_LYRICA)
-			{
-				if (p_ptr->tval_ammo == TV_ARROW)
-					p_ptr->num_fire += p_ptr->lev * 2;
-				else if ((p_ptr->tval_ammo == TV_BOLT))
-					p_ptr->num_fire += (p_ptr->lev * 3);
-			}
+				if (p_ptr->pclass == CLASS_ARCHER)
+				{
+					p_ptr->num_fire += p_ptr->lev;
+				}
+
+				break;
+			case TV_BOLT:
+				//熟練レベル40で追加射撃+1,50で+2相当のボーナス
+				bow_skill_exp = ref_skill_exp(TV_CROSSBOW);
+
+				if (bow_skill_exp > 4800)
+					p_ptr->num_fire += (bow_skill_exp - 4800) / 16;
 
 
-
-			/*
-			 * Addendum -- also "Reward" high level warriors,
-			 * with _any_ missile weapon -- TY
-			 */
-			if (p_ptr->pclass == CLASS_WARRIOR &&
-			   (p_ptr->tval_ammo == TV_ARROW || p_ptr->tval_ammo == TV_BOLT))
-			{
-				p_ptr->num_fire += (p_ptr->lev * 2);
-			}
-			//古道具屋はクロスボウの射撃が地味に上手い
-			if (p_ptr->pclass == CLASS_SH_DEALER && ( p_ptr->tval_ammo == TV_BOLT))
-			{
-				p_ptr->num_fire += (p_ptr->lev);
-			}
-			///mod140415 探検家のクロスボウ射撃ボーナス
-			if ((p_ptr->pclass == CLASS_SEIRAN || p_ptr->pclass == CLASS_ROGUE || p_ptr->pclass == CLASS_RANGER|| p_ptr->pclass == CLASS_SOLDIER) &&
-			    (p_ptr->tval_ammo == TV_BOLT))
-			{
-				p_ptr->num_fire += (p_ptr->lev * 2);
-			}
-			///mod140819 エンジニアのクロスボウ射撃ボーナス
-			if ((p_ptr->pclass == CLASS_NITORI || p_ptr->pclass == CLASS_ENGINEER) &&  (p_ptr->tval_ammo == TV_BOLT))
-			{
-				p_ptr->num_fire += (p_ptr->lev);
-			}
-
-			/* Snipers love Cross bows */
-			if ((p_ptr->pclass == CLASS_SNIPER) &&
-				(p_ptr->tval_ammo == TV_BOLT))
-			{
-				p_ptr->to_h_b += (10 + (p_ptr->lev / 5));
-				p_ptr->dis_to_h_b += (10 + (p_ptr->lev / 5));
+				break;
 			}
 
 		}
@@ -9929,6 +9970,18 @@ void calc_bonuses(void)
 		{
 			p_ptr->to_a += 5;
 			p_ptr->dis_to_a += 5;
+		}
+
+		//v1.1.94 棒熟練度が高いとAC上昇
+		if (o_ptr->tval == TV_STICK && ref_skill_exp(TV_STICK) > 3200)
+		{
+			int ac_bonus = (ref_skill_exp(TV_STICK) - 2000) / 400;
+
+			if (p_ptr->ryoute) ac_bonus *= 2;
+
+			p_ptr->to_a += ac_bonus;
+			p_ptr->dis_to_a += ac_bonus;
+
 		}
 
 		/* Normal weapons */
@@ -10038,8 +10091,7 @@ void calc_bonuses(void)
 			p_ptr->skill_dig += (o_ptr->weight / 10);
 		}
 
-		/* Assume okay */
-		/* Priest weapon penalty for non-blessed edged weapons */
+		//職業ごとの武器に関する補正いろいろ
 		/*:::仙術領域プリは祝福か鈍器、妖術領域プリは祝福されていない武器でないとペナルティということにする*/
 		if ((p_ptr->pclass == CLASS_PRIEST)
 			&& ((is_good_realm(p_ptr->realm1) && !(have_flag(flgs, TR_BLESSED)) && (o_ptr->tval != TV_HAMMER) && (o_ptr->tval != TV_STICK))
@@ -10096,16 +10148,6 @@ void calc_bonuses(void)
 				p_ptr->dis_to_d[i] -= 10;
 			}
 		}
-		//v1.1.21 兵士短剣技能
-		else if(p_ptr->pclass == CLASS_SOLDIER)
-		{
-			if ((o_ptr->tval == TV_KNIFE) && HAVE_SOLDIER_SKILL(SOLDIER_SKILL_COMBAT,SS_C_KNIFE_MASTERY))
-			{
-				p_ptr->to_dd[i] += 2;
-
-			}
-
-		}
 		//v1.1.60 針妙丸は針を装備するとボーナスを得ることにする
 		else if (p_ptr->pclass == CLASS_SHINMYOUMARU || p_ptr->pclass == CLASS_SHINMYOU_2)
 		{
@@ -10131,6 +10173,20 @@ void calc_bonuses(void)
 
 		}
 
+		//v1.1.94 ナイフに対するダイスボーナスを書き直し
+		if (o_ptr->tval == TV_KNIFE)
+		{
+			//v1.1.21 兵士短剣技能のダイスボーナス
+			if (HAVE_SOLDIER_SKILL(SOLDIER_SKILL_COMBAT, SS_C_KNIFE_MASTERY))
+			{
+				p_ptr->to_dd[i] += 2;
+			}
+			//v1.1.94 短剣熟練度でダイスボーナスが増えることにした。↑に累積はしない
+			else if (ref_skill_exp(TV_KNIFE) >= 6400)
+			{
+				p_ptr->to_dd[i] += 1;
+			}
+		}
 
 		/* Hex bonuses */
 		/*
@@ -10676,13 +10732,25 @@ void calc_bonuses(void)
 	{
 		if (buki_motteruka(INVEN_RARM+i))
 		{
-			int tval = inventory[INVEN_RARM+i].tval - TV_WEAPON_BEGIN;
-			int sval = inventory[INVEN_RARM+i].sval;
+			//int tval = inventory[INVEN_RARM+i].tval - TV_WEAPON_BEGIN;
+			//int sval = inventory[INVEN_RARM+i].sval;
 			///mod131227 skill 武器熟練度
 			//p_ptr->to_h[i] += (p_ptr->weapon_exp[tval][sval] - WEAPON_EXP_BEGINNER) / 200;
 			//p_ptr->dis_to_h[i] += (p_ptr->weapon_exp[tval][sval] - WEAPON_EXP_BEGINNER) / 200;
-			p_ptr->to_h[i] += (ref_skill_exp(inventory[INVEN_RARM+i].tval) - WEAPON_EXP_BEGINNER) / 200;
-			p_ptr->dis_to_h[i] += (ref_skill_exp(inventory[INVEN_RARM+i].tval) - WEAPON_EXP_BEGINNER) / 200;
+
+			//v1.1.94 剣は命中が上がりやすい
+			if (inventory[INVEN_RARM + i].tval == TV_SWORD)
+			{
+				p_ptr->to_h[i] += (ref_skill_exp(inventory[INVEN_RARM + i].tval)-2500 ) / 125;
+				p_ptr->dis_to_h[i] += (ref_skill_exp(inventory[INVEN_RARM + i].tval)-2500) / 125;
+
+			}
+			else
+			{
+				p_ptr->to_h[i] += (ref_skill_exp(inventory[INVEN_RARM + i].tval) - WEAPON_EXP_BEGINNER) / 200;
+				p_ptr->dis_to_h[i] += (ref_skill_exp(inventory[INVEN_RARM + i].tval) - WEAPON_EXP_BEGINNER) / 200;
+			}
+
 			///sys item class 修行僧や忍者の「ふさわしくない装備」判定
 			/*　一時無効化
 			if ((p_ptr->pclass == CLASS_MONK) || (p_ptr->pclass == CLASS_FORCETRAINER))
@@ -11065,6 +11133,8 @@ void calc_bonuses(void)
 		int ridingskill = ref_skill_exp(SKILL_RIDING);
 
 		if(p_ptr->riding_ryoute) ridinglevel += 20;
+
+		if (MON_BERSERK(&m_list[p_ptr->riding])) ridinglevel = ridinglevel * 3 / 2;
 
 		///mod140705 乗馬スキルが極めて高いと落馬回避判定にボーナス　騎兵とかでレベルの上がったパワーDに乗るための修正
 		//if(ridingskill > 6400) ridinglevel = MAX(ridinglevel-20,0);

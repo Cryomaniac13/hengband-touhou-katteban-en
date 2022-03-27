@@ -359,6 +359,9 @@ bool monst_spell_monst(int m_idx)
 	/* Prepare flags for summoning */
 	if (!pet) u_mode |= PM_ALLOW_UNIQUE;
 
+	//v1.1.95 狂戦士化状態だと魔法や特殊行動を使えない
+	if (MON_BERSERK(m_ptr))	return (FALSE);
+
 	/* Cannot cast spells when confused */
 	if (MON_CONFUSED(m_ptr)) return (FALSE);
 
@@ -484,6 +487,12 @@ bool monst_spell_monst(int m_idx)
 	/* Extract the monster level */
 	rlev = ((r_ptr->level >= 1) ? r_ptr->level : 1);
 
+	//v1.1.94 モンスター魔法力低下中はレベル判定値25%カット
+	if (MON_DEC_MAG(m_ptr))
+	{
+		rlev = (rlev * 3 + 1) / 4;
+	}
+
 
 	/* Remove unimplemented spells */
 	f6 &= ~(RF6_WORLD | RF6_TRAPS | RF6_FORGET);
@@ -503,10 +512,13 @@ bool monst_spell_monst(int m_idx)
 		if (!los(m_ptr->fy, m_ptr->fx, t_ptr->fy, t_ptr->fx))
 			f4 &= ~(RF4_BR_LITE);
 	}
-	///mod141010 メイルシュトロムはターゲットとかペット巻き込みとか面倒なので敵は使わない
+
 	//if ((f9 & RF9_MAELSTROM) && distance(y,x,m_ptr->fy,m_ptr->fx) < 8 && !(r_ptr->flags2 & RF2_STUPID))
 	///mod150604 闘技場でのみ使うようにした
-	if ((f9 & RF9_MAELSTROM) && (!p_ptr->inside_battle || distance(y,x,m_ptr->fy,m_ptr->fx) > 5))
+	///mod141010 メイルシュトロムはターゲットとかペット巻き込みとか面倒なので敵は使わないことにした
+	//v1.1.91 やっぱり配下以外の敵は使うようにした　
+	//TODO:いずれもう少しちゃんと整理して＠の配下のときにもなにかに使えるようにしたい
+	if (is_pet(m_ptr) || distance(y,x,m_ptr->fy,m_ptr->fx) > 5)
 	{
 		f9 &= ~(RF9_MAELSTROM);
 	}
@@ -538,6 +550,16 @@ bool monst_spell_monst(int m_idx)
 	{
 		if(m_ptr->hp > m_ptr->maxhp / 3 || distance(m_ptr->fy, m_ptr->fx, t_ptr->fy, t_ptr->fx) > 1 || pet && m_ptr->cdis < 3)
 			f4 &= ~(RF4_SPECIAL2);
+	}
+
+
+	//v1.1.91 尤魔はHPが減ってて周囲に石油地形があるときにしか特別行動をしない。あと闘技場やアリーナでは特別行動をしない。
+	if (m_ptr->r_idx == MON_YUMA)
+	{
+		if (p_ptr->inside_arena || p_ptr->inside_battle || (m_ptr->hp > m_ptr->maxhp * 3 / 4) || yuma_vacuum_oil(m_ptr->fy, m_ptr->fx, TRUE, 0) < 1)
+		{
+			f4 &= ~(RF4_SPECIAL2);
+		}
 	}
 
 	//v1.1.36 小鈴は付喪神がフロアにいるかダメージを受けていないと特別行動をしない
@@ -691,7 +713,7 @@ bool monst_spell_monst(int m_idx)
 
 		/* Prevent collateral damage */
 		/*:::フランの分身は攻撃にプレイヤーを巻き込む*/
-		if ((m_ptr->r_idx != MON_F_SCARLET_4) && !(p_ptr->pet_extra_flags & PF_BALL_SPELL) && (m_idx != p_ptr->riding))
+		if ((m_ptr->r_idx != MON_FLAN_4) && !(p_ptr->pet_extra_flags & PF_BALL_SPELL) && (m_idx != p_ptr->riding))
 		{
 			if ((f4 & (RF4_BALL_MASK & ~(RF4_ROCKET))) ||
 			    (f5 & RF5_BALL_MASK) ||
@@ -966,6 +988,14 @@ bool monst_spell_monst(int m_idx)
 			f5 &= (RF5_INT_MASK);
 			f6 &= (RF6_INT_MASK);
 			f9 &= (RF9_INT_MASK);
+
+			//v1.1.91 尤魔の特別行動とメイルシュトロムは回復も兼ねているので省かない
+			if (m_ptr->r_idx == MON_YUMA)
+			{
+				f4 |= RF4_SPECIAL2;
+				f9 |= RF9_MAELSTROM;
+			}
+
 		}
 		//RF4_DISPEL
 		if(f4 & RF4_DISPEL && one_in_(2)) thrown_spell = 96 + 2;
@@ -1058,7 +1088,8 @@ bool monst_spell_monst(int m_idx)
 	if (p_ptr->riding && (m_idx == p_ptr->riding)) disturb(1, 1);
 
 	/* Check for spell failure (inate attacks never fail) */
-	if (!spell_is_inate(thrown_spell) && (in_no_magic_dungeon || (MON_STUNNED(m_ptr) && one_in_(2)) || (m_ptr->mflag & MFLAG_NO_SPELL)))
+	//v1.1.94 魔法力低下中は1/4で失敗することにした
+	if (!spell_is_inate(thrown_spell) && (in_no_magic_dungeon || (MON_STUNNED(m_ptr) && one_in_(2)) || MON_DEC_MAG(m_ptr) && one_in_(4) ||  (m_ptr->mflag & MFLAG_NO_SPELL)))
 	{
 		disturb(1, 1);
 		/* Message */
@@ -1102,7 +1133,7 @@ bool monst_spell_monst(int m_idx)
 		return (TRUE);
 	}
 
-	if (is_hostile(m_ptr) && spell_is_summon(thrown_spell) && CHECK_USING_SD_UNIQUE_CLASS_POWER(CLASS_NEMUNO) && randint1(r_ptr->level) < p_ptr->lev)
+	if (is_hostile(m_ptr) && spell_is_summon(thrown_spell) && CHECK_USING_SD_UNIQUE_CLASS_POWER(CLASS_NEMUNO) && randint1(rlev) < p_ptr->lev)
 	{
 		msg_format(_("%^sが何かを召喚しようとしたが、あなたは不躾な来訪者を拒絶した。",
                     "%^s tries to summon help, but you reject the uninvited guests."), m_name);
@@ -1167,7 +1198,7 @@ bool monst_spell_monst(int m_idx)
 	{
 
 		//v1.1.65 三項演算子の優先順位を間違えててtmp値が1か2になってしまっていたので修正
-		int tmp = r_ptr->level * ((r_ptr->flags2 & RF2_POWERFUL) ? 2 : 1);
+		int tmp = rlev * ((r_ptr->flags2 & RF2_POWERFUL) ? 2 : 1);
 
 		if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND)) tmp *= 2;
 
@@ -1883,6 +1914,9 @@ bool monst_spell_monst(int m_idx)
 #else
 				msg_format("'Booooeeeeee'");
 #endif
+				else if (m_ptr->r_idx == MON_KUTAKA)
+					msg_format(_("「コ　ケ　コ　ッ　コ　ー　！」", "'Cock-a-doodle-doo!'"));
+
 				else if (blind)
 				{
 #ifdef JP
@@ -2383,7 +2417,7 @@ bool monst_spell_monst(int m_idx)
 					}
 				}
 			}
-			else if(m_ptr->r_idx == MON_F_SCARLET)
+			else if(m_ptr->r_idx == MON_FLAN)
 			{
 				if (!blind)
 				{
@@ -2437,6 +2471,19 @@ bool monst_spell_monst(int m_idx)
 			{
 					msg_format(_("%^sは周囲の付喪神を吸収した！", "%^s absorbs nearby tsukumogami!"), m_name);
 					absorb_tsukumo(m_idx);
+			}
+			else if (m_ptr->r_idx == MON_YUMA)
+			{
+				int oil_field_num;
+				int tmp_hp;
+				msg_format(_("%^sは周囲の石油を吸い込んで吸収した！", "%^s sucks up and absorbs the oil around her!"), m_name);
+				oil_field_num = yuma_vacuum_oil(m_ptr->fy, m_ptr->fx, FALSE, 0);
+
+				//ないと思うがオーバーフロー防止のために一時変数を経由
+				tmp_hp = m_ptr->hp + oil_field_num * 100;
+				if (tmp_hp > m_ptr->maxhp) tmp_hp = m_ptr->maxhp;
+				m_ptr->hp = tmp_hp;
+				if (p_ptr->health_who == m_idx) p_ptr->redraw |= (PR_HEALTH);
 			}
 
 			else
@@ -5088,7 +5135,7 @@ bool monst_spell_monst(int m_idx)
 
 			if ((r_ptr->flags1 & RF1_UNIQUE) && !easy_band)
 			{
-				num += r_ptr->level/40;
+				num += rlev/40;
 			}
 
 			for (k = 0; k < num; k++)
@@ -5842,8 +5889,14 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 		{
 			int rad;
 			disturb(1, 1);
-			if(see_either) msg_format(_("%^sがメイルシュトロムの呪文を詠唱した。",
-                                        "%^s casts a maelstrom."), m_name);
+			if (see_either)
+			{
+				if(m_ptr->r_idx == MON_YUMA)
+					msg_format(_("%^sが石油の大渦を巻き起こした！", "%^s conjures a huge whirlpool of oil!"), m_name);
+				else
+					msg_format(_("%^sがメイルシュトロムの呪文を詠唱した。", "%^s conjures a maelstrom."), m_name);
+
+			}
 
 			if (r_ptr->flags2 & RF2_POWERFUL)
 			{
@@ -5855,8 +5908,18 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 				dam = (rlev * 5) + randint1(rlev * 3);
 				rad = 6;
 			}
-			(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP), FALSE);
-			(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, rad, GF_WATER_FLOW, (PROJECT_GRID | PROJECT_ITEM | PROJECT_JUMP | PROJECT_HIDE), FALSE);
+
+			if (m_ptr->r_idx == MON_YUMA)
+			{
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP | PROJECT_HIDE), FALSE);
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_DIG_OIL, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_JUMP), FALSE);
+			}
+			else
+			{
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, dam, GF_WATER, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER | PROJECT_JUMP), FALSE);
+				(void)project(m_idx, rad, m_ptr->fy, m_ptr->fx, rad, GF_WATER_FLOW, (PROJECT_GRID | PROJECT_ITEM | PROJECT_JUMP | PROJECT_HIDE), FALSE);
+			}
+
 
 			break;
 		}

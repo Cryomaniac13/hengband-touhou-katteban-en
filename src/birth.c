@@ -487,6 +487,9 @@ static cptr seikaku_special_jouhou[MAX_SEIKAKU_SPECIAL] =
 	//文「社会派ルポライター」
 	_("あなたは異変調査のためにしばし素性を隠して活動することにしました。通常と違い頭に「頭襟」を装備する必要がありません。探索能力がやや上昇しますが肉弾戦関係の能力が少し低下します。",
     "In order to investigate the incident, you've decided to conceal your identity. You no longer have to wear a tokin on your head. Your searching abilities are somewhat higher, but you're slightly worse at physical combat."),
+	//女苑「石油王」
+	_("あなたと姉はひょんなことから石油を掘り当て石油王になりました。普段のように金を奪ったり散財したりする代わりに、石油を撒き散らしたり撒いた石油を燃やしたり姉を盾にしたりしながら戦います。いかにも富豪らしい雰囲気を醸し出すあなたは、街の店でいくらでもツケ払いで買い物をすることができます。しかし幻想郷に石油を換金する手段はなく、いずれ店主達はあなたからツケを取り立てることでしょう。",
+    "You and your sister have dug for oil and became oil barons. Instead of stealing money and spending it, you fight by spraying oil, setting it on fire, and using your sister as a shield. Since you give the impression of a wealthy woman, you can shop as much as you want, putting all expenses on your bill. However, since there's no way to trade oil for money in Gensoukyou, the shopkeepers eventually will come to collect your bill."),
 
 };
 
@@ -515,6 +518,7 @@ static int get_special_seikaku_index(int class_idx)
 	if (class_idx == CLASS_3_FAIRIES)	return SEIKAKU_SPECIAL_3_FAIRIES;
 	if (class_idx == CLASS_ORIN)		return SEIKAKU_SPECIAL_ORIN;
 	if (class_idx == CLASS_AYA)			return SEIKAKU_SPECIAL_AYA;
+	if (class_idx == CLASS_JYOON)		return SEIKAKU_SPECIAL_JYOON;
 
 
 	return SEIKAKU_SPECIAL_NONE;
@@ -2164,7 +2168,8 @@ static void player_wipe(void)
 	/* Reset wild_mode to FALSE */
 	p_ptr->wild_mode = FALSE;
 
-	for (i = 0; i < 108; i++)
+	//v1.1.94 magic_numサイズ変更
+	for (i = 0; i < MAGIC_NUM_SIZE; i++)
 	{
 		p_ptr->magic_num1[i] = 0;
 		p_ptr->magic_num2[i] = 0;
@@ -2954,7 +2959,7 @@ outfit_type birth_outfit_class[] = {
 	{CLASS_BANKI,2,0,TV_SPEAR, SV_WEAPON_AWL_PIKE,1},
 	{CLASS_MYSTIA,2,0,TV_CLOTHES, SV_CLOTHES,1},
 	{CLASS_FLAN,2,0,TV_CLOTHES, SV_CLOTHES,1},
-	{CLASS_FLAN,2,0,TV_STICK, SV_WEAPON_IRONSTICK,1},
+	{CLASS_FLAN,2,ART_FLAN,0, 0,1},
 
 	{CLASS_SHOU,0,ART_HOUTOU,0,0,0},
 	{CLASS_SHOU,2,0,TV_CLOTHES, SV_CLOTH_LEATHER	,1},
@@ -3196,6 +3201,12 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_TAKANE,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
 	{ CLASS_TAKANE,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
 
+	{ CLASS_MIKE,2,0,TV_CLOTHES,SV_CLOTHES,1 },
+	{ CLASS_MIKE,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
+	{ CLASS_MIKE,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
+	{ CLASS_MIKE,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
+
+
 	{ CLASS_CARD_DEALER,2,0,TV_CLOTHES,SV_CLOTH_SUIT,1 },
 	{ CLASS_CARD_DEALER,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
 	{ CLASS_CARD_DEALER,2,0,TV_ABILITY_CARD,SV_ABILITY_CARD,1 },
@@ -3305,6 +3316,14 @@ void player_outfit(void)
 	{
 		object_prep(q_ptr, lookup_kind(TV_ABILITY_CARD, SV_ABILITY_CARD));
 		apply_magic_abilitycard(q_ptr, ABL_CARD_KISERU, 0, 0);
+		add_outfit(q_ptr);
+
+	}
+	//v1.1.93 ミケも
+	else if (p_ptr->pclass == CLASS_MIKE)
+	{
+		object_prep(q_ptr, lookup_kind(TV_ABILITY_CARD, SV_ABILITY_CARD));
+		apply_magic_abilitycard(q_ptr, ABL_CARD_MANEKINEKO, 0, 0);
 		add_outfit(q_ptr);
 
 	}
@@ -3535,9 +3554,14 @@ void player_outfit(void)
 		&& p_ptr->prace != RACE_VAMPIRE && p_ptr->pclass != CLASS_WRIGGLE && p_ptr->pclass != CLASS_UTSUHO)
 	{
 		object_prep(q_ptr, lookup_kind(TV_LITE, SV_LITE_TORCH));
-		q_ptr->number = (byte)rand_range(3, 7);
-		if(EXTRA_MODE) q_ptr->number += 3;
-		q_ptr->xtra4 = rand_range(3, 7) * 500;
+
+
+		//v1.1.93 たいまつの性能と数を揃える。EXTRAで引きが悪くてQy@するのもつまらんので
+		//q_ptr->number = (byte)rand_range(3, 7);
+		//if(EXTRA_MODE) q_ptr->number += 3;
+		//q_ptr->xtra4 = rand_range(3, 7) * 500;
+		q_ptr->number = (EXTRA_MODE) ? 9 : 6;
+		q_ptr->xtra4 = 2500;
 		add_outfit(q_ptr);
 	}
 
@@ -5951,7 +5975,7 @@ struct unique_player_type
 	cptr info;	//キャラメイク時に表示される説明文
 };
 
-#define UNIQUE_PLAYER_NUM 120
+#define UNIQUE_PLAYER_NUM 121
 #define CLASS_DUMMY 255
 #define RACE_DUMMY 255
 static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
@@ -5982,7 +6006,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{TRUE,"レミリア・スカーレット",CLASS_REMY,RACE_VAMPIRE,ENTRY_KOUMA,SEX_FEMALE,
 	"あなたは紅魔館の主で、運命を操る力を持つという強力な吸血鬼です。白兵戦に極めて強く、多くの技能に優れ、多様な攻撃への耐性を持ち、魔法の習得も可能で、その上強力なアイテムがよく手に入ります。ただし吸血鬼なので破邪・閃光・水の攻撃に対しては脆弱です。強力な分スコアはかなり低くなります。"},
 	{TRUE,"フランドール・スカーレット",CLASS_FLAN,RACE_VAMPIRE,ENTRY_KOUMA,SEX_FEMALE,
-	"あなたは紅魔館の主の妹で、姉と同様強力な吸血鬼です。何百年も地下室にいて外になど興味を持ちませんでした。破壊の能力を持っており、ダンジョンのトラップやドアなどあらゆる障害を片端から壊して進みます。しかしあなたの破壊の力はしばしば壊すべきでないものまでうっかり壊します。様々な特技を持ちますがそれらは全て破壊的かつ不安定です。あなたの特異な精神はどのような恐ろしいものを見ても怯むことはありません。"},
+	"あなたは紅魔館の主の妹で、姉と同様強力な吸血鬼です。何百年も地下室にいて外になど興味を持ちませんでした。破壊の能力を持っており、ダンジョンのトラップやドアなどあらゆる障害を片端から壊して進みます。しかしあなたの破壊の力はしばしば壊すべきでないものまでうっかり壊します。様々な特技を持ちますがそれらの多くはやはり破壊的かつ不安定です。あなたの特異な精神はどのような恐ろしいものを見ても怯むことはありません。"},
 #else
     {TRUE,"Rumia",CLASS_RUMIA,RACE_YOUKAI,ENTRY_KOUMA,SEX_FEMALE,
 	"You are a youkai flying in the skies of Gensoukyou. Your ability is manipulating darkness, you use darkness-based attacks and resist them as well. Your physical abilities are above human, but aren't particularly notable for a youkai. You're not that proficient with using weapons and can't use magic. You will become completely immune to darkness as you level up."},
@@ -5997,7 +6021,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{TRUE,"Remilia Scarlet",CLASS_REMY,RACE_VAMPIRE,ENTRY_KOUMA,SEX_FEMALE,
 	"You are the owner of Scarlet Devil Mansion, a powerful vampire capable of manipulating fate. You are extremely strong in close combat, excel at many skills, have resistance to many elements, are capable of using magic, and you also are better at finding powerful items as well. However, as a vampire, you are weak to holy attacks, light and water. Since you are so powerful, your score is significantly lowered."},
 	{TRUE,"Flandre Scarlet",CLASS_FLAN,RACE_VAMPIRE,ENTRY_KOUMA,SEX_FEMALE,
-	"You are the sister of the owner of Scarlet Devil Mansion, a powerful vampire just like her. You have spent hundreds of years in basements, having little interest in the outside world. You have the power of destruction, letting you break down any obstacles like traps or doors. However, your destructive power might make you destroy something you'd rather not. You have many abilities, but they're all mostly are destructive and unpredictable. With your special state of mind, you're not affected by any kinds of horrors you might see."},
+	"You are the sister of the owner of Scarlet Devil Mansion, a powerful vampire just like her. You have spent hundreds of years in basements, having little interest in the outside world. You have the power of destruction, letting you break down any obstacles like traps or doors. However, your destructive power might make you destroy something you'd rather not. You have many abilities, but most of them are destructive and unpredictable. With your special state of mind, you're not affected by any kinds of horrors you might see."},
 #endif
 
 	{TRUE,_("レティ・ホワイトロック", "Letty Whiterock"),CLASS_LETTY,RACE_YOUKAI,ENTRY_YOUMU,SEX_FEMALE,
@@ -6028,7 +6052,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	_("あなたは半人半霊の剣士です。冥界で庭師兼護衛として主に仕えています。小柄ながらかなり鍛えられており、二刀流の達人です。「楼観剣」「白楼剣」という由緒ある刀を最初から所持しています。特異な体質と気質を活かした独特の剣技で戦います。また武芸の秘伝書を読むことで強力な技の習得が可能です。",
     "You are a half-ghost, half-human swordfighter. You serve your mistress in Hakugyoukurou as a gardener and guardian. You're petite, but you're very skilled and are a master at two-weapon combat. You start out with two famed blades, Roukanken and Hakurouken. You have your own unique style of swordfighting, and you can use more general samurai sword techniques as well.")},
 	{TRUE,_("西行寺　幽々子", "Yuyuko Saigyouji"),CLASS_YUYUKO,RACE_SPECTRE,ENTRY_YOUMU,SEX_FEMALE,
-	_("あなたは白玉楼の主を務める強力な亡霊です。茫洋とした見た目に反し高い近接戦闘能力を持ちます。また死霊領域の魔法を得意とし、さらに死の力を操ったりダンジョンの敵を消し去る特技を持ちます。様々な攻撃に対する耐性をもち、地獄攻撃を完全に無効化する一方で閃光を弱点とせず、さらに壁を抜けて移動することができます。ダンジョン探索において完璧に近い総合力の持ち主ですが、唯一の弱点としてすぐにお腹が空きます。食料は大量に持ち歩きましょう。なおあなたはお菓子を食べるとMPを回復することができます。",
+	_("あなたは白玉楼の主を務める強力な亡霊です。茫洋とした見た目に反し高い近接戦闘能力を持ちます。また死霊領域の魔法を得意とし、さらに死の力を操ったりダンジョンの敵を消し去る特技を持ちます。様々な攻撃に対する耐性をもち、地獄攻撃を完全に無効化する一方で閃光を弱点とせず、さらに壁を抜けて移動することができます。ダンジョン探索において完璧に近い総合力の持ち主ですが、唯一の弱点としてすぐにお腹が空きます。食料は大量に持ち歩きましょう。なおあなたはお菓子を食べてMPを回復することができます。",
     "You are a powerful ghost ruling over Hakugyokurou. You might look elegant and graceful, but you have solid close combat skills. Also, with your ability to manipulate power of death, you can banish enemies from the dungeon. You have multiple resistances, and are completely immune to nether attacks; you're not vulnerable to light, and you also can walk through walls. While you excel at dungeon exploration, you have one weak point - you get hungry fast. Better carry plenty of food. Also, you can recover MP by eating sweets.")},
 	{TRUE,_("八雲　藍", "Ran Yakumo"),CLASS_RAN,RACE_YOUKO,ENTRY_YOUMU,SEX_FEMALE,
 	_("あなたは大妖八雲紫の式です。主から鉄獄最深層への刺客を命じられました。あなた自身も大妖怪として知られる九尾の狐であり、加えて主から強力な式を付与されているためあらゆる面で極めて高い能力を持ちます。しかし命令完遂までの期限は僅か一週間です。脇目も振らずにダンジョンへ潜り続ける必要があるでしょう。なお、鉄獄の位置は最初から知らされており帰還の魔法などで行くことができます。",
@@ -6263,8 +6287,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
         "You are the matriarch of the Keiga family in Animal Realm. You prefer to kick down anything that gets in your way instead of messing with strategic actions. You have immense leg strength, letting you move very quickly, and you can't be slowed by monster attacks. You're proficient with martial arts and guns, and learn several special abilities related to them. Despite being an animal ghost, you're not weak to light, though you're still vulnerable to holy attacks.")},
 
 #ifdef JP
-	{ FALSE,"豪徳寺　ミケ",CLASS_MIKE,RACE_WARBEAST,ENTRY_KOURYUU,SEX_FEMALE,
-		"(未実装)" },
+	{ TRUE,"豪徳寺　ミケ",CLASS_MIKE,RACE_WARBEAST,ENTRY_KOURYUU,SEX_FEMALE,
+		"あなたは三毛猫の招き猫です。白猫主義の招き猫社会から排斥された過去を持ち、今は妖怪の山で気楽に暮らしています。あなたは招き猫として客や金を呼び寄せる能力を得るはずでしたが、十分な修行ができなかったせいでデメリットを伴う癖のある能力になってしまいました。状況を見極めて賢く能力を使う必要があります。あなたはアビリティカードに目をつけ流行に乗って一儲けしようと目論んでいます。しかし招き猫社会の妨害によりカード販売所には立ち入ることができません。カード交換所、カードを持つ人妖との交渉、偽天棚の賭場など他の手段でカードを手に入れる必要があります。前途は多難ですが強かにやり抜きましょう。" },
 	{ TRUE,"山城　たかね",CLASS_TAKANE,RACE_YAMAWARO,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは交渉事が大得意な山童です。最近出回り始めた「アビリティカード」に目をつけカード売人として一旗揚げることにしました。しかし他の妖怪たちも先を争ってアビリティカードを買い集め始めており高騰は必至です。一刻も早くお金を貯めてカードを買い漁りましょう。あなたは背中に大型のカードケースを背負っており、この中にカードを16種類まで収納することができます。さらに森の気を操る能力をもち、森に関係する幾つかの特技を習得します。しかし魔法を学習することはできず身体能力もあまり高くありません。" },
 	{ TRUE,"駒草　山如",CLASS_SANNYO,RACE_YOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6280,8 +6304,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,"姫虫　百々世",CLASS_MOMOYO,RACE_DAIYOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは凶悪な大蜈蚣(オオムカデ)の大妖怪です。非常に高い肉体能力と戦闘系技能をもち、様々な攻撃や防御の特技を習得し、さらにレベルが上がると攻撃に毒属性が追加されます。またつるはしを装備すると武器の威力にボーナスがつきます。一対一の殴り合いならほぼ敵なしでしょう。ただし隠密や探索はからっきしです。中盤以降はなるべく周囲に注意を払いましょう。あなたは食事コマンドで鉱石を食べて一時的に特別な効果を得ることができます。" },
 #else
-    { FALSE,"Mike Goutokuji",CLASS_MIKE,RACE_WARBEAST,ENTRY_KOURYUU,SEX_FEMALE,
-		"(unimplemented)" },
+    { TRUE,"Mike Goutokuji",CLASS_MIKE,RACE_WARBEAST,ENTRY_KOURYUU,SEX_FEMALE,
+		"You are a calico maneki-neko. You were ostracized from the white-furred maneki-neko society, and now you live at Youkai Mountain. As a maneki-neko, you were supposed to be capable of attracting customers or money, but due to insufficient training, your ability is imperfect, and it has its disadvantages. You'll have to wisely use your ability according to current situation. The ability cards have caught your eye, and you're planning to take advantage and make a fortune on them. However, due to your troubles with maneki-neko society, you can't go inside card trading office. You'll have to obtain cards through other means - card exchange, negotations, or gambling at False Heaven Shelf. You'll have to persevere, as your quest is going to be tough." },
 	{ TRUE,"Takane Yamashiro",CLASS_TAKANE,RACE_YAMAWARO,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a yamawaro with a talent for negotiation. Those 'ability cards' that recently became popular have caught your interest, and you decided to become a card trader. However, other youkai also are buying those cards, so the prices keep rising. Save up money and buy cards as quick as you can. You're carrying a large card case on your back, which can store 16 different kinds of cards. You also are capable of manipulating forest qi, which lets you use several forest-related abilities. However, you can't learn magic and you're not physically strong either." },
 	{ TRUE,"Sannyo Komakusa",CLASS_SANNYO,RACE_YOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6323,6 +6347,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("依神　紫苑", "Shion Yorigami"),CLASS_SHION,RACE_DEITY,ENTRY_TASOGARE,SEX_FEMALE,
 		_("あなたは誰からも嫌われる貧乏神です。大変な借金を抱えており、実質的に店や街の施設を利用することができません。さらに呪われていない装備品は即座に差し押さえられ半日ほどで没収されてしまいます。あなたがダンジョンで普通に戦うことは極めて困難で、「強制完全憑依」の特技を使ってモンスターの体を乗っ取って戦うことになります。あなたは周囲で起こった不幸を少しずつその身に蓄積していき、貯め込んだ不幸を開放してとてつもなく凶悪な「スーパー貧乏神」に変身することができます。",
         "You are a poverty god hated by everyone. You're in massive debt, and can't use shops or other town facilities. Also, any non-cursed items you equip will be seized, disappearing in about half a day. Fighting in the dungeon will be extremely tough, but you can use your 'Forceful Perfect Possession' ability to possess a monster's body. You slightly accumulate misfortune around you in your body, and you can transform into a terrible 'Super Poverty God' by releasing the accumulated misfortune.")},
+	{ FALSE,_("饕餮　尤魔", "Yuuma Toutetsu"),CLASS_YUMA,RACE_DEITY,ENTRY_TASOGARE,SEX_FEMALE,
+		_("(未実装)", "(unimplemented)") },
+
 
 	{TRUE,_("光の三妖精", "Fairies of Light"),CLASS_3_FAIRIES,RACE_FAIRY,ENTRY_OTHER,SEX_FEMALE,
 	_("あなたたちは光の三妖精と呼ばれる三人組の妖精です。	『サニーミルク』は光を屈折させる能力を、『ルナチャイルド』は音を消す能力を、『スターサファイア』は周囲の生物を探る能力を持ちます。	三人一緒にダンジョンに挑み、三人合わせて武器を2つ、盾を1つ、光源を1つ、防具やアクセサリを8個まで装備可能です。ただし同部位の装備品は最大3つまでとなります。	二刀流や近接・射撃武器同時装備のペナルティは発生しません。",
@@ -6510,7 +6537,11 @@ static bool get_unique_player(void)
 	int entry;
 	unique_player_type table[12];
 	int cnt_table;
+#ifdef JP
 	char temp[80*9];
+#else
+    char temp[80*12];
+#endif
 	cptr t;
 	char    buf[80], cur[80];
 	int mul_exp, mul_score;
@@ -6640,7 +6671,11 @@ static bool get_unique_player(void)
 
 		roff_to_buf(table[k].info, 74, temp, sizeof(temp));
 		t = temp;
+#ifdef JP
 		for (i = 0; i< 9; i++)
+#else
+        for (i = 0; i< 11; i++)
+#endif
 		{
 			if(t[0] == 0)
 				break;
@@ -8318,7 +8353,11 @@ void player_birth(void)
 /*:::種族、職業、性格、領域の説明文をファイルにコピーする*/
 void dump_yourself(FILE *fff)
 {
+#ifdef JP
 	char temp[80*10];
+#else
+    char temp[80*12];
+#endif
 	int i;
 	cptr t;
 
@@ -8390,7 +8429,7 @@ void dump_yourself(FILE *fff)
 		if(p_ptr->psex == SEX_MALE) fprintf(fff, "性格: %s\n", ap_ptr->title);
 		else fprintf(fff, "性格: %s\n", ap_ptr->f_title);
 #else
-	fprintf(fff, "Pesonality: %s\n", seikaku_info[p_ptr->pseikaku].title);
+	fprintf(fff, "Personality: %s\n", seikaku_info[p_ptr->pseikaku].title);
 #endif
 	t = temp;
 	for (i = 0; i < 6; i++)

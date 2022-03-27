@@ -1296,8 +1296,6 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 			/* Require a "naked" floor grid */
 			if (!cave_naked_bold(y, x)) break;
 
-
-
 			/* Not on the player */
 			if (player_bold(y, x)) break;
 
@@ -1310,6 +1308,8 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 
 			break;
 		}
+
+
 		case GF_MAKE_SPIDER_NEST:
 		{
 			if (!cave_have_flag_bold(y, x, FF_FLOOR)) break;
@@ -1424,6 +1424,29 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 
 			break;
 		}
+		//v1.1.91
+		case GF_DIG_OIL:
+		{
+			/* Ignore permanent grid */
+			if (have_flag(f_ptr->flags, FF_PERMANENT)) break;
+
+			/* Ignore grid without enough space */
+			//トラップ創造で罠地形を敷き詰めたら石油地形変化を防げたりする
+			if (!have_flag(f_ptr->flags, FF_FLOOR)) break;
+
+			//v1.1.92 女苑専用性格では油地形に変化させたグリッド数を記録することにしてみる
+			if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON ) && !who)
+				jyoon_record_money_waste(1);
+
+			cave_set_feat(y, x, feat_oil_field);
+
+			//＠のいる位置が地形変化して何らかのパラメータが変わるかもしれんので追加
+			p_ptr->update |= PU_BONUS;
+			p_ptr->redraw |= PR_STATE | PR_STATS | PR_STATUS;
+
+			break;
+		}
+
 
 		case GF_MAKE_BLIZZARD: //v1.1.85 魔法吹雪
 		{
@@ -1507,6 +1530,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 			p_ptr->redraw |= PR_STATE | PR_STATS | PR_STATUS;
 			break;
 		}
+
 
 		case GF_MOSES:
 		{
@@ -2197,9 +2221,18 @@ msg_format("%sは%s", o_name, note_kill);
 //モンスターが抵抗に成功したらTRUE
 //if ((r_ptr->flags1 & (RF1_UNIQUE)) || (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 //↑のような処理と入れ替える
-bool	mon_saving_throw(monster_race *r_ptr, int power)
+bool	mon_saving_throw(monster_type *m_ptr, int power)
 {
+	monster_race *r_ptr = &r_info[m_ptr->r_idx];
 	int chance = power;
+	int rlev = r_ptr->level;
+
+	//v1.1.95 防御低下状態なら抵抗力が下がることにした
+	if (MON_DEC_DEF(m_ptr))
+	{
+		rlev -= MAX(25, rlev / 4);
+		if (rlev < 0) rlev = 0;
+	}
 
 	//ユニークには抵抗されやすい
 	if ((r_ptr->flags1 & RF1_UNIQUE) || r_ptr->flags7 & RF7_UNIQUE2) chance = chance * 2 / 3;
@@ -2213,7 +2246,7 @@ bool	mon_saving_throw(monster_race *r_ptr, int power)
 	//元の判定式の10というマジックナンバーがなんか気に入らんから＠のレベルにした。まあ実質何の違いもないだろう。
 	if (chance < p_ptr->lev) chance = p_ptr->lev;
 
-	if (p_ptr->wizard) msg_format("saving throw: power%d-lev%d",chance,r_ptr->level);
+	if (cheat_xtra) msg_format("saving throw: power%d-lev%d",chance,r_ptr->level);
 
 	if (r_ptr->level >= randint1(chance)) return TRUE;
 	else return FALSE;
@@ -2334,6 +2367,18 @@ bool project_m(int who, int r, int y, int x, int dam, int typ, int flg, bool see
 
 	/* Time amount (amount to time) */
 	int do_time = 0;
+
+	//v1.1.94 ステータス異常追加
+	int do_dec_atk = 0;
+	int do_dec_def = 0;
+	int do_dec_mag = 0;
+
+	//v1.1.95 追加
+	int do_drunk = 0;//←実処理未実装
+	int do_berserk = 0;
+	int do_not_move = 0;
+
+
 
 	bool heal_leper = FALSE;
 
@@ -2632,6 +2677,10 @@ note = "はひどい痛手をうけた。";
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
 			}
+
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam = oil_field_damage_mod(dam, y, x);
+
 			if (r_ptr->flagsr & RFR_IM_FIRE)
 			{
 #ifdef JP
@@ -2758,6 +2807,15 @@ note = "にはかなり耐性がある！";
 					if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_DISE);
 				}
 			}
+			else
+			{
+				//v1.1.94 どちらの耐性もなければ防御力低下判定
+				if (!mon_saving_throw(m_ptr, dam))
+				{
+					do_dec_def = 8 + randint1(8);
+
+				}
+			}
 			break;
 		}
 		/* Nuclear waste */
@@ -2778,6 +2836,10 @@ note = "にはかなり耐性がある！";
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
 			}
+
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam_fire = oil_field_damage_mod(dam_fire, y, x);
+
 			if (r_ptr->flagsr & RFR_IM_FIRE || r_ptr->flagsr & RFR_RES_LITE)
 			{
 				note = _("には耐性がある。", " resists.");
@@ -2984,6 +3046,12 @@ note = "には少し効果が高いようだ。";
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
 			}
+
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam = oil_field_damage_mod(dam, y, x);
+
+
+
 			if ((r_ptr->flagsr & RFR_IM_FIRE) || (r_ptr->flagsr & RFR_IM_ELEC))
 			{
 #ifdef JP
@@ -3248,6 +3316,8 @@ note = "には耐性がある。";
 
 				dam *= 3; dam /= randint1(6) + 6;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_SHAR);
+				break;
+
 			}
 			//v1.1.64 ハニワは轟音破片弱点にしてみる
 			else if (r_ptr->flags3 & RF3_HANIWA)
@@ -3256,6 +3326,13 @@ note = "には耐性がある。";
 				dam = dam * 2;
 
 			}
+
+			//v1.1.94 破片耐性がないとき追加効果で攻撃力低下(ダメージ値を判定パワーとしてセービングスロー)
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_atk = 8 + randint1(dam/10);
+			}
+
 			break;
 		}
 
@@ -3285,6 +3362,7 @@ note = "には耐性がある。";
 
 				dam /= 2;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_SHAR);
+				break;
 			}
 			//v1.1.64 ハニワは轟音破片弱点にしてみる
 			else if (r_ptr->flags3 & RF3_HANIWA)
@@ -3293,6 +3371,13 @@ note = "には耐性がある。";
 				dam = dam * 2;
 
 			}
+
+			//v1.1.94 破片耐性がないとき追加効果で攻撃力低下(ダメージ値を判定パワーとしてセービングスロー)
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_atk = 8 + randint1(dam / 10);
+			}
+
 			break;
 		}
 
@@ -3364,7 +3449,11 @@ note = "には耐性がある。";
 				dam *= 3; dam /= randint1(6) + 6;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags3 |= (RF3_NO_CONF);
 			}
-			else do_conf = (10 + randint1(15) + r) / (r + 1);
+			else
+			{
+				do_conf = (10 + randint1(15) + r) / (r + 1);
+				do_dec_mag = 8 + randint1(dam/10);
+			}
 			break;
 		}
 
@@ -3394,7 +3483,17 @@ note = "には耐性がある。";
 
 				dam *= 3; dam /= randint1(6) + 6;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_DISE);
+				break;
 			}
+
+			//v1.1.94 劣化耐性がないとき追加効果で防御力低下(ダメージ値を判定パワーとしてセービングスロー)
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_def = 8 + randint1(dam/10);
+			}
+
+
+
 			break;
 		}
 
@@ -3423,6 +3522,7 @@ note = "には耐性がある。";
 
 				dam *= 4; dam /= randint1(3) + 5;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_TIME);
+				break;
 			}
 			else if(typ == GF_NEXUS)
 			{
@@ -3432,7 +3532,7 @@ note = "には耐性がある。";
                                                                              _("モンスター消滅", "monster disappearance")))
 				{
 					if (seen_msg) msg_format(_("%sはこのフロアにいなかったことになった。",
-                                                "%s never was on this floor."), m_name);
+                                                "%s never was on this level."), m_name);
 					return TRUE;
 				}
 				else if((dam <= m_ptr->hp) && !(r_ptr->flagsr & RFR_RES_TELE))
@@ -3440,6 +3540,12 @@ note = "には耐性がある。";
 					do_dist = randint1(200);
 					if (p_ptr->riding && (c_ptr->m_idx == p_ptr->riding)) do_dist = 0;
 				}
+
+				//v1.1.94 因果混乱の追加効果で判定なしの全能力低下
+				do_dec_atk = 16 + randint1(dam / 10);
+				do_dec_def = 16 + randint1(dam / 10);
+				do_dec_mag = 16 + randint1(dam / 10);
+
 			}
 			break;
 
@@ -3513,7 +3619,7 @@ note = "には耐性がある。";
 				//if ((r_ptr->flags1 & (RF1_UNIQUE)) ||
 				//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 				//v1.1.90 判定変更
-				if (mon_saving_throw(r_ptr, dam))
+				if (mon_saving_throw(m_ptr, dam))
 				{
 					obvious = FALSE;
 				}
@@ -3560,7 +3666,19 @@ note = "には耐性がある。";
 				dam *= 3; dam /= randint1(6) + 6;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_TIME);
 			}
-			else do_time = (dam + 1) / 2;
+			else
+			{
+				do_time = (dam + 1) / 2;
+
+				//v1.1.94 時間逆転の追加効果で全能力低下(要セービングスロー)
+				if (!mon_saving_throw(m_ptr, dam))
+				{
+					do_dec_atk = 8 + randint1(dam / 10);
+					do_dec_def = 8 + randint1(dam / 10);
+					do_dec_mag = 8 + randint1(dam / 10);
+				}
+
+			}
 			break;
 		}
 		///mod 空間歪曲属性 耐性ないとテレポ
@@ -3679,7 +3797,7 @@ note = "には耐性がある！";
 				//if ((r_ptr->flags1 & (RF1_UNIQUE)) ||
 				//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 
-				if (mon_saving_throw(r_ptr, dam))
+				if (mon_saving_throw(m_ptr, dam))
 				{
 					obvious = FALSE;
 				}
@@ -3702,7 +3820,7 @@ note = "には耐性がある！";
 				/* Attempt a saving throw */
 				//if ((r_ptr->flags1 & (RF1_UNIQUE)) ||
 				//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
-				if (mon_saving_throw(r_ptr, dam))
+				if (mon_saving_throw(m_ptr, dam))
 				{
 					/* Resist */
 					do_stun = 0;
@@ -3948,6 +4066,7 @@ note_dies = "は蒸発した！";
 				note = " is immune!";
 #endif
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags2 |= (RF2_EMPTY_MIND);
+				break;
 
 			}
 			else if ((r_ptr->flags2 & (RF2_STUPID | RF2_WEIRD_MIND)) ||
@@ -4025,7 +4144,11 @@ note_dies = "は蒸発した！";
 					}
 					dam = 0;
 				}
+				break;
 			}
+
+			//v1.1.94 精神攻撃系の追加効果で魔法低下
+			do_dec_mag = 8 + randint1(dam / 10);
 
 			if ((dam > 0) && one_in_(4))
 			{
@@ -4086,7 +4209,7 @@ note_dies = "は蒸発した！";
 #else
 				note = " is immune!";
 #endif
-
+				break;
 			}
 			/*
 			* Powerful demons & undead can turn a mindcrafter's
@@ -4120,15 +4243,16 @@ note_dies = "は蒸発した！";
 					take_hit(DAMAGE_ATTACK, dam / 3, killer, -1);
 				}
 				dam = 0;
+				break;
 			}
 			else if (r_ptr->flags2 & (RF2_STUPID | RF2_WEIRD_MIND))
 			{
 				dam /= 3;
 				note = _("には耐性がある。", " resists.");
-
+				break;
 			}
 			//魔法を全く持たないモンスターはMPを持たないと解釈し、MPを吸収できない。
-			else if (!((r_ptr->flags4 & ~(RF4_NOMAGIC_MASK)) || (r_ptr->flags5 & ~(RF5_NOMAGIC_MASK)) || (r_ptr->flags6 & ~(RF6_NOMAGIC_MASK)) || r_ptr->flags9))
+			else if (!HAS_ANY_MAGIC(r_ptr))
 			{
 				note = _("は魔力を持たないようだ。", " doesn't have mana.");
 			}
@@ -4136,6 +4260,7 @@ note_dies = "は蒸発した！";
 			{
 				dam /= 2;
 				note = _("は攻撃に抵抗した！", " resists the attack!");
+				break;
 			}
 			else if (dam > 0)
 			{
@@ -4146,6 +4271,10 @@ note_dies = "は蒸発した！";
 
 			}
 			note_dies = _("は倒れた。", " is defeated.");
+
+			//v1.1.94 精神攻撃系の追加効果で魔法低下
+			do_dec_mag = 8 + randint1(dam / 10);
+
 
 		}
 		break;
@@ -4780,7 +4909,7 @@ note = "が分裂した！";
 			//if ((r_ptr->flags1 & RF1_UNIQUE) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 
-			if (r_ptr->flagsr & (RFR_RES_INER) || mon_saving_throw(r_ptr, dam))
+			if (r_ptr->flagsr & (RFR_RES_INER) || mon_saving_throw(m_ptr, dam))
 			{
 #ifdef JP
 note = "には効果がなかった！";
@@ -4885,7 +5014,7 @@ note = "には効果がなかった！";
 			//    (r_ptr->flags3 & RF3_NO_SLEEP) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 			//v1.1.90 判定変更
-			if (r_ptr->flags3 & (RF3_NO_SLEEP) || mon_saving_throw(r_ptr, dam))
+			if (r_ptr->flags3 & (RF3_NO_SLEEP) || mon_saving_throw(m_ptr, dam))
 			{
 				/* Memorize a flag */
 				if (r_ptr->flags3 & RF3_NO_SLEEP)
@@ -4942,7 +5071,7 @@ note = "は眠り込んでしまった！";
 			//    !(r_ptr->flags3 & RF3_ANG_CHAOS) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 			//v1.1.90 判定変更
-			if (!(r_ptr->flags3 & RF3_ANG_CHAOS) || mon_saving_throw(r_ptr, dam))
+			if (!(r_ptr->flags3 & RF3_ANG_CHAOS) || mon_saving_throw(m_ptr, dam))
 			{
 #ifdef JP
 note = "には効果がなかった！";
@@ -4990,7 +5119,7 @@ note = "は動けなくなった！";
 			//if ((r_ptr->flags1 & RF1_UNIQUE) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 			//v1.1.90 判定変更
-			if (mon_saving_throw(r_ptr, dam))
+			if (mon_saving_throw(m_ptr, dam))
 			{
 #ifdef JP
 note = "には効果がなかった！";
@@ -5071,7 +5200,7 @@ note = "には効果がなかった！";
 			else
 			{
 				//v1.1.90 判定変更
-				if (mon_saving_throw(r_ptr, dam))
+				if (mon_saving_throw(m_ptr, dam))
 				{
 					note = _("には効果がなかった！", " is unaffected!");
 				}
@@ -5626,7 +5755,7 @@ note = "はあなたに服従した。";
 			//    (r_ptr->flags3 & (RF3_NO_CONF)) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 			//v1.1.90 判定変更
-			if (r_ptr->flags3 & (RF3_NO_CONF) || mon_saving_throw(r_ptr, dam))
+			if (r_ptr->flags3 & (RF3_NO_CONF) || mon_saving_throw(m_ptr, dam))
 			{
 				/* Memorize a flag */
 				if (r_ptr->flags3 & (RF3_NO_CONF))
@@ -5645,6 +5774,11 @@ note = "には効果がなかった！";
 #endif
 
 				obvious = FALSE;
+			}
+			else
+			{
+				//v1.1.94 精神攻撃系の追加効果で魔法低下
+				do_dec_mag = 8 + randint1(8);
 			}
 
 			/* No "real" damage */
@@ -5672,7 +5806,7 @@ note = "には効果がなかった！";
 			/* Attempt a saving throw */
 			//v1.1.90 判定変更
 			//if ((r_ptr->flags1 & (RF1_UNIQUE)) || (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
-			if(r_ptr->flags3 & (RF3_NO_STUN) || mon_saving_throw(r_ptr,dam))
+			if(r_ptr->flags3 & (RF3_NO_STUN) || mon_saving_throw(m_ptr,dam))
 			{
 				/* Resist */
 				do_stun = 0;
@@ -6056,7 +6190,7 @@ note = "には耐性がある！";
 				/* Attempt a saving throw */
 				//if (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10)
 				//v1.1.90 判定変更
-				if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(r_ptr, dam))
+				if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(m_ptr, dam))
 				{
 					/* No obvious effect */
 #ifdef JP
@@ -6067,6 +6201,12 @@ note = "には耐性がある！";
 
 					obvious = FALSE;
 					do_fear = 0;
+				}
+				else
+				{
+					//v1.1.94 精神攻撃系の追加効果で魔法低下
+					do_dec_mag = 8 + randint1(8);
+
 				}
 			}
 
@@ -6106,7 +6246,7 @@ note = "には耐性がある！";
 				/* Attempt a saving throw */
 				//if (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10)
 				//v1.1.90 判定変更
-				if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(r_ptr, dam))
+				if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(m_ptr, dam))
 				{
 					/* No obvious effect */
 #ifdef JP
@@ -6118,6 +6258,13 @@ note = "には耐性がある！";
 					obvious = FALSE;
 					do_fear = 0;
 				}
+				else
+				{
+					//v1.1.94 精神攻撃系の追加効果で魔法低下
+					do_dec_mag = 8 + randint1(8);
+
+				}
+
 			}
 
 			/* Others ignore */
@@ -6155,7 +6302,7 @@ note = "には耐性がある！";
 			//    (r_ptr->flags3 & (RF3_NO_FEAR)) ||
 			//    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 10))
 			//v1.1.90 判定変更
-			if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(r_ptr, dam))
+			if (r_ptr->flags3 & (RF3_NO_FEAR) || mon_saving_throw(m_ptr, dam))
 			{
 				/* No obvious effect */
 #ifdef JP
@@ -6166,6 +6313,12 @@ note = "は恐怖しなかった。";
 
 				obvious = FALSE;
 				do_fear = 0;
+			}
+			else
+			{
+				//v1.1.94 精神攻撃系の追加効果で魔法低下
+				do_dec_mag = 8 + randint1(8);
+
 			}
 
 			/* No "real" damage */
@@ -6465,7 +6618,7 @@ note_dies = "は倒れた。";
 				break;
 			}
 			///sys monspell RF4-6flag 魔法を使うモンスターが魔力吸収を使うときの判定？
-			if ((r_ptr->flags4 & ~(RF4_NOMAGIC_MASK)) || (r_ptr->flags5 & ~(RF5_NOMAGIC_MASK)) || (r_ptr->flags6 & ~(RF6_NOMAGIC_MASK)) || r_ptr->flags9)
+			if (HAS_ANY_MAGIC(r_ptr))
 			{
 				if (who > 0)
 				{
@@ -6567,7 +6720,7 @@ note_dies = "は倒れた。";
 			//	 (r_ptr->flags3 & RF3_NO_CONF) ||
 			//	 (r_ptr->level > randint1((caster_lev - 10) < 1 ? 1 : (caster_lev - 10)) + 10))
 			//v1.1.90 判定変更
-			else if (r_ptr->flags3 & (RF3_NO_CONF) || mon_saving_throw(r_ptr, dam))
+			else if (r_ptr->flags3 & (RF3_NO_CONF) || mon_saving_throw(m_ptr, dam))
 			{
 				/* Memorize a flag */
 				if (r_ptr->flags3 & (RF3_NO_CONF))
@@ -6580,6 +6733,7 @@ note_dies = "は倒れた。";
 				note = "is unaffected!";
 #endif
 				dam = 0;
+				break;
 		}
 			else if (r_ptr->flags2 & RF2_WEIRD_MIND)
 			{
@@ -6590,6 +6744,7 @@ note_dies = "は倒れた。";
 				note = " resists.";
 #endif
 				dam /= 3;
+				break;
 			}
 			else
 			{
@@ -6613,6 +6768,10 @@ note_dies = "は倒れた。";
 					do_conf = randint0(4) + 4;
 
 				}
+
+				//v1.1.94 精神攻撃系の追加効果で魔法低下
+				do_dec_mag = 8 + randint1(dam / 10);
+
 			}
 			break;
 		}
@@ -6928,6 +7087,9 @@ note_dies = "は倒れた。";
 				do_stun = dam / 8 + randint1(dam / 4);
 				do_conf = dam / 8 + randint1(dam / 4);
 				do_fear = dam / 8 + randint1(dam / 4);
+
+				//v1.1.94 精神攻撃系の追加効果で魔法低下
+				do_dec_mag = 16 + randint1(dam / 8);
 			}
 
 			break;
@@ -7273,6 +7435,15 @@ note = "には効果がなかった！";
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
 			}
+
+			//v1.1.94 追加効果で能力低下(ダメージ値を判定パワーとしてセービングスロー)
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_atk = 8 + randint1(8);
+				do_dec_def = 8 + randint1(8);
+				do_dec_mag = 8 + randint1(8);
+			}
+
 			break;
 		}
 
@@ -7335,19 +7506,6 @@ note = "には効果がなかった。";
 		}
 
 
-		/* Default */
-		default:
-		{
-			/* Irrelevant */
-			skipped = TRUE;
-
-			/* No damage */
-			dam = 0;
-
-			break;
-		}
-
-
 		/* PUNISH_1/2/3/4 破邪弱点の敵にしか効かない。効いたら敵に朦朧、恐怖付与を試みる。*/
 		case GF_PUNISH_1:
 		case GF_PUNISH_2:
@@ -7406,12 +7564,21 @@ note = "には効果がなかった。";
 				if (!(r_ptr->flags3 & RF3_NO_FEAR)) do_fear = damroll(3, (dam / 2)) + 1;
 				if (!(r_ptr->flags3 & RF3_NO_STUN) && (typ == GF_PUNISH_3 || typ == GF_PUNISH_4) ) do_stun = damroll(3, (dam / 2)) + 1;
 
+				//v1.1.94 追加効果で能力低下
+				if (one_in_(3))
+					do_dec_atk = 8 + randint1(8);
+				else if (one_in_(2))
+					do_dec_def = 8 + randint1(8);
+				else
+					do_dec_mag = 8 + randint1(8);
 			}
 
 			break;
 		}
 
 		/* 死霊領域の怨霊憑依など */
+		//v1.1.95 狂戦士化効果にした
+		/*
 		case GF_POSSESSION:
 		{
 			if (seen) obvious = TRUE;
@@ -7464,6 +7631,8 @@ note = "には効果がなかった。";
 
 			break;
 		}
+		*/
+
 		/* 死霊領域のソウルスティール */
 		case GF_SOULSTEAL:
 		{
@@ -7578,9 +7747,10 @@ note = "には効果がなかった。";
 #ifdef JP
 				note = "にはかなり耐性がある！";
 #else
-				note = " is immune!";
+				note = " resists a lot!";
 #endif
 				dam /= 9;
+				break;
 			}
 			else if (r_ptr->flags2 & RF2_WEIRD_MIND)
 			{
@@ -7591,13 +7761,13 @@ note = "には効果がなかった。";
 				note = " resists.";
 #endif
 				dam /= 3;
+				break;
 			}
 			//else if ((r_ptr->flags1 & RF1_UNIQUE) ||
 			//	 (r_ptr->flags3 & RF3_NO_CONF) ||
 			//	 (r_ptr->level > randint1((caster_lev - 10) < 1 ? 1 : (caster_lev - 10)) + 80))
 			//v1.1.90 判定変更
-			else if (r_ptr->flags3 & (RF3_NO_CONF) || r_ptr->flags2 & (RF2_WEIRD_MIND) || r_ptr->flags3 & (RF3_NONLIVING)
-				|| mon_saving_throw(r_ptr, dam))
+			else if (r_ptr->flags3 & (RF3_NO_CONF) || r_ptr->flags3 & (RF3_NONLIVING) || mon_saving_throw(m_ptr, dam))
 			{
 				/* Memorize a flag */
 				if (r_ptr->flags3 & (RF3_NO_CONF))
@@ -7606,6 +7776,7 @@ note = "には効果がなかった。";
 				}
 				note = _("は攻撃に抵抗した。", " resists the attack.");
 				dam /= 2;
+				break;
 			}
 			else
 			{
@@ -7623,6 +7794,9 @@ note = "には効果がなかった。";
 					do_stun = randint0(8) + 8;
 					(void)set_monster_slow(c_ptr->m_idx, MON_SLOW(m_ptr) + 4 + randint1(4));
 				}
+
+				//v1.1.94 精神攻撃系の追加効果で魔法低下
+				do_dec_mag = 8 + randint1(dam / 10);
 			}
 			break;
 		}
@@ -7680,6 +7854,11 @@ note = "には効果がなかった。";
 
 			if (ok && !(r_ptr->flags3 & RF3_NO_CONF) && ((r_ptr->flags3 & RF3_UNDEAD) || randint1(r_ptr->level) < caster_lev) )
 				do_conf = randint0(8) + 8;
+
+			if (ok && !mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_atk = 8 + randint1(dam / 8);
+			}
 
 			break;
 		}
@@ -7739,6 +7918,9 @@ note = "には効果がなかった。";
 
 			note = _("は厄を受けた！", " receives misfortune!");
 			hina_gain_yaku(-dam/10);
+
+			//v1.1.94 精神攻撃系の追加効果で魔法低下
+			do_dec_mag = 8 + randint1(8);
 
 			break;
 		}
@@ -7840,6 +8022,7 @@ note = "には効果がなかった。";
 				note = " is immune!";
 #endif
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags2 |= (RF2_EMPTY_MIND);
+				break;
 
 			}
 			else if ((r_ptr->flags2 & (RF2_WEIRD_MIND)) ||
@@ -7852,6 +8035,7 @@ note = "には効果がなかった。";
 #else
 				note = " resists.";
 #endif
+				break;
 			}
 
 
@@ -7870,6 +8054,11 @@ note = "には効果がなかった。";
 				dam *= 2;
 				note = _("は悪夢にうなされている・・", " is having nightmares...");
 				do_sleep = randint1(p_ptr->lev);
+			}
+
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_mag = 8 + randint1(dam / 10);
 			}
 
 #ifdef JP
@@ -7989,6 +8178,13 @@ note = "には効果がなかった。";
                         " is hurt even more by memories of earlier trauma!");
 				break;
 			}
+
+			//v1.1.94 精神系攻撃で魔法能力低下
+			if (!mon_saving_throw(m_ptr, dam))
+			{
+				do_dec_mag = 8 + randint1(dam / 10);
+			}
+
 			note_dies = _("は倒れた。", " is defeated.");
 
 			break;
@@ -8327,9 +8523,169 @@ note = "には効果がなかった。";
 		}
 
 
+		//v1.1.94
+		case GF_DEC_ATK:
+		case GF_DEC_DEF:
+		case GF_DEC_MAG:
+		case GF_DEC_ALL:
+		case GF_DIG_OIL:
+		case GF_SUPER_EGO:
+		{
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+			//スーパーエゴ　無精神には無効
+			if(typ == GF_SUPER_EGO && (r_ptr->flags2 & (RF2_WEIRD_MIND | RF2_EMPTY_MIND)))
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				obvious = FALSE;
+			}
+
+			if (mon_saving_throw(m_ptr, dam))
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				obvious = FALSE;
+			}
+
+			switch (typ)
+			{
+			case GF_DEC_ATK:
+			case GF_DIG_OIL:
+				do_dec_atk = 8 + randint1(8);
+				break;
+			case GF_DEC_DEF:
+				do_dec_def = 8 + randint1(8);
+				break;
+			case GF_DEC_MAG:
+				do_dec_mag = 8 + randint1(8);
+				break;
+			case GF_DEC_ALL:
+				do_dec_atk = 8 + randint1(8);
+				do_dec_def = 8 + randint1(8);
+				do_dec_mag = 8 + randint1(8);
+				break;
+
+			case GF_SUPER_EGO:
+				do_dec_atk = 8 + randint1(8);
+				do_dec_def = 8 + randint1(8);
+				do_dec_mag = 8 + randint1(8);
+				do_not_move = 16 + randint1(16);
+				break;
+			}
+
+			//破滅の薬のdamを500程度にしておけばJにも1/2くらいで効く。25d25でも効かなくはない。
+			//他の薬は100くらいでいいだろう
+
+			/* No "real" damage */
+			dam = 0;
+			break;
+		}
+
+		//v1.1.95 狂戦士化
+		case GF_BERSERK:
+		case GF_POSSESSION:
+		{
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+			//通常の精神を持たない敵、クエスト打倒対象には効かない
+			if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND) || r_ptr->flags1 & RF1_QUESTOR)
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
+				break;
+			}
+
+			//怨霊憑依は妖怪に効きやすい
+			if (typ == GF_POSSESSION && r_ptr->flags3 & RF3_KWAI) dam = dam * 3 / 2;
+
+			//配下は抵抗せずに狂戦士化する
+			if (is_pet(m_ptr))
+			{
+				do_berserk = 16 + randint1(dam / 4);
+			}
+			else
+			{
+				//混乱しない敵には効きづらい
+				if (r_ptr->flags3 & RF3_NO_CONF )
+				{
+					dam = dam * 2 / 3;
+					if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags3 |= (RF3_NO_CONF);
+				}
+				//抵抗判定に失敗したら狂戦士化
+				if (mon_saving_throw(m_ptr, dam))
+				{
+					note = _("は効果に抵抗した！", " resists the effect!");
+					dam = 0;
+					break;
+				}
+
+				do_berserk = 8 + randint1(dam / 8);
+
+			}
 
 
-	}
+
+			/* No "real" damage */
+			dam = 0;
+			break;
+		}
+
+
+		case GF_NO_MOVE: //移動禁止属性
+		{
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+
+			//はぐれメタル以外確定で成功する。ただし脱出されやすい。
+			//process_monsters_mtimed_aux(),process_monster()参照
+			do_not_move = dam;
+
+			/* No "real" damage */
+			dam = 0;
+			break;
+		}
+
+
+
+
+		/* Default */
+		default:
+		{
+			/* Irrelevant */
+			skipped = TRUE;
+
+			/* No damage */
+			dam = 0;
+
+			break;
+		}
+
+
+
+	}//switch(typ)終了
 
 	/* Absolutely no effect */
 	if (skipped) return (FALSE);
@@ -8437,13 +8793,11 @@ note = "には効果がなかった。";
 			}
 		}
 	}
-	else
+	else //モンスターがこの攻撃で死なないとき、ステータス異常付与判定など
 	{
 		/* Sound and Impact resisters never stun */
 		//v1.1.90 轟音耐性で朦朧しなくなる仕様をなくした
-		if (do_stun &&
-//		    !(r_ptr->flagsr & RFR_RES_SOUN) &&
-		    !(r_ptr->flags3 & RF3_NO_STUN))
+		if (do_stun && !(r_ptr->flags3 & RF3_NO_STUN))
 		{
 			/* Obvious */
 			if (seen) obvious = TRUE;
@@ -8479,10 +8833,7 @@ note = "には効果がなかった。";
 
 		/* Confusion and Chaos resisters (and sleepers) never confuse */
 		//v1.1.90 カオス耐性で混乱しなくなる仕様をなくした
-		if (do_conf &&
-			 !(r_ptr->flags3 & RF3_NO_CONF)
-//			 &&!(r_ptr->flagsr & RFR_EFF_RES_CHAO_MASK)
-			)
+		if (do_conf && !(r_ptr->flags3 & RF3_NO_CONF) )
 		{
 			/* Obvious */
 			if (seen) obvious = TRUE;
@@ -8517,6 +8868,102 @@ note = "には効果がなかった。";
 			/* Get angry */
 			get_angry = TRUE;
 		}
+
+		if (do_dec_atk)
+		{
+			if (seen) obvious = TRUE;
+
+			if (MON_DEC_ATK(m_ptr))
+			{
+				tmp = MON_DEC_ATK(m_ptr) + do_dec_atk / 2;
+			}
+			else
+			{
+				note = _("は攻撃力が下がったようだ。", " has lost some attack power.");
+				tmp = do_dec_atk;
+			}
+			(void)set_monster_timed_status_add(MTIMED2_DEC_ATK, c_ptr->m_idx, tmp);
+			get_angry = TRUE;
+		}
+
+		if (do_dec_def)
+		{
+			if (seen) obvious = TRUE;
+
+			if (MON_DEC_DEF(m_ptr))
+			{
+				tmp = MON_DEC_DEF(m_ptr) + do_dec_def / 2;
+			}
+			else
+			{
+				note = _("は防御力が下がったようだ。", " has lost some defense power.");
+				tmp = do_dec_def;
+			}
+			(void)set_monster_timed_status_add(MTIMED2_DEC_DEF, c_ptr->m_idx, tmp);
+			get_angry = TRUE;
+		}
+
+		//魔法低下　魔法を持たないモンスターには効かない
+		if (do_dec_mag && HAS_ANY_MAGIC(r_ptr))
+		{
+			if (seen) obvious = TRUE;
+
+			if (MON_DEC_MAG(m_ptr))
+			{
+				tmp = MON_DEC_MAG(m_ptr) + do_dec_mag / 2;
+			}
+			else
+			{
+				note = _("は魔法力が下がったようだ。", " has lost some magic power.");
+				tmp = do_dec_mag;
+			}
+			(void)set_monster_timed_status_add(MTIMED2_DEC_MAG, c_ptr->m_idx, tmp);
+			get_angry = TRUE;
+		}
+
+		//破滅の薬投擲などで複数の能力が下がったときメッセージを変えておく
+		if (do_dec_atk && do_dec_def || do_dec_atk && do_dec_mag || do_dec_def && do_dec_mag)
+		{
+			note = _("は複数の能力が下がったようだ。", " has all stats reduced.");
+		}
+
+
+
+		if (do_berserk)
+		{
+			if (seen) obvious = TRUE;
+
+			if (MON_BERSERK(m_ptr))
+			{
+				tmp = MON_BERSERK(m_ptr) + do_berserk / 2;
+			}
+			else
+			{
+				note = _("は激しく暴れだした！", " goes into a violent rage!");
+				tmp = do_berserk;
+			}
+			(void)set_monster_timed_status_add(MTIMED2_BERSERK, c_ptr->m_idx, tmp);
+			get_angry = TRUE;
+		}
+
+		if (do_not_move)
+		{
+			if (seen) obvious = TRUE;
+
+			if (MON_NO_MOVE(m_ptr))
+			{
+				tmp = MON_NO_MOVE(m_ptr) + do_not_move / 2;
+			}
+			else
+			{
+				note = _("は移動できなくなった！", " becomes unable to move!");
+				tmp = do_not_move;
+			}
+			(void)set_monster_timed_status_add(MTIMED2_NO_MOVE, c_ptr->m_idx, tmp);
+			get_angry = TRUE;
+		}
+
+
 
 		if (do_time)
 		{
@@ -9334,6 +9781,10 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			if (fuzzy) msg_print("You are hit by fire!");
 #endif
 
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam = oil_field_damage_mod(dam, y, x);
+
+
 			get_damage = fire_dam(dam, killer, monspell);
 			break;
 		}
@@ -9474,6 +9925,10 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 
 			dam_fire = dam / 2;
 			dam_lite = dam / 2;
+
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam_fire = oil_field_damage_mod(dam_fire, y, x);
+
 
 			//v1.1.59サニーミルクが光を取り込む
 			sunny_charge_sunlight(dam_lite);
@@ -9680,6 +10135,11 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
             if (fuzzy) msg_print("You are hit by something very hot!");
 #endif
+
+			//v1.1.91 石油地形火炎ダメージ
+			if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) dam = oil_field_damage_mod(dam, y, x);
+
+
 			get_damage = fire_dam(dam/2, killer, monspell);
 			if(!p_ptr->is_dead)get_damage +=  elec_dam(dam/2, killer, monspell);
 
@@ -12090,15 +12550,15 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 		//else if(typ == GF_DARK_WEAK) typ = GF_SHARDS; v1.1.85 typ:19を雷雲生成で埋めた
 		//else if(typ == GF_INACT) typ = GF_MANA; v1.1.85 typ:25を酸の沼生成で埋めた
 		//else if(typ == GF_ICE) typ = GF_CHAOS; v1.1.85 typ:29を毒の沼生成で埋めた
-		else if(typ == GF_GRAVITY) typ = GF_KILL_WALL;
-		else if(typ == GF_KILL_TRAP) typ = GF_STONE_WALL;
-		else if(typ == GF_MAKE_TREE) typ = GF_OLD_CLONE;
+		//else if(typ == GF_GRAVITY) typ = GF_KILL_WALL; typ:36-39を埋めた
+		//else if(typ == GF_BERSERK) typ = GF_MAKE_DOOR; 45まで埋まった
+		//else if(typ == GF_DIG_OIL) typ = GF_OLD_CLONE; //v1.1.92 MAKE_TREEとOLD_CLONEの間にDIG_OILを追加した v1.1.94 もうひとつ埋めた
 		else if(typ == GF_OLD_DRAIN) typ = GF_AWAY_UNDEAD;
-		else if(typ == GF_HAND_DOOM) typ = GF_CONTROL_LIVING;
+		else if(typ == GF_HAND_DOOM) typ = GF_CONTROL_LIVING;//モンスターボールと死者復活は飛ばす
 		else if(typ == GF_MAKE_FLOWER) typ = GF_MOSES;//GF_KOKOROはこころ専用の特殊属性なので飛ばす
 		else if(typ == GF_STEAM) typ = GF_PURIFY;//GF_SEIRAN_BEAMを飛ばす
 		else if (typ == GF_PURIFY) typ = GF_LUNATIC_TORCH;//v1.1.63 特殊射撃用属性を飛ばす
-		else if (typ == GF_RAINBOW) typ = GF_ELEC;//v1.1.63　末尾は最初に戻る　定期的に修正しよう (MAX_GFを使って自動的に設定すると特殊属性を追加したときにうっかり飛ばし忘れるかもしれんので手動で編集する)
+		else if (typ == GF_CONTROL_FISH) typ = GF_ELEC;//v1.1.63　末尾は最初に戻る　定期的に修正しよう (MAX_GFを使って自動的に設定すると特殊属性を追加したときにうっかり飛ばし忘れるかもしれんので手動で編集する)
 		else typ++;
 
 		if (typ >= MAX_GF) typ = GF_ELEC;

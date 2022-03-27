@@ -138,7 +138,15 @@ static void do_cmd_wiz_hack_ben_2(void)
 	object_type forge;
 	char desc[160];
 
-	//make_screen_dump();
+
+	if (gv_test1 > 0)
+	{
+		msg_format("try:%d success:%d avg_chance = %d.%d", gv_test1, gv_test2, gv_test3 / gv_test1 / 10, (gv_test3 / gv_test1) % 10);
+		gv_test1 = 0;
+		gv_test2 = 0;
+		gv_test3 = 0;
+
+	}
 
 //	get_score_server_name();
 //	send_world_score(TRUE);
@@ -153,11 +161,18 @@ static void do_cmd_wiz_hack_ben_2(void)
 		return;
 	}
 
+
+	if (p_ptr->pclass == CLASS_SUWAKO)
+	{
+		p_ptr->magic_num1[0] += 10000;
+		msg_print(_("畏れポイント+10000", "+10000 fear points"));
+	}
+
 	//カード売人のアビリティカード高騰度変化テスト
 	if (p_ptr->pclass == CLASS_CARD_DEALER)
 	{
 		int miss_num = 0;
-		int min = 10000; 
+		int min = 10000;
 		int	max = 0;
 		int avg = 0;
 		int tot = 0;
@@ -326,7 +341,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 	{
 		int i;
 
-		for(i=0;i<108;i++) msg_format("%d:%d/%d",i,p_ptr->magic_num1[i],p_ptr->magic_num2[i]);
+		for(i=0;i<MAGIC_NUM_SIZE_OLD;i++) msg_format("magic_num%d:%d/%d",i,p_ptr->magic_num1[i],p_ptr->magic_num2[i]);
 
 
 	}
@@ -553,7 +568,7 @@ static void wiz_create_named_art(void)
 	/* Extract */
 	a_idx = atoi(tmp_val);
 	if(a_idx < 0) a_idx = 0;
-	if(a_idx >= max_a_idx) a_idx = 0; 
+	if(a_idx >= max_a_idx) a_idx = 0;
 
 	/* Create the artifact */
 	(void)create_named_art(a_idx, py, px);
@@ -581,10 +596,28 @@ static void do_cmd_wiz_hack_ben(void)
 	int dir;
 	long test;
 
+	for (i = 0; i < MAGIC_NUM_SIZE; i++)
+	{
+		msg_format("magic_num%d:%d/%d", i, p_ptr->magic_num1[i], p_ptr->magic_num2[i]);
+		if (i % 10 == 0) msg_print("     ");
+	}
+
+
 	(void)probing();
 
 
-	msg_format("turn: %d  dun_turn:%d", turn, dungeon_turn);
+	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON))
+	{
+		msg_format("magic_num1[6]:%d", p_ptr->magic_num1[6]);
+	}
+
+	if (p_ptr->pclass == CLASS_KANAKO)
+	{
+		msg_format("magic_num1[0]:%d", p_ptr->magic_num1[0]);
+	}
+
+	msg_format("dun_level:%d", dun_level);
+//	msg_format("turn: %d  dun_turn:%d", turn, dungeon_turn);
 
 
 	//for(i=0;i<10;i++)
@@ -638,7 +671,7 @@ static void do_cmd_wiz_hack_ben(void)
 	msg_format("icky:%d",character_icky);
 	msg_format("max_d_idx:%d", max_d_idx);
 
-	
+
 
 	//msg_format(" Score-name:%s(len:%d) ",score_server_name,strlen(score_server_name));
 
@@ -669,7 +702,6 @@ static void do_cmd_wiz_hack_ben(void)
 //	msg_format("p_ptr->skill_thb:%d",p_ptr->skill_thb);
 	msg_format("turn:%d",turn);
 	msg_format("dungeon_turn:%d", dungeon_turn);
-	msg_format("dun_level:%d",dun_level );
 	msg_format("inside_quest:%d",p_ptr->inside_quest);
 	msg_format("inside_arena:%d", p_ptr->inside_arena);
 
@@ -837,7 +869,7 @@ static void do_cmd_wiz_hack_ben(void)
 
 	//msg_format("Mrate:%d",cp_ptr->mana_rate);
 	//msg_format("adj-mana:%d",adj_mag_mana[p_ptr->stat_ind[A_WIS]]);
-	
+
 	//display_rumor_new(0);
 	//msg_format("Food:%d",p_ptr->food);
 	//msg_format("STAT_CUR_CON:%d",p_ptr->stat_cur[A_CON]);
@@ -884,7 +916,7 @@ static void do_cmd_wiz_hack_ben(void)
 			powers++;
 		}
 		*/
-		
+
 		if(powers<10) count0++;
 		else if(powers<20) count10++;
 		else if(powers<30) count20++;
@@ -1098,7 +1130,7 @@ static void prt_alloc(byte tval, byte sval, int row, int col)
 
 		prt(format("%d", (i * K_MAX_DEPTH / 220) % 10), row + i + 1, col);
 
-		if (display[i] <= 0) 
+		if (display[i] <= 0)
 			continue;
 
 		/* Note the level */
@@ -1231,7 +1263,7 @@ static void do_cmd_wiz_change_aux(void)
 	}
 */
 
-	///mod140130 ウィザードモードの技能値指定　新しい技能値上限に対応	
+	///mod140130 ウィザードモードの技能値指定　新しい技能値上限に対応
 	for (j = 0; j < SKILL_EXP_MAX; j++)
 	{
 		int skill_max = cp_ptr->skill_aptitude[j] * SKILL_LEV_TICK * 10;
@@ -1239,7 +1271,7 @@ static void do_cmd_wiz_change_aux(void)
 		//if (p_ptr->skill_exp[j] > s_info[p_ptr->pclass].s_max[j]) p_ptr->skill_exp[j] = s_info[p_ptr->pclass].s_max[j];
 		if(p_ptr->skill_exp[j] > skill_max) p_ptr->skill_exp[j] = skill_max;
 	}
-	
+
 
 	for (j = 0; j < 32; j++)
 		p_ptr->spell_exp[j] = (tmp_s16b > SPELL_EXP_MASTER ? SPELL_EXP_MASTER : tmp_s16b);
@@ -2065,7 +2097,7 @@ static void do_cmd_wiz_blue_mage(void)
 
 	int				i = 0;
 	int				j = 0;
-	s32b            f4 = 0, f5 = 0, f6 = 0;	
+	s32b            f4 = 0, f5 = 0, f6 = 0;
 
 	for (j=1; j<6; j++)
 	{
@@ -2128,7 +2160,7 @@ static void do_cmd_wiz_play(void)
 	{
 		o_ptr = &o_list[0 - item];
 	}
-	
+
 	/* The item was not changed */
 	changed = FALSE;
 
@@ -2805,7 +2837,7 @@ void do_cmd_debug(void)
 		break;
 
 	case 'B':
-		///sysdel 闘技場？ 
+		///sysdel 闘技場？
 		//battle_monsters();
 		break;
 

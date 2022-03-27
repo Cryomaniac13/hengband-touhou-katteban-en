@@ -4205,6 +4205,12 @@ bool potion_smash_effect2(int who, int y, int x, int sval)
 		}
 		break;
 
+	//v1.1.95 ジキル博士の薬　強力な狂戦士化
+	case SV_COMPOUND_JEKYLL:
+		(void)project(who, 3, y, x, 150+randint1(150), GF_BERSERK, flg, -1);
+		angry = TRUE;
+		break;
+
 	default:
 		;//何もしない
 	}
@@ -4252,12 +4258,6 @@ bool potion_smash_effect(int who, int y, int x, int k_idx)
 		//case SV_POTION_SALT_WATER:
 		//case SV_POTION_SLIME_MOLD:
 		case SV_POTION_LOSE_MEMORIES:
-		case SV_POTION_DEC_STR:
-		case SV_POTION_DEC_INT:
-		case SV_POTION_DEC_WIS:
-		case SV_POTION_DEC_DEX:
-		case SV_POTION_DEC_CON:
-		case SV_POTION_DEC_CHR:
 		//case SV_POTION_WATER:   /* perhaps a 'water' attack? */
 		//case SV_POTION_APPLE_JUICE:
 			return TRUE;
@@ -4270,7 +4270,6 @@ bool potion_smash_effect(int who, int y, int x, int k_idx)
 		case SV_POTION_RESIST_HEAT:
 		case SV_POTION_RESIST_COLD:
 		case SV_POTION_HEROISM:
-		case SV_POTION_BESERK_STRENGTH:
 		case SV_POTION_RES_STR:
 		case SV_POTION_RES_INT:
 		case SV_POTION_RES_WIS:
@@ -4293,9 +4292,41 @@ bool potion_smash_effect(int who, int y, int x, int k_idx)
 		case SV_POTION_NEW_LIFE:
 			/* All of the above potions have no effect when shattered */
 			return FALSE;
+
+
+			//v1.1.94
+			//能力減少系の薬を攻撃低下属性などにした
+		case SV_POTION_DEC_STR:
+		case SV_POTION_DEC_DEX:
+			dt = GF_DEC_ATK;
+			dam = 100;
+			break;
+
+		case SV_POTION_DEC_INT:
+		case SV_POTION_DEC_WIS:
+			dt = GF_DEC_MAG;
+			dam = 100;
+			break;
+		case SV_POTION_DEC_CON:
+		case SV_POTION_DEC_CHR:
+			dt = GF_DEC_DEF;
+			dam = 100;
+			break;
+		case SV_POTION_RUINATION:
+			dt = GF_DEC_ALL;
+			dam = 500;
+			break;
+
+		case SV_POTION_BESERK_STRENGTH:
+			dt = GF_BERSERK;
+			dam = 50+randint1(50);
+			break;
+
+
+
 		case SV_POTION_SLOWNESS:
 			dt = GF_OLD_SLOW;
-			dam = 5;
+			dam = 25+randint1(25);
 			angry = TRUE;
 			break;
 		case SV_POTION_POISON:
@@ -4321,7 +4352,6 @@ bool potion_smash_effect(int who, int y, int x, int k_idx)
 			dt = GF_OLD_SLEEP;
 			angry = TRUE;
 			break;
-		case SV_POTION_RUINATION:
 		case SV_POTION_DETONATIONS:
 			dt = GF_SHARDS;
 			dam = damroll(25, 25);
@@ -7885,3 +7915,43 @@ bool wall_through_telepo(int mode)
 
 
 }
+
+
+//v1.1.91
+//饕餮尤魔が周囲の石油地形を飲み干して地形を変更する。モンスター特別行動と＠の特技両方で使う。
+//地形変更した数を返す。
+//x,y:中心地 rad:有効半径
+//check:TRUEだと周囲の石油地形を数えるだけで地形を変更しない。特技使用可能判定に。
+//rad:有効範囲 0だととりあえず4に
+int yuma_vacuum_oil(int y, int x, bool check, int rad)
+{
+	int oil_field_num = 0;
+
+	int xx, yy;
+
+	//radが0のとき4にする。モンスターの尤魔関係は呼ぶとき0にしてここで数値設定しよう)
+	if (rad < 1) rad = 3;
+
+	//周囲の石油地形の数を数える
+	for (yy = y - 10; yy <= y + 10; yy++)for (xx = x - 10; xx <= x + 10; xx++)
+	{
+		if (!in_bounds(yy, xx)) continue;
+		if (!cave_have_flag_bold(yy, xx, FF_OIL_FIELD)) continue;
+		if (distance(yy, xx, y, x) > rad) continue;
+		if (!projectable(yy, xx, y, x)) continue;
+		oil_field_num++;
+
+		if (check) continue;
+
+		//checkでないとき実際に地形変更を行う
+		cave_set_feat(yy, xx, (one_in_(2)?feat_dirt:feat_floor));
+
+	}
+	if (!check && cheat_xtra) msg_format("oil_field_num:%d",oil_field_num);
+	return oil_field_num;
+
+}
+
+
+
+

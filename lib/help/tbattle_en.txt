@@ -220,6 +220,107 @@ Keine - 'All of those various attacks described above can deal critical hits.
 A critical hit deals more damage, particularly affecting the damage dice part.
 Basically, the more heavy your weapon is, the more critical hits you get.'
 
+
+***** <Skilllevel>
+=== About Proficiency===
+Keine - 'Weapons and shield skill have a proficiency level. The higher it is,
+the more skillfully you are able to use them, giving you advantage in battle.
+However, proficiency has an upper limit determined by your class aptitude for
+that skill, and you normally cannot exceed that limit.
+To check your current proficiency levels and aptitude, press '~' and then 'e'.
+
+Basically, the higher your proficiency level is, the more accurate you are
+with that weapon, but you might get other benefits depending on the skill.
+Let's look over them here.
+
+- Martial Arts
+  Easily increases amount of melee blows while you're not holding a weapon.
+  Also increases chance of stunning/confusing/etc enemy with martial art
+  attacks.
+
+- Shields
+  If you raise your Shields skill high enough, you might be able to deliver
+  up to two extra blows with your shield during melee attacks. The heavier
+  your shield is, the more powerful it is, and it makes stunning enemies
+  easier.
+
+- Riding
+  The higher your Riding skill is, the less likely you are to get dismounted,
+  and you might be able to move faster than your mount's original speed.
+  If you raise it past a certain threshold, you'll stop your mount from
+  moving when you let go of reins; with even more proficiency, you'll be able
+  to control your mount without holding reins.
+
+- Dual Wielding
+  Holding a weapon in each hands gives you a major accuraccy penalty; this
+  skill reduces that penalty. If your skill level is very high, you can
+  practically ignore it. If you're equipped with weapons and handwear suited
+  for dual wielding, you might get more accurate compared to holding a single
+  weapon.
+
+- Throwing
+  Raising this skill reduces energy consumption for throwing
+  You'll be able to quickly attack enemies multiple times in a turn, as if
+  you were shooting from a bow. Energy consumption for weapons suitable for
+  throwing is reduced even more.
+  If your Throwing skill is high enough, you'll always be able to recover
+  weapons that come back when thrown.
+
+- Short Blades
+  Raising this skill increases your amount of melee blows, and increases
+  the dice of your weapon by +1. However, the similar skill of Soldier class
+  will take precedence over this dice boost.
+
+- Long Blades
+  Raising this skill increases your accuracy slightly more than usual.
+  It's not as impressive compared to other skills, but even those with low
+  aptitude can benefit from it.
+
+- Katanas
+  Raising this skill increases the chance of delivering a powerful critical
+  blow. This strike deals major damage (like Ninja's sneak attack), making
+  it possible to defeat enemies in a single blow.
+
+- Blunt Weapons
+  Raising this skill increases the chance of stunning enemies in melee, and
+  it might stun enemies with resistance as well. Stunned enemies will
+  frequently be unable to act. Very powerful.
+
+- Staves
+  Raising this skill increases your AC as you deflect blows with your staff.
+  The effect is doubled if you're holding it with both hands.
+
+- Axes
+  Raising this skill increases the chance of lowering enemy's defense power
+  with your melee attacks.
+
+- Spears
+  Raising this skill might let you preemptively attack enemies hitting you in
+  melee. This attack deals only one blow, but it doesn't consume energy, and
+  is more likely to deliver a critical hit.
+
+- Polearms
+  Raising this skill lets you slightly delay the next action of the enemy you
+  hit. It's not enough to keep them from attacking you at all, but you might
+  avoid getting hit several times in a row.
+
+- Bows/Crossbows
+  Raising those skills increases your shooting speed.
+  Prior to v1.1.94, shooting speed bonus was determined by your class and
+  level; starting from v1.1.94, it increases as you gain proficiency.
+  If you're planning to use a bow in the endgame, you'll have to train this
+  skill. Some classes get extra shooting speed in addition to this bonus.
+
+- Guns
+  Raising this skill makes you more successful at shooting with guns,
+  and makes you reload faster.
+
+That's about it.
+Proficiency level is easier to raise when fighting high level enemies.
+You're free to raise your proficiency by beating your followers, but it
+can only get you so far.'
+
+
 ***** <Buff>
 === About Temporary Effects ===
 

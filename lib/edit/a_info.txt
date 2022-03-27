@@ -455,7 +455,7 @@ D:の静かな魔法が秘められている。
 N:19:『魂の守り手』
 E:'Soulkeeper'
 I:41:8:2
-W:75:9:420:200000
+W:75:9:300:200000
 P:40:2d4:-5:0:25
 F:CON | SUST_CON |
 F:RES_ELEC | RES_FIRE | RES_POIS
@@ -1597,7 +1597,7 @@ D:北欧神話において炎の巨人スルトが世界に火を放った燃える剣だ。
 N:77:『クリスドゥリアン』
 E:'Crisdurian'
 I:24:10:0
-W:40:15:200:111000
+W:40:15:120:111000
 P:0:4d5:18:19:0
 F:SLAY_DRAGON | SLAY_EVIL | SLAY_UNDEAD |
 F:SLAY_HUMAN | SEE_INVIS | SHOW_MODS | VORPAL | BRAND_POIS
@@ -2541,7 +2541,7 @@ D:現在はとある古道具屋にあるはずだったが…
 N:126:『剣竜の鎧』
 E:'Razorback'
 I:42:6:0
-W:90:9:500:400000
+W:90:9:250:400000
 P:40:2d4:-4:0:25
 F:RES_FIRE | RES_COLD | RES_POIS | RES_LITE | RES_DARK | RES_ACID |
 F:LITE | SEE_INVIS | AGGRAVATE | FREE_ACT | IM_ELEC |
@@ -2563,7 +2563,7 @@ D:荒々しい稲光のエネルギーを直に感じる。
 N:127:『刀返し』
 E:'Bladeturner'
 I:42:15:0
-W:95:3:600:500000
+W:95:3:300:500000
 P:50:2d4:-8:0:35
 F:REGEN |
 F:RES_ACID | RES_FIRE | RES_COLD | RES_ELEC | RES_POIS | LEVITATION |
@@ -2869,7 +2869,7 @@ D:驚いてもっとよく見ようとしたところを天手力男命（あまのたぢからおのみこと）に引
 N:147:武蔵坊弁慶の
 E:of Benkei
 I:30:2:4
-W:40:20:100:98765
+W:40:20:200:98765
 P:0:3d8:5:23:5
 F:STR | CON | SLAY_EVIL | SLAY_UNDEAD | RES_FEAR |
 F:FREE_ACT | REGEN | SHOW_MODS
@@ -2906,7 +2906,7 @@ F:CHAOTIC | CURSED | HEAVY_CURSE | LITE |
 N:150:至高神ファリスの
 E:of Falis
 I:24:6:5
-W:70:25:130:80000
+W:70:25:60:80000
 P:0:3d5:20:15:0
 F:KILL_DEMON | STR | KILL_EVIL | KILL_UNDEAD | BRAND_FIRE |
 F:FREE_ACT | RES_FIRE | RES_ACID | RES_COLD | RES_ELEC | 
@@ -3399,7 +3399,7 @@ D:無冠の者が、また王となろう。」
 N:180:美髯公関羽の
 E:of Guan Yu
 I:30:2:3
-W:30:60:400:200000
+W:30:60:300:200000
 P:0:3d7:20:20:5
 F:STR | DEX | CON | SLAY_EVIL | SLAY_HUMAN |
 F:VORPAL | SHOW_MODS
@@ -3480,9 +3480,9 @@ D:身に纏えば、神の如き守護の力が得られる。
 
 #かなり強化した
 N:188:『天の沼矛』
-E:'Ama-no-NumaHoko'
+E:'Ama-no-Numa-Hoko'
 I:29:3:4
-W:70:160:400:350000
+W:70:160:300:350000
 P:0:5d9:20:20:0
 F:STR | WIS | CHR | 
 F:SUST_STR | SUST_WIS | SUST_CHR | HIDE_TYPE |
@@ -4261,8 +4261,6 @@ U:DRINK
 D:伊吹萃香が愛用する瓢箪だ。酒虫のエキスが中に染み込んでおり、いくらでも酒が湧いてくるという。
 D:なお、湧いてくるのは鬼用の酒で常人にはかなり強い。
 
-
-#JZ#
 N:247:『銀の手』
 E:'Silver Hand'
 I:45:6:1
@@ -5295,5 +5293,78 @@ F:ACTIVATE
 U:MAKE_BLIZZARD
 D:聖エルミン学園を丸ごと凍り付かせるほどの力を秘めた呪われた仮面だ。
 
+N:340:饕餮のスプーン
+E:Spoon of Yuuma
+I:28:1:3
+W:60:18:100:100000
+P:0:3d8:12:16:5
+F:TUNNEL | SEARCH | STR | CON
+F:VAMPIRIC | SLAY_ANIMAL | SLAY_HUMAN | SLAY_UNDEAD
+F:RES_WATER | RES_DISEN | RES_FEAR | REGEN | FULL_NAME
+F:ACTIVATE | 
+U:DIG_OIL
+D:$The favorite axe-like huge spoon of Yuuma Toutetsu, the matriarch of
+D:$Gouyoku Alliance. It looks a bit like a fork at the tip.
+D:剛欲同盟の長である「饕餮　尤魔」が愛用する、斧のように巨大なスプーンだ。
+D:先端はフォークのように少し割れている。
+
+
+N:341:捻れた黒杖
+E:Twisted Black Rod
+I:27:3:2
+W:66:5:60:66000
+P:0:2d8:8:8:0
+F:INT | CHR | QUESTITEM | FULL_NAME | DEC_MANA
+F:BRAND_FIRE | SH_FIRE | RES_FIRE | RES_FEAR | RES_DISEN | ACTIVATE
+U:BLAST_MISSILES
+D:$A twisted rod made out of unknown material. Its tip is in the shape of suit
+D:$of spades, and there's a large red ribbon tied to it.
+D:材質不明の捻じ曲がった棒だ。先端はトランプのスペードのような形になっていて、大きな赤いリボンが可愛らしく結ばれている。
+
+N:342:『タルンカッペ』
+E:Tarnkappe
+I:44:1:4
+W:40:60:10:80000
+P:1:0d0:0:0:12
+F:STR | STEALTH | XTRA_H_RES | ACTIVATE | RES_DARK | RES_CONF | SEE_INVIS
+U:TIM_SUPER_STEALTH
+D:$A magical hat that makes the wearer invisible and greatly increases their
+D:$power. Originally a treasure of Alberich, it was later stolen by Siegfried.
+D:着用者の姿を消し十二倍の力を与えるという魔法の帽子だ。
+D:元はアルベリヒの宝物だったが後にジークフリートがこれを奪った。
+
+
+N:343:蚩尤の戟
+E:Lance of Chi You
+I:30:5:2
+W:60:90:100:125000
+P:0:4d8:18:18:0
+F:STR | DEX | CON | BLOWS |
+F:BRAND_ELEC | SLAY_UNDEAD | SLAY_HUMAN | SLAY_KWAI | FULL_NAME
+F:SEE_INVIS | REGEN | RIDING | ACTIVATE
+U:WHIRLWIND
+D:$A polearm created by Chi You, an avaricious and ferocious god of war.
+D:貪欲で凶暴な戦乱の神、蚩尤(シュウ)の作り出した長柄武器だ。
+D:蚩尤は無数の魑魅魍魎を率い天変地異を起こして黄帝の軍を苦しめたという。
+
+
+N:344:物部大斧手の大盾
+E:Great Shield of Mononobe no Ooonote
+I:37:5:3
+W:40:20:120:70000
+P:10:1d6:0:0:10
+F:CON | RES_COLD | RES_ACID | FREE_ACT | RES_FEAR | XTRA_H_RES | FULL_NAME
+D:強弓の名手である朝日郎(あさけのいらつこ)の討伐のために物部目(もののべのめ)が誂えた大盾だ。
+D:物部大斧手(もののべのおおおのて)はこの大盾を構えて物部目を守って突撃し、物部目が朝日郎を斬り伏せるまで守り通した。
+
+N:345:野見宿禰の
+E:of Nominosukune
+I:48:36:3
+W:70:100:3:120000
+P:0:1d6:5:5:5
+F:STR | CON | CHR | BLESSED | FREE_ACT | RES_FEAR | ACTIVATE
+U:SUMMON_HANIWA
+D:古代日本最強の力士にして埴輪職人の祖でもある野見宿禰の勾玉だ。
+D:「今より以後、是の土物を以て生ける人に更易へ、陵墓に樹てて、後葉の法則とせむ」(日本書紀)
 
 

@@ -2899,7 +2899,7 @@ const activation_type* find_activation_info(object_type *o_ptr)
 /*:::ドラゴン鎧の発動効果*/
 static bool activate_dragon_breath(object_type *o_ptr)
 {
-	u32b flgs[4]; /* for resistance flags */
+	u32b flgs[TR_FLAG_SIZE]; /* for resistance flags */
 	int type[20];
 	cptr name[20];
 	int i, dir, t, n = 0;
@@ -5567,10 +5567,27 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 			break;
 		}
 
-
+		case ACT_DIG_OIL:
+		{
+			msg_print(_("あなたは石油を掘り始めた...", "You start digging for oil..."));
+			//v1.1.94 モンスターへのダメージはないが、紫特技で酒属性に変わるのでパワーを少し上げておく
+			project(0, 4, py, px, plev*10, GF_DIG_OIL, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID), -1);
 			break;
+		}
 
+		break;
 
+		case ACT_BLAST_MISSILES:
+		{
+			int dice = 4;
+			int sides = 4+plev/6;
+			int num = 5 + plev / 12;
+
+			if (!get_aim_dir(&dir)) return FALSE;
+			msg_format(_("あなたは魔法の矢を乱射した！", "You rapidly fire magic missiles!"));
+			fire_blast(GF_MISSILE, dir, dice, sides, 10, 3, 0);
+			break;
+		}
 
 
 

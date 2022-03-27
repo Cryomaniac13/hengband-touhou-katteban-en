@@ -52,7 +52,7 @@
 /*
  * Monster Blow Methods
  */
-///system 
+///system
 /*:::モンスター打撃処理 r_infoに追加したらここに入れる　この配列の添字がRBM_???の定義値と一致すること*/
 static cptr r_info_blow_method[] =
 {
@@ -107,7 +107,7 @@ static cptr r_info_blow_method[] =
 /*
  * Monster Blow Effects
  */
-///system 
+///system
 /*:::モンスター打撃処理 r_infoに追加したらここに入れる　この配列の添字がRBE_???の定義値と一致すること*/
 static cptr r_info_blow_effect[] =
 {
@@ -223,7 +223,7 @@ static cptr f_info_flags[] =
 	"ACID",
 	"OIL",
 	"PLATE",
-	"CAN_CLIMB",
+	"OIL_FIELD",//v1.1.91
 	"CAN_FLY",
 	"CAN_SWIM",
 	"CAN_PASS",
@@ -915,7 +915,7 @@ static cptr d_info_flags1[] =
 	"NO_MELEE",
 	"CHAMELEON",
 	"DARKNESS",
-	"NEW_RIVER", //v1.1.85 
+	"NEW_RIVER", //v1.1.85
 	"NEW_LAKE"
 };
 
@@ -951,7 +951,7 @@ static bool add_text(u32b *offset, header *head, cptr buf, bool normal_text)
 		if (head->text_size > 0 &&
 #ifdef JP
 		    (*(head->text_ptr + head->text_size - 1) != ' ') &&
-		    ((head->text_size == 1) || !iskanji(*(head->text_ptr + head->text_size - 2))) && 
+		    ((head->text_size == 1) || !iskanji(*(head->text_ptr + head->text_size - 2))) &&
 		    (buf[0] != ' ') && !iskanji(buf[0])
 #else
 		    (*(head->text_ptr + head->text_size - 1) != ' ') &&
@@ -3680,20 +3680,20 @@ static errr parse_line_feature(char *buf)
 					if (!zz[3][1]) return PARSE_ERROR_GENERIC;
 					letter[index].random |= MON_NO_SLEEP;
 					letter[index].monster = atoi(zz[3] + 1);
-				}	
+				}
 				//v1.1.24 pをつけたら配下として生成
 				else if (zz[3][0] == 'p')
 				{
 					if (!zz[3][1]) return PARSE_ERROR_GENERIC;
 					letter[index].random |= MON_NO_SLEEP | MON_FORCE_PET;
 					letter[index].monster = atoi(zz[3] + 1);
-				}	
+				}
 				else if (zz[3][0] == 'f')
 				{
 					if (!zz[3][1]) return PARSE_ERROR_GENERIC;
 					letter[index].random |= (MON_NO_SLEEP | MON_FORCE_FRIENDLY);
 					letter[index].monster = atoi(zz[3] + 1);
-				}	
+				}
 				else
 				{
 					letter[index].monster = atoi(zz[3]);
@@ -3897,7 +3897,7 @@ static errr parse_line_building(char *buf)
  */
 /*:::place_objectの後半部分でも似たようなことをしている*/
 /*:::こちらには再描画処理やアイテム数オーバー処理がないのが違いか？*/
-///mod140105 他から使うのでstaticにするのを止めた 
+///mod140105 他から使うのでstaticにするのを止めた
 void drop_here(object_type *j_ptr, int y, int x)
 {
 	cave_type *c_ptr = &cave[y][x];
@@ -4024,7 +4024,7 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 		for (*x = xmin, i = 0; ((*x < xmax) && (i < len)); (*x)++, s++, i++)
 		{
 			/* Access the grid */
-			
+
 			cave_type *c_ptr = &cave[*y][*x];
 
 			/*::: "D:"の次のアドレス*/
@@ -4301,7 +4301,7 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 				//お尋ね者クエストはWANTEDフラグのユニークモンスターを一緒に設定しないといけない
 				if(q_ptr->type == QUEST_TYPE_BOUNTY_HUNT)
 				{
-					if(!q_ptr->r_idx || !(r_ptr->flags3 & RF3_WANTED) || !(r_ptr->flags1 & RF1_UNIQUE)) 
+					if(!q_ptr->r_idx || !(r_ptr->flags3 & RF3_WANTED) || !(r_ptr->flags1 & RF1_UNIQUE))
 						return(PARSE_ERROR_WANTED_UNIQUE);
 				}
 
@@ -4500,7 +4500,7 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 			/* Maximum d_idx */
 			else if (zz[0][0] == 'D')
 			{
-				max_d_idx = atoi(zz[1]); 
+				max_d_idx = atoi(zz[1]);
 			}
 
 			/* Maximum o_idx */

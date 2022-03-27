@@ -910,6 +910,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_TAKANE) a_idx = ART_THRANDUIL;
 			else if (p_ptr->pclass == CLASS_MOMOYO) a_idx = ART_NAIN_PICK;
 			else if (p_ptr->pclass == CLASS_SANNYO) a_idx = ART_ANDVARI;
+			else if (p_ptr->pclass == CLASS_MIKE) a_idx = ART_DAIKOKU;
 
 
 
@@ -1053,6 +1054,75 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 				create_artifact(q_ptr, FALSE);
 				add_flag(q_ptr->art_flags, TR_LEVITATION);
 				q_ptr->art_name = quark_add(_("エンジニア河城にとりの", "of Nitori Kawashiro"));
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+
+		}
+
+
+		//v1.1.91 ヤクザ抗争1
+		else if (o_ptr->sval == SV_CHEST_YAKUZA1)
+		{
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KEIGA)
+			{
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q1_ACHIEVE)
+					a_idx = ART_ZOKU;
+				else
+					a_idx = ART_TETSUGETA;
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KIKETSU)
+			{
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q1_ACHIEVE)
+					a_idx = ART_TARNKAPPE;
+				else
+					a_idx = ART_SPECTRAL_DRAGON;
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_GOUYOKU)
+			{
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q1_ACHIEVE)
+					a_idx = ART_TRAPEZOHEDRON;
+				else
+					a_idx = ART_MAGMA;
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_HANIWA)
+			{
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q1_ACHIEVE)
+					a_idx = ART_NOMINOSUKUNE;
+				else
+					a_idx = ART_OOONOTE;
+			}
+			//全滅 呪われていないランダムな指輪のランダムアーティファクト
+			else
+			{
+				int tmp_sv;
+
+				while (1)
+				{
+					object_kind *k_ptr;
+					int k_idx;
+					//ランダムに指輪ベースアイテムを選定
+					tmp_sv = randint1(SV_RING_MAX);
+					k_idx = lookup_kind(TV_RING, tmp_sv);
+					if (!k_idx) continue;
+					k_ptr = &k_info[k_idx];
+					//呪い確定や★確定のベースアイテムは除外
+					if (k_ptr->gen_flags & (TRG_CURSED)) continue;
+					if (k_ptr->gen_flags & (TRG_INSTA_ART)) continue;
+					break;
+				}
+
+				object_level = 60;
+				while (1)
+				{
+					q_ptr = &forge;
+					object_prep(q_ptr, lookup_kind(TV_RING, tmp_sv));
+					apply_magic(q_ptr, object_level, AM_FORCE_NORMAL);
+					create_artifact(q_ptr, FALSE);
+					if (object_is_cursed(q_ptr)) continue;
+					break;
+				}
+				object_level = base_level;
+
 				(void)drop_near(q_ptr, -1, y, x);
 			}
 
@@ -4879,6 +4949,14 @@ void do_cmd_fire_aux(int item, object_type *j_ptr)
 			}
 			/* Some shots have hit bonus */
 			armour = r_ptr->ac;
+
+			//v1.1.94 モンスター防御力低下中はAC25%カット
+			if (MON_DEC_DEF(m_ptr))
+			{
+				armour = MONSTER_DECREASED_AC(armour);
+
+			}
+
 			/*
 			if ((p_ptr->pclass == CLASS_SNIPER) && p_ptr->concent)
 			{
@@ -6119,8 +6197,8 @@ static bool item_tester_hook_boomerang(object_type *o_ptr)
 /*:::投擲*/
 /*:::mult:投擲パワー　強力投擲変異以外は1*/
 /*:::boomerang:剣術家の「ブーメラン」のときTRUE*/
-/*:::shriken 忍者の八方手裏剣のときインベントリ番号、それ以外のとき-1が入ってる*/
-///system 種族、クラス制限で外せない装備に関してここで制限をかける必要あり
+/*:::shriken 忍者の八方手裏剣のときインベントリ番号、それ以外のとき-1が入ってる。宇佐見菫子特技による特殊投擲のとき-2*/
+
 bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 {
 	int dir, item;
@@ -6141,7 +6219,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	bool return_when_thrown = FALSE;
 	bool suitable_item = FALSE;
 
-	bool sumireko = FALSE;
+	bool sumireko_throwing = FALSE;//菫子特殊投擲　必ず戻ってくる
 
 	char o_name[MAX_NLEN];
 
@@ -6158,7 +6236,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 		return FALSE;
 	}
 
-	if(p_ptr->pclass == CLASS_SUMIREKO && shuriken == -2 && p_ptr->lev > 34) sumireko = TRUE;
+	if(p_ptr->pclass == CLASS_SUMIREKO && shuriken == -2 && p_ptr->lev > 34) sumireko_throwing = TRUE;
 
 	/*:::忍者の八方手裏剣のときは投げるアイテムが決まっている*/
 	if (p_ptr->special_defense & KATA_MUSOU)
@@ -6259,7 +6337,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	}
 #endif
 
-	if(sumireko && object_is_weapon(o_ptr)) boomerang = TRUE;
+	if(sumireko_throwing && object_is_weapon(o_ptr)) boomerang = TRUE;
 
 	/* Get local object */
 	q_ptr = &forge;
@@ -6309,7 +6387,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	if(tdis > 18) tdis = 18;
 	if(tdis < 1) tdis = 1;
 
-	if(sumireko) tdis = 18;
+	if(sumireko_throwing) tdis = 18;
 
 	/*:::八方手裏剣の場合＠の位置から±50のxyがターゲットになる*/
 	if (shuriken >= 0)
@@ -6498,6 +6576,15 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 			monster_type *m_ptr = &m_list[c_ptr->m_idx];
 			monster_race *r_ptr = &r_info[m_ptr->r_idx];
 
+			int mon_ac = r_ptr->ac;
+
+			//v1.1.94 モンスター防御力低下中はAC25%カット
+			if (MON_DEC_DEF(m_ptr))
+			{
+				mon_ac = MONSTER_DECREASED_AC(mon_ac);
+			}
+
+
 			/* Check the visibility */
 			visible = m_ptr->ml;
 
@@ -6505,7 +6592,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 			hit_body = TRUE;
 
 			/* Did we hit it (penalize range) */
-			if (test_hit_fire(chance - cur_dis, r_ptr->ac, m_ptr->ml))
+			if (test_hit_fire(chance - cur_dis, mon_ac, m_ptr->ml))
 			{
 				bool fear = FALSE;
 
@@ -6585,7 +6672,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 					else
 						tdam += -q_ptr->to_d;
 
-					if (!sumireko && boomerang)
+					if (!sumireko_throwing && boomerang)
 					{
 						tdam *= (mult+p_ptr->num_blow[item - INVEN_RARM]);
 						tdam += p_ptr->to_d_m;
@@ -6763,17 +6850,23 @@ msg_print("これはあまり良くない気がする。");
 	{
 		int back_chance = randint1(30)+20+((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 		char o2_name[MAX_NLEN];
-		///item ブーメランに向く武器
-		bool super_boomerang = (have_flag(flgs, TR_BOOMERANG) && object_is_artifact(q_ptr) && boomerang);
 
-		if(sumireko) super_boomerang = TRUE;
+		//ブーメランフラグ付きの★☆を剣術家特技「ブーメラン」で投げたら必ず返ってくる
+		if (have_flag(flgs, TR_BOOMERANG) && object_is_artifact(q_ptr) && boomerang) come_back = TRUE;
+
+		//菫子特殊投擲は必ず返ってくる
+		if(sumireko_throwing) come_back = TRUE;
+
+		//投擲熟練度が高い場合必ず返ってくる
+		if (ref_skill_exp(SKILL_THROWING) >= 5600) come_back = TRUE;
+
+		if (cheat_xtra && come_back) msg_print("(come back)");
 
 		j = -1;
 		if (boomerang) back_chance += 4+randint1(5);
-		if (super_boomerang) back_chance += 100;
 		object_desc(o2_name, q_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
 
-		if((back_chance > 30) && (!one_in_(100) || super_boomerang))
+		if((back_chance > 30) && !one_in_(100) || come_back)
 		{
 			for (i = cur_dis - 1; i > 0; i--)
 			{
@@ -6796,7 +6889,24 @@ msg_print("これはあまり良くない気がする。");
 					Term_xtra(TERM_XTRA_DELAY, msec);
 				}
 			}
-			if((back_chance > 37) && !p_ptr->blind && (item >= 0))
+			//必ず戻ってくる場合メッセージを変える
+			if (come_back)
+			{
+				if (item >= 0)
+				{
+					msg_format(_("%sは吸い込まれるようにあなたの手の中に納まった。",
+                                "%s returns to your hand as if it was sucked in."), o2_name);
+				}
+				else
+				{
+					msg_format(_("%sはあなたの足元へ静かに滑り込んだ。", "%s silently slides beneath your feet."), o2_name);
+					y = py;
+					x = px;
+				}
+
+			}
+
+			else if((back_chance > 37) && !p_ptr->blind && (item >= 0))
 			{
 #ifdef JP
 				msg_format("%sが手元に返ってきた。", o2_name);

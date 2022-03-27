@@ -158,7 +158,7 @@ static int buf_read(BUF *buf, int fd)
 	char tmp[BUFSIZE];
 #else
 	char *tmp;
-	
+
 	tmp = calloc( BUFSIZE , sizeof(char) );
 #endif
 
@@ -351,7 +351,7 @@ cptr make_screen_dump(void)
 				rv = angband_color_table[a][1];
 				gv = angband_color_table[a][2];
 				bv = angband_color_table[a][3];
-				buf_sprintf(screen_buf, "%s<font color=\"#%02x%02x%02x\">", 
+				buf_sprintf(screen_buf, "%s<font color=\"#%02x%02x%02x\">",
 					    ((y == 0 && x == 0) ? "" : "</font>"), rv, gv, bv);
 				old_a = a;
 			}
@@ -455,10 +455,13 @@ static bool http_get_msg(int sd)
 				err_code |= 0x04;
 			if(my_strstr(buf,"FILE_PARSE_ERROR"))
 				err_code |= 0x08;
+			if (my_strstr(buf, "GET_NUM_ERROR"))
+				err_code |= 0x10;
+
 
 			fprintf(fff,"%s",buf);
         }
-        else 
+        else
 		{
             break;
         }
@@ -470,18 +473,20 @@ static bool http_get_msg(int sd)
 	//失敗のときはサーバから返ってきたメッセージを画面に表示する
 	if(err_code)
 	{
+		//v1.1.93 エラーメッセージ(htmlファイル)を画面に表示するのをやめた
+#if 0
 		/* Open for read */
 		fff = my_fopen(file_name, "r");
 		while (fgets(buf, 1024, fff))
 		{
-			msg_format("%s",buf);
+			msg_format("%s", buf);
 
 		}
-
 		/* Close the file */
 		my_fclose(fff);
-		if(use_tmpfile)	fd_kill(file_name);
+		if (use_tmpfile)	fd_kill(file_name);
 
+#endif
 
 		if(err_code & 0x01)
 			msg_print("CGIサーバがメンテナンス中です。");
@@ -491,8 +496,15 @@ static bool http_get_msg(int sd)
 			msg_print("CGIサーバ内でファイルの保存に失敗しました。");
 		else if(err_code & 0x08)
 			msg_print("データの解析に失敗しました。");
+		else if (err_code & 0x10)
+			msg_print("サーバトラブルによりファイル番号の取得に失敗しました。");
 		else
 			msg_print("ERROR:CGIサーバからの応答が不正です");
+
+		if(!use_tmpfile)
+			msg_format("詳細はuserフォルダのログファイルを参照してください");
+
+
 	}
 
 
@@ -626,7 +638,7 @@ errr report_score(void)
 
 	buf_sprintf(score, "--%s--\r\n", MULTIPART_BOUNDARY);//最後のバウンダリの後ろにはさらに--が要る
 
-	
+
 #ifdef WINDOWS
 	if (WSAStartup(wVersionRequested, &wsaData))
 	{
@@ -660,7 +672,7 @@ errr report_score(void)
 		prt("connecting...", 0, 0);
 #endif
 		Term_fresh();
-		
+
 		/* プロキシを設定する */
 		set_proxy(HTTP_PROXY, HTTP_PROXY_PORT);
 
@@ -676,7 +688,7 @@ errr report_score(void)
 #endif
 		prt(buff, 0, 0);
 		(void)inkey();
-		
+
 #ifdef JP
 		if (!get_check_strict("もう一度接続を試みますか? ", CHECK_NO_HISTORY))
 #else
@@ -691,7 +703,7 @@ errr report_score(void)
 
 
 
-	if(!err) 
+	if(!err)
 	{
 	#ifdef JP
 		prt("スコア送信中...", 0, 0);

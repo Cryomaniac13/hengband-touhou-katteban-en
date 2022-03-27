@@ -10715,8 +10715,9 @@ static cptr do_new_spell_music2(int spell, int mode)
 
 		if (cont)
 		{
-			int power = plev + chr_adj * 2;
+			int power = plev * 2+ chr_adj * 2;
 			project_hack(GF_REDEYE, power);
+			project_hack(GF_DEC_MAG, power );
 		}
 		break;
 	case MUSIC_NEW_MYSTIA_CHORUSMASTER: //ミスティア　真夜中のコーラスマスター
@@ -12586,11 +12587,6 @@ static bool item_tester_hook_weapon_except_bow(object_type *o_ptr)
 	}
 
 	return (FALSE);
-}
-
-static bool item_tester_hook_cursed(object_type *o_ptr)
-{
-	return (bool)(object_is_cursed(o_ptr));
 }
 
 ///sysdel realm 呪術
@@ -16917,7 +16913,8 @@ static cptr do_new_spell_enchant(int spell, int mode)
 					return NULL;
 				}
 
-				item_tester_hook = item_tester_hook_make_tsukumo;
+				//v1.1.93 名称変更
+				item_tester_hook = object_is_melee_weapon_except_strange_kind;
 
 				q = _("どの武器に魔力を込めますか? ", "Imbue which weapon with mana?");
 				s = _("使えそうな武器がない。", "You don't have suitable weapons.");
@@ -18337,15 +18334,17 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 	case 12:
 #ifdef JP
 		if (name) return "怨霊憑依";
-		if (desc) return "敵一体に怨霊を憑依させ、減速、朦朧、混乱、恐怖させる。抵抗されると無効。妖怪に効きやすいがアンデッドやデーモンや無生物には効果が薄い。";
+		if (desc) return "モンスター一体に怨霊を憑依させ、高確率で狂戦士化させる。抵抗されると無効。妖怪に効きやすいが通常の精神を持たないモンスターには効かない。";
 #else
 		if (name) return "Vengeful Spirit Possession";
-		if (desc) return "Makes a single enemy possessed a vengeful spirit; slows, stuns, confuses and terrifies. Does nothing if resisted. Works well against youkai, but less effective against nonliving beings, demons and undead.";
+		if (desc) return "Makes a single monster possessed a vengeful spirit, making it berserk with a high probability rate. Does nothing if resisted. Works well against youkai, but does not affect monsters with unusual mind.";
 #endif
 
 		{
 			int power = plev * 2;
 			int rad = 0;
+
+			if (cp_ptr->magicmaster) power *= 2;
 
 			if (cast)
 			{
@@ -19898,7 +19897,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		{
 			int rad = plev / 2 + 10;
 
-			if (info) return format(_("倍率：%d", "rad: %d"),rad);
+			if (info) return format(_("範囲：%d", "rad: %d"),rad);
 
 			if (cast)
 			{
@@ -20004,6 +20003,26 @@ static cptr do_new_spell_transform(int spell, int mode)
 		break;
 
 	case 7:
+		if (name) return _("石油噴出", "Oil Eruption");
+		if (desc) return _("ターゲット周辺の地形を「石油」にする。また範囲内のモンスターの攻撃力を低下させる。石油地形上では火炎系統のダメージが上昇する。",
+                            "Turns terrain around the target into oil, and lowers attack power of monsters in that area. Fire attacks deal more damage to targets on oil terrain.");
+		{
+			int dam = plev * 3;
+			int rad = 1 + plev / 20;
+
+			if (cp_ptr->magicmaster) dam *= 2;
+			if (info) return info_power(dam);
+
+			if (cast)
+			{
+				if (!get_aim_dir(&dir)) return NULL;
+				if (!fire_ball_jump(GF_DIG_OIL, dir, dam, rad, _("石油が噴き出した！", "Oil erupts from the ground!"))) return NULL;
+			}
+		}
+		break;
+		//v1.1.94 足かせ→石油噴出
+
+	    /*
 #ifdef JP
 		if (name) return "足かせ";
 		if (desc) return "指定ターゲットを減速させる。抵抗されると無効。飛んでいる敵など一部の敵には効果が薄い。";
@@ -20028,6 +20047,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 
 		}
 		break;
+		*/
 
 	case 8:
 #ifdef JP
@@ -21324,6 +21344,57 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		}
 		break;
 
+		//v1.1.94 毒針作成→硝子の盾...にしようかと思ったがやっぱやめた
+		//防御デバフの「鎧粉砕」とかそんなのにする
+    case 13:
+		if (name) return _("鎧粉砕", "Smash Armor");
+		if (desc) return _("モンスター一体の防御力(AC)を低下させる。抵抗されると無効。",
+                            "Lowers a monster's defensive power (AC). Does nothing if resisted.");
+		{
+
+			int base = plev * 3;
+
+			if (cp_ptr->magicmaster) base += plev * 2;
+
+			if (info) return info_string_dice(_("効力:", "pow: "),1, base, base);
+
+			if (cast)
+			{
+
+
+				project_length = 1 + p_ptr->lev / 10;
+				if (!get_aim_dir(&dir)) return NULL;
+				fire_ball_hide(GF_DEC_DEF, dir, base+randint1(base), 0);
+			}
+		}
+		break;
+		/*
+	case 13:
+		{
+			int dam = plev * 4;
+
+			if (cp_ptr->magicmaster)
+				dam = plev * 6;
+
+			if (name) return _("硝子の盾", "Glass Shield");
+			if (desc) return _("接触型の隣接攻撃を防ぐ盾を作り出す。一度攻撃を防ぐと盾は破壊され、そのとき強力な破片属性の反撃を行う。",
+                            "Creates a shield that protects against contact melee attacks. It breaks upon receiving an attack, countering with a powerful shards attack.");
+
+			if (info) return info_damage(0, 0, dam);
+
+			if (cast)
+			{
+				msg_print(_("透き通った巨大な盾が現れた。", "A huge transparent shield appears."));
+				p_ptr->special_defense |= (SD_GLASS_SHIELD);
+				p_ptr->redraw |= (PR_STATUS);
+			}
+
+		}
+		break;
+
+		*/
+
+        /*
 	case 13:
 #ifdef JP
 		if (name) return "毒針作成";
@@ -21373,6 +21444,8 @@ static cptr do_new_spell_darkness(int spell, int mode)
 			}
 		}
 		break;
+
+        */
 
 	case 14:
 #ifdef JP
@@ -23748,8 +23821,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 	{
 	case 0:
 		if (name) return _("魔除けのまじない", "Warding Charm");
-		if (desc) return _("1体のモンスターに破邪属性のダメージを与え恐怖させる。抵抗されると無効。破邪弱点でないモンスターには効果がない。",
-                            "Deals holy damage to a single monster and terrifies is. Does nothing if resisted. Does not affect monsters not vulnerable to holy attacks.");
+		if (desc) return _("1体のモンスターに破邪属性のダメージを与え恐怖・能力低下させる。抵抗されると無効。破邪弱点でないモンスターには効果がない。",
+                            "Deals holy damage to a single monster, terrifies it and lowers its stats. Does nothing if resisted. Does not affect monsters not vulnerable to holy attacks.");
 
 		{
 			int dice = 3 + (plev) / 5;
@@ -24211,8 +24284,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		break;
 	case 18:
 		if (name) return _("破邪の印", "Holy Seal");
-		if (desc) return _("1体のモンスターに破邪属性の大ダメージを与え恐怖・朦朧させる。抵抗されると無効。破邪弱点でないモンスターには効果がない。",
-                            "Deals large amount of holy damage to a single monster, also terrifies and stuns. Does nothing if resisted. Has no effect on monster not vulnerable to holy attacks.");
+		if (desc) return _("1体のモンスターに破邪属性の大ダメージを与え恐怖・朦朧・能力低下させる。抵抗されると無効。破邪弱点でないモンスターには効果がない。",
+                            "Deals large amount of holy damage to a single monster; also terrifies, stuns, and lowers stats. Does nothing if resisted. Has no effect on monster not vulnerable to holy attacks.");
 
 		{
 			int dice = 15 + plev / 5;

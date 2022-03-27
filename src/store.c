@@ -2063,6 +2063,12 @@ static void store_object_absorb(object_type *o_ptr, object_type *j_ptr)
 	/* Combine quantity, lose excess items */
 	o_ptr->number = (total > max_num) ? max_num : total;
 
+	//v1.1.91 たいまつを売ったとき、残り時間(xtra4)が長い方に揃えられる
+	if (o_ptr->tval == TV_LITE && o_ptr->sval == SV_LITE_TORCH)
+	{
+		o_ptr->xtra4 = MAX(o_ptr->xtra4, j_ptr->xtra4);
+	}
+
 	/* Hack -- if rods are stacking, add the pvals (maximum timeouts) together. -LM- */
 	if (o_ptr->tval == TV_ROD)
 	{
@@ -3254,6 +3260,8 @@ static bool noneedtobargain(s32b minprice)
 	s32b good = st_ptr->good_buy;
 	s32b bad = st_ptr->bad_buy;
 
+
+
 	/* Cheap items are "boring" */
 	if (minprice < 10L) return (TRUE);
 
@@ -4071,9 +4079,10 @@ static bool purchase_haggle(object_type *o_ptr, s32b *price)
 		{
 			/* Message summary */
 #ifdef JP
-			msg_print("結局この金額にまとまった。");
+			//v1.1.94 メッセージ削除
+			//msg_print("結局この金額にまとまった。");
 #else
-			msg_print("You eventually agree upon the price.");
+			//msg_print("You eventually agree upon the price.");
 #endif
 
 			msg_print(NULL);
@@ -4153,6 +4162,14 @@ static bool purchase_haggle(object_type *o_ptr, s32b *price)
 
 	/* No incremental haggling yet */
 	allow_inc = FALSE;
+
+
+	//v1.1.94 このへんのやり取り削除しただの確認にした
+	(void)sprintf(out_val, _("%s :  %ld", "%s : %ld"), pmt, (long)cur_ask);
+	put_str(out_val, 1, 0);
+	*price = final_ask;
+	cancel = !get_check_strict(_("購入しますか？", "Do you want to purchase it? "), CHECK_DEFAULT_Y);
+#if 0
 
 	/* Haggle until done */
 	for (flag = FALSE; !flag; )
@@ -4256,6 +4273,9 @@ static bool purchase_haggle(object_type *o_ptr, s32b *price)
 		}
 	}
 
+#endif
+
+
 	/* Cancel */
 	if (cancel) return (TRUE);
 
@@ -4324,6 +4344,7 @@ static bool sell_haggle(object_type *o_ptr, s32b *price)
 		{
 			/* Message */
 #ifdef JP
+
 			msg_print("即座にこの金額にまとまった。");
 #else
 			msg_print("You instantly agree upon the price.");
@@ -4340,9 +4361,9 @@ static bool sell_haggle(object_type *o_ptr, s32b *price)
 		{
 			/* Message */
 #ifdef JP
-			msg_print("結局この金額にまとまった。");
+		//	msg_print("結局この金額にまとまった。");
 #else
-			msg_print("You eventually agree upon the price.");
+			//msg_print("You eventually agree upon the price.");
 #endif
 
 			msg_print(NULL);
@@ -4418,6 +4439,14 @@ static bool sell_haggle(object_type *o_ptr, s32b *price)
 	/* No incremental haggling yet */
 	allow_inc = FALSE;
 
+
+
+	//v1.1.94 このへんのやり取り削除しただの確認にした
+	(void)sprintf(out_val, _("%s :  %ld", "%s : %ld"), pmt, (long)cur_ask);
+	put_str(out_val, 1, 0);
+	*price = final_ask;
+	cancel = !get_check_strict(_("売却しますか？", "Do you want to sell it? "), CHECK_DEFAULT_Y);
+#if 0
 	/* Haggle */
 	for (flag = FALSE; !flag; )
 	{
@@ -4525,7 +4554,7 @@ static bool sell_haggle(object_type *o_ptr, s32b *price)
 			}
 		}
 	}
-
+#endif
 	/* Cancel */
 	if (cancel) return (TRUE);
 
@@ -4834,10 +4863,21 @@ msg_format("%s(%c)を購入する。", o_name, I2A(item));
 		if (choice == 0)
 		{
 			/* Fix the item price (if "correctly" haggled) */
-			if (price == (best * j_ptr->number)) o_ptr->ident |= (IDENT_FIXED);
+			//v1.1.94 価格交渉関係のフラグ削除
+			//if (price == (best * j_ptr->number)) o_ptr->ident |= (IDENT_FIXED);
+
+
+			//v1.1.95 なんか挙動が怪しいので上限設定
+			if (CHECK_JYOON_BUY_ON_CREDIT && (p_ptr->magic_num1[4] + price) >= 100000000)
+			{
+				msg_print(_("店主に追い出された。ツケで買いすぎたようだ。",
+                            "The shopkeeper kicks you out. Looks like your current bill is too high."));
+				return;
+			}
 
 			/* Player can afford it */
-			if (p_ptr->au >= price)
+			//v1.1.92 女苑特殊性格はツケ払いで買える
+			if (p_ptr->au >= price || CHECK_JYOON_BUY_ON_CREDIT)
 			{
 				/* Say "okay" */
 				say_comment_1();
@@ -4855,7 +4895,17 @@ msg_format("%s(%c)を購入する。", o_name, I2A(item));
 				decrease_insults();
 
 				/* Spend the money */
-				p_ptr->au -= price;
+				if (CHECK_JYOON_BUY_ON_CREDIT)
+				{
+					p_ptr->magic_num1[4] += price;
+
+					//v1.1.95 なんか挙動が怪しいので上限設定
+					if (p_ptr->magic_num1[4] >= 100000000) p_ptr->magic_num1[4] = 99999999;
+				}
+				else
+				{
+					p_ptr->au -= price;
+				}
 
 				//野良神様がBM以外で物を買った時、価格10000以上で自分が売ったものでないなら名声が最大5アップ
 				if(p_ptr->prace == RACE_STRAYGOD && cur_store_num != 6 && (price / j_ptr->number) >= 10000)
@@ -4882,11 +4932,20 @@ msg_format("%s(%c)を購入する。", o_name, I2A(item));
 				object_desc(o_name, j_ptr, 0);
 
 				/* Message */
-#ifdef JP
-msg_format("%sを $%ldで購入しました。", o_name, (long)price);
-#else
-				msg_format("You bought %s for %ld gold.", o_name, (long)price);
-#endif
+
+				if (CHECK_JYOON_BUY_ON_CREDIT)
+				{
+					msg_format(_("%sをツケで購入しました。",
+                                "You bought %s, putting the expenses on your bill."), o_name);
+
+				}
+				else
+				{
+					msg_format(_("%sを $%ldで購入しました。",
+                                "You bought %s for %ld gold."), o_name, (long)price);
+
+				}
+
 
 				strcpy(record_o_name, o_name);
 				record_turn = turn;

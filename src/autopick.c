@@ -242,6 +242,9 @@ static bool autopick_new_entry(autopick_type *entry, cptr str, bool allow_defaul
 	cptr prev_ptr, ptr, old_ptr;
 	int prev_flg;
 
+	//v1.1.92 Ž©“®E‚¢‚©‚ç’·‰ß‚¬‚é–Á‚ð‚Â‚¯‚é‚±‚Æ‚ð—}Ž~
+	char insc_buf[160];
+
 	if (str[0] && str[1] == ':') switch (str[0])
 	{
 	case '?': case '%':
@@ -315,6 +318,8 @@ static bool autopick_new_entry(autopick_type *entry, cptr str, bool allow_defaul
 
 	/* Skip comment line */
 	if (*buf == 0 && insc) return FALSE;
+
+	else if(insc) snprintf(insc_buf, 80, "%s", insc);
 
 	ptr = prev_ptr = buf;
 	old_ptr = NULL;
@@ -472,7 +477,12 @@ static bool autopick_new_entry(autopick_type *entry, cptr str, bool allow_defaul
 	/* Save this auto-picker entry line */
 	entry->name = string_make(ptr);
 	entry->action = act;
-	entry->insc = string_make(insc);
+
+	//v1.1.92 ’·‚·‚¬‚é–Á‚ª“ü‚ç‚È‚¢‚æ‚¤‚É
+	if(insc)
+		entry->insc = string_make(insc_buf);
+	else
+		entry->insc = string_make(insc); //insc=NULL
 
 	return TRUE;
 }

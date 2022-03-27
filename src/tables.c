@@ -2609,7 +2609,7 @@ const player_class class_info[MAX_CLASS] =
 		,A_INT
 		,5,4,70,
 		{3,2,4,3,4,0,0,0,0,0
-		,5,4,3,3,3,5,3,3,5,3
+		,5,4,3,3,3,5,3,3,5,4
 		,3}
 		,70,2,3,2,
 		FALSE,FALSE,FALSE
@@ -3376,7 +3376,7 @@ const player_class class_info[MAX_CLASS] =
 		{4,3,1,3,3,0,0,0,0,0
 		,4,4,4,3,3,3,4,4,3,4
 		,5}
-		,64,0,4,2,
+		,57,0,4,2,
 		FALSE,FALSE,TRUE
 		,FALSE
 		,3
@@ -3477,7 +3477,7 @@ const player_class class_info[MAX_CLASS] =
 		{5,1,5,1,3,0,0,0,0,0
 		,3,2,2,5,4,3,2,2,2,2
 		,1}
-		,40,5,3,4,
+		,36,5,3,4,
 		TRUE,FALSE,TRUE
 		,FALSE
 		,4
@@ -3502,7 +3502,7 @@ const player_class class_info[MAX_CLASS] =
 		{5,1,1,1,4,0,0,0,0,0
 		,2,1,2,4,1,3,1,2,1,1
 		,1}
-		,50,0,2,2,
+		,40,0,2,2,
 		FALSE,FALSE,TRUE
 		,FALSE
 		,3
@@ -3902,20 +3902,20 @@ const player_class class_info[MAX_CLASS] =
 		"Flandre",
 
 		{5, 3, -8, 1, 3, 0},
-		1,  1, 60, 1,  10, 32, 72, 20,
-		1, 16, 12, 0,  0, 10, 26, 20,
+		1,  1, 60, 1,  10, 32, 72, 60,
+		1, 16, 12, 0,  0, 10, 26, 25,
 		7, 35, 100
 		,{1,4,0,0,0,0,0,0,0,0,4,0,4,0,0,0}
 		,A_INT
 		,6,6,80,
 		{3,1,1,4,1,0,0,0,0,0
-		,2,5,2,4,5,4,3,3,3,1
+		,2,5,2,4,5,4,3,3,4,3
 		,1}
-		,35,4,2,2,
+		,25,4,2,2,
 		TRUE,FALSE,TRUE
 		,FALSE
 		,4
-		,MON_F_SCARLET
+		,MON_FLAN
 	},
 	{
 #ifdef JP
@@ -4136,7 +4136,7 @@ const player_class class_info[MAX_CLASS] =
 		,A_INT
 		,4,2,90,
 		{2,2,1,1,4,0,0,0,0,0
-		,3,2,3,1,2,1,3,2,3,4
+		,3,2,3,1,2,1,3,2,4,5
 		,4}
 		,68,3,3,4,
 		FALSE,FALSE,TRUE
@@ -4191,7 +4191,7 @@ const player_class class_info[MAX_CLASS] =
 		{4,2,1,1,3,0,0,0,0,0
 		,3,3,4,3,3,3,4,5,3,3
 		,2}
-		,40,0,4,5,
+		,36,0,4,5,
 		FALSE,FALSE,TRUE
 		,FALSE
 		,4
@@ -6143,23 +6143,23 @@ const player_class class_info[MAX_CLASS] =
 		"Mike",
 		"Mike",
 
-		{ 0, 1, 2, 0, -1, -2 },
-		20, 24, 28, 2, 16, 20, 45, 30,
-		12, 10,  9, 0,  4,  5,  15, 15,
-		1, 20, 70
+		{ -1, 3, 0, 1, -1, 2 },
+		28, 30, 36, 2, 27, 16, 48,40,
+		12, 10, 12, 0,  3,  3, 16,15,
+		3, 30, 75
 
 		//追加値暫定
-			,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
-			,A_INT
-			,3,2,90,
-			{ 2,1,1,2,2,0,0,0,0,0
-			,3,3,3,3,3,3,2,2,2,2
-			,1 }
-			,110,0,2,2,
-			FALSE,FALSE,TRUE
-			,TRUE
-			,3
-			,MON_PARSEE
+		,{ 1,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2 }
+		,A_INT
+		,4,2,80,
+		{3,2,1,1,3,0,0,0,0,0
+		,3,2,2,4,2,2,2,2,2,2
+		,1 }
+		,140,2,3,4,
+		FALSE,FALSE,TRUE
+		,TRUE
+		,3
+		,MON_MIKE
 	},
 	{
 #ifdef JP
@@ -6343,6 +6343,32 @@ const player_class class_info[MAX_CLASS] =
 		,MON_MOMOYO
 	},
 
+	{
+#ifdef JP
+		"無敗の剛欲同盟長",
+		"無敗の剛欲同盟長",
+#endif // JP
+		"Yuma",
+		"Yuma",
+
+		{ 5, -2, 2, 3, 5, -5 },
+		23, 24, 40, 2, 24, 25, 90, 50,
+		12, 12, 15, 0,  4, 15, 36, 20,
+		12, 80, 40
+
+		//追加値暫定
+					,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+					,A_INT
+					,6,5,60,
+					{ 5,3,1,5,3,0,0,0,0,0
+					,5,4,4,4,4,5,4,4,2,2
+					,1 }
+					,25,5,5,3,
+					FALSE,FALSE,TRUE
+					,FALSE
+					,5
+					,MON_YUMA
+	},
 
 };
 
@@ -7241,8 +7267,8 @@ magic_type spell_base_info[MAX_MAGIC][32][6] =
 	{{10,  8,35,  0},{10, 10,50, 10},{ 9,  9,45, 10},{ 8,  8,40, 10},{ 6,  7,35, 10},{ 5,  6,32, 10},},//強力投擲
 	{{14, 14,40,  0},{13, 21,50, 10},{11, 19,50, 10},{10, 15,45, 10},{ 8, 13,40, 10},{ 7, 10,36, 10},},//皮膚変容
 	{{16, 12,40,  0},{99,  1,20, 15},{13, 13,48, 15},{12, 11,44, 15},{10, 10,40, 15},{ 8,  9,36, 15},},//髪の毛針
-	{{18, 14,30,  0},{99,  1,40, 20},{14, 15,38, 20},{13, 14,35, 20},{12, 12,30, 20},{ 9, 10,27, 20},},//翼生成
-	{{21, 18,35,  0},{18, 20,43, 30},{16, 19,40, 30},{15, 17,38, 30},{14, 16,35, 30},{12, 14,32, 30},},//足かせ
+	{{18, 14,30,  0},{16, 20,40, 20},{14, 15,38, 20},{13, 14,35, 20},{12, 12,30, 20},{ 9, 10,27, 20},},//翼生成
+	{{21, 18,35,  0},{99,  1, 0,  0},{16, 24,42, 30},{15, 20,40, 30},{14, 18,35, 30},{12, 16,32, 30},},//足かせ→石油噴出
 	/*:::変容2*/
 	{{24, 22,45,  0},{21, 30,55, 35},{19, 25,53, 35},{17, 23,50, 35},{15, 20,45, 35},{14, 18,40, 35},},//循環器変容
 	{{27, 16,45,  0},{24, 24,50, 30},{22, 20,48, 30},{20, 18,45, 30},{18, 16,40, 30},{16, 14,35, 30},},//目からビーム　
@@ -7250,7 +7276,8 @@ magic_type spell_base_info[MAX_MAGIC][32][6] =
 	{{33, 28,45,  0},{32, 35,50, 50},{28, 30,45, 50},{26, 28,43, 50},{23, 26,40, 50},{20, 24,37, 50},},//結合再生　
 	{{37, 38,60,  0},{36, 50,72, 70},{30, 48,68, 70},{28, 43,65, 70},{26, 40,63, 70},{23, 36,55, 70},},//爪強化
 	{{40, 26,50,  0},{99,  1,20, 55},{34, 30,56, 55},{32, 27,53, 55},{30, 24,50, 55},{27, 20,45, 55},},//ブレス
-	{{43, 33,55,  0},{42, 40,65, 60},{38, 38,61, 60},{36, 35,58, 60},{34, 32,55, 60},{32, 28,50, 60},},//階段生成
+//	{{43, 85,84,  0},{99,  1,20,  5},{32, 90,87,100},{29, 85,84,100},{27, 80,80,100},{25, 70,75,100},},//v1.1.94 毒針作成から変更
+	{{43, 60,85,  0},{99,  1, 1,  1},{32, 30,80, 80},{29, 27,75, 80},{27, 22,70, 80},{25, 20,65, 80},},//粉砕
 	{{46, 30,60,  0},{99,  1, 0,  0},{39, 32,66, 80},{38, 30,63, 80},{36, 28,60, 80},{33, 25,55, 80},},//伸腕
 	/*:::変容3*/
 	{{99,  1,20,  5},{32, 35,60, 65},{28, 33,57, 65},{25, 30,53, 65},{22, 26,50, 65},{20, 22,50, 65},},//スプリングフロア
@@ -10431,7 +10458,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを蹴り上げた！",
         "You hit %s with a rising kick!"),             MELEE_MODE_KICK1,20, 10, 3, 7, 0 ,7},
 	{ _("%sを蹴り回した！",
-        "You hit %s with spinning kicks!"),             MELEE_MODE_KICK1,30, 15, 4, 7, MELEE_STUN ,8},
+        "You hit %s with spinning kicks!"),             MELEE_MODE_KICK1,30, 15, 4, 7, MELEE_DEC_ATK ,8},
 	{ _("%sを蹴って蹴って蹴りまくった！",
         "You keep kicking and kicking %s!"),MELEE_MODE_KICK1,40, 25, 7, 7, MELEE_STUN2 ,10},
 
@@ -10449,11 +10476,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sに食い付いた！",
         "You gnaw %s!"),             MELEE_MODE_BITE,10, 0, 3, 6, 0 ,7},
 	{ _("%sに齧り付いた！",
-        "You deeply bite into %s!"),             MELEE_MODE_BITE,20, 10, 4, 6, 0 ,8},
+        "You deeply bite into %s!"),             MELEE_MODE_BITE,20, 10, 4, 6, MELEE_DELAY ,8},
 	{ _("%sに鋭い牙を突き立てた！",
-        "You thrust your sharp fangs into %s!"),     MELEE_MODE_BITE,30, 20, 7, 7, 0 ,10},
+        "You thrust your sharp fangs into %s!"),     MELEE_MODE_BITE,30, 20, 7, 7, MELEE_DELAY ,10},
 	{ _("%sへ齧りついて振り回した！",
-        "You bite into %s and thrash around!"),   MELEE_MODE_BITE,40, 30, 10, 10, MELEE_STUN2 ,11},
+        "You bite into %s and thrash around!"),   MELEE_MODE_BITE,40, 30, 10, 10, MELEE_DELAY ,11},
 
 	{ _("%sを引っ掻いた。",
         "You scratch %s."),             MELEE_MODE_CLAW,1, 0, 1, 9, 0 ,2},
@@ -10462,20 +10489,20 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを鋭い爪で突いた。",
         "You thrust your sharp claws into %s."),         MELEE_MODE_CLAW,15, 0, 3, 9, 0 ,4},
 	{ _("%sを鋭い爪で切り裂いた！",
-        "You slash %s with your sharp claws!"),     MELEE_MODE_CLAW,24, 0, 5, 9, 0 ,6},
+        "You slash %s with your sharp claws!"),     MELEE_MODE_CLAW,24, 0, 5, 9, MELEE_DEC_ATK ,6},
 	{ _("%sを鋭い爪で貫いた！",
         "You rip %s with your sharp claws!"),		MELEE_MODE_CLAW,29, 20, 7, 9, 0 ,8},
 	{ _("%sを鋭い爪でなます切りにした！",
-        "You slice %s up with your sharp claws!"),		MELEE_MODE_CLAW,34, 20, 8, 9, 0 ,8},
+        "You slice %s up with your sharp claws!"),		MELEE_MODE_CLAW,34, 20, 8, 9, MELEE_DEC_ATK ,8},
 	{ _("%sを鋭い爪で滅多切りにした！",
-        "You cleave %s up with your sharp claws!"),		MELEE_MODE_CLAW,40, 30, 9, 9, 0 ,8},
+        "You cleave %s up with your sharp claws!"),		MELEE_MODE_CLAW,40, 30, 9, 9, MELEE_DEC_ATK ,8},
 
 	{ _("%sを羽衣で叩いた。",
         "You hit %s with your veils."),           MELEE_MODE_DRILL,1, 0, 1, 6, 0 ,1},
 	{ _("%sを羽衣で突いた。",
         "You thrust at %s with your veils."),           MELEE_MODE_DRILL,5, 0, 1, 8, 0 ,2},
 	{ _("%sを羽衣で薙ぎ払った。",
-        "You sweep %s with your veils."),           MELEE_MODE_DRILL,10, 0, 2, 8, 0 ,4},
+        "You sweep %s with your veils."),           MELEE_MODE_DRILL,10, 0, 2, 8, MELEE_DELAY ,4},
 	{ _("%sを羽衣で締めた。",
         "You squeeze %s with your veils."),           MELEE_MODE_DRILL,15, 10, 3, 8, MELEE_STUN ,6},
 	{ _("%sを羽衣で叩き伏せた。",
@@ -10490,7 +10517,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを殴り飛ばした。",
         "You punch and knock back %s."),         MELEE_MODE_PUNCH_ONI,10, 0, 5, 6, MELEE_STUN ,10},
 	{ _("%sを投げ飛ばした。",
-        "You throw %s."),         MELEE_MODE_PUNCH_ONI,20, 0, 6, 8, MELEE_STUN ,10},
+        "You throw %s."),         MELEE_MODE_PUNCH_ONI,20, 0, 6, 8, MELEE_DELAY ,10},
 	{ _("鋼鉄のような拳が%sへ叩き込まれた！",
         "You slam %s with an iron fist!"),    MELEE_MODE_PUNCH_ONI,30, 25, 9, 11, MELEE_STUN2 ,12},
 	{ _("%sを叩き付け地面に大穴を開けた！",
@@ -10519,7 +10546,6 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを包帯で絡め取り、振り回して叩きつけた！",
         "You wrap %s with your bandages and slam them into the ground!"),		MELEE_MODE_KASEN,45, 40, 12, 12, MELEE_KASEN ,16},
 
-
 	{ _("%sを払い除けた。",
         "You sweep %s."),					MELEE_MODE_ONI_KASEN,1, 0, 1, 7, 0 ,3 },
 	{ _("%sを殴った。",
@@ -10545,11 +10571,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("四天王の剛拳が%sに叩き込まれた！",
         "You slam %s with an iron fist of the Big Four!"),	MELEE_MODE_ONI_KASEN,45, 40, 14, 14, MELEE_STUN3 ,15 },
 
-
+	//シールドバッシュ　重量値は特殊処理で盾重量を基準に決まる
 	{ _("盾で%sを打った。",
         "You strike %s with your shield."),         MELEE_MODE_SHIELD,1, 0, 1, 5, 0 ,4},
+	{ _("盾で%sを殴りつけた。",
+        "You deliver a powerful blow to %s with your shield."),				MELEE_MODE_SHIELD,10, 0,3, 5, MELEE_STUN ,1},
+	{ _("盾を振り回して%sを打ち据えた。",
+        "You swing your shield, striking %s."),		MELEE_MODE_SHIELD,20, 5,4, 6, MELEE_STUN ,1},
 	{ _("盾を構えて%sへ体当たりした。",
-        "You hold your shield out and tackle %s."),  MELEE_MODE_SHIELD,30, 10, 2, 5, MELEE_STUN ,4},
+        "You hold your shield out and tackle %s."),		MELEE_MODE_SHIELD,30,10,7, 7, MELEE_STUN ,1},
+	{ _("盾の猛撃で%sを吹き飛ばした！",
+        "You knock %s back with a mighty shield strike!"),		MELEE_MODE_SHIELD,40,20,9, 9, MELEE_STUN2,1},
 
 	{ _("%sに頭突きを食らわせた。",
         "You headbutt %s."),     MELEE_MODE_HEADBUTT,1, 0, 2, 5, MELEE_STUN ,3},
@@ -10563,16 +10595,16 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを何度も角で突いた。",
         "You thrust at %s with your horns multiple times."),         MELEE_MODE_HORNS,15, 0, 2, 10, 0 ,4},
 	{ _("%sへ角を向け強烈な体当たりをかけた！",
-        "You lower your horns at %s and charge!"),     MELEE_MODE_HORNS,35, 15, 5, 10, MELEE_STUN ,8},
+        "You lower your horns at %s and charge!"),     MELEE_MODE_HORNS,35, 15, 5, 10, MELEE_DEC_DEF ,8},
 
 	{ _("%sを大きな角で突いた。",
         "You thrust at %s with your large horns."),             MELEE_MODE_BIGHORN,1, 0, 3, 10, 0 ,3},
 	{ _("%sを角でひっかけ空中へ投げ上げた！",
-        "You throw %s into the air with your horns!"), MELEE_MODE_BIGHORN,15, 0, 4, 10, MELEE_STUN ,6},
+        "You throw %s into the air with your horns!"), MELEE_MODE_BIGHORN,15, 0, 4, 10, MELEE_DEC_DEF ,6},
 	{ _("%sを巨大な角で貫いた！",
-        "You pierce %s with your huge horns!"),				MELEE_MODE_BIGHORN,30, 10, 6, 10, 0 ,8},
+        "You pierce %s with your huge horns!"),				MELEE_MODE_BIGHORN,30, 10, 6, 10, MELEE_DEC_DEF ,8},
 	{ _("%sを巨大な角で引き裂いた！",
-        "You cleave %s with your huge horns!"),			MELEE_MODE_BIGHORN,40, 15, 10, 10, 0 ,12},
+        "You cleave %s with your huge horns!"),			MELEE_MODE_BIGHORN,40, 15, 10, 10, MELEE_DEC_DEF ,12},
 
 	{ _("%sを太い尻尾で打った。",
         "You slam %s with your big tail."),       MELEE_MODE_BIGTAIL,1, 0, 2, 7, 0 ,4},
@@ -10583,11 +10615,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("強靭な尻尾がうなりを上げて%sに叩きつけられた！",
         "You raise your tough tail, roar, and slam it down on %s!"), MELEE_MODE_BIGTAIL,40, 30, 9,9, MELEE_STUN2 ,12},
 
-	{ _("%sを踏みつけた！", "You trample %s!"),       MELEE_MODE_GIGA_KICK,1, 0, 9, 10, 0 ,10},
+	{ _("%sを踏みつけた！", "You trample %s!"),       MELEE_MODE_GIGA_KICK,1, 0, 9, 10, MELEE_DELAY ,10},
 	{ _("%sを蹴り飛ばした！",
-        "Your kick sends %s flying!"),       MELEE_MODE_GIGA_KICK,10, 10, 11, 10, MELEE_STUN2 ,15},
+        "Your kick sends %s flying!"),       MELEE_MODE_GIGA_KICK,10, 10, 11, 10, MELEE_DELAY ,15},
 	{ _("%sを踏み潰した！",
-        "You stomp %s into the ground!"),       MELEE_MODE_GIGA_KICK,20, 20, 11, 12, 0 ,20},
+        "You stomp %s into the ground!"),       MELEE_MODE_GIGA_KICK,20, 20, 11, 12, MELEE_DELAY ,20},
 
 	{ _("%sを払い飛ばした！",
         "Your blow sends %s flying!"),       MELEE_MODE_GIGA_PUNCH,1,  0, 8, 10, MELEE_STUN2 ,10},
@@ -10597,13 +10629,13 @@ const martial_arts_new ma_blows_new[] =
         "You slam %s with your gigantic fist!"),       MELEE_MODE_GIGA_PUNCH,40, 25, 13, 13, MELEE_STUN3 ,20},
 
 	{ _("あなたの体からリスが飛び出して%sへ喰い付いた！",
-        "A squirrel jumps out of your body at %s!"),     MELEE_MODE_ULTIMATE,1, 5, 6, 10, 0 ,4},
+        "A squirrel jumps out of your body at %s!"),     MELEE_MODE_ULTIMATE,1, 5, 6, 10, MELEE_DEC_DEF ,4},
 	{ _("巨大なタコのような触手が%sを締め上げた！",
         "You crush %s with a massive octopus tentacle!"),       MELEE_MODE_ULTIMATE,10,  0, 8, 10, MELEE_STUN2 ,10},
 	{ _("腕から刃が生え、%sを切り裂いた！",
-        "You grow a blade in your arm and cleave %s!"),       MELEE_MODE_ULTIMATE,20,  0, 10, 10, 0 ,10},
+        "You grow a blade in your arm and cleave %s!"),       MELEE_MODE_ULTIMATE,20,  0, 10, 10, MELEE_DEC_ATK ,10},
 	{ _("硬質化した羽が射出され、さらにそれがピラニアに変身して%sへ食らいついた！",
-        "You shoot out feathers, then turn them into piranhas that bite at %s!"),       MELEE_MODE_ULTIMATE,40,  20, 12, 10, 0 ,10},
+        "You shoot out feathers, then turn them into piranhas that bite at %s!"),       MELEE_MODE_ULTIMATE,40,  20, 12, 10, MELEE_DEC_MAG ,10},
 	{ _("「は　も　ん　し　っ　そ　う　だとォーッ！？」",
         "'HAMON OVERDRIVE!?'"),       MELEE_MODE_ULTIMATE,48, 40, 15, 15, MELEE_STUN3 ,20},
 
@@ -10614,9 +10646,9 @@ const martial_arts_new ma_blows_new[] =
 	{ _("あなたの腕が蛇のように伸びて%sを締め上げた。",
         "Your arm extends like a snake and crushes %s."),     MELEE_MODE_LONGARM,20, 15, 4, 8, MELEE_STUN ,8},
 	{ _("%sへゴムゴムの機関銃を放った！",
-        "You hit %s with Gomu Gomu no Machinegun!"),         MELEE_MODE_LONGARM,30, 20, 6, 8, 0 ,4},
+        "You hit %s with Gomu Gomu no Machinegun!"),         MELEE_MODE_LONGARM,30, 20, 6, 8, MELEE_STUN ,4},
 	{ _("%sへクリプティックニードルを放った！",
-        "You hit %s with Cryptic Needle!"),     MELEE_MODE_LONGARM,40, 25, 8, 8, MELEE_STUN ,8},
+        "You hit %s with Cryptic Needle!"),     MELEE_MODE_LONGARM,40, 25, 8, 8, MELEE_DEC_MAG ,8},
 
 	{ _("%sへ鋭い爪が食い込んだ。",
         "You slash %s with your sharp claws."),           MELEE_MODE_VAMP,1, 0, 1, 8, MELEE_VAMP ,2},
@@ -10634,45 +10666,45 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへワン・インチ・パンチを食らわせた！",
         "You hit %s with One Inch Punch!"),			MELEE_MODE_PUNCH_NINJA,10, 5, 7, 5, 0 ,10},
 	{ _("%sへアラバマオトシを食らわせた！",
-        "You hit %s with Arabama-Otoshi!"),				MELEE_MODE_PUNCH_NINJA,20, 10, 8, 8, 0 ,12},
+        "You hit %s with Arabama-Otoshi!"),				MELEE_MODE_PUNCH_NINJA,20, 10, 8, 8, MELEE_STUN2 ,12},
 	{ _("%sへ対空ポムポム・パンチを食らわせた！",
-        "You hit %s with anti-aerial pom-pom punch!"),         MELEE_MODE_PUNCH_NINJA,30, 20,10,10, 0 ,14},
+        "You hit %s with anti-aerial pom-pom punch!"),         MELEE_MODE_PUNCH_NINJA,30, 20,10,10, MELEE_DELAY ,14},
 	{ _("%sへダブル・ポン・パンチを食らわせた！",
-        "You hit %s with a Double Pon Punch!"),         MELEE_MODE_PUNCH_NINJA,40, 30,12,12, 0 ,16},
+        "You hit %s with a Double Pon Punch!"),         MELEE_MODE_PUNCH_NINJA,40, 30,12,12, MELEE_DEC_DEF ,16},
 
 	{ _("%sへケリ・キックを食らわせた。",
-        "You hit %s with a kick."),				    MELEE_MODE_KICK_NINJA,1, 0, 5, 5, 0 ,6},
+        "You hit %s with a kick."),				    MELEE_MODE_KICK_NINJA,10, 0, 5, 5, MELEE_DELAY ,6},
 	{ _("%sへ伝説のサマーソルトキックを食らわせた！",
-        "You hit %s with Legendary Somersault Kick!"),		    MELEE_MODE_KICK_NINJA,25, 10, 7, 7, 0 ,8},
+        "You hit %s with Legendary Somersault Kick!"),		    MELEE_MODE_KICK_NINJA,20, 10, 7, 7, MELEE_DEC_ATK ,8},
 	{ _("%sへドラゴン・トビゲリを食らわせた！",
-        "You hit %s with Dragon Tobigeri!"),		    MELEE_MODE_KICK_NINJA,30, 20, 9, 9, 0 ,10},
+        "You hit %s with Dragon Tobigeri!"),		    MELEE_MODE_KICK_NINJA,30, 20, 9, 9, MELEE_DEC_MAG ,10},
 	{ _("%sへタツマキケンを食らわせた！",
-        "You hit %s with Tatsumaki-ken!"),				    MELEE_MODE_KICK_NINJA,40, 30, 12, 12, 0 ,15},
+        "You hit %s with Tatsumaki-ken!"),				    MELEE_MODE_KICK_NINJA,40, 30, 12, 12, MELEE_STUN2 ,15},
 
 	{ _("%sを巨大な爪で引っ掻いた！",
-        "You rip %s with your huge claws!"),     MELEE_MODE_BEAST,1,   0, 6, 10, 0 ,4},
-	{ _("%sを噛んだ！", "You bite %s!"),					MELEE_MODE_BEAST,10,  0, 8, 10, 0 ,7},
+        "You rip %s with your huge claws!"),     MELEE_MODE_BEAST,1,   0, 6, 10, MELEE_DEC_ATK ,4},
+	{ _("%sを噛んだ！", "You bite %s!"),					MELEE_MODE_BEAST,10,  0, 8, 10, MELEE_DEC_DEF ,7},
 	{ _("%sを後ろ脚で蹴った！",
-        "You kick %s with your hind legs!"),			MELEE_MODE_BEAST,20, 10, 10, 10, MELEE_STUN ,10},
+        "You kick %s with your hind legs!"),			MELEE_MODE_BEAST,20, 10, 10, 10, MELEE_DELAY ,10},
 	{ _("%sへ強烈な体当たりを仕掛けた！",
         "You deliver a fierce bodyblow to %s!"), MELEE_MODE_BEAST,30, 20, 12, 10, MELEE_STUN2 ,13},
 	{ _("%sへ巨大な牙を突き立てた！",
-        "You sink your huge fangs into %s!"),     MELEE_MODE_BEAST,40, 30, 13, 14, MELEE_STUN2 ,20},
+        "You sink your huge fangs into %s!"),     MELEE_MODE_BEAST,40, 30, 13, 14, MELEE_STUN3 ,20},
 
 	{ _("%sを鋭い爪で突いた。",
         "You thrust your sharp claws into %s."),			MELEE_MODE_EX_CLAW,1,   0, 3, 9, 0 ,3},
 	{ _("%sを鋭い爪で切り裂いた！",
-        "You cleave %s with your sharp claws!"),		MELEE_MODE_EX_CLAW,12,  5, 5, 9, 0 ,4},
+        "You cleave %s with your sharp claws!"),		MELEE_MODE_EX_CLAW,12,  5, 5, 9, MELEE_DEC_DEF ,4},
 	{ _("%sを鋭い爪で貫いた！",
-        "You pierce %s with your sharp claws!"),			MELEE_MODE_EX_CLAW,20, 10, 7, 9, 0 ,5},
+        "You pierce %s with your sharp claws!"),			MELEE_MODE_EX_CLAW,20, 10, 7, 9, MELEE_DEC_DEF ,5},
 	{ _("%sをぶった斬った！",
-        "You deeply cut %s!"),				MELEE_MODE_EX_CLAW,27, 15, 9, 9, 0 ,7},
+        "You deeply cut %s!"),				MELEE_MODE_EX_CLAW,27, 15, 9, 9, MELEE_DEC_DEF ,7},
 	{ _("%sをなます切りにした！",
-        "You slice %s up!"),			MELEE_MODE_EX_CLAW,33, 20,10, 9, 0 ,8},
+        "You slice %s up!"),			MELEE_MODE_EX_CLAW,33, 20,10, 9, MELEE_DEC_DEF ,8},
 	{ _("%sを斬って斬って斬りまくった！",
-        "You cut %s over and over and over!"),	MELEE_MODE_EX_CLAW,39, 25,11, 9, 0 ,9},
+        "You cut %s over and over and over!"),	MELEE_MODE_EX_CLAW,39, 25,11, 9, MELEE_DEC_DEF ,9},
 	{ _("輝く爪が%sを滅多切りにした！",
-        "You gouge %s with your shining claws!"),   MELEE_MODE_EX_CLAW,43, 30,14, 9, 0 ,12},
+        "You gouge %s with your shining claws!"),   MELEE_MODE_EX_CLAW,43, 30,14, 9, MELEE_DEC_DEF ,12},
 
 	{ _("%sへ纏わりついた。",
         "You cling to %s."),     MELEE_MODE_SLIME,1, 0, 2, 2, MELEE_SLOW ,4},
@@ -10689,25 +10721,25 @@ const martial_arts_new ma_blows_new[] =
 	{ _("体が%sへ当たった。",
         "You hit %s with a bodyblow."),     MELEE_MODE_KOISHI,5, 0, 3, 3, 0 ,3},
 	{ _("%sに踵が当たった。",
-        "You hit %s with your heel."),     MELEE_MODE_KOISHI,7, 0, 5, 4, 0 ,5},
+        "You hit %s with your heel."),     MELEE_MODE_KOISHI,7, 0, 5, 4, MELEE_STUN ,5},
 	{ _("くしゃみをした。",
-        "You sneeze."),     MELEE_MODE_KOISHI,10, 10, 2, 7, MELEE_STUN ,3},
+        "You sneeze."),     MELEE_MODE_KOISHI,10, 10, 2, 7, MELEE_DEC_MAG ,3},
 	{ _("帽子を取ろうとした手が%sに当たった。",
         "You grab your hat and strike %s."),     MELEE_MODE_KOISHI,15, 0, 2, 10, MELEE_STUN2 ,5},
 	{ _("膝が%sに当たった。",
-        "You hit %s with your knee."),     MELEE_MODE_KOISHI,20, 0, 2, 10, MELEE_STUN2 ,5},
+        "You hit %s with your knee."),     MELEE_MODE_KOISHI,20, 0, 2, 10, MELEE_DEC_MAG ,5},
 	{ _("花びらをまとった跳躍に%sが跳ね飛ばされた。",
         "You bounce at %s with petals flying around you."),     MELEE_MODE_KOISHI,25, 20, 6, 6, MELEE_STUN ,5},
 	{ _("巨大な電球が現れて%sを吹き飛ばした！",
         "A giant ball of lightning strikes %s!"),     MELEE_MODE_KOISHI,30, 0, 4, 10, MELEE_STUN ,5},
 	{ _("突然薔薇が咲いて%sへ棘が刺さった。",
-        "A rose suddenly springs up and pierces %s with its thorns."),     MELEE_MODE_KOISHI,33, 0, 4, 9, 0 ,4},
+        "A rose suddenly springs up and pierces %s with its thorns."),     MELEE_MODE_KOISHI,33, 0, 4, 9, MELEE_DEC_MAG ,4},
 	{ _("サードアイのコードが鞭のように%sを打ち据えた。",
         "You strike %s with your third eye's cord like a whip."),     MELEE_MODE_KOISHI,36, 10, 3, 10, MELEE_STUN2 ,6},
 	{ _("中空に描いたハートマークが%sに当たった。",
-        "A heart mark drawn in midair strikes %s."),     MELEE_MODE_KOISHI,39, 0, 4, 9, 0 ,4},
+        "A heart mark drawn in midair strikes %s."),     MELEE_MODE_KOISHI,39, 0, 4, 9, MELEE_DEC_MAG ,4},
 	{ _("%sは薔薇に覆い尽くされた。",
-        "%s is covered in roses."),     MELEE_MODE_KOISHI,44, 40, 8, 10, 0 ,10},
+        "%s is covered in roses."),     MELEE_MODE_KOISHI,44, 40, 8, 10, MELEE_DEC_ALL ,10},
 
 	{ _("%sへ体当たりした。",
         "You tackle %s."),     MELEE_MODE_MIST,1, 0, 2, 5, MELEE_SLOW ,4},
@@ -10718,18 +10750,18 @@ const martial_arts_new ma_blows_new[] =
 	{ _("錐のように尖って%sを突いた。",
         "You take the shape of a cone and thrust at %s."),     MELEE_MODE_MIST,36, 20, 5, 8, 0 ,10},
 	{ _("巨大な獣の形をとって%sへ突進した！",
-        "You take the shape of a huge beast and charge at %s!"),     MELEE_MODE_MIST,44, 40, 7, 9, 0 ,15},
+        "You take the shape of a huge beast and charge at %s!"),     MELEE_MODE_MIST,44, 40, 7, 9, MELEE_STUN2 ,15},
 
 	{ _("巨大な爪が%sを切り裂いた！",
-        "You cleave %s with your huge claws!"),       MELEE_MODE_DRAGON,1,  0, 10, 10, 0 ,10},
+        "You cleave %s with your huge claws!"),       MELEE_MODE_DRAGON,1,  0, 10, 10, MELEE_DEC_DEF ,10},
 	{ _("巨大な尻尾が%sを薙ぎ払った！",
         "You sweep %s with your huge tail!"),       MELEE_MODE_DRAGON,1,  0, 10, 12, MELEE_STUN3 ,15},
 	{ _("%sへ向かって急降下し、そのまま押し潰した！",
         "You dive at and crush %s!"),       MELEE_MODE_DRAGON,1, 0, 13, 13, MELEE_STUN3 ,20},
 	{ _("巨大な角が%sを貫いた！",
-        "You pierce %s with your huge horns!"),       MELEE_MODE_DRAGON,1, 0, 15, 12, 0 ,12},
+        "You pierce %s with your huge horns!"),       MELEE_MODE_DRAGON,1, 0, 15, 12, MELEE_DEC_DEF ,12},
 	{ _("巨大な牙が%sを引き裂いた！",
-        "You rip %s with your huge fangs!"),       MELEE_MODE_DRAGON,1, 0, 15, 15, 0 ,20},
+        "You rip %s with your huge fangs!"),       MELEE_MODE_DRAGON,1, 0, 15, 15, MELEE_DEC_DEF ,20},
 	{ _("%sへ強烈な火炎を吹き付けた！",
         "You breathe intense flames at %s!"),       MELEE_MODE_DRAGON,1, 0, 16, 16,MELEE_ATAGO ,10},
 
@@ -10738,11 +10770,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを殴った。",
         "You punch %s."),						MELEE_MODE_CIRNO,3, 5, 2, 3, 0 ,2},
 	{ _("%sへヘッドスライディングした。",
-        "You slide at %s head forward."),		MELEE_MODE_CIRNO,10, 5, 3, 4, 0 ,4},
+        "You slide at %s head forward."),		MELEE_MODE_CIRNO,10, 5, 3, 4, MELEE_DELAY ,4},
 	{ _("氷を持って%sへ体当たりした。",
         "You grab ice in your hands and tackle %s."),		MELEE_MODE_CIRNO,15, 10, 3, 4, MELEE_COLD ,6},
 	{ _("%sをげしげし蹴った。",
-        "You hit %s with a sharp kick."),				MELEE_MODE_CIRNO,20, 10, 4, 6, 0 ,4},
+        "You hit %s with a sharp kick."),				MELEE_MODE_CIRNO,20, 10, 4, 6, MELEE_DELAY ,4},
 	{ _("%sへ氷塊を投げつけた。",
         "You throw a lump of ice at %s."),				MELEE_MODE_CIRNO,24, 16, 3, 6, MELEE_COLD ,4},
 	{ _("周囲の気温を急激に下げた！",
@@ -10834,7 +10866,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("衝撃波と共に%sへ突撃した！",
         "You charge at %s with a shockwave!"),       	MELEE_MODE_LIGHTSPEED,10, 30, 8, 8, MELEE_STUN3 ,12},
 	{ _("%sの周りを駆け巡りズタズタにした！",
-        "You run circles around %s while dealing blows!"),       	MELEE_MODE_LIGHTSPEED,20, 30, 10, 10, MELEE_STUN2 ,6},
+        "You run circles around %s while dealing blows!"),       	MELEE_MODE_LIGHTSPEED,20, 30, 10, 10, MELEE_DEC_DEF ,6},
 	{ _("一瞬で数十発の打撃が%sに叩き込まれた！",
         "You land tens of blows on %s in an instant!"),       	MELEE_MODE_LIGHTSPEED,30, 40, 14, 14, MELEE_STUN2 ,9},
 
@@ -10856,7 +10888,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("岩が飛んで%sへ直撃した。",
         "You launch a rock at %s."),				MELEE_MODE_MIND,7, 10, 4, 4, MELEE_STUN ,8},
 	{ _("%sは地面に激しく押し付けられた。",
-        "You violently press %s into ground."),		MELEE_MODE_MIND,12, 20, 5, 5, MELEE_SLOW ,6},
+        "You violently press %s into ground."),		MELEE_MODE_MIND,12, 20, 5, 5, MELEE_DELAY ,6},
 	{ _("%sへ電撃を放った。",
         "You throw lightning at %s."),						MELEE_MODE_MIND,18, 20, 6, 6, MELEE_ELEC ,6},
 	{ _("%sが宙に浮き、地面に叩きつけられた！",
@@ -10868,28 +10900,28 @@ const martial_arts_new ma_blows_new[] =
 	{ _("突然%sの体が燃え上がった！",
         "%s is suddenly set ablaze!"),				MELEE_MODE_MIND,38, 20, 9, 10, MELEE_FIRE,5},
 	{ _("%sの体が激しく捻られた！",
-        "%s is twisted in an unnatural way!"),				MELEE_MODE_MIND,40, 25, 10, 10, 0,7},
+        "%s is twisted in an unnatural way!"),				MELEE_MODE_MIND,40, 25, 10, 10, MELEE_DEC_MAG,7},
 	{ _("地響きと共に大地が裂け、%sを呑み込んだ！",
         "The earth rumbles as a large crack opens up, swallowing %s!"),    MELEE_MODE_MIND,45, 40, 12, 12, MELEE_STUN2 ,12},
 
 	{ _("%sへ小さな蝶を飛ばした。",
-        "You send a small butterfly at %s."),           MELEE_MODE_YUYUKO,1, 0, 2, 5, MELEE_STUN ,2},
+        "You send a small butterfly at %s."),           MELEE_MODE_YUYUKO,1, 0, 2, 5, MELEE_DEC_ATK ,2},
 	{ _("幽霊が%sへ体当たりした。",
-        "A ghost slams into %s."),           MELEE_MODE_YUYUKO,6, 5, 2, 7, 0 ,3},
+        "A ghost slams into %s."),           MELEE_MODE_YUYUKO,6, 5, 2, 7, MELEE_STUN ,3},
 	{ _("幽霊が足元から%sを払った。",
-        "A ghost sweeps %s."),           MELEE_MODE_YUYUKO,11, 10, 2, 9, MELEE_SLOW ,4},
+        "A ghost sweeps %s."),           MELEE_MODE_YUYUKO,11, 10, 2, 9, MELEE_STUN ,4},
 	{ _("大きな蝶が弧を描いて%sを薙ぎ払った。",
-        "A large butterfly flies in an arc and sweeps %s."),  MELEE_MODE_YUYUKO,16, 10, 4, 6, 0 ,6},
+        "A large butterfly flies in an arc and sweeps %s."),  MELEE_MODE_YUYUKO,16, 10, 4, 6, MELEE_DEC_ATK ,6},
 	{ _("蝶を放ちながら宙返りした。",
-        "You do a somersault while scattering butterflies around."),			  MELEE_MODE_YUYUKO,22, 20, 5, 7, 0 ,8},
+        "You do a somersault while scattering butterflies around."),			  MELEE_MODE_YUYUKO,22, 20, 5, 7, MELEE_DEC_ATK ,8},
 	{ _("指先から五条の光が%sへ放たれた。",
-        "You fire five rays of light from your fingers at %s."),       MELEE_MODE_YUYUKO,28, 25, 7, 8, 0 ,1},
+        "You fire five rays of light from your fingers at %s."),       MELEE_MODE_YUYUKO,28, 25, 7, 8, MELEE_DEC_ALL ,1},
 	{ _("空中で蝶たちと共に大きく回転した。",
-        "You spin in midair, surrounded by butterflies."),     MELEE_MODE_YUYUKO,33, 20, 8, 9, 0 ,8},
+        "You spin in midair, surrounded by butterflies."),     MELEE_MODE_YUYUKO,33, 20, 8, 9, MELEE_DEC_ATK ,8},
 	{ _("幽霊たちが%sへ一斉に突撃した。",
-        "A swarm of ghosts charges at %s."),         MELEE_MODE_YUYUKO,39, 25, 9, 10, MELEE_STUN ,9},
+        "A swarm of ghosts charges at %s."),         MELEE_MODE_YUYUKO,39, 25, 9, 10, MELEE_STUN2 ,9},
 	{ _("輝く蝶が%sを覆い尽くした。",
-        "Glowing butterflies surround %s."),           MELEE_MODE_YUYUKO,44, 35, 10, 12, MELEE_STUN3 ,12},
+        "Glowing butterflies surround %s."),           MELEE_MODE_YUYUKO,44, 35, 10, 12, MELEE_DEC_ALL ,12},
 
 	{ _("%sを睨んだ。",
         "You gaze at %s."),           MELEE_MODE_TOZIKO,1, 0, 1, 6, 0 ,2},
@@ -10915,7 +10947,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("風を切って%sへ落下した！",
         "You drop on top of %s faster than wind!"),     MELEE_MODE_KISUME4,1, 0, 12, 20, MELEE_STUN3 ,20},
 	{ _("大地を揺るがして%sの上に落下した！",
-        "You drop on top of %s, making the ground shake!"),           MELEE_MODE_KISUME5,1, 0, 16, 25, MELEE_STUN3 ,25},
+        "You drop on top of %s, making the ground shake!"),           MELEE_MODE_KISUME5,1, 0, 22, 22, MELEE_STUN3 ,20},
 
 	{ _("%sを笏でぺちんと叩いた。",
         "You strike %s with your shaku."),		MELEE_MODE_MIKO,1, 0, 2, 3, 0 ,2},
@@ -10928,15 +10960,15 @@ const martial_arts_new ma_blows_new[] =
 	{ _("炎を纏った足で%sを蹴った。",
         "You wreathe your foot in flames and kick %s."),		MELEE_MODE_MIKO,20, 12, 6, 8, MELEE_FIRE ,6},
 	{ _("大きく振った両腕が%sを切り裂いた！",
-        "You cleave %s with two wide swings!"),	MELEE_MODE_MIKO,24, 10, 7, 5, 0 ,5},
+        "You cleave %s with two wide swings!"),	MELEE_MODE_MIKO,24, 10, 7, 5, MELEE_DEC_DEF ,5},
 	{ _("%sを蹴って燃え上がらせた！",
         "You kick and set %s on fire!"),	MELEE_MODE_MIKO,28, 15, 8, 8, MELEE_FIRE ,8},
 	{ _("宙に描いた光輪が%sを切り裂いた！",
-        "You draw a ring of light in midair, launching it to cleave %s!"),	MELEE_MODE_MIKO,32, 25, 9, 8, 0 ,7},
+        "You draw a ring of light in midair, launching it to cleave %s!"),	MELEE_MODE_MIKO,32, 25, 9, 8, MELEE_DEC_DEF ,7},
 	{ _("巨大な刃が虚空から%sへ突き出した！",
-        "A huge blade pierces %s out of nowhere!"),	MELEE_MODE_MIKO,38, 30, 10, 10, 0 ,9},
+        "A huge blade pierces %s out of nowhere!"),	MELEE_MODE_MIKO,38, 30, 10, 10, MELEE_DEC_DEF ,9},
 	{ _("輝く剣が天から%sへ向けて降り注いだ！",
-        "A shining sword drops down on %s from above!"),	MELEE_MODE_MIKO,45, 35, 11, 12, 0 ,12},
+        "A shining sword drops down on %s from above!"),	MELEE_MODE_MIKO,45, 35, 11, 12, MELEE_DEC_DEF ,12},
 
 	{ _("扇を取出し%sを叩いた。",
         "You take out your fan and strike %s."),			MELEE_MODE_KOKORO,1, 0, 2, 3, 0 ,2},
@@ -10947,17 +10979,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("面の一つが%sへ被さった。",
         "You slam one of your masks into %s."),			MELEE_MODE_KOKORO,16, 25, 5, 3, MELEE_STUN2 ,4},
 	{ _("光る薙刀を構え、%sへ斬りかかった。",
-        "You swing at %s with a glowing naginata."),		MELEE_MODE_KOKORO,21, 10, 5, 5, 0 ,6},
+        "You swing at %s with a glowing naginata."),		MELEE_MODE_KOKORO,21, 10, 5, 5, MELEE_DELAY ,6},
 	{ _("両手に扇を持ち%sへ向けて激しく回転した！",
         "You grab fans in both of your hands and swiftly spin at %s!"),	MELEE_MODE_KOKORO,27, 20, 6, 5, 0 ,6},
 	{ _("気の放出で%sを弾き飛ばした！",
         "You knock %s back with your sheer spirit release!"),		MELEE_MODE_KOKORO,30, 20, 7, 5, MELEE_STUN ,6},
 	{ _("%sを薙刀で続けざまに切り裂いた！",
-        "You keep slashing at %s with your naginata!"),		MELEE_MODE_KOKORO,36, 25, 9, 9, 0 ,8},
+        "You keep slashing at %s with your naginata!"),		MELEE_MODE_KOKORO,36, 25, 9, 9, MELEE_DELAY ,8},
 	{ _("多数の面が%sへ飛んだ！",
         "You send several masks flying at %s!"),			MELEE_MODE_KOKORO,40, 35, 8, 10, MELEE_STUN3 ,8},
 	{ _("%sを舞うように切り刻んだ！",
-        "You dance as you slice %s up!"),		MELEE_MODE_KOKORO,48, 45, 12, 12, 0 ,15},
+        "You dance as you slice %s up!"),		MELEE_MODE_KOKORO,48, 45, 12, 12, MELEE_DELAY ,15},
 
 	{ _("%sを手刀で打った。",
         "You strike %s with a hand knife."),						MELEE_MODE_NINJA,1, 0, 1, 3, 0 ,1},
@@ -10974,7 +11006,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("鋼鉄のような貫手が%sを貫いた！",
         "You pierce %s with a steel-hard blow!"),			MELEE_MODE_NINJA,40, 35, 5, 7, 0 ,6},
 	{ _("死角から%sを奇襲した！",
-        "You assault %s from a blind spot!"),					MELEE_MODE_NINJA,46, 40, 8, 8, 0 ,10},
+        "You assault %s from a blind spot!"),					MELEE_MODE_NINJA,46, 40, 8, 8, MELEE_DELAY ,10},
 
 	{ _("%sへ体当たりした。",
         "You tackle %s."),						MELEE_MODE_CHEN,1, 0, 1, 9, 0 ,3},
@@ -11021,8 +11053,8 @@ const martial_arts_new ma_blows_new[] =
         "You drag %s into the water!"),     MELEE_MODE_MURASA2, 22, 10, 6, 8, MELEE_SINK ,7},
 	{ _("%sに錨をぶつけて水中に叩き込んだ！",
         "You slam %s down into the water with an anchor!"),			MELEE_MODE_MURASA2, 28, 20, 7, 8, MELEE_SINK ,10},
-	{ _("水面から無数の腕が%sへ伸びた・・",
-        "Countless arms rise up from the water surface, grabbing at %s..."),			MELEE_MODE_MURASA2, 35, 30, 9, 10, MELEE_SINK ,8},
+	{ _("水面から無数の鎖が%sへ伸びた・・",
+        "Countless chains rise up from the water surface, grabbing at %s..."),			MELEE_MODE_MURASA2, 35, 30, 9, 10, MELEE_SINK ,8},
 	{ _("大渦が巻き起こり、%sを呑み込んだ！",
         "You summon a large whirlpool, enveloping %s!"),       	MELEE_MODE_MURASA2, 43, 40, 10, 12, MELEE_SINK ,13},
 
@@ -11031,17 +11063,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを蹴った。",
         "You kick %s."),         		        		MELEE_MODE_SHINMYOU2, 7, 0, 2, 7, 0 ,4},
 	{ _("%sに椀を蹴り当てた。",
-        "You kick your bowl at %s."),						MELEE_MODE_SHINMYOU2,13, 0, 3, 6, 0 ,6},
+        "You kick your bowl at %s."),						MELEE_MODE_SHINMYOU2,13, 0, 3, 6, MELEE_DELAY ,6},
 	{ _("%sへ体当りした。",
         "You tackle %s."),         					MELEE_MODE_SHINMYOU2,18, 5, 5, 5, 0 ,5},
 	{ _("%sへ椀を叩きつけた。",
-        "You slam %s with your bowl."),                 		MELEE_MODE_SHINMYOU2,24, 10, 6, 7,0 ,8},
+        "You slam %s with your bowl."),                 		MELEE_MODE_SHINMYOU2,24, 10, 6, 7,MELEE_DELAY ,8},
 	{ _("椀に乗ってコマネズミのように%sへ突進した！",
-        "You ride your bowl, charging at %s!"), MELEE_MODE_SHINMYOU2,28, 20, 7, 7, MELEE_STUN ,5},
+        "You ride your bowl, charging at %s!"), MELEE_MODE_SHINMYOU2,28, 20, 7, 7, MELEE_DELAY ,5},
 	{ _("打出の小槌で%sを殴った！",
         "You strike %s with Miracle Mallet!"),					MELEE_MODE_SHINMYOU2,33, 25, 8, 8, MELEE_STUN ,8},
 	{ _("高速回転する椀が%sを巻き込んだ！",
-        "Your bowl spins at high speed and slams into %s!"),           MELEE_MODE_SHINMYOU2,39, 30, 9, 9, 0 ,10},
+        "Your bowl spins at high speed and slams into %s!"),           MELEE_MODE_SHINMYOU2,39, 30, 9, 9, MELEE_DELAY ,10},
 	{ _("%sへ向けて打ち出の小槌をぶん回した！",
         "You slam your Miracle Mallet into %s!"),       MELEE_MODE_SHINMYOU2,43, 35, 10, 11, MELEE_STUN2 ,12},
 
@@ -11107,15 +11139,15 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを引っ掻いた。",
         "You scratch %s."),							MELEE_MODE_REMY_HAND,1, 0, 1, 7, 0 ,3},
 	{ _("%sを鋭い爪で切り裂いた！",
-        "You rip %s with your sharp claws!"),					MELEE_MODE_REMY_HAND,7, 0, 3, 5, 0 ,5},
+        "You rip %s with your sharp claws!"),					MELEE_MODE_REMY_HAND,7, 0, 3, 5, MELEE_DEC_DEF ,5},
 	{ _("%sを鋭い爪で切り上げた！",
-        "You hit %s with a rising claw attack!"),					MELEE_MODE_REMY_HAND,12, 0, 6, 6, 0 ,6},
+        "You hit %s with a rising claw attack!"),					MELEE_MODE_REMY_HAND,12, 0, 6, 6, MELEE_DEC_DEF ,6},
 	{ _("%sへ触れた。",
         "You touch %s."),								MELEE_MODE_REMY_HAND,18, 0, 6, 7, MELEE_VAMP ,6},
 	{ _("%sへ引き裂くようなフックを放った！",
         "You hit %s with a side cleave!"),			MELEE_MODE_REMY_HAND,26, 5, 7, 9, MELEE_STUN ,6},
 	{ _("%sを大きく続けざまに切り裂いた！",
-        "You deeply slash %s up!"),			MELEE_MODE_REMY_HAND,34, 20, 10, 11, 0 ,7},
+        "You deeply slash %s up!"),			MELEE_MODE_REMY_HAND,34, 20, 10, 11, MELEE_DEC_DEF ,7},
 	{ _("紅い十字のオーラが%sを吹き飛ばした！",
         "You launch a scarlet cross aura at %s!"),		MELEE_MODE_REMY_HAND,45, 40, 13, 13, MELEE_STUN3 ,18},
 
@@ -11135,7 +11167,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("翼で%sを打った。",
         "You strike %s with your wings."),							MELEE_MODE_REMY_OTHER,1, 0, 1, 7, 0 ,3},
 	{ _("%sへ滑るようなスライディングを放った。",
-        "You hit %s with a sliding attack."),		MELEE_MODE_REMY_OTHER,8, 0, 3, 5, 0 ,5},
+        "You hit %s with a sliding attack."),		MELEE_MODE_REMY_OTHER,8, 0, 3, 5, MELEE_DELAY ,5},
 	{ _("大きくしなった翼が%sへ叩きこまれた！",
         "You strike %s with giant wings!"),		MELEE_MODE_REMY_OTHER,12, 0, 4, 6, MELEE_STUN ,6},
 	{ _("%sへ吸血コウモリを放った。",
@@ -11143,9 +11175,9 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ弾丸のように突進した！",
         "You charge at %s like a bullet!"),					MELEE_MODE_REMY_OTHER,28, 10, 8, 8, MELEE_STUN2 ,10},
 	{ _("突如姿を消し、%sの背後から奇襲した！",
-        "You suddenly disappear, then appear behind %s and strike!"),       MELEE_MODE_REMY_OTHER,32, 20, 9, 10, MELEE_STUN ,8},
+        "You suddenly disappear, then appear behind %s and strike!"),       MELEE_MODE_REMY_OTHER,32, 20, 9, 10, MELEE_DELAY ,8},
 	{ _("翼がドリルのように%sを穿った！",
-        "You fold your wings like a drill and drive them into %s!"),				MELEE_MODE_REMY_OTHER,38, 25, 10, 10, 0 ,12},
+        "You fold your wings like a drill and drive them into %s!"),				MELEE_MODE_REMY_OTHER,38, 25, 10, 10, MELEE_DELAY ,12},
 	{ _("無数の蝙蝠が%sをズタズタにした！",
         "Countless bats assault %s!"),			MELEE_MODE_REMY_OTHER,40, 30, 11, 11, MELEE_VAMP ,7},
 	{ _("紅いオーラを纏って%sへ錐揉み突撃した！",
@@ -11154,17 +11186,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sに二弾蹴りを食らわせた。",
         "You double-kick %s."),						MELEE_MODE_NITORI,1, 0, 2, 3, 0 ,2},
 	{ _("回転するプロペラを%sに当てた！",
-        "You hit %s with a spinning propeller!"),					MELEE_MODE_NITORI,7, 0, 4, 4, 0 ,3},
+        "You hit %s with a spinning propeller!"),					MELEE_MODE_NITORI,7, 0, 4, 4, MELEE_DELAY ,3},
 	{ _("巨大なバネで%sを弾き飛ばした！",
-        "You knock %s back with a huge spring!"),					MELEE_MODE_NITORI,12, 0, 5, 6, 0 ,6},
+        "You knock %s back with a huge spring!"),					MELEE_MODE_NITORI,12, 0, 5, 6, MELEE_DELAY ,6},
 	{ _("リュックからグローブが飛び出して%sへアッパーを食らわせた！",
         "A glove flies out of your rucksack and uppercuts %s!"),	MELEE_MODE_NITORI,18, 12, 6, 7, MELEE_STUN2 ,7},
 	{ _("リュックからドリルが飛び出して%sを穿った！",
-        "A drill flies out of your rucksack and drives into %s!"),			MELEE_MODE_NITORI,26, 20, 7, 8, 0 ,8},
+        "A drill flies out of your rucksack and drives into %s!"),			MELEE_MODE_NITORI,26, 20, 7, 8, MELEE_DEC_DEF ,8},
 	{ _("リュックから鉄球が飛び出して%sに直撃した！",
         "An iron ball flies out of your rucksack and slams into %s!"),			MELEE_MODE_NITORI,34, 30, 9, 9, MELEE_STUN2 ,10},
 	{ _("ドリルとジェットが生えたリュックで%sへ突撃した！",
-        "Your rucksack grows a jetpack and a drill, and you charge at %s!"),	MELEE_MODE_NITORI,45, 40, 11, 11, 0 ,12},
+        "Your rucksack grows a jetpack and a drill, and you charge at %s!"),	MELEE_MODE_NITORI,45, 40, 11, 11, MELEE_DEC_DEF ,12},
 
 
 
@@ -11179,25 +11211,25 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ強烈なフックを喰らわせた。",
         "You hit %s with a powerful hook."),                 MELEE_MODE_HIZIRI,10, 5, 6, 5, MELEE_STUN ,7},
 	{ _("%sを独鈷杵の剣で斬った。",
-        "You slash %s with Vajra sword."),   					MELEE_MODE_HIZIRI,12, 5, 7, 5, 0 ,5},
+        "You slash %s with Vajra sword."),   					MELEE_MODE_HIZIRI,12, 5, 7, 5, MELEE_SLAY_EVIL ,5},
 	{ _("数珠が巨大化し%sを打った。",
         "You enlarge your bead chain and strike %s."),                 	MELEE_MODE_HIZIRI,15, 10, 6, 7, MELEE_SLAY_EVIL ,5},
 	{ _("%sを独鈷杵の剣で斬り上げた。",
-        "You hit %s with a rising slash of Vajra sword."),                 	MELEE_MODE_HIZIRI,18, 10, 6, 7, 0 ,9},
+        "You hit %s with a rising slash of Vajra sword."),                 	MELEE_MODE_HIZIRI,18, 10, 6, 7, MELEE_SLAY_EVIL ,9},
 	{ _("%sへ飛び蹴りを喰らわせた。",
         "You hit %s with a flying kick."),                 	MELEE_MODE_HIZIRI,20, 10, 7, 7, MELEE_STUN ,10},
 	{ _("独鈷杵の剣を構えて%sへ突進した！",
         "You hold out your Vajra sword and charge at %s!"),				MELEE_MODE_HIZIRI,23, 15, 8, 8, MELEE_STUN ,8},
 	{ _("%sを独鈷杵の剣で貫いた！",
-        "You pierce %s with your Vajra sword!"),			         	MELEE_MODE_HIZIRI,27, 20, 8, 8, 0 ,9},
+        "You pierce %s with your Vajra sword!"),			         	MELEE_MODE_HIZIRI,27, 20, 8, 8, MELEE_SLAY_EVIL ,9},
 	{ _("%sを強烈な気合いで弾き飛ばした！",
         "You knock %s back with your sheer spirit release!"),				MELEE_MODE_HIZIRI,30, 20, 8, 8, MELEE_STUN3 ,5},
 	{ _("%sを独鈷杵の剣で続けざまに斬った！",
-        "You keep slashing %s with your Vajra sword!"),			    MELEE_MODE_HIZIRI,32, 25, 8, 9, 0 ,9},
+        "You keep slashing %s with your Vajra sword!"),			    MELEE_MODE_HIZIRI,32, 25, 8, 9, MELEE_SLAY_EVIL ,9},
 	{ _("%sへ法力の衝撃波を食らわせた！",
         "You hit %s with a magic shockwave!"),				 	MELEE_MODE_HIZIRI,35, 25, 9, 9, MELEE_SLAY_EVIL ,8},
 	{ _("%sを独鈷杵の剣でぶった斬った！",
-        "You cleave %s with your Vajra sword!"),				 	MELEE_MODE_HIZIRI,38, 25, 10, 10, 0 ,12},
+        "You cleave %s with your Vajra sword!"),				 	MELEE_MODE_HIZIRI,38, 25, 10, 10, MELEE_SLAY_EVIL ,12},
 	{ _("%sへ引き裂くような飛び蹴りを喰らわせた！",
         "You cleave %s with a flying kick!"),       MELEE_MODE_HIZIRI,40, 30, 11, 11, MELEE_STUN2 ,12},
 	{ _("%sへ目にも留まらぬ連撃を浴びせた！",
@@ -11225,11 +11257,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ不吉な言葉を囁いた。",
         "You ominously whisper to %s."),		MELEE_MODE_NUE,34, 20, 10, 10, MELEE_CONFUSE ,12},
 	{ _("鋭い爪で%sを掻き毟った！",
-        "You tear into %s with your sharp claws!"),		MELEE_MODE_NUE,39, 10, 12, 12, 0 ,10},
+        "You tear into %s with your sharp claws!"),		MELEE_MODE_NUE,39, 10, 12, 12, MELEE_DEC_DEF ,10},
 	{ _("%sに雷が落ちた！",
         "You drop a thunderbolt down on %s!"),				MELEE_MODE_NUE,42, 20, 13, 13, MELEE_ELEC ,12},
 	{ _("%sは謎の黒煙に包まれた。",
-        "%s is engulfed in mysterious black smoke."),		MELEE_MODE_NUE,46, 35, 13, 14, MELEE_POIS ,15},
+        "%s is engulfed in mysterious black smoke."),		MELEE_MODE_NUE,46, 35, 13, 14, MELEE_DEC_ALL ,15},
 
 	{ _("%sを制御棒で殴った。",
         "You strike %s with your control rod."),				MELEE_MODE_UTSUHO,1, 0, 2, 4, 0 ,4},
@@ -11252,7 +11284,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sを岩のような足で蹴り上げた！",
         "You hit %s with a rising kick from your concrete-encased foot!"),		MELEE_MODE_UTSUHO,29, 15, 6, 7, MELEE_STUN ,8},
 	{ _("%sへサマーソルトキックを放った！",
-        "You hit %s with a somersault kick!"),	MELEE_MODE_UTSUHO,32, 20, 7, 7, 0 ,8},
+        "You hit %s with a somersault kick!"),	MELEE_MODE_UTSUHO,32, 20, 7, 7, MELEE_STUN ,8},
 	{ _("%sの周囲で続けざまに爆発が起こった！",
         "You cause explosions around %s!"),MELEE_MODE_UTSUHO,36, 30, 5, 7, MELEE_FIRE ,8},
 	{ _("光弾が%sを打ち据えた！",
@@ -11262,7 +11294,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ核反応制御不能ダイブを放った！",
         "You hit %s with Uncontainable Nuclear Reaction Dive!"),MELEE_MODE_UTSUHO,43, 35, 11, 11, MELEE_STUN2 ,15},
 	{ _("%sの下から巨大な火柱が噴き上がった！",
-        "A huge pillar of flame rises up from below %s!"),MELEE_MODE_UTSUHO,46, 37, 10, 18, MELEE_FIRE ,16},
+        "A huge pillar of flame rises up from below %s!"),MELEE_MODE_UTSUHO,46, 37, 10, 18, MELEE_ATAGO ,16},
 
 	{ _("%sへしゃがみ小キックを放った。",
         "You hit %s with a crouching kick."),             MELEE_MODE_MA,1, 0, 1, 3, 0 ,3},
@@ -11321,31 +11353,31 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ天の乱光脚龍を放った！",
         "You hit %s with Heavenly Light Dragon Kick!"),  				MELEE_MODE_MA,28, 20, 7, 8, MELEE_STUN ,9},
 	{ _("%sへフルムーンスパイラルを喰らわせた！",
-        "You hit %s with Full Moon Spiral!"),  	MELEE_MODE_MA,29, 25, 10, 10, 0 ,14},
+        "You hit %s with Full Moon Spiral!"),  	MELEE_MODE_MA,29, 25, 10, 10, MELEE_DEC_MAG ,14},
 	{ _("%sへハンティングスワンを放った！",
-        "You hit %s with Hunting Swan!"),           MELEE_MODE_MA,30, 28, 8, 9, 0 ,18},
+        "You hit %s with Hunting Swan!"),           MELEE_MODE_MA,30, 28, 8, 9, MELEE_DEC_DEF ,18},
 	{ _("%sへ七星点心を放った！",
         "You hit %s with Seven Star Heart Strike!"),                 	MELEE_MODE_MA,31, 25, 8, 9, 0 ,18},
 	{ _("%sへ悪魔風脚・画竜点睛を喰らわせた！",
         "You hit %s with Demon Wind Kick, Painted Dragon Strike!"),       MELEE_MODE_MA,32, 27, 7, 8, MELEE_FIRE ,10},
 	{ _("%sへ空手裏剣を喰らわせた！",
-        "You hit %s with Aerial Shuriken!"),               	MELEE_MODE_MA,33, 30, 10, 10, 0,5},
+        "You hit %s with Aerial Shuriken!"),               	MELEE_MODE_MA,33, 30, 10, 10, MELEE_DEC_DEF,5},
 	{ _("%sへギャラクティカマグナムを喰らわせた！",
         "You hit %s with Galactica Magnum!"),   MELEE_MODE_MA,34, 25, 8, 8, MELEE_STUN ,7},
 	{ _("%sへアンパンチを放った！",
         "You hit %s with Un-Punch!"),      				MELEE_MODE_MA,35, 30, 4, 12, MELEE_STUN3 ,12},
 	{ _("%sへジェットソニックマッハパンチを放った！",
-        "You hit %s with Jet Sonic Mach Punch!"),	MELEE_MODE_MA,36, 27, 6, 11, 0 ,9},
+        "You hit %s with Jet Sonic Mach Punch!"),	MELEE_MODE_MA,36, 27, 6, 11, MELEE_DEC_MAG ,9},
 	{ _("%sへダークネスイリュージョンを喰らわせた！",
         "You hit %s with Darkness Illusion!"),	MELEE_MODE_MA,37, 32, 10, 10, MELEE_STUN ,10},
 	{ _("%sへカラミティエンドを喰らわせた！",
-        "You hit %s with Calamity End!"),			MELEE_MODE_MA,38, 30, 9, 9, 0 ,15},
+        "You hit %s with Calamity End!"),			MELEE_MODE_MA,38, 30, 9, 9, MELEE_DEC_DEF ,15},
 	{ _("%sへタイガーブレイクを喰らわせた！",
         "You hit %s with Tiger Break!"),			MELEE_MODE_MA,39, 36, 9, 9, MELEE_STUN2 ,10},
 	{ _("%sへドゴーンパンチを放った！",
         "You hit %s with Dogone Punch!"),               MELEE_MODE_MA,40, 35, 10, 10, MELEE_STUN3 ,12},
 	{ _("%sへ南斗水鳥拳奥義飛燕流舞を放った！",
-        "You hit %s with North Star Crane Meteor Dance!"),       MELEE_MODE_MA,41, 40, 11, 12, 0 ,10},
+        "You hit %s with North Star Crane Meteor Dance!"),       MELEE_MODE_MA,41, 40, 11, 12, MELEE_DEC_DEF ,10},
 	{ _("%sへペガサス流星拳を放った！",
         "You hit %s with Pegasus Meteor Fist!"),       		MELEE_MODE_MA,42, 38, 11, 11, MELEE_STUN2 ,11},
 	{ _("%sへファイナルヘヴンを喰らわせた！",
@@ -11357,13 +11389,13 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへオーロラエクスキューションを放った！",
         "You hit %s with Aurora Execution!"),   MELEE_MODE_MA,46, 40, 10, 10, MELEE_COLD ,12},
 	{ _("%sへ夢幻闘舞を放った！",
-        "You hit %s with Dream Battle Dance!"),       				MELEE_MODE_MA,47, 40, 12, 12, 0 ,16},
+        "You hit %s with Dream Battle Dance!"),       				MELEE_MODE_MA,47, 40, 12, 12, MELEE_DELAY ,16},
 	{ _("%sへビッグバンインパクトを喰らわせた！",
         "You hit %s with Big Bang Impact!"),		MELEE_MODE_MA,48, 43, 12, 14, MELEE_STUN2 ,15},
 	{ _("%sへジェット・トゥ・ジェット・アパカーを喰らわせた！",
         "You hit %s with Jet-to-Jet Uppercut!"),MELEE_MODE_MA,49, 45, 13, 13, MELEE_STUN3 ,12},
 	{ _("%sへ超級覇王電影弾を放った！",
-        "You hit %s with Super Dynast Lightning Bullet!"),				MELEE_MODE_MA,50, 48, 13, 15, MELEE_ELEC ,20},
+        "You hit %s with Super Dynast Lightning Bullet!"),				MELEE_MODE_MA,50, 48, 13, 15, MELEE_DELAY ,20},
 
 	{ _("%sをはたいた。",
         "You hit %s."),								MELEE_MODE_SUWAKO,1, 0, 1, 7, 0 ,3},
@@ -11378,17 +11410,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("岩の蛙に乗って%sへ体当りした！",
         "You climb a stone frog statue and tackle %s!"),				MELEE_MODE_SUWAKO,18, 10, 4, 7, 0 ,9},
 	{ _("%sの足元から間欠泉が噴き出した！",
-        "A geyser spouts out from below %s!"),			MELEE_MODE_SUWAKO,22, 15, 5, 7, 0 ,7},
+        "A geyser spouts out from below %s!"),			MELEE_MODE_SUWAKO,22, 15, 5, 7, MELEE_WATER ,7},
 	{ _("大岩が地中から飛び出し%sへ直撃した！",
         "A boulder flies out of the earth at %s!"),       MELEE_MODE_SUWAKO,26, 15, 7, 7, MELEE_STUN ,8},
 	{ _("回転する鉄輪が%sを切り裂いた！",
-        "You slice %s with a spinning iron ring!"),				MELEE_MODE_SUWAKO,29, 20, 8, 7, 0 ,8},
+        "You slice %s with a spinning iron ring!"),				MELEE_MODE_SUWAKO,29, 20, 8, 7, MELEE_DEC_MAG ,8},
 	{ _("蛙のようなオーラが%sを弾き飛ばした！",
-        "You launch a frog-shaped aura at %s!"),		MELEE_MODE_SUWAKO,33, 20, 8, 8, 0 ,8},
+        "You launch a frog-shaped aura at %s!"),		MELEE_MODE_SUWAKO,33, 20, 8, 8, MELEE_DEC_MAG ,8},
 	{ _("巨大な岩の手が現れ%sを挟み打った！",
         "A huge rock hand appears and strikes %s!"),			MELEE_MODE_SUWAKO,37, 30,  9,  9, MELEE_STUN ,12},
 	{ _("巨大な翡翠の球が%sへ降り注いだ！",
-        "A huge jade globe crashes down on %s!"),			MELEE_MODE_SUWAKO,41, 30, 10, 10, 0 ,8 },
+        "A huge jade globe crashes down on %s!"),			MELEE_MODE_SUWAKO,41, 30, 10, 10, MELEE_DEC_MAG ,8 },
 	{ _("大蛇のような巨岩が現れ%sを呑み込んだ！",
         "A massive frog-shaped rock appears and swallows %s!"),		MELEE_MODE_SUWAKO,45, 40, 12, 12, MELEE_STUN3 ,18},
 
@@ -11416,13 +11448,13 @@ const martial_arts_new ma_blows_new[] =
 	{ _("要石を振りかぶって%sへ叩きつけた！",
         "You slam a keystone into %s!"),				MELEE_MODE_TENSHI,25, 15, 8, 8, MELEE_STUN2 ,9},
 	{ _("%sへサマーソルトキックを喰らわせた！",
-        "You hit %s with a somersault kick!"),			MELEE_MODE_TENSHI,30, 20, 8, 8, 0 ,9},
+        "You hit %s with a somersault kick!"),			MELEE_MODE_TENSHI,30, 20, 8, 8, MELEE_DELAY ,9},
 	{ _("%sの足元から要石が発射された！",
         "A keystone flies out from below %s!"),					MELEE_MODE_TENSHI,36, 25, 8, 8, MELEE_STUN ,5},
 	{ _("要石に乗って%sへ落下した！",
         "You drop down on %s, riding a keystone!"),						MELEE_MODE_TENSHI,40, 25, 9, 9, MELEE_STUN2 ,8},
 	{ _("岩が集まってきて%sを押しつぶした！",
-        "You gather rocks together and slam them into %s!"),				 	MELEE_MODE_TENSHI,44, 35, 10, 10, 0 ,12},
+        "You gather rocks together and slam them into %s!"),				 	MELEE_MODE_TENSHI,44, 35, 10, 10, MELEE_DELAY ,12},
 	{ _("天から降ってきた巨大な要石が%sを叩き潰した！",
         "A huge keystone slams down onto %s from above!"),   	MELEE_MODE_TENSHI,48, 45, 12, 12, MELEE_STUN2 ,15},
 
@@ -11439,7 +11471,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ降華蹴を食らわせた。",
         "You hit %s with Kick of Showering Brilliance."),				MELEE_MODE_MEIRIN,19, 12, 7, 5, 0 ,6},
 	{ _("%sへ破山砲を喰らわせた。",
-        "You hit %s with Mountain-Breaking Cannon."),               MELEE_MODE_MEIRIN,22, 18, 7, 6, 0 ,10},
+        "You hit %s with Mountain-Breaking Cannon."),               MELEE_MODE_MEIRIN,22, 18, 7, 6, MELEE_DEC_DEF ,10},
 	{ _("%sへ気砲を放った。",
         "You hit %s with a Ki blast."),						MELEE_MODE_MEIRIN,25, 20, 7, 7, MELEE_STUN ,8},
 	{ _("%sへ黄震脚を食らわせた。",
@@ -11453,7 +11485,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ大鵬拳を食らわせた！",
         "You hit %s with Dapeng Fist!"),   			MELEE_MODE_MEIRIN,40, 30, 9, 10, MELEE_STUN ,10},
 	{ _("%sへ烈虹真拳を食らわせた！",
-        "You hit %s with Intense Rainbow Fist!"),   			MELEE_MODE_MEIRIN,42, 35, 10, 10, 0 ,10},
+        "You hit %s with Intense Rainbow Fist!"),   			MELEE_MODE_MEIRIN,42, 35, 10, 10, MELEE_DEC_DEF ,10},
 	{ _("%sへ星脈地転弾を食らわせた！",
         "You hit %s with Earth-Moving Star Pulse Shot!"),   		MELEE_MODE_MEIRIN,44, 40, 11, 11, MELEE_STUN2 ,12},
 	{ _("%sへ崩山彩極砲を食らわせた！",
@@ -11466,17 +11498,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへカードを飛ばした。",
         "You throw a card at %s."),								MELEE_MODE_SUMIREKO,10, 3, 3, 4, 0 ,7},
 	{ _("%sへバス停標識を投げつけた。",
-        "You throw a bus stop sign at %s."),                 		MELEE_MODE_SUMIREKO,15, 10, 3, 6, 0 ,4},
+        "You throw a bus stop sign at %s."),                 		MELEE_MODE_SUMIREKO,15, 10, 3, 6, MELEE_DELAY ,4},
 	{ _("%sへ道路標識を振り下ろした。",
         "You slam a road sign on top of %s."),                 		MELEE_MODE_SUMIREKO,20, 10, 4, 4, 0 ,6},
 	{ _("%sの足元からマンホールの蓋と水が噴き出した！",
         "A manhole cover and a spout of water springs out from beneath %s!"),       MELEE_MODE_SUMIREKO,26, 20, 6, 5, MELEE_WATER ,5},
 	{ _("瓦礫が跳ねて%sを挟んだ！",
-        "You sandwich %s between pieces of rubbble!"),                 			MELEE_MODE_SUMIREKO,31, 20, 7, 7, 0 ,7},
+        "You sandwich %s between pieces of rubbble!"),                 			MELEE_MODE_SUMIREKO,31, 20, 7, 7, MELEE_DELAY ,7},
 	{ _("%sへ向かって電柱が倒れた。",
         "An utility pole falls on top of %s."),							MELEE_MODE_SUMIREKO,36, 30, 8, 9, MELEE_STUN ,8},
 	{ _("%sへ鉄骨を投げつけた！",
-        "You throw a steel girder at %s!"),								MELEE_MODE_SUMIREKO,40, 30, 10, 10, 0 ,12},
+        "You throw a steel girder at %s!"),								MELEE_MODE_SUMIREKO,40, 30, 10, 10, MELEE_DELAY ,12},
 	{ _("巨大な電波塔が地響きを立てて%sの上へ倒れた！",
         "A huge radio tower collapses on top of %s with a rumbling sound!"),		MELEE_MODE_SUMIREKO,45, 40, 8, 14, MELEE_STUN2 ,14},
 
@@ -11491,7 +11523,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("雲山が%sへ激しく放電した！",
         "Unzan fiercely discharges lightning at %s!"),                 	MELEE_MODE_ICHIRIN,21, 15, 4, 5, MELEE_ELEC ,3},
 	{ _("雲山が%sを掴み投げ飛ばした！",
-        "Unzan grabs and throws %s!"),              	MELEE_MODE_ICHIRIN,27, 20, 6, 6, 0 ,8},
+        "Unzan grabs and throws %s!"),              	MELEE_MODE_ICHIRIN,27, 20, 6, 6, MELEE_DELAY ,8},
 	{ _("雲山の巨大な拳が%sに落ちた！",
         "Unzan's huge fist drops down on %s!"),                 	MELEE_MODE_ICHIRIN,31, 20, 7, 7, MELEE_STUN ,10},
 	{ _("雲山が雷光と共に両手を打ち合わせた！",
@@ -11555,7 +11587,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ回転攻撃を食らわせた。",
         "You hit %s with a spinning attack."),			MELEE_MODE_FUTO,10, 5, 2, 4, 0 ,7},
 	{ _("%sへ小さな竜巻を起こした。",
-        "You launch a small tornado at %s."),			MELEE_MODE_FUTO,15, 10, 3, 5, 0 ,6},
+        "You launch a small tornado at %s."),			MELEE_MODE_FUTO,15, 10, 3, 5, MELEE_DELAY ,6},
 	{ _("%sへ火球を投げつけた。",
         "You throw a fireball at %s."),				MELEE_MODE_FUTO,20, 10, 3, 4, MELEE_FIRE ,4},
 	{ _("%sへ大皿を叩きつけた。",
@@ -11565,7 +11597,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sの足元から岩が飛び出した！",
         "Rocks fly out from beneath %s!"),			MELEE_MODE_FUTO,34, 25, 5, 6, MELEE_STUN ,6},
 	{ _("%sは大竜巻に巻き込まれた！",
-        "%s is engulfed in a large tornado!"),				MELEE_MODE_FUTO,38, 30, 10, 10, 0 ,10},
+        "%s is engulfed in a large tornado!"),				MELEE_MODE_FUTO,38, 30, 10, 10, MELEE_DELAY ,10},
 	{ _("%sの足元から巨大な火柱が噴き上がった！",
         "A huge pillar of flames spouts out from beneath %s!"),		MELEE_MODE_FUTO,42, 40, 10, 12, MELEE_FIRE ,12},
 	{ _("天の磐舟に乗って%sへ突撃した！",
@@ -11578,21 +11610,23 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sにヒップアタックを食らわせた。",
         "You hit %s with a hip attack."),		MELEE_MODE_MARISA,8, 0, 2, 6, MELEE_STUN ,7},
 	{ _("%sに星屑を飛ばした。",
-        "You shoot stardust at %s."),					MELEE_MODE_MARISA,12, 10, 2, 8, 0 ,3},
+        "You shoot stardust at %s."),					MELEE_MODE_MARISA,12, 10, 2, 8, MELEE_DEC_MAG ,3},
 	{ _("%sに箒のフルスイングを喰らわせた！",
         "You swing your broom at %s!"),		MELEE_MODE_MARISA,16, 5, 3, 8, 0 ,6},
 	{ _("箒に乗って%sに突進した！",
         "You charge at %s riding your broom!"),				MELEE_MODE_MARISA,20, 15, 4, 7, MELEE_STUN ,12},
 	{ _("謎の薬液が入った瓶を%sに投げつけた。",
-        "You throw a bottle with mysterious liquid at %s."),	MELEE_MODE_MARISA,24, 10, 5, 6, MELEE_POIS ,7},
+        "You throw a bottle with mysterious liquid at %s."),	MELEE_MODE_MARISA,23, 10, 5, 6, MELEE_POIS ,7},
+	{ _("突然地面から茸が生えて%sを吹っ飛ばした！",
+        "Suddenly, a mushroom sprouts out of the ground, knocking %s back!"),MELEE_MODE_MARISA,26, 15, 6, 6, MELEE_STUN ,8 },
 	{ _("%sにミアズマスウィープを喰らわせた！",
-        "You hit %s with Miasma Sweep!"),	MELEE_MODE_MARISA,28, 20, 5, 7, 0 ,7},
+        "You hit %s with Miasma Sweep!"),	MELEE_MODE_MARISA,29, 20, 5, 7, MELEE_DEC_MAG ,7},
 	{ _("%sの頭上から星屑が降り注いだ！",
-        "Stardust falls down on top of %s!"),			MELEE_MODE_MARISA,32, 25, 6, 7, 0 ,8},
+        "Stardust falls down on top of %s!"),			MELEE_MODE_MARISA,32, 25, 6, 7, MELEE_DEC_MAG ,8},
 	{ _("%sにラジアルストライクを喰らわせた！",
         "You hit %s with Radial Strike!"),	MELEE_MODE_MARISA,36, 30, 7, 7, MELEE_STUN ,8},
 	{ _("%sにミリ秒パルサーを喰らわせた！",
-        "You hit %s with Millisecond Pulsar!"),		MELEE_MODE_MARISA,40, 32,  8,  8, MELEE_ELEC ,8},
+        "You hit %s with Millisecond Pulsar!"),		MELEE_MODE_MARISA,40, 32,  8,  8, MELEE_DEC_MAG ,8},
 	{ _("%sに投げつけた瓶が大爆発した！",
         "You throw an explosive bottle at %s!"),			MELEE_MODE_MARISA,43, 35, 10, 10, MELEE_STUN2 ,10},
 	{ _("%sにサングレイザーを喰らわせた！",
@@ -11601,30 +11635,30 @@ const martial_arts_new ma_blows_new[] =
 	{ _("音符の弾が%sへ放たれた。",
         "You fire a musical note at %s."),					MELEE_MODE_BENBEN,1, 0, 7, 7, MELEE_STUN ,3},
 	{ _("五線譜の光が渦を巻いて%sを襲った！",
-        "You attack %s with musical score lasers!"),			MELEE_MODE_BENBEN,33, 20, 8, 8, 0 ,5},
+        "You attack %s with musical score lasers!"),			MELEE_MODE_BENBEN,33, 20, 8, 8, MELEE_DEC_ATK ,5},
 	{ _("衝撃波が%sを吹き飛ばした！",
         "You knock %s back with a shockwave!"),					MELEE_MODE_BENBEN,36, 30, 9, 9, MELEE_STUN ,7},
 	{ _("五線譜の光が%sを切り裂いた！",
-        "You slice %s with musical score lasers!"),				MELEE_MODE_BENBEN,39, 30, 10, 10, 0 ,7},
+        "You slice %s with musical score lasers!"),				MELEE_MODE_BENBEN,39, 30, 10, 10, MELEE_DEC_ATK ,7},
 	{ _("破滅の旋律が%sへ叩きつけられた！",
         "You strike %s with a destructive melody!"),			MELEE_MODE_BENBEN,44, 35, 11, 11, MELEE_STUN2 ,9},
 	{ _("無数の光線が次々に%sを貫いた！",
-        "Countless lasers pierce %s!"),				MELEE_MODE_BENBEN,48, 40, 12, 12, 0 ,12},
+        "Countless lasers pierce %s!"),				MELEE_MODE_BENBEN,48, 40, 12, 12, MELEE_DEC_ATK ,12},
 
 	{ _("%sを見た。",
         "You look at %s."),				MELEE_MODE_HINA,1, 0, 1, 2, 0 ,5},
 	{ _("%sに微笑みかけた。",
         "You smile at %s."),		MELEE_MODE_HINA,8, 0, 2, 2, 0 ,5},
 	{ _("%sに近寄った。",
-        "You approach %s."),			MELEE_MODE_HINA,15, 5, 3, 4, 0 ,6},
+        "You approach %s."),			MELEE_MODE_HINA,15, 5, 3, 4, MELEE_DEC_ALL ,6},
 	{ _("%sに語りかけた。",
-        "You speak to %s."),		MELEE_MODE_HINA,22, 10, 4, 5, 0 ,6},
+        "You speak to %s."),		MELEE_MODE_HINA,22, 10, 4, 5, MELEE_DEC_ALL ,6},
 	{ _("%sに手を差し出した。",
-        "You extend your hand towards %s."),	MELEE_MODE_HINA,28, 20, 5, 5, 0 ,7},
+        "You extend your hand towards %s."),	MELEE_MODE_HINA,28, 20, 5, 5, MELEE_DEC_ALL ,7},
 	{ _("%sに触れた。",
         "You touch %s."),			MELEE_MODE_HINA,34, 25, 5, 6, MELEE_STUN ,8},
 	{ _("%sに囁きかけた。",
-        "You whisper to %s."),		MELEE_MODE_HINA,40, 35, 5, 7, 0 ,10},
+        "You whisper to %s."),		MELEE_MODE_HINA,40, 35, 5, 7, MELEE_DEC_ALL ,10},
 	{ _("%sを優しく抱擁した。",
         "You gently hug %s."),	MELEE_MODE_HINA,44, 40, 5, 10, MELEE_STUN2 ,15},
 
@@ -11679,17 +11713,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("化け提灯に変じた配下を%sに叩きつけた！",
         "One of your subordinates transforms into a ghost lantern and slams into %s!"),		MELEE_MODE_MAMIZOU,21, 0, 2, 8, MELEE_FIRE ,3},
 	{ _("アミキリに変じた配下が%sへ斬り付けた！",
-        "One of your subordinates transforms into an amikiri and slices %s!"),		MELEE_MODE_MAMIZOU,26, 10, 5, 6,  0,3},
+        "One of your subordinates transforms into an amikiri and slices %s!"),		MELEE_MODE_MAMIZOU,26, 10, 5, 6,  MELEE_DELAY,3},
 	{ _("釣瓶落としに変じた配下が%sの上に落下した！",
         "One of your subordinates transforms into a tsurube-otoshi and drops on top of %s!"),	MELEE_MODE_MAMIZOU,30, 11, 3, 12, MELEE_STUN ,3},
 	{ _("濃い煙が%sを押し包んだ・・",
         "%s is enveloped in dense smoke..."),					MELEE_MODE_MAMIZOU,33, 20, 6, 6, MELEE_CONFUSE ,8},
 	{ _("ぬりかべに変じた配下が%sを押し潰した！",
-        "One of your subordinates transforms into a nurikabe and crushes %s!"),		MELEE_MODE_MAMIZOU,37, 27, 9, 9, 0 ,12},
+        "One of your subordinates transforms into a nurikabe and crushes %s!"),		MELEE_MODE_MAMIZOU,37, 27, 9, 9, MELEE_DELAY ,12},
 	{ _("地蔵に化けて%sの頭上に落ちた！",
         "You transform into a jizo and drop down on top of %s!"),				MELEE_MODE_MAMIZOU,41, 32, 10, 10, MELEE_STUN2 ,10},
 	{ _("配下たちと一緒に%sを揉みくちゃにした！",
-        "You assault %s along with your subordinates!"),		MELEE_MODE_MAMIZOU,45, 40, 12, 12, MELEE_STUN ,12},
+        "You assault %s along with your subordinates!"),		MELEE_MODE_MAMIZOU,45, 40, 12, 12, MELEE_DELAY ,12},
 
 	{ _("%sに微笑みかけた。",
         "You smile at %s."),							  	MELEE_MODE_YUKARI,1, 0, 2, 5, MELEE_CONFUSE ,4},
@@ -11704,27 +11738,27 @@ const martial_arts_new ma_blows_new[] =
 	{ _("スキマから道路標識が飛び出して%sに激突した！",
         "Road signs fly out of your gap and strike %s!"),   MELEE_MODE_YUKARI,22, 10, 6, 7, MELEE_STUN ,9},
 	{ _("スキマが%sを切り裂いた！",
-        "You cleave %s with your gap!"),						MELEE_MODE_YUKARI,25, 15, 8, 8, 0 ,9},
+        "You cleave %s with your gap!"),						MELEE_MODE_YUKARI,25, 15, 8, 8, MELEE_DEC_DEF ,9},
 	{ _("謎の飛行物が%sを強襲した！",
         "A mysterious flying object strikes down %s!"),						MELEE_MODE_YUKARI,30, 20, 8, 8, MELEE_CONFUSE ,9},
 	{ _("スキマから卒塔婆が飛び出して%sに突き刺さった！",
-        "A grave tablet flies out of your grave and pierces %s!"),	MELEE_MODE_YUKARI,36, 25, 8, 8, 0 ,5},
+        "A grave tablet flies out of your grave and pierces %s!"),	MELEE_MODE_YUKARI,36, 25, 8, 8, MELEE_DEC_MAG ,5},
 	{ _("%sを強固な結界に閉じ込めた！",
-        "%s is restrained in a solid barrier!"),					MELEE_MODE_YUKARI,40, 25, 9, 9, MELEE_STUN ,8},
+        "%s is restrained in a solid barrier!"),					MELEE_MODE_YUKARI,40, 25, 9, 9, MELEE_DEC_ATK ,8},
 	{ _("黒い蝶が%sを覆い尽くした・・",
-        "Black butterflies surround %s..."),					MELEE_MODE_YUKARI,44, 35, 10, 10, 0 ,12},
+        "Black butterflies surround %s..."),					MELEE_MODE_YUKARI,44, 35, 10, 10, MELEE_DEC_ALL ,12},
 	{ _("二つのスキマが%sを挟み込んで大爆発を起こした！",
         "You trap %s between two of your gaps and cause a large explosion!"), MELEE_MODE_YUKARI,48, 45, 12, 12, MELEE_STUN2 ,15},
 
 	{ _("%sを銃床で殴った。",
         "You strike %s with your gun stock."),					MELEE_MODE_GUN_HANDGUN,1, 0,  2, 3, 0 ,3},
 	{ _("銃身をつかんで%sをぶん殴った！",
-        "You grab your gun by the barrel and strike %s!"),		MELEE_MODE_GUN_HANDGUN,25,15, 4, 8, 0 ,6},
+        "You grab your gun by the barrel and strike %s!"),		MELEE_MODE_GUN_HANDGUN,25,15, 4, 8, MELEE_STUN ,6},
 
 	{ _("%sを銃身で突いた。",
         "You thrust your gun barrel at %s."),				MELEE_MODE_GUN_LONGBARREL,1, 0,1, 6, 0 ,3},
 	{ _("%sへ銃身のフルスイングを食らわせた！",
-        "You swing your gun at %s!"),	MELEE_MODE_GUN_LONGBARREL,20,20,3, 8, 0 ,8},
+        "You swing your gun at %s!"),	MELEE_MODE_GUN_LONGBARREL,20,20,3, 8, MELEE_STUN ,8},
 	{ _("%sへ銃床を叩き付けた！",
         "You slam %s with your gun stock!"),			MELEE_MODE_GUN_LONGBARREL,35,20,5, 8, 0 ,10},
 
@@ -11733,9 +11767,9 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへ銃剣の乱れ突きを放った！",
         "You thrust at %s with your bayonet over and over!"),		MELEE_MODE_GUN_BAYONET,12,5,4, 8, 0 ,6},
 	{ _("銃剣を構えて%sへ突撃した！",
-        "You charge at %s with your bayonet held in front!"),			MELEE_MODE_GUN_BAYONET,24,10,6, 8, 0 ,8},
+        "You charge at %s with your bayonet held in front!"),			MELEE_MODE_GUN_BAYONET,24,10,6, 8, MELEE_DELAY ,8},
 	{ _("%sを銃剣で貫いた！",
-        "You pierce %s with your bayonet!"),				MELEE_MODE_GUN_BAYONET,36,25,9, 9, 0 ,10},
+        "You pierce %s with your bayonet!"),				MELEE_MODE_GUN_BAYONET,36,25,9, 9, MELEE_DELAY ,10},
 
 	{ _("%sを砲身でぶん殴った。",
         "You strike %s with your barrel."),			MELEE_MODE_GUN_LAUNCHER,1, 0, 1, 12, 0 ,6},
@@ -11747,13 +11781,13 @@ const martial_arts_new ma_blows_new[] =
 	{ _("両腕の銃を回転させて%sを打ち据えた。",
         "You strike %s, spinning both of your guns."),				MELEE_MODE_GUN_TWOHAND,1, 0,  1, 4, 0 ,4},
 	{ _("至近距離から%sへ二丁拳銃を乱射した！",
-        "You fire at %s from your guns at close range!"),				MELEE_MODE_GUN_TWOHAND,20,10, 3, 4, 0 ,5},
+        "You fire at %s from your guns at close range!"),				MELEE_MODE_GUN_TWOHAND,20,10, 3, 4, MELEE_DELAY ,5},
 	{ _("%sの死角から素早く入り込み零距離射撃を放った！",
         "You quickly move into a blind spot and fire at %s from point blank range!"),		MELEE_MODE_GUN_TWOHAND,30,20, 4, 5, MELEE_STUN ,6},
 	{ _("%sに向けてエビ反りジャンプしながら射撃した！",
-        "You jump at %s while constantly firing!"),		MELEE_MODE_GUN_TWOHAND,35,25, 5, 5, 0 ,8},
+        "You jump at %s while constantly firing!"),		MELEE_MODE_GUN_TWOHAND,35,25, 5, 5, MELEE_DELAY ,8},
 	{ _("ムーンサルトしながら%sへ銃を連射した！",
-        "You do a moonsault and keep firing at %s!"),				MELEE_MODE_GUN_TWOHAND,40,20, 6, 6, 0 ,10},
+        "You do a moonsault and keep firing at %s!"),				MELEE_MODE_GUN_TWOHAND,40,20, 6, 6, MELEE_DELAY ,10},
 	{ _("踊るように%sへ銃弾を叩き込み、華麗に残心を決めた！",
         "You assault %s with gunfire, elegantly as if you were dancing!"),	MELEE_MODE_GUN_TWOHAND,45,40, 8, 8, MELEE_STUN2 ,14},
 
@@ -11805,7 +11839,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("影の角が%sを突いた。",
         "You thrust shadow horns at %s."),                 		MELEE_MODE_HYAKKI,12, 7, 2, 10, MELEE_STUN ,8},
 	{ _("影の鉤爪が%sを掻き毟った。",
-        "You rip %s with sharp shadow claws."),					MELEE_MODE_HYAKKI,16, 12, 5, 5, 0 ,6},
+        "You rip %s with sharp shadow claws."),					MELEE_MODE_HYAKKI,16, 12, 5, 5, MELEE_DEC_DEF ,6},
 	{ _("影の牙が%sへ噛み付いた。",
         "You bite %s with shadow fangs."),                 	MELEE_MODE_HYAKKI,21, 15, 6, 6, MELEE_VAMP ,8},
 	{ _("影が%sを締め上げた！",
@@ -11815,7 +11849,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("巨大な影が%sへ飛びかかった！",
         "A massive shadow flies at %s!"),				MELEE_MODE_HYAKKI,36, 30, 9,  9, MELEE_STUN ,12},
 	{ _("影の鉤爪が%sを滅多斬りにした！",
-        "You slice %s up with sharp shadow claws!"),          	MELEE_MODE_HYAKKI,40, 30, 11, 11, 0 ,10},
+        "You slice %s up with sharp shadow claws!"),          	MELEE_MODE_HYAKKI,40, 30, 11, 11, MELEE_DEC_DEF ,10},
 	{ _("影の顎門が%sを呑み込んだ！",
         "You engulf %s with a massive shadow jaw!"),					MELEE_MODE_HYAKKI,45, 40, 12, 12, MELEE_VAMP ,10},
 
@@ -11889,6 +11923,28 @@ const martial_arts_new ma_blows_new[] =
 	{ _("眩いスポットライトを浴びて踊りまくった！",
         "You dance in a dazzling spotlight!"),		MELEE_MODE_JYOON_2,48,40,18,18, MELEE_STUN3 ,20 },
 
+	//v1.1.92 女苑専用性格
+	{ _("%sを殴った。",
+        "You punch %s."),									MELEE_MODE_JYOON_3, 1, 0, 1, 7, 0 ,1 },
+	{ _("%sにワンツーパンチを食らわせた。",
+        "You hit %s with a one-two punch."),				MELEE_MODE_JYOON_3, 5, 0, 2, 5, 0 ,4 },
+	{ _("%sに火を放った！",
+        "You shoot fire at %s!"),								MELEE_MODE_JYOON_3,10, 0, 3, 3, MELEE_FIRE ,1 },
+	{ _("姉が%sに纏わりついた。",
+        "Your sister possesses %s."),							MELEE_MODE_JYOON_3,15, 5, 3, 5, MELEE_STUN ,4 },
+	{ _("%sに爆熱の右ストレートを食らわせた！",
+        "You hit %s with an explosive right straight!"),			MELEE_MODE_JYOON_3,20,10, 4, 5, MELEE_FIRE ,6 },
+	{ _("%sに向かってロケットのように打ち上がった！",
+        "You launch yourself at %s like a rocket!"),		MELEE_MODE_JYOON_3,25,10, 3,12, MELEE_STUN ,10 },
+	{ _("%sに燃え盛る大振りアッパーを食らわせた！",
+        "You hit %s with a blazing uppercut!"),		MELEE_MODE_JYOON_3,30,20, 5, 8, MELEE_FIRE ,7 },
+	{ _("%sに向けて姉をぶん投げた！",
+        "You throw your sister at %s!"),						MELEE_MODE_JYOON_3,35,20, 8, 8, MELEE_STUN ,6 },
+	{ _("爆炎とともに%sに突撃した！",
+        "You charge at %s with an explosion!"),						MELEE_MODE_JYOON_3,40,30, 9, 9, MELEE_FIRE ,9 },
+	{ _("%sに姉妹のツープラトンアタックを決めた！",
+        "You and your sister perform a two-platoon attack on %s!"),		MELEE_MODE_JYOON_3,45,35,12,12, MELEE_STUN2 ,15 },
+
 	//v1.1.48 紫苑(スーパー貧乏神時)
 	{ _("負のオーラが%sに絡みついた。",
         "%s is entangled in a negative aura."),					MELEE_MODE_SUPER_SHION,1,0,12,12, MELEE_STUN ,1 },
@@ -11897,7 +11953,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sは不幸のオーラに呑み込まれた！",
         "%s is swallowed by misfortune aura!"),				MELEE_MODE_SUPER_SHION,30,20,20,20, MELEE_STUN2 ,12 },
 	{ _("%sの運気を根こそぎ吸い取った！",
-        "You drain %s of good fortune!"),					MELEE_MODE_SUPER_SHION,40,30,25,25, MELEE_STUN3 ,16 },
+        "You drain %s of good fortune!"),					MELEE_MODE_SUPER_SHION,40,30,25,25, MELEE_DEC_ALL ,16 },
 
 	//v1.1.59 舟に乗っているとき
 	{ _("舟の舳先が%sにぶつかった。",
@@ -11917,7 +11973,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("ピースが松明で%sを焦がした！",
         "Piece scorches %s with her torch!"),			MELEE_MODE_3_FAIRIES_2,8,  0, 2, 5, MELEE_FIRE ,5 },
 	{ _("スターは後ろから皆を応援している！",
-        "Star supports everyone from behind!"),		MELEE_MODE_3_FAIRIES_2,10,  5, 1, 1, 0 ,10 },
+        "Star supports everyone from behind!"),		MELEE_MODE_3_FAIRIES_2,10,  5, 1, 1, MELEE_DEC_ATK ,10 },
 	{ _("ラルバが%sに悪臭を放った。",
         "Larva lets out foul breath at %s."),				MELEE_MODE_3_FAIRIES_2,12,  6,  3, 4, MELEE_POIS ,10 },
 	{ _("サニーが%sの前で光った！",
@@ -11929,9 +11985,9 @@ const martial_arts_new ma_blows_new[] =
 	{ _("ピースが%sを燃やした！",
         "Piece burns %s!"),					MELEE_MODE_3_FAIRIES_2,20, 10, 4, 5, MELEE_FIRE ,6 },
 	{ _("全員で%sに飛びかかった！",
-        "All of you leap at %s!"),				MELEE_MODE_3_FAIRIES_2,22, 15, 5, 5, 0 ,8 },
+        "All of you leap at %s!"),				MELEE_MODE_3_FAIRIES_2,22, 15, 5, 5, MELEE_DELAY ,8 },
 	{ _("スターは水筒のお茶で一服している！",
-        "Star takes a tea break!"),		MELEE_MODE_3_FAIRIES_2,24, 20, 1, 1, 0 ,1 },
+        "Star takes a tea break!"),		MELEE_MODE_3_FAIRIES_2,24, 20, 1, 1, MELEE_DEC_ATK ,1 },
 	{ _("ラルバが%sに鱗粉を振り撒いた！",
         "Larva scatters scales at %s!"),			MELEE_MODE_3_FAIRIES_2,26, 20, 5, 5, MELEE_POIS ,5 },
 	{ _("ルナがもんどりうって転んだ！",
@@ -11941,11 +11997,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("チルノが%sにグレートクラッシャーを食らわせた！",
         "Cirno hits %s with Great Crusher!"),	MELEE_MODE_3_FAIRIES_2,32, 25, 6, 10, MELEE_COLD ,12 },
 	{ _("大妖精たちが一斉にビームを放った！",
-        "You together fire a large beam!"),		MELEE_MODE_3_FAIRIES_2,34, 20, 7, 7, 0 ,5 },
+        "You together fire a large beam!"),		MELEE_MODE_3_FAIRIES_2,34, 20, 7, 7, MELEE_DEC_MAG ,5 },
 	{ _("%sにグレートトライアングルを食らわせた！",
-        "You hit %s with Great Triangle!"),	MELEE_MODE_3_FAIRIES_2,36, 30, 8, 7, 0 ,10 },
+        "You hit %s with Great Triangle!"),	MELEE_MODE_3_FAIRIES_2,36, 30, 8, 7, MELEE_DELAY ,10 },
 	{ _("全員で%sをげしげし蹴った！",
-        "All of you keep kicking %s over and over!"),				MELEE_MODE_3_FAIRIES_2,38, 30, 8, 8, 0 ,6 },
+        "All of you keep kicking %s over and over!"),				MELEE_MODE_3_FAIRIES_2,38, 30, 8, 8, MELEE_DELAY ,6 },
 	{ _("チルノが%sを氷柱に閉じ込めた！",
         "Cirno encases %s into an ice pillar!"),			MELEE_MODE_3_FAIRIES_2,40, 30, 9, 9, MELEE_COLD ,9 },
 	{ _("ピースが%sにバースティンググラッジを食らわせた！",
@@ -11955,7 +12011,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sにフェアリーオーバードライブを食らわせた！",
         "You hit %s with Fairy Overdrive!"),	MELEE_MODE_3_FAIRIES_2,45, 40, 12, 12, MELEE_STUN2 ,12 },
 	{ _("全員で%sを叩きのめした！",
-        "All of you beat %s up!"),				MELEE_MODE_3_FAIRIES_2,48, 45, 13, 13, 0 ,12 },
+        "All of you beat %s up!"),				MELEE_MODE_3_FAIRIES_2,48, 45, 13, 13, MELEE_DELAY ,12 },
 
 	//v1.1.78 酔拳
 	{ _("%sの目の前で叫んだ！",
@@ -11967,7 +12023,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sの懐に滑り込んで肘打ちを食らわせた！",
         "You hit %s with an elbow strike!"),     MELEE_MODE_SUIKEN,12, 3, 4, 4, 0 ,6 },
 	{ _("地面を転がりながら%sを蹴りまくった！",
-        "You kick %s while rolling on the ground!"),		MELEE_MODE_SUIKEN,15, 5, 5, 5, 0 ,7 },
+        "You kick %s while rolling on the ground!"),		MELEE_MODE_SUIKEN,15, 5, 5, 5, MELEE_SLOW ,7 },
 	{ _("%sに連続裏拳を食らわせた！",
         "You keep hitting %s with back of your fist!"),   				MELEE_MODE_SUIKEN,18, 5, 5, 6, 0 ,5 },
 	{ _("%sにしがみついて引きずり倒した！",
@@ -11977,11 +12033,11 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sに抱きついて連続頭突きを食らわせた！",
         "You hug %s and deliver multiple headbutts!"),     MELEE_MODE_SUIKEN,27, 10, 7, 6, MELEE_STUN ,10 },
 	{ _("%sの下に滑り込んで背後から蹴り倒した！",
-        "You slide under %s and deliver a kick from behind!"),		MELEE_MODE_SUIKEN,30, 15, 7, 7, 0 ,8 },
+        "You slide under %s and deliver a kick from behind!"),		MELEE_MODE_SUIKEN,30, 15, 7, 7, MELEE_DELAY ,8 },
 	{ _("%sに執拗な連続目潰しを見舞った！",
         "You keep relentlessly hitting %s in the eyes!"),			MELEE_MODE_SUIKEN,33, 20, 5, 8, MELEE_CONFUSE ,3 },
 	{ _("%sに大ジャンプからの空中三段蹴りを見舞った！",
-        "You jump and kick %s three times in the air!"),MELEE_MODE_SUIKEN,36, 25, 8, 8, 0 ,10 },
+        "You jump and kick %s three times in the air!"),MELEE_MODE_SUIKEN,36, 25, 8, 8, MELEE_DELAY ,10 },
 	{ _("%sにカエル跳び頭突きを食らわせた！",
         "You leap and headbutt %s!"),			MELEE_MODE_SUIKEN,39, 30, 8, 10, MELEE_STUN2 ,10 },
 	{ _("%sに向けて火を吹いた！",
@@ -13128,6 +13184,12 @@ const activation_type activation_info[] =
 		  { "MAKE_BLIZZARD", ACT_MAKE_BLIZZARD, 70, 5000,{ 50, 50 },
 		  _("巨大アイス・ボール(300)と魔法吹雪", "ball of cold (300) + magical blizzard") },
 
+		  { "DIG_OIL", ACT_DIG_OIL, 50, 5000,{ 20, 20 },
+		_("石油採掘", "digging for oil") },
+
+		{ "BLAST_MISSILES", ACT_BLAST_MISSILES, 50, 5000,{ 10, 20 },
+		  _("マジックミサイル連射", "magic missile barrage") },
+
 
 
 	{ NULL, 0, 0, 0, {0, 0},
@@ -14165,8 +14227,8 @@ const drug_material_type drug_material_table[] =
 /*:::薬師の合成表
  * {生成品TV,生成品SV,基本難易度,
  * {酸,電,火,冷,毒,回復,変容,精神必要属性値,
- * 基本コスト,固定必要素材TV,固定必要素材SV}
- */
+  * 基本コスト,最大生成数,固定必要素材TV,固定必要素材SV}
+*/
  //ダミー除いて63種まで登録できるはず
  //一番下が優先されるので特殊材料を優先したければ下へ
  //この順番は既作フラグに使うので挿入するとセーブデータ互換性がおかしくなる
@@ -14338,12 +14400,21 @@ const drug_compound_type drug_compound_table[] =
 	{0,0,0,0,0,-1600,800,1600},
 	100000,1,0,0},
 
+	//v1.1.94 破滅の薬を追加
+	{ TV_POTION,SV_POTION_RUINATION,130,
+	{ 0,0,0,0,0,-250,250,-250 },
+		2500,3,0,0 },
+
+
+
+
+
 	{0,0,0,{0,0,0,0,0,0,0,0},0,0,0,0} //終端用ダミー
 };
 
 
 /*:::秘伝書テーブル 配列添字が0-7は1冊目、8-15は2冊目・・となる*/
-//あくまでレシピ参照用なので合成テーブル変えたら全て検証し直す必要ががが
+//あくまでレシピ参照用なので合成テーブル変えたら全て検証し直す必要が
 const drug_recipe_type drug_recipe_table[32] =
 {
 	//一巻
@@ -14548,15 +14619,15 @@ const cptr gf_desc_name[MAX_GF] =
 	"(なし)",
 	"電撃","毒","酸","冷気","火炎",
 	"(未設定)","(未設定)","(未設定)","光の剣","無",
-	"射撃","プラズマ","(未設定)","水","閃光",
-	"暗黒","弱閃光","弱暗黒","(未設定)","破片",
-	"轟音","混乱","気","遅鈍","(未設定)",
-	"魔力","隕石","極寒","(未設定)","カオス",
+	"射撃","プラズマ","魔法吹雪","水","閃光",
+	"暗黒","弱閃光","弱暗黒","魔法雷雲","破片",
+	"轟音","混乱","気","遅鈍","酸の沼",
+	"魔力","隕石","極寒","毒の沼","カオス",
 	//30
 	"地獄","劣化","因果混乱","時間逆転","重力",
-	"(未設定)","(未設定)","(未設定)","(未設定)","岩石溶解？",
-	"ドア破壊","罠破壊","(未設定)","(未設定)","石壁生成",
-	"ドア生成","罠生成","森林生成","(未設定)","(未設定)",
+	"攻撃低下","防御低下","魔法低下","全能力低下","岩石溶解",
+	"ドア破壊","罠破壊","(未設定)","(未設定)","(未設定)",
+	"ドア生成","罠生成","森林生成","石油採掘","酒",
 	"クローン","チェンジ","回復モンスター","加速","減速",
 	"混乱","睡眠","生命力吸収","(未設定)","(未設定)",
 	//60
@@ -14589,17 +14660,17 @@ const cptr gf_desc_name[MAX_GF] =
     "(none)",
 	"lightning","poison","acid","frost","fire",
 	"(undefined)","(undefined)","(undefined)","Psycho-Spear","non-elemental",
-	"arrow","plasma","(undefined)","water","light",
-	"darkness","weak light","weak darkness","(undefined)","shards",
-	"sound","confusion","ki","inertia","(undefined)",
-	"mana","meteor","ice","(undefined)","chaos",
+	"arrow","plasma","magic blizzard","water","light",
+	"darkness","weak light","weak darkness","magic thunderclouds","shards",
+	"sound","confusion","ki","inertia","acid pool",
+	"mana","meteor","ice","poison pool","chaos",
 	//30
 	"nether","disenchantment","nexus","time","gravity",
-	"(undefined)","(undefined)","(undefined)","(undefined)","stone to mud?",
-	"door destruction","trap destruction","(undefined)","(undefined)","wall creation",
+	"lower attack","lower defense","lower magic","lower all","stone to mud",
+	"door destruction","trap destruction","(undefined)","(undefined)","(undefined)",
 	"door creation","trap creation","forest creation","(undefined)","(undefined)",
 	"clone","polymorph","heal monster","haste","slowness",
-	"confusion","sleep","drain life","(undefined)","(undefined)",
+	"confusion","sleep","drain life","oil excavation","alcohol",
 	//60
 	"teleport undead","teleport evil","teleport away","turn undead","turn evil",
 	"terrify","banish undead","holy energy","power","banish demon",
@@ -15098,7 +15169,20 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0, 0, 0, 0, 10, 0, -10, -10,
 		-1, 0
 		, FALSE
-	}
+	},
+		//v1.1.92 女苑専用
+	{
+#ifdef JP
+		"石油王　",
+		"石油王　",
+#endif // JP
+		"Oil_Baron",
+		"Oil_Baron",
+		{ 0, -1, -1, 0, 1, 3 },
+		0, 0, 0, -1, 5, 0, 5, 5,
+		0, 0
+		, FALSE
+	},
 
 
 };
@@ -15187,10 +15271,10 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_REMY,CLASS_REMY,NULL,"鬼ごっこ",NULL,0 },
 	{ MON_REMY,CLASS_REMY,NULL,"ミレニアム","の",21 },
 
-	{ MON_F_SCARLET,CLASS_FLAN,NULL,"カゴメカゴメ",NULL,5 },
-	{ MON_F_SCARLET,CLASS_FLAN,"の","迷路",NULL,7 },
-	{ MON_F_SCARLET,CLASS_FLAN,"も","いなくなるか？",NULL,0 },
-	{ MON_F_SCARLET,CLASS_FLAN,NULL,"禁じられた",NULL,20 },
+	{ MON_FLAN,CLASS_FLAN,NULL,"カゴメカゴメ",NULL,5 },
+	{ MON_FLAN,CLASS_FLAN,"の","迷路",NULL,7 },
+	{ MON_FLAN,CLASS_FLAN,"も","いなくなるか？",NULL,0 },
+	{ MON_FLAN,CLASS_FLAN,NULL,"禁じられた",NULL,20 },
 
 	{ MON_LETTY,CLASS_LETTY,NULL,"テーブル",NULL,10 },
 	{ MON_LETTY,CLASS_LETTY,NULL,"コールド",NULL,12 },
@@ -15798,6 +15882,11 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_MOMOYO,CLASS_MOMOYO,NULL,"蟲姫さま","の",25 },
 	{ MON_MOMOYO,CLASS_MOMOYO,NULL,"輝かしく落ち着かない",NULL,16 },
 
+	{ MON_YUMA,CLASS_YUMA,NULL,"お腹を空かせた",NULL,20 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"グリード",NULL,12 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"暴食",NULL,12 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"血液",NULL,16 },
+	{ MON_YUMA,CLASS_YUMA,"の","夕餉",NULL,8 },
 
 
 	{ MON_REIMU,CLASS_REIMU,NULL,"夢想",NULL,16},
@@ -15870,10 +15959,10 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_REMY,CLASS_REMY,NULL,"Vampire Tag",NULL,0 },
 	{ MON_REMY,CLASS_REMY,"of","Millennium",NULL,21 },
 
-	{ MON_F_SCARLET,CLASS_FLAN,NULL,"Kagome-Kagome",NULL,5 },
-	{ MON_F_SCARLET,CLASS_FLAN,NULL,"Maze","of",7 },
-	{ MON_F_SCARLET,CLASS_FLAN,"and then","Will There Be None?",NULL,0 },
-	{ MON_F_SCARLET,CLASS_FLAN,NULL,"Forbidden",NULL,20 },
+	{ MON_FLAN,CLASS_FLAN,NULL,"Kagome-Kagome",NULL,5 },
+	{ MON_FLAN,CLASS_FLAN,NULL,"Maze","of",7 },
+	{ MON_FLAN,CLASS_FLAN,"and then","Will There Be None?",NULL,0 },
+	{ MON_FLAN,CLASS_FLAN,NULL,"Forbidden",NULL,20 },
 
 	{ MON_LETTY,CLASS_LETTY,NULL,"Table",NULL,10 },
 	{ MON_LETTY,CLASS_LETTY,NULL,"Cold",NULL,12 },
@@ -16481,6 +16570,11 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_MOMOYO,CLASS_MOMOYO,NULL,"Mushihime-Sama",NULL,25 },
 	{ MON_MOMOYO,CLASS_MOMOYO,NULL,"Resplendent Daily Life",NULL,16 },
 
+	{ MON_YUMA,CLASS_YUMA,NULL,"Empty-Stomached",NULL,20 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"Greed",NULL,12 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"Gluttony",NULL,12 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"Blood",NULL,16 },
+	{ MON_YUMA,CLASS_YUMA,NULL,"Dinner","of",8 },
 
 
 	{ MON_REIMU,CLASS_REIMU,NULL,"Dream",NULL,16},

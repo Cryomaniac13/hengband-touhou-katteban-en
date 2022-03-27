@@ -1,0 +1,192 @@
+=== Dream Diary ===
+
+
+=== Rewards ===
+
+Sunday
+Level: 10           2 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of Cure Critical Wounds       100
+Potion of Antidepressant             100
+Potion of Resist Heat                100
+Potion of Resist Cold                100
+Potion of Severe Poison              100
+Scroll of Light                      100
+Scroll of Object Detection           100
+Scroll of Trap Detection             100
+Scroll of Door/Stair Detection       100
+Scroll of Teleport                   100
+Glowing moss                         100
+Orc tonic                            100
+Beer                                 100
+Nightmare Shard                       10
+Ultrasonic Whistle                    50
+Roast Sweet Potato                    50
+
+
+Monday
+Level: 20           2 monsters
+
+Item                               Chance
+-----------------------------------------
+Scroll of Word of Recall             100
+Scroll of Magic Mapping              100
+Scroll of Teleport Level             100
+Scroll of Dispel Undead              100
+Scroll of Summon Kin                  75
+Potion of Cure Critical Wounds       100
+Potion of Curing                     100
+Potion of Speed                       75
+Kyoumarubotan                        100
+Magnetite                            100
+Pile of Broken Needles               100
+Muscle Augment                        50
+Nightmare Shard                       50
+Spirit Sake                           70
+
+
+Tuesday
+Level: 30           2 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of Curing                     100
+Potion of Cat Ears                    20
+Scroll of *Remove Curse*             100
+Gelsemium Elegance                   100
+Arsenic                               80
+Mercury                               70
+Nightmare Shard                       80
+Garnet                               100
+Amethyst                             100
+Aquamarine                           100
+Moonstone                            100
+Peridot                              100
+Opal                                 100
+Topas                                100
+Lapis Lazuli                         100
+Miracle Fruit                        100
+
+
+Wednesday
+Level: 40           2-3 monsters
+
+Item                               Chance
+-----------------------------------------
+Wand of Teleport Other               100
+Wand of Stone to Mud                 100
+Potion of Healing                    100
+Potion of Resistance                 100
+Potion of Jekyll                      50
+Magic Whistle                        100
+Staff of Speed                        80
+Wand of Drain Life                   100
+Scroll of *Destruction*              100
+Scroll of *Enchant Weapon*           100
+Scroll of *Enchant Armor*            100
+Ishizakura                           100
+Mithril                              100
+Adamantite                            70
+Nightmare Shard                      100
+Hope Crystal                          30
+Spirit Sake                          100
+Peach Fruit                          100
+
+
+Thursday
+Level: 50           2-4 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of Healing                    100
+Potion of Restore Mana                80
+Potion of Enlightenment              100
+Potion of Resistance                 100
+Wand of Dragon Breath                100
+Staff of Dispel Chaotic              100
+Rod of Teleport Other                 60
+Rod of Enlightenment                  60
+Rod of Stone to Mud                   60
+Scroll of Mundanity                  100
+Scroll of Protection from Evil       100
+Scroll of Rune of Protection          75
+Potion of Detonations                100
+Dragon Scale                          80
+Shining Bamboo of Takakusa            80
+Hope Crystal                          60
+
+
+Friday
+Level: 60           3-5 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of *Healing*                   70
+Potion of Restore Mana               100
+Potion of Mutation                   100
+Potion of Self Knowledge             100
+Something very cold                  100
+Staff of *Destruction*               100
+Rod of Speed                         100
+Rod of Detection                     100
+Scroll of Spell                      100
+Wand of Striking                     100
+Scroll of Flames                     100
+Scroll of Ice                        100
+Scroll of Logrus                     100
+Scroll of Massacre                   100
+Emerald                               70
+Ruby                                  70
+Sapphire                              70
+Dragon Nail                           70
+Hope Crystal                         100
+Nectar                               100
+Smartphone                            50
+
+
+Saturday
+Level: 70           3-5 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of *Healing*                  100
+Potion of Restore Mana               100
+Potion of Life                        75
+Potion of *Detonations*               80
+Staff of Holiness                     60
+Staff of Power                        50
+Staff of Healing                      40
+Staff of Mana Storm                   30
+Wand of Disintegration                50
+Wand of Rockets                       25
+Rod of Perception                    100
+Scroll of Massacre Nearby            100
+Izanagi Object                        50
+Diamond                               80
+
+
+True Nightmare
+Level: 100-127     5 monsters
+
+Item                               Chance
+-----------------------------------------
+Potion of Life                       100
+Potion of New Life                   100
+Wand of Rockets                       80
+Potion of Love                       100
+Golden Mead                          100
+Izanagi Object                       100
+Mysterium                             30
+Staff of the Magi                     10
+Rod of Healing                        60
+Rod of Havoc                          40
+Phoenix Feather                       10
+Silver Key                            10
+Scroll of Artifact Creation           10
+Meteoric Iron                        100
+Hihiirokane                            5
+Mushroom of Magic (Super)             50
+
+

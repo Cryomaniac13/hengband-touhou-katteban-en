@@ -44,10 +44,496 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
 
+
+//v1.1.93 ミケ
+//カード販売所のリストにmagic_num2[0-9]を、カード買取の売却済みフラグにmagic_num1[0-3]を使っている。
+//さらに「このフロアですでに弾幕万来の特技を使った」フラグをmagic_num2[100]に記録
+class_power_type class_power_mike[] =
+{
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("カード収納", "Store Cards"),
+	_("カードケースにアビリティカードを8種類まで収納する。カードケースに入れたカードを発動することはできないが、所持タイプのカードはケースの中でも効果を発揮する。",
+    "Stores up to 8 different kinds of ability cards in your card case. You cannot activate cards from your case, but cards with passive effects still will be effective.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("カード確認", "Browse Cards"),
+	_("カードケースの中を確認する。行動順を消費しない。",
+    "Views the contents of your card case. Does not consume energy.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("カード取出し", "Remove Cards"),
+	_("カードケースからカードを取り出す。",
+    "Removes a card from your card case.")},
+
+	{ 20,20,70,FALSE,FALSE,A_INT,0,0,_("鑑識", "Identify"),
+	_("アイテムをひとつ鑑定する。",
+    "Identifies an item.")},
+
+	//(金を呼ぶが客が逃げる)
+	{ 25,16,60,FALSE,TRUE,A_CHR,0,0,_("弾災招福", "Shoot Away Disaster, Beckon in Fortune"),
+	_("一時的にドロップアイテムの質などが良くなる幸運状態になるが、同時に周囲のモンスターがすぐ起きて敵対する反感状態になる。",
+    "Temporarily makes you lucky, increasing quality of dropped items, but also makes you aggravate nearby monsters.")},
+
+	{ 30,0,75,FALSE,FALSE,A_CHR,0,0,_("カード買い取り", "Buy Cards"),
+	_("隣接したモンスター一体からカードを買い取る。カードを持っているモンスターはそのカードの題材となった幻想郷の住人のみ。また同じカードを買えるのは一度のみ。",
+    "Buys a card from an adjacent monster. The only monsters that hold cards are Gensoukyou residents that card was based on. You can buy each card one time only.")},
+
+	//(客を呼ぶが金が逃げる)
+	{ 40,120,90,FALSE,FALSE,A_CHR,0,0,_("弾幕万来", "Many Danmaku Guests"),
+	_("アビリティカードを持っている幻想郷の住人を友好的な状態で召喚する。ただしこの特技で呼ばれた者からカードを買おうとすると価格を倍以上に吹っ掛けてくる。一フロアに一度しか呼べない。",
+    "Summons a friendly Gensoukyou resident with an ability card. However, purchasing a spellcard from that resident will cost you several times more money. You can only call one guest per level.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_mike(int num, bool only_info)
+{
+//	int dir, dice, sides, base, damage, i;
+
+	switch (num)
+	{
+
+	case 0:
+	{
+		if (only_info) return format("");
+		if (!put_item_into_inven2()) return NULL;
+		break;
+
+	}
+	case 1:
+	{
+		if (only_info) return format("");
+		display_list_inven2();
+		return NULL; //見るだけなので行動順消費なし
+
+	}
+	case 2:
+	{
+		if (only_info) return format("");
+		if (!takeout_inven2()) return NULL;
+		break;
+	}
+
+
+	case 3:
+	{
+		if (only_info) return format("");
+
+		if (!ident_spell(FALSE)) return NULL;
+
+		break;
+	}
+
+	case 4:
+	{
+		int base = 25;
+		int v;
+
+		if (only_info) return format(_str_eff_dur_plus_1d, base, base);
+
+		v = base + randint1(base);
+
+		set_tim_lucky(v, FALSE);
+		set_tim_aggravation(v, FALSE);
+
+	}
+	break;
+
+
+	case 5:
+	{
+		if (only_info) return format("");
+
+		if (!buy_abilitycard_from_mon()) return NULL;
+
+	}
+	break;
+
+	case 6:
+	{
+
+
+		int candi_count = 0;
+		int summon_r_idx = 0;
+		int i;
+		bool flag_summon_success = FALSE;
+
+		if (only_info) return format("");
+
+
+		if (p_ptr->inside_arena)
+		{
+			msg_format(_("ここでは使えない。", "You can't use it here."));
+			return NULL;
+		}
+
+		//一フロアに一度しか呼べないようにしておく。霊夢だけリストに残して何度も呼んでサーペントを瀕死にできたりしないように。
+		if (p_ptr->magic_num2[100])
+		{
+			msg_format(_("このフロアではすでにお客を呼んだ。",
+                        "You already have called a guest on this level."));
+			return NULL;
+
+		}
+
+
+		for (i = 0; i<ABILITY_CARD_LIST_LEN; i++)
+		{
+			monster_race *tmp_r_ptr;
+
+			if (!ability_card_list[i].r_idx) continue;
+
+			//売却済みフラグが立っているカードの持ち主は出て来ない
+			if ((p_ptr->magic_num1[(i / 16) + ABLCARD_MAGICNUM_SHIFT] >> (i % 16)) & 1L) continue;
+
+			tmp_r_ptr = &r_info[ability_card_list[i].r_idx];
+
+			//打倒済み,もしくは既にフロアにいるとパス
+			if (tmp_r_ptr->cur_num >= tmp_r_ptr->max_num)
+			{
+				if (cheat_hear) msg_format(_("TESTMSG:idx%dは打倒済みもしくはすでにフロアにいる",
+                                            "TESTMSG: idx %d is either already defeated or already is on this level"), ability_card_list[i].r_idx);
+				continue;
+			}
+
+			//ダンジョンボスやクエスト打倒対象はパス
+			if (tmp_r_ptr->flags1 & RF1_QUESTOR) continue;
+
+			//今の階層より深いモンスターはパス レイマリが以前出たフロアより浅いフロアで出てこなくなるかもしれないがまあ大した影響はないだろう
+			if (tmp_r_ptr->level > dun_level) continue;
+
+			candi_count++;
+
+			if (!one_in_(candi_count)) continue;
+
+			summon_r_idx = ability_card_list[i].r_idx;
+
+		}
+
+		//特殊フラグを立てて召喚
+		if (summon_r_idx)
+		{
+
+			if (summon_named_creature(0, py, px, summon_r_idx, (PM_FORCE_FRIENDLY|PM_ALLOW_SP_UNIQUE|PM_SET_MFLAG_SP))) flag_summon_success = TRUE;
+
+		}
+
+		if (flag_summon_success)
+		{
+			msg_print(_("どこからともなくお客さんが現れた！",
+                        "A guest suddenly appears out of nowhere!"));
+			//このフロアですでに客を呼んだフラグ　フロアから出る時0にする
+			p_ptr->magic_num2[100] = 1;
+		}
+		else
+			msg_print(_("お客さんは来なかった...", "No guests have arrived..."));
+
+
+	}
+	break;
+
+
+	default:
+		if (only_info) return format("未実装");
+
+		msg_format("ERROR:実装していない特技が呼ばれた num:%d", num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
+//v1.1.92 女苑特殊性格専用技*/
+//magic_num1[0],[1]にばら撒いた石油を記録している
+//magic_num1[4]にツケ払いで買った金額を記録する
+//magic_num1[6]に紫苑がキレるまでのダメージカウント
+class_power_type class_power_jyoon_2[] =
+{
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("指輪装備", "Wear Ring"),
+	_("専用スロットに指輪を8つまで装備できる。ただし装備した指輪のパラメータは半減(端数切り捨て)として扱われる。呪われた指輪は装備できない。",
+    "Wears a ring in one of 8 special slots. The ring's parameters are halved (rounded down), and you can't equip cursed rings.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("指輪解除", "Remove Ring"),
+	_("専用スロットに装備している指輪を外す。",
+    "Removes a ring from a special slot.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("指輪発動", "Activate Ring"),
+	_("専用スロットに装備している指輪を発動する。",
+    "Activates a ring in one of the special slots.")},
+
+	{ 10,5,50,FALSE,FALSE,A_INT,0,0,_("目利き", "Appraise"),
+	_("アイテム一つの価値を知ることができる。鑑定や判別はできない。",
+    "Learns the value of an item. Does not identify it.")},
+	{ 15,10,45,FALSE,FALSE,A_INT,0,0,_("財貨感知", "Detect Treasure"),
+	_("フロアのアイテムと財宝を感知する。レベル30以降はアイテムや財宝を持っているモンスターも感知する。",
+    "Detects items and treasure. At level 30, also detects monsters carrying items or treasure.")},
+
+	{ 20,20,50,FALSE,FALSE,A_DEX,50,0,_("高飛び", "Flight"),
+	_("一行動で数グリッドを移動する。ドアを通過するとき移動可能距離が短くなる。装備品が重いとき失敗しやすくなる。地形のわからない場所をターゲットにすることはできない。",
+    "Moves several grids in a single action. Possible movement distance is reduced if you pass through a door. Higher failure rate when using heavy equipment. Cannot target unknown terrain.")},
+
+	{ 25,50,55,TRUE,FALSE,A_STR,50,20,_("突撃", "Charge"),
+	_("ターゲットに突撃し火炎属性のダメージを与える。格闘時にしか使用できず、威力は格闘攻撃力で決まる。装備品が重いとき失敗しやすくなる。",
+    "Charges at the target, dealing fire damage. Can only be used when using martial arts; power depends on martil art power. Higher failure rate when using heavy equipment.")},
+
+	{ 32,45,60,FALSE,TRUE,A_CON,0,0,_("フレイマブルレイン", "Flammable Rain"),
+	_("周囲のランダムなグリッドに火炎属性のボール攻撃を連打する。",
+    "Fires several fire balls at random nearby grids.")},
+
+	{ 38,50,70,FALSE,TRUE,A_STR,0,0,_("疫病神的な天空掘削機", "Pestilence God's Heavenly Excavator"),
+	_("視界内の指定位置に落下し水ダメージを与え、さらにその周囲を石油地形にする。",
+    "Drops down on target location in sight, dealing water damage and transforming nearby terrain into oil.")},
+
+	{ 43,76,85,FALSE,TRUE,A_CHR,0,0,_("貧乏神的な石油流出汚染", "Poverty God's Crude Oil Runoff Pollution"),
+	_("周囲のランダムな方向に水・汚染・石油地形生成いずれかの属性のビームを連続で放つ。",
+    "Fires several beams of water, pollution, or oil creation in random directions.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+cptr do_cmd_class_power_aux_jyoon_2(int num, bool only_info)
+{
+//	int dir, dice, sides, base, damage, i;
+	int dir, damage;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+
+	case 0:
+	{
+		if (only_info) return format("");
+		if (!put_item_into_inven2()) return NULL;
+
+		p_ptr->update |= PU_BONUS;
+		update_stuff();
+		break;
+
+	}
+	case 1:
+	{
+		if (only_info) return format("");
+		if (!takeout_inven2()) return NULL;
+		p_ptr->update |= PU_BONUS;
+		update_stuff();
+		break;
+	}
+	case 2:
+	{
+		if (only_info) return format("");
+		if (!activate_inven2()) return NULL;
+		break;
+	}
+
+	case 3:
+	{
+		cptr q, s;
+		object_type *o_ptr;
+		int item;
+		int value;
+		if (only_info) return "";
+
+		q = _("どのアイテムを確認しますか？", "Appraise which item?");
+		s = _("アイテムがない。", "You don't have items.");
+		if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP | USE_FLOOR))) return NULL;
+		if (item >= 0)
+		{
+			o_ptr = &inventory[item];
+		}
+		else
+		{
+			o_ptr = &o_list[0 - item];
+		}
+		value = object_value_real(o_ptr);
+
+		if (!value)
+		{
+			msg_format(_("このアイテムは無価値だ。", "This item is worthless."));
+			if (object_is_cursed(o_ptr))
+				msg_format(_("その上呪われている。", "Also, it's cursed."));
+		}
+		else
+		{
+#ifdef JP
+			msg_format("このアイテムには%s$%dの価値があるようだ。", ((o_ptr->number>1) ? "一つあたり" : ""), value);
+#else
+            msg_format("%s costs $%d.", ((o_ptr->number>1) ? "Each of those items" : "This item"), value);
+#endif
+			if (object_is_cursed(o_ptr))
+				msg_format(_("しかし呪われている。", "However, it's cursed."));
+
+		}
+
+
+		break;
+	}
+
+
+	case 4:
+	{
+		int range = 25 + plev / 2;
+		if (only_info) return format(_str_eff_area, range);
+
+		detect_objects_gold(range);
+		detect_objects_normal(range);
+
+		if (plev > 29)
+			detect_monsters_rich(range);
+
+		break;
+	}
+
+
+	case 5://散財→高跳び
+	{
+		int x, y;
+		int dist = plev / 3;
+		if (only_info) return format(_("移動コスト:%d", "mov cost: %d"), dist - 1);
+		if (!tgt_pt(&x, &y)) return NULL;
+
+		if (!player_can_enter(cave[y][x].feat, 0) || !(cave[y][x].info & CAVE_KNOWN))
+		{
+			msg_print(_("そこには行けない。", "You can't go there."));
+			return NULL;
+		}
+		forget_travel_flow();
+		travel_flow(y, x);
+		if (dist < travel.cost[py][px])
+		{
+			if (travel.cost[py][px] >= 9999)
+				msg_print(_("そこには道が通っていない。", "There's no path leading there."));
+			else
+				msg_print(_("そこは遠すぎる。", "It's too far away."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは姉に掴まって飛んだ。","You grab your sister and fly."));
+		teleport_player_to(y, x, TELEPORT_NONMAGICAL);
+
+		//高速移動がある時移動と同じように消費行動力が減少する
+		if (p_ptr->speedster)
+			new_class_power_change_energy_need = (75 - p_ptr->lev / 2);
+
+		break;
+	}
+
+	case 6://突進　火炎属性に変更
+	{
+		int len = p_ptr->lev / 5;
+		if (len < 5) len = 5;
+
+		if (p_ptr->do_martialarts)
+		{
+			damage = calc_martialarts_dam_x100(0) * p_ptr->num_blow[0] / 100;
+		}
+		else
+		{
+			damage = 0;
+		}
+
+		if (only_info) return format(_("射程:%d 損傷:およそ%d", "rng: %d dam: ~%d"), len, damage);
+
+		if (!damage)
+		{
+			msg_print(_("今その特技は使えない。", "You can't use this special ability right now."));
+			return NULL;
+		}
+
+		if (!rush_attack2(len, GF_FIRE, damage,0)) return NULL;
+		break;
+	}
+
+
+	case 7://スレイブロバー→フレイマブルレイン
+	{
+		int rad = 2 + plev / 24;
+		int damage = plev * 2 + chr_adj * 2;
+		if (only_info) return format(_("損傷:%d*(10+1d10)", "dam: %d*(10+1d10)"), damage);
+		msg_format(_("燃える油を撒き散らした！","You spread burning oil around!"));
+		cast_meteor(damage, rad, GF_FIRE);
+
+		//一応油を撒くので油ばらまきカウントを追加しておく。乱数なので実際に発動する数とは一致しないがまあ深刻な影響はない。
+		jyoon_record_money_waste(10+randint1(10));
+
+		break;
+	}
+
+	case 8: //プラックピジョン→石油掘削機　キスメ「飛んで井の中」を流用
+	{
+		int range = 5 + plev / 10;
+		int base;
+		int tx, ty, dam;
+
+		base = plev * 5;
+
+		if (use_itemcard && base < 100) base = 100;
+
+		if (only_info) return format(_("損傷:%d + 1d%d", "dam: %d + 1d%d"), base, base);
+
+		project_length = range;
+		if (!get_aim_dir(&dir)) return NULL;
+		dam = base + randint1(base);
+
+		ty = target_row;
+		tx = target_col;
+		//ここproject()じゃいかんのか？何かあったっけ
+		if (!fire_ball_jump(GF_DIG_OIL, dir, 3, 3, _("あなたは天高く飛び、地面に深々と拳を打ち込んだ！",
+                                                    "You jump towards the ceiling, and then crash down, driving your fist deep into the ground!"))) return NULL;
+		project(0, 4, ty, tx, dam, GF_WATER, (PROJECT_HIDE | PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID), -1);
+		teleport_player_to(ty, tx, TELEPORT_NONMAGICAL);
+
+	}
+
+	break;
+
+	case 9://アブソリュートルーザー→貧乏神的な石油流出汚染
+	{
+		int num = damroll(5, 3);
+		int y, x,k;
+		int attempts;
+
+		int dice = 10 + plev / 5;
+		int sides = 10 + chr_adj / 5;
+
+		//スターライト砲と同じ要領で水劣抜けに750dam,毒水劣抜けに1130damくらいの期待値
+		if (only_info) return format(_("損傷:%dd%d * 不定", "dam: %dd%d * undef"), dice, sides);
+
+		msg_print(_("地面から水と油と汚染物質が噴き出した！", "Water, oil, and pollutants erupt from the ground!"));
+
+		for (k = 0; k < num; k++)
+		{
+			int typ;
+			attempts = 100;
+
+			if (one_in_(3)) typ = GF_POLLUTE;
+			else if (one_in_(2)) typ = GF_WATER;
+			else typ = GF_DIG_OIL;
+
+			while (attempts--)
+			{
+				scatter(&y, &x, py, px, 4, 0);
+
+				if (!cave_have_flag_bold(y, x, FF_PROJECT)) continue;
+
+				if (!player_bold(y, x)) break;
+			}
+
+			project(0, 0, y, x, damroll(dice, sides), typ,
+				(PROJECT_BEAM | PROJECT_THRU | PROJECT_GRID | PROJECT_KILL), -1);
+		}
+		break;
+	}
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
 //v1.1.90 山如
-
-
-
 //カード販売所のリストにmagic_num2[32-41]を、カード買取の売却済みフラグにmagic_num1[32-35]を使っている.
 //吟遊詩人系特技と被らないよう使うインデックスを+32している。
 
@@ -1368,8 +1854,8 @@ class_power_type class_power_yachie[] =
     "Breathes fire with power equal to 1/4 of your current HP.")},
 
 	{ 30,45,50,FALSE,FALSE,A_INT,0,0,_("亀甲地獄", "Tortoiseshell Hell"),
-	_("自分を中心に遅鈍属性のボールを発生させる。",
-    "Generates a ball of inertia centered on yourself.")},
+	_("自分を中心に遅鈍属性のボールを発生させる、さらに移動禁止状態にする。",
+    "Generates a ball of inertia centered on yourself, and also prevents enemy movement.")},
 
 	{ 35,160,80,FALSE,FALSE,A_INT,0,0,_("搦手の犬畜生", "Mangy Beasts Attacking from the Rear"),
 	_("このフロアで自分に対して敵対召喚されてくるモンスターを買収しようと試みる。買収に成功すると所持金が減少する。",
@@ -1569,7 +2055,7 @@ cptr do_cmd_class_power_aux_yachie(int num, bool only_info)
 		if (dam > 1600) dam = 1600;
 
 		if (only_info) return format(_str_eff_dam, dam);
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 		msg_print(_("あなたは炎を吐いた！", "You breathe fire!"));
 		fire_ball(GF_FIRE, dir, dam, (p_ptr->lev > 35 ? -3 : -2));
 		break;
@@ -1585,6 +2071,8 @@ cptr do_cmd_class_power_aux_yachie(int num, bool only_info)
 		if (only_info) return format(_str_eff_dam, base / 2);
 		msg_format(_("あなたは周囲の動きを封じようと試みた。", "You attempt to slow down everything around you."));
 		project(0, rad, py, px, base, GF_INACT, PROJECT_KILL, -1);
+		project(0, rad, py, px, base/4, GF_NO_MOVE, PROJECT_HIDE|PROJECT_KILL, -1);
+
 	}
 	break;
 
@@ -1978,7 +2466,7 @@ class_power_type class_power_urumi[] =
 	_("アイテム「石の赤子」を作る。石塊をひとつ消費する。",
     "Creates a 'Stone baby' item. Requires using up a stone block.")},
 
-	{ 25,30,60,FALSE,TRUE,A_STR,0,0,_("重量操作Ⅱ", "Weight Manipulation II"),
+	{ 25,30,50,FALSE,TRUE,A_STR,0,0,_("重量操作Ⅱ", "Weight Manipulation II"),
 	_("一定時間、武器攻撃が命中したときの重量ボーナスが増加し会心の一撃が出やすくなる。",
     "Temporarily increases weight bonus for your weapon, making it easier to score critical hits.")},
 
@@ -1987,8 +2475,8 @@ class_power_type class_power_urumi[] =
     "Summons several aquatic monsters around the target as your followers. Can only summon on water terrain.")},
 
 	{ 40,45,60,FALSE,TRUE,A_STR,0,0,_("重量操作Ⅲ", "Weight Manipulation III"),
-	_("隣接したモンスター全てに強力な遅鈍属性攻撃を行う。",
-    "Performs a powerful inertia attack against all adjacent monsters.")},
+	_("隣接したモンスター全てに強力な遅鈍属性攻撃を行うい、さらに攻撃力を低下させる。",
+    "Performs a powerful inertia attack against all adjacent monsters, and also lowers their attack power.")},
 
 	{ 48,120,90,FALSE,TRUE,A_CHR,0,0,_("ヘビーストーンベイビー", "Heavy Stone Baby"),
 	_("隣接したモンスター一体を、耐性を無視して大幅に減速させる。「石の赤子」を使用する。",
@@ -2223,6 +2711,8 @@ cptr do_cmd_class_power_aux_urumi(int num, bool only_info)
 			if (only_info) return format(_str_eff_dam, base / 2);
 			msg_format(_("近くの全てのものを超重量にした！", "You make everything around yourself extremely heavy!"));
 			project(0, rad, py, px, base, GF_INACT, PROJECT_KILL, -1);
+			project(0, rad, py, px, base, GF_DEC_ATK, PROJECT_KILL|PROJECT_HIDE, -1);
+
 		}
 		break;
 
@@ -2834,15 +3324,19 @@ class_power_type class_power_kutaka[] =
 	_("部屋を明るくし、さらに視界内のモンスターを混乱させようと試みる。",
     "Illuminates nearby area and attempts to confuse monsters in sight.")},
 
-	{ 25,36,50,FALSE,TRUE,A_INT,0,0,_("鬼渡の試練", "Trial of Oniwatari"),
+	{ 24,36,50,FALSE,TRUE,A_INT,0,0,_("鬼渡の試練", "Trial of Oniwatari"),
 	_("視界内のモンスターをテレポートさせようと試みる。",
     "Attempts to teleport monsters in sight.")},
 
-	{ 30,50,75,FALSE,FALSE,A_INT,0,0,_("鳥頭発動Ⅱ", "Birdbrain Activation II"),
+	{ 28,56,50,FALSE,TRUE,A_CON,0,20,_("目覚めよ、葬られた幽霊達よ", "Awaken, O Buried Phantoms"),
+	_("視界内全てに轟音属性攻撃を行う。周囲の敵が起きる。さらに友好的な幽霊系のモンスターが数体現れる。",
+    "Hits everything in sight with sound, wakes up nearby enemies, and summons several friendly ghost monsters.")},
+
+	{ 32,50,75,FALSE,FALSE,A_INT,0,0,_("鳥頭発動Ⅱ", "Birdbrain Activation II"),
 	_("選択した習得済みの魔法を一つ忘却し、呪文学習可能数を一つ増やす。忘却した魔法の熟練度が高いと二つ増やす。",
     "Forgets a learned spell, and lets you study another one instead. If you forget a spell you were proficient with, you can study two new spells instead.")},
 
-	{ 35,40,60,FALSE,TRUE,A_WIS,0,0,_("血の分水嶺", "Watershed of Blood"),
+	{ 36,40,60,FALSE,TRUE,A_WIS,0,0,_("血の分水嶺", "Watershed of Blood"),
 	_("一時的に士気高揚・肉体強化を得る。また自分と近くのモンスターのテレポートを阻害する。",
     "Temporarily grants heroism and increases your physical stats; also prevents both yourself and nearby monsters from teleporting.")},
 
@@ -2953,7 +3447,29 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 	}
 	break;
 
-	case 5://選択的記憶除去
+	case 5:
+	{
+		int dam = plev * 5;
+		int summon_num = randint1(3);
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (one_in_(2))
+			msg_print(_("「コ ケ コ ッ コ ー ！」", "'Cock-a-doodle-doo!'"));
+		else
+			msg_print(_("あなたは死者すら飛び起きるような大音声を放った！",
+                        "You shout loudly enough to wake the dead!"));
+
+		project_hack2(GF_SOUND, 0, 0, dam);
+		aggravate_monsters(0, FALSE);
+		for (; summon_num; summon_num--)
+		{
+			summon_specific(0, py, px, dun_level, SUMMON_GHOST, (PM_FORCE_FRIENDLY | PM_ALLOW_GROUP));
+		}
+
+	}
+	break;
+
+	case 6://選択的記憶除去
 	{
 		if (only_info) return "";
 
@@ -2968,7 +3484,7 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 	break;
 
 
-	case 6: //血の分水嶺
+	case 7: //血の分水嶺
 	{
 		int v;
 		bool base = 10;
@@ -2995,7 +3511,7 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 		break;
 	}
 
-	case 7: //獄界視線
+	case 8: //獄界視線
 	{
 
 		int power = p_ptr->lev * 2 + chr_adj * 5;
@@ -3007,7 +3523,7 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 
 		break;
 	}
-	case 8://全霊鬼渡り
+	case 9://全霊鬼渡り
 	{
 
 		int rad = plev;
@@ -4189,6 +4705,7 @@ cptr do_cmd_class_power_aux_shion(int num, bool only_info)
 
 
 /*:::依神女苑専用技*/
+//magic_num1[0],[1]を散財に消費した金として記録している
 class_power_type class_power_jyoon[] =
 {
 	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("指輪装備", "Wear Ring"),
@@ -4353,7 +4870,7 @@ cptr do_cmd_class_power_aux_jyoon(int num, bool only_info)
 		damage = p_ptr->lev * 3;
 		if (damage < 50) damage = 50;
 		if (only_info) return format(_str_eff_range_dam, len, damage);
-		if (!rush_attack2(len, GF_FORCE, damage)) return NULL;
+		if (!rush_attack2(len, GF_FORCE, damage,0)) return NULL;
 		break;
 	}
 
@@ -4819,8 +5336,8 @@ class_power_type class_power_vfs_clownpiece[] =
     "Attempts to make an adjacent monster insane. Insane monsters indiscriminately attack nearby monsters. Less effective against unique monsters, and does not affect monsters with unusual mind. Requires having 'Torch of Clownpiece' in your possession.")},
 
 	{ 16,20,30,FALSE,TRUE,A_DEX,0,3,_("ヘルエクリプス", "Hell Eclipse"),
-	_("今いる部屋を明るくし、視界内の敵を混乱させる。レベルが上がると朦朧と恐怖も追加される。「★クラウンピースの松明」を所持していないと使えない。",
-    "Illuminates nearby area and confuses enemies in sight. At higher levels, stuns and terrifies as well. Requires having 'Torch of Clownpiece' in your possession.")},
+	_("今いる部屋を明るくし、視界内の敵を混乱させる。レベルが上がると朦朧と恐怖と狂戦士化も追加される。「★クラウンピースの松明」を所持していないと使えない。",
+    "Illuminates nearby area and confuses enemies in sight. At higher levels, stuns, terrifies and makes them berserk as well. Requires having 'Torch of Clownpiece' in your possession.")},
 
 	{ 24,72,45,TRUE,TRUE,A_CON,0,30,_("グレイズインフェルノ", "Graze Inferno"),
 	_("自分を中心に火炎属性のボールを発生させる。威力はHPの1/3になる。レベル40以降は視界内攻撃になる。",
@@ -4896,6 +5413,8 @@ cptr do_cmd_class_power_aux_vfs_clownpiece(int num, bool only_info)
 		confuse_monsters(power);
 		if (plev > 24) stun_monsters(power);
 		if (plev > 34) turn_monsters(power);
+		if (plev > 44) project_hack(GF_BERSERK,power);
+
 	}
 	break;
 
@@ -5666,7 +6185,7 @@ cptr do_cmd_class_power_aux_kosuzu_hyakki(int num, bool only_info)
 			if(dam<1) dam = 1;
 			if(dam > 600) dam=600;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 
 			msg_print(_("付喪神たちを吹きつけた！", "You breathe tsukumogami!"));
 
@@ -8728,13 +9247,17 @@ class_power_type class_power_sagume[] =
 		_("周囲の敵を配下あるいは友好的にする。ただし敵の攻撃でピンチになる可能性のある状況で使わないと効果が発生せず逆に周囲の敵が起きて加速する。クエストの討伐対象やダンジョンボスには効果がない。",
         "Attempts to turn nearby enemies friendly or your followers. However, if you're not at risk of receiving severe damage from enemy attacks, it might aggravate nearby enemies instead. Does not work on quest targets and dungeon bosses.")},
 
-	{25,30,40,FALSE,FALSE,A_DEX,0,0,_("穢身探知型機雷", "Impure Body Detection Mines"),
+	{24,30,40,FALSE,FALSE,A_DEX,0,0,_("穢身探知型機雷", "Impure Body Detection Mines"),
 		_("機雷を呼び出す。機雷は分裂しながらやや不規則に動き破邪属性の爆発で攻撃する。フロアを移動すると消える。",
         "Summons mines. The mines divide themselves, move somewhat irregularly and attack by exploding into holy energy. They disappear if you move to another level.")},
 
-	{32,50,65,FALSE,TRUE,A_WIS,0,0,_("神々の弾冠", "Shotgun Coronation of the Gods"),
+	{30,50,65,FALSE,TRUE,A_WIS,0,0,_("神々の弾冠", "Shotgun Coronation of the Gods"),
 		_("一時的に敵からの攻撃をHPでなくMPで受けるようになる。MPが尽きると効果が消える。光の剣属性の攻撃や敵からの攻撃でないダメージには効果がない。",
         "Temporarily makes you lose MP instead of HP from enemy attacks. Effect ends once your MP is used up. Does not affect damage from Psycho-Spear or non-enemy attacks.")},
+
+	{35,64,70,FALSE,TRUE,A_INT,0,0,_("烏合の二重呪", "Disorderly Flock's Duplex Curse"),
+		_("視界内のモンスター全てを高確率で狂戦士化し、さらに移動禁止状態にする。ただし移動あるいは隣接攻撃の能力を最初からもたない敵が一体でも含まれていると失敗し、さらにプレイヤーに向けて血の呪いが発動する。",
+        "Has a high chance to make all monsters in sight berserk, and prevent them from moving. However, it fails if it includes at least one enemy that either can't move or attack in melee, and it will hit you with Blood Curse in this case.")},
 
 	{ 40,80,75,FALSE,TRUE,A_INT,0,0,_("金城鉄壁の陰陽玉", "Impregnable Fortress Yin-Yang Orbs"),
 		_("一時的に物理防御上昇、魔法防御上昇、反射を得る。",
@@ -8835,6 +9358,53 @@ cptr do_cmd_class_power_aux_sagume(int num, bool only_info)
 
 	case 3:
 		{
+			int i,power;
+			bool flag_fail = FALSE;
+
+			power = plev * 5 + chr_adj * 5;
+
+			if (only_info) return format(_str_eff_power, power);
+
+			for (i = 1; i < m_max; i++)
+			{
+				monster_type *m_ptr = &m_list[i];
+				monster_race *r_ptr = &r_info[m_list[i].r_idx];
+
+				if (!m_ptr->r_idx) continue;
+				if (!projectable(py, px, m_ptr->fy, m_ptr->fx)) continue;
+
+				if (r_ptr->flags1 & (RF1_NEVER_BLOW | RF1_NEVER_MOVE))flag_fail = TRUE;
+			}
+
+			msg_print(_("あなたは複雑な命令を語り始めた...", "You start speaking complex orders..."));
+
+			if (flag_fail)
+			{
+				bool stop_ty = FALSE;
+				int count = 0;
+				int curses = 1 + randint1(3);
+				msg_format(_("あなたは条件の設定に失敗した！呪いが逆転する！",
+                            "You failed to properly set the conditions! The curse turns on you!"));
+				curse_equipment(100, 50);
+				do
+				{
+					stop_ty = activate_ty_curse(stop_ty, &count);
+				} while (--curses);
+
+			}
+			else
+			{
+				project_hack(GF_BERSERK, power);
+				project_hack(GF_NO_MOVE, power / 10);
+
+			}
+		}
+		break;
+
+
+
+	case 4:
+		{
 			int v;
 			int base = plev / 4;
 
@@ -8849,12 +9419,12 @@ cptr do_cmd_class_power_aux_sagume(int num, bool only_info)
 		}
 		break;
 
-	case 4:
+	case 5:
 		{
 			int dam = plev * 16 + chr_adj * 16;
 
 			if(only_info) return format(_("損傷:最大%d", "dam: up to %d"),dam/2);
-			msg_print(_("あなたは光の翼をはためかせて飛翔した！", "You fly on wing of light!"));
+			msg_print(_("あなたは光の翼をはためかせて飛翔した！", "You fly on a wing of light!"));
 			project(0,6,py,px,dam,GF_LITE,(PROJECT_KILL|PROJECT_JUMP),-1);
 			teleport_player(50+randint1(50),TELEPORT_NONMAGICAL);
 		}
@@ -10901,7 +11471,7 @@ cptr do_cmd_class_power_aux_mamizou(int num, bool only_info)
 		{
 			int dam = 50 + plev * 2 + chr_adj * 10;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("巨大な茶釜から蒸気が吐き出された！", "Steam pours forth!"));
 
 			fire_ball(GF_STEAM, dir, dam, -2);
@@ -11269,7 +11839,7 @@ cptr do_cmd_class_power_aux_raiko(int num, bool only_info)
 
 			if (!get_aim_dir(&dir)) return NULL;
 			msg_format(_("太鼓が火を噴いて飛んだ！", "A taiko drum flies forth, propelled by flames!"));
-			fire_rocket(GF_SHARDS, dir, dam,2);
+			fire_rocket(GF_ROCKET, dir, dam,2);
 			break;
 		}
 	case 9:
@@ -11650,6 +12220,9 @@ class_power_type class_power_yatsuhashi[] =
 	{30,0,0,FALSE,TRUE,A_WIS,0,0,_("浄瑠璃世界", "Joururi World"),
 		_("十二回続けて演奏するとHPとMPが中程度回復しステータス異常が治癒する。",
         "If consecutively performed 12 times, recovers a medium amount of HP and MP and cures status abnormalities.")},
+	{33,40,55,FALSE,FALSE,A_CHR,0,0,_("下克上レクイエム", "Social Upheaval Requiem"),
+		_("モンスター一体を全能力低下させようと試みる。抵抗されると無効。自分の1.5倍以上高いレベルのモンスターにしか効果がない。",
+        "Attempts to lower all stats of a single monster. Does nothing if resisted. Only affects monsters that are at least 1.5x of your level.")},
 	{36,24,65,FALSE,FALSE,A_WIS,0,0,_("人琴ともに亡ぶ", "Human and Koto Die Together"),
 		_("演奏中にダメージを受けるとそのダメージを相手に返す。演奏中はMPを消費し続ける。死霊魔法「復讐の契約」とは別処理。",
         "Starts a performance that deals damage you receive back to the enemy. Continuosly consumes MP. Treated separately from Death spell 'Oath of Vengeance'.")},
@@ -11684,9 +12257,11 @@ cptr do_cmd_class_power_aux_yatsuhashi(int num, bool only_info)
 			int power = 50 + plev * 3;
 			if(only_info) return format(_str_eff_power,power);
 
+			stop_tsukumo_music();
+
 			if(plev < 30)
 			{
-				if (!get_aim_dir(&dir)) return FALSE;
+				if (!get_aim_dir(&dir)) return NULL;
 				msg_print(_("か細い琴の音が響いた。", "A faint koto melody resounds."));
 				slow_monster(dir,power);
 				confuse_monster(dir,power);
@@ -11749,14 +12324,58 @@ cptr do_cmd_class_power_aux_yatsuhashi(int num, bool only_info)
 		}
 		break;
 
+	case 6:
+	{
+		int x, y;
+		int power = plev * 3 + chr_adj * 5;
+		monster_type *m_ptr;
+		monster_race *r_ptr;
+		char m_name[80];
 
-	case 6://人琴ともに亡ぶ
+		if (only_info) return format(_str_eff_power, power);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("ターゲットモンスターを明示的に指定しないといけない。",
+                        "You have to explicitly target a monster."));
+			return NULL;
+		}
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (!m_ptr->r_idx || !m_ptr->ml)
+		{
+			msg_print(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+		r_ptr = &r_info[m_ptr->r_idx];
+
+		stop_tsukumo_music();
+
+		monster_desc(m_name, m_ptr, 0);
+		if (r_ptr->level < plev * 3 / 2)
+		{
+			msg_format(_("%sが相手では今ひとつ演奏に身が入らなかった。",
+                        "You couldn't find the enthusiasm to play your performance against %s."), m_name);
+			break;
+		}
+
+		msg_format(_("%sへ向けた反抗の葬送曲を奏でた！",
+                    "You perform a defiant funeral march directed at %s!"), m_name);
+		project(0, 0, y, x, power, GF_DEC_ALL, (PROJECT_KILL | PROJECT_JUMP), -1);
+	}
+	break;
+
+	case 7://人琴ともに亡ぶ
 		{
 			if(only_info) return format("");
 			do_spell(TV_BOOK_MUSIC, MUSIC_NEW_TSUKUMO_JINKIN, SPELL_CAST);
 			break;
 		}
-	case 7://エコーチェンバー
+	case 8://エコーチェンバー
 		{
 			if(only_info) return format("");
 			do_spell(TV_BOOK_MUSIC, MUSIC_NEW_TSUKUMO_ECHO, SPELL_CAST);
@@ -12468,8 +13087,8 @@ class_power_type class_power_hina[] =
 		_("一定時間、ダメージを受けた時に同じダメージを相手に返すようになる。与えたダメージの1/5の厄を消費する。",
         "Temporarily, if you receive damage, you deal the same amount of damage back to the enemy. Consumes amount of misfortune equal to 1/5 of damage dealt.")},
 	{40,24,70,FALSE,TRUE,A_CON,0,0,_("流刑人形", "Exiled Doll"),
-		_("敵一体の移動とテレポートを一定時間妨害する。二体以上同時に妨害することはできない。妨害のたびに厄を少し消費する。巨大な敵や力強い敵には効果が薄い。",
-        "Temporarily prevents a single enemy from moving or teleporting. You can affect only one enemy in this way at once. Each prevented action consumes a slight amount of your misfortune. Less effective against gigantic or powerful enemies.")},
+		_("敵一体の移動とテレポートを一定時間妨害する。厄を300消費する。巨大な敵や力強い敵には効果が薄い。",
+        "Temporarily prevents a single enemy from moving or teleporting. Consumes 300 misfortune. Less effective against gigantic or powerful enemies.")},
 	{47,66,70,FALSE,TRUE,A_CHR,0,0,_("呪いの雛人形", "Cursed Hina Dolls"),
 		_("厄を撒き散らし、視界内のモンスターの魔法を中確率で妨害する。毎ターン厄を50+1d100消費する。もう一度実行するかフロアを移動すると技が解除される。地上では使えない。",
         "Spreads misfortune around, preventing monsters in sight from casting spells with medium probability rate. Consumes 50+1d100 misfortune each turn. This ability will be cancelled if you use it again or move to another level. Cannot be used on surface.")},
@@ -12781,6 +13400,12 @@ cptr do_cmd_class_power_aux_hina(int num, bool only_info)
 
 			base = 10 + p_ptr->lev / 5;
 			if(only_info) return format(_str_eff_dur,base);
+
+			if(yaku < 300)
+			{
+				msg_print(_("この特技を使う厄が足りない。", "You don't have enough misfortune to use this special ability."));
+				return NULL;
+			}
 			if (!get_aim_dir(&dir)) return NULL;
 
 			x = target_col;
@@ -12799,8 +13424,12 @@ cptr do_cmd_class_power_aux_hina(int num, bool only_info)
 				char m_name[80];
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("厄が渦巻いて%sを捕えた！", "%s is caught in a whirlwind of misfortune!"),m_name);
-				p_ptr->magic_num1[2] = cave[y][x].m_idx;
-				set_tim_general(base,FALSE,0,0);
+
+				project(0, 0, m_ptr->fy, m_ptr->fx, base, GF_NO_MOVE, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+				hina_gain_yaku(-300);
+
+				//p_ptr->magic_num1[2] = cave[y][x].m_idx;
+				//set_tim_general(base,FALSE,0,0);
 			}
 			else
 			{
@@ -13268,8 +13897,8 @@ class_power_type class_power_clownpiece[] =
 		_("魔力属性のビームを放つ。",
         "Fires a beam of mana.")},
 	{20,25,30,FALSE,FALSE,A_CHR,0,5,_("ヘルエクリプス", "Hell Eclipse"),
-		_("今いる部屋を明るくし、視界内の敵を混乱・朦朧・恐怖させる。レベル35以降は視界内の敵に精神攻撃を行う。「★クラウンピースの松明」を所持していないと使えない。",
-        "Illuminaters nearby area, also confuses, stuns and terrifies all enemies in sight. At level 35, hits enemies in sight with a mental attack. Requires having Torch of Clownpiece in your possession.")},
+		_("今いる部屋を明るくし、視界内の敵に精神攻撃を行い、さらに混乱・恐怖させようとする。さらにレベル30で朦朧、レベル40で狂戦士化も追加。「★クラウンピースの松明」を所持していないと使えない。",
+        "Illuminaters nearby area, also hits all enemies in sight with a mental attack, and confuses and terrifies then. At level 30, also stuns; at level 40, makes them berserk. Requires having Torch of Clownpiece in your possession.")},
 	{25,80,40,TRUE,TRUE,A_WIS,0,0,_("フラッシュアンドストライプ", "Flash and Stripe"),
 		_("大型の閃光属性ビームを放つ。",
         "Fires a large beam of light.")},
@@ -13335,8 +13964,9 @@ cptr do_cmd_class_power_aux_clownpiece(int num, bool only_info)
 			msg_format(_("狂気の光が周囲を染め上げた！", "Maddening light spreads around you!"));
 			project_hack2(GF_REDEYE,0,0,power);
 			confuse_monsters(power);
-			stun_monsters(power);
 			turn_monsters(power);
+			if (plev > 29) stun_monsters(power);
+			if (plev > 39) project_hack(GF_BERSERK, power);
 			lite_room(py, px);
 		}
 		break;
@@ -13995,23 +14625,26 @@ class_power_type class_power_alice[] =
 	{16,20,40,FALSE,TRUE,A_DEX,0,0,_("人形作成", "Create Doll"),
 		_("モンスター「人形」を配下として数体召喚する。",
         "Summons several dolls as your followers.")},
-	{22,30,50,FALSE,TRUE,A_DEX,0,0,_("アーティフルサクリファイス", "Artful Sacrifice"),
+	{20,20,45,FALSE,TRUE,A_WIS,0,0,_("トリップワイヤー", "Trip Wire"),
+		_("近くのモンスター一体を移動禁止状態にする。巨大なモンスターや力強いモンスターには脱出されやすい。",
+        "Prevents a nearby monster from moving. Gigantic or powerful monsters are more likely to escape.")},
+
+	{24,30,50,FALSE,TRUE,A_DEX,0,0,_("アーティフルサクリファイス", "Artful Sacrifice"),
 		_("アイテム「人形」を投擲し火炎属性の爆発を発生させる。威力は人形のHPの1/2(最大1600)となる。",
         "Throws a figurine from your inventory, which explodes in a ball of fire. Power is equal to 1/2 of the figurine's original HP (up to 1600).")},
-	{27,40,60,FALSE,TRUE,A_INT,0,0,_("スーサイドパクト", "Suicide Pact"),
+	{28,40,60,FALSE,TRUE,A_INT,0,0,_("スーサイドパクト", "Suicide Pact"),
 		_("配下のモンスター「人形」を全てその場で爆発させる。",
         "Detonates all of your doll followers on the spot.")},
 	{32,45,75,FALSE,TRUE,A_WIS,0,0,_("ドールズウォー", "Dolls' War"),
 		_("離れた場所に対して人形による通常攻撃を行う。",
         "Perform a melee attack at a distant location with your dolls.")},
-
 	{36,50,80,FALSE,TRUE,A_INT,0,10,_("首吊り蓬莱人形", "Hanged Hourai Dolls"),
 		_("暗黒属性の強力なビームを放つ。",
         "Fires a powerful beam of darkness.")},
 	{40,50,85,FALSE,TRUE,A_DEX,0,0,_("リターンイナニメトネス", "Return Inanimateness"),
 		_("アイテム「人形」を投擲し魔力属性の大爆発を発生させる。威力は人形のHPの1/3(最大3200)となる。",
         "Throws a figurine from your inventory, which explodes in a ball of pure mana. Power is equal to 1/3 of the figurine's original HP (up to 3200).")},
-	{46,70,85,FALSE,TRUE,A_CHR,0,0,_("グランギニョル座の怪人", "The Phantom of the Grand Guignol"),
+	{45,70,85,FALSE,TRUE,A_CHR,0,0,_("グランギニョル座の怪人", "The Phantom of the Grand Guignol"),
 		_("視界内の敵一体を指定し、その敵に射線が通った配下の人形全てから無属性ビームが放たれる。ビーム一発ごとにMP3を消費する。配下の人形がこのビームで傷つくことはない。",
         "Makes all of your doll followers fire non-elemental beams at target enemy in sight. Each beam consumes 3 MP. Those beam don't harm your doll followers.")},
 
@@ -14071,7 +14704,46 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 			break;
 		}
 	case 4:
-	case 8:
+	{
+		int power = plev / 2;
+		int range = 3 + plev / 12;
+		int x, y;
+		monster_type *m_ptr;
+
+		if (only_info) return format(_("射程:%d 効果:%d", "rng: %d pow: %d"), range,power);
+
+		project_length = range;
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                        "You have to explicitly pick a target in sight."));
+			return NULL;
+		}
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (!m_ptr->r_idx || !m_ptr->ml)
+		{
+			msg_print(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+		else
+		{
+			char m_name[80];
+			monster_desc(m_name, m_ptr, 0);
+			msg_format(_("%sの周りに魔力で強化した糸を張り巡らせた。",
+                        "Wires imbued with mana stretch around %s."), m_name);
+			project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_NO_MOVE, PROJECT_JUMP | PROJECT_KILL, -1);
+		}
+	}
+	break;
+
+
+	case 5:
+	case 9:
 		{
 			int     item;
 			cptr    q, s;
@@ -14134,7 +14806,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 
 			break;
 		}
-	case 5:
+	case 6:
 		{
 			monster_type *m_ptr;
 			int xx,yy;
@@ -14160,7 +14832,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 		}
 		break;
 
-	case 6:
+	case 7:
 		{
 			int range = 2 + (plev-32) / 8;
 			int x, y;
@@ -14201,7 +14873,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 
 
 
-	case 7:
+	case 8:
 		{
 			dice = plev / 2;
 			sides = 10 + chr_adj / 10;
@@ -14217,7 +14889,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 			fire_spark(GF_DARK, dir, base + damroll(dice,sides),1);
 			break;
 		}
-	case 9:
+	case 10:
 		{
 			int dam = plev + chr_adj;
 			int x, y;
@@ -15180,6 +15852,8 @@ cptr do_cmd_class_power_aux_futo(int num, bool only_info)
             msg_format("%s falls on top of %s!",desc,m_name);
 #endif
 			project(0,rad,ty,tx,dam,typ,(PROJECT_JUMP|PROJECT_GRID|PROJECT_ITEM|PROJECT_KILL),-1);
+			if(count_plate >= 60)
+				project(0,rad,ty,tx,dam/8, GF_DEC_ALL, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL), -1);
 
 
 		}
@@ -15249,9 +15923,14 @@ class_power_type class_power_kanako[] =
 	{24,12,50,FALSE,TRUE,A_CHR,0,0,_("神が歩かれた御神渡り", "Omiwatari that God Walked"),
 		_("トラップとドアを破壊するビームを放つ。信仰がかなり集まるとビームで壁を掘るようになる。",
         "Fires a beam of trap/door destruction. If you've gathered a lot of faith, it will dig through walls as well.")},
-	{30,24,60,FALSE,TRUE,A_DEX,0,8,_("御射山御狩神事", "Misayama Hunting Shrine Ritual"),
+	{28,24,60,FALSE,TRUE,A_DEX,0,8,_("御射山御狩神事", "Misayama Hunting Shrine Ritual"),
 		_("周囲のランダムな敵に向け数発の無属性ボルト攻撃を行う。信仰が集まると弾数が増える。",
         "Fires multiple non-elemental bolts at random enemies in your vicinity. Amount of bolts increases with amount of faith gathered.")},
+
+	{ 32,50,65,FALSE,TRUE,A_CHR,0,0,_("神の御威光", "Sacred Authority of the Gods"),
+		_("視界内全てのモンスターを攻撃力低下・魔法力低下状態にしようと試みる。進行が集まると効力が強くなる。",
+        "Attempts to lower attack and magic power of all monsters in sight. More powerful the more faith you've gathered")},
+
 	{36,48,65,FALSE,TRUE,A_WIS,0,0,_("マウンテン・オブ・フェイス", "Mountain of Faith"),
 		_("一定時間パワーアップする。信仰が集まるとさらに強力なパワーアップをするようになる。",
         "Temporarily powers you up. Gathering more faith makes the power up effects stronger.")},
@@ -15386,6 +16065,23 @@ cptr do_cmd_class_power_aux_kanako(int num, bool only_info)
 		break;
 	case 6:
 		{
+			int power = 10 + rank * rank * 10;
+			if (only_info) return format(_str_eff_power, power);
+
+			if (rank > 5) msg_print(_("あなたは細い植物の蔓をかざした！", "You hold out a thin plant vine!"));
+			else if (rank > 3) msg_print(_("あなたは神々しく光った！", "You radiate divine light!"));
+			else msg_print(_("あなたは偉そうに見得を切った！", "You make a grand gesture!"));
+
+			project_hack2(GF_DEC_ATK, 0, 0, power);
+			project_hack(GF_DEC_MAG, power);
+
+			break;
+		}
+
+
+
+	case 7:
+		{
 			int time = 30;
 			int dec_hp;
 
@@ -15437,7 +16133,7 @@ cptr do_cmd_class_power_aux_kanako(int num, bool only_info)
 		}
 		break;
 
-	case 7:
+	case 8:
 		{
 			int num = 1 + rank / 2;
 			bool flag = FALSE;
@@ -15455,7 +16151,7 @@ cptr do_cmd_class_power_aux_kanako(int num, bool only_info)
 		break;
 
 
-	case 8:
+	case 9:
 		{
 			int rad = 1 + (rank + 1) / 2;
 			int dam = 1 + rank * rank * 5;
@@ -16043,7 +16739,7 @@ cptr do_cmd_class_power_aux_sumireko(int num, bool only_info)
 		{
 			if(only_info) return format("");
 			project_length = 2 + plev / 24;
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			project_hook(GF_ATTACK, dir, HISSATSU_NO_AURA, PROJECT_STOP | PROJECT_KILL);
 			break;
 		}
@@ -16805,18 +17501,21 @@ class_power_type class_power_parsee[] =
 	{12,16,35,FALSE,TRUE,A_DEX,0,2,_("華やかなる仁者への嫉妬", "Jealousy of the Kind and Lovely"),
 		_("視界内の敵を混乱させる。周囲に敵が多いほど効果が高くなる。",
         "Confuses all enemies in sight. More effective when there are many enemies nearby.")},
-	{20,20,40,FALSE,TRUE,A_CHR,0,0,_("嫉妬心操作Ⅰ", "Jealousy Manipulation I"),
+	{18,20,40,FALSE,TRUE,A_CHR,0,0,_("嫉妬心操作Ⅰ", "Jealousy Manipulation I"),
 		_("モンスター一体の嫉妬心を煽る。嫉妬心を煽られたモンスターは自分より高レベルなモンスター全てに敵対する状態になる。ユニークモンスターと通常の精神を持たないモンスターには効果がない。",
         "Instills jealousy in a single monster. That monster will be hostile to all other higher level monsters. Does not affect unique monsters or monsters with unusual mind.")},
-	{24,32,50,FALSE,TRUE,A_INT,0,0,_("謙虚なる富者への片恨", "Hate for the Humble and Rich"),
+	{23,32,50,FALSE,TRUE,A_INT,0,0,_("謙虚なる富者への片恨", "Hate for the Humble and Rich"),
 		_("分身が現れる。分身は命令に関わらず自分について来ようとし、自分の間近にいないと消滅する。また敵に倒されたときに無属性の大爆発を起こす。(自分はこの爆発のダメージを受けない)",
         "Creates a clone of yourself. It will stay close to you regardless of your commands and disappears if you get separated. It causes a large non-elemental explosion when defeated by an enemy. (You don't take damage from that explosion)")},
-	{30,24,60,FALSE,TRUE,A_CHR,0,6,_("ジェラシーボンバー", "Jealousy Bomber"),
+	{27,24,60,FALSE,TRUE,A_CHR,0,6,_("ジェラシーボンバー", "Jealousy Bomber"),
 		_("精神攻撃属性のボールを放つ。威力は魅力に大きく依存し、また自分の体力が低いほど威力が上がる。精神を持たない敵やユニークモンスターには効果が薄い。",
         "Fires a ball of mental energy. Power greatly depends on your charisma, and also increases if you're low on health. Less effective against unique monsters and enemies with unusual mind.")},
-	{35,60,75,FALSE,TRUE,A_CHR,0,0,_("嫉妬心操作Ⅱ", "Jealousy Manipulation II"),
+	{31,60,75,FALSE,TRUE,A_CHR,0,0,_("嫉妬心操作Ⅱ", "Jealousy Manipulation II"),
 		_("このフロアでモンスターが増殖しなくなる。",
         "Prevents monsters from multiplying on this level.")},
+	{35,6,65,FALSE,TRUE,A_WIS,0,0,_("丑の刻参り", "Shrine Visit in the Dead of Night"),
+		_("画面にHPバーが表示されているモンスターに対して呪いの儀式を行う。七回続けて同じモンスターに呪いをかけるとそのモンスターを高確率で全能力低下させる。ただしこの呪いの儀式は誰にも見られてはいけない。",
+        "Performs a curse ritual against the monster whose HP bar is displayed on the screen. If performed seven times against the same monster, lowers all of its stats with high probability rate. However, nobody must see you perform this ritual.")},
 	{39,50,70,FALSE,TRUE,A_WIS,0,0,_("グリーンアイドモンスター", "Green-Eyed Monster"),
 		_("嫉妬の怪物を呼び出す。怪物は標的が強いほど強くなり、命令に関わらず標的を追いかけ、標的が倒れると消える。自分の分身と同時には呼べない。",
         "Summons a jealousy monster to pursue a target. The stronger its target is, the stronger it becomes, it pursues the target regardless of your orders and disappears when the target is defeated. Cannot be summoned at the same time with your clone.")},
@@ -16831,6 +17530,7 @@ class_power_type class_power_parsee[] =
 
 // p_ptr->magic_num1[0]をグリーンアイドモンスターのターゲットIDXに使用
 // p_ptr->magic_num1[1]を積怨返しのダメージカウントに使用　←parsee_damage_countを使うことにした
+// p_ptr->magic_num1[4]を丑の刻参りのターゲットモンスターm_idxに、magic_num2[4]を呪いカウントに使う
 cptr do_cmd_class_power_aux_parsee(int num, bool only_info)
 {
 	int dir,dice,sides,i;
@@ -16997,6 +17697,94 @@ cptr do_cmd_class_power_aux_parsee(int num, bool only_info)
 	}
 
 	case 6:
+
+	{
+		int power = plev * 7;
+		int target_m_idx;
+		monster_type *m_ptr;
+		char m_name[160];
+		if (only_info) return format(_str_eff_power, power);
+
+		target_m_idx = p_ptr->magic_num1[4];
+
+		if (p_ptr->health_who && m_list[p_ptr->health_who].ml)
+		{
+			int tmp_m_idx;
+			//技を使うところの視界内に誰かがいると儀式大失敗で太古の怨念発動
+			tmp_m_idx = check_player_is_seen();
+			if (tmp_m_idx)
+			{
+				int count = 0;
+				int i;
+				monster_desc(m_name, &m_list[tmp_m_idx], 0);
+
+				msg_format(_("呪いの儀式を%sに見られてしまった！呪いが逆流した！",
+                            "%s has seen you perform the curse ritual! The curse turns on you!"),m_name);
+
+				activate_ty_curse(FALSE, &count);
+
+				//カウントリセット
+				p_ptr->magic_num1[4] = 0;
+				p_ptr->magic_num2[4] = 0;
+				break;
+
+			}
+
+			m_ptr = &m_list[p_ptr->health_who];
+			monster_desc(m_name, m_ptr, 0);
+
+			if (p_ptr->health_who == target_m_idx)
+			{
+
+				msg_print(_("あなたは一心不乱に藁人形に釘を打ち付けている...",
+                            "You singlemindedly hammer nails into straw dolls..."));
+				p_ptr->magic_num2[4] += 1;
+
+				if (p_ptr->magic_num2[4] == 7)
+				{
+					monster_desc(m_name, m_ptr, 0);
+
+					msg_format(_("%sに対する呪いが成就した！",
+                                "You complete your curse against %s!"), m_name);
+					project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_DEC_ALL,  PROJECT_JUMP | PROJECT_KILL | PROJECT_HIDE, -1);
+					anger_monster(m_ptr);
+					set_monster_csleep(target_m_idx, 0);
+
+					//カウントリセット
+					p_ptr->magic_num1[4] = 0;
+					p_ptr->magic_num2[4] = 0;
+				}
+				else
+				{
+					//ときどき起きる
+					if (one_in_(6))
+					{
+						if (set_monster_csleep(target_m_idx, 0))
+							msg_format(_("%sは目を覚ました。", "%s wakes up."),m_name);
+					}
+
+				}
+
+			}
+			else
+			{
+				msg_format(_("あなたは%sの名前を書いた藁人形に釘を打ち付け始めた。",
+                            "You start hammering nails into a straw doll with '%s' written on it."),m_name);
+				p_ptr->magic_num1[4] = p_ptr->health_who;
+				p_ptr->magic_num2[4] = 1;
+
+			}
+		}
+		else
+		{
+			msg_print(_("呪いの標的がいない。", "There's no target to curse."));
+			return NULL;
+		}
+
+		break;
+	}
+
+	case 7:
 		{
 			int i;
 			bool flg_success = FALSE;
@@ -17040,7 +17828,7 @@ cptr do_cmd_class_power_aux_parsee(int num, bool only_info)
 		break;
 		}
 
-	case 7:
+	case 8:
 	{
 		int base = 5;
 		if (only_info) return format(_("範囲:%d 期間:%d+1d%d", "rad: %d dur: %d+1d%d"),MAX_SIGHT,base,base);
@@ -17051,7 +17839,7 @@ cptr do_cmd_class_power_aux_parsee(int num, bool only_info)
 	break;
 
 	///mod160319 積怨返しのダメージカウントを外部変数にした
-	case 8:
+	case 9:
 		{
 			int damage = parsee_damage_count;
 			int rad;
@@ -17200,7 +17988,7 @@ cptr do_cmd_class_power_aux_meirin(int num, bool only_info)
 			int len = 3 + (plev-25) / 6;
 			int damage = 50 + plev * 2;
 			if(only_info) return format(_str_eff_range_dam,len,damage);
-			if (!rush_attack2(len,GF_MISSILE,damage)) return NULL;
+			if (!rush_attack2(len,GF_MISSILE,damage,0)) return NULL;
 
 			//連撃カウント増加、行動消費減少
 			new_class_power_change_energy_need = use_energy;
@@ -17874,8 +18662,8 @@ class_power_type class_power_suwako[] =
 		_("配下の祟り神を一体呼び出す。",
         "Summons a scourge god as a follower.")},
 	{48,-100,90,FALSE,TRUE,A_CHR,0,0,_("赤口さま", "Mishaguchi-sama"),
-		_("MPを全て(最低100)消費し、隣接した敵に無属性のダメージを与える。消費MP量と現在のHPの低下度により威力が変化する。",
-        "Uses up all of MP (at least 100), and deals non-elemental damage to an adjacent enemy. Power depends on amount of MP used and how low on health you are.")},
+		_("MPを全て(最低100)消費し、隣接した敵に無属性のダメージを与え、高確率で全能力を低下させる。消費MP量と現在のHPの低下度により威力が変化する。",
+        "Uses up all of MP (at least 100), deals non-elemental damage to an adjacent enemy, and lowers all of its stats with high probability. Power depends on amount of MP used and how low on health you are.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",	""},
 };
@@ -17922,7 +18710,7 @@ cptr do_cmd_class_power_aux_suwako(int num, bool only_info)
 			if(dam<1) dam = 1;
 			if(dam > 800) dam=800;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			if(use_itemcard)
 				msg_print(_("カードから濁流が噴き出した！", "Muddy water pours out of the card!"));
 			else
@@ -18035,7 +18823,8 @@ cptr do_cmd_class_power_aux_suwako(int num, bool only_info)
 			world_monster = -1;
 			do_cmd_redraw();
 			Term_xtra(TERM_XTRA_DELAY, 1500);
-			project(0,1,py,px,dam,GF_DISP_ALL,PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM | PROJECT_HIDE,-1);
+			project(0,1,py,px,dam/5,GF_DEC_ALL, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+			project(0,1,py,px,dam,GF_DISP_ALL,PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE,-1);
 			world_monster = 0;
 			p_ptr->redraw |= (PR_MAP);
 			handle_stuff();
@@ -18246,7 +19035,7 @@ cptr do_cmd_class_power_aux_martial_artist(int num, bool only_info)
 			int dice = 3 + ex_power / 7;
 			int sides = 4 + plev / 8;
 			if(only_info) return format(_str_eff_dam_dice_sides,dice,sides);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			if(dice > 9)
 			{
 				msg_format(_("気砲を放った！", "You fire a wave of Ki!"));
@@ -18506,7 +19295,7 @@ cptr do_cmd_class_power_aux_martial_artist(int num, bool only_info)
 			if(p_ptr->tim_general[0]) rad = 2;
 
 			if(only_info) return format(_str_eff_dam_dice_sides,dice,sides);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			msg_format(_("「波ァ――――！」", "'Haa----!'"));
 			fire_spark(GF_FORCE,dir,damroll(dice,sides),rad);
 		}
@@ -18560,20 +19349,24 @@ class_power_type class_power_yamame[] =
 	{19,22,40,FALSE,FALSE,A_CON,0,0,_("原因不明の熱病", "Unexplained Fever"),
 		_("視界内の敵を混乱、朦朧させる。",
         "Confuses and stuns enemies in sight.")},
-	{25,16,55,FALSE,FALSE,A_DEX,50,0,_("カンダタロープ", "Kandata's Rope"),
-		_("近くの蜘蛛の巣を指定し、そこへ一瞬で移動する。もしその蜘蛛の巣の場所にモンスターがいた場合自分は移動せずそのモンスターを自分のところまで引き寄せる。ただし巨大な敵には効果がない。また装備品が重いと失敗しやすい。",
-        "Move to a nearby spiderweb in an instant. If there's a monster on that web, you move that monster up to yourself instead. Does not work on gigantic enemies. Failure rate is higher when using heavy equipment.")},
-	{30,32,60,FALSE,FALSE,A_WIS,0,10,_("フィルドミアズマ", "Filled Miasma"),
+	{23,16,55,FALSE,FALSE,A_DEX,50,0,_("カンダタロープ", "Kandata's Rope"),
+		_("近くの蜘蛛の巣を指定し、そこへ一瞬で移動する。反テレポート状態でも使用できる。もしその蜘蛛の巣の場所にモンスターがいた場合自分は移動せずそのモンスターを自分のところまで引き寄せる。ただし巨大な敵には効果がない。また装備品が重いと失敗しやすい。",
+        "Move to a nearby spiderweb in an instant. Can be used even under anti-teleportation. If there's a monster on that web, you move that monster up to yourself instead. Does not work on gigantic enemies. Failure rate is higher when using heavy equipment.")},
+	{28,28,60,FALSE,FALSE,A_WIS,0,10,_("フィルドミアズマ", "Filled Miasma"),
 		_("視界内のすべてに汚染属性の攻撃を仕掛ける。",
         "Hits everything in sight with pollution.")},
-	{35,30,65,TRUE,FALSE,A_CON,0,0,_("樺黄小町", "Japanese Foliage Spider"),
-		_("隣接した敵に噛みついてダメージを与える。毒耐性を持たない敵には三倍のダメージを与え、低確率で一撃で倒す。",
-        "Bites and deals damage to an adjacent enemy. Deals triple damage to enemies without poison resistance, and has low chance of defeating them in a single strike.")},
-	{40,40,70,FALSE,FALSE,A_STR,0,0,_("階段生成", "Stair Creation"),
+	{33,30,65,TRUE,FALSE,A_CON,0,0,_("樺黄小町", "Japanese Foliage Spider"),
+		_("隣接した敵に噛みついてダメージを与える。毒耐性を持たない敵には三倍のダメージを与え、攻撃力を低下させ、低確率で一撃で倒す。",
+        "Bites and deals damage to an adjacent enemy. Deals triple damage to enemies without poison resistance, lowers their attack power, and has low chance of defeating them in a single strike.")},
+	{37,40,70,FALSE,FALSE,A_STR,0,0,_("階段生成", "Stair Creation"),
 		_("今いるところに階段を作る。上り階段になることもある。地上やクエストダンジョンでは使えない。",
         "Creates stairs on your current location. Might create a staircase leading upwards. Cannot be used on surface or in quests.")},
+	//v1.1.91
+	{40,40,70,FALSE,FALSE,A_DEX,50,0,_("ヴェノムウェブ", "Venom Web"),
+		_("近くの蜘蛛の巣を指定し、そこへ一瞬で移動する。反テレポート状態でも使用できる。さらにその地点に強力な毒属性のボールを発生させる。その地点にモンスターがいた場合近くに着地する。また装備品が重いと失敗しやすい。",
+        "Instantly moves to nearby target spiderweb. Can be used even under anti-teleportation. Generates a powerful ball of poison at that location. If there's a monster at that location, lands somewhere nearby instead. Higher failure rate when using heavy equipment.")},
 
-	{43,48,80,FALSE,FALSE,A_CHR,0,0,_("石窟の蜘蛛の巣", "Cave Spider's Web"),
+	{44,48,80,FALSE,FALSE,A_CHR,0,0,_("石窟の蜘蛛の巣", "Cave Spider's Web"),
 		_("視界内の床に蜘蛛の巣を張り巡らせる。",
         "Weaves webs on all open floor areas in sight.")},
 
@@ -18654,10 +19447,24 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 			break;
 		}
 	case 3: //カンダタロープ
+	case 7: //v1.1.91 ヴェノムウェブ
 		{
-			int range = plev / 2;
+			int range;
 			int x = 0, y = 0;
-			if(only_info) return format(_str_eff_area,range);
+			int dam = 0;
+
+			if (num == 3)
+			{
+				range = plev / 2;
+				if (only_info) return format(_("範囲:%d", "rng: %d"), range);
+			}
+			else
+			{
+				range = plev / 3;
+				dam = plev * 7 + chr_adj * 5;
+				if (only_info) return format(_("範囲:%d 損傷:%d", "rng: %d dam: %d"), range,dam);
+			}
+
 
 			if (!tgt_pt(&x, &y)) return NULL;
 
@@ -18671,28 +19478,43 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 				msg_print(_("そこは遠すぎる。", "It's too far away."));
 				return NULL;
 			}
-			else if(cave[y][x].m_idx)
-			{
-				monster_type *m_ptr = &m_list[cave[y][x].m_idx];
-				monster_race *r_ptr = &r_info[m_ptr->r_idx];
-				char m_name[80];
-				monster_desc(m_name, m_ptr, 0);
 
-				if(r_ptr->flags2 & RF2_GIGANTIC)
+			if (num == 3)
+			{
+				if (cave[y][x].m_idx)
 				{
-					msg_format(_("%sは巨大すぎて引き寄せられなかった！", "%s is too huge for you to pull!"),m_name);
-					break;
+					monster_type *m_ptr = &m_list[cave[y][x].m_idx];
+					monster_race *r_ptr = &r_info[m_ptr->r_idx];
+					char m_name[80];
+					monster_desc(m_name, m_ptr, 0);
+
+					if (r_ptr->flags2 & RF2_GIGANTIC)
+					{
+						msg_format(_("%sは大きすぎて引き寄せられなかった！",
+                                    "%s is too large to pull up!"), m_name);
+						break;
+					}
+					else
+					{
+						msg_format(_("%sに糸を絡め、引っ張り寄せた！",
+                                    "You wrap %s in your threads, pulling towards yourself!"), m_name);
+						teleport_monster_to(cave[y][x].m_idx, py, px, 100, TELEPORT_PASSIVE);
+					}
 				}
+
 				else
 				{
-					msg_format(_("%sに糸を絡め、引っ張り寄せた！", "You entangle and draw %s in!"),m_name);
-					teleport_monster_to(cave[y][x].m_idx, py, px, 100,TELEPORT_PASSIVE);
+					msg_format(_("あなたは糸を手繰って飛んだ！", "You fly holding a thread in your hand!"));
+					teleport_player_to(y, x, TELEPORT_NONMAGICAL);
 				}
 			}
 			else
 			{
-				msg_format(_("あなたは糸を手繰って飛んだ！", "You fly forward on your thread!"));
-				teleport_player_to(y, x, 0L);
+				teleport_player_to(y, x, TELEPORT_NONMAGICAL);
+				msg_format(_("あなたは%sから急降下して猛毒を撒き散らした！",
+                            "You drop down from the %s, splashing venom around!"),(dun_level?_("天井", "ceiling"):_("空", "sky")));
+				project(0, 4, y, x, dam, GF_POIS, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID), -1);
+
 			}
 
 			break;
@@ -18749,6 +19571,10 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 						msg_format(_("%sの全身に毒が回った！", "%s is severely poisoned!"),m_name);
 						damage = m_ptr->hp + 1;
 					}
+					else if(set_monster_timed_status_add(MTIMED2_DEC_ATK, cave[y][x].m_idx, 16+randint1(16)))
+						msg_format(_("%sの攻撃力が下がったようだ。", "The attack power of %s is lowered."), m_name);
+
+
 				}
 
 				if(damage>0)
@@ -18775,7 +19601,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 		break;
 	}
 
-	case 7: //石窟の蜘蛛の巣
+	case 8: //石窟の蜘蛛の巣
 		{
 			if(only_info) return format("");
 			msg_print(_("周囲が光る網に埋め尽くされた！", "Glowing webs spread around you!"));
@@ -18882,7 +19708,7 @@ cptr do_cmd_class_power_aux_utsuho(int num, bool only_info)
 		{
 			int dam = 20 + plev + chr_adj;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("ビームを撃った。", "You fire a beam."));
 			fire_beam(GF_LITE,dir, dam);
 			break;
@@ -18906,7 +19732,7 @@ cptr do_cmd_class_power_aux_utsuho(int num, bool only_info)
 		{
 			int dam = 30 + plev * 2 + chr_adj * 3;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("高エネルギー荷電粒子を発生させた！", "You generate high energy charged particles!"));
 			fire_beam(GF_PLASMA,dir, dam);
 			break;
@@ -19915,6 +20741,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 
 /*:::レミリア用特技*/
 /*:::ミゼラブルフェイトにmagic_num1[0]とtim_general[0]を使用する*/
+//v1.1.95 ↑使わなくなった
 class_power_type class_power_remy[] =
 {
 	{10,10,30,FALSE,TRUE,A_INT,0,6,_("スターオブダビデ", "Star of David"),
@@ -19932,18 +20759,21 @@ class_power_type class_power_remy[] =
 	{27,20,45,TRUE,FALSE,A_DEX,0,10,_("バッドレディスクランブル", "Bad Lady Scramble"),
 		_("指定した敵へ突進しダメージを与え朦朧とさせる。障害物に当たると止まる。",
         "Runs up to target enemy, deals damage and stuns. Stops if you hit an obstacle.")},
-	{32,40,65,FALSE,TRUE,A_STR,0,0,_("ミゼラブルフェイト", "Miserable Fate"),
-		_("敵一体を自分の近くに引き寄せ、さらに移動とテレポートを阻害する。束縛から脱出されることもあり、巨大な敵や力強い敵には効きにくい。",
-        "Lure an enemy towards yourself, and prevent them from moving or teleporting. They might escape the restraints, and it is less effective against gigantic or powerful enemies.")},
-	{36,50,75,FALSE,TRUE,A_CHR,0,0,_("ミレニアムの吸血鬼", "Millennium Vampire"),
+	{30,40,65,FALSE,TRUE,A_STR,0,0,_("ミゼラブルフェイト", "Miserable Fate"),
+		_("敵一体を自分の近くに引き寄せ、さらに短時間移動とテレポートを阻害する。束縛から脱出されることもあり、巨大な敵や力強い敵には効きにくい。",
+        "Lure an enemy towards yourself, and prevent them from moving or teleporting for a short period of time. They might escape the restraints, and it is less effective against gigantic or powerful enemies.")},
+	{33,50,75,FALSE,TRUE,A_CHR,0,0,_("ミレニアムの吸血鬼", "Millennium Vampire"),
 		_("隣接した敵から大幅にHPを吸収し、満腹度を回復させる。人間型の敵にしか使えない。",
         "Drains a large amount of HP from an adjacent enemy and satisfies hunger. Can be used only against humanoid enemies.")},
-	{40,80,80,FALSE,TRUE,A_STR,0,0,_("スピア・ザ・グングニル", "Spear the Gungnir"),
+	{37,80,80,FALSE,TRUE,A_STR,0,0,_("スピア・ザ・グングニル", "Spear the Gungnir"),
 		_("バリアを貫通する強力なビーム攻撃を放つ。『グングニル』を装備していると威力が上がる。",
         "Fires a powerful beam capable of piercing barriers. Power increases if you're wielding Gungnir.")},
-	{45,60,70,FALSE,TRUE,A_DEX,0,0,_("きゅうけつ鬼ごっこ", "Duck, Duck, Bat"),
+	{40,60,70,FALSE,TRUE,A_DEX,0,0,_("きゅうけつ鬼ごっこ", "Duck, Duck, Bat"),
 		_("近くのランダムな敵の所に移動し魔力属性の球を発生させる。6/7の確率で再発動し、そのたびに少しづつ爆発が強力になる。",
         "Teleports up to a random nearby enemy and generates a ball of mana. Has 6/7 of repeating this action, slightly increasing the explosion power each time.")},
+	{44,75,75,FALSE,TRUE,A_CHR,0,0,_("ヘルカタストロフィ", "Hell Catastrophe"),
+		_("隣に敵がいるとき自分を中心にした破片属性ボール、周囲に敵が多いとき視界内劣化属性攻撃、どちらでもないときランダムなターゲットに対する精神攻撃属性ボール連射を行う。",
+        "If there's an enemy adjacent to you, generate a ball of shards centered on yourself; if there's a lot of enemies, hit everything in sight with disenchantment; if neither, fire several balls of mental attack at random targets.")},
 	{48,180,85,FALSE,TRUE,A_CHR,0,0,_("レッドマジック", "Red Magic"),
 		_("強力な視界内攻撃を行う。威力は魅力に大きく依存し、清浄な体を持つ敵に大きなダメージを与える。",
         "Hits everything in sight with a powerful attack. Power greatly depends on your charisma, and the attack deals large damage to enemies with pure bodies.")},
@@ -20012,7 +20842,7 @@ cptr do_cmd_class_power_aux_remy(int num, bool only_info)
 			int len = 5 + plev / 10;
 			int damage = 50 + plev * 2;
 			if(only_info) return format(_str_eff_range_dam,len,damage);
-			if (!rush_attack2(len,GF_FORCE,damage)) return NULL;
+			if (!rush_attack2(len,GF_FORCE,damage,0)) return NULL;
 			break;
 		}
 		break;
@@ -20022,7 +20852,9 @@ cptr do_cmd_class_power_aux_remy(int num, bool only_info)
 			int idx;
 			monster_type *m_ptr;
 			char m_name[80];
-			if(only_info) return "";
+			int base = 10;
+
+			if (only_info) return format(_str_eff_dur, base);
 
 			if(!teleport_back(&idx, TELEPORT_FORCE_NEXT)) return NULL;
 			m_ptr = &m_list[idx];
@@ -20030,10 +20862,10 @@ cptr do_cmd_class_power_aux_remy(int num, bool only_info)
 			if(distance(py,px,m_ptr->fy,m_ptr->fx) > 1) msg_format(_("%sを引き寄せるのに失敗した。", "You failed to lure %s."),m_name);
 			else
 			{
-				int base = 20;
 				msg_format(_("紅い鎖が飛び、%sを束縛した！", "Scarlet chains burst out and restrain %s!"),m_name);
-				p_ptr->magic_num1[0] = idx;
-				set_tim_general(base,FALSE,0,0);
+				project(0, 0, m_ptr->fy, m_ptr->fx, base, GF_NO_MOVE, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+//				p_ptr->magic_num1[0] = idx;
+//				set_tim_general(base,FALSE,0,0);
 			}
 		}
 		break;
@@ -20206,7 +21038,82 @@ cptr do_cmd_class_power_aux_remy(int num, bool only_info)
 		}
 		break;
 
-	case 9: //レッドマジック
+
+	case 9:
+	{
+
+		int i,dam,base;
+		int target_num = 0;
+		int near_target_num = 0;
+		int attack_type;
+		int attack_count;
+
+		for (i = 1; i < m_max; i++)
+		{
+			monster_type *m_ptr;
+			m_ptr = &m_list[i];
+			if (!m_ptr->r_idx) continue;
+			if (!m_ptr->ml) continue;
+			if (m_ptr->cdis > MAX_SIGHT) continue;
+			if (!is_hostile(m_ptr)) continue;
+			if (!projectable(m_ptr->fy, m_ptr->fx, py, px)) continue;
+			target_num++;
+			if (m_ptr->cdis == 1) near_target_num++;
+		}
+
+		if (near_target_num) attack_type = 1;
+		else if (target_num >= 7) attack_type = 2;
+		else attack_type = 3;
+
+		switch (attack_type)
+		{
+		case 1://破片属性ボール
+
+			dam = plev * 9 + chr_adj * 15;
+
+			if (only_info) return format(_("損傷:～%d", "dam: ~%d"), dam / 2);
+
+			msg_print(_("魔力の針が嵐のように撃ち出された！", "You conjure a storm of mana needles!"));
+			project(0, 5, py, px, dam, GF_SHARDS, (PROJECT_JUMP | PROJECT_KILL | PROJECT_ITEM), -1);
+			break;
+
+		case 2://視界内劣化
+
+			base = plev + chr_adj * 5;
+
+			if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
+
+			msg_print(_("魔力の牙が部屋中を食い荒らした！","Magical fangs devour everything around!"));
+			project_hack2(GF_DISENCHANT, 1, base, base);
+			break;
+
+		default:
+
+			dam = plev * 3 + chr_adj * 5;
+			if (only_info) return format(_("損傷:%d * 3", "dam: %d * 3"), dam);
+
+			msg_print(_("魔力の塊を叩きつけた！", "You throw balls of mana!"));
+
+			for (i = 0; i<3; i++)
+			{
+				if (!fire_random_target(GF_REDEYE, dam, 3, 4, 0))
+				{
+					if (i == 0)msg_format(_str_mess_cant_find_enemies);
+					break;
+				}
+			}
+			break;
+
+		}
+
+	}
+	break;
+
+
+
+
+
+	case 10: //レッドマジック
 		{
 			int dice = plev;
 			int sides =  chr_adj;
@@ -20986,7 +21893,7 @@ class_power_type class_power_kagerou[] =
 		_("遠吠えで視界内の敵を恐怖させ、自分自身を士気高揚させる。周囲の敵が起きる。満月時にはさらに視界内の敵に轟音ダメージを与える。",
         "Howls, terrifying all enemies in sight and granting yourself heroism. Wakes up nearby enemies. When used on a full moon night, also hits everything in sight with sound.")},
 
-	{24,18,60,TRUE,FALSE,A_DEX,50,5,_("ハイスピードバウンス", "High Speed Bounce"),
+	{24,18,60,TRUE,FALSE,A_DEX,50,5,_("ハイスピードパウンス", "High Speed Pounce"),
 		_("離れた敵に一瞬で飛びかかり攻撃する。レベルが上がると射程距離が延びる。障害物があると止まる。装備品が重いと失敗しやすい。",
         "Runs up to a distant enemy in an instant and attacks. Range increases with your level. Stops if you hit an obstacle. Failure rate is higher when using heavy equipment.")},
 
@@ -21223,8 +22130,8 @@ class_power_type class_power_reimu[] =
 		_("精神を研ぎ澄ませ、MPをわずかに回復する。",
         "Sharpens your mind, slightly recovering MP.")},
 	{35,45,75,FALSE,TRUE,A_WIS,0,0,_("八方鬼縛陣", "Omnidirectional Oni-Binding Circle"), //rank4
-		_("隣接したターゲットとその周辺に破邪属性ダメージを与え、さらにターゲットの移動とテレポートを短時間阻害する。二体以上を同時に縛ることはできない。脱出されることもある。",
-        "Hits an adjacent target and area around it with holy energy, also prevents the target from moving or teleporting for a short period of time. You cannot restrain two or more targets at the same time this way. The target also might escape your restraints.")},
+		_("隣接したターゲットとその周辺に破邪属性ダメージを与え、さらにターゲットの移動とテレポートを短時間阻害する。巨大な敵や力強い敵には脱出されやすい。",
+        "Hits an adjacent target and area around it with holy energy, also prevents the target from moving or teleporting for a short period of time. Gigantic or powerful enemies are more likely to escape.")},
 	{38,72,85,FALSE,TRUE,A_CHR,0,0,_("よくばり大幣", "Greedy Oonusa"), //rank7
 		_("大幣装備時にのみ使用可能。大幣が勝手に飛んで行って敵を薙ぎ倒す。",
         "Requires wielding an oonuse. Your oonusa flies around by itself, dealing sweeping blows to enemies.")},
@@ -21423,13 +22330,14 @@ cptr do_cmd_class_power_aux_reimu(int num, bool only_info)
 		}
 		break;
 	/*::: -Hack- 八方鬼縛陣　magic_num1[0]とtim_general[0]を使用する*/
+	//v1.1.95 GF_NO_MOVEに置き換えた
 	case 10:
 		{
 			int y, x;
 			int dam = plev * 2 + chr_adj * 10 / 3 + (rank+1) * plev / 5;
 			monster_type *m_ptr;
 
-			int base = 5 + p_ptr->lev / 10 + rank * 2;
+			int base = 7 + p_ptr->lev / 10 + rank * 2;
 			if(only_info) return format(_("損傷:%d 期間:%d", "dam: %d dur: %d"),dam, base);
 			if (!get_rep_dir2(&dir)) return NULL;
 			if (dir == 5) return NULL;
@@ -21448,8 +22356,10 @@ cptr do_cmd_class_power_aux_reimu(int num, bool only_info)
 				if(!m_ptr->r_idx) break;
 
 				msg_format(_("%sは光の柱に囚われた！", "%s is restrained by the pillar of light!"),m_name);
-				p_ptr->magic_num1[0] = cave[y][x].m_idx;
-				set_tim_general(base,FALSE,0,0);
+				project(0, 0, m_ptr->fy, m_ptr->fx, base, GF_NO_MOVE, PROJECT_KILL|PROJECT_JUMP|PROJECT_HIDE, -1);
+
+				//p_ptr->magic_num1[0] = cave[y][x].m_idx;
+				//set_tim_general(base,FALSE,0,0);
 			}
 			else
 			{
@@ -22448,7 +23358,7 @@ cptr do_cmd_class_power_aux_ninja(int num, bool only_info)
 
 			if(plev < 30)
 			{
-				if (!get_aim_dir(&dir)) return FALSE;
+				if (!get_aim_dir(&dir)) return NULL;
 				msg_print(_("あなたは標的を指さし術をかけた。", "You point at the target and use your jutsu."));
 				(void)stasis_monster(dir);
 				break;
@@ -22771,6 +23681,7 @@ cptr do_cmd_class_power_aux_wriggle(int num, bool only_info)
 
 
 /*:::こころ専用技*/
+//憂嘆の長壁面にtim_gen[0]を使用
 class_power_type class_power_kokoro[] =
 {
 	{ 3,4,30,FALSE,TRUE,A_WIS,0,0,_("感情探知", "Detect Emotions"),
@@ -22782,21 +23693,35 @@ class_power_type class_power_kokoro[] =
 	{ 5,0,0,FALSE,TRUE,A_DEX,0,0,_("再演", "Reproduce"),
 		_("装備している面の敵が持っていた技や魔法を再現する。難易度や消費MPの判定は個別に行われる。威力は面の元となった敵の能力に依存するがブレスなどのHPは1/6として計算される。",
         "Reproduces spells/abilities of the enemy whose mask you're wearing. Failure rate and MP cost depends on ability used. Power depends on stats of the original enemy; for the purposes of breaths and similar attacks, HP is calculated as 1/6 of its value.")},
-	{ 12,12,35,FALSE,TRUE,A_WIS,0,5,_("喜怒哀楽ポゼッション", "Four Humors Possession"),
-		_("敵一体を高確率で恐怖、混乱させる。レベル30になると少し効果が落ちるが視界内全ての敵が対象になり朦朧効果が追加される。",
-        "Terrifies and confuses a single enemy with high probability rate. At level 30 becomes slightly less effective, but hits all enemies in sight, and might stun as well.")},
-	{ 17,16,40,FALSE,TRUE,A_DEX,0,0,_("こころのルーレット", "Kokoro Roulette"),
+	{ 12,16,35,FALSE,TRUE,A_CHR,0,3,_("杞人地を憂う", "The Man of Qi Worries about the Earth"),
+		_("自分の周囲のモンスターを恐怖させようとする。レベル20で混乱、レベル30以上で朦朧、レベル40で攻撃力低下効果が追加される。抵抗されると無効。",
+        "Terries monsters around you. Confuses at level 20, stuns at level 30, lowers attack power at level 40. Does nothing if resisted.")},
+
+	{ 18,24,35,FALSE,TRUE,A_WIS,0,5,_("喜怒哀楽ポゼッション", "Four Humors Possession"),
+		_("隣接したモンスター一体に自分の恐怖・朦朧・幻覚・狂戦士化・つよしスペシャルの状態異常のうちどれかひとつを耐性を無視して押し付ける。何の状態異常もなければ失敗する。クエスト打倒対象モンスターと精神をもたないモンスターには効果がない。この特技は狂戦士化状態でも使うことができる。",
+        "Applies one of your current status abnormalities (among fear, stun, hallucination, berserk, tsuyoshi special) to an adjacent enemy, ignoring resistance. Fails if you don't have those status abnormalities. Does not affect quest targets and mindless monsters. This special ability can be used while berserk.")},
+	{ 20,16,40,FALSE,TRUE,A_DEX,0,0,_("こころのルーレット", "Kokoro Roulette"),
 		_("恐怖、祝福、ヒーロー、狂戦士化のいずれかの状態になる。レベル30で全耐性、レベル45で体力回復+全復活の効果が候補に加わる。",
         "Temporarily makes you either terrified, blessed, heroic or berserk. At level 30, can grant resistance to elements; at level 45, can heal + restore stat/experience drain.")},
-	{ 22,20,50,FALSE,TRUE,A_CHR,0,2,_("狂喜の火男面 ", "Enraptured Hyottoko Mask"),
+	{ 24,20,50,FALSE,TRUE,A_CHR,0,2,_("狂喜の火男面 ", "Enraptured Hyottoko Mask"),
 		_("歓喜の舞とともに花火が炸裂し、周囲に複数回の火炎属性攻撃を行う。",
         "Scatters fireworks in a cheerful dance, performing multiple fire attacks in your vicinity.")},
-	{ 30,25,50,FALSE,TRUE,A_DEX,0,0,_("怒れる忌狼の面", "Mask of an Angry Hated Wolf"),
+	{ 28,25,50,FALSE,TRUE,A_DEX,0,0,_("怒れる忌狼の面", "Mask of an Angry Hated Wolf"),
 		_("短距離を突進し、敵に当たると気属性ダメージを与えて止まる。レベルが上がると距離が延びる。",
         "Charge a short distance; if you hit an enemy, deal ki damage and stop. Range increases with level.")},
-	{ 36,40,80,FALSE,TRUE,A_STR,0,0,_("昂揚の神楽獅子", "Invigorated Kagura Lion"),
+
+	{ 32,40,60,FALSE,TRUE,A_CHR,0,0,_("憂嘆の長壁面", "Sighing Osakabe Mask"),
+		_("一定時間、隣接攻撃を仕掛けてきたモンスターにカウンターで恐怖・混乱・朦朧状態を付与するようになる。",
+        "Temporarily counters melee attacks by terrifying, confusing, and stunning the attackers.")},
+
+	{ 36,36,70,FALSE,TRUE,A_STR,0,0,_("昂揚の神楽獅子", "Invigorated Kagura Lion"),
 		_("プラズマ属性の強力なレーザーを放つ。",
         "Fires a powerful plasma laser.")},
+
+	{ 40,48,75,FALSE,TRUE,A_CHR,0,0,_("憂き世は憂しの小車", "Melancholic World is a Melancholic Cart"),
+		_("視界内全てのモンスターを恐怖、混乱、朦朧、攻撃力低下させようと試みる。抵抗されると無効。",
+        "Attempts to terrify, confuse, stun and lower attack power of all monsters in sight. Does nothing if resisted.")},
+
 	{ 45,96,85,FALSE,TRUE,A_CHR,0,0,_("モンキーポゼッション", "Monkey Possession"),
 		_("視界内全てに魔力・暗黒・閃光・気属性の強力な攻撃を行う。",
         "Hits everything in sight with powerful mana, darkness, light and ki attacks.")},
@@ -22846,13 +23771,24 @@ cptr do_cmd_class_power_aux_kokoro(int num, bool only_info)
 			{
 				char m_name[80];
 				int chance;
+				int mon_ac;
+
 				r_ptr = &r_info[m_ptr->r_idx];
 				monster_desc(m_name, m_ptr, 0);
 
+				mon_ac = r_ptr->ac;
+
+				//v1.1.94 モンスター防御力低下中はAC25%カット
+				if (MON_DEC_DEF(m_ptr))
+				{
+					mon_ac = MONSTER_DECREASED_AC(mon_ac);
+				}
+
 				chance = (p_ptr->skill_thn + (p_ptr->to_h[0] + p_ptr->lev * ref_skill_exp(SKILL_MARTIALARTS) / 8000)* BTH_PLUS_ADJ);
+
 				msg_format(_("あなたは%sへ飛びかかった！", "You leap at %s!"),m_name);
 
-				if(MON_CSLEEP(m_ptr) || test_hit_norm( chance, r_ptr->ac, m_ptr->ml))
+				if(MON_CSLEEP(m_ptr) || test_hit_norm( chance, mon_ac, m_ptr->ml))
 				{
 					project(0,0,y,x,randint1(damage),GF_KOKORO,(PROJECT_KILL | PROJECT_HIDE),0);
 				}
@@ -22878,38 +23814,117 @@ cptr do_cmd_class_power_aux_kokoro(int num, bool only_info)
 			break;
 		}
 
-	case 3:
-		{
-			int power = plev * 5 + chr_adj * 5;
-			if(plev > 29) power -= 100;
-			if(only_info) return format(_str_eff_power,power);
 
-			if(plev < 30)
+	case 3: //v1.1.95 効果少し変更
+	{
+		int power = plev * 5 + chr_adj * 5;
+		if (only_info) return format(_("効力:～%d", "pow: ~%d"), power / 2);
+
+		msg_print(_("絶望のオーラを放った！", "You emit an aura of despair!"));
+
+		project(0, 8, py, px, power, GF_TURN_ALL, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+		if (plev > 19)
+			project(0, 8, py, px, power, GF_OLD_CONF, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+		if (plev > 29)
+			project(0, 8, py, px, power, GF_STUN, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+		if (plev > 39)
+			project(0, 8, py, px, power, GF_DEC_ATK, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+
+		break;
+	}
+
+	case 4: //v1.1.95 性能変更
+
+		{
+			monster_type *m_ptr;
+			monster_race *r_ptr;
+			int m_idx;
+
+			if (only_info) return format(_("効力:不定", "pow: undef"));
+
+			if (!get_rep_dir2(&dir)) return NULL;
+			if (dir == 5) return NULL;
+
+			m_idx = cave[py + ddy[dir]][px + ddx[dir]].m_idx;
+			m_ptr = &m_list[m_idx];
+
+			if (m_idx && (m_ptr->ml))
 			{
-				if (!get_aim_dir(&dir)) return NULL;
-				if(dir != 5 || !target_okay() || !projectable(target_row,target_col,py,px))
+				char m_name[80];
+				r_ptr = &r_info[m_ptr->r_idx];
+				monster_desc(m_name, m_ptr, 0);
+
+				msg_format(_("%sに向けて感情の波動を放った！", "You release a wave of emotions at %s!"), m_name);
+
+				//QUESTORには効かなくする。狂戦士化薬を10服くらいガブ飲みしてから使えばボスをあっさりハメ殺せそうなので
+				if (r_ptr->flags2 & RF2_EMPTY_MIND || r_ptr->flagsr & RFR_RES_ALL || r_ptr->flags1 & RF1_QUESTOR)
 				{
-					msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
-                                "You have to pick a target in sight."));
-					return NULL;
+					msg_format(_("%sには効果がなかった！", "%s is unaffected!"), m_name);
+					break;
 				}
-				msg_print(_("感情の波動を放った！", "You release a wave of emotions!"));
-				fire_ball_hide(GF_OLD_CONF,dir,power,0);
-				fire_ball_hide(GF_TURN_ALL,dir,power,0);
+				if (p_ptr->afraid)
+				{
+					if (set_monster_monfear(m_idx, p_ptr->afraid))
+						msg_format(_("%sは恐怖して逃げ出した！", "%s flees in terror!"), m_name);
+					set_afraid(0);
+				}
+				else if (p_ptr->stun)
+				{
+					if (set_monster_stunned(m_idx, p_ptr->stun))
+						msg_format(_("%sは朦朧とした。", "%s is stunned."), m_name);
+					set_stun(0);
+				}
+				else if (p_ptr->shero)
+				{
+					if (set_monster_timed_status_add(MTIMED2_BERSERK, m_idx, p_ptr->shero))
+						msg_format(_("%sは突然暴れ出した！", "%s suddenly starts rampaging!"), m_name);
+					set_shero(0, TRUE);
+				}
+				//つよしスペシャル　攻撃低下+混乱
+				else if (p_ptr->tsuyoshi)
+				{
+					if (set_monster_confused(m_idx, p_ptr->tsuyoshi + p_ptr->image))
+					{
+						if (is_gen_unique(m_ptr->r_idx) || my_strchr("hknopstuzAFGKLOPSTUVWY", r_ptr->d_char) || r_ptr->flags3 & (RF3_HUMAN | RF3_DEMIHUMAN))
+							msg_format(_("%s「オクレ兄さん！！」", "%s - 'Brother OKURE!!'"), m_name);
+						else
+							msg_format(_("%sは何かキマッちゃってるようだ！", "The mind of %s starts to falter!"), m_name);
+
+					}
+					set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, p_ptr->tsuyoshi + p_ptr->image);
+
+						//通常の処理を通さずに効果を消去する。副作用の腕耐弱化を無視するため
+						p_ptr->tsuyoshi = 0;
+					p_ptr->redraw |= (PR_STATUS);
+					p_ptr->update |= (PU_BONUS | PU_HP);
+					//幻覚も直しておく
+					set_image(0);
+				}
+				//幻覚は混乱扱いにする
+				else if (p_ptr->image)
+				{
+					if (set_monster_confused(m_idx, p_ptr->image))
+						msg_format(_("%sは混乱した。", "%s is confused."), m_name);
+					set_image(0);
+				}
+				else
+				{
+					msg_print(_("しかし押し付けるような感情を抱いていなかった。", "However, you had no emotions to transfer."));
+				}
+
 			}
 			else
 			{
-				msg_print(_("感情の波動を周囲に放った！", "A wave of emotions spreads around you!"));
-				confuse_monsters(power);
-				stun_monsters(power);
-				turn_monsters(power);
+				msg_format(_("そこには何もいない。", "There's nobody here."));
+				return NULL;
 			}
-
 
 			break;
 		}
 
-	case 4:
+
+
+	case 5:
 		{
 			int time;
 			int base = 20;
@@ -22992,7 +24007,7 @@ cptr do_cmd_class_power_aux_kokoro(int num, bool only_info)
 
 		}
 		break;
-	case 5:
+	case 6:
 		{
 			int rad = 2 + plev / 24;
 			int damage = plev  + chr_adj;
@@ -23007,17 +24022,28 @@ cptr do_cmd_class_power_aux_kokoro(int num, bool only_info)
 
 			break;
 		}
-	case 6:
+	case 7:
 		{
 			int len = plev / 7;
 			int damage = 50 + plev * 2;
 			if(len < 4) len = 4;
 
 			if(only_info) return format(_str_eff_range_dam,len,damage);
-			if (!rush_attack2(len,GF_FORCE,damage)) return NULL;
+			if (!rush_attack2(len,GF_FORCE,damage,0)) return NULL;
 			break;
 		}
-	case 7:
+
+	case 8:
+	{
+		int base = 20;
+		if (only_info) return format(_str_eff_dur_plus_1d, base, base);
+
+		set_tim_general(base + randint1(base), FALSE, 0, 0);
+
+	}
+	break;
+
+	case 9:
 		{
 			dice = p_ptr->lev / 3;
 			sides = 10 + chr_adj;
@@ -23031,7 +24057,25 @@ cptr do_cmd_class_power_aux_kokoro(int num, bool only_info)
 
 			break;
 		}
-	case 8:
+
+
+	case 10: //v1.1.95
+	{
+		int power = plev * 3 + chr_adj * 5;
+		if (only_info) return format(_str_eff_power, power);
+
+		msg_print(_("無数の面が周囲に飛んだ...", "Countless masks start flying around..."));
+
+		turn_monsters(power);
+		confuse_monsters(power);
+		stun_monsters(power);
+		project_hack(GF_DEC_ATK, power);
+
+		break;
+	}
+
+
+	case 11:
 		{
 			base = p_ptr->lev;
 			dice = 1;
@@ -24394,7 +25438,7 @@ cptr do_cmd_class_power_aux_paladin(int num, bool only_info)
 		{
 			int dam = plev * 3;
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("光の槍を生み出し、投げつけた！", "You create a lance of light and throw it!"));
 			fire_beam(GF_HOLY_FIRE,dir, dam);
 			break;
@@ -24492,14 +25536,15 @@ class_power_type class_power_yuyuko[] =
         "Banishes a single enemy from the level with high probability rate. You take some damage depending on the banished enemy's level. Does not affect unique monsters.")},
 	{28,24,55,FALSE,TRUE,A_CHR,0,5,_("鳳蝶紋の死槍", "Lance of the Swallowtail Butterfly Crest"),
 		_("地獄属性の強力なビームを放つ。", "Fires a powerful beam of nether.")},
-	{34,50,65,FALSE,TRUE,A_CHR,0,0,_("華胥の永眠", "Eternal Sleep in Dreamland"),
+	{32,48,60,FALSE,TRUE,A_CHR,0,3,_("盛者必滅の理", "Law of Inevitable Decay"),
+		_("敵一体を高確率で全能力低下させる。抵抗されると無効。",
+        "Lowers all stats of a single enemy with a high probability rate. Does nothing if resisted.")},
+	{36,50,65,FALSE,TRUE,A_CHR,0,0,_("華胥の永眠", "Eternal Sleep in Dreamland"),
 		_("周囲の敵をフロアから消し去る。抵抗されることもあり、ユニークモンスターには効かない。追い払った敵のレベルにより少しダメージを受ける。",
         "Removes enemies in nearby area from the level. Can be resisted, and does not affect unique monsters. You take some damage depending on the banished enemies' level.")},
-
 	{40,60,75,FALSE,TRUE,A_CHR,0,0,_("桜吹雪地獄", "Cherry Blossom Blizzard Hell"), //v1.1.76
 		_("自分を中心に無属性の巨大なボールを発生させる。",
         "Generates a huge non-elemental ball centered on yourself.")},
-
 	{43,64,80,FALSE,TRUE,A_CHR,0,0,_("死出の誘蛾灯", "Light Trap of Passing Away"),
 		_("短時間、視界内の敵の魔法使用を確率で妨害する。ユニークモンスターや高レベルな敵には効きにくい。",
         "For a short period of time, has a chance to prevent enemies in sight from casting spells. Less effective against unique monsters and high level enemies.")},
@@ -24620,7 +25665,23 @@ cptr do_cmd_class_power_aux_yuyuko(int num, bool only_info)
 			for (i = 0; i < num; i++) if(dir != 5 || target_okay()) fire_beam(GF_NETHER, dir, damroll(dice, sides));
 			break;
 		}
-	case 6://華胥の永眠
+
+	case 6:
+		{
+			int power = plev * 5 + chr_adj * 5;
+
+			if (only_info) return format(_str_eff_power, power);
+
+			if (!get_aim_dir(&dir)) return NULL;
+			if (!fire_ball_jump(GF_DEC_ALL, dir, power, 0, _("あなたの指差す先に大量の死蝶と幽霊が押し寄せた！",
+                                                            "A lot of ghosts and death butterflies fly in the direction you're pointing at!"))) return NULL;
+
+			break;
+		}
+
+
+
+	case 7://華胥の永眠
 		{
 			int power = 50 + plev * 2 + chr_adj*5;
 			if(power < 200) power = 200;
@@ -24631,7 +25692,7 @@ cptr do_cmd_class_power_aux_yuyuko(int num, bool only_info)
 		}
 		break;
 
-	case 7: //桜吹雪地獄 v1.1.76
+	case 8: //桜吹雪地獄 v1.1.76
 		{
 
 		int rad = 7;
@@ -24645,7 +25706,7 @@ cptr do_cmd_class_power_aux_yuyuko(int num, bool only_info)
 		}
 		break;
 
-	case 8://死出の誘蛾灯 v1.1.76 仕様変更
+	case 9://死出の誘蛾灯 v1.1.76 仕様変更
 	{
 		int time;
 		int base = plev / 8;
@@ -24697,7 +25758,7 @@ cptr do_cmd_class_power_aux_yuyuko(int num, bool only_info)
 
 	//西行寺無余涅槃 v1.1.76で仕様変更
 	//夢想の型+毎ターン視界内攻撃
-	case 9:
+	case 10:
 	{
 		if (only_info) return format("");
 		set_action(ACTION_KATA);
@@ -24874,7 +25935,7 @@ cptr do_cmd_class_power_aux_samurai(int num, bool only_info)
 	case 1:
 		{
 			if(only_info) return format("");
-			if (!choose_samurai_kata()) return FALSE;
+			if (!choose_samurai_kata()) return NULL;
 			p_ptr->update |= (PU_BONUS);
 			break;
 		}
@@ -24894,14 +25955,14 @@ class_power_type class_power_medi[] =
 		_("毒の薬を作る。花畑か毒の沼でないと使えない。",
         "Creates a potion of poison. Requires standing in a flower field or a poison pool.")},
 	{8,8,30,FALSE,TRUE,A_INT,0,0,_("神経の毒", "Nerve Poison"),
-		_("隣接した敵を高確率で眠らせる。睡眠耐性のある敵、毒耐性のある敵、無生物には効かない。ユニークモンスターや力強い敵には効果が薄い。",
-        "Puts an adjacent enemy to sleep with high probability rate. Does not affect sleep or poison resistant enemies, or nonliving beings. Less effective against unique monsters and powerful enemies.")},
+		_("隣接した敵を高確率で眠らせて攻撃力低下状態にする。睡眠耐性のある敵、毒耐性のある敵、無生物には効かない。ユニークモンスターや力強い敵には効果が薄い。",
+        "Puts an adjacent enemy to sleep and lowers their attack power with high probability rate. Does not affect sleep or poison resistant enemies, or nonliving beings. Less effective against unique monsters and powerful enemies.")},
 	{12,12,45,TRUE,FALSE,A_CON,0,10,_("ポイズンブレス", "Poison Breath"),
 		_("現在HPの1/3の威力の毒のブレスを吐く。満腹度が減少する。",
         "Breathes poison with power equal to 1/3 of current HP. Reduces satiation level.")},
 	{16,12,50,FALSE,TRUE,A_INT,0,0,_("憂鬱の毒", "Melancholy Poison"),
-		_("隣接した敵を高確率で減速させる。毒耐性のある敵、通常の精神を持たない敵、無生物には効かない。ユニークモンスターや力強い敵には効果が薄い。",
-        "Slows an adjacent enemy with high probability rate. Does not affect enemies with unusual mind, poison resistant enemies or nonliving beings. Less effective against unique monsters and powerful enemies.")},
+		_("隣接した敵を高確率で減速させ魔法力低下状態にする。毒耐性のある敵、通常の精神を持たない敵、無生物には効かない。ユニークモンスターや力強い敵には効果が薄い。",
+        "Slows an adjacent enemy and lowers their magic power with high probability rate. Does not affect enemies with unusual mind, poison resistant enemies or nonliving beings. Less effective against unique monsters and powerful enemies.")},
 	{20,30,65,FALSE,TRUE,A_CHR,0,0,_("譫妄の毒", "Delirium Poison"),
 		_("隣接した敵を高確率で操って配下にする。無生物、毒耐性のある敵、通常の精神を持たない敵、ユニークモンスターには効果がない。",
         "Manipulates an adjacent enemy into being your follower with high probability rate. Does not affect nonliving beings, poison resistant enemies, enemies with unusual mind or unique monsters.")},
@@ -24995,18 +26056,29 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
 					if((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2)) power /= 3;
 					if((r_ptr->flags2 & RF2_POWERFUL)) power /= 2;
 
-					if((r_ptr->flagsr & RFR_IM_POIS) || (r_ptr->flags3 & RF3_NO_SLEEP) || (r_ptr->flagsr & RFR_RES_ALL))
+					if((r_ptr->flagsr & RFR_IM_POIS) || (r_ptr->flagsr & RFR_RES_ALL))
 					{
 						msg_format(_("しかし効果がなかった。", "There was no effect."));
-						if (r_ptr->flags3 & RF3_NO_SLEEP) r_ptr->r_flags3 |= (RF3_NO_SLEEP);
 						if (r_ptr->flagsr & RFR_IM_POIS) r_ptr->r_flagsr |= (RFR_IM_POIS);
 					}
 					else if(!monster_living(r_ptr)) msg_format(_("%sは眠らないようだ。", "Doesn't look like %s can sleep."),m_name);
 					else if(randint1(power) < r_ptr->level) msg_format(_("%sは毒に抵抗した！", "%s resists the poison!"),m_name);
 					else
 					{
-						msg_format(_("%sは眠り込んだ。", "%s falls asleep."),m_name);
-						(void)set_monster_csleep(cave[y][x].m_idx, power);
+						if (r_ptr->flags3 & RF3_NO_SLEEP)
+						{
+							r_ptr->r_flags3 |= (RF3_NO_SLEEP);
+							msg_format(_("%sは眠らされなかった。", "%s did not fall asleep."), m_name);
+						}
+						else
+						{
+							msg_format(_("%sは眠り込んだ。", "%s falls asleep."), m_name);
+							(void)set_monster_csleep(cave[y][x].m_idx, power);
+						}
+
+						if (set_monster_timed_status_add(MTIMED2_DEC_ATK, cave[y][x].m_idx, MON_DEC_ATK(m_ptr) + 8 + randint1(8)))
+							msg_format(_("%^sは攻撃力が下がったようだ。", "The attack power of %^s is lowered."), m_name);
+
 					}
 				}
 				else if(num == 3)
@@ -25018,7 +26090,6 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
 					if((r_ptr->flagsr & RFR_IM_POIS) || (r_ptr->flags2 & RF2_EMPTY_MIND) || (r_ptr->flags2 & RF2_WEIRD_MIND) || (r_ptr->flagsr & RFR_RES_ALL))
 					{
 						msg_format(_("しかし効果がなかった。", "There was no effect."));
-						if (r_ptr->flags3 & RF3_NO_SLEEP) r_ptr->r_flags3 |= (RF3_NO_SLEEP);
 						if (r_ptr->flagsr & RFR_IM_POIS) r_ptr->r_flagsr |= (RFR_IM_POIS);
 					}
 					else if(!monster_living(r_ptr)) msg_format(_("%sは動じないようだ。", "Doesn't look like it works on %s."),m_name);
@@ -25027,6 +26098,10 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
 					{
 						if (set_monster_slow(cave[y][x].m_idx, MON_SLOW(m_ptr) + 8 + randint1(8))) msg_format(_("%sの動きが遅くなった。",
                                                                                                                 "%s starts moving slower."),m_name);
+
+						if (set_monster_timed_status_add(MTIMED2_DEC_MAG, cave[y][x].m_idx, MON_DEC_MAG(m_ptr) + 8 + randint1(8)))
+							msg_format(_("%^sは魔法力が下がったようだ。", "The magic power of %^s is lowered."), m_name);
+
 					}
 					anger_monster(m_ptr);
 				}
@@ -25073,7 +26148,7 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
 			if(dam > 1600) dam=1600;
 
 			if(only_info) return format(_str_eff_dam,dam);
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 
 			if(use_itemcard)
 				msg_print(_("カードから毒ガスが噴き出した。", "Poison gas is released from the card."));
@@ -25285,32 +26360,52 @@ cptr do_cmd_class_power_aux_shou(int num, bool only_info)
 }
 
 
+//フォービドゥンフルーツ指定用関数
+static bool item_tester_hook_forbidden_fruit(object_type *o_ptr)
+{
+	if (o_ptr->tval == TV_FOOD && o_ptr->sval == SV_FOOD_FORBIDDEN_FRUIT) return TRUE;
+	else return FALSE;
+}
+
+
+
 /*:::フランドール用特技*/
 class_power_type class_power_flan[] =
 {
 
-	{ 7,10,25,FALSE,FALSE,A_INT,0,0,_("殺気感知", "Detect Murderous Intent"),
+	{ 5,10,25,FALSE,FALSE,A_INT,0,0,_("殺気感知", "Detect Murderous Intent"),
 	_("周囲の精神をもつモンスターを感知する。",
         "Detects nearby monsters except mindless ones.")},
-
+	{ 12,12,30,TRUE,FALSE,A_STR,0,10,_("ケルベロスクリッパー", "Cerberus Clipper"),
+		_("自分の隣接グリッド全てに攻撃する。近接武器を装備していないと使えない。",
+        "Attacks everyone adjacent to you in melee. Requires wield a melee weapon.")},
 	{16,12,30,FALSE,TRUE,A_INT,0,6,_("スターボウブレイク", "Starbow Break"),
 		_("自分の周辺のランダムな場所に複数回の隕石属性攻撃を行う。",
         "Performs multiple meteor attacks at random positions in your vicinity.")},
+	{ 20,30,30,FALSE,FALSE,A_DEX,0,0,_("蝙蝠移動", "Bat Flight"),
+		_("一行動で数グリッドを移動する。視界外にも移動できるがドアを通過するとき移動可能距離が短くなる。",
+        "Moves several grids in a single action. You can move to a location out of sight. Passing through a door reduces maximum movement range.")},
 	{24,18,50,FALSE,FALSE,A_DEX,0,0,_("きゅっとしてドカーン", "Kyuu~, and BOOM!"),
 		_("ターゲットとその周辺3+1d3グリッドを*破壊*する。ターゲットは明示的に指定しなければならない。(25-レベル/2)%の確率で想定外の大破壊が起こる。地上やクエストダンジョンでは使えない。",
         "*Destroys* target and the area around it in radius 3+1d3. You must explicitly pick a target. Can cause unexpectedly large destruction with (25 - level/2)% chance. Cannot be used on surface or quest levels.")},
-	{30,32,60,FALSE,TRUE,A_INT,0,8,_("カタディオプトリック", "Catadioptric"),
+	{29,32,60,FALSE,TRUE,A_INT,0,8,_("カタディオプトリック", "Catadioptric"),
 		_("特殊な軌道のビームを5発放つ。",
         "Fires 5 special orbital beams.")},
-	{36,64,70,FALSE,TRUE,A_DEX,0,0,_("フォーオブアカインド", "Four of a Kind"),
+	{32,64,70,FALSE,TRUE,A_DEX,0,0,_("フォーオブアカインド", "Four of a Kind"),
 		_("分身を三体出現させる。ただし分身は命令に関わらずあなたを範囲攻撃に巻き込む。",
         "Creates three clones of yourself. They will involve you in their area of effect spells disregarding your orders.")},
-	{42,72,70,FALSE,TRUE,A_STR,0,0,_("レーヴァテイン", "Laevatein"),
+	{36,80,70,FALSE,TRUE,A_CHR,0,0,_("カゴメカゴメ", "Kagome-Kagome"),
+		_("視界内全てに無属性ダメージを与え、さらに短時間移動禁止にする。",
+        "Hits everyone in sight with non-elemental attack, and prevents them from moving.")},
+	{40,72,70,FALSE,TRUE,A_STR,0,0,_("レーヴァテイン", "Laevatein"),
 		_("自分の周囲を地獄の劫火属性で攻撃する。威力は武器攻撃力に依存する。",
         "Attacks area around you with hellfire. Power depends on attack power of your wielded weapon.")},
-	{48,99,75,FALSE,TRUE,A_CHR,0,0,_("495年の波紋", "Ripples of 495 Years"),
+	{45,99,75,FALSE,TRUE,A_CHR,0,0,_("495年の波紋", "Ripples of 495 Years"),
 		_("自分の周辺のランダムな場所に強力な分解属性ボールを複数発生させる。体力が少ないほど威力が上がる。",
         "Generates multiple powerful disintegration balls at random positions in your vicinity. Power increases as you current HP gets lower.")},
+	{50,-100,95,FALSE,TRUE,A_WIS,0,0,_("スカーレットニヒリティ", "Scarlet Nihility"),
+		_("MP全て(最低100)とアイテム「フォービドゥンフルーツ」を消費し、極めて強力な万能属性のボール攻撃を行う。「フォービドゥンフルーツ」を使わずにこの特技を使用すると「虚無召来」の効果が発生する。",
+        "Uses up all of your MP (at least 100) and consumes a 'Forbidden Fruit' item; fires an extremely powerful irresistable ball attack. Using this special ability without 'Forbidden Fruit' activates the effect of 'Call the Void'.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
 };
@@ -25331,14 +26426,66 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 		detect_monsters_mind(rad);
 		break;
 	}
-	case 1: //スターボウブレイク
+
+	case 1: //ケルベロスクリッパー
+	{
+		if (only_info) return format("");
+
+		if (p_ptr->do_martialarts)
+		{
+			msg_print(_("近接武器を装備していないとこの特技は使えない。",
+                        "You cannot use this ability without holding a melee weapon."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは大きく武器を振り回した！", "You swing your weapon in a large arc!"));
+		whirlwind_attack();
+	}
+	break;
+
+	case 2: //スターボウブレイク
 		{
 			int dam = plev*2 + chr_adj + 20;
 			if(only_info) return format(_("損傷:%d*不定", "dam: %d*undef"),dam);
 			cast_meteor(dam, 2,GF_METEOR);
 		}
 		break;
-	case 2://きゅっとしてどかーん
+
+	case 3: //蝙蝠移動
+	{
+		int x, y;
+		int cost;
+		int dist = 2 + plev / 8;
+		if (only_info) return format(_("移動コスト:%d", "mov cost: %d"), dist-1);
+		if (!tgt_pt(&x, &y)) return NULL;
+
+		if (!player_can_enter(cave[y][x].feat, 0) || !(cave[y][x].info & CAVE_KNOWN))
+		{
+			msg_print(_("そこには行けない。", "You can't go there."));
+			return NULL;
+		}
+		forget_travel_flow();
+		travel_flow(y, x);
+		if (dist < travel.cost[py][px])
+		{
+			if (travel.cost[py][px] >= 9999)
+				msg_print(_("そこには道が通っていない。", "There's no path leading there."));
+			else
+				msg_print(_("そこは遠すぎる。", "It's too far away."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは蝙蝠に変身して飛んだ。", "You transform into a bat and fly."));
+		teleport_player_to(y, x, TELEPORT_NONMAGICAL);
+
+		//高速移動がある時移動と同じように消費行動力が減少する
+		if (p_ptr->speedster)
+			new_class_power_change_energy_need = (75 - p_ptr->lev / 2);
+
+		break;
+	}
+
+	case 4://きゅっとしてどかーん
 		{
 			if(only_info) return format("");
 			if (!get_aim_dir(&dir)) return NULL;
@@ -25375,7 +26522,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 		}
 		break;
 
-	case 3: //カタディオプトリック
+	case 5: //カタディオプトリック
 		{
 			int dam = plev * 2 + chr_adj * 2 ;
 			int table[] = {1,2,3,6,9,8,7,4,1,2,3,6,9,8};
@@ -25396,7 +26543,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			}
 		}
 		break;
-	case 4: //フォーオブアカインド
+	case 6: //フォーオブアカインド
 		{
 			int max = 3;
 			bool flag = FALSE;
@@ -25410,14 +26557,14 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 				int dist_tmp;
 				m_ptr = &m_list[i];
 				if (!m_ptr->r_idx) continue;
-				if((m_ptr->r_idx == MON_F_SCARLET_4) && (m_ptr->mflag & MFLAG_EPHEMERA)) cnt++;
+				if((m_ptr->r_idx == MON_FLAN_4) && (m_ptr->mflag & MFLAG_EPHEMERA)) cnt++;
 			}
 			if(cnt >= max)
 			{
 				msg_format(_("これ以上呼び出せない。", "You can't call any more."),num);
 				return NULL;
 			}
-			for(i=0;i<(max-cnt);i++) if(summon_named_creature(0, py, px, MON_F_SCARLET_4, PM_EPHEMERA)) flag = TRUE;
+			for(i=0;i<(max-cnt);i++) if(summon_named_creature(0, py, px, MON_FLAN_4, PM_EPHEMERA)) flag = TRUE;
 
 			if(flag && p_ptr->pclass != CLASS_FLAN)
 				msg_print(_("宝石のような羽を持つ吸血鬼の幻影が現れた・・",
@@ -25429,7 +26576,19 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 				msg_print(_("何も現れなかった。", "Nobody appears."));
 		}
 		break;
-	case 5: //レーヴァテイン
+
+	case 7:
+		{
+			int base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
+			if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
+
+			msg_print(_("あなたの魔力が檻のように部屋を埋め尽くした！", "Your magical power fills the room in form of a cage!"));
+			project_hack2(GF_MISSILE, 1, base, base);
+			project_hack(GF_NO_MOVE, base / 20);
+
+			break;
+		}
+	case 8: //レーヴァテイン
 		{
 
 			int dam =  calc_weapon_dam(0) + calc_weapon_dam(1);
@@ -25444,7 +26603,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			break;
 		}
 		break;
-	case 6: //495年の波紋
+	case 9: //495年の波紋
 		{
 			int dam = plev * 3 + chr_adj * 5;
 			int rad = 2;
@@ -25459,8 +26618,65 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			break;
 		}
 
+	case 10: //スカーレットニヒリティ
+		{
+			cptr q, s;
+			int item;
+			int dam = plev * chr_adj * p_ptr->csp / 100;
+			bool have_fruit = FALSE;
+
+			if (dam > 9999) dam = 9999;
+
+			if (only_info) return format(_str_eff_dam, dam);
+
+			q = _("触媒を指定してください:", "Choose a catalyst: ");
+			s = _("触媒を持っていない。", "You don't have a catalyst.");
+			item_tester_hook = item_tester_hook_forbidden_fruit;
+			if (get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) have_fruit = TRUE;
+
+			if (have_fruit)
+			{
+				if (!get_aim_dir(&dir)) return NULL;
+
+
+				if (one_in_(3))
+					msg_print(_("「これを喰らって生き残ったやつはいない！」", "'No one who has been hit by this has survived!'"));
+				else
+					msg_print(_("あなたは破壊の力を禁断の実に込めて投げつけた！", "You imbue the forbidden fruit with your destructive power and throw it!"));
+
+				fire_ball(GF_PSY_SPEAR, dir, dam, 8);
+
+				if (item >= 0)
+				{
+					inven_item_increase(item, -1);
+					inven_item_describe(item);
+					inven_item_optimize(item);
+				}
+				else
+				{
+					floor_item_increase(0 - item, -1);
+					floor_item_describe(0 - item);
+					floor_item_optimize(0 - item);
+				}
+
+			}
+			else
+			{
+				if (!get_check_strict(_("本当に触媒なしでこの特技を使いますか？",
+                                        "Are you sure you want to use this special ability without a catalyst? "), CHECK_OKAY_CANCEL)) return NULL;
+				if (dun_level && !p_ptr->inside_quest && !p_ptr->inside_arena) msg_print(_("暴走した破壊の力がダンジョンを引き裂いた！",
+                                                                                        "Your uncontrollable destructive power tears through the dungeon!"));
+
+				//虚無招来発動 誰が考えたのか知らないがこの関数名は実にクールだと思う
+				call_the_();
+			}
+
+		}
+		break;
+
 
 	default:
+		if (only_info) return format(_str_unimp);
 		msg_format(_str_unimp_error,num);
 		return NULL;
 	}
@@ -25559,8 +26775,8 @@ class_power_type class_power_mystia[] =
 		_("あなたが今いる部屋を暗くする。",
         "Darkness nearby area.")},
 	{5,8,30,FALSE,TRUE,A_CHR,0,0,_("夜雀の歌", "Song of the Night Sparrow"),
-		_("周囲の人間を鳥目にする歌を歌う。歌っている間はMPを消費し続ける。鳥目になった敵は高確率であなたの位置を見失い無防備にあなたの攻撃を受けるが、部屋が明るかったり敵が視覚に頼らない存在だと効果が薄い。",
-        "Sings a song that makes nearby humans night-blind. Singing continuously consumes MP. Night-blind enemies have high chance of losing sight of you, becoming defenseles before your attack. Less effective in illuminated areas or against enemies not relying on vision.")},
+		_("周囲のモンスターを鳥目にする歌を歌う。歌っている間はMPを消費し続ける。鳥目になった敵は高確率であなたの位置を見失い無防備にあなたの攻撃を受けるが、部屋が明るかったり敵が視覚に頼らない存在だと効果が薄い。",
+        "Sings a song that makes nearby monsters night-blind. Singing continuously consumes MP. Night-blind enemies have high chance of losing sight of you, becoming defenseles before your attack. Less effective in illuminated areas or against enemies not relying on vision.")},
 	{10,10,30,FALSE,TRUE,A_DEX,0,0,_("毒蛾の鱗粉", "Poisonous Moth's Scales"),
 		_("周辺の敵を混乱させる。",
         "Confuses nearby enemies.")},
@@ -25571,8 +26787,8 @@ class_power_type class_power_mystia[] =
 		_("離れた敵に突撃する。装備が重いと失敗しやすい。",
         "Rushes at a distant enemy. Failure rate increases when using heavy equipment.")},
 	{30,24,60,FALSE,TRUE,A_CHR,0,0,_("ミステリアスソング", "Mysterious Song"),
-		_("周囲の敵に精神攻撃を行い朦朧・混乱・減速させる歌を歌う。歌っている間はMPを消費し続ける。ユニークモンスターや通常の精神を持たない敵には効果が薄い。",
-        "Sings a song that hits nearby enemies with a mental attack and stun, confuses and slows them. Singing continuously consumes MP. Less effective against unique monsters or enemies with an unusual mind.")},
+		_("周囲の敵に精神攻撃を行い朦朧・混乱・減速・魔法力低下させる歌を歌う。歌っている間はMPを消費し続ける。ユニークモンスターや通常の精神を持たない敵には効果が薄い。",
+        "Sings a song that hits nearby enemies with a mental attack, stuns, confuses and slows them, and lowers their magic power. Singing continuously consumes MP. Less effective against unique monsters or enemies with an unusual mind.")},
 	{35,30,65,FALSE,TRUE,A_CHR,0,0,_("ヒューマンケージ", "Human Cage"),
 		_("周囲の人間の移動を封じる歌を歌う。また歌いながら人間に攻撃すると人間スレイを得る。歌っている間はMPを消費し続ける。",
         "Sings a song that stops movement of nearby humans. Also, gives a human slayer effect to your attacks. Singing continuously consumes MP.")},
@@ -25660,7 +26876,7 @@ cptr do_cmd_class_power_aux_mystia(int num, bool only_info)
 		}
 	case 6://ミステリアスソング
 		{
-			int power = plev + chr_adj * 2;
+			int power = plev * 2 + chr_adj * 2;
 			if(only_info) return  format(_str_eff_power,power);
 			do_spell(TV_BOOK_MUSIC, MUSIC_NEW_MYSTIA_MYSTERIOUS, SPELL_CAST);
 
@@ -26020,7 +27236,7 @@ cptr do_cmd_class_power_aux_aya(int num, bool only_info)
 			if(damage < 100) damage=100;
 			if(only_info) return format(_("損傷:%d 射程:%d", "dam: %d rng: %d"),damage/2,project_length);
 
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			tx = px + project_length * ddx[dir];
 			ty = py + project_length * ddy[dir];
 			if ((dir == 5) && target_okay())
@@ -26156,18 +27372,24 @@ class_power_type class_power_patchouli[] =
 	{ 20,20,35,FALSE,TRUE,A_INT,0,0,_("エレメンタルハーベスター", "Elemental Harvester"),
 		_("自分の周りに回転する刃を生み出し、近寄った敵に対して反撃する。破片属性オーラ扱いになる。",
         "Surround yourself with rotating blades, counterattacking nearby enemies. Treated as an aura of shards.")},
-	{ 26,28,45,FALSE,TRUE,A_INT,0,0,_("セントエルモピラー", "Saint Elmo's Pillar"),
+	{ 24,28,45,FALSE,TRUE,A_INT,0,0,_("セントエルモピラー", "Saint Elmo's Pillar"),
 		_("強力なプラズマ属性の球を放つ。",
         "Fires powerful ball of plasma.")},
+	{ 28,36,50,FALSE,TRUE,A_INT,0,0,_("メタルファティーグ", "Metal Fatigue"),//v1.1.95
+		_("周囲のモンスターを攻撃力低下、防御力低下状態にする。",
+        "Lowers attack and defense power of nearby monsters.")},
 	{ 32,45,55,FALSE,TRUE,A_INT,0,0,_("ラーヴァクロムレク", "Lava Cromlech"),
 		_("指定した位置に火炎属性の巨大なボールを発生させ、地面を溶岩にする。",
         "Generates a huge ball of fire on target position and turns terrain into lava.")},
+	{ 35,40,65,FALSE,TRUE,A_INT,0,0,_("スティッキーバブル", "Sticky Bubble"),//v1.1.95
+		_("モンスターを短時間移動禁止にするブレス状の攻撃を行う。",
+        "Performs a breath attack that prevents monsters from moving for a short period of time.")},
+
 	{ 37,48,50,FALSE,TRUE,A_INT,0,0,_("サイレントセレナ", "Silent Selene"),
 		_("隣接した敵全てに暗黒属性の強力な攻撃を行う。",
         "Performs a powerful darkness attack against all adjacent enemies.")},
 
-	//v1.1.75
-	{ 40,40,80,FALSE,TRUE,A_INT,0,0,_("同時詠唱", "Dualcasting"),
+	{ 40,40,80,FALSE,TRUE,A_INT,0,0,_("同時詠唱", "Dualcasting"), //v1.1.75
 		_("魔法書による魔法を二連続で使用する。喘息の調子が悪いときには使えない。",
         "Casts two spells from a spellbook. Cannot be used during an asthma attack.")},
 
@@ -26238,7 +27460,22 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 			break;
 		}
 
-	case 4: //ラーヴァクロムレク
+	case 4: //メタルファティーグ
+		{
+			int power = 150 + plev * 10 + chr_adj * 5;
+			if (only_info) return format(_("効力:～%d", "pow: ~%d"), power / 2);
+
+			msg_print(_("周囲の物質を急速に腐蝕させた！", "You rapidly corrode materials in your vicinity!"));
+
+			project(0, 8, py, px, power, GF_DEC_ATK, PROJECT_JUMP | PROJECT_KILL, -1);
+			project(0, 8, py, px, power, GF_DEC_DEF, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+
+			break;
+		}
+
+
+
+	case 5: //ラーヴァクロムレク
 		{
 			int rad = 3;
 			base = p_ptr->lev*5 + chr_adj * 5;
@@ -26252,7 +27489,22 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 		}
 		break;
 
-	case 5: //サイレントセレナ
+	case 6: //スティッキーバブル
+		{
+			int power = plev / 4;
+
+			if (only_info) return format(_str_eff_power, power);
+
+			project_length = 5;
+
+			if (!get_aim_dir(&dir)) return NULL;
+
+			msg_print(_("粘つく泡を吹き付けた。", "You blow a sticky bubble."));
+			fire_ball(GF_NO_MOVE, dir, power, -2);
+			break;
+		}
+
+	case 7: //サイレントセレナ
 		{
 			int rad = 1;
 			base = p_ptr->lev * 10 + chr_adj * 20;
@@ -26263,7 +27515,7 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 			break;
 		}
 
-	case 6: //v1.1.75 同時詠唱
+	case 8: //v1.1.75 同時詠唱
 		{
 			if (only_info) return format("");
 
@@ -26277,7 +27529,7 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 		}
 
 
-	case 7://ロイヤルフレア MAX500+1000 魅力47で570+1350辺り
+	case 9://ロイヤルフレア MAX500+1000 魅力47で570+1350辺り
 		{
 			base = p_ptr->lev * 14 + chr_adj * 10;
 			dice = p_ptr->lev ;
@@ -26291,7 +27543,7 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 
 			break;
 		}
-	case 8://賢者の石
+	case 10://賢者の石
 		{
 			int max_num = 5;
 			int i,cnt=0;
@@ -27198,13 +28450,15 @@ class_power_type class_power_tsukumo_master[] =
 
 /*:::付喪神使いが付喪神にできる武器　★以外の直接戦闘武器*/
 ///mod150925 ★を床においてフロア移動しても消えなくなったので★も対象にした
+//v1.1.93 関数を分ける必要がもうないので削除。object_is_melee_weapon_except_strange_kindを使う
+/*
 bool item_tester_hook_make_tsukumo(object_type *o_ptr)
 {
 	//if(object_is_fixed_artifact(o_ptr)) return FALSE;
-	return item_tester_hook_melee_weapon(o_ptr);
+	return object_is_melee_weapon_except_strange_kind(o_ptr);
 
 }
-
+*/
 
 
 cptr do_cmd_class_power_aux_tsukumo_master(int num, bool only_info)
@@ -27253,7 +28507,7 @@ cptr do_cmd_class_power_aux_tsukumo_master(int num, bool only_info)
                                     "ERROR: Weird management of tsukumogami idx"));
 			}
 
-			item_tester_hook = item_tester_hook_make_tsukumo;
+			item_tester_hook = object_is_melee_weapon_except_strange_kind;
 
 			q = _("どの武器を付喪神化しますか? ", "Turn which weapon into tsukumogami?");
 			s = _("付喪神化できる武器がない。", "You don't have weapons you can turn into tsukumogami.");
@@ -28118,9 +29372,9 @@ class_power_type class_power_orin[] =
 	{24,20,25,FALSE,TRUE,A_CHR,0,0,_("ゾンビフェアリー", "Zombie Fairy"),
 		_("ゾンビフェアリーを召喚する。",
         "Summons a zombie fairy.")},
-	{32,44,40,FALSE,TRUE,A_CHR,0,0,_("食人怨霊", "Vengeful Cannibal Spirit"),
-		_("大量の怨霊を召喚し、近くのランダムな敵に憑りつかせる。",
-        "Summons a lot of vengeful spirits to possess random nearby enemies.")},
+	{32,64,50,FALSE,TRUE,A_CHR,0,0,_("食人怨霊", "Vengeful Cannibal Spirit"),
+		_("視界内のモンスター全てを狂戦士化させようと試みる。妖怪に効きやすい。狂戦士化したモンスターは魔法や特技を使えなくなるが隣接攻撃力が大幅に上昇する。",
+        "Attempts to make all monsters in sight berserk. Works well against youkai. Berserk monsters cannot use magic or special abilities, but their melee attack power is greatly increased.")},
 	{45,70,50,FALSE,TRUE,A_CHR,0,0,_("火焔の車輪", "Blazing Wheel"),
 		_("視界内全てに対して地獄の業火属性の攻撃を行う。",
         "Hits everything in sight with hellfire attack.")},
@@ -28202,13 +29456,13 @@ cptr do_cmd_class_power_aux_orin(int num, bool only_info)
 		{
 			int rad = 0;
 			bool flag = FALSE;
-			int num;
+			//int num;
 			int i;
-			int power = p_ptr->lev * 3 / 2;
-			num = p_ptr->lev / 10 + adj_general[p_ptr->stat_ind[A_CHR]] / 5;
+			int power = p_ptr->lev * 2 + adj_general[p_ptr->stat_ind[A_CHR]] * 2;
+			//num = p_ptr->lev / 10 + adj_general[p_ptr->stat_ind[A_CHR]] / 5;
 
 			if(power < 50) power = 50;
-			if(num < 4) num = 4;
+			//if(num < 4) num = 4;
 
 			if(only_info) return format(_str_eff_power,power);
 
@@ -28216,15 +29470,19 @@ cptr do_cmd_class_power_aux_orin(int num, bool only_info)
 				msg_format(_("カードから大量の怨霊が湧きだしてきた！", "Many vengeful spirits pour out of the card!"));
 			else
 				msg_format(_("あなたは大量の怨霊を放った！", "You release many vengeful spirits!"));
+
+			project_hack2(GF_POSSESSION, 0, 0, power);
+			/*
 			for(i=0;i<num;i++)
 			{
 				if(fire_random_target(GF_POSSESSION, power,3, rad,0))flag = TRUE;
 				if(i==0 && !flag)
 				{
-					msg_format(_str_mess_cant_find_enemies);
+					msg_format("しかし敵が見当たらなかった。");
 					break;
 				}
 			}
+			*/
 			break;
 		}
 	case 7:
@@ -28770,7 +30028,7 @@ cptr do_cmd_class_power_aux_seiga(int num, bool only_info)
 			feature_type *f_ptr, *mimic_f_ptr;
 			if(only_info) return format("");
 
-			if (!get_rep_dir2(&dir)) return FALSE;
+			if (!get_rep_dir2(&dir)) return NULL;
 			y = py + ddy[dir];
 			x = px + ddx[dir];
 			c_ptr = &cave[y][x];
@@ -29041,8 +30299,13 @@ class_power_type class_power_koishi[] =
 		_("一番近い敵の隣にテレポートし、そのまま一撃を加える。精神を持たない敵は対象にならない。装備が重いと使えない。",
         "Teleports to the closest enemy and attacks. Ignores mindless enemies. Cannot be used when wearing heavy equipment.")},
 	{40,50,65,FALSE,TRUE,A_CHR,0,0,_("イドの開放", "Release of Id"),
-		_("視界内全てに精神攻撃を仕掛け朦朧、混乱、減速させる。通常の精神を持たない敵には効果が薄い。",
-        "Hits everyone in sight with a mental attack; also stuns, confuses and slows. Less effective against enemies with unusual mind.")},
+		_("視界内全てに精神攻撃を仕掛け朦朧、混乱、減速、狂戦士化させる。通常の精神を持たない敵には効果が薄い。",
+        "Hits everyone in sight with a mental attack; also stuns, confuses, slows and makes berserk. Less effective against enemies with unusual mind.")},
+
+	{44,65,70,FALSE,TRUE,A_CHR,0,0,_("スーパーエゴ", "Super-Ego"),
+		_("視界内全てに精神攻撃を仕掛け移動禁止、全能力低下させる。通常の精神を持たない敵には効果がない。",
+        "Hits everyone in sight with a mental attack, preventing them from moving and lowering all of their stats. Does not affect enemies with unusual mind.")},
+
 	{48,80,75,FALSE,TRUE,A_CHR,0,0,_("胎児の夢", "Embryo's Dream"),
 		_("隣接した敵一体に強力な精神攻撃と時間逆転攻撃を仕掛ける。通常の精神を持たない的には効果が薄い。",
         "Hits an adjacent enemy with a composite mental and time attack. Less effective against enemies with unusual mind.")},
@@ -29151,15 +30414,31 @@ cptr do_cmd_class_power_aux_koishi(int num, bool only_info)
 		//イドの開放
 	case 4:
 		{
-			base = plev * 2 + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
-			sides = plev * 2 + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
-			if(only_info) return format(_str_eff_dam_base_1d,base,sides);
+			base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
+			if(only_info) return format(_str_eff_dam_base_1d,base,base);
+
 			msg_format(_("強烈な衝動が開放された！", "You release a powerful shockwave!"));
-			project_hack2(GF_REDEYE,1,sides,base);
+			project_hack2(GF_REDEYE,1, base,base);
+			//v1.1.95
+			project_hack2(GF_BERSERK, 1, base, base);
 
 			break;
 		}
-	case 5: //胎児の夢
+		//スーパーエゴ
+	case 5:
+	{
+		base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
+		if (only_info) return format(_("効力:%d+1d%d", "pow: %d+1d%d"), base, base);
+		msg_format(_("強烈な抑圧が発動された！", "You cause intense supression!"));
+
+		//v1.1.95
+		project_hack2(GF_SUPER_EGO, 1, base, base);
+
+		break;
+	}
+
+
+	case 6: //胎児の夢
 		{
 			int x,y;
 			base = chr_adj * 20 + plev * 4 ;
@@ -29707,9 +30986,14 @@ class_power_type class_power_suika[] =
 	{26,25,50,FALSE,FALSE,A_STR,0,3,_("戸隠山投げ", "Mt. Togakushi Toss"),
 		_("大岩を投げつけ、無属性ボール攻撃をする。威力は腕力に依存する。",
         "Hurls a boulder, dealing non-elemental damage. Power depends on strength.")},
-	{32,50,60,FALSE,TRUE,A_INT,0,0,_("濛々迷霧", "Deep Fog Labyrinth"),
+	{30,50,60,FALSE,TRUE,A_INT,0,0,_("濛々迷霧", "Deep Fog Labyrinth"),
 		_("一定時間霧に変化する。物理攻撃、切り傷・落石・ボルトが効きにくくなり隠密能力が大幅に上昇する。しかし身体能力が大幅に低下し元素と閃光と劣化の攻撃に弱くなってしまう。",
         "Transforms into mist. Gives you protection against physical attacks, cuts, cave-ins and bolt attacks and greatly increases strength. However, also greatly lowers physical abilities and makes you vulnerable to basic elements, light and disenchantment.")},
+
+	{35,30,70,FALSE,FALSE,A_DEX,0,0,_("鬼縛りの術", "Art of Oni Binding"),
+		_("モンスター一体を遠くから引き寄せて短時間移動不能にし、さらに高確率で魔法力低下状態にする。",
+        "Pulls in a monster and prevents them from moving for a short period of time; also lowers their magic power with a high probability rate.")},
+
 	{39,48,65,FALSE,TRUE,A_DEX,0,0,_("インプスウォーム", "Imp Swarm"),
 		_("小型の分身を数体呼び出す。今いる階から出ると分身は消える。",
         "Summons multiple little clones of yourself. They disappear if you leave this level.")},
@@ -29748,7 +31032,7 @@ cptr do_cmd_class_power_aux_suika(int num, bool only_info)
 
 			if(only_info) return format(_str_eff_dam,dam);
 
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			if(use_itemcard)
 				msg_print(_("カードから炎が吐き出された！", "Fire blows out from the card!"));
 			else
@@ -29808,6 +31092,30 @@ cptr do_cmd_class_power_aux_suika(int num, bool only_info)
 		}
 
 	case 5:
+        {
+            int idx;
+            monster_type *m_ptr;
+            char m_name[80];
+            int power = p_ptr->lev * 8;
+
+            if (only_info) return format(_str_eff_power,power);
+
+            if (!teleport_back(&idx, TELEPORT_FORCE_NEXT)) return NULL;
+            m_ptr = &m_list[idx];
+            monster_desc(m_name, m_ptr, 0);
+            if (distance(py, px, m_ptr->fy, m_ptr->fx) > 1) msg_format(_("%sを引き寄せるのに失敗した。", "You fail to pull %s in."), m_name);
+            else
+            {
+                msg_format(_("%sに鬼縛りの鎖を巻きつけて魔力を散らした！",
+                            "%s is wrapped in oni-binding chains that drain magical power!"), m_name);
+                project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_DEC_MAG, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+                project(0, 0, m_ptr->fy, m_ptr->fx, 10, GF_NO_MOVE, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+            }
+        }
+        break;
+
+
+	case 6:
 		{
 			bool flag = FALSE;
 			int i,num;
@@ -29819,7 +31127,7 @@ cptr do_cmd_class_power_aux_suika(int num, bool only_info)
 			break;
 		}
 
-	case 6:
+	case 7:
 		{
 			int time;
 			int percentage;
@@ -29890,13 +31198,17 @@ class_power_type class_power_kasen[] =
 	{21,30,0,TRUE,FALSE,A_STR,0,0,_("大喝", "Great Shout"),
 		_("大音声を放って攻撃する。周辺の敵が起きる。",
         "Attacks with a loud shout. Wakes up nearby enemies.")},
-	{27,20,30,FALSE,FALSE,A_CHR,0,0,_("動物説得", "Lecture Animals"),
+	{24,20,30,FALSE,FALSE,A_CHR,0,0,_("動物説得", "Lecture Animals"),
 		_("周囲の動物を説得して配下にしようと試みる。",
         "Attempts to turn nearby animals into your followers by lecturing them.")},
-	{31,30,55,FALSE,TRUE,A_CHR,0,0,_("動物召喚", "Summon Animals"),
+	{30,32,45,FALSE,TRUE,A_INT,0,0,_("微速の務光", "Slow-Speed Mukou"),
+		_("モンスター一体に電撃ダメージを与え、その後魔法力低下状態にする。",
+        "Hits a monster with lightning element attack, and lowers their magic power.")},
+
+	{35,30,55,FALSE,TRUE,A_CHR,0,0,_("動物召喚", "Summon Animals"),
 		_("動物の配下を召喚する。",
         "Summons animals as your followers.")},
-	{37,74,65,TRUE,TRUE,A_STR,0,20,_("ドラゴンズグロウル", "Dragon's Growl"),
+	{38,74,65,TRUE,TRUE,A_STR,0,20,_("ドラゴンズグロウル", "Dragon's Growl"),
 		_("轟音属性のブレスを放つ。威力はHPの1/3になる。",
         "Breathes sound. Power is equal to 1/3 of current HP.")},
 	{45,70,75,FALSE,TRUE,A_INT,0,0,_("方術", "Fangshi"),
@@ -29910,6 +31222,8 @@ class_power_type class_power_kasen[] =
 cptr do_cmd_class_power_aux_kasen(int num, bool only_info)
 {
 	int dir,dice,sides,base,damage,i;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int plev = p_ptr->lev;
 
 	switch(num)
 	{
@@ -29960,7 +31274,34 @@ cptr do_cmd_class_power_aux_kasen(int num, bool only_info)
 			charm_animals(power);
 			break;
 		}
+
 	case 5:
+        {
+            int base = plev * 3;
+            int sides = chr_adj * 5;
+            int dam;
+            int dist = 3 + plev / 10;
+
+            if (only_info) return format(_str_eff_dam_base_1d, base, sides);
+            if (!get_aim_dir(&dir)) return NULL;
+
+            dam = base + randint1(sides);
+            project_length = dist;
+            msg_print(_("あなたは雷獣を放った。", "You send out your raijuu."));
+            fire_ball(GF_ELEC, dir, dam, 0);
+            //電撃で生きているとき追加で魔法低下
+            if (cave[target_row][target_col].m_idx)
+            {
+                fire_ball_hide(GF_DEC_MAG, dir, dam, 0);
+            }
+            else if (cheat_xtra)
+                msg_print("no target");
+
+            break;
+        }
+
+
+	case 6:
 		{
 			bool flag = FALSE;
 			if(only_info) return "";
@@ -29975,7 +31316,7 @@ cptr do_cmd_class_power_aux_kasen(int num, bool only_info)
 
 			break;
 		}
-	case 6:
+	case 7:
 		{
 			int dam;
 			dam = p_ptr->chp / 3;
@@ -29983,7 +31324,7 @@ cptr do_cmd_class_power_aux_kasen(int num, bool only_info)
 			if(dam > 800) dam=800;
 			if(only_info) return format(_str_eff_dam,dam);
 
-			if (!get_aim_dir(&dir)) return FALSE;
+			if (!get_aim_dir(&dir)) return NULL;
 			else msg_print(_("包帯の腕が大きく膨れ、衝撃波が放たれた！",
                             "The bandages on your arm expand, and release a shockwave!"));
 
@@ -29993,7 +31334,7 @@ cptr do_cmd_class_power_aux_kasen(int num, bool only_info)
 
 
 
-	case 7:
+	case 8:
 		{
 			dice = base = 15;
 			if(only_info) return format(_str_eff_dur_plus_1d,base,dice);
@@ -30122,6 +31463,7 @@ cptr do_cmd_class_power_aux_kogasa(int num, bool only_info)
 						else set_food(p_ptr->food + food);
 
 						(void)set_monster_confused(cave[y][x].m_idx, MON_CONFUSED(m_ptr) + 10 + randint0(p_ptr->lev) / 5);
+						project(0,0,y,x,power,GF_DEC_MAG, PROJECT_KILL, 0);
 						project(0,0,y,x,power,GF_TURN_ALL,PROJECT_KILL,0);
 					}
 					/*:::同じ敵を何度も驚かせないようにマークをつけておく*/
@@ -30326,12 +31668,12 @@ class_power_type class_power_komachi[] =
 	{15,30,35,TRUE,TRUE,A_STR,0,0,_("河の流れのように", "Flow of the River"),
 		_("愛用の船に乗ってターゲットに突撃し、水属性ダメージを与える。",
         "Charges at the target on your beloved boat, dealing water damage.")},
-	{20,16,40,FALSE,FALSE,A_INT,0,0,_("距離を操る", "Manipulation of Distance"),
+	{20,16,40,FALSE,FALSE,A_INT,0,0,_("距離を操るⅠ", "Manipulation of Distance I"),
 		_("現在地から通路が通った既知の場所へ移動する。高速移動能力があるときはそれに応じて消費行動力が減る。",
         "Moves to a known location that is connected to your current position. Energy cost is reduced if you have swift movement.")},
 	{24,30,55,FALSE,TRUE,A_WIS,0,0,_("無間の狭間", "Narrow Confines of Avici"),
-		_("隣接した敵一体の移動とテレポートを短時間妨害する。二体以上同時に妨害することはできない。強力な敵には効果が薄い。",
-        "Prevents an adjacent enemy from moving or teleporting. You cannot affect two or more enemies at once in this way. Less effective against powerful enemies.")},
+		_("隣接した敵一体の移動とテレポートを短時間妨害する。巨大な敵や力強い敵には効きづらい。",
+        "Prevents an adjacent enemy from moving or teleporting. Gigantic or powerful enemies are more likely to escape.")},
 	{28,30,70,FALSE,TRUE,A_INT,0,0,_("脱魂の儀", "Ritual of Ecstasy"),
 		_("指定した敵と位置を交換する。視界外の敵にも有効。",
         "Swaps positions with target enemy. Works on enemies out of your sight as well.")},
@@ -30410,7 +31752,7 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 			damage = adj_general[p_ptr->stat_ind[A_STR]] * 5 + p_ptr->lev;
 			if(damage < 50) damage = 50;
 			if(only_info) return format(_str_eff_range_dam,len,damage);
-			if (!rush_attack2(len,GF_WATER,damage)) return NULL;
+			if (!rush_attack2(len,GF_WATER,damage,0)) return NULL;
 			break;
 		}
 		//v1.1.20 視界外でも既知の通路が通っていれば行けることにした
@@ -30447,14 +31789,18 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 
 			break;
 		}
-/*::: -Hack- 無間の狭間　magic_num1[0]とtim_general[0]を使用する*/
+	/*::: -Hack- 無間の狭間　magic_num1[0]とtim_general[0]を使用する*/
+		//v1.1.95 GF_NO_MOVE属性に変更し↑は使わなくなった
 	case 4:
 		{
 			int y, x;
 			monster_type *m_ptr;
 
-			base = 5 + p_ptr->lev / 10;
-			if(only_info) return format(_str_eff_dur,base);
+			int power = 10 + plev / 5;
+
+			//base = 5 + p_ptr->lev / 10;
+			if(only_info) return format(_str_eff_dur,power);
+
 			if (!get_rep_dir2(&dir)) return NULL;
 			if (dir == 5) return NULL;
 
@@ -30466,9 +31812,10 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 				{
 					char m_name[80];
 					monster_desc(m_name, m_ptr, 0);
-					msg_format(_("%sは狭間に囚われた！", "%s is trapped in the narrow confines!"),m_name);
-					p_ptr->magic_num1[0] = cave[y][x].m_idx;
-					set_tim_general(base,FALSE,0,0);
+					msg_format(_("%sを狭間に捕えた！", "You capture %s in the narrow confines!"),m_name);
+					project(0, 0, y, x, power, GF_NO_MOVE, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+					//p_ptr->magic_num1[0] = cave[y][x].m_idx;
+					//set_tim_general(base,FALSE,0,0);
 				}
 				else
 				{
@@ -30751,6 +32098,7 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 
 
 /*:::衣玖専用技*/
+//v1.1.95 「羽衣は時の如く」にtim_general[0]使用
 class_power_type class_power_iku[] =
 {
 	{10,12,25,FALSE,TRUE,A_CHR,0,0,_("龍神の怒り", "Dragon God's Wrath"),
@@ -30765,12 +32113,16 @@ class_power_type class_power_iku[] =
 	{30,40,55,FALSE,FALSE,A_DEX,30,0,_("羽衣は空の如く", "Veils Like Sky"),
 		_("敵の様々な攻撃を受け流すべく身構え、一時的に酸電火冷の耐性とAC上昇を得る。装備が重いと失敗しやすい。",
         "Prepares to deflect various enemy attacks; grants temporary resistance to acid, lightning, fire and cold and increases AC. High chance to fail if you're wearing heavy equipment.")},
-	{35,40,45,FALSE,TRUE,A_CHR,0,0,_("エレキテルの龍宮", "Elekiter Dragon Palace"),
+	{33,40,45,FALSE,TRUE,A_CHR,0,0,_("エレキテルの龍宮", "Elekiter Dragon Palace"),
 		_("自分を中心とした強力な電撃のボールを発生させる。",
         "Generates a powerful ball of lightning centered on you.")},
-	{40,55,65,FALSE,TRUE,A_CHR,0,10,_("龍宮の使い遊泳弾", "Thundercloud Fish's Swimming Shot"),
+	{36,55,65,FALSE,TRUE,A_CHR,0,10,_("龍宮の使い遊泳弾", "Thundercloud Fish's Swimming Shot"),
 		_("強力な電撃のボールを大量に放つ。ターゲットはランダムに決まる。",
         "Fires many powerful balls of lightning. Targets are chosen at random.")},
+	{40,72,80,FALSE,FALSE,A_DEX,0,0,_("羽衣は時の如く", "Veils Like Time"),
+		_("一時的に敵からの隣接攻撃に対して行動消費なしで反撃するようになる。反撃のたびにMPを7消費する。羽衣による格闘中でないと使えない。",
+        "Temporarily counters melee attacks without consuming energy. Each counterattack costs 7 MP. Can only be used if you're using martial arts.")},
+
 	{45,85,70,FALSE,TRUE,A_CHR,0,0,_("玄雲海の雷庭", "Thunder Court in Abstruse Clouds"),
 		_("視界内の全てを電撃で攻撃する。",
         "Hits everything in sight with lightning.")},
@@ -30878,6 +32230,24 @@ cptr do_cmd_class_power_aux_iku(int num, bool only_info)
 		}
 	case 6:
 		{
+			int base = 4;
+
+			if (only_info) return format(_("期間:%d+1d%dターン", "dur: %d+1d%d"), base,base);
+
+			if (!p_ptr->do_martialarts)
+			{
+				msg_print(_("今の装備ではその技を使えない。", "You cannot use this special ability with your current equipment."));
+				return NULL;
+			}
+
+			set_tim_general(base+randint1(base), FALSE, 0, 0);
+			p_ptr->counter = TRUE;
+
+			break;
+		}
+
+	case 7:
+		{
 			dice = p_ptr->lev / 5;
 			sides = adj_general[p_ptr->stat_ind[A_CHR]] * 3;
 			if(only_info) return format(_str_eff_dam_dice_sides,dice,sides);
@@ -30908,19 +32278,25 @@ class_power_type class_power_udonge[] =
 	{16,18,30,FALSE,TRUE,A_WIS,0,0,_("イリュージョナリィブラスト", "Illusionary Blast"),
 		_("半物理半精神攻撃のレーザーを放つ。精神の希薄な敵や狂気をもたらす敵、ユニークモンスターには効果が薄い。",
         "Fires a half physical, half mental laser. Less effective against enemies with unusual mind, insanity inducing enemies or unique monsters.")},
-	{20,30,75,FALSE,FALSE,A_INT,0,0,_("波長診断", "Wavelength Diagnosis"),
+	{20,30,65,FALSE,FALSE,A_INT,0,0,_("波長診断", "Wavelength Diagnosis"),
 		_("視界内のモンスターの波長を読み取って能力やパラメータなどを調査する。",
         "Reads wavelength of monsters in sight and analyzes their abilities and parameters.")},
-	{25,40,80,FALSE,FALSE,A_CHR,0,0,_("マインドストッパー", "Mind Stopper"),
+	{24,40,70,FALSE,FALSE,A_CHR,0,0,_("マインドストッパー", "Mind Stopper"),
 		_("視界内のモンスター全てを睨んで動きを停止させる。",
         "Gazes at all monsters in sight, stopping their movement.")},
-	{30,36,50,FALSE,TRUE,A_WIS,0,0,_("マインドエクスプロージョン", "Mind Explosion"),
+	{28,25,60,FALSE,TRUE,A_CHR,0,0,_("ディスカーダー", "Discarder"),
+		_("視界内のモンスター一体を高確率で魔法力低下状態にする。抵抗されると無効。",
+        "Lowers a single monster's magic power with high probability rate. Does nothing if resisted.")},
+	{32,36,50,FALSE,TRUE,A_WIS,0,0,_("マインドエクスプロージョン", "Mind Explosion"),
 		_("半物理半精神攻撃のロケットを放つ。精神の希薄な敵や狂気をもたらす敵、ユニークモンスターには効果が薄い。",
         "Fires a half physical, half mental rocket. Less effective against enemies with unusual mind, insanity inducing enemies or unique monsters.")},
-	{35,33,50,TRUE,TRUE,A_CON,0,0,_("国士無双の薬", "Grand Patriot Elixir"),
+	{36,33,50,TRUE,TRUE,A_CON,0,0,_("国士無双の薬", "Grand Patriot Elixir"),
 		_("永琳印の強化薬を服用する。飲み過ぎると・・",
         "Takes Eirin's augmenting medicine. If you drink too much...")},
-	{40,56,70,FALSE,TRUE,A_INT,0,0,_("ビジョナリチューニング", "Visionary Tuning"),
+	{39,45,65,FALSE,TRUE,A_CHR,0,0,_("マインドブローイング", "Mind Blowing"),
+		_("視界内のモンスター一体を狂戦士化させる。抵抗されると無効。クエスト打倒対象モンスターや精神を持たないモンスターには効果がない。",
+        "Makes a monster berserk. Does nothing if resisted. Does not affect quest targets and mindless monsters.")},
+	{42,56,70,FALSE,TRUE,A_INT,0,0,_("ビジョナリチューニング", "Visionary Tuning"),
 		_("ごく一時的に周囲の様々な波長を狂わせ、敵が自分を見失いやすくする。",
         "For a short period of time, distorts ambient wavelength, making it more likely for enemies to lose sight of you.")},
 	{45,65,75,FALSE,TRUE,A_WIS,0,0,_("アイサイトクリーニング", "Eyesight Cleaning"),
@@ -30935,6 +32311,9 @@ class_power_type class_power_udonge[] =
 cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 {
 	int dir,dice,sides,base,damage;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int plev = p_ptr->lev;
+
 	switch(num)
 	{
 	case 0:
@@ -31003,7 +32382,20 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			stasis_monsters(power);
 			break;
 		}
+
 	case 5:
+		{
+			base = p_ptr->lev * 5 + chr_adj * 5;
+			if (only_info) return format(_str_eff_power, base);
+
+			if (!get_aim_dir(&dir)) return NULL;
+
+			msg_print(_("呪文を阻害する波動を送った。", "You release a wave interfering with spellcasting."));
+			fire_ball_hide(GF_DEC_MAG, dir, base, 0);
+
+			break;
+		}
+	case 6:
 		{
 			int rad = 2;
 			if(p_ptr->lev > 39) rad = 3;
@@ -31018,23 +32410,29 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			fire_rocket(GF_REDEYE, dir, base + damroll(dice,sides), rad);
 			break;
 		}
-	case 6:
+	case 7:
 		{
 			dice = base = 25;
 			if(only_info) return format(_str_eff_dur_plus_1d,base,dice);
 
-			msg_format(_("薬を服用した。", "You take the medicine."));
 			if(!p_ptr->hero)
 			{
+                msg_format(_("薬を服用した。", "You take the medicine."));
 				set_afraid(0);
 				set_hero(randint1(dice) + base, FALSE);
 			}
-			else if(!p_ptr->shield) set_shield(randint1(dice) + base, FALSE);
+			else if (!p_ptr->shield)
+			{
+				msg_format(_("薬を服用した。", "You take the medicine."));
+				set_shield(randint1(dice) + base, FALSE);
+			}
 			//else if(!p_ptr->fast) set_fast(randint1(dice) + base, FALSE);
 			else if(!p_ptr->tim_addstat_count[A_STR] || !p_ptr->tim_addstat_count[A_DEX] || !p_ptr->tim_addstat_count[A_CON])
 			{
 				int percentage = p_ptr->chp * 100 / p_ptr->mhp;
 				int v = randint1(dice) + base;
+
+				msg_format(_("薬を服用した。", "You take the medicine."));
 				msg_format(_("強大な力が湧き出してきた！", "Power flows through you!"));
 				set_tim_addstat(A_STR,105,v,FALSE);
 				set_tim_addstat(A_DEX,105,v,FALSE);
@@ -31056,9 +32454,15 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 					return NULL;
 				}
 
+				if (p_ptr->warning && !get_check_strict(_("...嫌な予感がする。本当に飲みますか？",
+                                                        "...You have a bad feeling about this. Are you sure you want to drink it? "), CHECK_OKAY_CANCEL))
+				{
+					return NULL;
+				}
+				msg_format(_("飲んではいけない量の薬を飲み干した！", "You've drunk too much of the elixir!"));
 				msg_format(_("あなたは大爆発した！", "You explode!"));
 				project(0, 7, py, px, dam * 5 + randint1(dam*5), GF_MANA, PROJECT_KILL | PROJECT_ITEM | PROJECT_GRID, -1);
-				take_hit(DAMAGE_LOSELIFE, dam, _("師匠の薬", "teacher's medicine"), -1);
+				take_hit(DAMAGE_LOSELIFE, dam, _("師匠の薬", "master's elixir"), -1);
 				set_hero(0,TRUE);
 				set_shield(0,TRUE);
 				set_tim_addstat(A_STR,0,0,TRUE);
@@ -31069,7 +32473,22 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			break;
 		}
 
-	case 7:
+
+
+	case 8:
+		{
+			base = p_ptr->lev * 3 + chr_adj * 5;
+			if (only_info) return format(_str_eff_power, base);
+
+			if (!get_aim_dir(&dir)) return NULL;
+
+			msg_print(_("狂気をもたらす波動を送った！", "You release a berserk rage inducing wave!"));
+			fire_ball_hide(GF_BERSERK, dir, base, 0);
+
+			break;
+		}
+
+	case 9:
 		{
 			dice = base = 15;
 			if(only_info) return format(_str_eff_dur_plus_1d,base,dice);
@@ -31077,7 +32496,7 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			set_tim_superstealth(base + randint1(dice),FALSE, SUPERSTEALTH_TYPE_NORMAL);
 			break;
 		}
-	case 8:
+	case 10:
 		{
 			damage = p_ptr->lev * 5 + adj_general[p_ptr->stat_ind[A_WIS]] * 5 + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
 			if(only_info) return format(_str_eff_dam,damage);
@@ -31088,7 +32507,7 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			break;
 		}
 
-	case 9:
+	case 11:
 		{
 			dice = base = 6;
 			if(only_info) return format(_str_eff_dur_plus_1d,base,dice);
@@ -31148,24 +32567,14 @@ cptr do_cmd_class_power_aux_tewi(int num, bool only_info)
 				return NULL;
 			}
 
-			for (i = 1; i < m_max; i++)
+			if (check_player_is_seen())
 			{
-				int dist_tmp;
-				monster_type *m_ptr = &m_list[i];
-				if(!m_ptr->r_idx) continue;
-				if (!player_has_los_bold(m_ptr->fy,m_ptr->fx)) continue;
-				if(r_info[m_ptr->r_idx].flags2 & RF2_EMPTY_MIND) continue;
-				if(MON_CONFUSED(m_ptr)) continue;
-				if(MON_CSLEEP(m_ptr)) continue;
-
 				msg_print(_("今は掘れない。誰かに見られている。", "You can't dig right now. Someone might notice."));
 				return NULL;
 			}
 
-
 			cave_set_feat(py, px, f_tag_to_index_in_init("TEWI_PIT"));
 			msg_print(_("落とし穴を掘った！", "You dig up a trap hole!"));
-
 		}
 		break;
 	case 1:
@@ -31849,6 +33258,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 		else if(p_ptr->pclass == CLASS_KASEN && !is_special_seikaku(SEIKAKU_SPECIAL_KASEN) && skillnum == 3);//大喝
 		else if(p_ptr->pclass == CLASS_KAGEROU);//影狼は狂戦士化中にも特技が使える
 		else if(p_ptr->pclass == CLASS_YOSHIKA  && skillnum == 2);//死なない殺人鬼
+		else if (p_ptr->pclass == CLASS_KOKORO  && skillnum == 4);//喜怒哀楽ポゼッション
 
 		else
 		{
@@ -32140,7 +33550,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 
 	else if(p_ptr->pclass == CLASS_UDONGE)
 	{
-		if(p_ptr->blind && ( skillnum == 0 || skillnum == 2 || skillnum == 4 || skillnum == 8 ))
+		if(p_ptr->blind && ( skillnum == 0 || skillnum == 2 || skillnum == 4 || skillnum == 5 || skillnum == 8 || skillnum == 10))
 		{
 #ifdef JP
 			my_strcpy(errmsg, "その特技は目が見えないと使えない。", 150);
@@ -32152,7 +33562,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 	}
 	else if(p_ptr->pclass == CLASS_FLAN)
 	{
-		if(skillnum == 2 && p_ptr->blind)
+		if(skillnum == 4 && p_ptr->blind)
 		{
 #ifdef JP
 			my_strcpy(errmsg, "その特技は目が見えないと使えない。", 150);
@@ -32161,7 +33571,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #endif
 			return FALSE;
 		}
-		else if(skillnum == 5 && !buki_motteruka(INVEN_RARM) && !buki_motteruka(INVEN_LARM))
+		else if((skillnum == 1 || skillnum == 7) && !buki_motteruka(INVEN_RARM) && !buki_motteruka(INVEN_LARM))
 		{
 #ifdef JP
 			my_strcpy(errmsg, "その技は近接武器を持っていないと使えない。", 150);
@@ -32349,6 +33759,12 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #else
                 my_strcpy(errmsg, "You have to wield a weapon in order to use this ability.", 150);
 #endif
+				return FALSE;
+			}
+			if (skillnum == 6 && !p_ptr->do_martialarts)
+			{
+				my_strcpy(errmsg, _("その技は武器を装備していると使えない。",
+                                    "You cannot use this special ability while wielding a weapon."), 150);
 				return FALSE;
 			}
 	}
@@ -32694,7 +34110,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 	}
 	else if(p_ptr->pclass == CLASS_ALICE)
 	{
-		if((skillnum == 6) && p_ptr->do_martialarts)
+		if((skillnum == 7) && p_ptr->do_martialarts)
 		{
 #ifdef JP
 				my_strcpy(errmsg, "人形の装備ができていない。", 150);
@@ -33224,6 +34640,8 @@ void do_cmd_new_class_power(bool only_browse)
     int minfail = 0;
 	bool anti_magic = FALSE;
 	int ask = TRUE;
+
+	int cur_pos;//コマンドウィンドウから使用するとき(use_menu)のカーソル位置
 
 #ifdef JP
     cptr power_desc_waza = "特技";
@@ -33963,8 +35381,16 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 	case CLASS_JYOON:
-		class_power_table = class_power_jyoon;
-		class_power_aux = do_cmd_class_power_aux_jyoon;
+		if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON))//v1.1.92 特殊性格特技追加
+		{
+			class_power_table = class_power_jyoon_2;
+			class_power_aux = do_cmd_class_power_aux_jyoon_2;
+		}
+		else
+		{
+			class_power_table = class_power_jyoon;
+			class_power_aux = do_cmd_class_power_aux_jyoon;
+		}
 		power_desc = power_desc_waza;
 		break;
 	case CLASS_SHION:
@@ -34047,6 +35473,13 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_MIKE:
+		class_power_table = class_power_mike;
+		class_power_aux = do_cmd_class_power_aux_mike;
+		power_desc = power_desc_waza;
+		break;
+
+
 	default:
 #ifdef JP
 		msg_print("あなたは職業による特技を持っていない。");
@@ -34115,6 +35548,8 @@ void do_cmd_new_class_power(bool only_browse)
 #endif
 
 	choice= (always_show_list ) ? ESCAPE:1;
+
+	cur_pos = 0;
 
 	while (!flag)
 	{
@@ -34203,8 +35638,24 @@ void do_cmd_new_class_power(bool only_browse)
 					/*:::効果欄のコメントを得る*/
 					sprintf(comment, "%s", (*class_power_aux)(i,TRUE));
 //msg_format("len(%d):%d",i,strlen((*class_power_aux)(i,TRUE)));
+
+
 					/*:::カーソルまたはアルファベットの表示*/
-					sprintf(psi_desc, "  %c) ",I2A(i));
+
+
+					/*:::カーソルまたはアルファベットの表示*/
+					if (use_menu)
+					{
+						if(i == cur_pos)
+							sprintf(psi_desc, _("  》 ", "   > "));
+						else
+							sprintf(psi_desc, "     ");
+
+					}
+					else
+					{
+						sprintf(psi_desc, "  %c) ", I2A(i));
+					}
 
 					/* Dump the spell --(-- */
 					//Hack 幽々子最終奥義は全消費
@@ -34274,14 +35725,54 @@ void do_cmd_new_class_power(bool only_browse)
 			continue;
 		}
 
-		/* Note verify */
-		ask = isupper(choice);
+		if (use_menu)
+		{
+			char c = choice;
+			ask = FALSE;
 
-		/* Lowercase */
-		if (ask) choice = tolower(choice);
+			if (c == 'x' || c == 'X' || c == '\r' || c == '\n')
+			{
+				i = cur_pos;
+			}
+			else if (c == '0')
+			{
+				break;
+			}
+			else if (c == '8' || c == 'k' || c == 'K')
+			{
+				cur_pos--;
+				if (cur_pos < 0) cur_pos = cnt - 1;
+				choice = ESCAPE;
+				if(!only_browse)screen_load();
+				redraw = FALSE;
+				continue;
+			}
+			else if (c == '2' || c == 'j' || c == 'J')
+			{
+				cur_pos++;
+				if (cur_pos >= cnt) cur_pos = 0;
+				choice = ESCAPE;
+				if (!only_browse)screen_load();
+				redraw = FALSE;
+				continue;
+			}
+		}
+		else
+		{
 
-		/* Extract request */
-		i = (islower(choice) ? A2I(choice) : -1);
+			//選択が大文字ならask(使う前に確認する)フラグを立てて小文字に直している
+			ask = isupper(choice);
+			if (ask) choice = tolower(choice);
+
+			//選択が小文字アルファベットならそれを番号に直している
+			i = (islower(choice) ? A2I(choice) : -1);
+
+		}
+
+
+
+
+
 
 		/* Totally Illegal */
 		if ((i < 0) || (i >= cnt))
@@ -34570,12 +36061,12 @@ const support_item_type support_item_list[] =
 	_("それは視界内のモンスターの動きを止める。",
     "Binds all monsters in sight.")},
 	//国士無双の薬
-	{35, 20,  110,7,3,	MON_UDONGE,class_power_udonge,do_cmd_class_power_aux_udonge,6,
+	{35, 20,  110,7,3,	MON_UDONGE,class_power_udonge,do_cmd_class_power_aux_udonge,7,
 	_("永琳印の薬瓶", "Eirin's Medicine"),
 	_("それを使うと三段階パワーアップする。飲みすぎると・・",
     "You can get three stages of powering up by using this. But if you drink too much...")},
 	//アキュラースペクトル
-	{60, 60,  120,2,16,	MON_UDONGE,class_power_udonge,do_cmd_class_power_aux_udonge,9,
+	{60, 60,  120,2,16,	MON_UDONGE,class_power_udonge,do_cmd_class_power_aux_udonge,11,
 	_("薬屋の編み笠", "Pharmacy Knitting Hat"),
 	_("それを使うと短時間分身し敵からの攻撃を受けにくくなる。",
     "Creates a clone of yourself for a short period of time, making it more difficult for enemies to hit you.")},
@@ -34644,7 +36135,7 @@ const support_item_type support_item_list[] =
 	_("それは無属性ボールを放つ。威力は腕力に依存する。",
     "Fires a non-elemental ball. Power depends on your strength.")},
 	//ミッシングパープルパワー
-	{60, 50, 120,1,30,	MON_SUIKA,class_power_suika,do_cmd_class_power_aux_suika,6,
+	{60, 50, 120,1,30,	MON_SUIKA,class_power_suika,do_cmd_class_power_aux_suika,7,
 	_("鬼の分銅", "Oni Weight"),
 	_("それを使うと一定時間巨大化する。巨大化中は身体能力が爆発的に上昇するが巻物と魔道具が使用できない。Uコマンドで巨大化を解除できる。",
     "Temporarily turns you giant. Your physical stats drastically increase, but you cannot use scrolls or magic devices. Cancel giantform with 'U' command.")},
@@ -34713,7 +36204,7 @@ const support_item_type support_item_list[] =
 	_("それを使うと一番近い敵の隣にテレポートし、そのまま一撃を加える。精神を持たない敵は対象にならない。",
     "Teleports next to the closest enemy and attacks. Ignores mindless enemies.")},
 	//胎児の夢
-	{60, 40, 115,3,10,	MON_KOISHI,class_power_koishi,do_cmd_class_power_aux_koishi,5,
+	{60, 40, 115,3,10,	MON_KOISHI,class_power_koishi,do_cmd_class_power_aux_koishi,6,
 	_("覚の閉じた瞳", "Closed Eye"),
 	_("それは隣接した敵一体に強力な精神攻撃と時間逆転攻撃を仕掛ける。通常の精神を持たない敵には効果が薄い。",
     "Hits an adjacent monster with a powerful mental and time attack. Less effective against monsters with unusual mind.")},
@@ -34777,17 +36268,17 @@ const support_item_type support_item_list[] =
     "Summons an Ice crystal as your follower that can't leave this level. It can't move and performs powerful frost attacks.")},
 
 	//きゅっとしてドカーン
-	{55, 40, 120,4,10,	MON_F_SCARLET,class_power_flan,do_cmd_class_power_aux_flan,2,
+	{55, 40, 120,4,10,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,4,
 	_("巨大隕石の欠片", "Huge Meteor Shard"),
 	_("それはターゲットとその周辺3+1d3グリッドを*破壊*する。ターゲットは明示的に指定しなければならない。(25-レベル/2)%の確率で想定外の大破壊が起こる。地上やクエストダンジョンでは使えない。",
     "*Destroys* the target and the area in 3+1d3 radius around it. Requires explicitily picking a target. Has a (25-level/2)% chance of causing more destruction than expected. Cannot be used on surface or in quests.")},
 	//フォーオブアカインド
-	{80, 20, 80,1,10,	MON_F_SCARLET,class_power_flan,do_cmd_class_power_aux_flan,4,
+	{80, 20, 80,1,10,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,6,
 	_("虹色の欠片", "Rainbow Shard"),
 	_("それを使うとこのフロア限定で「フランドール・スカーレット」の分身が三体出現する。分身は配下扱いだが命令に関わらずプレイヤーを範囲攻撃に巻き込む。",
     "Summons 3 clones of Flandre Scarlet as your followers that can't leave this level. They will involve you in their area of effect attacks regardless of your orders.")},
 	//レーヴァテイン
-	{90, 60, 128,4,18,	MON_F_SCARLET,class_power_flan,do_cmd_class_power_aux_flan,5,
+	{90, 60, 128,4,18,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,7,
 	_("捻じれた黒杖", "Bent Black Rod"),
 	_("それは自分を中心に強力な地獄の劫火属性のボールを発生させる。",
     "Generate a powerful ball of hellfire centered on yourself.")},
@@ -34852,12 +36343,12 @@ const support_item_type support_item_list[] =
 	_("それは指定した位置にプラズマ属性の巨大なボールを発生させる。",
     "Generates a huge ball of plasma at target location.")},
 	//サイレントセレナ
-	{40, 40, 100,4,10,	MON_PATCHOULI,class_power_patchouli,do_cmd_class_power_aux_patchouli,5,
+	{40, 40, 100,4,10,	MON_PATCHOULI,class_power_patchouli,do_cmd_class_power_aux_patchouli,7,
 	_("三日月の帽子飾り", "Crescent Moon Accessory"),
 	_("それは隣接した敵に強力な暗黒属性攻撃を放つ。",
     "Hits adjacent enemies with a powerful darkness attack.")},
 	//賢者の石
-	{150, 70, 128,5,20,	MON_PATCHOULI,class_power_patchouli,do_cmd_class_power_aux_patchouli,8,
+	{150, 70, 128,5,20,	MON_PATCHOULI,class_power_patchouli,do_cmd_class_power_aux_patchouli,10,
 	_("賢者の石", "Philosopher's Stone"),
 	_("それはこのフロア限定で「賢者の石」を召喚する。賢者の石は配下扱いで強力な元素魔法で攻撃する。",
     "Summons a Philosopher's Stone as your follower that cannot leave this level. It performs powerful basic element attacks.")},
@@ -34928,7 +36419,7 @@ const support_item_type support_item_list[] =
 	_("それは地獄属性の強力なビームを放つ。",
     "Fires a powerful nether beam.")},
 	//華胥の永眠
-	{60, 30, 120,3,12,	MON_YUYUKO,class_power_yuyuko,do_cmd_class_power_aux_yuyuko,6,
+	{60, 30, 120,3,12,	MON_YUYUKO,class_power_yuyuko,do_cmd_class_power_aux_yuyuko,7,
 	_("西行妖の花弁", "Petals of Saigyou Ayakashi"),
 	_("それは周囲の敵を高確率でフロアから消し去る。ユニークモンスターには効果がない。",
     "Banishes nearby enemies from the level with high probability rate. Does not affect unique monsters.")},
@@ -34999,17 +36490,17 @@ const support_item_type support_item_list[] =
     "Fires an extremely powerful unresistable beam.")},
 
 	//狂喜の火男面
-	{35, 10, 40,3,4,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,5,
+	{35, 10, 40,3,4,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,6,
 	_("ひょっとこの面", "Hyottoko Mask"),
 	_("それは周囲のランダムな位置に火炎属性のボールを数回発生させる。",
     "Generates several balls of fire at random positions in your vicinity.")},
 	//怒れる忌狼の面
-	{40, 30, 70,4,5,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,6,
+	{40, 30, 70,4,5,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,7,
 	_("狼の面", "Wolf Mask"),
 	_("それは使うと短距離を突進し、敵に当たると気属性のダメージを与える。",
     "Makes you charge a short distance, dealing Ki damage if you hit an enemy.")},
 	//昂揚の神楽獅子
-	{50, 40, 100,4,7,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,7,
+	{50, 40, 100,4,7,MON_KOKORO,class_power_kokoro,do_cmd_class_power_aux_kokoro,9,
 	_("獅子舞の装束", "Lion Dance Clothing"),
 	_("それは強力なプラズマ属性のビームを放つ。",
     "Fires a powerful beam of plasma.")},
@@ -35154,13 +36645,14 @@ const support_item_type support_item_list[] =
 	_("それは特殊なビームを放つ。水棲の敵に大ダメージを与え、その他の敵には水属性ダメージを与える。",
     "Fires a special beam that deals large damage to aquatic enemies and deals water damage to other enemies.")},
 	//神代大蛇
+	//v1.1.92 首飾りじゃなくて髪飾りだった。修正
 	{80, 50, 100,3,12,		MON_SANAE,class_power_sanae,do_cmd_class_power_aux_sanae,17,
-	_("白蛇の首飾り", "White Snake Adornment"),
+	_("白蛇の髪飾り", "White Snake Adornment"),
 	_("それは空間歪曲属性の強力なビームを放つ。",
     "Fires a powerful beam of space distortion.")},
 	//120 手管の蝦蟇
 	{80, 50, 100,3,12,		MON_SANAE,class_power_sanae,do_cmd_class_power_aux_sanae,18,
-	_("蛙の首飾り", "Frog Adornment"),
+	_("蛙の髪飾り", "Frog Adornment"),
 	_("それはカオス属性の強力なブレスを放つ。",
     "Powerfully breathes chaos.")},
 
@@ -35177,10 +36669,10 @@ const support_item_type support_item_list[] =
 	//スピアオブグングニル
 	{70,60, 128,5,8,		MON_REMY,class_power_remy,do_cmd_class_power_aux_remy,7,
 	_("血の色の槍", "Blood-Colored Spear"),
-	_("それは万能属性の強力なビームを放つ。",
-    "Fires a powerful unresistable beam.")},
+	_("それは万能属性の強力なビームを放つ。★グングニルの装備中は威力が倍になる。",
+    "Fires a powerful unresistable beam. Power is doubled if you're wielding Gungnir.")},
 	//レッドマジック
-	{50,80, 128,1,20,		MON_REMY,class_power_remy,do_cmd_class_power_aux_remy,9,
+	{50,80, 128,1,20,		MON_REMY,class_power_remy,do_cmd_class_power_aux_remy,10,
 	_("吸血鬼の紅茶", "Vampire's Red Tea"),
 	_("それは極めて強力な視界内攻撃を行う。威力は魅力に大きく依存し、清浄な体を持つ敵に大きなダメージを与える。",
     "Hits everyone in sight with an extremely powerful attack. Power greatly depends on your charisma, and it deals large damage to enemies with pure bodies.")},
@@ -35305,8 +36797,8 @@ const support_item_type support_item_list[] =
 	//樺黄小町
 	{60,30, 80,6,5,	MON_YAMAME,class_power_yamame,do_cmd_class_power_aux_yamame,5,
 	_("土蜘蛛の牙", "Tsuchigumo's Fang"),
-	_("それは隣接した敵にダメージを与える。毒耐性を持たない敵には三倍のダメージを与え、低確率で一撃で倒す。",
-    "Deals damage to an adjacent enemy. Deals triple damage to enemies without poison resistance, and has a low chance of defeating them in a single strike.")},
+	_("それは隣接した敵にダメージを与える。毒耐性を持たない敵には三倍のダメージを与え、攻撃力を低下させ、低確率で一撃で倒す。",
+    "Deals damage to an adjacent enemy. Deals triple damage to enemies without poison resistance, lowers their attack power, and has a low chance of defeating them in a single strike.")},
 
 	//諏訪清水
 	{35,20, 70,6,5,	MON_SUWAKO,class_power_suwako,do_cmd_class_power_aux_suwako,2,
@@ -35384,7 +36876,7 @@ const support_item_type support_item_list[] =
 	_("それは精神攻撃属性のボールを放つ。自分の体力が低いほど威力が上昇する。",
     "Fires a ball of mental energy. Power increases if you're low on HP.")},
 	//積怨返し
-	{160,80, 128,1,50,MON_PARSEE,class_power_parsee,do_cmd_class_power_aux_parsee,8,
+	{160,80, 128,1,50,MON_PARSEE,class_power_parsee,do_cmd_class_power_aux_parsee,9,
 	_("橋姫の鉄輪", "Bridge Princess's Iron Ring"),
 	_("それは自分のいる場所に地獄の劫火属性の巨大なボールを発生させる。威力はこのフロアで自分が受けたダメージの合計になり、一度使うとリセットされる。",
     "Generates a huge ball of hellfire centered on yourself. Power is equal to total amount of damage you received on this dungeon level; damage counter resets upon use.")},
@@ -35471,7 +36963,7 @@ const support_item_type support_item_list[] =
 	_("それは閃光属性のビームを放つ。",
     "Fires a beam of light.")},
 	//首吊り蓬莱人形
-	{50,40, 100,5,8,MON_ALICE,class_power_alice,do_cmd_class_power_aux_alice,7,
+	{50,40, 100,5,8,MON_ALICE,class_power_alice,do_cmd_class_power_aux_alice,8,
 	_("蓬莱人形", "Hourai Doll"),
 	_("それは強力な暗黒属性のビームを放つ。",
     "Fires a powerful beam of darkness.")},
@@ -35493,10 +36985,10 @@ const support_item_type support_item_list[] =
     "Detects nearby monsters, doors, traps and items.")},
 
 	//ヘルエクリプス
-	{50,25, 75,3,7,MON_CLOWNPIECE,class_power_clownpiece,do_cmd_class_power_aux_clownpiece,2,
+	{90,45, 100,2,12,MON_CLOWNPIECE,class_power_clownpiece,do_cmd_class_power_aux_clownpiece,2,
 	_("地獄の松明", "Hell Torch"),
-	_("それは今いる部屋を明るくし、視界内の敵に精神攻撃を行う。",
-    "Illuminates nearby area and hits enemies in sight with a mental attack.")},
+	_("それは今いる部屋を明るくし、視界内の敵に精神攻撃と様々な状態異常付与を行う。",
+    "Illuminates nearby area and hits enemies in sight with a mental attack, inflicting various status abnormalities.")},
 	//ストライプドアビス
 	{120,85, 128,1,25,MON_CLOWNPIECE,class_power_clownpiece,do_cmd_class_power_aux_clownpiece,6,
 	_("地獄の道化の帽子", "Hell Clown's Hat"),
@@ -35615,7 +37107,7 @@ const support_item_type support_item_list[] =
 	_("それを使うとこのフロア限定でモンスター「穢身探知型機雷」を呼び出す。機雷は分裂し破邪属性の爆発を起こす。",
     "Summons impure body detection mines as your followers (cannot leave this dungeon level). They multiply and explode into holy energy.")},
 	//片翼の白鷺
-	{90,60, 110,2,14,MON_SAGUME,class_power_sagume,do_cmd_class_power_aux_sagume,4,
+	{90,60, 110,2,14,MON_SAGUME,class_power_sagume,do_cmd_class_power_aux_sagume,5,
 	_("白鷺の羽根", "White Heron Feathers"),
 	_("それを使うと強力な閃光属性のボールを発生させて中距離テレポートする。反テレポートに妨害されない。",
     "Generates a powerful ball of light and teleports a medium distance. Ignores anti-teleportation.")},
@@ -35832,10 +37324,23 @@ const support_item_type support_item_list[] =
 		_("それは周囲のモンスターを朦朧、減速、混乱させる。",
         "Stuns, slows and confuses nearby monsters.")},
 
+	//v1.1.92 疫病神的な天空掘削機
+		{ 80,40, 100,5,6,	MON_JYOON,class_power_jyoon_2,do_cmd_class_power_aux_jyoon_2,8,
+		_("石油王の指輪", "Oil Baron's Ring"),
+		_("それを使うと指定したターゲットの近くに移動し、周辺に無属性ダメージと水属性ダメージを与え、さらに周辺を石油地形にする。",
+        "Moves next up to specified location, dealing non-elemental and water damage around it, and turning nearby terrain into oil.")},
+
+	//v1.1.93 ミケ弾災招福
+		{ 120,5, 80,1,25,	MON_MIKE,class_power_mike,do_cmd_class_power_aux_mike,4,
+		_("三毛猫の招き猫", "Calico Maneki-Neko"),
+		_("それを使うと一時的に幸運状態になるが、同時に反感状態になる。",
+        "Temporarily makes you lucky, but makes you aggravate monsters as well.")},
+
+
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };
 
-//サポートアイテムのテストコマンド　デバッグコマンド'S'
+//アイテムカードのテストコマンド　デバッグコマンド'S'
 bool support_item_test(void)
 {
 	char tmp_val[160];
@@ -35983,7 +37488,8 @@ int calc_itemcard_slot_size(void)
 }
 
 /*:::アイテムカードの一覧表示*/
-void print_itemcard_list(bool show_info)
+//cur_pos:use_menu=TRUEのときカーソルが表示される位置
+void print_itemcard_list(bool show_info, int cur_pos)
 {
 	int		i;
 	char	tmp_val[40];
@@ -35992,12 +37498,26 @@ void print_itemcard_list(bool show_info)
 	object_type *o_ptr;
 	cptr (*class_power_aux)( int, bool);
 
+
 	for(i=1;i<itemslot_max+3;i++) Term_erase(17, i, 255);
+
+	cur_pos += INVEN_SPECIAL_ITEM_SLOT_START;
 
 	/*:::追加インベントリ表示　常にすべての欄*/
 	for (i = INVEN_SPECIAL_ITEM_SLOT_START; i <= itemslot_max; i++)
 	{
 		o_ptr = &inven_special[i];
+
+		if (use_menu)
+		{
+			sprintf(tmp_val, "%s ",(i==cur_pos?_("》", "> "):"  " ));
+
+		}
+		else
+		{
+			//ラベル
+			sprintf(tmp_val, "%c)", index_to_label(i) - INVEN_SPECIAL_ITEM_SLOT_START);
+		}
 
 		//ラベル
 		sprintf(tmp_val, "%c)", index_to_label(i) - INVEN_SPECIAL_ITEM_SLOT_START);
@@ -36040,6 +37560,7 @@ bool set_itemcard(void)
 	char    o_name[MAX_NLEN];
 	bool flag_change = FALSE;
 	int		itemslot_max = calc_itemcard_slot_size(); //アイテムカードスロット欄数 inven_special[]添字に関係
+	int cur_pos = 0;
 
 	q_ptr = &forge;
 
@@ -36070,15 +37591,43 @@ bool set_itemcard(void)
 	{
 		char c;
 		slot = 0; //inven_special[0]は小傘鍛冶用なので使わない
-		print_itemcard_list(TRUE);
+		print_itemcard_list(TRUE,cur_pos);
 		prt(_("どのスロットにセットしますか？", "Set into which slot?"),0,0);
 
 		c = inkey();
-		if(c == ESCAPE) break;
-		if(c >= 'a' && c <= ('a'+itemslot_max-INVEN_SPECIAL_ITEM_SLOT_START))
+
+		if (c == ESCAPE || c == ' ') break;
+
+		if (use_menu)
 		{
-			slot = c - 'a'+INVEN_SPECIAL_ITEM_SLOT_START;
-			break;
+			if (c == 'x' || c == 'X' || c == '\r' || c == '\n')
+			{
+				slot = cur_pos + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
+			else if (c == '0')
+			{
+				break;
+			}
+			else if (c == '8' || c == 'k' || c == 'K')
+			{
+				cur_pos--;
+				if (cur_pos < 0) cur_pos = itemslot_max - 1;
+			}
+			else if (c == '2' || c == 'j' || c == 'J')
+			{
+				cur_pos++;
+				if (cur_pos >= itemslot_max) cur_pos = 0;
+			}
+
+		}
+		else
+		{
+			if (c >= 'a' && c <= ('a' + itemslot_max - INVEN_SPECIAL_ITEM_SLOT_START))
+			{
+				slot = c - 'a' + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
 		}
 	}
 	screen_load();
@@ -36155,6 +37704,7 @@ bool remove_itemcard(void)
 	char    o_name[MAX_NLEN];
 	int		itemslot_max = calc_itemcard_slot_size(); //アイテムカードスロット欄数 inven_special[]添字に関係
 
+	int cur_pos = 0;
 	q_ptr = &forge;
 
 	screen_save();
@@ -36162,15 +37712,43 @@ bool remove_itemcard(void)
 	{
 		char c;
 		slot = 0; //inven_special[0]は小傘鍛冶用なので使わない
-		print_itemcard_list(TRUE);
+		print_itemcard_list(TRUE,cur_pos);
 		prt(_("どのスロットからカードを取り出しますか？", "Remove card from which slot?"),0,0);
 
 		c = inkey();
-		if(c == ESCAPE) break;
-		if(c >= 'a' && c <= ('a'+itemslot_max-INVEN_SPECIAL_ITEM_SLOT_START))
+
+		if (c == ESCAPE || c == ' ') break;
+
+		if (use_menu)
 		{
-			slot = c - 'a'+INVEN_SPECIAL_ITEM_SLOT_START;
-			break;
+			if (c == 'x' || c == 'X' || c == '\r' || c == '\n')
+			{
+				slot = cur_pos + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
+			else if (c == '0')
+			{
+				break;
+			}
+			else if (c == '8' || c == 'k' || c == 'K')
+			{
+				cur_pos--;
+				if (cur_pos < 0) cur_pos = itemslot_max - 1;
+			}
+			else if (c == '2' || c == 'j' || c == 'J')
+			{
+				cur_pos++;
+				if (cur_pos >= itemslot_max) cur_pos = 0;
+			}
+
+		}
+		else
+		{
+			if (c >= 'a' && c <= ('a' + itemslot_max - INVEN_SPECIAL_ITEM_SLOT_START))
+			{
+				slot = c - 'a' + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
 		}
 	}
 	screen_load();
@@ -36205,23 +37783,53 @@ bool activate_itemcard(void)
 	cptr (*class_power_aux)( int, bool);
 	int power_idx;
 	int		itemslot_max = calc_itemcard_slot_size(); //アイテムカードスロット欄数 inven_special[]添字に関係
+	int cur_pos = 0;
 
 	if (!repeat_pull(&slot))
 	{
 		screen_save();
 		while(1)
 		{
+
 			char c;
 			slot = 0; //inven_special[0]は小傘鍛冶用なので使わない
-			print_itemcard_list(TRUE);
-			prt(_("どのアイテムカードを使用しますか？", "Use which item card?"),0,0);
+			print_itemcard_list(TRUE, cur_pos);
+			prt(_("どのアイテムカードを使用しますか？", "Use which item card?"), 0, 0);
 
 			c = inkey();
-			if(c == ESCAPE) break;
-			if(c >= 'a' && c <= ('a'+itemslot_max-INVEN_SPECIAL_ITEM_SLOT_START))
+
+			if (c == ESCAPE || c == ' ') break;
+
+			if (use_menu)
 			{
-				slot = c - 'a'+INVEN_SPECIAL_ITEM_SLOT_START;
-				break;
+				if (c == 'x' || c == 'X' || c == '\r' || c == '\n')
+				{
+					slot = cur_pos + INVEN_SPECIAL_ITEM_SLOT_START;
+					break;
+				}
+				else if (c == '0')
+				{
+					break;
+				}
+				else if (c == '8' || c == 'k' || c == 'K')
+				{
+					cur_pos--;
+					if (cur_pos < 0) cur_pos = itemslot_max - 1;
+				}
+				else if (c == '2' || c == 'j' || c == 'J')
+				{
+					cur_pos++;
+					if (cur_pos >= itemslot_max) cur_pos = 0;
+				}
+
+			}
+			else
+			{
+				if (c >= 'a' && c <= ('a' + itemslot_max - INVEN_SPECIAL_ITEM_SLOT_START))
+				{
+					slot = c - 'a' + INVEN_SPECIAL_ITEM_SLOT_START;
+					break;
+				}
 			}
 		}
 		repeat_push(slot);
@@ -36268,21 +37876,52 @@ void read_itemcard(void)
 	char    o_name[MAX_NLEN];
 	int		itemslot_max = calc_itemcard_slot_size(); //アイテムカードスロット欄数 inven_special[]添字に関係
 
+	int cur_pos = 0;
+
 	screen_save();
 	while(1)
 	{
 		char c;
 		slot = 0; //inven_special[0]は小傘鍛冶用なので使わない
-		print_itemcard_list(TRUE);
+		print_itemcard_list(TRUE,cur_pos);
 		prt(_("どのスロットのカードを読みますか？", "Read card in which slot?"),0,0);
 
 		c = inkey();
-		if(c == ESCAPE) break;
-		if(c >= 'a' && c <= ('a'+itemslot_max-INVEN_SPECIAL_ITEM_SLOT_START))
+
+		if(c == ESCAPE || c == ' ') break;
+
+		if (use_menu)
 		{
-			slot = c - 'a'+INVEN_SPECIAL_ITEM_SLOT_START;
-			break;
+			if (c == 'x' || c == 'X' || c == '\r' || c == '\n')
+			{
+				slot = cur_pos + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
+			else if (c == '0')
+			{
+				break;
+			}
+			else if (c == '8' || c == 'k' || c == 'K')
+			{
+				cur_pos--;
+				if (cur_pos < 0) cur_pos = itemslot_max-1;
+			}
+			else if (c == '2' || c == 'j' || c == 'J')
+			{
+				cur_pos++;
+				if (cur_pos >= itemslot_max) cur_pos = 0;
+			}
+
 		}
+		else
+		{
+			if (c >= 'a' && c <= ('a' + itemslot_max - INVEN_SPECIAL_ITEM_SLOT_START))
+			{
+				slot = c - 'a' + INVEN_SPECIAL_ITEM_SLOT_START;
+				break;
+			}
+		}
+
 	}
 	screen_load();
 	if(!slot) return;

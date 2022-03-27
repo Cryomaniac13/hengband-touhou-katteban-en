@@ -1527,6 +1527,13 @@ static int check_hit2(int power, int level, int ac, int stun)
 #define BLOW_EFFECT_TYPE_HEAL  3
 #define BLOW_EFFECT_TYPE_FOOD	4
 
+//v1.1.94
+#define BLOW_EFFECT_TYPE_DEC_ATK	5
+#define BLOW_EFFECT_TYPE_DEC_DEF	6
+#define BLOW_EFFECT_TYPE_DEC_MAG	7
+#define BLOW_EFFECT_TYPE_DEC_ALL	8
+
+
 
 /* Monster attacks monster */
 /*:::モンスター同士の通常攻撃処理*/
@@ -1583,6 +1590,13 @@ static bool monst_attack_monst(int m_idx, int t_idx)
 
 	/* Total armor */
 	ac = tr_ptr->ac;
+
+
+	//v1.1.94 モンスター防御力低下中はAC25%カット
+	if (MON_DEC_DEF(t_ptr))
+	{
+		ac = MONSTER_DECREASED_AC(ac);
+	}
 
 	//v1.1.41 舞特殊騎乗　AC増加
 	if (p_ptr->pclass == CLASS_MAI && p_ptr->riding == t_idx)
@@ -1643,6 +1657,11 @@ static bool monst_attack_monst(int m_idx, int t_idx)
 		{
 			int chr = p_ptr->stat_ind[A_CHR] + 3;
 			d_dice += MAX(0,d_dice * (chr-5) / 15);
+		}
+		//v1.1.95 モンスター狂戦士化中はダメージ2倍 ただし舞のダンスの効果に累積しない
+		else if (MON_BERSERK(m_ptr))
+		{
+			d_side *= 2;
 		}
 
 		//喋れないモンスターなど特殊処理
@@ -2197,6 +2216,12 @@ act = "%sの耳元で轟音を出した。";
 			/* Roll out the damage */
 			damage = damroll(d_dice, d_side);
 
+			//v1.1.94 モンスター攻撃力低下中はダメージ25%カット
+			if (MON_DEC_ATK(m_ptr))
+			{
+				damage = (damage * 3 + 1) / 4;
+			}
+
 			/* Assume no effect */
 			effect_type = BLOW_EFFECT_TYPE_NONE;
 
@@ -2211,7 +2236,8 @@ act = "%sの耳元で轟音を出した。";
 				break;
 
 			case RBE_SUPERHURT:
-				if ((randint1(rlev*2+250) > (ac+200)) || one_in_(13))
+				//v1.1.94 弱体化中は痛恨が出ない
+				if (((randint1(rlev*2+250) > (ac+200)) || one_in_(13)) && !MON_DEC_ATK(m_ptr))
 				{
 					int tmp_damage = damage - (damage * ((ac < 150) ? ac : 150) / 250);
 					damage = MAX(damage, tmp_damage * 2);
@@ -2242,13 +2268,23 @@ act = "%sの耳元で轟音を出した。";
 			case RBE_EAT_FOOD:
 			case RBE_EAT_LITE:
 			case RBE_BLIND:
+				break;
 			case RBE_LOSE_STR:
+			case RBE_LOSE_DEX:
+				effect_type = BLOW_EFFECT_TYPE_DEC_ATK;
+				break;
+
 			case RBE_LOSE_INT:
 			case RBE_LOSE_WIS:
-			case RBE_LOSE_DEX:
+				effect_type = BLOW_EFFECT_TYPE_DEC_MAG;
+				break;
 			case RBE_LOSE_CON:
 			case RBE_LOSE_CHR:
+				effect_type = BLOW_EFFECT_TYPE_DEC_DEF;
+				break;
+
 			case RBE_LOSE_ALL:
+				effect_type = BLOW_EFFECT_TYPE_DEC_ALL;
 				break;
 
 			case RBE_ACID:
@@ -2341,6 +2377,14 @@ act = "%sの耳元で轟音を出した。";
 
 			if (pt)
 			{
+
+				int effect_power;
+
+				if (r_ptr->flags2 & RF2_POWERFUL)
+					effect_power = r_ptr->level * 3;
+				else
+					effect_power = r_ptr->level * 2;
+
 				/* Do damage if not exploding */
 				if (!explode)
 				{
@@ -2357,8 +2401,23 @@ act = "%sの耳元で轟音を出した。";
 
 				case BLOW_EFFECT_TYPE_SLEEP:
 					project(m_idx, 0, t_ptr->fy, t_ptr->fx,
-						r_ptr->level, GF_OLD_SLEEP, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+						effect_power, GF_OLD_SLEEP, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
 					break;
+
+					//v1.1.94
+				case BLOW_EFFECT_TYPE_DEC_ATK:
+					project(m_idx, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_ATK, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_DEF:
+					project(m_idx, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_DEF, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_MAG:
+					project(m_idx, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_MAG, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_ALL:
+					project(m_idx, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_ALL, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+
 
 				case BLOW_EFFECT_TYPE_HEAL:
 					if ((monster_living(tr_ptr)) && (damage > 2))
@@ -2629,6 +2688,13 @@ bool monplayer_attack_monst(int t_idx)
 
 	/* Total armor */
 	ac = tr_ptr->ac;
+
+
+	//v1.1.94 モンスター防御力低下中はAC25%カット
+	if (MON_DEC_DEF(t_ptr))
+	{
+		ac = MONSTER_DECREASED_AC(ac);
+	}
 
 	/* Extract the effective monster level */
 	rlev = ((r_ptr->level >= 1) ? r_ptr->level : 1);
@@ -3054,13 +3120,23 @@ bool monplayer_attack_monst(int t_idx)
 				}
 				break;
 			case RBE_BLIND:
+				break;
 			case RBE_LOSE_STR:
+			case RBE_LOSE_DEX:
+				effect_type = BLOW_EFFECT_TYPE_DEC_ATK;
+				break;
+
 			case RBE_LOSE_INT:
 			case RBE_LOSE_WIS:
-			case RBE_LOSE_DEX:
+				effect_type = BLOW_EFFECT_TYPE_DEC_MAG;
+				break;
 			case RBE_LOSE_CON:
 			case RBE_LOSE_CHR:
+				effect_type = BLOW_EFFECT_TYPE_DEC_DEF;
+				break;
+
 			case RBE_LOSE_ALL:
+				effect_type = BLOW_EFFECT_TYPE_DEC_ALL;
 				break;
 
 			case RBE_ACID:
@@ -3158,6 +3234,13 @@ bool monplayer_attack_monst(int t_idx)
 			{
 				bool flag_living;
 
+				int effect_power;
+
+				if (r_ptr->flags2 & RF2_POWERFUL)
+					effect_power = r_ptr->level * 3;
+				else
+					effect_power = r_ptr->level * 2;
+
 				flag_living = monster_living(tr_ptr);
 
 				/* Do damage if not exploding */
@@ -3176,6 +3259,20 @@ bool monplayer_attack_monst(int t_idx)
 				case BLOW_EFFECT_TYPE_SLEEP:
 					if (!t_ptr->r_idx) break; //v1.1.49 モンスターを倒したら何もしない
 					project(0, 0, t_ptr->fy, t_ptr->fx,	r_ptr->level, GF_OLD_SLEEP, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+
+					//v1.1.94
+				case BLOW_EFFECT_TYPE_DEC_ATK:
+					project(0, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_ATK, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_DEF:
+					project(0, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_DEF, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_MAG:
+					project(0, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_MAG, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
+					break;
+				case BLOW_EFFECT_TYPE_DEC_ALL:
+					project(0, 0, t_ptr->fy, t_ptr->fx, effect_power, GF_DEC_ALL, PROJECT_KILL | PROJECT_STOP | PROJECT_AIMED, -1);
 					break;
 
 				case BLOW_EFFECT_TYPE_HEAL:
@@ -3372,7 +3469,8 @@ static void process_monster(int m_idx)
 
 	monster_spell_freq = r_ptr->freq_spell;
 
-
+	//v1.1.94 「すでに行動遅延を受けているフラグ」を削除する
+	m_ptr->mflag &= ~(MFLAG_ALREADY_DELAYED);
 
 	//v1.1.48 紫苑がスーパー貧乏神になっているとき、消滅、恐怖、行動妨害判定
 	if (SUPER_SHION)
@@ -3414,43 +3512,40 @@ static void process_monster(int m_idx)
 
 	if(r_ptr->flags1 & RF1_NEVER_MOVE) flag_never_move = TRUE;
 
+
+
 	/*::: -Hack- 小町などの移動抑止特技の特殊処理 効果持続中は該当モンスターをNEVER_MOVE扱いにするが破られることもある*/
-	if((p_ptr->pclass == CLASS_KOMACHI || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_REMY) && p_ptr->magic_num1[0] == m_idx
-		|| (p_ptr->pclass == CLASS_HINA) && p_ptr->magic_num1[2] == m_idx)
+	//v1.1.95 MTIMED2_NO_MOVEの処理に置き換えた。この技をかけた状態でバージョンアップするといきなり効果が切れるが多分そんな人はいないだろう。
+	if(MON_NO_MOVE(m_ptr))
 	{
 		bool smash = FALSE;
-		int power = p_ptr->lev;
+		int power = p_ptr->lev + MON_NO_MOVE(m_ptr) * 2;
+		char m_name[80];
+
+		monster_desc(m_name, m_ptr, 0);
+
 		flag_never_move = TRUE;
 
 		if(r_ptr->flags2 & RF2_GIGANTIC && power < randint1(r_ptr->level*3/2)) smash = TRUE;
 		if(r_ptr->flags2 & RF2_POWERFUL && power < randint1(r_ptr->level)) smash = TRUE;
-		if(r_ptr->flags1 & (RF1_UNIQUE) && (power < randint1(r_ptr->level) || one_in_(10))) smash = TRUE;
+		if(r_ptr->flags1 & (RF1_UNIQUE) && (power < randint1(r_ptr->level) || one_in_(6))) smash = TRUE;
 
 		if (MON_CSLEEP(m_ptr)) smash = FALSE;
 
 		if(smash)
 		{
-			char m_name[80];
-			monster_desc(m_name, m_ptr, 0);
-			if(p_ptr->pclass == CLASS_KOMACHI) msg_format(_("%sは狭間から脱出した！",
-                                                            "%s escapes from the confines!"),m_name);
-			else if(p_ptr->pclass == CLASS_REMY) msg_format(_("%sは鎖から脱出した！",
-                                                                "%s escapes from the chains!"),m_name);
-			else if(p_ptr->pclass == CLASS_HINA) msg_format(_("%sは厄の軛から脱出した！",
-                                                                "%s escapes from the misfortune bonds!"),m_name);
-			else msg_format(_("%sは陣から脱出した！", "%s escapes from the circle!"),m_name);
-			set_tim_general(0,TRUE,0,0);
+			msg_format(_("%sは束縛を振り払った！", "%s breaks free of restraints!"),m_name);
+			set_monster_timed_status_add(MTIMED2_NO_MOVE, m_idx, 0);
+			if (one_in_(2)) flag_never_move = FALSE;
 		}
-		else
+		else if(one_in_(7))
 		{
-			if(p_ptr->pclass == CLASS_HINA)
-			{
-				hina_gain_yaku(-(r_ptr->level/4));
-				if(!p_ptr->magic_num1[0]) set_tim_general(0,TRUE,0,0);
-			}
+			msg_format(_("%sは動けない！", "%s can't move!"), m_name);
+			return;
 
 		}
 	}
+
 	//v1.1.47 ミスティア特技「ヒューマンケージ」による人間フラグモンスターの移動禁止処理
 	if (p_ptr->pclass == CLASS_MYSTIA && music_singing(MUSIC_NEW_MYSTIA_HUMAN_CAGE) && (r_ptr->flags3 & (RF3_HUMAN)))
 	{
@@ -4392,6 +4487,41 @@ msg_format("%^s%s", m_name, monmessage);
 
 	}
 
+	//v1.1.91 抗争系クエストではモンスターは＠より手近な他勢力モンスターを狙うようにしてみる
+	//狐狸戦争クエストでもやることにした。そのままでは物凄い勢いで召喚地獄になるので妖怪狐は召喚を持つモンスターに変身しないようにする。
+	if (((m_ptr->sub_align & SUB_ALIGN_QUEST_MASK) || p_ptr->inside_quest == QUEST_KORI)
+		&& !is_pet(m_ptr) && !(p_ptr->cursed & TRC_AGGRAVATE))
+	{
+		int new_target_m_idx = 0;
+		monster_type *tmp_m_ptr;
+		int tmp_dist = 999, tmp_dist_2;
+
+		//一番近くの敵対モンスターをターゲット
+		for (i = m_max - 1; i >= 1; i--)
+		{
+			if (i == m_idx) continue;
+			tmp_m_ptr = &m_list[i];
+			if (!tmp_m_ptr->r_idx) continue;
+			if (!are_enemies(m_ptr, tmp_m_ptr)) continue;
+
+			if (ABS((int)tmp_m_ptr->fx - (int)m_ptr->fx) > MAX_SIGHT || ABS((int)tmp_m_ptr->fy - (int)m_ptr->fy) > MAX_SIGHT) continue;
+
+			tmp_dist_2 = distance(m_ptr->fy, m_ptr->fx, tmp_m_ptr->fy, tmp_m_ptr->fx);
+
+			if (tmp_dist_2 < tmp_dist)
+			{
+				tmp_dist = tmp_dist_2;
+				new_target_m_idx = i;
+			}
+		}
+		//ただし＠のほうが近い場合何もしない
+		if (new_target_m_idx && m_ptr->cdis > tmp_dist)
+		{
+			set_target(m_ptr, m_list[new_target_m_idx].fy, m_list[new_target_m_idx].fx);
+		}
+
+
+	}
 
 	/* Try to cast spell occasionally */
 	/*:::呪文使用判定 freq_spellは1/2なら50が入っている*/
@@ -4971,7 +5101,8 @@ msg_format("%^s%s", m_name, monmessage);
 			if(inventory[INVEN_RARM].name1 == ART_AMENOHABAKIRI ||inventory[INVEN_LARM].name1 == ART_AMENOHABAKIRI)
 				range += 4;
 
-			if(m_ptr->cdis < range && projectable(m_ptr->fy,m_ptr->fx,py,px))
+			//v1.1.93 <=が<になってて効果範囲が1グリッド少なくlev12～23まで無意味な技になっていた。修正
+			if(m_ptr->cdis <= range && projectable(m_ptr->fy,m_ptr->fx,py,px))
 			{
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("%sは祇園様の怒りに触れた！",
@@ -5918,7 +6049,11 @@ static void mproc_remove(int m_idx, int mproc_type)
 /*
  * Initialize monster process
  */
-/*:::フロアのモンスター全てが持っている一時ステータス情報を初期化　mproc_list[一時ステータス番号][連番]=モンスターインデックス、という形*/
+//フロアのモンスター全てが持っている一時ステータス情報を初期化　
+//mproc_list[一時ステータス番号][連番]にm_listのインデックスを記録する
+//process_monster_mtimed()でモンスターの一時ステータスカウントを一括して減らすためにmproc_list[]が使われているが、
+//m_list[]を普通にループするのに比べて何のメリットがあるのかよくわからない。
+//なぜこんなややこしい仕組みを実装したんだろうか？
 void mproc_init(void)
 {
 	monster_type *m_ptr;
@@ -5943,6 +6078,62 @@ void mproc_init(void)
 	}
 }
 
+//v1.1.94 モンスター用の一時効果発生/終了の追加分
+//m_ptr->mtimed[7]以降が対象
+//一時効果が発生/終了したときTRUEを返す。数値の増減だけならFALSE。
+//「攻撃力が下がった！」などのメッセージはこの中では出さない。
+bool set_monster_timed_status_add(int mtimed_type, int m_idx, int v)
+{
+	monster_type *m_ptr = &m_list[m_idx];
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (mtimed_type <= MTIMED_INVULNER || mtimed_type >= MAX_MTIMED)
+	{
+		msg_format(_("ERROR:set_monster_timed_status_add()に不正なtype値(%d)が渡された",
+                    "ERROR: Incorrect type value (%d) passed to set_monster_timed_status_add()"), mtimed_type);
+		return FALSE;
+	}
+
+	if (cheat_xtra)
+		msg_format("m_idx%d timed2: type(%d) val(%d)",m_idx, mtimed_type, v);
+
+	/* Open */
+	if (v)
+	{
+		if (!m_ptr->mtimed[mtimed_type])
+		{
+			mproc_add(m_idx, mtimed_type);
+			notice = TRUE;
+		}
+	}
+	/* Shut */
+	else
+	{
+		if (m_ptr->mtimed[mtimed_type])
+		{
+			mproc_remove(m_idx, mtimed_type);
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	m_ptr->mtimed[mtimed_type] = v;
+
+	if (!notice) return FALSE;
+
+	if (m_ptr->ml)
+	{
+		/* Update health bar as needed */
+		if (p_ptr->health_who == m_idx) p_ptr->redraw |= (PR_HEALTH);
+		if (p_ptr->riding == m_idx) p_ptr->redraw |= (PR_UHEALTH);
+	}
+
+	return TRUE;
+
+}
 
 /*
  * Set "m_ptr->mtimed[MTIMED_CSLEEP]", notice observable changes
@@ -6259,9 +6450,12 @@ static u32b csleep_noise;
 static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 {
 	monster_type *m_ptr = &m_list[m_idx];
+	monster_race *r_ptr = &r_info[m_ptr->r_idx];
 
-	int rlev = r_info[m_ptr->r_idx].level;
+	int rlev = r_ptr->level;
+	int recover_val = randint1(rlev / 20 + 1);//一部のバステの回復判定値　急回復があると倍
 
+	if (r_info[m_ptr->r_idx].flags2 & RF2_REGENERATE) recover_val *= 2;
 
 	switch (mtimed_idx)
 	{
@@ -6422,7 +6616,9 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 
 	case MTIMED_CONFUSED:
 		/* Reduce the confusion */
-		if (set_monster_confused(m_idx, MON_CONFUSED(m_ptr) - randint1(r_info[m_ptr->r_idx].level / 20 + 1)))
+		//v1.1.95 朦朧と同じ回復判定にした。こころの特技で混乱耐性を貫通できるようになったので。
+		if (set_monster_confused(m_idx, (randint0(10000) <= rlev * rlev) ? 0 : (MON_CONFUSED(m_ptr) - 1)))
+	//	if (set_monster_confused(m_idx, MON_CONFUSED(m_ptr) - recover_val))
 		{
 			/* Message if visible */
 			if (is_seen(m_ptr))
@@ -6444,7 +6640,7 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 
 	case MTIMED_MONFEAR:
 		/* Reduce the fear */
-		if (set_monster_monfear(m_idx, MON_MONFEAR(m_ptr) - randint1(r_info[m_ptr->r_idx].level / 20 + 1)))
+		if (set_monster_monfear(m_idx, MON_MONFEAR(m_ptr) - recover_val))
 		{
 			/* Visual note */
 			if (is_seen(m_ptr))
@@ -6490,6 +6686,85 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 			}
 		}
 		break;
+
+	case MTIMED2_DEC_ATK:
+		if (set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, MON_DEC_ATK(m_ptr) - recover_val))
+		{
+			if (is_seen(m_ptr))
+			{
+				char m_name[80];
+				monster_desc(m_name, m_ptr, 0);
+				msg_format(_("%^sの攻撃力が元に戻ったようだ。",
+                            "The attack power of %^s returns to normal."), m_name);
+			}
+		}
+		break;
+	case MTIMED2_DEC_DEF:
+		if (set_monster_timed_status_add(MTIMED2_DEC_DEF, m_idx, MON_DEC_DEF(m_ptr) - recover_val))
+		{
+			if (is_seen(m_ptr))
+			{
+				char m_name[80];
+				monster_desc(m_name, m_ptr, 0);
+				msg_format(_("%^sの防御力が元に戻ったようだ。",
+                            "The defense power of %^s returns to normal."), m_name);
+			}
+		}
+		break;
+	case MTIMED2_DEC_MAG:
+		if (set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, MON_DEC_MAG(m_ptr) - recover_val))
+		{
+			if (is_seen(m_ptr))
+			{
+				char m_name[80];
+				monster_desc(m_name, m_ptr, 0);
+				msg_format(_("%^sの魔法力が元に戻ったようだ。",
+                            "The magic power of %^s returns to normal."), m_name);
+			}
+		}
+		break;
+
+	case MTIMED2_DRUNK:
+		if (set_monster_timed_status_add(MTIMED2_DRUNK, m_idx, MON_DRUNK(m_ptr) - recover_val))
+		{
+			if (is_seen(m_ptr))
+			{
+				char m_name[80];
+				monster_desc(m_name, m_ptr, 0);
+				msg_format(_("%^sは酔いを覚ましたようだ。",
+                            "%^s sobers up."), m_name);
+			}
+		}
+		break;
+
+	//移動禁止　ここの他にもモンスターの行動のたびに解除判定が発生する
+	case MTIMED2_NO_MOVE:
+	if (set_monster_timed_status_add(MTIMED2_NO_MOVE, m_idx, MON_NO_MOVE(m_ptr) - 1))
+	{
+		if (is_seen(m_ptr))
+		{
+			char m_name[80];
+			monster_desc(m_name, m_ptr, 0);
+			msg_format(_("%^sは束縛を振り払った！", "%^s breaks free of restraints!"), m_name);
+		}
+	}
+	break;
+
+	case MTIMED2_BERSERK:
+		if (set_monster_timed_status_add(MTIMED2_BERSERK, m_idx, MON_BERSERK(m_ptr) - recover_val))
+		{
+			if (is_seen(m_ptr))
+			{
+				char m_name[80];
+				monster_desc(m_name, m_ptr, 0);
+				msg_format(_("%^sは激情が収まったようだ。", "%^s is no longer furious."), m_name);
+			}
+		}
+		break;
+
+
+
+
 	}
 }
 
@@ -6548,6 +6823,9 @@ void dispel_monster_status(int m_idx)
 		if (m_ptr->ml) msg_format("%^s is no longer slow.", m_name);
 #endif
 	}
+
+	//
+
 }
 
 /*:::敵による時間停止処理*/

@@ -321,7 +321,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 	{
 		msg_format(_("ERROR:use_ability_card()に不正なカードidx(%d)を持ったアビリティカードが渡された",
                     "ERROR: Ability card with incorrect idx (%d) passed to use_ability_card()"), card_idx);
-		return FALSE;
+		return NULL;
 	}
 
 	card_num = count_ability_card(card_idx);
@@ -404,7 +404,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		if (only_info) return format(_(" このカードを発動すると%dダメージの破邪属性のボールを放つ。",
                                         " Activating this card fires a ball of holy energy (damage: %d)."), dam);
 
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 
 		fire_ball(GF_HOLY_FIRE, dir, dam, 1);
 
@@ -417,7 +417,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		if (only_info) return format(_(" このカードを発動すると%dダメージの破邪属性のボルトを放つ。",
                                         " Activating this card fires a bolt of holy energy (damage: %d)."), dam);
 
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 		fire_bolt(GF_HOLY_FIRE, dir, dam);
 
 	}
@@ -430,7 +430,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		if (only_info) return format(_(" このカードを発動すると%dダメージの閃光属性のビームを放つ。",
                                         " Activating this card fires a beam of light (damage: %d)."), dam);
 
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 		fire_beam(GF_LITE, dir, dam);
 
 	}
@@ -443,7 +443,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		if (only_info) return format(_(" このカードを発動すると%dダメージのロケットを放つ。",
                                         " Activating this card fires a rocket (damage: %d)."), dam);
 
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 		fire_rocket(GF_ROCKET, dir, dam, 2);
 
 	}
@@ -490,7 +490,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		if (only_info) return format(_(" このカードを発動すると%dダメージの破片属性ボルトを放つ。このボルトが壁に当たるとそこから一度だけランダムな敵のほうへ飛ぶ。",
                                         " Activating this card fires a bolt of shards (damage: %d). If this bolt hits a wall, it ricochets towards a random enemy (but only once)."), dam);
 
-		if (!get_aim_dir(&dir)) return FALSE;
+		if (!get_aim_dir(&dir)) return NULL;
 
 		project_hook(GF_SHARDS, dir, dam, flg);
 
@@ -940,10 +940,10 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 	{
 		int base = 50 + plev + chr_adj * 5;
 		int time = 15 + randint1(15);
-		if (only_info) return format(_("このカードを発動すると視界内すべてに対し%dダメージの閃光属性攻撃を行う。",
-                                        "Activating this card hits everything in sight with light (damage: %d)."), base);
+		if (only_info) return format(_("このカードを発動すると視界内すべてに対し%dダメージの閃光属性攻撃を行う。さらに一時的に対邪悪結界と聖なるオーラを得る。",
+                                        "Activating this card hits everything in sight with light (damage: %d), and grants temporary protection from evil and holy aura."), base);
 
-		project_hack2(GF_HOLY_FIRE, 0, 0, base);
+		project_hack2(GF_LITE, 0, 0, base);
 		set_protevil(time, FALSE);
 		set_tim_sh_holy(time, FALSE);
 
@@ -1094,7 +1094,8 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 
 
 //アビリティカードを使用する。カードはすでに選択されている。成功判定、チャージ減少処理を行い実行部分に渡す。
-//行動順消費しないときのみFALSEを返す。ただしターゲットキャンセルとかはロッド類と同様行動力消費する
+//行動順消費しないときのみFALSEを返す。
+//v1.1.94 発動成功後にターゲットキャンセルした場合行動力を消費しないものとする
 bool use_ability_card(object_type *o_ptr)
 {
 	ability_card_type *ac_ptr;
@@ -1184,7 +1185,8 @@ bool use_ability_card(object_type *o_ptr)
 	//(未鑑定ロッドの判明に相当する処理はない。カードは生成時に常に*鑑定*されているため)
 
 
-	//msg_format("あなたは『%s』のアビリティカードを発動した！", ac_ptr->card_name);←メッセージが冗長なので消す
+	//msg_format("あなたは『%s』のアビリティカードを発動した！", ac_ptr->card_name);
+	//↑メッセージが冗長なので消す
 
 	//実行部分。ターゲットキャンセルなどしたらNULLが返り行動消費しない
 	if (!use_ability_card_aux(o_ptr, FALSE)) return FALSE;
@@ -1414,6 +1416,14 @@ bool	buy_abilitycard_from_mon(void)
 	//カードを持っているとき、価格を決定して確認を取る
 	//価格は典から買う2/3
 	price = calc_ability_card_price(i) * 2 / 3;
+
+	//v1.1.93 ミケが特技でフロアに呼んだ客は価格を吹っかけてくる ランダムに二倍から三倍
+	if (p_ptr->pclass == CLASS_MIKE && m_ptr->mflag & MFLAG_SPECIAL)
+	{
+		if (cheat_xtra) msg_print(_("(価格上昇)", "(price raised)"));
+		price = price * (200 + m_ptr->mon_random_number % 100) / 100;
+
+	}
 
 	if (!get_check_strict(format(_("「%s」のカードを$%dで売ってくれるようだ。買いますか？",
                                     "'%s' is available for $%d. Purchase it?"), ability_card_list[i].card_name, price), CHECK_DEFAULT_Y))

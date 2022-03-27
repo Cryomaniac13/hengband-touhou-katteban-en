@@ -213,6 +213,8 @@ static bool item_tester_hook_mochikae(object_type *o_ptr)
 }
 
 
+#if 0
+v1.1.93 紛らわしいし似た役割の関数がすでにあるので削除
 static bool item_tester_hook_melee_weapon(object_type *o_ptr)
 {
 	/* Check for a usable slot */
@@ -222,6 +224,8 @@ static bool item_tester_hook_melee_weapon(object_type *o_ptr)
 	/* Assume not wearable */
 	return (FALSE);
 }
+#endif
+
 
 //数字が少ないほど優先してINVEN_RARMに入る。クロスボウと銃を「通常右手に持つが近接武器と一緒に持ったら左手になる」なんて変な仕様にしたせいで判定が面倒になって今になって作った
 int check_priority_inven_rarm(object_type *o_ptr)
@@ -407,7 +411,12 @@ void do_cmd_wield(bool mochikae)
 			/* Restrict the choices */
 			/*:::選択一覧に(毒針以外の)武器しか出さないためのhook*/
 			/*:::・・なんだが、毒針二刀流にしててもちゃんと両方候補に出る。どういうことか。*/
-			item_tester_hook = item_tester_hook_melee_weapon;
+			//↑cmd3.cとbldg.cに同名の関数があり、ここのは毒針も選択対象
+
+			//v1.1.93 ここ独自のmelee_weapon判定関数を削除して普通のに変えた。TV_MAGICWEAPONが新たに対象になる
+			//item_tester_hook = item_tester_hook_melee_weapon;
+			item_tester_hook = object_is_melee_weapon;
+
 			item_tester_no_ryoute = TRUE;
 
 			/* Choose a weapon from the equipment only */
@@ -847,6 +856,9 @@ sprintf(dummy, "%sを装備するとニンジャになります。よろしいですか？", o_name);
 	//九十九姉妹演奏中断
 	stop_tsukumo_music();
 
+	//v1.1.95 衣玖特技中断
+	if (p_ptr->pclass == CLASS_IKU && p_ptr->tim_general[0]) set_tim_general(0, TRUE, 0, 0);
+
 	if (need_switch_wielding && !object_is_cursed(&inventory[need_switch_wielding]))
 	{
 		object_type *slot_o_ptr = &inventory[slot];
@@ -1139,9 +1151,11 @@ void do_cmd_wield_3_fairies(void)
 		if (buki_motteruka(INVEN_RARM) && buki_motteruka(INVEN_LARM))
 		{
 			/* Restrict the choices */
-			/*:::選択一覧に(毒針以外の)武器しか出さないためのhook*/
-			/*:::・・なんだが、毒針二刀流にしててもちゃんと両方候補に出る。どういうことか。*/
-			item_tester_hook = item_tester_hook_melee_weapon;
+
+			//v1.1.93 ここ独自のmelee_weapon判定関数を削除して普通のに変えた。TV_MAGICWEAPONが新たに対象になる
+			//item_tester_hook = item_tester_hook_melee_weapon;
+			item_tester_hook = object_is_melee_weapon;
+
 			item_tester_no_ryoute = TRUE;
 			q = _("どちらの武器と取り替えますか?", "Replace which weapon? ");
 			s = _("おっと。", "Oops.");

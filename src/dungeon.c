@@ -1866,7 +1866,7 @@ static object_type *choose_cursed_obj_name(u32b flag)
 		else if ((flag == TRC_ADD_L_CURSE) || (flag == TRC_ADD_H_CURSE))
 		{
 			u32b cf = (flag == TRC_ADD_L_CURSE) ? TR_ADD_L_CURSE : TR_ADD_H_CURSE;
-			u32b flgs[4];
+			u32b flgs[TR_FLAG_SIZE];
 			object_flags(o_ptr, flgs);
 			if (have_flag(flgs, cf))
 			{
@@ -2948,6 +2948,13 @@ static void process_world_aux_timeout(void)
 	{
 		(void)set_nennbaku(p_ptr->nennbaku - 1, TRUE);
 	}
+	//v1.1.93 一時反感
+	if (p_ptr->tim_aggravation)
+	{
+		(void)set_tim_aggravation(p_ptr->tim_aggravation - 1, TRUE);
+	}
+
+
 
 	/* Multi-shadow */
 	if (p_ptr->multishadow)
@@ -6189,7 +6196,7 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		int i;
 
 		/* Hack -- Process the counters of monsters if needed */
-		/*:::MAX_MTIMED=7*/
+		/*:::MAX_MTIMED=16*/
 		for (i = 0; i < MAX_MTIMED; i++)
 		{
 			if (mproc_max[i] > 0) process_monsters_mtimed(i);
@@ -6216,6 +6223,19 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 	{
 		if(turn > A_DAY * RAN_LIMIT && !(p_ptr->inside_battle)) take_hit(DAMAGE_LOSELIFE,9999,_("主からの再教育", "re-education from your master"),0);
 	}
+	//v1.1.92 女苑(専用性格)のツケの取り立て
+	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && p_ptr->magic_num1[4] && !CHECK_JYOON_BUY_ON_CREDIT)
+	{
+		msg_print(_("ついに店主たちが痺れを切らした！", "The shopkeepers have ran out of patience!"));
+		msg_print(NULL);
+		p_ptr->au -= p_ptr->magic_num1[4];
+		p_ptr->magic_num1[4] = 0;
+		p_ptr->redraw |= PR_GOLD;
+		redraw_stuff();
+		msg_print(_("ツケを取り立てられてしまった...", "Your bill was collected..."));
+
+	}
+
 	/* Date changes */
 	/*:::日記記入と本日の賞金首変更　日付はどこで変わるのか？*/
 	///system
@@ -7916,6 +7936,9 @@ static void process_upkeep_with_speed(void)
 	//v1.1.48 追加
 	if (p_ptr->wild_mode) return;
 
+	//v1.1.92 追加
+	if (p_ptr->inside_battle) return;
+
 	while (p_ptr->enchant_energy_need <= 0)
 	{
 		///mod140329 レーダーセンスの処理をここに入れてみる
@@ -7939,6 +7962,7 @@ static void process_upkeep_with_speed(void)
 			murasa_detect_water = FALSE;
 		}
 
+		//ご先祖様が見ているぞ
 		if(p_ptr->pclass == CLASS_KOISHI && !load && p_ptr->magic_num1[0] && one_in_(4))
 		{
 			int dam = p_ptr->lev + 30 + adj_general[p_ptr->stat_ind[A_CHR]] * 2;
@@ -7987,6 +8011,60 @@ static void process_upkeep_with_speed(void)
 
 		}
 
+
+		//v1.1.92 女苑専用性格　ダメージを食らった紫苑が油を撒く
+		//食らったダメージはmagic_num1[6]に記録されている
+		if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && !p_ptr->inside_battle)
+		{
+			int plev = p_ptr->lev;
+			//姉がキレたあと疲労しているとき
+			if (p_ptr->magic_num1[6] < 0)
+			{
+				p_ptr->magic_num1[6] += 1;
+			}
+			//姉がキレたら油を大量にばらまいた後疲労する
+			else if (p_ptr->magic_num1[6] >= 30000)
+			{
+				int i;
+				int dam = plev * 4;
+				int rad = plev / 12 + 1;
+				msg_print(_("姉がキレた！", "Your sister loses her temper!"));
+				disturb(0, 0);
+
+				for (i = 1; i<10; i++)
+				{
+					int x, y;
+					scatter(&y, &x, py, px, 4, 0);
+
+					//石油地形生成と水攻撃(見えない)のランダム発動
+					project(0, rad, y, x, dam, GF_DIG_OIL, PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID, -1);
+					project(0, rad, y, x, dam, GF_WATER, PROJECT_JUMP | PROJECT_KILL | PROJECT_HIDE, -1);
+				}
+				//しばらく値をマイナスにする。これが0以上になるまで攻撃を肩代わりしてくれない(take_hit()参照)
+				p_ptr->magic_num1[6] = -100 - randint1(100);
+
+			}
+			//それ以外のとき、確率で石油を撒いて少しカウントを減らす
+			else if (p_ptr->magic_num1[6]>0)
+			{
+				int x, y;
+				int rad = plev / 20;
+
+				//ここもう少し判定調整？ダメージが貯まっていればいるほど発動しやすく、あまり毎ターン発動しないように
+				if (randint1(SHION_OIL_BOMB_LIMIT) < p_ptr->magic_num1[6] * 5)
+				{
+					scatter(&y, &x, py, px, 1, 0);
+					msg_print(_("姉の体から石油が滴り落ちた。", "Oil pours out of your sister's body."));
+					project(0, rad, y, x, p_ptr->lev * 2, GF_DIG_OIL, PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID, -1);
+
+					p_ptr->magic_num1[6] -= 50;
+					if (p_ptr->magic_num1[6] < 0) p_ptr->magic_num1[6] = 0;
+
+				}
+
+			}
+
+		}
 
 		/* Handle the player song */
 		/*:::継続する歌のMP計算や効果発生など*/
@@ -8430,9 +8508,20 @@ msg_print("中断しました。");
 	{
 		p_ptr->window |= PW_PLAYER;
 		p_ptr->sutemi = FALSE;
-		p_ptr->counter = FALSE;
 		now_damaged = FALSE;
 
+		//v1.1.95 カウンター状態の解除　衣玖「羽衣は時の如く」使用中は解除されない
+		//p_ptr->counterはセーブ/ロードされないのでここで弥縫的にTRUEにし直す
+		if (p_ptr->pclass == CLASS_IKU && p_ptr->tim_general[0] && PLAYER_CAN_USE_ARTS)
+		{
+			p_ptr->counter = TRUE;
+			p_ptr->redraw |= PR_STATUS;
+		}
+		else
+		{
+			p_ptr->counter = FALSE;
+			p_ptr->redraw |= PR_STATUS;
+		}
 
 		/* Handle "p_ptr->notice" */
 		notice_stuff();
@@ -9402,6 +9491,7 @@ static void dungeon(bool load_game)
 
 		//ヘカーティア特殊処理
 		for(i=0;i<3;i++) hecatia_hp[i] = 5600;
+
 		//Exモード用建物内カウントをリセット
 		for(i=0;i<EX_BUILDINGS_PARAM_MAX;i++) ex_buildings_param[i] = 0;
 
@@ -9423,7 +9513,6 @@ static void dungeon(bool load_game)
 			make_ability_card_store_list();
 		}
 
-
 		//v1.1.13 公転周期の罠の解除
 		if(p_ptr->special_flags & SPF_ORBITAL_TRAP)
 		{
@@ -9431,11 +9520,14 @@ static void dungeon(bool load_game)
                         "The orbital trap is no longer effective."));
 			p_ptr->special_flags &= ~(SPF_ORBITAL_TRAP);
 		}
-		//v1.1.35 ネムノ
+		//v1.1.35 ネムノ縄張りクリア
 		if(p_ptr->pclass == CLASS_NEMUNO)
 		{
 			erase_nemuno_sanctuary(FALSE,FALSE);
 		}
+
+		//v1.1.93 ミケの「このフロアですでに客を呼んだ」フラグをクリア
+		if (p_ptr->pclass == CLASS_MIKE) p_ptr->magic_num2[100] = 0;
 
 		///mod140423
 		if(p_ptr->silent_floor)
@@ -9450,7 +9542,11 @@ static void dungeon(bool load_game)
 				set_tim_lucky(0,TRUE);
 		}
 		///mod150304 束縛系特技をクリア
-		if(p_ptr->pclass == CLASS_KOMACHI || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_REMY || p_ptr->pclass == CLASS_MAMIZOU)
+		//v1.1.95 移動禁止系特技をMTIMED2_NO_MOVEに統合したので処理削除
+//		if(p_ptr->pclass == CLASS_KOMACHI || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_REMY || p_ptr->pclass == CLASS_MAMIZOU)
+
+		//マミゾウが変身させているモンスターの解除
+		if(p_ptr->pclass == CLASS_MAMIZOU)
 		{
 			if(p_ptr->magic_num1[0]) set_tim_general(0,TRUE,0,0);
 		}
@@ -9463,6 +9559,12 @@ static void dungeon(bool load_game)
 		if(p_ptr->pclass == CLASS_SATORI)
 		{
 			make_magic_list_satori(TRUE);
+		}
+		//v1.1.95 パルスィの藁人形カウントをクリア
+		if (p_ptr->pclass == CLASS_PARSEE)
+		{
+			p_ptr->magic_num1[4] = 0;
+			p_ptr->magic_num2[4] = 0;
 		}
 
 		//v1.1.77 お燐(専用性格)の追跡対象モンスターをクリア
@@ -10455,14 +10557,16 @@ prt("お待ち下さい...", 0, 0);
 	{
 		for (i = 1; i < max_r_idx; i++)
 		{
-			if(!(i == MON_OBERON || i== MON_SERPENT || i == MON_MORGOTH || i == MON_AZATHOTH || i == MON_F_SCARLET
-			|| i == MON_GOLFIMBUL || i == MON_HECATIA1 || i == MON_HECATIA2 || i == MON_HECATIA3 || i == MON_MIKO || i == MON_ERIC))
+			//v1.1.92 菫子(闘技場専用)も出さないよう追加
+
+			if(i == MON_OBERON || i== MON_SERPENT || i == MON_MORGOTH || i == MON_AZATHOTH || i == MON_FLAN || i == MON_SUMIREKO_2
+			|| i == MON_GOLFIMBUL || i == MON_HECATIA1 || i == MON_HECATIA2 || i == MON_HECATIA3 || i == MON_MIKO || i == MON_ERIC)
 			{
-				r_info[i].flags1 &= ~(RF1_QUESTOR);
+				r_info[i].flags1 |= (RF1_QUESTOR);
 			}
 			else
 			{
-				r_info[i].flags1 |= (RF1_QUESTOR);
+				r_info[i].flags1 &= ~(RF1_QUESTOR);
 			}
 		}
 	}

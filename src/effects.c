@@ -289,6 +289,8 @@ void reset_tim_flags(void)
 	//v1.1.13
 	p_ptr->special_flags = 0L;
 
+	p_ptr->tim_aggravation = 0L;
+
 	while(p_ptr->energy_need < 0) p_ptr->energy_need += ENERGY_NEED();
 	world_player = FALSE;
 	///race clalss 一時効果解除でも一部の職や種族は一部効果が継続する
@@ -305,6 +307,9 @@ void reset_tim_flags(void)
 
 	if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_MOMOYO) && (p_ptr->lev > 19)) p_ptr->oppose_pois = 1;
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
+
 
 	if ( p_ptr->pseikaku == SEIKAKU_BERSERK) p_ptr->shero = 1;
 
@@ -407,6 +412,9 @@ void dispel_player(void)
 
 	//v1.1.69
 	set_nennbaku(0, TRUE);
+	//v1.1.93
+	(void)set_tim_aggravation(0, TRUE);
+
 
 	//v1.1.17 純狐一時効果も
 	//v1.1.52 菫子新性格追加
@@ -429,8 +437,16 @@ void dispel_player(void)
 		p_ptr->special_defense &= ~(SD_HELLFIRE_BARRIER);
 	}
 
+	//v1.1.94 硝子の盾
+	if (p_ptr->special_defense & SD_GLASS_SHIELD)
+	{
+		msg_print(_("硝子の盾が消えた。", "Your glass shield vanishes."));
+		p_ptr->special_defense &= ~(SD_GLASS_SHIELD);
+
+	}
+
 	//うどんげ「イビルアンジュレーション」消去
-	if (p_ptr->special_defense & CHECK_EVIL_UNDULATION_MASK)
+	if (p_ptr->special_defense & EVIL_UNDULATION_MASK)
 	{
 		evil_undulation(FALSE, FALSE);
 	}
@@ -1922,6 +1938,68 @@ bool set_tim_superstealth(int v, bool do_dec, int stealth_type)
 	/* Result */
 	return (TRUE);
 }
+
+
+
+//v1.1.93 一時反感処理
+bool set_tim_aggravation(int v, bool do_dec)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+	/* Open */
+	if (v)
+	{
+		if (p_ptr->tim_aggravation && !do_dec)
+		{
+			if (p_ptr->tim_aggravation > v) return FALSE;
+		}
+		else if (!p_ptr->tim_aggravation)
+		{
+			msg_print(_("急に嫌われ者になった気がする...", "You suddenly feel like everyone hates you..."));
+
+			notice = TRUE;
+		}
+	}
+
+	/* Shut */
+	else
+	{
+		if (p_ptr->tim_aggravation)
+		{
+			msg_print(_("嫌われている感じがなくなった。", "You no longer feel hated."));
+
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	p_ptr->tim_aggravation = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+
+	/* Disturb */
+	if (disturb_state) disturb(0, 0);
+
+	/* Recalculate bonuses */
+	p_ptr->update |= (PU_BONUS);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
+
+
 
 
 /*
@@ -4405,6 +4483,7 @@ bool set_oppose_fire(int v, bool do_dec)
 	else if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39)) v=1;
 	else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29)) v = 1;
 	else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29)) v = 1;
+	else if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29)) v = 1;
 
 	if ( (p_ptr->mimic_form == MIMIC_DEMON)) v = 1;
 	//if ((prace_is_(RACE_DEMON) && (p_ptr->lev > 44)) || (p_ptr->mimic_form == MIMIC_DEMON)) v = 1;
@@ -6676,6 +6755,7 @@ msg_format("体内の構成が変化した！");
 /*:::＠のHPを減少させ、マイナスになったら死亡処理*/
 /*:::距離、耐性、弱点によるダメージ増減は既に済んでいる*/
 /*:::返り値は目には目などの魔法や落馬処理に使われるらしい*/
+//このcptr hit_fromはformat()の結果のアドレスをそのまま渡すとtake_hit()の処理中にformat()の中身が変わって最悪ゲームがクラッシュするそうな。知らなかった。
 int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 {
 	int old_chp = p_ptr->chp;
@@ -6775,24 +6855,61 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 		/*:::分身*/
 		if (CHECK_MULTISHADOW())
 		{
-			if (damage_type == DAMAGE_FORCE)
+			if (p_ptr->multishadow)
 			{
+                if (damage_type == DAMAGE_FORCE)
+                {
 #ifdef JP
-				msg_print("幻影もろとも体が切り裂かれた！");
+                    msg_print("幻影もろとも体が切り裂かれた！");
 #else
-				msg_print("The attack hits Shadow together with you!");
+                    msg_print("The attack hits Shadow together with you!");
 #endif
+                }
+                else if (damage_type == DAMAGE_ATTACK)
+                {
+#ifdef JP
+                    msg_print("攻撃は幻影に命中し、あなたには届かなかった。");
+#else
+                    msg_print("The attack hits Shadow, you are unharmed!");
+#endif
+                    return 0;
+                }
 			}
-			else if (damage_type == DAMAGE_ATTACK)
+			//v1.1.92 女苑専用性格 確率で攻撃が紫苑に当たってダメージ回避 multishadowの判定式に寄生
+			//受けたダメージをmagic_num1[6]に記録し、process_upkeep_with_speed()で油を撒く処理
+			//時々姉がキレる判定が行われ、magic_num1[6]に30000が格納されて大量に油を撒く。そのあと一時的に値がマイナスになって攻撃からかばってくれなくなる
+			else if(is_special_seikaku(SEIKAKU_SPECIAL_JYOON))
 			{
-#ifdef JP
-				msg_print("攻撃は幻影に命中し、あなたには届かなかった。");
-#else
-				msg_print("The attack hits Shadow, you are unharmed!");
-#endif
-				return 0;
+				if (damage_type == DAMAGE_FORCE)
+				{
+					msg_print(_("姉もろとも体が切り裂かれた！",
+                                "Both your and your sister's bodies get shredded by the attack!"));
+				}
+				else if(damage_type == DAMAGE_ATTACK && p_ptr->magic_num1[6] >= 0 )
+				{
+					msg_print(_("攻撃は姉に命中し、あなたには届かなかった。",
+                                "The attack hits your sister without reaching you."));
+					p_ptr->magic_num1[6] += damage;
+
+					//時々姉がキレる判定
+					if (randint1(SHION_OIL_BOMB_LIMIT) < p_ptr->magic_num1[6]) p_ptr->magic_num1[6] = 30000;
+					return 0;
+
+				}
+
 			}
+			else
+			{
+
+				msg_print(_("ERROR:想定外の状況でCHECK_MULTISHADOW()が通っている",
+                            "ERROR: CHECK_MULTISHADOW() passed in an unexpected state"));
+			}
+
 		}
+
+
+
+
 		/*:::幽体化*/
 		if (p_ptr->wraith_form)
 		{
@@ -8572,13 +8689,14 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 
 	if (p_ptr->is_dead) return FALSE;
 
-	/*:::小町特殊処理　無間の狭間に囚われたモンスターが死んだら効果が消える*/
-	///mod150201 霊夢も同じようにする
-	//レミリアも
-	if(p_ptr->pclass == CLASS_KOMACHI && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
-	if(p_ptr->pclass == CLASS_REIMU && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
-	if(p_ptr->pclass == CLASS_REMY && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
-	if(p_ptr->pclass == CLASS_HINA && ind == 0 && !m_list[p_ptr->magic_num1[2]].r_idx) v=0;
+	/*:::小町,霊夢,レミリア,雛特殊処理　無間の狭間に囚われたモンスターが死んだら効果が消える*/
+	//v1.1.95 移動禁止処理をMTIMED2_NO_MOVEに統合したので処理削除
+//	if(p_ptr->pclass == CLASS_KOMACHI && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
+//	if(p_ptr->pclass == CLASS_REIMU && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
+//	if(p_ptr->pclass == CLASS_REMY && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
+//	if(p_ptr->pclass == CLASS_HINA && ind == 0 && !m_list[p_ptr->magic_num1[2]].r_idx) v=0;
+
+	//マミゾウが変身させているモンスター　倒したら効果が消える
 	if(p_ptr->pclass == CLASS_MAMIZOU && ind == 0 && !m_list[p_ptr->magic_num1[0]].r_idx) v=0;
 
 
@@ -8591,11 +8709,11 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 		}
 		else if (!p_ptr->tim_general[ind])
 		{
-			if(p_ptr->pclass == CLASS_KOMACHI && ind == 0) ;
-			else if(p_ptr->pclass == CLASS_HINA && ind == 0) ;
-			else if((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES)) ;
-			else if(p_ptr->pclass == CLASS_REIMU && ind == 0) ;
-			else if(p_ptr->pclass == CLASS_REMY && ind == 0) ;
+			if((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES)) ;
+			//if(p_ptr->pclass == CLASS_KOMACHI && ind == 0) ;
+			//else if(p_ptr->pclass == CLASS_HINA && ind == 0) ;
+			//else if(p_ptr->pclass == CLASS_REIMU && ind == 0) ;
+			//else if(p_ptr->pclass == CLASS_REMY && ind == 0) ;
 			else if(p_ptr->pclass == CLASS_MAMIZOU && ind == 0) ;
 			else if(p_ptr->pclass == CLASS_MAID && ind == 0) ;
 			else if(p_ptr->pclass == CLASS_MARISA && ind == 0) ;
@@ -8637,6 +8755,10 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #else
                 msg_format("You unfold a barrier.");
 #endif
+			else if (p_ptr->pclass == CLASS_IKU && ind == 0)
+				msg_format(_("あなたは敵の攻撃に対して身構えた。", "You prepare for enemy attacks."));
+			else if (p_ptr->pclass == CLASS_KOKORO && ind == 0)
+				msg_format(_("恐ろしい形相の面があなたの周囲に浮遊した。", "Terrifying masks start floating around you."));
 			else if(p_ptr->pclass == CLASS_YUKARI)
 			{
 				; //メッセージなし
@@ -8785,8 +8907,15 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 	{
 		if (p_ptr->tim_general[ind])
 		{
-			/*:::小町特殊処理*/
-			if(p_ptr->pclass == CLASS_KOMACHI && ind == 0)
+			if (USE_NAMELESS_ARTS)
+			{
+				//v1.1.56
+				msg_print(msg_tim_nameless_arts(0, ind, FALSE));
+
+				p_ptr->update |= PU_TORCH; //能力「発光」用
+			}
+			/*
+			else if(p_ptr->pclass == CLASS_KOMACHI && ind == 0)
 			{
 #ifdef JP
 				msg_format("狭間が消えた。");
@@ -8795,7 +8924,6 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #endif
 				p_ptr->magic_num1[0] = 0;
 			}
-			/*:::雛特殊処理*/
 			else if(p_ptr->pclass == CLASS_HINA && ind == 0)
 			{
 #ifdef JP
@@ -8814,13 +8942,16 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #endif
 				p_ptr->magic_num1[0] = 0;
 			}
-			else if(USE_NAMELESS_ARTS)
+			else if(p_ptr->pclass == CLASS_REMY && ind == 0)
 			{
-				//v1.1.56
-				msg_print(msg_tim_nameless_arts(0, ind, FALSE));
-
-				p_ptr->update |= PU_TORCH; //能力「発光」用
+#ifdef JP
+				msg_format("鎖が消えた。");
+#else
+                msg_format("Your chains disappear.");
+#endif
+				p_ptr->magic_num1[0] = 0;
 			}
+			*/
 			else if(p_ptr->pclass == CLASS_RUMIA && ind == 0)
 			{
 #ifdef JP
@@ -8860,15 +8991,6 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #else
                 msg_format("Your magic absorber is no longer in effect.");
 #endif
-			}
-			else if(p_ptr->pclass == CLASS_REMY && ind == 0)
-			{
-#ifdef JP
-				msg_format("鎖が消えた。");
-#else
-                msg_format("Your chains disappear.");
-#endif
-				p_ptr->magic_num1[0] = 0;
 			}
 			else if(p_ptr->pclass == CLASS_MAMIZOU && ind == 0)
 			{
@@ -8925,12 +9047,16 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #else
                 msg_format("Your augmentation spell has ran out!");
 #endif
+			else if (p_ptr->pclass == CLASS_KOKORO && ind == 0)
+				msg_format(_("恐ろしい形相の面は消えた。", "The terrifying masks around you vanish."));
 			else if (p_ptr->pclass == CLASS_OKINA)
 #ifdef JP
 				msg_print("あなたは普段の動きに戻った。");
 #else
                 msg_print("You are moving normally once again.");
 #endif
+			else if (p_ptr->pclass == CLASS_IKU && ind == 0)
+				msg_format(_("あなたは構えを解いた。", "You stop assuming your posture."));
 			else if(p_ptr->pclass == CLASS_SUWAKO && ind == 0)
 			{
 #ifdef JP
@@ -9322,6 +9448,8 @@ int is_hurt_holy(){
 	else if(p_ptr->pclass == CLASS_YUYUKO) mod = 50;
 	else if(p_ptr->pclass == CLASS_REIMU && p_ptr->lev > 29 && osaisen_rank() > 4) mod = -100;
 	else if(p_ptr->pclass == CLASS_EIKI) mod = -100;
+	else if (p_ptr->pclass == CLASS_MIKE) mod = 0;
+
 
 	//v1.1.37 一部破邪に弱い種族に変身中は種族的な例外判定を上書きすることにした
 	if(p_ptr->mimic_form == MIMIC_DEMON || p_ptr->mimic_form == MIMIC_DEMON_LORD || p_ptr->mimic_form == MIMIC_VAMPIRE ) mod = 66;
@@ -9714,11 +9842,11 @@ bool evil_undulation(bool activate, bool check)
 #else
         msg_print("Evil undulations wrap around you.");
 #endif
-		p_ptr->special_defense |= CHECK_EVIL_UNDULATION_MASK;
+		p_ptr->special_defense |= EVIL_UNDULATION_MASK;
 	}
 	else if (check)
 	{
-		if (p_ptr->special_defense & CHECK_EVIL_UNDULATION_MASK)
+		if (p_ptr->special_defense & EVIL_UNDULATION_MASK)
 		{
 #ifdef JP
 			msg_print("障壁波動があなたを守った！");
@@ -9737,7 +9865,7 @@ bool evil_undulation(bool activate, bool check)
 #else
                 msg_print("Your barrier fades away.");
 #endif
-				p_ptr->special_defense &= ~(CHECK_EVIL_UNDULATION_MASK);
+				p_ptr->special_defense &= ~(EVIL_UNDULATION_MASK);
 			}
 
 		}
@@ -9753,7 +9881,7 @@ bool evil_undulation(bool activate, bool check)
 #else
         msg_print("Your barrier fades away.");
 #endif
-		p_ptr->special_defense &= ~(CHECK_EVIL_UNDULATION_MASK);
+		p_ptr->special_defense &= ~(EVIL_UNDULATION_MASK);
 
 	}
 	p_ptr->redraw |= PR_STATUS;

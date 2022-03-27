@@ -631,115 +631,116 @@ A:80/2
 P:0:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
-##### 財宝 TVAL:16 #####
-#ここのIDはdefine.hと整合するように
+##### 財宝 TVAL:51 #####
+#v1.1.94で魔法領域の拡張性確保のためtval16→51に変更した
+#ここのIDX(53)はdefine.hのOBJ_GOLD_LISTと整合するように
 
 N:53:銅塊
 E:copper
 G:$:u
-I:16:1:0
+I:51:1:0
 W:1:0:0:3
 
 N:54:銅塊
 E:copper
 G:$:u
-I:16:2:0
+I:51:2:0
 W:1:0:0:4
 
 N:55:銅塊
 E:copper
 G:$:u
-I:16:3:0
+I:51:3:0
 W:1:0:0:5
 
 N:56:銀塊
 E:silver
 G:$:s
-I:16:4:0
+I:51:4:0
 W:1:0:0:6
 
 N:57:銀塊
 E:silver
 G:$:s
-I:16:5:0
+I:51:5:0
 W:1:0:0:7
 
 N:58:銀塊
 E:silver
 G:$:s
-I:16:6:0
+I:51:6:0
 W:1:0:0:8
 
 N:59:銀塊
 E:silver
 G:$:s
-I:16:7:0
+I:51:7:0
 W:1:0:0:9
 
 N:60:銀塊
 E:silver
 G:$:s
-I:16:8:0
+I:51:8:0
 W:1:0:0:10
 
 N:61:金塊
 E:gold
 G:$:y
-I:16:9:0
+I:51:9:0
 W:1:0:0:12
 
 N:62:金塊
 E:gold
 G:$:y
-I:16:10:0
+I:51:10:0
 W:1:0:0:14
 
 N:63:金塊
 E:gold
 G:$:y
-I:16:11:0
+I:51:11:0
 W:1:0:0:16
 
 N:64:金塊
 E:gold
 G:$:y
-I:16:12:0
+I:51:12:0
 W:1:0:0:18
 
 N:65:宝石片
-E:sapphires
+E:gemstone shards
 G:$:b
-I:16:13:0
+I:51:13:0
 W:1:0:0:20
 
 N:66:宝石片
-E:rubies
+E:gemstone shards
 G:$:r
-I:16:14:0
+I:51:14:0
 W:1:0:0:24
 
 N:67:宝石片
-E:diamonds
+E:gemstone shards
 G:$:w
-I:16:15:0
+I:51:15:0
 W:1:0:0:28
 
 N:68:宝石片
-E:emeralds
+E:gemstone shards
 G:$:G
-I:16:16:0
+I:51:16:0
 W:1:0:0:32
 
 N:69:宝石片
-E:mithril
+E:gemstone shards
 G:$:B
-I:16:17:0
+I:51:17:0
 W:1:0:0:48
 
 N:70:宝石
-E:adamantite
+E:gemstones
 G:$:g
-I:16:18:0
+I:51:18:0
 W:1:0:0:96
 
 
@@ -3305,7 +3306,7 @@ F:INSTA_ART
 
 #勾玉
 N:315:曲玉:曲がった
-E:& Bead~:Curved
+E:& Magatama~:Curved
 G:":g
 I:48:19:0
 W:100:0:3:90000
@@ -5492,12 +5493,14 @@ N:534:破滅:刺激臭のする
 E:Ruination:Pungent
 G:!:R
 I:75:15:0
-W:40:0:4:0
+W:40:0:4:5000
 A:40/8
 P:0:20d20:0:0:0
 D:$You take 10d10 damage and it decreases all your stats permanently when you
-D:$quaff it.
+D:$quaff it. If thrown at a monster, it reduces their attack, defense, and
+D:$magic power.
 D:それは飲むと10d10のダメージを受け、全ステータスの最大値が下がる。
+D:モンスターに投げつけると攻撃、防御、魔法力を低下させることがある。
 
 N:535:脆弱:青い
 E:Weakness:Blue
@@ -5506,8 +5509,10 @@ I:75:16:0
 W:3:0:4:0
 A:3/1
 P:0:3d12:0:0:0
-D:$It decreases your strength when you quaff it.
+D:$It decreases your strength when you quaff it. If thrown at a monster, it
+D:$reduces their attack power.
 D:それは飲むと腕力の現在値が下がる。
+D:モンスターに投げつけると攻撃力を低下させることがある。
 
 N:536:無知:茶色の
 E:Stupidity:Brown
@@ -5516,8 +5521,10 @@ I:75:17:0
 W:20:0:4:0
 A:20/1
 P:0:1d1:0:0:0
-D:$It decreases your intelligence when you quaff it.
+D:$It decreases your intelligence when you quaff it. If thrown at a monster,
+D:$it reduces their magic power.
 D:それは飲むと知能の現在値が下がる。
+D:モンスターに投げつけると魔法力を低下させることがある。
 
 N:537:愚鈍:薄黄緑色の
 E:Naivety:Chartreuse
@@ -5526,8 +5533,10 @@ I:75:18:0
 W:20:0:4:0
 A:20/1
 P:0:1d1:0:0:0
-D:$It decreases your wisdom when you quaff it.
+D:$It decreases your wisdom when you quaff it. If thrown at a monster, it
+D:$reduces their magic power.
 D:それは飲むと賢さの現在値が下がる。
+D:モンスターに投げつけると魔法力を低下させることがある。
 
 N:538:不器用:悪臭のする
 E:Clumsiness:Stinking
@@ -5536,8 +5545,10 @@ I:75:19:0
 W:5:0:4:0
 A:5/1
 P:0:1d1:0:0:0
-D:$It decreases your dexterity when you quaff it.
+D:$It decreases your dexterity when you quaff it. If thrown at a monster, it
+D:$reduces their attack power.
 D:それは飲むと器用さの現在値が下がる。
+D:モンスターに投げつけると攻撃力を低下させることがある。
 
 N:539:病気:象牙色の
 E:Sickliness:Ivory White
@@ -5546,8 +5557,10 @@ I:75:20:0
 W:10:0:4:0
 A:10/1
 P:0:1d1:0:0:0
-D:$It decreases your constitution when you quaff it.
+D:$It decreases your constitution when you quaff it. If thrown at a monster,
+D:$it reduces their defense power.
 D:それは飲むと耐久力の現在値が下がる。
+D:モンスターに投げつけると防御力を低下させることがある。
 
 
 N:540:醜悪:紅色の
@@ -5557,8 +5570,10 @@ I:75:21:0
 W:20:0:4:0
 A:20/1
 P:0:1d1:0:0:0
-D:$It decreases your charisma when you quaff it.
+D:$It decreases your charisma when you quaff it. If thrown at a monster, it
+D:$reduces their defense power.
 D:それは飲むと魅力の現在値が下がる。
+D:モンスターに投げつけると防御力を低下させることがある。
 
 N:541:爆発:よどんだ赤の
 E:Detonations:Clotted Red
@@ -5682,8 +5697,9 @@ W:20:0:4:100
 A:20/3
 P:0:1d1:0:0:0
 D:$It removes fear, causes you to go berserk and heals you 30 when you
-D:$quaff it.
+D:$quaff it. If thrown at a monster, it makes them berserk.
 D:それは飲むと恐怖を取り除き、一時的に狂戦士化し、体力が30回復する。
+D:モンスターに投げつけると狂戦士化させることがある。
 
 N:553:軽傷の治癒:金色の
 E:Cure Light Wounds:Gold
@@ -6608,10 +6624,14 @@ A:25/2
 P:0:1d1:0:0:0
 D:年代物のワインだ。かなりの貴重品のはずだが紅魔館のメイドがどこからか無尽蔵に持ってくる。
 
+
+#v1.1.92
+#svalが14で焼酎と被っていたので33に変更
+#rd_itemのときはo_ptr->k_idxのみ読み込まれ、それに合わせて新たなtval,svalが設定し直されるはず
 N:642:どぶろく
 E:Doburoku
 G:!:w
-I:78:14:1000
+I:78:33:1000
 W:0:0:10:80
 A:5/3
 P:0:1d1:0:0:0
@@ -8148,8 +8168,10 @@ I:81:22:0
 W:1:0:5:0
 A:1/255
 P:0:1d1:0:0:0
-D:$Transforms you into a demon for 50+1d50 turns when drunk.
+D:$Transforms you into a demon for 50+1d50 turns when drunk. If thrown at a
+D:$monster, it makes them berserk.
 D:それは飲むと50+1d50ターンの間悪魔化する。
+D:モンスターに投げつけると狂戦士化させることがある。
 
 N:785:幸福薬
 E:& Potion~ of Happiness
@@ -9268,13 +9290,18 @@ I:47:52:0
 W:50:0:2:50000
 F:INSTA_ART | FIXED_FLAVOR
 
+#v1.1.92
+#svalを設定し忘れて他の酒と被っていたので32に変更
+#rd_itemのときにo_ptr->k_idxのみ読み込まれ、それに合わせて新たなtval,svalが設定し直されるはず
 N:893:鯨の息吹
 E:Seishuu
 G:!:w
-I:78:15:4000
+I:78:32:4000
 W:0:0:10:300
 A:30/3
 P:0:1d1:0:0:0
+D:$A popular drink at Geidontei. They say you'll get a very intoxicating drink
+D:$if you order it in autumn.
 D:鯢呑亭で人気の清酒だ。秋に注文すると妙に酔いが回りやすい酒が出てくるという噂だ。
 
 
@@ -9285,6 +9312,7 @@ I:73:41:8000
 W:100:0:20:30000
 A:100/255
 P:0:2d2:0:0:0
+D:$A glowing rainbow-colored jewel, said to belong to a dragon.
 D:龍の持ち物と言われる七色に光る宝石だ。ほんの僅かにだが魂を込める効果があるという。
 
 
@@ -9296,6 +9324,8 @@ I:85:1:0
 W:1:0:1:1000
 A:1/255
 P:0:1d1:0:0:0
+D:$A card with a familiar item or person drawn on it. It lets you use other
+D:$people's abilities as your own.
 D:どこかで見た物品や人物が描かれたカードだ。これを持っていると他人の力をまるで我が物のように使うことができるという。
 F:READABLE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
@@ -9309,7 +9339,49 @@ W:1:0:10:100
 A:1/255
 P:0:2d4:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A small box decorated with lots of flair. You can't wait to open it!
 D:やたらと派手に光る小箱だ。これを開けるときには興奮を抑えきれないだろう！
 
+N:897:酔魔の酒の空き瓶
+E:& Empty alcohol bottle~
+G:!:w
+I:72:32:0
+W:25:0:5:10
+A:1/255
+P:0:1d1:0:0:0
+F:HOUSE
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE
+D:$An empty bottle. Its smell tells that it stored quite a strong liquor at
+D:$some point.
+D:ただの空き瓶だ。匂いを嗅いでみると相当強い酒が入っていたらしいことがわかる。
+
+
+N:898:フォービドゥンフルーツ
+E:& Forbidden Fruit~
+G:,:r
+I:80:11:1000
+W:65:0:2:50000
+A:66/66
+P:0:1d1:0:0:0
+D:$The forbidden fruit of Tree of Wisdom. Adam and Eve ate it, instigated by
+D:$the Serpent, and got banished from Paradise.
+D:禁断の知恵の樹の実だ。アダムとイヴは蛇に唆されてこの実を口にし楽園から追放されたという。
+
+N:899:豪華な箱
+E:& Luxurious Box~
+G:&:v
+I:60:59:0
+W:1:0:10:100
+A:1/255
+P:0:2d4:0:0:0
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+#勾玉2
+N:900:曲玉:古い
+E:& Magatama~:Old
+G:":g
+I:48:36:0
+W:65:0:3:80000
+F:INSTA_ART
 
 

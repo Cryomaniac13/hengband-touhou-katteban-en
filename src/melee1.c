@@ -252,6 +252,36 @@ bool make_attack_normal(int m_idx)
 	}
 
 
+	//v1.1.94 槍熟練度ボーナスによるカウンター
+	if (ref_skill_exp(TV_SPEAR) >= 4800 && (randint1(4000) < (ref_skill_exp(TV_SPEAR) - 4000)))
+	{
+
+		if (p_ptr->pclass == CLASS_ALICE)
+		{
+			bool flag_counter = FALSE;
+			for (i = 0; i < INVEN_DOLL_NUM_MAX; i++) if (inven_add[i].tval == TV_SPEAR) flag_counter = TRUE;
+
+			if (flag_counter)
+			{
+				msg_print(_("槍を持った人形が敵の攻撃を迎え撃った！",
+                            "Your spear-wielding doll counters the enemy attack!"));
+				if (py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_COUNTER_SPEAR)) return TRUE;
+			}
+		}
+		else
+		{
+			if (buki_motteruka(INVEN_RARM) && inventory[INVEN_RARM].tval == TV_SPEAR
+				|| buki_motteruka(INVEN_LARM) && inventory[INVEN_LARM].tval == TV_SPEAR)
+			{
+
+				msg_print(_("あなたは槍を振るって敵の攻撃を迎え撃った！",
+                            "You swing your spear, countering the enemy attack!"));
+				if (py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_COUNTER_SPEAR)) return TRUE;
+			}
+		}
+
+	}
+
 
 	if (p_ptr->pclass == CLASS_SEIJA && p_ptr->special_defense & NINJA_KAWARIMI)
 	{
@@ -296,8 +326,12 @@ bool make_attack_normal(int m_idx)
 
 		int power = 0;
 		int damage = 0;
-		///mod140626 基本damageと同じだが弱点属性でdamageが増えてもこちらは増えない。
-		int damage_stun = 0;
+
+		//v1.1.94 v1.1.83の耐性軽減処理でダメージが減ってデスソードなどの切り傷が全く入らなくなっていたのでこの変数を切り傷/朦朧判定用に使う。
+		//最初のダイスロールの数値が出て弱点や耐性で増減しない。痛恨と弱体化の影響は受ける。
+		//..つもりだったが、こうすると元々耐性で軽減されていた元素属性攻撃でクリティカルが出るようになった。
+		//軽減前提で「100d1でパンチして燃やす」みたいな攻撃する奴がもし居たら即死トラップになるので朦朧だけはdamage値とdamage_effect_check値の少ない方を使う。弥縫策。
+		int damage_effect_check = 0;
 
 		cptr act = NULL;
 
@@ -307,11 +341,17 @@ bool make_attack_normal(int m_idx)
 		int d_dice = r_ptr->blow[ap_cnt].d_dice;
 		int d_side = r_ptr->blow[ap_cnt].d_side;
 
-
+		//オーラなどで死んだらここで出る
 		if (!m_ptr->r_idx) break;
 
 		/* Hack -- no more attacks */
 		if (!method) break;
+
+		//v1.1.95 モンスター狂戦士化中はダメージ2倍
+		if (MON_BERSERK(m_ptr))
+		{
+			d_side *= 2;
+		}
 
 		/*:::キスメが特定の攻撃を回避する処理*/
 		///mod141118 キスメ
@@ -1057,7 +1097,6 @@ bool make_attack_normal(int m_idx)
 #endif
 
 					do_stun = 1;
-					touched = TRUE;
 					sound(SOUND_HIT);
 					break;
 				}
@@ -1070,7 +1109,6 @@ bool make_attack_normal(int m_idx)
 					sound(SOUND_HIT);
 					break;
 				}
-
 
 			}
 
@@ -1101,9 +1139,39 @@ bool make_attack_normal(int m_idx)
 			/* Hack -- assume all attacks are obvious */
 			obvious = TRUE;
 
+
+			//v1.1.94 硝子の盾　接触型隣接攻撃を一度だけ無効化し破片属性で反撃
+			if (touched && (p_ptr->special_defense & SD_GLASS_SHIELD))
+			{
+				int shard_dam;
+
+				if (cp_ptr->magicmaster)
+					shard_dam = p_ptr->lev * 6;
+				else
+					shard_dam = p_ptr->lev * 4;
+
+				msg_format(_("硝子の盾が砕けた！", "Your glass shield shatters!"));
+				project(0, 0, m_ptr->fy, m_ptr->fx, shard_dam, GF_SHARDS, PROJECT_KILL, -1);
+				if (!m_ptr->r_idx) alive = FALSE;
+
+				p_ptr->special_defense &= ~(SD_GLASS_SHIELD);
+				p_ptr->redraw |= (PR_STATUS);
+				redraw_stuff();
+
+				continue;
+			}
+
 			/* Roll out the damage */
 			damage = damroll(d_dice, d_side);
-			damage_stun = damage;
+
+			//v1.1.94 モンスター攻撃力低下中はダメージ25%カット
+			//最大ダメージ接近による切り傷や朦朧もほぼ出なくなる
+			if (MON_DEC_ATK(m_ptr))
+			{
+				damage = (damage * 3 + 1) / 4;
+			}
+
+			damage_effect_check = damage;
 
 			/*
 			 * Skip the effect when exploding, since the explosion
@@ -1112,7 +1180,7 @@ bool make_attack_normal(int m_idx)
 			if (explode)
 			{
 				damage = 0;
-				damage_stun = 0;
+				damage_effect_check = 0;
 			}
 			/* Apply appropriate damage */
 			///sys mon モンスター通常攻撃実行部
@@ -1125,15 +1193,16 @@ bool make_attack_normal(int m_idx)
 
 					/* Hack -- No damage */
 					damage = 0;
-					damage_stun = 0;
+					damage_effect_check = 0;
 
 					break;
 				}
 
 				case RBE_SUPERHURT:
 				{
-					/*:::痛恨の一撃でない場合breakせずHURTと同じ処理*/
-					if (((randint1(rlev*2+300) > (ac+200)) || one_in_(13)) && !CHECK_MULTISHADOW())
+					//痛恨の一撃はダメージが増え、またダメージのAC減少が起こらないのでダイス最大ダメージに近づいたときの朦朧や切り傷が出やすい
+					//v1.1.94 弱体化中は痛恨が出ない
+					if (((randint1(rlev*2+300) > (ac+200)) || one_in_(13)) && !CHECK_MULTISHADOW() && !MON_DEC_ATK(m_ptr))
 					{
 						int tmp_damage = damage - (damage * ((ac < 150) ? ac : 150) / 250);
 #ifdef JP
@@ -1148,6 +1217,7 @@ bool make_attack_normal(int m_idx)
 						get_damage += take_hit(DAMAGE_ATTACK, tmp_damage, ddesc, -1);
 						break;
 					}
+					//痛恨の一撃でないときはbreakせずにRBE_HURTと同じ処理になる
 				}
 				case RBE_HURT:
 				{
@@ -1156,7 +1226,7 @@ bool make_attack_normal(int m_idx)
 
 					/* Hack -- Player armor reduces total damage */
 					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
-					damage_stun = damage;
+					damage_effect_check = damage;
 
 					///mod140530 霧変化時は物理攻撃ダメージ半減
 					if(p_ptr->mimic_form == MIMIC_MIST) damage /= 3;
@@ -1239,7 +1309,7 @@ bool make_attack_normal(int m_idx)
 					}
 					///mod140119 劣化打撃は耐性でダメージ増減することにした
 					damage = mod_disen_dam(damage);
-					if(damage == 0) damage_stun = 0;
+					if(damage == 0) damage_effect_check = 0;
 					/* Take some damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 
@@ -1745,6 +1815,10 @@ bool make_attack_normal(int m_idx)
 					/* Obvious */
 					obvious = TRUE;
 
+					//v1.1.91 石油地形火炎ダメージ
+					if (cave_have_flag_bold(py, px, FF_OIL_FIELD)) damage = oil_field_damage_mod(damage, py, px);
+
+
 					/* Message */
 #ifdef JP
 					msg_print("全身が炎に包まれた！");
@@ -2101,7 +2175,7 @@ bool make_attack_normal(int m_idx)
 
 					/* Hack -- Reduce damage based on the player armor class */
 					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
-					damage_stun = damage;
+					damage_effect_check = damage;
 
 					//霧変化時に軽減
 					if(p_ptr->mimic_form == MIMIC_MIST) damage /= 3;
@@ -2635,7 +2709,7 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				{
 					if(process_ringo_im(GF_HOLY_FIRE)) break;
 					damage = mod_holy_dam(damage);
-					if(damage == 0) damage_stun = 0;
+					if(damage == 0) damage_effect_check = 0;
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					update_smart_learn(m_idx, DRS_HOLY);
 					break;
@@ -2649,7 +2723,7 @@ msg_format("%sは体力を回復したようだ。", m_name);
 					damage = mod_water_dam(damage);
 					if(damage==0)
 					{
-						damage_stun = 0;
+						damage_effect_check = 0;
 						break;
 					}
 					engineer_malfunction(GF_WATER, damage);
@@ -2774,8 +2848,9 @@ msg_format("%sは体力を回復したようだ。", m_name);
 
 					///mod140530 傷打撃はHURTと同様にACで威力軽減。また霧変化時は物理攻撃ダメージ半減
 					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
-					if(p_ptr->mimic_form == MIMIC_MIST) damage /= 3;
+					damage_effect_check = damage;
 
+					if(p_ptr->mimic_form == MIMIC_MIST) damage /= 3;
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
@@ -2833,7 +2908,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				int k = 0;
 
 				/* Critical hit (zero if non-critical) */
-				tmp = monster_critical(d_dice, d_side, damage);
+				tmp = monster_critical(d_dice, d_side, damage_effect_check);
+
+				if (cheat_xtra) msg_format("critital: dd=%d, ds=%d, dam=%d, crit:%d",d_dice,d_side, damage_effect_check,tmp);
+
 
 				/* Roll for damage */
 				switch (tmp)
@@ -2860,10 +2938,12 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				/* Critical hit (zero if non-critical) */
 				//tmp = monster_critical(d_dice, d_side, damage);
 
-				///mod140626 ダイスを振った後ダメージが増加する処理の場合（破邪弱点で「殴って浄化する」を受けるなど）場合によっては一発で意識不明料になりかねないので補正。
-				///不本意ながらスタン判定用のdamage値を作った。耐性や軽減で減少はしても増加はしない。
-				tmp = monster_critical(d_dice, d_side, damage_stun);
+				//v1.1.94
+				//damage_effect_checkに最初のダイス値そのままを使うことにしたが、
+				//もし「100d1で殴って燃やす」みたいな耐性軽減前提の固定大ダメージ朦朧打撃のモンスターがいたら即死するので弥縫策で少ない方を使うことにした
+				tmp = monster_critical(d_dice, d_side, MIN(damage,damage_effect_check));
 
+				if (cheat_xtra) msg_format("critital: dd=%d, ds=%d, dam=%d, crit:%d", d_dice, d_side, damage_effect_check, tmp);
 
 				/* Roll for damage */
 				switch (tmp)
@@ -3128,11 +3208,19 @@ msg_format("%sは体力を回復したようだ。", m_name);
 							blinked = FALSE;
 							alive = FALSE;
 						}
+						//v1.1.94 破片による攻撃低下
+						else if(!mon_saving_throw(m_ptr,p_ptr->lev * 2))
+						{
+							if (set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, 4 + randint1(4)))
+							{
+								msg_format(_("%^sは攻撃力が下がったようだ。", "The attack power of %^s is lowered."),m_name);
+							}
+						}
 					}
 					else
 					{
 						if (is_original_ap_and_seen(m_ptr))
-							r_ptr->r_flagsr |= (r_ptr->flagsr & RFR_EFF_RES_SHAR_MASK);
+							r_ptr->r_flagsr |= (r_ptr->flagsr & RFR_RES_SHAR);
 					}
 
 					if (is_mirror_grid(&cave[py][px]))
@@ -3144,9 +3232,21 @@ msg_format("%sは体力を回復したようだ。", m_name);
 
 				///mod140321 死霊のオーラ　恐怖、朦朧、混乱付与処理を追加
 				/*::: 死霊のオーラ */
-				if (p_ptr->tim_sh_death && alive && !p_ptr->is_dead)
+				//v1.1.95 こころ長壁面も同じ効果に。こちらは地獄耐性でなくEMPTY_MINDで除外判定
+				if ((p_ptr->tim_sh_death || p_ptr->pclass == CLASS_KOKORO && p_ptr->tim_general[0]) && alive && !p_ptr->is_dead)
 				{
-					if (!(r_ptr->flagsr & RFR_RES_NETH))
+					bool resist = FALSE;
+
+					if (p_ptr->pclass == CLASS_KOKORO && p_ptr->tim_general[0] && r_ptr->flags2 & RF2_EMPTY_MIND) resist = TRUE;
+					if (p_ptr->tim_sh_death && r_ptr->flagsr & RFR_RES_NETH)
+					{
+						resist = TRUE;
+						if (is_original_ap_and_seen(m_ptr))
+							r_ptr->r_flagsr |= (r_ptr->flagsr & RFR_RES_NETH);
+
+					}
+
+					if (!resist)
 					{
 						int power = p_ptr->lev * 2;
 						if(r_ptr->flags1 & RF1_UNIQUE ) power /= 2;
@@ -3166,11 +3266,6 @@ msg_format("%sは体力を回復したようだ。", m_name);
 							conf = TRUE;
 						}
 
-					}
-					else
-					{
-						if (is_original_ap_and_seen(m_ptr))
-							r_ptr->r_flagsr |= (r_ptr->flagsr & RFR_RES_NETH);
 					}
 
 				}
@@ -3429,6 +3524,7 @@ msg_format("%^sから落ちてしまった！", m_name);
 		//v1.1.77 お燐(専用性格)の追跡　
 		if (orin_escape(m_idx)) return TRUE;
 
+	//攻撃4回ループの終了..のはず
 	}
 
 	/* Hex - revenge damage stored */

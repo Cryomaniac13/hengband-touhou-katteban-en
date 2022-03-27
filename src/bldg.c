@@ -2097,6 +2097,30 @@ bool marisa_will_trade(object_type *o_ptr)
 	return FALSE;
 }
 
+
+
+//EX建物用尤魔トレードアイテムhook
+bool yuma_will_trade(object_type *o_ptr)
+{
+	if (o_ptr->tval == TV_FOOD) return TRUE;
+
+	if (o_ptr->tval == TV_SWEETS) return TRUE;
+
+	if (o_ptr->tval == TV_ALCOHOL) return TRUE;
+
+	if (o_ptr->tval == TV_MUSHROOM) return TRUE;
+
+	if (o_ptr->tval == TV_FLASK) return TRUE;//油壷とエンジニア用エネルギーパック
+
+	if (o_ptr->name1 == ART_IBUKI) return TRUE;//伊吹瓢
+
+	if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_BIG_EGG) return TRUE; //巨大な卵
+
+	if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_DOUJU) return TRUE; //道寿の壺
+
+	return FALSE;
+}
+
 static void building_prt_maripo(void)
 {
 	char tmp_str[80];
@@ -4359,6 +4383,7 @@ static void town_history(void)
 s32b calc_expect_crit(int weight, int plus, int dam, s16b meichuu, bool dokubari)
 {
 	s32b i,k, num;
+	int count;
 
 	if(dokubari) return dam;
 
@@ -4366,21 +4391,45 @@ s32b calc_expect_crit(int weight, int plus, int dam, s16b meichuu, bool dokubari
 	if (p_ptr->pclass == CLASS_URUMI && p_ptr->tim_general[0])
 	{
 		int old_weight = weight;
-		weight = weight * p_ptr->lev * 2 / 10;
-		if (weight > 2000) weight = MAX(2000, old_weight);
+		weight = weight * p_ptr->lev * 8 / 50;
 	}
 
-	i = weight + (meichuu * 3 + plus * 5) + (p_ptr->lev * 3);
-	k = weight;
-	num=0;
+	//v1.1.94 武器クリティカル率上昇と重量上限2000を反映
+	weight = weight * 2 + p_ptr->lev * 2;
+	if (weight > 2000) weight = 2000;
 
+
+
+	i = weight + (meichuu * 3 + plus * 5) + (p_ptr->lev * 3);
+	num = 0;
+
+	//会心のときの1d650を1~650まで全部ダメージ計算して足しあわせて最後に650で割ることで会心平均ダメージを計算している
+
+	//v1.1.94
+	//kをrandint1(weight)+randint1(650)にしたので同じような計算ができなくなった。
+	//randint1(weight)が1から最大まで10%ずつ増やして全部合計するか。完全な数字ではなくなるがそれほど外れてはいないと思う
+	for (count = 0; count <= 10; count++)
+	{
+		k = (weight+9)/10*count;
+		if (k < 400)						num += (2 * dam + 5) * (400 - k);
+		if (k < 700)						num += (2 * dam + 10) * (MIN(700, k + 650) - MAX(400, k));
+		if (k >(700 - 650) && k < 900)		num += (3 * dam + 15) * (MIN(900, k + 650) - MAX(700, k));
+		if (k >(900 - 650) && k < 1300)		num += (3 * dam + 20) * (MIN(1300, k + 650) - MAX(900, k));
+		if (k >(1300 - 650))					num += (7 * dam / 2 + 25) * MIN(650, k - (1300 - 650));
+	}
+	num /= 650*11;
+
+	/*
+	k = weight;
 	if (k < 400)						num += (2 * dam + 5) * (400 - k);
 	if (k < 700)						num += (2 * dam + 10) * (MIN(700, k + 650) - MAX(400, k));
 	if (k > (700 - 650) && k < 900)		num += (3 * dam + 15) * (MIN(900, k + 650) - MAX(700, k));
 	if (k > (900 - 650) && k < 1300)		num += (3 * dam + 20) * (MIN(1300, k + 650) - MAX(900, k));
 	if (k > (1300 - 650))					num += (7 * dam / 2 + 25) * MIN(650, k - (1300 - 650));
-
 	num /= 650;
+
+	*/
+
 	if(p_ptr->pclass == CLASS_NINJA)
 	{
 		num *= i;
@@ -9428,6 +9477,544 @@ bool check_quest_unique_text(void)
 
 		break;
 
+
+	case QUEST_YAKUZA_1:
+
+		//このクエストは所属勢力がややこしいので受領時・成功時・失敗時でまず分ける
+		if (accept)
+		{
+			//動物霊憑依時
+			if (p_ptr->muta4 & (MUT4_GHOST_WOLF | MUT4_GHOST_EAGLE | MUT4_GHOST_OTTER | MUT4_GHOST_HANIWA))
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "畜生界の動物霊が旧血の池地獄で抗争を始めるそうだ。");
+				strcpy(quest_text[line++], "しかしどうしたことだろう？");
+				strcpy(quest_text[line++], "なぜかあの勢力に助太刀しなければいけない気がして仕方がない！");
+#else
+                strcpy(quest_text[line++], "The animal ghosts from Animal Realm are going to start a war at Former");
+                strcpy(quest_text[line++], "Lake of Blood Hell. But wait, what's going on? For some reason, you feel");
+				strcpy(quest_text[line++], "strangely compelled to help their forces!");
+#endif
+			}
+			//早鬼
+			else if (pc == CLASS_SAKI)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "最近見かけない饕餮尤魔の行方に関する情報提供者が現れた。");
+				strcpy(quest_text[line++], "尤魔は旧血の池地獄に引き篭もってせっせと力を蓄えているらしい。");
+				strcpy(quest_text[line++], "さっそく蹴り倒しに行こう。");
+#else
+                strcpy(quest_text[line++], "An informant has arrived, bringing news about Yuuma Toutetsu's location.");
+				strcpy(quest_text[line++], "She's hiding at Former Lake of Blood Hell, building up her strength.");
+				strcpy(quest_text[line++], "Time to kick her down.");
+#endif
+			}
+			//八千慧
+			else if (pc == CLASS_YACHIE)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "最近見かけない饕餮尤魔の行方に関する情報提供者が現れた。");
+				strcpy(quest_text[line++], "饕餮は旧血の池地獄に引き篭もって石油を貪っているらしい。");
+				strcpy(quest_text[line++], "饕餮に力を蓄えられるのは好ましくないし資源を我々が手にすれば有利になる。");
+				strcpy(quest_text[line++], "放置する手はないだろう。");
+				strcpy(quest_text[line++], "しかし恐らくこの者は他の組織にも同様に情報を提供している。");
+				strcpy(quest_text[line++], "最悪四つ巴の抗争になるだろう。入念に準備をして臨まねばならない。");
+				strcpy(quest_text[line++], "とくに石油はよく燃えるので火炎対策が重要だ。");
+				strcpy(quest_text[line++], "傭兵として雇った強力な火竜を連れて行こう。");
+#else
+                strcpy(quest_text[line++], "An informant has arrived, bringing news about Yuuma Toutetsu's location.");
+				strcpy(quest_text[line++], "She's hiding at Former Lake of Blood Hell, consuming oil.");
+				strcpy(quest_text[line++], "You don't like the idea of Yuuma gathering strength, and obtaining the");
+				strcpy(quest_text[line++], "resources would be profitable for you. You can't leave this issue alone.");
+				strcpy(quest_text[line++], "However, this information might also have been provided to other families;");
+				strcpy(quest_text[line++], "in the worst case, it'll be a four-way conflict. You'll have to carefully");
+				strcpy(quest_text[line++], "prepare before going in. Since oil burns well, you'll have to protect");
+				strcpy(quest_text[line++], "yourself against fire. You've hired a powerful fire wyrm as your mercenary.");
+#endif
+			}
+			//尤魔
+			else if (pc == CLASS_YUMA)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "ようやく落ち着いた血の池地獄に畜生界の連中がちょっかいをかけてきた。");
+				strcpy(quest_text[line++], "強力な火竜を引き連れた勢力までいるようだ。");
+				strcpy(quest_text[line++], "しかし何もせずみすみす石油を明け渡すのはあまりにも惜しい。");
+				strcpy(quest_text[line++], "不本意だが防衛戦をせねばならない。");
+#else
+				strcpy(quest_text[line++], "Just as the Lake of Blood Hell has calmed down, forces from Animal Realm");
+				strcpy(quest_text[line++], "started interfering. They even have brought a powerful fire wyrm.");
+				strcpy(quest_text[line++], "However, you're not going to just hand over your oil. You don't like it,");
+				strcpy(quest_text[line++], "but you'll have to fight a defensive war.");
+#endif
+			}
+			//埴輪
+			else if (pc == CLASS_MAYUMI || pc == CLASS_KEIKI)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "畜生界の動物霊が旧血の池地獄で抗争を始めるとの情報が届いた。");
+				strcpy(quest_text[line++], "すぐに行って動物霊を掃討しなければならない。");
+				strcpy(quest_text[line++], "無敵の埴輪兵団の力をもう一度見せつけてやろう。");
+#else
+				strcpy(quest_text[line++], "You've received information that animal ghosts from Animal Realm are");
+				strcpy(quest_text[line++], "going to start a war at Former Lake of Blood Hell. You must quickly go");
+				strcpy(quest_text[line++], "there and deal with the ghosts. You're going to show them the power of");
+				strcpy(quest_text[line++], "your inexhaustible Haniwa Corps once again.");
+#endif
+			}
+			//ほか一般動物霊　所属勢力で分岐
+			else if (pr == RACE_ANIMAL_GHOST)
+			{
+				switch (CHECK_ANIMAL_GHOST_STRIFE)
+				{
+				case ANIMAL_GHOST_STRIFE_KEIGA:
+#ifdef JP
+					strcpy(quest_text[line++], "早鬼「丁度いいところに来たな！今から抗争に行くぞ！");
+					strcpy(quest_text[line++], "行き先は旧血の池地獄だ。尤魔の奴が引き篭もって何かしているらしい！");
+					strcpy(quest_text[line++], "いつもすぐ逃げ出す卑怯者を蹴倒してやるチャンスだ！みんな私に続け！」");
+#else
+                    strcpy(quest_text[line++], "Saki - 'You came at a good time! We're going to war!");
+					strcpy(quest_text[line++], "We're heading to Former Lake of Blood Hell. Yuuma's hiding there,");
+					strcpy(quest_text[line++], "planning to do something! It's our chance to kick some cowards who");
+					strcpy(quest_text[line++], "keep on running away! Everyone, follow me!'");
+#endif
+					break;
+
+				case ANIMAL_GHOST_STRIFE_KIKETSU:
+#ifdef JP
+					strcpy(quest_text[line++], "八千慧「あなたに緊急の任務を与えます。");
+					strcpy(quest_text[line++], "旧血の池地獄にて石油という有用な資源が大量に発見されました。");
+					strcpy(quest_text[line++], "現在は剛欲同盟に支配されており、放置するわけにはいきません。");
+					strcpy(quest_text[line++], "この地を奪取すべく急ぎ兵力を集めていますが、");
+					strcpy(quest_text[line++], "勁牙組や霊長園にも我々と同様の動きが見られます。");
+					strcpy(quest_text[line++], "おそらく一大抗争になるでしょう。あなたもこれに加わりなさい。");
+					strcpy(quest_text[line++], "石油はよく燃えるので石油の上では炎の威力が増します。");
+					strcpy(quest_text[line++], "強力な火竜を雇って連れて行くので巻き込まれないように立ち回りなさい。」");
+#else
+					strcpy(quest_text[line++], "Yachie - 'I have an urgent mission for you.");
+					strcpy(quest_text[line++], "We've discovered a large amount of useful resource called 'oil' in");
+					strcpy(quest_text[line++], "Former Lake of Blood Hell. It's under control of Gouyoku Alliance");
+					strcpy(quest_text[line++], "right now; we can't leave it like that. We're moving our forces");
+					strcpy(quest_text[line++], "to that location, and Keiga Family and Primate Garden are doing the");
+					strcpy(quest_text[line++], "same. It's likely to end up in a major conflict. I'd like you to");
+					strcpy(quest_text[line++], "take part in it. Oil burns well, so fire deals more damage on oil");
+					strcpy(quest_text[line++], "terrain. We've brought a powerful fire wyrm, so avoid getting in");
+					strcpy(quest_text[line++], "the way of its attacks.'");
+#endif
+					break;
+
+
+				case ANIMAL_GHOST_STRIFE_GOUYOKU:
+#ifdef JP
+					strcpy(quest_text[line++], "地面から聞こえる尤魔の声「おいお前。すぐに地下の旧血の池地獄まで来い。");
+					strcpy(quest_text[line++], "我々の石油を狙って他勢力の連中が攻めてきた。");
+					strcpy(quest_text[line++], "どう転ぶにしろ少しは敵に出血を強いなければ利権に食い込むこともできん。");
+					strcpy(quest_text[line++], "お前も加わってなるべく敵の数を減らせ。");
+					strcpy(quest_text[line++], "とくに敵の援軍の火竜が厄介だ。火炎対策をしておけ。");
+					strcpy(quest_text[line++], "それにしても防衛戦など全く割に合わん。ああ腹が減る...」");
+#else
+					strcpy(quest_text[line++], "Yuuma voice from the ground - 'Hey, you. Come quickly to the Former");
+					strcpy(quest_text[line++], "Lake of Blood Hell underground. Other forces are attacking, trying");
+					strcpy(quest_text[line++], "to obtain out oil. No matter how you look at it, we'll have to make");
+					strcpy(quest_text[line++], "them bleed to maintain profits. Join in and reduce enemy forces as");
+					strcpy(quest_text[line++], "much as you can. Their fire wyrm in particular is a nasty one.");
+					strcpy(quest_text[line++], "Protect yourself against fire attacks. Still, I really don't like");
+					strcpy(quest_text[line++], "being on the defense. I'm so hungry...'");
+#endif
+					break;
+				default:
+#ifdef JP
+					strcpy(quest_text[line++], "畜生界の動物霊がこの下の旧血の池地獄で抗争を始めるようだ。");
+					strcpy(quest_text[line++], "自分には関係のない話だが、どこかに味方して恩を売ってもいい。");
+					strcpy(quest_text[line++], "あるいは全員倒してしまえば実に痛快だろう。");
+#else
+					strcpy(quest_text[line++], "The animal ghosts from Animal Realm are going to start a war at Former");
+                    strcpy(quest_text[line++], "Lake of Blood Hell. It's none of your business, but you might join");
+                    strcpy(quest_text[line++], "someone to win their favor. Or you could just beat them all up.");
+#endif
+
+					break;
+				}
+			}
+			//ほか一般埴輪
+			else if (pr == RACE_HANIWA)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "磨弓「動物霊どもが旧血の池地獄で抗争を始めるとの情報が入ったわ！");
+				strcpy(quest_text[line++], "人間霊を虐げるのに飽き足らず畜生界の外にまで戦禍を広げようとは許しがたい！");
+				strcpy(quest_text[line++], "私達もすぐに向かい、奴等を掃討しましょう！」");
+#else
+				strcpy(quest_text[line++], "Mayumi - 'We've received information that animal ghosts are going to start");
+				strcpy(quest_text[line++], "a war at Former Lake of Blood Hell! Oppressing human spirits was bad enough,");
+				strcpy(quest_text[line++], "and now they're waging war outside their realm! We're heading there right");
+				strcpy(quest_text[line++], "now to clean them up!'");
+#endif
+			}
+			//それ以外
+			else
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "空「なんで動物霊とか竜とか埴輪の群れが");
+				strcpy(quest_text[line++], "喧嘩しながら灼熱地獄をぞろぞろ通り抜けて行くの？");
+				strcpy(quest_text[line++], "もう撃ち落とすのに疲れたよー！」");
+				strcpy(quest_text[line++], "　");
+				strcpy(quest_text[line++], "燐「旧血の池地獄で畜生界の連中が抗争をおっ始めるみたいだねえ。");
+				strcpy(quest_text[line++], "まあ決着がつくまで放っておきなよ。");
+				strcpy(quest_text[line++], "でも腕に自信があるならひと暴れして何処かに恩を売れるかもしれないね。");
+				if (pc == CLASS_SATORI)
+					strcpy(quest_text[line++], "さとり様も見物に行ってみますか？」");
+				else if (pc == CLASS_KOISHI)
+					strcpy(quest_text[line++], "...ん？いまそこに誰かいたような？」");
+				else if (pc == CLASS_ORIN)
+					strcpy(quest_text[line++], "あたいもちょいと見物に行こうかな？」");
+				else if (pc == CLASS_UTSUHO)
+					strcpy(quest_text[line++], "何ならちょいと見物に行ってみるかい？」");
+				else if (p_ptr->psex == SEX_MALE)
+					strcpy(quest_text[line++], "そこのお兄さんも行ってみるかい？」");
+				else
+					strcpy(quest_text[line++], "そこのお姉さんも行ってみるかい？」");
+#else
+				strcpy(quest_text[line++], "Utsuho - 'Why are there animal ghosts, dragons, and haniwa fighting");
+				strcpy(quest_text[line++], "each other as they march through Hell of Blazing Fires? I'm tired of");
+				strcpy(quest_text[line++], "shooting them down!'");
+				strcpy(quest_text[line++], "  ");
+				strcpy(quest_text[line++], "Rin - 'Looks like groups of Animal Realm are starting a war at Former");
+				strcpy(quest_text[line++], "Lake of Blood Hell. Let's leave them alone until they're done.");
+				strcpy(quest_text[line++], "But if you're confident in your skills, you might join them and win");
+				strcpy(quest_text[line++], "someone's favor.");
+				if (pc == CLASS_SATORI)
+					strcpy(quest_text[line++], "Lady Satori, are you going, too?'");
+				else if (pc == CLASS_KOISHI)
+					strcpy(quest_text[line++], "...Hm? Is somebody here?'");
+				else if (pc == CLASS_ORIN)
+					strcpy(quest_text[line++], "I think I'll go and take a look.'");
+				else if (pc == CLASS_UTSUHO)
+					strcpy(quest_text[line++], "Why don't you go and take a look?'");
+				else
+					strcpy(quest_text[line++], "Would you like to go and take a look?'");
+#endif
+			}
+		}
+		//成功時 味方した勢力で分岐
+		else if (comp)
+		{
+
+			if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KEIGA)
+			{
+				if (pc == CLASS_SAKI)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "畜生界の他勢力を全て蹴散らし、実に気分がいい！");
+					strcpy(quest_text[line++], "さらに情報提供者から面白い品が献上された。");
+#else
+					strcpy(quest_text[line++], "It felt so good to kick around the other forces from Animal Realm!");
+					strcpy(quest_text[line++], "You also have received an interesting item from your informant.");
+#endif
+				}
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "早鬼「見たか！やはり最後に勝つのは暴力だ！");
+					strcpy(quest_text[line++], "お前も感動的な強さだったぞ！褒美にこれをやろう！」");
+#else
+					strcpy(quest_text[line++], "Saki - 'Did you see it? Brute force triumphs in the end! You also were");
+					strcpy(quest_text[line++], "impressingly strong! Let me reward you!'");
+#endif
+				}
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "早鬼「見たか！やはり最後に勝つのは暴力だ！");
+					strcpy(quest_text[line++], "お前も感動的な強さだったぞ！褒美にこれをやろう！");
+					strcpy(quest_text[line++], "ところで勁牙組に入る気はないか？」");
+#else
+					strcpy(quest_text[line++], "Saki - 'Did you see it? Brute force triumphs in the end! You also were");
+					strcpy(quest_text[line++], "impressingly strong! Let me reward you!'");
+					strcpy(quest_text[line++], "By the way, would you like to join the Keiga Family?'");
+#endif
+				}
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KIKETSU)
+			{
+				if (pc == CLASS_YACHIE)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "四つ巴の抗争を制することに成功した。");
+					strcpy(quest_text[line++], "地上の神達が色々と交渉を持ちかけてきたのでうまく利益を引き出してやろう。");
+#else
+					strcpy(quest_text[line++], "You've won the four-way conflict.");
+					strcpy(quest_text[line++], "You also managed to gain some profits by negotiating with the gods on");
+					strcpy(quest_text[line++], "surface.");
+#endif
+				}
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "八千慧「素晴らしい。思っていたより遥かに使えるようですね。");
+					strcpy(quest_text[line++], "あとは私に任せなさい。あなたには充分な報酬を与えましょう。」");
+#else
+					strcpy(quest_text[line++], "Yachie - 'That was splendid. You're far more useful than I thought. Leave");
+					strcpy(quest_text[line++], "the rest to me. I'll reward you handsomely.'");
+#endif
+				}
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "八千慧「自分の力の売り込み方をよく心得ているようですね。");
+					strcpy(quest_text[line++], "あなたとはよい関係でありたいものです。");
+					strcpy(quest_text[line++], "今回の報酬としてこれを差し上げましょう。」");
+#else
+					strcpy(quest_text[line++], "Yachie - 'You sure know how to sell your own strength. We'd like to");
+					strcpy(quest_text[line++], "maintain good relationship with you. For now, take this as your reward.'");
+#endif
+				}
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_GOUYOKU)
+			{
+				if (pc == CLASS_YUMA)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "剛欲同盟長の本気の力の前に他勢力は逃げ去っていった。");
+					strcpy(quest_text[line++], "役に立たない同盟者の神から今更支援品の提供の申し出があったが、");
+					strcpy(quest_text[line++], "いつかこいつも呑み込んでやろう。");
+#else
+					strcpy(quest_text[line++], "The other forces fled from the true power of Gouyoku Alliance.");
+					strcpy(quest_text[line++], "That useless ally of a god offered you an item; you're going to");
+					strcpy(quest_text[line++], "consume it someday.");
+#endif
+				}
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "尤魔「クックック...天晴な強さじゃないか。気に入ったぞ。");
+					strcpy(quest_text[line++], "褒美としてこれをくれてやる。");
+					strcpy(quest_text[line++], "いつか食うつもりだったが、お前に使わせたほうが利益になりそうだ。」");
+#else
+					strcpy(quest_text[line++], "Yuuma - 'Hehehe... You're so strong. I like you!");
+					strcpy(quest_text[line++], "Take this as your reward.");
+					strcpy(quest_text[line++], "I was planning on eating it, but it might be of more use to you.'");
+#endif
+				}
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "尤魔「はて、なぜお前が我々に味方した？同盟に参加したいのか？");
+					strcpy(quest_text[line++], "まあいい、次も頼むぞ。そのぶん報酬に色を付けてやる。」");
+#else
+					strcpy(quest_text[line++], "Yuuma - 'Huh, why did you join us? Are you planning on joining");
+					strcpy(quest_text[line++], "the Alliance? Very well, that's for next time. Take this as your");
+					strcpy(quest_text[line++], "reward.'");
+#endif
+				}
+			}
+			else if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_HANIWA)
+			{
+				if (pc == CLASS_MAYUMI || pc == CLASS_KEIKI)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "埴輪兵団の無限の力の前に動物霊たちは散り散りに逃げていった。");
+					strcpy(quest_text[line++], "情報提供者から協力の謝礼として珍しい品が届けられた。");
+#else
+					strcpy(quest_text[line++], "The animal ghosts have scattered before the endless power of");
+					strcpy(quest_text[line++], "Haniwa Corps. Your informant sent you an interesting item as a");
+					strcpy(quest_text[line++], "reward for cooperation.");
+#endif
+				}
+				else if (pr == RACE_HANIWA)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "磨弓「我々の勝利よ！");
+					strcpy(quest_text[line++], "見事な働きをした貴方には褒美の品が下賜されます！");
+					strcpy(quest_text[line++], "今後の奮闘に期待しているわ！」");
+#else
+					strcpy(quest_text[line++], "Mayumi - 'Victory is ours!");
+					strcpy(quest_text[line++], "You were outstanding! Here's your reward.");
+					strcpy(quest_text[line++], "We're looking forward to working with you in the future!'");
+#endif
+				}
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "磨弓「動物霊どもの掃討にご協力感謝致します！");
+					strcpy(quest_text[line++], "見事な働きをした貴方には褒美の品が下賜されます！");
+					strcpy(quest_text[line++], "それと、我々のような完璧な体をお望みならいつでも言ってくださいね！」");
+#else
+					strcpy(quest_text[line++], "Mayumi - 'Thank you for helping us clean up those animal ghosts!");
+					strcpy(quest_text[line++], "You were outstanding! Here's your reward.");
+					strcpy(quest_text[line++], "Also, if you want a perfect body like ours, just let us know!'");
+#endif
+					//TODO:袿姫の店で埴輪に種族変更できるようになるというのはどうだろう？
+				}
+			}
+			else //全滅ルート
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "全ての勢力を単独で殲滅して戻ると、背中に妙なむず痒さを感じた。");
+				strcpy(quest_text[line++], "振り向いてみるが誰もおらず、しかしいつの間にか小さな箱が置かれていた。");
+				strcpy(quest_text[line++], "どうやらあなたの行動はどこかの誰かを非常に満足させたらしい。");
+#else
+				strcpy(quest_text[line++], "After defeating all of the forces by yourself and returning, you feel");
+				strcpy(quest_text[line++], "someone standing behind you. As you turn around, there's nobody here,");
+				strcpy(quest_text[line++], "but there's a small box lying on the ground. Looks like your actions");
+				strcpy(quest_text[line++], "have made someone very happy.");
+#endif
+			}
+		}
+
+		//失敗時
+		else if (fail)
+		{
+
+			if (pc == CLASS_SAKI)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "またも敵対勢力に暴力で後れを取ってしまった。");
+				strcpy(quest_text[line++], "部下の手前気丈に振る舞うが、食事も喉を通らない...");
+#else
+				strcpy(quest_text[line++], "Once again, your enemies were more violent than you.");
+				strcpy(quest_text[line++], "You try to look strong for your subordinates, but you can't");
+				strcpy(quest_text[line++], "get a meal down your throat...");
+#endif
+			}
+			else if (pc == CLASS_YACHIE)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "抗争に敗れてしまった。");
+				strcpy(quest_text[line++], "石油利権を得た他勢力を相手にどう巻き返すか頭が痛い...");
+#else
+				strcpy(quest_text[line++], "You've lost the war.");
+				strcpy(quest_text[line++], "Your head hurts thinking about how to deal with other forces, now that the");
+				strcpy(quest_text[line++], "oil is in their hands...");
+#endif
+			}
+			else if (pc == CLASS_YUMA)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "折角の石油利権を奪われてしまった。");
+				strcpy(quest_text[line++], "今は大人しく引き下がるのみだ。");
+				strcpy(quest_text[line++], "いずれこっそり忍び込んで全部つまみ食いしてやろう。");
+#else
+				strcpy(quest_text[line++], "Your oil resources were taken away from you.");
+				strcpy(quest_text[line++], "You'll have to lay down for a while.");
+				strcpy(quest_text[line++], "Some day, you're going to come out and consume them all.");
+#endif
+			}
+			else if (pc == CLASS_MAYUMI || pc == CLASS_KEIKI)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "組長達の本気の抗争は想像以上の激しさだった。");
+				strcpy(quest_text[line++], "不覚にも敗走の憂き目にあってしまった。");
+#else
+				strcpy(quest_text[line++], "The matriarchs were stronger in battle than you expected.");
+				strcpy(quest_text[line++], "You were painfully defeated in conflict.");
+#endif
+			}
+			else if (pr == RACE_ANIMAL_GHOST)
+			{
+				switch (CHECK_ANIMAL_GHOST_STRIFE)
+				{
+				case ANIMAL_GHOST_STRIFE_KEIGA:
+#ifdef JP
+					strcpy(quest_text[line++], "早鬼「ええい、なんだあの鬱陶しい油は！");
+					strcpy(quest_text[line++], "悔しくなんか無いぞ！でも次は絶対に勝つからな！」");
+#else
+					strcpy(quest_text[line++], "Saki - 'Hey, what's up with that annoying oil?");
+					strcpy(quest_text[line++], "I have no regrets! Next time, we'll win for sure!'");
+#endif
+					break;
+
+				case ANIMAL_GHOST_STRIFE_KIKETSU:
+#ifdef JP
+					strcpy(quest_text[line++], "八千慧「まあこの手の争いは戦闘が終わってからが本番です。");
+					strcpy(quest_text[line++], "あとは私がやりましょう。あなたは元の任務に戻りなさい。」");
+#else
+					strcpy(quest_text[line++], "Yachie - 'Well, the real conflict starts after a battle like this");
+					strcpy(quest_text[line++], "is over. Leave it to me and resume your original mission.'");
+#endif
+					break;
+
+				case ANIMAL_GHOST_STRIFE_GOUYOKU:
+#ifdef JP
+					strcpy(quest_text[line++], "尤魔「まあいい。あれが誰のものになろうが勝手に忍び込んで食うまでだ。");
+					strcpy(quest_text[line++], "しかしなぜこんなに早く連中に石油のことが漏れた？");
+					strcpy(quest_text[line++], "やはりあの胡散臭い奴の差し金か？」");
+#else
+					strcpy(quest_text[line++], "Yuuma - 'Oh well; I don't care who controls it, I'll sneak in and");
+					strcpy(quest_text[line++], "devour it anyway. However, how did they find out about the oil so");
+					strcpy(quest_text[line++], "quickly?'");
+#endif
+					break;
+				default:
+#ifdef JP
+					strcpy(quest_text[line++], "あなたは畜生界住人たちの熾烈な抗争から命からがら逃げ出した。");
+#else
+					strcpy(quest_text[line++], "You ran for your life from the violent battle between the");
+					strcpy(quest_text[line++], "residents of Animal Realm.");
+#endif
+					break;
+				}
+			}
+			else if (pr == RACE_HANIWA)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "磨弓「動物霊にあれほどのことができるなんて...");
+				strcpy(quest_text[line++], "　夢のような現実だわ！」");
+#else
+				strcpy(quest_text[line++], "Mayumi - 'I never knew animal ghosts could be this powerful...");
+				strcpy(quest_text[line++], "  It's like a dream come true!'");
+#endif
+			}
+			else if (pc == CLASS_SATORI || pc == CLASS_KOISHI || pc == CLASS_ORIN || pc == CLASS_UTSUHO)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "あなたは畜生界住人たちの熾烈な抗争から命からがら逃げ出した。");
+#else
+                strcpy(quest_text[line++], "You ran for your life from the violent battle between the");
+                strcpy(quest_text[line++], "residents of Animal Realm.");
+#endif
+			}
+			else if (player_looks_human_side())//少々乱暴だが人間勢力っぽい外見かどうかで分岐
+			{
+#ifdef JP
+				if (p_ptr->psex == SEX_MALE)
+					strcpy(quest_text[line++], "燐「おやおやお兄さん大丈夫かい？");
+				else
+					strcpy(quest_text[line++], "燐「おやおやお姉さん大丈夫かい？");
+
+				strcpy(quest_text[line++], "もし大丈夫じゃなくても安心してよ。");
+				strcpy(quest_text[line++], "あたいがちゃんと死体の面倒を見てあげるからね。」");
+#else
+				strcpy(quest_text[line++], "Rin - 'Hey, are you okay?");
+				strcpy(quest_text[line++], "If you're not, don't worry!");
+				strcpy(quest_text[line++], "I'll take good care of your corpse.'");
+#endif
+			}
+			else
+			{
+#ifdef JP
+				if (p_ptr->psex == SEX_MALE)
+				{
+					strcpy(quest_text[line++], "燐「おやおやお兄さん大丈夫かい？");
+					strcpy(quest_text[line++], "でもお兄さんの死体は面白くなさそうだね。");
+				}
+				else
+				{
+					strcpy(quest_text[line++], "燐「おやおやお姉さん大丈夫かい？");
+					strcpy(quest_text[line++], "でもお姉さんの死体は面白くなさそうだね。");
+				}
+				strcpy(quest_text[line++], "ま、温泉に浸かったらさっさと帰った帰った。");
+#else
+				strcpy(quest_text[line++], "Rin - 'Hey, are you okay?");
+                strcpy(quest_text[line++], "Hmm, your corpse wouldn't be interesting to me.");
+				strcpy(quest_text[line++], "Just take a dip in the hot springs and go back.'");
+#endif
+			}
+
+		}
+		break;
+
+
+
+
 	default:
 		break;
 	}
@@ -9636,6 +10223,10 @@ bool check_ignoring_quest(int questnum)
 	case QUEST_REIMU_ATTACK:
 		if (pc == CLASS_REIMU) return TRUE;
 		break;
+
+	case QUEST_YAKUZA_1:
+		if (pc == CLASS_OKINA) return TRUE;
+
 	}
 
 
@@ -9712,45 +10303,17 @@ sprintf(tmp_str, _("１ターンにつき %d-%d", "1 turn: %d-%d"), p_ptr->num_blow[0] 
 }
 
 
-/*
- * Hook to specify "weapon"
- */
-/*:::毒針以外の武器のときTRUE*/
-/*:::cmd3.cに同名の関数がある*/
-///item　TVAL　装備変更
-///mod131223 melee_weapon 魔導書や魔導器は外しておく
-
-bool item_tester_hook_melee_weapon(object_type *o_ptr)
-{
-	switch (o_ptr->tval)
-	{
-		case TV_SWORD:
-		case TV_KATANA:
-		case TV_HAMMER:
-		case TV_STICK:
-		case TV_AXE:
-		case TV_SPEAR:
-		case TV_POLEARM:
-		case TV_OTHERWEAPON:
-		{
-			return (TRUE);
-		}
-		case TV_KNIFE:
-		{
-			if (o_ptr->sval != SV_WEAPON_DOKUBARI) return (TRUE);
-		}
-	}
-
-	return (FALSE);
-}
-
-//武器匠での比較用 melee_weapon+特殊魔法武器(扇など)
+//武器匠での比較用 object_is_melee_weaponから毒針を除いたもの
+//v1.1.93 全面書き換え TV_MAGICWEAPONを追加で指定できるようになった
 bool item_tester_hook_compare_weapon(object_type *o_ptr)
 {
-	if(item_tester_hook_melee_weapon(o_ptr)) return TRUE;
-	if(o_ptr->tval == TV_MAGICWEAPON) return TRUE;
+//	if(item_tester_hook_melee_weapon(o_ptr)) return TRUE;
+//	if(o_ptr->tval == TV_MAGICWEAPON) return TRUE;
 
-	return (FALSE);
+	if (o_ptr->tval == TV_KNIFE && o_ptr->sval == SV_WEAPON_DOKUBARI) return (FALSE);
+
+	return (object_is_melee_weapon(o_ptr));
+
 }
 
 
@@ -9855,7 +10418,8 @@ static int compare_weapons(int bcost)
 
 		/* Only compare melee weapons */
 		item_tester_no_ryoute = TRUE;
-		item_tester_hook = item_tester_hook_melee_weapon;
+		//v1.1.93 melee_weapon→compare_weaponに修正
+		item_tester_hook = item_tester_hook_compare_weapon;
 
 		/* Hack -- prevent "icky" message */
 		character_xtra = TRUE;
@@ -10125,7 +10689,7 @@ bool item_tester_hook_repair_material(object_type *o_ptr)
 {
 
 	//v1.1.64 EXTRA部屋の霊長園でも使うが、このときは武器を選択できない
-	if (item_tester_hook_melee_weapon(o_ptr))
+	if (object_is_melee_weapon_except_strange_kind(o_ptr))
 	{
 		if (building_ex_idx[f_info[cave[py][px].feat].subtype] == BLDG_EX_KEIKI)
 			return FALSE;
@@ -12171,11 +12735,97 @@ bool riding_ropeway(void)
 	p_ptr->leaving = TRUE;
 	leave_bldg = TRUE;
 	p_ptr->teleport_town = TRUE;
-	flag_riding_ropeway = TRUE;
+	teleport_town_mode = TELE_TOWN_MODE_ROPEWAY;
 	screen_load();
 	return TRUE;
 }
 
+
+
+//地霊虹洞
+//v1.1.91 魔法の森⇔旧地獄市街
+bool pass_through_chirei_koudou(void)
+{
+	int i, x, y;
+	int num = 0;
+	int new_town;
+
+	if (p_ptr->word_recall)
+	{
+		msg_print(_("今は帰還待ち中だ。", "You are waiting to be recalled."));
+		return FALSE;
+	}
+
+	screen_save();
+	clear_bldg(4, 20);
+
+	if (p_ptr->town_num == TOWN_KIRISAME)
+	{
+		prt(_("広い洞窟が奥へと続いている。", "There's a path leading deep into a cave."), 4, 0);
+		prt(_("　ここを通れば地底に行けるはずだ...", "  You should be able to reach underground if you go through here..."), 5, 0);
+		new_town = TOWN_CHITEI;
+	}
+	else
+	{
+		prt(_("地上の魔法の森へと通じている洞窟だ。", "This cave connects to Forest of Magic on surface."), 4, 0);
+		new_town = TOWN_KIRISAME;
+	}
+
+	if (!get_check_strict(_("洞窟に入りますか？", "Enter the cave? "), CHECK_DEFAULT_Y))
+	{
+		screen_load();
+		return FALSE;
+	}
+
+	for (y = 0; y < max_wild_y; y++)
+	{
+		for (x = 0; x < max_wild_x; x++)
+		{
+			if (wilderness[y][x].town == new_town)
+			{
+				p_ptr->wilderness_y = y;
+				p_ptr->wilderness_x = x;
+			}
+		}
+	}
+	clear_bldg(4, 20);
+
+	//フレーバーメッセージ
+	switch (randint1(5))
+	{
+	case 1:
+		if (p_ptr->pclass != CLASS_MARISA)
+		{
+			prt(_("何やら大荷物を抱えて逃亡中の魔法使いとすれ違った..",
+                "You meet a fleeing magician carrying a lot of baggage..."), 10, 10);
+			break;
+		}
+		//go through
+	case 2:
+		if (p_ptr->pclass != CLASS_YAMAME)
+		{
+			prt(_("土蜘蛛が昼寝をしている...", "The tsuchigumo is sleeping..."), 10, 10);
+			break;
+		}
+		//go through
+	default:
+		prt(_("あなたは薄暗い洞窟の中を歩き始めた...", "You start walking through the dark cave..."), 10, 10);
+		break;
+	}
+
+
+	prt(_("何かキーを押してください", "Press any key"), 0, 0);
+	(void)inkey();
+	prt("", 0, 0);
+
+
+	p_ptr->leaving = TRUE;
+	leave_bldg = TRUE;
+	p_ptr->teleport_town = TRUE;
+	teleport_town_mode = TELE_TOWN_MODE_CHIREIKOUDOU;
+	screen_load();
+	return TRUE;
+}
 
 /*
  *  research_mon
@@ -12504,26 +13154,30 @@ void display_rumor_new(int town_num)
 	bool err;
 	int i;
 
-	bool extra_grassroot_rumor = FALSE;
-	//v1.1.26 EXTRA用噂の判定にcharacter_ickyを追加。玉兎のレイシャルでも噂を聞けるの忘れてた
-	//v1.1.27 icky>1にしたら全部が玉兎用噂になったので修正。
-	if(EXTRA_MODE && character_icky)
-		extra_grassroot_rumor = TRUE;
+	//v1.1.92 処理を変えてex_rumor_new()で数値設定することにした
+		//bool extra_grassroot_rumor = FALSE;
+		//v1.1.26 EXTRA用噂の判定にcharacter_ickyを追加。玉兎のレイシャルでも噂を聞けるの忘れてた
+		//v1.1.27 icky>1にしたら全部が玉兎用噂になったので修正。
+		//if(EXTRA_MODE && character_icky)
+		//	extra_grassroot_rumor = TRUE;
 
 	//v1.1.18 EXTRA用噂
-	if(extra_grassroot_rumor && ex_buildings_param[f_info[cave[py][px].feat].subtype]== 255)
+	if(town_num == 23 && ex_buildings_param[f_info[cave[py][px].feat].subtype]== 255)
 	{
 		msg_print(_("草の根妖怪ネットワークの者達はもういない。",
                 "The Grassroots Network youkai have left."));
 		return;
 	}
 
+	//LUNATICでは変な噂になる
+	if (difficulty == DIFFICULTY_LUNATIC && (town_num < 7)) town_num = 99;
+
 	screen_save();
 
-	//LUNATICでは変な噂になる
-	if(difficulty == DIFFICULTY_LUNATIC && (town_num < 7)) town_num = 99;
 	//v1.1.18 EXTRA噂追加
-	else if(extra_grassroot_rumor) town_num = 23;
+	//v1.1.92 処理を変えてex_rumor_new()で数値設定することにした
+	//else if(extra_grassroot_rumor) town_num = 23;
+
 
 	err = get_rnd_line(_("rumors_new.txt", "rumors_new_e.txt"), town_num, buf);
 	if (err) strcpy(buf, _("ERROR:その番号の噂は定義されていない。",
@@ -13221,6 +13875,12 @@ void buy_ability_card(bool examine)
 
 	object_type barter_list[10];
 
+	if (p_ptr->pclass == CLASS_MIKE)
+	{
+		msg_print(_("カード販売所には招き猫たちが群れていて近寄りたくない。",
+                    "You don't want to approach the card trading office swarming with maneki-neko."));
+		return;
+	}
 
 	if (!CHECK_ABLCARD_DEALER_CLASS)
 	{
@@ -13783,15 +14443,15 @@ void grassroots_trading_cards(void)
 	{
 		if(p_ptr->grassroots)
 		{
-			mult = 100;
-			base_rarity = 40;
-			trade_chance = 3 + randint1(4);
+			mult = 120;
+			base_rarity = 80;
+			trade_chance = 6 + randint1(4);
 		}
 		else
 		{
-			mult = 70 + adj_general[p_ptr->stat_ind[A_CHR]]/2;
-			base_rarity = 20 + adj_general[p_ptr->stat_ind[A_CHR]]/3;
-			trade_chance = 4 + randint1(6);
+			mult = 80 + adj_general[p_ptr->stat_ind[A_CHR]]/2;
+			base_rarity = 20 + adj_general[p_ptr->stat_ind[A_CHR]];
+			trade_chance = 3 + randint1(5);
 		}
 		if(p_ptr->pclass == CLASS_KAGEROU)
 		{
@@ -13822,9 +14482,9 @@ void grassroots_trading_cards(void)
 			return;
 		}
 
-		mult = 50 + rank;
-		base_rarity = 25 + rank;
-		trade_chance = 1 + rank / 12;
+		mult = 70 + rank/2;
+		base_rarity = 50 + rank;
+		trade_chance = 3 + rank / 15;
 		q = _("どのカードを出しますか？", "Which card do you want to trade?");
 		s = _("カードを持っていない。", "You don't have cards.");
 		msg_select = _("「カードってこれのこと？さっき懲らしめた妖怪が持っていたんだけど」",
@@ -13838,9 +14498,9 @@ void grassroots_trading_cards(void)
 	else if(ex_bldg_idx == BLDG_EX_MARISA)
 	{
 
-		mult = 80;
-		base_rarity = 50;
-		trade_chance = 4 ;
+		mult = 100;
+		base_rarity = 70;
+		trade_chance = 5 ;
 		q = _("「何のカードを出すんだ？宝石や魔法書でもいいぜ。」",
                 "'What card do you want to trade? Gems or magic books are fine too.'");
 		s = _("交換できるものを持っていない。", "You don't have anything to exchange.");
@@ -13849,6 +14509,21 @@ void grassroots_trading_cards(void)
                         "'Sorry, I don't have any cards to match that.'");
 		msg_finish = _("「さて、またどこかで商品を仕入れてこなきゃな。」",
                         "'Well, I'll have to obtain some products again.'");
+
+	}
+	else if (ex_bldg_idx == BLDG_EX_YUMA)
+	{
+
+		mult = 80;
+		base_rarity = 60;
+		trade_chance = 4;
+		q = _("「酒か食い物をよこせ。」", "'Give me sake or food.'");
+		s = _("交換できるものを持っていない。", "You don't have anything to exchange.");
+		//msg_select = ""; あとで設定する
+		msg_reject = _("「悪いな。それに見合うカードを持ってないぜ。」",
+                        "'Sorry, I don't have any cards to match that.'");
+		msg_finish = _("「次はもっと旨いものを持ってこい。」",
+                        "'Bring something better next time.'");
 
 	}
 	else
@@ -13861,6 +14536,8 @@ void grassroots_trading_cards(void)
 	//カード選ぶ
 	if(ex_bldg_idx == BLDG_EX_MARISA)
 		item_tester_hook = marisa_will_trade;
+	else if(ex_bldg_idx == BLDG_EX_YUMA)
+		item_tester_hook = yuma_will_trade;
 	else
 		item_tester_tval = TV_ITEMCARD;
 
@@ -13880,8 +14557,11 @@ void grassroots_trading_cards(void)
 	{
 		ref_pval = o_ptr->pval;
 		ref_cost = support_item_list[ref_pval].cost;
+
+		ref_totalcost = ref_cost * ref_num * mult / 100;
+
 	}
-	else //移動魔法店でアイテムを渡したとき
+	else if (ex_bldg_idx == BLDG_EX_MARISA) //移動魔法店でアイテムを渡したとき
 	{
 		ref_pval = -1;
 
@@ -13901,19 +14581,271 @@ void grassroots_trading_cards(void)
 					ref_cost = marisa_wants_table[i].maripo / 10;
 					if(ref_cost > 50) base_rarity += 20;
 				}
+
 				if(ref_cost > 30)
 				{
-					ref_cost = 30 + (ref_cost - 30) / 2;
-					trade_chance += ref_cost / 20;
+
+					//ref_cost = 30 + (ref_cost - 30) / 2;
+					trade_chance += ref_cost / 30;
 					if(trade_chance > 10) trade_chance = 10;
 				}
+
+				ref_totalcost = ref_cost * ref_num * mult / 100;
 
 				break;
 			}
 		}
+
+
+	}
+	else if (ex_bldg_idx == BLDG_EX_YUMA)
+	{
+
+		//巨大な卵
+		if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_BIG_EGG)
+		{
+			msg_select = _("クックック...こいつは珍しいものを持ってきたな。",
+                            "Hehehe... You've brought in something rare.");
+			ref_cost = 300;
+		}
+		//伊吹瓢
+		else if (o_ptr->name1 == ART_IBUKI)
+		{
+			msg_select = _("ほう、いくらでも酒が出るのか？この私に打って付けじゃないか。",
+                            "Oh, it produces as much sake as you want? It's perfect for me!");
+			ref_cost = 250;
+		}
+		//道寿の壺
+		else if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_DOUJU)
+		{
+			msg_select = _("ほう、いくらでも油が出るのか？この私に打って付けじゃないか。",
+                            "Oh, it produces as much oil as you want? It's perfect for me!");
+			ref_cost = 200;
+		}
+		else if (o_ptr->tval == TV_FOOD)
+		{
+
+			switch (o_ptr->sval)
+			{
+			case SV_FOOD_SLIMEMOLD:
+			case SV_FOOD_SENTAN:
+			case SV_FOOD_MAGIC_WATERMELON:
+				msg_select = _("まあ腹の足しにはなるか。",
+                                "I guess that'll do.");
+				ref_cost = 5;
+				break;
+
+			case SV_FOOD_EEL:
+			case SV_FOOD_TENTAN:
+				msg_select = _("中々滋養がありそうじゃないか。",
+                                "That looks quite nourishing!");
+				ref_cost = 20;
+				break;
+
+			default:
+				msg_select = _("つまらんな。他に何も持ってないのか？",
+                                "Meh. Do you have anything else?");
+				ref_cost = 1;
+				break;
+			}
+		}
+		else if (o_ptr->tval == TV_MUSHROOM)
+		{
+
+			switch (o_ptr->sval)
+			{
+			case SV_MUSHROOM_MANA:
+			case SV_MUSHROOM_PUFFBALL:
+			case SV_MUSHROOM_MON_L_BLUE:
+				msg_select = _("まあ腹の足しにはなるか。",
+                                "I guess that'll do.");
+				ref_cost = 5;
+				break;
+
+				//実際EXTRAでは手に入らないがそのうち何かで手に入るようになるかもしれんので設定しておく
+			case SV_MUSHROOM_MON_SUPER:
+				msg_select = _("こいつは魔法の森の主か？なぜこんなところに？",
+                                "Isn't that the Lord of Forest of Magic? What is it doing here?");
+				ref_cost = 300;
+				break;
+
+			default:
+				msg_select = _("腹の足しにもならんな。", "That doesn't satisfy me.");
+				ref_cost = 1;
+				break;
+			}
+		}
+		else if (o_ptr->tval == TV_SWEETS)
+		{
+			switch (o_ptr->sval)
+			{
+			case SV_SWEET_POTATO:
+				msg_select = _("美味そうな焼き芋だな。早くよこせ。",
+                                "That's a delicious sweet potato. Hand it over!");
+				ref_cost = 10;
+				break;
+
+			case SV_SWEETS_MIRACLE_FRUIT:
+				msg_select = _("中々滋養がありそうじゃないか。",
+                                "That looks quite nourishing!");
+				ref_cost = 20;
+				break;
+
+			case SV_SWEETS_PEACH:
+				msg_select = _("それは仙桃じゃないか。懐かしいな。",
+                                "Isn't that a hermit peach? I miss those.");
+				ref_cost = 50;
+				break;
+
+			default:
+				msg_select = _("つまらんな。他に何も持ってないのか？",
+                                "Meh. Do you have anything else?");
+				ref_cost = 2;
+				break;
+			}
+		}
+		else if (o_ptr->tval == TV_FLASK)
+		{
+			switch (o_ptr->sval)
+			{
+				//ロケット燃料が一番コスパがいいが使い道と重量を考えれば大量に買って持ち歩くのは現実的ではないだろう
+			case SV_FLASK_ROCKET:
+			case SV_FLASK_ENERGY_RED:
+			case SV_FLASK_ENERGY_BLUE:
+			case SV_FLASK_ENERGY_WHITE:
+			case SV_FLASK_ENERGY_BLACK:
+				msg_select = _("まあ腹の足しにはなるか。",
+                                "I guess that'll do.");
+				ref_cost = 5;
+				break;
+			case SV_FLASK_ENERGY_PARTICLE:
+				msg_select = _("何だそれは？見たこともない力を感じるぞ。",
+                                "What's this? I'm feeling some unknown power.");
+				ref_cost = 50;
+				break;
+			case SV_FLASK_ENERGY_WAVEMOTION:
+				msg_select = _("何だそれは？見たこともない力を感じるぞ。",
+                                "What's this? I'm feeling some unknown power.");
+				ref_cost = 100;
+				break;
+			case SV_FLASK_ENERGY_HYPERSPACE:
+				msg_select = _("何だそれは？見たこともない力を感じるぞ。",
+                                "What's this? I'm feeling some unknown power.");
+				ref_cost = 200;
+				break;
+
+			default:
+				msg_select = _("つまらんな。他に何も持ってないのか？",
+                                "Meh. Do you have anything else?");
+				ref_cost = 1;
+				break;
+			}
+
+		}
+		else if (o_ptr->tval == TV_ALCOHOL)
+		{
+			switch (o_ptr->sval)
+			{
+
+
+
+			case SV_ALCOHOL_ORC:
+			case SV_ALCOHOL_REISYU:
+				msg_select = _("なんか薬臭い酒だな。", "What's that medicinal liquor?");
+				ref_cost = 10;
+				break;
+
+			case SV_ALCOHOL_STRONGWINE:
+			case SV_ALCOHOL_MAGGOT_BEER:
+			case SV_ALCOHOL_1420:
+			case SV_ALCOHOL_SCARLET:
+			case SV_ALCOHOL_MAMUSHI:
+				msg_select = _("なかなか悪くない酒だ。もっと持ってこい。", "That wasn't bad. Bring some more.");
+				ref_cost = 30;
+				break;
+
+			case SV_ALCOHOL_MARISA:
+				msg_select = _("何だ？何をやったらただの安酒がこんな呪われた代物になるんだ？",
+                                "What? Just what did you do to turn cheap sake into a cursed item like this?");
+				ref_cost = 50;
+				break;
+
+			case SV_ALCOHOL_90:
+			case SV_ALCOHOL_SYUTYUU:
+			case SV_ALCOHOL_TRUE_ONIKOROSHI:
+				msg_select = _("ほう、こいつは美味そうだ。", "Ohh, that's delicious!");
+				ref_cost = 50;
+				break;
+
+			case SV_ALCOHOL_KOKO:
+			case SV_ALCOHOL_EIRIN:
+				msg_select = _("随分古そうだが妙に味気ない酒だな。",
+                                "Looks very old, but it's strangely tasteless.");
+				ref_cost = 50;
+				break;
+
+			case SV_ALCOHOL_KUSHINADA:
+				msg_select = _("クックック...この程度の毒酒でこの私が潰れると思ったか？",
+                                "Hehehe... Did you think you could knock me out with that much poisoned sake?");
+				ref_cost = 100;
+				break;
+
+			case SV_ALCOHOL_GOLDEN_MEAD:
+				msg_select = _("私の知らない古く強い力を感じるな。なかなか興味深いぞ。",
+                                "I'm feeling some unknown ancient power. That's very interesting.");
+				ref_cost = 100;
+				break;
+
+			case SV_ALCOHOL_NECTAR:
+				msg_select = _("ほう、異国の神酒か！こいつは栄養満点だ！",
+                                "Ohh, an exotic divine liquor! It's so fullfilling!");
+				ref_cost = 200;
+				break;
+
+			default:
+				msg_select = _("もっと強い酒はないのか？", "Don't you have anything stronger?");
+				ref_cost = 5;
+				break;
+			}
+		}
+		else
+		{
+			msg_print(_("ERROR:このアイテムを尤魔に渡したときの評価値が設定されていない",
+                        "ERROR: Undefined value for this item given to Yuuma"));
+			return;
+		}
+
+		if (ref_cost > 30)
+		{
+			//ref_cost = 30 + (ref_cost - 30) / 2;
+			trade_chance += ref_cost / 30;
+			if (trade_chance > 10) trade_chance = 10;
+			base_rarity += ref_cost / 5;
+		}
+
+		//食料生成99個とかで高級なカードを入手することを防ぐためにアイテムの数が多すぎるとtotalcostを減らしておく
+
+		if (ref_num == 1)
+			ref_totalcost = ref_cost * mult / 100;
+		else if (ref_num <= 10)
+			ref_totalcost = ref_cost * (1 + (ref_num - 1) * 2 / 3) * mult / 100;
+		else if (ref_num <= 30)
+			ref_totalcost = ref_cost * (7 + (ref_num - 10) / 2) * mult / 100;
+		else if (ref_num <= 70)
+			ref_totalcost = ref_cost * (17 + (ref_num - 30) / 4) * mult / 100;
+		else
+			ref_totalcost = ref_cost * (27 + (ref_num - 70) / 8) * mult / 100;
+
+
+
+	}
+	else
+	{
+		msg_print(_("ERROR:この建物でカード交換するときのコスト計算が設定されていない",
+                    "ERROR: Undefined cost calculation for card trading in this building"));
+		return;
 	}
 
-	ref_totalcost = ref_cost * ref_num * mult / 100;
 	for(i=0;i<10;i++) object_wipe(&barter_list[i]);
 	trade_num = 0;
 
@@ -14408,6 +15340,75 @@ static bool escape_from_gensoukyou(void)
 }
 
 
+//v1.1.92
+//回復施設で近くの配下も回復することにする
+//ratio:HPの回復率
+static void bldg_heal_all_pets(int ratio)
+{
+	int i;
+
+	//フロアのモンスターをループ
+	for (i = 1; i < m_max; i++)
+	{
+		int heal;
+		bool flag_done = FALSE;
+
+		monster_type *m_ptr = &m_list[i];
+		monster_race *r_ptr;
+		char m_name[240];
+		r_ptr = &r_info[m_ptr->r_idx];
+		if (!m_ptr->r_idx) continue;
+		if (!is_pet(m_ptr)) continue;
+		if (m_ptr->cdis > 3) continue;
+
+		monster_desc(m_name, m_ptr, 0);
+		r_ptr = &r_info[m_ptr->r_idx];
+		heal = m_ptr->max_maxhp * ratio / 100;
+		if (heal < 300) heal = 300;
+
+		if (m_ptr->hp < m_ptr->max_maxhp)
+		{
+			int tmp;
+			flag_done = TRUE;
+
+			tmp = m_ptr->hp + heal;
+			if (tmp > m_ptr->max_maxhp) tmp = m_ptr->max_maxhp;
+			if (tmp > m_ptr->maxhp) m_ptr->maxhp = tmp;
+			m_ptr->hp = tmp;
+
+		}
+		if (MON_STUNNED(m_ptr))
+		{
+			flag_done = TRUE;
+			set_monster_stunned(i, 0);
+		}
+		if (MON_CONFUSED(m_ptr))
+		{
+			flag_done = TRUE;
+			set_monster_confused(i, 0);
+
+		}
+		if (MON_SLOW(m_ptr))
+		{
+			flag_done = TRUE;
+			set_monster_slow(i, 0);
+
+		}
+		if (MON_MONFEAR(m_ptr))
+		{
+			flag_done = TRUE;
+			set_monster_monfear(i, 0);
+
+		}
+
+		if(flag_done) msg_format(_("%sは回復した。", "%s is healed."), m_name);
+	}
+
+
+
+	return;
+
+}
 
 
 
@@ -14754,6 +15755,86 @@ static void engineer_guild_guide(void)
 	display_rumor_new(21);
 }
 
+
+//v1.1.92 EXダンジョン建物用の噂コマンド 建物説明とか
+static void ex_rumor_new(void)
+{
+
+	int ex_bldg_num = f_info[cave[py][px].feat].subtype;
+	int ex_bldg_idx = building_ex_idx[ex_bldg_num];
+
+	switch(ex_bldg_idx)
+	{
+	case BLDG_EX_GRASSROOTS:
+		display_rumor_new(23);
+		break;
+
+	case BLDG_EX_YUMA:
+		display_rumor_new(24);
+		break;
+	default:
+		msg_print(_("ERROR:この建物のex_rumor_new()処理が登録されていない",
+                    "ERROR: ex_rumor_new() logic undefined for this building"));
+
+
+	}
+}
+
+
+//v1.1.92 尤魔が呪われたアイテムを食べて消滅させる
+static void yuma_eats_cursed_item(void)
+{
+
+	int choice;
+	int item, item_pos;
+	int amt;
+	s32b price, value, dummy;
+	object_type *o_ptr;
+	cptr q, s;
+	char o_name[MAX_NLEN];
+	int i, base_point, total_point;
+
+	q = _("「どれを喰ってほしい？」", "'What do you want me to eat?'");
+	s = _("「呪いの匂いはしないな。つまらん。」", "'Meh, I don't smell any curses.'");
+
+	item_tester_hook = item_tester_hook_cursed;
+	if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP))) return;
+	o_ptr = &inventory[item];
+
+	if (!(wield_check(item, INVEN_PACK)))
+	{
+		return;
+	}
+
+	object_desc(o_name, o_ptr, OD_NAME_ONLY);
+
+	if (!get_check(format(_("「%sを喰うぞ？いいんだな？」", "'I'm going to eat %s; are you sure?' "), o_name))) return;
+
+	if (o_ptr->curse_flags & TRC_PERMA_CURSE)
+	{
+		prt(_("「こいつは千年ものの呪いだな！栄養満点だ！」",
+            "'That's a thousand-year curse! It's so fullfilling!'"),10,20);
+	}
+	else if (o_ptr->curse_flags & TRC_HEAVY_CURSE)
+	{
+		prt(_("「なかなか悪くない味の呪いだな。」",
+            "'This curse tasted pretty well.'"), 10, 20);
+	}
+	else
+	{
+		prt(_("「貧相な呪いだな。喰い足りん。」",
+            "'What a lousy curse. I need more food.'"), 10, 20);
+	}
+
+
+	inven_item_increase(item, (0-o_ptr->number));
+	inven_item_describe(item);
+	inven_item_optimize(item);
+
+}
+
+
+
 ///mod150811 魔理沙魔法作成ルールを読む
 static void marisa_read_memo(void)
 {
@@ -14910,13 +15991,21 @@ msg_print("お金が足りません！");
 	//	do_cmd_study();
 	//	break;
 	case BACT_HEALING: /* needs work */
+		if (dun_level)
+			msg_print(_("治療を受けた。", "You are healed."));
+		else
+			msg_print(_("あなたは温泉で体を癒やした...", "You heal your body in the hot springs..."));
+
 		hp_player(200);
 		set_poisoned(0);
 		set_blind(0);
 		set_confused(0);
 		set_cut(0);
 		set_stun(0);
-		msg_print(_("治療を受けた。", "You are healed."));
+
+		//v1.1.92 配下も回復する
+		bldg_heal_all_pets(30);
+
 		paid = TRUE;
 		break;
 
@@ -14932,6 +16021,12 @@ msg_print("お金が足りません！");
 		set_asthma(0);
 		restore_level();
 		set_food(MAX(p_ptr->food, PY_FOOD_FULL - 1));
+
+		//v1.1.92 配下も回復する
+		bldg_heal_all_pets(100);
+
+		msg_print(_("治療を受けた。", "You are healed."));
+
 		paid = TRUE;
 		break;
 	case BACT_RESTORE: /* needs work */
@@ -15129,6 +16224,16 @@ msg_print("お金が足りません！");
 		paid = riding_ropeway();
 		break;
 
+		//v1.1.91
+	case BACT_GO_UNDERGROUND:
+		paid = pass_through_chirei_koudou();
+		break;
+
+	case BACT_EX_RUMOR_NEW:
+		ex_rumor_new();
+		break;
+
+
 	/*:::防御について調べる（武器匠）*/
 	case BACT_EVAL_AC:
 		paid = eval_ac(p_ptr->dis_ac + p_ptr->dis_to_a);
@@ -15268,6 +16373,11 @@ msg_print("お金が足りません！");
 	case BACT_EX_SEARCH_AROUND:
 		exbldg_search_around();
 		break;
+
+	case BACT_DESTROY_ITEM:
+		yuma_eats_cursed_item();
+		break;
+
 
 	case BACT_BUY_HINA_NINGYOU:
 		buy_hinaningyou();
@@ -15458,6 +16568,133 @@ msg_print("ここにはクエストの入口はない。");
 			else if(c == 'b') quest[QUEST_KORI].flags |= QUEST_FLAG_TEAM_B;
 
 		}
+
+			//v1.1.91 抗争クエスト1
+			//抗争クエに入るとき、どちらの勢力につくか選択してフラグをp_ptr->animal_ghost_align_flagに記録する
+		else if (cave[py][px].special == QUEST_YAKUZA_1)
+			{
+				int i;
+				char c;
+				u32b selectable_flags = 0L;
+
+				//選択可能な勢力をフラグで設定
+				//プロテウスリングとかで変身中のときも考慮する？
+
+					//動物霊に憑依されている場合最優先でその所属に固定
+					if (p_ptr->muta4 & MUT4_GHOST_WOLF)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
+					}
+					else if (p_ptr->muta4 & MUT4_GHOST_EAGLE)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+					}
+					else if (p_ptr->muta4 & MUT4_GHOST_OTTER)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+					}
+					else if (p_ptr->muta4 & MUT4_GHOST_HANIWA)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
+					}
+				//早鬼
+					else if (p_ptr->pclass == CLASS_SAKI)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
+					}
+				//八千慧
+					else if (p_ptr->pclass == CLASS_YACHIE)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+					}
+				//尤魔
+					else if (p_ptr->pclass == CLASS_YUMA)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+					}
+				//埴輪と袿姫
+					else if (p_ptr->prace == RACE_HANIWA || p_ptr->pclass == CLASS_KEIKI)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
+					}
+				//ほか種族動物霊は所属勢力で決まる。無所属(あるいは今後実装されるかもしれない正体不明の集団)は埴輪以外全て選択可能
+					else if (p_ptr->prace == RACE_ANIMAL_GHOST)
+					{
+						switch (CHECK_ANIMAL_GHOST_STRIFE)
+						{
+						case ANIMAL_GHOST_STRIFE_KEIGA:
+							selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
+							break;
+
+						case ANIMAL_GHOST_STRIFE_KIKETSU:
+							selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+							break;
+
+						case ANIMAL_GHOST_STRIFE_GOUYOKU:
+							selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+							break;
+						default:
+							selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+							break;
+						}
+					}
+				//神奈子とフランは剛欲か全滅
+					else if (p_ptr->pclass == CLASS_KANAKO || p_ptr->pclass == CLASS_FLAN)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+					}
+				//さとまいは？埴輪か全滅？
+				//霊夢・映姫・久侘歌・種族死神は全滅オンリー
+					else if (p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_EIKI || p_ptr->pclass == CLASS_KUTAKA || p_ptr->prace == RACE_DEATH)
+					{
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+					}
+					else //上に挙げた条件に当てはまらないとき全て選択可能
+					{
+						selectable_flags |= (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_HANIWA | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+					}
+				screen_save();
+				for (i = 1; i<9; i++)Term_erase(12, i, 255);
+
+				put_str("どの勢力につきますか？", 1, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_KEIGA) put_str(_("a) 勁牙組", "a) Keiga Family"), 3, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_KIKETSU) put_str(_("b) 鬼傑組", "b) Kiketsu Family"), 4, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_GOUYOKU) put_str(_("c) 剛欲同盟", "c) Gouyoku Alliance"), 5, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_HANIWA) put_str(_("d) 埴輪兵団", "d) Haniwa Corps"), 6, 40);
+				if (selectable_flags & ANIMAL_GHOST_ALIGN_KILLTHEMALL) put_str(_("e) 全員倒す", "e) Defeat them all"), 7, 40);
+
+				while (1)
+				{
+					c = inkey();
+					//v1.1.92 間違えて&&でつないでたので修正
+					if (c < 'a' || c > 'e') continue;
+
+					if (c == 'a' && !(selectable_flags & ANIMAL_GHOST_ALIGN_KEIGA)) continue;
+					if (c == 'b' && !(selectable_flags & ANIMAL_GHOST_ALIGN_KIKETSU)) continue;
+					if (c == 'c' && !(selectable_flags & ANIMAL_GHOST_ALIGN_GOUYOKU)) continue;
+					if (c == 'd' && !(selectable_flags & ANIMAL_GHOST_ALIGN_HANIWA)) continue;
+					if (c == 'e' && !(selectable_flags & ANIMAL_GHOST_ALIGN_KILLTHEMALL)) continue;
+
+					break;
+				}
+				screen_load();
+
+				//フラグをp_ptr->animal_ghost_align_flagに記録
+				if (c == 'a')
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_ALIGN_KEIGA;
+				else if (c == 'b')
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_ALIGN_KIKETSU;
+				else if (c == 'c')
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_ALIGN_GOUYOKU;
+				else if (c == 'd')
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_ALIGN_HANIWA;
+				else if (c == 'e')
+					p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_ALIGN_KILLTHEMALL;
+				else
+					msg_print(_("ERROR:不正な選択が行われた", "ERROR: Incorrect choice"));
+
+			}
+
 
 		//v1.1.24 クエスト「急流下り」の開始時ターンを記録
 		if(QRKDR)
@@ -15852,6 +17089,7 @@ void quest_discovery(int q_idx)
 		/* Unique */
 
 		/* Hack -- "unique" monsters must be "unique" */
+		//v1.1.92 place_quest_monsters()の仕様変更によりここには来なくなるはず
 		if ((r_ptr->flags1 & RF1_UNIQUE) &&
 		    (0 == r_ptr->max_num))
 		{

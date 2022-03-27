@@ -1,6 +1,6 @@
 
                   ****************************************
-                  **  Hengband Touhou Katteban v1.1.90  **
+                  **  Hengband Touhou Katteban v1.1.95  **
                   ****************************************
 
           Based on Moria:   Copyright (c) 1985 Robert Alan Koeneke

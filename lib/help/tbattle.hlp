@@ -10,13 +10,14 @@
     (d) 格闘について             (tbattle.txt#Martialarts)
     (e) 投擲について             (tbattle.txt#Throwing)
     (f) 会心の一撃について       (tbattle.txt#Critical)
-    (g) 補助効果について         (tbattle.txt#Buff)
-    (h) バッドステータスについて (tbattle.txt#BadStatus)
-    (i) 属性について             (tbattle.txt#Attack_type)
-    (j) 弱点について             (tbattle.txt#Weak_point)
-    (k) 低層戦術                 (tbattle.txt#Tactics1)
-    (l) 中層戦術                 (tbattle.txt#Tactics2)
-    (m) 深層戦術                 (tbattle.txt#Tactics3)
+    (g) 熟練度について           (tbattle.txt#Skilllevel)
+    (h) 補助効果について         (tbattle.txt#Buff)
+    (i) バッドステータスについて (tbattle.txt#BadStatus)
+    (j) 属性について             (tbattle.txt#Attack_type)
+    (k) 弱点について             (tbattle.txt#Weak_point)
+    (l) 低層戦術                 (tbattle.txt#Tactics1)
+    (m) 中層戦術                 (tbattle.txt#Tactics2)
+    (n) 深層戦術                 (tbattle.txt#Tactics3)
 
     (?) ヘルプシステムの使用法      (jhelpinfo.txt)
 
@@ -27,10 +28,11 @@
 ***** [d] tbattle.txt#Martialarts
 ***** [e] tbattle.txt#Throwing
 ***** [f] tbattle.txt#Critical
-***** [g] tbattle.txt#Buff
-***** [h] tbattle.txt#BadStatus
-***** [i] tbattle.txt#Attack_type
-***** [j] tbattle.txt#Weak_point
-***** [k] tbattle.txt#Tactics1
-***** [l] tbattle.txt#Tactics2
-***** [m] tbattle.txt#Tactics3
+***** [g] tbattle.txt#Skilllevel
+***** [h] tbattle.txt#Buff
+***** [i] tbattle.txt#BadStatus
+***** [j] tbattle.txt#Attack_type
+***** [k] tbattle.txt#Weak_point
+***** [l] tbattle.txt#Tactics1
+***** [m] tbattle.txt#Tactics2
+***** [n] tbattle.txt#Tactics3

@@ -631,15 +631,31 @@ static void rd_item(object_type *o_ptr)
 	if (flags & SAVE_ITEM_MARKED) rd_byte(&o_ptr->marked);
 	else o_ptr->marked = 0;
 
-	/* Object flags */
-	if (flags & SAVE_ITEM_ART_FLAGS0) rd_u32b(&o_ptr->art_flags[0]);
-	else o_ptr->art_flags[0] = 0;
-	if (flags & SAVE_ITEM_ART_FLAGS1) rd_u32b(&o_ptr->art_flags[1]);
-	else o_ptr->art_flags[1] = 0;
-	if (flags & SAVE_ITEM_ART_FLAGS2) rd_u32b(&o_ptr->art_flags[2]);
-	else o_ptr->art_flags[2] = 0;
-	if (flags & SAVE_ITEM_ART_FLAGS3) rd_u32b(&o_ptr->art_flags[3]);
-	else o_ptr->art_flags[3] = 0;
+	//v1.1.94 art_flags拡張のついでにフラグにかかわらずすべて保存することにした
+	if (h_older_than(1, 1, 94, 0))
+	{
+		if (flags & SAVE_ITEM_ART_FLAGS0) rd_u32b(&o_ptr->art_flags[0]);
+		else o_ptr->art_flags[0] = 0;
+		if (flags & SAVE_ITEM_ART_FLAGS1) rd_u32b(&o_ptr->art_flags[1]);
+		else o_ptr->art_flags[1] = 0;
+		if (flags & SAVE_ITEM_ART_FLAGS2) rd_u32b(&o_ptr->art_flags[2]);
+		else o_ptr->art_flags[2] = 0;
+		if (flags & SAVE_ITEM_ART_FLAGS3) rd_u32b(&o_ptr->art_flags[3]);
+		else o_ptr->art_flags[3] = 0;
+
+		o_ptr->art_flags[4] = 0;
+		o_ptr->art_flags[5] = 0;
+		o_ptr->art_flags[6] = 0;
+		o_ptr->art_flags[7] = 0;
+	}
+	else
+	{
+		for (i = 0; i < TR_FLAG_SIZE; i++)
+		{
+			rd_u32b(&o_ptr->art_flags[i]);
+		}
+	}
+
 
 	if (flags & SAVE_ITEM_CURSE_FLAGS) rd_u32b(&o_ptr->curse_flags);
 	else o_ptr->curse_flags = 0;
@@ -667,8 +683,18 @@ static void rd_item(object_type *o_ptr)
 
 	if (flags & SAVE_ITEM_INSCRIPTION)
 	{
+		char tmp_str[160];
+
 		rd_string(buf, sizeof(buf));
-		o_ptr->inscription = quark_add(buf);
+
+//		o_ptr->inscription = quark_add(buf);
+
+		my_strcpy(tmp_str, buf, 40);
+
+		//v1.1.92 長過ぎる銘を切り詰め
+		//v1.1.92a %を含む銘が正しく読めなくなったのでstrcpyにした
+		//snprintf(tmp_str, 40, buf);
+		o_ptr->inscription = quark_add(tmp_str);
 	}
 	else o_ptr->inscription = 0;
 
@@ -723,6 +749,21 @@ static void rd_item(object_type *o_ptr)
 
 		}
 	}
+
+	//v1.1.92 除外した「特殊フィールド」と「宇佐見菫子(闘技場用)のぶんの号数を詰める
+	if (o_ptr->tval == TV_BUNBUN || o_ptr->tval == TV_KAKASHI)
+	{
+		if (h_older_than(1, 1, 92, 0))
+		{
+			if (o_ptr->pval == MON_EXTRA_FIELD) o_ptr->xtra5 = 0;
+			if (o_ptr->pval > MON_EXTRA_FIELD) o_ptr->xtra5 -= 1;
+
+			if (o_ptr->pval == MON_SUMIREKO_2) o_ptr->xtra5 = 0;
+			if (o_ptr->pval > MON_SUMIREKO_2) o_ptr->xtra5 -= 1;
+
+		}
+	}
+
 
 	//v1.1.32 hack - マリオの服を作業服に変更
 	if (h_older_than(1, 1, 32, 0) && o_ptr->name1 == ART_MARIO)
@@ -1008,6 +1049,17 @@ static void rd_monster(monster_type *m_ptr)
 	if (flags & SAVE_MON_MFLAG) rd_u32b(&m_ptr->mflag);
 	else m_ptr->mflag = 0;
 
+	//v1.1.94 MAX_MTIMEDを7→16に増加
+	//既存の0-6まではこれまで通り保存するが追加分はフラグ処理とかせずそのまま書き込んでいる
+	for (i = 7; i < MAX_MTIMED; i++)
+	{
+		if (h_older_than(1, 1, 94, 0))
+			m_ptr->mtimed[i] = 0;
+		else
+			rd_s16b(&m_ptr->mtimed[i]);
+	}
+
+
 	//v1.1.81 拡張用変数追加
 	if (h_older_than(1, 1, 81, 0))
 	{
@@ -1016,8 +1068,8 @@ static void rd_monster(monster_type *m_ptr)
 	}
 	else
 	{
-		for (i = 0; i<MAX_MTIMED; i++)
-			rd_s16b(&m_ptr->mtimed_2[i]);
+		for (i = 0; i<7; i++)
+			rd_s16b(&m_ptr->future_use[i]);
 		rd_u32b(&m_ptr->mflag3);
 		rd_u32b(&m_ptr->mflag4);
 
@@ -1968,8 +2020,20 @@ static void rd_extra(void)
 
 
 	{
-		for (i = 0; i < 108; i++) rd_s32b(&p_ptr->magic_num1[i]);
-		for (i = 0; i < 108; i++) rd_byte(&p_ptr->magic_num2[i]);
+
+		//v1.1.94 magic_numのサイズを108から256へ
+		if (h_older_than(1, 1, 94, 0))
+		{
+			for (i = 0; i < MAGIC_NUM_SIZE_OLD; i++) rd_s32b(&p_ptr->magic_num1[i]);
+			for (     ; i < MAGIC_NUM_SIZE; i++) p_ptr->magic_num1[i]=0;
+			for (i = 0; i < MAGIC_NUM_SIZE_OLD; i++) rd_byte(&p_ptr->magic_num2[i]);
+			for (     ; i < MAGIC_NUM_SIZE; i++) p_ptr->magic_num2[i] = 0;
+		}
+		else
+		{
+			for (i = 0; i < MAGIC_NUM_SIZE; i++) rd_s32b(&p_ptr->magic_num1[i]);
+			for (i = 0; i < MAGIC_NUM_SIZE; i++) rd_byte(&p_ptr->magic_num2[i]);
+		}
 
 
 		//v1.1.40 妖怪人形兵士はレベル1のポイントを得る前に初期装備品でレベル9になるのでレベル1のポイントを得られないというバグへの弥縫策
@@ -2310,13 +2374,13 @@ static void rd_extra(void)
 		rd_s16b(&p_ptr->metamor_r_idx);
 		rd_s16b(&p_ptr->abilitycard_price_rate);
 		rd_s16b(&p_ptr->superstealth_type);
-		rd_s16b(&p_ptr->future_use_counter4);
+		rd_s16b(&p_ptr->tim_aggravation);
 		rd_s16b(&p_ptr->future_use_counter5);
 		rd_s16b(&p_ptr->future_use_counter6);
 		rd_s16b(&p_ptr->future_use_counter7);
 		rd_s16b(&p_ptr->future_use_counter8);
 
-		rd_s32b(&p_ptr->ptype_new_flags1);
+		rd_s32b(&p_ptr->animal_ghost_align_flag);
 		rd_s32b(&p_ptr->ptype_new_flags2);
 		rd_s32b(&p_ptr->ptype_new_flags3);
 		rd_s32b(&p_ptr->ptype_new_flags4);

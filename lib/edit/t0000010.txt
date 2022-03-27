@@ -56,6 +56,34 @@ F:a:BUILDING_0:3
 F:a:BUILDING_0:3
 ?:1
 
+
+
+#######Quest58 採用試験二次募集######
+F:y:FLOOR:3
+B:$2:N:Small lonely shrine:Narumi Yadatera:Jizo
+B:$2:A:0:Quest:0:0:q:6:0
+B:2:N:寂れた小堂:矢田寺　成美:地蔵
+B:2:A:0:クエスト:0:0:q:6:0
+
+?:[EQU $QUEST58 0]
+F:c:BUILDING_2:3:0:0:0:0:NONE:58
+?:[EQU $QUEST58 1]
+F:c:QUEST_ENTER:3:0:0:0:0:NONE:58
+?:[EQU $QUEST58 2]
+F:c:BUILDING_2:3:0:0:0:0:NONE:58
+?:[EQU $QUEST58 3]
+F:c:BUILDING_2:3
+F:y:FLOOR:3:0:0:0:325
+?:[EQU $QUEST58 4]
+F:c:BUILDING_2:3
+?:[EQU $QUEST58 5]
+F:c:BUILDING_2:3:0:0:0:0:NONE:58
+?:[EQU $QUEST58 6]
+F:c:BUILDING_2:3
+?:1
+
+
+
 B:$0:N:Kirisame Magic Shop:Marisa Kirisame:Human
 B:$0:A:0:Exchange items for points:0:0:a:12:0
 B:$0:A:1:Exchange points for presents:0:0:b:13:0
@@ -96,34 +124,10 @@ B:$0:A:7:Create spellcard:0:0:s:85:0
 B:0:A:7:スペルカードを作る:0:0:s:85:0
 ?:1
 
-
-
-#######Quest58 採用試験二次募集######
-F:y:FLOOR:3
-B:$2:N:Small lonely shrine:Narumi Yadatera:Jizo
-B:$2:A:0:Quest:0:0:q:6:0
-B:2:N:寂れた小堂:矢田寺　成美:地蔵
-B:2:A:0:クエスト:0:0:q:6:0
-
-?:[EQU $QUEST58 0]
-F:c:BUILDING_2:3:0:0:0:0:NONE:58
-?:[EQU $QUEST58 1]
-F:c:QUEST_ENTER:3:0:0:0:0:NONE:58
-?:[EQU $QUEST58 2]
-F:c:BUILDING_2:3:0:0:0:0:NONE:58
-?:[EQU $QUEST58 3]
-F:c:BUILDING_2:3
-F:y:FLOOR:3:0:0:0:325
-?:[EQU $QUEST58 4]
-F:c:BUILDING_2:3
-?:[EQU $QUEST58 5]
-F:c:BUILDING_2:3:0:0:0:0:NONE:58
-?:[EQU $QUEST58 6]
-F:c:BUILDING_2:3
-?:1
-
-
-
+B:$3:N:Rainbow Cavern of Earth Spirits:empty:　
+B:$3:A:0:Go underground:0:0:a:89:0
+B:3:N:地霊虹洞への入り口:無人:　
+B:3:A:0:地底へ行く:0:0:a:89:0
 
 # Town Layout
 D:######################################################################################################################################################################################################
@@ -177,9 +181,9 @@ D:#-TTTTTT-TTT-T=TT---TTT---TTTT-TTTT-TTTTT-TTTTTT-TT-T-TT-TTTTT---TT-T--TT--T-T
 D:#TTTT--T--TTTTTTTT-=TTTTTTTTT-TTTTTTTT-TTTTTT=TTTTTTTTTTT--TTT--TTTT---TTTT--TTT-TT---T--TTT=TTTT--T--=TTT--T-TTTT-TT-T--TT----T-=-=TT----=========================================--=TT==TTTTTTT-TTT#
 D:#TT---TTTTTT-TT-T--TT--TT-TTTTTT--TTTT-TTTT=-TTTT--TTT-TTTTTT=TTT---TTTTT-T-TTTTTTT-TTTTTTTT=TTTTT-T-TTT-TT--TT--TTT--TTT=TTT====================TT--TTTTTTT--T---TTTT=================T-TTT---TT=-TT#
 D:#TT-TTT--TTTTTTTTT-TTTTTT-TTT---TT-T--TT--TTT=TTTTT-T-TTTT--TT-TTTTT---TT-T--TTTT-TTTTT-TT=T=TTTTT-TTTT-TTTTTTT=-T=T-T--TTTT--=T==========-====T--T=T-TTTTT-T--TT-T--=============T=====T-TTTTTT-TTTT#
-D:#TTTTT-TTT=-TTT-T-TTTTTTTT-T=TTT-T--TT-TTTTTT-TTT---TTT-T-TTT=TTTT--TTT---TTTT--TT-=TTTT--TT=TTTTT----TTT--=T=-=TT-T--TTTTTT-TTT-T============TT==T--T-----TTTTT-TTTTTTTTTTT============TT-T-T-TTTT-T#
-D:#TTTT-TTTTTTTTTTTTTTTTTT-TTTT-T-TT-T-TTTTTT-TT-T-TTT-TTTT--TTTTTT-TTT-T--TTT-TTTTT-TTT-TTTTTTTTTT-=TTT-TT-TTTTTTT--T-TTT-TTTTTTTTT--==========TT-==----T-TTTTTTTTTT-TT-T---TTTTT==========TTTTTT-TTTT#
-D:#T-TTTT-TTTTTT-TTTTTT-T-TTTTT-T-T-TTT-TTTT--TT---TT-TT-TTTT-TTT-TTTTTTT=TTT===TTTTTTT=T=TTTT-TTTTTT=TT--TTTTTTTT--TTTTTT-TTT=TTTTTTTTTT-======-=TT--T-TTTTTTTTTTTTTTT-TTTTTT===============TTT-TTTTTT#
+D:#TTTTT-TTT=-TTT-T-TTTTTTTT-T=TTT-T--TT-TTTTTT-TTT---TTT-T-TTT=TTTT--TTT---TTTT--TT-=TTTT--TT=TTTTT----TTT--=T=-=TT-T--TTTTTT-TTT-T============TT==T--T--------TT-TTTTTTTTTTT============TT-T-T-TTTT-T#
+D:#TTTT-TTTTTTTTTTTTTTTTTT-TTTT-T-TT-T-TTTTTT-TT-T-TTT-TTTT--TTTTTT-TTT-T--TTT-TTTTT-TTT-TTTTTTTTTT-=TTT-TT-TTTTTTT--T-TTT-TTTTTTTTT--==========TT-==----T--d---TTTTT-TT-T---TTTTT==========TTTTTT-TTTT#
+D:#T-TTTT-TTTTTT-TTTTTT-T-TTTTT-T-T-TTT-TTTT--TT---TT-TT-TTTT-TTT-TTTTTTT=TTT===TTTTTTT=T=TTTT-TTTTTT=TT--TTTTTTTT--TTTTTT-TTT=TTTTTTTTTT-======-=TT--T-TTT-----TTTTTTT-TTTTTT===============TTT-TTTTTT#
 D:#--TTTT--TT-=-T-TT-TTTT-T-TT---TTT----TT-=TTTT=--TT-TTTTTT-TT-TTT-TTTTTTT=-TTTT=-TTTT-TTTTT-TTTT--T=TT--TT-T=TTT-T--T---TTTTT-T--============-TT-T=-TTT-TTTTTT-TTTT---TTTT-TTT===T==============TTTTT#
 D:#TTTT-TT-TT-TTTT---TT-TTTTTTTTTT=-TTT-TTTTTT-TT-TT-TTTTT--TTTTT-T-TTTTT-TT=TTTT-TT-TTT-T=-TTTTTTTTT-TTT-TTTTTTT--=TT-T-TT-TT-TT---===========TTT-==TTT-TTTTTT-TTTTT-TTT-TT=====================TTT-=T#
 D:#TTT-TTTTTTTTTT--TT-T=TTT=T-TT-T-TTTT-TTT=TTTTTTT-TTT-TTTT-TTTTT---TTTT-TT-T--TTT-T-TTTT-TTTTTTTT-TTTTTT-TTTTT-TTT-T-TTTT-TT=T-TTTT-T==========T-TTT-T-===================================TT=T-TTT-TT#

@@ -5479,6 +5479,10 @@ static int collect_monsters(int grp_cur, s16b mon_idx[], byte mode)
 		if(r_ptr->flags7 & RF7_VARIABLE) continue;
 		if(i == MON_EXTRA_FIELD) continue;
 
+		//v1.1.92 菫子(闘技場専用特殊モンスター)を除外
+		if (i == MON_SUMIREKO_2) continue;
+
+
 		/* Require known monsters */
 		if (!(mode & 0x02) && !cheat_know && !r_ptr->r_sights) continue;
 
@@ -6926,6 +6930,9 @@ static void do_cmd_knowledge_uniques(void)
 		//v1.1.48
 		if (i == MON_EXTRA_FIELD) continue;
 		if (r_ptr->flags7 & RF7_VARIABLE) continue;
+
+		//v1.1.92 菫子(闘技場専用特殊モンスター)を除外
+		if (i == MON_SUMIREKO_2) continue;
 
 		/* Require unique monsters */
 		if (!(r_ptr->flags1 & RF1_UNIQUE)) continue;

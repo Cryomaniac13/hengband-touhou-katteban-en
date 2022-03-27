@@ -700,7 +700,7 @@ struct monster_type
 	s16b parent_m_idx;
 
 	//v1.1.81 拡張用変数追加
-	s16b mtimed_2[MAX_MTIMED];	/* Timed status counter */
+	s16b future_use[7];
 
 	u32b mflag3;
 	u32b mflag4;
@@ -713,7 +713,7 @@ struct monster_type
 	s16b new_monster_param7;
 	s16b new_monster_param8;
 
-	u16b mon_random_number; //生成時にランダムな数値を入れる。WEIRD_MIND感知判定などランダムだが個体依存なことに使う。
+	u16b mon_random_number; //生成時に0-65535のランダムな数値を入れる。WEIRD_MIND感知判定などランダムだが個体依存なことに使う。
 
 
 };
@@ -1341,8 +1341,9 @@ struct player_type
 	//s16b skill_exp[10];       /* Proficiency of misc. skill */
 
 	/*:::職業ごと多目的変数として使われている*/
-	s32b magic_num1[108];     /* Array for non-spellbook type magic */
-	byte magic_num2[108];     /* Flags for non-spellbook type magics */
+	//v1.1.94 magic_numのサイズを108→256に変更
+	s32b magic_num1[MAGIC_NUM_SIZE];     /* Array for non-spellbook type magic */
+	byte magic_num2[MAGIC_NUM_SIZE];     /* Flags for non-spellbook type magics */
 
 	s16b mane_spell[MAX_MANE];
 	s16b mane_dam[MAX_MANE];
@@ -1703,14 +1704,16 @@ struct player_type
 	//v1.1.88 発動中の一時超隠密のタイプ(普通、光学迷彩、森隠れなど)を記録する
 	s16b superstealth_type;
 
+	//v1.1.93 一時反感
+	s16b tim_aggravation;
+
 	//v1.1.81 将来の拡張用に変数を増やしておく
-	s16b future_use_counter4;
 	s16b future_use_counter5;
 	s16b future_use_counter6;
 	s16b future_use_counter7;
 	s16b future_use_counter8;
 
-	u32b ptype_new_flags1;
+	u32b animal_ghost_align_flag; //v1.1.91
 	u32b ptype_new_flags2;
 	u32b ptype_new_flags3;
 	u32b ptype_new_flags4;
