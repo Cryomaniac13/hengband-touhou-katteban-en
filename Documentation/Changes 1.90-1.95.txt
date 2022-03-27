@@ -1,0 +1,87 @@
+-New monsters/artifacts
+-Changed some monster parameters
+-Changed/added some special abilities for unique classes; many of them now
+ inflict new status effects on monsters
+-Changed layout of Former Hell
+-Forest of Magic and Former Hell are now connected through a cave
+-Added 'Oil field' terrain
+  -Fire element attacks deal +33% damage on it
+  -Fire branded weapons deal +33% only against enemies without resistance
+  -Slows you down without levitation (like forest terrain)
+-Added 'Forbidden fruit' item; can sometimes be dropped by angel uniques
+-Added a new quest to Former Hell
+  -You choose which side to join upon entering. Reward changes depending
+   on who you side with
+  -Reward also changes depending on whether your force's leader is still
+   present on the level when you exit the quest
+-In quests where several sides of monsters are fighting each other, the
+ monsters prioritize attacking hostile monsters close to them instead of
+ going after the player
+-Youkai foxes can no longer transform into summoners or monsters of less than
+ half of their level
+-Healing at building heals your pets as well
+-Quests requiring you to defeat a specific target in a random dungeon will
+ respawn the target if it's an already defeated unique monster
+-Added a new building to Extra mode. You can exchange food for item cards and
+ destroy your cursed equipment.
+-Made card trades give better items in Extra mode
+-Added 'Oil Baron' personality for Joon Yorigami
+  -Some special abilities are changed
+  -Martial art combat changed to fire/stunning attacks
+  -Constant double fire resistance starting at level 30
+  -Has 1/6 of intercepting attacks with Shion; might create oil terrain
+   Shion might get enraged, hitting everything around with water attack and
+   creating oil, then she does nothing for a while.
+  -For a week since the start of the game (or 5 days in Extra mode), you can
+   buy items in 1-9 stores without paying, putting the expenses on your bill.
+   Your bill will be collected once this time period passes.
+-Inscription length in auto-picker limited to 79 characters
+-You always start the game with 6 torches with 2500 turns of light (9 in Extra)
+-Added Mike Goutokuji unique class
+  -Card trader who can't buy cards at trading office; you have to get them by
+   exchanging, negotiations, or gambling
+  -Very low magic aptitude
+  -Score is double that of card trader
+-Added temporary statuses for monsters: 'Lowered attack', 'Lowered defense',
+ 'Lowered magic power'
+  Lowered attack power reduces melee attack power by 25% and prevents criticals
+  Lowered defense power reduces AC by 25%, and makes the monster less likely
+    to resist status abnormalities
+  Lowered magic power increases failure rate for spells by 25% and reduces
+    effective level by 25%
+  HP bar for monsters with lowered stats is displayed in umber
+  -Stat reducing potions inflict those effect when thrown at a monster
+  -Potion of Ruination lowers all monster stats; now costs $5000
+  -Shards/oil attack reduce monster attack power as well (can resist)
+  -Disenchantment/pollution attacks reduce monster defense power as well
+   (can resist)
+  -Some mental attacks reduce monster magic power as well (can resist)
+  -Time attacks reduce all of monster's stats as well (can resist)
+  -Nexus attacks reduce all of monster's stats if they don't resist nexus
+  -Blood Curse reduces all of monster's stats as well (can resist)
+  -Warding Charm/etc holy element attacks can lower some of monster's stats
+   as well
+  -Chemists now can make Potions of Ruination (no recipe)
+  -Changed 'Create Poison Needle' in Darkness Realm to 'Shatter Armor'. Lowers
+   one enemy's defense power.
+  -Changed 'Entangle' in Nature Realm to 'Oil Eruption'.
+-Added various bonuses for high proficiency level skills. See 'Combat System'
+ help file for more details.
+-Higher proficiency level makes extra attack effects more likely to trigger
+-Changed several martial art attacks to lower attack/defense/magic/delay
+-Gun proficiency is now easier to raise
+-Added 'Berserk' status for monsters
+  -Berserk monsters cannot use spells/special abilities, but dice sides for
+   their melee attacks are doubled (Mai's dancing takes precedent over this)
+  -Cannot affect quest targets or mindless monsters
+  -Less likely to affect confusion resistant monsters
+  -Followers don't resist being turned berserk
+  -Easier to get dismounted while riding a berserk follower
+  -Berserk monsters symbols glow red
+  -Potions of Berserk Strength/Dr. Jekyll turn monsters berserk when thrown
+-Added 'Unable to move' status for monsters
+  -Cannot move or teleport, and sometimes fails to act
+  -Can affect most monsters, but they might escape
+  -Gigantic, powerful, or unique monsters are more likely to escape
+  -Changed some unique class special abilities to inflict this status; made
+   them capable of affecting several targets at a time
