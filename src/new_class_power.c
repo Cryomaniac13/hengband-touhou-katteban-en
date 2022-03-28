@@ -5797,7 +5797,7 @@ cptr do_cmd_class_power_aux_mai(int num, bool only_info)
 				if (!heal2) heal2 = 1;
 				m_ptr->hp += heal2;
 				if (m_ptr->hp > m_ptr->maxhp) m_ptr->hp = m_ptr->maxhp;
-				msg_format(_("%^sの傷が少し癒えた。", "The wounds of %^s are somewhat healed."), m_name);
+				msg_format(_("%^sの傷が少し癒えた。", "The wounds of %s are somewhat healed."), m_name);
 				p_ptr->redraw |= (PR_HEALTH);
 				p_ptr->redraw |= (PR_UHEALTH);
 			}
@@ -10028,7 +10028,7 @@ cptr do_cmd_class_power_aux_eirin(int num, bool only_info)
 			monster_desc(m_name, m_ptr, 0);
 			if(monster_living(r_ptr))
 			{
-				msg_format(_("あなたは%^sの治療を始めた...", "You start healing %^s..."), m_name);
+				msg_format(_("あなたは%^sの治療を始めた...", "You start healing %s..."), m_name);
 				m_ptr->hp = m_ptr->maxhp;
 				(void)set_monster_slow(target_m_idx, 0);
 				(void)set_monster_stunned(target_m_idx, 0);
@@ -10040,7 +10040,7 @@ cptr do_cmd_class_power_aux_eirin(int num, bool only_info)
 				msg_format(_("%^sは完全に治った！", "%^s has been fully healed!"), m_name);
 			}
 			else
-				msg_format(_("%^sを治療することはできない。", "Doesn't look like you can heal %^s."), m_name);
+				msg_format(_("%^sを治療することはできない。", "Doesn't look like you can heal %s."), m_name);
 			break;
 		}
 
@@ -25476,11 +25476,11 @@ cptr do_cmd_class_power_aux_paladin(int num, bool only_info)
 				m_ptr->hp += heal;
 				if(m_ptr->hp > m_ptr->maxhp) m_ptr->hp = m_ptr->maxhp;
 				set_monster_stunned(cave[y][x].m_idx,0);
-				msg_format(_("%^sの傷を治療した。", "You heal %^s."), m_name);
+				msg_format(_("%^sの傷を治療した。", "You heal %s."), m_name);
 				p_ptr->redraw |= (PR_HEALTH);
 			}
 			else
-				msg_format(_("%^sの傷を治療することはできなかった。", "You could not heal %^s."), m_name);
+				msg_format(_("%^sの傷を治療することはできなかった。", "You could not heal %s."), m_name);
 			break;
 		}
 	case 6: //結界
@@ -26077,7 +26077,7 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
 						}
 
 						if (set_monster_timed_status_add(MTIMED2_DEC_ATK, cave[y][x].m_idx, MON_DEC_ATK(m_ptr) + 8 + randint1(8)))
-							msg_format(_("%^sは攻撃力が下がったようだ。", "The attack power of %^s is lowered."), m_name);
+							msg_format(_("%^sは攻撃力が下がったようだ。", "The attack power of %s is lowered."), m_name);
 
 					}
 				}
@@ -26100,7 +26100,7 @@ cptr do_cmd_class_power_aux_medi(int num, bool only_info)
                                                                                                                 "%s starts moving slower."),m_name);
 
 						if (set_monster_timed_status_add(MTIMED2_DEC_MAG, cave[y][x].m_idx, MON_DEC_MAG(m_ptr) + 8 + randint1(8)))
-							msg_format(_("%^sは魔法力が下がったようだ。", "The magic power of %^s is lowered."), m_name);
+							msg_format(_("%^sは魔法力が下がったようだ。", "The magic power of %s is lowered."), m_name);
 
 					}
 					anger_monster(m_ptr);
@@ -34646,7 +34646,7 @@ void do_cmd_new_class_power(bool only_browse)
 #ifdef JP
     cptr power_desc_waza = "特技";
 #else
-    cptr power_desc_waza = "Ability";
+    cptr power_desc_waza = "ability";
 #endif
 
 	//v1.1.37 小鈴の怨霊の特殊処理 アイテムカードで誰でも変身できるのでここに記述する
@@ -34864,7 +34864,7 @@ void do_cmd_new_class_power(bool only_browse)
 	case CLASS_PATCHOULI:
 		class_power_table = class_power_patchouli;
 		class_power_aux = do_cmd_class_power_aux_patchouli;
-		power_desc = "スペル";
+		power_desc = _("スペル", "spell");
 		break;
 	case CLASS_LIBRARIAN:
 		class_power_table = class_power_librarian;
@@ -35087,7 +35087,7 @@ void do_cmd_new_class_power(bool only_browse)
 	case CLASS_MARTIAL_ARTIST:
 		class_power_table = class_power_martial_artist;
 		class_power_aux = do_cmd_class_power_aux_martial_artist;
-		power_desc = "技";
+		power_desc = _("技", "technique");
 		break;
 	case CLASS_MAGIC_EATER:
 		class_power_table = class_power_magic_eater;

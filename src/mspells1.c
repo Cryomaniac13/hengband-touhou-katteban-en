@@ -2588,7 +2588,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 #ifdef JP
 		msg_format("反魔法バリアが%^sの呪文をかき消した。", m_name);
 #else
-		msg_format("Anti magic barrier cancels the spell which %^s casts.");
+		msg_format("Anti magic barrier cancels the spell which %s casts.");
 #endif
 		return (TRUE);
 	}
@@ -2601,7 +2601,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 		{
 			if(!in_bounds(yy,xx)) continue;
 			if(!is_elder_sign(&cave[yy][xx])) continue;
-			msg_format(_("旧神の印が%^sの召喚魔法を無効化した！", "The sign of Elder Gods prevents %^s from summoning!"), m_name);
+			msg_format(_("旧神の印が%^sの召喚魔法を無効化した！", "The sign of Elder Gods prevents %s from summoning!"), m_name);
 			return (TRUE);
 		}
 	}
@@ -2662,7 +2662,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 			else if(monspell_list2[monspell_num].level) //ダミーや特別行動は非対象
 			{
 				msg_format(_("あなたは%^sが唱えていた魔法を吸収した！",
-                            "You absorb the spell cast by %^s!"), m_name);
+                            "You absorb the spell cast by %s!"), m_name);
 				p_ptr->csp += monspell_list2[monspell_num].smana;
 				if(p_ptr->csp > p_ptr->msp)
 				{
@@ -2677,7 +2677,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 		else
 		{
 				msg_format(_("%^sの魔法の妨害に失敗した！",
-                            "You failed to prevent %^s from casting a spell!"), m_name);
+                            "You failed to prevent %s from casting a spell!"), m_name);
 		}
 	}
 

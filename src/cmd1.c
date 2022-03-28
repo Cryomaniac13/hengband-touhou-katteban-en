@@ -338,21 +338,21 @@ void apply_special_effect(int m_idx, int special_effect_type, int critical_rank,
 	case ATTACK_EFFECT_DEC_ATK:
 
 		if(set_monster_timed_status_add(MTIMED2_DEC_ATK,m_idx,effect_turns))
-			msg_format(_("%^sの攻撃力が下がった！", "The attack power of %^s is decreased!"), m_name);
+			msg_format(_("%^sの攻撃力が下がった！", "The attack power of %s is decreased!"), m_name);
 
 		break;
 
 	case ATTACK_EFFECT_DEC_DEF:
 
 		if (set_monster_timed_status_add(MTIMED2_DEC_DEF, m_idx, effect_turns))
-			msg_format(_("%^sの防御力が下がった！", "The defense power of %^s is decreased!"), m_name);
+			msg_format(_("%^sの防御力が下がった！", "The defense power of %s is decreased!"), m_name);
 
 		break;
 
 	case ATTACK_EFFECT_DEC_MAG:
 
 		if (set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, effect_turns))
-		msg_format(_("%^sの魔法力が下がった！", "The magic power of %^s is decreased!"), m_name);
+		msg_format(_("%^sの魔法力が下がった！", "The magic power of %s is decreased!"), m_name);
 		break;
 
 	case ATTACK_EFFECT_DEC_ALL:
@@ -363,7 +363,7 @@ void apply_special_effect(int m_idx, int special_effect_type, int critical_rank,
 		if (set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, effect_turns)) flag_ok = TRUE;
 
 		if(flag_ok)
-			msg_format(_("%^sの全能力が下がった！", "All of the abilities of %^s are decreased!"), m_name);
+			msg_format(_("%^sの全能力が下がった！", "All of the abilities of %s are decreased!"), m_name);
 
 		break;
 
@@ -371,7 +371,7 @@ void apply_special_effect(int m_idx, int special_effect_type, int critical_rank,
 	case ATTACK_EFFECT_DELAY:
 
 		if (monster_delay(m_idx, 25 + randint1(25)))
-			msg_format(_("%^sは体勢を崩したようだ。", "The posture of %^s looks broken."), m_name);
+			msg_format(_("%^sは体勢を崩したようだ。", "The posture of %s looks broken."), m_name);
 
 		break;
 

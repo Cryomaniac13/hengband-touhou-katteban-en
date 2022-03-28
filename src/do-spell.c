@@ -19488,12 +19488,12 @@ static cptr do_new_spell_life(int spell, int mode)
 						m_ptr->hp += heal;
 						if(m_ptr->hp > m_ptr->maxhp) m_ptr->hp = m_ptr->maxhp;
 						set_monster_stunned(cave[y][x].m_idx,0);
-						msg_format(_("%^sの傷を治療した。", "You cure %^s."), m_name);
+						msg_format(_("%^sの傷を治療した。", "You cure %s."), m_name);
 						if (p_ptr->health_who == target_m_idx) p_ptr->redraw |= (PR_HEALTH);
 						if (p_ptr->riding == target_m_idx) p_ptr->redraw |= (PR_UHEALTH);
 					}
 					else
-						msg_format(_("%^sの傷を治療することはできなかった。", "You are unable to cure %^s."), m_name);
+						msg_format(_("%^sの傷を治療することはできなかった。", "You are unable to cure %s."), m_name);
 
 				}
 				else

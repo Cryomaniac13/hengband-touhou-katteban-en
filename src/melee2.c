@@ -1583,7 +1583,7 @@ static bool monst_attack_monst(int m_idx, int t_idx)
 	{
 		monster_desc(m_name, m_ptr, 0);
 		msg_format(_("%^sの攻撃は埴輪には効いていない！",
-                    "The attack of %^s has no effect on haniwa!"), m_name);
+                    "The attack of %s has no effect on haniwa!"), m_name);
 		return TRUE;
 	}
 
@@ -3320,7 +3320,7 @@ bool monplayer_attack_monst(int t_idx)
 		{
 			/* Wake it up */
 			(void)set_monster_csleep(t_idx, 0);
-			msg_format(_("ミス！%^sにかわされた。", "You miss %^s."), t_name);
+			msg_format(_("ミス！%^sにかわされた。", "You miss %s."), t_name);
 
 		}
 	}
@@ -6695,7 +6695,7 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 				char m_name[80];
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("%^sの攻撃力が元に戻ったようだ。",
-                            "The attack power of %^s returns to normal."), m_name);
+                            "The attack power of %s returns to normal."), m_name);
 			}
 		}
 		break;
@@ -6707,7 +6707,7 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 				char m_name[80];
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("%^sの防御力が元に戻ったようだ。",
-                            "The defense power of %^s returns to normal."), m_name);
+                            "The defense power of %s returns to normal."), m_name);
 			}
 		}
 		break;
@@ -6719,7 +6719,7 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 				char m_name[80];
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("%^sの魔法力が元に戻ったようだ。",
-                            "The magic power of %^s returns to normal."), m_name);
+                            "The magic power of %s returns to normal."), m_name);
 			}
 		}
 		break;

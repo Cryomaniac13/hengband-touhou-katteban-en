@@ -6373,9 +6373,9 @@ void message_pain(int m_idx, int dam)
 		if(percentage > 95) msg_format(_("%^sは余裕綽々だ。", "%^s is calm and composed."), m_name);
 		else if(percentage > 75) msg_format(_("%^sはまだまだ余裕のようだ。", "%^s still looks calm."), m_name);
 		else if(percentage > 50) msg_format(_("%^sは少し焦ってきている。", "%^s looks a bit impatient."), m_name);
-		else if(percentage > 35) msg_format(_("%^sの服があちこち破けている。", "The clothes %^s is wearing are getting torn."), m_name);
+		else if(percentage > 35) msg_format(_("%^sの服があちこち破けている。", "The clothes %s is wearing are getting torn."), m_name);
 		else if(percentage > 20) msg_format(_("%^sはちょっと涙目だ。", "%^s is getting teary-eyed."), m_name);
-		else if(percentage > 10) msg_format(_("%^sの服はもうボロボロだ。", "The clothes %^s is wearing are in tatters."), m_name);
+		else if(percentage > 10) msg_format(_("%^sの服はもうボロボロだ。", "The clothes %s is wearing are in tatters."), m_name);
 		else msg_format(_("%^sは泣きそうになっている。", "%^s looks about to cry."), m_name);
 
 	}

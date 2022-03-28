@@ -309,7 +309,7 @@ bool make_attack_normal(int m_idx)
 	if (r_ptr->d_char == 'G' && prace_is_(RACE_HANIWA))
 	{
 		msg_format(_("%^s‚ÌUŒ‚‚Í‚ ‚È‚½‚É‚ÍŒø‚¢‚Ä‚¢‚È‚¢I",
-                    "You are unaffected by the attack of %^s!"), m_name);
+                    "You are unaffected by the attack of %s!"), m_name);
 		return TRUE;
 	}
 
@@ -498,7 +498,7 @@ bool make_attack_normal(int m_idx)
 				if (!abbreviate)
 				{
 				    msg_format(_("‹àŽR•F–½‚ª%^s‚Ì•Ší‚ð–³—Í‰»‚µ‚½I",
-                                "The weapon of %^s is negated by Kanayamahiko-no-Mikoto!"), m_name);
+                                "The weapon of %s is negated by Kanayamahiko-no-Mikoto!"), m_name);
 					abbreviate = 1;/*‚Q‰ñ–ÚˆÈ~‚ÍÈ—ª */
 				}
 				continue;
@@ -3213,7 +3213,7 @@ msg_format("%s‚Í‘Ì—Í‚ð‰ñ•œ‚µ‚½‚æ‚¤‚¾B", m_name);
 						{
 							if (set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, 4 + randint1(4)))
 							{
-								msg_format(_("%^s‚ÍUŒ‚—Í‚ª‰º‚ª‚Á‚½‚æ‚¤‚¾B", "The attack power of %^s is lowered."),m_name);
+								msg_format(_("%^s‚ÍUŒ‚—Í‚ª‰º‚ª‚Á‚½‚æ‚¤‚¾B", "The attack power of %s is lowered."),m_name);
 							}
 						}
 					}
@@ -3362,7 +3362,7 @@ msg_format("%s‚Í‘Ì—Í‚ð‰ñ•œ‚µ‚½‚æ‚¤‚¾B", m_name);
 							dam = mon_damage_mod(m_ptr, dam, FALSE);
 
 							msg_format(_("”¼—ì‚Ì”¼•ª‚ª%^s‚É”½Œ‚‚µ‚½I",
-                                        "Your half-half-ghost counterattacks %^s!"), m_name);
+                                        "Your half-half-ghost counterattacks %s!"), m_name);
 
 							if (mon_take_hit(m_idx, dam, &fear, _("‚Í“|‚ê‚½B", " is defeated.")))
 							{
@@ -3400,7 +3400,7 @@ msg_format("%s‚Í‘Ì—Í‚ð‰ñ•œ‚µ‚½‚æ‚¤‚¾B", m_name);
 						msg_format("‰e‚ÌƒI[ƒ‰‚ª%^s‚É”½Œ‚‚µ‚½I", m_name);
 						if (mon_take_hit(m_idx, dam, &fear, "‚Í“|‚ê‚½B"))
 #else
-						msg_format("Your shadow aura counterattacks %^s!", m_name);
+						msg_format("Your shadow aura counterattacks %s!", m_name);
 
 						if (mon_take_hit(m_idx, dam, &fear, " is defeated."))
 #endif
@@ -3584,7 +3584,7 @@ msg_format("%^s‚©‚ç—Ž‚¿‚Ä‚µ‚Ü‚Á‚½I", m_name);
 			//monster_desc(m_name, m_ptr, 0);
 
 			p_ptr->csp -= 7;
-			msg_format(_("%^s‚É”½Œ‚‚µ‚½I", "You counterattack %^s!"), m_name);
+			msg_format(_("%^s‚É”½Œ‚‚µ‚½I", "You counterattack %s!"), m_name);
 			py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_COUNTER);
 			fear = FALSE;
 		}
@@ -3598,7 +3598,7 @@ msg_format("%^s‚©‚ç—Ž‚¿‚Ä‚µ‚Ü‚Á‚½I", m_name);
 
 	if(p_ptr->pclass == CLASS_BENBEN && music_singing(MUSIC_NEW_TSUKUMO_DOUBLESCORE) && alive && !p_ptr->is_dead)
 	{
-		msg_format(_("%^s‚É”½Œ‚‚µ‚½I", "You counterattack %^s!"), m_name);
+		msg_format(_("%^s‚É”½Œ‚‚µ‚½I", "You counterattack %s!"), m_name);
 		py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_DOUBLESCORE);
 		fear = FALSE;
 		///mod151101’Ç‰Á
@@ -3608,7 +3608,7 @@ msg_format("%^s‚©‚ç—Ž‚¿‚Ä‚µ‚Ü‚Á‚½I", m_name);
 	{
 		int tmp_dice = 10 + p_ptr->lev / 5;
 		int tmp_sides = 10 + adj_general[p_ptr->stat_ind[A_CHR]] / 3;
-		msg_format(_("b‚‚¢‹Õ‚Ì‰¹‚ª%^s‚É“Ë‚«Žh‚³‚Á‚½I", "Shrill sounds of koto pierce %^s!"), m_name);
+		msg_format(_("b‚‚¢‹Õ‚Ì‰¹‚ª%^s‚É“Ë‚«Žh‚³‚Á‚½I", "Shrill sounds of koto pierce %s!"), m_name);
 		project_m(0,0,m_ptr->fy,m_ptr->fx,damroll(tmp_dice,tmp_sides),GF_SOUND,PROJECT_KILL,TRUE);
 		fear = FALSE;
 		///mod151101’Ç‰Á
