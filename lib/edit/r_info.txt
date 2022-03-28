@@ -4953,7 +4953,7 @@ D:”M‚ª•¨¿‰»‚µ‚½‚à‚Ì‚¾B
 
 #JZ#
 N:300:“d‹C‚Ì‹…‘Ì
-E:Ball lightning
+E:Electric sphere
 G:*:B
 I:120:6d6:100:30:0
 W:17:1:0:50:0:0

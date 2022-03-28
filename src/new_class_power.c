@@ -16669,7 +16669,7 @@ class_power_type class_power_sumireko[] =
         "Fires a fairly short range beam of fire.")},
 	{13,5,30,FALSE,TRUE,A_DEX,0,3,_("遠隔攻撃", "Remote Attack"),
 		_("少し離れた場所へ通常攻撃を行う。　武器を装備していると使えないが敵のオーラによるダメージを受けない。",
-        "Performs a melee attack against a slightly distant location. Requires wielding a weapon. You don't take damage from enemy auras during this attack.")},
+        "Performs a melee attack against a slightly distant location. Cannot be used if you're wielding a weapon. You don't take damage from enemy auras during this attack.")},
 	{16,10,40,FALSE,TRUE,A_INT,0,0,_("指向性テレポート", "Directional Teleport"),
 		_("指定した方向へ短距離のテレポートを行う。通常の半分の行動力しか消費しない。テレポートできない場所にテレポートしようとした場合、その周辺のランダムな場所へ出るか元の場所に戻る。",
         "Teleports a short distance in given direction. Consumes half as much energy as normal action. If you attempt to teleport to a place inaccessible through teleportation, you will exit at a random nearby position or stay in place.")},
