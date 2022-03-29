@@ -3406,7 +3406,7 @@ static void display_entry(int pos)
 			sprintf(out_val, "%3d.%1d", lbtokg1(wgt) , lbtokg2(wgt) );
 			put_str(out_val, i+6, 60);
 #else
-			(void)sprintf(out_val, "%3d.%d", wgt / 10, wgt % 10);
+			(void)sprintf(out_val, "%3d.%1d", lbtokg1(wgt) , lbtokg2(wgt) );
 			put_str(out_val, i+6, 61);
 #endif
 
