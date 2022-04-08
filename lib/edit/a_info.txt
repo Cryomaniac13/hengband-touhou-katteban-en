@@ -4824,7 +4824,7 @@ F:CHR | INT | QUESTITEM
 D:スペルカードの研究書だ。ある魔法使いが書き記したとされている。
 
 N:298:鞍馬山天狗のタライ
-E:of the Kurama Tengu
+E:Kurama Tengu's Washbasin
 I:41:1:2
 W:40:10:40:80000
 P:4:1d1:0:0:24

@@ -2871,7 +2871,7 @@ class_power_type class_power_sangetsu_2[] =
     _("ターゲットモンスターにかかっている魔法効果を解除する。",
     "Dispel magic effects on target monster.")},
 
-	{ 40,120,45,TRUE,TRUE,A_CON,0,30,"グレイズインフェルノ",
+	{ 40,120,45,TRUE,TRUE,A_CON,0,30,_("グレイズインフェルノ", "Graze Inferno"),
 	_("視界内の全てに対し火炎属性攻撃を行う。威力はHPの1/3になる。",
     "Hits everything in sight with fire. Power is equal to 1/3 of your current HP.")},
 
@@ -35542,9 +35542,9 @@ void do_cmd_new_class_power(bool only_browse)
 		(void) strnfmt(out_val, 78, "(%^s %c-%c, '*'で一覧, ESC) どの%sを使いますか？",	power_desc, I2A(0), I2A(cnt - 1), power_desc);
 #else
     if (only_browse)
-		(void) strnfmt(out_val, 78, "(%^s %c-%c, *=List, ESC=exit) Learn about which %s?", power_desc, I2A(0), I2A(cnt - 1), power_desc);
+		(void) strnfmt(out_val, 85, "(%^s %c-%c, *=List, ESC=exit) Learn about which %s?", power_desc, I2A(0), I2A(cnt - 1), power_desc);
 	else
-		(void) strnfmt(out_val, 78, "(%^s %c-%c, *=List, ESC=exit) Use which %s?",	power_desc, I2A(0), I2A(cnt - 1), power_desc);
+		(void) strnfmt(out_val, 85, "(%^s %c-%c, *=List, ESC=exit) Use which %s?",	power_desc, I2A(0), I2A(cnt - 1), power_desc);
 #endif
 
 	choice= (always_show_list ) ? ESCAPE:1;
@@ -35839,10 +35839,18 @@ void do_cmd_new_class_power(bool only_browse)
 	if(only_browse)
 	{
 		int j, line;
+#ifdef JP
 		char temp[62*5];
+#else
+        char temp[62*8];
+#endif
 		screen_save();
 
+#ifdef JP
 		for(j=16;j<23;j++)	Term_erase(12, j, 255);
+#else
+        for(j=16;j<26;j++)	Term_erase(12, j, 255);
+#endif
 
 		roff_to_buf(spell->tips, 62, temp, sizeof(temp));
 		for(j=0, line = 17;temp[j];j+=(1+strlen(&temp[j])))

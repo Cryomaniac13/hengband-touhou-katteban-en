@@ -13638,7 +13638,7 @@ void trading_ability_cards(void)
 
 	if (inventory[INVEN_PACK - 1].k_idx)
 	{
-		msg_print("¡‚Í‰×•¨‚ªˆê”t‚¾B");
+		msg_print(_("¡‚Í‰×•¨‚ªˆê”t‚¾B", "Your inventory is full."));
 		return;
 	}
 
