@@ -5923,7 +5923,7 @@ D:グルグルと回って燃えさかる火炎の渦巻きだ。
 
 #J0#
 N:355:アシッド・ボルテックス
-E:Water vortex
+E:Acid vortex
 G:v:b
 I:110:9d9:100:30:0
 W:21:1:0:100:0:0
@@ -9538,7 +9538,7 @@ D:恐ろしい勢いで近づいてくるのだ。それを見ているだけで疲労してくる。
 
 #:::水属性をこっちにして酸の方はアシッドにした
 N:543:ウォーター・ハウンド
-E:Impact hound
+E:Water hound
 G:Z:b
 I:110:35d10:30:30:0
 W:35:2:0:500:0:0
@@ -9552,6 +9552,8 @@ F:BASH_DOOR |
 F:ANIMAL | RES_WATE | NO_CONF | NO_SLEEP
 S:1_IN_8 | 
 S:BR_AQUA
+D:$A mass of water rising up from the ground is sliding towards you. As you
+D:$look closer, it seems to be in a shape of a large hound.
 D:地面から盛り上がった水の塊が滑るように向かってくる。よく見るとそれは犬のような形をしている。
 
 

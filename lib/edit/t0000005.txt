@@ -285,7 +285,7 @@ B:3:A:3:è‚¢:30:30:f:59:0
 B:$3:A:4:Leave to the Outside World:0:0:e:52:0
 B:3:A:4:ŠO‚Ì¢ŠE‚É‘—‚Á‚Ä‚à‚ç‚¤:0:0:e:52:0
 ?:1
-?:[EQU $RACE Stray-god]
+?:[EQU $RACE Stray-God]
 B:$3:A:5:Check your reputation:0:0:e:60:0
 B:3:A:5:©•ª‚Ì•]”»‚ğ•·‚­:0:0:e:60:0
 ?:1
