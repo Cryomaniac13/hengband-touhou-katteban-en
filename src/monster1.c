@@ -1851,7 +1851,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff(" magical, casting spells");
 
 		/* Adverb */
-		if (flags2 & (RF2_SMART_EX)) hook_c_roff(TERM_ORANGE, "extremely intelligently");
+		if (flags2 & (RF2_SMART_EX)) hook_c_roff(TERM_ORANGE, " extremely intelligently");
 		else if (flags2 & RF2_SMART) hook_c_roff(TERM_YELLOW, " intelligently");
 #endif
 
