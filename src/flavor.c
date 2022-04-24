@@ -2166,6 +2166,18 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 
 #else
 
+#ifndef JP
+    if (object_is_smith(o_ptr))
+    {
+        if(o_ptr->xtra3 == SPECIAL_ESSENCE_ONI)//•ŠíC•œ•i
+            t = object_desc_str(t, _("", "<> "));
+        else //’b–è•i
+            //	t = object_desc_str(t, format("’b–èt%s‚Ì", player_name));
+            t = object_desc_str(t, format(_("", "<> ")));
+    }
+#endif
+
+
 	/* The object "expects" a "number" */
 	if (basenm[0] == '&')
 	{
@@ -2311,7 +2323,7 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 	if (object_is_smith(o_ptr))
 	{
 		if(o_ptr->xtra3 == SPECIAL_ESSENCE_ONI)//•ŠíC•œ•i
-			t = object_desc_str(t, _("", "<> "));
+			t = object_desc_str(t, _("", ""));
 		else if(p_ptr->pclass == CLASS_TSUKUMO_MASTER)//•t‘r_g‚¢‚Ì—dŠí
 		{
 			if(o_ptr->xtra1 >= 100)	t = object_desc_str(t, _("(*—dŠí*)", "(*Youkai*)"));

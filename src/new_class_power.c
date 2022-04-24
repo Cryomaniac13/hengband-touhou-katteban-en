@@ -22980,9 +22980,9 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 			int dice = 3 + plev / 5 + chr_adj / 7;
 			int sides = 4;
 
-			if(only_info) return format("損傷:%dd%d",dice,sides);
+			if(only_info) return format(_str_eff_dam_dice_sides,dice,sides);
 			if (!get_aim_dir(&dir)) return NULL;
-			msg_print("柄杓から水を飛ばした。");
+			msg_print(_("柄杓から水を飛ばした。", "You throw water from your ladle."));
 			fire_bolt(GF_WATER,dir,damroll(dice,sides));
 			break;
 		}
@@ -22991,9 +22991,9 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 			int sides = plev * 3;
 			int base = 30 + (adj_general[p_ptr->stat_ind[A_STR]] * 4);
 
-			if(only_info) return format("損傷:%d+1d%d",base,sides);
+			if(only_info) return format(_str_eff_dam_base_1d,base,sides);
 			if (!get_aim_dir(&dir)) return NULL;
-			msg_print("錨を投げつけた！");
+			msg_print(_("錨を投げつけた！", "You throw an anchor!"));
 			fire_rocket(GF_ARROW,dir,base + randint1(sides),1);
 
 			break;
@@ -23004,14 +23004,14 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 			int rad = 1 + plev / 24;
 			if(cave_have_flag_bold((py), (px), FF_WATER)) dam *= 4;
 
-			if(only_info) return format("損傷:～%d ",dam/2);
+			if(only_info) return format(_str_eff_dam_around,dam/2);
 
 			if(cave_have_flag_bold((py), (px), FF_WATER))
 			{
-				msg_print("大渦が発生した！");
+				msg_print(_("大渦が発生した！", "You create a large whirlpool!"));
 			}
 			else
-				msg_print("地面から水が噴き出した！");
+				msg_print(_("地面から水が噴き出した！", "Water spouts out from the ground!"));
 
 			project(0, rad, py, px, rad+1, GF_WATER_FLOW, PROJECT_GRID, -1);
 			project(0, rad, py, px, dam, GF_WATER, (PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
@@ -23025,7 +23025,7 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 		{
 			if(only_info) return format("");
 
-			msg_print("あなたは水の中に消えた・・");
+			msg_print(_("あなたは水の中に消えた・・", "You disappear into the water..."));
 			if (!dimension_door(D_DOOR_MURASA)) return NULL;
 			new_class_power_change_energy_need = 33;
 			break;
@@ -23034,8 +23034,9 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 		{
 			int damage = plev + chr_adj * 5;
 			if(damage < 80) damage = 80;
-			if(only_info) return format("損傷：%d",damage);
-			msg_format("どこからともなく水が湧き出し、水位がみるみる上がっていく！");
+			if(only_info) return format(_str_eff_dam,damage);
+			msg_format(_("どこからともなく水が湧き出し、水位がみるみる上がっていく！",
+                        "Water spouts out from nowhere, and the water level rises rapidly!"));
 			project_hack2(GF_WATER_FLOW,0,0,2);
 			project_hack2(GF_WATER,0,0,damage);
 			p_ptr->update |= (PU_BONUS);
@@ -23050,7 +23051,7 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 			monster_race *r_ptr;
 
 			int damage = plev * 3 + chr_adj * 15;
-			if(only_info) return format("損傷：%d",damage);
+			if(only_info) return format(_str_eff_dam,damage);
 			if (!get_rep_dir2(&dir)) return NULL;
 			if (dir == 5) return NULL;
 
@@ -23065,7 +23066,7 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 				r_ptr = &r_info[m_ptr->r_idx];
 				monster_desc(m_name, m_ptr, 0);
 
-				msg_format("あなたは%sと共に水底へと沈んでいった・・",m_name);
+				msg_format(_("あなたは%sと共に水底へと沈んでいった・・", "You sink to the bottom along with %s..."),m_name);
 				if((r_ptr->flags7 & RF7_AQUATIC) || (r_ptr->flagsr & RFR_RES_WATE)
 					|| !monster_living(r_ptr) || (r_ptr->flags1 & RF1_QUESTOR)
 					|| (r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2))
@@ -23081,14 +23082,14 @@ cptr do_cmd_class_power_aux_murasa(int num, bool only_info)
 				}
 				if(randint1(r_ptr->level) < chance)
 				{
-					msg_format("%sを水底へ沈めた。", m_name);
+					msg_format(_("%sを水底へ沈めた。", "%s sinks to the bottom."), m_name);
 					damage = m_ptr->hp + 1;
 				}
 				project(0,0,m_ptr->fy,m_ptr->fx,damage,GF_WATER,PROJECT_KILL,-1);
 			}
 			else
 			{
-				msg_format("そこには何もいない。");
+				msg_format(_str_mess_nobody_here);
 				return NULL;
 			}
 

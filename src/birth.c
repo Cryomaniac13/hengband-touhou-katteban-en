@@ -2263,8 +2263,6 @@ static void player_wipe(void)
 
 	ability_card_trade_count = 0;
 	buy_gacha_box_count = 0;
-
-
 }
 
 /*
@@ -6184,7 +6182,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	_("あなたは道を外れた仙人です。基本的に自分の欲望と好奇心を満たす事しか考えていません。特殊な鑿で壁に穴を開ける特技を持ちます。レベルが上がると移動時に壁を掘り抜き、さらにレベルが上がると壁を掘らずにすり抜けるようになります。魔法を二領域習得可能で、死霊術などの禍々しい術に特に高い適性を持ちます。長い時を生きた仙人のため、しばしば地獄からの刺客に狙われます。",
     "You're a heretical hermit thinking only of satisfying your own desires and curiousity. You have the ability to open holes in walls using a special chisel. As you level up, you will be able to normally walk through walls by destroying them, and on even higher levels, you'll be able to simply pass through walls. You can study two realms of magic, and you're particularly adept at dark magic like necromancy. You're a hermit who has lived for a long time, so assassins from hell will be coming after you.")},
 	{TRUE,_("蘇我　屠自古", "Soga no Tojiko"),CLASS_TOZIKO,RACE_SPECTRE,ENTRY_SHINREI,SEX_FEMALE,
-	"あなたは豊聡耳神子に従者として仕える亡霊です。かつては強力な怨霊でしたが、今は恨みもほとんど消え気ままな亡霊生活を送っています。霊体のため壁を抜けることができダンジョン探索に有利です。電撃攻撃が得意で、武器の扱いは弓を除き不得手です。下半身の具現化が不完全なため靴を履くことができません。"},
+	_("あなたは豊聡耳神子に従者として仕える亡霊です。かつては強力な怨霊でしたが、今は恨みもほとんど消え気ままな亡霊生活を送っています。霊体のため壁を抜けることができダンジョン探索に有利です。電撃攻撃が得意で、武器の扱いは弓を除き不得手です。下半身の具現化が不完全なため靴を履くことができません。",
+    "You are a ghost serving Toyosatomimi no Miko. You once were a powerful vengeful spirit, but now your grudges are almost gone, and you live a carefree life as a ghost. Being able to pass through walls makes dungeon exploration easy for you. You're proficient at lightning element attacks, but you're not skilled at using weapons aside form bows. Your lower body isn't fully materialized, so you can't use footwear.")},
 	{TRUE,_("物部　布都", "Mononobe no Futo"),CLASS_FUTO,RACE_SENNIN,ENTRY_SHINREI,SEX_FEMALE,
 	_("あなたは千四百年の眠りから目覚めた尸解仙で、豊聡耳神子の元で道士として修行の日々を送っています。仙人の割に魔法書の扱いはあまり得意でなく、代わりに物部の秘術と道教の仙術を合わせた独特の技で戦います。この技はやや癖がありますが入念に準備すれば威力は絶大です。あまり乱発すると皿代が嵩むため序盤はうまく遣り繰りしましょう。あなたの身体能力はそれほど高いとはいえず、弓以外の武器の扱いは苦手です。またあなたは秘術により本来の寿命を誤魔化しているため、ダンジョン内で地獄からの刺客に襲われることがあります。",
     "You are a shikaisen awakened from sleep of 1400 years; you spend your days training as a Taoist under Toyosatomimi no Miko. You're not skilled with studying spellbooks like other hermits, prefering to fight using your own unique style. Your abilities are gimmicky, but they can be very powerful with proper preparation. You'll spend a lot of money on plates if you're careless, so be careful in early game. Your physical stats aren't that high, and you're not good at using weapons other than bows. Also, since you've unnaturally extended your lifespan, assassins from hell will attack you in the dungeon.")},

@@ -3196,7 +3196,7 @@ note = "‚É‚Í‘Ï«‚ª‚ ‚éB";
 			}
 			else if(r_ptr->flagsr & RFR_HURT_WATER)
 			{
-				note = "‚Í…‚ª‹êŽè‚È‚æ‚¤‚¾I";
+				note = _("‚Í…‚ª‹êŽè‚È‚æ‚¤‚¾I", " does not like water!");
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_WATER);
 				dam *= 2;
 			}
