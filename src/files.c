@@ -12,6 +12,8 @@
 
 #include "angband.h"
 
+#include "player/player-log-save.h"
+
 
 /*
  * You may or may not want to use the following "#undef".
@@ -10450,6 +10452,17 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 			(void)inkey();
 		}
 	}
+
+#ifdef NEW_PLAYER_LOG
+	if (save_player_log(savefile, p_log_ptr))
+	{
+		prt("Saving player log... done.", 0, 0);
+	}
+	else
+	{
+		prt("Saving player log... failed!", 0, 0);
+	}
+#endif
 
 	/* Allow suspend again */
 	signals_handle_tstp();

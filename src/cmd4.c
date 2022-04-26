@@ -11,7 +11,8 @@
 /* Purpose: Interface commands */
 
 #include "angband.h"
-
+#include "player/player-log.h"
+#include "player/player-log-display.h"
 
 
 /*
@@ -10755,6 +10756,15 @@ void do_cmd_knowledge(void)
 		case 'i': /* Autopick */
 			do_cmd_knowledge_autopick();
 			break;
+
+#ifdef NEW_PLAYER_LOG
+        case 'x':
+            player_log_display_objects(p_log_ptr);
+            break;
+        case 'y':
+            player_log_display_spells(p_log_ptr);
+            break;
+#endif
 		default: /* Unknown option */
 			bell();
 		}

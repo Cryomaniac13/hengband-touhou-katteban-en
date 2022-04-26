@@ -11,6 +11,7 @@
 /* Purpose: Racial powers (and mutations) */
 
 #include "angband.h"
+#include "player/player-log.h"
 
 /*
  * Hook to determine if an object is contertible in an arrow/bolt
@@ -6589,6 +6590,10 @@ prt("                            Lv   MP Ž¸—¦                            Lv   MP
 
 			/* Window stuff */
 			p_ptr->window |= (PW_PLAYER | PW_SPELL);
+
+#ifdef NEW_PLAYER_LOG
+            player_log_record_rac_power_use(p_log_ptr, power_desc[i].name);
+#endif
 		}
 	}
 	else energy_use = 0;

@@ -1,4 +1,5 @@
 #include "angband.h"
+#include "player/player-log.h"
 
 //アイテムカード使用時にTRUE
 static bool use_itemcard = FALSE;
@@ -35955,6 +35956,10 @@ void do_cmd_new_class_power(bool only_browse)
 	{
 		/*:::成功判定後にターゲット選択でキャンセルしたときなどにはcptrにNULLが返り、そのまま行動順消費せず終了する*/
 		if(!(*class_power_aux)(num,FALSE)) return;
+
+#ifdef NEW_PLAYER_LOG
+		player_log_record_class_power_use(p_log_ptr, spell->name);
+#endif
 	}
 
 	/*:::ターンやコスト消費など*/

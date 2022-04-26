@@ -104,6 +104,118 @@ static bool know_damage(int r_idx, int i)
 	return (FALSE);
 }
 
+static cptr get_blow_method_desc(int method)
+{
+    cptr p;
+
+    p = NULL;
+
+    switch (method)
+    {
+        case RBM_HIT:		p = "hit"; break;
+        case RBM_TOUCH:		p = "touch"; break;
+        case RBM_PUNCH:		p = "punch"; break;
+        case RBM_KICK:		p = "kick"; break;
+        case RBM_CLAW:		p = "claw"; break;
+        case RBM_BITE:		p = "bite"; break;
+        case RBM_STING:		p = "stab"; break;
+        case RBM_SLASH:		p = "slash"; break;
+        case RBM_BUTT:		p = "butt"; break;
+        case RBM_CRUSH:		p = "crush"; break;
+        case RBM_ENGULF:	p = "engulf"; break;
+        case RBM_CHARGE: 	p = "give an invoice";   break;
+        case RBM_CRAWL:		p = "crawl on you"; break;
+        case RBM_DROOL:		p = "drool on you"; break;
+        case RBM_SPIT:		p = "spit"; break;
+        case RBM_EXPLODE:	p = "explode"; break;
+        case RBM_GAZE:		p = "gaze"; break;
+        case RBM_WAIL:		p = "wail"; break;
+        case RBM_SPORE:		p = "release spores"; break;
+        case RBM_DANCE:		p = _("踊る", "dance"); break;
+        case RBM_BEG:		p = "beg"; break;
+        case RBM_INSULT:	p = "insult"; break;
+        case RBM_MOAN:		p = "moan"; break;
+        case RBM_SHOW:  	p = "sing"; break;
+        case RBM_SPEAR:  	p = "thrust"; break;
+        case RBM_BOOK:  	p = "bludgeon with a book"; break;
+        case RBM_MOFUMOFU: 	p = "envelop with fluffy tail"; break;
+        case RBM_SQUEEZE:  	p = "squeeze"; break;
+        case RBM_DRAG:  	p = "drag"; break;
+        case RBM_INJECT:  	p = "inject"; break;
+        case RBM_SMILE:  	p = "smile"; break;
+        case RBM_HEADBUTT: 	p = "headbutt"; break;
+        case RBM_FLASH:  	p = "flash"; break;
+        case RBM_HOWL:  	p = "howl"; break;
+        case RBM_WHISPER:  	p = "whisper"; break;
+        case RBM_PRESS:  	p = "press"; break;
+        case RBM_POINT:  	p = "point"; break;
+        case RBM_STRIKE:  	p = "strike"; break;
+        case RBM_PLAY:  	p = "play"; break;
+		case RBM_SMOKE:  	p = "blow smoke"; break;
+    }
+
+    return p;
+}
+
+static cptr get_blow_effect_desc(int effect)
+{
+    cptr p;
+
+    p = NULL;
+
+    switch (effect)
+    {
+        case RBE_SUPERHURT: p = "powerfully attack"; break;
+        case RBE_HURT:     p = "attack"; break;
+        case RBE_POISON:   p = "poison"; break;
+        case RBE_UN_BONUS: p = "disenchant"; break;
+        case RBE_UN_POWER: p = "drain charges"; break;
+        case RBE_EAT_GOLD: p = "steal gold"; break;
+        case RBE_EAT_ITEM: p = "steal items"; break;
+        case RBE_EAT_FOOD: p = "eat your food"; break;
+        case RBE_EAT_LITE: p = "absorb light"; break;
+        case RBE_ACID:     p = "shoot acid"; break;
+        case RBE_ELEC:     p = "electrocute"; break;
+        case RBE_FIRE:     p = "burn"; break;
+        case RBE_COLD:     p = "freeze"; break;
+        case RBE_BLIND:    p = "blind"; break;
+        case RBE_CONFUSE:  p = "confuse"; break;
+        case RBE_TERRIFY:  p = "terrify"; break;
+        case RBE_PARALYZE: p = "paralyze"; break;
+        case RBE_LOSE_STR: p = "reduce strength"; break;
+        case RBE_LOSE_INT: p = "reduce intelligence"; break;
+        case RBE_LOSE_WIS: p = "reduce wisdom"; break;
+        case RBE_LOSE_DEX: p = "reduce dexterity"; break;
+        case RBE_LOSE_CON: p = "reduce constitution"; break;
+        case RBE_LOSE_CHR: p = "reduce charisma"; break;
+        case RBE_LOSE_ALL: p = "reduce all stats"; break;
+        case RBE_SHATTER:  p = "shatter"; break;
+        case RBE_EXP_10:   p = "lower experience (by 10d6+)"; break;
+        case RBE_EXP_20:   p = "lower experience (by 20d6+)"; break;
+        case RBE_EXP_40:   p = "lower experience (by 40d6+)"; break;
+        case RBE_EXP_80:   p = "lower experience (by 80d6+)"; break;
+        case RBE_DISEASE:  p = "disease"; break;
+        case RBE_TIME:     p = "time"; break;
+        case RBE_EXP_VAMP: p = "drain life force"; break;
+        case RBE_DR_MANA:  p = "drain mana force"; break;
+        case RBE_INERTIA:  p = "slow"; break;
+        case RBE_STUN:     p = "stun"; break;
+        case RBE_CHAOS:    p = "attack with chaos"; break;
+        case RBE_ELEMENT:  p = "attack with elements"; break;
+        case RBE_MUTATE:   p = "cause mutations"; break;
+        case RBE_SMITE:    p = "purify"; break;
+        case RBE_DROWN:    p = "drown"; break;
+        case RBE_KILL:     p = "invite to death"; break;
+        case RBE_CURSE:    p = "curse"; break;
+        case RBE_PHOTO:    p = "take a photo"; break;
+        case RBE_MELT:     p = "melt"; break;
+        case RBE_BLEED:    p = "wound"; break;
+        case RBE_INSANITY: p = "cause insanity"; break;
+        case RBE_HUNGER:   p = "cause hunger"; break;
+    }
+
+    return p;
+}
 
 /*
  * Prepare hook for c_roff(). It will be changed for spoiler generation in wizard1.c.
@@ -116,6 +228,10 @@ static void hooked_roff(cptr str)
 	hook_c_roff(TERM_WHITE, str);
 }
 
+static void roff_new_section()
+{
+    hooked_roff("\n");
+}
 
 /*
  * Hack -- display monster information using "hooked_roff()"
@@ -347,7 +463,7 @@ static void roff_aux(int r_idx, int mode)
 		hooked_roff(format("このモンスターはあなたを過去に %d 回倒している",
 			    r_ptr->r_deaths ));
 #else
-		hooked_roff(format("This creature has defeated you %d time(s) in the past "));
+		hooked_roff(format("This creature has defeated you %d time(s) in the past", r_ptr->r_deaths));
 #endif
 
 
@@ -357,7 +473,7 @@ static void roff_aux(int r_idx, int mode)
 #ifdef JP
 			hooked_roff(format("が、あなたはこのモンスターを少なくとも %d 体は倒している。", r_ptr->r_pkills));
 #else
-			hooked_roff(format(", and you have defeated at least %d of the creatures.  ", r_ptr->r_pkills));
+			hooked_roff(format(", and you have defeated at least %d of these creatures.  ", r_ptr->r_pkills));
 #endif
 
 		}
@@ -368,7 +484,7 @@ static void roff_aux(int r_idx, int mode)
 #ifdef JP
 			hooked_roff(format("が、あなたは過去にこのモンスターを少なくとも %d 回は倒している。", r_ptr->r_tkills));
 #else
-			hooked_roff(format(", and you have defeated at least %d of the creatures in the past.  "));
+			hooked_roff(format(", and you have defeated at least %d of the creatures in the past.  ", r_ptr->r_tkills));
 #endif
 
 		}
@@ -439,7 +555,8 @@ static void roff_aux(int r_idx, int mode)
 			hooked_roff(tmp);
 
 			/* Start a new line */
-			hooked_roff("\n");
+            hooked_roff("\n");
+            hooked_roff("\n");
 		}
 	}
 
@@ -663,7 +780,9 @@ static void roff_aux(int r_idx, int mode)
 #ifdef JP
 		hooked_roff("。");
 #else
-		hooked_roff(".  ");
+		hooked_roff(".");
+
+		roff_new_section();
 #endif
 
 		old = FALSE;
@@ -899,6 +1018,7 @@ else                            hooked_roff("存在");
 			/* Mention the dependance on the player's level */
 			hooked_roff(format(" for a%s %lu%s level character.  ",
 				    q, (long)i, p));
+            roff_new_section();
 #endif
 
 		}
@@ -959,6 +1079,7 @@ else                            hooked_roff("存在");
 		}
 
 		hook_c_roff(TERM_WHITE, "creature. ");
+		roff_new_section();
     #endif
 
 	}
@@ -1037,6 +1158,13 @@ else                            hooked_roff("存在");
 
 	}
 
+#ifndef JP
+    if ((flags2 & RF2_AURA_FIRE) || (flags2 & RF2_AURA_ELEC) || (flags2 & RF2_AURA_COLD) || (flags2 & RF2_REFLECTING))
+    {
+        roff_new_section();
+    }
+#endif // JP
+
 	/* Describe escorts */
 	if ((flags1 & RF1_ESCORT) || (flags1 & RF1_ESCORTS))
 	{
@@ -1056,7 +1184,6 @@ else                            hooked_roff("存在");
 		hooked_roff(format("%^s usually appears in groups.  ", wd_he[msex]));
 #endif
 	}
-
 
 	/* Collect inate attacks */
 	vn = 0;
@@ -1915,6 +2042,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
 	}
@@ -1957,6 +2085,8 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 			hooked_roff(format(" and a life rating of %dd%d.  ", hd , r_ptr->hside));
 #endif
 		}
+
+		roff_new_section();
 	}
 
 
@@ -2072,8 +2202,8 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("ことができる。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
-
 	}
 
 
@@ -2160,6 +2290,14 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 
 	}
 
+#ifndef JP
+    if (flags7 & (RF7_SELF_LITE_1 | RF7_SELF_LITE_2 | RF7_SELF_DARK_1 | RF7_SELF_DARK_2 | RF7_RIDING) ||
+        flags2 & (RF2_INVISIBLE | RF2_COLD_BLOOD | RF2_EMPTY_MIND | RF2_WEIRD_MIND | RF2_MULTIPLY | RF2_REGENERATE))
+    {
+        roff_new_section();
+    }
+#endif // JP
+
 
 	/* Collect susceptibilities */
 	vn = 0;
@@ -2243,6 +2381,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("でダメージを与えられる。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
 	}
@@ -2419,6 +2558,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("の耐性を持っている。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
 	}
@@ -2438,6 +2578,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 			hooked_roff(format("に進化する。"));
 #else
 			hooked_roff(format(" when %s gets enough experience.  ", wd_he[msex]));
+			roff_new_section();
 #endif
 		}
 		else if (!(r_ptr->flags1 & RF1_UNIQUE))
@@ -2445,9 +2586,11 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 #ifdef JP
 			hooked_roff(format("%sは進化しない。", wd_he[msex]));
 #else
-			hooked_roff(format("%s won't evolve.  ", wd_he[msex]));
+			hooked_roff(format("%^s won't evolve.  ", wd_he[msex]));
+			roff_new_section();
 #endif
 		}
+
 	}
 
 	/* Collect non-effects */
@@ -2515,6 +2658,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
 	}
@@ -2633,6 +2777,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 #else
 		hooked_roff(format("%^s %s intruders, which %s may notice from %d feet.  ",
 			    wd_he[msex], act, wd_he[msex], 10 * r_ptr->aaf));
+        roff_new_section();
 #endif
 
 	}
@@ -2774,6 +2919,7 @@ if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L
 		hooked_roff("を持っていることがある。");
 #else
 		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
 	}
@@ -3320,6 +3466,7 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 		if(r!=n-1) hooked_roff("、");
 #else
 		/* Introduce the attack description */
+#if 0
 		if (!r)
 		{
 			hooked_roff(format("%^s can ", wd_he[msex]));
@@ -3357,6 +3504,45 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 			}
 		}
 #endif
+        {
+            cptr blow_desc;
+
+            p = get_blow_method_desc(method);
+            q = get_blow_effect_desc(effect);
+            blow_desc = "";
+
+            if (!r)
+            {
+                hooked_roff(format("%^s has the following melee attacks: ", wd_he[msex]));
+                hooked_roff("\n");
+            }
+            else
+            {
+                hooked_roff("\n");
+            }
+
+            if (q)
+            {
+                blow_desc = format("  %^s to %s", p, q);
+            }
+            else
+            {
+                blow_desc = format("  %^s", p);
+            }
+
+            if (d1 && d2 && (know_everything || know_damage(r_idx, m)))
+            {
+                hooked_roff(format("%-50s(%dd%d damage)", blow_desc, d1, d2));
+            }
+            else if (d1 && d2)
+            {
+                hooked_roff(format("%-50s(damage unknown)", blow_desc));
+            } else
+            {
+                hooked_roff(format("%-50s", blow_desc));
+            }
+        }
+#endif
 
 
 
@@ -3370,9 +3556,51 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 #ifdef JP
 		hooked_roff("。");
 #else
-		hooked_roff(".  ");
+		roff_new_section();
 #endif
 
+#ifndef JP
+        /* Display average damage per round if all attacks are known */
+        {
+            bool all_attacks_known;
+            int avg_damage;
+
+            all_attacks_known = TRUE;
+            avg_damage = 0;
+
+            for (r = 0, m = 0; m < 4; m++)
+            {
+                int effect;
+                int d1, d2;
+                int avg_dam;
+
+                /* Skip non-attacks */
+                if (!r_ptr->blow[m].method) continue;
+                if (r_ptr->blow[m].method == RBM_SHOOT) continue;
+
+                if (!r_ptr->r_blows[m] && !know_everything) all_attacks_known = FALSE;
+                if (!know_damage(r_idx, m)) all_attacks_known = FALSE;
+
+                /* Mana draining melee attacks don't damage HP, ignore them */
+                effect = r_ptr->blow[m].effect;
+                if (effect == RBE_DR_MANA) continue;
+
+                /* Extract the attack info */
+                d1 = r_ptr->blow[m].d_dice;
+                d2 = r_ptr->blow[m].d_side;
+
+                /* Calculate average damage for the blow */
+                avg_dam = (d1 + (d1 * d2)) / 2;
+                avg_damage += avg_dam;
+            }
+
+            if (all_attacks_known || know_everything)
+            {
+                hooked_roff(format("%^s deals %d damage per round in melee on average (assuming no elemental resistances or vulnerabilities).  ", wd_he[msex], avg_damage));
+                roff_new_section();
+            }
+        }
+#endif // JP
 	}
 
 	/* Notice lack of attacks */
@@ -3382,6 +3610,7 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 		hooked_roff(format("%^sは物理的な攻撃方法を持たない。", wd_he[msex]));
 #else
 		hooked_roff(format("%^s has no physical attacks.  ", wd_he[msex]));
+		roff_new_section();
 #endif
 
 	}
@@ -3393,6 +3622,7 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 		hooked_roff(format("%s攻撃については何も知らない。", wd_his[msex]));
 #else
 		hooked_roff(format("Nothing is known about %s attack.  ", wd_his[msex]));
+		roff_new_section();
 #endif
 
 	}

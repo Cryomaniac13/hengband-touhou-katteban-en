@@ -11,6 +11,7 @@
 /* Purpose: Angband game engine */
 
 #include "angband.h"
+#include "player/player-log-load.h"
 
 #define TY_CURSE_CHANCE 200
 #define CHAINSWORD_NOISE 100
@@ -10033,6 +10034,10 @@ quit("セーブファイルが壊れています");
 #endif
 
 	}
+
+#ifdef NEW_PLAYER_LOG
+	load_player_log(savefile, p_log_ptr);
+#endif
 
 	/* Extract the options */
 	/*:::オプションの設定情報をフラグ用変数に入れなおしているらしい*/

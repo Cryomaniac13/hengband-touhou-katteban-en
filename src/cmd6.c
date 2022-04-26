@@ -11,7 +11,7 @@
 /* Purpose: Object commands */
 
 #include "angband.h"
-
+#include "player/player-log.h"
 
 /*
  * This file includes code for eating food, drinking potions,
@@ -1438,6 +1438,13 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 		/* Food can feed the player */
 		(void)set_food(p_ptr->food + o_ptr->pval);
 	}
+
+#ifdef NEW_PLAYER_LOG
+	if ((o_ptr->tval == TV_FOOD || o_ptr->tval == TV_MUSHROOM) && object_is_aware(o_ptr))
+    {
+        player_log_record_food_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
 
 	/* Destroy a food in the pack */
 	if (item >= 0)
@@ -3107,6 +3114,13 @@ msg_print("液体の一部はあなたのアゴを素通りして落ちた！");
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
 
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(q_ptr))
+    {
+        player_log_record_potion_use(p_log_ptr, q_ptr->k_idx);
+    }
+#endif
+
 	/* Potions can feed the player */
 	///race 薬を飲んだ時の満腹度増加処理
 	///mod140326 酒を飲むと種族にかかわらずpval/3ぶんの食事
@@ -4152,6 +4166,13 @@ static void sagume_read_scroll_aux(int item, bool known)
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
 
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(o_ptr))
+    {
+        player_log_record_scroll_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
+
 	/* Hack -- allow certain scrolls to be "preserved" */
 	if (!used_up)
 	{
@@ -4957,6 +4978,12 @@ take_hit(DAMAGE_NOESCAPE, 111+randint1(111), "ログルスの巻物", -1);
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
 
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(o_ptr))
+    {
+        player_log_record_scroll_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
 
 	/* Hack -- allow certain scrolls to be "preserved" */
 	if (!used_up)
@@ -5630,6 +5657,12 @@ static void do_cmd_use_staff_aux(int item)
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
 
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(o_ptr))
+    {
+        player_log_record_staff_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
 
 	/* Hack -- some uses are "free" */
 	if (!use_charge) return;
@@ -6453,6 +6486,12 @@ static void do_cmd_aim_wand_aux(int item)
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
 
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(o_ptr))
+    {
+        player_log_record_wand_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
 
 	/* Use a single charge */
 	o_ptr->pval--;
@@ -6958,6 +6997,13 @@ msg_print("そのロッドはまだ充填中です。");
 
 	/* Window stuff */
 	p_ptr->window |= (PW_INVEN | PW_EQUIP | PW_PLAYER);
+
+#ifdef NEW_PLAYER_LOG
+	if (object_is_aware(o_ptr))
+    {
+        player_log_record_rod_use(p_log_ptr, o_ptr->k_idx);
+    }
+#endif
 }
 
 /*:::ロッドを振る*/

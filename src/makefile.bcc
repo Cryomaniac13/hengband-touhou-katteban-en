@@ -55,7 +55,8 @@ ANGBAND_RC = ang_eng.rc
 CCOPTS = -Od -jb -j1 -Hc -tW -lGn -e$(EXE_FILE) \
 	-wamb -wdef -wnod -wpin -wstu -wstv -wuse \
 	-D_WIN32_WINNT=0x0400 -DWINVER=0x0501 \
-	-DUSE_TRANSPARENCY $(JP_OPT) \ 
+	-DUSE_TRANSPARENCY $(JP_OPT) \
+#	-DNEW_PLAYER_LOG \
 	-g255
 
 # Compile flags:
@@ -79,7 +80,14 @@ OBJ = \
 	z-form.obj z-rand.obj z-term.obj z-util.obj z-virt.obj \
 	chuukei.obj \
 	ability_card.obj bldg2.obj cmd7.obj cmd_junko.obj new_class_power.obj \
-	random_unique_monster.obj straygod.obj
+	random_unique_monster.obj straygod.obj \
+	io\io-plain-read-write.obj \
+	player\player-log.obj \
+	player\player-log-object.obj \
+	player\player-log-spell.obj \
+	player\player-log-display.obj \
+	player\player-log-load.obj \
+	player\player-log-save.obj
 
 all : $(EXE_FILE)
 

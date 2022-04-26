@@ -11,6 +11,7 @@
 /* Purpose: Spell/Prayer commands */
 
 #include "angband.h"
+#include "player/player-log.h"
 
 /*:::魔法書使用のための補助コード*/
 ///realm
@@ -2276,6 +2277,15 @@ msg_print("An infernal sound echoed.");
 
 			p_ptr->spell_exp[(increment ? 32 : 0) + spell] += exp_gain;
 		}
+
+#ifdef NEW_PLAYER_LOG
+		{
+		    cptr spell_name;
+		    spell_name = do_spell(use_realm, spell, SPELL_NAME);
+
+            player_log_record_spell_use(p_log_ptr, spell_name);
+		}
+#endif
 	}
 
 	/* Take a turn */

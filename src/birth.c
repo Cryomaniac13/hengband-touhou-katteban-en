@@ -9,6 +9,7 @@
  */
 
 #include "angband.h"
+#include "player/player-log.h"
 
 /*
  * How often the autoroller will update the display and pause
@@ -2263,6 +2264,10 @@ static void player_wipe(void)
 
 	ability_card_trade_count = 0;
 	buy_gacha_box_count = 0;
+
+#ifdef NEW_PLAYER_LOG
+    init_player_log(p_log_ptr);
+#endif
 }
 
 /*
