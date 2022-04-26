@@ -13867,7 +13867,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 						int prob = calc_ability_card_prob(ABL_CARD_DANMAKUGHOST, card_num);
 						if (randint1(100) <= prob)
 						{
-							msg_print("’e–‹‚Ì–S—ì‚ª–‚–@‚ðÁ‚µ‹Ž‚Á‚½I");
+							msg_print(_("’e–‹‚Ì–S—ì‚ª–‚–@‚ðÁ‚µ‹Ž‚Á‚½I", "The danmaku ghost cancels the spell!"));
 							break;
 						}
 					}
