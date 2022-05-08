@@ -846,7 +846,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		int add_lis[10]		= { 1,1,1,1,1,2,2,2,2,3 };
 
 		if (only_info) return format(_("このカードを所持していると、HPが最大値の%d%%以上のときに限り隣接攻撃回数が%d増える。",
-                                        "Carrying this card increases your amount of melee blows per round by %d as long as your HP is at least %d%% of its maximum value."), border_lis[card_num], add_lis[card_num]);
+                                        "As long as your HP is at least %d%% of its maximum value, carrying this card increases your amount of melee blows per round by %d."), border_lis[card_num], add_lis[card_num]);
 
 	}
 	break;
