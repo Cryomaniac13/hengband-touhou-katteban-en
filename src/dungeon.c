@@ -2128,7 +2128,7 @@ static void process_world_aux_hp_and_sp(void)
 
 	if(p_ptr->pclass == CLASS_HINA && p_ptr->magic_num1[0] > HINA_YAKU_LIMIT3 && one_in_(6) && !IS_INVULN())
 	{
-		take_hit(DAMAGE_NOESCAPE, 1, "–ï‚Ì•‰’S", -1);
+		take_hit(DAMAGE_NOESCAPE, 1, _("–ï‚Ì•‰’S", "burden of misfortune"), -1);
 	}
 
 
@@ -2195,7 +2195,7 @@ static void process_world_aux_hp_and_sp(void)
 		{
 			/* Take damage */
 			///msg131221
-			take_hit(DAMAGE_NOESCAPE, dam, "‰ö‰ä‚Ì’É‚Ý", -1);
+			take_hit(DAMAGE_NOESCAPE, dam, _("‰ö‰ä‚Ì’É‚Ý", "pain from wounds"), -1);
 		}
 
 

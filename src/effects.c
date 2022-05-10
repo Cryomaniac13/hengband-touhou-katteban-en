@@ -2395,7 +2395,7 @@ bool set_protevil(int v, bool do_dec)
 
 	if(p_ptr->pclass == CLASS_HINA && p_ptr->magic_num1[0])
 	{
-		msg_print("守護の魔法が厄を打ち払った！");
+		msg_print(_("守護の魔法が厄を打ち払った！", "The protective magic dispels your misfortune!"));
 		hina_gain_yaku(-v);
 		v=0;
 	}

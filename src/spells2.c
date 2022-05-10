@@ -8154,7 +8154,7 @@ bool activate_ty_curse(bool stop_ty, int *count)
 
 	if(p_ptr->pclass == CLASS_HINA)
 	{
-		msg_print("‚ ‚È‚½‚Í‘¾ŒÃ‚ÌŽô‚¢‚ð‹zŽû‚µ‚½I");
+		msg_print(_("‚ ‚È‚½‚Í‘¾ŒÃ‚ÌŽô‚¢‚ð‹zŽû‚µ‚½I", "You absorb the Ancient Foul Curse!"));
 		hina_gain_yaku(250+randint1(250));
 		return TRUE;
 	}
@@ -8162,7 +8162,7 @@ bool activate_ty_curse(bool stop_ty, int *count)
 	//v1.1.48 Ž‡‰‘‚ÍŽô‚¢‚ð•s‰^ƒpƒ[‚Æ‚µ‚Ä‹zŽû‚·‚é
 	if (p_ptr->pclass == CLASS_SHION)
 	{
-		msg_print("‚ ‚È‚½‚Í‘¾ŒÃ‚ÌŽô‚¢‚ð‹zŽû‚µ‚½I");
+		msg_print(_("‚ ‚È‚½‚Í‘¾ŒÃ‚ÌŽô‚¢‚ð‹zŽû‚µ‚½I", "You absorb the Ancient Foul Curse!"));
 		p_ptr->magic_num1[1] += 10000 + randint1(10000);
 		return TRUE;
 	}

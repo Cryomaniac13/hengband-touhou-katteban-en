@@ -11863,7 +11863,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 	if (p_ptr->pclass == CLASS_YATSUHASHI && music_singing(MUSIC_NEW_TSUKUMO_JINKIN)
 		&& m_ptr->r_idx && get_damage > 0 && !p_ptr->is_dead && (who > 0))
 	{
-		msg_format("%sは琴の音に包まれた・・", m_name);
+		msg_format(_("%sは琴の音に包まれた・・", "%^s is enveloped in the sound of koto..."), m_name);
 		project(0, 0, m_ptr->fy, m_ptr->fx, get_damage, GF_MISSILE, PROJECT_KILL, -1);
 	}
 
