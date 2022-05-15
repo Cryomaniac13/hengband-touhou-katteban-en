@@ -8038,10 +8038,12 @@ static void dump_aux_options(FILE *fff)
 #endif
 
 	if (ironman_no_fixed_art)
-		fprintf(fff, "\n ★が出現しない:     ON");
+		fprintf(fff, _("\n ★が出現しない:     ON",
+                     "\n No fixed artifacts: ON"));
 
 	if (no_capture_book)
-		fprintf(fff, "\n 妖魔本が出現しない: ON");
+		fprintf(fff, _("\n 妖魔本が出現しない: ON",
+                     "\n No demon books:     ON"));
 
 
 	if (ironman_downward)
