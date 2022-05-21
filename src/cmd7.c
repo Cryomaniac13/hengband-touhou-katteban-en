@@ -6671,7 +6671,7 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 #ifdef JP
 			msg_format("%sの魔力を%d抽出した！",marisa_essence_name[type],gain);
 #else
-            msg_format("You extract %d magical power of %s!",marisa_essence_name[type],gain);
+            msg_format("You extract %d %s mana!", gain, marisa_essence_name[type]);
 #endif
 			msg_print(NULL);
 		}
@@ -8471,8 +8471,8 @@ bool marisa_extract_material(bool in_home)
 	char o_name[MAX_NLEN];
 	int i, base_point, total_point;
 
-	q = "何から魔力を抽出しようか？";
-	s = "魔法の材料になりそうなものを持っていない。";
+	q = _("何から魔力を抽出しようか？", "Extract mana from what item?");
+	s = _("魔法の材料になりそうなものを持っていない。", "You don't have anything that could be used as spell material.");
 
 	item_tester_hook = marisa_will_buy;
 	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return FALSE;
@@ -8559,12 +8559,12 @@ bool check_marisa_recipe(void)
 			prt(info_ptr, 7+i, 18);
 			info_ptr += strlen(info_ptr) + 1;
 		}
-		prt(_("必要な魔力:", "Essence required:"), 12, 18);
+		prt(_("必要な魔力:", "Mana required:"), 12, 18);
 		j=13;
 		for(i=0;i<8;i++)
 		{
 			if(!marisa_magic_table[num].use_magic_power[i]) continue;
-			prt(format(_("%sの魔力(%d)", "Essence of %s (%d)"),marisa_essence_name[i],marisa_magic_table[num].use_magic_power[i]),j++,18);
+			prt(format(_("%sの魔力(%d)", "%^s mana (%d)"),marisa_essence_name[i],marisa_magic_table[num].use_magic_power[i]),j++,18);
 		}
 
 

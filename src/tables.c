@@ -13789,7 +13789,7 @@ struct marisa_magic_type marisa_magic_table[MARISA_MAX_MAGIC_KIND] =
 
 };
 
-cptr marisa_essence_name[8] = {_("炎", "Fr"),_("氷", "Cl"),_("雷", "El"),_("光", "Lt"),_("闇", "Dk"),_("幻", "Il"),_("星", "St"),_("極", "Ex"),};
+cptr marisa_essence_name[8] = {_("炎", "Fire"),_("氷", "Cold"),_("雷", "Elec"),_("光", "Lght"),_("闇", "Dark"),_("幻", "Illu"),_("星", "Star"),_("極", "Ulti"),};
 
 //輝夜クエスト
 int kaguya_quest_art_list[KAGUYA_QUEST_MAX] =

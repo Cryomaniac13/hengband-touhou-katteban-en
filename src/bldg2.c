@@ -2283,7 +2283,7 @@ void marisa_check_essence(void)
 	screen_save();
 	for(i=4;i<14;i++) Term_erase(17, i, 255);
 
-	prt("Œ»Ý–‚—Í‚Ì”õ’~‚Í‚±‚ê‚¾‚¯‚ ‚éB",4,18);
+	prt(_("Œ»Ý–‚—Í‚Ì”õ’~‚Í‚±‚ê‚¾‚¯‚ ‚éB", "You have following kinds of mana prepared right now."),4,18);
 	for(i=0;i<8;i++)
 	{
 

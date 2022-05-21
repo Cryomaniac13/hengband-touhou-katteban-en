@@ -101,8 +101,8 @@ F:b:PERMANENT:3
 ?:[EQU $CLASS Marisa]
 B:$0:A:0:Study spells:0:0:a:64:0
 B:$0:A:1:Browse spell effects:0:0:b:70:0
-B:$0:A:2:Extract essence from material:0:0:c:66:0
-B:$0:A:3:Confirm essence stockpile:0:0:d:67:0
+B:$0:A:2:Extract mana from materials:0:0:c:66:0
+B:$0:A:3:Check mana stockpile:0:0:d:67:0
 B:$0:A:4:Read note:0:0:m:65:0
 B:$0:A:5:Create spells:0:0:e:68:0
 B:$0:A:6:Take spells:0:0:f:69:0
