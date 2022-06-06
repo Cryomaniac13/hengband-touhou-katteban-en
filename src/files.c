@@ -7191,7 +7191,7 @@ void display_player(int mode)
 					sprintf(statmsg, "…あなたは、クエスト「%s」で%sに倒された。", quest[p_ptr->inside_quest].name, p_ptr->died_from);
 
 #else
-					sprintf(statmsg, "...You were killed by %s in the quest '%s'.", p_ptr->died_from, quest[p_ptr->inside_quest].name);
+					sprintf(statmsg, "...You were defeated by %s in the quest '%s'.", p_ptr->died_from, quest[p_ptr->inside_quest].name);
 #endif
 				}
 				else if(INSIDE_EXTRA_QUEST)
