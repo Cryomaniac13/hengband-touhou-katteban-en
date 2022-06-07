@@ -2585,8 +2585,10 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 			int itemp;
 			strcpy(temp, quark_str(o_ptr->art_name));
 
-		    if (o_ptr->tval == TV_MASK) ;
-		    else if (o_ptr->tval == TV_PHOTO && o_ptr->sval == SV_PHOTO_NIGHTMARE) ;
+		    if (o_ptr->tval == TV_MASK) {
+                t = object_desc_chr(t, ' of ');
+                t = object_desc_str(t, temp);
+            } else if (o_ptr->tval == TV_PHOTO && o_ptr->sval == SV_PHOTO_NIGHTMARE) ;
 		    else {
                 t = object_desc_chr(t, ' ');
                 t = object_desc_str(t, quark_str(o_ptr->art_name));
