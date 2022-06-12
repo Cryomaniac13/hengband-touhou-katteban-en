@@ -269,6 +269,21 @@ static void change_path(cptr info)
 
 
 /*
+ * Provided routines that main-win.c does, but do nothing:  allows things to
+ * link.
+ */
+void init_music_hack()
+{
+}
+
+
+int find_mon_music_priority(int r_idx)
+{
+	return 0;
+}
+
+
+/*
  * Simple "main" function for multiple platforms.
  *
  * Note the special "--" option which terminates the processing of
