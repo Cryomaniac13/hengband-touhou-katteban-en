@@ -2095,12 +2095,12 @@ extern void make_evilweapon(object_type *o_ptr, monster_race *r_ptr);
 extern bool apply_random_unique(int r_idx);
 extern char random_unique_name[3][80];
 extern s16b random_unique_akills;
-bool flag_generate_doppelganger;
+extern bool flag_generate_doppelganger;
 
-int flag_generate_lilywhite;
+extern int flag_generate_lilywhite;
 
 
-int special_idol_generate_type;
+extern int special_idol_generate_type;
 
 extern bool check_rest_f50(int r_idx);
 
@@ -2537,10 +2537,10 @@ extern void absorb_tsukumo(int m_idx);
 extern bool hack_flag_powerup_mutation;
 
 //v1.1.43
-bool lunatic_torch(int m_idx, int power);
+extern bool lunatic_torch(int m_idx, int power);
 
 //v1.1.43
-bool flag_sunny_refraction;
+extern bool flag_sunny_refraction;
 extern void update_flying_dist(void);
 
 //v1.1.44
