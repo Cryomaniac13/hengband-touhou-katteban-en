@@ -628,16 +628,8 @@ int main(int argc, char *argv[])
 		argv[1] = NULL;
 	}
 
-
-	/* Process the player name */
-	process_player_name(TRUE);
-
-
-
 	/* Install "quit" hook */
 	quit_aux = quit_hook;
-
-
 
 #ifdef USE_XAW
 	/* Attempt to use the "main-xaw.c" support */
@@ -792,6 +784,8 @@ int main(int argc, char *argv[])
 	/* Make sure we have a display! */
 	if (!done) quit("Unable to prepare any 'display module'!");
 
+	/* Process the player name */
+	process_player_name(TRUE);
 
 	/* Hack -- If requested, display scores and quit */
 	if (show_score > 0) display_scores(0, show_score);
