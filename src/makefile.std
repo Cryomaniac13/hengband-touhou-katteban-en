@@ -49,14 +49,15 @@ SRCS = \
 	object1.c object2.c monster1.c monster2.c \
 	xtra1.c xtra2.c spells1.c spells2.c \
 	melee1.c melee2.c save.c files.c floors.c \
-	cmd1.c cmd2.c cmd3.c cmd4.c cmd5.c cmd6.c \
+	cmd1.c cmd2.c cmd3.c cmd4.c cmd5.c cmd6.c cmd7.c cmd_junko.c \
 	do-spell.c store.c birth.c load.c \
 	wizard1.c wizard2.c grid.c streams.c rooms.c \
 	generate.c dungeon.c init1.c init2.c \
 	effects.c racial.c inet.c report.c snipe.c hex.c \
 	artifact.c autopick.c mutation.c flavor.c spells3.c \
 	mspells1.c mspells2.c scores.c mind.c mane.c hissatsu.c \
-	bldg.c obj_kind.c wild.c avatar.c japanese.c mspells3.c \
+	bldg.c bldg2.c obj_kind.c wild.c avatar.c japanese.c mspells3.c \
+	ability_card.c new_class_power.c random_unique_monster.c straygod.c \
 	main-cap.c main-gcu.c main-x11.c main-xaw.c main.c chuukei.c
 
 OBJS = \
@@ -65,14 +66,15 @@ OBJS = \
 	object1.o object2.o monster1.o monster2.o \
 	xtra1.o xtra2.o spells1.o spells2.o \
 	melee1.o melee2.o save.o files.o floors.o \
-	cmd1.o cmd2.o cmd3.o cmd4.o cmd5.o cmd6.o \
+	cmd1.o cmd2.o cmd3.o cmd4.o cmd5.o cmd6.o cmd7.o cmd_junko.o \
 	do-spell.o store.o birth.o load.o \
 	wizard1.o wizard2.o grid.o streams.o rooms.o \
 	generate.o dungeon.o init1.o init2.o \
 	effects.o racial.o inet.o report.o snipe.o hex.o \
 	artifact.o autopick.o mutation.o flavor.o spells3.o \
 	mspells1.o mspells2.o scores.o mind.o mane.o hissatsu.o \
-	bldg.o obj_kind.o wild.o avatar.o japanese.o mspells3.o \
+	bldg.o bldg2.o obj_kind.o wild.o avatar.o japanese.o mspells3.o \
+	ability_card.c new_class_power.o random_unique_monster.o straygod.o \
 	main-cap.o main-gcu.o main-x11.o main-xaw.o main.o chuukei.o
 
 
@@ -301,9 +303,11 @@ INCS = \
 	z-term.h z-rand.h z-util.h z-virt.h z-form.h $(HDRS)
 
 
+ability_card.o: ability_card.c $(INCS)
 artifact.o: artifact.c $(INCS)
 avatar.o: avatar.c $(INCS)
 bldg.o: bldg.c $(INCS)
+bldg2.o: bldg2.c $(INCS)
 birth.o: birth.c $(INCS)
 cave.o: cave.c $(INCS)
 chuukei.o: chuukei.c $(INCS)
@@ -313,6 +317,8 @@ cmd3.o: cmd3.c $(INCS)
 cmd4.o: cmd4.c $(INCS)
 cmd5.o: cmd5.c $(INCS)
 cmd6.o: cmd6.c $(INCS)
+cmd7.o: cmd7.c $(INCS)
+cmd_junko.o: cmd_junko.c $(INCS)
 do-spell.o: do-spell.c $(INCS)
 dungeon.o: dungeon.c $(INCS)
 effects.o: effects.c $(INCS)
@@ -320,7 +326,9 @@ files.o: files.c $(INCS)
 flavor.o: flavor.c $(INCS)
 generate.o: generate.c $(INCS) generate.h grid.h rooms.h streams.h
 grid.o: grid.c $(INCS) grid.h generate.h
+new_class_power.o: new_class_power.c $(INCS) player/player-log.h
 rooms.o: rooms.c $(INCS) grid.h rooms.h generate.h
+straygod.o: straygod.c $(INCS)
 streams.o: streams.c $(INCS) grid.h generate.h
 hissatsu.o: hissatsu.c $(INCS)
 hex.o: hex.c $(INCS)
@@ -348,6 +356,7 @@ object1.o: object1.c $(INCS)
 object2.o: object2.c $(INCS) kajitips.h
 obj_kind.o: obj_kind.c $(INCS)
 racial.o: racial.c $(INCS)
+random_unique_monster.o: random_unique_monster.c $(INCS)
 report.o: report.c $(INCS)
 scores.o: scores.c $(INCS)
 save.o: save.c $(INCS)
