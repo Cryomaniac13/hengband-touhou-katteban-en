@@ -74,7 +74,7 @@ OBJS = \
 	artifact.o autopick.o mutation.o flavor.o spells3.o \
 	mspells1.o mspells2.o scores.o mind.o mane.o hissatsu.o \
 	bldg.o bldg2.o obj_kind.o wild.o avatar.o japanese.o mspells3.o \
-	ability_card.c new_class_power.o random_unique_monster.o straygod.o \
+	ability_card.o new_class_power.o random_unique_monster.o straygod.o \
 	main-cap.o main-gcu.o main-x11.o main-xaw.o main.o chuukei.o
 
 
