@@ -74,7 +74,7 @@ OBJS = \
 	artifact.o autopick.o mutation.o flavor.o spells3.o \
 	mspells1.o mspells2.o scores.o mind.o mane.o hissatsu.o \
 	bldg.o bldg2.o obj_kind.o wild.o avatar.o japanese.o mspells3.o \
-	ability_card.c new_class_power.o random_unique_monster.o straygod.o \
+	ability_card.o new_class_power.o random_unique_monster.o straygod.o \
 	main-cap.o main-gcu.o main-x11.o main-xaw.o main.o chuukei.o
 
 
@@ -254,7 +254,13 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 #LIBS = -L/usr/X11R6/lib -lX11 -lcurses
 
 
-
+#
+# Hack -- convert Japanese encoding (shift JIS?) in .c files to EUC-JP so
+# Unix compilers don't choke.  Requires that nkf,
+# https://osdn.net/projects/nkf/ , be in the path.
+#
+.c.o:
+	./compile-wrap $(CC) $(CFLAGS) -c $<
 
 #
 # Hack -- "install" as the base target
@@ -279,6 +285,9 @@ hengband: $(OBJS)
 
 clean:
 	-\rm -f *.bak *.o
+
+distclean: clean
+	-\rm -r ../.build
 
 
 #
