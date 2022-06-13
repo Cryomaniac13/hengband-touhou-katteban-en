@@ -134,17 +134,17 @@ JP_OPT= -D"JP" -D"EUC" -DDEFAULT_LOCALE="\"ja_JP.eucJP\""
 # including "USE_GETCH" and "USE_CURS_SET".  Note that "z-config.h" will
 # attempt to "guess" at many of these flags based on your system.
 #
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_X11" -D"USE_GCU"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU"
 #LIBS = -lX11 -lcurses -ltermcap
 
-CFLAGS = -Wall -O2  -fno-strength-reduce -pipe -g -D"USE_X11" -DANGBAND_2_8_1 $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include
+CFLAGS = -Wall -O2  -fno-strength-reduce -pipe -g -DANGBAND_2_8_1 -D"USE_X11" $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include
 LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 
 
 ##
 ## Variation -- Compile for Linux
 ##
-#CFLAGS = -Wall -O2 -m486 -pipe -g -D"USE_XAW" -D"USE_GCU"
+#CFLAGS = -Wall -O2 -pipe -g -DANGBAND_2_8_1 -D"USE_XAW" -D"USE_GCU"
 #LIBS = -L/usr/X11R6/lib -lXaw -lXext -lSM -lICE -lXmu -lXt \
 #	-lX11 -lcurses
 
@@ -152,35 +152,35 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 ##
 ## Variation -- Only support "main-x11.c" (not "main-gcu.c")
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_X11"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_X11"
 #LIBS = -lX11
 
 
 ##
 ## Variation -- Only support "main-gcu.c" (not "main-x11.c")
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_GCU"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_GCU"
 #LIBS = -lcurses -ltermcap
 
 
 ##
 ## Variation -- Use "main-xaw.c" instead of "main-x11.c"
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_XAW" -D"USE_GCU"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_XAW" -D"USE_GCU"
 #LIBS = -lXaw -lXmu -lXt -lX11 -lcurses -ltermcap
 
 
 ##
 ## Variation -- Use "main-cap.c" instead of "main-gcu.c"
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_X11" -D"USE_CAP"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_X11" -D"USE_CAP"
 #LIBS = -lX11 -ltermcap
 
 
 ##
 ## Variation -- Only work on simple vt100 terminals
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_CAP" -D"USE_HARDCODE"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_CAP" -D"USE_HARDCODE"
 
 
 ##
@@ -196,7 +196,7 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 ##
 #CFLAGS = -I/usr/include/ncurses \
 #         -Wall -O2 -fomit-frame-pointer \
-#         -D"USE_X11" -D"USE_GCU" \
+#         -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU" \
 #         -D"USE_TPOSIX" -D"USE_CURS_SET"
 #LIBS = -lX11 -lncurses
 #LDFLAGS = -s
@@ -205,14 +205,14 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 ##
 ## Variation -- compile for Solaris
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_X11" -D"USE_GCU" -D"SOLARIS"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU" -D"SOLARIS"
 #LIBS = -lX11 -lsocket -lcurses
 
 
 ##
 ## Variation -- compile for SGI Indigo runnig Irix
 ##
-#CFLAGS = -Wall -O2  -fno-strength-reduce -g -D"USE_X11" $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include
+#CFLAGS = -Wall -O2  -fno-strength-reduce -g -DANGBAND_2_8_1 -D"USE_X11" $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include
 #LIBS = -L/usr/X11R6/lib -lX11 -lncurses -ltermcap -lsun
 
 
@@ -221,22 +221,22 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 ## Variation -- compile for Dec ALPHA OSF/1 v2.0
 ##
 #CC     = cc
-##CFLAGS = -std -O -g3 -Olimit 4000 -D"USE_X11" -D"USE_GCU"
-#CFLAGS = -std -g -D"USE_X11" -D"USE_GCU"
+##CFLAGS = -std -O -g3 -Olimit 4000 -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU"
+#CFLAGS = -std -g -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU"
 #LIBS   = -lX11 -lcurses -ltermcap -lrpcsvc
 
 
 ##
 ## Variation -- compile for Interactive Unix (ISC) systems
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_X11" -D"USE_GCU" -D"ISC"
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_X11" -D"USE_GCU" -D"ISC"
 #LIBS = -lX11 -lcurses -lnsl_s -linet -lcposix
 
 
 ##
 ## Variation -- Support fat binaries under NEXTSTEP
 ##
-#CFLAGS = -Wall -O1 -pipe -g -D"USE_GCU" -arch m68k -arch i386
+#CFLAGS = -Wall -O1 -pipe -g -DANGBAND_2_8_1 -D"USE_GCU" -arch m68k -arch i386
 #LIBS = -lcurses -ltermcap
 
 
@@ -244,13 +244,13 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 ## Variation -- compile for FreeBSD
 ##
 # (for Japanese ver.)
-#CFLAGS = -Wall -O2  -fno-strength-reduce -m486 -pipe -g -D"USE_X11" -D"JP" -D"EUC" -D"USE_GCU" -I/usr/X11R6/include -DUSE_NCURSES -DDEFAULT_LOCALE="\"ja_JP.EUC\""
+#CFLAGS = -Wall -O2  -fno-strength-reduce -pipe -g -DANGBAND_2_8_1 -D"USE_X11" -D"JP" -D"EUC" -D"USE_GCU" -I/usr/X11R6/include -DUSE_NCURSES -DDEFAULT_LOCALE="\"ja_JP.EUC\""
 #LIBS = -L/usr/X11R6/lib -lX11 -lncurses -lmytinfo -lxpg4
 
 ##
 ## Variation -- compile for other BSD-like OS
 ##
-#CFLAGS = -Wall -O2  -fno-strength-reduce -m486 -pipe -g -D"USE_X11" $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include -DSPECIAL_BSD
+#CFLAGS = -Wall -O2  -fno-strength-reduce -pipe -g -DANGBAND_2_8_1 -D"USE_X11" $(JP_OPT) -D"USE_GCU" -I/usr/X11R6/include -DSPECIAL_BSD
 #LIBS = -L/usr/X11R6/lib -lX11 -lcurses
 
 
