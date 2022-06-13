@@ -11444,7 +11444,7 @@ static bool add_essence(int mode)
 #ifdef JP
 					if (!get_check("修正値は1になります。よろしいですか？")) return TRUE;
 #else
-					if (!get_check("The magic number of this weapon will become 1. Are you sure? ")) return;
+					if (!get_check("The magic number of this weapon will become 1. Are you sure? ")) return TRUE;
 #endif
 				}
 
@@ -11528,7 +11528,7 @@ static bool add_essence(int mode)
 #ifdef JP
 			if (!get_string(format("いくつ付加しますか？ (1-%d):", p_ptr->lev/7+3), tmp_val, 2)) return TRUE;
 #else
-			if (!get_string(format("Enchant how many? (1-%d):", p_ptr->lev/7+3), tmp_val, 2)) return;
+			if (!get_string(format("Enchant how many? (1-%d):", p_ptr->lev/7+3), tmp_val, 2)) return TRUE;
 #endif
 			val = atoi(tmp_val);
 			if (val > p_ptr->lev/7+3) val = p_ptr->lev/7+3;
