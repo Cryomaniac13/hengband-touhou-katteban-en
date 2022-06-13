@@ -611,8 +611,10 @@
 #endif
 #endif
 
-#endif /* HAVE_CONFIG_H */
-
-
 ///patch　本家の修正をこっちにも適用するとき
 #define PATCH_ORIGIN
+#ifdef PATCH_ORIGIN
+#include <wctype.h>
+#endif
+
+#endif /* HAVE_CONFIG_H */
