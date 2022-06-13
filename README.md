@@ -34,6 +34,21 @@ Link to wiki: https://w.atwiki.jp/hengtouhou/
 Changed from base Hengband.txt is the author's list of main differences
 between this mod and original Hengband.
 
-- I didn't have Visual Studio on hand, but I managed to compile using
-Borland C++. The makefile I'm using is makefile.bcc. Keep in mind you have
-to run it in Japanese locale in order to make it work.
+- To build on Windows, I didn't have Visual Studio on hand, but I managed to
+compile using Borland C++. The makefile I'm using is makefile.bcc. Keep in
+mind you have to run it in Japanese locale in order to make it work.
+
+- To build on Linux/Unix, I used src/makefile.std.  Having the nkf utility,
+https://osdn.net/projects/nkf/ , in your path is a prerequisite for compilation
+to work.  On Debian and Ubuntu, you can get nkf by installing the nkf package;
+on OpenBSD, you can get it by running "pkg_add ja-nkf".  To compile the
+English version, edit src/makefile.std to comment out (i.e. put a '#' as the
+first character in the line) the line "JP_OPT= ..." which is for the Japanese
+version (if you're on OpenBSD you also need to add "-DSGI" to the uncommented
+line which sets CFLAGS, "CFLAGS = ..." and change the default compiler from
+gcc to cc in the "CC = ..." line).  To compile, open a terminal, change
+directories to the src subdirectory of the Touhou Katteban Hengband files, and
+run "make -f makefile.std".  The resulting executable is named "hengband" and
+is placed at the top level of the Touhou Katteban Hengband files.  To run it
+from a terminal, change directories to the top level of the Touhou Katteban
+Hengband files and run "./hengband".
