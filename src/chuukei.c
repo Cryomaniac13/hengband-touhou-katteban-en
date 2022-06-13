@@ -7,6 +7,8 @@
 #include <ctype.h>
 #ifdef WINDOWS
 #include <windows.h>
+#elif !defined(MACINTOSH)
+#include <sys/time.h>
 #endif
 
 #ifdef CHUUKEI
@@ -20,7 +22,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <sys/time.h>
 #include <arpa/inet.h>
 
 #include <setjmp.h>
