@@ -1,0 +1,136 @@
+#!/bin/sh
+
+# Wrap compilation to convert the encoding of Japanese characters in the source
+# code to EUC-JP so Unix tools can be used without using a special locale.
+# Assumes one source file is compiled per invocation and that nkf,
+# https://osdn.net/projects/nkf/ , is in the path.
+# Usage: compile-wrap [compiler command line]
+
+# This is the root directory for the source files.  It can be a relative or
+# absolute path.
+src_dir=.
+# This is the directory where building will be done and the preprocessed
+# source files stored.  It can not be within $src_dir or its subdirectories.
+# It can be a relative or absolute path.
+build_dir=../.build
+# Either the full path to $src_dir or the relative path from $build_dir to
+# $src_dir.
+qual_src_dir=../src
+if test x"$qual_src_dir" = x`echo "$qual_src_dir" | sed -e 's%^/%x%'` ; then
+    # $qual_src_dir is a relative path.
+    rel_qual_src_dir=1
+else
+    rel_qual_src_dir=0
+fi
+
+# Precompute some properties for $src_dir
+src_dir_len=`echo "$src_dir" | wc -c`
+src_dir_nslash=`echo "$src_dir" | tr -C -d / | wc -c`
+
+
+# Populate the build directory with the header files; eventually this should be
+# handled more efficiently in the makefiles so that this overhead is only
+# incurred when there's a change in the headers and not at every compilation.
+
+# Most of the headers can be symbolically linked into the build directory since
+# they don't have Japanese characters.  There are some exceptions:  include
+# them, separated by whitespace in special_headers.
+special_headers="defines.h"
+# This will break if header path names include spaces.
+for header in `find "$src_dir" -name '*.h' -print` "$src_dir"/maid-x11.c ; do
+	header_len=`echo "$header" | wc -c`
+        header_nslash=`echo "$header" | tr -C -d / | wc -c`
+	header_base=`basename "$header"`
+	header_base_len=`echo "$header_base" | wc -c`
+	subdir_start=`expr $src_dir_len + 1`
+	subdir_end=`expr $header_len - $header_base_len - 1`
+	if test $subdir_start -le $subdir_end ; then
+		header_subdir=`echo "$header" | cut -c "$subdir_start"-"$subdir_end"`
+		dest_dir="$build_dir"/"$header_subdir"
+		src_path="$qual_src_dir"/"$header_subdir"/"$header_base"
+		depth=`expr $header_nslash - $src_dir_nslash - 1`
+	else
+		dest_dir="$build_dir"
+		src_path="$qual_src_dir"/"$header_base"
+		depth=0
+	fi
+	if test -e "$dest_dir" ; then
+		if test ! -d "$dest_dir" ; then
+			rm "$dest_dir" || exit 1
+			mkdir "$dest_dir" || exit 1
+		fi
+	else
+		mkdir -p "$dest_dir" || exit 1
+	fi
+	is_special=0
+	for special_header in "$special_headers" ; do
+		if test x"$src_dir"/"$special_header" = x"$header" ; then
+			is_special=1
+			break
+		fi
+	done
+	if test $rel_qual_src_dir -ne 0 ; then
+        	i=0
+            	while test $i -lt $depth ; do
+			src_path="../$src_path"
+			i=`expr $i + 1`
+		done
+	fi
+	dest_path="$dest_dir"/"$header_base"
+	if test $is_special -eq 0 ; then
+		if test -e "$dest_path" ; then
+			rm -r "$dest_path" || exit 1
+		fi
+		ln -s "$src_path" "$dest_path" || exit 1
+	elif test ! "$dest_path" -nt "$header" ; then
+		# Regenerate if it does not exist or is older than the header
+		# that is preprocessed to generate it.
+		if test -e "$dest_path" ; then
+			rm -r "$dest_path" || exit 1
+		fi
+		nkf -e "$header" > "$dest_path" || exit 1
+	fi
+done
+
+
+# Convert the character encoding in the source file.
+eval src_file="$src_dir"/\${$#}
+src_file_len=`echo "$src_file" | wc -c`
+src_file_nslash=`echo "$src_file" | tr -C -d / | wc -c`
+src_file_base=`basename "$src_file"`
+src_file_base_len=`echo "$src_file_base" | wc -c`
+subdir_start=`expr $src_dir_len + 1`
+subdir_end=`expr $src_file_len - $src_file_base_len - 1`
+if test $subdir_start -le $subdir_end ; then
+	dest_dir="$build_dir"/`echo "$src_file" | cut -c "$subdir_start"-"$subdir_end"`
+else
+	dest_dir="$build_dir"
+fi
+if test -e "$dest_dir" ; then
+	if test ! -d "$dest_dir" ; then
+		rm "$dest_dir" || exit 1
+		mkdir "$dest_dir" || exit 1
+	fi
+else
+	mkdir -p "$dest_dir" || exit 1
+fi
+nkf -e "$src_file" > "$dest_dir"/`basename "$src_file"` || exit 1
+
+
+# Perform the compilation in the build directory.
+curr_dir=`pwd`
+cd "$build_dir" || exit 1
+$@
+
+
+if test $? -eq 0 ; then
+	# Return to what the current directory was prior to the compilation.
+	cd "$curr_dir" || exit 1
+
+	# Move the object file back to the source directory.
+	obj_file=`echo "$src_file" | sed -E 's%\.[^/.]+$%\.o%'`
+	built_obj_file="$dest_dir"/`basename "$obj_file"`
+	mv "$built_obj_file" "$src_dir"/"$obj_file" || exit 1
+else
+	exit $?
+fi

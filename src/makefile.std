@@ -254,7 +254,13 @@ LIBS = -L/usr/X11R6/lib -lX11 -lncurses
 #LIBS = -L/usr/X11R6/lib -lX11 -lcurses
 
 
-
+#
+# Hack -- convert Japanese encoding (shift JIS?) in .c files to EUC-JP so
+# Unix compilers don't choke.  Requires that nkf,
+# https://osdn.net/projects/nkf/ , be in the path.
+#
+.c.o:
+	./compile-wrap $(CC) $(CFLAGS) -c $<
 
 #
 # Hack -- "install" as the base target
@@ -279,6 +285,9 @@ hengband: $(OBJS)
 
 clean:
 	-\rm -f *.bak *.o
+
+distclean: clean
+	-\rm -r ../.build
 
 
 #
