@@ -753,7 +753,7 @@ static errr Term_xtra_gcu_event(int v)
 
 static int scale_color(int i, int j, int scale)
 {
-   return (angband_color_table[i][j] * (scale - 1) + 127) / 256;
+   return (angband_color_table[i][j] * (scale - 1) + 127) / 255;
 }
 
 static int create_color(int i, int scale)
