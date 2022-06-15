@@ -585,6 +585,10 @@ int main(int argc, char *argv[])
 
 #ifdef USE_GCU
 				puts("  -mgcu    To use GCU (GNU Curses)");
+				puts("  --       Sub options");
+				puts("  -- -B    Use brighter bold characters");
+				puts("  -- -K    Keep the terminal's color table when changing colors");
+				puts("");
 #endif /* USE_GCU */
 
 #ifdef USE_CAP
