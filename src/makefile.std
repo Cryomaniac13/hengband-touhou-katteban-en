@@ -287,7 +287,8 @@ clean:
 	-\rm -f *.bak *.o
 
 distclean: clean
-	-\rm -r ../.build
+	-\rm -f hengband ../hengband
+	-\rm -rf ../.build
 
 
 #
