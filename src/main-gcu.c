@@ -13,125 +13,6 @@
 /*
  * This file has been modified to use multiple text windows if your screen
  * is larger than 80x25.  By Keldon Jones (keldon@umr.edu).
- *
- * Also included is Keldon Jones patch to get better colors. To switch to
- * a term that supports this, see this posting:
- *
- * From keldon@umr.edu Thu Apr 01 05:40:14 1999
- * Sender: KELDON JONES <keldon@saucer.cc.umr.edu>
- * From: Keldon Jones <keldon@umr.edu>
- * Subject: Re: Linux colour prob (Or: question for Greg)
- * Newsgroups: rec.games.roguelike.angband
- * References: <slrn7g1jlp.gj9.scarblac-spamtrap@flits104-37.flits.rug.nl> <3700f96b.1593384@news.polsl.gliwice.pl> <slrn7g36er.fm4.wooledge@jekyll.local>
- * X-Newsreader: TIN [UNIX 1.3 unoff BETA 970625; 9000/780 HP-UX B.10.20]
- * NNTP-Posting-Host: saucer.cc.umr.edu
- * X-NNTP-Posting-Host: saucer.cc.umr.edu
- * Message-ID: <370306be.0@news.cc.umr.edu>
- * Date: 1 Apr 99 05:40:14 GMT
- * Organization: University of Missouri - Rolla
- * Lines: 199
- * Path: xs4all!xs4all!newsfeed.wirehub.nl!news-peer.gip.net!news.gsl.net!gip.net!news.he.net!mercury.cts.com!alpha.sky.net!news.missouri.edu!news.cc.umr.edu!not-for-mail
- * Xref: xs4all rec.games.roguelike.angband:86332
- *
- * Greg Wooledge <wooledge@kellnet.com> wrote:
- * > Gwidon S. Naskrent (naskrent@artemida.amu.edu.pl) wrote:
- *
- * > >On 30 Mar 1999 13:17:18 GMT, scarblac-spamtrap@pino.selwerd.cx (Remco
- * > >Gerlich) wrote:
- *
- * > >>I recently switched to Linux, and *bands work fine. I like
- * > >>to play them in consoles, not in X. However, colour is wrong.
- * > >>"Slate" and "light slate" are always light blue, instead
- * > >>of some shade of grey. Colours are fine in X.
- *
- * > I actually noticed the Linux console color issue a very long time ago,
- * > but since I always play under X, I never really investigated it.
- *
- * > You're absolutely right, though -- the Linux console colors are not
- * > "right" for Angband.
- *
- *    I've noticed this myself, so I spent the evening fixing it.
- * Well, sorta fixing it.  It's not perfect yet, and it may not be
- * possible to get it perfect with VGA hardware and/or the current
- * Linux kernel.
- *
- * > OK, reading on in terminfo(5):
- *
- * >    Color Handling
- * >        Most color terminals are either `Tektronix-like'  or  `HP-
- * >        like'.   Tektronix-like terminals have a predefined set of
- * >        N colors (where N usually 8), and can  set  character-cell
- * >        foreground and background characters independently, mixing
- * >        them into N * N color-pairs.  On  HP-like  terminals,  the
- * >        use must set each color pair up separately (foreground and
- * >        background are  not  independently  settable).   Up  to  M
- * >        color-pairs  may  be  set  up  from  2*M different colors.
- * >        ANSI-compatible terminals are Tektronix-like.
- *
- * > The "linux" terminfo entry is definitely in the "Tektronix-like" family.
- * > It has the "setaf" and "setab" capabilities for setting the foreground
- * > and background colors to one of 8 basically hard-coded values:
- *
- * >              Color       #define       Value       RGB
- * >              black     COLOR_BLACK       0     0, 0, 0
- * >              red       COLOR_RED         1     max,0,0
- * >              green     COLOR_GREEN       2     0,max,0
- * >              yellow    COLOR_YELLOW      3     max,max,0
- * >              blue      COLOR_BLUE        4     0,0,max
- * >              magenta   COLOR_MAGENTA     5     max,0,max
- * >              cyan      COLOR_CYAN        6     0,max,max
- * >              white     COLOR_WHITE       7     max,max,max
- *
- *    Well, not quite.  Using certain escape sequences, an
- * application (or better yet, curses) can redefine the colors (at
- * least some of them) and then those are used.  Read the
- * curs_color manpage, and the part about "ccc" and "initc" in the
- * terminfo manpage.  This is what the part of main-gcu inside the
- * "if (can_fix_color)" code does.
- *
- * > So, what does this mean to the Angband player?  Well, it means that
- * > either there's nothing you can do about the console colors as long as
- * > straight curses/ncurses is used, or if there is something to be done,
- * > I'm not clever enough to figure out how to do it.
- *
- *    Well, it is possible, though you have to patch main-gcu
- * and edit a terminfo entry.  Apparently the relevant code in
- * main-gcu was never tested (it's broken in at least one major
- * way).  Apply the patch at the end of this message (notice that
- * we need to define REDEFINE_COLORS at some point near the
- * beginning of the file).
- *    Next, write this termcap entry to a file:
- *
- * linux-c|linux console 1.3.6+ with private palette for each virtual console,
- *         ccc,
- *         colors#16, pairs#64,
- *         initc=\E]P%x%p1%{16}%/%02x%p1%{16}%/%02x%p1%{16}%/%02x,
- *         oc=\E]R,
- *         use=linux,
- *
- * and run "tic" on it to produce a new terminfo entry called
- * "linux-c".  Especially note the "ccc" flag which says that we
- * can redefine colors.  The ugly "initc" string is what tells
- * the console how to redefine a color.  Now, just set your TERM
- * variable to "linux-c" and try Angband again.  If I've
- * remembered to tell you everything that I've done, you should
- * get the weird light-blue slate changed to a gray.
- *    Now, there are still lots of problems with this.
- * Something (I don't think it's curses, either the kernel or
- * the hardware itself) seems to be ignoring my color changes to
- * colors 6 and 7, which is annoying.  Also, the normal "white"
- * color is now way too bright, but it's now necessary to
- * distinguish it from the other grays.
- *    The kernel seems to support 16 colors, but you can
- * only switch to 8 of those, due to VT102 compatibility, it
- * seems.  I think it would be possible to patch the kernel and
- * allow all 16 colors to be used, but I haven't built up the
- * nerve to try that yet.
- *    Let me know if you can improve on this any.  Some of
- * this may actually work differently on other hardware (ugh).
- *
- *    Keldon
- *
  */
 
 /*
@@ -218,13 +99,6 @@ static term_data data[MAX_TERM_DATA];
 # undef USE_TERMIO
 # undef USE_TCHARS
 #endif
-
-/*
- * Try redefining the colors at startup.
- */
-#define REDEFINE_COLORS
-
-
 
 /*
  * POSIX stuff
@@ -357,14 +231,34 @@ static int active = 0;
 static int can_use_color = FALSE;
 
 /*
- * Software flag -- we are allowed to change the colors
- */
-static int can_fix_color = FALSE;
-
-/*
  * Simple Angband to Curses color conversion table
  */
 static int colortable[16];
+
+/*
+ * If TRUE, use A_BRIGHT with colors on 88 and 256 color terminals.
+ */
+static int bold_extended = FALSE;
+
+/*
+ * If TRUE, don't change the terminal's color table, even if otherwise
+ * allowed.
+ */
+static int keep_terminal_colors = FALSE;
+
+/*
+ * The background color we should draw with.
+ */
+static int bg_color = COLOR_BLACK;
+
+#define PAIR_WHITE 0
+#define PAIR_RED 1
+#define PAIR_GREEN 2
+#define PAIR_YELLOW 3
+#define PAIR_BLUE 4
+#define PAIR_MAGENTA 5
+#define PAIR_CYAN 6
+#define PAIR_BLACK 7
 
 #endif
 
@@ -857,6 +751,104 @@ static errr Term_xtra_gcu_event(int v)
 
 #endif   /* USE_GETCH */
 
+static int scale_color(int i, int j, int scale)
+{
+   return (angband_color_table[i][j] * (scale - 1) + 127) / 256;
+}
+
+static int create_color(int i, int scale)
+{
+   int r = scale_color(i, 1, scale);
+   int g = scale_color(i, 2, scale);
+   int b = scale_color(i, 3, scale);
+   int rgb = 16 + scale * scale * r + scale * g + b;
+
+   /* In the case of white and black we need to use the ANSI colors */
+   if (r == g && g == b) {
+       if (b == 0) rgb = 0;
+       if (b == scale) rgb = 15;
+   }
+
+   return rgb;
+}
+
+
+/*
+ * Adjust the color tables if there's more than 16 available.
+ */
+static void handle_extended_color_tables(void)
+{
+#ifdef A_COLOR
+   if (COLORS == 256 || COLORS == 88)
+   {
+      int isbold = bold_extended ? A_BRIGHT : A_NORMAL;
+      int i;
+
+      if (keep_terminal_colors) {
+         /*
+          * If we have more then 16 colors, find the best
+          * matches in the terminal's default color table.
+          * These numbers correspond to xterm/rxvt's builtin
+          * color numbers--they do not correspond to curses'
+          * constants OR with curses' color pairs.
+          *
+          * XTerm has 216 (6*6*6) RGB colors, with each RGB
+          * setting 0-5.
+          * RXVT has 64 (4*4*4) RGB colors, with each RGB
+          * setting 0-3.
+          *
+          * Both also have the basic 16 ANSI colors, plus some
+          * extra grayscale colors which we no not use.
+          */
+         int scale = COLORS == 256 ? 6 : 4;
+
+         bg_color = create_color(TERM_DARK, scale);
+         for (i = 0; i < 16; i++)
+         {
+            int fg = create_color(i, scale);
+            init_pair(i + 1, fg, bg_color);
+            colortable[i] = COLOR_PAIR(i + 1) | isbold;
+         }
+      } else {
+         bg_color = 0;
+         for (i = 0; i < 16; i++)
+         {
+            /*
+             * Scale components to a range of 0 - 1000 per
+             * init_color()'s documentation.
+             */
+            init_color(i,
+               (angband_color_table[i][1] * 1001) / 256,
+               (angband_color_table[i][2] * 1001) / 256,
+               (angband_color_table[i][3] * 1001) / 256);
+            init_pair(i + 1, i, bg_color);
+            colortable[i] = COLOR_PAIR(i + 1) | isbold;
+         }
+      }
+
+      for (i = 0; i < MAX_TERM_DATA; ++i) {
+         if (data[i].win) {
+             wbkgdset(data[i].win, ' ' | colortable[TERM_DARK]);
+         }
+      }
+      if (data[0].win) {
+         /*
+          * Adjust the background color on the standard screen
+          * as well so separators between the terminals have
+          * the same background as the rest.
+          */
+         chtype term0_bkg = getbkgd(data[0].win);
+
+         if (getbkgd(stdscr) != term0_bkg) {
+            wbkgd(stdscr, term0_bkg);
+            wrefresh(stdscr);
+         }
+      }
+   }
+#endif
+}
+
+
 #ifdef USE_SOUND
 
 /*
@@ -912,34 +904,6 @@ static errr Term_xtra_gcu_sound(int v)
 
 }
 #endif
-
-/*
- * React to changes
- */
-static errr Term_xtra_gcu_react(void)
-{
-
-#ifdef A_COLOR
-
-	int i;
-
-	/* Cannot handle color redefinition */
-	if (!can_fix_color) return (0);
-
-	/* Set the colors */
-	for (i = 0; i < 16; i++)
-	{
-		/* Set one color (note scaling) */
-		init_color(i, angband_color_table[i][1] * 1000 / 255,
-			      angband_color_table[i][2] * 1000 / 255,
-			      angband_color_table[i][3] * 1000 / 255);
-	}
-
-#endif
-
-	/* Success */
-	return (0);
-}
 
 
 /*
@@ -1002,7 +966,7 @@ static errr Term_xtra_gcu(int n, int v)
 
       /* React to events */
       case TERM_XTRA_REACT:
-      Term_xtra_gcu_react();
+      handle_extended_color_tables();
       return (0);
 
    }
@@ -1048,7 +1012,13 @@ static errr Term_wipe_gcu(int x, int y, int n)
    /* Clear some characters */
    else
    {
-      while (n-- > 0) waddch(td->win, ' ');
+#ifdef A_COLOR
+      if (can_use_color) wattrset(td->win, colortable[TERM_DARK]);
+#endif
+      whline(td->win, ' ', n);
+#ifdef A_COLOR
+      if (can_use_color) wattrset(td->win, WA_NORMAL);
+#endif
    }
 
    /* Success */
@@ -1074,7 +1044,7 @@ static void Term_acs_text_gcu(int x, int y, int n, byte a, cptr s)
 
 #ifdef A_COLOR
    /* Set the color */
-   wattrset(td->win, colortable[a & 0x0F]);
+   if (can_use_color) wattrset(td->win, colortable[a & 0x0F]);
 #endif
 
    for (i=0; i < n; i++)
@@ -1082,7 +1052,10 @@ static void Term_acs_text_gcu(int x, int y, int n, byte a, cptr s)
       /* add acs_map of a */
       waddch(td->win, acs_map[(int)s[i]]);
    }
-   wattrset(td->win, WA_NORMAL);
+
+#ifdef A_COLOR
+   if (can_use_color) wattrset(td->win, WA_NORMAL);
+#endif
 }
 #endif
 
@@ -1120,6 +1093,10 @@ static errr Term_text_gcu(int x, int y, int n, byte a, cptr s)
 
    /* Add the text */
    waddstr(td->win, text);
+
+#ifdef A_COLOR
+   if (can_use_color) wattrset(td->win, WA_NORMAL);
+#endif
 
    /* Success */
    return (0);
@@ -1201,10 +1178,15 @@ errr init_gcu(int argc, char *argv[])
    int num_term = 4, next_win = 0;
    char path[1024];
 
-   /* Unused */
-   (void)argc;
-   (void)argv;
-
+   /* Parse args */
+   for (i = 1; i < argc; i++)
+   {
+      if (prefix(argv[i], "-B")) {
+         bold_extended = TRUE;
+      } else if (prefix(argv[i], "-K")) {
+         keep_terminal_colors = TRUE;
+      }
+   }
 
    setlocale(LC_ALL, "");
 
@@ -1246,69 +1228,39 @@ errr init_gcu(int argc, char *argv[])
    can_use_color = ((start_color() != ERR) && has_colors() &&
 		    (COLORS >= 8) && (COLOR_PAIRS >= 8));
 
-#ifdef REDEFINE_COLORS
-	/* Can we change colors? */
-	can_fix_color = (can_use_color && can_change_color() &&
-			 (COLORS >= 16) && (COLOR_PAIRS > 8));
-#endif
+   if (!can_change_color()) keep_terminal_colors = true;
 
-   /* Attempt to use customized colors */
-   if (can_fix_color)
+   if (can_use_color)
    {
       /* Prepare the color pairs */
-      for (i = 1; i <= 63; i++)
-      {
-	 /* Reset the color */
-	 if (init_pair(i, (i - 1) % 8, (i - 1) / 8) == ERR)
-	 {
-	    quit("Color pair init failed");
-	 }
+      /* PAIR_WHITE (pair 0) is *always* WHITE on BLACK */
+      init_pair(PAIR_RED, COLOR_RED, bg_color);
+      init_pair(PAIR_GREEN, COLOR_GREEN, bg_color);
+      init_pair(PAIR_YELLOW, COLOR_YELLOW, bg_color);
+      init_pair(PAIR_BLUE, COLOR_BLUE, bg_color);
+      init_pair(PAIR_MAGENTA, COLOR_MAGENTA, bg_color);
+      init_pair(PAIR_CYAN, COLOR_CYAN, bg_color);
+      init_pair(PAIR_BLACK, COLOR_BLACK, bg_color);
 
-	/* Set up the colormap */
-	colortable[i - 1] = (COLOR_PAIR(i) | A_NORMAL);
-	colortable[i + 7] = (COLOR_PAIR(i) | A_BRIGHT);
-
-	/* XXX XXX XXX Take account of "gamma correction" */
-
-	/* Prepare the "Angband Colors" */
-	Term_xtra_gcu_react();
-      }
+      /* Prepare the colors */
+      colortable[TERM_DARK] = (COLOR_PAIR(PAIR_BLACK));
+      colortable[TERM_WHITE] = (COLOR_PAIR(PAIR_WHITE) | A_BRIGHT);
+      colortable[TERM_SLATE] = (COLOR_PAIR(PAIR_WHITE));
+      colortable[TERM_ORANGE] = (COLOR_PAIR(PAIR_YELLOW) | A_BRIGHT);
+      colortable[TERM_RED] = (COLOR_PAIR(PAIR_RED));
+      colortable[TERM_GREEN] = (COLOR_PAIR(PAIR_GREEN));
+      colortable[TERM_BLUE] = (COLOR_PAIR(PAIR_BLUE));
+      colortable[TERM_UMBER] = (COLOR_PAIR(PAIR_YELLOW));
+      colortable[TERM_L_DARK] = (COLOR_PAIR(PAIR_BLACK) | A_BRIGHT);
+      colortable[TERM_L_WHITE] = (COLOR_PAIR(PAIR_WHITE));
+      colortable[TERM_VIOLET] = (COLOR_PAIR(PAIR_MAGENTA));
+      colortable[TERM_YELLOW] = (COLOR_PAIR(PAIR_YELLOW) | A_BRIGHT);
+      colortable[TERM_L_RED] = (COLOR_PAIR(PAIR_MAGENTA) | A_BRIGHT);
+      colortable[TERM_L_GREEN] = (COLOR_PAIR(PAIR_GREEN) | A_BRIGHT);
+      colortable[TERM_L_BLUE] = (COLOR_PAIR(PAIR_BLUE) | A_BRIGHT);
+      colortable[TERM_L_UMBER] = (COLOR_PAIR(PAIR_YELLOW));
+      handle_extended_color_tables();
    }
-   /* Attempt to use colors */
-   else if (can_use_color)
-   {
-		/* Color-pair 0 is *always* WHITE on BLACK */
-
-		/* Prepare the color pairs */
-		init_pair(1, COLOR_RED,     COLOR_BLACK);
-		init_pair(2, COLOR_GREEN,   COLOR_BLACK);
-		init_pair(3, COLOR_YELLOW,  COLOR_BLACK);
-		init_pair(4, COLOR_BLUE,    COLOR_BLACK);
-		init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
-		init_pair(6, COLOR_CYAN,    COLOR_BLACK);
-		init_pair(7, COLOR_BLACK,   COLOR_BLACK);
-
-		/* Prepare the "Angband Colors" -- Bright white is too bright */
-		/* Changed in Drangband. Cyan as grey sucks -- -TM- */
-		colortable[0] = (COLOR_PAIR(7) | A_NORMAL);	/* Black */
-		colortable[1] = (COLOR_PAIR(0) | A_BRIGHT);	/* White */
-		colortable[2] = (COLOR_PAIR(0) | A_NORMAL);	/* Grey XXX */
-		colortable[3] = (COLOR_PAIR(1) | A_BRIGHT);	/* Orange XXX */
-		colortable[4] = (COLOR_PAIR(1) | A_NORMAL);	/* Red */
-		colortable[5] = (COLOR_PAIR(2) | A_NORMAL);	/* Green */
-		colortable[6] = (COLOR_PAIR(4) | A_BRIGHT);	/* Blue */
-		colortable[7] = (COLOR_PAIR(3) | A_NORMAL);	/* Umber */
-		colortable[8] = (COLOR_PAIR(7) | A_BRIGHT);	/* Dark-grey XXX */
-		colortable[9] = (COLOR_PAIR(0) | A_NORMAL);	/* Light-grey XXX */
-		colortable[10] = (COLOR_PAIR(5) | A_BRIGHT);	/* Purple */
-		colortable[11] = (COLOR_PAIR(3) | A_BRIGHT);	/* Yellow */
-		colortable[12] = (COLOR_PAIR(5) | A_NORMAL);	/* Light Red XXX */
-		colortable[13] = (COLOR_PAIR(2) | A_BRIGHT);	/* Light Green */
-		colortable[14] = (COLOR_PAIR(6) | A_BRIGHT);	/* Light Blue */
-		colortable[15] = (COLOR_PAIR(3) | A_NORMAL);	/* Light Umber XXX */
-
-   }
-
 #endif
 
 #ifdef USE_SOUND
