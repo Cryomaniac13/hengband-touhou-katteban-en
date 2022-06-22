@@ -765,8 +765,8 @@ static int create_color(int i, int scale)
 
    /* In the case of white and black we need to use the ANSI colors */
    if (r == g && g == b) {
-       if (b == 0) rgb = 0;
-       if (b == scale) rgb = 15;
+      if (b == 0) rgb = 0;
+      if (b == scale) rgb = 15;
    }
 
    return rgb;
@@ -786,7 +786,7 @@ static void handle_extended_color_tables(void)
 
       if (keep_terminal_colors) {
          /*
-          * If we have more then 16 colors, find the best
+          * If we have more than 16 colors, find the best
           * matches in the terminal's default color table.
           * These numbers correspond to xterm/rxvt's builtin
           * color numbers--they do not correspond to curses'
@@ -798,7 +798,7 @@ static void handle_extended_color_tables(void)
           * setting 0-3.
           *
           * Both also have the basic 16 ANSI colors, plus some
-          * extra grayscale colors which we no not use.
+          * extra grayscale colors which we do not use.
           */
          int scale = COLORS == 256 ? 6 : 4;
 
@@ -828,7 +828,7 @@ static void handle_extended_color_tables(void)
 
       for (i = 0; i < MAX_TERM_DATA; ++i) {
          if (data[i].win) {
-             wbkgdset(data[i].win, ' ' | colortable[TERM_DARK]);
+            wbkgdset(data[i].win, ' ' | colortable[TERM_DARK]);
          }
       }
       if (data[0].win) {
@@ -1221,7 +1221,7 @@ errr init_gcu(int argc, char *argv[])
    can_use_color = ((start_color() != ERR) && has_colors() &&
 		    (COLORS >= 8) && (COLOR_PAIRS >= 8));
 
-   if (!can_change_color()) keep_terminal_colors = true;
+   if (!can_change_color()) keep_terminal_colors = TRUE;
 
    if (can_use_color)
    {
