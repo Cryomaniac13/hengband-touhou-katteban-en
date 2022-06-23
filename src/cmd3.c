@@ -46,13 +46,13 @@ void do_cmd_inven(void)
 	item_tester_full = FALSE;
 
 #ifdef JP
-	sprintf(out_val, "持ち物： 合計 %3d.%1d kg (限界の%ld%%) コマンド: ",
+	sprintf(out_val, "持ち物： 合計 %3d.%1d kg (限界の%lu%%) コマンド: ",
 	    (int)lbtokg1(p_ptr->total_weight) , (int)lbtokg2(p_ptr->total_weight) ,
-	    (long int)((p_ptr->total_weight * 100) / weight_limit()));
+	    (unsigned long)((p_ptr->total_weight * 100) / weight_limit()));
 #else
 	sprintf(out_val, "Inventory: carrying %3d.%1d kg (%ld%% of capacity). Command: ",
 	    (int)lbtokg1(p_ptr->total_weight), (int)lbtokg2(p_ptr->total_weight) ,
-	    (p_ptr->total_weight * 100) / weight_limit());
+	    (unsigned long)(p_ptr->total_weight * 100) / weight_limit());
 #endif
 
 
