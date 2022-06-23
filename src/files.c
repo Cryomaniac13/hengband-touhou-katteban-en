@@ -8730,7 +8730,7 @@ static void dump_aux_inventory2(FILE *fff)
 {
 	int i;
 	char o_name[MAX_NLEN];
-	char out_desc[MAX_NLEN];
+	char out_desc[24 + MAX_NLEN];
 	int inven2_num = calc_inven2_num();
 	object_type *o_ptr;
 	int pc = p_ptr->pclass;
@@ -9772,7 +9772,7 @@ prt("[キー:(?)ヘルプ (ESC)終了]", hgt - 1, 0);
 		{
 			FILE *ffp;
 			char buff[1024];
-			char xtmp[82];
+			char xtmp[162];
 
 			strcpy (xtmp, "");
 
