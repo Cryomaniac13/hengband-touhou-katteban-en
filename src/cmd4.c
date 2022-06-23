@@ -10830,7 +10830,7 @@ void do_cmd_time(void)
 #endif
 
 
-	if (day < MAX_DAYS) sprintf(day_buf, "%d", day);
+	if (day >= 0 && day < MAX_DAYS) sprintf(day_buf, "%d", day);
 	else strcpy(day_buf, "*****");
 
 	/* Message */
