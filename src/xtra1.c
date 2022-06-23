@@ -2634,9 +2634,13 @@ static void print_monster_line(int x, int y, monster_type* m_ptr, int n_same){
 	int i;
 	int r_idx = m_ptr->ap_r_idx;
 	monster_race* r_ptr = &r_info[r_idx];
+	int endx, endy;
 
 	Term_gotoxy(x, y);
-	if(!r_ptr)return;
+	if(!r_ptr) {
+		Term_erase(x, y, Term->wid);
+		return;
+	}
 	//Number of 'U'nique
 	if(r_ptr->flags1&RF1_UNIQUE)
 	{//unique
@@ -2693,6 +2697,17 @@ static void print_monster_line(int x, int y, monster_type* m_ptr, int n_same){
 	Term_addstr(-1, TERM_WHITE, buf);
 
 	//Term_addstr(-1, TERM_WHITE, look_mon_desc(m_ptr, 0));
+
+	/* Clear to the end of the line. */
+	if (Term_locate(&endx, &endy))
+	{
+		/*
+		 * If h-basic.h (via angband.h) includes assert.h, then
+		 * should uncomment this.
+		 */
+		/* assert(endy == y); */
+		Term_erase(endx, y, Term->wid);
+	}
 }
 
  /*
@@ -2753,10 +2768,14 @@ void print_monster_list(int x, int y, int max_lines){
 	if(line-y-1==max_lines && i!=temp_n){
 		Term_gotoxy(x, line);
 		Term_addstr(-1, TERM_WHITE, "-- and more --");
+		Term_erase(x + 14, line++, Term->wid);
 	}else{
 		if(last_mons)print_monster_line(x, line++, last_mons, n_same);
 	}
 
+	while (line < y + max_lines) {
+		Term_erase(x, line++, Term->wid);
+	}
 
 	//v1.1.66 特定条件のグリッドをカウントするtemp_n,temp_x[],temp_y[]をリセットしておく
 	temp_n = 0;
@@ -2787,8 +2806,6 @@ static void fix_monster_list(void)
 		/* Activate */
 		Term_activate(angband_term[j]);
 		Term_get_size(&w, &h);
-
-		Term_clear();
 
 		//モンスター一覧を生成，ソート
 		if(full_mon_list)
