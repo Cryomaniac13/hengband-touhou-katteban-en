@@ -7782,7 +7782,7 @@ static void dump_aux_class_special(FILE *fff)
 			{	} //壁生成などは内部的にダメージ値が記録されているが使わないので表示しない
 			else if (art_idx == JKF1_ATTACK_BREATH)
 				fprintf(fff, _("  威力:現在HPの%d%%",
-                                " Power:%d% of cur HP"), xtra1);
+                                " Power:%d%% of cur HP"), xtra1);
 			else if (dice && sides && base)
 				fprintf(fff, _("  威力/効果:%dd%d+%d",
                                 " Power/Eff:%dd%d+%d"), dice, sides, base);
