@@ -2603,6 +2603,7 @@ static void display_player_various(void)
 	if(alice)//アリス隣接攻撃の特殊処理
 	{
 		blows1 = 0;
+		blows2 = 0;
 		damage[0] = 0;
 		for(i=0;i<INVEN_DOLL_NUM_MAX;i++)
 		{
@@ -2643,6 +2644,7 @@ static void display_player_various(void)
 		monster_race *r_ptr = &r_info[MON_EXTRA_FIELD];
 		damage[0] = 0;
 		blows1 = 0;
+		blows2 = 0;
 		for(i=0;i<4;i++)
 		{
 			if(!r_ptr->blow[i].method) continue;
@@ -7782,7 +7784,7 @@ static void dump_aux_class_special(FILE *fff)
 			{	} //壁生成などは内部的にダメージ値が記録されているが使わないので表示しない
 			else if (art_idx == JKF1_ATTACK_BREATH)
 				fprintf(fff, _("  威力:現在HPの%d%%",
-                                " Power:%d% of cur HP"), xtra1);
+                                " Power:%d%% of cur HP"), xtra1);
 			else if (dice && sides && base)
 				fprintf(fff, _("  威力/効果:%dd%d+%d",
                                 " Power/Eff:%dd%d+%d"), dice, sides, base);
@@ -8730,7 +8732,7 @@ static void dump_aux_inventory2(FILE *fff)
 {
 	int i;
 	char o_name[MAX_NLEN];
-	char out_desc[MAX_NLEN];
+	char out_desc[24 + MAX_NLEN];
 	int inven2_num = calc_inven2_num();
 	object_type *o_ptr;
 	int pc = p_ptr->pclass;
@@ -9772,7 +9774,7 @@ prt("[キー:(?)ヘルプ (ESC)終了]", hgt - 1, 0);
 		{
 			FILE *ffp;
 			char buff[1024];
-			char xtmp[82];
+			char xtmp[162];
 
 			strcpy (xtmp, "");
 

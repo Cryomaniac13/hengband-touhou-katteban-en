@@ -13491,10 +13491,10 @@ static bool reimu_fortune_teller()
                 "Reimu takes out a cape and a crystal ball."));
 
 	if(one_in_(25)) c_put_str(TERM_WHITE,_("面倒臭いわね・・", "So troublesome..."),8 , 6);
-	else if(one_in_(4)) c_put_str(TERM_WHITE,("なになに・・", "What is it..."),8 , 6);
-	else if(one_in_(3)) c_put_str(TERM_WHITE,("ほうほう・・", "Let's see..."),8 , 6);
-	else if(one_in_(2)) c_put_str(TERM_WHITE,("あらあら・・", "Oh, my..."),8 , 6);
-	else				c_put_str(TERM_WHITE,("ふむふむ・・", "Hmmm..."),8 , 6);
+	else if(one_in_(4)) c_put_str(TERM_WHITE,_("なになに・・", "What is it..."),8 , 6);
+	else if(one_in_(3)) c_put_str(TERM_WHITE,_("ほうほう・・", "Let's see..."),8 , 6);
+	else if(one_in_(2)) c_put_str(TERM_WHITE,_("あらあら・・", "Oh, my..."),8 , 6);
+	else				c_put_str(TERM_WHITE,_("ふむふむ・・", "Hmmm..."),8 , 6);
 
 	(void)inkey();
 

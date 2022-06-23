@@ -9780,7 +9780,7 @@ static void do_cmd_knowledge_stat(void)
 static void do_cmd_knowledge_quests_current(FILE *fff)
 {
 	char tmp_str[120];
-	char rand_tmp_str[120] = "\0";
+	char rand_tmp_str[200] = "\0";
 	char name[80];
 	monster_race *r_ptr;
 	int i;
@@ -10061,11 +10061,11 @@ void do_cmd_knowledge_quests_completed(FILE *fff, int quest_num[])
 		//v1.1.25 クエスト達成時間情報追加
 		if(quest[q_idx].comptime)
 		{
-			sprintf(str_time,"(%.2lu:%.2lu:%.2lu)", quest[q_idx].comptime/(60*60), (quest[q_idx].comptime/60)%60, quest[q_idx].comptime%60);
+			sprintf(str_time,"(%.2lu:%.2lu:%.2lu)", (unsigned long) quest[q_idx].comptime/(60*60), (unsigned long) (quest[q_idx].comptime/60)%60, (unsigned long) quest[q_idx].comptime%60);
 		}
 		else
 		{
-			sprintf(str_time,"");
+			str_time[0] = '\0';
 		}
 
 
@@ -10830,7 +10830,7 @@ void do_cmd_time(void)
 #endif
 
 
-	if (day < MAX_DAYS) sprintf(day_buf, "%d", day);
+	if (day >= 0 && day < MAX_DAYS) sprintf(day_buf, "%d", day);
 	else strcpy(day_buf, "*****");
 
 	/* Message */

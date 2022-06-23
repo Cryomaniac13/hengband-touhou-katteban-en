@@ -244,7 +244,7 @@ bool convert_item_to_mana(void)
 	long price;
 	object_type *o_ptr;
 	char o_name[MAX_NLEN];
-	char out_val[160];
+	char out_val[MAX_NLEN + 32];
 
 	cptr q, s;
 
@@ -273,7 +273,7 @@ bool convert_item_to_mana(void)
 	object_desc(o_name, o_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
 	o_ptr->number = old_number;
 
-	sprintf(out_val, "%sは消滅します。よろしいですか？", o_name);
+	sprintf(out_val, _("%sは消滅します。よろしいですか？", "%s will disappear.  Is that OK? "), o_name);
 	if (!get_check_strict(out_val, CHECK_OKAY_CANCEL)) return FALSE;
 
 	price = object_value_real(o_ptr);

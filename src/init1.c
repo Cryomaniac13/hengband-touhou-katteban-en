@@ -3424,7 +3424,8 @@ errr parse_d_info(char *buf, header *head)
 				s += 7;
 
 				/* Read a string */
-				strncpy(d_ptr->r_char, s, sizeof(d_ptr->r_char));
+				strncpy(d_ptr->r_char, s, sizeof(d_ptr->r_char) - 1);
+				d_ptr->r_char[sizeof(d_ptr->r_char) - 1] = '\0';
 
 				/* Start at next entry */
 				s = t;

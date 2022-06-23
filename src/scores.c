@@ -670,7 +670,7 @@ errr top_twenty(void)
 	//sprintf(the_score.pts, "%9ld", (long)total_points());
 	points = total_points_new(FALSE);
 	if (points > 999999999) points = 999999999;
-	sprintf(the_score.pts, "%9lu", points);
+	sprintf(the_score.pts, "%9lu", (unsigned long) points);
 	the_score.pts[9] = '\0';
 
 	/* Save the current gold */
@@ -803,7 +803,7 @@ msg_print("スコア・ファイルが使用できません。");
 	//sprintf(the_score.pts, "%9ld", (long)total_points());
 	score_point = total_points_new(FALSE);
 	if (score_point > 999999999) score_point = 999999999;
-	sprintf(the_score.pts, "%9ld", score_point);
+	sprintf(the_score.pts, "%9lu", (unsigned long) score_point);
 
 	/* Save the current gold */
 	sprintf(the_score.gold, "%9lu", (long)p_ptr->au);
