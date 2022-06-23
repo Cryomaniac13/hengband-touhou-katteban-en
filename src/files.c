@@ -2603,6 +2603,7 @@ static void display_player_various(void)
 	if(alice)//ƒAƒŠƒX—×ÚUŒ‚‚Ì“Áêˆ—
 	{
 		blows1 = 0;
+		blows2 = 0;
 		damage[0] = 0;
 		for(i=0;i<INVEN_DOLL_NUM_MAX;i++)
 		{
@@ -2643,6 +2644,7 @@ static void display_player_various(void)
 		monster_race *r_ptr = &r_info[MON_EXTRA_FIELD];
 		damage[0] = 0;
 		blows1 = 0;
+		blows2 = 0;
 		for(i=0;i<4;i++)
 		{
 			if(!r_ptr->blow[i].method) continue;
