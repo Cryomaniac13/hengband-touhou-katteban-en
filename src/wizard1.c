@@ -1484,7 +1484,7 @@ static void analyze_misc(object_type *o_ptr, char *misc_desc)
 #else
 	sprintf(misc_desc, "Level %u, Rarity %u, %d.%d lbs, %ld Gold",
 		a_ptr->level, a_ptr->rarity,
-		a_ptr->weight / 10, a_ptr->weight % 10, a_ptr->cost);
+		a_ptr->weight / 10, a_ptr->weight % 10, (long int)a_ptr->cost);
 #endif
 }
 
