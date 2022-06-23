@@ -10061,11 +10061,11 @@ void do_cmd_knowledge_quests_completed(FILE *fff, int quest_num[])
 		//v1.1.25 クエスト達成時間情報追加
 		if(quest[q_idx].comptime)
 		{
-			sprintf(str_time,"(%.2lu:%.2lu:%.2lu)", quest[q_idx].comptime/(60*60), (quest[q_idx].comptime/60)%60, quest[q_idx].comptime%60);
+			sprintf(str_time,"(%.2lu:%.2lu:%.2lu)", (unsigned long) quest[q_idx].comptime/(60*60), (unsigned long) (quest[q_idx].comptime/60)%60, (unsigned long) quest[q_idx].comptime%60);
 		}
 		else
 		{
-			sprintf(str_time,"");
+			str_time[0] = '\0';
 		}
 
 
