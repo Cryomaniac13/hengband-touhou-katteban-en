@@ -9780,7 +9780,7 @@ static void do_cmd_knowledge_stat(void)
 static void do_cmd_knowledge_quests_current(FILE *fff)
 {
 	char tmp_str[120];
-	char rand_tmp_str[120] = "\0";
+	char rand_tmp_str[200] = "\0";
 	char name[80];
 	monster_race *r_ptr;
 	int i;
