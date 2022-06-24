@@ -6965,7 +6965,7 @@ void display_player(int mode)
 	if(difficulty == DIFFICULTY_EXTRA)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("EXTRA", "Extra")), TERM_L_RED);
 	//スコア表示　キャラクターメイク時には表示しない
 	//v1.1.53b スコア上限40億に拡張 luはunsigned long
-	if(character_generated) display_player_one_line(ENTRY_ALIGN, format("%lu" ,total_points_new(FALSE)), TERM_L_WHITE);
+	if(character_generated) display_player_one_line(ENTRY_ALIGN, format("%lu" ,(unsigned long)total_points_new(FALSE)), TERM_L_WHITE);
 
 
 		///mod140104 パラメータ上限と表記を変更
@@ -11112,7 +11112,7 @@ static void print_tomb(void)
 		*/
 
 
-		center_string(buf, format("SCORE:%lu",total_points_new(FALSE)));
+		center_string(buf, format("SCORE:%lu",(unsigned long)total_points_new(FALSE)));
 		put_str(buf, 4, 11);
 
 		center_string(buf, player_name);

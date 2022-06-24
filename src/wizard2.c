@@ -664,7 +664,7 @@ static void do_cmd_wiz_hack_ben(void)
 	msg_format("old_hp:%d", nightmare_record_hp);
 
 
-	msg_format("points:%lu",total_points_new(TRUE));
+	msg_format("points:%lu",(unsigned long)total_points_new(TRUE));
 
 	//msg_format("gain:%d",gambling_gain);
 	//msg_format("pinch:%d",score_count_pinch);
