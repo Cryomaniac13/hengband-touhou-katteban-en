@@ -2186,15 +2186,15 @@ static void display_player_middle(void)
 	else e = ENTRY_CUR_EXP;
 
 	if (p_ptr->exp >= p_ptr->max_exp)
-		display_player_one_line(e, format("%ld", p_ptr->exp), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long) p_ptr->exp), TERM_L_GREEN);
 	else
-		display_player_one_line(e, format("%ld", p_ptr->exp), TERM_YELLOW);
+		display_player_one_line(e, format("%ld", (long) p_ptr->exp), TERM_YELLOW);
 
 	/* Dump max experience */
 	if (p_ptr->prace == RACE_ANDROID)
 		/* Nothing */;
 	else
-		display_player_one_line(ENTRY_MAX_EXP, format("%ld", p_ptr->max_exp), TERM_L_GREEN);
+		display_player_one_line(ENTRY_MAX_EXP, format("%ld", (long) p_ptr->max_exp), TERM_L_GREEN);
 
 	/* Dump exp to advance */
 	if (p_ptr->prace == RACE_ANDROID) e = ENTRY_EXP_TO_ADV_ANDR;
@@ -2203,12 +2203,12 @@ static void display_player_middle(void)
 	if (p_ptr->lev >= PY_MAX_LEVEL)
 		display_player_one_line(e, "*****", TERM_L_GREEN);
 	else if (p_ptr->prace == RACE_ANDROID)
-		display_player_one_line(e, format("%ld", (s32b)(player_exp_a[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long)(player_exp_a[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
 	else
-		display_player_one_line(e, format("%ld", (s32b)(player_exp[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long)(player_exp[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
 
 	/* Dump gold */
-	display_player_one_line(ENTRY_GOLD, format("%ld", p_ptr->au), TERM_L_GREEN);
+	display_player_one_line(ENTRY_GOLD, format("%ld", (long)p_ptr->au), TERM_L_GREEN);
 
 	/* Dump Day */
 	{
@@ -2254,7 +2254,7 @@ static void display_player_middle(void)
 		display_player_one_line(ENTRY_SP, format("%4d/%4d", p_ptr->csp , p_ptr->msp), TERM_RED);
 
 	/* Dump play time */
-	display_player_one_line(ENTRY_PLAY_TIME, format("%.2lu:%.2lu:%.2lu", playtime/(60*60), (playtime/60)%60, playtime%60), TERM_L_GREEN);
+	display_player_one_line(ENTRY_PLAY_TIME, format("%.2lu:%.2lu:%.2lu", (unsigned long)playtime/(60*60), (unsigned long)(playtime/60)%60, (unsigned long)playtime%60), TERM_L_GREEN);
 }
 
 
@@ -6965,7 +6965,7 @@ void display_player(int mode)
 	if(difficulty == DIFFICULTY_EXTRA)	display_player_one_line(ENTRY_SOCIAL, format("%s" ,_("EXTRA", "Extra")), TERM_L_RED);
 	//スコア表示　キャラクターメイク時には表示しない
 	//v1.1.53b スコア上限40億に拡張 luはunsigned long
-	if(character_generated) display_player_one_line(ENTRY_ALIGN, format("%lu" ,total_points_new(FALSE)), TERM_L_WHITE);
+	if(character_generated) display_player_one_line(ENTRY_ALIGN, format("%lu" ,(unsigned long)total_points_new(FALSE)), TERM_L_WHITE);
 
 
 		///mod140104 パラメータ上限と表記を変更
@@ -11112,7 +11112,7 @@ static void print_tomb(void)
 		*/
 
 
-		center_string(buf, format("SCORE:%lu",total_points_new(FALSE)));
+		center_string(buf, format("SCORE:%lu",(unsigned long)total_points_new(FALSE)));
 		put_str(buf, 4, 11);
 
 		center_string(buf, player_name);

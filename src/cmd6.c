@@ -8108,9 +8108,9 @@ int select_magic_eater(bool only_browse, bool recharge)
 					{
 						strcat(dummy, format(
 #ifdef JP
-							       " %-22.22s [“U:%2d/%2d%3d%%",
+							       " %-22.22s [“U:%2ld/%2d%3d%%",
 #else
-							       " %-22.22s   (%2d/%2d) %3d%%",
+							       " %-22.22s   (%2ld/%2d) %3d%%",
 #endif
 							       k_name + k_info[k_idx].name,
 							       p_ptr->magic_num1[ctr+ext] ?

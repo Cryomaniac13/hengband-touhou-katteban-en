@@ -19920,7 +19920,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		{
 			int mult = 2 + plev / 15;
 
-			if (info) return format(_("î{ó¶ÅF%d", "mult: "),mult);
+			if (info) return format(_("î{ó¶ÅF%d", "mult: %d"),mult);
 
 			if (cast)
 			{

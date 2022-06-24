@@ -2396,7 +2396,7 @@ static void health_redraw(bool riding)
 
 void prt_score(void)
 {
-	put_str(format("Score:%lu",total_points_new(FALSE)),ROW_SCORE,COL_SCORE);
+	put_str(format("Score:%lu",(unsigned long)total_points_new(FALSE)),ROW_SCORE,COL_SCORE);
 
 }
 
@@ -2416,7 +2416,7 @@ static void prt_frame_basic(void)
 	if(difficulty == DIFFICULTY_LUNATIC)	c_put_str(TERM_VIOLET, _("LUNATIC", "Lunatic"), ROW_DIFFICULTY, COL_DIFFICULTY+3);
 	if(difficulty == DIFFICULTY_EXTRA)	c_put_str(TERM_RED, _("EXTRA", "Extra"), ROW_DIFFICULTY, COL_DIFFICULTY+5);
 
-	put_str(format("Score:%lu",total_points_new(FALSE)),ROW_SCORE,COL_SCORE);
+	put_str(format("Score:%lu",(unsigned long)total_points_new(FALSE)),ROW_SCORE,COL_SCORE);
 
 	/* Race and Class */
 	if (p_ptr->mimic_form)
