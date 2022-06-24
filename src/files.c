@@ -2186,15 +2186,15 @@ static void display_player_middle(void)
 	else e = ENTRY_CUR_EXP;
 
 	if (p_ptr->exp >= p_ptr->max_exp)
-		display_player_one_line(e, format("%ld", p_ptr->exp), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long) p_ptr->exp), TERM_L_GREEN);
 	else
-		display_player_one_line(e, format("%ld", p_ptr->exp), TERM_YELLOW);
+		display_player_one_line(e, format("%ld", (long) p_ptr->exp), TERM_YELLOW);
 
 	/* Dump max experience */
 	if (p_ptr->prace == RACE_ANDROID)
 		/* Nothing */;
 	else
-		display_player_one_line(ENTRY_MAX_EXP, format("%ld", p_ptr->max_exp), TERM_L_GREEN);
+		display_player_one_line(ENTRY_MAX_EXP, format("%ld", (long) p_ptr->max_exp), TERM_L_GREEN);
 
 	/* Dump exp to advance */
 	if (p_ptr->prace == RACE_ANDROID) e = ENTRY_EXP_TO_ADV_ANDR;
@@ -2203,12 +2203,12 @@ static void display_player_middle(void)
 	if (p_ptr->lev >= PY_MAX_LEVEL)
 		display_player_one_line(e, "*****", TERM_L_GREEN);
 	else if (p_ptr->prace == RACE_ANDROID)
-		display_player_one_line(e, format("%ld", (s32b)(player_exp_a[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long)(player_exp_a[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
 	else
-		display_player_one_line(e, format("%ld", (s32b)(player_exp[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
+		display_player_one_line(e, format("%ld", (long)(player_exp[p_ptr->lev - 1] * p_ptr->expfact / 100L)), TERM_L_GREEN);
 
 	/* Dump gold */
-	display_player_one_line(ENTRY_GOLD, format("%ld", p_ptr->au), TERM_L_GREEN);
+	display_player_one_line(ENTRY_GOLD, format("%ld", (long)p_ptr->au), TERM_L_GREEN);
 
 	/* Dump Day */
 	{
