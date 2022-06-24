@@ -2254,7 +2254,7 @@ static void display_player_middle(void)
 		display_player_one_line(ENTRY_SP, format("%4d/%4d", p_ptr->csp , p_ptr->msp), TERM_RED);
 
 	/* Dump play time */
-	display_player_one_line(ENTRY_PLAY_TIME, format("%.2lu:%.2lu:%.2lu", playtime/(60*60), (playtime/60)%60, playtime%60), TERM_L_GREEN);
+	display_player_one_line(ENTRY_PLAY_TIME, format("%.2lu:%.2lu:%.2lu", (unsigned long)playtime/(60*60), (unsigned long)(playtime/60)%60, (unsigned long)playtime%60), TERM_L_GREEN);
 }
 
 
