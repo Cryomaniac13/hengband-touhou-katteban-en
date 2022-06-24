@@ -14752,7 +14752,7 @@ occult_contact_type occult_contact_table[] =
 	{FF_CAN_FLY,	0,		FF_MOVE,MON_COLOUR_OUTOFSPACE	,"from the dark chasm"},//異次元の色彩：暗い穴　この条件は山も当てはまるので山の下に
 #endif
 
-	{0,0,0,0,"終端用ダミー"},//r_idxが0ならループ終了
+	{0,0,0,0,_("終端用ダミー","dummy terminator")},//r_idxが0ならループ終了
 };
 
 //v1.1.21
