@@ -1542,7 +1542,18 @@ sprintf(dummy, "%sを装備するとニンジャになります。よろしいですか？", o_name);
 		object_copy(switch_o_ptr, slot_o_ptr);
 		object_copy(slot_o_ptr, otmp_ptr);
 
+#ifdef JP
 		msg_format("%sを持ち替えた。", switch_name);
+#else
+		/*
+		 * Skipping this English message because of the more detailed
+		 * message below (which is displayed in the English version but
+		 * not the Japanese version).
+		 */
+#if 0
+		msg_format("You switch %s to your other hand.", switch_name);
+#endif
+#endif
 
 #ifdef JP
 	//	msg_format("%sを%sに構えなおした。", switch_name, (slot == INVEN_RARM) ? (left_hander ? "左手" : "右手") : (left_hander ? "右手" : "左手"));
