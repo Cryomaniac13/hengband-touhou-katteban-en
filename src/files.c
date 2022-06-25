@@ -8418,7 +8418,7 @@ static void dump_aux_race_history(FILE *fff)
 	if(p_ptr->pclass == CLASS_SOLDIER)
 	{
 		int i;
-		fprintf(fff, "\n[習得技能] \n");
+		fprintf(fff, _("\n[習得技能] \n", "\n[Acquired Skill] \n"));
 		for(i=0;i<SOLDIER_SKILL_ARRAY_MAX;i++)
 		{
 			fprintf(fff, "  %s: %d \n",soldier_skill_table[i][0].name, p_ptr->magic_num2[i]);
@@ -10430,12 +10430,22 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 		if (!p_ptr->playing && !p_ptr->is_dead)
 		{
 			Term_clear();
+#ifdef JP
 			prt("大変申し訳ありません。セーブに失敗しました。", 5, 5);
 			prt("強制的に人里に戻して再セーブを試みます。", 6, 5);
 			prt("念のため続行前にsaveフォルダのアクセス権などを見直して下さい。", 7, 5);
 			prt("userフォルダに緊急ダンプが出力されます。", 8, 5);
 			prt("この勝手版作者に送っていただけると幸いです。", 9, 5);
 			prt("何かキーを押すと続行します。", 12, 5);
+#else
+			prt("Sorry, failed to save.", 5, 5);
+			prt("Forcibly returning to the remote area and trying to save again.", 6, 5);
+			prt("Just in case, please review the permissions on the save folder before ", 7, 5);
+			prt("continuing.", 8, 5);
+			prt("An emergency dump will be written to the user folder.  I would", 8, 5);
+			prt("appriate it if you could send it to the author of this Hengband variant.", 9, 5);
+			prt("Press any key to continue.", 12, 5);
+#endif
 			(void)inkey();
 			(void)file_character("heng_katte_panic_dump.txt");
 			p_ptr->word_recall = 0;
@@ -10451,8 +10461,8 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 			p_ptr->riding = 0;
 			wipe_m_list();
 			change_floor();
-			if(save_player()) prt("再セーブに成功。", 14, 5);
-			else prt("再セーブ失敗..", 14, 5);
+			if(save_player()) prt(_("再セーブに成功。", "Successful resave."), 14, 5);
+			else prt(_("再セーブ失敗..", "Resave failed."), 14, 5);
 			(void)inkey();
 		}
 	}
