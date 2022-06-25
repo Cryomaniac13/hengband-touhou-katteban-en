@@ -12525,7 +12525,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 	//v1.1.31 –³ŠQ‚È–ò‚Ì“Š±‚È‚Ç‚Åtyp=0‚ÅŒÄ‚Î‚ê‚é‚±‚Æ‚à‚ ‚é‚æ‚¤‚È‚Ì‚Å’Êí•\¦‚³‚ê‚È‚¢‚æ‚¤‚É‚µ‚½
 	if(cheat_xtra && !typ)
 	{
-		msg_print("WARNING:project()‚Étyp’l‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢");
+		msg_print(_("WARNING:project()‚Étyp’l‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢", "WARNING:typ value is zero in project()"));
 	}
 
 	///mod141214
