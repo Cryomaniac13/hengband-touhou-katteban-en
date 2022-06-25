@@ -8427,7 +8427,7 @@ void gain_maid_reward(void)
 	}
 	else if(type < 36)
 	{
-		msg_print("主はあなたの奉仕に深く満足している。褒美の品が送られてきた。");
+		msg_print(_("主はあなたの奉仕に深く満足している。褒美の品が送られてきた。", "Your master is deeply satisified with your service and sent an item as a reward."));
 		reward = _("高級なアイテムを与えられた。", "valuable item.");
 		if(p_ptr->lev > 24 || one_in_(3)) acquirement(py, px, 1+randint1(2), TRUE, FALSE);
 		else acquirement(py, px, 1, TRUE, FALSE);
