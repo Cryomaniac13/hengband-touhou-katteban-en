@@ -1895,7 +1895,7 @@ static void display_player_melee_bonus(int hand, int hand_entry)
 			}
 
 		}
-		if(!attack_doll_num){msg_print("ERROR:アリス攻撃回数計算がおかしい"); return;}
+		if(!attack_doll_num){msg_print(_("ERROR:アリス攻撃回数計算がおかしい", "ERROR: zero result for Alice's attack count")); return;}
 		show_tohit += (skill_sum/attack_doll_num - WEAPON_EXP_BEGINNER)/200 + to_h_sum / attack_doll_num;
 		show_todam += to_d_sum / attack_doll_num;
 	}
@@ -2773,7 +2773,7 @@ static void display_player_various(void)
 		if(!muta_att)
 			desc = format("%d", damage[0] / 100);//アリスのdamage[0]は攻撃回数分合計済み
 		else
-			desc = format("%d+α", damage[0] / 100);
+			desc = format(_("%d+α", "%d+@"), damage[0] / 100);
 
 	}
 	else if(IS_METAMORPHOSIS)
