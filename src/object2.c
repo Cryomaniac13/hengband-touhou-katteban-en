@@ -7693,7 +7693,7 @@ s16b inven_takeoff(int item, int amt)
 	///mod151202 ŽO—d¸“ÁŽêmsg
 	if(p_ptr->pclass == CLASS_3_FAIRIES)
 	{
-		act = "‚ð‘•”õ‚©‚ç‚Í‚¸‚µ‚½";
+		act = _("‚ð‘•”õ‚©‚ç‚Í‚¸‚µ‚½", "You were wielding");
 	}
 
 	/* Took off weapon */
