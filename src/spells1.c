@@ -9106,7 +9106,7 @@ note = "‚É‚ÍŒø‰Ê‚ª‚È‚©‚Á‚½B";
 			if(m_ptr->r_idx == MON_SAGUME_MINE) mine = TRUE;
 			//v1.1.24
 			else if(m_ptr->r_idx == MON_YOUR_BOAT || m_ptr->r_idx == MON_ANCIENT_SHIP)
-				note = "‚Í’¾‚ñ‚¾B";
+				note = _("‚Í’¾‚ñ‚¾B", " sunk.");
 
 			/* Give detailed messages if destroyed */
 			if (known && note)
