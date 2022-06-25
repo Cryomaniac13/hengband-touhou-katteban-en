@@ -11212,7 +11212,7 @@ static void print_tomb(void)
 		}
 		else if (streq(p_ptr->died_from, "Seppuku"))
 		{
-			strcpy(tmp, "Ÿ—˜‚ÌŒãAØ• ");
+			strcpy(tmp, _("Ÿ—˜‚ÌŒãAØ• ", "Committed seppuku after victory"));
 		}
 		else
 		{
