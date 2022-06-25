@@ -1217,7 +1217,7 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 		if(o_ptr->name1 == ART_GRIMOIRE_OF_MARISA)
 		{
-			info[i++] = "それは難易度EXTRAにおいてアイテムカードスロット数を増やす。";
+			info[i++] = _("それは難易度EXTRAにおいてアイテムカードスロット数を増やす。","It increases the number of item slots on EXTRA difficulty.");
 		}
 
 
