@@ -5957,7 +5957,7 @@ void process_monsters(void)
 
 			if(randint1(check) < p_ptr->lev)
 			{
-				msg_format("%sは落とし穴に落ちた！",m_name);
+				msg_format(_("%sは落とし穴に落ちた！", "%s fell into a pit!"), m_name);
 				//耐性無視スタン
 				set_monster_stunned(i, 5+randint1(5) + MON_STUNNED(m_ptr));
 				//さらに判定通ったら気絶
@@ -5967,7 +5967,7 @@ void process_monsters(void)
 			}
 			else
 			{
-				msg_format("%sは落とし穴に落ちなかった。",m_name);
+				msg_format(_("%sは落とし穴に落ちなかった。", "%s avoided a pit."), m_name);
 			}
 			cave_set_feat(m_ptr->fy,m_ptr->fx,feat_floor);
 		}
