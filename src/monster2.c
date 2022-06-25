@@ -4670,7 +4670,7 @@ static bool place_monster_one(int who, int y, int x, int r_idx, u32b mode)
 		{
 			if( dun_level <10)
 			{
-				if(cheat_hear) msg_format("10ŠK–¢–ž‚Ì‚½‚ßƒ‰ƒ“ƒ_ƒ€ƒ†ƒj[ƒN‚ª”­¶—}Ž~‚³‚ê‚½");
+				if(cheat_hear) msg_format(_("10ŠK–¢–ž‚Ì‚½‚ßƒ‰ƒ“ƒ_ƒ€ƒ†ƒj[ƒN‚ª”­¶—}Ž~‚³‚ê‚½", "Random unique suppressed at dungeon level less than 10."));
 				return FALSE;
 			}
 		}
@@ -4879,7 +4879,7 @@ msg_print("Žç‚è‚Ìƒ‹[ƒ“‚ª‰ó‚ê‚½I");
 	if (r_ptr->level > dun_level)
 	{
 		if(cheat_hear && (r_ptr->flags1 & (RF1_FORCE_DEPTH)) && r_ptr->level > dun_level)
-			msg_format("FORCE_DEPTH(%s)B", name);
+			msg_format("FORCE_DEPTH(%s).", name);
 
 		/* Unique monsters */
 		if (r_ptr->flags1 & (RF1_UNIQUE))
