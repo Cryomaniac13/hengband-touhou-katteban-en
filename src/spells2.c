@@ -6429,13 +6429,13 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 
 		if(p_ptr->mimic_form == MIMIC_MIST)
 		{
-			msg_print("あなたは霧になって落石をかわした。");
+			msg_print(_("あなたは霧になって落石をかわした。", "You turned into mist and slipped through the falling rocks."));
 			damage = 0;
 		}
 		//諏訪子冬眠中　通常無敵だが一部攻撃は通る
 		else if (p_ptr->pclass == CLASS_SUWAKO && p_ptr->tim_general[0])
 		{
-			msg_print("落石はあなたがいる場所までは届かなかった。");
+			msg_print(_("落石はあなたがいる場所までは届かなかった。", "The falling rocks did not reach where you were."));
 			damage = 0;
 		}
 
