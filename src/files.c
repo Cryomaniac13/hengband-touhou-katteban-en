@@ -12584,7 +12584,7 @@ void get_score_server_name(void)
 
 	if(!strlen(score_server_name))
 		need_set = TRUE;
-	else if(!get_check_strict(format("プレイヤー「%s」としてスコアを送ります。",score_server_name), CHECK_DEFAULT_Y | CHECK_NO_HISTORY))
+	else if(!get_check_strict(format(_("プレイヤー「%s」としてスコアを送ります。", "Send the score as player \"%s\"? "), score_server_name), CHECK_DEFAULT_Y | CHECK_NO_HISTORY))
 		need_set = TRUE;
 
 	if(!need_set) return;
@@ -12594,12 +12594,19 @@ void get_score_server_name(void)
 
 	while(1)
 	{
+#ifdef JP
 		prt("「プレイヤー名」を設定してください。", 5,25);
 		prt("「プレイヤー名」は、スコアサーバに表示されます。", 6,25);
 		prt("設定せずにスコアを送ることもできます。", 7,25);
 		prt("一部の記号は使用できません。", 8,25);
+#else
+		prt("Please set the \"player name\".", 5, 25);
+		prt("The \"player name\" will be displayed on the score server.", 6, 25);
+		prt("You can also send the score without setting it.", 7, 25);
+		prt("Some symbols can not be used in the name.", 8, 25);
+#endif
 
-		if (get_string("プレイヤー名: ", tmp_name, SCORE_SERVER_STR_LEN-4))
+		if (get_string(_("プレイヤー名: ", "Player name: "), tmp_name, SCORE_SERVER_STR_LEN-4))
 		{
 
 			for (i = 0; tmp_name[i]; i++)
@@ -12624,11 +12631,11 @@ void get_score_server_name(void)
 		Term_clear();
 
 		if(!strlen(tmp_name))
-			prt("プレイヤー名は設定されません。", 5,25);
+			prt(_("プレイヤー名は設定されません。", "The player name is not set."), 5,25);
 		else
-			prt(format("プレイヤー名:%s",tmp_name), 5,25);
+			prt(format(_("プレイヤー名:%s", "Player name: %s"), tmp_name), 5,25);
 
-		if (get_check_strict("よろしいですか？", CHECK_DEFAULT_Y | CHECK_NO_HISTORY)) break;
+		if (get_check_strict(_("よろしいですか？", "Is that name okay? "), CHECK_DEFAULT_Y | CHECK_NO_HISTORY)) break;
 
 	}
 	//いま記録されてるのと一致しない(strcmpが!=0)とき保存
@@ -12636,7 +12643,7 @@ void get_score_server_name(void)
 	{
 		strcpy(score_server_name,tmp_name);
 		//スコア送信直前なのでセーブが必要
-		if (!save_player()) msg_print("セーブ失敗！");
+		if (!save_player()) msg_print(_("セーブ失敗！", "Save failed!"));
 	}
 
 	screen_load();
