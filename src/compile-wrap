@@ -35,7 +35,7 @@ src_dir_nslash=`echo "$src_dir" | tr -C -d / | wc -c`
 # Most of the headers can be symbolically linked into the build directory since
 # they don't have Japanese characters.  There are some exceptions:  include
 # them, separated by whitespace in special_headers.
-special_headers="defines.h"
+special_headers="defines.h kajitips.h"
 # This will break if header path names include spaces.
 for header in `find "$src_dir" -name '*.h' -print` "$src_dir"/maid-x11.c ; do
 	header_len=`echo "$header" | wc -c`
@@ -63,7 +63,7 @@ for header in `find "$src_dir" -name '*.h' -print` "$src_dir"/maid-x11.c ; do
 		mkdir -p "$dest_dir" || exit 1
 	fi
 	is_special=0
-	for special_header in "$special_headers" ; do
+	for special_header in $special_headers ; do
 		if test x"$src_dir"/"$special_header" = x"$header" ; then
 			is_special=1
 			break
