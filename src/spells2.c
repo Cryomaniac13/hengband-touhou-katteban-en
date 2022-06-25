@@ -7861,7 +7861,7 @@ bool fire_random_target(int typ, int dam, int method, int rad, int range)
 	}
 	else
 	{
-		msg_format("ERROR:fire_random_target‚ª•Ï‚Èmethod(%d)‚ÅŒÄ‚Î‚ê‚½",method);
+		msg_format(_("ERROR:fire_random_target‚ª•Ï‚Èmethod(%d)‚ÅŒÄ‚Î‚ê‚½", "ERROR:fire_random_target() was called with an invalid method, %d"), method);
 	}
 	return (FALSE);
 
