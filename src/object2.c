@@ -8471,7 +8471,7 @@ static void spell_damcalc(monster_type *m_ptr, int typ, int dam, int limit, int 
 		break;
 
 	default:
-		msg_format("WARNING:spell_damcalcにて(%d)のGF値属性が定義されていない",typ);
+		msg_format(_("WARNING:spell_damcalcにて(%d)のGF値属性が定義されていない", "WARNING:spell_damcalc:unknown GF value, %d"),typ);
 
 	}
 
