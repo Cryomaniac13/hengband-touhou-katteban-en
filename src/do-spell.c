@@ -20824,7 +20824,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 #ifdef JP
 				take_hit(DAMAGE_USELIFE, 200+randint0(101), "–³–d‚È“÷‘Ì•ÏŠ·", -1);
 #else
-				take_hit(DAMAGE_USELIFE, 20 + randint1(30), "reckless body transformation", -1);
+				take_hit(DAMAGE_USELIFE, 200+randint0(101), "reckless body transformation", -1);
 #endif
 			}
 		}

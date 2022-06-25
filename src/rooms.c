@@ -7297,13 +7297,13 @@ void	init_extra_dungeon_buildings(void)
 		{
 			sprintf(building[i].name,_("開けた場所", "Open area"));
 			sprintf(building[i].owner_name,_("火焔猫　燐", "Rin Kaenbyou"));
-			sprintf(building[i].act_names[0],_("アイテムを拠点に送る", "Send item to exploration base"));
+			sprintf(building[i].act_names[0],_("アイテムを拠点に送る", "Send item to base"));
 			building[i].letters[0] = 'i';
 			building[i].actions[0] = BACT_ITEM_TRANSFER;
 			if(p_ptr->pclass == CLASS_SATORI || p_ptr->pclass == CLASS_KOISHI || p_ptr->pclass == CLASS_UTSUHO) building[i].member_costs[0] = 0;
 			else building[i].member_costs[0] = 500;
 
-			sprintf(building[i].act_names[2],_("アイテムを拠点から運んでもらう", "Receive item from exploration base"));
+			sprintf(building[i].act_names[2],_("アイテムを拠点から運んでもらう", "Receive item from base"));
 			building[i].letters[2] = 't';
 			building[i].actions[2] = BACT_ORIN_DELIVER_ITEM;
 			if(p_ptr->pclass == CLASS_SATORI || p_ptr->pclass == CLASS_KOISHI || p_ptr->pclass == CLASS_UTSUHO) building[i].member_costs[0] = 0;
@@ -7383,7 +7383,7 @@ void	init_extra_dungeon_buildings(void)
 		case BLDG_EX_CHIMATA:
 		{
 			sprintf(building[i].name, _("奇妙な場所", "Strange place"));
-			sprintf(building[i].owner_name, _("千亦＆龍＆典＆百々世", "Chimata, Megumu, Tsukasa, Momoyo"));
+			sprintf(building[i].owner_name, _("千亦＆龍＆典＆百々世", "Chimata&Megumu&Tsukasa&Momoyo"));
 
 			sprintf(building[i].act_names[0], _("アビリティカード交換会", "Trade ability cards"));
 			building[i].letters[0] = 'a';
