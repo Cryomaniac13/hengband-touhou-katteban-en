@@ -16041,7 +16041,7 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 
 	{ MON_KEINE,CLASS_KEINE,NULL,"Crisis",NULL,0 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"History",NULL,4 },
-	{ MON_KEINE,CLASS_KEINE,NULL,"Year 20XX","Å@",32 },
+	{ MON_KEINE,CLASS_KEINE,NULL,"Year 20XX",_("Å@"," "),32 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"Pyramid",NULL,5 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"Phantasmal",NULL,15 },
 
