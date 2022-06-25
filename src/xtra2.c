@@ -5862,7 +5862,7 @@ static int target_set_aux(int y, int x, int mode, cptr info)
 
 			//舞と里乃のメッセージ変更
 			if (CLASS_RIDING_BACKDANCE && player_bold(y, x))
-				s2 = "の背後";
+				s2 = _("の背後", "behind");
 
 #ifdef JP
 			sprintf(out_val, "[%s]%s%s(%s)%s%s [r思 %s%s]", acount, s1, m_name, look_mon_desc(m_ptr, 0x01), s2, s3, x_info, info);
