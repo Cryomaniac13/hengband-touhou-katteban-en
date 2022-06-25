@@ -4107,7 +4107,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 
 		/*:::サンタを倒した時の特殊メッセージ*/
 		if ((m_ptr->r_idx == MON_SANTACLAUS))
-			msg_print("≪クリスマス中止のお知らせ≫");
+			msg_print(_("≪クリスマス中止のお知らせ≫", "Christmas has been canceled."));
 
 		/*:::こころを倒した時の特殊メッセージ*/
 		//v1.1.48 闘技場ではメッセージ出なくする。ここ通らないかもしれないが
