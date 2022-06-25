@@ -2053,7 +2053,7 @@ static bool save_player_aux(char *name)
 		}
 		else
 		{
-			msg_print("ERROR!セーブファイルをオープンできません!");
+			msg_print(_("ERROR!セーブファイルをオープンできません!", "ERROR!  Unable to open save file!"));
 
 		}
 
