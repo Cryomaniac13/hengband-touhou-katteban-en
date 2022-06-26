@@ -11844,7 +11844,7 @@ bool shion_begging(void)
 	}
 	else
 	{
-		msg_format("ÇªÇ±Ç…ÇÕâΩÇ‡Ç¢Ç»Ç¢ÅB");
+		msg_format(_("ÇªÇ±Ç…ÇÕâΩÇ‡Ç¢Ç»Ç¢ÅB", "There is nothing there."));
 		return FALSE;
 	}
 	return TRUE;
