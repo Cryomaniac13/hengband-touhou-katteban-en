@@ -17500,7 +17500,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print("‚ ‚È‚½‚Í’Ó‚â–Ø‚Ìª‚ğ‘€‚Á‚½I");
+				msg_print(_("‚ ‚È‚½‚Í’Ó‚â–Ø‚Ìª‚ğ‘€‚Á‚½I", "You manipulated the vines and roots of the tree."));
 				project_hack(GF_SLOW_TWINE, power);
 			}
 		}
