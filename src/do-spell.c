@@ -7600,7 +7600,7 @@ static cptr do_craft_spell(int spell, int mode)
 			if (cast)
 			{
 				// pulish_shield();
-			msg_print("‚–‚«‚Í–³Œø‰»’†B");
+			msg_print(_("‚–‚«‚Í–³Œø‰»’†B", "Shield polishing is disabled."));
 			}
 		}
 		break;
