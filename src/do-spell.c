@@ -24437,7 +24437,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 #endif
 		{
 			int rad = 3 + plev / 4;
-			if (info) return format("�͈́F%d",rad);
+			if (info) return format(_("�͈́F%d", "range %d"), rad);
 
 			if (cast)
 			{
