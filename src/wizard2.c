@@ -41,8 +41,8 @@ void print_all_item_param(int idx)
 	if(idx < 0 || idx > INVEN_FEET)
 	{
 
-		q = "どのアイテムを確認しますか？";
-		s = "確認できるアイテムがありません。";
+		q = _("どのアイテムを確認しますか？", "Which item do you want to check? ");
+		s = _("確認できるアイテムがありません。", "There are no items to check.");
 
 		if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP | USE_FLOOR))) return;
 		/* Get the item (in the pack) */
