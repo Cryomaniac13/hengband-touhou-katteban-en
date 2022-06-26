@@ -8903,7 +8903,7 @@ cptr use_marisa_magic(int num, bool only_info)
 		{
 			int dice = 25 + p_ptr->lev / 2;
 			int sides = 25 + chr_adj / 2;
-			if(only_info) return format("‘¹:%dd%d",dice,sides);
+			if(only_info) return format(_("‘¹:%dd%d", "dam: %dd%d"), dice, sides);
 
 			if (!get_aim_dir(&dir)) return NULL;
 			fire_spark(GF_DARK,dir, damroll(dice,sides),1);
