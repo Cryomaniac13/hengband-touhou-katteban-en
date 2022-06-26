@@ -7529,7 +7529,7 @@ if(flag_general || flag_outsider)
 #ifdef JP
 		put_str("種族        :　　　　　　　", 4, 1);
 #else
-		put_str("Race        :　　　　　　　", 4, 1);
+		put_str("Race        :              ", 4, 1);
 #endif
 		c_put_str(TERM_L_BLUE, rp_ptr->title, 4, 15);
 		if (!get_player_realms()) return FALSE;
