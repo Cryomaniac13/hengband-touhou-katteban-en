@@ -10403,7 +10403,7 @@ static int select_hecatia_body(void)
 		{
 			//¡‚Ì‘Ì‚Í‘I‘ğ‚Å‚«‚È‚¢
 			if(n == p_ptr->magic_num2[0]) continue;
-			else put_str( format("%c)%4s‚Ì‘Ì(HP:%.1f%% MP:%.1f%%)",'a'+n,namelist[n],((float)p_ptr->magic_num1[0+n]/100.0),((float)p_ptr->magic_num1[3+n]/100.0)), 12 + n, 30);
+			else put_str(format(_("%c)%4s‚Ì‘Ì(HP:%.1f%% MP:%.1f%%)", "%c) %10s body (HP:%.1f%% MP:%.1f%%)"), 'a'+n, namelist[n], ((float)p_ptr->magic_num1[0+n]/100.0), ((float)p_ptr->magic_num1[3+n]/100.0)), 12 + n, 30);
 		}
 		c = inkey();
 
