@@ -142,7 +142,7 @@ static int get_spell(int *sn, cptr prompt, int sval, bool learned, int use_realm
 	//v1.1.67 -hack- ‘I‘ğ“I‹L‰¯œ‹
 	if (flag_spell_forget)
 	{
-		prompt = "–Y‚ê‚é";
+		prompt = _("–Y‚ê‚é", "forget");
 	}
 
 #endif /* ALLOW_REPEAT -- TNB */
