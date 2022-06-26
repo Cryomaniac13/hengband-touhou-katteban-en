@@ -1296,7 +1296,7 @@ void make_evilweapon(object_type *o_ptr, monster_race *r_ptr)
 			}
 			break;
 		default:
-			msg_format("ERROR:make_evilweapon‚Ìselect’l(%d)‚ª‚¨‚©‚µ‚¢",select);
+			msg_format(_("ERROR:make_evilweapon‚Ìselect’l(%d)‚ª‚¨‚©‚µ‚¢", "Error: invalid select value, %d, in make_evilweapon"), select);
 
 		}
 		//Šù‚É‚Á‚Ä‚¢‚é”\—Í‚ÉŒˆ‚Ü‚Á‚½‚ç‚â‚è’¼‚·
