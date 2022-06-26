@@ -1724,7 +1724,7 @@ static void wiz_tweak_item(object_type *o_ptr)
 		if(o_ptr->pval >= max_r_idx) o_ptr->pval = max_r_idx-1;
 
 		o_ptr->xtra5 = numbering_newspaper(o_ptr->pval);
-		msg_print("(V•·‚Ìxtra5‚ªÄİ’è‚³‚ê‚½)");
+		msg_print(_("(V•·‚Ìxtra5‚ªÄİ’è‚³‚ê‚½)", "(newspaper xtra5 has been reset)"));
 	}
 
 	wiz_display_item(o_ptr);
