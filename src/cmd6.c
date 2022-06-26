@@ -2640,7 +2640,7 @@ msg_print("‹°‚ë‚µ‚¢ŒõŒi‚ª“ª‚É•‚‚©‚ñ‚Å‚«‚½B");
 				ident = TRUE;
 				msg_print(_("‚±‚ê‚Í“ÅÁ‚µ‚¾I‚ ‚È‚½‚Í‹ê‚µ‚­‚È‚Á‚Ä‚«‚½B",
                             "This is an antidote! It hurts you!"));
-				take_hit(DAMAGE_NOESCAPE, 50 + randint1(50), "‰ð“Å‚Ì–ò", -1);
+				take_hit(DAMAGE_NOESCAPE, 50 + randint1(50), _("‰ð“Å‚Ì–ò", "antidote"), -1);
 			}
 			else if(p_ptr->pclass == CLASS_MEDICINE)
 			{
