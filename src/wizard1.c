@@ -1348,9 +1348,9 @@ static void analyze_misc_magic(object_type *o_ptr, cptr *misc_list)
 	if ((o_ptr->tval == TV_LITE) && object_is_fixed_artifact(o_ptr))
 	{
 		if(o_ptr->name1 == ART_TRAPEZOHEDRON)
-			*misc_list++ = "‰i‹vŒõŒ¹(”¼Œa-4)";
+			*misc_list++ = _("‰i‹vŒõŒ¹(”¼Œa-4)", "Permanent light(-4)");
 		else
-			*misc_list++ = "‰i‹vŒõŒ¹(”¼Œa3)";
+			*misc_list++ = _("‰i‹vŒõŒ¹(”¼Œa3)", "permanent light(3)");
 	}
 
 	/*
