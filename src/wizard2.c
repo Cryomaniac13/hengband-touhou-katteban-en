@@ -723,8 +723,8 @@ static void do_cmd_wiz_hack_ben(void)
 
 	//msg_format("Hetate_HP:%d/%d/%d",hecatia_hp[0],hecatia_hp[1],hecatia_hp[2]);
 
-	if(p_ptr->pclass == CLASS_SUWAKO) msg_format("畏れポイント：%d",p_ptr->magic_num1[0]);
-	if(p_ptr->pclass == CLASS_KANAKO) msg_format("信仰ポイント：%d",p_ptr->magic_num1[0]);
+	if(p_ptr->pclass == CLASS_SUWAKO) msg_format(_("畏れポイント：%d", "Fear point: %d"), p_ptr->magic_num1[0]);
+	if(p_ptr->pclass == CLASS_KANAKO) msg_format(_("信仰ポイント：%d", "Faith point: %d"), p_ptr->magic_num1[0]);
 
 	//msg_format("k_idx:%d",inventory[INVEN_RARM].k_idx);
 	//msg_format("flavor:%d",k_info[inventory[INVEN_RARM].k_idx].flavor);
