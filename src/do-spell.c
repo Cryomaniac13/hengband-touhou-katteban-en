@@ -25836,7 +25836,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 				m_ptr = &m_list[cave[y][x].m_idx];
 				if (!cave[y][x].m_idx || !m_ptr->ml)
 				{
-					msg_format("ÇªÇ±Ç…ÇÕâΩÇ‡Ç¢Ç»Ç¢ÅB");
+					msg_format(_("ÇªÇ±Ç…ÇÕâΩÇ‡Ç¢Ç»Ç¢ÅB", "There is nothing there."));
 					return NULL;
 				}
 
