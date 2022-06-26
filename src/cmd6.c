@@ -2474,7 +2474,7 @@ static void do_cmd_quaff_potion_aux(int item)
 		msg_print("You fall asleep.");
 #endif
 
-				if(CHECK_FAIRY_TYPE == 12 && lose_all_info()) msg_print("頭がスッキリした！でも何か忘れているような。");
+				if(CHECK_FAIRY_TYPE == 12 && lose_all_info()) msg_print(_("頭がスッキリした！でも何か忘れているような。", "Ah, such visions!  But, you feel like you've forgotten something."));
 
 				if (ironman_nightmare)
 				{
