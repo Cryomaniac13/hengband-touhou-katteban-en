@@ -1696,25 +1696,25 @@ sprintf(dummy, "%sを装備するとニンジャになります。よろしいですか？", o_name);
 		/*:::生い立ち欄が書き換わる*/
 		sprintf(p_ptr->history[0], _("あなたは%sとして平穏に生きていた。", "You led a peaceful life as a %s."),rp_ptr->title);
 		sprintf(p_ptr->history[1], _("しかしある日あなたに平安時代のニンジャ・ソウルが憑依した！",
-                                    "However, one day you got possessed by Ninja Soul from Heian era!"));
+                                    "But one day you got possessed by Heian era Ninja Soul!"));
 		if(one_in_(6))
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、太歳星君への復讐だ！",
-                                        "You have only one goal: Take revenge on Taisui Xingjun!"));
+                                        "Your goal: Take revenge on Taisui Xingjun!"));
 		else if(one_in_(5))
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、月の女神嫦娥への復讐だ！",
-                                        "You have only one goal: Take revenge on the moon goddess Chang'e!"));
+                                        "Your goal: Take revenge on the moon goddess Chang'e!"));
 		else if(one_in_(4))
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、『混沌のサーペント』への復讐だ！",
-                                        "You have only one goal: Take revenge on the Serpent of Chaos!"));
+                                        "Your goal: Take revenge on the Serpent of Chaos!"));
 		else if(one_in_(3))
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、全てのニンジャの抹殺だ！",
-                                        "You have only one goal: Exterminate all ninjas!"));
+                                        "Your goal: Exterminate all ninjas!"));
 		else if(one_in_(2))
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、自らを虐げた者達への復讐だ！",
-                                        "You have only one goal: Take revenge on those who have oppressed you!"));
+                                        "Your goal: Take revenge on those who have oppressed you!"));
 		else
 			sprintf(p_ptr->history[2], _("あなたの目的は唯一つ、全アンバーの王族への復讐だ！",
-                                        "You have only one goal: Take revenge on all of the Lords of Amber!"));
+                                        "Your goal: Take revenge on all of the Lords of Amber!"));
 		sprintf(p_ptr->history[3], _("走れ、%s、走れ！", "Run, %s, run!"), player_name);
 		/* Turn into a NINJA */
 		change_race(RACE_NINJA, "");
