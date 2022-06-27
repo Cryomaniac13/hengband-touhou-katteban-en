@@ -7587,7 +7587,7 @@ static byte build_type_ex(void)
 
 
 
-	if (cheat_room) msg_format("EXTRA—p“ÁŽêŒš’z•¨:idx%d",building_ex_idx[0]);
+	if (cheat_room) msg_format(_("EXTRA—p“ÁŽêŒš’z•¨:idx%d", "Special extra building: ID is %d"), building_ex_idx[0]);
 
 	return building_ex_idx[0];
 }
