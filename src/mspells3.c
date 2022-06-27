@@ -2103,7 +2103,7 @@ bool check_monspell_learned(int monspell_num)
 	//monspell_list2[]の範囲チェック
 	if (monspell_num < 1 || monspell_num > MAX_MONSPELLS2)
 	{
-		msg_format("ERROR:check_monspell_learned()に不正なmonspell_num値(%d)が渡された", monspell_num);
+		msg_format(_("ERROR:check_monspell_learned()に不正なmonspell_num値(%d)が渡された", "ERROR: invalid monspell_num, %d, passed to check_monspell_learned()."), monspell_num);
 		return FALSE;
 	}
 
