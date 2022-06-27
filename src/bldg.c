@@ -13406,7 +13406,7 @@ static void talk_kagerou()
                             "Kagerou - 'Let's welcome our new companion, everyone!"));
 
 				//-Hack- Œš•¨‚É‰\ƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚µ‚ÄÄ•`‰æ‚·‚é
-				sprintf(building[ex_bldg_num].act_names[6],"‰\‚ğ•·‚­");
+				sprintf(building[ex_bldg_num].act_names[6], _("‰\‚ğ•·‚­", "Listen to rumors"));
 				building[ex_bldg_num].letters[6] = 'r';
 				building[ex_bldg_num].actions[6] = BACT_RUMORS_NEW;
 
