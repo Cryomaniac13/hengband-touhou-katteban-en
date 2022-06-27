@@ -10581,7 +10581,7 @@ prt("お待ち下さい...", 0, 0);
 	if(0)
 	{
 			Term_clear();
-			put_str("***強制人里帰還***", 17 , 40);
+			put_str(_("***強制人里帰還***", "*** forced return to the village ***"), 17, 40);
 			(void)inkey();
 			p_ptr->chp = p_ptr->mhp;
 			p_ptr->chp_frac = 0;
