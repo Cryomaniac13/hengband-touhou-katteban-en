@@ -16166,7 +16166,7 @@ msg_print("‚¨‹à‚ª‘«‚è‚Ü‚¹‚ñI");
 		break;
 	//case BACT_TARGET:
 		///del131221 €‘Ìíœ
-		msg_print("––±Š‚Í•Â“X‚µ‚½B");
+		msg_print(_("––±Š‚Í•Â“X‚µ‚½B", "This office has closed."));
 		//today_target();
 		break;
 	//case BACT_KANKIN:
