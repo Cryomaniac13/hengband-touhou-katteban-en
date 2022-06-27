@@ -16166,7 +16166,7 @@ msg_print("お金が足りません！");
 		break;
 	//case BACT_TARGET:
 		///del131221 死体削除
-		msg_print(_("事務所は閉店した。", "This office has closed."));
+		//msg_print(_("事務所は閉店した。", "This office has closed."));
 		//today_target();
 		break;
 	//case BACT_KANKIN:
@@ -16425,7 +16425,7 @@ msg_print("お金が足りません！");
 		break;
 
 	default:
-		msg_format("ERROR:BACT(%d)が未定義",bact);
+		msg_format(_("ERROR:BACT(%d)が未定義", "ERROR: unhandled BACT_ constant, %d"), bact);
 
 	}
 
