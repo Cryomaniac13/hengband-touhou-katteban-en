@@ -3071,7 +3071,7 @@ bool kogasa_smith(void)
 		if (!get_item(&item, q, s, (USE_INVEN))) return FALSE;
 
 		if (item >= 0)	o_ptr = &inventory[item];
-		else {msg_print("ERROR:kogasa_smith()のitemがマイナス"); return FALSE;}
+		else {msg_print(_("ERROR:kogasa_smith()のitemがマイナス", "ERROR: negative item index in kogasa_smith()")); return FALSE;}
 
 
 		//軽い呪いでなく修正値が限界以上なら断られる
