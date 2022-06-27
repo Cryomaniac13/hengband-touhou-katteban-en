@@ -19941,7 +19941,7 @@ cptr do_cmd_class_power_aux_seija(int num, bool only_info)
 	case 3:
 		{
 			int power = 50 + plev * 4 + chr_adj * 5;
-			if(only_info) return format("Œø—Í:%d",power);
+			if(only_info) return format(_("Œø—Í:%d", "power: %d"), power);
 			msg_format(_("‚ ‚È‚½‚ÍüˆÍ‚Ì“G‚Ì‹ŠE‚ğ‹¶‚í‚¹‚½I", "You disrupt the senses of enemies in your vicinity!"));
 			confuse_monsters(power);
 			break;
