@@ -14177,7 +14177,7 @@ void grassroots_barter()
 		q_ptr->feeling = FEEL_NONE;
 		object_desc(o_name, q_ptr, 0);
 
-		msg_format("%s(%c)を選択した。", o_name, index_to_label(item));
+		msg_format(_("%s(%c)を選択した。", "%s(%c) was selected."), o_name, index_to_label(item));
 		msg_print("");
 		value = object_value_real(q_ptr);
 
