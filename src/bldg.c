@@ -1837,7 +1837,7 @@ static void buy_gacha_box()
                 "Takane - 'Leave trading to us while you're away."), 5, 10);
 			prt(format(_("　　　さて、今なら初回大サービスで一箱$%dだよ！",
                         "          By the way, it's $%d per box for your first purchase!"), price), 6, 10);
-			prt("　　　 ", 7, 10);
+			prt(_("　　　 ", "       "), 7, 10);
 			prt(_("　　　え？もちろん金を取るに決まってるじゃないか！」",
                 "          Eh? Of course I'm going to charge money!'"), 8, 10);
 		}
@@ -4988,7 +4988,7 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "どうか助けて頂けませんか？」");
 #else
                 strcpy(quest_text[line++], "Akyuu - 'Miss Yama!? What are you doing here, it can't be...");
-				strcpy(quest_text[line++], "　");
+				strcpy(quest_text[line++], "  ");
 				strcpy(quest_text[line++], "Ah, you're on a vacation and investigating this incident?");
 				strcpy(quest_text[line++], "That's a great help. Truth to be told, some bandits from the");
 				strcpy(quest_text[line++], "other world have made a vacant house into their hideout. Couldn't");
