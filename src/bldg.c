@@ -10850,7 +10850,7 @@ const struct guild_arts_type repair_weapon_power_table[] =
 	{TV_SOUVENIR,SV_SOUVENIR_ASIA,25,-1," "},
 	{ TV_SOUVENIR,SV_SOUVENIR_SHILVER_KEY,25,-1," " },
 
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 };
 
 
@@ -15029,7 +15029,7 @@ const struct guild_arts_type archer_guild_table[] =
 	{ TV_MATERIAL, SV_MATERIAL_MYSTERIUM, EGO_ARROW_AMANOZYAKU,99,_("天邪鬼の矢", "Arrows of Amanojaku")},
 
 
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 
 };
 
@@ -15041,7 +15041,7 @@ const struct guild_arts_type archer_guild_table2[] =
 	{TV_MATERIAL,SV_MATERIAL_ADAMANTITE,10,99," "},
 	{TV_MATERIAL, SV_MATERIAL_METEORICIRON ,15,99," "},
 	{TV_MATERIAL,SV_MATERIAL_HIHIIROKANE,25,99," "},
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 };
 
 
