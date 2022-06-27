@@ -34168,7 +34168,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #ifdef JP
 				my_strcpy(errmsg, "–ï‚ª‘«‚è‚È‚­‚Ä‚»‚Ì“Á‹Z‚ğg‚¦‚È‚¢B", 150);
 #else
-                my_strcpy(errmsg, "You haven't gathered enough misfortune to use this abilityB", 150);
+                my_strcpy(errmsg, "You haven't gathered enough misfortune to use this ability.", 150);
 #endif
 				return FALSE;
 		}
