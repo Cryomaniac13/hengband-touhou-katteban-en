@@ -5807,7 +5807,7 @@ cptr do_cmd_class_power_aux_mai(int num, bool only_info)
 	}
 	else //里乃のビハインドユー
 	{
-		if (only_info) return format("　");
+		if (only_info) return format(_("　", "  "));
 
 		if (!p_ptr->riding)
 		{
