@@ -7448,7 +7448,7 @@ static byte build_type_ex(void)
 
 	if(num < 1 || num > BLDG_EX_NUM)
 	{
-		msg_format("build_type_ex()に想定外の値(%d)が渡された",num);
+		msg_format(_("build_type_ex()に想定外の値(%d)が渡された", "Unexpected value, %d, passed to build_type_ex()."), num);
 		return 0;
 	}
 
