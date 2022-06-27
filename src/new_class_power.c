@@ -20651,7 +20651,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 		{
 			int sides = plev*2;
 
-			if(only_info) return format("損傷:1d%d",sides);
+			if(only_info) return format(_("損傷:1d%d", "dam: 1d%d"), sides);
 			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("リュックの横からスピーカーが飛び出し、音波を放った！",
                         "Speakers fly out of your rucksack and blast a sound wave!"));
