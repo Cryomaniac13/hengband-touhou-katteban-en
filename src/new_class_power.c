@@ -231,9 +231,9 @@ cptr do_cmd_class_power_aux_mike(int num, bool only_info)
 
 
 	default:
-		if (only_info) return format("–¢ŽÀ‘•");
+		if (only_info) return format(_("–¢ŽÀ‘•", "unimplemented"));
 
-		msg_format("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d", num);
+		msg_format(_("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d", "ERROR: an unimplemented feat, %d, was inoked"), num);
 		return NULL;
 	}
 	return "";
@@ -10720,7 +10720,7 @@ cptr do_cmd_class_power_aux_extra(int num, bool only_info)
 
 	default:
 		if(only_info) return format("");
-		msg_format("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d",num);
+		msg_format(_("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d", "ERROR: an unimplemented feat, %d, was invoked"), num);
 		return NULL;
 	}
 	return "";
@@ -25943,7 +25943,7 @@ cptr do_cmd_class_power_aux_samurai(int num, bool only_info)
 		}
 
 	default:
-		msg_format("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d",num);
+		msg_format(_("ERROR:ŽÀ‘•‚µ‚Ä‚¢‚È‚¢“Á‹Z‚ªŒÄ‚Î‚ê‚½ num:%d", "ERROR: an implemented power, %d, was invoked"), num);
 		return NULL;
 	}
 	return "";
