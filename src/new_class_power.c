@@ -21698,7 +21698,7 @@ cptr do_cmd_class_power_aux_sanae(int num, bool only_info)
 			{
 				base = (12 + cons_suwa) * (30 + chr_adj) * plev / 100;
 			}
-			if(only_info) return format("損傷:%d",base);
+			if(only_info) return format(_("損傷:%d", "dam: %d"), base);
 			if(cons_suwa < min_cons)
 			{
 				msg_format(_("力が足りない。詠唱をし直さないと。", "Not enough power. You have to continue chanting."));
@@ -21734,7 +21734,7 @@ cptr do_cmd_class_power_aux_sanae(int num, bool only_info)
 				range = MIN(MAX_SIGHT,cons_soma * 2);
 
 			}
-			if(only_info) return format("範囲:%d",range);
+			if(only_info) return format(_("範囲:%d", "range: %d"), range);
 			if(cons_soma <  min_cons)
 			{
 				msg_format(_("力が足りない。詠唱をし直さないと。", "Not enough power. You have to continue chanting."));
