@@ -4682,7 +4682,7 @@ msg_format("%^sが何かを力強くつぶやいた。", m_name);
 #endif
 
 			}
-			else if(m_ptr->r_idx == MON_SEIJA || m_ptr->r_idx == MON_SEIJA_D) msg_format("%^sの体が実体を失い暗く透き通った・・", m_name);
+			else if(m_ptr->r_idx == MON_SEIJA || m_ptr->r_idx == MON_SEIJA_D) msg_format(_("%^sの体が実体を失い暗く透き通った・・", "The body of %s loses its substance..."), m_name);
 
 			else
 			{
