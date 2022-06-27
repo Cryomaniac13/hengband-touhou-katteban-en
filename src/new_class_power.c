@@ -12655,7 +12655,7 @@ cptr do_cmd_class_power_aux_sakuya(int num, bool only_info)
 
 			if(flag_max)
 			{
-				msg_print("‚±‚êˆÈã‚Ä‚È‚¢B");
+				msg_print(_("‚±‚êˆÈã‚Ä‚È‚¢B", "There's no space in your knife holder."));
 				return NULL;
 			}
 
