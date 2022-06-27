@@ -6812,7 +6812,7 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 		{
 			if (damage_type == DAMAGE_FORCE)
 			{
-				msg_print("á•Ç‚ªØ‚è—ô‚©‚ê‚½I");
+				msg_print(_("á•Ç‚ªØ‚è—ô‚©‚ê‚½I", "The barrier has been torn!"));
 			}
 			else
 				return 0;
