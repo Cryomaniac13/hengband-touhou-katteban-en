@@ -6537,7 +6537,7 @@ void change_race(int new_race, cptr effect_msg)
 			object_desc(obj_name, &inventory[i], 0);
 			object_copy(q_ptr, &inventory[i]);
 
-			msg_format("%sが外れてしまった！",obj_name);
+			msg_format(_("%sが外れてしまった！", "%s! has come off!"), obj_name);
 			inven_item_increase(i, -1);
 			inven_item_optimize(i);
 			drop_near(q_ptr,0,py,px);
