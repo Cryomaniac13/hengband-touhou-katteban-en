@@ -1217,7 +1217,7 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 		if(o_ptr->name1 == ART_GRIMOIRE_OF_MARISA)
 		{
-			info[i++] = "それは難易度EXTRAにおいてアイテムカードスロット数を増やす。";
+			info[i++] = _("それは難易度EXTRAにおいてアイテムカードスロット数を増やす。","It increases the number of item slots on EXTRA difficulty.");
 		}
 
 
@@ -2906,9 +2906,9 @@ cptr describe_use(int i)
 	cptr p;
 	if(p_ptr->pclass == CLASS_3_FAIRIES)
 	{
-		if(i<INVEN_RARM) return "ザックに入っている";
-		else if(i <= INVEN_LARM && p_ptr->heavy_wield[i-INVEN_RARM]) return "運搬中の";
-		else return "装備中の";
+		if(i<INVEN_RARM) return _("ザックに入っている", "in the backpack");
+		else if(i <= INVEN_LARM && p_ptr->heavy_wield[i-INVEN_RARM]) return _("運搬中の", "just lifting");
+		else return _("装備中の", "equipped");
 	}
 
 	switch (i)

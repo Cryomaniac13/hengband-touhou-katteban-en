@@ -1692,7 +1692,7 @@ static void get_extra(bool roll_hitdie)
 			p_ptr->skill_exp[i] =  2400;
 			break;
 		default:
-			msg_format("ERROR:skill_aptitude[]が不正な値");
+			msg_format(_("ERROR:skill_aptitude[]が不正な値", "ERROR: invalid skill_aptitude[]"));
 		}
 		/*:::教師は最初から技能が高い*/
 		if(p_ptr->pclass == CLASS_TEACHER) p_ptr->skill_exp[i] =  2400;
@@ -3381,13 +3381,13 @@ void player_outfit(void)
 		//種族処理にアーティファクトは未対応
 		if(birth_outfit_race[i].artifact_idx)
 		{
-			msg_format("ERROR:birth_outfit_race[%d]にアーティファクトが指定されている(未実装)",i);
+			msg_format(_("ERROR:birth_outfit_race[%d]にアーティファクトが指定されている(未実装)", "ERROR: birth_outfit_race[%d] has an artifact specified: unimplemented"), i);
 			continue;
 		}
 		//念のため
 		if(birth_outfit_race[i].num < 1 || birth_outfit_race[i].num > 99 )
 		{
-			msg_format("ERROR:birth_outfit_race[%d]のアイテム数がおかしい",i);
+			msg_format(_("ERROR:birth_outfit_race[%d]のアイテム数がおかしい", "ERROR: incorrect number of items in birth_outfit_race[%d]"), i);
 			continue;
 		}
 		object_prep(q_ptr,lookup_kind(birth_outfit_race[i].tval,birth_outfit_race[i].sval));
@@ -3415,13 +3415,13 @@ void player_outfit(void)
 
 			if (!a_ptr->name)
 			{
-				msg_format("ERROR:birth_outfit_class[%d]のアーティファクトIDがおかしい",i);
+				msg_format(_("ERROR:birth_outfit_class[%d]のアーティファクトIDがおかしい", "ERROR: incorrect artifact ID in birth_outfit_class[%d]"), i);
 				continue;
 			}
 			tmp_k_idx = lookup_kind(a_ptr->tval, a_ptr->sval);
 			if (!tmp_k_idx)
 			{
-				msg_format("ERROR:a_info[%d]のtvalかsvalがおかしい",i);
+				msg_format(_("ERROR:a_info[%d]のtvalかsvalがおかしい", "ERROR: incorrect tval or sval for a_info[%d]"), birth_outfit_class[i].artifact_idx);
 				continue;
 			}
 
@@ -3477,7 +3477,7 @@ void player_outfit(void)
 		//念のため
 		else if(birth_outfit_class[i].num < 1 || birth_outfit_class[i].num > 99 )
 		{
-			msg_format("ERROR:birth_outfit_class[%d]のアイテム数がおかしい",i);
+			msg_format(_("ERROR:birth_outfit_class[%d]のアイテム数がおかしい", "ERROR: incorrect number of items in birth_outfit_class[%d]"), i);
 			continue;
 		}
 		else
@@ -4151,7 +4151,7 @@ static bool get_player_race(void)
 	//要らんと思うが念のため
 	if (valid_race_idx_count > 52 || !valid_race_idx_count)
 	{
-		put_str("ラベルがa～Zまでで足りないかカウント値がおかしい", 23, 5);
+		put_str(_("ラベルがa～Zまでで足りないかカウント値がおかしい", "Too many races for the available labels, or race count is wrong."), 23, 5);
 		inkey();
 		return FALSE;
 	}
@@ -6597,12 +6597,12 @@ static bool get_unique_player(void)
 		{
 			if(cnt_table == 12)
 			{
-				put_str("ERROR:get_unique_player()のcnt_tableが一杯", 12, 10);
+				put_str(_("ERROR:get_unique_player()のcnt_tableが一杯", "ERROR: cnt_table of get_unique_player() is full"), 12, 10);
 				break;
 			}
 			table[cnt_table++] = unique_player_table[i];
 		}
-		if(cnt_table==0)		c_put_str(TERM_L_BLUE, format("作品ID:%dに誰も登録されていない", entry), 8 , 10);
+		if(cnt_table==0)		c_put_str(TERM_L_BLUE, format(_("作品ID:%dに誰も登録されていない", "No unique player registered for the ID, %d"), entry), 8, 10);
 
 #ifdef JP
 		put_str("あなたは誰ですか？", 10, 10);
@@ -6692,13 +6692,13 @@ static bool get_unique_player(void)
 
 		if(table[k].race == 255 || table[k].class_id == 255)
 		{
-			c_put_str(TERM_RED, "ERROR:このプレーヤーの種族かクラスが設定されていない", 10, 10);
+			c_put_str(TERM_RED, _("ERROR:このプレーヤーの種族かクラスが設定されていない", "ERROR: no race or class has been set for this player"), 10, 10);
 			inkey();
 			return (FALSE);
 		}
 		if(!class_info[table[k].class_id].flag_only_unique)
 		{
-			c_put_str(TERM_RED, "ERROR:このクラスにユニーククラスフラグが設定されていない", 10, 10);
+			c_put_str(TERM_RED, _("ERROR:このクラスにユニーククラスフラグが設定されていない", "ERROR: unique class flag not set for this class"), 10, 10);
 			inkey();
 			return (FALSE);
 		}
@@ -7529,7 +7529,7 @@ if(flag_general || flag_outsider)
 #ifdef JP
 		put_str("種族        :　　　　　　　", 4, 1);
 #else
-		put_str("Race        :　　　　　　　", 4, 1);
+		put_str("Race        :              ", 4, 1);
 #endif
 		c_put_str(TERM_L_BLUE, rp_ptr->title, 4, 15);
 		if (!get_player_realms()) return FALSE;
@@ -8397,7 +8397,7 @@ void dump_yourself(FILE *fff)
 		}
 		if(i==UNIQUE_PLAYER_NUM)
 		{
-			msg_print("ERROR:あなたのクラスIDがunique_player_table[]に登録されてない");
+			msg_print(_("ERROR:あなたのクラスIDがunique_player_table[]に登録されてない", "ERROR: your class ID is not registered in unique_player_table[]"));
 			return;
 		}
 		roff_to_buf(unique_player_table[i].info, 78, temp, sizeof(temp));
@@ -8493,7 +8493,7 @@ const player_seikaku * get_ap_ptr(int race_idx, int class_idx, int seikaku_idx)
 		int idx2 = get_special_seikaku_index(class_idx);
 		if(idx2 >= MAX_SEIKAKU_SPECIAL)
 		{
-			msg_format("ERROR:特殊性格idxがMAX超過");
+			msg_format(_("ERROR:特殊性格idxがMAX超過", "ERROR: special personality index is too large"));
 
 		}
 		else

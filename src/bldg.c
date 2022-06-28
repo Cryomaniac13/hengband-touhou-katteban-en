@@ -1837,7 +1837,7 @@ static void buy_gacha_box()
                 "Takane - 'Leave trading to us while you're away."), 5, 10);
 			prt(format(_("　　　さて、今なら初回大サービスで一箱$%dだよ！",
                         "          By the way, it's $%d per box for your first purchase!"), price), 6, 10);
-			prt("　　　 ", 7, 10);
+			prt(_("　　　 ", "       "), 7, 10);
 			prt(_("　　　え？もちろん金を取るに決まってるじゃないか！」",
                 "          Eh? Of course I'm going to charge money!'"), 8, 10);
 		}
@@ -4988,7 +4988,7 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "どうか助けて頂けませんか？」");
 #else
                 strcpy(quest_text[line++], "Akyuu - 'Miss Yama!? What are you doing here, it can't be...");
-				strcpy(quest_text[line++], "　");
+				strcpy(quest_text[line++], "  ");
 				strcpy(quest_text[line++], "Ah, you're on a vacation and investigating this incident?");
 				strcpy(quest_text[line++], "That's a great help. Truth to be told, some bandits from the");
 				strcpy(quest_text[line++], "other world have made a vacant house into their hideout. Couldn't");
@@ -10850,7 +10850,7 @@ const struct guild_arts_type repair_weapon_power_table[] =
 	{TV_SOUVENIR,SV_SOUVENIR_ASIA,25,-1," "},
 	{ TV_SOUVENIR,SV_SOUVENIR_SHILVER_KEY,25,-1," " },
 
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 };
 
 
@@ -13406,7 +13406,7 @@ static void talk_kagerou()
                             "Kagerou - 'Let's welcome our new companion, everyone!"));
 
 				//-Hack- 建物に噂コマンドを追加して再描画する
-				sprintf(building[ex_bldg_num].act_names[6],"噂を聞く");
+				sprintf(building[ex_bldg_num].act_names[6], _("噂を聞く", "Listen to rumors"));
 				building[ex_bldg_num].letters[6] = 'r';
 				building[ex_bldg_num].actions[6] = BACT_RUMORS_NEW;
 
@@ -14177,7 +14177,7 @@ void grassroots_barter()
 		q_ptr->feeling = FEEL_NONE;
 		object_desc(o_name, q_ptr, 0);
 
-		msg_format("%s(%c)を選択した。", o_name, index_to_label(item));
+		msg_format(_("%s(%c)を選択した。", "%s(%c) was selected."), o_name, index_to_label(item));
 		msg_print("");
 		value = object_value_real(q_ptr);
 
@@ -15029,7 +15029,7 @@ const struct guild_arts_type archer_guild_table[] =
 	{ TV_MATERIAL, SV_MATERIAL_MYSTERIUM, EGO_ARROW_AMANOZYAKU,99,_("天邪鬼の矢", "Arrows of Amanojaku")},
 
 
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 
 };
 
@@ -15041,7 +15041,7 @@ const struct guild_arts_type archer_guild_table2[] =
 	{TV_MATERIAL,SV_MATERIAL_ADAMANTITE,10,99," "},
 	{TV_MATERIAL, SV_MATERIAL_METEORICIRON ,15,99," "},
 	{TV_MATERIAL,SV_MATERIAL_HIHIIROKANE,25,99," "},
-	{0,0,0,0,"終端用ダミー"}
+	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 };
 
 
@@ -16166,7 +16166,7 @@ msg_print("お金が足りません！");
 		break;
 	//case BACT_TARGET:
 		///del131221 死体削除
-		msg_print("事務所は閉店した。");
+		//msg_print(_("事務所は閉店した。", "This office has closed."));
 		//today_target();
 		break;
 	//case BACT_KANKIN:
@@ -16425,7 +16425,7 @@ msg_print("お金が足りません！");
 		break;
 
 	default:
-		msg_format("ERROR:BACT(%d)が未定義",bact);
+		msg_format(_("ERROR:BACT(%d)が未定義", "ERROR: unhandled BACT_ constant, %d"), bact);
 
 	}
 

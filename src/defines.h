@@ -5748,7 +5748,7 @@
 #define update_playtime() \
 {\
 	u32b tmp;\
-	if(!start_time)msg_format("ERROR:start_time‚ª–¢İ’è‚Ì‚Ü‚Üupdate_playtime()‚ªŒÄ‚Î‚ê‚½");\
+	if(!start_time)msg_format(_("ERROR:start_time‚ª–¢İ’è‚Ì‚Ü‚Üupdate_playtime()‚ªŒÄ‚Î‚ê‚½", "ERROR:update_playtime() called with start_time unset"));\
 	tmp = time(NULL);\
 	playtime += (tmp - start_time);\
 	start_time = tmp;\

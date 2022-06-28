@@ -41,8 +41,8 @@ void print_all_item_param(int idx)
 	if(idx < 0 || idx > INVEN_FEET)
 	{
 
-		q = "どのアイテムを確認しますか？";
-		s = "確認できるアイテムがありません。";
+		q = _("どのアイテムを確認しますか？", "Which item do you want to check? ");
+		s = _("確認できるアイテムがありません。", "There are no items to check.");
 
 		if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP | USE_FLOOR))) return;
 		/* Get the item (in the pack) */
@@ -157,7 +157,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 
 	if (p_ptr->pclass == CLASS_SUNNY || p_ptr->pclass == CLASS_3_FAIRIES)
 	{
-		msg_format("日光ポイント:%d",p_ptr->magic_num1[0]);
+		msg_format(_("日光ポイント:%d", "Nikko points: %d"), p_ptr->magic_num1[0]);
 		return;
 	}
 
@@ -299,23 +299,23 @@ static void do_cmd_wiz_hack_ben_2(void)
 		char tmp_val[160];
 		int tmp;
 
-		msg_print("野良神様神性値強制設定");
+		msg_print(_("野良神様神性値強制設定", "Override stray god divinity values"));
 		sprintf(tmp_val, "0");
-		if (!get_string("秩序値: ", tmp_val, 9)) return;
+		if (!get_string(_("秩序値: ", "Order value: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<0) tmp=0;
 		if(tmp > 255) tmp=255;
 		p_ptr->race_multipur_val[0] = tmp;
 
 		sprintf(tmp_val, "0");
-		if (!get_string("好戦値: ", tmp_val, 9)) return;
+		if (!get_string(_("好戦値: ", "Good fight value: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<0) tmp=0;
 		if(tmp > 255) tmp=255;
 		p_ptr->race_multipur_val[1] = tmp;
 
 		sprintf(tmp_val, "0");
-		if (!get_string("名声値: ", tmp_val, 9)) return;
+		if (!get_string(_("名声値: ", "Fame: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<0) tmp=0;
 		if(tmp > 255) tmp=255;
@@ -329,7 +329,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 
 		msg_format("%d:%s",CHECK_FAIRY_TYPE,fairy_table[CHECK_FAIRY_TYPE].fairy_desc);
 		sprintf(tmp_val, "%d",CHECK_FAIRY_TYPE);
-		if (!get_string("新特性: ", tmp_val, 9)) return;
+		if (!get_string(_("新特性: ", "New features: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<1) tmp=1;
 		if(tmp > FAIRY_TYPE_MAX) tmp=FAIRY_TYPE_MAX;
@@ -350,7 +350,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 		char tmp_val[160] = "";
 		int tmp;
 
-		if (!get_string("信仰値: ", tmp_val, 9)) return;
+		if (!get_string(_("信仰値: ", "Faith value: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<0) tmp=0;
 		if(tmp > 20000) tmp=20000;
@@ -364,7 +364,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 		char tmp_val[160] = "";
 		int tmp;
 
-		if (!get_string("厄値: ", tmp_val, 9)) return;
+		if (!get_string(_("厄値: ", "Bad value: "), tmp_val, 9)) return;
 		tmp = atol(tmp_val);
 		if(tmp<0) tmp=0;
 		if(tmp > HINA_YAKU_MAX) tmp = HINA_YAKU_MAX;
@@ -723,8 +723,8 @@ static void do_cmd_wiz_hack_ben(void)
 
 	//msg_format("Hetate_HP:%d/%d/%d",hecatia_hp[0],hecatia_hp[1],hecatia_hp[2]);
 
-	if(p_ptr->pclass == CLASS_SUWAKO) msg_format("畏れポイント：%d",p_ptr->magic_num1[0]);
-	if(p_ptr->pclass == CLASS_KANAKO) msg_format("信仰ポイント：%d",p_ptr->magic_num1[0]);
+	if(p_ptr->pclass == CLASS_SUWAKO) msg_format(_("畏れポイント：%d", "Fear point: %d"), p_ptr->magic_num1[0]);
+	if(p_ptr->pclass == CLASS_KANAKO) msg_format(_("信仰ポイント：%d", "Faith point: %d"), p_ptr->magic_num1[0]);
 
 	//msg_format("k_idx:%d",inventory[INVEN_RARM].k_idx);
 	//msg_format("flavor:%d",k_info[inventory[INVEN_RARM].k_idx].flavor);
@@ -1724,7 +1724,7 @@ static void wiz_tweak_item(object_type *o_ptr)
 		if(o_ptr->pval >= max_r_idx) o_ptr->pval = max_r_idx-1;
 
 		o_ptr->xtra5 = numbering_newspaper(o_ptr->pval);
-		msg_print("(新聞のxtra5が再設定された)");
+		msg_print(_("(新聞のxtra5が再設定された)", "(newspaper xtra5 has been reset)"));
 	}
 
 	wiz_display_item(o_ptr);

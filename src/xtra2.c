@@ -4107,7 +4107,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 
 		/*:::サンタを倒した時の特殊メッセージ*/
 		if ((m_ptr->r_idx == MON_SANTACLAUS))
-			msg_print("≪クリスマス中止のお知らせ≫");
+			msg_print(_("≪クリスマス中止のお知らせ≫", "Christmas has been canceled."));
 
 		/*:::こころを倒した時の特殊メッセージ*/
 		//v1.1.48 闘技場ではメッセージ出なくする。ここ通らないかもしれないが
@@ -5862,7 +5862,7 @@ static int target_set_aux(int y, int x, int mode, cptr info)
 
 			//舞と里乃のメッセージ変更
 			if (CLASS_RIDING_BACKDANCE && player_bold(y, x))
-				s2 = "の背後";
+				s2 = _("の背後", "behind");
 
 #ifdef JP
 			sprintf(out_val, "[%s]%s%s(%s)%s%s [r思 %s%s]", acount, s1, m_name, look_mon_desc(m_ptr, 0x01), s2, s3, x_info, info);
@@ -8427,7 +8427,7 @@ void gain_maid_reward(void)
 	}
 	else if(type < 36)
 	{
-		msg_print("主はあなたの奉仕に深く満足している。褒美の品が送られてきた。");
+		msg_print(_("主はあなたの奉仕に深く満足している。褒美の品が送られてきた。", "Your master is deeply satisified with your service and sent an item as a reward."));
 		reward = _("高級なアイテムを与えられた。", "valuable item.");
 		if(p_ptr->lev > 24 || one_in_(3)) acquirement(py, px, 1+randint1(2), TRUE, FALSE);
 		else acquirement(py, px, 1, TRUE, FALSE);

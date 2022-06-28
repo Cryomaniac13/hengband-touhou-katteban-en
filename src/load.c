@@ -116,7 +116,7 @@ static bool h_older_than(byte major, byte minor, byte patch, byte extra)
  */
 static bool z_older_than(byte x, byte y, byte z)
 {
-	msg_format("‚±‚±‚É‚Í—ˆ‚È‚¢‚Í‚¸(Z)B%d:%d:%d",x,y,z);
+	msg_format(_("‚±‚±‚É‚Í—ˆ‚È‚¢‚Í‚¸(Z)B%d:%d:%d", "You shouldn't come here (Z).  %d:%d:%d"), x, y, z);
 	/* Much older, or much more recent */
 	if (z_major < x) return (TRUE);
 	if (z_major > x) return (FALSE);

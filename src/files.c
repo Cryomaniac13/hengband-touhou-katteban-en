@@ -1895,7 +1895,7 @@ static void display_player_melee_bonus(int hand, int hand_entry)
 			}
 
 		}
-		if(!attack_doll_num){msg_print("ERROR:アリス攻撃回数計算がおかしい"); return;}
+		if(!attack_doll_num){msg_print(_("ERROR:アリス攻撃回数計算がおかしい", "ERROR: zero result for Alice's attack count")); return;}
 		show_tohit += (skill_sum/attack_doll_num - WEAPON_EXP_BEGINNER)/200 + to_h_sum / attack_doll_num;
 		show_todam += to_d_sum / attack_doll_num;
 	}
@@ -2773,7 +2773,7 @@ static void display_player_various(void)
 		if(!muta_att)
 			desc = format("%d", damage[0] / 100);//アリスのdamage[0]は攻撃回数分合計済み
 		else
-			desc = format("%d+α", damage[0] / 100);
+			desc = format(_("%d+α", "%d+@"), damage[0] / 100);
 
 	}
 	else if(IS_METAMORPHOSIS)
@@ -8418,7 +8418,7 @@ static void dump_aux_race_history(FILE *fff)
 	if(p_ptr->pclass == CLASS_SOLDIER)
 	{
 		int i;
-		fprintf(fff, "\n[習得技能] \n");
+		fprintf(fff, _("\n[習得技能] \n", "\n[Acquired Skill] \n"));
 		for(i=0;i<SOLDIER_SKILL_ARRAY_MAX;i++)
 		{
 			fprintf(fff, "  %s: %d \n",soldier_skill_table[i][0].name, p_ptr->magic_num2[i]);
@@ -10430,12 +10430,22 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 		if (!p_ptr->playing && !p_ptr->is_dead)
 		{
 			Term_clear();
+#ifdef JP
 			prt("大変申し訳ありません。セーブに失敗しました。", 5, 5);
 			prt("強制的に人里に戻して再セーブを試みます。", 6, 5);
 			prt("念のため続行前にsaveフォルダのアクセス権などを見直して下さい。", 7, 5);
 			prt("userフォルダに緊急ダンプが出力されます。", 8, 5);
 			prt("この勝手版作者に送っていただけると幸いです。", 9, 5);
 			prt("何かキーを押すと続行します。", 12, 5);
+#else
+			prt("Sorry, failed to save.", 5, 5);
+			prt("Forcibly returning to the remote area and trying to save again.", 6, 5);
+			prt("Just in case, please review the permissions on the save folder before ", 7, 5);
+			prt("continuing.", 8, 5);
+			prt("An emergency dump will be written to the user folder.  I would", 8, 5);
+			prt("appriate it if you could send it to the author of this Hengband variant.", 9, 5);
+			prt("Press any key to continue.", 12, 5);
+#endif
 			(void)inkey();
 			(void)file_character("heng_katte_panic_dump.txt");
 			p_ptr->word_recall = 0;
@@ -10451,8 +10461,8 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 			p_ptr->riding = 0;
 			wipe_m_list();
 			change_floor();
-			if(save_player()) prt("再セーブに成功。", 14, 5);
-			else prt("再セーブ失敗..", 14, 5);
+			if(save_player()) prt(_("再セーブに成功。", "Successful resave."), 14, 5);
+			else prt(_("再セーブ失敗..", "Resave failed."), 14, 5);
 			(void)inkey();
 		}
 	}
@@ -11202,7 +11212,7 @@ static void print_tomb(void)
 		}
 		else if (streq(p_ptr->died_from, "Seppuku"))
 		{
-			strcpy(tmp, "勝利の後、切腹");
+			strcpy(tmp, _("勝利の後、切腹", "Committed seppuku after victory"));
 		}
 		else
 		{
@@ -12574,7 +12584,7 @@ void get_score_server_name(void)
 
 	if(!strlen(score_server_name))
 		need_set = TRUE;
-	else if(!get_check_strict(format("プレイヤー「%s」としてスコアを送ります。",score_server_name), CHECK_DEFAULT_Y | CHECK_NO_HISTORY))
+	else if(!get_check_strict(format(_("プレイヤー「%s」としてスコアを送ります。", "Send the score as player \"%s\"? "), score_server_name), CHECK_DEFAULT_Y | CHECK_NO_HISTORY))
 		need_set = TRUE;
 
 	if(!need_set) return;
@@ -12584,12 +12594,19 @@ void get_score_server_name(void)
 
 	while(1)
 	{
+#ifdef JP
 		prt("「プレイヤー名」を設定してください。", 5,25);
 		prt("「プレイヤー名」は、スコアサーバに表示されます。", 6,25);
 		prt("設定せずにスコアを送ることもできます。", 7,25);
 		prt("一部の記号は使用できません。", 8,25);
+#else
+		prt("Please set the \"player name\".", 5, 25);
+		prt("The \"player name\" will be displayed on the score server.", 6, 25);
+		prt("You can also send the score without setting it.", 7, 25);
+		prt("Some symbols can not be used in the name.", 8, 25);
+#endif
 
-		if (get_string("プレイヤー名: ", tmp_name, SCORE_SERVER_STR_LEN-4))
+		if (get_string(_("プレイヤー名: ", "Player name: "), tmp_name, SCORE_SERVER_STR_LEN-4))
 		{
 
 			for (i = 0; tmp_name[i]; i++)
@@ -12614,11 +12631,11 @@ void get_score_server_name(void)
 		Term_clear();
 
 		if(!strlen(tmp_name))
-			prt("プレイヤー名は設定されません。", 5,25);
+			prt(_("プレイヤー名は設定されません。", "The player name is not set."), 5,25);
 		else
-			prt(format("プレイヤー名:%s",tmp_name), 5,25);
+			prt(format(_("プレイヤー名:%s", "Player name: %s"), tmp_name), 5,25);
 
-		if (get_check_strict("よろしいですか？", CHECK_DEFAULT_Y | CHECK_NO_HISTORY)) break;
+		if (get_check_strict(_("よろしいですか？", "Is that name okay? "), CHECK_DEFAULT_Y | CHECK_NO_HISTORY)) break;
 
 	}
 	//いま記録されてるのと一致しない(strcmpが!=0)とき保存
@@ -12626,7 +12643,7 @@ void get_score_server_name(void)
 	{
 		strcpy(score_server_name,tmp_name);
 		//スコア送信直前なのでセーブが必要
-		if (!save_player()) msg_print("セーブ失敗！");
+		if (!save_player()) msg_print(_("セーブ失敗！", "Save failed!"));
 	}
 
 	screen_load();

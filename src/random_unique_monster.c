@@ -1660,7 +1660,7 @@ int get_random_unique_symbol(int r_idx, int lev)
 
 
 		}
-		msg_format("WARNING:r_unique_symbol_table[].mon_char‚Ærp_ptr->random_unique_symbol‚ªˆê’v‚µ‚È‚¢");
+		msg_format(_("WARNING:r_unique_symbol_table[].mon_char‚Ærp_ptr->random_unique_symbol‚ªˆê’v‚µ‚È‚¢", "WARNING:r_unique_synbol_table[].mon_char and rp_ptr->random_unique_symbol do not match"));
 	}
 
 

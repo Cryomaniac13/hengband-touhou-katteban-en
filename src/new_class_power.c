@@ -231,9 +231,9 @@ cptr do_cmd_class_power_aux_mike(int num, bool only_info)
 
 
 	default:
-		if (only_info) return format("未実装");
+		if (only_info) return format(_("未実装", "unimplemented"));
 
-		msg_format("ERROR:実装していない特技が呼ばれた num:%d", num);
+		msg_format(_("ERROR:実装していない特技が呼ばれた num:%d", "ERROR: an unimplemented feat, %d, was inoked"), num);
 		return NULL;
 	}
 	return "";
@@ -5807,7 +5807,7 @@ cptr do_cmd_class_power_aux_mai(int num, bool only_info)
 	}
 	else //里乃のビハインドユー
 	{
-		if (only_info) return format("　");
+		if (only_info) return format(_("　", "  "));
 
 		if (!p_ptr->riding)
 		{
@@ -10720,7 +10720,7 @@ cptr do_cmd_class_power_aux_extra(int num, bool only_info)
 
 	default:
 		if(only_info) return format("");
-		msg_format("ERROR:実装していない特技が呼ばれた num:%d",num);
+		msg_format(_("ERROR:実装していない特技が呼ばれた num:%d", "ERROR: an unimplemented feat, %d, was invoked"), num);
 		return NULL;
 	}
 	return "";
@@ -12655,7 +12655,7 @@ cptr do_cmd_class_power_aux_sakuya(int num, bool only_info)
 
 			if(flag_max)
 			{
-				msg_print("これ以上持てない。");
+				msg_print(_("これ以上持てない。", "There's no space in your knife holder."));
 				return NULL;
 			}
 
@@ -19941,7 +19941,7 @@ cptr do_cmd_class_power_aux_seija(int num, bool only_info)
 	case 3:
 		{
 			int power = 50 + plev * 4 + chr_adj * 5;
-			if(only_info) return format("効力:%d",power);
+			if(only_info) return format(_("効力:%d", "power: %d"), power);
 			msg_format(_("あなたは周囲の敵の視界を狂わせた！", "You disrupt the senses of enemies in your vicinity!"));
 			confuse_monsters(power);
 			break;
@@ -20651,7 +20651,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 		{
 			int sides = plev*2;
 
-			if(only_info) return format("損傷:1d%d",sides);
+			if(only_info) return format(_("損傷:1d%d", "dam: 1d%d"), sides);
 			if (!get_aim_dir(&dir)) return NULL;
 			msg_print(_("リュックの横からスピーカーが飛び出し、音波を放った！",
                         "Speakers fly out of your rucksack and blast a sound wave!"));
@@ -21698,7 +21698,7 @@ cptr do_cmd_class_power_aux_sanae(int num, bool only_info)
 			{
 				base = (12 + cons_suwa) * (30 + chr_adj) * plev / 100;
 			}
-			if(only_info) return format("損傷:%d",base);
+			if(only_info) return format(_("損傷:%d", "dam: %d"), base);
 			if(cons_suwa < min_cons)
 			{
 				msg_format(_("力が足りない。詠唱をし直さないと。", "Not enough power. You have to continue chanting."));
@@ -21734,7 +21734,7 @@ cptr do_cmd_class_power_aux_sanae(int num, bool only_info)
 				range = MIN(MAX_SIGHT,cons_soma * 2);
 
 			}
-			if(only_info) return format("範囲:%d",range);
+			if(only_info) return format(_("範囲:%d", "range: %d"), range);
 			if(cons_soma <  min_cons)
 			{
 				msg_format(_("力が足りない。詠唱をし直さないと。", "Not enough power. You have to continue chanting."));
@@ -25943,7 +25943,7 @@ cptr do_cmd_class_power_aux_samurai(int num, bool only_info)
 		}
 
 	default:
-		msg_format("ERROR:実装していない特技が呼ばれた num:%d",num);
+		msg_format(_("ERROR:実装していない特技が呼ばれた num:%d", "ERROR: an implemented power, %d, was invoked"), num);
 		return NULL;
 	}
 	return "";
@@ -34168,7 +34168,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #ifdef JP
 				my_strcpy(errmsg, "厄が足りなくてその特技を使えない。", 150);
 #else
-                my_strcpy(errmsg, "You haven't gathered enough misfortune to use this ability。", 150);
+                my_strcpy(errmsg, "You haven't gathered enough misfortune to use this ability.", 150);
 #endif
 				return FALSE;
 		}

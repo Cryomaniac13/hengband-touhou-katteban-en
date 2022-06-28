@@ -2349,7 +2349,7 @@ sprintf(ouch, "%sを装備したダメージ", o_name);
 		if (prace_is_(RACE_VAMPIRE)) dam = 30 + randint1(20);
 		else dam = randint1(20);
 
-		take_hit(DAMAGE_NOESCAPE, dam, "溺れ", -1);
+		take_hit(DAMAGE_NOESCAPE, dam, _("溺れ", "drowning"), -1);
 		cave_no_regen = TRUE;
 	}
 	//v1.1.86 虹龍洞深部では酸素の必要なプレーヤーはダメージ
@@ -10581,7 +10581,7 @@ prt("お待ち下さい...", 0, 0);
 	if(0)
 	{
 			Term_clear();
-			put_str("***強制人里帰還***", 17 , 40);
+			put_str(_("***強制人里帰還***", "*** forced return to the village ***"), 17, 40);
 			(void)inkey();
 			p_ptr->chp = p_ptr->mhp;
 			p_ptr->chp_frac = 0;

@@ -12373,27 +12373,27 @@ const cptr silly_attacks2[MAX_SILLY_ATTACK] =
 	"get a good job from %s.",
 	"confess your love to %s.",
 	"hire %s for an hourly wage of 500 yen.",
-	"%sの100の秘密について熱く語った。",
-	"ニャーと鳴いた。",
-	"%sに気をつけた。",
+	"gossips about the 100 secrets of %s.",
+	"meows.",
+	"is skittish around %s.",
 	"%sをポリゴン化させた。",
-	"%sを少しかじった。",
-	"アルテマの呪文を唱えた！",
-	"%sのスパイクをブロックした。",
+	"nips at %s.",
+	"casts the Artema spell!",
+	"blocks the spikes of %s.",
 	"スライド移動した。",
-	"昇龍拳コマンドの入力に失敗した。",
-	"%sに拡散波動砲を発射した。",
-	"%sにデスラー戦法をしかけた。",
-	"%sをライダーキックで攻撃した。",
-	"%sに二週間以内でビデオを人に見せないと死ぬ呪いをかけた。",
-	"パルプンテを唱えた。",
-	"%sにスーパーウルトラギャラクティカマグナムを放った。",
-	"%sをしゃがみ小キックでハメた。",
-	"%sにジェットストリームアタックをかけた。",
+	"fails to enter the Shoryuken command.",
+	"fires a diffuse wave cannon at %s.",
+	"initiates Dessler's tactics against %s.",
+	"attacks %s with a rider kick.",
+	"curses %s to die if the video isn't shown within two weeks.",
+	"chants Pulpunte.",
+	"fires a Super Ultra Galacitica Magnum at %s.",
+	"forces %s to duck a kick.",
+	"uses a jet stream attack on %s",
 	"%sに卍固めをかけて「1、2、3、ダーッ！」と叫んだ。",
-	"「いくじなし！ばかばかばか！」といって駆け出した。",
+	"rushes out saying, \"No luck! Stupid, stupid!\".",
 	"「ごらん、ルーベンスの絵だよ」と言って静かに目を閉じた。",
-	"言った。「変愚蛮怒、絶賛公開中！」",
+	"says, \"Hengband's publicly acclaimed!\"."
 };
 #endif
 
@@ -14752,7 +14752,7 @@ occult_contact_type occult_contact_table[] =
 	{FF_CAN_FLY,	0,		FF_MOVE,MON_COLOUR_OUTOFSPACE	,"from the dark chasm"},//異次元の色彩：暗い穴　この条件は山も当てはまるので山の下に
 #endif
 
-	{0,0,0,0,"終端用ダミー"},//r_idxが0ならループ終了
+	{0,0,0,0,_("終端用ダミー","dummy terminator")},//r_idxが0ならループ終了
 };
 
 //v1.1.21
@@ -14892,68 +14892,68 @@ soldier_skill_type soldier_skill_table[SOLDIER_SKILL_ARRAY_MAX][SOLDIER_SKILL_NU
 //cost,name,info,change_bullet,use_ammo
 soldier_bullet_type soldier_bullet_table[] =
 {
-	{0,"始端ダミー","",0},
+	{0,_("始端ダミー","initial dummy"),"",0},
 
 	//他の特技のSSM_とダミー**
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
 
 	//11-14 火炎、氷結、電撃弾
-	{8,"火炎弾","威力2倍の火炎属性になる。",SS_M_ELEM_BULLET},
-	{8,"氷結弾","威力2倍の冷気属性になる。",SS_M_ELEM_BULLET},
-	{8,"電撃弾","威力2倍の電撃属性になる。",SS_M_ELEM_BULLET},
-	{8,"溶解弾","威力2倍の酸属性になる。",SS_M_ELEM_BULLET},
+	{8,_("火炎弾","fiery bullet"),_("威力2倍の火炎属性になる。","2x damage from fire"),SS_M_ELEM_BULLET},
+	{8,_("氷結弾","icy bullet"),_("威力2倍の冷気属性になる。","2x damage from cold"),SS_M_ELEM_BULLET},
+	{8,_("電撃弾","shocking bullet"),_("威力2倍の電撃属性になる。","2x damage from electricity"),SS_M_ELEM_BULLET},
+	{8,_("溶解弾","acidic bullet"),_("威力2倍の酸属性になる。","2x double damage from acid"),SS_M_ELEM_BULLET},
 	//15-18
-	{24,"閃光弾","閃光に弱い敵に3倍のダメージを与え、部屋を明るくする半径2のロケットになる。",SS_M_HIGH_BULLET},
-	{24,"吸血弾","生命力吸収属性のボルトになる。反射されない。",SS_M_HIGH_BULLET},
-	{24,"衝撃弾","轟音属性のビームになる。",SS_M_HIGH_BULLET},
-	{24,"重力弾","重力属性の半径2のボールになる。",SS_M_HIGH_BULLET},
+	{24,_("閃光弾","flash bullet"),_("閃光に弱い敵に3倍のダメージを与え、部屋を明るくする半径2のロケットになる。","radius 2 rocket; 3x damage from light; lights room"),SS_M_HIGH_BULLET},
+	{24,_("吸血弾","vampiric bullet"),_("生命力吸収属性のボルトになる。反射されない。","bolt; transfers health; can't be reflected"),SS_M_HIGH_BULLET},
+	{24,_("衝撃弾","impact bullet"),_("轟音属性のビームになる。","stuns target"),SS_M_HIGH_BULLET},
+	{24,_("重力弾","gravity bullet"),_("重力属性の半径2のボールになる。","radius 2 ball; can stun, slow, and teleport"),SS_M_HIGH_BULLET},
 	//19-30予備
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
 
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
-	{0,"ダミー","",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
+	{0,_("ダミー","dummy"),"",0},
 	//31-48宝石弾
-	{0,"猛毒弾","威力3倍の毒属性になる。",SS_M_MATERIAL_BULLET},
-	{0,"獣殺しの弾丸","獣に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"磁力弾","無生物に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"破魔の弾丸","妖怪・アンデッド・デーモンに対して威力が2倍になる。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"怨霊の弾丸","人間に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"太陽の弾丸","飛行するモンスターに対して威力が2倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"銀の弾丸","混沌の勢力に威力1.5倍、\\妖怪・アンデッド・デーモンに対して威力が3倍になる。\\クリティカルヒット率が上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"重量弾","威力2倍の通常の射撃になる。\\クリティカルヒット率が上昇する。反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"ドラゴンブレス弾","3倍の威力のブレスになる。",SS_M_MATERIAL_BULLET},
-	{0,"水龍の弾丸","威力3倍の極寒属性ロケットになる。",SS_M_MATERIAL_BULLET},
-	{0,"竜殺しの弾丸","竜に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"神殺しの弾丸","神格に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"悪夢の弾丸","地獄の業火弱点のモンスターに対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"聖なる弾丸","威力3倍の破邪属性ロケットになる。",SS_M_MATERIAL_BULLET},
-	{0,"真紅の弾丸","威力5倍の火炎属性ビームになる。",SS_M_MATERIAL_BULLET},
-	{0,"金剛弾","威力4倍の光の剣属性のビームになる。",SS_M_MATERIAL_BULLET},
-	{0,"流星弾","威力4倍の通常射撃になる。\\クリティカルヒット率が大幅に上昇する。反射されない。",SS_M_MATERIAL_BULLET},
-	{0,"緋緋色金の弾丸","威力10倍の分解属性大型ビームになる。",SS_M_MATERIAL_BULLET},
+	{0,_("猛毒弾","toxic bullet"),_("威力3倍の毒属性になる。","3x damage from poison"),SS_M_MATERIAL_BULLET},
+	{0,_("獣殺しの弾丸","animal slayer"),_("獣に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to animals; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("磁力弾","magnetic bullet"),_("無生物に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to nonliving; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("破魔の弾丸","demon slayer"),_("妖怪・アンデッド・デーモンに対して威力が2倍になる。\\ボルトでも反射されない。","2x damage against youkai, undead, and demons; even shots not refected"),SS_M_MATERIAL_BULLET},
+	{0,_("怨霊の弾丸","widow maker"),_("人間に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage to humans; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("太陽の弾丸","bird shot"),_("飛行するモンスターに対して威力が2倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","2x damage to flying monsters; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("銀の弾丸","silver bullet"),_("混沌の勢力に威力1.5倍、\\妖怪・アンデッド・デーモンに対して威力が3倍になる。\\クリティカルヒット率が上昇する。\\ボルトでも反射されない。","1.5x damage to chaotic forces; 3x damage against youkai, undead, and domes; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("重量弾","heavy ammunition"),_("威力2倍の通常の射撃になる。\\クリティカルヒット率が上昇する。反射されない。","2x damage; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("ドラゴンブレス弾","dragon's breath bullet"),_("3倍の威力のブレスになる。","3x damage; acts like breath weapon"),SS_M_MATERIAL_BULLET},
+	{0,_("水龍の弾丸","water dragon bullet"),_("威力3倍の極寒属性ロケットになる。","a frigid rocket with 3x damage"),SS_M_MATERIAL_BULLET},
+	{0,_("竜殺しの弾丸","dragon slayer"),_("竜に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against dragons; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("神殺しの弾丸","god slayer"),_("神格に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against deities; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("悪夢の弾丸","nightmare bullet"),_("地獄の業火弱点のモンスターに対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage against holy monsters; greatly increased criticals; event shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("聖なる弾丸","holy bullet"),_("威力3倍の破邪属性ロケットになる。","radius 2 racket; 3x damage"),SS_M_MATERIAL_BULLET},
+	{0,_("真紅の弾丸","crimson bullet"),_("威力5倍の火炎属性ビームになる。","beam of fire; 5x damage"),SS_M_MATERIAL_BULLET},
+	{0,_("金剛弾","Kongo bullet"),_("威力4倍の光の剣属性のビームになる。","slashing light beam; 4x damage"),SS_M_MATERIAL_BULLET},
+	{0,_("流星弾","meteor"),_("威力4倍の通常射撃になる。\\クリティカルヒット率が大幅に上昇する。反射されない。","4x damage; significantly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("緋緋色金の弾丸", "scarlet gold bullet"),_("威力10倍の分解属性大型ビームになる。","disintegrating beam; 10x damage"),SS_M_MATERIAL_BULLET},
 
 
 
 
-	{-1,"終端ダミー","",0},
+	{-1,_("終端ダミー","dummy terminator"),"",0},
 };
 
 /*:::兵士の弾丸作成テーブル*/
@@ -16041,7 +16041,7 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 
 	{ MON_KEINE,CLASS_KEINE,NULL,"Crisis",NULL,0 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"History",NULL,4 },
-	{ MON_KEINE,CLASS_KEINE,NULL,"Year 20XX","　",32 },
+	{ MON_KEINE,CLASS_KEINE,NULL,"Year 20XX",_("　"," "),32 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"Pyramid",NULL,5 },
 	{ MON_KEINE,CLASS_KEINE,NULL,"Phantasmal",NULL,15 },
 

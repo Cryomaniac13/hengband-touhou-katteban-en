@@ -6429,13 +6429,13 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 
 		if(p_ptr->mimic_form == MIMIC_MIST)
 		{
-			msg_print("‚ ‚È‚½‚Í–¶‚É‚È‚Á‚Ä—Î‚ğ‚©‚í‚µ‚½B");
+			msg_print(_("‚ ‚È‚½‚Í–¶‚É‚È‚Á‚Ä—Î‚ğ‚©‚í‚µ‚½B", "You turned into mist and slipped through the falling rocks."));
 			damage = 0;
 		}
 		//z–Kq“~–°’†@’Êí–³“G‚¾‚ªˆê•”UŒ‚‚Í’Ê‚é
 		else if (p_ptr->pclass == CLASS_SUWAKO && p_ptr->tim_general[0])
 		{
-			msg_print("—Î‚Í‚ ‚È‚½‚ª‚¢‚éêŠ‚Ü‚Å‚Í“Í‚©‚È‚©‚Á‚½B");
+			msg_print(_("—Î‚Í‚ ‚È‚½‚ª‚¢‚éêŠ‚Ü‚Å‚Í“Í‚©‚È‚©‚Á‚½B", "The falling rocks did not reach where you were."));
 			damage = 0;
 		}
 
@@ -7861,7 +7861,7 @@ bool fire_random_target(int typ, int dam, int method, int rad, int range)
 	}
 	else
 	{
-		msg_format("ERROR:fire_random_target‚ª•Ï‚Èmethod(%d)‚ÅŒÄ‚Î‚ê‚½",method);
+		msg_format(_("ERROR:fire_random_target‚ª•Ï‚Èmethod(%d)‚ÅŒÄ‚Î‚ê‚½", "ERROR:fire_random_target() was called with an invalid method, %d"), method);
 	}
 	return (FALSE);
 

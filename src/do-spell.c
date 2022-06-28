@@ -7600,7 +7600,7 @@ static cptr do_craft_spell(int spell, int mode)
 			if (cast)
 			{
 				// pulish_shield();
-			msg_print("盾磨きは無効化中。");
+			msg_print(_("盾磨きは無効化中。", "Shield polishing is disabled."));
 			}
 		}
 		break;
@@ -17500,7 +17500,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print("あなたは蔦や木の根を操った！");
+				msg_print(_("あなたは蔦や木の根を操った！", "You manipulated the vines and roots of the tree."));
 				project_hack(GF_SLOW_TWINE, power);
 			}
 		}
@@ -24437,7 +24437,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 #endif
 		{
 			int rad = 3 + plev / 4;
-			if (info) return format("範囲：%d",rad);
+			if (info) return format(_("範囲：%d", "range %d"), rad);
 
 			if (cast)
 			{
@@ -25836,7 +25836,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 				m_ptr = &m_list[cave[y][x].m_idx];
 				if (!cave[y][x].m_idx || !m_ptr->ml)
 				{
-					msg_format("そこには何もいない。");
+					msg_format(_("そこには何もいない。", "There is nothing there."));
 					return NULL;
 				}
 

@@ -6537,7 +6537,7 @@ void change_race(int new_race, cptr effect_msg)
 			object_desc(obj_name, &inventory[i], 0);
 			object_copy(q_ptr, &inventory[i]);
 
-			msg_format("%sが外れてしまった！",obj_name);
+			msg_format(_("%sが外れてしまった！", "%s! has come off!"), obj_name);
 			inven_item_increase(i, -1);
 			inven_item_optimize(i);
 			drop_near(q_ptr,0,py,px);
@@ -6812,7 +6812,7 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 		{
 			if (damage_type == DAMAGE_FORCE)
 			{
-				msg_print("障壁が切り裂かれた！");
+				msg_print(_("障壁が切り裂かれた！", "The barrier has been torn!"));
 			}
 			else
 				return 0;
@@ -8683,7 +8683,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
 	if(ind >= TIM_GENERAL_MAX || ind < 0)
 	{
-		msg_format("ERROR:tim_general()が範囲外のindex(%d)で呼ばれた",ind);
+		msg_format(_("ERROR:tim_general()が範囲外のindex(%d)で呼ばれた", "ERROR: tim_general() called with out-of-range index, %d"), ind);
 		return (FALSE);
 	}
 
@@ -8879,7 +8879,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 			}
 			else
 			{
-				msg_format("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義",ind);
+				msg_format(_("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義", "ERROR: tim_general[%d] is undefined"), ind);
 			}
 			notice = TRUE;
 		}
@@ -9170,7 +9170,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 			}
 			else
 			{
-				msg_format("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義",ind);
+				msg_format(_("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義", "ERROR: tim_general[%d] is undefined"), ind);
 			}
 
 			notice = TRUE;
@@ -9283,7 +9283,7 @@ bool set_tim_addstat(int stat, int amount, int v, bool do_dec)
 
 	if(do_dec && amount)
 	{
-		msg_print("WARNING:set_tim_addstat()のdo_decがTRUEなのにamountが設定されている");
+		msg_print(_("WARNING:set_tim_addstat()のdo_decがTRUEなのにamountが設定されている", "WARNING: set_tim_addstat(): do_dec is true but amount is nonzero"));
 		amount = 0;
 	}
 
@@ -9519,7 +9519,7 @@ int is_hurt_disen(){
 	if(mod>100 || mod < -100)
 	{
 		mod = 0;
-		msg_print("ERROR:劣化弱点の判定値がおかしい");
+		msg_print(_("ERROR:劣化弱点の判定値がおかしい", "ERROR: incorrect disenchantment modifier"));
 	}
 
 	return (mod);
@@ -9619,7 +9619,7 @@ int is_hurt_water(){
 	if(mod>100 || mod < -100)
 	{
 		mod = 0;
-		msg_print("ERROR:水弱点の判定値がおかしい");
+		msg_print(_("ERROR:水弱点の判定値がおかしい", "ERROR: incorrect water damage modifier"));
 	}
 
 	return (mod);
@@ -9670,7 +9670,7 @@ int is_hurt_fire(){
 	if(mod>200 || mod < -100)
 	{
 		mod = 0;
-		msg_print("ERROR:火炎弱点の判定値がおかしい");
+		msg_print(_("ERROR:火炎弱点の判定値がおかしい", "ERROR: incorrect fire damage modifier"));
 	}
 
 	return (mod);
@@ -9742,7 +9742,7 @@ int is_hurt_elec(){
 	if(mod>200 || mod < -100)
 	{
 		mod = 0;
-		msg_print("ERROR:電撃弱点の判定値がおかしい");
+		msg_print(_("ERROR:電撃弱点の判定値がおかしい", "ERROR: incorrect electrical damage modifier"));
 	}
 
 	return (mod);
@@ -9776,7 +9776,7 @@ int is_hurt_acid(){
 	if(mod>200 || mod < -100)
 	{
 		mod = 0;
-		msg_print("ERROR:酸弱点の判定値がおかしい");
+		msg_print(_("ERROR:酸弱点の判定値がおかしい", "ERROR: incorrect acid damage modifier"));
 	}
 
 	return (mod);

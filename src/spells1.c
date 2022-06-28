@@ -9106,7 +9106,7 @@ note = "には効果がなかった。";
 			if(m_ptr->r_idx == MON_SAGUME_MINE) mine = TRUE;
 			//v1.1.24
 			else if(m_ptr->r_idx == MON_YOUR_BOAT || m_ptr->r_idx == MON_ANCIENT_SHIP)
-				note = "は沈んだ。";
+				note = _("は沈んだ。", " sunk.");
 
 			/* Give detailed messages if destroyed */
 			if (known && note)
@@ -12525,7 +12525,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 	//v1.1.31 無害な薬の投擲などでtyp=0で呼ばれることもあるようなので通常表示されないようにした
 	if(cheat_xtra && !typ)
 	{
-		msg_print("WARNING:project()にtyp値が設定されていない");
+		msg_print(_("WARNING:project()にtyp値が設定されていない", "WARNING:typ value is zero in project()"));
 	}
 
 	///mod141214

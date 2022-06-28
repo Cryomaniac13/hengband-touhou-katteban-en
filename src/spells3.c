@@ -3106,7 +3106,7 @@ bool ident_spell(bool only_equip)
 
 		if(check_invalidate_inventory(item))
 		{
-			msg_print("¡‚»‚ê‚É‚ÍG‚ê‚È‚¢B");
+			msg_print(_("¡‚»‚ê‚É‚ÍG‚ê‚È‚¢B", "You do nothing with that item."));
 			return FALSE;
 		}
 
@@ -5927,7 +5927,7 @@ s = "ŽKŽ~‚ß‚Å‚«‚é‚à‚Ì‚ª‚ ‚è‚Ü‚¹‚ñB";
 		o_ptr = &inventory[item];
 		if(check_invalidate_inventory(item))
 		{
-			msg_print("¡‚»‚ê‚É‚ÍG‚ê‚È‚¢B");
+			msg_print(_("¡‚»‚ê‚É‚ÍG‚ê‚È‚¢B", "You do nothing with that item."));
 			return FALSE;
 		}
 
@@ -7351,7 +7351,7 @@ bool ident_spell_2(int mode)
 	{
 		if (item >= INVEN_RARM)
 		{
-			msg_format("%^s: %s(%c)B", describe_use(item), o_name, index_to_label(item));
+			msg_format(_("%^s: %s(%c)B", "%^s: %s(%c)."), describe_use(item), o_name, index_to_label(item));
 		}
 		else if (item >= 0)
 		{

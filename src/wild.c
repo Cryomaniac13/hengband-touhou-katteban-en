@@ -51,7 +51,7 @@ void set_floor_and_wall(byte type)
 		if(dev > 9) dev = 9;
 		cur_type = 255;
 
-		if(cheat_room) msg_print("EXモード特殊処理：ダンジョン生成規則上書き");
+		if(cheat_room) msg_print(_("EXモード特殊処理：ダンジョン生成規則上書き", "EX mode special processing: overwrite dungeon generation rules"));
 
 		switch((dun_level + p_ptr->pclass + p_ptr->prace)%dev + 1)
 		{

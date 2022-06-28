@@ -404,7 +404,7 @@ msg_print("何も技を知らない。");
 	if (!do_spell(TV_BOOK_HISSATSU, n, SPELL_CHECK))
 	{
 		if (flush_failure) flush();
-		msg_print("今の装備ではその技は使えない。");
+		msg_print(_("今の装備ではその技は使えない。", "That technique can not be used with your current equipment."));
 		msg_print(NULL);
 		return;
 	}

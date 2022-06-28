@@ -2864,7 +2864,7 @@ bool fairy_racial_power_aux(s32b command)
 	int plev = p_ptr->lev;
 	if(p_ptr->prace != RACE_FAIRY)
 	{
-		msg_format("fairy_racial_power_aux()‚ª—d¸ˆÈŠO‚©‚çŒÄ‚Î‚ê‚½");
+		msg_format(_("fairy_racial_power_aux()‚ª—d¸ˆÈŠO‚©‚çŒÄ‚Î‚ê‚½", "fairy_racial_power_aux() was called for someone other than a fairy"));
 		 return FALSE;
 	}
 

@@ -5254,7 +5254,7 @@ static void store_sell(void)
 	{
 		if (o_ptr->tval != TV_ARROW && o_ptr->tval != TV_BOLT)
 		{
-			msg_print("¡‚Í–î‚µ‚©ˆµ‚¤‚±‚Æ‚ª‚Å‚«‚È‚¢B");
+			msg_print(_("¡‚Í–î‚µ‚©ˆµ‚¤‚±‚Æ‚ª‚Å‚«‚È‚¢B", "At the moment, your home can only accept arrows or bolts."));
 			return;
 		}
 	}

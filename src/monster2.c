@@ -3637,7 +3637,7 @@ bool apply_mon_race_banki_head(int r_idx)
 
 	if(r_idx != MON_BANKI_HEAD_1 && r_idx != MON_BANKI_HEAD_2)
 	{
-		msg_format("ERROR:赤蛮奇の頭のパラメータ設定ルーチンが未登録のr_idx(%d)で呼ばれた",r_idx);
+		msg_format(_("ERROR:赤蛮奇の頭のパラメータ設定ルーチンが未登録のr_idx(%d)で呼ばれた", "ERROR:apply_mon_race_banki_head() called with invalid r_idx, %d"),r_idx);
 		return FALSE;
 	}
 
@@ -3704,7 +3704,7 @@ bool apply_mon_race_green_eyed(void)
 
 	if(!m_list[target_m_idx].r_idx)
 	{
-		msg_format("ERROR:グリーンアイドモンスターのターゲットM_IDXがおかしい(%d)",target_m_idx);
+		msg_format(_("ERROR:グリーンアイドモンスターのターゲットM_IDXがおかしい(%d)", "ERROR:invalid target_m_idx for green-eyed monster, %d"), target_m_idx);
 		return FALSE;
 	}
 	target_r_ptr = &r_info[m_list[target_m_idx].r_idx];
@@ -3898,7 +3898,7 @@ bool apply_mon_race_reimu(void)
 	if(lev==0) lev = 1;
 	if(lev < 1 || lev > 128)
 	{
-		msg_print("ERROR:霊夢のレベルがおかしい");
+		msg_print(_("ERROR:霊夢のレベルがおかしい", "ERROR:Reimu's level is strange"));
 		return FALSE;
 	}
 	r_ptr->level = lev;
@@ -4039,7 +4039,7 @@ bool apply_mon_race_marisa(void)
 	if(lev==0) lev = 1;
 	if(lev < 1 || lev > 128)
 	{
-		msg_print("ERROR:魔理沙のレベルがおかしい");
+		msg_print(_("ERROR:魔理沙のレベルがおかしい", "ERROR:Marisa's level is strange"));
 		return FALSE;
 	}
 	r_ptr->level = lev;
@@ -4670,7 +4670,7 @@ static bool place_monster_one(int who, int y, int x, int r_idx, u32b mode)
 		{
 			if( dun_level <10)
 			{
-				if(cheat_hear) msg_format("10階未満のためランダムユニークが発生抑止された");
+				if(cheat_hear) msg_format(_("10階未満のためランダムユニークが発生抑止された", "Random unique suppressed at dungeon level less than 10."));
 				return FALSE;
 			}
 		}
@@ -4879,7 +4879,7 @@ msg_print("守りのルーンが壊れた！");
 	if (r_ptr->level > dun_level)
 	{
 		if(cheat_hear && (r_ptr->flags1 & (RF1_FORCE_DEPTH)) && r_ptr->level > dun_level)
-			msg_format("FORCE_DEPTH(%s)。", name);
+			msg_format("FORCE_DEPTH(%s).", name);
 
 		/* Unique monsters */
 		if (r_ptr->flags1 & (RF1_UNIQUE))

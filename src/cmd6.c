@@ -2474,7 +2474,7 @@ static void do_cmd_quaff_potion_aux(int item)
 		msg_print("You fall asleep.");
 #endif
 
-				if(CHECK_FAIRY_TYPE == 12 && lose_all_info()) msg_print("頭がスッキリした！でも何か忘れているような。");
+				if(CHECK_FAIRY_TYPE == 12 && lose_all_info()) msg_print(_("頭がスッキリした！でも何か忘れているような。", "Ah, such visions!  But, you feel like you've forgotten something."));
 
 				if (ironman_nightmare)
 				{
@@ -2640,7 +2640,7 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 				ident = TRUE;
 				msg_print(_("これは毒消しだ！あなたは苦しくなってきた。",
                             "This is an antidote! It hurts you!"));
-				take_hit(DAMAGE_NOESCAPE, 50 + randint1(50), "解毒の薬", -1);
+				take_hit(DAMAGE_NOESCAPE, 50 + randint1(50), _("解毒の薬", "antidote"), -1);
 			}
 			else if(p_ptr->pclass == CLASS_MEDICINE)
 			{

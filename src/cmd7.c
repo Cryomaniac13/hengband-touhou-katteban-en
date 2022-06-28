@@ -1296,7 +1296,7 @@ void make_evilweapon(object_type *o_ptr, monster_race *r_ptr)
 			}
 			break;
 		default:
-			msg_format("ERROR:make_evilweaponのselect値(%d)がおかしい",select);
+			msg_format(_("ERROR:make_evilweaponのselect値(%d)がおかしい", "Error: invalid select value, %d, in make_evilweapon"), select);
 
 		}
 		//既に持っている能力に決まったらやり直す
@@ -8903,7 +8903,7 @@ cptr use_marisa_magic(int num, bool only_info)
 		{
 			int dice = 25 + p_ptr->lev / 2;
 			int sides = 25 + chr_adj / 2;
-			if(only_info) return format("損傷:%dd%d",dice,sides);
+			if(only_info) return format(_("損傷:%dd%d", "dam: %dd%d"), dice, sides);
 
 			if (!get_aim_dir(&dir)) return NULL;
 			fire_spark(GF_DARK,dir, damroll(dice,sides),1);
@@ -10403,7 +10403,7 @@ static int select_hecatia_body(void)
 		{
 			//今の体は選択できない
 			if(n == p_ptr->magic_num2[0]) continue;
-			else put_str( format("%c)%4sの体(HP:%.1f%% MP:%.1f%%)",'a'+n,namelist[n],((float)p_ptr->magic_num1[0+n]/100.0),((float)p_ptr->magic_num1[3+n]/100.0)), 12 + n, 30);
+			else put_str(format(_("%c)%4sの体(HP:%.1f%% MP:%.1f%%)", "%c) %10s body (HP:%.1f%% MP:%.1f%%)"), 'a'+n, namelist[n], ((float)p_ptr->magic_num1[0+n]/100.0), ((float)p_ptr->magic_num1[3+n]/100.0)), 12 + n, 30);
 		}
 		c = inkey();
 
@@ -11844,7 +11844,7 @@ bool shion_begging(void)
 	}
 	else
 	{
-		msg_format("そこには何もいない。");
+		msg_format(_("そこには何もいない。", "There is nothing there."));
 		return FALSE;
 	}
 	return TRUE;

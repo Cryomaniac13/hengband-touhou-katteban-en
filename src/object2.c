@@ -7693,7 +7693,7 @@ s16b inven_takeoff(int item, int amt)
 	///mod151202 三妖精特殊msg
 	if(p_ptr->pclass == CLASS_3_FAIRIES)
 	{
-		act = "を装備からはずした";
+		act = _("を装備からはずした", "You were wielding");
 	}
 
 	/* Took off weapon */
@@ -8471,7 +8471,7 @@ static void spell_damcalc(monster_type *m_ptr, int typ, int dam, int limit, int 
 		break;
 
 	default:
-		msg_format("WARNING:spell_damcalcにて(%d)のGF値属性が定義されていない",typ);
+		msg_format(_("WARNING:spell_damcalcにて(%d)のGF値属性が定義されていない", "WARNING:spell_damcalc:unknown GF value, %d"),typ);
 
 	}
 

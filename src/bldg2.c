@@ -61,7 +61,7 @@ const cptr battle_mon_random_team_name_list[BATTLE_MON_RANDOM_TEAM_NAME_NUM+1] =
 //新闘技場の固定チーム編成　最初の数字はチームが選定されるための最低生成レベル
 const	battle_mon_special_team_type	battle_mon_special_team_list[BATTLE_MON_SPECIAL_TEAM_NUM+1] =
 {
-	{255,"(ダミー)",
+	{255,_("(ダミー)", "(dummy)"),
 		{0, 0, 0, 0, 0, 0, 0, 0}},
 	{60,_("『紅魔館』", "Scarlet Devil Mansion"),
 		{MON_REMY, MON_FLAN, MON_SAKUYA, MON_PATCHOULI, MON_MEIRIN, MON_KOAKUMA, MON_CHUPACABRA,0}},
@@ -3071,7 +3071,7 @@ bool kogasa_smith(void)
 		if (!get_item(&item, q, s, (USE_INVEN))) return FALSE;
 
 		if (item >= 0)	o_ptr = &inventory[item];
-		else {msg_print("ERROR:kogasa_smith()のitemがマイナス"); return FALSE;}
+		else {msg_print(_("ERROR:kogasa_smith()のitemがマイナス", "ERROR: negative item index in kogasa_smith()")); return FALSE;}
 
 
 		//軽い呪いでなく修正値が限界以上なら断られる
