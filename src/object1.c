@@ -1664,7 +1664,7 @@ bool screen_object(object_type *o_ptr, u32b mode)
 	#ifdef JP
 			info[i++] = "‚»‚ê‚Í“Š‚°‚Ä‚àèŒ³‚É•Ô‚Á‚Ä‚­‚éB";
 	#else
-			info[i++] = "It is very sharp and can cut your foes.";
+			info[i++] = "It returns to you after being thrown.";
 	#endif
 
 		}
