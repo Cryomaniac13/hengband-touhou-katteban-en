@@ -1,0 +1,21 @@
+# quest38_taisai.txt
+# 変愚蛮怒勝手版から幻想蛮怒への変更に伴いラスボスを差し替える
+
+# Name
+Q:$38:N:Taisui Xingjun
+Q:38:N:太歳星君
+
+# Definition
+Q:$38:Q:1:0:0:1:100:860:0:1
+Q:38:Q:1:0:0:1:100:860:0:1
+
+# Description for quest
+?:[LEQ $QUEST38 2]
+Q:$38:T:The massive dungeon that has opened up in Gensoukyou happened
+Q:$38:T:to unearth Taisui Xingjun - a calamitious deity crawling in its
+Q:$38:T:depths. Great calamities shall befall Gensoukyou unless you drive it
+Q:$38:T:back into the depths!
+Q:38:T:幻想郷に突如開いた巨大なダンジョンは、
+Q:38:T:不幸なことに地中を進む災厄の神『太歳星君』を掘り出してしまった。
+Q:38:T:すぐに埋め直さないと幻想郷は大変なことになってしまうだろう！
+?:1

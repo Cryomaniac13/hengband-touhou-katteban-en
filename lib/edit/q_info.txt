@@ -157,8 +157,9 @@
 %:quest37_yukari.txt
 
 # オベロン（移動）
+#v2.0 オベロン→太歳星君
 ?:[EQU $QUEST_NUMBER 38]
-%:quest38_oberon.txt
+%:quest38_taisai.txt
 
 # サーペント（移動）
 ?:[EQU $QUEST_NUMBER 39]
@@ -257,5 +258,8 @@
 ?:[EQU $QUEST_NUMBER 71]
 %:quest71_t03_yakuza_battle1.txt
 
+#v1.1.92 連続昏睡事件Ⅱ
+?:[EQU $QUEST_NUMBER 72]
+%:quest72_t05_hangoku_2.txt
 
 

@@ -4473,7 +4473,7 @@ I:40:15:4
 W:60:55:10:125000
 P:3:0d0:5:5:24
 F:HIDE_TYPE
-F:STR | WIS | CHR | SPEED
+F:STR | WIS | CHR | SPEED | DISARM
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_WATER
 F:ACTIVATE
 U:INVULN
@@ -5206,7 +5206,7 @@ I:40:15:4
 W:60:55:10:125000
 P:3:0d0:0:0:32
 F:HIDE_TYPE
-F:INT | DEX | CHR
+F:INT | DEX | CHR | DISARM
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | RES_WATER | RES_NETHER
 F:ACTIVATE | QUESTITEM
 U:ULTIMATE_RESIST
@@ -5366,5 +5366,15 @@ F:STR | CON | CHR | BLESSED | FREE_ACT | RES_FEAR | ACTIVATE
 U:SUMMON_HANIWA
 D:古代日本最強の力士にして埴輪職人の祖でもある野見宿禰の勾玉だ。
 D:「今より以後、是の土物を以て生ける人に更易へ、陵墓に樹てて、後葉の法則とせむ」(日本書紀)
+
+N:346:フラワーロック
+E:Flower Rock
+I:27:2:-3
+W:8:10:20:2980
+P:0:2d1:0:0:5
+F:SHOW_MODS | WARNING | STEALTH | FULL_NAME
+D:$A strange flower blooming at Muenzuka. If you make a sound nearby,
+D:$it starts dancing and playing music.
+D:無縁塚に咲いていた奇妙な花だ。近くで音を立てると音楽を奏でながら踊りだす。
 
 

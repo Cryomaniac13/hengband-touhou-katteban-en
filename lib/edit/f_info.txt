@@ -195,6 +195,7 @@ E:trap door
 G:^:w:LIT
 W:2
 K:DESTROYED:*FLOOR*
+K:HIT_TRAP:*FLOOR*
 F:SUBTYPE_0 | POWER_5 | LOS | PROJECT | MOVE | PLACE | NOTICE | REMEMBER |
 F:DISARM | TRAP | MORE | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 
@@ -206,30 +207,34 @@ E:pit
 G:^:s:LIT
 W:2
 K:DESTROYED:*FLOOR*
+K:HIT_TRAP:*FLOOR*
 F:SUBTYPE_1 | POWER_5 | LOS | PROJECT | MOVE | PLACE | NOTICE | REMEMBER |
 F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 
 # 0x12 --> visible trap -- spiked pit
 
+#v1.1.97 水地形発生罠に変更
 N:18:TRAP_SPIKED_PIT
-J:落とし穴
-E:pit
+J:湿っぽい亀裂
+E:damp crack in the ground
 G:^:s:LIT
-M:TRAP_PIT
+#M:TRAP_PIT
 W:2
 K:DESTROYED:*FLOOR*
+K:HIT_TRAP:*FLOOR*
 F:SUBTYPE_2 | POWER_5 | LOS | PROJECT | MOVE | PLACE | NOTICE | REMEMBER |
 F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 
 # 0x13 --> visible trap -- poison pit
-
+#v1.1.97 石油地形発生罠に変更
 N:19:TRAP_POISON_PIT
-J:落とし穴
-E:pit
+J:悪臭のする亀裂
+E:foul-smelling crack in the ground
 G:^:s:LIT
-M:TRAP_PIT
+#M:TRAP_PIT
 W:2
 K:DESTROYED:*FLOOR*
+K:HIT_TRAP:*FLOOR*
 F:SUBTYPE_3 | POWER_5 | LOS | PROJECT | MOVE | PLACE | NOTICE | REMEMBER |
 F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 
@@ -270,8 +275,8 @@ F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 # 0x17 --> visible trap -- spot -- acid
 
 N:23:TRAP_ACID
-J:焦げた場所
-E:discolored spot
+J:腐食した場所
+E:corroded spot
 G:^:u:LIT
 M:TRAP_FIRE
 W:2
@@ -329,8 +334,8 @@ F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 # 0x1C --> visible trap -- gas -- blind
 
 N:28:TRAP_BLIND
-J:ガス・トラップ
-E:gas trap
+J:盲目ガス・トラップ
+E:blinding gas trap
 G:^:g:LIT
 W:2
 K:DESTROYED:*FLOOR*
@@ -340,8 +345,8 @@ F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 # 0x1D --> visible trap -- gas -- confuse
 
 N:29:TRAP_CONFUSE
-J:ガス・トラップ
-E:gas trap
+J:混乱ガス・トラップ
+E:confusion gas trap
 G:^:g:LIT
 M:TRAP_BLIND
 W:2
@@ -352,8 +357,8 @@ F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 # 0x1E --> visible trap -- gas -- poison
 
 N:30:TRAP_POISON
-J:ガス・トラップ
-E:gas trap
+J:毒ガス・トラップ
+E:poison gas trap
 G:^:g:LIT
 M:TRAP_BLIND
 W:2
@@ -364,8 +369,8 @@ F:DISARM | TRAP | HIT_TRAP | CAN_FLY | HURT_DISI | TELEPORTABLE
 # 0x1F --> visible trap -- gas -- sleep
 
 N:31:TRAP_SLEEP
-J:ガス・トラップ
-E:gas trap
+J:睡眠ガス・トラップ
+E:sleeping gas trap
 G:^:g:LIT
 M:TRAP_BLIND
 W:2
@@ -2006,6 +2011,7 @@ W:2
 F:LOS | PROJECT | MOVE | PLACE | DROP | REMEMBER | POISON_PUDDLE | SHALLOW | CAN_FLY |
 F:TELEPORTABLE
 
+#瘴気地形は未使用
 N:249:DEEP_MIASMA
 J:深い瘴気
 E:deep miasma
@@ -2029,6 +2035,7 @@ G:~:D
 W:2
 F:LOS | PROJECT | MOVE | PLACE | DROP | REMEMBER | OIL_FIELD | SHALLOW | CAN_FLY |
 F:TELEPORTABLE
+
 
 
 

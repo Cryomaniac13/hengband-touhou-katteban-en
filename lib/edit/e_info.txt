@@ -237,11 +237,12 @@ X:24:15
 W:0:12:0:2500
 F:BRAND_COLD | RES_COLD | IGNORE_COLD
 
-N:26:鈴蘭の
-E:of Suzuran
+N:26:蜈蚣の
+E:of Centipede
 X:24:20
-W:0:24:0:4500
-F:BRAND_POIS | RES_POIS
+W:0:24:0:8000
+C:8:8:0:2
+F:BRAND_POIS | RES_POIS | TUNNEL
 
 N:27:精霊の
 E:@Elemental
@@ -729,12 +730,13 @@ X:34:10
 F:FREE_ACT | XTRA_POWER
 W:0:8:0:1200
 
-N:85:河童の
-E:@Kappa
+#v1.1.99 「河童の」から変更
+N:85:エンジニアの
+E:@Engineer
 X:34:18
-W:0:12:0:2000
-C:0:0:0:5
-F:DEX | HIDE_TYPE
+W:0:16:0:3000
+C:0:0:0:4
+F:DEX | DISARM | HIDE_TYPE
 
 N:86:達人の
 E:of Mastery
@@ -1584,8 +1586,172 @@ C:5:5:0:0
 
 #帽子のみ
 N:199:探偵の
-E:of Detective
+E:@Detective
 X:33:12
 W:0:32:0:2500
 C:0:0:0:4
 F:INT | SEARCH | RES_CONF
+
+#服のみ
+N:200:山童の
+E:@Yamawaro
+X:31:18
+C:0:0:0:3
+W:0:18:0:2000
+F:XTRA_RES | RES_ACID | RES_ELEC | CHR
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+#服のみ
+N:201:山女郎の
+E:@Yamajourou
+X:31:20
+C:0:0:0:3
+W:0:20:0:2500
+F:XTRA_POWER | XTRA_H_RES | INT | DEX | RES_FIRE | RES_COLD | 
+
+#盾
+N:202:招き猫の
+E:@Manekineko
+X:25:24
+W:0:32:0:7500
+C:0:0:5:5
+F:CHR | SAVING | XTRA_H_RES
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+#手袋のみ
+N:203:大怨霊の
+E:of Great Vengeful Spirits
+X:34:0
+W:0:36:0:0
+C:0:0:20:7
+F:CHR | RES_NETHER | HEAVY_CURSE | CURSED | TY_CURSE
+F:VAMPIRIC
+
+#鎧のみ
+N:204:埴輪の
+E:@Haniwa
+X:31:40
+W:0:50:0:20000
+C:0:0:10:5
+F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | SAVING
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+F:XTRA_H_RES
+
+N:205:お地蔵さんの
+E:@Jizo
+X:32:20
+W:0:25:0:7000
+C:0:0:15:4
+F:SAVING | XTRA_E_RES | XTRA_H_RES
+
+N:206:天馬の
+E:of Celestial Steeds
+X:35:60
+W:0:120:0:30000
+C:0:0:10:5
+F:LEVITATION | RES_ELEC | RES_FIRE | RES_COLD | RES_ACID | SPEED | SPEEDSTER | 
+
+#刃のある武器のみ
+N:207:山姥の
+E:@Yamanba
+X:24:30
+W:0:40:0:10000
+C:5:5:0:3
+F:VORPAL | STR | SLAY_HUMAN | ACTIVATE
+U:BERSERK
+
+#重量30以下の軽い武器のみ
+N:208:ダンサーの
+E:of the Dancer
+X:24:30
+W:0:30:0:8000
+C:10:0:0:4
+F:FREE_ACT | CHR | DEX | ACTIVATE
+U:SWORD_DANCE
+
+
+###花専用エゴ### INVEN:20として処理する
+N:209:向日葵の
+E:@Sunflower
+X:20:10
+W:0:16:0:1000
+C:5:0:0:2
+F:RES_LITE
+
+N:210:月見草の
+E:@Primrose
+X:20:10
+W:0:16:0:1000
+C:0:0:0:2
+F:RES_DARK
+
+N:211:彼岸
+E:@Cluster Amaryllis
+X:20:10
+W:0:16:0:1000
+C:0:0:0:2
+F:RES_NETHER
+
+N:212:朝顔の
+E:@Morning Glory
+X:20:10
+W:0:16:0:1000
+C:0:0:0:2
+F:RES_CHAOS
+
+N:213:雪下の
+E:@Strawberry Geranium
+X:20:10
+W:0:16:0:1000
+C:0:5:0:2
+F:CON | RES_WATER
+
+N:214:桜の
+E:@Sakura
+X:20:10
+W:0:16:0:1000
+C:0:0:0:3
+F:CHR | XTRA_H_RES
+
+N:215:鈴蘭の
+E:@Valley Lily
+X:20:20
+W:0:24:0:1500
+F:BRAND_POIS | RES_POIS
+
+N:216:柊の
+E:@Holly Olive
+X:20:25
+W:0:32:0:4500
+C:5:5:0:2
+F:SAVING | SLAY_KWAI | SLAY_DEMON | SLAY_UNDEAD | WARNING
+
+N:217:竹の
+E:@Bamboo
+X:20:25
+W:0:32:0:8000
+C:10:10:0:2
+F:STR | CON | XTRA_DICE
+
+N:218:優曇華の
+E:@Udumbara
+X:20:45
+W:0:80:0:24000
+C:10:10:10:3
+F:INT | WIS | RES_HOLY | RES_FIRE | RES_ACID | RES_COLD | RES_ELEC | RES_POIS | DEC_MANA
+
+N:219:紫の桜の
+E:@Purple Sakura
+X:20:0
+W:0:24:0:0
+C:0:0:0:3
+F:INT | WIS | XTRA_DICE | RES_NETHER | SLAY_HUMAN
+
+
+
+
+
+
+
+
+
