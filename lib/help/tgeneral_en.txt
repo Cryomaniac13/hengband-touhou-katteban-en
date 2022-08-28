@@ -1,6 +1,6 @@
-=== What is Hengband? ===
+=== What is Gensouband? ===
 
-Keine - 'Hengband is one of Japanese roguelike variants.
+Keine - 'Gensouband is one of Japanese roguelike variants.
 
 Do you know what a 'roguelike' is?
 In 1980, the early days of computer games, there was a dungeon exploration RPG
@@ -10,31 +10,44 @@ dungeons, defeating enemies and collecting treasure; they're turn-based, and
 the game ends when you are defeated.
 
 A 'variant' is a derivative work.
-Roguelikes have many various branches and variants. Hengband belongs to the
+Roguelikes have many various branches and variants. Gensouband belongs to the
 following line:
-"Rogue" -> "Moria" -> "Angband" -> "Zangband" -> "Hengband".
+"Rogue" -> "Moria" -> "Angband" -> "Zangband" -> "Hengband" -> "Gensouband".
 
 Moria-Angband added a large amount of Tolkien-related content.
+
 Zangband added a lot more content, including Cthulhu mythos and Chronicles
 of Amber. Hengband added even more various content related to anime; while
 the game ended up being very chaotic, the base gameplay system remains the
 same.
 
-Early roguelikes like Hengband are simple games. Their graphical display is
-limited to symbols, there's no sound effects/BGM; the game world is created
-by the player's imagination - however, the very original roleplaying games
+Gensouband builds further upon it, adding material from Touhou Project.
+
+Early roguelikes are simple games. Their graphical display is limited to 
+symbols, there's no sound effects/BGM; the game world is created by the 
+player's imagination - however, the very original roleplaying games
 already were imaginary adventures.'
 
 ***** <Katte>
-=== What is Katteban? ===
+=== Hengband and Mods ===
 
 Keine - 'Hengband's source code is freely available, and anyone can create
 their own version by changing and re-compiling it. It's frequently called
-a 'katteban'/'mod'/'personal version'. This game is one of those mods.
+a 'katteban'/'mod'/'personal version'.
 
-Some of you might want to make their own mod; in this case, follow the
-licensing rules and distribute it freely. For more details, check the
-official original Hengband website.'
+Gensouband started out being titled as 'Hengband Katteban, with mainly
+Touhou content being added', frequently shortened to 'Touhou Katteban'.
+As more and more changes started piling up, its title was changed to avoid
+confusion.
+
+Some of you might want to make their own mod or a variant; in this case, I
+strongly suggest starting with Hengband source code instead of Gensouband.
+
+Current Hengband code is undergoing major refactoring, and it should be
+far easier to work with compared to Gensouband code, which is a hobby
+project based on 10 year old code.
+
+For more details, check the official original Hengband website.'
 
 
 ***** <First>
@@ -70,25 +83,16 @@ Mokou.'
 
 
 ***** <Web>
-=== Hengband (Katteban) Website ===
+=== Gensouband Website ===
 
 Keine - 'You should know this already by the point you've launched this mod,
 but I'm going to say this anyway.
-This Hengband Katteban is being officially distributed here:
+Gensouband is being officially distributed here:
 
 --- http://www.miyamasa.net/heng_th_katte.html ---
 
-The address below is the official site of original Hengband; it's not
-related to this mod, so don't bring questions/bugs related to this mod there.'
-
--------------------Quoted below-------------------------------
-
-(http://hengband.sourceforge.jp/en/)
-
-http://hengband.sourceforge.jp/en/ is the official Hengband website.
-It includes information on where to download the Hengband source code
-and current executables for most popular operating systems as well as
-information on current development issues.
+If you have any questions or want to report a bug, unnatural message, or make
+a game balance suggestion, post a message on its BBS. (in Japanese)'
 
 ------------------------------------------------------------------------------
 

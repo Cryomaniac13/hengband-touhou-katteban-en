@@ -206,22 +206,25 @@ Here's a list of those methods:
 - Use special facilities
   In Extra mode, small buildings appear or non-quest levels, and some of
   them offer services to access your exploration base.
+
   'Divine Spirit Mausoleum Branch Office' can send items to your house.
+
   At an 'Open area' with the youkai Rin Kaenbyou, you can have her either
   carry items to your house or deliver one item from your house to you.
+
   At a 'Strange place' with a crack in the barrier, you can access your
   exploration base one item. However, if you fail, you will get sucked in,
   obtaining a mutation. Having high manual dexterity makes it easier to use.
 
-  Also, you can exchange cards at Grassroots Youkai Network camps; it's one
-  way to obtain to aforementioned item cards.
-  It's a very valuable card, but someone might offer it in exchange.
-  However, you'll also have to present very valuable cards as well.'
+  If you encounter a building with zashiki-warashi, they can let you access
+  your base one time. You'll want to use this service if you find this
+  building, but it's fairly rare.'
 
 ***** <Gun>
 === Gun Class Weapons ===
 
 Keine - 'Gun class weapons underwent big changes in version 1.1.04.
+They're more or less rods that you can equip.
 Let's look over the new gun mechanics.
 Commands are for standard keyboard layout.
 
@@ -319,9 +322,15 @@ instead of HP. It makes late-midgame dungeon exploration easier for mages
 with low HP.
 
 However, if you receive too much damage at once or your MP reaches 0, you will
-suffer a 'Guard Break', breaking the barrier and stunning you.
+suffer a 'Guard Break', stunning you.
 Also, the barrier will vanish if you wear anti-magic equipment or become 
-paralyzed, confused, knocked out or heavily stunned.'
+paralyzed, confused, knocked out or heavily stunned.
+
+Starting from version 1.1.96:
+If you have equipment that reduces spell difficulty, you're 1.5 times more
+resistant to guard breaks.
+If you have equipment that decreases mana consumption, amount of MP you spend
+is reduced by 25%.'
 
 ***** <AbilityCard>
 === Ability Cards ===

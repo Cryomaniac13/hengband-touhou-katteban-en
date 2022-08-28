@@ -1,9 +1,9 @@
-Keine - 'Let's start the special class on Hengband (Katteban).
-  Due to this being a help file for a mod, there will be many various
+Keine - 'Let's start the special class on Gensouband.
+  Due to this being a help file, there will be many various
   meta concepts mentioned; please take a good look at that.
   Well, what do you want to learn about?'
 
- (a) What is Hengband (Katteban)?  (tgeneral_en .hlp) 
+ (a) What is Gensouband?           (tgeneral_en .hlp) 
  (b) Character Creation            (tbirth_en   .hlp)  
  (c) Races/Classes/Personalities   (traceclas_en.hlp) 
  (d) Map/Town                      (ttown_en    .hlp)
@@ -20,7 +20,7 @@ Keine - 'Let's start the special class on Hengband (Katteban).
 
 [[[[B| (o) ***Beginner's Guide***        (instruction_en .txt)
 
- (p) Original Hengband help files  (help.hlp)
+ (p) Hengband help files           (help.hlp)
 [[[[y| (?) Help System Commands          (helpinfo.txt)
 
 ***** [a] tgeneral_en.hlp

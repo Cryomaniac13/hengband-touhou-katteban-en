@@ -497,10 +497,8 @@ Prompt for holding items in both hands   [always_check_arms]
 
 ***** <last_words>
 Leave last words when your character dies    [last_words] 
-    Display a random line from the "death.txt" file when you get a
-    game over and then allow you to rewrite this last line.
-    
-    Also lets you leave a comment if you retire after winning.
+    Lets you leave a last comment when you retire after winning or get
+    a game over while trying.
 
 ***** <ex_attack_msg>
 Change messages when attacking with weapons
@@ -585,7 +583,7 @@ Disturb whenever high-level monster moves    [disturb_high]
     player moves, appears, or disappears.  This includes monsters
     which are only visible due to telepathy.
 
-    In this mod, this option applies to monsters whose level is unknown
+    In Gensouband, this option applies to monsters whose level is unknown
     right now as well.    
 
 ***** <disturb_near>

@@ -1,5 +1,5 @@
 === Items ===
-Keine - 'Collecting items will be important for your adventure.
+Keine - 'Collecting and using items is extremely important in roguelikes.
 You won't be able to fight your way through the dungeon without obtaining
 powerful equipment, collecting a lot of scrolls and healing potions, along
 with various magic devices.
@@ -35,7 +35,8 @@ When you remove a piece of equipment, it automatically goes into your
 inventory. If your inventory is full, it is dropped beneath your feet.
 
 Several classes have their own item container separate both from equipment
-and inventory. You should understand if you try using it.
+and inventory - Secondhand-Dealer's toolbox, Engineer's backpack, Rin's cart.
+You should understand if you try using it.
 
 If you're carrying too much weight, your speed will be reduced. In early game,
 it will significantly decrease you combat power, so be careful.
@@ -82,7 +83,13 @@ to choose an item, press '_' to switch to items on the floor.
   Office or with Recharging spells. However, if you fail to recharge with a
   spell/scroll, the item might break.
 
-  Using staves, wands and rods is linked to Magic Device skill.
+- Ability Cards '#'
+  Some ability cards are used with 'u' commands, some have a passive effect
+  applied if you're carrying them. You can get a few as rewards for certain
+  quests, and you can exchange them at Moriya Shrine.
+  Some classes have to increase their power by buying those cards.
+
+  Using staves, wands, rods and ability cards is linked to Magic Device skill.
   If your skill is level, you're very likely to fail to properly use high
   level magic devices. They're also hard to use if you're confused or berserk.
 
@@ -149,7 +156,7 @@ Here's several methods of identification:
   and you will get an even more vague message.
   For example, a Warrior can tell if a weapon/armor is 'average', 'good',
   'excellent', or 'special'. A Mage will only be able if it's 'cursed' or
-  'uncursed'.
+  'uncursed', and it will take more time to realise this.
 
 - Identification
   The standard method of identifying items.
@@ -281,8 +288,6 @@ Swords and armors melt in acid.
 Rings and wands get broken by lightning attacks.
 Potions shatter upon getting hit by cold/shockwaves/shards/etc.
 Chaos, disenchantmnet, mana, and disintegration attacks can destroy any items.
-(Disenchantment doesn't destroy items in original version, that's a feature of
-this mod)
 Spatial distortion and pollution attacks might destroy any items.
 
 Items in your inventory also might get destroyed by enemy attacks.
@@ -365,7 +370,7 @@ They're probably hard to understand, but remember them if possible.
   If you leave a fixed artifact lying on floor, go down a staircase and then
   come back, for some reason, the artifact will disappear.
   This is an unnatural feature related to inner game workings. Be careful.
-(Should not happen past v1.0.75 (probably))
+  (Should not happen past v1.0.75 (probably))
 
 - Information about items on floor gets compressed
   If you defeat a lot of enemies and the floor starts to get filled with
@@ -419,6 +424,10 @@ Next up is armor.
 (-3) is short for (-3, 0) - it applies a -3 accuracy modifier to your attacks.
 Heavy armor obstructs your movements.
 [21, +7] is armor class. 21 is the base value, +7 is armor modifier value.
+The higher your armor class is, the more easily you can avoid monster melee
+attacks, and it can reduce damage you receive if you get hit.
+However, damage from special melee attacks (like 'burn' or 'poison') is not
+reduced by armor class.
 
 Next up is ego-item armor.
 	
@@ -450,7 +459,7 @@ Let's start with weapon special effects.
   To be more specific, it multiplies the dice part by 2.5.
   For example, if you attack with a (3d5) (0, +10) {|Fi} weapon, the 
   expected damage against a fire resistant enemy is 19, but against an enemy
-  lacking that resistance it's 33.5.
+  lacking that resistance it's 32.5.
 
 - Slays (/Ch, /Lw, /An, /Hm, /Un, /Dr, /Dt, /Dm, /Yk; might be /X)
   Essentially means 'Weapon of Slay ###'.
@@ -488,6 +497,8 @@ Let's start with weapon special effects.
   power. If you attack with this weapon, dice value will be multiplied by
   (brand/slay multiplier * 1.5 + 2).
   This effect stacks with brand/slay and sharpness modifiers.
+  However, your MP decreases when you attack with force weapons.
+  If your MP runs out, this effect no longer applies.
   
   Effectively, dice value ends up being modified by [highest applicable
   brand/slay multiplier] * [force multiplier] * [sharpness multiplier].
@@ -495,9 +506,6 @@ Let's start with weapon special effects.
   |Mn alone multiplies by 3.5,
   /Yk|Mn multiplies by 6.5 when attacking a youkai,
   /XDr|Mn|XShp multiplies by an astounding 16 when attacking a dragon!
-
-  However, your MP decreases when you attack with force weapons.
-  If your MP runs out, this effect no longer applies.
 
 - Earthquakes (|Qk)
   A weapon that causes earthquakes when you attack with it. Can only be
@@ -520,8 +528,8 @@ Let's start with weapon special effects.
   A bloodthirsty weapon.
   When you attack a living being with this weapon, you drain a slight amount
   of HP from them. It's a very useful weapon that boosts your long-term combat
-  capability. However, it's harder to use from midgame, where many demons and
-  undead start to appear.
+  capability. However, it's harder to use from midgame, where many nonliving
+  demons and undead start to appear.
 
 - Suitable for throwing (Th)
   It's either in a shape that makes it easier to throw, or is enchanted with
@@ -552,7 +560,8 @@ That's about it for special effects on weapons.'
 === Elemental Resistances ===
 
 Keine - 'Next, I'll explain resistances to various elements.
-Several races and classes can have some innate resistances.
+Several races and classes can have some innate resistances, but they're
+mainly obtained through equipment.
 
 - Acid resistance (rAc)      Acid immunity (*Ac)
 - Lightning resistance (rEl) Lightning immunity (*El)
@@ -597,7 +606,7 @@ abilities with similar effect.
 - Light resistance (rLi)
   Reduces light element damage to 4/(7+1d4). Also prevents you from being
   blinded by light element attacks.
-  This mod has several new enemies using light element attacks; if you don't
+  Gensouband has several new enemies using light element attacks; if you don't
   have it covered by midgame, watch out for shrine maidens and spellcasters.
 
 - Darkness resistance (rDk)
@@ -665,7 +674,7 @@ The following effects protect you from status abnormalities:
 - Free action (Fa)
   Protects from paralysis/sleep.
   If you become paralysed, you generally will keep getting attacked for a
-  several turns. In Hengband, that effectively means a game over.
+  several turns. That effectively means a game over.
   Make absolutely sure to have it covered beyond dungeon level 20, and never
   take it off.
 
@@ -743,13 +752,20 @@ Let's remember the parameters explained at the point of character creation.
   starting from midgame.
 
 - Searching (+Sr)
-  Raises your searching skill. Helps you detect hidden doors and sense level
-  feelings. In this mod, it also affects generation rate for materials; it can
-  be very important depending on your class.
+  Raises your searching skill. Helps you detect traps and hidden doors and 
+  sense level feelings. In Gensouband, it also affects generation rate for 
+  materials; it can be very important depending on your class.
 
 - Extra Attacks (+At)
   Increases amount of melee attacks per round.
   Mostly appears on weapons and rings.
+
+- Protection from Magic (+PrMg)
+  Increases protection from magic, making it easier to resist attacks like
+  curses and mind blasts.
+
+- Disarming (+Dsrm)
+  Increases your trap disarming skill.
 
 That's about it for parameters.'
 

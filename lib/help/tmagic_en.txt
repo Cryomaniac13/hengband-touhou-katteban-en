@@ -5,24 +5,21 @@ You'll be able to learn more of them as you become more experienced.
 Once you've leveled up high enough, use them with 'J' command.
 
 Also, many races can learn 'racial powers'.
-They're the special physical characteristics you've been born with.
+They're the physical characteristics you've been born with.
 Once you've leveled up high enough, use them with 'U' command.
-You also can learn racial powers through mutations.
+You also can learn racial powers through mutations or Transformation magic.
 
 Several classes can learn 'spells'.
 You learn them by studying spellbooks, and you can use spell you've learned
-with 'm' command.
+with 'm' command. Now, some people might think about Royal Flare or Master
+Spark upon hearing 'spells', but those are implemented as special abilities
+for unique classes.
 A few classes like Mindcrafter can use their special abilities with 'm'.
 
 For example, a White Wolf Tengu Shugenja can:
-Meditate with 'J' command, recovering MP
+Meditate by using a special ability with 'J' command, recovering MP
 Carefully listen with 'U' command, detecting monsters
 Cast learned spells with 'm' command
-
-Now, some people might think about Royal Flare or Master Spark upon hearing
-'spells', but in this mod, those are classified as special abilities.
-They can only be learned by specific classes, and don't require spellbooks
-to use.
 
 You cannot use those abilities while confused, and you can't cast spells if
 you're blind or in a dark area.
@@ -84,28 +81,35 @@ terms like 'bolt', 'ball', 'beam'. I'll explain them here.
   Also, it can be reflected by enemies that reflect bolt spells.
   There are also spells that fire several bolts at locations close to the
   target.
+
 - Ball
   Explosive spells. It sends out a sphere that explodes at the target, but it
   passes through any enemies on the way without dealing damage.
   It deals 100% damage at the center, 50% at adjacent grids, 33% at grids
   adjacent to those - it deals less damage the further a grid is located from
   the epicenter.
+
 - Beam
   Laser spells. Pierces through enemies and can't be reflected.
   There are several spells that fire wide lasers.
+
 - Rocket
   A combination of bolt and ball.
   Sends out a sphere that explodes upon hitting an enemy. Can't be reflected.
+
 - Curses/etc
   You pick a target in your sight, and the spell applies its effect to that
   target only. Think of it as a radius 0 ball spell.
+
 - Line of sight
   Hits everything in your sight. Be careful - it can destroy items lying on
   the floor as well.
+
 - Directional
   After you cast it, you'll be prompted for a direction input.
   If there's a monster in that place, the spell applies its effect to that
   monster.
+
 - Breath
   A combination of beam and ball.
   Deals damage to everyone on its firing trajectory, and deals reduced damage
@@ -115,10 +119,10 @@ terms like 'bolt', 'ball', 'beam'. I'll explain them here.
 === Magic Realms ===
 
 Keine - 'Now, let's take a look at magic realms.
-In this Hengband mod, there are 12 (+1) magic realms, each of them has 4
-spellbooks, and each of those spellbooks has 8 spells.
+In Gensouband, there are 13 magic realms, each of them has 4 spellbooks,
+and each of those spellbooks has 8 spells.
 During character creation, sometimes you can pick 1 or 2 realms from those
-12 (+1). Spells in the second realm you pick will be slightly harder to learn.
+13. Spells in the second realm you pick will be slightly harder to learn.
 
 I've said that you can't learn spells unless you're studying their realm;
 however, if your class can pick a second realm to study, you can always change
@@ -131,10 +135,10 @@ Reading a Scroll of Spell increases amount of spells you can learn by 1.
 As an exception, a few classes like Patchouli or Librarian start out with all
 spells learned already, but they can't change realms.
 
-Those 12 (+1) realms are:
+Those 13 realms are:
 
 Elements, Divination, Enchantment, Summoning, Mysticism, Life, Exorcism, 
-Nature, Transformation, Darkness, Necromancy, Chaos, (Occult)
+Nature, Transformation, Darkness, Necromancy, Chaos, Occult
 
 Those realms belong to one of major realms - Arcane Arts, Hermit Arts, or
 Sorcery Arts.
@@ -148,15 +152,16 @@ If your first and second realms belong to different major realms,
 learning spells in your second realm will be far more difficult, so
 keep that in mind.
 
-Here are simple descriptions of those 12 (+1) magic realms.
+Here are simple descriptions of those 13 magic realms.
 If you're a magic specialist like Mage or High-Mage, it'll probably be
 better to pick a realm with reliable offense for your first one.
 
 - Arcane Arts of Elements
-  This realm has plenty of elemental offensive spells. Comparatively powerful
-  and doesn't cost much MP. However, many enemies resist basic elements, so
-  you have to carefully choose your spells by looking at enemy resistances.
-  Has some defensive and support spells as well.
+  This realm has plenty of elemental (acid, lightning, fire, cold) offensive
+  spells. They're comparatively powerful and don't cost much MP. However,
+  many enemies resist basic elements, so you have to carefully choose your
+  spells by looking at enemy resistances. Has some defensive and support
+  spells as well.
 
 - Arcane Arts of Divination
   This realm is full of detection spells like monster detection, nearby area
@@ -223,7 +228,7 @@ better to pick a realm with reliable offense for your first one.
   spells as well, but they're very useful.
   Failing to cast spells from this realm might cause bad things to happen.
 
-- OccultÅ@
+- OccultÅ
   This realm was added in version 1.1.08.
   Treats urban legends that recently have been manifesting in Gensoukyou as
   spells. Has many offensive/summoning spells, along with some support spells.

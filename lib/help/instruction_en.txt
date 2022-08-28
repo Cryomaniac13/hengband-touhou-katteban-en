@@ -1,39 +1,38 @@
 === Beginner's Guide ===
 
-Keine - 'What? You're starting off with this mod without having played the
-original Hengband? Very well, I understand, calm down. I'll teach you.
+Keine - 'What? You're starting off with Gensouband without having played
+Hengband? Very well, I understand, calm down. I'll teach you.
 
 This file is /lib/help/instruction_en.txt.
 It might be a good idea to open it in Notepad and place it to the side of the
 game window as you play the game.
 
 You can change the game window size by dragging the border with mouse.
-This mod might be difficult to play with default window size, so it's a good
-idea to make it bigger.
+If you want to view more of the map, feel free to make it larger.
+You can use the menu bar to open one or several subwindows; I recommend
+display visible monster list and message history.
 
 Anyway, let's start with the Warrior class.
 In early game, warriors fight essentialy by holding down arrow keys, so
 you'll be able to learn the basic game controls.
 
-Oni, WhiteWolf-Tengu, Celestials, Shinigami and Great-Youkai are strong
+Oni, WhiteWolf-Tengu, Celestials, Shinigami, Great-Youkai and Haniwa are good
 races that are easy to use. If you want to play as a Touhou character, then
-Youmu, Tewi, Yuuka, Momiji, Eiki, Tenshi and Clownpiece are easy for beginners
+Yuuka, Kasen, Yorihime, Mayumi, Saki and Momoyo are easy for beginners
 to handle.
 
-Aim for around 20 bonus points.
-You can reroll bonus points by pressing ESC at the allocation screen and then
-pressing 'r'. Allocate points in strength, dexterity and constitution; if you
-put those stats over 20, you might allocate the rest in charisma.
-If you set the 'Fixed amount of bonus points' option to 'on', you'll always
-get 20 bonus points to allocate, making it less annoying.
+You can get 20 bonus points by turning the corresponding option on at
+character creation. It's a good idea to assign points to strength, dexterity
+and consitution to make yourself good at melee combat.
+If you turn the fixed bonus points option off, you can reroll the amount
+of bonus points as many times as you want.
 
 Now, that the game has started, do you see those colorful symbols that make up
 the 'town'? This is the game screen. Old computer games before NES era looked
 like this. This is the Human Village of Gensoukyou. The '@' symbol close to
 the entrance is you.
 
-This game doesn't work with controllers like gamepads.
-All command are performed with keyboard.
+All commands in this game are performed with keyboard.
 There's around a hundred of different commands in total, but at first, let's
 learn the basic list of commands required to progressing to around dungeon
 level 20. You can look for other commands through a window you open by
@@ -55,6 +54,7 @@ pressing Enter. You'll be using them often, so try and remember them.
         low, you might fail to find anything even after searching for a while.
   <     Go up a staircase. If used on surface, switches to global map mode.
   >     Go down a staircase. If used in global map mode, moves to normal map.
+        Also can be used to deliberately activate a trap.
 
   g (get)       Pick up an item beneath your feet.
   d (drop)      Drop an item on floor.
@@ -117,13 +117,6 @@ This will display the trajectory of spells cast by enemies.
  remaining money
 If the stores aren't selling items you want, spend some time so that they'll
 restock. You can spend it by resting at the inn.
-
-If you're playing as Youmu, take off one of your katanas and fight with
-holding one with both of your hands. In early game, you'll hardly hit anything
-while dual-wielding.
-If you're playing as Tewi, you start out with a large sum of money. Go to
-whatever stores you like and buy items that look strong. Tewi's probably the
-strongest in early game.
 
   Once you've done shopping, let's go to a dungeon.
 Press '<' to switch to global map view; there's Myouren Temple slightly to

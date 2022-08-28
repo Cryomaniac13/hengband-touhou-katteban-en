@@ -1,6 +1,6 @@
-=== Hengband Monsters ===
+=== Gensouband Monsters ===
 
-Keine - 'Hengband has over a thousand different monsters, and most of them
+Keine - 'Gensouband has over a thousand different monsters, and most of them
 will be trying to defeat you. Let's talk about those monsters.
 Also, humans/deities are called here 'monsters' as well.'
 
@@ -9,10 +9,10 @@ Also, humans/deities are called here 'monsters' as well.'
 
 Keine - 'I've already touched on what symbols can represent monsters, but
 let's go over it once again.
-Several symbols have changed their meaning from original Hengband.
+Several symbols have changed their meaning from Hengband.
 't' is tengu, 'S' is deity, 'K' is kappa, 'yY' are youkai', 'F' is fairy.
 Spiders have joined 'c', beetles have joined 'I', yeti have joined 'H'.
-Yeeks and townspeople don't appear in this mod.
+Yeeks and townspeople don't appear in Gensouband.
 
 a (Ant)                      Ants. Not that strong.
 b (Bat)                      Bats. Not that strong.
@@ -23,8 +23,8 @@ d (Dragon)                   Somewhat small dragons. Comparatively resilient,
 e (Eye)                      Has many nasty sleep-inducing enemies. Very
                              powerful on lower levels.
 f (Cat/feline werebeast)     Many of them are fast and comparatively strong.
-g (Golem)                    Golems/dolls. Start getting powerful in late
-                             midgame.
+g (Golem)                    Golems/dolls. Many of them are unaffected by
+                             mental attacks or slaying weapons.      
 h (Humanoid)                 Living beings resembling humans. Many of them use
                              spells or ranged attacks.
 i (Icky thing)               Mysterious viscous lifeforms. Not that strong.
@@ -101,7 +101,7 @@ R (Reptile/amphibian)        Lizards/frogs in early game are trash enemies,
                              appearing at midgame.
 S (Deity)                    Divine spirits and stray gods aren't strong, but
                              there also are powerful scourge gods.
-T (Troll)                    Giants who appear in groups.
+T (Troll)                    Large humanoid monsters who appear in groups.
 U (Greater demon)            Many of them use fire/nether attacks. On lower
                              levels, their physical attacks get devastating
                              as well.
@@ -111,7 +111,7 @@ V (Vampire)                  They use nasty spells and drain life force. On
 W (Wight)                    More ominous than a zombie - or something to that
                              effect. Many of them use powerful spells.
 X (Xorn)                     Mysterious beings that can move through walls.
-Y (Large/humanoid youkai)    They can use all kinds of attacks.
+Y (Large/humanoid youkai)    Powerful youkai. Can use all kinds of attacks.
 Z (Zephyr hound)             Hound-shaped elementals. They appear in groups
                              and use breath attacks.
 
@@ -136,7 +136,7 @@ For more details, check the Commands and Options sections.'
 Keine - 'Monster level is shown as 'usually found on dungeon level ##'.
 A level 60 monster doesn't usually appear at level 59 or above.
 However, in special dungeon feature like vault or monster hordes, high
-level enemies are more likely to appear.
+level enemies (compared to current dungeon level) are more likely to appear.
 Even during normal monster generation, there is some chance for an out of
 depth monster to spawn.
 Muenzuka in particular has a lot of powerful enemies. Don't lower your guard.'
@@ -162,7 +162,7 @@ Let's take a look at them.
   proper ability.
 
 - Mindless
-  Mechanical or lower lifeforms, or weird entitites from other worlds.
+  Golems or lower lifeforms, or weird entitites from other worlds.
   You won't be able to sense those monsters if you have telepathy, and they're
   not affected by mental attacks.
 
@@ -429,7 +429,7 @@ details in Options section.'
 
 Keine - 'There are powerful enemies called 'unique monsters'.
 Once you defeat one of them, you will never encounter that monster during this
-adventure again. Unique monsters are very unlikely to be affected by status
+adventure again. Unique monsters are unlikely to be affected by status
 abnormality inducing spells, can resist many various actions, and cannot be
 defeated except by your direct attacks.
 Many of them are clearly very strong for their level. Fight them with all
@@ -463,13 +463,14 @@ easier. They're very dedicated to following you, and won't fight back even if
 you attack them.
 
 Followers are very useful, but there are some catches.
+
 - Enemies defeated by your followers don't drop items and give you no
-  experience. Your follower take it all.
+  experience. Your follower takes it all (there are some exceptions).
 - Having followers reduces your MP regeneration.
   If you have too many, your MP will start to decrease; once it drops to 0,
   you have to dismiss some of them.
-  Compared to original Hengband, penalty for having high level followers is
-  higher in this mod. However, having high charisma allows you to maintain
+  Compared to Hengband, penalty for having high level followers is
+  higher in Gensouband. However, having high charisma allows you to maintain
   more followers.
   Followers you dismiss will disappear from the level. Don't be concerned 
   about them attacking you.
@@ -503,7 +504,7 @@ weakening it first. You can carry your favorite followers with you in those
 books.
 
 Demon books are sold in Human Village's Bookstore.
-By the way, this item was called 'Capture Ball' in original Hengband.'
+By the way, this item was called 'Capture Ball' in Hengband.'
 
 ***** <Riding>
 === Riding your Followers ===
@@ -610,8 +611,8 @@ Keine - 'Some of the monsters are friendly.
 Friendly monsters won't attack you and might even attack your enemies along
 with you. In contrast to followers, they don't require MP to maintain, but
 they won't follow orders either. Be careful not to accidentally get hit by
-their attacks. By the way, they will get angry and turn hostile if you attack
-them.'
+their attacks. By the way, they will get angry and turn hostile along with
+other nearby friendly monsters if you attack them.'
 
 
 

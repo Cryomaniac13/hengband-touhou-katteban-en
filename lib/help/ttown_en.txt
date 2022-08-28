@@ -56,8 +56,8 @@ monsters.
 In order to move, attack or do something else, you enter a command through
 keyboard input. The most basic commands required for early game are listed in
 the Beginner's Guide.
-There are no dangerous monsters in Human Village, so walk around for a bit and
-test out various commands.
+There are almost no dangerous monsters in Human Village, so walk around for a
+bit and test out various commands.
 
 Once you reach the edge of the map, you will move to an adjacent map screen,
 and the area you've just left will be generated once again.
@@ -72,52 +72,52 @@ You can buy or sell items at stores.
 The higher your charisma is, the better prices you get.
 The numbers 1~9 in Human Village represent store entrances.
 Sometimes, they sell expensive items that have slightly unusual names.
-I'll talk about items in more details later on.'
+I'll talk about items in more details later on.
 
 1: General Store
-Keine - 'You can buy food, lanterns and lantern oil here.
-You also can buy a pick to dig through walls.'
+You can buy food, lanterns and lantern oil here.
+You also can buy a pick to dig through walls.
 
 2: Armoury
-Keine - 'You can buy clothes and armor here.
+You can buy clothes and armor here.
 If you're using magic, wearing heavy equipment or ordinary gloves can
-affect your spellcasting.'
+affect your spellcasting.
 
 3: Weapon Store
-Keine - 'You can buy weapons and arrows here.
-You'll probably be fine with your starting weapon for a while.
-However, some dual classes might start out with a somewhat weak weapon, so
-you might want to purchase something you can hold with both hands.'
+You can buy weapons and arrows here.
+Warrior classes will probably be fine with your starting weapon for a while.
+You might want to buy something affordable here if your starting weapon isn't
+that good.
 
 4: Potion/Liquor Store
-Keine - 'You can buy potions and alcohol here.
-You'll want to purchase some healing potions if you have spare money.'
+You can buy potions and alcohol here.
+You'll want to purchase some healing potions if you have spare money.
 
 5: Scroll Store
-Keine - 'You can buy scrolls here.
+You can buy scrolls here.
 Scrolls have various effects and are vital for your adventure.
 First of all, purchase some Scrolls of Teleportation for emergency escape.
 Don't forget about Scrolls of Word of Recall once you start going deeper into
-the dungeon.'
+the dungeon.
 
 6: Magic Store
-Keine - 'You can buy items like rings, amulets and magic staves here.
+You can buy items like rings, amulets and magic staves here.
 Staves and wands have limited amount of uses, but they're convenient tools
-that aren't too heavy.'
+that aren't too heavy.
 
 7: Pawn Shop/Thieves Market
-Keine - 'Various items are being sold at the pawn shop.
+Various items are being sold at the pawn shop.
 Many of them are very powerful and aren't sold at other stores, but their
 selling price is very high as well.
 If you have enough money, it might be worth to check it out.
-Looks like various locations sell items of slightly varied value.'
+Looks like various locations sell items of slightly varied value.
 
 8: Exploration Base
-Keine - 'This is the storeroom you're free to use. You can place hundreds of
+This is the storeroom you're free to use. You can place hundreds of
 items you can't carry with you here.
 It's not available at the start of your adventure, but if you resolve some
 requests from town residents, they might let you use a building as your
-exploration base.'
+exploration base.
 
 9: Bookstore
 Keine - 'You can buy spellbooks here.
@@ -133,17 +133,13 @@ decorate your entrance with it.'
 Keine - 'You should identify items before selling them.
 Unidentified items always sell for low prices.
 Also, shops change their inventory several times a day.
-If you want an item you can't afford, hurry and get money before it gets sold.
-
-As an aside, original Hengband had several other store-related mechanics,
-but many of them got removed in this mod. For example, haggling for price,
-racial-based price adjustment and maximum selling price got removed.'
+If you want an item you can't afford, hurry and get money before it gets sold.'
 
 ***** <Buildings>
 === Other Buildings ===
 
-Keine - 'The '+' symbols represents doors in the dungeon; in town areas, it
-represents entrance to a building you can use.
+Keine - 'The '+' symbols in town areas, it represents an entrance to a 
+building you can use.
 You can do various thing at them. Here's some examples:
 
 - Hieda House
@@ -168,7 +164,7 @@ Scarlet Devil Mansion Library.
 However, it's somewhat expensive.
 
 - Divine Spirit Mausoleum Branch Office
-The recently resurrected saint opened those up in several towns.
+Toyosatomimi no Miko has opened those up in several towns.
 Here, you can recharge your magic devices like staves, teleport to other
 towns, or recall to the deepest level of a dungeon you've visited.
 Don't forget to bring your own means of recalling if you're going to dungeon.
@@ -184,8 +180,8 @@ However, it's pretty expensive. Maybe there's some way to get a discount?
 Looks like there are some kappas gambling in a corner as well.
 
 - Guilds
-Marksman/engineer guilds. If you belong to one of those classes, you can
-request special services here.
+Marksman/engineer/chemist guilds. If you belong to one of those classes, you
+can request special services here.
 
 - Kirisame Magic Shop
 Marisa has opened up a shop in Forest of Magic.

@@ -1,23 +1,25 @@
-=== Commands Different from Original Hengband ===
+=== Commands Different from Hengband ===
 
 Keine - 'For many people, it's most important to know differences in commands
-compared to the original, so I'll start with that.
+compared to Hengband, so I'll start with that.
 
 First of all, an important detail:
-In this mod, class special abilities are used through 'J' command instead of
+In Gensouband, class special abilities are used through 'J' command instead of
 'm'. 'j' command lets you browse your class special abilities.
-In roguelike layout, 'S' uses special abilities, 'P' browses them.
+(In roguelike layout, 'S' uses special abilities, 'P' browses them)
 
 Also, 'b' command lets you browse not only spells, but also the special class
 abilities from 'J' command and racial powers from 'U' command.
 
 The 'jam a door' command was removed, along with iron spike items.
 
-'x' key in original layout no longer opens command window; it's free to use
-for macros.
-
 Starting from version 1.1.27, spellcaster classes can use 'Barrier Guard' with
-Ctrl-'g'. It's explained in more details in 'Other' section.'
+Ctrl-'g'. It's explained in more details in 'Other' section.
+
+You can deliberately activate a trap on the floor with '>' command.
+This lets you jump through a trap door or release sleeping gas around you.
+
+That's about all for differences in commands.'
 
 ***** <Turn>
 === Action Commands and Other Commands ===
@@ -53,7 +55,7 @@ You can change this setting through options command ('=').
 ***** <ComWindow>
 === Command Window ====
 
-Keine - 'In Hengband, all actions are performed by entered commands with
+Keine - 'In Gensouband, all actions are performed by entered commands with
 keyboards. Total amount of commands is close to 100, which is probably a lot
 for beginners.
 

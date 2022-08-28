@@ -55,8 +55,8 @@ early dungeon exploration:
   Next, visit the Armoury and purchase items like headgear, boots or cloak.
   Having AC of around 20 should be enough for reaching dungeon level 10.
   However, don't just wear anything that looks sturdy - holding a shield
-  makes you more likely to get less attacks per round, and spellcasters have
-  harder time casting spells if they use heavy equipment.
+  makes you more likely to get less attacks per round, and you have harder
+  time casting spells if you use heavy equipment.
   Your choice depends on various factors.
 
 - Word of Recall
@@ -78,29 +78,35 @@ early dungeon exploration:
     If you read it, you will teleport somewhere else on the level.
     You want to bring several of those with you in case you get surrounded
     by enemies.
+
   - Potions of Cure Serious Wounds
     Take around 10-20 with you and drink them if you don't have time to rest.
     Also, if you get confused or blinded, you can cure it by drinking those
     potions. There also are more powerful Potions of Cure Critical Wounds,
     but they're somewhat expensive.
+
   - Scrolls of Holy Chant
     If you read it, you become blessed for some time.
     While you are blessed, your AC and accuracy are increased, as well as
     your protection from magic.
     Reading one before fighting a strong enemy can make the fight easier.
+  
   - Scrolls of Monster Confusion
     If you read it, your hands will start glowing.
     If you hit a monster in this state, you can confuse them.
     It's a useful item for fighting strong enemies in early game.
+  
   - Staves/Scrolls of Object Detection
     It's tiresome to search each room one by one while you explore the
     dungeon. By using those items, you learn locations of nearby items.
+  
   - Staves of Door/Stair Location, Scrolls of Magic Mapping, 
       Staves of Enlightenment
     By using those items, you can learn locations of nearby stairs or map out
     your surroundings. They're somewhat expensive, but you want to bring some
     with you once you go slightly deeper into the dungeon.
-  - Ring of Warning.
+  
+  - Ring of Warning
     If you put it on your finger, it will vibrate once you're about to step on
     a trap or potentially get hit by a powerful enemy, warning you of danger.
     It's a useful item to avoid traps in early game.
@@ -215,8 +221,8 @@ You can check if the item in front of you is actually a monster by using
 the 'l'ook command.
 
 Here's a brief list. It'll be explored in more details in Monsters section.
-Some of the symbols have been changed from original Hengband; keep that
-in mind.
+Some of the symbols have been changed from Hengband; keep that in mind if 
+you're used to it.
 
 a (Ant)				b (Bat)
 c (Spider/centipede)		d (Dragon)
@@ -320,8 +326,9 @@ Keine - 'You might find some unusual locations in the dungeon.
 Let's take a look at them.
 
 - Pits/Nests
-  A large rectangular room filled with monsters.
-  All of them start out awake.
+  A large rectangular room filled with monsters, with a corridor running
+  around it.
+  All of monsters inside start out awake.
   I don't know what they're doing in a place like this, but they're going
   to attack you once you open the door.
   It has a specific shape; if you're careful, you'll notice it without
@@ -340,13 +347,14 @@ Let's take a look at them.
   the same symbol. Some of them might be strong for current dungeon level, so
   those are very dangerous.
   In particular, on lower dungeon levels, you might land in the middle of
-  'D' or 'Z' monsters if you teleport around.
+  a group of dragons or hounds if you teleport around.
 
 - Shopping District
   For some reason, you might find a town in the dungeon.
   Don't think about it too much. On lower levels, you'll be able to purchase
   better items.
-  Even entering a shop counts as performing an action, so be careful.
+  Even entering a shop counts as performing an action - it's better to enter
+  stores after clearing out nearby enemies.
 
 - Pattern
   I don't know the details, but looks like it's a mechanism for some kind of
@@ -365,9 +373,8 @@ They're being guarded by an unique monster; if you defeat it, a staircase
 to the next level will appear, along with several high quality items as your
 reward.
 
-You can escape if you're not able to defeat that monster.
-After leaving the level and coming back, no quest will be issued, and stairs
-to next level will appear as usual.'
+You can escape if you're not able to defeat that monster, but obviously, that
+makes you fail the quest.'
 
 --- Yukari Yakumo ---
 Keine - 'Yukari Yakumo is at dungeon level 50 of Angband.
@@ -393,7 +400,7 @@ them.
   It doesn't have special features like vault, and out-of-depth enemies
   don't spawn here.
   It's your training grounds for the start of your adventure.
-  Sometimes you can find gemstones here.
+  Sometimes you can find gemstones here if you go deep enough.
 
 - Forest of Magic (Levels 24-36)
   A dungeon deep inside Forest of Magic.
@@ -413,7 +420,8 @@ them.
   Made of standard walls and floor terrain.
   Humanoids and demons are frequently found here, along with plenty of magic
   devices.
-  The lowest level is guarded by the owner of Scarlet Devil Mansion.
+  The lowest level is guarded by the owner of Scarlet Devil Mansion, Remilia
+  Scarlet.
   The chief maid is frequently found around the lowest levels, and she will 
   cut you down without asking any questions.
   Both of them are powerful opponents, so don't go too deep if you're not
@@ -433,19 +441,20 @@ them.
   also a lot of strong out-of-depth enemies starting out awake.
 
 - Former Hell of Blazing Fires (Levels 40-50)
-  First of all, go to the entrance to underground located very far away from
-  Human Village in south-west area.
-  Keep going through here and you'll reach Streets of Former Hell;
-  the courtyard of Palace of Earth Spirits there has the entrance to this
-  dungeon.
-  It's full of lava. If you don't have levitation or other proper
-  countermeasures, going in is suicidal.
+  You can enter this dungeon from the courtyard of Palace of Earths Spirits in
+  Former Hell. Reaching Former Hell requires traveling to south-west from
+  Human Village, then going to the east.
+  There are rumors about a shortcut leading to Former Hell in Forest of Magic.
+  You might want to search for it.
+
+  As for the dungeon itsels, it's full of lava. If you don't have levitation 
+  or other proper countermeasures, going in is suicidal.
   There's a lot of fire resistant or flying monsters in here.
 
 - Inverted Castle (Levels 30-45)
   Located very far to north-west from the Human Village.
-  An inverted castle floating in the sky that was directly related to a
-  recent incident.
+  An inverted castle floating in the sky that was directly related to an
+  incident caused by a descendant of the inchlings and an amanojaku.
   Many corridors can be cut off by deep pits, so levitation is required.
   Also, magic is completely unusable here.
 
@@ -472,7 +481,26 @@ them.
   that, there's plenty of special features like vaults here. It's a very
   dangerous place.
   You can find some materials here you can't get other way, but you shouldn't
-  go here unless you're confident enough in your skills.'
+  go here unless you're confident enough in your skills.
+
+- Hell (Levels 40-80)
+  Go past Muenzuka, cross the Sanzu river (watch out for plesiosauruses and
+  giant fish), and you will reach Higan.
+  The entrance to Hell is located there.
+  It is full of demons, undead and damaging terrain
+  You shouldn't visit this place unless you have some business there.
+
+- Rainbow Dragon Cave (Kouryuudou) (Levels 30-65)
+  Climb to the mountain north of Human Village, and you will reach a place
+  known as False Heaven Shelf. 
+  The entrance to Rainbow Dragon Cave is there.
+  It is a cramped yet deep dungeon, and you might find rare ore on lower
+  levels. Be careful, though - there's not much oxygen there for humans to
+  breathe. By the way, I don't have any trouble with this - it's a mystery.
+  Humans and similar races will have a lot of trouble there without some
+  way to get oxygen. By the way, would a ring that prevents you from
+  drowning work?'
+
 
 ***** <Souvenir>
 === Souvenirs ===
