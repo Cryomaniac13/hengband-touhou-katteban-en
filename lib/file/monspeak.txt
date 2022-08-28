@@ -712,6 +712,14 @@ says, 'Don't look me as I was a louse!'
 says, 'Here a louse.'
 says, 'Die. Die. Damn thing is strong!'
 
+N:860:Taisui Xingjun
+looks at you with the eyes in its body.
+shakes its body, making the dungeon shudder as well.
+moves around, ground being distorted in its wake.
+seems to grow slightly bigger...
+grows new eyes on its body.
+lowers into the ground. The floor begins to tremble...
+
 N:*:Default lines
 cackles evilly.
 cackles diabolically.

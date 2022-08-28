@@ -1,7 +1,7 @@
 
-                  ****************************************
-                  **  Hengband Touhou Katteban v1.1.95  **
-                  ****************************************
+                  *****************************************
+                  **          Gensouband v2.0.0          **
+                  *****************************************
 
           Based on Moria:   Copyright (c) 1985 Robert Alan Koeneke
               and Umoria:   Copyright (c) 1989 James E. Wilson
@@ -15,9 +15,8 @@
        ZAngband Jap ver.:   Mitsuhiro Itakura <itakura @ users.sourceforge.net>
            Hengband: Mr.Hoge (echizen @ users.sourceforge.jp) & Many others
                        http://hengband.sourceforge.jp/
+                Gensouband:    Miyamasa
+                English translation: Cryomaniac
 
-    (Touhou Katteban author: Miyamasa)       (English translation: Cryomaniac)
-
-        This Hengband variant is also a derivative work of Touhou Project.
+        Gensouband is also a derivative work of Touhou Project.
         Touhou Project is a copyrighted work of Team Shanghai Alice.
-

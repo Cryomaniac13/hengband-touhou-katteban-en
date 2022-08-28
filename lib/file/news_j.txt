@@ -1,6 +1,6 @@
 
        ********************************************************
-       **  変愚蛮怒勝手版　主に東方関係要素色々追加 v1.1.94a **
+       **                幻想蛮怒　v2.0.0                    **
        ********************************************************
 
           Based on Moria:    Copyright (c) 1985 Robert Alan Koeneke
@@ -15,8 +15,7 @@
        ZAngband 日本語版:    板倉充洋 < itakura＠users.sourceforge.net >
           変愚蛮怒: Mr.hoge (echizen＠users.sourceforge.jp) ＆ 多くの方々
                      http://hengband.sourceforge.jp/
-                     
-　　 (この勝手版の作成者:みやまさ)
+                幻想蛮怒:    みやまさ
 　
-　　　　この勝手版は東方Projectの二次創作でもあります。
+　　　　幻想蛮怒は東方Projectの二次創作でもあります。
 　　　　東方Projectは『上海アリス幻樂団』の著作物です。

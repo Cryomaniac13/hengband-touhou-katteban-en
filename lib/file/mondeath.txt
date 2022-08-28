@@ -25,6 +25,9 @@ says, 'My God, Please visit a punishment upon this unrighteous sinner!'
 N:780:Vlad Dracula, Prince of Darkness
 says, 'Faugh, I'll be back...so long as human psyche has a blackness. Ho-ho.'
 
+N:1379:Oberon, King of Amber
+says, 'I shall walk the Pattern. Goodbye.'
+
 N:873:Combat-Echizen
 says shiftlessly, 'Oh. No.'
 
@@ -50,7 +53,11 @@ N:1018:Raou
 points at himself and shouts, 'I finished my life with no regrets!'
 
 N:1063:lousy, the King of louses
-says, 'Ah, Hengband is too difficult!'
+says, 'Ah, Gensouband is too difficult!'
+
+# Taisui Xingjun
+N:860
+sinks back deep into the earth, its power exhausted...
 
 N:*:Default
 shouts, 'AAAARRRGGGHHH!!!'
