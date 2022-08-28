@@ -714,6 +714,12 @@ static void rd_item(object_type *o_ptr)
 
 	}
 
+	//v1.1.99 作業服にpval付与
+	if (h_older_than(1, 1, 99, 0) && o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER)
+	{
+		if (!o_ptr->pval) o_ptr->pval = 1;
+
+	}
 
 	//v1.1.25 アイテム価格情報をデータ化
 	if(h_older_than(1,1,25,0))
@@ -1248,6 +1254,8 @@ static void rd_lore(int r_idx)
 	rd_byte(&tmp8u);
 
 	/* Repair the lore flags */
+	//もしロード前とロード後でモンスターの能力が変わっている場合に、
+	//＠が記憶しているモンスターフラグのうち現在存在しないフラグを削除している
 	r_ptr->r_flags1 &= r_ptr->flags1;
 	r_ptr->r_flags2 &= r_ptr->flags2;
 	r_ptr->r_flags3 &= r_ptr->flags3;
@@ -1255,7 +1263,7 @@ static void rd_lore(int r_idx)
 	r_ptr->r_flags5 &= r_ptr->flags5;
 	r_ptr->r_flags6 &= r_ptr->flags6;
 
-	///mod140102 モンスター新魔法フラグ追加に伴いflags9追加。正直この操作何のために必要なのかわからないがとりあえず同じようにやっとく
+
 	r_ptr->r_flags9 &= r_ptr->flags9;
 
 	r_ptr->r_flagsr &= r_ptr->flagsr;
@@ -2333,7 +2341,7 @@ static void rd_extra(void)
 				}
 				else if(i == DUNGEON_ANGBAND)
 				{
-					if(quest[QUEST_OBERON].status == QUEST_STATUS_FINISHED)
+					if(quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED)
 						flag_dungeon_complete[i] = 1;
 				}
 				else if(i == DUNGEON_CHAOS)
@@ -2381,7 +2389,7 @@ static void rd_extra(void)
 		rd_s16b(&p_ptr->future_use_counter8);
 
 		rd_s32b(&p_ptr->animal_ghost_align_flag);
-		rd_s32b(&p_ptr->ptype_new_flags2);
+		rd_s32b(&p_ptr->quest_special_flag);
 		rd_s32b(&p_ptr->ptype_new_flags3);
 		rd_s32b(&p_ptr->ptype_new_flags4);
 

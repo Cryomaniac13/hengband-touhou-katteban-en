@@ -4254,7 +4254,7 @@ cptr do_cmd_class_power_aux_okina(int num, bool only_info)
 		if (only_info) return format("");
 
 		if (p_ptr->inside_quest
-			|| quest[QUEST_OBERON].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_ANGBAND && dun_level == 100
+			|| quest[QUEST_TAISAI].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_ANGBAND && dun_level == 100
 			|| quest[QUEST_SERPENT].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_CHAOS && dun_level == 127)
 		{
 			msg_print(_("今は使えない。", "You can't use this ability right now."));
@@ -5113,7 +5113,10 @@ cptr do_cmd_class_power_aux_udonge_d(int num, bool only_info)
 			object_type *o_ptr = &inventory[INVEN_RARM + hand];
 			int timeout_base, bullets;
 
-			if (o_ptr->tval != TV_GUN || o_ptr->sval != SV_FIRE_GUN_LUNATIC) continue;
+//			if (o_ptr->tval != TV_GUN || o_ptr->sval != SV_FIRE_GUN_LUNATIC) continue;
+
+			//v1.1.98 ルナティックガン改も入れる
+			if (!(o_ptr->tval == TV_GUN && ( o_ptr->sval == SV_FIRE_GUN_LUNATIC || o_ptr->sval == SV_FIRE_GUN_LUNATIC_2))) continue;
 
 			timeout_base = calc_gun_timeout(o_ptr) * 1000;
 			bullets = calc_gun_load_num(o_ptr);
@@ -5165,7 +5168,10 @@ cptr do_cmd_class_power_aux_udonge_d(int num, bool only_info)
 			object_type *o_ptr = &inventory[INVEN_RARM + hand];
 			int timeout_base, bullets, timeout_max;
 
-			if (o_ptr->tval != TV_GUN || o_ptr->sval != SV_FIRE_GUN_LUNATIC) continue;
+			//if (o_ptr->tval != TV_GUN || o_ptr->sval != SV_FIRE_GUN_LUNATIC) continue;
+
+			//v1.1.98 ルナティックガン改も入れる
+			if (!(o_ptr->tval == TV_GUN && (o_ptr->sval == SV_FIRE_GUN_LUNATIC || o_ptr->sval == SV_FIRE_GUN_LUNATIC_2))) continue;
 
 			timeout_base = calc_gun_timeout(o_ptr) * 1000;
 			bullets = calc_gun_load_num(o_ptr);
@@ -11209,7 +11215,7 @@ cptr do_cmd_class_power_aux_yukari(int num, bool only_info)
 			if(only_info) return format("");
 
 			if(p_ptr->inside_quest
-				|| quest[QUEST_OBERON].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_ANGBAND && dun_level == 100
+				|| quest[QUEST_TAISAI].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_ANGBAND && dun_level == 100
 				|| quest[QUEST_SERPENT].status == QUEST_STATUS_TAKEN && dungeon_type == DUNGEON_CHAOS && dun_level == 127)
 			{
 				msg_print(_("今は使えない。", "You can't use this ability right now."));
@@ -14620,9 +14626,12 @@ class_power_type class_power_alice[] =
 	{1,0,0,FALSE,FALSE,A_DEX,0,0,_("人形武装解除", "Unequip Dolls"),
 		_("人形の装備しているアイテムを外す。",
         "Removes an item equipped to a doll.")},
-	{10,16,30,FALSE,TRUE,A_INT,0,5,_("魔彩光の上海人形", "Magically Luminous Shanghai Dolls"),
+	{8,15,30,FALSE,TRUE,A_INT,0,5,_("魔彩光の上海人形", "Magically Luminous Shanghai Dolls"),
 		_("閃光属性のビームを放つ。",
         "Fires a beam of light.")},
+	{12,5,40,FALSE,FALSE,A_DEX,0,0,_("トラップ発動", "Activate Traps"),
+		_("トラップを発動させるビームを放つ。発動したトラップにモンスターを巻き込むことができる。プレイヤーも範囲内にいるとダメージを受ける。",
+        "Fires a beam that activates traps. Activated traps might hit monsters, and they will deal damage to you as well if you stand too close.")},
 	{16,20,40,FALSE,TRUE,A_DEX,0,0,_("人形作成", "Create Doll"),
 		_("モンスター「人形」を配下として数体召喚する。",
         "Summons several dolls as your followers.")},
@@ -14679,6 +14688,8 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 			update_stuff();
 			break;
 		}
+
+
 	case 2:
 		{
 			dice = 2 + plev / 3;
@@ -14693,6 +14704,19 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 			break;
 		}
 	case 3:
+	{
+		int range = 6 + p_ptr->lev / 4;
+		if (only_info) return format(_("範囲:%d", "rng: %d"), range);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_print(_("あなたは魔糸を床に這わせた...", "You send a magic thread running across the floor..."));
+		fire_beam(GF_ACTIV_TRAP, dir, 0);
+
+
+		break;
+	}
+
+	case 4:
 		{
 			bool flag = FALSE;
 			int max = 1 + p_ptr->lev / 10;
@@ -14704,7 +14728,8 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 
 			break;
 		}
-	case 4:
+
+	case 5:
 	{
 		int power = plev / 2;
 		int range = 3 + plev / 12;
@@ -14743,8 +14768,8 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 	break;
 
 
-	case 5:
-	case 9:
+	case 6:
+	case 10:
 		{
 			int     item;
 			cptr    q, s;
@@ -14807,7 +14832,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 
 			break;
 		}
-	case 6:
+	case 7:
 		{
 			monster_type *m_ptr;
 			int xx,yy;
@@ -14833,7 +14858,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 		}
 		break;
 
-	case 7:
+	case 8:
 		{
 			int range = 2 + (plev-32) / 8;
 			int x, y;
@@ -14874,7 +14899,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 
 
 
-	case 8:
+	case 9:
 		{
 			dice = plev / 2;
 			sides = 10 + chr_adj / 10;
@@ -14890,7 +14915,7 @@ cptr do_cmd_class_power_aux_alice(int num, bool only_info)
 			fire_spark(GF_DARK, dir, base + damroll(dice,sides),1);
 			break;
 		}
-	case 10:
+	case 11:
 		{
 			int dam = plev + chr_adj;
 			int x, y;
@@ -29313,7 +29338,7 @@ cptr do_cmd_class_power_aux_shinmyoumaru(int num, bool only_info)
 			for (i = 1; i < m_max; i++)
 			{
 				monster_type *m_ptr = &m_list[i];
-				if (m_ptr->r_idx == MON_OBERON ) oberon_idx = i;
+				if (m_ptr->r_idx == MON_TAISAI ) oberon_idx = i;
 			}
 
 			if(!oberon_idx)
@@ -29330,7 +29355,8 @@ cptr do_cmd_class_power_aux_shinmyoumaru(int num, bool only_info)
 			koduchi_payment(18);
 			koduchi_payment(22);
 			teleport_player(200,TELEPORT_NONMAGICAL);
-			mon_take_hit(oberon_idx,30001,&dummy,_("はその場に倒れた！", "collapses on the spot!"));
+			mon_take_hit(oberon_idx,30001,&dummy,_("は物凄い勢いで地中に沈んでいった！",
+                                          "sinks into the ground in an instant!"));
 			koduchi_payment(25);
 			koduchi_payment(24);
 
@@ -30587,6 +30613,11 @@ class_power_type class_power_rogue[] =
 	{10,7,20,FALSE,FALSE,A_INT,0,0,_("トラップ感知", "Detect Traps"),
 		_("周辺のトラップを感知する。",
         "Detects nearby traps.")},
+
+	{15,5,40,FALSE,FALSE,A_DEX,0,0,_("トラップ発動", "Activate Traps"),
+		_("トラップを発動させるビームを放つ。発動したトラップにモンスターを巻き込むことができる。プレイヤーも範囲内にいるとダメージを受ける。",
+        "Fires a beam that activates traps. Activated traps might hit monsters, and they will deal damage to you as well if you stand too close.")},
+
 	{20,15,20,TRUE,FALSE,A_DEX,30,0,_("ヒット＆アウェイ", "Hit and Away"),
 		_("敵に攻撃し、その後一瞬で離脱する。失敗することもある。装備が重いと失敗しやすい。",
         "Attacks an enemy and immediately escapes. Might fail to escape. Higher failure rate if you're wearing heavy equipment.")},
@@ -30617,20 +30648,35 @@ cptr do_cmd_class_power_aux_rogue(int num, bool only_info)
 			detect_traps(DETECT_RAD_DEFAULT, TRUE);
 			break;
 		}
+
+
 	case 1:
+	{
+		int range = 5 + p_ptr->lev / 5;
+		if (only_info) return format(_("範囲:%d", "rng: %d"), range);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_print(_("あなたは巧みにロープを操った...", "You skillfully manipulate a rope..."));
+		fire_beam(GF_ACTIV_TRAP, dir, 0);
+
+
+		break;
+	}
+
+	case 2:
 		{
 			if(only_info) return format("");
 			if(!hit_and_away()) return NULL;
 			break;
 		}
-	case 2:
+	case 3:
 		{
 			if(only_info) return format("");
 			if (!ident_spell(FALSE)) return NULL;
 
 			break;
 		}
-	case 3:
+	case 4:
 		{
 			if(only_info) return format("");
 			msg_format(_("周囲の敵を調査した・・", "You analyze nearby enemies..."));
@@ -34112,7 +34158,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 	}
 	else if(p_ptr->pclass == CLASS_ALICE)
 	{
-		if((skillnum == 7) && p_ptr->do_martialarts)
+		if((skillnum == 8) && p_ptr->do_martialarts)
 		{
 #ifdef JP
 				my_strcpy(errmsg, "人形の装備ができていない。", 150);
@@ -36133,7 +36179,7 @@ const support_item_type support_item_list[] =
     _("それは周囲の動物を説得し配下にする。",
     "Lectures nearby animals, attempting to make them your followers.")},
 	//ドラゴンズグロウル
-	{35, 40, 100,5,6,	MON_KASEN,class_power_kasen,do_cmd_class_power_aux_kasen,6,
+	{35, 40, 100,5,6,	MON_KASEN,class_power_kasen,do_cmd_class_power_aux_kasen,7,
 	_("包帯の竜頭", "Bandaged Dragon Head"),
     _("それは現在HPの1/3の威力の轟音属性ブレスを放つ。",
     "Brathes sound with power equal to 1/3 of your current HP.")},
@@ -36292,7 +36338,7 @@ const support_item_type support_item_list[] =
 	_("それを使うとこのフロア限定で「フランドール・スカーレット」の分身が三体出現する。分身は配下扱いだが命令に関わらずプレイヤーを範囲攻撃に巻き込む。",
     "Summons 3 clones of Flandre Scarlet as your followers that can't leave this level. They will involve you in their area of effect attacks regardless of your orders.")},
 	//レーヴァテイン
-	{90, 60, 128,4,18,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,7,
+	{90, 60, 128,4,18,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,8,
 	_("捻じれた黒杖", "Bent Black Rod"),
 	_("それは自分を中心に強力な地獄の劫火属性のボールを発生させる。",
     "Generate a powerful ball of hellfire centered on yourself.")},
@@ -36977,7 +37023,7 @@ const support_item_type support_item_list[] =
 	_("それは閃光属性のビームを放つ。",
     "Fires a beam of light.")},
 	//首吊り蓬莱人形
-	{50,40, 100,5,8,MON_ALICE,class_power_alice,do_cmd_class_power_aux_alice,8,
+	{50,40, 100,5,8,MON_ALICE,class_power_alice,do_cmd_class_power_aux_alice,9,
 	_("蓬莱人形", "Hourai Doll"),
 	_("それは強力な暗黒属性のビームを放つ。",
     "Fires a powerful beam of darkness.")},

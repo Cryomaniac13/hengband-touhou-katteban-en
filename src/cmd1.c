@@ -1348,13 +1348,13 @@ void carry(bool pickup)
 
 
 /*
- * Determine if a trap affects the player.
- * Always miss 5% of the time, Always hit 5% of the time.
- * Otherwise, match trap power against player armor.
- */
-/*:::トラップの命中判定。
- *:::melee1.cに同名の関数があり、そちらはモンスターが＠に打撃攻撃をする時の命中判定に使われる。*/
-static int check_hit(int power)
+* Determine if a trap affects the player.
+* Always miss 5% of the time, Always hit 5% of the time.
+* Otherwise, match trap power against player armor.
+*/
+//トラップの命中判定
+//v1.1.96 同名の関数があって紛らわしいのでcheck_hit()から名称変更した
+static int check_hit_trap(int power)
 {
 	int k, ac;
 
@@ -1381,6 +1381,875 @@ static int check_hit(int power)
 }
 
 
+//v1.1.97
+//床上トラップの発動。hit_trap()をこれに変更する。主にproject()経由で＠にもモンスターにも効果が出るようにする。
+//発動するトラップの座標を指定する。トラップの上に＠でなくモンスターがいることも誰もいないこともある。
+//GF_ACTIVATE_TRAP属性でトラップを発動する場合project()が再帰呼び出しされるのでスタックオーバーフローと地形変化と敵消滅に注意
+//mpe_mode:MPE_BREAK_TRAPのとき発動後のトラップを粉砕し、MPE_ACTIVATE_TRAPのとき浮遊があっても落とし戸に落ちる
+void activate_floor_trap(int y, int x, u32b mpe_mode)
+{
+	bool flag_break_trap;
+	bool trap_player = FALSE;
+	bool trap_monster = FALSE;
+	cave_type *c_ptr = &cave[y][x];
+	feature_type *f_ptr = &f_info[c_ptr->feat];
+	int trap_feat_type = have_flag(f_ptr->flags, FF_TRAP) ? f_ptr->subtype : NOT_TRAP;
+	char            m_name[80] = "";
+	monster_type *m_ptr;
+	monster_race *r_ptr;
+	int damage;
+
+	flag_break_trap = (mpe_mode & MPE_BREAK_TRAP);
+
+
+	if (trap_feat_type == NOT_TRAP) return;
+
+	if (world_player || SAKUYA_WORLD)
+	{
+		msg_print(_("トラップは作動しなかった。", "The trap didn't go off."));
+		return;
+	}
+
+	//トラップの上に＠がいるときtrap_playerがTRUE
+	if (player_bold(y, x))
+	{
+		trap_player = TRUE;
+
+		if (p_ptr->pclass == CLASS_FLAN) flag_break_trap = TRUE;
+		if (p_ptr->pseikaku == SEIKAKU_BERSERK && randint1(p_ptr->lev) > 10) flag_break_trap = TRUE;
+
+	}
+	//トラップの上に乗馬以外のモンスターがいるときtrap_monsterがTRUE
+	else if (c_ptr->m_idx)
+	{
+		trap_monster = TRUE;
+
+		m_ptr = &m_list[c_ptr->m_idx];
+		r_ptr = &r_info[m_ptr->r_idx];
+
+		monster_desc(m_name, m_ptr, 0);
+
+	}
+
+	disturb(0, 1);
+
+
+	switch (trap_feat_type)
+	{
+		//落とし戸　＠はテレポレベル、モンスターはFLYING無効、GIGANTICとQUESTORは行動遅延、それ以外フロアから消滅
+	case TRAP_TRAPDOOR:
+	{
+		if (trap_player)
+		{
+			if (!(mpe_mode & MPE_ACTIVATE_TRAP) && p_ptr->levitation)
+			{
+#ifdef JP
+				msg_print("落とし戸を飛び越えた。");
+#else
+				msg_print("You fly over a trap door.");
+#endif
+				return;
+			}
+			else
+			{
+				cptr trap_name;
+				if(mpe_mode & MPE_ACTIVATE_TRAP)
+					msg_print(_("落とし戸に飛び込んだ！", "You jump through a trap door!"));
+				else
+					msg_print(_("落とし戸に落ちた！", "You have fallen through a trap door!"));
+
+				sound(SOUND_FALL);
+				damage = damroll(2, 8);
+#ifdef JP
+				trap_name = "落とし戸";
+#else
+				trap_name = "a trap door";
+#endif
+				take_hit(DAMAGE_NOESCAPE, damage, trap_name, -1);
+
+				/* Still alive and autosave enabled */
+				if (autosave_l && (p_ptr->chp >= 0))
+					do_cmd_save_game(TRUE);
+
+#ifdef JP
+				do_cmd_write_nikki(NIKKI_BUNSHOU, 0, "落とし戸に落ちた");
+#else
+				do_cmd_write_nikki(NIKKI_BUNSHOU, 0, "You have fallen through a trap door.");
+#endif
+				///mod160813 クエストフロアでトラップドアに落ちたときの処理を追加　サグメ用
+				if (EXTRA_MODE)
+				{
+
+					prepare_change_floor_mode(CFM_DOWN | CFM_RAND_PLACE | CFM_NO_RETURN);
+					if (INSIDE_EXTRA_QUEST)
+					{
+						leave_quest_check();
+						p_ptr->inside_quest = 0;
+					}
+				}
+				else
+				{
+					prepare_change_floor_mode(CFM_SAVE_FLOORS | CFM_DOWN | CFM_RAND_PLACE | CFM_RAND_CONNECT);
+					if (p_ptr->inside_quest)
+					{
+						leave_quest_check();
+						p_ptr->inside_quest = 0;
+					}
+				}
+
+				/* Leaving */
+				p_ptr->leaving = TRUE;
+			}
+		}
+		else if (trap_monster)
+		{
+			msg_print(_("落とし戸が開いた！", "A trap door opens!"));
+			if (r_ptr->flags7 & RF7_CAN_FLY)
+			{
+				msg_format(_("%sは悠々と落とし戸の上を飛んでいる。",
+                            "%^s is leisurely flying above the trap door."), m_name);
+			}
+			else if (r_ptr->flags1 & RF1_QUESTOR || r_ptr->flags2 & RF2_GIGANTIC)
+			{
+				msg_format(_("%sは落とし戸から抜け出した！",
+                            "%^s escapes from the trap door!"), m_name);
+				monster_delay(c_ptr->m_idx, randint1(100));
+			}
+			else
+			{
+				msg_format(_("%sが落とし戸に落ちた！",
+                            "%^s has fallen through a trap door!"), m_name);
+				monster_drop_carried_objects(m_ptr);//拾ったアイテムは律儀に落としてから消えることにしておく
+				delete_monster_idx(c_ptr->m_idx);
+			}
+
+		}
+		else
+		{
+			msg_print(_("落とし戸が開いた。しかし誰も落とし戸の上にいない。", "A trap door opens. However, no one was on top of it."));
+		}
+	}
+	break;
+
+
+	//落とし穴のダメージ処理はGF_PIT_FALL属性として実装した。いずれ魔法の「深い穴生成」やてゐの落とし穴とも統合したい
+	case TRAP_PIT:
+
+	{
+		int d = dun_level / 8 + 1;
+		damage = damroll(d, d);
+
+		if (trap_player)
+		{
+
+			if (!(mpe_mode & MPE_ACTIVATE_TRAP) && p_ptr->levitation)
+			{
+#ifdef JP
+				msg_print("落とし穴を飛び越えた。");
+#else
+				msg_print("You fly over a trap pit.");
+#endif
+				return;
+
+			}
+			else
+			{
+				msg_print(_("落とし穴だ！", "It's a trap pit!"));
+				project(PROJECT_WHO_TRAP, 0, y, x, damage, GF_PIT_FALL, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER), -1);
+			}
+		}
+		else if (trap_monster)
+		{
+			project(PROJECT_WHO_TRAP, 0, y, x, damage, GF_PIT_FALL, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER), -1);
+		}
+		else
+		{
+			msg_print(_("落とし穴が開いた。しかし誰も落とし穴の上にいない。", "A trap pit opens. However, no one was on top of it."));
+		}
+
+	}
+	break;
+
+	//defineのラベルだけそのままで穴の機能を水地形生成と石油地形生成に変えた
+	case TRAP_SPIKED_PIT:
+	case TRAP_POISON_PIT:
+		if (trap_player)
+		{
+			if (!(mpe_mode & MPE_ACTIVATE_TRAP) && p_ptr->levitation)
+			{
+				msg_print(_("亀裂の上を飛び越えた。", "You fly above a crack in the ground."));
+				return;
+			}
+			else
+			{
+				if (mpe_mode & MPE_ACTIVATE_TRAP)
+					msg_print(_("あなたは足元の亀裂を踏み割った！", "You deliberately stomp on a crack beneath you!"));
+
+				if(trap_feat_type == TRAP_SPIKED_PIT)
+					msg_print(_("足元が崩れた！下に水が溜まっている！", "The ground beneath you cracks! Water pours forth!"));
+				else
+					msg_print(_("足元から石油が噴き出した！", "Oil spouts out from below you!"));
+
+			}
+		}
+		//地形変更する前にこのグリッドのトラップを消滅させる
+		cave_alter_feat(y, x, FF_HIT_TRAP);
+
+		//ここは＠が飛び越えたとき以外無条件に発動するようにしている。
+		//いずれトラップをモンスターが踏むように改造する機能を実装したとして、
+		//飛ぶモンスターが踏み入ったときに発動しないよう設定する必要がある。
+		if (trap_feat_type == TRAP_SPIKED_PIT)
+			project(PROJECT_WHO_TRAP, (2 + randint1(5) / 4) , y, x, 4, GF_WATER_FLOW, PROJECT_JUMP | PROJECT_GRID, -1);
+		else
+			project(PROJECT_WHO_TRAP, (3 + randint1(3)/3), y, x, 100+dun_level, GF_DIG_OIL, PROJECT_JUMP | PROJECT_GRID, -1);
+
+
+		break;
+
+	//邪悪なルーン	モンスターが踏んだら全能力低下+移動禁止でいいだろう
+	case TRAP_TY_CURSE:
+	{
+		if (trap_player)
+		{
+			int i;
+			int num = 2 + randint1(3);
+#ifdef JP
+			msg_print("何かがピカッと光った！");
+#else
+			msg_print("There is a flash of shimmering light!");
+#endif
+			for (i = 0; i < num; i++)
+			{
+				(void)summon_specific(0, y, x, dun_level, 0, (PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_NO_PET));
+			}
+
+			if (dun_level > randint1(100)) /* No nasty effect for low levels */
+			{
+				bool stop_ty = FALSE;
+				int count = 0;
+
+				do
+				{
+					stop_ty = activate_ty_curse(stop_ty, &count);
+				} while (one_in_(6));
+			}
+		}
+		else if (trap_monster)
+		{
+			msg_format(_("%sの足元で何かがピカッと光った！", "Something beneath %s gives off a flash of light!"), m_name);
+
+			project(0, 0, y, x, 100 + dun_level * 3, GF_DEC_ALL, (PROJECT_JUMP | PROJECT_KILL), -1);
+			project(0, 0, y, x, 10 + dun_level / 2, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_KILL), -1);
+		}
+		else
+		{
+			msg_print(_("何かがピカッと光った。しかし呪いは不発のようだ。", "Something gives off a flash of light. However, the curse wasn't activated."));
+		}
+
+
+	}
+	break;
+
+	//奇妙なルーン　モンスターが踏んだらAWAY_ALLでいいだろう
+	case TRAP_TELEPORT:
+	{
+		if (trap_player)
+		{
+#ifdef JP
+			msg_print("テレポート・トラップにひっかかった！");
+#else
+			msg_print("You hit a teleport trap!");
+#endif
+			teleport_player(100, TELEPORT_PASSIVE);
+		}
+		else if (trap_monster)
+		{
+			msg_format(_("%sはテレポート・トラップにひっかかった！", "%^s hits a teleport trap!"), m_name);
+			project(0, 0, y, x, 100, GF_AWAY_ALL, (PROJECT_JUMP | PROJECT_KILL), -1);
+		}
+		else
+		{
+			msg_print(_("奇妙なルーンが起動した。しかし不発のようだ。", "A strange rune is activated. However, nothing happens."));
+		}
+
+
+	}
+	break;
+
+	//炎　単純に火炎ボールを起こして範囲内全員ダメージ
+	case TRAP_FIRE:
+	{
+
+#ifdef JP
+		msg_print("地面から炎が噴き出した！");
+#else
+		msg_print("Flames shoot out from the ground!");
+#endif
+
+		damage = MAX(5, dun_level) * 3;
+		project(PROJECT_WHO_TRAP, 2, y, x, damage, GF_FIRE, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+
+	}
+	break;
+
+
+	case TRAP_ACID:
+	{
+#ifdef JP
+		msg_print("地面から酸が噴き出した！");
+#else
+		msg_print("Acid shoots out from the ground!");
+#endif
+
+		damage = MAX(5, dun_level) * 3;
+
+		project(PROJECT_WHO_TRAP, 2, y, x, damage, GF_ACID, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+
+	}
+	break;
+
+	case TRAP_POISON:
+	{
+#ifdef JP
+		msg_print("地面から緑色のガスが噴き出した！");
+#else
+		msg_print("Green gas pours out from the ground!");
+#endif
+
+		damage = MAX(5, dun_level) * 3;
+		project(PROJECT_WHO_TRAP, 3, y, x, damage, GF_POIS, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+
+	}
+	break;
+
+
+	//ダーツ　モンスターには能力低下属性攻撃
+	case TRAP_SLOW:
+	case TRAP_LOSE_STR:
+	case TRAP_LOSE_DEX:
+	case TRAP_LOSE_CON:
+	{
+		if (trap_player)
+		{
+			if (check_hit_trap(125))
+			{
+#ifdef JP
+				msg_print("小さなダーツが飛んできて刺さった！");
+#else
+				msg_print("A small dart hits you!");
+#endif
+
+				damage = damroll(1, 4);
+#ifdef JP
+				take_hit(DAMAGE_ATTACK, damage, "ダーツの罠", -1);
+#else
+				take_hit(DAMAGE_ATTACK, damage, "a dart trap", -1);
+#endif
+
+				if (!CHECK_MULTISHADOW())
+				{
+					if (trap_feat_type == TRAP_SLOW) set_slow(p_ptr->slow + randint0(20) + 20, FALSE);
+					if (trap_feat_type == TRAP_LOSE_STR) do_dec_stat(A_STR);
+					if (trap_feat_type == TRAP_LOSE_DEX) do_dec_stat(A_DEX);
+					if (trap_feat_type == TRAP_LOSE_CON) do_dec_stat(A_CON);
+				}
+			}
+			else
+			{
+#ifdef JP
+				msg_print("小さなダーツが飛んできた！が、運良く当たらなかった。");
+#else
+				msg_print("A small dart barely misses you.");
+#endif
+
+			}
+
+		}
+		else if (trap_monster)
+		{
+			int power = 100 + dun_level * 2;
+			msg_format(_("小さなダーツが飛んで%sに刺さった！", "A small dart hits %s!"), m_name);
+
+			if (trap_feat_type == TRAP_SLOW)
+				project(0, 0, y, x, power, GF_OLD_SLOW, (PROJECT_JUMP | PROJECT_KILL), -1);
+			if (trap_feat_type == TRAP_LOSE_STR)
+				project(0, 0, y, x, power, GF_DEC_ATK, (PROJECT_JUMP | PROJECT_KILL), -1);
+			if (trap_feat_type == TRAP_LOSE_DEX)
+				project(0, 0, y, x, power, GF_DEC_ATK, (PROJECT_JUMP | PROJECT_KILL), -1);
+			if (trap_feat_type == TRAP_LOSE_CON)
+				project(0, 0, y, x, power, GF_DEC_DEF, (PROJECT_JUMP | PROJECT_KILL), -1);
+
+		}
+		else
+		{
+			msg_print(_("小さなダーツが飛んで床に刺さった。", "A small dart flies out and hits the floor."));
+		}
+
+		break;
+	}
+
+	//盲目ガス　モンスターには盲目状態がないので混乱として扱う。
+	//まず＠に影響を及ぼさない混乱属性ボールを発生させ、＠が範囲内にいたら盲目処理を行う。
+	case TRAP_BLIND:
+	{
+		int power = 150 + dun_level * 3;
+#ifdef JP
+		msg_print("地面から黒いガスが噴き出した！");
+#else
+		msg_print("Black gas pours out from the ground!");
+#endif
+		project(0, 3, y, x, power, GF_OLD_CONF, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL), -1);
+
+		if (!p_ptr->resist_blind && distance(y, x, py, px) < 3)
+		{
+			(void)set_blind(p_ptr->blind + randint0(50) + 25);
+		}
+	}
+	break;
+	//混乱ガス　単純に混乱ボールを発生させる
+	case TRAP_CONFUSE:
+	{
+		int power = 150 + dun_level * 3;
+#ifdef JP
+		msg_print("地面からきらめくガスが噴き出した！");
+#else
+		msg_print("Gas of scintillating colors pours out from the ground!");
+#endif
+		project(PROJECT_WHO_TRAP, 3, y, x, power, GF_OLD_CONF, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER), -1);
+	}
+	break;
+
+	//睡眠ガス　悪夢処理はproject_p()で行われるのでここで書かなくて済む
+	case TRAP_SLEEP:
+	{
+		int power = 150 + dun_level * 3;
+#ifdef JP
+		msg_print("地面から白いガスが噴き出した！");
+#else
+		msg_print("White gas pours out from the ground!");
+#endif
+		project(PROJECT_WHO_TRAP, 3, y, x, power, GF_OLD_SLEEP, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER), -1);
+
+	}
+	break;
+
+	//コンパクトルーン(トラップ追加生成)　上に何がいようと同じ効果でいいだろう
+	case TRAP_TRAPS:
+	{
+#ifdef JP
+		msg_print("まばゆい閃光が走った！");
+#else
+		msg_print("There is a bright flash of light!");
+#endif
+		/* Make some new traps */
+		project(0, 1, y, x, 0, GF_MAKE_TRAP, PROJECT_HIDE | PROJECT_JUMP | PROJECT_GRID, -1);
+
+	}
+	break;
+
+	//警報　加えてSTUN属性のボール発生
+	//とはいえスピードモンスターがあるから利用することはないだろう。
+	//スピードモンスターなしで起こすだけにする？それだと特技の警報と紛らわしいか。
+	case TRAP_ALARM:
+	{
+		int power = 150 + dun_level * 3;
+#ifdef JP
+		msg_print("けたたましい音が鳴り響いた！");
+#else
+		msg_print("There is a loud, shrill noise!");
+#endif
+
+		aggravate_monsters(0, FALSE);
+		project(PROJECT_WHO_TRAP, 1, y, x, power, GF_STUN, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL), -1);
+
+	}
+	break;
+
+	//開門トラップ
+	//とりあえず誰が踏んでも同じ効果にしておく。
+	//モンスターに踏ませたらそいつをターゲットにするよう設定するのも面白いが、ハルマゲドンと違い開門ではすでにモンスターがいるから改めてターゲット設定し直すのが難しい。
+	//開門トラップで配置されるモンスターの生成時に特殊フラグを立てておき、トラップを踏んだらターゲットを切り替える？フロアに開門トラップが二つあったら？
+	case TRAP_OPEN:
+	{
+#ifdef JP
+		msg_print("大音響と共にまわりの壁が崩れた！");
+#else
+		msg_print("Suddenly, surrounding walls are opened!");
+#endif
+		(void)project(0, 3, y, x, 0, GF_DISINTEGRATE, PROJECT_GRID | PROJECT_HIDE, -1);
+		(void)project(0, 3, y, x - 4, 0, GF_DISINTEGRATE, PROJECT_GRID | PROJECT_HIDE, -1);
+		(void)project(0, 3, y, x + 4, 0, GF_DISINTEGRATE, PROJECT_GRID | PROJECT_HIDE, -1);
+		aggravate_monsters(0, TRUE);
+
+		break;
+	}
+
+	//ハルマゲドントラップ
+	//モンスターに踏ませたらそいつをターゲットにするよう設定してみる
+	case TRAP_ARMAGEDDON:
+	{
+		static int levs[10] = { 0, 0, 20, 10, 5, 3, 2, 1, 1, 1 };
+		int evil_idx = 0, good_idx = 0;
+
+		int lev;
+
+		if (trap_player)
+		{
+#ifdef JP
+			msg_print("突然天界の戦争に巻き込まれた！");
+#else
+			msg_print("Suddenly, you are in the middle of a heavenly war!");
+#endif
+		}
+		else if (trap_monster)
+		{
+			msg_format(_("%sは天界の戦争に巻き込まれた！", "%s is in the middle of a heavenly war!"), m_name);
+
+		}
+		else
+		{
+			msg_print(_("突然天界の戦争が巻き起こった！", "Suddenly, a heavenly war breaks out!"));
+
+		}
+
+		/* Summon Demons and Angels */
+		for (lev = dun_level; lev >= 20; lev -= 1 + lev / 16)
+		{
+			int i;
+			int num = levs[MIN(lev / 10, 9)];
+			for (i = 0; i < num; i++)
+			{
+				monster_type *evil_ptr;
+				monster_type *good_ptr;
+
+				int x1 = rand_spread(x, 7);
+				int y1 = rand_spread(y, 5);
+
+				/* Skip illegal grids */
+				if (!in_bounds(y1, x1)) continue;
+
+				/* Require line of projection */
+				if (!projectable(py, px, y1, x1)) continue;
+
+				if (summon_specific(0, y1, x1, lev, SUMMON_ARMAGE_EVIL, (PM_NO_PET)))
+				{
+					evil_idx = hack_m_idx_ii;
+					evil_ptr = &m_list[evil_idx];
+				}
+
+				if (summon_specific(0, y1, x1, lev, SUMMON_ARMAGE_GOOD, (PM_NO_PET)))
+				{
+					good_idx = hack_m_idx_ii;
+					good_ptr = &m_list[good_idx];
+				}
+
+				/* Let them fight each other */
+				if (evil_idx && good_idx)
+				{
+					evil_ptr->target_y = good_ptr->fy;
+					evil_ptr->target_x = good_ptr->fx;
+					good_ptr->target_y = evil_ptr->fy;
+					good_ptr->target_x = evil_ptr->fx;
+				}
+				//モンスターに踏ませた場合、所属勢力でないほうから集中攻撃を受けることにしてみる。＠が踏むときに比べて遥かに大ダメージを受けるかもしれない
+				if (trap_monster && !(r_ptr->flags3 & RF3_ANG_CHAOS) && evil_idx)
+				{
+					evil_ptr->target_y = y;
+					evil_ptr->target_x = x;
+				}
+				if (trap_monster && !(r_ptr->flags3 & RF3_ANG_COSMOS) && good_idx)
+				{
+					good_ptr->target_y = y;
+					good_ptr->target_x = x;
+				}
+
+
+			}
+		}
+	}
+	break;
+
+	//ピラニアトラップ　誰が踏んでも同じでいいだろう
+	case TRAP_PIRANHA:
+	{
+		int num, i;
+#ifdef JP
+		msg_print("突然壁から水が溢れ出した！ピラニアがいる！");
+#else
+		msg_print("Suddenly, the room is filled with water with piranhas!");
+#endif
+
+		//地形変更する前にこのグリッドのトラップを消滅させる
+		cave_alter_feat(y, x, FF_HIT_TRAP);
+
+		/* Water fills room */
+		fire_ball_hide(GF_WATER_FLOW, 0, 1, 10);
+
+		/* Summon Piranhas */
+		num = 1 + dun_level / 20;
+		for (i = 0; i < num; i++)
+		{
+			(void)summon_specific(0, y, x, dun_level, SUMMON_PIRANHAS, (PM_ALLOW_GROUP | PM_NO_PET));
+		}
+	}
+	break;
+
+
+	//ビーム罠
+	case TRAP_BEAM:
+	{
+		int tmp_y, tmp_x;
+		int i,j, k, dir;
+		byte dir_table[8] = { 1,2,3,4,6,7,8,9 };
+		byte dir_init = randint0(8);
+		bool flag = FALSE;
+
+		for (i = 0; i<8; i++)
+		{
+			//ランダムな方角を決める
+			k = dir_init + i;
+			if (k >= 8) k -= 8;
+			dir = dir_table[k];
+
+			//ターゲットグリッドから1グリッド以上開けて壁などがある位置を探す
+			for (j = 1; j<16; j++)
+			{
+				tmp_x = x + ddx[dir] * j;
+				tmp_y = y + ddy[dir] * j;
+
+				if (!in_bounds(tmp_y, tmp_x)) break;
+
+				if (!cave_have_flag_bold(tmp_y, tmp_x, FF_PROJECT))
+				{
+					if (j == 1) break;
+					else
+					{
+						tmp_x = x + ddx[dir] * (j - 1);
+						tmp_y = y + ddy[dir] * (j - 1);
+						flag = TRUE;
+						break;
+					}
+				}
+
+			}
+			if (flag) break;
+		}
+
+		//丁度良い場所があった場合そこからレーザー発射
+		if (flag)
+		{
+			int typ;
+			int flg = PROJECT_BEAM | PROJECT_KILL | PROJECT_THRU | PROJECT_PLAYER;
+
+			damage = dun_level * 2 + randint1(50);
+			if (randint1(dun_level + 50) > 50) typ = GF_NUKE;
+			else typ = GF_FIRE;
+
+			//-hack- 通常project()はモンスターか＠の位置からしか撃たないのでグローバル変数使って例外処理　違法建築がまた一つ :)
+			hack_project_start_x = tmp_x;
+			hack_project_start_y = tmp_y;
+
+			if (one_in_(7))
+				msg_print(_("*上手に焼けましたー*", "* WELL BURNED *"));
+			else if (trap_player)
+				msg_print(_("どこからかビームが飛んできた！", "A beam shoots out of somewhere!"));
+			else
+				msg_print(_("壁からビームが撃ち出された！", "A beam shoots out of a wall!"));
+
+			(void)project(PROJECT_WHO_TRAP, 0, y, x, damage, typ, flg, -1);
+			hack_project_start_x = 0;
+			hack_project_start_y = 0;
+
+		}
+		else
+		{
+			msg_print(_("しかし何も起こらなかったようだ。", "Doesn't look like anything happened."));
+		}
+
+		break;
+	}
+
+
+	//↓実装を検討していたが保留。
+	//f_infoのインデックスが255を超えるのでどこかに問題が起こるかもしれない。今後もう少し落ち着いたときにやる
+	/*
+	case TRAP_CEILING: //吊り天井トラップ 部屋中に150+1d150のダメージ
+	{
+
+		msg_print("轟音を立てて天井が落ちてきた！");
+		project_hack3(PROJECT_WHO_TRAP, y, x, GF_DISP_ALL, 1, 150, 150);
+
+	}
+	break;
+
+	case TRAP_OIL: //石油
+	{
+
+#ifdef JP
+		msg_print("地面から石油が噴き出した！");
+#else
+		msg_print("A gas of scintillating colors surrounds you!");
+#endif
+		project(PROJECT_WHO_TRAP, 6, y, x, 250, GF_DIG_OIL, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+
+	}
+	break;
+
+	case TRAP_SUIKI: //水鬼鬼神長の罠　水ダメージ+水地形生成+長時間移動禁止
+	{
+
+#ifdef JP
+		msg_print("地面から超高圧の水が噴き出した！");
+#else
+		msg_print("A gas of scintillating colors surrounds you!");
+#endif
+
+		project(PROJECT_WHO_TRAP, 4, y, x, 200, GF_WATER_FLOW, (PROJECT_JUMP | PROJECT_GRID), -1);
+		project(PROJECT_WHO_TRAP, 4, y, x, 200, GF_WATER, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+		project(PROJECT_WHO_TRAP, 1, y, x, 100, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+	}
+	break;
+
+
+	//間欠泉トラップ　上のフロアに飛ばされる
+	//クエストダンジョンや地下一階や夢日記フロアなどに生成されないよう注意
+	case TRAP_GEYSER:
+	{
+
+		msg_print("間欠泉が噴き出した！");
+		damage = damroll(10, 10) + dun_level * 2;
+		project(PROJECT_WHO_TRAP, 3, y, x, damage, GF_STEAM, (PROJECT_JUMP | PROJECT_KILL | PROJECT_PLAYER | PROJECT_GRID), -1);
+
+		//＠は上のフロアに飛ばされる
+		if (trap_player && p_ptr->chp >= 0 && dun_level > 1 && !p_ptr->inside_arena && !(EXTRA_MODE) && !p_ptr->anti_tele)
+		{
+			do_cmd_write_nikki(NIKKI_BUNSHOU, 0, "間欠泉に吹き上げられた");
+			prepare_change_floor_mode(CFM_SAVE_FLOORS | CFM_UP | CFM_RAND_PLACE | CFM_RAND_CONNECT);
+
+			msg_print("あなたは上のフロアに吹き飛ばされた！");
+
+			//クエストフロアには生成されないようにする必要がある
+			if (p_ptr->inside_quest)
+			{
+				leave_quest_check();
+				p_ptr->inside_quest = 0;
+			}
+			p_ptr->leaving = TRUE;
+
+		}
+		//モンスターはQUESTORとGIGANTICは行動遅延、それ以外はフロアから追放
+		//蒸気ボールで倒したときは何もしない
+		else if (trap_monster && m_ptr->r_idx)
+		{
+			if (r_ptr->flags1 & RF1_QUESTOR || r_ptr->flags2 & RF2_GIGANTIC)
+			{
+				msg_format("%sは吹き飛ばされなかった。", m_name);
+				monster_delay(c_ptr->m_idx, randint1(100));
+			}
+			else
+			{
+				msg_format("%sは間欠泉に吹き飛ばされてこのフロアから消えた。", m_name);
+				monster_drop_carried_objects(m_ptr);//拾ったアイテムは律儀に落としてから消えることにしておく
+				delete_monster_idx(c_ptr->m_idx);
+			}
+
+		}
+
+	}
+	break;
+
+	//普通に地雷も作ろう。
+	//モンスター「地雷」を削除する？その場合新聞の号数を詰めたり幽霊洋館クエの地雷を置き換えたりする必要がある。
+	case TRAP_MINE:
+	{
+	msg_print("地雷だ！");
+
+	msg_print("(未実装)");
+
+	}
+
+	case TRAP_MEGACRASH: //メガクラッシュ地雷 MEGACRASHとMEGACRUSHのどっちが正しいんだろう
+	{
+		msg_print("巨大な爆発が起こった！");
+		destroy_area(y, x, 10, FALSE, FALSE, FALSE);
+		if (distance(py, px, y, x)<10)
+		{
+			if (check_activated_nameless_arts(JKF1_DESTRUCT_DEF))
+			{
+				msg_format("あなたは破壊の力を物ともしなかった！");
+				break;
+			}
+			damage = p_ptr->chp / 2;
+			if (p_ptr->pclass != CLASS_CLOWNPIECE)
+			{
+				//v1.1.86 NOESCAPE→ATTACKに
+				take_hit(DAMAGE_ATTACK, damage, m_name, -1);
+			}
+			if (p_ptr->pseikaku != SEIKAKU_BERSERK || one_in_(7))
+			{
+				msg_format("あなたは吹き飛ばされた！");
+				teleport_player_away(0, 100);
+			}
+		}
+	}
+	break;
+
+
+	//大岩トラップ？罠仕様変更memo2.txtに検討内容
+
+
+	//謎の呪文が刻まれた床に鳥居の彫られた隕石が落ちてくるとか？
+
+
+	*/
+
+	default:
+		msg_format(_("ERROR:activate_trap()にてtrap_feat_type%dの発動効果が未登録",
+                    "ERROR: Unregistered effect for trap_feat_type %d in activate_trap()"), trap_feat_type);
+		return;
+
+	}
+
+
+
+	//罠発動後の消滅処理
+	if (is_trap(c_ptr->feat))
+	{
+		//トラップ粉砕移動などのときトラップ解除
+		if (flag_break_trap)
+		{
+			cave_alter_feat(y, x, FF_DISARM);
+#ifdef JP
+			msg_print("トラップを粉砕した。");
+#else
+			msg_print("You destroyed the trap.");
+#endif
+			/* Remove "unsafe" flag if player is not blind */
+			if (!p_ptr->blind && player_has_los_bold(y, x))
+			{
+				c_ptr->info &= ~(CAVE_UNSAFE);
+				/* Redraw */
+				lite_spot(y, x);
+			}
+		}
+		//それ以外の発動のときも1/6でトラップ解除
+		else if (one_in_(6))
+		{
+			cave_alter_feat(y, x, FF_DISARM);
+		}
+		//そうでないときはトラップごとに設定された処理。
+		else
+		{
+			cave_alter_feat(y, x, FF_HIT_TRAP);
+		}
+	}
+
+
+}
+
+
+//v1.1.96 hit_trap()をactivate_floor_trap()に置き換えた
+#if 0
 
 /*
  * Handle player hitting a real trap
@@ -1726,7 +2595,7 @@ void hit_trap(bool break_trap)
 
 		case TRAP_SLOW:
 		{
-			if (check_hit(125))
+			if (check_hit_trap(125))
 			{
 #ifdef JP
 				msg_print("小さなダーツが飛んできて刺さった！");
@@ -1757,7 +2626,7 @@ void hit_trap(bool break_trap)
 
 		case TRAP_LOSE_STR:
 		{
-			if (check_hit(125))
+			if (check_hit_trap(125))
 			{
 #ifdef JP
 				msg_print("小さなダーツが飛んできて刺さった！");
@@ -1788,7 +2657,7 @@ void hit_trap(bool break_trap)
 
 		case TRAP_LOSE_DEX:
 		{
-			if (check_hit(125))
+			if (check_hit_trap(125))
 			{
 #ifdef JP
 				msg_print("小さなダーツが飛んできて刺さった！");
@@ -1819,7 +2688,7 @@ void hit_trap(bool break_trap)
 
 		case TRAP_LOSE_CON:
 		{
-			if (check_hit(125))
+			if (check_hit_trap(125))
 			{
 #ifdef JP
 				msg_print("小さなダーツが飛んできて刺さった！");
@@ -2107,7 +2976,7 @@ msg_print("まばゆい閃光が走った！");
 				else
 					msg_print(_("どこからかビームが飛んできた！", "A beam shoots out of nowhere!"));
 
-				(void)project(PROJECT_WHO_TRAP_BEAM, 0, py, px, dam, typ, flg, -1);
+				(void)project(PROJECT_WHO_TRAP, 0, py, px, dam, typ, flg, -1);
 				hack_project_start_x = 0;
 				hack_project_start_y = 0;
 
@@ -2135,6 +3004,8 @@ msg_print("まばゆい閃光が走った！");
 #endif
 	}
 }
+
+#endif
 
 /*:::オーラによるダメージを受ける処理*/
 ///mon オーラダメージ
@@ -2486,6 +3357,7 @@ int select_gun_melee_mode(void)
 		case SV_FIRE_GUN_HANDGUN:
 		case SV_FIRE_GUN_CRIMSON:
 		case SV_FIRE_GUN_MAGNUM:
+		case SV_FIRE_GUN_LUNATIC_2:
 			melee_mode[slot-INVEN_RARM] =  MELEE_MODE_GUN_HANDGUN;
 			timeout_base = calc_gun_timeout(o_ptr) * 1000;
 			timeout_max = timeout_base * (calc_gun_load_num(o_ptr) - 1);
@@ -2727,9 +3599,26 @@ int find_martial_arts_method(int findmode)
 	if(p_ptr->pclass == CLASS_BENBEN && music_singing(MUSIC_NEW_TSUKUMO_DOUBLESCORE)) return MELEE_MODE_BENBEN;
 	//爪強化　このときkick限定にはならないはず
 	if(p_ptr->clawextend) return MELEE_MODE_EX_CLAW;
+
+
+	//銃装備時格闘
+	//v2.0 特定の攻撃手段のときガン=カタのダメージボーナスを得られてしまうので不整合をなくすため優先度を少し上げた
+	if (!kick && (inventory[INVEN_RARM].tval == TV_GUN || inventory[INVEN_LARM].tval == TV_GUN))
+	{
+		//v1.1.21 ガン=カタ以外のとき1/2でキック攻撃
+		int tmp = select_gun_melee_mode();
+		//if (cheat_xtra) msg_format("gun_melee_mode:%d", tmp);
+		if (tmp == MELEE_MODE_GUN_TWOHAND || !one_in_(2)) return tmp;
+		else kick = TRUE;
+
+	}
+
+
+
 	//伸腕攻撃　変容魔法や河童レイシャル　追加格闘が出ないのでパンチのみ 一部クラスは専用攻撃優先
 	if(findmode == MELEE_FIND_LONGARM)
 	{
+
 		if(p_ptr->pclass == CLASS_REMY) return MELEE_MODE_REMY_OTHER;
 		else if(p_ptr->pclass == CLASS_MINDCRAFTER) return MELEE_MODE_MIND;
 		else if(p_ptr->pclass == CLASS_MAMIZOU) return MELEE_MODE_MAMIZOU;
@@ -2764,17 +3653,6 @@ int find_martial_arts_method(int findmode)
 		if(p_ptr->concent == 2) return MELEE_MODE_KISUME3;
 		if(p_ptr->concent == 3) return MELEE_MODE_KISUME4;
 		else return MELEE_MODE_KISUME5;
-	}
-
-	//銃装備時格闘
-	if(!kick && (inventory[INVEN_RARM].tval == TV_GUN || inventory[INVEN_LARM].tval == TV_GUN))
-	{
-		//v1.1.21 ガン=カタ以外のとき1/2でキック攻撃
-		int tmp = select_gun_melee_mode();
-		//if (cheat_xtra) msg_format("gun_melee_mode:%d", tmp);
-		if(tmp == MELEE_MODE_GUN_TWOHAND || !one_in_(2)) return tmp;
-		else kick = TRUE;
-
 	}
 
 
@@ -3086,7 +3964,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	bool            weak = FALSE;
 	bool            drain_msg = TRUE;
 	int             drain_result = 0, drain_heal = 0;
-	bool            can_drain = FALSE;
+	bool            can_drain = FALSE; //吸血できるか　
 	bool            can_feed = FALSE;
 	int             num_blow;
 	int             drain_left = MAX_VAMPIRIC_DRAIN;
@@ -3106,12 +3984,14 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	//v1.1.42 ドレミー・スイートの格闘攻撃でモンスターを眠らせるフラグカウント
 	bool		counting_sheep = 0;
 
+	bool	flag_vamp_armour = FALSE; //防具による吸血があるかどうか
+
 	int			martial_arts_method = 0;//格闘のときにランダムに選ばれる格闘分類タイプ MELEE_MODE_***
 
 	//v1.1.94
 	int		skill_type = 0;	//該当するスキル ref_skill_exp()に使う
 
-
+	int i;
 
 	//v1.1.69 潤美特技発動のとき武器攻撃が加重モードになる
 	// py_attack()中に記述すると追加格闘が出なくなるのでここに書いた
@@ -3140,6 +4020,26 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	if(p_ptr->do_martialarts) monk_attack = TRUE;
 
 	if(check_invalidate_inventory(INVEN_RARM + hand)) weapon_invalid = TRUE;
+
+
+	if (check_equip_specific_fixed_art(ART_ECSEDI, TRUE)) flag_vamp_armour = TRUE;
+
+	//v1.1.99 吸血フラグ付きの防具を着けているとき両手に吸血効果が乗る
+	//もとは★エリーザベトだけだったが大怨霊エゴグローブも追加したので扱いを整理
+	for (i = INVEN_RIBBON; i <= INVEN_FEET; i++)
+	{
+		object_type *tmp_o_ptr = &inventory[i];
+		u32b tmp_flgs[TR_FLAG_SIZE];
+
+		object_flags(tmp_o_ptr, tmp_flgs);
+
+		if (have_flag(tmp_flgs, TR_VAMPIRIC))
+		{
+			if (cheat_xtra) msg_print("TESTMEG:VAMP ARMOUR");
+			flag_vamp_armour = TRUE;
+			break;
+		}
+	}
 
 	//職業ごとに不意打ち判定などの特殊処理
 	switch (p_ptr->pclass)
@@ -3271,8 +4171,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		{
 			fuiuchi = TRUE;
 			flag_katana_critical = TRUE;
-
 		}
+		if (mode == HISSATSU_FUIUCHI)
+			fuiuchi = TRUE;
 
 	}
 
@@ -3635,8 +4536,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 				if(weapon_invalid) can_drain = FALSE;
 			}
-			//エリザベートのドレス
-			if(monster_living(r_ptr) && check_equip_specific_fixed_art(ART_ECSEDI,TRUE))
+			//v1.1.99 吸血防具フラグ
+			if(monster_living(r_ptr) && flag_vamp_armour)
 			{
 					can_drain = TRUE;
 			}
@@ -7317,7 +8218,10 @@ bool move_player_effect(int ny, int nx, u32b mpe_mode)
 		}
 
 		/* Hit the trap */
-		hit_trap((mpe_mode & MPE_BREAK_TRAP) ? TRUE : FALSE);
+		//hit_trap((mpe_mode & MPE_BREAK_TRAP) ? TRUE : FALSE);
+
+		activate_floor_trap(py,px,mpe_mode );
+
 
 		if (!player_bold(ny, nx) || p_ptr->is_dead || p_ptr->leaving) return FALSE;
 	}
@@ -7415,7 +8319,8 @@ bool trap_can_be_ignored(int feat)
  *:::break_trap:トラップを破壊する（狂戦士用？）
  *:::oktomove:移動に成功したかどうかのフラグ
  */
-void move_player(int dir, bool do_pickup, bool break_trap)
+//v1.1.97 activate_trapフラグ追加。これがTRUEのとき罠を解除しないし浮遊があっても落とし穴や落とし戸に落ちる
+void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 {
 	/* Find the result of moving */
 	/*:::移動先グリッドの位置を計算*/
@@ -7821,7 +8726,7 @@ void move_player(int dir, bool do_pickup, bool break_trap)
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
 	/* Disarm a visible trap */
-	else if ((do_pickup != easy_disarm) && have_flag(f_ptr->flags, FF_DISARM) && !c_ptr->mimic)
+	else if ((do_pickup != easy_disarm) && have_flag(f_ptr->flags, FF_DISARM) && !c_ptr->mimic && !activate_trap)
 	{
 		if (!trap_can_be_ignored(c_ptr->feat))
 		{
@@ -7937,7 +8842,8 @@ void move_player(int dir, bool do_pickup, bool break_trap)
 	{
 		u32b mpe_mode = MPE_ENERGY_USE;
 		/*:::警告処理*/
-		if (p_ptr->warning)
+		//v1.1.97 罠発動移動のとき警告を出なくする。危険なモンスターの方の警告も出なくなるがまあそれほど奇妙な挙動でもないだろう
+		if (p_ptr->warning && !activate_trap)
 		{
 			if (!process_warning(x, y,FALSE))
 			{
@@ -8001,7 +8907,8 @@ void move_player(int dir, bool do_pickup, bool break_trap)
 
 #endif /* ALLOW_EASY_DISARM -- TNB */
 
-		if (break_trap) mpe_mode |= MPE_BREAK_TRAP;
+		if (activate_trap) mpe_mode |= MPE_ACTIVATE_TRAP;
+		else if (break_trap) mpe_mode |= MPE_BREAK_TRAP;
 
 		/* Move the player */
 		(void)move_player_effect(y, x, mpe_mode);
@@ -8756,11 +9663,11 @@ void run_step(int dir)
 	/* Move the player, using the "pickup" flag */
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
-	move_player(find_current, FALSE, FALSE);
+	move_player(find_current, FALSE, FALSE,FALSE);
 
 #else /* ALLOW_EASY_DISARM -- TNB */
 
-	move_player(find_current, always_pickup, FALSE);
+	move_player(find_current, always_pickup, FALSE, FALSE);
 
 #endif /* ALLOW_EASY_DISARM -- TNB */
 
@@ -8904,7 +9811,7 @@ void travel_step(void)
 
 	energy_use = 100;
 
-	move_player(travel.dir, always_pickup, FALSE);
+	move_player(travel.dir, always_pickup, FALSE,FALSE);
 
 	if ((py == travel.y) && (px == travel.x))
 		travel.run = 0;

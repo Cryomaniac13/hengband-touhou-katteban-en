@@ -23,8 +23,8 @@ RC         = brc32
 #
 # Name of the *.exe-file
 
-# EXE_FILE = hengband_th.exe
-EXE_FILE = hengband_th_eng.exe
+# EXE_FILE = Gensoband.exe
+EXE_FILE = Gensouband.exe
 
 
 ###################################################################

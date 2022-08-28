@@ -758,6 +758,34 @@ static void do_cmd_eat_food_aux(int item)
 			}
 			break;
 
+			case SV_FOOD_STRANGE_BEAN:
+			{
+				msg_print(_("不気味な味と食感だ...", "It has an unsettling taste and texture..."));
+
+				if (one_in_(2) && !(p_ptr->resist_pois || IS_OPPOSE_POIS()))
+				{
+					msg_print(_("あなたは苦しくなってきた。", "You are suddenly in pain."));
+					take_hit(DAMAGE_NOESCAPE, 100 + randint1(100), _("食あたり", "food poisoning"), -1);
+				}
+				else if (one_in_(2) && !p_ptr->sustain_con)
+				{
+					if (do_dec_stat(A_CON))
+						msg_print(_("あなたは体調を崩した。", "You're not feeling well."));
+				}
+				else if (one_in_(2) && !p_ptr->sustain_str)
+				{
+					if (do_dec_stat(A_STR))
+						msg_print(_("あなたは体調を崩した。", "You're not feeling well."));
+				}
+				else
+				{
+					//変容魔法「肉体変容」と同じ効果
+					gain_physical_mutation();
+				}
+			}
+			break;
+
+
 
 		}
 	}
@@ -1725,9 +1753,16 @@ static void do_cmd_quaff_potion_aux(int item)
 	}
 
 	//v1.1.84 反獄王の入った酒　特殊★
-	if (o_ptr->name1 == ART_HANGOKU_SAKE)
+	//v1.1.98 連続昏睡事件Ⅱ受領後はこの酒の効果がなくなる
+	if (o_ptr->name1 == ART_HANGOKU_SAKE && quest[QUEST_HANGOKU2].status == QUEST_STATUS_UNTAKEN)
 	{
-		if (p_ptr->prace == RACE_LUNARIAN)
+		if (p_ptr->muta4 & MUT4_GHOST_HANGOKUOH)
+		{
+			msg_print(_("今更こんなものを飲んでも仕方がない。", "No use drinking it at this point."));
+			return;
+		}
+
+		else if (p_ptr->prace == RACE_LUNARIAN)
 		{
 			char i;
 			msg_print(_("この酒はあなたにとって耐え難い穢れに満ちている。",
@@ -1821,8 +1856,9 @@ static void do_cmd_quaff_potion_aux(int item)
 		}
 
 		//v1.1.84 特殊★の処理は別にやる
-		if (q_ptr->name1 == ART_HANGOKU_SAKE)
+		if (q_ptr->name1 == ART_HANGOKU_SAKE && quest[QUEST_HANGOKU2].status == QUEST_STATUS_UNTAKEN)
 		{
+
 			if (p_ptr->prace == RACE_LUNARIAN)
 			{
 				take_hit(DAMAGE_LOSELIFE, 5000, _("反獄王", "Hangoku-ou"), -1);
@@ -3961,7 +3997,8 @@ static void sagume_read_scroll_aux(int item, bool known)
 				break;
 			}
 			cave_set_feat(py, px, f_tag_to_index_in_init("TRAP_TRAPDOOR"));
-			if(!p_ptr->levitation) hit_trap(FALSE);
+			//if(!p_ptr->levitation) hit_trap(FALSE);
+			if(!p_ptr->levitation) activate_floor_trap(py,px,0L);
 			ident = TRUE;
 
 			break;
@@ -6056,10 +6093,17 @@ static int wand_effect(int sval, int dir, bool powerful, bool magic)
 			break;
 		}
 
+		//v1.1.96 トラップ・ドア破壊の魔法棒をトラップ発動の魔法棒に変更する
+		//トラップ解除の魔法棒と役割が大部分被っていたので丁度いい
 		case SV_WAND_TRAP_DOOR_DEST:
 		{
-			if (destroy_door(dir)) ident = TRUE;
-			if (powerful && destroy_doors_touch()) ident = TRUE;
+
+			//if (destroy_door(dir)) ident = TRUE;
+			//if (powerful && destroy_doors_touch()) ident = TRUE;
+
+			int flg = PROJECT_BEAM | PROJECT_GRID | PROJECT_ITEM;
+			return (project_hook(GF_ACTIV_TRAP, dir, 0, flg));
+
 			break;
 		}
 

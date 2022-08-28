@@ -3942,10 +3942,11 @@ cptr cast_monspell_new_aux(int num, bool only_info, bool fail, int xtra)
 
 			if(powerful)
 			{
+				//v2.0 少し弱体化
 				rad = 5;
-				base = cast_lev * 4;
+				base = cast_lev * 3;
 				dice = 1;
-				sides = 300;
+				sides = 250;
 			}
 			else
 			{
@@ -6599,7 +6600,8 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_ISHIZAKURA) gain = 20;
 				if (tv == TV_MATERIAL && sv == SV_MATERIAL_SKULL) gain = 25;
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_NIGHTMARE_FRAGMENT) gain = 100;
-				if(tv == TV_MATERIAL && sv == SV_MATERIAL_SAPPHIRE) gain = 200;
+				if (tv == TV_SOUVENIR && sv == SV_SOUVENIR_KODOKUZARA) gain = 500;
+
 				break;
 			case MARISA_POWER_ILLU:
 				if(tv == TV_MUSHROOM && sv == SV_MUSHROOM_BLINDNESS) gain = 3;
@@ -8086,7 +8088,7 @@ void kanako_get_point(monster_type *m_ptr)
 			p_ptr->magic_num2[0] |= KANAKO_BEAT_0_CTHULHU;
 		}
 
-		if(m_ptr->r_idx == MON_OBERON)
+		if(m_ptr->r_idx == MON_TAISAI)
 		{
 			get_point += 250; //*2
 			 p_ptr->magic_num2[0] |= KANAKO_BEAT_0_OBERON;
@@ -9053,16 +9055,16 @@ int moon_vault_mon_list[][3] =
 	{MON_UDONGE,3,5},
 	{MON_TEWI,7,5},
 
-	{MON_G_USAGI,3,7},
-	{MON_G_USAGI,4,7},
-	{MON_G_USAGI,5,7},
-	{MON_G_USAGI,6,7},
-	{MON_G_USAGI,7,7},
-	{MON_G_USAGI,3,8},
-	{MON_G_USAGI,4,8},
-	{MON_G_USAGI,5,8},
-	{MON_G_USAGI,6,8},
-	{MON_G_USAGI,7,8},
+	{MON_YOUKAI_RABBIT2,3,7},
+	{MON_YOUKAI_RABBIT2,4,7},
+	{MON_YOUKAI_RABBIT2,5,7},
+	{MON_YOUKAI_RABBIT2,6,7},
+	{MON_YOUKAI_RABBIT2,7,7},
+	{MON_YOUKAI_RABBIT2,3,8},
+	{MON_YOUKAI_RABBIT2,4,8},
+	{MON_YOUKAI_RABBIT2,5,8},
+	{MON_YOUKAI_RABBIT2,6,8},
+	{MON_YOUKAI_RABBIT2,7,8},
 
 	{MON_FAIRY_EX,3,12},
 	{MON_FAIRY_EX,4,12},
@@ -9566,6 +9568,10 @@ void hina_yakuotoshi(int gain_exp)
 			if(have_flag(flgs,TR_CHR)) need_exp += -(o_ptr->pval) * 10;
 			if(have_flag(flgs,TR_STEALTH)) need_exp += -(o_ptr->pval) * 10;
 			if(have_flag(flgs,TR_SEARCH)) need_exp += -(o_ptr->pval) * 10;
+
+			if (have_flag(flgs, TR_DISARM)) need_exp += -(o_ptr->pval) * 10;
+			if (have_flag(flgs, TR_SAVING)) need_exp += -(o_ptr->pval) * 10;
+
 		}
 
 		//マイナス修正値 1ごとに2000
@@ -11293,7 +11299,9 @@ bool set_mana_shield(bool set, bool guard_break)
 ///v1.1.27 結界ガードによるダメージ軽減とMP減少
 void check_mana_shield(int *dam, int damage_type)
 {
-	int reduce_dam;
+	int reduce_dam, use_mana;
+
+	int shield_power;
 
 	if (!(p_ptr->special_defense & SD_MANA_SHIELD)) return;
 
@@ -11308,22 +11316,41 @@ void check_mana_shield(int *dam, int damage_type)
 	{
 		msg_print(_("結界を貫通された！", "Your barrier is pierced!"));
 		reduce_dam = 0;
+		use_mana = 0;
 	}
 	else
 	{
-		//軽減可能ダメージ計算
+		//軽減ダメージ計算
 		reduce_dam = (*dam + 1) / 2;
-		if(p_ptr->csp < reduce_dam) reduce_dam = p_ptr->csp;
+
+		//消費MP計算 消費魔力減少のとき-25%
+		use_mana = reduce_dam;
+		if (p_ptr->dec_mana) use_mana = use_mana * 3 / 4;
+
+		//MPが足りないぶんはHPダメージに逆流(消費魔力減少の効果は発揮されたまま)
+		if (p_ptr->csp < use_mana)
+		{
+			reduce_dam -= use_mana - p_ptr->csp;
+			use_mana = p_ptr->csp;
+			//ガードブレイク
+			set_mana_shield(FALSE, TRUE);
+		}
 
 	}
 
-	//次の行動までに最大MP以上のダメージを食らったら防御が破れる
-	if(reduce_dam >= p_ptr->csp || count_damage_guard_break >= MIN(p_ptr->msp,500))
+	shield_power = MIN(p_ptr->msp, 500);
+	if (p_ptr->easy_spell) shield_power += shield_power / 2;
+
+	//次の行動までに最大MP以上のダメージを食らったらガードブレイク
+	if(count_damage_guard_break > shield_power)
 		set_mana_shield(FALSE,TRUE);
+
+	//paranoia
+	if (reduce_dam < 0) reduce_dam = 0;
 
 	//ダメージとMP減少
 	*dam -= reduce_dam;
-	p_ptr->csp -= reduce_dam;
+	p_ptr->csp -= use_mana;
 	p_ptr->redraw |= PR_MANA;
 
 }

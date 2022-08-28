@@ -5429,8 +5429,8 @@ void update_dungeon_feeling(bool flag_feel_now)
 	/* No feeling in a quest */
 	if (quest_num &&
 	    (is_fixed_quest_idx(quest_num) &&
-	  //   !((quest_num == QUEST_OBERON) || (quest_num == QUEST_SERPENT) ||
-	     !((quest_num == QUEST_OBERON) || (quest_num == QUEST_YUKARI) ||
+	  //   !((quest_num == QUEST_TAISAI) || (quest_num == QUEST_SERPENT) ||
+	     !((quest_num == QUEST_TAISAI) || (quest_num == QUEST_YUKARI) ||
 	       !(quest[quest_num].flags & QUEST_FLAG_PRESET)))) return;
 
 	if(EXTRA_QUEST_FLOOR) return;
@@ -5609,6 +5609,10 @@ static void process_world(void)
 			p_ptr->energy_need = 0;
 		}
 		//それ以外のとき、まだ勝負がついてない
+
+		//v1.1.96 闘技場で「応答なし」にならないように追加　たぶんこの関数でいいはず
+		if (turn % 10 == 0) Term_flush();
+
 	}
 
 	/*** Check monster arena ***/
@@ -6423,10 +6427,17 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 
 			if (x > 190) x -= 30; //ラストスパート(X=160~190)は丸太の密度二倍
 
-			if (in_bounds(y, x) && cave_empty_bold2(y, x))
+			//v2.0 マップの最上部を駆け抜けたら丸太に当たらないのはクエストの趣旨に反するし少々不自然なのでダメージを受けることにした
+			if (player_bold(y, x))
+			{
+				msg_print(_("落ちてきた丸太が脳天に直撃した！", "A falling log lands on top of your head!"));
+				disturb(1, 1);
+				if (!IS_INVULN()) take_hit(DAMAGE_NOESCAPE, 50 + randint1(25), _("丸太", "falling log"), -1);
+				set_stun(p_ptr->stun + randint1(50));
+			}
+			else if (in_bounds(y, x) && cave_empty_bold2(y, x))
 			{
 				summon_named_creature(0, y, x, MON_MARUTA, PM_NO_PET);
-
 			}
 		}
 	}
@@ -6445,7 +6456,8 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		int chance = 3000 - dun_level * 16;
 		if( one_in_(chance))
 		{
-			if (summon_specific(0, py, px, dun_level, SUMMON_DEATH,(PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_NO_PET)))
+			//v1.2.00 レベルをdun_levelから(plev+dun_level)/2にした。ヘルファイアDが最終盤まで出ないように
+			if (summon_specific(0, py, px, (dun_level+p_ptr->lev)/2, SUMMON_DEATH,(PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_NO_PET)))
 				msg_format(_("地獄からの刺客が現れた！", "An assassin from hell appears!"));
 		}
 	}
@@ -9134,7 +9146,7 @@ static void dungeon(bool load_game)
 	//v1.1.25 ダンジョン制覇フラグ
 	if(!p_ptr->inside_quest && dun_level && dun_level == d_info[dungeon_type].maxdepth && !flag_dungeon_complete[dungeon_type])
 	{
-		if(dungeon_type != DUNGEON_ANGBAND && dungeon_type != DUNGEON_CHAOS &&
+		if(dungeon_type != DUNGEON_CHAOS &&
 			(!d_info[dungeon_type].final_guardian || !r_info[d_info[dungeon_type].final_guardian].max_num))
 		{
 			msg_format(_("あなたは%sを制覇した！", "You have conquered %s!"),d_name+d_info[dungeon_type].name);
@@ -9244,8 +9256,8 @@ static void dungeon(bool load_game)
 	/*:::クエストダンジョンに入ったとき「典型的なクエストのダンジョンのようだ」と表示させるための処理らしいが、*/
 	/*:::それにしては条件式がややこしすぎる気がする。何か見落としているのか。*/
 	if (quest_num && (is_fixed_quest_idx(quest_num) &&
-	  //  !((quest_num == QUEST_OBERON) || (quest_num == QUEST_SERPENT) ||
-	    !((quest_num == QUEST_OBERON) ||(quest_num == QUEST_YUKARI) ||
+	  //  !((quest_num == QUEST_TAISAI) || (quest_num == QUEST_SERPENT) ||
+	    !((quest_num == QUEST_TAISAI) ||(quest_num == QUEST_YUKARI) ||
 	    !(quest[quest_num].flags & QUEST_FLAG_PRESET)))) do_cmd_feeling();
 
 	if (p_ptr->inside_battle)
@@ -9289,7 +9301,7 @@ static void dungeon(bool load_game)
 		quest_discovery(random_quest_number(dun_level));
 		p_ptr->inside_quest = random_quest_number(dun_level);
 	}
-	if ((dun_level == d_info[dungeon_type].maxdepth) && d_info[dungeon_type].final_guardian)
+	if ((dun_level == d_info[dungeon_type].maxdepth) && d_info[dungeon_type].final_guardian && (CHECK_GUARDIAN_CAN_POP))
 	{
 		if (r_info[d_info[dungeon_type].final_guardian].max_num)
 #ifdef JP
@@ -10564,7 +10576,7 @@ prt("お待ち下さい...", 0, 0);
 		{
 			//v1.1.92 菫子(闘技場専用)も出さないよう追加
 
-			if(i == MON_OBERON || i== MON_SERPENT || i == MON_MORGOTH || i == MON_AZATHOTH || i == MON_FLAN || i == MON_SUMIREKO_2
+			if(i == MON_TAISAI || i == MON_OBERON || i== MON_SERPENT || i == MON_MORGOTH || i == MON_AZATHOTH || i == MON_FLAN || i == MON_SUMIREKO_2
 			|| i == MON_GOLFIMBUL || i == MON_HECATIA1 || i == MON_HECATIA2 || i == MON_HECATIA3 || i == MON_MIKO || i == MON_ERIC)
 			{
 				r_info[i].flags1 |= (RF1_QUESTOR);

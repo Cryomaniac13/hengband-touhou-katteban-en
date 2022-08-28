@@ -663,6 +663,10 @@ static flag_insc_table flag_insc_plus[] =
 	{ "探", "Sr", TR_SEARCH, -1 },
 	{ "赤", "If", TR_INFRA, -1 },
 	{ "掘", "Dg", TR_TUNNEL, -1 },
+	//v1.1.99 追加
+	{ "解", "Da", TR_DISARM, -1 },
+	{ "抗", "Sv", TR_SAVING, -1 },
+
 	{ NULL, NULL, 0, -1 }
 };
 
@@ -832,6 +836,10 @@ static flag_insc_table flag_insc_plus[] =
 	{ "Sr", TR_SEARCH, -1 },
 	{ "If", TR_INFRA, -1 },
 	{ "Dg", TR_TUNNEL, -1 },
+	//v1.1.99 追加
+	{ "Dsrm", TR_DISARM, -1 },
+	{ "PrMg", TR_SAVING, -1 },
+
 	{ NULL, 0, -1 }
 };
 
@@ -1092,8 +1100,9 @@ static char *get_ability_abbreviation(char *ptr, object_type *o_ptr, bool kanji,
 
 	//Hack - グリマリには+3符と記述
 	if(o_ptr->name1 == ART_GRIMOIRE_OF_MARISA) ADD_INSC(_("符","Cd"));
-	//v1.1.32 作業服に解と記述
-	if(o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER) ADD_INSC(_("解", "Dsrm"));
+
+	//v1.1.32 作業服に解と記述 廃止
+	//if(o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER) ADD_INSC("解");
 
 	/* Resistance */
 	if (have_flag_of(flag_insc_resistance, flgs))
@@ -2692,14 +2701,21 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 #endif
 			}
 		}
-
+		else if (o_ptr->pval >= CHEST_TRAP_LIST_LENGTH)
+		{
+			t = object_desc_str(t, "(ERROR)");
+		}
 		/* Describe the traps, if any */
 		else
 		{
-			/* Describe the traps */
-			switch (chest_traps[o_ptr->pval])
+			//v1.1.97 箱トラップ内容を一新
+
+//			switch (chest_traps[o_ptr->pval])
+			switch (chest_new_traps[o_ptr->pval])
 			{
-				case 0:
+
+
+				case CHEST_TRAP_NOTHING:
 				{
 #ifdef JP
 					t = object_desc_str(t, "(施錠)");
@@ -2708,6 +2724,110 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 #endif
 					break;
 				}
+				case CHEST_TRAP_LOSE_STR:
+					t = object_desc_str(t, _("(腕力低下ダーツ)", "(STR lowering dart)"));
+					break;
+				case CHEST_TRAP_LOSE_CON:
+					t = object_desc_str(t, _("(耐久低下ダーツ)", "(CON lowering dart)"));
+					break;
+				case CHEST_TRAP_LOSE_MAG:
+					t = object_desc_str(t, _("(知能低下ダーツ)", "(INT lowering dart)"));
+					break;
+
+
+				case CHEST_TRAP_BA_POIS:
+					t = object_desc_str(t, _("(毒ガス)", "(Poison gas)"));
+					break;
+				case CHEST_TRAP_BA_SLEEP:
+					t = object_desc_str(t, _("(睡眠ガス)", "(Sleeping gas)"));
+					break;
+				case CHEST_TRAP_BA_CONF:
+					t = object_desc_str(t, _("(混乱ガス)", "(Confusion gas)"));
+					break;
+				case CHEST_TRAP_EXPLODE:
+					t = object_desc_str(t, _("(爆弾)", "(Bomb)"));
+					break;
+				case CHEST_TRAP_ALARM:
+					t = object_desc_str(t, _("(アラーム)", "(Alarm)"));
+					break;
+				case CHEST_TRAP_SUMMON:
+					t = object_desc_str(t, _("(召喚のルーン)", "(Summoning runes)"));
+					break;
+				case CHEST_TRAP_S_BIRD:
+					t = object_desc_str(t, _("(鳥召喚のルーン)", "(Bird summoning runes)"));
+					break;
+
+				case CHEST_TRAP_S_ELEMENTAL:
+					t = object_desc_str(t, _("(精霊召喚のルーン)", "(Elemental summoning runes)"));
+					break;
+				case CHEST_TRAP_S_DEMON:
+					t = object_desc_str(t, _("(悪魔召喚のルーン)", "(Demon summoning runes)"));
+					break;
+
+				case CHEST_TRAP_S_DRAGON:
+					t = object_desc_str(t, _("(竜召喚のルーン)", "(Dragon summoning runes)"));
+					break;
+				case CHEST_TRAP_S_CHIMERA:
+					t = object_desc_str(t, _("(巨獣召喚のルーン)", "(Beast summoning runes)"));
+					break;
+				case CHEST_TRAP_S_VORTEX:
+					t = object_desc_str(t, _("(魔渦召喚のルーン)", "(Vortex summoning runes)"));
+					break;
+				case CHEST_TRAP_S_KWAI:
+					t = object_desc_str(t, _("(妖怪召喚のルーン)", "(Youkai summoning runes)"));
+					break;
+
+				case CHEST_TRAP_SUIKI:
+					t = object_desc_str(t, _("(水鬼鬼神長の罠)", "(Sui-Ki Kishin chief trap)"));
+					break;
+
+				case CHEST_TRAP_RUIN:
+					t = object_desc_str(t, _("(破滅のトラップ)", "(Ruination trap)"));
+					break;
+				case CHEST_TRAP_SLINGSHOT:
+					t = object_desc_str(t, _("(石つぶて)", "(Slingshot)"));
+					break;
+				case CHEST_TRAP_ARROW:
+					t = object_desc_str(t, _("(矢)", "(Arrow)"));
+					break;
+				case CHEST_TRAP_STEEL_ARROW:
+					t = object_desc_str(t, _("(鋼鉄の矢)", "(Steel arrow)"));
+					break;
+				case CHEST_TRAP_TELEPORTER:
+					t = object_desc_str(t, _("(テレポーター)", "(Teleporter)"));
+					break;
+				case CHEST_TRAP_PUNCH:
+					t = object_desc_str(t, _("(パンチ)", "(Punch)"));
+					break;
+				case CHEST_TRAP_BR_FIRE:
+					t = object_desc_str(t, _("(火炎放射)", "(Flamethrower)"));
+					break;
+				case CHEST_TRAP_BR_ACID:
+					t = object_desc_str(t, _("(酸の噴射)", "(Acid spray)"));
+					break;
+				case CHEST_TRAP_BA_TIME:
+					t = object_desc_str(t, _("(逆玉手箱)", "(Time reversal)"));
+					break;
+				case CHEST_TRAP_MIMIC:
+					t = object_desc_str(t, _("(ミミック)", "(Mimic)"));
+					break;
+				case CHEST_TRAP_MAGIC_DRAIN:
+					t = object_desc_str(t, _("(魔力吸収)", "(Magic drain)"));
+					break;
+				case CHEST_TRAP_BA_BERSERK:
+					t = object_desc_str(t, _("(狂化ガス)", "(Maddening gas)"));
+					break;
+				case CHEST_TRAP_FUSION:
+					t = object_desc_str(t, _("(フュージョン)", "(Fusion)"));
+					break;
+
+				default:
+				{
+					t = object_desc_str(t, "(ERROR)");
+					break;
+				}
+
+#if 0
 				case CHEST_LOSE_STR:
 				{
 #ifdef JP
@@ -2792,6 +2912,8 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 #endif
 					break;
 				}
+#endif
+
 			}
 		}
 	}
@@ -3252,6 +3374,26 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 				t = object_desc_str(t, "赤外線視力");
 #else
 				t = object_desc_str(t, " to infravision");
+#endif
+			}
+			//v1.1.99 魔法防御
+			else if (have_flag(flgs, TR_SAVING))
+			{
+				/* Dump " to infravision" */
+#ifdef JP
+				t = object_desc_str(t, "魔法防御");
+#else
+				t = object_desc_str(t, " to protection from magic");
+#endif
+			}
+			//v1.1.99 解除
+			else if (have_flag(flgs, TR_DISARM))
+			{
+				/* Dump " to infravision" */
+#ifdef JP
+				t = object_desc_str(t, "解除");
+#else
+				t = object_desc_str(t, " to disarming");
 #endif
 			}
 

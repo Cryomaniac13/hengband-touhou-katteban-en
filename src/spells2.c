@@ -6288,6 +6288,7 @@ bool destroy_area(int y1, int x1, int r, bool in_generate, bool force_floor, boo
  *:::範囲内の地形をランダムな壁と床にし、壁になった地形に＠やモンスターが居たらダメージか退避処理
  *:::（壁抜け可能なキャラクターを除く）
  *:::r:半径 m_idx:モンスターが地震を起こしたときそのモンスターのインデックス　＠は0*/
+//v2.0 r値を上限30にした。map[][]を32→64に
 bool earthquake_aux(int cy, int cx, int r, int m_idx)
 {
 	int             i, t, y, x, yy, xx, dy, dx;
@@ -6295,7 +6296,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 	int             sn = 0, sy = 0, sx = 0;
 	bool            hurt = FALSE;
 	cave_type       *c_ptr;
-	bool            map[32][32];
+	bool            map[64][64];
 
 	if(p_ptr->pclass == CLASS_TENSHI && kanameishi_check(randint1(r))) return (FALSE);
 
@@ -6305,14 +6306,15 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 		return (FALSE);
 	}
 
-
 	/* Paranoia -- Enforce maximum range */
-	if (r > 12) r = 12;
+	if (r > 30) r = 30;
+
+	if (cheat_xtra) msg_format("earthquake:rad%d", r);
 
 	/* Clear the "maximal blast" area */
-	for (y = 0; y < 32; y++)
+	for (y = 0; y < 64; y++)
 	{
-		for (x = 0; x < 32; x++)
+		for (x = 0; x < 64; x++)
 		{
 			map[y][x] = FALSE;
 		}
@@ -6323,6 +6325,8 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 	{
 		for (dx = -r; dx <= r; dx++)
 		{
+			int idx, idy;
+
 			/* Extract the location */
 			yy = cy + dy;
 			xx = cx + dx;
@@ -6350,7 +6354,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 
 			if (player_bold(yy, xx) && (p_ptr->pclass == CLASS_TENSHI || p_ptr->pclass == CLASS_KEIKI))
 			{
-				msg_print(_("落石はあなたを傷つけなかった。", "Of course, you weren't harmed."));
+				msg_print(_("落石はあなたを傷つけなかった。", "The falling rocks didn't harm you."));
 				continue;
 			}
 			else if (player_bold(yy, xx) && p_ptr->pclass == CLASS_ICHIRIN && one_in_(p_ptr->do_martialarts? 2:4))
@@ -6359,8 +6363,18 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 				continue;
 			}
 
+			idy = 32 + yy - cy;
+			idx = 32 + xx - cx;
+
+			if (idx < 0 || idx >= 64 || idy < 0 || idy >= 64)
+			{
+				msg_format(_("ERROR:earthquake_aux()で配列外のXY(%d,%d)",
+                            "ERROR: Out of bounds XY (%d, %d) in earthquake_aux()"), idx, idy);
+				return FALSE;
+			}
+
 			/* Damage this grid */
-			map[16+yy-cy][16+xx-cx] = TRUE;
+			map[idy][idx] = TRUE;
 
 			/* Hack -- Take note of player damage */
 			if (player_bold(yy, xx)) hurt = TRUE;
@@ -6381,7 +6395,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 			if (!cave_empty_bold(y, x)) continue;
 
 			/* Important -- Skip "quake" grids */
-			if (map[16+y-cy][16+x-cx]) continue;
+			if (map[32+y-cy][32+x-cx]) continue;
 
 			if (cave[y][x].m_idx) continue;
 
@@ -6444,11 +6458,13 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 		{
 			/* Message and damage */
 #ifdef JP
-			msg_print("あなたはひどい怪我を負った！");
+			msg_print("逃げ場がない！あなたは巨岩の下敷きになった！");
 #else
-			msg_print("You are severely crushed!");
+			msg_print("There's nowhere to run! You get pinned under a massive rock!");
 #endif
 			damage = 200;
+			//v2.0 逃げ場がない大ダメージのときはスタンも増やそう
+			(void)set_stun(p_ptr->stun + 30 + randint1(30));
 		}
 
 		/* Destroy the grid, and push the player to safety */
@@ -6474,8 +6490,9 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 #else
 					msg_print("You are bashed by rubble!");
 #endif
+					//v2.0 スタン値が増加するのとダメージが大きいのに分けてみる
 					damage = damroll(10, 4);
-					(void)set_stun(p_ptr->stun + randint1(50));
+					(void)set_stun(p_ptr->stun + 15 + randint1(15));
 					break;
 				}
 				case 3:
@@ -6485,8 +6502,8 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 #else
 					msg_print("You are crushed between the floor and ceiling!");
 #endif
-					damage = damroll(10, 4);
-					(void)set_stun(p_ptr->stun + randint1(50));
+					damage = damroll(15, 15);
+					//(void)set_stun(p_ptr->stun + randint1(50));
 					break;
 				}
 			}
@@ -6496,7 +6513,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 		}
 
 		/* Important -- no wall on player */
-		map[16+py-cy][16+px-cx] = FALSE;
+		map[32+py-cy][32+px-cx] = FALSE;
 
 		/* Take some damage */
 		if (damage)
@@ -6535,7 +6552,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 			xx = cx + dx;
 
 			/* Skip unaffected grids */
-			if (!map[16+yy-cy][16+xx-cx]) continue;
+			if (!map[32+yy-cy][32+xx-cx]) continue;
 
 			/* Access the grid */
 			c_ptr = &cave[yy][xx];
@@ -6552,7 +6569,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 				if (r_ptr->flags1 & RF1_QUESTOR)
 				{
 					/* No wall on quest monsters */
-					map[16+yy-cy][16+xx-cx] = FALSE;
+					map[32+yy-cy][32+xx-cx] = FALSE;
 
 					continue;
 				}
@@ -6560,13 +6577,21 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 				/*:::☆の付喪神は地震で埋まらない*/
 				if((m_ptr->r_idx >= MON_TSUKUMO_WEAPON1 && m_ptr->r_idx <= MON_TSUKUMO_WEAPON5 ) && object_is_artifact(&o_list[m_ptr->hold_o_idx]))
 				{
-					map[16+yy-cy][16+xx-cx] = FALSE;
+					map[32+yy-cy][32+xx-cx] = FALSE;
 					continue;
 				}
 				//輝夜も地震で埋まらない
 				if((m_ptr->r_idx == MON_MASTER_KAGUYA))
 				{
-					map[16+yy-cy][16+xx-cx] = FALSE;
+					map[32+yy-cy][32+xx-cx] = FALSE;
+					continue;
+				}
+
+				//v1.1.99 すでに倒れているモンスターは埋まらないことにした(アンバーの王族の血の呪い)
+				if (m_ptr->hp < 0)
+				{
+					map[32 + yy - cy][32 + xx - cx] = FALSE;
+					if (cheat_xtra) msg_print(_("TESTMSG:埋まらない", "TESTMSG: Don't get buried"));
 					continue;
 				}
 
@@ -6600,7 +6625,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 							if (pattern_tile(y, x)) continue;
 
 							/* Important -- Skip "quake" grids */
-							if (map[16+y-cy][16+x-cx]) continue;
+							if (map[32+y-cy][32+x-cx]) continue;
 
 							if (cave[y][x].m_idx) continue;
 							if (player_bold(y, x)) continue;
@@ -6705,7 +6730,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 			xx = cx + dx;
 
 			/* Skip unaffected grids */
-			if (!map[16+yy-cy][16+xx-cx]) continue;
+			if (!map[32+yy-cy][32+xx-cx]) continue;
 
 			/* Access the cave grid */
 			c_ptr = &cave[yy][xx];

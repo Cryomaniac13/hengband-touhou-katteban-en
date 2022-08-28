@@ -72,7 +72,7 @@ const	battle_mon_special_team_type	battle_mon_special_team_list[BATTLE_MON_SPECI
 	{60,_("『メイガスナイト』", "Magus Night"),
 		{MON_MARISA, MON_PATCHOULI, MON_ALICE, MON_BYAKUREN, MON_NARUMI, 0, 0, 0}},
 	{35,_("『兎角同盟』", "Rabbit Alliance"),
-		{MON_UDONGE, MON_TEWI, MON_G_USAGI, MON_G_USAGI, MON_G_USAGI, MON_G_USAGI, MON_G_USAGI, MON_G_USAGI}},
+		{MON_UDONGE, MON_TEWI, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2}},
 
 	{60,_("『付喪神連盟』", "Tsukumogami Federation"),
 		{MON_RAIKO, MON_BENBEN, MON_YATSUHASHI, MON_KOGASA, MON_KOKORO, 0, 0, 0}},
@@ -90,7 +90,7 @@ const	battle_mon_special_team_type	battle_mon_special_team_list[BATTLE_MON_SPECI
 	{70,_("『守矢神社』", "Moriya Shrine"),
 		{MON_KANAKO, MON_SUWAKO, MON_SANAE, 0, 0, 0, 0, 0}},
 	{65,_("『永遠亭』", "Eientei"),
-		{MON_KAGUYA, MON_EIRIN, MON_UDONGE, MON_TEWI, MON_G_USAGI, MON_G_USAGI, MON_G_USAGI, 0}},
+		{MON_KAGUYA, MON_EIRIN, MON_UDONGE, MON_TEWI, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, MON_YOUKAI_RABBIT2, 0}},
 	{30,_("『ダブルスポイラー』", "Double Spoiler"),
 		{MON_AYA, MON_HATATE, 0, 0, 0, 0, 0, 0}},
 	{75,_("『是非曲直庁』", "Ministry of Right and Wrong"),
@@ -1326,6 +1326,9 @@ static bool monster_hook_battle_mon(int r_idx)
 
 	//v1.1.42 紫苑2は出ない
 	if (r_idx == MON_SHION_2) return FALSE;
+
+	//v1.1.98 瑞霊は出ない
+	if (r_idx == MON_MIZUCHI) return FALSE;
 
 	if(r_idx == MON_MASTER_KAGUYA) return FALSE;//輝夜(可変)は出ない
 
@@ -3293,9 +3296,9 @@ void exbldg_search_around(void)
 			{
 #ifdef JP
 				msg1 = "「…物は相談なんだが。";
-				msg1_2 = "何も言わずにその宝塔を$1000000で売ってほしい。」";
+				msg1_2 = "何も言わずにその宝塔を$1,000,000で売ってほしい。」";
 #else
-                msg1 = "'...I want buy that pagoda from you for $1000000.";
+                msg1 = "'...I want buy that pagoda from you for $1,000,000.";
                 msg1_2 = "Just don't tell anyone.'";
 #endif
 				msg2 = _("売りますか？", "Sell it?");
@@ -3346,6 +3349,44 @@ void exbldg_search_around(void)
 		msg2 = _("素材を提供しますか？", "Provide materials?");
 		msg3 = _("造形神は気分良さげに別のものを作り始めている。", "The sculptor god has started working on a new item.");
 		break;
+
+
+	case BLDG_EX_ZASHIKI: //座敷わらしのテレワーク
+
+		msg1 = _("眼鏡をかけた座敷わらしが話しかけてきた...", "Glasses-wearing zashiki-warashi are talking...");
+		if (p_ptr->prace == RACE_ZASHIKIWARASHI)
+		{
+			if(one_in_(3))
+				msg1_2 = _("「あなたが留守の間、私が代理で拠点を担当しますね」",
+                        "'I'll be in charge of exploration base while you're away'");
+			else if (one_in_(2))
+				msg1_2 = _("「やはり時代はリモートね！でも快適なのにすごく仕事が増えている気がするの」",
+                        "'It's truly the era of remote work! However, I have the feeling amount of work has increased'");
+			else
+				msg1_2 = _("「テレワークもいいけどあなたのようなモバイルワークも楽しそうね」",
+                        "'Remote work is fine, but working on the move like you seems to be fun as well'");
+
+		}
+		else
+		{
+			if (one_in_(3))
+				msg1_2 = _("「私があなたの探索拠点の担当になりました。お世話します。」",
+                        "'I'm in charge of taking care of your exploration base.'");
+			else if (one_in_(2))
+				msg1_2 = _("「少しだけあなたの探索をお手伝いしましょう」",
+                        "'It might be just a bit, but I'll help you with exploration base.'");
+			else
+				msg1_2 = _("「あなたの家に泥棒が入らないのは私がちゃんと見張っているからですよ？」",
+                        "'Do robbers avoid your house because I'm watching over it?'");
+
+		}
+
+		msg2 = _("拠点を使いますか？", "Use exploration base?");
+		msg3 = _("「それでは、探索頑張ってくださいね。」", "'Good luck in your adventure.'");
+		break;
+
+
+
 
 		default:
 		msg_print(_("ERROR:exbldg_search_around()にこのidxのメッセージが登録されていない",
@@ -4167,6 +4208,16 @@ void exbldg_search_around(void)
 		}
 		break;
 
+		case BLDG_EX_ZASHIKI://座敷わらし　拠点利用
+		{
+			hack_flag_access_home = TRUE;
+			do_cmd_store();
+			hack_flag_access_home = FALSE;
+			//建物から別の建物に入ったのでフラグ再設定と再描画
+			character_icky = TRUE;
+			show_building(&building[ex_bldg_num]);
+			break;
+		}
 		default:
 		msg_print(_("ERROR:exbldg_search_around()にこの建物の処理が登録されていない",
                     "ERROR: Logic for this building not listed in exbldg_search_around()"));
@@ -4329,6 +4380,8 @@ static bool monster_hook_nightmare_diary(int r_idx)
 	if (r_idx == MON_SEIJA) return FALSE;//正邪は出ない
 	if (r_idx == MON_SUMIREKO) return FALSE; //菫子(お尋ね者バージョン)は出ない
 
+	//v1.1.98 瑞霊は出ない
+	if (r_idx == MON_MIZUCHI) return FALSE;
 
 	//＠が霊夢と魔理沙のときは可変パラメータのMON_REIMUとMON_MARISAを自分として出す。
 	//それ以外のときはランダムユニーク1を自分として出し、monster_is_you()に当てはまる自分モンスターは出さない。

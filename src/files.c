@@ -295,6 +295,8 @@ static named_num gf_desc[] =
 	{"GF_OLD_CONF",			GF_OLD_CONF			},
 	{"GF_OLD_SLEEP",			GF_OLD_SLEEP		},
 	{"GF_OLD_DRAIN",			GF_OLD_DRAIN		},
+	{ "GF_PIT_FALL",			GF_PIT_FALL },
+	{ "GF_ACTIV_TRAP",			GF_ACTIV_TRAP },
 	{"GF_AWAY_UNDEAD",		GF_AWAY_UNDEAD		},
 	{"GF_AWAY_EVIL",			GF_AWAY_EVIL		},
 	{"GF_AWAY_ALL",			GF_AWAY_ALL			},
@@ -6118,14 +6120,18 @@ static void display_player_other_flag_info(void)
 	display_flag_aux(row+ 5, col, "探索        :", TR_SEARCH, &f, 0);
 	display_flag_aux(row+ 6, col, "採掘        :", TR_TUNNEL, &f, 0);
 
-	display_flag_aux(row+ 8, col, "魔法難度減少:", TR_EASY_SPELL, &f, 0);
-	display_flag_aux(row+ 9, col, "消費魔力減少:", TR_DEC_MANA, &f, 0);
-	display_flag_aux(row+10, col, "祝福        :", TR_BLESSED, &f, 0);
-	display_flag_aux(row+11, col, "光源        :", TR_LITE, &f, 0);
+	//v1.1.99 追加
+	display_flag_aux(row + 7, col, "罠解除　　　:", TR_DISARM, &f, 0);
+	display_flag_aux(row + 8, col, "魔法防御上昇:", TR_SAVING, &f, 0);
+
+	display_flag_aux(row+ 9, col, "魔法難度減少:", TR_EASY_SPELL, &f, 0);
+	display_flag_aux(row+10, col, "消費魔力減少:", TR_DEC_MANA, &f, 0);
+	display_flag_aux(row+11, col, "祝福        :", TR_BLESSED, &f, 0);
+	display_flag_aux(row+12, col, "光源        :", TR_LITE, &f, 0);
 	///mod141219 光源は中で例外処理することにした
 	//display_flag_aux(row+11, col, "光源        :", TR_SH_FIRE, &f, 0);
-	display_flag_aux(row+12, col, "乗馬        :", TR_RIDING, &f, 0);
-	display_flag_aux(row+13, col, "投擲        :", TR_THROW, &f, 0);//要らんかも
+	display_flag_aux(row+13, col, "乗馬        :", TR_RIDING, &f, 0);
+	display_flag_aux(row+14, col, "投擲        :", TR_THROW, &f, 0);//要らんかも
 
 	display_flag_aux(row+15, col, "経験値吸収  :", TR_DRAIN_EXP, &f, 0);
 	display_flag_aux(row+16, col, "乱テレポート:", TR_TELEPORT, &f, 0);
@@ -6140,14 +6146,17 @@ static void display_player_other_flag_info(void)
 	display_flag_aux(row+ 5, col, "Searching   :", TR_SEARCH, &f, 0);
 	display_flag_aux(row+ 6, col, "Digging     :", TR_TUNNEL, &f, 0);
 
-	display_flag_aux(row+ 8, col, "Easy Spells :", TR_EASY_SPELL, &f, 0);
-	display_flag_aux(row+ 9, col, "Cheap Spells:", TR_DEC_MANA, &f, 0);
-	display_flag_aux(row+10, col, "Blessed     :", TR_BLESSED, &f, 0);
-	display_flag_aux(row+11, col, "Light       :", TR_LITE, &f, 0);
+	display_flag_aux(row+ 7, col, "Disarming   :", TR_DISARM, &f, 0);
+	display_flag_aux(row+ 8, col, "Magic Prot. :", TR_SAVING, &f, 0);
+
+	display_flag_aux(row+ 9, col, "Easy Spells :", TR_EASY_SPELL, &f, 0);
+	display_flag_aux(row+10, col, "Cheap Spells:", TR_DEC_MANA, &f, 0);
+	display_flag_aux(row+11, col, "Blessed     :", TR_BLESSED, &f, 0);
+	display_flag_aux(row+12, col, "Light       :", TR_LITE, &f, 0);
 	///mod141219 光源は中で例外処理することにした
 	//display_flag_aux(row+11, col, "光源        :", TR_SH_FIRE, &f, 0);
-	display_flag_aux(row+12, col, "Riding      :", TR_RIDING, &f, 0);
-	display_flag_aux(row+13, col, "Throwing    :", TR_THROW, &f, 0);//要らんかも
+	display_flag_aux(row+13, col, "Riding      :", TR_RIDING, &f, 0);
+	display_flag_aux(row+14, col, "Throwing    :", TR_THROW, &f, 0);//要らんかも
 
 	display_flag_aux(row+15, col, "Drain EXP   :", TR_DRAIN_EXP, &f, 0);
 	display_flag_aux(row+16, col, "Teleport    :", TR_TELEPORT, &f, 0);
@@ -7947,7 +7956,7 @@ static void dump_aux_recall(FILE *fff)
 			if (!r_info[d_info[y].final_guardian].max_num) seiha = TRUE;
 		}
 		/*:::オベロンとサーペント倒しても帰還が最深でないと制覇マークがつかなかったので修正*/
-		else if(y == DUNGEON_ANGBAND && quest[QUEST_OBERON].status == QUEST_STATUS_FINISHED) seiha = TRUE;
+		else if(y == DUNGEON_ANGBAND && quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED) seiha = TRUE;
 		else if(y == DUNGEON_CHAOS && quest[QUEST_SERPENT].status == QUEST_STATUS_FINISHED) seiha = TRUE;
 		else if (max_dlv[y] == d_info[y].maxdepth) seiha = TRUE;
 #endif
@@ -8932,10 +8941,10 @@ errr make_character_dump(FILE *fff)
     int test = 0; //テストするとき1にする
 
 #ifdef JP
-	fprintf(fff, "  [変愚蛮怒勝手版 %d.%d.%dT キャラクタ情報]\n\n",
+	fprintf(fff, "  [幻想蛮怒 %d.%d.%dT キャラクタ情報]\n\n",
 		H_VER_MAJOR, H_VER_MINOR, H_VER_PATCH);
 #else
-	fprintf(fff, "  [Hengband Katteban %d.%d.%dT character dump]\n\n",
+	fprintf(fff, "  [Gensouband %d.%d.%dT character dump]\n\n",
 		H_VER_MAJOR, H_VER_MINOR, H_VER_PATCH);
 #endif
 
@@ -9548,9 +9557,9 @@ msg_format("'%s'をオープンできません。", name);
 		{
 			prt(format(
 #ifdef JP
-				"[変愚蛮怒勝手版 %d.%d.%dT, %s, %d/%d]",
+				"[幻想蛮怒 %d.%d.%dT, %s, %d/%d]",
 #else
-				"[Hengband Katteban %d.%d.%d, %s, Line %d/%d]",
+				"[Gensouband %d.%d.%d, %s, Line %d/%d]",
 #endif
 
 			   H_VER_MAJOR, H_VER_MINOR, H_VER_PATCH,
@@ -10435,7 +10444,7 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 			prt("強制的に人里に戻して再セーブを試みます。", 6, 5);
 			prt("念のため続行前にsaveフォルダのアクセス権などを見直して下さい。", 7, 5);
 			prt("userフォルダに緊急ダンプが出力されます。", 8, 5);
-			prt("この勝手版作者に送っていただけると幸いです。", 9, 5);
+			prt("バグ発見のために作者に送っていただけると幸いです。", 9, 5);
 			prt("何かキーを押すと続行します。", 12, 5);
 #else
 			prt("Sorry, failed to save.", 5, 5);
@@ -10443,7 +10452,7 @@ prt("ゲームをセーブしています... 失敗！", 0, 0);
 			prt("Just in case, please review the permissions on the save folder before ", 7, 5);
 			prt("continuing.", 8, 5);
 			prt("An emergency dump will be written to the user folder.  I would", 8, 5);
-			prt("appriate it if you could send it to the author of this Hengband variant.", 9, 5);
+			prt("appriate it if you could send it to the author.", 9, 5);
 			prt("Press any key to continue.", 12, 5);
 #endif
 			(void)inkey();
@@ -10651,7 +10660,7 @@ if(test) msg_format("SOUVENIR(MAX1000k):%d",value_items_max);
 			questpoint += quest[i].level * quest[i].level * (60 - quest[i].complev) * (EXTRA_MODE?2:1);
 			//特定クエストにボーナス
 			if(i == QUEST_YUKARI)	questpoint += 100000;
-			if(i == QUEST_OBERON)	questpoint += 500000;
+			if(i == QUEST_TAISAI)	questpoint += 500000;
 			if(i == QUEST_SERPENT)	questpoint += 1000000;
 
 		}
@@ -10664,8 +10673,18 @@ if(test) msg_format("QUEST:%d",questpoint);
 	for(i=1;i<max_r_idx;i++)
 	{
 		monster_race *r_ptr = &r_info[i];
-		if ((r_ptr->flags1 & RF1_UNIQUE) && (r_ptr->r_akills)) monpoint += r_ptr->level * r_ptr->level;
-		if ((r_ptr->flags3 & RF3_ANG_AMBER) && r_ptr->r_akills) monpoint += 10000;
+
+		if(!(r_ptr->flags1 & RF1_UNIQUE) || !r_ptr->r_akills) continue;
+
+		monpoint += r_ptr->level * r_ptr->level;
+
+		//旧ラスボスのオベロンを倒すとスコアが大幅に上がる。EXTRAでは困難なのでさらにボーナス
+		if (i == MON_OBERON)
+		{
+			if(EXTRA_MODE) monpoint += 600000;
+			else monpoint += 300000;
+		}
+		else if ((r_ptr->flags3 & RF3_ANG_AMBER) && r_ptr->r_akills) monpoint += 10000;
 	}
 
 	///mod160326 UNIQUE2打倒時もユニークと同様にスコア算出
@@ -10675,7 +10694,7 @@ if(test) msg_format("UNIQUE:%d",monpoint);
 	point_l += monpoint;
 
 	//オベロン倒して引退するときターンに応じてボーナス(キャノンボウラーはボーナス多い)
-	if(finish_the_game && (quest[QUEST_OBERON].status == QUEST_STATUS_FINISHED))
+	if(finish_the_game && (quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED))
 	{
 		if(score_turn < TURNS_PER_TICK * TOWN_DAWN * 30) turnbonus += (TURNS_PER_TICK * TOWN_DAWN * 30 - score_turn);
 		//v1.1.53b 難易度LUNATICのときはどうせ反感同然なので何の性格でも同様のボーナスを得られることにした

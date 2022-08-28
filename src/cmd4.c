@@ -444,8 +444,8 @@ errr do_cmd_write_nikki(int type, int num, cptr note)
 #endif
 		///sys 日記　オベロン、サーペントクエ
 		else if (q_idx && (is_fixed_quest_idx(q_idx)
-//		         && !((q_idx == QUEST_OBERON) || (q_idx == QUEST_SERPENT))))
-		         && !((q_idx == QUEST_OBERON) || (q_idx == QUEST_YUKARI))))
+//		         && !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_SERPENT))))
+		         && !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_YUKARI))))
 #ifdef JP
 			note_level = "クエスト:";
 #else
@@ -576,8 +576,8 @@ errr do_cmd_write_nikki(int type, int num, cptr note)
 		{
 			cptr to;
 			if (q_idx && (is_fixed_quest_idx(q_idx)
-			   //  && !((q_idx == QUEST_OBERON) || (q_idx == QUEST_SERPENT))))
-			       && !((q_idx == QUEST_OBERON) || (q_idx == QUEST_YUKARI))))
+			   //  && !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_SERPENT))))
+			       && !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_YUKARI))))
 			{
 #ifdef JP
 				to = "地上";
@@ -4927,10 +4927,10 @@ void do_cmd_version(void)
 
 	/* Silly message */
 #ifdef JP
-	msg_format("変愚蛮怒勝手版 %d.%d.%dT",
+	msg_format("幻想蛮怒 %d.%d.%dT",
 		    H_VER_MAJOR, H_VER_MINOR, H_VER_MINOR);
 #else
-	msg_format("You are playing Hengband Katteban %d.%d.%dT",
+	msg_format("You are playing Gensouband %d.%d.%dT",
 		    H_VER_MAJOR, H_VER_MINOR, H_VER_MINOR);
 #endif
 }
@@ -9603,7 +9603,7 @@ static void do_cmd_knowledge_dungeon(void)
 			{
 				if (!r_info[d_info[i].final_guardian].max_num) seiha = TRUE;
 			}
-			else if(i == DUNGEON_ANGBAND && quest[QUEST_OBERON].status == QUEST_STATUS_FINISHED) seiha = TRUE;
+			else if(i == DUNGEON_ANGBAND && quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED) seiha = TRUE;
 			else if(i == DUNGEON_CHAOS && quest[QUEST_SERPENT].status == QUEST_STATUS_FINISHED) seiha = TRUE;
 			else if (max_dlv[i] == d_info[i].maxdepth) seiha = TRUE;
 #endif

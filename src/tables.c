@@ -3395,7 +3395,7 @@ const player_class class_info[MAX_CLASS] =
 		14, 12, 15, 0,  4, 18, 18, 18,
 		4, 30, 50
 
-		,{1,4,4,3,3,3,3,3,4,0,0,0,0,0,0,0}
+		,{1,4,4,3,3,3,3,3,4,0,0,0,0,0,0,3}
 		,A_INT
 		,5,4,80,
 		{4,3,3,3,3,0,0,0,0,0
@@ -3625,7 +3625,7 @@ const player_class class_info[MAX_CLASS] =
 		15, 15, 15, 0,  3, 12,  8,  8,
 		1, 40, 50
 
-		,{3,4,4,5,4,3,4,2,2,2,5,5,5,0,0,0}
+		,{3,4,4,5,4,3,4,2,2,2,5,5,5,0,0,4}
 		,A_INT
 		,3,2,100,
 		{1,1,1,1,3,0,0,0,0,0
@@ -3675,7 +3675,7 @@ const player_class class_info[MAX_CLASS] =
 		12, 13, 15, 1,  4, 20,  20,  8,
 		4, 45, 30
 
-		,{1,0,0,0,0,0,0,0,0,3,4,5,4,0,0,0}
+		,{1,0,0,0,0,0,0,0,0,3,4,5,4,0,0,4}
 		,A_INT
 		,4,3,90,
 		{4,2,1,1,3,0,0,0,0,0
@@ -3905,7 +3905,7 @@ const player_class class_info[MAX_CLASS] =
 		1,  1, 60, 1,  10, 32, 72, 60,
 		1, 16, 12, 0,  0, 10, 26, 25,
 		7, 35, 100
-		,{1,4,0,0,0,0,0,0,0,0,4,0,4,0,0,0}
+		,{1,4,0,0,0,0,0,0,0,0,4,0,4,0,0,4}
 		,A_INT
 		,6,6,80,
 		{3,1,1,4,1,0,0,0,0,0
@@ -3954,7 +3954,7 @@ const player_class class_info[MAX_CLASS] =
 		21, 24, 30, 4, 16, 20, 40, 40,
 		12, 12, 11, 0,  1,  4,  21, 18,
 		3, 30, 50
-		,{1,4,4,4,4,0,0,0,0,4,4,4,4,0,0,0}
+		,{1,4,4,4,4,0,0,0,0,4,4,4,4,0,0,4}
 		,A_INT
 		,4,2,100,
 		{3,3,1,3,3,0,0,0,0,0
@@ -4132,7 +4132,7 @@ const player_class class_info[MAX_CLASS] =
 		11, 12, 10, 1,  4, 12, 20, 27,
 		4, 40, 75
 
-		,{1,0,4,0,0,0,3,0,0,0,3,0,0,0,0,0}
+		,{1,0,4,0,0,0,3,0,0,0,3,0,0,0,0,4}
 		,A_INT
 		,4,2,90,
 		{2,2,1,1,4,0,0,0,0,0
@@ -4336,7 +4336,7 @@ const player_class class_info[MAX_CLASS] =
 		12, 12, 12, 0,  5, 25, 20, 20,
 		6, 30, 40
 
-		,{1,0,0,0,0,4,4,5,4,0,0,0,0,0,0,0}
+		,{1,0,0,0,0,4,4,5,4,0,0,0,0,0,0,4}
 		,A_INT
 		,4,4,80,
 		{4,4,4,4,5,0,0,0,0,0
@@ -4386,7 +4386,7 @@ const player_class class_info[MAX_CLASS] =
 		 8, 12, 12, 0, 3, 18, 24, 12,
 		4, 20, 50
 
-		,{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0}
+		,{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,2}
 		,A_INT
 		,5,3,80,
 		{4,1,1,3,2,0,0,0,0,0
@@ -4488,7 +4488,7 @@ const player_class class_info[MAX_CLASS] =
 		12, 12, 12, 1,  5, 15, 30, 27,
 		8, 80, 30
 
-		,{1,4,5,4,4,0,0,0,0,4,5,4,4,0,0,0}
+		,{1,4,5,4,4,0,0,0,0,4,5,4,4,0,0,4}
 		,A_INT
 		,6,5,70,
 		{5,2,2,2,5,0,0,0,0,0
@@ -4538,7 +4538,7 @@ const player_class class_info[MAX_CLASS] =
 		16, 18, 15, 0,  4, 12, 15, 18,
 		0, 70, 30
 
-		,{1,5,5,5,5,5,5,0,5,0,5,0,0,0,0,0}
+		,{1,5,5,5,5,5,5,0,5,0,5,0,0,0,0,5}
 		,A_INT
 		,5,3,100,
 		{5,3,2,2,4,0,0,0,0,0
@@ -4895,7 +4895,7 @@ const player_class class_info[MAX_CLASS] =
 		39, 36, 30, 3, 30, 35, 64, 55,
 		11, 10, 10, 0,  2, 12, 18, 18,
 		0, 180, 70
-		,{1,4,4,4,4,4,4,4,4,0,4,4,4,0,0,0}
+		,{1,4,4,4,4,4,4,4,4,0,4,4,4,0,0,4}
 		,A_INT
 		,5,1,100,
 		{4,4,4,4,4,0,0,0,0,0
@@ -4946,7 +4946,7 @@ const player_class class_info[MAX_CLASS] =
 		15, 12, 14, 1,  5,  8,  18,  22,
 		3, 30, 55
 
-		,{1,3,3,0,0,3,0,0,4,0,0,0,0,0,0,0}
+		,{1,3,3,0,0,3,0,0,4,0,0,0,0,0,0,3}
 		,A_INT
 		,3,2,100,
 		{4,1,3,2,4,0,0,0,0,0
@@ -5047,7 +5047,7 @@ const player_class class_info[MAX_CLASS] =
 		16, 15, 12, 0,  3, 10, 21, 10,
 		4, 70, 20
 
-		,{1,4,4,4,4,0,0,0,0,0,4,4,0,0,0,0}
+		,{1,4,4,4,4,0,0,0,0,0,4,4,0,0,0,4}
 		,A_INT
 		,1,1,100,
 		{2,1,1,1,4,0,0,0,0,0
@@ -5174,7 +5174,7 @@ const player_class class_info[MAX_CLASS] =
 		15, 16, 13, 0,  2, 12, 18, 14,
 		3, 50, 30
 
-		,{1,4,4,4,5,0,0,0,0,4,4,4,4,0,0,0}
+		,{1,4,4,4,5,0,0,0,0,4,4,4,4,0,0,4}
 		,A_INT
 		,4,3,100,
 		{3,2,3,1,3,0,0,0,0,0
@@ -5199,7 +5199,7 @@ const player_class class_info[MAX_CLASS] =
 		12, 16, 12, 0,  2,  10, 20,  8,
 		5, 20, 70
 
-		,{1,5,4,4,4,3,3,3,4,4,5,5,4,0,0,0}
+		,{1,5,4,4,4,3,3,3,4,4,5,5,4,0,0,4}
 		,A_INT
 		,4,3,90,
 		{4,2,1,1,2,0,0,0,0,0
@@ -5225,7 +5225,7 @@ const player_class class_info[MAX_CLASS] =
 		15, 15, 12, 0,  3,  10, 14,  8,
 		2, 20, 70
 
-		,{3,5,5,5,5,4,4,3,4,4,5,5,5,0,0,0}
+		,{3,5,5,5,5,4,4,3,4,4,5,5,5,0,0,4}
 		,A_INT
 		,3,2,90,
 		{2,1,1,1,2,0,0,0,0,0
@@ -5353,7 +5353,7 @@ const player_class class_info[MAX_CLASS] =
 		15, 14, 12, 0,  4, 10, 21, 21,
 		6, 100, 20
 
-		,{1,0,0,0,0,0,0,0,0,5,5,5,5,0,0,0}
+		,{1,0,0,0,0,0,0,0,0,5,5,5,5,0,0,5}
 		,A_INT
 		,5,2,80,
 		{4,3,4,2,4,0,0,0,0,0
@@ -5687,7 +5687,7 @@ const player_class class_info[MAX_CLASS] =
 		10, 12, 12, 0,  5, 10, 22, 16,
 		6, 35, 60
 
-		,{1,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0}
+		,{1,0,0,0,0,2,2,2,2,0,0,0,0,0,0,2}
 		,A_INT
 		,4,3,80,
 		{4,3,1,2,3,0,0,0,0,0
@@ -5714,7 +5714,7 @@ const player_class class_info[MAX_CLASS] =
 		10, 12, 15, 0,  3,  7, 12, 10,
 		2, 50, 40
 
-		,{3,5,5,5,5,5,6,5,5,0,0,0,0,0,0,0}
+		,{3,5,5,5,5,5,6,5,5,0,0,0,0,0,0,5}
 		,A_INT
 		,3,2,100,
 		{1,2,1,1,1,0,0,0,0,0
@@ -5997,7 +5997,7 @@ const player_class class_info[MAX_CLASS] =
 			,A_INT
 			,4,2,60,
 			{ 2,2,1,2,2,0,0,0,0,0
-			,4,3,3,2,2,2,2,2,2
+			,4,3,3,2,2,2,2,2,2,1
 			,1 }
 			,55,4,3,4,
 			FALSE,FALSE,TRUE
@@ -6018,7 +6018,7 @@ const player_class class_info[MAX_CLASS] =
 		16, 15, 12, 0,  4, 10, 16, 16,
 		4, 40, 25
 
-		,{ 1,0,0,0,0,0,0,0,0,5,5,5,5,0,0,0 }
+		,{ 1,0,0,0,0,0,0,0,0,5,5,5,5,0,0,5 }
 			,A_INT
 			,4,2,80,
 			{ 4,3,2,2,3,0,0,0,0,0
@@ -6984,10 +6984,10 @@ magic_type spell_base_info[MAX_MAGIC][32][6] =
 	{{99,  0, 0,  0},{99,  0, 0,  0},{37, 32,80,120},{32, 28,75,120},{28, 25,70,120},{25, 23,60,120},},//原子分解
 	{{99,  0, 0,  0},{48, 70,85,150},{45, 60,80,150},{40, 55,70,150},{36, 50,60,150},{33, 43,55,150},},//石壁生成
 	{{99,  0, 0,  0},{50, 80,90,150},{47, 75,88,150},{43, 67,85,150},{40, 60,80,150},{37, 55,75,150},},//絶対零度
-	{{99,  0, 0,  0},{99,  0, 0,  0},{50,100,95,180},{46, 90,90,180},{43, 75,85,180},{40, 68,80,180},},//アトミックレイ
+	{{99,  0, 0,  0},{99,  0, 0,  0},{50,100,95,180},{46, 90,85,180},{43, 75,75,180},{40, 68,70,180},},//アトミックレイ
 	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{48, 50,99,250},{45, 40,99,250},{41, 35,85,250},},//エリクサー
 	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{49,145,85,200},{46,130,80,200},{43,115,70,200},},//四元素免疫
-	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{50, 92,95,250},{48, 84,90,250},{45, 75,72,250},},//エーテルストライク
+	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{50, 80,90,250},{48, 75,85,250},{45, 65,72,250},},//エーテルストライク
 	},
 	{
 	/*:::予見1*/
@@ -7358,7 +7358,7 @@ magic_type spell_base_info[MAX_MAGIC][32][6] =
 	{{42, 21,75,  0},{99,  1,20,  5},{99,  1,20,  5},{30, 18,75, 80},{28, 15,70, 80},{25, 12,60, 80},},//魔力吸収
 	{{45, 25,50,  0},{99,  1,20,  5},{42, 40,55, 60},{38, 37,50, 60},{35, 35,50, 60},{32, 30,45, 60},},//使嗾
 	/*:::死霊3*/
-	{{99,  1,20,  5},{32, 25,60, 50},{28, 22,57, 50},{25, 20,54, 50},{20, 17,50, 50},{18, 15,47, 50},},//死の言霊
+	{{99,  1,20,  5},{32, 22,60, 50},{28, 18,57, 50},{25, 16,54, 50},{20, 14,50, 50},{18, 12,47, 50},},//死の言霊
 	{{99,  1,20,  5},{99,  1,20,  5},{30, 26,56, 65},{27, 24,53, 65},{24, 20,50, 65},{20, 18,45, 65},},//精神感応
 	{{99,  1,20,  5},{36, 48,80, 70},{33, 45,80, 70},{30, 44,75, 70},{27, 40,70, 70},{24, 35,65, 70},},//アンデッド魅了
 	{{99,  1,20,  5},{99,  1,20,  0},{39, 50,65,100},{35, 40,60,100},{33, 30,55,100},{30, 25,48,100},},//死の光線
@@ -7380,7 +7380,7 @@ magic_type spell_base_info[MAX_MAGIC][32][6] =
 	{
 	/*:::混沌1*/
 	{{ 3,  2,22,  0},{ 7,  2,30,  5},{ 5,  2,28,  5},{ 3,  2,23,  5},{ 1,  1,20,  5},{ 1,  1,15,  5},},//マジックミサイル
-	{{ 4,  3,25,  0},{ 8,  4,32,  5},{ 6,  3,30,  5},{ 3,  3,25,  5},{ 1,  2,22,  5},{ 1,  1,15,  5},},//トラップ/ドア破壊
+	{{ 4,  3,25,  0},{ 8,  4,32,  5},{ 6,  3,30,  5},{ 3,  3,25,  5},{ 1,  2,22,  5},{ 1,  1,15,  5},},//トラップ/ドア破壊→トラップ発動
 	{{ 6,  4,30,  0},{11,  9,35,  5},{ 8,  8,35,  5},{ 4,  5,30,  5},{ 2,  2,25,  5},{ 2,  1,15,  5},},//閃光
 	{{ 9,  6,35,  0},{12, 12,45,  6},{ 9, 10,40,  6},{ 6,  6,34,  6},{ 5,  5,30,  6},{ 4,  2,20,  6},},//混乱の手
 	{{16, 14,45,  0},{15, 13,60,  8},{12, 11,60,  8},{10,  7,53,  8},{ 9,  6,48,  8},{ 6,  4,40,  8},},//魔力炸裂
@@ -7446,17 +7446,18 @@ magic_type occult_spell_base_info[32][6] =
 	{{99,  0, 0,  0},{99,  0, 0,  0},{30, 45,60, 40},{25, 40,55, 40},{21, 32,50, 40},{18, 27,44, 40},},//ネッシー
 	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{30,  1,90, 70},{27,  1,80, 70},{24,  1,75, 70},},//猿の手(v1.1.19 三冊目に移動し少し性能変更)
 	{{99,  0, 0,  0},{38, 50,70, 80},{36, 45,65, 80},{32, 40,60, 80},{29, 36,55, 80},{26, 32,50, 80},},//リトルグリーンマン
-	{{99,  0, 0,  0},{99,  0, 0,  0},{43, 60,85,100},{40, 50,80,100},{36, 44,70,100},{32, 37,64,100},},//ドッペルゲンガー
-	{{99,  0, 0,  0},{48, 70,90,120},{46, 65,85,120},{44, 60,83,120},{42, 55,80,120},{39, 47,75,120},},//MIB
+	{{99,  0, 0,  0},{45, 65,90,100},{43, 60,85,100},{40, 50,80,100},{36, 44,70,100},{32, 37,64,100},},//ドッペルゲンガー
+	{{99,  0, 0,  0},{99,  0, 0,  0},{48, 65,85,120},{45, 60,83,120},{42, 55,80,120},{39, 47,75,120},},//MIB
 	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{48, 70,88,160},{45, 65,83,160},{42, 50,80,160},},//月面超文明の襲来
 	/*:::秘術4*/
 	{{99,  0, 0,  0},{24, 35,55, 50},{18, 30,50, 50},{16, 24,45, 50},{13, 20,40, 50},{10, 15,35, 50},},//エイボンの霧の車輪
 	{{99,  0, 0,  0},{35, 30,65, 80},{30, 25,60, 80},{25, 20,55, 80},{22, 15,50, 80},{18, 12,35, 80},},//スレイマンの塵
 	{{99,  0, 0,  0},{43, 75,83,100},{40, 70,80,100},{35, 60,75,100},{30, 50,70,100},{27, 40,65,100},},//異界との接触
-	{{99,  0, 0,  0},{50, 40,60,100},{42, 35,55,100},{37, 30,50,100},{33, 20,45,100},{30, 18,40,100},},//異界への退散
-	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{41,200,90,120},{37,180,80,120},{35,150,75,120},},//黄金の蜂蜜酒製造
-	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{45,128,95,140},{40,100,90,140},{37, 80,85,140},},//イシスの封印
-	{{99,  0, 0,  0},{99,  0, 0,  0},{50,120,95,160},{47,100,90,160},{44, 80,85,160},{40, 64,80,160},},//旧神の印
+ //	{{99,  0, 0,  0},{50, 40,60,100},{42, 35,55,100},{37, 30,50,100},{33, 20,45,100},{30, 18,40,100},},//異界への退散
+	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{37, 65,72,100},{33, 57,65,100},{30, 46,60,100},},//v1.1.96 アザトートの呪詛
+	{{99,  0, 0,  0},{99,  0, 0,  0},{45,210,95,120},{41,200,90,120},{37,180,80,120},{35,150,75,120},},//黄金の蜂蜜酒製造
+	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{44,128,95,140},{40,100,90,140},{37, 80,85,140},},//イシスの封印
+	{{99,  0, 0,  0},{50,120,95,160},{48,100,90,160},{46, 90,85,160},{43, 80,80,160},{40, 64,75,160},},//旧神の印
 	{{99,  0, 0,  0},{99,  0, 0,  0},{99,  0, 0,  0},{50,120,95,200},{48, 96,90,200},{45, 77,85,200},},//ヨグ＝ソトートの一撃
 	};
 
@@ -7823,6 +7824,83 @@ const cptr realm_names[]
 	"unknown"
 };
 */
+
+//v1.1.97 chest_traps[]に代わってこちらの箱トラップリストを使う。
+//o_ptr->pval(1~60?)がインデックスになる。pvalが負なら解除済み、0なら空
+//ビットフラグを使うのをやめマルチトラップを廃止。0は施錠
+//過去のバージョンで生成された箱の施錠/解錠状態と互換を取るため0の部分は変えない
+
+//ここを変えるときはactivate_chest_trap(),object_desc()の該当部分も変える
+const int chest_new_traps[CHEST_TRAP_LIST_LENGTH] =
+{
+	CHEST_TRAP_NOTHING,                                      /* 0 == empty */
+	CHEST_TRAP_LOSE_STR,
+	CHEST_TRAP_LOSE_CON,
+	CHEST_TRAP_ALARM,
+	CHEST_TRAP_SLINGSHOT,
+	CHEST_TRAP_PUNCH,             /* 5 == best small wooden */
+	CHEST_TRAP_NOTHING,//←ここを0から変えると過去のバージョンで生成されたクエスト報酬箱などが罠付きに変化するので変えない
+	CHEST_TRAP_LOSE_STR,
+	CHEST_TRAP_LOSE_CON,
+	CHEST_TRAP_LOSE_MAG,
+	CHEST_TRAP_BA_POIS,
+	CHEST_TRAP_BA_POIS,
+	CHEST_TRAP_SLINGSHOT,
+	CHEST_TRAP_BA_SLEEP,
+	CHEST_TRAP_BA_CONF,
+	CHEST_TRAP_ARROW,                 /* 15 == best large wooden */
+	0,
+	CHEST_TRAP_MIMIC,
+	CHEST_TRAP_MIMIC,
+	CHEST_TRAP_LOSE_MAG,
+	CHEST_TRAP_BA_SLEEP,
+	CHEST_TRAP_BA_CONF,
+	CHEST_TRAP_SUMMON,
+	CHEST_TRAP_ARROW,
+	CHEST_TRAP_PUNCH,
+	CHEST_TRAP_BA_TIME,                        /* 25 == best small iron */
+	CHEST_TRAP_NOTHING,
+	CHEST_TRAP_S_BIRD,
+	CHEST_TRAP_S_ELEMENTAL,
+	CHEST_TRAP_S_DEMON,
+	CHEST_TRAP_S_DRAGON,
+	CHEST_TRAP_S_CHIMERA,
+	CHEST_TRAP_S_VORTEX,
+	CHEST_TRAP_S_KWAI,
+	CHEST_TRAP_BA_BERSERK,
+	CHEST_TRAP_TELEPORTER, /* 35 == best large iron */
+	CHEST_TRAP_NOTHING,
+	CHEST_TRAP_BA_BERSERK,
+	CHEST_TRAP_STEEL_ARROW,
+	CHEST_TRAP_STEEL_ARROW,
+	CHEST_TRAP_EXPLODE,
+	CHEST_TRAP_TELEPORTER,
+	CHEST_TRAP_BR_FIRE,
+	CHEST_TRAP_BR_ACID,
+	CHEST_TRAP_BA_TIME,
+	CHEST_TRAP_MAGIC_DRAIN,        /* 45 == best small steel */
+	CHEST_TRAP_NOTHING,
+	CHEST_TRAP_BR_FIRE,
+	CHEST_TRAP_BR_ACID,
+	CHEST_TRAP_EXPLODE,
+	CHEST_TRAP_SUIKI,
+	CHEST_TRAP_RUIN,
+	CHEST_TRAP_TELEPORTER,
+	CHEST_TRAP_MAGIC_DRAIN,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,  /* 55 == best large steel */
+	CHEST_TRAP_FUSION,//ここから下は多分出ない
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+	CHEST_TRAP_FUSION,
+
+};
+
+
 
 /*
  * Each chest has a certain set of traps, determined by pval
@@ -9677,7 +9755,7 @@ const option_type option_info[] =
 #ifdef WORLD_SCORE
 #ifdef JP
 	{ &send_score,                  TRUE,  OPT_PAGE_GAMEPLAY, 4, 7,
-	"send_score",                   "スコアサーバ(勝手版用)にゲームデータを送る" },
+	"send_score",                   "スコアサーバにゲームデータを送る" },
 #else
 	{ &send_score,                  TRUE,  OPT_PAGE_GAMEPLAY, 4, 6,
 	"send_score",                   "Send score dump to the world score server" },
@@ -11804,8 +11882,10 @@ const martial_arts_new ma_blows_new[] =
         "You throw a bottle of poison at %s."),   		MELEE_MODE_UDONGE,27, 20, 6, 6, MELEE_POIS ,6},
 	{ _("%sを両足で踏みつけた。",
         "You kick %s with both legs."),								MELEE_MODE_UDONGE,32, 25, 4, 12, MELEE_STUN ,9},
+	{ _("%sに後ろ蹴りを食らわせた。",
+        "You hit %s with a reverse kick."),							MELEE_MODE_UDONGE,36, 30, 7, 7, MELEE_STUN ,9 },
 	{ _("%sに怪光線を放った。",
-        "You fire a mysterious ray at %s."),   							MELEE_MODE_UDONGE,38, 30, 8, 8, MELEE_CONFUSE ,5},
+        "You fire a mysterious ray at %s."),   							MELEE_MODE_UDONGE,40, 30, 8, 8, MELEE_CONFUSE ,5},
 	{ _("%sに幻朧月睨（ルナティックレッドアイズ)を食らわせた！",
         "You hit %s with Lunatic Red Eyes!"), MELEE_MODE_UDONGE,44, 40, 10, 10, MELEE_STUN3 ,12},
 
@@ -13207,6 +13287,9 @@ const int adj_general[STAT_HYPERMAX-2] =
 
 };
 
+
+//特産物テーブル
+//{ダンジョンidx,Tval,Sval,最低階層,最大階層,基本発見率,最大生成数}
 const struct souvenir_type souvenir_table[] =
 {
 
@@ -13353,7 +13436,8 @@ const struct souvenir_type souvenir_table[] =
 
 	{ DUNGEON_FOREST,TV_MUSHROOM	,SV_MUSHROOM_PUFFBALL      ,25,36,100,4 },
 	{ DUNGEON_FOREST,TV_FOOD	,SV_FOOD_MAGIC_WATERMELON  ,24,32,120,3 },
-	{ DUNGEON_FOREST,TV_FOOD	,SV_FOOD_DATURA  ,24,28,30,1 },
+	{ DUNGEON_FOREST,TV_FOOD	,SV_FOOD_DATURA  ,24,28,80,2 },
+	{ DUNGEON_FOREST,TV_FOOD	,SV_FOOD_STRANGE_BEAN  ,27,32,60,2 },
 
 
 	//夢の世界 30-70
@@ -13480,6 +13564,7 @@ int engineer_guild_supply_table[MAX_MACHINE_SUPPLY][2] ={
 /*:::青魔、ものまね系用モンスター魔法新リスト*/
 /*:::これらのレベルや難易度などの各項目は職によっては無視される*/
 /*:::配列の添え字はRF4,5,6,9の順に0から*/
+//v1.1.96 主にブレス系のコスト低下
 const monspells2 monspell_list2[MAX_MONSPELLS2+1] =
 {
 /* level,  smana,  fail, use_stat, use_words, attack_spell,priority, name ,monspell_type*/
@@ -13488,38 +13573,38 @@ const monspells2 monspell_list2[MAX_MONSPELLS2+1] =
 { 1,    1,   10, A_CON, TRUE,FALSE,5,  _("叫ぶ", "Shriek"),NEW_MSPELL_TYPE_OTHER },
 { 1,    2,   20, A_CHR, FALSE,TRUE,1, _("弾幕", "Danmaku"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
 { 24,  25,  70, A_INT, TRUE, FALSE,3,_("魔力消去", "Dispel Magic"),NEW_MSPELL_TYPE_OTHER },
-{ 36,  45,  70, A_STR, FALSE,TRUE,2, _("ロケット", "Rocket"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
-{ 5,    6,  20, A_DEX, FALSE,TRUE,2, _("射撃", "Shoot"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
-{ 30,  40,  70, A_CON, FALSE,TRUE,2, _("聖なるブレス", "Holy Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 35,  42,  75, A_CON, FALSE,TRUE,2, _("地獄の劫火のブレス", "Hellfire Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 36,  30,  70, A_STR, FALSE,TRUE,2, _("ロケット", "Rocket"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
+{ 5,    4,  20, A_DEX, FALSE,TRUE,2, _("射撃", "Shoot"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
+{ 30,  30,  70, A_CON, FALSE,TRUE,2, _("聖なるブレス", "Holy Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 35,  30,  75, A_CON, FALSE,TRUE,2, _("地獄の劫火のブレス", "Hellfire Breath"),NEW_MSPELL_TYPE_BREATH },
 { 20,  25,  55, A_CON, FALSE,TRUE,2, _("アクアブレス", "Aqua Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 15,  30,  50, A_CON, FALSE,TRUE,1, _("酸のブレス", "Acid Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 15,  30,  50, A_CON, FALSE,TRUE,1, _("電撃のブレス", "Lightning Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 15,  20,  50, A_CON, FALSE,TRUE,1, _("酸のブレス", "Acid Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 15,  20,  50, A_CON, FALSE,TRUE,1, _("電撃のブレス", "Lightning Breath"),NEW_MSPELL_TYPE_BREATH },
 
-{ 15,  30,  50, A_CON, FALSE,TRUE,1, _("炎のブレス", "Fire Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 15,  30,  50, A_CON, FALSE,TRUE,1, _("冷気のブレス", "Frost Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 20,  30,  50, A_CON, FALSE,TRUE,1, _("ガスのブレス", "Poison Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 27,  27,  60, A_CON, FALSE,TRUE,2, _("地獄のブレス", "Nether Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 15,  20,  50, A_CON, FALSE,TRUE,1, _("炎のブレス", "Fire Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 15,  20,  50, A_CON, FALSE,TRUE,1, _("冷気のブレス", "Frost Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 20,  20,  50, A_CON, FALSE,TRUE,1, _("ガスのブレス", "Poison Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 27,  25,  60, A_CON, FALSE,TRUE,2, _("地獄のブレス", "Nether Breath"),NEW_MSPELL_TYPE_BREATH },
 { 25,  25,  60, A_CON, FALSE,TRUE,2, _("閃光のブレス", "Light Breath"),NEW_MSPELL_TYPE_BREATH },
 { 25,  25,  60, A_CON, FALSE,TRUE,2, _("暗黒のブレス", "Darkness Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 45,  65,  80, A_CON, TRUE,TRUE, 2,_("波動砲", "Wave-Motion Cannon"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
-{ 28,  32,  60, A_CON, TRUE,TRUE,2, _("衝撃波のブレス", "Shockwave Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 30,  32,  60, A_CON, FALSE,TRUE,2, _("カオスのブレス", "Chaos Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 30,  36,  60, A_CON, FALSE,TRUE,2, _("劣化のブレス", "Disenchantment Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 45,  45,  80, A_CON, TRUE,TRUE, 2,_("波動砲", "Wave-Motion Cannon"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
+{ 28,  25,  60, A_CON, TRUE,TRUE,2, _("衝撃波のブレス", "Shockwave Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 30,  25,  60, A_CON, FALSE,TRUE,2, _("カオスのブレス", "Chaos Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 30,  25,  60, A_CON, FALSE,TRUE,2, _("劣化のブレス", "Disenchantment Breath"),NEW_MSPELL_TYPE_BREATH },
 
-{ 35,  40,  70, A_CON, FALSE,TRUE,2, _("因果混乱のブレス", "Nexus Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 35,  35,  70, A_CON, FALSE,TRUE,2, _("因果混乱のブレス", "Nexus Breath"),NEW_MSPELL_TYPE_BREATH },
 { 30,  30,  60, A_CON, FALSE,TRUE,2, _("時間逆転のブレス", "Time Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 25,  36,  55, A_CON, FALSE,TRUE,2, _("遅鈍のブレス", "Inertia Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 25,  32,  55, A_CON, FALSE,TRUE,2, _("重力のブレス", "Gravity Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 30,  36,  60, A_CON, FALSE,TRUE,2, _("破片のブレス", "Shards Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 20,  30,  50, A_CON, FALSE,TRUE,2, _("プラズマのブレス", "Plasma Breath"),NEW_MSPELL_TYPE_BREATH },
-{ 28,  32,  60, A_STR, FALSE,TRUE,2, _("気弾", "Ki Bullet"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
-{ 32,  40,  70, A_CON, FALSE,TRUE,2, _("魔力のブレス", "Mana Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 25,  25,  55, A_CON, FALSE,TRUE,2, _("遅鈍のブレス", "Inertia Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 25,  25,  55, A_CON, FALSE,TRUE,2, _("重力のブレス", "Gravity Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 30,  25,  60, A_CON, FALSE,TRUE,2, _("破片のブレス", "Shards Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 20,  25,  50, A_CON, FALSE,TRUE,2, _("プラズマのブレス", "Plasma Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 28,  25,  60, A_STR, FALSE,TRUE,2, _("気弾", "Ki Bullet"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
+{ 32,  30,  70, A_CON, FALSE,TRUE,2, _("魔力のブレス", "Mana Breath"),NEW_MSPELL_TYPE_BREATH },
 { 0,  0,  0, A_CON, FALSE, 0,FALSE,_("(特別行動1は使用不可)", "(special action 1 unusable)"),0 },
-{ 25,  35,  60, A_CON, FALSE,TRUE,2, _("核熱のブレス", "Nuclear Heat Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 25,  30,  60, A_CON, FALSE,TRUE,2, _("核熱のブレス", "Nuclear Heat Breath"),NEW_MSPELL_TYPE_BREATH },
 
 { 28,  24,  75, A_INT, TRUE,TRUE, 3,_("純ログルス", "Raw Logrus"),NEW_MSPELL_TYPE_BALL },
-{ 30,  33,  60, A_CON, FALSE,TRUE,2, _("分解のブレス", "Disintegration Breath"),NEW_MSPELL_TYPE_BREATH },
+{ 30,  30,  60, A_CON, FALSE,TRUE,2, _("分解のブレス", "Disintegration Breath"),NEW_MSPELL_TYPE_BREATH },
 { 18,  12,  50,  A_INT, TRUE,TRUE,4, _("アシッド・ボール", "Acid Ball"),NEW_MSPELL_TYPE_BALL }, //RF5
 { 16,  11,  50,  A_INT, TRUE,TRUE,4, _("サンダー・ボール", "Thunder Ball"),NEW_MSPELL_TYPE_BALL },
 { 18,  13,  50,  A_INT, TRUE,TRUE,4, _("ファイア・ボール", "Fire Ball"),NEW_MSPELL_TYPE_BALL },
@@ -13599,7 +13684,7 @@ const monspells2 monspell_list2[MAX_MONSPELLS2+1] =
 { 36,  38,  80, A_INT, TRUE,TRUE, 3,_("汚染の球", "Pollution Ball"),NEW_MSPELL_TYPE_BALL },
 { 32,  32,  80, A_INT, TRUE,TRUE, 3,_("原子分解", "Disintegration"),NEW_MSPELL_TYPE_BALL },
 { 32,  25,  70, A_INT, TRUE,TRUE, 3,_("破邪の光球", "Holy Sphere"),NEW_MSPELL_TYPE_BALL },
-{ 36,  55,  85, A_INT, TRUE,TRUE, 2,_("メテオストライク", "Meteor Strike"),NEW_MSPELL_TYPE_BALL },
+{ 36,  50,  80, A_INT, TRUE,TRUE, 2,_("メテオストライク", "Meteor Strike"),NEW_MSPELL_TYPE_BALL },
 { 42,  35,  85, A_INT, TRUE,TRUE, 3,_("空間歪曲", "Space Distortion"),NEW_MSPELL_TYPE_BALL },
 { 3,   2,   25, A_INT, TRUE,FALSE, 4,_("魔除けのまじない", "Warding Charm"),NEW_MSPELL_TYPE_OTHER_ATTACK },
 { 9,   5,   30, A_INT, TRUE,FALSE, 4,_("聖なる言葉", "Holy Word"),NEW_MSPELL_TYPE_OTHER_ATTACK },
@@ -13610,7 +13695,7 @@ const monspells2 monspell_list2[MAX_MONSPELLS2+1] =
 { 40,  64,  90, A_INT, FALSE,TRUE, 2,_("大型レーザー", "Wide Laser"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
 { 20,   16,  50, A_INT, TRUE,TRUE, 3,_("音符のボルト", "Musical Note Bolt"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
 { 27, 30,   60, A_INT, TRUE,FALSE, 4,_("動物召喚", "Summon Animals"),NEW_MSPELL_TYPE_SUMMMON },
-{ 25,   32,  55, A_INT, FALSE,TRUE, 3,_("レーザー", "Laser"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
+{ 25,   24,  55, A_INT, FALSE,TRUE, 3,_("レーザー", "Laser"),NEW_MSPELL_TYPE_BOLT_BEAM_ROCKET },
 { 0,  0,  0, A_CON, FALSE,FALSE, 0,_("(未実装)", "(unimplemented)"),0 },
 { 48,  80,  75, A_INT, TRUE,TRUE, 3,_("ヘル・ファイア", "Hellfire"),NEW_MSPELL_TYPE_BALL },
 { 48,  80,  75, A_INT, TRUE,TRUE, 3,_("ホーリー・ファイア", "Holy Fire"),NEW_MSPELL_TYPE_BALL },
@@ -13624,7 +13709,7 @@ const monspells2 monspell_list2[MAX_MONSPELLS2+1] =
 { 25,  15,  50, A_INT, FALSE,FALSE, 3,_("隣接テレポート", "Teleport Self To"),NEW_MSPELL_TYPE_OTHER },
 { 35,  25,  70, A_INT, FALSE,FALSE, 2,_("視界外隣接テレポート", "Teleport Self To (out of LoS)"),NEW_MSPELL_TYPE_OTHER },
 { 40,  48,  85, A_INT, TRUE,FALSE, 3,_("メイルシュトロム", "Maelstrom"),NEW_MSPELL_TYPE_OTHER_ATTACK },
-{ 5,    5,   20, A_CON, TRUE,FALSE, 5, _("警報", "Alarm"),NEW_MSPELL_TYPE_OTHER },
+{ 5,    5,   20, A_CON, TRUE,FALSE, 5, _("警報+加速", "Alarm + Haste"),NEW_MSPELL_TYPE_OTHER },
 
 };
 
@@ -14206,6 +14291,10 @@ const drug_material_type drug_material_table[] =
 	{ TV_FOOD,SV_FOOD_MAGIC_WATERMELON ,300,
 	{ 100,0,0,0,0,200,200,0 } },
 
+	//奇妙な豆
+	{ TV_FOOD,SV_FOOD_STRANGE_BEAN ,500,
+	{ 0,0,0,0,250,250,250,0 } },
+
 	//チョウセンアサガオの葉
 	{ TV_FOOD,SV_FOOD_DATURA ,100,
 	{ 0,0,0,0,50,0,25,-50 } },
@@ -14217,6 +14306,9 @@ const drug_material_type drug_material_table[] =
 	{TV_FLASK,SV_FLASK_OIL,5,
 	{0,0,5,-2,0,0,0,0}},
 
+	//蠱毒皿
+	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA,30000,
+	{ 0,0,0,0,1000,-1000,1000,0 } },
 
 
 	{0,0,0,{0,0,0,0,0,0,0,0}} //終端用ダミー
@@ -14555,9 +14647,11 @@ ex_quest_rew_type ex_quest_reward_table[] =
 	{40,0,TV_ROD,SV_ROD_SPEED,0L,1},
 
 	//クローン　報酬箱、薬箱、耐カオス指輪
+	//v1.1.96 鑑定ロッド追加
 	{50,0,TV_CHEST,SV_CHEST_CLONE,0L,1},
 	{50,0,TV_CHEST,SV_CHEST_EIRIN,0L,1},
 	{50,0,TV_RING,SV_RING_RES_CHAOS,(AM_NO_FIXED_ART | AM_GOOD),1},
+	{50,0,TV_ROD,SV_ROD_IDENTIFY,0L,1 },
 
 	//古い城　報酬箱、妖刀箱、破壊の杖
 	{60,0,TV_CHEST,SV_CHEST_OLDCASTLE,0L,1},
@@ -14608,6 +14702,8 @@ const gun_base_param_type gun_base_param_table[SV_FIRE_GUN_MAX+1] =
 	{GF_ARROW,GUN_FIRE_MODE_DEFAULT,4,5}, //マグナム
 	{GF_LITE,GUN_FIRE_MODE_BEAM,6,3}, //光線銃
 	{GF_ROCKET,GUN_FIRE_MODE_ROCKET,12,1}, //ロケラン
+	{GF_MISSILE,GUN_FIRE_MODE_BOLT,6,4 }, //v1.1.98 ルナティックガン改
+
 };
 
 
@@ -14626,10 +14722,10 @@ const cptr gf_desc_name[MAX_GF] =
 	//30
 	"地獄","劣化","因果混乱","時間逆転","重力",
 	"攻撃低下","防御低下","魔法低下","全能力低下","岩石溶解",
-	"ドア破壊","罠破壊","(未設定)","(未設定)","(未設定)",
+	"ドア破壊","罠破壊","移動禁止","狂化","スーパーエゴ",
 	"ドア生成","罠生成","森林生成","石油採掘","酒",
 	"クローン","チェンジ","回復モンスター","加速","減速",
-	"混乱","睡眠","生命力吸収","(未設定)","(未設定)",
+	"混乱","睡眠","生命力吸収","落下","トラップ発動",
 	//60
 	"死者アウェイ","邪悪アウェイ","テレポアウェイ","死者恐怖","邪悪恐怖",
 	"恐怖","アンデッド退散","聖浄","力","悪魔退散",
@@ -14667,10 +14763,10 @@ const cptr gf_desc_name[MAX_GF] =
 	//30
 	"nether","disenchantment","nexus","time","gravity",
 	"lower attack","lower defense","lower magic","lower all","stone to mud",
-	"door destruction","trap destruction","(undefined)","(undefined)","(undefined)",
-	"door creation","trap creation","forest creation","(undefined)","(undefined)",
+	"door destruction","trap destruction","stop movement","berserk","superego",
+	"door creation","trap creation","forest creation","oil excavation","alcohol",
 	"clone","polymorph","heal monster","haste","slowness",
-	"confusion","sleep","drain life","oil excavation","alcohol",
+	"confusion","sleep","drain life","falling down","activate traps",
 	//60
 	"teleport undead","teleport evil","teleport away","turn undead","turn evil",
 	"terrify","banish undead","holy energy","power","banish demon",
@@ -16975,3 +17071,7 @@ ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 	//空色の勾玉は出さない
 
 };
+
+
+
+

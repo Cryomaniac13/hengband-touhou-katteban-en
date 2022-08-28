@@ -5185,7 +5185,7 @@ msg_print("守りのルーンが壊れた！");
 				if (!monster_has_hostile_align(NULL, 0, -1, r_ptr)) set_friendly(m_ptr);
 			}
 			else if (p_ptr->pclass == CLASS_NAZRIN && m_ptr->r_idx == MON_YOUKAI_MOUSE)  set_friendly(m_ptr);
-			else if (p_ptr->pclass == CLASS_TEWI && m_ptr->r_idx == MON_G_USAGI)  set_friendly(m_ptr);
+			else if (p_ptr->pclass == CLASS_TEWI && m_ptr->r_idx == MON_YOUKAI_RABBIT2)  set_friendly(m_ptr);
 			else if ((p_ptr->pclass == CLASS_RINGO || p_ptr->pclass == CLASS_SEIRAN || p_ptr->pclass == CLASS_SAGUME || p_ptr->pclass == CLASS_REISEN2 || p_ptr->pclass == CLASS_TOYOHIME || p_ptr->pclass == CLASS_YORIHIME)
 				&& (r_ptr->flags3 & RF3_GEN_MOON))  set_friendly(m_ptr);
 			else if (p_ptr->pclass == CLASS_SANAE && m_ptr->r_idx == MON_KANAKO && p_ptr->inside_quest != QUEST_KANASUWA) set_friendly(m_ptr);
@@ -5957,6 +5957,9 @@ bool alloc_guardian(bool def_val)
 	int oy;
 	int ox;
 	int try_num = 4000;
+
+	//v2.0 オベロンが鉄国の主として出てこれるのは太歳星君を倒したあとのみ
+	if (!CHECK_GUARDIAN_CAN_POP) return def_val;
 
 	/*:::主が存在するダンジョンで最下階でまだ出現していないとき主生成を試みる*/
 	if (guardian && (d_info[dungeon_type].maxdepth == dun_level) && (r_info[guardian].cur_num < r_info[guardian].max_num))

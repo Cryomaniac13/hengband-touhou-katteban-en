@@ -4807,7 +4807,7 @@ void calc_bonuses(void)
 	///mod160513 近接攻撃武器を持たず銃を持っているとき、銃による特殊格闘フラグを立てる
 	//v1.1.70  && !p_ptr->mimic_formの記述を削除し変身中でも銃格闘可能に。
 	else if(!p_ptr->migite && !p_ptr->hidarite && p_ptr->pclass != CLASS_KISUME
-		&& p_ptr->pclass != CLASS_ALICE && !p_ptr->clawextend)
+		&& p_ptr->pclass != CLASS_ALICE && !p_ptr->clawextend )
 	{
 		if(inventory[INVEN_RARM].tval == TV_GUN)
 		{
@@ -7820,6 +7820,11 @@ void calc_bonuses(void)
 			if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += (tmp_addstat * 10);
 			if (have_flag(flgs, TR_SPEED)) new_speed += tmp_addstat;
 
+			//v1.1.99 アイテムの罠解除能力と魔法防御能力
+			if (have_flag(flgs, TR_DISARM)) p_ptr->skill_dis += tmp_addstat * 5;
+			if (have_flag(flgs, TR_SAVING)) p_ptr->skill_sav += tmp_addstat * 4;
+
+
 			if (have_flag(flgs, TR_ESP_EVIL)) p_ptr->esp_evil = TRUE;
 			if (have_flag(flgs, TR_ESP_GOOD)) p_ptr->esp_good = TRUE;
 			if (have_flag(flgs, TR_ESP_ANIMAL)) p_ptr->esp_animal = TRUE;
@@ -8117,10 +8122,18 @@ void calc_bonuses(void)
 			if (have_flag(flgs, TR_STEALTH)) p_ptr->skill_stl += pv / 2;
 			if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_srh += (pv * 5 / 2);
 
+
+
 			if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5 / 2);
 			if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += pv / 2;
 			if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += (pv * 10);
 			if (have_flag(flgs, TR_SPEED)) new_speed += pv / 2;
+
+			//v1.1.99 アイテムの罠解除能力と魔法防御能力
+			if (have_flag(flgs, TR_DISARM)) p_ptr->skill_dis += pv * 5 / 2;
+			if (have_flag(flgs, TR_SAVING)) p_ptr->skill_sav += pv * 2;
+
+
 		}
 
 		//追加射撃の個数2つごとに本来の指輪一つとして扱う
@@ -8181,11 +8194,11 @@ void calc_bonuses(void)
 		/* Affect searching ability (factor of five) */
 		if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_srh += (pv * 5);
 
-		//v1.1.32 作業服
-		if(o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER)
-		{
-			 p_ptr->skill_dis += MAX(pv,1) * 10;
-		}
+
+		//v1.1.99 アイテムの罠解除能力と魔法防御能力
+		if (have_flag(flgs, TR_DISARM)) p_ptr->skill_dis += pv * 5;
+
+		if (have_flag(flgs, TR_SAVING)) p_ptr->skill_sav += pv * 4;
 
 		/* Affect searching frequency (factor of five) */
 		if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5);
@@ -10520,7 +10533,8 @@ void calc_bonuses(void)
 		if(p_ptr->mimic_form == MIMIC_SLIME)tmp_blows = 1 + plev / 15 + (p_ptr->stat_ind[A_DEX]+3) / 20;
 
 		//二丁拳銃のとき銃威力の一部を格闘ダメージに加える
-		if(flag_gun_kata && select_gun_melee_mode() == MELEE_MODE_GUN_TWOHAND)
+		//v2.0 愛宕様と光速移動使用時はガンカタを使わない
+		if(flag_gun_kata && select_gun_melee_mode() == MELEE_MODE_GUN_TWOHAND && !(p_ptr->kamioroshi & KAMIOROSHI_ATAGO) && !p_ptr->lightspeed)
 		{
 			tmp_bonus = 0;
 			tmp_bonus += inventory[INVEN_RARM].to_d + inventory[INVEN_RARM].dd * (inventory[INVEN_RARM].ds+1) / 2;
@@ -11521,6 +11535,20 @@ void calc_bonuses(void)
 		if (p_ptr->lev >= s_ptr->slevel) p_ptr->no_flowed = TRUE;
 	}
 #endif
+
+
+	//テスト
+	if (cheat_xtra)
+	{
+		msg_format("show1: (%d,%d)", p_ptr->dis_to_h[0], p_ptr->dis_to_d[0]);
+		msg_format("real1: (%d,%d)", p_ptr->to_h[0], p_ptr->to_d[0]);
+		msg_format("show2: (%d,%d)", p_ptr->dis_to_h[1], p_ptr->dis_to_d[1]);
+		msg_format("real2: (%d,%d)", p_ptr->to_h[1], p_ptr->to_d[1]);
+
+
+
+	}
+
 
 
 }

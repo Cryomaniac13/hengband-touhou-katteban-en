@@ -175,7 +175,8 @@ bool gain_random_mutation(int choose_mut)
 	if (character_icky) no_wield_change = TRUE;
 
 	//蓬莱人は変異無効 箱によるオーラ除く
-	if(p_ptr->prace == RACE_HOURAI && choose_mut != 193)
+	//v1.1.98 瑞霊の憑依も受ける
+	if(p_ptr->prace == RACE_HOURAI && choose_mut != 193 && choose_mut != 217)
 	{
 		if(one_in_(3))msg_print(_("一瞬髪が逆立った気がしたが何も起こらなかった。",
                                     "You feel your hair stand up for a moment, but nothing happens."));
@@ -2815,7 +2816,7 @@ muta_desc = "白いオーラは輝いて消えた。";
 
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_HANGOKUOH;
-			muta_desc = _("ここはどこだ？確か自分はあの酒を飲んで……", "Where am I? Last thing I remember was drinking that sake......");
+			muta_desc = _("ここはどこだ？記憶が飛んでいる気がする…", "Where am I? I feel my memories flowing...");
 			break;
 
 
@@ -4411,4 +4412,21 @@ bool mutation_power_aux(u32b power)
 	}
 
 	return TRUE;
+}
+
+//肉体的なランダム突然変異を獲得する。変容魔法の「肉体変容」を使ったときと魔法の森の謎の豆を食べたとき呼ばれる
+void gain_physical_mutation(void)
+{
+	int attempt = 10;
+
+	//肉体的な突然変異のリスト
+	//gain_random_mutation()に渡すパラメータ
+	int muta_lis[] =
+	{
+		1,5,8,17,19,24,31,35,38,46,62,65,81,83,85,95,98,100,109,120,123,126,129,136,138,141,143,146,154,157,161,163,165,168,171,173,182,185
+	};
+
+	while ((attempt-- > 0) && !gain_random_mutation(muta_lis[randint0(sizeof(muta_lis) / sizeof(int)) - 1]));
+
+
 }

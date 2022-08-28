@@ -182,7 +182,7 @@ bool make_attack_normal(int m_idx)
 
 	int ap_cnt;
 
-	int i, k, tmp, ac, rlev;
+	int i, k, tmp, ac, saving, rlev;
 	int do_cut, do_stun;
 
 	s32b gold;
@@ -429,6 +429,8 @@ bool make_attack_normal(int m_idx)
 
 		/* Total armor */
 		ac = p_ptr->ac + p_ptr->to_a;
+
+		saving = p_ptr->skill_sav;
 
 		/* Monster hits player */
 		/*:::命中判定*/
@@ -1323,6 +1325,9 @@ bool make_attack_normal(int m_idx)
 				//v1.1.81 魔力充填吸収打撃の仕様変更
 				case RBE_UN_POWER:
 				{
+					//v2.0 魔法防御でダメージを軽減 ACと似た計算だが魔法防御-50の値を用いる
+					if(saving >= 50) damage -= (damage * ((saving < 200) ? (saving-50) : 150) / 250);
+					damage_effect_check = damage;
 
 
 					/* Take some damage */
@@ -1448,6 +1453,11 @@ bool make_attack_normal(int m_idx)
 
 				case RBE_EAT_GOLD:
 				{
+
+					//v2.0 ACで軽減できることにした
+					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
+					damage_effect_check = damage;
+
 					/* Take some damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 
@@ -1542,6 +1552,10 @@ bool make_attack_normal(int m_idx)
 
 				case RBE_EAT_ITEM:
 				{
+					//v2.0 ACで軽減できることにした
+					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
+					damage_effect_check = damage;
+
 					/* Take some damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 
@@ -1667,6 +1681,10 @@ bool make_attack_normal(int m_idx)
 
 				case RBE_EAT_FOOD:
 				{
+					//v2.0 ACで軽減できることにした
+					damage -= (damage * ((ac < 150) ? ac : 150) / 250);
+					damage_effect_check = damage;
+
 					/* Take some damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 
@@ -1724,6 +1742,10 @@ bool make_attack_normal(int m_idx)
 				{
 					/* Access the lite */
 					o_ptr = &inventory[INVEN_LITE];
+
+					//v2.0 暗黒耐性で威力減衰
+					if (p_ptr->resist_dark)
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Take some damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -1865,7 +1887,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 盲目耐性で威力減衰
 					if (p_ptr->resist_blind)
-						damage = damage * (randint1(4) + 3) / 8;
+						damage = damage * (randint1(3) + 5) / 10;
 
 
 					/* Take damage */
@@ -1900,7 +1922,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 混乱耐性で威力減衰
 					if (p_ptr->resist_conf)
-						damage = damage * (randint1(4) + 3) / 8;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 
@@ -1926,7 +1948,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 恐怖耐性で威力減衰
 					if (p_ptr->resist_fear)
-						damage = damage * (randint1(4) + 3) / 8;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Take damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -1979,7 +2001,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 麻痺耐性で威力減衰
 					if (p_ptr->free_act)
-						damage = damage * (randint1(4) + 3) / 8;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Take damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2033,7 +2055,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 維持で威力減衰
 					if(p_ptr->sustain_str)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2050,7 +2072,7 @@ bool make_attack_normal(int m_idx)
 				{
 					//v1.1.83 維持で威力減衰
 					if (p_ptr->sustain_int)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 
 					/* Damage (physical) */
@@ -2068,7 +2090,7 @@ bool make_attack_normal(int m_idx)
 				{
 					//v1.1.83 維持で威力減衰
 					if (p_ptr->sustain_wis)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2085,7 +2107,7 @@ bool make_attack_normal(int m_idx)
 				{
 					//v1.1.83 維持で威力減衰
 					if (p_ptr->sustain_dex)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2102,7 +2124,7 @@ bool make_attack_normal(int m_idx)
 				{
 					//v1.1.83 維持で威力減衰
 					if (p_ptr->sustain_con)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2119,7 +2141,7 @@ bool make_attack_normal(int m_idx)
 				{
 					//v1.1.83 維持で威力減衰
 					if (p_ptr->sustain_chr)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2135,6 +2157,7 @@ bool make_attack_normal(int m_idx)
 				case RBE_LOSE_ALL:
 				{
 					//v1.1.83 維持ひとつにつき(1d4+3)%軽減
+					//v2.0 1d5+4にする。計算方法も少し変更
 					int dam_dec_count =0;
 
 					if (p_ptr->sustain_str) dam_dec_count++;
@@ -2146,11 +2169,9 @@ bool make_attack_normal(int m_idx)
 
 					if (dam_dec_count)
 					{
-						damage = damage * (100 - (randint1(4)+3)*dam_dec_count) / 100;
+						damage = damage * (100 - dam_dec_count * 4 + damroll(dam_dec_count,5)) / 100;
 
 					}
-
-
 
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2335,7 +2356,7 @@ bool make_attack_normal(int m_idx)
 
 					//v1.1.83 時空耐性で威力減衰
 					if (p_ptr->resist_time)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 
 					if (!p_ptr->resist_time && !CHECK_MULTISHADOW())
@@ -2511,6 +2532,11 @@ msg_format("%sは体力を回復したようだ。", m_name);
 
 							}
 
+							//v2.0 魔法防御でダメージを軽減 ACと似た計算だが魔法防御-50の値を用いる
+							if (saving >= 50) damage -= (damage * ((saving < 200) ? (saving - 50) : 150) / 250);
+							damage_effect_check = damage;
+
+
 
 							/* Take damage */
 							p_ptr->csp -= damage;
@@ -2536,7 +2562,7 @@ msg_format("%sは体力を回復したようだ。", m_name);
 
 					//v1.1.83 一時加速もしくは加速+20以上で軽減
 					else if(p_ptr->fast || p_ptr->pspeed >= 130)
-						damage = damage * (randint1(4) + 4) / 9;
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/* Take damage */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2563,7 +2589,7 @@ msg_format("%sは体力を回復したようだ。", m_name);
 					//v1.1.83 轟音耐性で軽減
 					if (p_ptr->resist_sound)
 					{
-						damage = damage * (randint1(4) + 10) / 16;
+						damage = damage * (randint1(3) + 5) / 10;
 					}
 
 					/* Take damage */
@@ -2595,7 +2621,9 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				{
 					if(process_ringo_im(GF_CHAOS)) break;
 
-					if (p_ptr->resist_chaos) damage = damage * 2 / 3;
+					if (p_ptr->resist_chaos)
+						damage = damage * (randint1(3) + 5) / 10;
+
 					if (damage == 0) break;
 
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2682,6 +2710,13 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				///mod131230 突然変異誘発打撃 毒、カオス耐性でそれぞれ90%無効化
 				case RBE_MUTATE:
 				{
+
+					//v2.0 カオス耐性でダメージ軽減
+					if (p_ptr->resist_chaos)
+						damage = damage * (randint1(3) + 5) / 10;
+
+					if (damage == 0) break;
+
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
 					if(m_ptr->r_idx != MON_ASHIURI && p_ptr->resist_pois && !one_in_(10))break;
@@ -2744,7 +2779,7 @@ msg_format("%sは体力を回復したようだ。", m_name);
 
 					break;
 				}
-				//mod131230 死に誘う打撃 もしターンに二回この攻撃をする敵を作ると連続行動で即死する強さなのでもう少し調整しようか？
+				//mod131230 死に誘う打撃
 				case RBE_KILL:
 				{
 					if(p_ptr->pclass == CLASS_HINA)
@@ -2754,6 +2789,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 						break;
 					}
 					if(process_ringo_im(GF_NETHER)) break;
+
+					//v2.0 地獄耐性で威力減衰
+					if (p_ptr->resist_neth)
+						damage = damage * (randint1(3) + 5) / 10;
 
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
@@ -2782,6 +2821,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 						break;
 					}
 
+					//v2.0 魔法防御でダメージを軽減 ACと似た計算だが魔法防御-50の値を用いる
+					if (saving >= 50) damage -= (damage * ((saving < 200) ? (saving - 50) : 150) / 250);
+					damage_effect_check = damage;
+
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
@@ -2803,6 +2846,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 					s16b tmp_idx;
 					int cnt=0;
 					q_ptr = &forge;
+
+					//v2.0 閃光耐性で威力減衰　ただし現時点でダメージのある写真攻撃をするモンスターはいないはず
+					if (p_ptr->resist_lite)
+						damage = damage * (randint1(3) + 5) / 10;
 
 					/*:::まずダメージ処理*/
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
@@ -2836,6 +2883,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				///pend 吸収打撃　詳細未作成
 				case RBE_MELT:
 				{
+
+					msg_print(_("WARNING:吸収打撃はまだ実装が終わっていない",
+                            "WARNING: Draining melee attack not yet implemented"));
+
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
@@ -2861,6 +2912,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				///mod131231 狂気打撃 耐性ないとsanityblast
 				case RBE_INSANITY:
 				{
+					//v2.0 狂気耐性で威力減衰
+					if (p_ptr->resist_insanity)
+						damage = damage * (randint1(3) + 5) / 10;
+
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;
@@ -2873,6 +2928,10 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				//v1.1.32 空腹打撃
 				case RBE_HUNGER:
 				{
+					//v2.0 遅消化で威力減衰
+					if (p_ptr->slow_digest)
+						damage = damage * (randint1(3) + 5) / 10;
+
 					/* Damage (physical) */
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					if (p_ptr->is_dead || CHECK_MULTISHADOW()) break;

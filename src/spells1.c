@@ -712,6 +712,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 		{
 		case GF_TIME:
 		case GF_DISINTEGRATE:
+		case GF_PIT_FALL:
 			//爆弾消滅処理
 			msg_format(_("爆弾は消えた。", "The bomb disappears."));
 			c_ptr->info &= ~(CAVE_MARK);
@@ -1126,6 +1127,33 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 
 			break;
 		}
+
+		//v1.1.96 トラップ発動
+		case GF_ACTIV_TRAP:
+		{
+			/* Destroy traps */
+			if (is_trap(c_ptr->feat))
+			{
+				/* Check line of sight */
+				if (known && typ == GF_KILL_TRAP)
+				{
+#ifdef JP
+					msg_print("トラップが発動した！");
+#else
+					msg_print("The trap activates!");
+#endif
+					obvious = TRUE;
+				}
+
+				activate_floor_trap(y, x, 0L);
+
+			}
+
+
+		}
+		break;
+
+
 		/*:::ドア固定（魔法の施錠？）*/
 		/*:::固定可能な閉じたドアに有効　開いたドアには矢が当たらない*/
 		case GF_JAM_DOOR: /* Jams a door (as if with a spike) */
@@ -1768,6 +1796,8 @@ bool project_o(int who, int r, int y, int x, int dam, int typ)
 	int k_idx = 0;
 	bool is_potion = FALSE;
 
+	bool flag_need_restart_loop;
+
 
 	/* XXX XXX XXX */
 	who = who ? who : 0;
@@ -1775,53 +1805,56 @@ bool project_o(int who, int r, int y, int x, int dam, int typ)
 	/* Reduce damage by distance */
 	dam = (dam + r) / (r + 1);
 
-
-	/* Scan all objects in the grid */
-	/*:::床上アイテムループ*/
-	for (this_o_idx = c_ptr->o_idx; this_o_idx; this_o_idx = next_o_idx)
+	do
 	{
-		/* Acquire object */
-		object_type *o_ptr = &o_list[this_o_idx];
+		flag_need_restart_loop = FALSE;
 
-		bool is_art = FALSE;
-		bool ignore = FALSE;
-		bool do_kill = FALSE;
+        /* Scan all objects in the grid */
+        /*:::床上アイテムループ*/
+        for (this_o_idx = c_ptr->o_idx; this_o_idx; this_o_idx = next_o_idx)
+        {
+            /* Acquire object */
+            object_type *o_ptr = &o_list[this_o_idx];
 
-		cptr note_kill = NULL;
+            bool is_art = FALSE;
+            bool ignore = FALSE;
+            bool do_kill = FALSE;
+
+            cptr note_kill = NULL;
 
 #ifndef JP
-		/* Get the "plural"-ness */
-		bool plural = (o_ptr->number > 1);
+            /* Get the "plural"-ness */
+            bool plural = (o_ptr->number > 1);
 #endif
 
-		/* Acquire next object */
-		next_o_idx = o_ptr->next_o_idx;
+            /* Acquire next object */
+            next_o_idx = o_ptr->next_o_idx;
 
-		/* Extract the flags */
-		object_flags(o_ptr, flgs);
+            /* Extract the flags */
+            object_flags(o_ptr, flgs);
 
-		/* Check for artifact */
-		if (object_is_artifact(o_ptr)) is_art = TRUE;
+            /* Check for artifact */
+            if (object_is_artifact(o_ptr)) is_art = TRUE;
 
-		///mod151227 蓬莱の薬は破壊されない
-		if(o_ptr->tval == TV_COMPOUND && o_ptr->sval == SV_COMPOUND_HOURAI) ignore = TRUE;
+            ///mod151227 蓬莱の薬は破壊されない
+            if(o_ptr->tval == TV_COMPOUND && o_ptr->sval == SV_COMPOUND_HOURAI) ignore = TRUE;
 
-		//v1.1.79 ラフノールの鏡も破壊されない
-		if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_MIRROR_OF_RUFFNOR) ignore = TRUE;
+            //v1.1.79 ラフノールの鏡も破壊されない
+            if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_MIRROR_OF_RUFFNOR) ignore = TRUE;
 
-		/* Analyze the type */
-		/*:::ベースアイテムが指定属性に弱い場合破壊フラグをON*/
-		/*:::個別に属性保護されたアイテムは無視フラグをON*/
-		switch (typ)
-		{
-			/* Acid -- Lots of things */
+            /* Analyze the type */
+            /*:::ベースアイテムが指定属性に弱い場合破壊フラグをON*/
+            /*:::個別に属性保護されたアイテムは無視フラグをON*/
+            switch (typ)
+            {
+                /* Acid -- Lots of things */
 			case GF_ACID:
 			{
 				if (hates_acid(o_ptr))
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "融けてしまった！";
+                    note_kill = "融けてしまった！";
 #else
 					note_kill = (plural ? " melt!" : " melts!");
 #endif
@@ -1838,7 +1871,7 @@ note_kill = "融けてしまった！";
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                    note_kill = "壊れてしまった！";
 #else
 					note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -1855,7 +1888,7 @@ note_kill = "壊れてしまった！";
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "燃えてしまった！";
+                    note_kill = "燃えてしまった！";
 #else
 					note_kill = (plural ? " burn up!" : " burns up!");
 #endif
@@ -1871,7 +1904,7 @@ note_kill = "燃えてしまった！";
 				if (hates_cold(o_ptr))
 				{
 #ifdef JP
-note_kill = "砕け散ってしまった！";
+                    note_kill = "砕け散ってしまった！";
 #else
 					note_kill = (plural ? " shatter!" : " shatters!");
 #endif
@@ -1889,7 +1922,7 @@ note_kill = "砕け散ってしまった！";
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "燃えてしまった！";
+                    note_kill = "燃えてしまった！";
 #else
 					note_kill = (plural ? " burn up!" : " burns up!");
 #endif
@@ -1901,7 +1934,7 @@ note_kill = "燃えてしまった！";
 					ignore = FALSE;
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                    note_kill = "壊れてしまった！";
 #else
 					note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -1918,7 +1951,7 @@ note_kill = "壊れてしまった！";
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "燃えてしまった！";
+                    note_kill = "燃えてしまった！";
 #else
 					note_kill = (plural ? " burn up!" : " burns up!");
 #endif
@@ -1930,7 +1963,7 @@ note_kill = "燃えてしまった！";
 					ignore = FALSE;
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "砕け散ってしまった！";
+                    note_kill = "砕け散ってしまった！";
 #else
 					note_kill = (plural ? " shatter!" : " shatters!");
 #endif
@@ -1952,7 +1985,7 @@ note_kill = "砕け散ってしまった！";
 				if (hates_cold(o_ptr))
 				{
 #ifdef JP
-note_kill = "砕け散ってしまった！";
+                    note_kill = "砕け散ってしまった！";
 #else
 					note_kill = (plural ? " shatter!" : " shatters!");
 #endif
@@ -1969,7 +2002,7 @@ note_kill = "砕け散ってしまった！";
 			{
 				do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                note_kill = "壊れてしまった！";
 #else
 				note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -1982,7 +2015,7 @@ note_kill = "壊れてしまった！";
 			{
 				do_kill = TRUE;
 #ifdef JP
-note_kill = "蒸発してしまった！";
+                note_kill = "蒸発してしまった！";
 #else
 				note_kill = (plural ? " evaporate!" : " evaporates!");
 #endif
@@ -1994,7 +2027,7 @@ note_kill = "蒸発してしまった！";
 			{
 				do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                note_kill = "壊れてしまった！";
 #else
 				note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -2008,7 +2041,7 @@ note_kill = "壊れてしまった！";
 			{
 				do_kill = TRUE;
 #ifdef JP
-note_kill = "崩れてしまった！";
+                note_kill = "崩れてしまった！";
 #else
 				note_kill = (plural ? " break down!" : " breaks down!");
 #endif
@@ -2020,11 +2053,11 @@ note_kill = "崩れてしまった！";
 			case GF_DISTORTION:
 			case GF_POLLUTE:
 			{
-				if(!one_in_(3)) break;
+				if (!one_in_(3)) break;
 
 				do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                note_kill = "壊れてしまった！";
 #else
 				note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -2042,7 +2075,7 @@ note_kill = "壊れてしまった！";
 				{
 					do_kill = TRUE;
 #ifdef JP
-note_kill = "壊れてしまった！";
+                    note_kill = "壊れてしまった！";
 #else
 					note_kill = (plural ? " are destroyed!" : " is destroyed!");
 #endif
@@ -2059,6 +2092,25 @@ note_kill = "壊れてしまった！";
 				autopick_alter_item((-this_o_idx), FALSE);
 				break;
 			}
+
+			//v1.1.97 トラップ発動
+			case GF_ACTIV_TRAP:
+			{
+				if (o_ptr->tval == TV_CHEST)
+				{
+					if (o_ptr->pval > 0)
+					{
+						activate_chest_trap(y, x, this_o_idx, FALSE);
+						obvious = TRUE;
+
+						// -Hack- ＠以外へのトラップ効果の実装により、
+						//箱が爆発したり箱のトラップで混沌('E')を倒したりするなどしてこのグリッドの他のアイテムがループ中に破壊されることがある。
+						//そのままループを続けるとnext_o_idxがずれて処理がおかしくなるのでこのグリッドに対するアイテム処理ループをやり直すことにした。
+						flag_need_restart_loop = TRUE;
+					}
+				}
+			}
+			break;
 
 			/* Unlock chests */
 			case GF_KILL_TRAP:
@@ -2080,7 +2132,7 @@ note_kill = "壊れてしまった！";
 						if (known && (o_ptr->marked & OM_FOUND))
 						{
 #ifdef JP
-msg_print("カチッと音がした！");
+                            msg_print("カチッと音がした！");
 #else
 							msg_print("Click!");
 #endif
@@ -2095,7 +2147,7 @@ msg_print("カチッと音がした！");
 			///sysdel 死者復活
 			//case GF_ANIM_DEAD:
 			{
-///del131214  死者復活
+				///del131214  死者復活
 #if 0
 				if (o_ptr->tval == TV_CORPSE)
 				{
@@ -2105,7 +2157,7 @@ msg_print("カチッと音がした！");
 					if (!who || is_pet(&m_list[who]))
 						mode |= PM_FORCE_PET;
 
-					for (i = 0; i < o_ptr->number ; i++)
+					for (i = 0; i < o_ptr->number; i++)
 					{
 						if (((o_ptr->sval == SV_CORPSE) && (randint1(100) > 80)) ||
 						    ((o_ptr->sval == SV_SKELETON) && (randint1(100) > 60)))
@@ -2113,9 +2165,9 @@ msg_print("カチッと音がした！");
 							if (!note_kill)
 							{
 #ifdef JP
-note_kill = "灰になった。";
+                                note_kill = "灰になった。";
 #else
-					note_kill = (plural ? " become dust." : " becomes dust.");
+                                note_kill = (plural ? " become dust." : " becomes dust.");
 #endif
 							}
 							continue;
@@ -2123,15 +2175,15 @@ note_kill = "灰になった。";
 						else if (summon_named_creature(who, y, x, o_ptr->pval, mode))
 						{
 #ifdef JP
-note_kill = "生き返った。";
+                            note_kill = "生き返った。";
 #else
-					note_kill = " revived.";
+                            note_kill = " revived.";
 #endif
 						}
 						else if (!note_kill)
 						{
 #ifdef JP
-note_kill = "灰になった。";
+                            note_kill = "灰になった。";
 #else
 							note_kill = (plural ? " become dust." : " becomes dust.");
 #endif
@@ -2143,70 +2195,80 @@ note_kill = "灰になった。";
 #endif
 				break;
 			}
-		}
+            }
 
 
-		/* Attempt to destroy the object */
-		if (do_kill)
-		{
-			/* Effect "observed" */
-			if (known && (o_ptr->marked & OM_FOUND))
-			{
-				obvious = TRUE;
-				object_desc(o_name, o_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
-			}
+            /* Attempt to destroy the object */
+            if (do_kill)
+            {
+                /* Effect "observed" */
+                if (known && (o_ptr->marked & OM_FOUND))
+                {
+                    obvious = TRUE;
+                    object_desc(o_name, o_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
+                }
 
-			/* Artifacts, and other objects, get to resist */
-			/*:::アーティファクトと元素保護アイテムは影響を受けない*/
-			if (is_art || ignore)
-			{
-				/* Observe the resist */
-				if (known && (o_ptr->marked & OM_FOUND))
-				{
+                /* Artifacts, and other objects, get to resist */
+                /*:::アーティファクトと元素保護アイテムは影響を受けない*/
+                if (is_art || ignore)
+                {
+                    /* Observe the resist */
+                    if (known && (o_ptr->marked & OM_FOUND))
+                    {
 #ifdef JP
-msg_format("%sは影響を受けない！",
-   o_name);
+                        msg_format("%sは影響を受けない！",
+                            o_name);
 #else
-					msg_format("The %s %s unaffected!",
-							o_name, (plural ? "are" : "is"));
+                        msg_format("The %s %s unaffected!",
+                            o_name, (plural ? "are" : "is"));
 #endif
 
-				}
-			}
+                    }
+                }
 
-			/* Kill it */
-			/*:::アイテム破壊処理　*/
-			else
-			{
-				/* Describe if needed */
-				if (known && (o_ptr->marked & OM_FOUND) && note_kill)
-				{
+                /* Kill it */
+                /*:::アイテム破壊処理　*/
+                else
+                {
+                    /* Describe if needed */
+                    if (known && (o_ptr->marked & OM_FOUND) && note_kill)
+                    {
 #ifdef JP
-msg_format("%sは%s", o_name, note_kill);
+                        msg_format("%sは%s", o_name, note_kill);
 #else
-					msg_format("The %s%s", o_name, note_kill);
+                        msg_format("The %s%s", o_name, note_kill);
 #endif
 
-				}
+                    }
 
-				k_idx = o_ptr->k_idx;
-				is_potion = object_is_potion(o_ptr);
+                    k_idx = o_ptr->k_idx;
+                    is_potion = object_is_potion(o_ptr);
 
 
-				/* Delete the object */
-				delete_object_idx(this_o_idx);
+                    /* Delete the object */
+                    delete_object_idx(this_o_idx);
 
-				/* Potions produce effects when 'shattered' */
-				if (is_potion)
-				{
-					(void)potion_smash_effect(who, y, x, k_idx);
-				}
+                    /* Potions produce effects when 'shattered' */
+                    if (is_potion)
+                    {
+                        (void)potion_smash_effect(who, y, x, k_idx);
+                    }
 
-				/* Redraw */
-				lite_spot(y, x);
+                    /* Redraw */
+                    lite_spot(y, x);
+                }
+            }
+
+
+			if (flag_need_restart_loop)
+			{
+				if (cheat_xtra) msg_print("RESTART LOOP");
+				break;
 			}
-		}
-	}
+
+		} //next_o_idxループ
+
+	} while (flag_need_restart_loop);
 
 	/* Return "Anything seen?" */
 	return (obvious);
@@ -7715,7 +7777,7 @@ note = "には効果がなかった。";
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
 			}
-			else if(randint1(r_ptr->ac ) > p_ptr->lev + 10)
+			else if(randint1(r_ptr->ac ) > (p_ptr->lev + 25)) //v1.1.96
 			{
 				note = _("には当たらなかった。", " did not get hit.");
 				dam = 0;
@@ -8668,6 +8730,41 @@ note = "には効果がなかった。";
 			break;
 		}
 
+		//v1.1.97 落とし穴属性 床トラップの発動と「深い穴生成」の魔法
+		//TODO:てゐの落とし穴も統合したかったが色々挙動が違うので後回し
+		case GF_PIT_FALL:
+		{
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				note = _("には効果がなかった！", "is unaffected!");
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+			if (r_ptr->flags7 & RF7_CAN_FLY)
+			{
+				note = _("は悠々と穴の上を飛んでいる...", "leisurely floats above the chasm...");
+				dam = 0;
+				break;
+			}
+
+			if (r_ptr->flags2 & RF2_GIGANTIC)
+			{
+				if (seen_msg) msg_format(_("%sの巨体が地響きを立てて穴に落ちた！", "%^s crashes down into the chasm with a deafening noise!"),m_name);
+				dam *= 2;
+			}
+			else
+			{
+				if (seen_msg) msg_format(_("%sが穴に落ちた！", "%^s falls into the chasm!"), m_name);
+			}
+
+			do_stun = 8 + randint1(dam/10);
+
+		}
+		break;
 
 
 
@@ -9737,6 +9834,9 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			strcpy(killer, _("『ヨグ＝ソトート』との接触", "contact with Yog-Sothoth"));
 			rlev = 90;
 			break;
+		case PROJECT_WHO_TRAP:
+			strcpy(killer, _("罠", "trap"));
+			break;
 		case PROJECT_WHO_EXPLODE_ICE:
 			strcpy(killer, _("氷の破片", "shards of ice"));
 			break;
@@ -9744,9 +9844,9 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 
 		default:
 #ifdef JP
-			strcpy(killer, "罠");
+			strcpy(killer, "(その他)");
 #else
-			strcpy(killer, "a trap");
+			strcpy(killer, "(other)");
 #endif
 			break;
 		}
@@ -10510,6 +10610,10 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			break;
 		}
 
+
+
+
+
 		/* Disenchantment -- see above */
 		case GF_DISENCHANT:
 		{
@@ -11067,6 +11171,19 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #endif
 
 			(void)set_fast(p_ptr->fast + randint1(5), FALSE);
+			dam = 0;
+			break;
+		}
+
+		//v1.1.97 なぜか無かったので追加
+		case GF_OLD_CONF:
+		{
+			if (fuzzy) msg_print(_("何かで攻撃された！", "You are hit by something!"));
+
+			if (!p_ptr->resist_conf && !CHECK_MULTISHADOW())
+			{
+				(void)set_confused(p_ptr->confused + randint1(10) + 10);
+			}
 			dam = 0;
 			break;
 		}
@@ -11818,6 +11935,78 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			get_damage = take_hit(DAMAGE_ATTACK, dam, _("自分のビーム", "your own beam"), monspell);
 			break;
 		}
+
+		//v1.1.97
+		case GF_DEC_ATK:
+		{
+			if(!CHECK_MULTISHADOW())
+				do_dec_stat(A_STR);
+			dam = 0;
+			break;
+		}
+
+		case GF_DEC_DEF:
+		{
+			if (!CHECK_MULTISHADOW())
+				do_dec_stat(A_CON);
+			dam = 0;
+			break;
+		}
+
+		case GF_DEC_MAG:
+		{
+			if (!CHECK_MULTISHADOW())
+				do_dec_stat(A_INT);
+			dam = 0;
+			break;
+		}
+		case GF_DEC_ALL:
+		{
+
+			if (!CHECK_MULTISHADOW())
+			{
+				do_dec_stat(A_STR);
+				do_dec_stat(A_INT);
+				do_dec_stat(A_WIS);
+				do_dec_stat(A_DEX);
+				do_dec_stat(A_CON);
+				do_dec_stat(A_CHR);
+
+			}
+			dam = 0;
+		}
+		break;
+		case GF_BERSERK:
+		{
+			if (!CHECK_MULTISHADOW()) set_shero(p_ptr->shero + 25 + randint1(25), FALSE);
+
+
+			dam = 0;
+		}
+		break;
+
+		case GF_PIT_FALL:
+		{
+
+			if (p_ptr->levitation)
+			{
+				msg_print(_("あなたは飛んでダメージを回避した。", "You avoid harm as you are floating."));
+				break;
+			}
+			else
+			{
+				msg_print(_("穴に落ちた！", "You fall into a pit!"));
+				get_damage = take_hit(DAMAGE_ATTACK, dam, killer, monspell);
+				set_stun(p_ptr->stun + 8 + randint1(8));
+
+			}
+
+		}
+
+		break;
+
+
+
 		/* Default */
 		default:
 		{
@@ -12553,7 +12742,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 		//else if(typ == GF_GRAVITY) typ = GF_KILL_WALL; typ:36-39を埋めた
 		//else if(typ == GF_BERSERK) typ = GF_MAKE_DOOR; 45まで埋まった
 		//else if(typ == GF_DIG_OIL) typ = GF_OLD_CLONE; //v1.1.92 MAKE_TREEとOLD_CLONEの間にDIG_OILを追加した v1.1.94 もうひとつ埋めた
-		else if(typ == GF_OLD_DRAIN) typ = GF_AWAY_UNDEAD;
+		//else if(typ == GF_OLD_DRAIN) typ = GF_AWAY_UNDEAD; //v1.1.96 落とし穴属性とトラップ発動属性で埋めた
 		else if(typ == GF_HAND_DOOM) typ = GF_CONTROL_LIVING;//モンスターボールと死者復活は飛ばす
 		else if(typ == GF_MAKE_FLOWER) typ = GF_MOSES;//GF_KOKOROはこころ専用の特殊属性なので飛ばす
 		else if(typ == GF_STEAM) typ = GF_PURIFY;//GF_SEIRAN_BEAMを飛ばす

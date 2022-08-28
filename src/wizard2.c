@@ -596,11 +596,15 @@ static void do_cmd_wiz_hack_ben(void)
 	int dir;
 	long test;
 
-	for (i = 0; i < MAGIC_NUM_SIZE; i++)
-	{
-		msg_format("magic_num%d:%d/%d", i, p_ptr->magic_num1[i], p_ptr->magic_num2[i]);
-		if (i % 10 == 0) msg_print("     ");
-	}
+	msg_format("turn:%d",turn);
+	msg_format("taisai_comptime:%d", quest[QUEST_TAISAI].comptime);
+
+
+//	for (i = 0; i < MAGIC_NUM_SIZE; i++)
+//	{
+//		msg_format("magic_num%d:%d/%d", i, p_ptr->magic_num1[i], p_ptr->magic_num2[i]);
+//		if (i % 10 == 0) msg_print("     ");
+//	}
 
 
 	(void)probing();
@@ -626,11 +630,12 @@ static void do_cmd_wiz_hack_ben(void)
 	msg_format("total_pay: %d", total_pay_cardshop);
 	msg_format("box_count: %d", buy_gacha_box_count);
 
-	/*
+
 	msg_format("show1: (%d,%d)", p_ptr->dis_to_h[0], p_ptr->dis_to_d[0]);
 	msg_format("real1: (%d,%d)", p_ptr->to_h[0], p_ptr->to_d[0]);
 	msg_format("show2: (%d,%d)", p_ptr->dis_to_h[1], p_ptr->dis_to_d[1]);
 	msg_format("real2: (%d,%d)", p_ptr->to_h[1], p_ptr->to_d[1]);
+	/*
 	*/
 
 	//msg_format("turn: %d  recall:%d", turn, p_ptr->word_recall);
@@ -1461,10 +1466,19 @@ static void wiz_display_item(object_type *o_ptr)
 	prt("+------------FLAGS4------------+", 17, j+32);
 	prt(".....[[[nnCURSE....A            ", 18, j+32);
 	prt("bt2  fecto a aaiiiiCM BR   hnF  ", 19, j+32);
-	prt("lewreilolm geddggggTAUOE  miaf  ", 20, j+32);
-	prt("eleusrelpaTgxdd....ITSOA  odmi  ", 21, j+32);
-	prt("sepnpecdogYrpLHaefcVEEMD..deex  ", 22, j+32);
+	prt("lewreilolm geddggggTAUOE  miaf D", 20, j+32);
+	prt("eleusrelpaTgxdd....ITSOA  odmi i", 21, j+32);
+	prt("sepnpecdogYrpLHaefcVEEMD..deex s", 22, j+32);
 	prt_binary(flgs[3], 23, j+32);
+
+	prt("+------------FLAGS5------------+", 10, j + 64);
+	prt("                                ", 11, j + 64);
+	prt("                                ", 12, j + 64);
+	prt("S                               ", 13, j + 64);
+	prt("a                               ", 14, j + 64);
+	prt("v                               ", 15, j + 64);
+	prt_binary(flgs[4], 16, j + 64);
+
 }
 
 

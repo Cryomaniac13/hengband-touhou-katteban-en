@@ -927,7 +927,7 @@ char *v_text;
  * The skill table
  */
 /*:::各職業ごとの武器熟練度と騎乗などのスキルの初期値、最大値*/
-skill_table *s_info;
+//skill_table *s_info;
 
 /*
  * The magic info

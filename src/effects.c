@@ -7242,8 +7242,8 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 					strcpy(buf,"on the surface");
 #endif
 				else if (q_idx && (is_fixed_quest_idx(q_idx) &&
-				   //      !((q_idx == QUEST_OBERON) || (q_idx == QUEST_SERPENT))))
-				         !((q_idx == QUEST_OBERON) || (q_idx == QUEST_YUKARI))))
+				   //      !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_SERPENT))))
+				         !((q_idx == QUEST_TAISAI) || (q_idx == QUEST_YUKARI))))
 #ifdef JP
 					strcpy(buf,"クエスト");
 #else

@@ -1517,7 +1517,7 @@ static bool cast_berserk_spell(int spell)
 		if (!get_rep_dir2(&dir)) return FALSE;
 		y = py + ddy[dir];
 		x = px + ddx[dir];
-		move_player(dir, easy_disarm, TRUE);
+		move_player(dir, easy_disarm, TRUE,FALSE);
 		break;
 	}
 	/*:::ínêk*/

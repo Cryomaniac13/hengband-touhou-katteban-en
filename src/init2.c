@@ -838,6 +838,7 @@ errr init_v_info(void)
 /*
  * Initialize the "s_info" array
  */
+#if 0
 static errr init_s_info(void)
 {
 	/* Init the header */
@@ -853,6 +854,7 @@ static errr init_s_info(void)
 	return init_info("s_info", &s_head,
 			 (void*)&s_info, NULL, NULL, NULL);
 }
+#endif
 
 
 /*
@@ -2555,11 +2557,11 @@ if (init_misc()) quit("その他の変数を初期化できません");
 	/* Initialize weapon_exp info */
 	///sys skill 武器・技能熟練度設定ファイル　いずれクラス設定値に統合して削除する予定
 #ifdef JP
-	note("[データの初期化中... (熟練度)]");
-	if (init_s_info()) quit("熟練度初期化不能");
+	//note("[データの初期化中... (熟練度)]");
+	//if (init_s_info()) quit("熟練度初期化不能");
 #else
-	note("[Initializing arrays... (skill)]");
-	if (init_s_info()) quit("Cannot initialize skill");
+	//note("[Initializing arrays... (skill)]");
+	//if (init_s_info()) quit("Cannot initialize skill");
 #endif
 
 	/* Initialize wilderness array */

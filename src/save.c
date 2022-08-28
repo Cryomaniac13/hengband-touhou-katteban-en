@@ -1009,7 +1009,7 @@ static void wr_extra(void)
 	wr_s16b(p_ptr->future_use_counter8);
 
 	wr_u32b(p_ptr->animal_ghost_align_flag);
-	wr_u32b(p_ptr->ptype_new_flags2);
+	wr_u32b(p_ptr->quest_special_flag);
 	wr_u32b(p_ptr->ptype_new_flags3);
 	wr_u32b(p_ptr->ptype_new_flags4);
 

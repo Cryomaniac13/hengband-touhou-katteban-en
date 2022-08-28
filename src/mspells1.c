@@ -1893,6 +1893,34 @@ bool make_attack_spell(int m_idx, int special_flag)
 	{
 		f9 &= ~(RF9_TELE_APPROACH | RF9_TELE_HI_APPROACH);
 	}
+
+	//v1.2.00 村紗は＠の近くに水がないと視界外隣接テレポを使わない
+	if (m_ptr->r_idx == MON_MURASA)
+	{
+		bool find_water = FALSE;
+		int j;
+
+		for (j = 1; j <= 9; j++)
+		{
+			int tmp_x, tmp_y;
+
+			tmp_x = px + ddx[j];
+			tmp_y = py + ddy[j];
+
+			if (!in_bounds(tmp_y, tmp_x)) continue;
+			if (cave_have_flag_bold(tmp_y, tmp_x, FF_WATER))
+			{
+				find_water = TRUE;
+				break;
+			}
+		}
+
+		if (!find_water)
+		{
+			f9 &= ~(RF9_TELE_HI_APPROACH);
+		}
+	}
+
 	//配下は*破壊*や時間停止を使わない
 	if(is_pet(m_ptr))
 	{
@@ -2538,6 +2566,9 @@ bool make_attack_spell(int m_idx, int special_flag)
 
 	//v1.1.94 魔法力低下中はさらに失敗率25%上昇
 	if (MON_DEC_MAG(m_ptr)) failrate += 25;
+
+	//v1.1.96 恐怖中はさらに失敗率25%上昇
+	if (MON_MONFEAR(m_ptr)) failrate += 25;
 
 	//v1.1.46 女苑「プラックピジョン」による魔法失敗率上昇
 	failrate += pluck_pigeon_magic_fail(m_ptr);
@@ -3409,7 +3440,8 @@ else msg_format("%^sが魔力のブレスを吐いた。", m_name);
 				{
 					if (!blind)	msg_format(_("金色の小槌でぶん殴られた！", "You are hit by a golden mallet!"));
 					else msg_format(_("何かが頭上に振り下ろされた！", "Something powerfully strikes your head!"));
-					dam = 100 + randint0(100);
+					//v1.2.00 50ポイント弱体化
+					dam = 50 + randint0(100);
 					breath(y, x, m_idx, GF_MISSILE, dam, 0, FALSE, -1, FALSE);
 					earthquake_aux(y, x, 4, m_idx);
 				}
@@ -5080,6 +5112,56 @@ msg_format("%sは無傷の球の呪文を唱えた。", m_name);
 
 				break;
 
+				//v1.1.98 瑞霊　＠に憑依して消滅
+			case MON_MIZUCHI:
+
+				msg_format(_("%^sは巨大な手錠をあなたの首に向けて飛ばした！", "%^s throws a giant handcuff at your neck!"), m_name);
+
+				if (p_ptr->pclass == CLASS_BANKI)
+				{
+					msg_print(_("しかしあなたには首がなかった。", "However, you don't have a neck to speak of."));
+					break;
+				}
+				else if (p_ptr->prace == RACE_HANIWA)
+				{
+					msg_print(_("あなたには完全な耐性がある！", "You are completely immune!"));
+					break;
+				}
+				//太古の怨念の彫像化と同じ判定にしておこう
+				else if (randint1(125) < p_ptr->skill_sav)
+				{
+					msg_print(_("あなたは憑依に抵抗した！", "You resist the possession!"));
+					break;
+				}
+				else
+				{
+					msg_print(_("あなたの首に手錠がかかった！", "The handcuff latches around your neck!"));
+					gain_random_mutation(217);
+					delete_monster_idx(m_idx);
+					aggravate_monsters(0, TRUE);
+
+					return TRUE;
+
+				}
+
+				break;
+
+			//太歳星君特殊行動　広範囲地震連発　体力が減っているほど範囲と回数が増加
+			case MON_TAISAI:
+			{
+				int tmp_rad = 7 + (m_ptr->maxhp - m_ptr->hp) / 1000;
+				int tmp_num = 2 + (m_ptr->maxhp - m_ptr->hp) / 5000;
+
+				msg_format(_("%^sは大地震を起こした！", "%^s causes a large earthquake!"), m_name);
+				for (k = 0; k < tmp_num; k++)
+				{
+					earthquake_aux(m_ptr->fy, m_ptr->fx, tmp_rad, m_idx);
+					tmp_rad += randint1(2);
+
+				}
+			}
+			break;
+
 			default:
 				if (r_ptr->d_char == 'B')
 				{
@@ -5479,6 +5561,12 @@ else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
                                             "%^s screams something, and you sense something appear nearby."), m_name);
 				else	msg_format(_("%^sは配下の埴輪達を呼び出した。", "%^s calls forth her haniwa followers."), m_name);
 			}
+			else if (m_ptr->r_idx == MON_LUNASA || m_ptr->r_idx == MON_MERLIN || m_ptr->r_idx == MON_LYRICA)
+			{
+				if (blind)	msg_format(_("突然アップテンポながらニヒルな死生観のある音楽に包まれた。",
+                                    "You are suddenly enveloped in a up-tempo yet nihilistic music."));
+				else	msg_format(_("%^sは姉妹を呼び出した。", "%^s calls her sisters."), m_name);
+			}
 
 			else
 			{
@@ -5591,6 +5679,7 @@ else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
 				}
 				break;
 			case MON_EIRIN:
+			case MON_TEWI:
 				{
 					int k;
 					int num = 5 + randint0(6);
@@ -5746,8 +5835,19 @@ else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
 				int num = 4 + randint1(3);
 				for (k = 0; k < num; k++)
 				{
-					count += summon_specific(m_idx, y, x, rlev, SUMMON_HANIWA, (PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_FORCE_ENEMY));
+					count += summon_specific(m_idx, m_ptr->fy, m_ptr->fx, rlev, SUMMON_HANIWA, (PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_FORCE_ENEMY));
 				}
+			}
+			break;
+
+			case MON_LUNASA:
+			case MON_MERLIN:
+			case MON_LYRICA:
+			{
+
+				count += summon_named_creature(m_idx, m_ptr->fy, m_ptr->fx, MON_LUNASA, 0);
+				count += summon_named_creature(m_idx, m_ptr->fy, m_ptr->fx, MON_MERLIN, 0);
+				count += summon_named_creature(m_idx, m_ptr->fy, m_ptr->fx, MON_LYRICA, 0);
 			}
 			break;
 
@@ -6466,10 +6566,14 @@ else msg_format("%^sが破邪の光球の呪文を唱えた。", m_name);
 			if (blind) msg_format(_("%^sが何か複雑な呪文を唱えた。何かが頭上から降ってきた！",
                                     "%^s casts some complicated spell. Something falls on your head!"), m_name);
 			else msg_format(_("%^sがメテオストライクの呪文を唱えた！", "%^s invokes a meteor strike!"), m_name);
+
+
 			if (r_ptr->flags2 & RF2_POWERFUL)
 			{
 				rad = 5;
-				dam = (rlev * 4) + damroll(1,300);
+				//v2.0 少し弱体化　壁抜けで軽減できないからヘルファイアとかより期待値が低くていいか
+				//dam = (rlev * 4) + damroll(1, 300);
+				dam = (rlev * 3) + damroll(1,250);
 			}
 			else
 			{
@@ -6898,8 +7002,15 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 				repair_monsters = TRUE;
 			}
 
-			if (m_ptr->r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI) msg_format(_("今何か…気のせいか？",
-                                                                                        "What was that... your imagination?"));
+			if (m_ptr->r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI)
+			{
+				msg_format(_("今何か…気のせいか？", "What was that... your imagination?"));
+			}
+			else if (m_ptr->r_idx == MON_MURASA)
+			{
+				msg_format(_("%sが水の中から現れた！", "%^s pops out of water!"), m_name);
+			}
+
 			else if (distance(y, x, m_ptr->fy, m_ptr->fx) < 3)
 			{
 				msg_format(_("%sが突然あなたの近くに現れた。", "%s suddenly appears close to you."), m_name);

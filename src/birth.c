@@ -67,16 +67,16 @@ struct hist_type
 static cptr info_difficulty[5] ={
 #ifdef JP
 	"練習用のモードです。プレイヤーの能力が上がり、ゲームオーバーになってもコンティニューが可能です。このモードは50階で終了します。スコアが大幅に低下します。",
-	"通常のモードです。敵の体力が低く、またあまりひどいことが起こりにくいように調整されているため本家の変愚蛮怒よりかなり簡単です。50階クリア時点でゲームクリア扱いになります。",
-	"敵がやや力強くなり、しばしば序盤から強敵が出現し、いくつかの事柄に不規則性が出ます。基本的に本家変愚蛮怒と同様の設定ですがそれでも本家変愚蛮怒より簡単です。スコアがやや上昇します。HARD以降でないと選択できない職業や性格が存在します。",
-	"敵が凄まじく力強く素早く注意深くなり、有り得ないほどの強敵が頻繁に出現し、理不尽なまでの様々な困難があなたに襲い掛かります。スコアが大幅に上昇します。",
-	"極めて特殊なモードです。鉄獄1階からゲームが開始されそこから降りるのみです。レベルが上がりやすくなり、深層のアイテムが出現しやすくなり、消耗品が複数まとめて生成され、「アイテムカード」が出現します。ランダムクエストはなくなり、一定階ごとに特定のクエストダンジョンが生成されます。十全な準備を整えられない中で最善を尽くすことが求められます。"
+	"通常のモードです。敵の体力が低く、またあまりひどいことは起こりにくいように調整されています。50階クリア時点でゲームクリア扱いになります。",
+	"敵がやや力強くなり、しばしば序盤から強敵が出現し、いくつかの事柄に不規則性が出ます。基本的に変愚蛮怒と同様の設定ですが、強いキャラクターでプレイすれば変愚蛮怒より簡単です。スコアはNORMALの2倍です。HARD以降でないと選択できない職業や性格が存在します。",
+	"敵が凄まじく力強く素早く注意深くなり、有り得ないほどの強敵が頻繁に出現し、理不尽なまでの様々な困難があなたに襲い掛かります。スコアはNORMALの8倍です。",
+	"極めて特殊なモードです。鉄獄1階からゲームが開始されそこから降りるのみです。レベルが上がりやすくなり、深層のアイテムが出現しやすくなり、消耗品が複数まとめて生成され、「アイテムカード」が出現します。ランダムクエストはなくなり、一定階ごとに特定のクエストダンジョンが生成されます。十全な準備を整えられない中で最善を尽くすことが求められます。スコアはNORMALの4倍です。"
 #else
     "Training mode. Your stats are increased, and you can continue playing even after getting a game over. This mode ends at floor 50. Significantly lowers score.",
 	"Normal mode. It's simpler compared to base Hengband - enemies have less health, and bad situations happen less often. Game is considered to be won once you clear floor 50.",
-	"Enemies are fairly tough, and dangerous enemies can appear early on. More or less similar to original Hengband, but even then, it's easier compared to it. Score is a bit increased. There are some classes/personalities available only on Hard or higher.",
-	"Enemies are far stronger, faster and cautious; incredibly strong enemies pop up as you suffer other unreasonable troubles. Score is significantly increased.",
-	"Very special game mode. You start at floor 1 of Angband and can only go down. Experience level is easy to raise, out-of-depth items appear more frequently, consumables are generated in large quantities, and 'item cards' appear as well. There are no random quests, but special quest dungeons appear at certain levels. You have to do your best without being able to fully prepare."
+	"Enemies are fairly tough, and dangerous enemies can appear early on. More or less similar to original Hengband, but it's easier compared to it if you're playing as a strong character. Score is doubled compared to Normal difficulty. There are some classes/personalities available only on Hard or higher.",
+	"Enemies are far stronger, faster and cautious; incredibly strong enemies pop up as you suffer other unreasonable troubles. Score is multiplied by eight compared to Normal difficulty.",
+	"Very special game mode. You start at floor 1 of Angband and can only go down. Experience level is easy to raise, out-of-depth items appear more frequently, consumables are generated in large quantities, and 'item cards' appear as well. There are no random quests, but special quest dungeons appear at certain levels. You have to do your best without being able to fully prepare. Score is quadrupled compared to Normal difficulty."
 #endif
 };
 
@@ -2296,6 +2296,8 @@ static bool mon_hook_quest(int r_idx)
 	//v1.1.42 紫苑はランクエに出ない
 	if (r_idx == MON_SHION_1 || r_idx == MON_SHION_2) return FALSE;
 
+
+
 	return TRUE;
 }
 
@@ -2407,9 +2409,9 @@ static void init_dungeon_quests(void)
 	if(EXTRA_MODE)//Extraモードでは最初からオベロンクエスト受領し、紫クエストは未受領　ほかクエスト無効化処理もない
 	{
 		init_flags = INIT_ASSIGN;
-		p_ptr->inside_quest = QUEST_OBERON;
+		p_ptr->inside_quest = QUEST_TAISAI;
 		process_dungeon_file("q_info.txt", 0, 0, 0, 0);
-		quest[QUEST_OBERON].status = QUEST_STATUS_TAKEN;
+		quest[QUEST_TAISAI].status = QUEST_STATUS_TAKEN;
 	}
 	else
 	{
@@ -2420,12 +2422,12 @@ static void init_dungeon_quests(void)
 		}
 		/* Init the two main quests (Oberon + Serpent) */
 		init_flags = INIT_ASSIGN;
-		//p_ptr->inside_quest = QUEST_OBERON;
+		//p_ptr->inside_quest = QUEST_TAISAI;
 		p_ptr->inside_quest = QUEST_YUKARI;
 
 		process_dungeon_file("q_info.txt", 0, 0, 0, 0);
 
-		//quest[QUEST_OBERON].status = QUEST_STATUS_TAKEN;
+		//quest[QUEST_TAISAI].status = QUEST_STATUS_TAKEN;
 		quest[QUEST_YUKARI].status = QUEST_STATUS_TAKEN;
 
 		/*:::Hack - 藍は紫クエストを完了済み(スコアには参入しない)*/
@@ -2433,10 +2435,10 @@ static void init_dungeon_quests(void)
 		if(p_ptr->pclass == CLASS_RAN || p_ptr->pclass == CLASS_YUKARI)
 		{
 			quest[QUEST_YUKARI].status = QUEST_STATUS_FINISHED;
-			p_ptr->inside_quest = QUEST_OBERON;
+			p_ptr->inside_quest = QUEST_TAISAI;
 			init_flags |= INIT_ASSIGN;
 			process_dungeon_file("q_info.txt", 0, 0, 0, 0);
-			quest[QUEST_OBERON].status = QUEST_STATUS_TAKEN;
+			quest[QUEST_TAISAI].status = QUEST_STATUS_TAKEN;
 
 		}
 		/*:::Hack - 魔理沙専用クエスト*/
@@ -2942,7 +2944,9 @@ outfit_type birth_outfit_class[] = {
 	{CLASS_MOMIZI,2,0,TV_SWORD,SV_WEAPON_SCIMITAR,1},
 	{CLASS_MOMIZI,2,0,TV_SHIELD,SV_SMALL_LEATHER_SHIELD,1},
 	{CLASS_CIRNO,2,0,TV_CLOTHES, SV_CLOTHES,1},
+
 	{CLASS_ORIN,2,0,TV_CLOTHES, SV_CLOTH_DRESS,1},
+	{CLASS_ORIN,2,0,TV_MATERIAL, SV_MATERIAL_SKULL,1 },//v1.1.98
 
 	{CLASS_SHINMYOUMARU,2,0,TV_CLOTHES, SV_CLOTH_EASTERN,1},
 	{CLASS_SHINMYOUMARU,2,ART_SHINMYOUMARU,0,0,0},
@@ -3330,7 +3334,6 @@ void player_outfit(void)
 		add_outfit(q_ptr);
 
 	}
-
 
 
 
@@ -6551,14 +6554,15 @@ static bool get_unique_player(void)
 	int mul_exp, mul_score;
 	char old_name[32];
 
+
 	while(1)
 	{
 
 		bool ok = TRUE;
 #ifdef JP
-		put_str("あなたの登場作品を選んでください。", 10, 10);
+		put_str("あなたの登場作品を選んでください。(*:ランダム)", 10, 10);
 #else
-        put_str("Choose the work you've debuted in.", 10, 10);
+        put_str("Choose the work you've debuted in. (*: Random)", 10, 10);
 #endif
 		cs = 0;
 		while(1)
@@ -6571,6 +6575,13 @@ static bool get_unique_player(void)
 			c = inkey();
 			if (c == 'Q') birth_quit();
 			if (c == 'S') return (FALSE);
+
+			if (c == '*')
+			{
+				k = randint0(ENTRY_MAX);
+				break;
+			}
+
 			if (c == ' ' || c == '\r' || c == '\n')
 			{
 				k = cs;
@@ -6592,41 +6603,42 @@ static bool get_unique_player(void)
 		clear_from(10);
 		entry = k;
 
-		cnt_table=0;
-		for(i=0;i<UNIQUE_PLAYER_NUM;i++)if(unique_player_table[i].entry == entry)
+
+		cnt_table = 0;
+		for (i = 0; i < UNIQUE_PLAYER_NUM; i++)if (unique_player_table[i].entry == entry)
 		{
-			if(cnt_table == 12)
+			if (cnt_table == 12)
 			{
 				put_str(_("ERROR:get_unique_player()のcnt_tableが一杯", "ERROR: cnt_table of get_unique_player() is full"), 12, 10);
 				break;
 			}
 			table[cnt_table++] = unique_player_table[i];
 		}
-		if(cnt_table==0)		c_put_str(TERM_L_BLUE, format(_("作品ID:%dに誰も登録されていない", "No unique player registered for the ID, %d"), entry), 8, 10);
+		if (cnt_table == 0)		c_put_str(TERM_L_BLUE, format(_("作品ID:%dに誰も登録されていない", "No unique player registered for the ID, %d"), entry), 8, 10);
 
 #ifdef JP
-		put_str("あなたは誰ですか？", 10, 10);
+		put_str("あなたは誰ですか？(*:ランダム)", 10, 10);
 		put_str("(灰字は未実装 ESCで作品選択へ戻る)", 11, 10);
 #else
-        put_str("Who are you?", 10, 10);
+        put_str("Who are you? (*: Random)", 10, 10);
 		put_str("(Grayed out options are unimplemented. ESC returns to picking debut appearance)", 11, 10);
 #endif
 
 		cs = 0;
-		while(1)
+		while (1)
 		{
-			for(n=0;n<cnt_table;n++)
+			for (n = 0; n < cnt_table; n++)
 			{
-				if(n == cs)
-					c_put_str(TERM_YELLOW, format("%c) %s",('a'+n),table[n].name), 12 + n, 10);
-				//藍はHARD以上限定
-				//紫も
-				else if((table[n].class_id == CLASS_RAN || table[n].class_id == CLASS_YUKARI) && difficulty < DIFFICULTY_HARD)
-					c_put_str(TERM_L_DARK, format("%c) %s",('a'+n),table[n].name), 12 + n, 10);
-				else if(!table[n].flag_fix)
-					c_put_str(TERM_L_DARK, format("%c) %s",('a'+n),table[n].name), 12 + n, 10);
+				if (n == cs)
+					c_put_str(TERM_YELLOW, format("%c) %s", ('a' + n), table[n].name), 12 + n, 10);
+				//藍・紫はHARD以上限定
+				else if ((table[n].class_id == CLASS_RAN || table[n].class_id == CLASS_YUKARI) && difficulty < DIFFICULTY_HARD)
+					c_put_str(TERM_L_DARK, format("%c) %s", ('a' + n), table[n].name), 12 + n, 10);
+				else if (!table[n].flag_fix)
+					c_put_str(TERM_L_DARK, format("%c) %s", ('a' + n), table[n].name), 12 + n, 10);
 				else
-					put_str( format("%c) %s",('a'+n),table[n].name), 12 + n, 10);
+					put_str(format("%c) %s", ('a' + n), table[n].name), 12 + n, 10);
+
 
 			}
 			Term_gotoxy(0, 0);
@@ -6638,40 +6650,66 @@ static bool get_unique_player(void)
 			}
 			if (c == 'Q') birth_quit();
 			if (c == 'S') return (FALSE);
+
+			//v1.1.97 ランダム選択
+			if (c == '*')
+			{
+				int available_number_list[64];
+				int tmp_list_len = 0;
+
+				for (n = 0; n < cnt_table; n++)
+				{
+					if (!table[n].flag_fix)continue;
+					//藍・紫はHARD以上限定
+					if (table[k].class_id == CLASS_RAN && difficulty < DIFFICULTY_HARD) continue;
+					if (table[k].class_id == CLASS_YUKARI && difficulty < DIFFICULTY_HARD) continue;
+					available_number_list[tmp_list_len++] = n;
+				}
+
+				if (tmp_list_len)
+				{
+					k = available_number_list[randint0(tmp_list_len)];
+					break;
+				}
+				//該当ページの実装キャラがまだ一人もいない場合tmp_list_lenが0になり*を押しても何も起こらない
+			}
+
+
 			if (c == ' ' || c == '\r' || c == '\n')
 			{
 				k = cs;
-				if(!table[k].flag_fix)continue;
-				//藍はHARD以上限定
-				//紫も
-				if(table[k].class_id == CLASS_RAN && difficulty < DIFFICULTY_HARD) continue;
-				if(table[k].class_id == CLASS_YUKARI && difficulty < DIFFICULTY_HARD) continue;
+				if (!table[k].flag_fix)continue;
+				//藍・紫はHARD以上限定
+				if (table[k].class_id == CLASS_RAN && difficulty < DIFFICULTY_HARD) continue;
+				if (table[k].class_id == CLASS_YUKARI && difficulty < DIFFICULTY_HARD) continue;
 				break;
 			}
-			if (c == '2' && cs < cnt_table-1) cs++;
+			if (c == '2' && cs < cnt_table - 1) cs++;
 			if (c == '8' && cs > 0) cs--;
 			if (c == '?')
 			{
 				show_help(_("tbirth.txt#Class", "tbirth_en.txt#Class"));
 			}
 
-			if (c >= 'a' && c <= 'a'+cnt_table-1)
+			if (c >= 'a' && c <= 'a' + cnt_table - 1)
 			{
 				k = c - 'a';
-				if(!table[k].flag_fix)continue;
+				if (!table[k].flag_fix)continue;
 
 				//藍はHARD以上限定
-				if(table[k].class_id == CLASS_RAN && difficulty < DIFFICULTY_HARD) continue;
-				if(table[k].class_id == CLASS_YUKARI && difficulty < DIFFICULTY_HARD) continue;
+				if (table[k].class_id == CLASS_RAN && difficulty < DIFFICULTY_HARD) continue;
+				if (table[k].class_id == CLASS_YUKARI && difficulty < DIFFICULTY_HARD) continue;
 
 				break;
 			}
 		}
 		clear_from(10);
-		if(!ok)
+		if (!ok)
 		{
 			continue; //作品選択まで戻る
 		}
+
+
 
 		roff_to_buf(table[k].info, 74, temp, sizeof(temp));
 		t = temp;

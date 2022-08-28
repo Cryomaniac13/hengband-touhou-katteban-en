@@ -1936,7 +1936,7 @@ if (flags9 & (RF9_S_KWAI))        {vp[vn] = "summon youkai";color[vn++] = TERM_G
 if (flags9 & (RF9_TELE_APPROACH))        {vp[vn] = "teleport towards target";color[vn++] = TERM_ORANGE;}
 if (flags9 & (RF9_TELE_HI_APPROACH))        {vp[vn] = "teleport towards target (while out of sight)";color[vn++] = TERM_ORANGE;}
 if (flags9 & (RF9_MAELSTROM))        {vp[vn] = "produce maelstroms";color[vn++] = TERM_BLUE;}
-if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm";color[vn++] = TERM_L_RED;}
+if (flags9 & (RF9_ALARM))        {vp[vn] = "sound an alarm and haste allies";color[vn++] = TERM_L_RED;}
 #endif
 
 
@@ -3632,7 +3632,7 @@ case RBE_DR_MANA:  q = "魔力を奪う"; break;
 	 * Notice "Quest" monsters, but only if you
 	 * already encountered the monster.
 	 */
-	if ((flags1 & RF1_QUESTOR) && ((r_ptr->r_sights) && (r_ptr->max_num) && ((r_idx == MON_OBERON) || (r_idx == MON_SERPENT) ||(r_idx == MON_YUKARI) )))
+	if ((flags1 & RF1_QUESTOR) && ((r_ptr->r_sights) && (r_ptr->max_num) && ((r_idx == MON_TAISAI) || (r_idx == MON_SERPENT) ||(r_idx == MON_YUKARI) )))
 	{
 #ifdef JP
 		hook_c_roff(TERM_VIOLET, "このモンスターこそが倒すべきボスであるらしい・・");

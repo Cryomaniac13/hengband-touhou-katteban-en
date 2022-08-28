@@ -1714,7 +1714,7 @@ struct player_type
 	s16b future_use_counter8;
 
 	u32b animal_ghost_align_flag; //v1.1.91
-	u32b ptype_new_flags2;
+	u32b quest_special_flag; //v1.1.98 一部クエストをどんな状態で進行したか記録する
 	u32b ptype_new_flags3;
 	u32b ptype_new_flags4;
 

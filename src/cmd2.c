@@ -225,18 +225,194 @@ void do_cmd_go_up(void)
 }
 
 
+
+/*
+* Return the number of features around (or under) the character.
+* Usually look for doors and floor traps.
+*/
+/*:::＠の周辺の特定の物の数を数える。数えるものは関数ポインタで処理を渡す*/
+static int count_dt(int *y, int *x, bool(*test)(int feat), bool under)
+{
+	int d, count, xx, yy;
+
+	/* Count how many matches */
+	count = 0;
+
+	/* Check around (and under) the character */
+	for (d = 0; d < 9; d++)
+	{
+		cave_type *c_ptr;
+		s16b feat;
+
+		/* if not searching under player continue */
+		if ((d == 8) && !under) continue;
+
+		/* Extract adjacent (legal) location */
+		yy = py + ddy_ddd[d];
+		xx = px + ddx_ddd[d];
+
+		/* Get the cave */
+		c_ptr = &cave[yy][xx];
+
+		/* Must have knowledge */
+		if (!(c_ptr->info & (CAVE_MARK))) continue;
+
+		/* Feature code (applying "mimic" field) */
+		feat = get_feat_mimic(c_ptr);
+
+		/* Not looking for this feature */
+		if (!((*test)(feat))) continue;
+
+		/* OK */
+		++count;
+
+		/* Remember the location. Only useful if only one match */
+		*y = yy;
+		*x = xx;
+	}
+
+	/* All done */
+	return count;
+}
+
+
+/*
+* Determine if a grid contains a chest
+*/
+static s16b chest_check(int y, int x, bool trapped)
+{
+	cave_type *c_ptr = &cave[y][x];
+
+	s16b this_o_idx, next_o_idx = 0;
+
+
+	/* Scan all objects in the grid */
+	for (this_o_idx = c_ptr->o_idx; this_o_idx; this_o_idx = next_o_idx)
+	{
+		object_type *o_ptr;
+
+		/* Acquire object */
+		o_ptr = &o_list[this_o_idx];
+
+		/* Acquire next object */
+		next_o_idx = o_ptr->next_o_idx;
+
+		/* Skip unknown chests XXX XXX */
+		/* if (!(o_ptr->marked & OM_FOUND)) continue; */
+
+		/* Check for non empty chest */
+		if ((o_ptr->tval == TV_CHEST) &&
+			(((!trapped) && (o_ptr->pval)) || /* non empty */
+			((trapped) && (o_ptr->pval > 0)))) /* trapped only */
+		{
+			return (this_o_idx);
+		}
+	}
+
+	/* No chest */
+	return (0);
+}
+
+/*
+* Return the number of chests around (or under) the character.
+* If requested, count only trapped chests.
+*/
+/*:::＠周辺の箱のあるグリッド数を数える*/
+/*:::trapped:トラップのある箱のみを数える*/
+static int count_chests(int *y, int *x, bool trapped)
+{
+	int d, count, o_idx;
+
+	object_type *o_ptr;
+
+	/* Count how many matches */
+	count = 0;
+
+	/* Check around (and under) the character */
+	for (d = 0; d < 9; d++)
+	{
+		/* Extract adjacent (legal) location */
+		int yy = py + ddy_ddd[d];
+		int xx = px + ddx_ddd[d];
+
+		/* No (visible) chest is there */
+		if ((o_idx = chest_check(yy, xx, FALSE)) == 0) continue;
+
+		/* Grab the object */
+		o_ptr = &o_list[o_idx];
+
+		/* Already open */
+		if (o_ptr->pval == 0) continue;
+
+		/* No (known) traps here */
+		if (trapped && (!object_is_known(o_ptr) ||
+			!chest_traps[o_ptr->pval])) continue;
+
+		/* OK */
+		++count;
+
+		/* Remember the location. Only useful if only one match */
+		*y = yy;
+		*x = xx;
+	}
+
+	/* All done */
+	return count;
+}
+
+
+//v1.1.97 わざと罠を踏む cmd_go_down()からのみ使用
+static void step_on_trap(void)
+{
+	int dir,x,y;
+	s16b feat;
+	cave_type *c_ptr;
+
+	if (!get_check_strict(_("近くの罠をわざと踏みますか？", "Are you sure you want to deliberately step on a nearby trap?"), CHECK_DEFAULT_Y)) return;
+	if (!get_rep_dir(&dir, TRUE)) return;
+
+	/* Get requested location */
+	y = py + ddy[dir];
+	x = px + ddx[dir];
+
+	/* Get requested grid */
+	c_ptr = &cave[y][x];
+
+	if (!is_known_trap(c_ptr))
+	{
+		msg_print(_("そこには罠が見当たらない。", "You don't see any traps there."));
+		return;
+	}
+
+	//move_player()に新しいフラグを実装しわざとトラップ発動させる
+	move_player(dir, FALSE, FALSE,TRUE);
+
+	//直接実行する場合＠はトラップの場所へ動かないので落とし戸とかに落ちられない。イメージ的にも移動すべきか。
+	//activate_floor_trap(y, x, FALSE);
+
+}
+
 /*
  * Go down one level
  */
 /*:::階段を下りる*/
+//v1.1.97 罠をわざと踏む機能を追加
 void do_cmd_go_down(void)
 {
 	/* Player grid */
 	cave_type *c_ptr = &cave[py][px];
 	feature_type *f_ptr = &f_info[c_ptr->feat];
 
+	int trap_count = 0;
+
 	bool fall_trap = FALSE;
 	int down_num = 0;
+
+	int ty, tx;
+
+	//足元もしくは隣接した感知済みの罠を数える
+	trap_count = count_dt(&ty, &tx, is_trap, TRUE);
+
 
 	if (p_ptr->special_defense & KATA_MUSOU)
 	{
@@ -244,17 +420,22 @@ void do_cmd_go_down(void)
 	}
 
 	/* Verify stairs */
-	if (!have_flag(f_ptr->flags, FF_MORE))
+	//v1.1.97 落とし戸はstep_on_trap()で処理するのでここで階段でなくトラップと見なすようにする
+	if (!(have_flag(f_ptr->flags, FF_MORE) && !have_flag(f_ptr->flags, FF_TRAP)))
 	{
 #ifdef JP
 		msg_print("ここには下り階段が見当たらない。");
 #else
 		msg_print("I see no down staircase here.");
 #endif
+		//v1.1.97 わざと罠を踏む
+		if (trap_count) step_on_trap();
 
 		return;
+
 	}
 
+	//v1.1.97 もうこのフラグは立たないはずだが消すのも面倒なのでそのまま
 	if (have_flag(f_ptr->flags, FF_TRAP)) fall_trap = TRUE;
 
 	/* Quest entrance */
@@ -263,7 +444,7 @@ void do_cmd_go_down(void)
 		do_cmd_quest();
 	}
 	/*::: Mega Hack - Extraモードでオベロン打倒後に階段を降りるとサーペントクエストを受領し混沌の領域101階へ*/
-	else if(EXTRA_MODE && dun_level == 100 && quest[QUEST_OBERON].status == QUEST_STATUS_FINISHED)
+	else if(EXTRA_MODE && dun_level == 100 && quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED)
 	{
 		int tmp = p_ptr->inside_quest;
 
@@ -502,43 +683,6 @@ void do_cmd_search(void)
 }
 
 
-/*
- * Determine if a grid contains a chest
- */
-static s16b chest_check(int y, int x, bool trapped)
-{
-	cave_type *c_ptr = &cave[y][x];
-
-	s16b this_o_idx, next_o_idx = 0;
-
-
-	/* Scan all objects in the grid */
-	for (this_o_idx = c_ptr->o_idx; this_o_idx; this_o_idx = next_o_idx)
-	{
-		object_type *o_ptr;
-
-		/* Acquire object */
-		o_ptr = &o_list[this_o_idx];
-
-		/* Acquire next object */
-		next_o_idx = o_ptr->next_o_idx;
-
-		/* Skip unknown chests XXX XXX */
-		/* if (!(o_ptr->marked & OM_FOUND)) continue; */
-
-		/* Check for non empty chest */
-		if ((o_ptr->tval == TV_CHEST) &&
-			(((!trapped) && (o_ptr->pval)) || /* non empty */
-			((trapped) && (o_ptr->pval > 0)))) /* trapped only */
-		{
-			return (this_o_idx);
-		}
-	}
-
-	/* No chest */
-	return (0);
-}
-
 
 /*
  * Allocates objects upon opening a chest    -BEN-
@@ -567,6 +711,13 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 
 	object_type *o_ptr = &o_list[o_idx];
 
+	if (o_ptr->tval != TV_CHEST)
+	{
+		msg_format(_("ERROR:tvalがTV_CHEST以外(%d)のときchest_death()が呼ばれた",
+                    "ERROR: chest_death() called with tval other than TV_CHEST (%d)"),o_ptr->tval);
+		return;
+	}
+
 	/*:::出るアイテムの質と個数を決定*/
 	/* Small chests often hold "gold" */
 	small = (o_ptr->sval < SV_CHEST_MIN_LARGE);
@@ -584,8 +735,12 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 	else
 	{
 		/* Determine the "value" of the items */
-		object_level = ABS(o_ptr->pval) + 10;
+		//object_level = ABS(o_ptr->pval) + 10;
+		//v1.1.97 箱の中身のレベルをモンスターと同じく生成フロア+5にした
+		object_level = MIN(127,o_ptr->xtra3);
 	}
+
+	if (cheat_peek) msg_format("object_level:%d",object_level);
 
 	/* Zero pval means empty chest */
 	/*:::空いた箱か爆発した箱*/
@@ -1127,6 +1282,31 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			}
 
 		}
+		//v1.1.98 連続昏睡事件Ⅱ
+		else if (o_ptr->sval == SV_CHEST_HANGOKU2)
+		{
+			int i = 5+randint1(15);
+			q_ptr = &forge;
+			for (; i > 0; i--)
+			{
+				int roll = randint1(100);
+
+				if(roll == 100)
+					object_prep(q_ptr, lookup_kind(TV_MATERIAL, SV_MATERIAL_METEORICIRON));
+				else if(roll > 90)
+					object_prep(q_ptr, lookup_kind(TV_FOOD, SV_FOOD_MAGIC_WATERMELON));
+				else if(roll > 75)
+					object_prep(q_ptr, lookup_kind(TV_MUSHROOM, SV_MUSHROOM_PUFFBALL));
+				else if (roll > 55)
+					object_prep(q_ptr, lookup_kind(TV_STICK, SV_WEAPON_FLOWER));
+				else
+					object_prep(q_ptr, lookup_kind(TV_MATERIAL, SV_MATERIAL_SKULL));
+
+				apply_magic(q_ptr, object_level, 0L);
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+
+		}
 		/*:::サトリ・コンフリクト報酬　魔法職なら第一領域、スペマス系なら使用可能な領域からランダム、どちらでもないなら全くランダムな四冊目魔法書*/
 		else if(o_ptr->sval == SV_CHEST_SATORI)
 		{
@@ -1421,6 +1601,568 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 }
 
 
+
+//v1.1.97 箱のトラップが発動し罠が消える。chest_trap()をこれに置き換える。
+//遠隔解除によって＠以外のモンスターなどを罠にかけることができるようにする。
+//このトラップの発動によって箱自体が破壊されることもある。
+//trap_player:＠が罠付き箱を開けるか解除失敗して罠にかかるときTRUE。
+//FALSEのとき罠によっては周囲の適当なプレイヤーやモンスターをランダムにターゲットしてボルトなどを発射する
+void activate_chest_trap(int y, int x, s16b o_idx, bool trap_player)
+{
+
+	bool trap_monster = FALSE;
+	int  i, trap_type;
+	int dam,typ;
+	int trap_range = MAX_RANGE;
+
+	u32b summon_flag = (PM_ALLOW_GROUP | PM_NO_PET);
+
+	//ボルトなどが箱から撃ち出されるときのターゲットグリッド
+	int ty = 0, tx = 0;
+
+	//箱からターゲットまでの距離
+	int target_dist = 0;
+
+	object_type *o_ptr = &o_list[o_idx];//箱なので常に床上
+
+	int chest_level = o_ptr->xtra3;//箱のレベル(生成レベル+5)
+
+	/* Ignore disarmed chests */
+	if (o_ptr->pval <= 0) return;
+
+	//もしかすると他のトラップの発動などによりこの箱が破壊された状態で呼ばれるかもしれないので念のため
+	if (!o_ptr->k_idx) return;
+	if (o_ptr->pval >= CHEST_TRAP_LIST_LENGTH)
+	{
+		msg_format(_("ERROR:この箱のpvalがトラップインデックスの範囲外(%d)",
+                    "ERROR: pval for this chest is out of bounds for trap index (%d)"),o_ptr->pval);
+		o_ptr->pval = 0 - o_ptr->pval;//GF_ACTIV_TRAP経由でここに来た時箱が解錠されないとループになると思うので一応
+		return;
+	}
+
+	//罠の種類を取得
+	trap_type = chest_new_traps[o_ptr->pval];
+
+	//フランが鍵開けに失敗するとよく爆発する
+	if (p_ptr->pclass == CLASS_FLAN && one_in_(2)) trap_type = (CHEST_TRAP_EXPLODE);
+
+	//箱を解除済みにする
+	o_ptr->pval = (0 - o_ptr->pval);
+	object_known(o_ptr);
+
+	//v1.1.98 トラップなし(施錠)のとき終了
+	if (trap_type == CHEST_TRAP_NOTHING) return;
+
+	//GF_ACTIV_TRAP経由でここに来た時箱が解錠されないとループになると思うので時間停止中でも解除しておく
+	if (SAKUYA_WORLD || world_player)
+	{
+		msg_print(_("箱の罠は作動しなかった。", "The trap on the chest didn't go off."));
+		return;
+	}
+
+
+	//ターゲットグリッドと箱からターゲットまでの距離を求める。トラップの種類によってはこの処理が無駄になるが大した問題はないだろう
+	//＠が普通に箱の罠にかかったとき
+	if (trap_player)
+	{
+		tx = px;
+		ty = py;
+		if (!player_bold(y, x)) target_dist = 1;
+	}
+	//箱の上に誰かがいる状態で箱のトラップが起動されたとき
+	else if (player_bold(y, x) || cave[y][x].m_idx)
+	{
+		tx = x;
+		ty = y;
+	}
+	//それ以外のとき、箱の近くのプレイヤーやモンスターをランダムに選定する
+	else
+	{
+		int tmp_dist = 255;
+		//まず＠を初期値にする
+		if (projectable(py, px, y, x))
+		{
+			tx = px;
+			ty = py;
+			tmp_dist = distance(py, px, y, x);
+		}
+		//それ以下の距離にモンスターがいればそちらが選ばれる(処理の簡略化のためm_idxが高いモンスター優先)
+		for (i = 0; i < m_max; i++)
+		{
+			int tmp_dist2;
+
+			monster_type *m_ptr_tmp = &m_list[i];
+			if (!m_ptr_tmp->r_idx) continue;
+
+			tmp_dist2 = distance(y, x, m_ptr_tmp->fy, m_ptr_tmp->fx);
+			if (tmp_dist2 > tmp_dist) continue; //等距離なら＠よりモンスター優先で当たることになる
+			if (!projectable(y, x, m_ptr_tmp->fy, m_ptr_tmp->fx)) continue;
+
+			tmp_dist = tmp_dist2;
+			tx = m_ptr_tmp->fx;
+			ty = m_ptr_tmp->fy;
+		}
+		target_dist = tmp_dist;
+
+
+	}
+
+	//＠勢力以外のモンスターがターゲットになっているとき召喚トラップの召喚フラグを変更
+	if (!trap_player && cave[ty][tx].m_idx && is_hostile(&m_list[cave[ty][tx].m_idx]))
+	{
+		summon_flag = (PM_ALLOW_GROUP | PM_FORCE_FRIENDLY);
+	}
+
+	//if (p_ptr->wizard) trap_type = CHEST_TRAP_FUSION; //テスト用
+
+	switch (trap_type)
+	{
+
+	case CHEST_TRAP_LOSE_STR:
+	case CHEST_TRAP_LOSE_CON:
+	case CHEST_TRAP_LOSE_MAG:
+
+		if (trap_type == CHEST_TRAP_LOSE_STR)
+			typ = GF_DEC_ATK;
+		else if (trap_type == CHEST_TRAP_LOSE_CON)
+			typ = GF_DEC_DEF;
+		else
+			typ = GF_DEC_MAG;
+
+		//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+		trap_range = 6;
+		if (target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+		dam = 100 + randint1(chest_level);
+		msg_print(_("箱から小さなダーツが撃ち出された。", "A small dart shoots out from the chest."));
+		//project()の発射位置を特殊変数で設定して射出処理
+		hack_project_start_x = x;
+		hack_project_start_y = y;
+		(void)project(PROJECT_WHO_TRAP, 0, ty, tx, dam, typ, (PROJECT_REFLECTABLE | PROJECT_STOP | PROJECT_KILL | PROJECT_GRID), -1);
+		break;
+
+	case CHEST_TRAP_TELEPORTER:
+	{
+		trap_range = 5;
+		msg_print(_("おおっと！テレポーター！", "Oops! A teleporter!"));
+		//まず＠に影響を及ぼさない周辺モンスターテレポート
+		project(0, trap_range, y, x, 100, GF_AWAY_ALL, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL), -1);
+		//範囲内の＠を強制テレポート。壁の中に出ることもある。
+		if (distance(py, px, y, x) < trap_range) teleporter_trap();
+		break;
+	}
+
+	case CHEST_TRAP_BA_POIS:
+		dam = chest_level * 3;
+		msg_print(_("箱から緑色のガスが噴き出した！", "Green gas pours out from the chest!"));
+		project(PROJECT_WHO_TRAP, 4, y, x, dam, GF_POIS, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+		break;
+
+	case CHEST_TRAP_BA_SLEEP:
+		dam = 150 + chest_level * 3;
+		msg_print(_("箱から白いガスが噴き出した！", "White gas pours out from the chest!"));
+		project(PROJECT_WHO_TRAP, 4, y, x, dam, GF_OLD_SLEEP, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+		break;
+
+	case CHEST_TRAP_BA_CONF:
+		dam = 150 + chest_level * 3;
+		msg_print(_("箱からきらめくガスが噴き出した！", "Gas of scintillating colors pours out from the chest!"));
+		project(PROJECT_WHO_TRAP, 4, y, x, dam, GF_OLD_CONF, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+		break;
+
+	case CHEST_TRAP_EXPLODE:
+		dam = 150 + chest_level * 2;
+		msg_print(_("おおっと！爆弾！", "Oops! A bomb!"));
+		project(PROJECT_WHO_TRAP, 4, y, x, dam, GF_SHARDS, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+		//この箱アイテム消滅
+		floor_item_increase(o_idx, -1);
+		floor_item_optimize(o_idx);
+		lite_spot(y, x);
+
+		break;
+
+	case CHEST_TRAP_ALARM:
+		dam = 150 + chest_level * 3;
+
+#ifdef JP
+		msg_print("けたたましい音が鳴り響いた！");
+#else
+		msg_print("There is a loud, shrill noise!");
+#endif
+		//スピードモンスターをなくす
+		aggravate_monsters(0, FALSE);
+		project(PROJECT_WHO_TRAP, 2, y, x, dam, GF_STUN, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL), -1);
+
+		break;
+
+	case CHEST_TRAP_SUMMON:
+	case CHEST_TRAP_S_BIRD:
+	case CHEST_TRAP_S_ELEMENTAL:
+	case CHEST_TRAP_S_DEMON:
+	case CHEST_TRAP_S_DRAGON:
+	case CHEST_TRAP_S_CHIMERA:
+	case CHEST_TRAP_S_VORTEX:
+	case CHEST_TRAP_S_KWAI:
+	{
+		int summon_num;
+		bool summon_done = FALSE;
+		cptr summon_msg;
+		int summon_lev;
+		int summon_mode;
+
+		switch (trap_type)
+		{
+		case CHEST_TRAP_S_KWAI:
+			summon_num = 4 + randint1(4);
+			summon_msg = _("つづらの中から魑魅魍魎がぞろぞろ湧き出てきた！",
+                         "Wicked spirits come out of the basket!");
+			summon_lev = chest_level;
+			summon_mode = SUMMON_KWAI;
+			break;
+
+		case CHEST_TRAP_S_VORTEX:
+			summon_num = 5 + randint1(5);
+			summon_msg = _("渦巻が合体し、破裂した！", "Vortices coalesce and burst forth!");
+			summon_lev = chest_level / 2;
+			summon_mode = SUMMON_VORTEX;
+			break;
+
+
+
+		case CHEST_TRAP_S_CHIMERA:
+			summon_num = 3 + randint1(3);
+			summon_msg = _("奇妙な姿の怪物が襲って来た！", "Strange beast come forth!");
+			summon_lev = chest_level;
+			summon_mode = SUMMON_HYBRID;
+			break;
+
+		case CHEST_TRAP_S_DRAGON:
+			summon_num = 2 + randint1(2);
+			summon_msg = _("暗闇にドラゴンの影がぼんやりと現れた！", "Dragonic forms appear in the darkness!");
+			summon_lev = chest_level;
+			summon_mode = SUMMON_DRAGON;
+			break;
+
+		case CHEST_TRAP_S_DEMON:
+			summon_num = 2 + randint1(2);
+			summon_msg = _("炎と硫黄の雲の中に悪魔が姿を現した！", "Demons appear in a cloud of fire and sulfur!");
+			summon_lev = chest_level;
+			summon_mode = SUMMON_DEMON;
+			break;
+
+		case CHEST_TRAP_S_ELEMENTAL:
+			summon_num = 3 + randint1(3);
+			summon_msg = _("宝を守るためにエレメンタルが現れた！", "Elementals guarding the treasure appear!");
+			summon_lev = chest_level;
+			summon_mode = SUMMON_ELEMENTAL;
+			break;
+
+		case CHEST_TRAP_S_BIRD:
+			summon_num = 5 + randint1(5);
+			summon_msg = _("箱から鳥の群れが飛び出した！", "A flock of birds flies out from the chest!");
+			summon_lev = chest_level / 2 + 1;
+			summon_mode = SUMMON_BIRD;
+			break;
+
+
+		default:
+			summon_num = 4 + randint1(4);
+			summon_msg = _("箱からモンスターが現れた！", "Monsters appear from the chest!");
+			summon_lev = chest_level;
+			summon_mode = 0;
+			break;
+
+
+
+		}
+
+		for (i = 0; i < summon_num; i++)
+		{
+			if(summon_specific(0, y, x, summon_lev, summon_mode, summon_flag)) summon_done = TRUE;
+		}
+		if (summon_done)
+		{
+			msg_format("%s", summon_msg);
+
+			if (summon_flag & PM_FORCE_FRIENDLY)
+				msg_print(_("召喚のルーンはターゲットを誤認したようだ！", "Looks like the summoning runes misidentified their target!"));
+		}
+		else
+		{
+			msg_print(_("召喚のルーンは不発だった！", "The summoning runes failed to activate!"));
+		}
+
+		break;
+	}
+
+	case CHEST_TRAP_SUIKI:
+	{
+		msg_print(_("地面から超高圧の水流が噴き出した！", "A jet of water bursts out from the ground at extremely high pressure!"));
+		dam = chest_level * 4;
+
+		project(PROJECT_WHO_TRAP, 2, y, x, dam, GF_WATER_FLOW, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_GRID), -1);
+		project(PROJECT_WHO_TRAP, 2, y, x, dam, GF_WATER, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+
+
+		if (trap_player)
+		{
+			msg_print(_("あなたは一瞬動きを封じられた！", "You are momentarily unable to move!"));
+			p_ptr->energy_need += ENERGY_NEED();
+		}
+		else if (cave[y][x].m_idx)
+		{
+			char            m_name[80];
+			monster_desc(m_name, &m_list[cave[y][x].m_idx], 0);
+			msg_format(_("%sは怯んでいる！", "%^s is shaken!"),m_name);
+			monster_delay(cave[y][x].m_idx, 100 + randint1(100));
+			project(PROJECT_WHO_TRAP, 0, y, x, 25+chest_level/4, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_KILL), -1);
+
+
+		}
+
+		break;
+	}
+
+
+	case CHEST_TRAP_RUIN:
+
+		if (trap_player)
+		{
+			/* Determine how many nasty tricks can be played. */
+			int nasty_tricks_count = 4 + randint0(3);
+
+			/* Message. */
+#ifdef JP
+			msg_print("恐ろしい声が響いた:  「暗闇が汝をつつまん！」");
+#else
+			msg_print("Hideous voices bid:  'Let the darkness have thee!'");
+#endif
+
+			/* This is gonna hurt... */
+			for (; nasty_tricks_count > 0; nasty_tricks_count--)
+			{
+				/* ...but a high saving throw does help a little. */
+				if (randint1(100 + chest_level) > p_ptr->skill_sav)
+				{
+#ifdef JP
+					if (one_in_(6)) take_hit(DAMAGE_NOESCAPE, damroll(5, 20), "破滅のトラップの宝箱", -1);
+#else
+					if (one_in_(6)) take_hit(DAMAGE_NOESCAPE, damroll(5, 20), "ruination chest trap", -1);
+#endif
+					else if (one_in_(5)) (void)set_cut(p_ptr->cut + 200);
+					else if (one_in_(4))
+					{
+						if (!p_ptr->free_act)
+							(void)set_paralyzed(p_ptr->paralyzed + 2 +
+								randint0(6));
+						else
+							(void)set_stun(p_ptr->stun + 10 +
+								randint0(100));
+					}
+					else if (one_in_(3)) apply_disenchant(0, 0);
+					else if (one_in_(2))
+					{
+						(void)do_dec_stat(A_STR);
+						(void)do_dec_stat(A_DEX);
+						(void)do_dec_stat(A_CON);
+						(void)do_dec_stat(A_INT);
+						(void)do_dec_stat(A_WIS);
+						(void)do_dec_stat(A_CHR);
+					}
+					else (void)fire_meteor(-1, GF_NETHER, y, x, 150, 1);
+				}
+			}
+		}
+		else if (target_dist <= 1)
+		{
+			msg_print(_("邪悪なルーンが発動した！", "Evil runes get activated!"));
+			project(0, 0, ty, tx, 100 + chest_level * 3, GF_DEC_ALL, (PROJECT_JUMP | PROJECT_KILL), -1);
+			project(0, 0, ty, tx, 10 + chest_level / 2, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_KILL), -1);
+			project(PROJECT_WHO_TRAP, 0, y, x, 100+chest_level*2, GF_HAND_DOOM, (PROJECT_KILL | PROJECT_HIDE | PROJECT_JUMP), -1);
+
+		}
+		else
+		{
+			msg_print(_("邪悪なルーンが発動したが不発に終わったようだ。", "Evil runes were activated, but failed to go off."));
+
+		}
+		break;
+
+	case CHEST_TRAP_SLINGSHOT:
+
+		//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+		trap_range = 6;
+		if(target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+		dam = 10 + randint1(chest_level/2);
+		msg_print(_("箱から石礫が撃ち出された！", "A stone flies out from the chest!"));
+		//project()の発射位置を特殊変数で設定して射出処理
+		hack_project_start_x = x;
+		hack_project_start_y = y;
+		(void)project(PROJECT_WHO_TRAP, 0, ty, tx, dam, GF_ARROW, (PROJECT_STOP|PROJECT_KILL|PROJECT_GRID), -1);
+		break;
+
+
+	case CHEST_TRAP_ARROW:
+
+		//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+		trap_range = 12;
+		if (target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+		dam = 25 + randint1(chest_level);
+		msg_print(_("箱から矢が撃ち出された！", "An arrow shoots out from the chest!"));
+		//project()の発射位置を特殊変数で設定して射出処理
+		hack_project_start_x = x;
+		hack_project_start_y = y;
+		(void)project(PROJECT_WHO_TRAP, 0, ty, tx, dam, GF_ARROW, (PROJECT_STOP | PROJECT_KILL | PROJECT_GRID), -1);
+		break;
+
+	case CHEST_TRAP_STEEL_ARROW:
+
+		//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+		trap_range = 15;
+		if (target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+		dam = 50 + damroll(2,chest_level);
+		msg_print(_("箱から鋼鉄の矢が撃ち出された！", "A steel arrow shoots out from the chest!"));
+		//project()の発射位置を特殊変数で設定して射出処理
+		hack_project_start_x = x;
+		hack_project_start_y = y;
+		(void)project(PROJECT_WHO_TRAP, 0, ty, tx, dam, GF_ARROW, (PROJECT_STOP | PROJECT_KILL | PROJECT_GRID), -1);
+		break;
+
+	case CHEST_TRAP_PUNCH:
+	{
+		int	dice = chest_level / 10 + 4;
+		int	sides = dice;
+		dam = damroll(dice, sides);
+		if (trap_player)
+		{
+			msg_print(_("バネ仕掛けのパンチンググローブがあなたの顔面にめり込んだ！",
+                    "A spring-loaded boxing glove hits you in the face!"));
+			take_hit(DAMAGE_NOESCAPE, dam, _("罠", "trap"), -1);
+			(void)set_stun(p_ptr->stun + 50 + randint0(50));
+		}
+		else
+		{
+			//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+			trap_range = 2;
+			if (target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+			msg_print(_("箱からパンチンググローブが撃ち出された！", "A boxing glove shoots out from the chest!"));
+			//project()の発射位置を特殊変数で設定して射出処理
+			hack_project_start_x = x;
+			hack_project_start_y = y;
+			(void)project(PROJECT_WHO_TRAP, 0, ty, tx, dam, GF_FORCE, (PROJECT_KILL), -1);
+		}
+		break;
+	}
+
+	case CHEST_TRAP_BR_FIRE:
+	case CHEST_TRAP_BR_ACID:
+		//トラップの射程を設定し、その範囲内にターゲットがいなければ適当に決める
+		trap_range = 8;
+		if (target_dist > trap_range) scatter(&ty, &tx, y, x, trap_range, 0);
+		dam = chest_level * 6;
+		if (dam < 100) dam = 100;
+		if (trap_type == CHEST_TRAP_BR_FIRE)
+		{
+			typ = GF_FIRE;
+			msg_print(_("火炎放射だ！", "Fire shoots out!"));
+		}
+		else
+		{
+			typ = GF_ACID;
+			msg_print(_("箱から強酸が噴き出した！", "Acid sprays out from the chest!"));
+		}
+
+		//project()の発射位置を特殊変数で設定して射出処理
+		hack_project_start_x = x;
+		hack_project_start_y = y;
+		(void)project(PROJECT_WHO_TRAP, -2, ty, tx, dam, typ, (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_PLAYER), -1);
+		break;
+
+	case CHEST_TRAP_BA_TIME:
+		dam = chest_level * 2 + randint1(chest_level);
+		msg_print(_("逆玉手箱だ！", "It's a time reversal trap!"));
+		project(PROJECT_WHO_TRAP, 5, y, x, dam, GF_TIME, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+
+		break;
+
+
+	case CHEST_TRAP_MIMIC:
+		msg_print(_("なんと箱はミミックだった！", "What? The chest was a mimic!"));
+		//この箱アイテム消滅
+		floor_item_increase(o_idx, -1);
+		floor_item_optimize(o_idx);
+		lite_spot(y, x);
+		//ミミック召喚
+		if (!summon_named_creature(0, y, x, MON_MIMIC_CHEST, 0L))
+			msg_print(_("しかしミミックはどこかへ消えた。", "The mimic disappears into thin air."));
+
+		break;
+
+	case CHEST_TRAP_MAGIC_DRAIN:
+		trap_range = 5;
+		dam = chest_level * 4;
+		msg_print(_("周囲の魔力が箱に吸い込まれた！", "The chest sucks in nearby mana!"));
+
+		//＠に影響を及ぼさない魔法力低下のボール
+		project(0, trap_range, y, x, dam, GF_DEC_MAG, (PROJECT_JUMP | PROJECT_KILL), -1);
+		//範囲内モンスターに魔力消去
+		for (i = 1; i<m_max; i++)
+		{
+			monster_type *m_ptr = &m_list[i];
+
+			if (!m_ptr->r_idx) continue;
+			if (distance(m_ptr->fy, m_ptr->fx, y, x) > trap_range) continue;
+			if (!projectable(m_ptr->fy, m_ptr->fx, y, x)) continue;
+
+			dispel_monster_status(i);
+		}
+
+		//＠が範囲内なら魔力消去とMPダメージ
+		if (distance(py, px, y, x) < trap_range)
+		{
+			dispel_player();
+			p_ptr->csp -= dam;
+			if (p_ptr->csp < 0)
+			{
+				p_ptr->csp = 0;
+				p_ptr->csp_frac = 0;
+				p_ptr->redraw |= (PR_MANA);
+			}
+
+		}
+
+		break;
+
+	case CHEST_TRAP_BA_BERSERK:
+		dam = 150 + randint1(chest_level * 3);
+		msg_print(_("箱から真っ赤なガスが噴き出した！", "Bright red gas pours out from the chest!"));
+		project(PROJECT_WHO_TRAP, 4, y, x, dam, GF_BERSERK, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+		break;
+
+	case CHEST_TRAP_FUSION:
+		msg_print(_("おおっと！ニュークリアフュージョン！", "Oops! Nuclear fusion!"));
+		dam = chest_level * 8;
+		if (dam < 300) dam = 300;
+
+		//この箱アイテム消滅
+		floor_item_increase(o_idx, -1);
+		floor_item_optimize(o_idx);
+		lite_spot(y, x);
+		//視界内核熱攻撃
+		project_hack3(PROJECT_WHO_TRAP, y, x, GF_NUKE, 0, 0, dam);
+		break;
+
+
+	default:
+		msg_format(_("ERROR:trap_type(%d)の処理が定義されていない",
+                    "ERROR: Undefined logic for trap_type %d"),trap_type);
+		break;
+	}
+
+	hack_project_start_x = 0;
+	hack_project_start_y = 0;
+
+}
+
 /*
  * Chests have traps too.
  *
@@ -1428,6 +2170,8 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
  * Note that the chest itself is never destroyed.
  */
 /*:::箱のトラップが発動する*/
+//v1.1.97 この関数をchest_trap()に置き換えた
+#if 0
 static void chest_trap(int y, int x, s16b o_idx)
 {
 	int  i, trap;
@@ -1440,7 +2184,7 @@ static void chest_trap(int y, int x, s16b o_idx)
 	if (o_ptr->pval <= 0) return;
 
 	/* Obtain the traps */
-	/*:::tables.cのchest_traps[]にpvalごとの罠の種類が記述されている。罠が複数あることもある*/
+	/*:::tables.cのchest_traps[]にpvalごとの罠の種類が記述されている。intだがビットフラグなので罠が複数あることもある*/
 	trap = chest_traps[o_ptr->pval];
 
 	//フランが鍵開けに失敗するとよく爆発する
@@ -1722,6 +2466,7 @@ static void chest_trap(int y, int x, s16b o_idx)
 		o_ptr->pval = 0;
 	}
 }
+#endif
 
 
 /*
@@ -1800,11 +2545,21 @@ static bool do_cmd_open_chest(int y, int x, s16b o_idx)
 	{
 		/* Apply chest traps, if any */
 		/*:::箱の罠があれば発動する*/
-		chest_trap(y, x, o_idx);
+		//v1.1.97 箱トラップ仕様変更
+		activate_chest_trap(y, x, o_idx, TRUE);
+		//chest_trap(y, x, o_idx);
 
 		/* Let the Chest drop items */
 		/*:::箱が開き、アイテムが出る*/
-		chest_death(FALSE, y, x, o_idx);
+		//v1.1.97 箱の罠によってこの箱が破壊される可能性があるので条件式追加
+		if (!o_list[o_idx].k_idx)
+		{
+			if (cheat_peek) msg_print(_("(箱が破壊されている)", "(the chest was destroyed)"));
+		}
+		else
+		{
+			chest_death(FALSE, y, x, o_idx);
+		}
 	}
 
 	/* Result */
@@ -1822,103 +2577,6 @@ static bool is_open(int feat)
 	return have_flag(f_info[feat].flags, FF_CLOSE) && (feat != feat_state(feat, FF_CLOSE));
 }
 
-
-/*
- * Return the number of features around (or under) the character.
- * Usually look for doors and floor traps.
- */
-/*:::＠の周辺の特定の物の数を数える。数えるものは関数ポインタで処理を渡す*/
-static int count_dt(int *y, int *x, bool (*test)(int feat), bool under)
-{
-	int d, count, xx, yy;
-
-	/* Count how many matches */
-	count = 0;
-
-	/* Check around (and under) the character */
-	for (d = 0; d < 9; d++)
-	{
-		cave_type *c_ptr;
-		s16b feat;
-
-		/* if not searching under player continue */
-		if ((d == 8) && !under) continue;
-
-		/* Extract adjacent (legal) location */
-		yy = py + ddy_ddd[d];
-		xx = px + ddx_ddd[d];
-
-		/* Get the cave */
-		c_ptr = &cave[yy][xx];
-
-		/* Must have knowledge */
-		if (!(c_ptr->info & (CAVE_MARK))) continue;
-
-		/* Feature code (applying "mimic" field) */
-		feat = get_feat_mimic(c_ptr);
-
-		/* Not looking for this feature */
-		if (!((*test)(feat))) continue;
-
-		/* OK */
-		++count;
-
-		/* Remember the location. Only useful if only one match */
-		*y = yy;
-		*x = xx;
-	}
-
-	/* All done */
-	return count;
-}
-
-
-/*
- * Return the number of chests around (or under) the character.
- * If requested, count only trapped chests.
- */
-/*:::＠周辺の箱のあるグリッド数を数える*/
-/*:::trapped:トラップのある箱のみを数える*/
-static int count_chests(int *y, int *x, bool trapped)
-{
-	int d, count, o_idx;
-
-	object_type *o_ptr;
-
-	/* Count how many matches */
-	count = 0;
-
-	/* Check around (and under) the character */
-	for (d = 0; d < 9; d++)
-	{
-		/* Extract adjacent (legal) location */
-		int yy = py + ddy_ddd[d];
-		int xx = px + ddx_ddd[d];
-
-		/* No (visible) chest is there */
-		if ((o_idx = chest_check(yy, xx, FALSE)) == 0) continue;
-
-		/* Grab the object */
-		o_ptr = &o_list[o_idx];
-
-		/* Already open */
-		if (o_ptr->pval == 0) continue;
-
-		/* No (known) traps here */
-		if (trapped && (!object_is_known(o_ptr) ||
-			!chest_traps[o_ptr->pval])) continue;
-
-		/* OK */
-		++count;
-
-		/* Remember the location. Only useful if only one match */
-		*y = yy;
-		*x = xx;
-	}
-
-	/* All done */
-	return count;
-}
 
 
 /*
@@ -2966,7 +3624,9 @@ static bool do_cmd_disarm_chest(int y, int x, s16b o_idx)
 #endif
 
 		sound(SOUND_FAIL);
-		chest_trap(y, x, o_idx);
+		//v1.1.97 箱トラップ仕様変更
+		activate_chest_trap(y, x, o_idx, TRUE);
+		//chest_trap(y, x, o_idx);
 	}
 
 	/* Result */
@@ -2983,7 +3643,7 @@ static bool do_cmd_disarm_chest(int y, int x, s16b o_idx)
  *
  * Returns TRUE if repeated commands may continue
  */
-/*:::床上のトラップを解除する。箱のトラップとほぼ同じ。罠の発動は、解除せず移動することで行われる*/
+/*:::床上のトラップを解除する。箱のトラップとほぼ同じ。罠の発動は解除されてない状態で移動することで行われる*/
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
 bool do_cmd_disarm_aux(int y, int x, int dir)
@@ -3062,12 +3722,12 @@ static bool do_cmd_disarm_aux(int y, int x, int dir)
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
 		/* Move the player onto the trap */
-		move_player(dir, easy_disarm, FALSE);
+		move_player(dir, easy_disarm, FALSE,FALSE);
 
 #else /* ALLOW_EASY_DISARM -- TNB */
 
 		/* move the player onto the trap grid */
-		move_player(dir, FALSE, FALSE);
+		move_player(dir, FALSE, FALSE, FALSE);
 
 #endif /* ALLOW_EASY_DISARM -- TNB */
 	}
@@ -3102,12 +3762,12 @@ static bool do_cmd_disarm_aux(int y, int x, int dir)
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
 		/* Move the player onto the trap */
-		move_player(dir, easy_disarm, FALSE);
+		move_player(dir, easy_disarm, FALSE,FALSE);
 
 #else /* ALLOW_EASY_DISARM -- TNB */
 
 		/* Move the player onto the trap */
-		move_player(dir, FALSE, FALSE);
+		move_player(dir, FALSE, FALSE, FALSE);
 
 #endif /* ALLOW_EASY_DISARM -- TNB */
 	}
@@ -3317,7 +3977,7 @@ static bool do_cmd_bash_aux(int y, int x, int dir)
 		}
 
 		/* Hack -- Fall through the door */
-		move_player(dir, FALSE, FALSE);
+		move_player(dir, FALSE, FALSE,FALSE);
 	}
 
 	/* Saving throw against stun */
@@ -3778,7 +4438,7 @@ void do_cmd_walk(bool pickup)
 			if(!have_flag(f_ptr->flags, FF_WATER)) energy_use = energy_use * 4 / 3;
 		}
 		/* Actually move the character */
-		move_player(dir, pickup, FALSE);
+		move_player(dir, pickup, FALSE,FALSE);
 
 		/* Allow more walking */
 		more = TRUE;

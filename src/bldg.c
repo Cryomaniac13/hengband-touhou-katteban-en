@@ -2037,6 +2037,7 @@ struct marisa_store_type marisa_wants_table[] =
 
 	{ TV_SOUVENIR,SV_SOUVENIR_ELDER_THINGS_CRYSTAL ,800 },
 
+	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA ,1200 },
 
 	{0,0,0}//終端用ダミー
 };
@@ -2117,6 +2118,8 @@ bool yuma_will_trade(object_type *o_ptr)
 	if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_BIG_EGG) return TRUE; //巨大な卵
 
 	if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_DOUJU) return TRUE; //道寿の壺
+
+	if (o_ptr->tval == TV_MATERIAL && o_ptr->sval == SV_MATERIAL_TAKAKUSAGORI) return TRUE; //高草郡の竹
 
 	return FALSE;
 }
@@ -2346,6 +2349,8 @@ struct marisa_store_type korin_wants_table[] =
 	{ TV_SOUVENIR,SV_SOUVENIR_NODENS_CHARIOT ,400000 },
 
 	{ TV_SOUVENIR,SV_SOUVENIR_ELDER_THINGS_CRYSTAL ,30000 },
+
+	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA ,66000 },
 
 	{0,0,0}//終端用ダミー
 };
@@ -4225,6 +4230,15 @@ put_str("今ここで受けられるクエストはないようだ。", 8, 0);
 	}
 
 	q_ptr = &quest[q_index];
+
+
+	//v1.1.98 連続昏睡事件Ⅱのクエストをすでに怨霊に憑依された状態で受けると特殊フラグを立てる
+	if (q_index == QUEST_HANGOKU2 && q_ptr->status == QUEST_STATUS_UNTAKEN && p_ptr->muta4 & MUT4_GHOST_HANGOKUOH)
+	{
+		p_ptr->quest_special_flag |= QUEST_SP_FLAG_HANGOKU2_POSSESSED;
+		if (cheat_xtra) msg_print("SPECIAL FLAG ON");
+
+	}
 
 	//151124 v1.0.82bでうっかりquest53～.txtを入れ忘れてアップロード。クエスト受領に失敗し、quest[53]の内容が空のままQUEST_STATUS_TAKENになった。
 	//それを修正するために該当状況でクエストパラメータを読み直す。
@@ -8528,18 +8542,18 @@ bool check_quest_unique_text(void)
 
 		break;
 
-		//オベロン打倒メインクエスト
-	case QUEST_OBERON:
+		//太歳星君打倒メインクエスト
+	case QUEST_TAISAI:
 		if(pc == CLASS_SEIJA)
 		{
 			if(accept)
 			{
 #ifdef JP
-				strcpy(quest_text[line++], "鉄獄の底にはとにかく偉い王様が住んでいるらしい。");
-				strcpy(quest_text[line++], "あなたはそれを聞き、何としてもその面に泥を塗ってやろうと決意した。");
+				strcpy(quest_text[line++], "鉄獄の底から強力な神が這い出そうとしているらしい。");
+				strcpy(quest_text[line++], "あなたはそれを聞き、何としてもそれを埋め直してやろうと決意した。");
 #else
-                strcpy(quest_text[line++], "Looks like there's some great king living in the depths of Angband.");
-				strcpy(quest_text[line++], "After hearing this, you've decided to drive his face into the dirt.");
+                strcpy(quest_text[line++], "Looks like some powerful deity has crawled out from the depths of Angband.");
+				strcpy(quest_text[line++], "After hearing this, you've decided to drive it back into the ground.");
 #endif
 			}
 		}
@@ -8549,12 +8563,12 @@ bool check_quest_unique_text(void)
 			{
 #ifdef JP
 				strcpy(quest_text[line++], "アンバーの王の力で幻想郷の地下が鉄獄と繋がってしまった。");
-				strcpy(quest_text[line++], "このままでは幻想郷に異界の怪物たちがあふれてしまう。");
-				strcpy(quest_text[line++], "手遅れになる前に彼らをここから追い払わないといけない。");
+				strcpy(quest_text[line++], "その影響であろうことか地中の太歳星君が掘り出されてしまった。");
+				strcpy(quest_text[line++], "手遅れになる前に埋め直さないといけない。");
 #else
                 strcpy(quest_text[line++], "The Lords of Amber have connected the depths of Gensoukyou with");
-				strcpy(quest_text[line++], "Angband. Monsters from other worlds keep appearing all over");
-				strcpy(quest_text[line++], "Gensoukyou. You have to drive them out before it's too late.");
+				strcpy(quest_text[line++], "Angband - and they unearthed Taisui Xingjun from the depths in");
+				strcpy(quest_text[line++], "the process. You have to bury it again before it's too late.");
 #endif
 			}
 		}
@@ -10013,6 +10027,134 @@ bool check_quest_unique_text(void)
 		break;
 
 
+	case QUEST_HANGOKU2://v1.1.98 連続昏睡事件Ⅱ
+		if (accept)
+		{
+			if (p_ptr->muta4 & MUT4_GHOST_HANGOKUOH)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "妖精会議の会場を怨霊から護衛してほしいと頼まれた。");
+				strcpy(quest_text[line++], "全く愚かなことだ。");
+				strcpy(quest_text[line++], "その怨霊は目の前にいるというのに。");
+#else
+				strcpy(quest_text[line++], "You were asked to protect a gathering of fairies from");
+				strcpy(quest_text[line++], "vengeful spirits.");
+				strcpy(quest_text[line++], "How foolish!");
+				strcpy(quest_text[line++], "You are that vengeful spirit they mention.");
+#endif
+			}
+			else if (pc == CLASS_3_FAIRIES || pc == CLASS_LARVA || pr == RACE_FAIRY)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "太陽の畑にミステリーサークルが出現した。");
+				strcpy(quest_text[line++], "今こそ妖精たちのの大会議が開かれるときだ。");
+				strcpy(quest_text[line++], "しかしミステリーサークルの中に強力な怨霊が居座っているらしい。");
+				strcpy(quest_text[line++], "妖精の未来のために自分が頑張って追い払わないと。");
+#else
+				strcpy(quest_text[line++], "A mystery circle has appeared in the Garden of Sun.");
+				strcpy(quest_text[line++], "Fairies are gathering there right now.");
+				strcpy(quest_text[line++], "However, it looks like there's a vengeful spirit there.");
+				strcpy(quest_text[line++], "You have to drive it away for the sake of the fairies.");
+#endif
+			}
+		}
+
+		if (comp)
+		{
+
+			if (p_ptr->muta4 & MUT4_GHOST_HANGOKUOH)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "太陽の畑で妖怪に正体を見破られて戦いになった。");
+				strcpy(quest_text[line++], "しかしやはり最近の妖怪は腑抜けている。");
+				strcpy(quest_text[line++], "妖精たちがなかなか心惹かれる呪具を持っていたので頂戴しておいた。");
+#else
+				strcpy(quest_text[line++], "The youkai in Garden of Sun have noticed your true");
+				strcpy(quest_text[line++], "identity and attacked. However, it looks like youkai");
+				strcpy(quest_text[line++], "right now aren't much to speak of.");
+				strcpy(quest_text[line++], "The fairies had some interesting magic items in their");
+				strcpy(quest_text[line++], "possession.");
+#endif
+			}
+			//あまりないと思うが、受領時には憑依されていたがその後どこかで新生の薬を飲むなどして憑依解除したとき
+			else if (p_ptr->quest_special_flag & QUEST_SP_FLAG_HANGOKU2_POSSESSED)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "気がつくと足元に大妖怪が倒れ伏しており、");
+				strcpy(quest_text[line++], "辺りには怯えきった妖精たちがいた。");
+				strcpy(quest_text[line++], "何が起こっているのだろう？最近の記憶がない。");
+				strcpy(quest_text[line++], "でもそれはそれとしてくれるものは貰っておこう。");
+#else
+				strcpy(quest_text[line++], "As you come to your senses, you see a great youkai");
+				strcpy(quest_text[line++], "lying down defeated, surrounded by frightened fairies.");
+				strcpy(quest_text[line++], "You have no recollection of what has happened, but");
+				strcpy(quest_text[line++], "you'll gladly take the items they're giving you.");
+#endif
+			}
+			else if (pc == CLASS_3_FAIRIES || pc == CLASS_LARVA || pr == RACE_FAIRY)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "我々の勝利だ！");
+				strcpy(quest_text[line++], "仲間たちから称賛とともに賞品を送られた。");
+				strcpy(quest_text[line++], "この前の出店の売れ残りのような気がするが、");
+				strcpy(quest_text[line++], "そんなことはこの達成感の前では些細な問題だ。");
+#else
+				strcpy(quest_text[line++], "Victory is ours!");
+				strcpy(quest_text[line++], "Your friends praised you and sent you rewards.");
+				strcpy(quest_text[line++], "It looks like some leftovers from a sale, but");
+				strcpy(quest_text[line++], "you don't really care with your sense of accomplishment.");
+#endif
+			}
+
+		}
+
+		if (fail)
+		{
+			if (p_ptr->muta4 & MUT4_GHOST_HANGOKUOH)
+			{
+
+				//クエスト受領時から怨霊に憑依されているとき
+				if (p_ptr->quest_special_flag & QUEST_SP_FLAG_HANGOKU2_POSSESSED)
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "太陽の畑で妖怪に正体を見破られて戦いになった。");
+					strcpy(quest_text[line++], "なかなかの強敵で撤退を余儀なくされた。");
+					strcpy(quest_text[line++], "最近の妖怪もそう捨てたものではないのかもしれない。");
+#else
+					strcpy(quest_text[line++], "The youkai in Garden of Sun have noticed your true");
+                    strcpy(quest_text[line++], "identity and attacked, forcing you to retreat.");
+                    strcpy(quest_text[line++], "Looks like youkai still haven't lost their touch.");
+#endif
+				}
+				//瑞霊の特殊行動で強制失敗になったらここに来るはず
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "「何の策もなしに私の前に立つとは全く見くびられたものだな。");
+					strcpy(quest_text[line++], "さて、この体をどう使ってくれようか？」");
+#else
+                    strcpy(quest_text[line++], "'You have totally underestimated me, going against me");
+                    strcpy(quest_text[line++], "without a plan. Now, how shall I use this body?'");
+#endif
+				}
+
+			}
+			//クエスト受領時に怨霊憑依されていたが途中で新生の薬などで憑依解除したとき
+			else if (p_ptr->quest_special_flag & QUEST_SP_FLAG_HANGOKU2_POSSESSED)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "気がつくと太陽の畑で大妖怪に追いかけ回されていた。");
+				strcpy(quest_text[line++], "何が起こっているのだろう？最近の記憶がない。");
+#else
+				strcpy(quest_text[line++], "As you come to your senses, you are chased out from");
+				strcpy(quest_text[line++], "Garden of Sun by a great youkai. You have no recollection");
+				strcpy(quest_text[line++], "of what has happened.");
+#endif
+			}
+
+		}
+
+		break;
 
 
 	default:
@@ -14622,6 +14764,12 @@ void grassroots_trading_cards(void)
                             "Oh, it produces as much oil as you want? It's perfect for me!");
 			ref_cost = 200;
 		}
+		else if (o_ptr->tval == TV_MATERIAL && o_ptr->sval == SV_MATERIAL_TAKAKUSAGORI)
+		{
+			msg_select = _("これは霊薬の材料か。悪くない。",
+                            "That's a material for elixirs? Not bad.");
+			ref_cost = 50;
+		}
 		else if (o_ptr->tval == TV_FOOD)
 		{
 
@@ -14637,6 +14785,7 @@ void grassroots_trading_cards(void)
 
 			case SV_FOOD_EEL:
 			case SV_FOOD_TENTAN:
+			case SV_FOOD_STRANGE_BEAN:
 				msg_select = _("中々滋養がありそうじゃないか。",
                                 "That looks quite nourishing!");
 				ref_cost = 20;
@@ -15423,18 +15572,23 @@ bool bldg_remove_curse( void)
 	int i;
 	u32b flag_curse=0L;
 	u32b flag_perma=0L;
-	bool flag_reimu;
+
+	//1:霊夢 2:守矢 3:座敷わらし
+	int msg_mode = 0;
 
 	int ex_bldg_num = f_info[cave[py][px].feat].subtype;
 	int ex_bldg_idx = building_ex_idx[ex_bldg_num];
 
 	if (p_ptr->town_num == TOWN_HAKUREI)
-		flag_reimu = TRUE;
-	//v1.1.33 else忘れ修正
+		msg_mode = 1;
+	else if (p_ptr->town_num == TOWN_MORIYA)
+		msg_mode = 2;
 	else if(EXTRA_MODE && building_ex_idx[ex_bldg_num] == BLDG_EX_REIMU)
-		flag_reimu = TRUE;
-	else
-		flag_reimu = FALSE;
+		msg_mode = 1;
+	else if (EXTRA_MODE && building_ex_idx[ex_bldg_num] == BLDG_EX_MORIYA)
+		msg_mode = 2;
+	else if(EXTRA_MODE && building_ex_idx[ex_bldg_num] == BLDG_EX_ZASHIKI)
+		msg_mode = 3;
 
 	for(i=INVEN_RARM;i<INVEN_TOTAL;i++)
 	{
@@ -15454,23 +15608,33 @@ bool bldg_remove_curse( void)
 	}
 	else if(flag_curse & ~flag_perma)
 	{
-		if (flag_reimu)
+		switch (msg_mode)
 		{
+		case 1:
 			if (p_ptr->pclass == CLASS_REIMU)
 				msg_print(_("分社の戸が開き諏訪子が出てきて呪いを吸い取ってくれた。",
                             "Suwako comes out of the branch shrine and absorbs the curse."));
 			else
 				msg_print(_("霊夢はあなたの目の前に手をかざして妙な手つきで指を動かした。",
                             "Reimu holds her hand in front of you, making strange movements."));
-		}
-		else
-		{
-			if(p_ptr->pclass == CLASS_KANAKO)
-				msg_print(_("諏訪湖がニヤニヤしながら出てきて呪いを吸い取った。",
+			break;
+		case 2:
+			if (p_ptr->pclass == CLASS_KANAKO)
+				msg_print(_("諏訪子がニヤニヤしながら出てきて呪いを吸い取った。",
                             "Suwako comes out and absorbs the curse with a grin."));
 			else
 				msg_print(_("神奈子が出てきて「ハァーー！！」と気合を放った！",
                             "Kanako comes out and yell out 'Haaaah!!'"));
+			break;
+
+		case 3:
+			msg_print(_("座敷わらしたちが手際よく解呪してくれた。",
+                        "The zashiki-warashi skillfully remove your curses."));
+			break;
+
+		default:
+			msg_print(_("ERROR:この建物の解呪成功メッセージが設定されていない",
+                        "ERROR: Undefined messages for removing curses in this building"));
 		}
 
 		if(remove_all_curse())
@@ -15482,26 +15646,34 @@ bool bldg_remove_curse( void)
 	}
 	else
 	{
-		if (flag_reimu)
+
+		switch (msg_mode)
 		{
+		case 1:
 			if (p_ptr->pclass == CLASS_REIMU)
 				msg_print(_("分社の戸が開き諏訪子が出てきて、何も言わずに引っ込んだ。",
                             "Suwako comes out of the branch shrine and goes back in without saying a word."));
 			else
 				msg_print(_("霊夢「ごめんなさい。その呪いは私の手にも負えないわ。」",
                             "Reimu - 'I'm sorry, but removing this curse is beyond my abilities.'"));
-
-		}
-		else
-		{
+			break;
+		case 2:
 			if (p_ptr->pclass == CLASS_KANAKO)
-				msg_print(_("諏訪湖「ありゃまぁ、ひどい祟りに見初められたもんだねえ。まあ仲良く付き合うんだね。」",
+				msg_print(_("諏訪子「ありゃまぁ、ひどい祟りに見初められたもんだねえ。まあ仲良く付き合うんだね。」",
                             "Suwako - 'Wow, that's the first time I'm seeing a curse like this. Well, let's get along.'"));
 			else
 				msg_print(_("神奈子「済まぬがその呪いは神の手にも負えぬ。『凡庸の巻物』を探せ。」",
-                            "Kanko - 'I'm sorry, but this curse is beyond my powers. Look for a Scroll of Mundanity."));
-
+                            "Kanako - 'I'm sorry, but this curse is beyond my powers. Look for a Scroll of Mundanity."));
+			break;
+		case 3:
+			msg_print(_("座敷わらしたちがヒソヒソと相談しあっている。我が家からの引っ越しを検討しているようだ...",
+                        "The zashiki-warashi talk with each other in whispers. Looks like they're considering leaving your house..."));
+			break;
+		default:
+			msg_print(_("ERROR:この建物の解呪失敗メッセージが設定されていない",
+                        "ERROR: Undefined message for failing to remove curses in this building"));
 		}
+
 		return FALSE;
 	}
 
@@ -16076,7 +16248,7 @@ msg_print("お金が足りません！");
 			//easyでは紫を倒しても50階までしか行けない
 			if (difficulty == DIFFICULTY_EASY ) max_depth = 50;
 
-			//if (quest[QUEST_OBERON].status != QUEST_STATUS_FINISHED) max_depth = 98;
+			//if (quest[QUEST_TAISAI].status != QUEST_STATUS_FINISHED) max_depth = 98;
 			//else if(quest[QUEST_SERPENT].status != QUEST_STATUS_FINISHED) max_depth = 99;
 		}
 

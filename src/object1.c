@@ -282,6 +282,9 @@ void object_flags_known(object_type *o_ptr, u32b flgs[TR_FLAG_SIZE])
 	for (i = 0; i < TR_FLAG_SIZE; i++)
 		flgs[i] = k_ptr->flags[i];
 
+	//v1.2.0 投擲の指輪のフラグ処理を忘れていたので追加
+	if (o_ptr->tval == TV_RING && o_ptr->sval == SV_RING_MIGHTY_THROW) add_flag(flgs,TR_THROW);
+
 	/* Must be identified */
 	if (!object_is_known(o_ptr)) return;
 
@@ -756,6 +759,9 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 		if (have_flag(flgs, TR_LITE))info[i++] = "それは眩いばかりの輝きを放っている。";
 		if (have_flag(flgs, TR_BLESSED))info[i++] = "それは神に祝福されている。";
+
+		if (have_flag(flgs, TR_DISARM))info[i++] = "それは見るものを試すような複雑な文様が刻まれている。";
+		if (have_flag(flgs, TR_SAVING))info[i++] = "それを見るとなにかに守られているような気になってくる。";
 #else
 		if (have_flag(flgs, TR_STR))info[i++] = "It reminds you of the hot-blooded ancient times.";
 		if (have_flag(flgs, TR_INT))info[i++] = "It is sophisticated and makes you feel the birth of civilization";
@@ -790,6 +796,9 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 		if (have_flag(flgs, TR_LITE))info[i++] = "It emits a dazzling glow.";
 		if (have_flag(flgs, TR_BLESSED))info[i++] = "It is blessed by the gods.";
+
+		if (have_flag(flgs, TR_DISARM))info[i++] = "It is insribed with intricate patterns.";
+		if (have_flag(flgs, TR_SAVING))info[i++] = "It makes you feel being protected by something.";
 #endif
 	}
 
@@ -1173,10 +1182,16 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 		}
 		//v1.1.32 作業服
-		if(o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER)
+		if(o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_WORKER || have_flag(flgs,TR_DISARM))
 		{
 			info[i++]= _("それは解除能力に影響を及ぼす。", "It affects your ability to disarm traps.");
 		}
+		//v1.1.99 魔法防御
+		if (have_flag(flgs, TR_SAVING))
+		{
+			info[i++] = _("それは魔法防御能力に影響を及ぼす。", "It affects your protection from magic.");
+		}
+
 
 		if (have_flag(flgs, TR_INFRA))
 		{

@@ -185,9 +185,9 @@ void display_scores_aux(int from, int to, int note, high_score *score)
 		/* Title */
 #ifdef JP
 		///msg131221
-		put_str("      変愚蛮怒(勝手版): プレイヤースコア", 0, 0);
+		put_str("      幻想蛮怒: プレイヤースコア", 0, 0);
 #else
-		put_str("       Hengband (Katteban): Player Score", 0, 0);
+		put_str("      Gensouband: Player Score", 0, 0);
 #endif
 
 
@@ -600,7 +600,7 @@ bool send_world_score(bool do_send)
 */
 #ifdef JP
 //		if(get_check_strict("スコアをスコア・サーバに登録しますか? ", (CHECK_NO_ESCAPE | CHECK_NO_HISTORY)))
-		if(get_check_strict("ゲームデータを勝手版スコア・サーバに送信しますか? ", (CHECK_NO_ESCAPE | CHECK_NO_HISTORY)))
+		if(get_check_strict("ゲームデータを幻想蛮怒スコア・サーバに送信しますか? ", (CHECK_NO_ESCAPE | CHECK_NO_HISTORY)))
 #else
 		if(get_check_strict("Do you send score to the world score sever? ", (CHECK_NO_ESCAPE | CHECK_NO_HISTORY)))
 #endif

@@ -5663,31 +5663,50 @@ msg_format("%^s%s", m_name, monmessage);
 
 
 	/* Hack -- get "bold" if out of options */
-	/*:::‘Ü¬˜H‚É‹°•|‚µ‚½“G‚ğ’Ç‚¢‹l‚ß‚½‚ç‹°•|‰ğœ*/
-	if (!do_turn && !do_move && MON_MONFEAR(m_ptr) && aware)
+	/*:::‘Ü¬˜H‚É‹°•|‚µ‚½“G‚ğ’Ç‚¢‹l‚ß‚½‚ç‹°•|‰ğœ?*/
+	//v1.1.96 ’áƒŒƒxƒ‹‚Ìƒ‚ƒ“ƒXƒ^[‚Í‹°•|‰ğœ‚³‚ê‚É‚­‚¢‚æ‚¤‚É‚·‚é
+	if (!do_turn && !do_move && MON_MONFEAR(m_ptr) && aware )
 	{
-		/* No longer afraid */
-		(void)set_monster_monfear(m_idx, 0);
+		char m_name[80];
 
-		/* Message if seen */
-		if (see_m)
+		/* Acquire the monster name */
+		monster_desc(m_name, m_ptr, 0);
+
+		if (randint1(100) < r_ptr->level)
 		{
-			char m_name[80];
+			/* No longer afraid */
+			(void)set_monster_monfear(m_idx, 0);
 
-			/* Acquire the monster name */
-			monster_desc(m_name, m_ptr, 0);
+			/* Message if seen */
+			if (see_m)
+			{
 
-			/* Dump a message */
+				/* Dump a message */
 #ifdef JP
-			msg_format("%^s‚Íí‚¢‚ğŒˆˆÓ‚µ‚½I", m_name);
+				msg_format("%^s‚Íí‚¢‚ğŒˆˆÓ‚µ‚½I", m_name);
 #else
-			msg_format("%^s turns to fight!", m_name);
+				msg_format("%^s turns to fight!", m_name);
 #endif
-		}
+			}
 
+		}
+		else
+		{
+			/* Message if seen */
+			if (see_m)
+			{
+				/* Dump a message */
+#ifdef JP
+				msg_format("%^s‚Í‹°•|‚É‚¨‚Ì‚Ì‚¢‚Ä‚¢‚é...", m_name);
+#else
+				msg_format("%^s is overwhelmed with fear...", m_name);
+#endif
+			}
+
+
+		}
 		//if (m_ptr->ml) chg_virtue(V_COMPASSION, -1);
 
-		/* XXX XXX XXX Actually do something now (?) */
 	}
 }
 

@@ -494,7 +494,7 @@ extern birther previous_char;
 extern vault_type *v_info;
 extern char *v_name;
 extern char *v_text;
-extern skill_table *s_info;
+//extern skill_table *s_info;
 //extern player_magic *m_info;
 extern feature_type *f_info;
 extern char *f_name;
@@ -762,11 +762,13 @@ extern bool pattern_seq(int c_y, int c_x, int n_y, int n_x);
 extern bool player_can_enter(s16b feature, u16b mode);
 extern bool move_player_effect(int ny, int nx, u32b mpe_mode);
 extern bool trap_can_be_ignored(int feat);
-extern void move_player(int dir, bool do_pickup, bool break_trap);
+extern void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap);
 extern void run_step(int dir);
 #ifdef TRAVEL
 extern void travel_step(void);
 #endif
+
+extern void activate_floor_trap(int y, int x, u32b mpe_mode);//v1.1.97
 
 /* cmd2.c */
 extern void forget_travel_flow(void);
@@ -2711,3 +2713,11 @@ extern int	gv_test4;
 //v1.1.95
 extern int check_player_is_seen(void);
 
+//v1.1.97
+extern const int chest_new_traps[CHEST_TRAP_LIST_LENGTH];
+extern void activate_chest_trap(int y, int x, s16b o_idx, bool trap_player);
+extern void teleporter_trap(void);
+
+extern bool monster_delay(int m_idx, int add_energy);
+
+extern void gain_physical_mutation(void);

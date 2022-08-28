@@ -439,7 +439,9 @@ static void curse_artifact(object_type * o_ptr)
 ///class?
 static void random_plus(object_type * o_ptr)
 {
-	int this_type = (object_is_weapon_ammo(o_ptr) ? 25 : 21);
+	//v1.1.99 拡張
+	//int this_type = (object_is_weapon_ammo(o_ptr) ? 25 : 21);
+	int this_type = (object_is_weapon_ammo(o_ptr) ? 29 : 25);
 
 	switch (artifact_bias)
 	{
@@ -482,9 +484,21 @@ static void random_plus(object_type * o_ptr)
 			add_flag(o_ptr->art_flags, TR_WIS);
 			if (one_in_(2)) return;
 		}
+		if (!(have_flag(o_ptr->art_flags, TR_SAVING)))
+		{
+			add_flag(o_ptr->art_flags, TR_SAVING);
+			if (one_in_(2)) return;
+		}
+
 		break;
 
 	case BIAS_RANGER:
+		if ((o_ptr->tval == TV_GLOVES) && !(have_flag(o_ptr->art_flags, TR_DISARM)))
+		{
+			add_flag(o_ptr->art_flags, TR_DISARM);
+			if (one_in_(2)) return;
+		}
+
 		if (!(have_flag(o_ptr->art_flags, TR_DEX)))
 		{
 			add_flag(o_ptr->art_flags, TR_DEX);
@@ -505,6 +519,12 @@ static void random_plus(object_type * o_ptr)
 		break;
 
 	case BIAS_ROGUE:
+		if ((o_ptr->tval == TV_GLOVES) && !(have_flag(o_ptr->art_flags, TR_DISARM)))
+		{
+			add_flag(o_ptr->art_flags, TR_DISARM);
+			if (one_in_(4)) return;
+		}
+
 		if (!(have_flag(o_ptr->art_flags, TR_STEALTH)))
 		{
 			add_flag(o_ptr->art_flags, TR_STEALTH);
@@ -667,8 +687,23 @@ static void random_plus(object_type * o_ptr)
 		if (!artifact_bias && one_in_(11))
 			artifact_bias = BIAS_ROGUE;
 		break;
+
+	case 20:case 21:
+		add_flag(o_ptr->art_flags, TR_DISARM);
+		if (!artifact_bias && one_in_(11))
+			artifact_bias = BIAS_ROGUE;
+		break;
+	case 22:case 23:
+		add_flag(o_ptr->art_flags, TR_SAVING);
+		if (!artifact_bias && one_in_(11))
+			artifact_bias = BIAS_PRIESTLY;
+		break;
+
+
+
+
 	///mod131230 TVALから見てそれっぽいPVALが付きやすくなるようにしてみる
-	case 20: case 21:
+	case 24: case 25:
 		switch(o_ptr->tval)
 		{
 		case TV_KNIFE:
@@ -715,12 +750,18 @@ static void random_plus(object_type * o_ptr)
 			if(one_in_(2))		add_flag(o_ptr->art_flags, TR_STR);
 			else				add_flag(o_ptr->art_flags, TR_CON);
 			break;
-		case TV_CLOTHES: case TV_CLOAK:
+		case TV_CLOAK:
 			add_flag(o_ptr->art_flags, TR_STEALTH);
 			if(one_in_(2)) break;
 
 			if(one_in_(2))		add_flag(o_ptr->art_flags, TR_CHR);
 			else				add_flag(o_ptr->art_flags, TR_SEARCH);
+			break;
+
+		case TV_CLOTHES:
+			add_flag(o_ptr->art_flags, TR_SAVING);
+			if (one_in_(2))		add_flag(o_ptr->art_flags, TR_CHR);
+
 			break;
 		case TV_HEAD:
 			if(one_in_(2))		add_flag(o_ptr->art_flags, TR_SEARCH);
@@ -729,7 +770,8 @@ static void random_plus(object_type * o_ptr)
 			else				add_flag(o_ptr->art_flags, TR_WIS);
 			break;
 		case TV_GLOVES:
-			if(one_in_(2))		add_flag(o_ptr->art_flags, TR_STR);
+			if (one_in_(3))		add_flag(o_ptr->art_flags, TR_DISARM);
+			else if(one_in_(2))		add_flag(o_ptr->art_flags, TR_STR);
 			else				add_flag(o_ptr->art_flags, TR_DEX);
 			break;
 		case TV_BOOTS:
@@ -747,10 +789,10 @@ static void random_plus(object_type * o_ptr)
 			break;
 		}
 		break;
-	case 22: case 23:
+	case 26: case 27:
 		add_flag(o_ptr->art_flags, TR_TUNNEL);
 		break;
-	case 24: case 25:
+	case 28: case 29:
 		if (o_ptr->tval == TV_BOW || o_ptr->tval == TV_CROSSBOW || o_ptr->tval == TV_GUN)
 			random_plus(o_ptr);
 		else
@@ -4128,11 +4170,9 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 
 		case ACT_BERSERK:
 		{
-#ifdef JP
-			msg_format("ワオーーーーーン！", name);
-#else
-            msg_format("Woooooooooow!", name);
-#endif
+			if(o_ptr->name2 == EGO_HEAD_BEAST)
+				msg_format(_("ワオーーーーーン！", "Hoooooooooowl!"), name);
+
 			(void)set_afraid(0);
 			(void)set_shero(randint1(25) + 25, FALSE);
 			/* (void)set_afraid(0);

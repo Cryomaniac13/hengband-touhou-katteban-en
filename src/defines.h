@@ -77,10 +77,10 @@
  * Upper compatibility is always guaranteed.
  */
 ///sys131117 FAKE_VERSIONの定数を消した
-#define H_VER_MAJOR 1
-#define H_VER_MINOR 1
-#define H_VER_PATCH 95
-#define H_VER_EXTRA 1
+#define H_VER_MAJOR 2
+#define H_VER_MINOR 0
+#define H_VER_PATCH 0
+#define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
 //#define SCORE_SERVER_TEST
@@ -199,7 +199,7 @@
 #define QUEST_WANTED_SUMIREKO	35
 #define QUEST_HECATIA			36
 #define QUEST_YUKARI         37
-#define QUEST_OBERON         38
+#define QUEST_TAISAI         38
 #define QUEST_SERPENT        39
 //40-48はランクエ
 #define QUEST_MOON_VAULT     50
@@ -225,8 +225,9 @@
 #define QUEST_MORIYA_2		69 //守矢の策動Ⅱ
 #define QUEST_REIMU_ATTACK	70 //巫女警報発令中
 #define QUEST_YAKUZA_1		71
+#define QUEST_HANGOKU2		72
 
-#define QUEST_MAX			72 //クエストの最後の番号+1
+#define QUEST_MAX			73 //クエストの最後の番号+1
 
 //v1.1.24 急流下りクエストでこのターン数以下で入賞
 #define QT_TURN1			250
@@ -971,9 +972,10 @@
  * used for get_random_ego()
  */
 /*:::エゴ生成に使う特殊装備部位値　*/
-#define INVEN_EGO_AMMO     23
+#define INVEN_EGO_AMMO    23
 #define INVEN_EGO_BOW     22
 #define INVEN_EGO_GUN     21
+#define INVEN_EGO_FLOWER  20
 
 /*
  * Total number of inventory slots (hard-coded).
@@ -1725,8 +1727,8 @@
 #define NOT_TRAP        -1
 #define TRAP_TRAPDOOR    0
 #define TRAP_PIT         1
-#define TRAP_SPIKED_PIT  2
-#define TRAP_POISON_PIT  3
+#define TRAP_SPIKED_PIT  2 //←v1.1.97 「スパイクの敷かれた落とし穴」を水地形生成の罠にした
+#define TRAP_POISON_PIT  3 //←v1.1.97 「毒スパイクの敷かれた落とし穴」を石油地形生成の罠にした
 #define TRAP_TY_CURSE    4
 #define TRAP_TELEPORT    5
 #define TRAP_FIRE        6
@@ -2227,6 +2229,16 @@
 #define EGO_ARROW_SLAY_DEITY	198
 //v1.1.77
 #define EGO_HEAD_DETECTIVE	199
+//v1.1.99
+#define EGO_BODY_YAMAWARO	200
+#define EGO_BODY_YAMAJORO	201
+#define EGO_SHIELD_MANEKI	202
+#define EGO_HANDS_DAIONRYOU 203
+#define EGO_BODY_HANIWA		204
+#define EGO_CLOAK_JIZO		205
+#define EGO_BOOTS_PEGASUS	206
+#define EGO_WEAPON_YAMANBA	207
+#define EGO_WEAPON_DANCER	208
 
 
 /* Activation effects for random artifacts */
@@ -2690,8 +2702,10 @@
 #define SV_FIRE_GUN_MAGNUM	8 //マグナム銃
 #define SV_FIRE_GUN_LASER	9 //光線銃
 #define SV_FIRE_GUN_ROCKET	10 //ロケラン
+#define SV_FIRE_GUN_LUNATIC_2	11 //ルナティックガン改
 
-#define SV_FIRE_GUN_MAX		10 //gun_base_param_table[]の配列サイズ object_prepでこの数字+1以上のsvalの銃が生成されようとしたらエラーにする
+
+#define SV_FIRE_GUN_MAX		11 //gun_base_param_table[]の配列サイズ object_prepでこの数字+1以上のsvalの銃が生成されようとしたらエラーにする
 
 //SVAL:マジックアイテム TV:34
 #define SV_MAGICITEM_MARISA	1
@@ -3081,6 +3095,8 @@
 #define SV_CHEST_10_GACHA		58
 //v1.1.91 動物霊戦争1
 #define SV_CHEST_YAKUZA1		59
+//v1.1.98 連続昏睡事件Ⅱ
+#define SV_CHEST_HANGOKU2		60
 
 //SVAL:人形 TV:61
 #define SV_FIGURINE_NORMAL	0
@@ -3253,6 +3269,7 @@
 #define SV_SOUVENIR_NODENS_CHARIOT		30
 #define SV_SOUVENIR_ELDER_THINGS_CRYSTAL	31	//v1.1.80
 #define SV_SOUVENIR_EMPTY_BOTTLE		32
+#define SV_SOUVENIR_KODOKUZARA			33 //v1.1.98 蠱毒皿
 
 
 
@@ -3476,6 +3493,7 @@
 #define SV_FOOD_MAGIC_WATERMELON	9 //魔法スイカ
 #define SV_FOOD_DATURA				10 //チョウセンアサガオの葉
 #define SV_FOOD_FORBIDDEN_FRUIT		11
+#define SV_FOOD_STRANGE_BEAN		12 //魔法の森の巨大な豆
 
 //新しく珍しいのを追加したらgrassroots_trading_cards()の尤魔のところに処理追加
 
@@ -3609,9 +3627,9 @@
 #define PROJECT_WHO_EXPLODE_BOMB -5 //スターサファイア爆弾
 #define PROJECT_WHO_DEEPECO_BOMB -6 //魔理沙ディープエコロジカルボム
 #define PROJECT_WHO_CONTACT_YOG		 -7
-#define PROJECT_WHO_TRAP_BEAM	-8
+#define PROJECT_WHO_TRAP		-8 //v1.1.96 レーザートラップ→罠全般
 #define PROJECT_WHO_EXPLODE_ICE -9 //v1.1.68 閃光で爆発する氷塊
-
+//ここを増やすときproject_p()の死因個別定義も追加すること
 
 /*
  * Bit flags for the "enchant()" function
@@ -4091,7 +4109,7 @@
 #define GF_KILL_DOOR    41
 /*:::トラップ解除*/
 #define GF_KILL_TRAP    42
-#define GF_NO_MOVE	43 //v1.1.95 移動禁止状態にする
+#define GF_NO_MOVE		43 //v1.1.95 移動禁止状態にする
 #define GF_BERSERK		44 //v1.1.95 狂戦士化状態にする
 #define GF_SUPER_EGO	45
 
@@ -4111,6 +4129,9 @@
 #define GF_OLD_CONF             56
 #define GF_OLD_SLEEP    57
 #define GF_OLD_DRAIN    58
+#define GF_PIT_FALL     59 //v1.1.96 落とし穴属性
+#define GF_ACTIV_TRAP   60 //v1.1.96 トラップ発動
+
 /*:::特定種族をアウェイ*/
 #define GF_AWAY_UNDEAD  61
 #define GF_AWAY_EVIL    62
@@ -4308,6 +4329,46 @@
 #define CHEST_RUNES_OF_EVIL     0x0400
 #define CHEST_ALARM             0x0800
 
+//v1.1.97 箱のトラップを一新。
+//chest_new_traps[]参照。
+//ビットフラグをやめマルチトラップを廃止。
+#define CHEST_TRAP_NOTHING		0
+#define CHEST_TRAP_LOSE_STR		1
+#define CHEST_TRAP_LOSE_CON		2
+#define CHEST_TRAP_LOSE_MAG		3
+#define CHEST_TRAP_BA_POIS		4
+#define CHEST_TRAP_BA_SLEEP		5
+#define CHEST_TRAP_BA_CONF		6
+#define CHEST_TRAP_EXPLODE		7
+#define CHEST_TRAP_ALARM		8
+#define CHEST_TRAP_SUMMON		9
+#define CHEST_TRAP_S_BIRD		10
+#define CHEST_TRAP_S_ELEMENTAL	11
+#define CHEST_TRAP_S_DEMON		12
+#define CHEST_TRAP_S_DRAGON		13
+#define CHEST_TRAP_S_CHIMERA	14
+#define CHEST_TRAP_S_VORTEX		15
+#define CHEST_TRAP_S_KWAI		16
+#define CHEST_TRAP_SUIKI		17
+#define CHEST_TRAP_RUIN			18
+#define CHEST_TRAP_SLINGSHOT	19
+#define CHEST_TRAP_ARROW		20
+#define CHEST_TRAP_STEEL_ARROW	21
+#define CHEST_TRAP_TELEPORTER	22
+#define CHEST_TRAP_PUNCH		23
+#define CHEST_TRAP_BR_FIRE		24
+#define CHEST_TRAP_BR_ACID		25
+#define CHEST_TRAP_BA_TIME		26
+#define CHEST_TRAP_MIMIC		27
+#define CHEST_TRAP_MAGIC_DRAIN	28
+#define CHEST_TRAP_BA_BERSERK	29
+#define CHEST_TRAP_FUSION		30
+
+
+
+#define CHEST_TRAP_LIST_LENGTH	64
+
+
 
 /*
  * Special Object Flags
@@ -4437,8 +4498,13 @@
 ///mod131228 TRフラグ入れ替えに伴い変更
 //#define is_pval_flag(INDEX) ((TR_STR <= (INDEX) && (INDEX) <= TR_MAGIC_MASTERY) || (TR_STEALTH <= (INDEX) && (INDEX) <= TR_BLOWS))
 //#define have_pval_flags(ARRAY) !!((ARRAY)[0] & (0x00003f7f))
-#define is_pval_flag(INDEX) (TR_STR <= (INDEX) && (INDEX) <= TR_BLOWS)
-#define have_pval_flags(ARRAY) !!((ARRAY)[0] & (0x00001fff))
+
+//v1.1.98 TR_DISARMとTR_SAVING追加
+//#define is_pval_flag(INDEX) (TR_STR <= (INDEX) && (INDEX) <= TR_BLOWS)
+#define is_pval_flag(INDEX) (TR_STR <= (INDEX) && (INDEX) <= TR_BLOWS || (INDEX) == TR_SAVING || (INDEX) == TR_DISARM)
+#define have_pval_flags(ARRAY) !!((ARRAY)[0] & (0x00001fff) || ((ARRAY)[3] & 0x80000000) || ((ARRAY)[4] & 0x00000001))
+
+// !! は「常に1か0が得られる」という効果があるらしい
 
 
 ///res mon item アイテムフラグ　耐性とかスレイ触るときに変更
@@ -4597,7 +4663,13 @@
 
 #define TR_HOUSE					126	//v1.1.79 種族「座敷わらし」が移動屋敷として住めるアイテム
 //あとひとつだけフラグを増やせると思う
-#define TR_FLAG_MAX            127 //v1.1.79 TR_HOUSE追加のため126→127
+//#define TR_FLAG_MAX            127 //v1.1.79 TR_HOUSE追加のため126→127
+
+#define TR_DISARM			127 //v1.1.99 解除
+#define TR_SAVING			128 //v1.1.99 魔法防御
+
+#define TR_FLAG_MAX            129 //解除と魔法防御を追加
+
 
 //v1.1.94 TR_FLAG_SIZEを4→8にした
 #define TR_FLAG_OLD_SIZE       4
@@ -6116,6 +6188,8 @@ extern int PlayerUID;　
 #define QUEST_STATUS_FAILED_DONE          6/*:::失敗、連絡済*/
 #define QUEST_STATUS_STAGE_COMPLETED      7/*:::塔専用？各フロアの完了フラグ*/
 
+//v1.1.98 一部クエストに関する特殊フラグ
+#define QUEST_SP_FLAG_HANGOKU2_POSSESSED	0x00000001L	//連続昏睡事件Ⅱのクエストをすでに怨霊に憑依された状態で受ける
 
 /*
  * Quest type
@@ -6445,6 +6519,7 @@ extern int PlayerUID;　
 #define MON_G_SLUG			120
 #define MON_G_PINK_FROG	 121
 #define MON_D_ELF         122
+#define MON_MIMIC_CHEST	353
 #define MON_MANES         128
 #define MON_LOST_SOUL     133
 #define MON_ROBIN_HOOD    138
@@ -6662,7 +6737,7 @@ extern int PlayerUID;　
 #define MON_G_CTHULHU     857
 #define MON_SAURON        858
 #define MON_UNICORN_ORD   859
-#define MON_OBERON        860
+#define MON_TAISAI        860
 #define MON_MORGOTH       861
 #define MON_SERPENT       862
 #define MON_ONE_RING      864
@@ -6756,7 +6831,7 @@ extern int PlayerUID;　
 #define MON_CHARGE_MAN	1081
 #define MON_JURAL	1082
 
-#define MON_G_USAGI		1083
+#define MON_YOUKAI_RABBIT2		1083
 #define MON_G_MUKADE	1088
 ///mod140107 追加モンスター
 #define MON_RUMIA		1089
@@ -7022,8 +7097,13 @@ extern int PlayerUID;　
 //v1.1.91
 #define MON_YUMA			1366
 #define MON_MIMIC_ALCOHOL	1367
+//v1.1.98
+#define MON_MIZUCHI			1368
 
-#define MON_IDX_MAX			1367	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_SUIRYUU			1378
+#define MON_OBERON		    1379
+
+#define MON_IDX_MAX			1380	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -7102,6 +7182,7 @@ extern int PlayerUID;　
 #define HISSATSU_NYUSIN 8
 #define HISSATSU_FUKI   9
 #define HISSATSU_MAJIN  10
+#define HISSATSU_FUIUCHI 11
 //#define HISSATSU_BOOMER 11
 #define HISSATSU_DRAIN  12
 #define HISSATSU_SEKIRYUKA 13
@@ -7463,6 +7544,7 @@ extern int PlayerUID;　
 #define MPE_DO_PICKUP     0x00000020
 #define MPE_BREAK_TRAP    0x00000040
 #define MPE_DONT_SWAP_MON 0x00000080
+#define MPE_ACTIVATE_TRAP 0x00000100 //v1.1.97 トラップ強制発動
 
 
 #define MTIMED_CSLEEP   0 /* Monster is sleeping */
@@ -8134,8 +8216,9 @@ extern int PlayerUID;　
 #define BLDG_EX_KEIKI		37 //霊長園
 #define BLDG_EX_CHIMATA		38 //月虹市場
 #define BLDG_EX_YUMA		39 //尤魔
+#define BLDG_EX_ZASHIKI		40 //座敷わらしのテレワーク　拠点使用可能
 
-#define BLDG_EX_MAX			40 //最後の建物番号+1
+#define BLDG_EX_MAX			41 //最後の建物番号+1
 
 
 
@@ -8591,6 +8674,7 @@ extern int PlayerUID;　
 //v1.1.94 防御低下状態になったモンスターのACを計算。 -25か-25%の低い方(最低0)
 #define MONSTER_DECREASED_AC(AC) ( MAX(0, (MIN((AC) - (AC) / 4, (AC) - 25))))
 
-
+//v2.0 太歳星君打倒後にオベロンが鉄国の主として出て来れるかの判定　打倒直後にオベロンが飛んできて*破壊*とかしないようにしたいがどうしたものか
+#define CHECK_GUARDIAN_CAN_POP ((dungeon_type == DUNGEON_ANGBAND) ? (quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED) : TRUE)
 
 

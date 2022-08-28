@@ -13862,10 +13862,10 @@ static cptr do_new_spell_element(int spell, int mode)
 		break;
 
 	case 2:
-		if (name) return _("サンダー・ボルト", "Thunderbolt");
+		if (name) return _("サンダー・ボルト", "Thunder Bolt");
 		if (desc) return _("電撃のボルトもしくはビームを放つ。", "Fires a bolt/beam of lightning.");
 		{
-			int dice = 6 + (plev - 5) / 4;
+			int dice = 7 + (plev - 5) / 4;
 			int sides = 5;
 
 			if (info) return info_damage(dice, sides, 0);
@@ -13882,7 +13882,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (name) return _("アイス・ボルト", "Ice Bolt");
 		if (desc) return _("冷気のボルトもしくはビームを放つ。", "Fires a bolt/beam of cold.");
 		{
-			int dice = 6 + (plev - 5) / 4;
+			int dice = 8 + (plev - 5) / 4;
 			int sides = 6;
 
 			if (info) return info_damage(dice, sides, 0);
@@ -13900,7 +13900,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (name) return _("アシッド・ボルト", "Acid Bolt");
 		if (desc) return _("酸のボルトもしくはビームを放つ。", "Fires a bolt/beam of acid.");
 		{
-			int dice = 7 + (plev - 5) / 4;
+			int dice = 9 + (plev - 5) / 4;
 			int sides = 6;
 
 			if (info) return info_damage(dice, sides, 0);
@@ -13923,7 +13923,7 @@ static cptr do_new_spell_element(int spell, int mode)
 #endif
 
 		{
-			int dice = 8 + (plev - 5) / 4;
+			int dice = 10 + (plev - 5) / 4;
 			int sides = 8;
 
 			if (info) return info_damage(dice, sides, 0);
@@ -14013,12 +14013,14 @@ static cptr do_new_spell_element(int spell, int mode)
                             "Attacks by launching blades of wind. Amount of blades increases with level. Less effective against enemies with high AC.");
 
 		{
-			int count = 2 + (plev - 10) / 5;
-			int dice = 3 + (plev - 1) / 5;
+			int count = 3 + plev / 10;
+			int dice = 2 + plev / 5;
 			int sides = 4;
 			int i;
-			if(cp_ptr->magicmaster) count+=2;
-			if(count<1) break; //paranoia
+
+			if(cp_ptr->magicmaster) count += plev / 20;
+			if(count<1) count = 1; //paranoia
+
 			if (info) return info_multi_damage_dice(dice, sides);
 
 			if (cast)
@@ -14060,7 +14062,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("雷の球を放つ。", "Fires a ball of lightning.");
 
 		{
-			int dam = plev + 55;
+			int dam = plev * 2 + 50;
 			int rad = 2;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14079,7 +14081,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("冷気の球を放つ。", "Fires a ball of cold.");
 
 		{
-			int dam = plev + 75;
+			int dam = plev * 2 + 70;
 			int rad = 2;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14097,7 +14099,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("酸の球を放つ。", "Fires a ball of acid.");
 
 		{
-			int dam = plev + 95;
+			int dam = plev * 2 + 90;
 			int rad = 2;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14115,7 +14117,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("炎の球を放つ。", "Fires a ball of fire.");
 
 		{
-			int dam = plev*2 + 100;
+			int dam = plev * 3 + 120;
 			int rad = 2;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14156,7 +14158,7 @@ static cptr do_new_spell_element(int spell, int mode)
 
 		{
 			int dice = 1;
-			int sides = plev * 2;
+			int sides = 50 + plev * 2;
 			int base = 50 + plev * 2;
 
 			if (info) return info_damage(dice, sides, base);
@@ -14186,8 +14188,14 @@ static cptr do_new_spell_element(int spell, int mode)
 				/*:::罠があれば消す。水と溶岩以外のアイテムを置ける地形なら深い穴にする。そのとき浮いていないモンスターがいたらダメージを与える*/
 				if (cave[y][x].m_idx)
 				{
+
 					int dam = damroll(dice,sides) + base;
 					int flg = PROJECT_STOP | PROJECT_GRID | PROJECT_KILL | PROJECT_HIDE;
+					project(0, 0, y, x, dam, GF_PIT_FALL, flg, -1);
+
+					//v1.1.97 モンスターに対する落とし穴ダメージをGF_PIT_FALL属性に統合した
+
+					/*
 					monster_type *m_ptr = &m_list[cave[y][x].m_idx];
 					char m_name[80];
 
@@ -14216,7 +14224,9 @@ static cptr do_new_spell_element(int spell, int mode)
 							(void)set_monster_stunned(cave[y][x].m_idx, MON_STUNNED(m_ptr) + dam / 20);
 						}
 					}
+					*/
 				}
+
 				p_ptr->redraw |= (PR_MAP);
 			}
 		}
@@ -14273,8 +14283,8 @@ static cptr do_new_spell_element(int spell, int mode)
 
 		{
 			int dice = plev / 3;
-			int sides = 10;
-			int base = 100 + plev;
+			int sides = 12;
+			int base = 120 + plev;
 
 			if (info) return info_damage(dice, sides, base);
 
@@ -14290,7 +14300,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("視界内全てに対して酸で攻撃する。", "Hits everything in sight with acid.");
 
 		{
-			int dam = 50 + plev * 2;
+			int dam = 80 + plev * 2;
 
 			if (info) return info_damage(0, 0, dam);
 
@@ -14308,7 +14318,7 @@ static cptr do_new_spell_element(int spell, int mode)
 		if (desc) return _("巨大な炎の球を放つ。", "Fires a giant ball of fire.");
 
 		{
-			int dam = plev*5 + 100;
+			int dam = plev * 6 + 100;
 			int rad = 4;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14330,8 +14340,8 @@ static cptr do_new_spell_element(int spell, int mode)
 
 		{
 			int dice = 1;
-			int sides = plev * 3;
-			int base = 150 + plev * 4;
+			int sides = 120 + plev * 4;
+			int base = 120 + plev * 4;
 
 			if (info) return info_damage(dice, sides, base);
 
@@ -14402,7 +14412,7 @@ static cptr do_new_spell_element(int spell, int mode)
 #endif
 
 		{
-			int dam = plev + 70;
+			int dam = plev * 2 + 50;
 			int rad = 3 + plev / 40;
 
 			if (info) return info_damage(0, 0, dam);
@@ -14441,7 +14451,7 @@ static cptr do_new_spell_element(int spell, int mode)
 
 		{
 
-			int dam = plev * 5;
+			int dam = plev * 5 + 30;
 
 			if (info) return info_damage(0, 0, dam);
 
@@ -14621,22 +14631,26 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		break;
 
 	case 1:
+		//v1.1.97 周辺トラップ破壊→トラップ発動ビーム
 #ifdef JP
-		if (name) return "トラップ/ドア破壊";
-		if (desc) return "隣接する罠と扉を破壊する。";
+		if (name) return "トラップ発動";
+		if (desc) return "トラップを発動させるビームを放つ。";
 #else
-		if (name) return "Trap / Door Destruction";
-		if (desc) return "Destroys all traps in adjacent squares.";
+		if (name) return "Activate Traps";
+		if (desc) return "Fires a beam that activates traps.";
 #endif
 
 		{
-			int rad = 1;
 
-			if (info) return info_radius(rad);
+			if (info) return "";
 
 			if (cast)
 			{
-				destroy_doors_touch();
+				int flg = PROJECT_BEAM | PROJECT_GRID | PROJECT_ITEM;
+
+				if (!get_aim_dir(&dir)) return NULL;
+				fire_beam(GF_ACTIV_TRAP, dir, 0);
+
 			}
 		}
 		break;
@@ -15109,16 +15123,16 @@ static cptr do_new_spell_chaos(int spell, int mode)
 	case 20:
 #ifdef JP
 		if (name) return "プラズマ球";
-		if (desc) return "プラズマの球を放つ。";
+		if (desc) return "強力なプラズマの球を放つ。";
 #else
 		if (name) return "Plasma Ball";
-		if (desc) return "Fires a ball of plasma.";
+		if (desc) return "Fires a powerful ball of plasma.";
 #endif
 
 		{
 			int dice = 1;
-			int sides = plev*3;
-			int base = plev*2 + 100;
+			int sides = plev * 4;
+			int base = plev * 2 + 100;
 			int rad = 2 + plev / 40;
 
 			if (info) return info_damage(dice, sides, base);
@@ -15326,7 +15340,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 #endif
 
 		{
-			int dam = 300 + plev * 4;
+			int dam = 300 + plev * 5;
 			int rad = 4;
 
 			if (info) return info_damage(0, 0, dam);
@@ -17534,14 +17548,14 @@ static cptr do_new_spell_nature(int spell, int mode)
 	case 13:
 #ifdef JP
 		if (name) return "鎌鼬";
-		if (desc) return "指定した位置に真空の刃を巻き起こす。防御力の高い敵には効きにくい。";
+		if (desc) return "指定した位置に真空の刃を巻き起こす。防御力の高い敵には当たらないことがある。";
 #else
 		if (name) return "Kamaitachi";
-		if (desc) return "Creates a vacuum blade at target location. Less effective against enemies with high AC.";
+		if (desc) return "Creates a vacuum blade at target location. Might fail to hit enemies with high AC.";
 #endif
 
 		{
-			int dice = 1 + plev / 7;
+			int dice = 4 + plev / 6;
 			int sides = plev;
 
 			if (info) return info_damage(dice, sides, 0);
@@ -17635,7 +17649,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 #endif
 
 		{
-			int dice = 3 + (plev - 1) / 5;
+			int dice = 3 + plev / 4;
 			int sides = 12;
 			if (info) return info_damage(dice, sides, 0);
 			if (cast)
@@ -17803,7 +17817,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 #endif
 
 		{
-			int dam = plev*4 + 100;
+			int dam = plev*4 + 160;
 			int rad = 4;
 
 			if (info) return info_damage(0, 0, dam);
@@ -18026,6 +18040,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 	bool desc = (mode == SPELL_DESC) ? TRUE : FALSE;
 	bool info = (mode == SPELL_INFO) ? TRUE : FALSE;
 	bool cast = (mode == SPELL_CAST) ? TRUE : FALSE;
+	bool fail = (mode == SPELL_FAIL) ? TRUE : FALSE;
 
 #ifdef JP
 	static const char s_dam[] = "損傷:";
@@ -18144,7 +18159,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 #endif
 
 		{
-			int dam = 10 + plev ;
+			int dam = 15 + plev ;
 			int rad = 1;
 
 			if (info) return info_damage(0, 0, dam);
@@ -18243,7 +18258,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 
 		{
 			int dice = 8 + (plev - 5) / 4;
-			int sides = 8;
+			int sides = 11;
 
 			if (info) return info_damage(dice, sides, 0);
 
@@ -18357,29 +18372,24 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 	case 13:
 #ifdef JP
 		if (name) return "死者召喚";
-		if (desc) return "1体のアンデッドを召喚し配下にする。召喚されたアンデッドが敵対することもある。";
+		if (desc) return "1体のアンデッドを召喚し配下にする。詠唱に失敗したとき敵対的なアンデッドが現れる。";
 #else
 		if (name) return "Raise the Dead";
-		if (desc) return "Summons an undead monster. Summoned undead might be hostile.";
+		if (desc) return "Summons an undead monster. Summons hostile undead upon failure.";
 #endif
 
 		{
-			if (cast)
+			if (cast || fail)
 			{
-				int type;
-				bool pet = TRUE;
 				u32b mode = 0L;
 
-				if(plev + adj_general[p_ptr->stat_ind[A_WIS]] < randint1(80)) pet = FALSE;
 
-				type = SUMMON_UNDEAD;
-
-				if (pet) mode |= PM_FORCE_PET;
+				if (cast) mode |= PM_FORCE_PET;
 				else mode |= (PM_ALLOW_UNIQUE | PM_NO_PET);
 
-				if (summon_specific((pet ? -1 : 0), py, px, plev*5/4, type, mode))
+				if (new_summoning(1, py, px, plev, SUMMON_UNDEAD, mode))
 				{
-					if (pet)
+					if (cast)
 					{
 #ifdef JP
 						msg_print("地面から死者が這い出し、あなたに従った。");
@@ -18598,7 +18608,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 
 		{
 			int dam = plev * 2 + 100;
-			int sides = 100;
+			int sides = plev * 4;
 			int rad = plev / 20 + 2;
 
 			if (info) return info_damage(1, sides, dam);
@@ -18636,32 +18646,25 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 	case 23:
 #ifdef JP
 		if (name) return "上位アンデッド召喚";
-		if (desc) return "強力なアンデッドを複数召喚し配下にする。召喚されたアンデッドが敵対することもある。";
+		if (desc) return "強力なアンデッドを複数召喚し配下にする。詠唱に失敗したとき敵対的なアンデッドが現れる。";
 #else
 		if (name) return "Summon Greater Undead";
-		if (desc) return "Summons multiple powerful undead monsters as your followers. Summoned monsters might be hostile.";
+		if (desc) return "Summons multiple powerful undead monsters as your followers. Summons hostile undead upon failure.";
 #endif
 
 		{
-			if (cast)
+			if (cast || fail)
 			{
-				int type;
-				bool pet =TRUE;
 				u32b mode = 0L;
 				int num,i;
 				bool msgflag=FALSE;
 
-				if(plev + adj_general[p_ptr->stat_ind[A_WIS]] < randint1(120)) pet = FALSE;
+				if (cast) mode = (PM_FORCE_PET | PM_ALLOW_GROUP);
+				else mode = (PM_ALLOW_UNIQUE | PM_NO_PET| PM_ALLOW_GROUP);
 
-				type = SUMMON_HI_UNDEAD;
+				num = 1 + randint1(3);
 
-				mode |= PM_ALLOW_GROUP;
-
-				if (pet) mode |= PM_FORCE_PET;
-				else mode |= (PM_ALLOW_UNIQUE | PM_NO_PET);
-				num = 1 + plev / 45 + randint0(1);
-
-				for(i=0;i<num;i++) if (summon_specific((pet ? -1 : 0), py, px, (plev * 3) / 2, type, mode) && !msgflag)
+				if (new_summoning(num, py, px, plev * 3 / 2, SUMMON_HI_UNDEAD, mode) && !msgflag)
 				{
 					msgflag = TRUE;
 #ifdef JP
@@ -18671,7 +18674,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 #endif
 
 
-					if (pet)
+					if (cast)
 					{
 #ifdef JP
 						msg_print("古えの死せる者共があなたに仕えるため土から甦った！");
@@ -18695,10 +18698,10 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 	case 24:
 #ifdef JP
 		if (name) return "屍竜召喚";
-		if (desc) return "ドラゴンのアンデッドを召喚する。触媒として竜の鱗などの物品を消費する。";
+		if (desc) return "ドラゴンのアンデッドを召喚する。触媒として竜の鱗などの物品を消費すると強力な竜が出やすい。";
 #else
 		if (name) return "Summon Undead Dragon";
-		if (desc) return "Summons an undead dragon. Consumes a dragon-related item as extra cost.";
+		if (desc) return "Summons an undead dragon. Powers up if you use a dragon-related item as a catalyst.";
 #endif
 
 		{
@@ -18715,23 +18718,16 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 				{
 					item_tester_hook = item_tester_hook_dragonkind;
 					summon_mode |= PM_FORCE_PET;
-					if(!select_pay(&cost)) return NULL;
+					if(!select_pay(&cost)) cost = 0;
 
-					if(cost <= 0) //無価値なアイテムを使うと失敗する
-					{
-						summon_mode &= ~(PM_FORCE_PET);
-						summon_mode |= PM_NO_PET;
-					}
-					lev += cost / 2000;
-					if(lev > 100) lev = 100;
+					lev += cost / 1500;
+					if(lev > 120) lev = 120;
 				}
 
 				if (new_summoning(num, py, px, lev, SUMMON_UNDEAD_DRAGON, summon_mode))
 				{
-					if(summon_mode & PM_NO_PET) msg_print(_("触媒が悪かったらしい。竜が襲いかかってきた！",
-                                                            "Your offering was worthless. The dragon attacks you!"));
-					else     msg_print(_("地の底から響くような唸り声が聞こえた・・",
-                                        "You hear a growling sound coming from depths of the earth..."));
+					msg_print(_("地の底から響くような唸り声が聞こえた・・",
+                                    "You hear a growling sound coming from depths of the earth..."));
 				}
 			}
 		}
@@ -18771,7 +18767,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 #endif
 
 		{
-			int dam = plev * 7;
+			int dam = plev * 9;
 			int rad = plev / 7;
 
 			if (info) return info_damage(0, 0, dam);
@@ -20780,14 +20776,10 @@ static cptr do_new_spell_transform(int spell, int mode)
 #endif
 
 		{
-			//gain_random_mutation()で変異決定するための数値のリスト
-			int muta_lis[] = {1,5,8,17,19,24,31,35,38,46,62,65,81,83,85,95,98,100,109,120,123,126,129,136,138,141,143,146,154,157,161,163,165,168,171,173,182,185};
-
-			int attempt = 10;
 
 			if (cast)
 			{
-				while(( attempt-- > 0) && !gain_random_mutation(muta_lis[randint0(sizeof(muta_lis) / sizeof(int))-1]));
+				gain_physical_mutation();
 			}
 		}
 		break;
@@ -21604,7 +21596,9 @@ static cptr do_new_spell_darkness(int spell, int mode)
 #endif
 
 		{
-			int dam = plev * 3 ;
+			int dam = plev * 3 + 25;
+
+			if (cp_ptr->magicmaster) dam += plev;
 
 			if (info) return info_damage(0, 0, dam);
 
@@ -21647,7 +21641,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 #endif
 
 		{
-			int dam = 100 + plev * 2;
+			int dam = 100 + plev * 5 / 2;
 			int rad = 4;
 
 			if (info) return info_damage(0, 0, dam);
@@ -22044,7 +22038,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 #endif
 
 		{
-			int lev = 1 + plev / 2;
+			int lev = plev * 2 / 3;
 			int kind;
 			if (info) return format(_("召喚レベル：%d", "level: %d"),lev);
 			if (cast || fail)
@@ -22655,7 +22649,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 #endif
 
 		{
-			int lev = plev * 4 / 5 ;
+			int lev = plev + 5;
 			if (info) return format(_("基本召喚レベル：%d", "base level: %d"),lev);
 			if (cast || fail)
 			{
@@ -22842,7 +22836,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 #endif
 
 		{
-			int lev = plev * 3 / 2;
+			int lev = plev * 2;
 			if (info) return format(_("召喚レベル：%d", "level: %d"),lev);
 
 			if(cast && p_ptr->chp < lev * 3)
@@ -22935,7 +22929,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 #endif
 
 		{
-			int lev = plev;
+			int lev = plev * 3 / 2;
 			if (info) return format(_("基本召喚レベル：%d", "base level: %d"),lev);
 			if (cast || fail)
 			{
@@ -24788,24 +24782,24 @@ static cptr do_new_spell_occult(int spell, int mode)
 
 	case 4:
 		if (name) return _("置いてけ掘", "Oiteke-bori");
-		if (desc) return _("アイテムを拾って持っている敵が水地形に隣接しているときにしか使えない。敵一体に水属性の大ダメージを与えてアイテムを落とさせ、ユニークモンスターでない場合高確率で一撃で倒す。",
-                            "Can be used only on enemies that have picked up an item and are adjacent to a water square. Delivers significant water damage and becomes them drop the item, and has high chance of defeating non-unique monster in a single strike.");
+		if (desc) return _("アイテムを拾って持っているモンスターにしか効果がない。モンスター一体を移動禁止状態にし、さらにそのモンスターが水地形に隣接している場合水属性の大ダメージを与えて時々一撃で倒す。",
+                            "Can be used only on enemies that have picked up an item. Prevents the monster from moving; if that monster is adjacent to a water tile, deals significant water damage, makes them drop that item, and has high chance of defeating non-unique monsters in a single strike.");
 
 		{
 			int i;
 			char m_name[80];
-			int x,y,tx,ty;
+			int x, y, tx, ty;
 			monster_type *m_ptr;
 			monster_race *r_ptr;
 			bool flag_water = FALSE;
 			int dam = 200 + plev * 4;
-			int flg = (PROJECT_JUMP|PROJECT_KILL|PROJECT_STOP);
+			int flg = (PROJECT_JUMP | PROJECT_KILL | PROJECT_STOP);
 			if (info) return info_damage(0, 0, dam);
 			if (cast)
 			{
 
 				if (!get_aim_dir(&dir)) return NULL;
-				if(dir != 5 || !target_okay() || !projectable(target_row,target_col,py,px))
+				if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
 				{
 					msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
                                 "You have to pick a target in sight."));
@@ -24824,9 +24818,9 @@ static cptr do_new_spell_occult(int spell, int mode)
 				r_ptr = &r_info[m_ptr->r_idx];
 				monster_desc(m_name, m_ptr, 0);
 
-				if(!m_ptr->hold_o_idx)
+				if (!m_ptr->hold_o_idx)
 				{
-					msg_format(_("%sは何も持っていない。", "%s isn't holding anything."),m_name);
+					msg_format(_("%sは何も持っていない。", "%s isn't holding anything."), m_name);
 					return NULL;
 				}
 
@@ -24834,39 +24828,36 @@ static cptr do_new_spell_occult(int spell, int mode)
 				{
 					ty = y + ddy_ddd[i];
 					tx = x + ddx_ddd[i];
-					if(!in_bounds(ty,tx)) continue;
-					if(cave_have_flag_bold(ty,tx,FF_WATER))
+					if (!in_bounds(ty, tx)) continue;
+					if (cave_have_flag_bold(ty, tx, FF_WATER))
 					{
 						flag_water = TRUE;
 						break;
 					}
 				}
-				if(!flag_water)
-				{
-					msg_format(_("%sの近くに水場がない。", "There's no bodies of water close to %s."),m_name);
-					return NULL;
-				}
 				msg_print(_("どこからともなく「置・い・て・け～」と声がする..",
                             "A voice sounds out of nowhere... 'LEAVE... IT... BEHIND...'"));
+				project(0, 0, m_ptr->fy, m_ptr->fx, 10 + randint1(10), GF_NO_MOVE, flg, -1);
 
-				if(!(r_ptr->flagsr & (RFR_RES_WATE | RFR_RES_ALL)) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & (RF7_AQUATIC | RF7_UNIQUE2))
-				&& randint1((r_ptr->flags2 & (RF2_POWERFUL | RF2_GIGANTIC))?(dam/4):(dam/2)) > r_ptr->level )
+				if (flag_water)
 				{
 					msg_format(_("水面から幾多の手が伸び、%sを引きずり込んだ！",
                                 "Countless arms extend from the water surface and drag %s in!"),m_name);
-					dam = m_ptr->hp + 1;
 
-					project(0,0,m_ptr->fy,m_ptr->fx,dam,GF_DISP_ALL,flg,-1);
+					if (!(r_ptr->flagsr & (RFR_RES_WATE | RFR_RES_ALL)) && !(r_ptr->flags1 & RF1_UNIQUE) && !(r_ptr->flags7 & (RF7_AQUATIC | RF7_UNIQUE2))
+						&& randint1((r_ptr->flags2 & (RF2_POWERFUL | RF2_GIGANTIC)) ? (dam / 5) : (dam / 3)) > r_ptr->level)
+                    {
+                        dam = m_ptr->hp + 1;
+
+                        project(0,0,m_ptr->fy,m_ptr->fx,dam,GF_DISP_ALL,flg,-1);
+					}
+					else
+					{
+						project(0, 0, m_ptr->fy, m_ptr->fx, dam, GF_WATER, flg, -1);
+						if (m_ptr->r_idx) monster_drop_carried_objects(m_ptr);
+
+					}
 				}
-				else
-				{
-					msg_format(_("水面から幾多の手が伸び、%sを引きずり込んだ！",
-                                "Countless arms extend from the water surface and drag %s in!"),m_name);
-					project(0,0,m_ptr->fy,m_ptr->fx,dam,GF_WATER,flg,-1);
-					if(m_ptr->r_idx) monster_drop_carried_objects(m_ptr);
-
-				}
-
 			}
 		}
 		break;
@@ -25241,8 +25232,8 @@ static cptr do_new_spell_occult(int spell, int mode)
 			int rad = MAX_SIGHT;
 
 			if (name) return _("メリーさんの電話", "Phone Call from Mary");
-			if (desc) return _("周囲のランダムなモンスターの隣にテレポートし、そのまま隣接攻撃を仕掛ける。精神を持たないモンスターは対象にならない。",
-                                "Teleports next to a random nearby monster and performs melee attack. Cannot target mindless monsters.");
+			if (desc) return _("周囲のランダムなモンスターの隣にテレポートし、そのまま隣接攻撃を仕掛ける。この攻撃の一撃目は強烈な一撃になりやすい。精神を持たないモンスターは対象にならない。",
+                                "Teleports next to a random nearby monster and performs melee attack. Frequently results in a critical hit. Cannot target mindless monsters.");
 			if (info) return info_radius(rad);
 
 			if(cast)
@@ -25288,7 +25279,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 						char m_name[80];
 						monster_desc(m_name, &m_list[cave[ty][tx].m_idx], 0);
 						msg_format(_("あなたは%sの後ろに出現した！", "You appear behind %s!"),m_name);
-						py_attack(ty,tx,0);
+						py_attack(ty,tx, HISSATSU_FUIUCHI);
 					}
 					else
 					{
@@ -25393,7 +25384,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 			monster_type *m_ptr;
 			monster_race *r_ptr;
 			int i;
-			int dice = 10;
+			int dice = 12;
 			int sides = 25 + plev/2;
 			int num = 0;
 			if (info) return info_damage(dice, sides, 0);
@@ -25948,6 +25939,64 @@ static cptr do_new_spell_occult(int spell, int mode)
 
 
 	case 27:
+		if (name) return _("アザトートの呪詛", "Curse of Azathoth");
+		if (desc) return _("モンスター一体に対して強力な精神攻撃を行い、恐怖・朦朧・混乱・魔法力低下状態にする。通常の精神を持たないモンスターには効果がなく、デーモンやアンデッドやユニークモンスターには効きづらい。詠唱の成功失敗にかかわらず使用者の知能と賢さが一時的に低下する。",
+                            "Hits a monster with a powerful mental attack; frightens, stuns, confuses and lowers magical power. Does not affect monsters with an unusual mind, and is less effective against demons, undead and unique monsters. Temporarily drains your intelligence and wisdom (even if you fail to cast this spell).");
+		{
+			monster_type *m_ptr;
+			monster_race *r_ptr;
+			int j;
+			char m_name[80];
+			int x, y;
+			bool flag_ok = TRUE;
+			int power;
+			if (cp_ptr->magicmaster) power = plev * 7;
+			else power = plev * 5;
+
+			if (info) return format(_("効力:%d", "pow: %d"), power);
+
+			if (cast)
+			{
+
+				if (!get_aim_dir(&dir)) return NULL;
+				if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+				{
+					msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                                "You have to pick a target in sight."));
+					return NULL;
+				}
+
+				y = target_row;
+				x = target_col;
+				m_ptr = &m_list[cave[y][x].m_idx];
+
+				if (!m_ptr->r_idx || !m_ptr->ml)
+				{
+					msg_format(_("そこには何もいない。", "There's nobody here."));
+					return NULL;
+				}
+
+				msg_print(_("あなたは最も忌まわしき存在の真の名を唱えた...", "You chant the true name of the most terrifying being in existence..."));
+				project(0, 0, y, x, power, GF_COSMIC_HORROR, (PROJECT_KILL | PROJECT_HIDE | PROJECT_JUMP), -1);
+
+			}
+			if (cast || fail)
+			{
+				msg_print(_("禁断の音節があなたの精神を蝕んだ！", "The forbidden intonations corrode your mind!"));
+				do
+				{
+					do_dec_stat(A_INT);
+					do_dec_stat(A_WIS);
+				} while (one_in_(3));
+			}
+
+		}
+		break;
+
+		//v1.1.96 異界への退散→アザトートの呪詛
+
+#if 0
+	case 27:
 		if (name) return _("異界への退散", "Banish to Other Worlds");
 		if (desc) return _("「幻想郷の外から来たモンスター」一体をフロアから追放する。モンスターのレベルの倍(ユニークモンスターは四倍)のMPを追加で消費し、MPが足りていれば必ず追放に成功する。クエストダンジョンでは使えず、クエストのターゲットモンスターには効果がない。MPが足りなかった場合追放に失敗したうえ彫像化を受ける。",
                             "Banishes a monster from outside of Gensoukyou from the floor. Consumes extra MP equal to double the level of the monster (or quadruple if it's unique); banishment is guaranteed to succeed if extra cost is paid. Cannot be used in quest and doesn't affect quest target monsters. If you don't have enough MP and banishment fails, you get paralysed regardless of free action.");
@@ -26027,6 +26076,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 		break;
 
 
+#endif
 	case 28:
 		if (name) return _("黄金の蜂蜜酒の製造", "Create Golden Mead");
 		if (desc) return _("「黄金の蜂蜜酒」を製造する。アイテム「*啓蒙*の薬」「竜の爪」「高草郡の光る竹」「ミラクルフルーツ」「一夜のクシナダ」のいずれか一つを消費する。",
