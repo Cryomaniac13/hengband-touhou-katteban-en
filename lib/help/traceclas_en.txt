@@ -10,7 +10,6 @@ of their compatibility.
 
 Hit Dice is related to HP calculation; base value is 10.
 The higher your experience penalty is, the more slowly you gain levels.
-Strong and long-living races tend to require a lot of experience.
 Score modifier affects your score. The stronger you are, the lower it is.
 
 Numbers in brackets after resistances/abilities/characteristics represent
@@ -29,9 +28,8 @@ Transformation/Darkness/Necromancy/Chaos
 Version 1.1.08 adds the Occult realm, but all races have standard aptitude
 for it, so it's omitted.
 
-If you're a beginner, you'll spend a lot of time exploring, so a high XP
-penalty shouldn't bother you too much. That's why I recommend picking a
-strong race disregarding experience penalty.'
+If you're a beginner, I recommend picking a strong race disregarding
+experience penalty.'
 
 
 ***** <Human>
@@ -137,9 +135,11 @@ physical stats by themselves aren't that high, but they also hold a bit of
 mysterious power. They do fine as spellcasters, and their natural MP recovery
 is a solid asset for dual classes.
 
-The assassins from hell are mainly shinigami. The deeper down you go, the more
-powerful assassins will come after you. They have fairly large score and XP
-penalties.'
+The assassins from hell are mainly shinigami. The deeper down you go and
+stronger you become, the more powerful assassins will come after you. If you
+go around in the dungeon holding down keys, you might get surprise attacked
+several times by one of them.
+They have fairly large score and XP penalties.'
 
 ***** <Celestial>
 --- Celestial ---
@@ -172,8 +172,8 @@ Othor
 Keine - 'More or less a stronger version of the already strong hermits.
 You're not likely to have hard time in early game combat. You're strong, but
 your penalties are severe at well. Suitable for beginners.
-You're vulnerable to hellfire, but it's not going to be a concern until the
-very end.'
+You're vulnerable to hellfire, but enemies that use it mainly appear on the
+lower levels.'
 
 
 ***** <Fairy>
@@ -257,7 +257,8 @@ Magic realm aptitude:
 Other:
   Does not require food at all (but can overeat)
 
-Keine - 'As their name implies, they specialize in magic.
+Keine - 'That's not a class, that's a race.
+As their name implies, they specialize in magic.
 They learn spells quickly and can efficiently use them. Since they have a
 MP recovery power, they're suited for classes like Magic-Knight as well.
 However, they're fairly weak physically, so keep an eye on your health.
@@ -429,7 +430,7 @@ comparatively light.
 
 Slightly meta statement:
 In Gensoukyou, were-beasts and youkai beasts are very different, but they've
-been unified for this mod.'
+been unified for Gensouband.'
 
 
 ***** <Tsukumogami>
@@ -508,7 +509,7 @@ that rely on several stats will have a lot of trouble preparing their
 equipment. Rings, amulets, and light sources don't affect your level.
 
 Another meta statement: Of course, the youkai dolls in Gensoukyou don't work
-like that. That's a feature taken from original Hengband's Androids.'
+like that. That's a feature taken from Hengband's Androids.'
 
 
 ***** <Moon-Rabbit>
@@ -637,7 +638,7 @@ Other:
 Keine - 'Youkai tanuki. They really don't get along with youkai foxes.
 They're good at transforming, disappearing, and hiding; their stats and
 special abilities make them comparatively simple to use.
-They're decent at being almost any class. Their penalties are fairly high.'
+They're decent at being almost any class.'
 
 
 ***** <Merfolk>
@@ -749,7 +750,10 @@ without much power. According to rumors, they were summoned from other worlds,
 making them completely unaffected by otherworldly horrors. They also are
 resistance to darkness and nether, but are very vulnerable to holy attacks.
 Though they're suited for spellcaster classes, you might pick a dual class to
-make use of their characteristics.'
+make use of their characteristics.
+
+By the way, the part about them being summoned from other worlds is really
+nothing more than some rumors.'
 
 
 ***** <Golem>
@@ -816,9 +820,9 @@ Other:
   Can hold short blades with both hands
 
 
-Keine - 'It's a recently discovered race; they're about up to my knee in
-height. They're incredibly weak, but level up extremely quickly as well.
-That's probably their everyday life already is dangerous for them.
+Keine - 'They're about up to my knee in height. They're incredibly weak,
+but level up extremely quickly as well.
+That's probably because their everyday life already is dangerous for them.
 They're unmatched at stealth, and they're not bad at handling magic devices
 either.'
 
@@ -942,14 +946,14 @@ human, and a quarter of that of a fairy.
 
 Yet another meta statement:
 In Gensoukyou, 'ghosts', 'spirits', 'vengeful spirits', 'poltergeist' have
-their own qualities. In this mod, all of those are grouped in this race, and
-their characteristics are based on original Hengband's Spectre.'
+their own qualities. In Gensouband, all of those are grouped in this race,
+and their characteristics are based on Hengband's Spectre.'
 
 
 ***** <Stray-God>
 --- Stray God ---
 Primary stats: undefined
-Hit Dice: 11 (might change)
+Hit Dice: base 11
 XP Penalty: 50%
 Score: 80%
 
@@ -1171,6 +1175,7 @@ Magic realm aptitude:
   3/3/3/3 - 2/0/0/3 - 8/7/8/6
 Other:
   Has different racial powers depending on what group you belong to
+    (randomly decided at the start of game)
   Speed +level/15
   Hardly gains satiation from ordinary food, has to sustained themselves by
     defeating living beings or undead
@@ -1210,9 +1215,8 @@ Other:
     inhabiting
 
 Keine - 'Zashiki-Warashi are a rare kind of youkai residing in human houses.
-They keep watching that household and its owner, and inform them if there's
-any trouble about to happen. Recently, zashiki-warashi have been spotted
-walking outside houses. They can possess some items they view as 'households',
+Recently, zashiki-warashi have been spotted walking outside houses.
+They can possess some items they view as 'households',
 and walk around carrying them, which lets them leave the Human Village.
 Depending on the household they inhabit, they might obtain new abilities and
 powers. Zashiki-Warashi are very observant, granting them high Stealth and
@@ -1227,7 +1231,10 @@ Keine - 'Next, let's look over details for basic classes.
 Their skills are written like 12(8); it means the starting value is 12, and
 it increases by 8 each ten levels. For magic/skill aptitudes, A is highest
 value. The lower follower cost coefficient is, the more powerful followers you
-can maintain.'
+can maintain.
+
+Classes marked as '(Magic Specialist)' have several of their spells powered
+up, and can use a special ability called 'Barrier Guard'.'
 
 
 ***** <Warrior>
@@ -1259,7 +1266,6 @@ Resistances/etc:
   Regeneration (45)
 
 Other:
-  Amount of shots (bow/crossbow) increased by 0.02*level per turn
   +1 melee attack/round at level 40
 
 Keine - 'Warriors are the most basic class, and the best known close combat
@@ -1287,6 +1293,7 @@ Follower cost coefficient: 30
 Magic realm aptitude:
   Can study two realms
   Aptitude B for all realms
+  (Magic Specialist)
 
 Skill aptitude:
   Martial Arts  E    Shields      E      Riding      E       Dual-Wielding E
@@ -1340,6 +1347,7 @@ Magic realm aptitude:
   Life/Exorcism/Darkness/Necromancy     - B
   Mysticism/Nature/Transformation/Chaos - C
   (Cannot study realms belonging to different major realms)
+  (Magic Specialist)
 
 Skill aptitude:
   Martial Arts  C    Shields      D      Riding      E       Dual-Wielding E
@@ -1408,6 +1416,8 @@ Skill aptitude:
 
 Class special abilities:
   Detect Traps (10)
+  Activate Traps (15; remotely activates known traps. Their activation can
+                      affect nearby monsters)
   Hit and Away (20; attacks an adjacent enemy, then immediately teleports
                     away; might fail)
   Identify (30)
@@ -1418,7 +1428,6 @@ Resistances/etc:
   Powerful throwing (40)
 
 Other:
-  Amount of shots (crossbow) increased by 0.02*level per turn
   +1 melee attack/round for short blades
 
 Keine - 'This class has high dexterity along with various useful abilities.
@@ -1462,8 +1471,6 @@ Resistances/etc:
   Poison resistance (40)
 
 Other:
-  Amount of shots (crossbow) increased by 0.02*level per turn
-  Amount of shots (bow) increased by 0.04*level per turn
   Does not slow down while walking through forest terrain
 
 Keine - 'A powerful dual class with various combat-related skills. They're
@@ -1727,6 +1734,7 @@ Follower cost coefficient: 25
 Magic realm aptitude:
   Can study one realm
   Aptitude A for all realms
+  (Magic Specialist)
 
 Skill aptitude:
   Martial Arts  E    Shields      E      Riding      E       Dual-Wielding E
@@ -1950,7 +1958,7 @@ taking down as you attempt to learn them. Carefully think about whether you
 want to learn only the most necessary techniques, or if you desire
 overwhelming power and are prepare to brave danger.
 
-They're similar to Blue Mages from original Hengband, but they can use support
+They're similar to Blue Mages from Hengband, but they can use support
 spells like teleportation or healing as well.'
 
 
@@ -1986,18 +1994,19 @@ Resistances/etc:
   Blindness resistance (40)
 
 Other:
-  Amount of shots (bow) increased by (0.5 + 0.04*level) per turn
-  Amount of shots (crossbow) increased by 0.04*level per turn
+  Bonus to amount of shots per round
   Arrows/bolts you shoot are less likely to break
   Can enmpower arrows with materials at Archers Guild
 
 
 Keine - 'A warrior specialising in ranged combat. They're not good at melee,
 but their shooting power might exceed warrior's melee combat. They can make
-arrows from trees and imbue them with elements using materials. In this mod,
+arrows from trees and imbue them with elements using materials. In Gensouband,
 ranged weapon equipment slot got replaced, and holding a shield or a melee
 weapons will interfere with shooting. They're a lot weaker compared to
-original Hengband, but they're still strong.'
+original Hengband, but they're still strong.
+Magic Quivers, which let you access arrows from your exploration base, are
+important for this class.'
 
 
 
@@ -2015,6 +2024,7 @@ Follower cost coefficient: 50
 
 Magic realm aptitude:
   Cannot use
+  (Magic Specialist)
 
 Skill aptitude:
   Martial Arts  E    Shields      C      Riding      E       Dual-Wielding E
@@ -2098,7 +2108,6 @@ Resistances/etc:
   Shards resistance (40)
 
 Other:
-  Amount of shots (crossbow) increased by 0.01*level per turn
   Can install (2+level/6) machines on backpack
   Installed machines can temporarily malfunction when you get hit by water or
     lightning. Malfunction probability depends on attack power and machine.
@@ -2324,7 +2333,6 @@ Resistances/etc:
 
 Other:
   Starts the game out with a horse
-  Amount of shots (bow) increased by 0.03*level per turn
   Less penalty for wielding a weapon unsuitable for riding while riding
   Lesser maintenance cost for the follower you're riding
 
@@ -2426,7 +2434,6 @@ Other:
   Can use guilds in town to extract essences from pieces of equipment or
     materials, and imbue other items with those essences
   Can carry 25% more weight
-  Amount of shots (crossbow) increased by 0.01*level per turn
   When buying/selling in stores, uses the highest of CHR and (INT + 5)
   'No fixed artifacts generated' option doesn't raise your score as much
 
@@ -2437,7 +2444,7 @@ are great at identification, making them suited for exploration. However,
 they don't have any monster detection or combat support abilities, and they're
 not that great in combat by themselves.
 
-They're close to Weaponsmith in original Hengband, but somewhat worse at close
+They're close to Weaponsmith in Hengband, but somewhat worse at close
 combat. They also can't extract essences in dungeon and have to return to
 town. In return, they have better magic device use and identification skills,
 and can handle essences like sharpness, force, or extra shots. They're not
@@ -2449,7 +2456,7 @@ bad at fighting powerful enemies with essence-imbued crossbow and bolts.'
 --- Jeweler ---
 Str: -2  Int: 2 Wis:0 Dex: 2 Con: -2 Chr: 2
 Dsm: 30(10) MDev: 40(17) MProt: 36(12)  Stl: 2(0) Srh: 24(3)
-Fighting: 48(16) Shooting: 30(10)
+Fighting: 40(15) Shooting: 30(10)
 Hit Dice: +2
 XP Penalty: 50
 Score: 80%
@@ -2646,7 +2653,8 @@ Other:
   Always starts out as a human
   Starts out with 0 money
   Only has a smartphone in inventory, without food or torches
-  Can leave to Outside World from Hakurei Shrine, can always retire
+  Can leave to Outside World from Hakurei Shrine, which counts as clearing
+    the game (retiring)
 
 Keine - 'Ordinary people from Outside World that were spirited away into
 Gensoukyou. They're as powerless as they look. Reaching Hakurei Shrine

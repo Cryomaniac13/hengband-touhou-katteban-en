@@ -2,10 +2,10 @@
 === About Movement Order ===
 Keine - 'Let's start with explaining movement order.
 One of specific features of roguelike games is 'You and enemies take turns
-performing actions'. However, that's not quite the case with Hengband.
-While you still can take any amount of time thinking once it's your turn to
-act, there's no guarantee that two beings with the same speed will always
-take turns one after another.
+performing actions'. However, that's not quite the case with Hengband and
+Gensouband. While you still can take any amount of time thinking once it's
+your turn to act, there's no guarantee that two beings with the same speed
+will always take turns one after another.
 
 Let's go a bit deeper into the details.
 All characters, including you, have to wait for some time before taking
@@ -17,6 +17,8 @@ Amount of energy consumed depends on the action you just performed. Most
 of the actions use up the same amount of energy, but some use up a different
 amount. Actions like 'drop an item', 'shoot/throw at high speed', 'stop
 movement after receiving a warning' use very little time before next action.
+On the other hand, for example, walking through forest terrain without
+levitation requires more energy than usual.
 
 Next up is speed; of course, having higher speed means waiting less time for
 your next action. At +10 you perform actions twice as fast, at +20 you perform
@@ -29,7 +31,7 @@ times, it can have a surprisingly significant impact. There are cases of
 enemies at +10 speed taking multiple turns while the player was at +30 speed.
 
 It is argued where this mechanic is thrilling or just harmful for strategic
-combat, but that's the system used to determine move order in Hengband.
+combat, but that's the system used to determine move order in this game.
 It's less about pulling through battles with all of your strength and more
 about always being prepared to fight in top condition.
 
@@ -89,8 +91,8 @@ wielding penalties; that's another way to get around this.
 === About Ranged Attacks ===
 
 Keine - 'Now, let's talk about using bows and crossbows.
-In original Hengband, you had a separate equipment slot for using a ranged
-weapon, but in this mod, you have to hold them in your hands. They're mainly
+In Hengband, you had a separate equipment slot for using a ranged weapon, 
+but in Gensouband, you have to hold them in your hands. They're mainly
 held with both hands. You can hold a shield or a melee weapon in other hand,
 but this will give you penalties to accuracy and amount of shots per round.
 
@@ -110,6 +112,11 @@ Accuracy is calculated in a way similar to melee attacks, only it depends
 on your ranged combat skill.
 Crossbows have somewhat better accuracy compared to bows.
 You can check your accuracy and amount of shots per round with 'C' command.
+
+Increasing amount of shots per round requires either raising your skill
+proficiency or using equipment that gives you extra shots. The Trigger-Happy
+personality slightly raises your amount of shots per round, but it also
+significantly lowers your constitution, so I can't recommend it.
 
 Amount of shots per round is treated in a very different manner compared
 to amount of blows in melee.
@@ -137,9 +144,9 @@ a comparatively safe way of combat.'
 === About Martial Arts ===
 
 Keine - 'Martial arts refers to attacking with your bare hands - that is,
-without having a melee weapon equipped. Original Hengband had only some 
-classes being capable at martial arts, but in this mod, any class can fight
-in this manner.
+without having a melee weapon equipped. Martial art specialist classes and
+some unique classes can deal more damage in this manner compared to using
+a melee weapon.
 
 Amount of blows per round for martial arts mainly depends on your level,
 dexterity, and martial art proficiency. Those who have high aptitude for
@@ -180,7 +187,7 @@ hands, extra martial art attacks are more likely to occur.'
 ***** <Throwing>
 === About Throwing ===
 
-Keine - 'You can attack by throwing items at enemies.
+Keine - 'You can attack by throwing items at enemies with 'v' command.
 If your throwing proficiency is high enough, you'll be able to do it faster
 compared to performing a normal action.
 
@@ -199,16 +206,16 @@ dexterity.
 A thrown potion will always break, applying its effect.
 Thrown non-artifact weapon can occasionally break and disappear.
 
-Don't forget that some weapons like knives or javelins are 'suitable for
-throwing'.
+Some weapons like knives or javelins are 'suitable for throwing'.
 They have higher accuracy and increased power when thrown.
 Artifacts in particular can be very powerful in this regard.
 Some ego-items and artifacts can be suitable for throwing, even if their
 base item isn't.
+
 Also, there are only few of them, but there are weapons that come back when
 thrown. However, they might not always come back, and even if they come back,
 you might fail to catch them, and they'll drop beneath your feet. Success
-rate depends on your dexterity.
+rate depends on your dexterity, along with Throwing skill proficency.
 
 Any classes can use throwing to some extent, but there are only few classes
 that are proficient at it.'
@@ -289,10 +296,13 @@ Let's look over them here.
 - Staves
   Raising this skill increases your AC as you deflect blows with your staff.
   The effect is doubled if you're holding it with both hands.
+  Fighting with a staff increases the chance of dealing additional martial
+  art attacks.
 
 - Axes
   Raising this skill increases the chance of lowering enemy's defense power
-  with your melee attacks.
+  with your melee attacks (more details in 'Monster Temporary Effects'
+  section).
 
 - Spears
   Raising this skill might let you preemptively attack enemies hitting you in
@@ -325,7 +335,7 @@ can only get you so far.'
 === About Temporary Effects ===
 
 Keine - 'It's reckless to fight powerful enemies without preparations.
-In Hengband, there are various means of raising your power.
+In Gensouband, there are various means of raising your power.
 Here's a list of some basic ones. Many of them can be obtained through
 potions or spells.
 
@@ -338,7 +348,8 @@ potions or spells.
 - Blessing
   You become blessed by some deity, though you're not certain which one.
   Increases AC by 10 and slightly increases melee accuracy.
-  In this mod, it also slightly increases protection from magic.
+  It also slightly increases protection from magic, protection you from
+  curses and other similar attacks.
   Can be obtained by using blessing spells or Scroll of Holy Chant.
   The scrolls are being sold at stores; buy some if you have spare money.
 
@@ -349,7 +360,7 @@ potions or spells.
   go over it again. If you gain a temporary resistance while already being
   resistant to that element from your equipment, you will become 'double
   resistant', reducing damage to 1/9 of its base value.
-  However, this applies only to the base elements and poison.
+  However, this applies only to the fire, cold, electricity, acid and poison.
   There are spells that give temporary resistance to elements like chaos or
   nether, but they can't give you a double resistance.
 
@@ -365,7 +376,8 @@ potions or spells.
   midgame.
 
 - Haste
-  Increases speed by +10. Vital when facing against powerful enemies.
+  Increases speed by +10. Vital when facing against powerful enemies that can
+  take several actions in a row if you're unhasted.
   Potions of Speed are comparatively easy to obtain from the early game.
   If possible, get yourself a Staff of Speed.
   There also are some spells that temporarily increase your speed.
@@ -375,8 +387,9 @@ potions or spells.
   parameters. The normal limit for your stats is 40, but there are some
   powerful spells that can go beyond that limit.
 
-Those are basic temporary effects. In this mod, there's over a hundred of
-different temporary effects in total.'
+Those are basic temporary effects. There's over a hundred of different
+temporary effects in total - for more details, look at descriptions of spells
+and special abilities.'
 
 ***** <BadStatus>
 === About Bad Status Conditions ===
@@ -394,8 +407,7 @@ quickly cure them.
 
 - Fear
   If you're terrified, you can't attack enemies in melee.
-  In this mod, it also increases spell failure rate and reduces ranged attack
-  accuracy.
+  It also increases spell failure rate and reduces ranged attack accuracy.
   Can be cured by drinking a potion with heroism effect or drinking sake.
   If you resist fear, you can't be terrified.
 
@@ -437,7 +449,7 @@ quickly cure them.
 - Statue
   Same as paralysis, except it ignores free action.
   Can be rarely inflicted by Ancient Foul Curse or blood curse.
-  If your protection from magic is high enough, you'll be able to resist it.
+  If your protection from magic is very high, you'll be able to resist it.
 
 - Stat drain
   Some enemy attacks can temporarily reduce your primary stats.
@@ -461,8 +473,7 @@ quickly cure them.
   if your wounds are too severe, you might end up taking 100 damage or more.
   Can be healed with potions. Potions of Cure Critical Wounds or higher
   equivalents instantly cure any wounds.
-  You can't get resistance to this effect, but some races like Golems, Ghosts
-  or Tsukumogami can't be wounded.
+  You can't get resistance to this effect, but some races can't be wounded.
 
 - Stunning
   Increases spell failure rate.
@@ -473,17 +484,135 @@ quickly cure them.
   almost certain.
   Potions of Cure Serious Wounds or higher equivalents cure stunning.
   Resistance to sound/water prevents you from being stunned by those attacks.
-  There's no resistance to getting stunned by enemy melee attacks, but Golems
-  can't be stunned at all.
+  There's no resistance to getting stunned by enemy melee attacks, but some
+  races can't be stunned at all.
+
+- Broken
+  Some special races like Youkai-Doll and Haniwa becomes 'Broken' instead of
+  being wounded or stunned. This conditions lowers your state, heavily
+  diminishing your combat abilities if it is sever enough.
+  It recovers over time, and can be treated with a racial power.
 
 Potions of Cure Critical Wounds recover you health somewhat and cure a lot
-of bad status effects. If you have enough money, carrying dozens of those
-with you won't be an overkill.'
+of bad status effects - it's an excellent item. If you have enough money,
+carrying dozens of those with you won't be an overkill.'
+
+
+
+***** <Monster-TimedStatus>
+=== Monster Temporary Effects ===
+
+Keine - 'Monsters have their own helpful or harmful temporary effects.
+Let's take a look at them.
+
+- Haste
+  Increases speed by +10.
+  It's dangerous - you're more likely to get hit several times in a row.
+  If a powerful enemy becomes hasted, it might be a good idea to dispel
+  it or run away until it wears off. Monsters can haste themselves with the
+  'Haste' spell, and 'Alarm' spell wakes up and hastes nearby monsters.
+  Using a Staff of Haste Monsters or breaking a Potion of Speed also can
+  apply this effect.
+
+- Invulnerability
+  Makes a monster mostly unaffected by attacks.
+  There are powerful monsters that can cast 'Globe of Invulnerability' on
+  themselves. Attacks have a 1/13 of affecting them, and this effect can
+  be dispelled. Normally, though, you'll have to run away until it wears off.
+
+- Sleeping/Bound
+  Many monsters start out asleep when you enter a new level.
+  Also, binding monsters can prevent them from moving.
+  Monsters can't do anything in this state, but they will wake up and
+  start attacking if they get hit in melee or by a spell. Having low Stealth
+  skill increases the chance of nearby monsters waking up.
+  Some monsters are less likely to wake up than others; generally, the less
+  attention a monster pays to intruders, the less likely it is to wake up.
+  The difference between sleeping and binding is how it is affected by monster
+  resistance. Sleeping attacks have no effect on monsters that resist sleep,
+  but binding attacks might work.
+
+- Slowed Down
+  Reduces speed by +10, making the monster easier to beat.
+  Several spells, inertia attacks or some mental attacks can inflict this
+  condition. However, high level monsters are hard to slow down. This state
+  expires as time passes, and high level monsters quickly recover from it.
+
+- Confusion
+  Confused monsters can't move straight and can't cast spells. It's a powerful
+  detrimental effect. You can inflict it with Scrolls of Monster Confusion
+  bought in stores, or confusion/mental/chaos element attacks.
+  Has no effect on monsters that resist confusion - and most of the endgame
+  monsters do. This state expires as time passes, and high level monsters 
+  quickly recover from it.
+
+- Stunning
+  Stunned monsters occasionally fail to do anything, and have high chance of
+  failing to cast spells. It's a pretty debilitating effect.
+  Monsters can be stunned with sound/water/Ki elemental attacks and some
+  mental attacks. Generally, monsters that resist being stunned are
+  unaffected by this. However, fighting in melee using martial arts or blunt
+  weapons might stun those monsters as well.
+  This state expires as time passes, and high level monsters quickly recover
+  from it.
+
+- Fear
+  Terrified monsters run away and don't attack in melee.
+  They also prefer using teleportation/healing spells instead of offensive
+  ones. Aside from fear inducing spells, this state can be inflicted by
+  dealing enough damage. Monsters that resist fear are unaffected.
+  This state wears off as time passes or if the monster recovers health,
+  and cornered monsters might turn to fight.
+
+- Lowered attack (from v1.1.94)
+  Monsters with lowered attack deal 25% less damage in melee and cannot
+  deal critical hits. It can be inflicted with some potions and spells, or
+  with shards/nexus/oil element attacks.
+  It's not as major as slowing down, confusion, or stunning, but it can
+  affect high level monsters as well.
+  This state expires as time passes, and high level or regenerating monsters
+  recover more quickly.
+
+- Lowered defense (from v1.1.94)
+  Reduces AC by 25%, and slightly reduces resistance to bad status effects
+  and mental attacks. It can be inflicted with some potions and spells, or
+  with shards/nexus element attacks.
+  
+- Lowered magic power (from v1.1.94)
+  Reduces effective monster level for purposes of spellcasting by 25%, and
+  increases spell failure rate. It can be inflicted with some potions and
+  spells, or with nexus element or mental attacks.
+
+- Movement prevention (from v1.1.95)
+  Monsters in this state can't move or teleport, and have a low chance of
+  failing to perform any action at all. It can be inflicted with some special
+  spells or abilities.
+  It wears off as time passes, and gigantic monsters recover from it very
+  quickly.
+
+- Berserk (from v1.1.95)
+  Berserk monsters can't cast spells, but their melee damage is doubled.
+  You can use this condition either to seal enemy spellcasters, or to power
+  up your melee-oriented followers.
+  It can be inflicted by throwing a Potion of Berserk Strength or using some
+  special spells and abilities.
+  This state expires as time passes, and high level or regenerating monsters
+  recover more quickly.
+
+Attacks inflicting those detrimental condition are less effective against
+unique monsters, deitities and powerful monsters.
+In Hengband, unique monsters were almost completely resistant to status
+effects, but in Gensouband, they're slightly more effective.
+Devices of Slow/Confuse Monsters might be more useful in early game.
+
+Also, some unique classes can inflict their own temporary effects not
+mentioned above.'
+
 
 ***** <Attack_type>
 === About Elements ===
 
-Keine - 'Spells and abilities in Hengband use various elements.
+Keine - 'Spells and abilities in Gensouband use various elements.
 Let's go over elements that will be mainly used by enemy attacks.
 I may repeat something I've already explained during talking about monster
 special abilities and resistances, but it's very important, so let's examine
@@ -648,10 +777,11 @@ it once more.
   invulnerability.
 
 - Hellfire
-  Extremely dangerous attack. Cannot be resisted, and will deal damage to any
-  race. If you're a Celestial, Lunarian or Moon-Rabbit, you will take more
-  damage.
-  There are very few enemies that can use this attack.
+  Extremely dangerous attack. Cannot be resisted through equipment, and will
+  deal damage to any race. If you're a Celestial, Lunarian or Moon-Rabbit, you
+  will take more damage.
+  There are very few enemies that can use this attack, and they appear on
+  lowest levels.
 
 Again, it's essential that you avoid fighting enemies who can use attacks
 you don't resist.'
@@ -708,16 +838,19 @@ Here's several methods to gain advantage in early game:
 - Scrolls of Holy Chant
   If you read it, you become blessed, raising your defense and accuracy.
   They're sold in stores.
+
 - Scrolls of Monster Confusion
   If you read it, you'll confuse an enemy with your next physical attack.
-  It's effective against most of early game monsters. The scrolls are sold
-  in stores.
-- Sake and other alcohol
+  It's effective against most of early game monsters that don't resist 
+  confusion. Those scrolls are sold in stores.
+
+- Sake/Antidepressant
   If you drink it, you become heroic, raising your defense, accuracy,  HP,
   and making you resistant to fear.
   However, it's dangerous to drink too much.
   In particular, if you find some very strong alcohol that's not available in
   stores, you should refrain from drinking it.
+
 - Potions of Speed
   It's your trump card in early game. If you drink it, you'll start moving
   twice as fast.
@@ -726,16 +859,29 @@ Here's several methods to gain advantage in early game:
   Since quite a few of those are lying around on dungeon floor, it's a good
   idea to bring scrolls or staves of Object Detection with you.'
 
---- Crossbows ---
+- Status-inflicting Devices
+  Magic devices of Slow/Confuse Monster.
+  In earlier versions, they were completely ineffective agains high level or
+  unique monsters; starting from v1.1.90, they can help you against early
+  game enemies.
+
+- Stat-decreasing Potions
+  Potions of Weakness/Clumsiness/etc that decrease your stats if you drink
+  them. Starting from v1.1.94, they can temporarily weaken monsters if you
+  throw them.
+
+--- Torches and Crossbows ---
 Keine - 'If you're not good at physical combat and don't have powerful spells,
-I can recommend using a crossbow.
+I can recommend using a crossbow or torches.
+Torches are light sources, but they also can be thrown with 'v' command,
+dealing extra damage from fire.
 It's comparatively easy to land a hit with a crossbow even if your skill is
 low. If you use Scrolls of Phase Door to keep your distance, you should be
 able to comfortably fight strong enemies.
 That being said, that tactic is mainly for pushing through early game.'
 
 --- Teleport Away ---
-Keine - 'Let me teach you about the most powerful spell in Hengband.
+Keine - 'Let me teach you about the most powerful spell.
 It's called 'Teleport Away'.
 If you use a 'Wand of Teleport Away', a beam will shoot out, forcibly
 teleporting any monsters that get hit.
@@ -754,8 +900,9 @@ resistances; setting up a proper combination of items can be difficult.'
 --- Tunnelling Tactics ---
 Keine - 'You're not reckless enough to keep fighting while being
 surrounded by strong enemies in an open area, right?
-While the basic tactic is to retreat into a corridor and fight them one by
-one, the enemies from behind still will be using spells and breath attacks.
+While the basic tactic against multiple enemies is to retreat into a corridor
+and fight them one by one, the enemies from behind still will be using spells
+and breath attacks.
 In this case, dig a zig-zagging corridor with a Wand of Stone to Mud.
 Like this:
 
@@ -788,9 +935,9 @@ You can't use it with ball spells or curses.'
 be able to target)
 
 --- Poison Needle ---
-Keine - 'There's a weapon called Poison Needle from a certain famous JRPG.
-If you wield it and hit an enemy, you might be able to defeat them in a single
-strike - even a huge dragon with 5000 HP.
+Keine - 'There's a weapon called Poison Needle from a certain famous JRPG
+series. If you wield it and hit an enemy, you might be able to deal 9999
+damage in a single strike - enough to dispose of a huge dragon with 5000 HP.
 You can go to Dragon's Lair and hunt for powerful enemies like wyrms.
 If you hit several times and it doesn't work, retreat before your HP runs out.
 If you use it well, you can get several ten thousands experience points and
@@ -800,14 +947,13 @@ means of double resistance and detection.
 
 Some people hate this 'scumming' tactic, but it's not against the rules.
 If you're stuck in midgame, try it out at your own risk.
-I also should mention that poison needles won't work against unique monsters.
-Also, in this mod, maximum damage you can deal with it is 9999.'
+I also should mention that poison needles won't work against unique monsters.'
 
 --- Stat Gain ---
 Keine - 'While preparing your equipment is important, you'll have trouble
 getting past midgame unless you raise your stats as well.
 In order to raise them, you have to search for potions like 'Potion of 
-Strength' and drink them.
+Strength/Intelligence' and drink them.
 They're generally found around dungeon level 30-45.
 Enemies that drop only 'good items' won't drop consumables.
 If you keep using poison needles in Dragon Lair, you might end developing
@@ -832,16 +978,17 @@ How do you read it? Feel free to shout 'Destruction!'.
 
 Once you use *Destruction*, the area in radius of 12-17 grids around you
 will be destroyed. All monsters and items will diseappear, and terrain will
-be turned to either open floor or walls. The monsters caught up in the blast
-are probably thrown to the lower or upper dungeon level. Any unique monsters
-caught in that area of effect still can appear later in the game.
+be turned to either open floor or walls. The grid you're standing on is not
+affected. The monsters caught up in the blast are probably thrown to the 
+lower or upper dungeon level. Any unique monsters caught in that area of 
+effect still can appear later in the game.
 You can use *Destruction* from scrolls, staves or some spells. Realms of
 Chaos, Divination and Exorcism have spells with this effect.
 
 Since scrolls are consumables, you'll be relying on staves, but Staves of
-*Destruction* are difficult to use. Warriors, Samurai, Engineer and other
-classes who aren't proficient with magic devices will have a hard time on
-lower floors without raising that skill with equipment.'
+*Destruction* are difficult to use. Warriors, Samurai and other classes who
+aren't proficient with magic devices will have a hard time on lower floors
+without raising that skill with equipment.'
 
 --- Emergency Escapes ---
 Keine - 'On lower levels, there are many enemies with powerful ranged
@@ -857,7 +1004,8 @@ once again.
 They're sometimes being sold at the Pawn Shop; carry several of them with you
 when exploring lower levels.
 
-Scrolls of *Destruction* also can be used as an emergency escape.
+Scrolls of *Destruction* also can be used as an emergency escape, though
+they're fairly rare.
 What about Staves of *Destruction*? You might fail to properly use a staff or 
 a rod. If you're proficient with magic, you'll have low failure rate even when
 using complex magic devices, but you still might get a game over if you get
@@ -873,7 +1021,7 @@ keep those resistances in mind as well.'
 Keine - 'There are people called 'Lords of Amber'.
 They look like ordinary humans, but they're very long-lived, extremely
 resilient, and can walk across parallel worlds at will.
-There are twelve Lords of Amber in Hengband.
+There are twelve Lords of Amber in Gensouband.
 They're going to be a major obstacle at the end of your adventure.
 
 Is there anyone who's thinking rude things like 'Who are those invincible
@@ -881,7 +1029,7 @@ OCs'? Let me explain, just in case.
 Lords of Amber are a royal family appearing in Roger Zelazny's work, the 
 Chronicles of Amber series.
 They were added in Zangband (which was derived from Angband), and they
-occupy an important position in the original Hengband as well.
+occupy an important position in Hengband as well.
 
 Now that we have that out of the way...
 All of the Lords of Amber are pretty strong, but what's most terrifying about
@@ -895,5 +1043,3 @@ this will prevent you from being turned into a statue.
 High level Shrine-Maidens will naturally have enough magic protection,
 and other classes might guarantee it by using equipment with anti-magic.
 By the way, defeating Lords of Amber slightly raises your score.'
-
-

@@ -20,24 +20,22 @@ you've cleared the game. You can't go any further. Also, your score will be
 extremely lowered.
 
   "Normal" is normal mode. That being said, it's notably easier compared
-to original Hengband. Enemy health is only 75% of the original. Also,
-enemies cannot cast spells or use breath attacks several times in a row
-without giving you a turn. You're free to attack without worrying too much
-about what elements you're vulnerable to.
+to Hengband. Enemy health is only 75% of the original. Also, enemies cannot
+cast spells or use breath attacks several times in a row without giving you
+a turn. You're free to attack without worrying too much about what elements
+you're vulnerable to.
 Once you defeat Yukari Yakumo in this mode, it counts as you having cleared
 the game, but you still can go further on. If you play carefully enough, you
 should clear this difficulty with comparative ease.
 
-  "Hard" is around the same level as original Hengband.
+  "Hard" is, more or less, around the same level as Hengband.
 Enemies learn what elements are effective against you and won't use
 ineffective attacks. You also might get hit by multiple powerful attacks in
 a row from a fast-moving enemy. There also will be strong enemies that easily
 can defeat you in no time if you're careless.
 Score is doubled compared to Normal.
-If you're an experienced Hengband player, you probably won't be satisfied
-with playing on a lower difficulty.
 
-  "Lunatic" is close the the 'Nightmare Mode' from original Hengband.
+  "Lunatic" is close the the 'Nightmare Mode' from Hengband.
 All enemies get +5 to speed, and their health is doubled, with an upper limit
 of 30000. They always start out awake and know all of your vulnerabilities
 from the start. That's not all; powerful enemies might be lurking around
@@ -58,7 +56,9 @@ in completely unreasonable ways. Score is multiplied eight times compared to
 Normal difficulty.
 
   "Extra" is an extremely special game mode with its own unique rules.
-Explaining it would take too long, so we'll do it somewhere else.
+Explaining it would take too long, so we'll do it somewhere else. Handling
+consumables and equipment will be far more important in this mode; it's a
+difficulty you can attempt after clearing Hard mode several times.
 Score is quadrupled compared to Normal difficulty.'
 
 
@@ -71,8 +71,7 @@ abilities.
 
 We'll start with the 6 primary stats:
 Strength, Intelligence, Wisdom, Dexterity, Constitution, and Charisma.
-Their interpretation and role have changed slightly from original Hengband,
-so keep that in mind.
+Their interpretation and role have changed slightly from Hengband.
 
 - "Strength" is your physical strength.
 It affects your combat attack power, equipment weight you're comfortable with,
@@ -85,7 +84,7 @@ higher if you're wearing too heavy equipment, mages can't neglect it either.
 It affects spell failure rate, amount of spells you can learn, success rate
 for magic devices and so on.
 It's very important for spellcasters, and warriors might not need it as much.
-In contrast to original Hengband, classes like Shrine Maidens still use 
+In contrast to Hengband, 'priestly' classes like Shrine Maidens still use 
 Intelligence to calculate spell failure rate.
 
 - "Wisdom" is your spiritual power and faith.
@@ -94,8 +93,8 @@ It's not that important for pure warriors, but other classes will need it.
 In particular, it's directly linked to combat capability for pure mages.
 
 - "Dexterity" is both your manual dexterity and agility in general.
-It affects armor class, amount of weapon attack per round, amount of attacks
-per round in martial art combat, disarming skill, etc.
+It affects armor class, amount of weapon attack per round, disarming skill,
+and so on.
 It's important for warrior classes, but spellcasters don't need it as much.
 If it's too low, you might end up crying after a thief steals something
 important from you.
@@ -114,8 +113,7 @@ abilities that increase in power depending on your charisma.
 After all, "Danmaku is a contest of beauty".
 
 Those stats will occasionally increase as you level up.
-They also might increase if you wear a powerful piece of equipment or drink
-a magical potion.
+They also might increase if you drink a magical potion.
 Maximum stat value, without taking race/class/personality/equipment
 modifiers into account, is 30.
 With those modifiers, the maximum is 40; there are some special ways to
@@ -136,7 +134,7 @@ Come back once you've reached around dungeon level 30.
 
 - "Stealth" is the ability to avoid waking up enemies.
 If your stealth is low, nearby enemies will keep waking up and coming
-after you, making dungeon exploration harder.
+after you, likely making dungeon exploration harder.
 Stealth is affected by your race, class and equipment.
 There are very few classes that increase stealth as they level up.
 
@@ -163,12 +161,13 @@ In order to dig up treasures buried in walls, you have to raise this parameter
 by, for example, wielding a digging tool.
 Past midgame, it's not going to be very useful unless it's high enough.
 
-- "Searching" is the ability to search the dungeon.
+- "Searching" is the ability to discover hidden things.
 If it is high, you'll have easier time discovering traps and hidden doors,
 and you'll be able to quicker get a general feeling about the level.
 Also, you'll find more special items (like materials) in dungeons.
 You can't have too much of Searching, but you shouldn't be too concerned
 with having low Searching either.
+It's going to be more important on Extra difficulty.
 
 - "Magic Devices" is the ability to use magic devices.
 It affects your success rate of using staves/wands/rods or activating
@@ -188,12 +187,14 @@ If you manage to resist the effect, you take no damage.
 There will be many powerful attacks past midgame, so you never can have
 enough of this skill.
 Its value mainly depends on you race, class, level, and wisdom.
-You also can raise it with some special abilities or equipment with
-'anti-magic'. Also, in this mod, it is slightly increased if you're
-temporarily blessed.
+Some equipment can raise your protection from magic, and being temporarily
+'blessed' will raise it as well.
+Equipment with 'anti-magic' also boosts it, but it makes you unable to use
+magic yourself.
 
 - "Disarming" is the ability to disarm traps and unlock doors.
-Mainly depends on your race, class, level and dexterity.
+Mainly depends on your race, class, level and dexterity. Some equipment can
+raise your disarming skill.
 However, it's not that useful past midgame. It's faster and safer to disarm
 using magic devices.
 
@@ -213,8 +214,8 @@ will have very different amounts of HP.
 
 - "MP" should be obvious as well. You can't cast spells if you don't have
 enough.
-Amount of MP depends mainly on level, class, and wisdom. Your race's wisdom
-modifier also affects it somewhat.
+Amount of MP depends mainly on level, class, and wisdom. Your race and class
+wisdom modifier also affects it somewhat.
 Spells usually use MP, but some class special abilities might use HP instead.
 Racial powers mainly use MP; if you don't have enough, they use HP as well.
 Even warriors have a bit of MP, but they probably aren't going to use it
@@ -284,18 +285,14 @@ them again.'
 ***** <UniqueClass>
 === What are Unique Classes? ===
 
-Keine - 'There are other special classes.
+Keine - 'There are other special classes specific to Gensouband.
 They're the girls of Gensoukyou known due to many incidents.
 If you're one of them, say your name.
 They have their own special class, and their race, gender and name are fixed.
-By the way, you change change your class name in-game through 'C' command.
-Of course, there's no such thing in original Hengband. 
-They're called 'unique classes' for convenience.
-
-As of v1.1.17, all unique classes are implemented.
-Aside from people with no combat skills like Akyuu or Rinnosuke, you can
-play as any of the characters.
-New classes will be added as new characters will appear in further works.'
+Those classes have their own parameters, magic realms, special abilities and
+other unique characteristics; they're generally called 'unique classes'.
+There are over 100 unique classes right now, and the amount is going to
+increase as new Touhou Project material comes out.'
 
 ***** <Outsider>
 === Who are Outsiders? ===
@@ -316,6 +313,9 @@ Personalities like this slightly affect your parameters. Well, pick the one
 you like.
 The 'Munchkin' personality ridiculously powers you up in all aspects; think
 of it as a training mode.
+
+Several unique classes can choose a specific unique personality, which can
+significantly change their parameters and special abilities.
 
 There also are some other obviously weird personalities, but I can't recommend
 them to new players.'
@@ -342,11 +342,12 @@ Sorcery Arts has the Transformation, Darkness, Necromancy and Chaos realms.
 Each realm has 4 spellbooks - from the 1st volume to the final one, and each
 of the spellbooks has 8 spells in it.
 
-Those who are familiar with base version probably already understand that,
-but this mod greatly changes the magic realms.
-Chaos is basically the same as the original Chaos realm.
-Life, Nature and Exorcism are 50%+ the same as original realms.
-Summoning resembles Trump realm, Enchantment resembles Craft realm.
+Those who are familiar with Hengband probably already understand that,
+but Gensouband greatly changes the magic realms.
+Chaos is basically the same as Hengband's Chaos realm.
+Life and Nature are 50%+ the same as the corresponding Hengband realms.
+Summoning resembles Trump realm, Enchantment resembles Craft realm, Exorcism
+resemebles Crusade realm.
 Many of the other realms have been greatly changed or replaced by new ones.
 
 Out of those 12 realms, you'll be able to study only one of them you choose.
@@ -357,7 +358,7 @@ all spells you've learned from your previous realm.
 There's a limit on how many spells you can learn in total, so I don't
 recommend changing your realms without a good reason. Also, if your second
 realm belongs to a different major realm than your first, its spells will
-be very difficult for you to cast. Keep that in mind.
+be harder for you to cast. Keep that in mind.
 
 Classes have their own aptitudes to the magic realms.
 Let's take a look at an Explorer and a Mage studying realm of Elements.
@@ -399,9 +400,7 @@ If you don't like it, press 'r' key after finishing allocation to reroll.
 It's similar to a certain famous dungeon crawler game, but it's a bit hard
 to get a good amount of bonus points here. Getting 25 will be good enough.
 If it's annoying, you can use a birth option to set bonus points to a fixed
-amount.
-
-By the way, the largest amount during testing was 41.'
+amount of 20. It also slightly raises your score.'
 
 ***** <BackgroundEditor>
 === Background Editor ===
