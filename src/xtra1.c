@@ -2637,10 +2637,8 @@ static void print_monster_line(int x, int y, monster_type* m_ptr, int n_same){
 	int endx, endy;
 
 	Term_gotoxy(x, y);
-	if(!r_ptr) {
-		Term_erase(x, y, Term->wid);
-		return;
-	}
+	Term_erase(x, y, Term->wid);
+	if(!r_ptr) { return; }
 	//Number of 'U'nique
 	if(r_ptr->flags1&RF1_UNIQUE)
 	{//unique
