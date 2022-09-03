@@ -342,7 +342,8 @@ W:3:10:0:0:0:0
 B:BITE:DISEASE:1d10
 F:WILD_TOWN | WILD_ALL | WILD_ONLY
 F:RAND_50 | ANIMAL | GEN_WARLIKE
-D:$...
+D:$This wild dog staggers around, foaming at its mouth. You feel it is
+D:$extremely dangerous...
 D:泡を吹いてふらつく野犬だ。非常に危険そうな感じがする…
 
 N:10:花妖精
@@ -356,6 +357,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | TAKE_ITEM
 F:RES_HOLY
 S:1_IN_6
 S:DANMAKU
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is holding a flower.
 D:幻想郷の至る所に出現する自然の具現だ。花を抱えている。
 
 N:11:茸妖精
@@ -369,6 +372,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | TAKE_ITEM
 F:RES_HOLY
 S:1_IN_6
 S:DANMAKU
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is holding a mushroom.
 D:幻想郷の至る所に出現する自然の具現だ。キノコを抱えている。
 
 
@@ -383,6 +388,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | TAKE_ITEM
 F:RES_HOLY
 S:1_IN_5
 S:DANMAKU
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is holding a large sunflower.
 D:幻想郷の至る所に出現する自然の具現だ。大きなヒマワリを抱えている。
 
 
@@ -398,6 +405,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | TAKE_ITEM
 F:RES_HOLY
 S:1_IN_5
 S:DANMAKU
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is larger than usual.
 D:幻想郷の至る所に出現する自然の具現だ。やや大きい。
 
 
@@ -433,6 +442,8 @@ F:FORCE_SLEEP | CAN_FLY | FEMALE | FAIRY | FRIENDS
 F:OPEN_DOOR | GEN_NEUTRAL | DROP_60
 S:1_IN_5
 S:DANMAKU | CAUSE_1
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$This fairy is cosplaying a zombie for some reason.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:なぜかゾンビのコスプレをしているノリのいい妖精だ。
 
@@ -449,6 +460,8 @@ F:OPEN_DOOR | GEN_NEUTRAL| WILD_ALL | TAKE_ITEM
 F:FORCE_SLEEP | RES_HOLY
 S:1_IN_4
 S:DANMAKU | BLINK | CONF | S_KIN | MISSILE | BO_FIRE | BEAM_LITE
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is pretty large and powerful, for a fairy.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:妖精の割には体が大きく力も強い。
 
@@ -482,6 +495,8 @@ W:3:1:0:1:10:19
 B:HIT:HURT:1d3
 F:RAND_50 | KWAI | FRIENDS
 F:FORCE_SLEEP | GEN_NEUTRAL 
+D:$Teacups and other utensils are lying on the ground.
+D:$Is it just your imagination, or are they walking around on tiny legs?
 D:地面に茶碗や雑具が転がっている。
 D:足が生えて歩いているように見えるのは気のせいか？
 
@@ -493,6 +508,9 @@ W:12:1:0:40:300:52
 B:HIT:HURT:1d8
 F:RAND_25 | KWAI
 F:FORCE_SLEEP | GEN_NEUTRAL 
+D:$Old tools that have obtained sentience and became youkai, they are known
+D:$to haunt people. You should give proper memorial service to tools
+D:$you're no longer using before they end up like this.
 D:古い道具が自我を持って動く妖怪だ。時には人に祟ることもある。
 D:使い終わった道具はこうなる前にちゃんと供養しよう。
 S:1_IN_6
@@ -24893,6 +24911,9 @@ F:OPEN_DOOR | GEN_KWAI | TAKE_ITEM | SELF_DARK_1
 F:FORCE_SLEEP | IM_FIRE | RES_DARK | RES_NETH | HURT_HOLY
 S:1_IN_3
 S:DANMAKU | BO_FIRE | SCARE | DARKNESS
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$Looks like this one came from Makai; she's wearing black clothes, and
+D:$her wings are glowing red and black.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:魔界から来たらしく、暗い色の服を着て赤黒く光る羽を生やしている。
 
@@ -25047,6 +25068,9 @@ F:FORCE_SLEEP | CAN_FLY | FEMALE | FAIRY | FRIENDS
 F:OPEN_DOOR | GEN_NEUTRAL | DROP_90 | WILD_WOOD | WILD_ONLY
 S:1_IN_3
 S:DANMAKU | CONF | TELE_AWAY
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She lives in a bamboo grove and enjoys playing pranks on visitors,
+D:$leading them astray.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:竹林に棲み、訪れるものを惑わせて楽しむ悪戯者だ。
 
@@ -25224,6 +25248,8 @@ F:IM_FIRE | IM_COLD | FORCE_SLEEP
 F:RES_NETH | RES_DARK | NO_FEAR | STAY_AT_HOME3
 S:1_IN_4
 S:DANMAKU | SCARE | BO_FIRE | BA_FIRE | CONF | BO_NETH
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$Fairies live in Hell, too; they enjoy bullying sinners there.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:地獄にも妖精は棲んでおり、地獄の罪人をいじめるのが楽しみのようだ。
 
@@ -25241,6 +25267,8 @@ F:RES_LITE | RES_DARK | IM_COLD | IM_POIS | IM_FIRE
 F:RES_HOLY | NO_FEAR | STAY_AT_HOME3
 S:1_IN_4
 S:DANMAKU | BEAM_LITE
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$There's a few fairies that live on the lunar surface as well.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:月面にも僅かながら妖精が住んでいる。
 
@@ -25260,6 +25288,9 @@ F:RES_HOLY | NO_FEAR | NO_STUN
 S:1_IN_3
 S:DANMAKU | BEAM_LITE | BA_LITE | BO_HOLY | BO_PLAS | BO_ICEE | BLINK 
 S:TORNADO
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$This fairy is a pure embodiment of life force, powerful enough to face
+D:$a high ranking oni.
 D:幻想郷の至る所に出現する自然の具現だ。
 D:純化された妖精は生命力の塊であり鬼神に等しい力を持つという。
 
@@ -25272,6 +25303,7 @@ B:EXPLODE:CHAOS:16d16
 F:CAN_FLY | SELF_DARK_2 | ATTR_MULTI
 F:WEIRD_MIND | STAY_AT_HOME3
 F:RES_CHAO | NO_FEAR | NO_CONF | NO_SLEEP | NONLIVING
+D:$Shards of nightmares that are flying around in Dream World like meteors.
 D:夢の世界を隕石のように飛び交う悪夢のかけらだ。
 
 
@@ -25321,6 +25353,8 @@ W:5:7:0:30:0:0
 B:EXPLODE:PARALYZE:1d6
 F:CAN_FLY | RAND_25 | WILD_ALL | FORCE_MAXHP
 F:NO_FEAR | NO_CONF | NO_SLEEP | NO_STUN | NONLIVING
+D:$It looks like a soap bubbles floating in midair; that's a dream someone
+D:$was supposed to see. Touching it might drag you into the Dream World.
 D:シャボン玉のようなものが漂っている。これは誰かが見るはずだった夢だ。触ると夢の世界に誘われる。
 
 N:1290:豹
@@ -25332,6 +25366,7 @@ B:CLAW:HURT:1d8
 B:CLAW:HURT:1d8
 F:BASH_DOOR | WILD_WOOD | WILD_GRASS
 F:ANIMAL
+D:$A large ferocious feline with spotted yellowish-brown fur.
 D:大型のネコ科の猛獣だ。薄い黄褐色に特徴的な黒い斑点の入った毛皮に包まれている。
 
 N:1291:『足売り婆』
@@ -25371,6 +25406,7 @@ B:HIT:HURT:1d1
 F:VARIABLE
 F:FEMALE | FORCE_MAXHP | UNIQUE2
 F:HUMAN | GEN_FRIENDLY
+D:$She is your master, you must protect her at all costs.
 D:あなたの主だ。あなたは何としても彼女を守らないといけない。
 
 
@@ -25895,6 +25931,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | DROP_90
 F:RES_HOLY | HURT_COLD
 S:1_IN_4
 S:DANMAKU | BLINK
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She has brightly colored butterfly wings.
 D:幻想郷の至る所に出現する自然の具現だ。この妖精は色鮮やかな蝶の羽根を生やしている。
 
 N:1326:梅林の妖精
@@ -25908,6 +25946,8 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_WOOD | DROP_90
 F:RES_HOLY | RES_WATE
 S:1_IN_4
 S:DANMAKU | CONF
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$She is capable of making rain go on for longer periods.
 D:幻想郷の至る所に出現する自然の具現だ。この妖精は雨を長引かせる力を持っている。
 
 N:1327:エンシェントシップ
