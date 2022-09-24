@@ -23322,6 +23322,8 @@ F:EMPTY_MIND | OPEN_DOOR | FORCE_MAXHP | FRIENDS
 F:STAY_AT_HOME2
 F:IM_FIRE | IM_ELEC | IM_COLD | IM_POIS | GEN_NEUTRAL
 F:NO_CONF | NO_SLEEP | NO_FEAR | NONLIVING
+D:$A doll manipulated by Alice. They move around so freely, it's hard to believe they're being
+D:$controlled by strings.
 D:アリスの操る人形だ。糸で操作されているとは思えないほど各々が自由に動く。
 
 
@@ -23442,6 +23444,7 @@ F:DROP_3D2 | OPEN_DOOR | BASH_DOOR | DRAGON | UNDEAD | ANG_CHAOS
 F:RES_NETH | RES_DISE | NO_FEAR | NO_STUN | REGENERATE
 F:IM_COLD | IM_POIS | HURT_HOLY
 F:NO_CONF | NO_SLEEP | RIDING
+D:$Remains of a dragon that have been brought back as an undying being by magic.
 D:魔法によって蘇り不死の存在になったドラゴンの骸だ。
 
 N:1171:『Deathspit』
@@ -23454,6 +23457,7 @@ F:ANIMAL | NO_CONF | NO_SLEEP | NO_FEAR
 F:IM_ELEC | IM_ACID | IM_FIRE |
 S:1_IN_1
 S:BR_ACID 
+D:$An extremely dangerous hound, its unending breath has brought down many adventurers.
 D:非常に危険なハウンドだ。その尽きることのないブレスは多くの冒険者を葬ってきた。
 
 N:1172:『Plaguewrath』
@@ -23466,6 +23470,7 @@ F:ANIMAL | NO_CONF | NO_SLEEP | NO_FEAR
 F:IM_ACID | IM_FIRE | IM_POIS | RES_LITE | RES_DARK
 S:1_IN_1
 S:BR_POIS
+D:$An extremely dangerous hound, its unending breath has brought down many adventurers.
 D:非常に危険なハウンドだ。その尽きることのないブレスは多くの冒険者を葬ってきた。
 
 N:1173:竜牙兵
@@ -24073,6 +24078,9 @@ S:BA_FORCE | CONF | BLIND | BLINK | CAUSE_4 | TORNADO | HASTE
 S:BA_WATE | BA_LITE | BA_NETH | S_HI_UNDEAD | S_DRAGON | S_KIN | TELE_HI_APPROACH
 S:TPORT | TELE_TO | BA_DARK | BRAIN_SMASH | TELE_AWAY | HAND_DOOM | BA_DISI
 S:FIRE_STORM | ICE_STORM | THUNDER_STORM | ACID_STORM | PSY_SPEAR
+D:$One of the kishin chiefs from Hell who commands oni and shinigami.
+D:$It normally does not leave Higan, but it might come to this world to bring judgment upon
+D:$those who unnaturally prolong their lifespan.
 D:地獄で鬼や死神を束ねる鬼神長の一人だ。
 D:普段は彼岸から出てこないが、寿命を不正に延ばす者を直々に裁くために現世に来ることがある。
 
@@ -24090,6 +24098,7 @@ F:FORCE_MAXHP | GEN_NEUTRAL
 F:ANIMAL | 
 S:1_IN_2
 S:BLINK | TELE_APPROACH
+D:$A new monster imported from the Outside World. Moves quickly and drains blood of livestock.
 D:外界から輸入？されてきた新顔の怪物だ。素早い動きで家畜の血を吸う。
 
 N:1208:宙に浮かぶ魔法陣(赤)
@@ -24318,6 +24327,8 @@ F:NO_FEAR | NO_CONF | NO_SLEEP | RES_HOLY | RES_WATE
 S:1_IN_3
 S:BO_MANA | CAUSE_4 | HAND_DOOM | BLINK | TORNADO | TELE_HI_APPROACH | BA_POLLUTE | BO_WATE
 S:TPORT | BA_DARK | BA_NETH | BRAIN_SMASH | HASTE | S_UNDEAD | S_HI_UNDEAD
+D:$A raging deity. It will grant you blessings if you worship it properly, and will have no
+D:$mercy if you go against it.
 D:荒ぶる神格だ。定められた手段で崇め奉れば加護を授けてくれるが、逆らえば恐ろしい目に遭わされることだろう。
 
 
@@ -24410,6 +24421,8 @@ B:CRUSH:HURT:3d6
 B:INSULT:CONFUSE
 F:TAKE_ITEM | OPEN_DOOR | FEMALE | DROP_3D2 | GEN_KWAI
 F:KWAI | ANIMAL | TANUKI | HURT_HOLY | CAN_FLY
+D:$A tanuki with youkai power. It can transform into humans, and into other creatures
+D:$as well.
 D:妖力を得た狸だ。人に変身できるし人以外にも変身できる。
 
 N:1229:妖怪古狸
@@ -24427,6 +24440,7 @@ F:KWAI | ANIMAL | TANUKI | CAN_FLY
 F:IM_FIRE | IM_COLD | RES_DARK | HURT_HOLY | RES_TELE | NO_CONF
 S:1_IN_6
 S:BLIND | CONF | SCARE | HOLD | BLINK | TPORT
+D:$A long-lived, powerful youkai tanuki.
 D:長く生きて力を蓄えた強力な妖怪狸だ。
 
 N:1230:化け狸十変化『二ッ岩　マミゾウ』
@@ -24641,6 +24655,7 @@ B:BITE:POISON:3d12
 F:WILD_SWAMP
 F:BASH_DOOR | IM_POIS | RIDING | WILD_OCEAN | WILD_SHORE
 F:ANIMAL | NO_CONF | NO_SLEEP | CAN_SWIM | GEN_NEUTRAL
+D:$A large reptile with a strong tail, sharp claws and poisonous bite.
 D:大型の爬虫類だ。強靭な尻尾、鋭い爪、そして毒のある牙を持っている。
 
 N:1247:強い亡霊
@@ -24675,6 +24690,7 @@ F:BASH_DOOR | FLAG_50F
 F:ANIMAL | RES_DISE | NO_CONF | NO_SLEEP
 S:1_IN_5 | 
 S:BR_DISE
+D:$A dull-colored canine form. Vegetation withers and water turns muddy as it passes through.
 D:くすんだ色をした犬のような塊だ。
 D:その塊がのたうつように進むと、周囲の植物は見る間に枯れ水たまりは濁っていく。
 
@@ -24694,6 +24710,8 @@ F:BASH_DOOR | FLAG_50F
 F:ANIMAL | RES_HOLY | HURT_HELL | NO_CONF | NO_SLEEP
 S:1_IN_5 | 
 S:BR_HOLY
+D:$A canine form radiating divine light. It considers you to be impure, and seeks to
+D:$eliminate you.
 D:神々しい光を放つ、犬のような形をした何かだ。
 D:どうやらあなたを不浄なものとみなし、抹消しようとしているらしい。
 
@@ -24712,6 +24730,8 @@ F:BASH_DOOR | FLAG_50F
 F:ANIMAL | NO_CONF | NO_SLEEP
 S:1_IN_5 | 
 S:BR_DISI
+D:$Suddenly, the walls and floor get riddled with holes, as a silhouette of a hound
+D:$leaps forth...
 D:突如、壁や床にボコボコと穴が開いた。飛びかかってくる犬のシルエットのような形だ・・
 
 
@@ -24945,6 +24965,7 @@ F:SELF_DARK_1 | STAY_AT_HOME2 | IM_FIRE | RES_DARK | RES_NETH
 F:ONLY_GOLD | DROP_2D2 |
 S:1_IN_5
 S:DANMAKU
+D:$A raven born from the darkness of Hell. It is very rarely seen outside of Former Hell.
 D:地獄の闇から生まれた鴉だ。旧地獄の固有種らしい。
 
 
@@ -25033,7 +25054,7 @@ D:$but Kaguya made it be reborn as a vanguard object.
 D:月都万象展に設営されたステージだったはずだが、輝夜の手により前衛オブジェとして生まれ変わった。
 
 N:1270:人面犬
-E:Rabid dog
+E:Human-faced dog
 G:C:U
 I:110:10d10:30:100:0
 W:7:100:0:1:0:0
@@ -25055,6 +25076,7 @@ F:WILD_SWAMP | WILD_WOOD
 F:BASH_DOOR | IM_POIS | HURT_HOLY | RIDING
 F:ANIMAL | KWAI | NO_SLEEP | CAN_SWIM | GEN_KWAI
 F:STAY_AT_HOME1
+D:$A large snake that can swallow a human whole. It loves sake a lot.
 D:人間を一呑みにしてしまうような大蛇だ。酒が大好きらしい。
 
 N:1272:竹林の妖精
@@ -25800,6 +25822,8 @@ F:IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS |
 F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN | NONLIVING | SELF_LITE_2
 S:1_IN_2 | 
 S:DANMAKU
+D:$A huge glowing orb that moves around as it shoots bullets, it follows the will
+D:$of its caster.
 D:巨大な光球が弾を放ちながら迫ってくる。使用者の意思に従って動いているようだ。
 
 N:1318:判読眼のビブロフィリア『本居 小鈴』
@@ -25959,6 +25983,7 @@ F:NEVER_BLOW| COLD_BLOOD | FORCE_MAXHP
 F:STUPID | EMPTY_MIND | RIDING | ONLY_RIDING
 F:CAN_FLY
 F:HURT_ROCK | NO_FEAR | NO_STUN | NO_CONF | NO_SLEEP | IM_COLD | IM_POIS | RES_WATE
+D:$A small boat flying through the air. It's fun to ride.
 D:空を飛ぶ小舟だ。それに乗ると楽しい。
 
 
@@ -25969,6 +25994,7 @@ I:110:8d16:18:20:20
 W:8:2:0:40:0:0
 B:BITE:HURT:3d3
 F:ANIMAL | AQUATIC | WILD_OCEAN | RES_WATE | GEN_NEUTRAL
+D:$A species of ancient fish that still exists to this day.
 D:現存する古代魚の一種だ。
 
 
@@ -25981,6 +26007,7 @@ B:CRUSH:HURT:2d20
 B:ENGULF:DROWN:8d8
 F:RAND_25 | RES_WATE
 F:ANIMAL | AQUATIC | WILD_OCEAN | WILD_ONLY | GIGANTIC | GEN_NEUTRAL
+D:$An ancient fish in Sanzu River that can swallow a human in a single gulp.
 D:人間を一呑みにしてしまうような三途の川の巨大な古代魚だ。
 
 
@@ -25994,6 +26021,7 @@ B:CRUSH:SUPERHURT:10d10
 F:WILD_OCEAN |
 F:IM_COLD | IM_POIS | RES_WATE | ANIMAL | AQUATIC | GIGANTIC | GEN_NEUTRAL
 F:NO_CONF | NO_STUN | NO_FEAR | RIDING | WILD_OCEAN
+D:$A prehistoric terror living in Sanzu River.
 D:それは三途の川に棲む有史以前の恐怖だ。
 
 N:1331:海龍

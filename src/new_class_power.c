@@ -1132,6 +1132,8 @@ cptr do_cmd_class_power_aux_takane(int num, bool only_info)
 
 //v1.1.87 カード売人
 //カード販売所のリストにmagic_num2[0-9]を、カード買取の売却済みフラグにmagic_num1[0-3]を使っている.
+//また「資本主義のジレンマ」による価格乱高下係数をmagic_num2[10-19]に記録
+
 class_power_type class_power_card_dealer[] =
 {
 	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("カード収納", "Store Cards"),
@@ -9489,7 +9491,7 @@ class_power_type class_power_kaguya[] =
 		_("隣接した壁を永久壁に変化させる。クエストダンジョンでは使えない。",
         "Changes adjacent walls into permanent walls. Cannot be used in quests.")},
 	{40,40,75,FALSE,TRUE,A_INT,0,0,_("須臾の術Ⅰ", "Manipulate Instantaneous I"),
-		_("指定した場所に一瞬で現れる。テレポート妨害を無視するが現在値から既知の通路が通っていない場所には移動できない。",
+		_("指定した場所に一瞬で現れる。テレポート妨害を無視するが未知の場所や通路が通っていない場所には移動できない。",
         "Instantly move to a specified location. Ignores teleportation prevention, but you cannot move to a place with no known route from your current location.")},
 
 	{43,80,80,FALSE,TRUE,A_CHR,0,0,_("エイジャの赤石", "Red Stone of Aja"),
@@ -9717,26 +9719,8 @@ cptr do_cmd_class_power_aux_kaguya(int num, bool only_info)
 			int dist = plev * 2;
 			if(dist < 30) dist = 30;
 			if(only_info) return format(_("移動コスト:%d", "%d spaces"),dist);
-			if (!tgt_pt(&x, &y)) return NULL;
 
-			if (!player_can_enter(cave[y][x].feat, 0) || !(cave[y][x].info & CAVE_KNOWN))
-			{
-				msg_print(_("そこには行けない。", "You can't use this ability here."));
-				return NULL;
-			}
-			forget_travel_flow();
-			travel_flow(y,x);
-			if(dist < travel.cost[py][px])
-			{
-				if(travel.cost[py][px] >= 9999)
-					msg_print(_("そこには道が通っていない。", "There's no known path to that place."));
-				else
-					msg_print(_("そこは遠すぎる。", "It's too far away."));
-				return NULL;
-			}
-
-			msg_print(_("あなたは一瞬で移動した！", "You move instantaneously!"));
-			teleport_player_to(y,x,TELEPORT_NONMAGICAL);
+			if (!teleport_walk(dist))return NULL;
 		}
 		break;
 	case 13:
@@ -29888,8 +29872,6 @@ class_power_type class_power_priest[] =
 
 cptr do_cmd_class_power_aux_priest(int num, bool only_info)
 {
-	int dir,dice,sides,base,damage,i;
-
 	switch(num)
 	{
 		//奉納
@@ -30841,6 +30823,11 @@ cptr do_cmd_class_power_aux_wakasagi(int num, bool only_info)
 /*:::p_ptr->tim_general[0]をマジックアブソーバーのカウントに使う。*/
 /*:::*/
 ///mod160103 p_ptr->magic_num1[30-37]をチートコマンド中のmarisa_magic_power[]にまとめることにする
+
+//v2.0.1 専用性格のときカード売人と同じ特技(class_power_card_dealer)になる
+//カード販売所のリストにmagic_num2[80-89]を、カード買取の売却済みフラグにmagic_num1[80-83]を使っている.
+//また「資本主義のジレンマ」による価格乱高下係数をmagic_num2[90-99]に記録
+
 class_power_type class_power_marisa[] =
 {
 	{1,0,0,FALSE,FALSE,A_INT,0,0,_("魔法について確認する", "Browse Spells"),
@@ -31804,32 +31791,15 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 			break;
 		}
 		//v1.1.20 視界外でも既知の通路が通っていれば行けることにした
+		//v2.0.1 処理をteleport_walk()に分離
 	case 3:
 		{
 			int x, y;
 			int cost;
 			int dist = 8 + plev / 4;
 			if(only_info) return format(_("移動コスト:%d", "mov: %d"),dist);
-			if (!tgt_pt(&x, &y)) return NULL;
 
-			if (!player_can_enter(cave[y][x].feat, 0) || !(cave[y][x].info & CAVE_KNOWN))
-			{
-				msg_print(_("そこには行けない。", "You can't go there."));
-				return NULL;
-			}
-			forget_travel_flow();
-			travel_flow(y,x);
-			if(dist < travel.cost[py][px])
-			{
-				if(travel.cost[py][px] >= 9999)
-					msg_print(_("そこには道が通っていない。", "There's no path leading there."));
-				else
-					msg_print(_("そこは遠すぎる。", "It's too far away."));
-				return NULL;
-			}
-
-			msg_print(_("あなたは一瞬で移動した！", "You move in an instant!"));
-			teleport_player_to(y,x,TELEPORT_NONMAGICAL);
+			if (!teleport_walk(dist)) return NULL;
 
 			//高速移動がある時移動と同じように消費行動力が減少する
 			if(p_ptr->speedster)
@@ -34781,10 +34751,21 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 	case CLASS_MARISA:
-		class_power_table = class_power_marisa;
-		class_power_aux = do_cmd_class_power_aux_marisa;
+		//v2.0.1
+		if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+		{
+			class_power_table = class_power_card_dealer;
+			class_power_aux = do_cmd_class_power_aux_card_dealer;
+
+		}
+		else
+		{
+			class_power_table = class_power_marisa;
+			class_power_aux = do_cmd_class_power_aux_marisa;
+		}
 		power_desc = power_desc_waza;
 		break;
+
 	case CLASS_WAKASAGI:
 		class_power_table = class_power_wakasagi;
 		class_power_aux = do_cmd_class_power_aux_wakasagi;

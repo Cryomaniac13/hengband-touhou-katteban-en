@@ -1732,3 +1732,8 @@ int	gv_test1=0;
 int	gv_test2=0;
 int	gv_test3=0;
 int	gv_test4=0;
+
+//v2.0.1 「生命爆発の薬」の効果による爆発を発生させるフラグ
+bool	flag_life_explode = FALSE;
+
+

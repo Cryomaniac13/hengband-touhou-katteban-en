@@ -1768,7 +1768,7 @@ void activate_floor_trap(int y, int x, u32b mpe_mode)
 		else if (trap_monster)
 		{
 			int power = 100 + dun_level * 2;
-			msg_format(_("小さなダーツが飛んで%sに刺さった！", "A small dart hits %s!"), m_name);
+			msg_format(_("小さなダーツが飛んだ！", "A small dart flies out!"));
 
 			if (trap_feat_type == TRAP_SLOW)
 				project(0, 0, y, x, power, GF_OLD_SLOW, (PROJECT_JUMP | PROJECT_KILL), -1);
@@ -1785,8 +1785,8 @@ void activate_floor_trap(int y, int x, u32b mpe_mode)
 			msg_print(_("小さなダーツが飛んで床に刺さった。", "A small dart flies out and hits the floor."));
 		}
 
-		break;
 	}
+	break;
 
 	//盲目ガス　モンスターには盲目状態がないので混乱として扱う。
 	//まず＠に影響を及ぼさない混乱属性ボールを発生させ、＠が範囲内にいたら盲目処理を行う。

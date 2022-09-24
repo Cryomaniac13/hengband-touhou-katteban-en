@@ -2374,13 +2374,56 @@ bool remove_all_curse(void)
 	return (remove_curse_aux(TRUE));
 }
 
+//アビリティカード「クリエイターなら容易な事」で金に変えられる素材
+//似た判定関数がいくつもあるがどうまとめたものか判断がつかんので分けた
+bool item_tester_hook_make_money(object_type *o_ptr)
+{
+
+	if (o_ptr->tval == TV_MATERIAL)
+	{
+		switch (o_ptr->sval)
+		{
+			case SV_MATERIAL_HEMATITE:
+			case SV_MATERIAL_MAGNETITE:
+			case SV_MATERIAL_MITHRIL:
+			case SV_MATERIAL_ADAMANTITE:
+			case SV_MATERIAL_GARNET:
+			case SV_MATERIAL_AMETHYST:
+			case SV_MATERIAL_AQUAMARINE:
+			case SV_MATERIAL_DIAMOND:
+			case SV_MATERIAL_EMERALD:
+			case SV_MATERIAL_MOONSTONE:
+			case SV_MATERIAL_RUBY:
+			case SV_MATERIAL_PERIDOT:
+			case SV_MATERIAL_SAPPHIRE:
+			case SV_MATERIAL_OPAL:
+			case SV_MATERIAL_TOPAZ:
+			case SV_MATERIAL_LAPISLAZULI:
+			case SV_MATERIAL_METEORICIRON:
+			case SV_MATERIAL_HIHIIROKANE:
+			case SV_MATERIAL_MYSTERIUM:
+			case SV_MATERIAL_IZANAGIOBJECT:
+			case SV_MATERIAL_BROKEN_NEEDLE:
+			case SV_MATERIAL_RYUUZYU:
+
+				return TRUE;
+
+		}
+
+	}
+
+	return FALSE;
+}
+
 
 /*
  * Turns an object into gold, gain some of its value in a shop
  */
 /*:::錬金術、ミダスの手*/
 ///mod140824 上限99999に変更
-bool alchemy(void)
+//v2.0.1 modeパラメータを追加
+//1:鉱石を消費し鉱石の価値より高額を入手
+bool alchemy(int mode)
 {
 	int item, amt = 1;
 	int old_number;
@@ -2394,6 +2437,11 @@ bool alchemy(void)
 
 	/* Hack -- force destruction */
 	if (command_arg > 0) force = TRUE;
+
+	if (mode == 1)
+	{
+		item_tester_hook = item_tester_hook_make_money;
+	}
 
 	/* Get an item */
 #ifdef JP
@@ -2425,7 +2473,6 @@ s = "金に変えられる物がありません。";
                     "Looks like you only can redeem this card through some specific means."));
 		return FALSE;
 	}
-
 
 	/* See how many items */
 	if (o_ptr->number > 1)
@@ -2488,13 +2535,22 @@ msg_format("%sをニセの金に変えた。", o_name);
 	}
 	else
 	{
-		price /= 3;
-
-
+		int price_limit;
+		//v2.0.1
+		if (mode == 1)
+		{
+			price_limit = 999999;
+			price *= 3;
+		}
+		else
+		{
+			price_limit = 99999;
+			price /= 3;
+		}
 
 		//v1.1.89 discount値が反映されていなかったので追加
 		if (o_ptr->discount) price -= (price * o_ptr->discount / 100L);
-		if (price > 99999) price = 99999;
+		if (price > price_limit) price = price_limit;//v2.0.1 上限処理変更
 		if (amt > 1) price *= amt;
 
 		msg_format(_("%sを＄%d の金に変えた。", "You turn %s into $%d."), o_name, price);
@@ -4872,8 +4928,19 @@ s16b spell_chance(int spell, int use_realm)
 	if (!cp_ptr->magicmaster)
 	{
 		if (minfail < 5) minfail = 5;
+
 	}
 
+	//v2.0.1 アビリティカード「魔法使いの基礎勉強」による失敗率低下
+	{
+		int abl_card_num;
+		abl_card_num = count_ability_card(ABL_CARD_PATHE_STUDY);
+
+		if (abl_card_num)
+		{
+			minfail -= calc_ability_card_prob(ABL_CARD_PATHE_STUDY, abl_card_num) / 3;
+		}
+	}
 
 	/* Hack -- Priest prayer penalty for "edged" weapons  -DGK */
 	if (((p_ptr->pclass == CLASS_PRIEST) || (p_ptr->pclass == CLASS_SORCERER)) && p_ptr->icky_wield[0]) chance += 25;
@@ -7980,5 +8047,210 @@ void teleporter_trap(void)
 
 }
 
+//v2.0.1
+//小町や輝夜の特殊テレポート。アビリティカードでも似たようなのを実装するので分離共有した
+//指定距離内の道が通っている場所を選択してテレポートできる。vault内でも使用可
+//トラベルコマンドの機能を使う
+//キャンセルか選択不可で何もしなかったときFALSE
+bool teleport_walk(int dist)
+{
+	int x, y;
+
+	if (!tgt_pt(&x, &y)) return FALSE;
+
+	if (!player_can_enter(cave[y][x].feat, 0) || !(cave[y][x].info & CAVE_KNOWN))
+	{
+		msg_print(_("そこには行けない。", "You can't go there."));
+		return FALSE;
+	}
+	forget_travel_flow();
+	travel_flow(y, x);
+
+	//v2.0.1 travel.costは隣接グリッドでも2になるようなのでdist+1する
+	if (dist+1 < travel.cost[py][px])
+	{
+		if (travel.cost[py][px] >= 9999)
+			msg_print(_("そこには道が通っていない。", "There's no path leading there."));
+		else
+			msg_print(_("そこは遠すぎる。", "It's too far away."));
+		return FALSE;
+	}
+
+	msg_print(_("あなたは一瞬で移動した！", "You move in an instant!"));
+	teleport_player_to(y, x, TELEPORT_NONMAGICAL);
+
+	return TRUE;
+
+}
+
+
+
+
+
+//rokuro_head_search_item()でカウントが終了した時ここに来る
+//フロアのアイテムをランダムに足元に落とす。
+void	rokuro_head_find_item(void)
+{
+
+	bool find_item = FALSE;
+
+	int         ty, tx, tmp_o_idx;
+	int 		find_x, find_y;
+	cave_type   *c_ptr;
+	object_type *o_ptr;
+	int normal_dist = MAX(MAX_RANGE,p_ptr->lev);
+
+	int find_count = 0;
+
+	//フロアから適当なアイテムの落ちているグリッドを見つける
+	for (ty = 1; ty < cur_hgt - 1; ty++) for (tx = 1; tx < cur_wid - 1; tx++)
+	{
+
+		if (!in_bounds(ty, tx)) continue;
+
+		c_ptr = &cave[ty][tx];
+
+		//アイテムのない床はパス
+		if (!c_ptr->o_idx) continue;
+
+		//足元はパス
+		if (player_bold(ty, tx)) continue;
+
+		//Vault内はパス
+		if (c_ptr->info & CAVE_ICKY) continue;
+
+		//遠くのアイテムはパス
+		if (distance(ty, tx, py, px) > normal_dist) continue;
+
+		find_count++;
+		//見つけたグリッドからランダムに選定
+		if (!one_in_(find_count)) continue;
+
+		find_x = tx;
+		find_y = ty;
+
+	}
+
+
+	if (find_count)
+	{
+		if (p_ptr->pclass == CLASS_BANKI)
+			msg_print(_("あなたの頭がアイテムを持って戻ってきた！", "Your head comes back with an item!"));
+		else
+			msg_print(_("さっきの頭がアイテムを持って戻ってきた！", "The head comes back with an item!"));
+
+	}
+	else
+	{
+		if (p_ptr->pclass == CLASS_BANKI)
+			msg_print(_("あなたの頭が戻ってきた。しかしアイテムは見つからなかった。", "Your head comes back, but it didn't find any items."));
+		else
+			msg_print(_("さっきの頭が戻ってきて、申し訳なさそうな顔をしながら消えていった。", "The head comes back, but it didn't find any items."));
+
+		return;
+	}
+
+	//選定されたグリッドの一番上のアイテムを自分の足元に持ってくる
+
+	c_ptr = &cave[find_y][find_x];
+
+	tmp_o_idx = c_ptr->o_idx;
+	o_ptr = &o_list[tmp_o_idx];
+	c_ptr->o_idx = o_ptr->next_o_idx;
+
+	drop_near(o_ptr, -1, py, px);
+	//drop_near()はコピーでありo_list[tmp_o_idx]がそのままになるはずなので削除
+	delete_object_idx(tmp_o_idx);
+
+	//↓元にしたfetch()の処理だがなんか怪しいので普通に落とす
+	//cave[py][px].o_idx = tmp_o_idx;
+	//o_ptr->next_o_idx = 0;//ここ元々のcave[py][px].o_idxの値を入れなくていいのか？
+	//o_ptr->iy = (byte)py;
+	//o_ptr->ix = (byte)px;
+	//これって足元にアイテムがある状態で使ったらどうなる？元の関数は？
+
+	note_spot(py, px);
+
+}
+
+
+
+//赤蛮奇の特技
+//首がアイテムを探しに行き、カウントが終わったらフロアのランダムなアイテムを拾って戻ってくる
+//カウントにはp_ptr->tim_rokuro_head_searchを使用
+//flag_stop=TRUEで呼ぶと捜索中止。フロア移動やreset_tim_flags()で中止になる
+//何か行動中断するほどのことが起こったらTRUEを返す
+bool rokuro_head_search_item(int v, bool flag_stop)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+	//終了時に効果を発揮するので複数回使って効果を延長する意味がない。この特技の使用時にも既に使用中だったら弾くようにする
+	if (p_ptr->tim_rokuro_head_search > 0 && p_ptr->tim_rokuro_head_search < v) return FALSE;
+
+	if (flag_stop) v = 0;
+
+	/* Open */
+	if (v)
+	{
+		if (!p_ptr->tim_rokuro_head_search)
+		{
+			if (p_ptr->pclass == CLASS_BANKI)
+			{
+				msg_print(_("あなたの頭のひとつがアイテムを探しに行った。", "You send one of your heads to search for items."));
+			}
+			else
+			{
+				msg_print(_("宙に浮く生首が出現し、何処へともなく飛んでいった...",
+                            "A disembodied head appears in midair, and then floats off to somewhere..."));
+			}
+
+			notice = TRUE;
+		}
+	}
+	/* Shut */
+	else
+	{
+		if (p_ptr->tim_rokuro_head_search)
+		{
+
+			if (flag_stop)
+			{
+				msg_print(_("アイテムの探索は中断された。", "Item search interrupted."));
+			}
+			else
+			{
+				//フロアのランダムなアイテムを見つけてくる。失敗することもある。
+				rokuro_head_find_item();
+			}
+
+			notice = TRUE;
+		}
+	}
+
+	p_ptr->tim_rokuro_head_search = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS | PR_MAP);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+
+	/* Disturb */
+	if (disturb_state) disturb(0, 0);
+
+	//足元アイテムウィンドウの更新
+	p_ptr->window |= (PW_FLOOR_ITEM_LIST);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
 
 

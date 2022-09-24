@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 0
+#define H_VER_PATCH 1
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1325,9 +1325,10 @@
 #define CLASS_RIDING_BACKDANCE	(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO)
 
 //v1.1.87 アビリティカードを扱う職業
-#define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_MIKE || p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER)
+#define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_MIKE || p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER || is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
 //v1.1.90 駒草山如にカード売人系特技と吟遊詩人系特技を持たせようとしたらp_ptr->magic_num[]の使われる場所が被ったので弥縫策でカード売人系特技の使用箇所をシフトさせる
-#define ABLCARD_MAGICNUM_SHIFT (p_ptr->pclass == CLASS_SANNYO ? 32:0)
+//v2.0.1 魔理沙専用性格のときにカード売人特技を使うことにした。通常の特技によるmagic_num[]は使わなくなるはずだが念のためシフトしておく
+#define ABLCARD_MAGICNUM_SHIFT (p_ptr->pclass == CLASS_SANNYO ? 32:p_ptr->pclass == CLASS_MARISA ? 80:0)
 
 
 ///mod140817 歌関係に吟遊詩人以外の職も便乗
@@ -1367,8 +1368,9 @@
 #define SEIKAKU_SPECIAL_ORIN		10
 #define SEIKAKU_SPECIAL_AYA			11
 #define SEIKAKU_SPECIAL_JYOON		12
+#define SEIKAKU_SPECIAL_MARISA		13
 
-#define MAX_SEIKAKU_SPECIAL			13 //一つ上の最大+1
+#define MAX_SEIKAKU_SPECIAL			14 //一つ上の最大+1
 
 
 
@@ -3612,7 +3614,8 @@
 #define PROJECT_OPT         0x40000 ///mod140829 カタディオプトリック 着弾地点から見えるランダムなモンスターに向けて一度だけ再発動する
 #define PROJECT_COMPRESS    0x80000 ///mod150308 菊一文字コンプレッサー　上下にしか爆発しない
 #define PROJECT_FUTO		0x100000 //布都用特殊処理　皿の所で止まる
-#define PROJECT_FINAL		0x200000 //ブレイジングスター用　射程無限
+#define PROJECT_LONG_RANGE	0x200000 //射程無限　ブレスとかボールでこれをやるとどうなるのかは試していない
+#define PROJECT_MOVE		0x400000 //弾着地点に＠が動いてくる　ブレイジングスター用
 
 //型がintで使われることが多いので0x80000000を定義するのはまずいかも
 
@@ -3912,7 +3915,8 @@
 #define SD_METAMORPHOSIS		0x00020000 //ドレミー変身
 #define SD_SAKUYA_WORLD			0x00040000 //咲夜の世界
 #define SD_HINA_NINGYOU			0x00080000 //呪いの雛人形
-#define SD_OPTICAL_STEALTH		0x00100000 //光学迷彩　このフラグはv1.1.88でp_ptr->superstealth_typeに移してもう使わないのでいずれ他ので上書きする
+//#define SD_OPTICAL_STEALTH	0x00100000 //光学迷彩　このフラグはv1.1.88でp_ptr->superstealth_typeに移してもう使わないのでいずれ他ので上書きする
+#define SD_LIFE_EXPLODE			0x00100000 //v2.0.1 光学迷彩フラグを「生命爆発の薬」フラグで上書き
 #define SD_EIBON_WHEEL			0x00200000 //エイボンの霧の車輪
 #define SD_MANA_SHIELD			0x00400000 //v1.1.27　結界ガード
 #define SD_STATUE_FORM			0x00800000 //あうん「石像化」
@@ -4247,6 +4251,7 @@
 #define GF_BRAIN_FINGER_PRINT	164 //さとり「ブレインフィンガープリント」
 #define GF_RAINBOW		165	//v1.1.63 虹・プリズム属性
 #define GF_CONTROL_FISH	166
+#define GF_KANAMEISHI	167 //v2.0.1 爆心地を岩地形にする隕石属性
 
 //ここを変更するときspell-xx.prfとgf_desc[]も変更すること
 //ときどきproject()にある紫の境界操作関係の処理を手直しする
@@ -8629,8 +8634,44 @@ extern int PlayerUID;　
 #define ABL_CARD_TSUKASA	51	//霊力の標本瓶
 #define ABL_CARD_MUGIMESHI	52	//天狗の麦飯
 //#define ABL_CARD_AIR_MAGATAMA	53	//空色の勾玉はアビリティカードとしては出さない
+//↓v2.0.1追加
+#define ABL_CARD_NITORI			53 //資本主義のジレンマ
+#define ABL_CARD_PATHE_STUDY	54 //魔法使いの基礎勉強
+#define ABL_CARD_FLAN			55 //破壊の美学
+#define ABL_CARD_FUTO			56 //龍の通り道
+#define ABL_CARD_AUNN			57 //けしかける狛犬
+#define ABL_CARD_LIFE_EXPLODE	58 //生命爆発の薬
+#define ABL_CARD_FEAST			59 //生命の豊穣
+#define ABL_CARD_SAKI_2			60 //不屈の脳筋
+#define ABL_CARD_SPARE_GHOST	61 //半霊のスペア
+#define ABL_CARD_STAR			62 //静かなる輝き
+#define ABL_CARD_LUNAR			63 //狂おしい静寂
+#define ABL_CARD_SUNNY			64 //賑やかな無力
+#define ABL_CARD_LARVA			65 //刺激的な鱗粉
+#define ABL_CARD_NEMUNO			66 //山姥の包丁
+#define ABL_CARD_SEIRAN			67 //舞い降りた兎
+#define ABL_CARD_HOUTOU			68 //攻撃的な宝塔
+#define ABL_CARD_ROKURO_HEAD	69 //自由気ままな生首
+#define ABL_CARD_JELLYFISH		70 //気ままな無脊椎動物
+#define ABL_CARD_URUMI			71 //濡れた大蛇
+#define ABL_CARD_KEIKI			72 //クリエイターなら容易な事
+#define ABL_CARD_TEWI2			73 //詐欺うさぎの足
+#define ABL_CARD_SUIKA			74 //酔狂の伊吹瓢
+#define ABL_CARD_LUNATIC_TORCH	75 //命を焚く松明
+#define ABL_CARD_KANAME_MISSILE	76 //要石ミサイル
+#define ABL_CARD_WAKASAGI		77 //わかさぎの鱗
+#define ABL_CARD_KUTAKA			78 //正直すぎる道しるべ
+#define ABL_CARD_KOMACHI		79 //急がば三途の回り道
+#define ABL_CARD_HIRARI			80 //ひらり布
+#define ABL_CARD_JYOON			81 //ジュリ扇
+#define ABL_CARD_SHION			82 //煤けた団扇
+#define ABL_CARD_DOREMY			83 //数えたくなる羊
+#define ABL_CARD_JUNKO			84 //純粋な自己肯定感
+#define ABL_CARD_YUNOMI_REIMU	85 //ゆのみ霊夢
+#define ABL_CARD_YUNOMI_MARISA	86 //ゆのみ魔理沙
+#define ABL_CARD_100TH_MARKET	87 //百回目のブラックマーケット
 
-#define ABILITY_CARD_LIST_LEN	53	//アビリティカード格納の配列サイズ ↑の最大+1
+#define ABILITY_CARD_LIST_LEN	88	//アビリティカード格納の配列サイズ ↑の最大+1
 
 #define ABL_CARD_MAX_STACK_SIZE 9 //アビリティカードは9枚までしかスタックされないことにする
 

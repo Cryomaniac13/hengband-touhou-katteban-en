@@ -1919,8 +1919,18 @@ void marisa_make_magic_recipe(void)
 	int i;
 	char magic_name[80];
 
-	if(p_ptr->pclass != CLASS_MARISA) { msg_print(_("ERROR:魔理沙以外でmarisa_make_magic()が呼ばれた",
-                                                    "ERROR: marisa_make_magic() called for non-Marisa")); return;}
+	if(p_ptr->pclass != CLASS_MARISA)
+    {
+        msg_print(_("ERROR:魔理沙以外でmarisa_make_magic()が呼ばれた",
+            "ERROR: marisa_make_magic() called for non-Marisa")); return;
+    }
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return;
+	}
 
 	if(p_ptr->magic_num2[27])
 	{
@@ -2003,8 +2013,18 @@ static int check_marisa_can_make_spell(int spell_num)
 	int num = 99;
 
 	if(p_ptr->pclass != CLASS_MARISA)
-		{msg_print(_("ERROR:marisa_can_make_spell()が魔理沙以外で呼ばれた",
-                    "ERROR: marisa_can_make_spell() called for non-Marisa")); return 0;}
+    {
+        msg_print(_("ERROR:marisa_can_make_spell()が魔理沙以外で呼ばれた",
+            "ERROR: marisa_can_make_spell() called for non-Marisa"));
+        return 0;
+    }
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return;
+	}
 
 	//未開発の魔法(ここには来ないはず)
 	if(!p_ptr->magic_num2[spell_num]) return 0;
@@ -2214,6 +2234,13 @@ bool make_marisa_magic(void)
 	{msg_print(_("ERROR:make_marisa_magic()が魔理沙以外で呼ばれた",
                 "ERROR: make_marisa_magic() called for non-Marisa")); return FALSE;}
 
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return;
+	}
+
 	//作成する魔法を選択　材料が足りていることも確認
 	spell_num = choose_marisa_magic(CMM_MODE_MAKE);
 	if(spell_num < 0) return FALSE;
@@ -2283,6 +2310,13 @@ void marisa_check_essence(void)
 	{msg_print(_("ERROR:marisa_check_essence()が魔理沙以外で呼ばれた",
                 "ERROR: marisa_check_essence() called for non-Marisa")); return ;}
 
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return;
+	}
+
 	screen_save();
 	for(i=4;i<14;i++) Term_erase(17, i, 255);
 
@@ -2315,6 +2349,13 @@ bool carry_marisa_magic(void)
 	if(p_ptr->pclass != CLASS_MARISA)
 	{msg_print(_("ERROR:carry_marisa_magic()が魔理沙以外で呼ばれた",
                 "ERROR: carry_marisa_magic() called for non-Marisa")); return FALSE;}
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return;
+	}
 
 	while(1)
 	{

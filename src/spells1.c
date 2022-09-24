@@ -134,6 +134,7 @@ byte spell_color(int type)
 			case GF_DARK:           return (0x07);
 			case GF_PLASMA:         return (0x0B);
 			case GF_METEOR:         return (0x00);
+			case GF_KANAMEISHI:         return (0x00);
 			case GF_ICE:            return (0x01);
 			case GF_ROCKET:         return (0x0F);
 			case GF_DEATH_RAY:      return (0x07);
@@ -680,6 +681,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 		case GF_DISINTEGRATE:
 			message = _("消えた", "disappears");break;
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		case GF_CHAOS:
 		case GF_MANA:
 		case GF_ROCKET:
@@ -731,6 +733,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 			break;
 		case GF_NUKE:
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		case GF_ROCKET:
 			tmp_dam = randint1(dam/3);
 			bomb_count(y,x,-tmp_dam);
@@ -801,6 +804,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 		case GF_STEAM:
 			message = _("溶けた", "melts");break;
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		case GF_CHAOS:
 		case GF_MANA:
 		case GF_SEEKER:
@@ -840,6 +844,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 			message = _("消えた", "disappears");break;
 		case GF_NUKE:
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		case GF_CHAOS:
 		case GF_MANA:
 		case GF_ROCKET:
@@ -905,6 +910,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 			message = "burns up!";break;
 #endif
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		case GF_CHAOS:
 		case GF_MANA:
 		case GF_SEEKER:
@@ -1290,6 +1296,30 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 
 			break;
 		}
+		//v2.0.1 要石属性　爆心地を岩地形に変える
+		case GF_KANAMEISHI:
+		{
+			//爆心地のみ対象
+			if (r) break;
+
+			//永久地形には無効
+			if (cave_have_flag_bold(y, x, FF_PERMANENT)) break;
+
+			//モンスターやアイテムのあるところには無効
+			if ((cave[y][x].info & CAVE_OBJECT) || (cave[y][x].o_idx) || (cave[y][x].m_idx)) break;
+
+			/* Not on the player */
+			if (player_bold(y, x)) break;
+
+			/* Create a closed door */
+			cave_set_feat(y, x, feat_rubble);
+
+			/* Observe */
+			if (c_ptr->info & (CAVE_MARK)) obvious = TRUE;
+
+			break;
+		}
+
 		/* Make doors */
 		case GF_MAKE_FLOWER:
 		{
@@ -1946,6 +1976,7 @@ bool project_o(int who, int r, int y, int x, int dam, int typ)
 
 			/* Fire + Cold */
 			case GF_METEOR:
+			case GF_KANAMEISHI:
 			{
 				if (hates_fire(o_ptr))
 				{
@@ -4414,6 +4445,7 @@ note_dies = "は蒸発した！";
 
 		/* Meteor -- powerful magic missile */
 		case GF_METEOR:
+		case GF_KANAMEISHI:
 		{
 			if (seen) obvious = TRUE;
 
@@ -12926,9 +12958,9 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 
 	range = project_length ? project_length : MAX_RANGE;
 
-	if(flg & PROJECT_FINAL) range = 255;
-	//Hack 超巨大レーザーの射程を伸ばす・・と思ったがうまく撃てなくなったので中止
-	//if(flg & PROJECT_MASTERSPARK && rad == 2) range=24;
+	if(flg & PROJECT_LONG_RANGE) range = 255;
+
+
 
 	/* Calculate the projection path */
 	/*:::始点からターゲット（もしくは障害物）までの経路を算出。*/
@@ -13393,7 +13425,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 	project_length = 0;
 
 	/* If we found a "target", explode there */
-	if (dist <= MAX_RANGE || flg & PROJECT_FINAL)
+	if (dist <= MAX_RANGE || flg & PROJECT_LONG_RANGE)
 	{
 		/* Mega-Hack -- remove the final "beam" grid */
 		//if ((flg & (PROJECT_BEAM)) && !(flg & (PROJECT_FUTO)) && (grids > 0)) grids--;
@@ -14033,6 +14065,22 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 					break;
 				}
 
+				//v2.0.1 アビリティカード「気ままな無脊椎動物」ボルト確率無効
+				if (flg & (PROJECT_STOP) && !rad)
+				{
+					int card_num = count_ability_card(ABL_CARD_JELLYFISH);
+					if (card_num)
+					{
+						int prob = calc_ability_card_prob(ABL_CARD_JELLYFISH, card_num);
+						if (randint1(100) <= prob)
+						{
+							msg_print(_("クラゲが攻撃を食べた！", "Your jellyfish intercepts the attack!"));
+							break;
+						}
+					}
+				}
+
+
 				//v1.1.86 アビリティカード「背中の扉」ボルトとビーム確率無効(光の剣除く)
 				if (typ != GF_PSY_SPEAR && (flg & (PROJECT_BEAM | PROJECT_STOP)) && !rad)
 				{
@@ -14228,7 +14276,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 	}
 	*/
 
-	if(flg & PROJECT_FINAL) //ブレイジングスター
+	if(flg & PROJECT_MOVE) //ブレイジングスター
 	{
 		teleport_player_to(by,bx,TELEPORT_NONMAGICAL);
 	}

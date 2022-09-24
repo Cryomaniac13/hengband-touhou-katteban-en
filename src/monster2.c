@@ -1568,6 +1568,8 @@ s16b get_mon_num(int level)
 	int pls_kakuritu, pls_level;
 	int hoge = mysqrt(level*10000L);
 
+	int shion_card_num = 0;
+
 	/*:::levelは128以上にはならない*/
 	if (level > MAX_DEPTH - 1) level = MAX_DEPTH - 1;
 
@@ -1592,6 +1594,24 @@ s16b get_mon_num(int level)
 		if (pls_kakuritu < 2) pls_kakuritu = 2;
 		pls_level += 2;
 		level += 3;
+	}
+
+	//v2.0.1 アビリティカード「煤けた団扇」
+	shion_card_num = count_ability_card(ABL_CARD_SHION);
+
+	if (shion_card_num)
+	{
+		int mult = calc_ability_card_mod_param(ABL_CARD_SHION, shion_card_num);
+
+		//ランダムモンスターレベルブースト確率低下
+		pls_kakuritu = pls_kakuritu * mult / 100;
+
+		//フロアよりハイレベルでの生成を確率でフロアレベルまで下げる
+		if (level > dun_level && randint1(mult) > 100)
+		{
+			level = dun_level;
+		}
+
 	}
 
 	/* Boost the level */

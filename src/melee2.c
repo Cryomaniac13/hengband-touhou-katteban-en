@@ -3464,6 +3464,8 @@ static void process_monster(int m_idx)
 	bool            see_m = is_seen(m_ptr);
 	bool			flag_never_move = FALSE;
 
+	int				card_num_jellyfish = 0;
+
 	//v1.1.45 モンスター魔法使用率をこの変数で管理することにした。基本r_ptr->freq_spellと同じだが里乃のバックダンスでボーナスがつく
 	int monster_spell_freq;
 
@@ -3590,8 +3592,8 @@ static void process_monster(int m_idx)
 			}
 		}
 
-
 	}
+
 
 	//v1.1.35 ネムノ特殊処理　ネムノが縄張りにおらずモンスターが縄張りにいるとき、レベルに応じた判定で縄張りを奪われる
 	if(p_ptr->pclass == CLASS_NEMUNO && is_hostile(m_ptr) && !MON_CSLEEP(m_ptr) && !MON_MONFEAR(m_ptr))
@@ -3763,6 +3765,11 @@ static void process_monster(int m_idx)
 		if (check_mon_blind(m_idx)) aware = FALSE;
 	}
 
+	//v2.0.1 アビリティカードのひらり布
+	if (p_ptr->tim_hirari_nuno)
+	{
+		aware = FALSE;
+	}
 	//エイボンの霧の車輪
 	if(p_ptr->special_defense & (SD_EIBON_WHEEL))
 	{
@@ -5142,6 +5149,11 @@ msg_format("%^s%s", m_name, monmessage);
 						do_move = FALSE;
 				}
 			}
+			//v2.0.1 ひらり布
+			if (p_ptr->tim_hirari_nuno)
+			{
+				do_move = FALSE;
+			}
 
 			/* In anti-melee dungeon, stupid or confused monster takes useless turn */
 			if (do_move && (d_info[dungeon_type].flags1 & DF1_NO_MELEE))
@@ -5784,6 +5796,10 @@ void process_monsters(void)
 	byte    old_r_cast_spell = 0;
 
 	int speed;
+
+	//v2.0.1 現実変容の発動カウントが1のときモンスターは動かないことにする。
+	//テレポレベルは安全に離脱できるが即時現実変容は安全でないというのは分かりづらい事故要因になりそうなので
+	if (p_ptr->alter_reality == 1) return;
 
 	/* Clear monster fighting indicator */
 	mon_fight = FALSE;

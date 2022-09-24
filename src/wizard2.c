@@ -596,18 +596,23 @@ static void do_cmd_wiz_hack_ben(void)
 	int dir;
 	long test;
 
-	msg_format("turn:%d",turn);
+    (void)probing();
+
+
+	msg_format("testmsg:o_cnt:%d", o_cnt);
+
+	for (i = 0; i < MAGIC_NUM_SIZE; i++)
+	{
+		msg_format("magic_num%d:%d/%d", i, p_ptr->magic_num1[i], p_ptr->magic_num2[i]);
+		if (i % 10 == 0) msg_print("     ");
+	}
+
+	return;
+
+
+	msg_format("turn:%d", turn);
 	msg_format("taisai_comptime:%d", quest[QUEST_TAISAI].comptime);
 
-
-//	for (i = 0; i < MAGIC_NUM_SIZE; i++)
-//	{
-//		msg_format("magic_num%d:%d/%d", i, p_ptr->magic_num1[i], p_ptr->magic_num2[i]);
-//		if (i % 10 == 0) msg_print("     ");
-//	}
-
-
-	(void)probing();
 
 
 	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON))

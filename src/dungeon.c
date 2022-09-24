@@ -2867,6 +2867,16 @@ static void process_world_aux_timeout(void)
 		if (p_ptr->tim_addstat_count[i]) (void)set_tim_addstat(i,0,p_ptr->tim_addstat_count[i] - 1, TRUE);
 	}
 
+	if (p_ptr->tim_rokuro_head_search)
+	{
+		rokuro_head_search_item(p_ptr->tim_rokuro_head_search - 1, FALSE);
+	}
+	if (p_ptr->tim_hirari_nuno)
+	{
+		set_hirarinuno_card(p_ptr->tim_hirari_nuno - 1, TRUE);
+
+	}
+
 
 	/*::: 幸運のメカニズム */
 	if (p_ptr->lucky)
@@ -5705,11 +5715,21 @@ static void process_world(void)
 	}
 #endif
 
+
+
+	//v2.0.1 「生命爆発の薬」のカードで爆発が起こるとき
+	if (flag_life_explode && !p_ptr->is_dead)
+	{
+		flag_life_explode = FALSE;
+		project(0, 5, py, px, p_ptr->csp, GF_FORCE, (PROJECT_JUMP | PROJECT_KILL | PROJECT_GRID), -1);
+	}
+
+
+
+
 	/* Every 10 game turns */
 	if (turn % TURNS_PER_TICK) return;
-
 	/*:::ここから先、内部的10turn(ゲーム上で1ターン)ごとの処理*/
-
 
 	/*** Check the Time and Load ***/
 	///system アングバンドへの門・・・？
@@ -5928,6 +5948,9 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		ability_card_trade_count = 0;
 		set_abilitycard_price_rate();
 		make_ability_card_store_list();
+
+		break_market();
+
 	}
 
 	//野良神様は日数経過で好戦度と名声変化
@@ -7930,6 +7953,9 @@ static void pack_overflow(void)
  */
 static void process_upkeep_with_speed(void)
 {
+
+	int seiran_card_num = count_ability_card(ABL_CARD_SEIRAN);
+
 	/* Give the player some energy */
 	if (!load && p_ptr->enchant_energy_need > 0 && !p_ptr->leaving)
 	{
@@ -7954,6 +7980,20 @@ static void process_upkeep_with_speed(void)
 
 	while (p_ptr->enchant_energy_need <= 0)
 	{
+
+		//v2.0.1 アビリティカード「舞い降りた兎」の効果
+		//target_whoのモンスターが視界内にいるとロケットによる追加攻撃
+		if (seiran_card_num)
+		{
+			int prob = calc_ability_card_prob(ABL_CARD_SEIRAN, seiran_card_num);
+
+			if (randint0(100) < prob && target_who > 0 && target_okay())
+			{
+				fire_rocket(GF_ROCKET, 5, p_ptr->lev * 2,1);
+
+			}
+		}
+
 		///mod140329 レーダーセンスの処理をここに入れてみる
 		if(!load && p_ptr->radar_sense)
 		{
@@ -8724,10 +8764,11 @@ msg_print("中断しました。");
 
 			//v1.1.86 前回行動時からHPが変わってたらcauc_bonuses()を再実行する。
 			//アビリティカード「暴食のムカデ」に関係
+			//v2.0.1 追加カード「不屈の脳筋」も
 			if (prev_turn_hp != p_ptr->chp)
 			{
 				prev_turn_hp = p_ptr->chp;
-				if (count_ability_card(ABL_CARD_MUKADE))
+				if (count_ability_card(ABL_CARD_MUKADE) || count_ability_card(ABL_CARD_SAKI_2))
 				{
 					p_ptr->update |= PU_BONUS;
 					update_stuff();
@@ -9507,6 +9548,12 @@ static void dungeon(bool load_game)
 
 		//Exモード用建物内カウントをリセット
 		for(i=0;i<EX_BUILDINGS_PARAM_MAX;i++) ex_buildings_param[i] = 0;
+
+		//赤蛮奇特技のアイテム探索を中断
+		if (p_ptr->tim_rokuro_head_search)
+		{
+			rokuro_head_search_item(0, TRUE);
+		}
 
 		//響子の記憶している魔法をクリア。アイテムカードから使えるよう独立変数にした
 		kyouko_echo(TRUE,0);

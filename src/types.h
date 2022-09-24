@@ -1707,9 +1707,13 @@ struct player_type
 	//v1.1.93 一時反感
 	s16b tim_aggravation;
 
+	//v2.0.1 赤蛮奇のアイテム探索特技(アビリティカードでも使う)
+	s16b tim_rokuro_head_search;
+	//v2.0.1 アビリティカードのひらり布の有効時間(正邪の特技のひらり布ではない)
+	s16b tim_hirari_nuno;
+
+
 	//v1.1.81 将来の拡張用に変数を増やしておく
-	s16b future_use_counter5;
-	s16b future_use_counter6;
 	s16b future_use_counter7;
 	s16b future_use_counter8;
 

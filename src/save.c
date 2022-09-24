@@ -1003,8 +1003,8 @@ static void wr_extra(void)
 	wr_s16b(p_ptr->abilitycard_price_rate);
 	wr_s16b(p_ptr->superstealth_type);
 	wr_s16b(p_ptr->tim_aggravation);
-	wr_s16b(p_ptr->future_use_counter5);
-	wr_s16b(p_ptr->future_use_counter6);
+	wr_s16b(p_ptr->tim_rokuro_head_search);
+	wr_s16b(p_ptr->tim_hirari_nuno);
 	wr_s16b(p_ptr->future_use_counter7);
 	wr_s16b(p_ptr->future_use_counter8);
 

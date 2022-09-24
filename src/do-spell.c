@@ -3007,7 +3007,7 @@ static cptr do_sorcery_spell(int spell, int mode)
 		{
 			if (cast)
 			{
-				if (!alchemy()) return NULL;
+				if (!alchemy(0)) return NULL;
 			}
 		}
 		break;
@@ -23611,7 +23611,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		{
 			if (cast)
 			{
-				if (!alchemy()) return NULL;
+				if (!alchemy(0)) return NULL;
 			}
 		}
 		break;

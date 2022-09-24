@@ -4481,7 +4481,7 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 #else
 			msg_print("It glows bright yellow...");
 #endif
-			(void)alchemy();
+			(void)alchemy(0);
 			break;
 		}
 

@@ -535,6 +535,8 @@ static void prt_stat(int stat)
 #define BAR_TIM_AGGRAVATION		108 //v1.1.93 一時反感
 #define BAR_GLASS_SHIELD		109 //v1.1.94 硝子の盾
 #define BAR_COUNTER				110
+#define BAR_LIFE_EXPLODE		111 //v2.0.1 生命爆発の薬
+#define BAR_HIRARINUNO			112 //v2.0.1 ひらり布(アビリティカード)
 
 //ここの値は127が現在の限界である。(v1.1.46で95から拡張)
 
@@ -665,6 +667,8 @@ static struct {
 	{ TERM_RED, "怒", "反感" },
 	{ TERM_WHITE, "盾", "硝子の盾" },
 	{ TERM_RED, "反", "カウンター" },
+	{ TERM_YELLOW, "爆", "生命爆発" },
+	{ TERM_VIOLET, "布", "ひらり布" },
 
 
 	{0, NULL, NULL}
@@ -789,6 +793,9 @@ static struct {
 	{ TERM_RED, "Agr", "Aggrav" },
 	{ TERM_WHITE, "GlS", "GlssShld" },
 	{ TERM_RED, "Ctr", "Counter" },
+
+	{ TERM_YELLOW, "Exp", "LifeExpl" },
+	{ TERM_VIOLET, "Fab", "Fabric" },
 
 
 	{0, NULL, NULL}
@@ -964,6 +971,9 @@ static void prt_status(void)
 	if(p_ptr->special_defense & EVIL_UNDULATION_MASK)
 		ADD_FLG(BAR_EVIL_UNDULATION);
 
+	//v2.0.1
+	if (p_ptr->special_defense & SD_LIFE_EXPLODE) ADD_FLG(BAR_LIFE_EXPLODE);
+
 	///mod140502
 	if (p_ptr->lucky) ADD_FLG(BAR_LUCKY);
 	if (p_ptr->foresight) ADD_FLG(BAR_FORESIGHT);
@@ -1078,6 +1088,9 @@ static void prt_status(void)
 
 	if(p_ptr->special_defense & SD_HINA_NINGYOU)
 		 ADD_FLG(BAR_HINA);
+
+	if (p_ptr->tim_hirari_nuno)
+		ADD_FLG(BAR_HIRARINUNO);
 
 
 	if(p_ptr->special_defense & SD_STATUE_FORM)
@@ -2639,6 +2652,7 @@ static void print_monster_line(int x, int y, monster_type* m_ptr, int n_same){
 	Term_gotoxy(x, y);
 	Term_erase(x, y, Term->wid);
 	if(!r_ptr) { return; }
+
 	//Number of 'U'nique
 	if(r_ptr->flags1&RF1_UNIQUE)
 	{//unique
@@ -3726,13 +3740,22 @@ static void calc_mana(void)
 	{
 		int card_num;
 
+		int add_sp1 = 0, add_sp2 = 0;
+
+
 		card_num = count_ability_card(ABL_CARD_SPELL);
 		if (card_num)
 		{
-			msp += calc_ability_card_add_hp_sp(ABL_CARD_SPELL, card_num);
+			add_sp1 = calc_ability_card_mod_param(ABL_CARD_SPELL, card_num);
 		}
 
+		card_num = count_ability_card(ABL_CARD_FUTO);
+		if (card_num)
+		{
+			add_sp2 = calc_ability_card_mod_param(ABL_CARD_FUTO, card_num);
+		}
 
+		msp += MAX(add_sp1,add_sp2);
 	}
 
 #if 0
@@ -3983,20 +4006,26 @@ static void calc_hitpoints(void)
 
 	//v1.1.86 アビリティカードによるHP増加
 	{
-		int add_hp1 = 0, add_hp2 = 0, card_num;
+		int add_hp1 = 0, add_hp2 = 0, add_hp3 = 0, card_num;
 
 		card_num = count_ability_card(ABL_CARD_LIFE);
 		if (card_num)
 		{
-			add_hp1 = calc_ability_card_add_hp_sp(ABL_CARD_LIFE, card_num);
+			add_hp1 = calc_ability_card_mod_param(ABL_CARD_LIFE, card_num);
 		}
+
 		card_num = count_ability_card(ABL_CARD_PHOENIX);
 		if (card_num)
 		{
-			add_hp2 = calc_ability_card_add_hp_sp(ABL_CARD_PHOENIX, card_num);
+			add_hp2 = calc_ability_card_mod_param(ABL_CARD_PHOENIX, card_num);
+		}
+		card_num = count_ability_card(ABL_CARD_FEAST);
+		if (card_num)
+		{
+			add_hp3 = calc_ability_card_mod_param(ABL_CARD_FEAST, card_num);
 		}
 
-		mhp += MAX(add_hp1, add_hp2);
+		mhp += MAX(add_hp3,MAX(add_hp1, add_hp2));
 	}
 
 
@@ -8719,10 +8748,22 @@ void calc_bonuses(void)
 			{
 				extra_blows[0] += add_lis[card_num];
 				extra_blows[1] += add_lis[card_num];
-
 			}
+		}
+		//v2.0.1　「不屈の脳筋」カード追加
+		card_num = count_ability_card(ABL_CARD_SAKI_2);
+		if (card_num)
+		{
+			int border_lis[10] = { 50,55,58,61,64,64,67,70,73,75 };
+			int add_lis[10] = { 1,1,1,1,1,2,2,2,2,3 };
+            if (card_num > 9) card_num = 9;//paranoia
 
-
+			//HPがMAXHPのborder%未満のとき攻撃回数がadd増加
+			if (p_ptr->mhp * border_lis[card_num] / 100 > p_ptr->chp)
+			{
+				extra_blows[0] += add_lis[card_num];
+				extra_blows[1] += add_lis[card_num];
+			}
 		}
 
 		//v1.1.86 埴輪カードによる魔法防御上昇

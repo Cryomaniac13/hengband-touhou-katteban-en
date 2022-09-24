@@ -5522,6 +5522,7 @@ bool mass_genocide(int power, bool player_cast)
 //周辺抹殺の改造ルーチン
 //mode0:鈴瑚の浄化作戦　妖怪、悪魔、獣にのみ有効　ノーダメージ
 //mode1:久侘歌の全霊鬼渡し　幻想郷の住人フラグのない敵に有効　ノーダメージ
+//mode2:アビリティカード「純粋な自己肯定感」　ノーダメージ 野良神様の評判悪化なし
 bool mass_genocide_2(int power, int rad, int mode)
 {
 	int  i;
@@ -5556,6 +5557,11 @@ bool mass_genocide_2(int power, int rad, int mode)
 			result |= genocide_aux(i, power, TRUE, 0, "");
 
 		}
+		else if (mode == 2)
+		{
+			result |= genocide_aux(i, power, TRUE, 0, "");
+
+		}
 		else
 		{
 			msg_format(_("ERROR:想定外のmodeでmass_genocide_2()が呼ばれた",
@@ -5566,7 +5572,7 @@ bool mass_genocide_2(int power, int rad, int mode)
 
 	}
 
-	if (result)
+	if (result && mode != 2)
 	{
 		if(one_in_(2))set_deity_bias(DBIAS_WARLIKE, -1);
 		if(one_in_(2))set_deity_bias(DBIAS_REPUTATION, -1);
@@ -5931,7 +5937,7 @@ msg_print("これで全部です。");
  */
 /*:::*破壊*の魔法の処理　ダンジョン生成時の破壊地形もここ(in_generate)*/
 ///mod140510 破邪領域用にforce_floor引数を追加した
-///mod140829 フラン用にフラグ追加
+///mod140829 フラン用にフラグ追加 中心点を破壊の対象に含める
 bool destroy_area(int y1, int x1, int r, bool in_generate, bool force_floor, bool flan)
 {
 	int       y, x, k, t;

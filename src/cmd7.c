@@ -41,6 +41,8 @@ int calc_inven2_num(void)
 	else if (pc == CLASS_SANNYO) num = 8;
 	//ミケ　常に8
 	else if (pc == CLASS_MIKE) num = 8;
+	//魔理沙専用性格　闇市場調査員 常に8
+	else if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA)) num = 8;
 
 
 
@@ -456,6 +458,13 @@ bool put_item_into_inven2(void)
 		s = _("アビリティカードを持っていない。", "You don't have ability cards.");
 		break;
 
+	case CLASS_MARISA:
+		item_tester_hook = item_tester_inven2_card_dealer;
+		q = _("どのカードを隠し持ちますか？ ", "Hide which card?");
+		s = _("アビリティカードを持っていない。", "You don't have ability cards.");
+		break;
+
+
 	default:
 		msg_print(_("ERROR:この職業の追加インベントリ対象アイテムが定義されていない",
                     "ERROR: Item not defined for this class extra inventory"));
@@ -479,7 +488,7 @@ bool put_item_into_inven2(void)
 
 	amt = 1;
 	/*:::個数指定　ここで指定されていないアリスやエンジニア、咲夜などは常に一つずつ*/
-	if (o_ptr->number > 1 && ( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_MIKE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER) )
+	if (o_ptr->number > 1 && ( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS)) )
 	{
 		/*:::数量を入力。アイテム個数以上にはならないよう処理される。*/
 		amt = get_quantity(NULL, o_ptr->number);
@@ -526,7 +535,7 @@ bool put_item_into_inven2(void)
 
 	/*:::自動的にまとめられるか判定しつつアイテムを自動的に空いてる追加インベントリに入れる職業（薬師、お燐）*/
 	/*:::エンジニアは1スロット1つしか入れないがどうせ機械はまとまらないのでこのルーチンのままで問題ないはず*/
-	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || pc == CLASS_MIKE || pc == CLASS_TAKANE || pc == CLASS_SANNYO || pc == CLASS_CARD_DEALER)
+	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS))
 	{
 		int freespace = 99;
 		/*:::まとめられるか判定*/
@@ -793,6 +802,8 @@ bool put_item_into_inven2(void)
 		else if (pc == CLASS_MIKE) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_SANNYO) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
+		else if (pc == CLASS_MARISA) msg_format(_("%sをスカートの隠しポケットに入れた。", "You put %s in a hidden pocket on your skirt."), o_name);
+
 		else msg_format(_("ERROR:追加インベントリにアイテム入れたときのメッセージがない",
                             "ERROR: No message upon putting item in extra inventory"));
 
@@ -852,6 +863,8 @@ bool put_item_into_inven2(void)
                                                     "You don't have space for %s in card case."), o_name);
 		else if (pc == CLASS_CARD_DEALER) msg_format(_("ケースには%sを入れる隙間がない。",
                                                     "You don't have space for %s in card case."), o_name);
+		else if (pc == CLASS_MARISA) msg_format(_("もうスカートの隠しポケットは一杯だ。",
+                                                    "All of your skirt pockets are full."));
 		else msg_format(_("ERROR:追加インベントリにアイテム入れる場所がないときのメッセージがない",
                             "ERROR: No message for no enough space in extra inventory"));
 
@@ -983,6 +996,7 @@ bool takeout_inven2(void)
 	else if (pc == CLASS_MIKE) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_SANNYO) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
+	else if (pc == CLASS_MARISA) msg_format(_("スカートの隠しポケットから%sを出した。", "You take %s out of a hidden pocket on your skirt."), o_name);
 	else msg_format(_("ERROR:追加インベントリからアイテム出したときのメッセージがない",
                         "ERROR: No message for taking item out of extra inventory"));
 
@@ -2105,7 +2119,7 @@ bool use_machine(int mode)
 			break;
 
 		case SV_MACHINE_MIDAS_HAND:
-			if (!alchemy()) return FALSE;
+			if (!alchemy(0)) return FALSE;
 			break;
 
 		case SV_MACHINE_E_CAN:
@@ -8473,6 +8487,14 @@ bool marisa_extract_material(bool in_home)
 	char o_name[MAX_NLEN];
 	int i, base_point, total_point;
 
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return FALSE;
+	}
+
 	q = _("何から魔力を抽出しようか？", "Extract mana from what item?");
 	s = _("魔法の材料になりそうなものを持っていない。", "You don't have anything that could be used as spell material.");
 
@@ -8520,6 +8542,14 @@ bool check_marisa_recipe(void)
 	int num;
 	char buf[1024];
 	int i;
+
+
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+	{
+		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
+                    "You're investigating the black market right now. Go and search for ability cards."));
+		return FALSE;
+	}
 
 	while(1)
 	{
@@ -9021,7 +9051,7 @@ cptr use_marisa_magic(int num, bool only_info)
 		{
 			int tx, ty;
 			int dam = 3200;
-			int flg = (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_THRU | PROJECT_FAST | PROJECT_MASTERSPARK | PROJECT_DISI | PROJECT_FINAL);
+			int flg = (PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL | PROJECT_THRU | PROJECT_FAST | PROJECT_MASTERSPARK | PROJECT_DISI | PROJECT_LONG_RANGE|PROJECT_MOVE);
 			if(only_info) return format(_("損傷:%d", "dam: %d"),dam);
 
 			if (!get_rep_dir2(&dir)) return NULL;

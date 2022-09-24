@@ -3401,27 +3401,47 @@ msg_format("%sは体力を回復したようだ。", m_name);
 				}
 
 				//v1.1.86 アビリティカード「半霊の半分」
+				//v2.0.1 「半霊のスペア」も同性能で追加
 				if (alive && !p_ptr->is_dead)
 				{
-					int card_count;
+					int card_count1,card_count2;
 
-					card_count = count_ability_card(ABL_CARD_QUARTER_GHOST);
-					if (card_count)
+
+					card_count1 = count_ability_card(ABL_CARD_QUARTER_GHOST);
+					card_count2 = count_ability_card(ABL_CARD_SPARE_GHOST);
+
+					if (card_count1 || card_count2)
 					{
 						if (!(r_ptr->flagsr & RFR_EFF_RES_NETH_MASK))
 						{
-							int dam;
+							int dam=0;
 
-							int dice = card_count+1;
-							int sides = 9;
-							if (card_count >= 9) sides = 10;
+							//int dice = card_count+1;
+							//int sides = 9;
+							//if (card_count >= 9) sides = 10;
+							//dam = damroll(dice, sides);
 
-							dam = damroll(dice, sides);
+							dam += damroll(card_count1 + 1, 9 + card_count1 / 9);
+							dam += damroll(card_count2 + 1, 9 + card_count2 / 9);
+
+
+							if (card_count1 && card_count2)
+							{
+								msg_format(_("半霊の半分とスペアが%^sに反撃した！",
+                                            "Your half-half-ghost and spare half-ghost counterattack %s!"), m_name);
+							}
+							else if (card_count1)
+							{
+								msg_format(_("半霊の半分が%^sに反撃した！",
+                                            "Your half-half-ghost counterattacks %s!"), m_name);
+							}
+							else
+							{
+								msg_format(_("半霊のスペアが%^sに反撃した！",
+                                            "Your spare half-ghost counterattacks %s!"), m_name);
+							}
 
 							dam = mon_damage_mod(m_ptr, dam, FALSE);
-
-							msg_format(_("半霊の半分が%^sに反撃した！",
-                                        "Your half-half-ghost counterattacks %s!"), m_name);
 
 							if (mon_take_hit(m_idx, dam, &fear, _("は倒れた。", " is defeated.")))
 							{

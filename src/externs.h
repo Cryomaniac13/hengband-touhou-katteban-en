@@ -1306,7 +1306,7 @@ extern bool explosive_rune(void);
 extern void identify_pack(void);
 extern bool remove_curse(void);
 extern bool remove_all_curse(void);
-extern bool alchemy(void);
+extern bool alchemy(int mode);
 extern bool enchant(object_type *o_ptr, int n, int eflag);
 extern bool enchant_spell(int num_hit, int num_dam, int num_ac);
 extern bool artifact_scroll(void);
@@ -2677,7 +2677,7 @@ extern int apply_magic_abilitycard(object_type *o_ptr, int card_idx, int card_ra
 extern cptr use_ability_card_aux(object_type *o_ptr, bool only_info);
 extern bool use_ability_card(object_type *o_ptr);
 extern int	count_ability_card(int card_idx);
-extern int calc_ability_card_add_hp_sp(int card_idx, int card_num);
+extern int calc_ability_card_mod_param(int card_idx, int card_num);
 extern int calc_ability_card_prob(int card_idx, int card_num);
 extern bool wall_through_telepo(int mode);
 extern s16b	ability_card_trade_count;
@@ -2721,3 +2721,13 @@ extern void teleporter_trap(void);
 extern bool monster_delay(int m_idx, int add_energy);
 
 extern void gain_physical_mutation(void);
+
+extern bool flag_life_explode;
+
+extern bool teleport_walk(int dist);
+
+extern bool rokuro_head_search_item(int v, bool flag_stop);
+
+extern bool set_hirarinuno_card(int v, bool do_dec);
+
+extern void break_market(void);

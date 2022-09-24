@@ -1114,6 +1114,8 @@ bool dispel_check(int m_idx)
 	//v1.1.44 イビルアンジュレーション
 	if (p_ptr->special_defense & EVIL_UNDULATION_MASK) return (TRUE);
 
+	if (p_ptr->special_defense & SD_LIFE_EXPLODE) return (TRUE);
+
 	if(p_ptr->tim_superstealth) return (TRUE);
 	if(p_ptr->tim_sh_death) return (TRUE);
 	if(p_ptr->deportation) return (TRUE);

@@ -4267,6 +4267,19 @@ void calc_spell_info(magic_type *s_ptr, int realm, int spell)
 	///mod140814 高速詠唱中は消費MPが増える
 	if(quick_cast) table.smana += table.smana * 3 / 10;
 
+	//v2.0.1 アビリティカード「魔法使いの基礎勉強」による失敗率低下
+	{
+		int abl_card_num;
+		abl_card_num = count_ability_card(ABL_CARD_PATHE_STUDY);
+
+		if (abl_card_num)
+		{
+			int bonus = calc_ability_card_prob(ABL_CARD_PATHE_STUDY, abl_card_num);
+
+			table.sfail -= bonus;
+		}
+	}
+
 	(void)COPY(s_ptr, &table, magic_type);
 	return;
 }
