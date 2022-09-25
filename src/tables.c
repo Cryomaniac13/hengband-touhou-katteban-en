@@ -2492,10 +2492,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"戦士",
 		"戦士",
+		"Warrior",
+#else
+		"Warrior",
+		"Warrior",
 #endif
-		"Warrior",
-		"Warrior",
-
 		{ 4, -2, -2, 2, 2, -1},
 		25, 18, 31, 1,  14, 40, 70, 55,
 		9, 7,  10, 0,  0,  12,  30, 30,
@@ -2518,10 +2519,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"メイジ",
 		"メイジ",
+		"Mage",
+#else
+		"Mage",
+		"Mage",
 #endif
-		"Mage",
-		"Mage",
-
 		{-3, 3, 1, 0, -2, 1},
 		30, 40, 40, 3,  21, 20, 34, 20,
 		12,  15, 13,  0,  3,  7,  6, 7,
@@ -2544,10 +2546,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神官",
 		"巫女",
-#endif
+		"Priest",
+#else
 		"Priest",
 		"Shrine-Maiden",
-
+#endif
 		{0, 1, 3, -1, 0, 2},
 		25, 35, 50, 2, 18, 25, 40, 40,
 		7,  11, 15, 0,  1,  9, 13, 12,
@@ -2570,10 +2573,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"探検家",
 		"探検家",
+		"Explorer",
+#else
+		"Explorer",
+		"Explorer",
 #endif
-		"Explorer",
-		"Explorer",
-
 		{ 1, 1, -2, 2, 1, 0},
 		45, 37, 36, 4, 40, 45, 48, 43,
 		15, 12, 10, 1,  7, 15, 16, 18,
@@ -2596,10 +2600,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"レンジャー",
 		"レンジャー",
+		"Ranger",
+#else
+		"Ranger",
+		"Ranger",
 #endif
-		"Ranger",
-		"Ranger",
-
 		{ 2, 0, -1, 3, 1, -1},
 		30, 23, 36, 3, 35, 60, 60, 72,
 		10,  9, 10, 2,  5, 18, 21, 32,
@@ -2623,10 +2628,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"守護者",
 		"守護者",
+		"Protector",
+#else
+		"Protector",
+		"Protector",
 #endif
-		"Protector",
-		"Protector",
-
 		{ 1, -2, 2, -1, 2, 3},
 		16, 20, 37, 1, 18, 35, 68, 40,
 		 7,  10, 14, 0,  2, 10, 24, 15,
@@ -2650,10 +2656,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"教師",
 		"教師",
+		"Teacher",
+#else
+		"Teacher",
+		"Teacher",
 #endif
-		"Teacher",
-		"Teacher",
-
 		{ 0, 2, 0, 1, 0, 1},
 		30, 35, 36, 2, 20, 40, 45, 45,
 		 9, 10, 10, 0,  1, 10, 15, 15,
@@ -2676,10 +2683,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"執事",
 		"メイド",
-#endif
-        "Butler",
+		"Butler",
+#else
+		"Butler",
 		"Maid",
-
+#endif
 		{ 0, 1, 1, 1, 1, 1},
 		40, 30, 36, 3, 25, 40, 63, 50,
 		12, 12, 12, 0,  3, 12, 22, 18,
@@ -2702,9 +2710,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"格闘家",
 		"格闘家",
+		"Martial-Artist",
+#else
+		"Martial-Artist",
+		"Martial-Artist",
 #endif
-		"Martial-Artist",
-		"Martial-Artist",
 		{ 2, -2, 1, 3, 1, 1},
 		20, 18, 26, 2, 22, 45, 55, 30,
 		10,  7, 14,  1,  3,  15, 28, 12,
@@ -2728,10 +2738,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"超能力者",
 		"超能力者",
+		"Mindcrafter",
+#else
+		"Mindcrafter",
+		"Mindcrafter",
 #endif
-		"Mindcrafter",
-		"Mindcrafter",
-
 		{0, -1, 3, 1, 0, 2},   /* note: spell stat is Wis */
 		30, 33, 38, 3,  24, 16, 50, 45,
 		12, 11, 12, 0,   4,  0, 18, 18,
@@ -2755,10 +2766,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"ハイ=メイジ",
 		"ハイ=メイジ",
+		"High-Mage",
+#else
+		"High-Mage",
+		"High-Mage",
 #endif
-		"High-Mage",
-		"High-Mage",
-
 		{-4, 4, 2, -1, -2, 0},
 		30, 40, 40, 3, 18, 18, 34, 20,
 		7,  18, 13, 0,  2,  6,  6, 7,
@@ -2781,9 +2793,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"普通の住人",
 		"普通の住人",
+		"Civilian",
+#else
+		"Civilian",
+		"Civilian",
 #endif
-		"Civilian",
-		"Civilian",
 		{ 0, 0, 0, 0, 0, 0},
 		25, 20, 30, 3, 20, 24, 43, 25,
 		12,  9,  9, 0,  2,  8, 12, 10,
@@ -2806,9 +2820,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"修験者",
 		"修験者",
+		"Shugenja",
+#else
+		"Shugenja",
+		"Shugenja",
 #endif
-		"Shugenja",
-		"Shugenja",
 		{ 1, 0, 2, 1, 1, 0},
 		25, 30, 36, 2, 24, 36, 60, 40,
 		7,  10, 15, 0,  2,  15, 18, 16,
@@ -2831,9 +2847,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"魔法剣士",
 		"魔法剣士",
+		"Magic-Knight",
+#else
+		"Magic-Knight",
+		"Magic-Knight",
 #endif
-		"Magic-Knight",
-		"Magic-Knight",
 		{ 1, 2, 0, 1, 0, 1},
 		28, 40, 34, 2, 17, 24, 50, 33,
 		9,  12, 11 ,0, 1,   7, 16, 10,
@@ -2858,10 +2876,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"弾幕研究家",
 		"弾幕研究家",
+		"Danmakulogist",
+#else
+		"Danmakulogist",
+		"Danmakulogist",
 #endif
-		"Danmakulogist",
-		"Danmakulogist",
-
 		{ -2, 3, 1, 1, 0, -2 },
 		24, 32, 33, 2, 21, 20, 40, 20,
 		10, 12, 11, 0,  3,  7, 10,  8,
@@ -2884,10 +2903,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"射手",
 		"射手",
+		"Marksman",
+#else
+		"Marksman",
+		"Marksman",
 #endif
-		"Marksman",
-		"Marksman",
-
 		{ 2, -1, -2, 3, 1, 0},
 		40, 24, 35, 3,  30, 35, 45, 85,
 		13, 10, 10, 0,  3,  10, 15, 40,
@@ -2911,10 +2931,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"魔道具使い",
 		"魔道具使い",
-#endif
-        "Magic-Eater",
 		"Magic-Eater",
-
+#else
+		"Magic-Eater",
+		"Magic-Eater",
+#endif
 		{-1, 3, 1, 1, -2, 0},
 		30, 45, 36, 3,  22, 16, 45, 35,
 		10, 22, 10, 0,  2,  0, 12, 10,
@@ -2936,9 +2957,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"エンジニア",
 		"エンジニア",
+		"Engineer",
+#else
+		"Engineer",
+		"Engineer",
 #endif
-		"Engineer",
-		"Engineer",
 		{1, 3, -3, 2, 0, 0},
 		40, 15, 20,  2, 25, 20, 47, 55,
 		20,  6,   8,  0,  4,   8, 16, 24,
@@ -2962,10 +2985,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"司書",
 		"司書",
+		"Librarian",
+#else
+		"Librarian",
+		"Librarian",
 #endif
-		"Librarian",
-		"Librarian",
-
 		{ 1, 2, -1, 1, 1, 0},
 		20, 34, 34, 3, 16, 20, 55, 25,
 		7,  11, 11, 0,   2, 10,  17, 11,
@@ -2989,10 +3013,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"剣術家",
 		"剣術家",
+		"Samurai",
+#else
+		"Samurai",
+		"Samurai",
 #endif
-		"Samurai",
-		"Samurai",
-
 		{ 3, -2, 1, 2, 1, 0},
 		25, 18, 32, 2,  16, 6, 70, 40,
 		12, 7,  10, 0,  1,  0,  23, 18,
@@ -3017,9 +3042,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"兵士",
 		"兵士",
+		"Soldier",
+#else
+		"Soldier",
+		"Soldier",
 #endif
-		"Soldier",
-		"Soldier",
 		{2, 1, -1, 2, 2, -3},
 		32, 20, 20,  4, 28, 27, 55, 60,
 		14,  8,  8,  0,  4, 10, 20, 25,
@@ -3044,10 +3071,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"薬師",
 		"薬師",
+		"Chemist",
+#else
+		"Chemist",
+		"Chemist",
 #endif
-		"Chemist",
-		"Chemist",
-
 		{-1, 4, 0, 1, 0, 2},
 		37, 32, 32, 4, 36, 25, 47, 52,
 		11, 12, 10, 0,  5,  8, 18, 20,
@@ -3071,9 +3099,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"騎兵",
 		"騎兵",
+		"Cavalry",
+#else
+		"Cavalry",
+		"Cavalry",
 #endif
-		"Cavalry",
-		"Cavalry",
 		{ 2, -2, -2, 2, 2, 0},
 		20, 18, 32, 1,  16, 35, 60, 66,
 		10,  7, 10, 0,  0,  10, 22, 26,
@@ -3096,9 +3126,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"狂戦士",
 		"狂戦士",
-#endif
 		"Berserker",
-
+#else
+		"Berserker",
+		"Berserker",
+#endif
 		{ 8, -20, -20, 4, 4, -5},
 		-100, -1000, -200, -100,  -100, -100, 120, -2000,
 		0, 0,  0, 0,  0,  0,  50, 0,
@@ -3122,10 +3154,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"付喪神使い",
 		"付喪神使い",
+		"Tsukumo-Master",
+#else
+		"Tsukumo-Master",
+		"Tsukumo-Master",
 #endif
-		"Tsukumo-Master",
-		"Tsukumo-Master",
-
 		{1, 2, -1, 1, 1, -2},
 		40, 36, 35, 2, 24, 25, 50, 45,
 		13, 14, 12, 0,  3,  3, 18, 15,
@@ -3148,10 +3181,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"古道具屋",
 		"古道具屋",
+		"SecondhandDealer",
+#else
+		"SecondhandDealer",
+		"SecondhandDealer",
 #endif
-		"SecondhandDealer",
-		"SecondhandDealer",
-
 		{1, 2, 0, 1, 0, -1},
 		40, 30, 30, 3, 35, 25, 48, 45,
 		12, 12, 10, 0,  6,  8, 17, 18,
@@ -3174,10 +3208,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"宝飾師",
 		"宝飾師",
+		"Jeweler",
+#else
+		"Jeweler",
+		"Jeweler",
 #endif
-		"Jeweler",
-		"Jeweler",
-
 		{ -1, 2, 1, 2, -2, 2},
 		30, 40, 36, 2, 24, 16, 48,30,
 		10, 17, 12, 0,  3,   3, 16,10,
@@ -3200,10 +3235,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"忍者",
 		"忍者",
+		"Ninja",
+#else
+		"Ninja",
+		"Ninja",
 #endif
-		"Ninja",
-		"Ninja",
-
 		{ 0, 1, 0, 3, 0, -2},
 		45, 27, 27, 5, 33, 48, 55,63,
 		15, 12, 10, 2,  6, 16, 24,18,
@@ -3227,10 +3263,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"カード売人",
 		"カード売人",
+		"Card-Trader",
+#else
+		"Card-Trader",
+		"Card-Trader",
 #endif
-		"Card-Trader",
-		"Card-Trader",
-
 		{ -1, 1, 0, 1, -1, 3 },
 		30, 32, 30, 2, 27, 16, 48,45,
 		10, 16, 10, 0,  3,  3, 16,16,
@@ -3254,10 +3291,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"外来人",
 		"外来人",
+		"Outsider",
+#else
+		"Outsider",
+		"Outsider",
 #endif
-		"Outsider",
-		"Outsider",
-
 		{ -3, -3, -3, -3, -3, -3},
 		10, 10, 10, 1, 10, 10, 30, 30,
 		10, 10, 10, 1,  1, 10, 12, 12,
@@ -3281,10 +3319,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"宵闇の妖怪",
 		"宵闇の妖怪",
+		"Rumia",
+#else
+		"Rumia",
+		"Rumia",
 #endif
-		"Rumia",
-		"Rumia",
-
 		{1, -1, -1, -1, 0, -1},
 		20,  7, 25, 2, 8, 20, 50, 20,
 		 5, 10, 12, 2, 1,  5, 15, 10,
@@ -3307,10 +3346,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"半人半霊の庭師",
 		"半人半霊の庭師",
+		"Youmu",
+#else
+		"Youmu",
+		"Youmu",
 #endif
-		"Youmu",
-		"Youmu",
-
 		{3, -2, -1, 3, 4, 3},
 		23, 18, 30, -2,20, 40, 60, 45,
 		 8, 12, 13, 1, 1,  18, 25, 15,
@@ -3333,10 +3373,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"幸運の素兎",
 		"幸運の素兎",
+		"Tewi",
+#else
+		"Tewi",
+		"Tewi",
 #endif
-		"Tewi",
-		"Tewi",
-
 		{-2, 3, 2, 0, -1, 4},
 		36, 22, 36, 3, 32, 42, 40, 40,
 		12, 11, 12, 1,  5, 15, 15, 12,
@@ -3361,10 +3402,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"狂気の月の兎",
 		"狂気の月の兎",
+		"Udonge",
+#else
+		"Udonge",
+		"Udonge",
 #endif
-		"Udonge",
-		"Udonge",
-
 		{2, 3, -1, 0, 2, 0},
 		36, 27, 40, 2, 30, 40, 52, 60,
 		12, 12, 16, 3,  4, 14, 22, 30,
@@ -3386,10 +3428,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"美しき緋の衣",
 		"美しき緋の衣",
+		"Iku",
+#else
+		"Iku",
+		"Iku",
 #endif
-		"Iku",
-		"Iku",
-
 		{0, 3, 3, 2, 0, 3},
 		25, 36, 40, 3, 30, 45, 52, 36,
 		14, 12, 15, 0,  4, 18, 18, 18,
@@ -3411,10 +3454,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"三途の水先案内人",
 		"三途の水先案内人",
+		"Komachi",
+#else
+		"Komachi",
+		"Komachi",
 #endif
-		"Komachi",
-		"Komachi",
-
 		{0, 0, -2, 3, 2, 2},
 		20, 30, 50, 1, 28, 25, 60, 35,
 		 9, 12, 18, 0,  3, 10, 27, 20,
@@ -3436,10 +3480,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"愉快な忘れ傘",
 		"愉快な忘れ傘",
+		"Kogasa",
+#else
+		"Kogasa",
+		"Kogasa",
 #endif
-		"Kogasa",
-		"Kogasa",
-
 		{2, 0, -1, 0, 1, 2},
 		25, 30, 36, 1, 25, 25, 45, 10,
 		10, 10, 12, 0,  2,  5, 16,  1,
@@ -3462,10 +3507,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"片腕有角の仙人",
 		"片腕有角の仙人",
+		"Kasen",
+#else
+		"Kasen",
+		"Kasen",
 #endif
-		"Kasen",
-		"Kasen",
-
 		{6, 0, 0, 2, 6, 2},
 		23, 40, 45, 4, 22, 30, 72, 35,
 		12, 16, 18, 0,  1, 12, 25, 12,
@@ -3487,10 +3533,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"小さな百鬼夜行",
 		"小さな百鬼夜行",
+		"Suika",
+#else
+		"Suika",
+		"Suika",
 #endif
-		"Suika",
-		"Suika",
-
 		{2, 2, 1, 2, 2, 2},
 		16, 20, 36, 1, 18, 24, 80, 50,
 		16, 10, 14, 0,  4, 12, 32, 24,
@@ -3514,10 +3561,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"普通の黒魔術師",
 		"普通の黒魔術師",
+		"Marisa",
+#else
+		"Marisa",
+		"Marisa",
 #endif
-		"Marisa",
-		"Marisa",
-
 		{-1, 4, 4, 5, 1, 4},
 		40, 47, 32, 5, 45, 50, 50, 50,
 		15, 16, 12, 0,  8, 30, 18, 18,
@@ -3540,10 +3588,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"淡水に棲む人魚",
 		"淡水に棲む人魚",
+		"Wakasagi",
+#else
+		"Wakasagi",
+		"Wakasagi",
 #endif
-		"Wakasagi",
-		"Wakasagi",
-
 		{ -2, 0, 1, 1, -1, 1},
 		20, 24, 32, 4, 30, 25, 44, 55,
 		 9, 12, 16, 1,  4,  8, 12, 16,
@@ -3565,10 +3614,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"閉じた恋の瞳",
 		"閉じた恋の瞳",
+		"Koishi",
+#else
+		"Koishi",
+		"Koishi",
 #endif
-		"Koishi",
-		"Koishi",
-
 		{ -2, -7, -3, 3, 1, 2},
 		 1, 16, 75,  0,  1, 80, 30,  1,
 		 1, 10, 15,  5,  0,  0, 30,  1,
@@ -3590,10 +3640,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"下っ端哨戒天狗",
 		"下っ端哨戒天狗",
+		"Momiji",
+#else
+		"Momiji",
+		"Momiji",
 #endif
-		"Momiji",
-		"Momiji",
-
 		{ 1, 3, 0, 1, 0, 0},
 		36, 21, 32, 2, 60, 45, 54, 50,
 		12,  9, 10, 0, 10, 12, 18, 20,
@@ -3616,10 +3667,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"壁抜けの邪仙",
 		"壁抜けの邪仙",
+		"Seiga",
+#else
+		"Seiga",
+		"Seiga",
 #endif
-		"Seiga",
-		"Seiga",
-
 		{ -1, 3, -1, 2, 1, -3},
 		24, 40, 40, 3, 32, 30, 36, 36,
 		15, 15, 15, 0,  3, 12,  8,  8,
@@ -3641,10 +3693,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"氷の妖精",
 		"氷の妖精",
+		"Cirno",
+#else
+		"Cirno",
+		"Cirno",
 #endif
-		"Cirno",
-		"Cirno",
-
 		{ 3, 1, 2, 3, 3, 3},
 		10, 14, 30, 1, 12, 25, 40, 18,
 		 2,  9, 12, 0,  1,  8, 23,  9,
@@ -3666,10 +3719,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"地獄の輪禍",
 		"地獄の輪禍",
+		"Orin",
+#else
+		"Orin",
+		"Orin",
 #endif
-		"Orin",
-		"Orin",
-
 		{ 1, 4, 3, 1, 1, -3},
 		30, 30, 36, 4, 32, 55, 55, 36,
 		12, 13, 15, 1,  4, 20,  20,  8,
@@ -3692,10 +3746,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"小人の末裔",
 		"小人の末裔",
+		"Shinmyoumaru",
+#else
+		"Shinmyoumaru",
+		"Shinmyoumaru",
 #endif
-		"Shinmyoumaru",
-		"Shinmyoumaru",
-
 		{1, 0, 3, 2, 1, 3},
 		36, 48, 32, 3, 32, 45, 55, 32,
 		12, 24, 12, 1,  3, 16, 20, 16,
@@ -3717,10 +3772,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"ダウザーの小さな大将",
 		"ダウザーの小さな大将",
+		"Nazrin",
+#else
+		"Nazrin",
+		"Nazrin",
 #endif
-		"Nazrin",
-		"Nazrin",
-
 		{ -2, 3, 3, 0, -2, 1},
 		40, 40, 38, 3, 40, 36, 37, 40,
 		14, 14, 12, 1,  8, 11, 12, 10,
@@ -3742,10 +3798,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"冬の忘れ物",
 		"冬の忘れ物",
+		"Letty",
+#else
+		"Letty",
+		"Letty",
 #endif
-		"Letty",
-		"Letty",
-
 		{ -1, 1, 2, -2, 0, 1},
 		25, 20, 30, 4, 15, 20, 45, 30,
 		12, 10, 10, 1,  1,  7,  15, 15,
@@ -3768,10 +3825,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"忠実な死体",
 		"忠実な死体",
+		"Yoshika",
+#else
+		"Yoshika",
+		"Yoshika",
 #endif
-		"Yoshika",
-		"Yoshika",
-
 		{ 1, 2, 1, 0, 2, 2},
 		10, 14, 30, 3,  8, 20, 65, 10,
 		 6,   6,  8, 0,  0,  4,  20,  5,
@@ -3795,10 +3853,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"動かない大図書館",
 		"動かない大図書館",
+		"Patchouli",
+#else
+		"Patchouli",
+		"Patchouli",
 #endif
-		"Patchouli",
-		"Patchouli",
-
 		{ -2, 5, 3, -2, -4, 1},
 		15, 30, 35, 4, 20, 10, 15, 10,
 		10, 18, 15, 0,  3,  2,   5,  5,
@@ -3821,10 +3880,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"伝統の幻想ブン屋",
 		"伝統の幻想ブン屋",
+		"Aya",
+#else
+		"Aya",
+		"Aya",
 #endif
-		"Aya",
-		"Aya",
-
 		{ 1, 1, 2, 5, 2, 1},
 		25, 26, 32, 3, 30, 30, 55, 40,
 		15, 13, 12, 0,  5, 15, 22, 12,
@@ -3847,10 +3907,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"ろくろ首の怪奇",
 		"ろくろ首の怪奇",
+		"Sekibanki",
+#else
+		"Sekibanki",
+		"Sekibanki",
 #endif
-		"Sekibanki",
-		"Sekibanki",
-
 		{0, 1, 0, 1, 1, 1},
 		23, 20, 22, 4, 22, 30, 50, 50,
 		12, 11, 15, 0,  2, 10, 18, 21,
@@ -3872,10 +3933,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"夜雀の怪",
 		"夜雀の怪",
+		"Mystia",
+#else
+		"Mystia",
+		"Mystia",
 #endif
-		"Mystia",
-		"Mystia",
-
 		{-1, -2, 0, 2, 0, 3},
 		26, 20, 32, 5, 24, 32, 45, 15,
 		12,  9, 10, 1,  3, 10, 21, 10,
@@ -3897,10 +3959,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"悪魔の妹",
 		"悪魔の妹",
+		"Flandre",
+#else
+		"Flandre",
+		"Flandre",
 #endif
-		"Flandre",
-		"Flandre",
-
 		{5, 3, -8, 1, 3, 0},
 		1,  1, 60, 1,  10, 32, 72, 60,
 		1, 16, 12, 0,  0, 10, 26, 25,
@@ -3921,10 +3984,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"毘沙門天の弟子",
 		"毘沙門天の弟子",
+		"Shou",
+#else
+		"Shou",
+		"Shou",
 #endif
-		"Shou",
-		"Shou",
-
 		{3, 2, 5, -1, 2, 5},
 		20, 30, 38, 2, 24, 24, 16, 16,
 		10, 12, 16, 0,  2, 12, 40, 30,
@@ -3946,10 +4010,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"小さなスイートポイズン",
 		"小さなスイートポイズン",
+		"Medicine",
+#else
+		"Medicine",
+		"Medicine",
 #endif
-		"Medicine",
-		"Medicine",
-
 		{ 0, 1, 1, 1, 0, 1},
 		21, 24, 30, 4, 16, 20, 40, 40,
 		12, 12, 11, 0,  1,  4,  21, 18,
@@ -3971,10 +4036,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"華胥の亡霊",
 		"華胥の亡霊",
+		"Yuyuko",
+#else
+		"Yuyuko",
+		"Yuyuko",
 #endif
-		"Yuyuko",
-		"Yuyuko",
-
 		{ 4, 4, 3, 2, 3, 5},
 		22, 45, 45, 5, 35, 30, 55, 40,
 		10, 16, 18, 1,  3, 10, 24, 16,
@@ -3996,10 +4062,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"怨霊も恐れ怯む少女",
 		"怨霊も恐れ怯む少女",
+		"Satori",
+#else
+		"Satori",
+		"Satori",
 #endif
-		"Satori",
-		"Satori",
-
 		{ -3, 8, 8, -2, -3, -4},
 		16, 30, 36, 4, 23, 40, 37, 45,
 		12, 12, 12, 0,  1, 12, 12,  20,
@@ -4021,10 +4088,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"読経するヤマビコ",
 		"読経するヤマビコ",
+		"Kyouko",
+#else
+		"Kyouko",
+		"Kyouko",
 #endif
-		"Kyouko",
-		"Kyouko",
-
 		{-1, 0, 2, -1, -1, 1},
 		24, 20, 28, 2, 18, 24, 43, 15,
 		10, 11, 10, 0,  2,  8, 18, 10,
@@ -4046,10 +4114,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神の末裔の亡霊",
 		"神の末裔の亡霊",
+		"Tojiko",
+#else
+		"Tojiko",
+		"Tojiko",
 #endif
-		"Tojiko",
-		"Tojiko",
-
 		{2, 1, 0, 1, 2, 0},
 		20, 22, 30, 3, 18, 36, 45, 50,
 		10, 12, 11, 0,  1, 15, 16, 23,
@@ -4071,10 +4140,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"春を運ぶ妖精",
 		"春を運ぶ妖精",
+		"Lilywhite",
+#else
+		"Lilywhite",
+		"Lilywhite",
 #endif
-		"Lilywhite",
-		"Lilywhite",
-
 		{3, 3, 3, 3, 3, 3},
 		20, 21, 35, 1, 21, 26, 50, 20,
 		 5,  12, 12, 0, 2,  12, 20, 10,
@@ -4097,10 +4167,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"恐るべき井戸の怪",
 		"恐るべき井戸の怪",
+		"Kisume",
+#else
+		"Kisume",
+		"Kisume",
 #endif
-		"Kisume",
-		"Kisume",
-
 		{ -1, -1, 1, -2, 2, -2},
 		18, 20, 28, 5, 20, 25, 60, 48,
 		10,  9, 11, 1,  3, 10, 25, 24,
@@ -4123,10 +4194,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"今どきの念写記者",
 		"今どきの念写記者",
+		"Hatate",
+#else
+		"Hatate",
+		"Hatate",
 #endif
-		"Hatate",
-		"Hatate",
-
 		{ 0, 2, 1, -1, 1, 1},
 		24, 32, 30, 3, 27, 25, 50, 68,
 		11, 12, 10, 1,  4, 12, 20, 27,
@@ -4149,10 +4221,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"聖徳道士",
 		"聖徳道士",
+		"Miko",
+#else
+		"Miko",
+		"Miko",
 #endif
-		"Miko",
-		"Miko",
-
 		{ 3, 5, 5, 2, 2, 5},
 		30, 48, 40, 4, 32, 36, 55, 48,
 		18, 22, 18, 0,  5,  18, 25, 21,
@@ -4176,10 +4249,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"表情豊かなポーカーフェイス",
 		"表情豊かなポーカーフェイス",
+		"Kokoro",
+#else
+		"Kokoro",
+		"Kokoro",
 #endif
-		"Kokoro",
-		"Kokoro",
-
 		{2, 3, 3, 2, 2, 3},
 		26, 36, 32, 3, 24, 30, 58, 45,
 		13, 16, 13, 0,  3, 12, 25, 20,
@@ -4201,10 +4275,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"闇に蠢く光の蟲",
 		"闇に蠢く光の蟲",
+		"Wriggle",
+#else
+		"Wriggle",
+		"Wriggle",
 #endif
-		"Wriggle",
-		"Wriggle",
-
 		{ -1, -2, -1, 0, 1, 1},
 		24, 20, 32, 3, 27, 30, 43, 36,
 		12, 10, 12, 0,  3,   8, 16, 14,
@@ -4226,10 +4301,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"四季のフラワーマスター",
 		"四季のフラワーマスター",
+		"Yuuka",
+#else
+		"Yuuka",
+		"Yuuka",
 #endif
-		"Yuuka",
-		"Yuuka",
-
 		{ 3, 2, 2, 1, 3, 3},
 		33, 30, 36, 4,  30, 30, 75, 45,
 		11, 13, 14, 0,  4,  10,  32, 16,
@@ -4251,10 +4327,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"凶兆の黒猫",
 		"凶兆の黒猫",
+		"Chen",
+#else
+		"Chen",
+		"Chen",
 #endif
-		"Chen",
-		"Chen",
-
 		{1, 2, 1, 3, 1, 2},
 		20, 24, 30, 4, 18, 36, 55, 20,
 		10, 12, 11, 1, 3,  15, 24, 10,
@@ -4276,10 +4353,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"水難事故の念縛霊",
 		"水難事故の念縛霊",
+		"Minamitsu",
+#else
+		"Minamitsu",
+		"Minamitsu",
 #endif
-		"Minamitsu",
-		"Minamitsu",
-
 		{ 1, 1, 3, 1, 0, -2},
 		36, 30, 38, 4, 20, 32, 50, 40,
 		13, 12, 11, 0,  3, 10, 20, 10,
@@ -4301,10 +4379,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"知識と歴史の半獣",
 		"知識と歴史の半獣",
+		"Keine",
+#else
+		"Keine",
+		"Keine",
 #endif
-		"Keine",
-		"Keine",
-
 		{ -2, 6, 4, -2, 0, 4},
 		32, 36, 30, 2, 27, 26, 55, 45,
 		16, 14, 13, 0,  4, 10, 24, 15,
@@ -4327,10 +4406,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"博麗の巫女",
 		"博麗の巫女",
+		"Reimu",
+#else
+		"Reimu",
+		"Reimu",
 #endif
-		"Reimu",
-		"Reimu",
-
 		{0, 0, 0, 0, 0, 0},
 		25, 30, 27, 2, 25, 65, 50, 50,
 		12, 12, 12, 0,  5, 25, 20, 20,
@@ -4353,10 +4433,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"語られる怪力乱神",
 		"語られる怪力乱神",
+		"Yugi",
+#else
+		"Yugi",
+		"Yugi",
 #endif
-		"Yugi",
-		"Yugi",
-
 		{4, 1, 2, -1, 3, 1},
 		10, 24, 29, 1, 16, 20, 90, 40,
 		10, 10, 11, 0,  2, 12, 30, 18,
@@ -4377,10 +4458,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"竹林のルーガルー",
 		"竹林のルーガルー",
+		"Kagerou",
+#else
+		"Kagerou",
+		"Kagerou",
 #endif
-		"Kagerou",
-		"Kagerou",
-
 		{1, 0, 0, 1, 1, 1},
 		25, 20, 30, 4,20, 40, 55, 30,
 		 8, 12, 12, 0, 3, 18, 24, 12,
@@ -4402,10 +4484,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"寂しさと終焉の象徴",
 		"寂しさと終焉の象徴",
+		"Shizuha",
+#else
+		"Shizuha",
+		"Shizuha",
 #endif
-		"Shizuha",
-		"Shizuha",
-
 		{2, -1, 0, 2, -1, -2},
 		24, 22, 27, 3,16, 20, 50, 20,
 		12, 12, 12, 0, 3,  5, 22, 10,
@@ -4429,10 +4512,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"祀られる風の人間",
 		"祀られる風の人間",
+		"Sanae",
+#else
+		"Sanae",
+		"Sanae",
 #endif
-		"Sanae",
-		"Sanae",
-
 		{-1, 1, 3, -1, -1, 2},
 		26, 32, 32, 3, 21, 25, 43, 38,
 		12, 12, 16, 0,  2,  9, 16, 12,
@@ -4454,10 +4538,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"豊かさと稔りの象徴",
 		"豊かさと稔りの象徴",
+		"Minoriko",
+#else
+		"Minoriko",
+		"Minoriko",
 #endif
-		"Minoriko",
-		"Minoriko",
-
 		{ 0, 0, 2, -1, 0, 1},
 		22, 24, 32, 2, 20, 23, 45, 25,
 		10, 12, 10, 0,  3,  7, 12, 10,
@@ -4479,10 +4564,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"永遠に紅い幼き月",
 		"永遠に紅い幼き月",
+		"Remilia",
+#else
+		"Remilia",
+		"Remilia",
 #endif
-		"Remilia",
-		"Remilia",
-
 		{3, 2, 2, 3, 3, 3},
 		36, 45, 40, 4, 36, 36, 80, 60,
 		12, 12, 12, 1,  5, 15, 30, 27,
@@ -4504,10 +4590,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"超妖怪弾頭",
 		"超妖怪弾頭",
+		"Nitori",
+#else
+		"Nitori",
+		"Nitori",
 #endif
-		"Nitori",
-		"Nitori",
-
 		{1, 1, 1, 2, 0, 1},
 		55, 21, 27, 3, 23, 20, 50, 60,
 		32,  9, 10, 0,  2,  8, 22, 24,
@@ -4529,10 +4616,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"封印された大魔法使い",
 		"封印された大魔法使い",
+		"Byakuren",
+#else
+		"Byakuren",
+		"Byakuren",
 #endif
-		"Byakuren",
-		"Byakuren",
-
 		{ -1, 3, 7, -1, -2, 6},
 		27, 45, 36, 2, 21, 30, 40, 40,
 		16, 18, 15, 0,  4, 12, 15, 18,
@@ -4554,10 +4642,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"土着神の頂点",
 		"土着神の頂点",
+		"Suwako",
+#else
+		"Suwako",
+		"Suwako",
 #endif
-		"Suwako",
-		"Suwako",
-
 		{ 1, 4, 7, 2, 3, 2},
 		30, 40, 40, 3, 28, 30, 50, 45,
 		18, 18, 18, 1,  5, 12, 18, 16,
@@ -4581,10 +4670,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"未確認幻想飛行少女",
 		"未確認幻想飛行少女",
+		"Nue",
+#else
+		"Nue",
+		"Nue",
 #endif
-		"Nue",
-		"Nue",
-
 		{ 0, 2, 0, 1, 0, 0},
 		27, 34, 32, 5, 24, 27, 55, 45,
 		16, 16, 12, 1,  3, 18, 27, 15,
@@ -4607,10 +4697,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"逆襲のあまのじゃく",
 		"逆襲のあまのじゃく",
+		"Seija",
+#else
+		"Seija",
+		"Seija",
 #endif
-		"Seija",
-		"Seija",
-
 		{-3, 5, 5, 2, -2, -7},
 		32, 48, 25, 5, 28, 32, 35, 50,
 		18, 20,  8, 1,  5, 10,  12, 25,
@@ -4632,10 +4723,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"熱かい悩む神の火",
 		"熱かい悩む神の火",
+		"Utsuho",
+#else
+		"Utsuho",
+		"Utsuho",
 #endif
-		"Utsuho",
-		"Utsuho",
-
 		{ 2, -3, 1, 0, 4, 2},
 		14, 15, 36, 1, 15, 18, 55, 45,
 		10, 10, 16, 0,  1,   6, 24, 16,
@@ -4657,10 +4749,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"暗い洞窟の明るい網",
 		"暗い洞窟の明るい網",
+		"Yamame",
+#else
+		"Yamame",
+		"Yamame",
 #endif
-		"Yamame",
-		"Yamame",
-
 		{1, -1, 0, 1, 0, -2},
 		32, 20, 25, 4, 28, 20, 45, 20,
 		10,  8, 12, 1, 1,  5, 18, 10,
@@ -4682,10 +4775,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"すきま妖怪の式",
 		"すきま妖怪の式",
+		"Ran",
+#else
+		"Ran",
+		"Ran",
 #endif
-		"Ran",
-		"Ran",
-
 		{4, 4, 4, 4, 4, 4},
 		30, 36, 40, 4, 32, 40, 60, 60,
 		10, 15, 12, 0,  3,  12, 20, 20,
@@ -4707,10 +4801,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"楽園の最高裁判長",
 		"楽園の最高裁判長",
+		"Yamaxanadu",
+#else
+		"Yamaxanadu",
+		"Yamaxanadu",
 #endif
-		"Yamaxanadu",
-		"Yamaxanadu",
-
 		{ 2, 5, 9, 1, 5, 3},
 		20, 38, 45, 2, 32, 20, 45, 40,
 		12, 15, 20, 0,  9,  7,  16, 18,
@@ -4732,10 +4827,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"非想非非想天の娘",
 		"非想非非想天の娘",
+		"Tenshi",
+#else
+		"Tenshi",
+		"Tenshi",
 #endif
-		"Tenshi",
-		"Tenshi",
-
 		{ 1, 0, 0, 1, 1, -1},
 		40, 40, 36, 1, 20, 24, 45, 40,
 		18, 21, 13 ,0, 2,   7, 26, 15,
@@ -4758,10 +4854,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"華人小娘",
 		"華人小娘",
+		"Meiling",
+#else
+		"Meiling",
+		"Meiling",
 #endif
-		"Meiling",
-		"Meiling",
-
 		{ 1, -1, 2, 2, 2, 1},
 		22, 22, 30, 3, 24, 32, 55, 47,
 		6,  11, 12, 0,  2,  12, 23, 17,
@@ -4783,10 +4880,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"地殻の下の嫉妬心",
 		"地殻の下の嫉妬心",
+		"Parsee",
+#else
+		"Parsee",
+		"Parsee",
 #endif
-		"Parsee",
-		"Parsee",
-
 		{ 0, 1, 2, 0, -1, -2},
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -4809,10 +4907,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"小人の末裔",
 		"小人の末裔",
+		"Shinmyoumaru2",
+#else
+		"Shinmyoumaru2",
+		"Shinmyoumaru2",
 #endif
-		"Shinmyoumaru2",
-		"Shinmyoumaru2",
-
 		{1, 0, 3, 2, 1, 3},
 		36, 48, 32, 3, 32, 45, 55, 32,
 		12, 24, 12, 1,  3, 16, 20, 16,
@@ -4835,10 +4934,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"秘封倶楽部初代会長",
 		"秘封倶楽部初代会長",
+		"Sumireko",
+#else
+		"Sumireko",
+		"Sumireko",
 #endif
-		"Sumireko",
-		"Sumireko",
-
 		{-2, 3, 3, 1, -1, 2},
 		30, 20, 35, 4, 28, 16, 45, 55,
 		12, 15, 11, 0,  5,  0, 22, 24,
@@ -4861,10 +4961,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"守り守られし大輪",
 		"守り守られし大輪",
+		"Ichirin",
+#else
+		"Ichirin",
+		"Ichirin",
 #endif
-		"Ichirin",
-		"Ichirin",
-
 		{ -1, 3, 5, 0, 0, 3},
 		25, 26, 30, 1, 24, 36, 70, 24,
 		7,  12, 11, 0,  2,  15, 16, 10,
@@ -4887,10 +4988,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"蓬莱の人の形",
 		"蓬莱の人の形",
+		"Mokou",
+#else
+		"Mokou",
+		"Mokou",
 #endif
-		"Mokou",
-		"Mokou",
-
 		{-1, 1, 3, 1, -2, 0},
 		39, 36, 30, 3, 30, 35, 64, 55,
 		11, 10, 10, 0,  2, 12, 18, 18,
@@ -4911,10 +5013,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"山坂と湖の権化",
 		"山坂と湖の権化",
+		"Kanako",
+#else
+		"Kanako",
+		"Kanako",
 #endif
-		"Kanako",
-		"Kanako",
-
 		{ 1, 0, 2, -1, 2, 1},
 		24, 25, 36, 2, 20, 24, 40, 40,
 		10, 10, 12 ,0,  2,   7, 15, 12,
@@ -4937,10 +5040,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"古代日本の尸解仙",
 		"古代日本の尸解仙",
+		"Futo",
+#else
+		"Futo",
+		"Futo",
 #endif
-		"Futo",
-		"Futo",
-
 		{ -1, 2, 0, 2, -1, 1},
 		22, 34, 30, 1, 20, 24, 48, 56,
 		15, 12, 14, 1,  5,  8,  18,  22,
@@ -4962,10 +5066,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"輝ける日の光",
 		"輝ける日の光",
+		"Sunnymilk",
+#else
+		"Sunnymilk",
+		"Sunnymilk",
 #endif
-		"Sunnymilk",
-		"Sunnymilk",
-
 		{ 2, 2, 1, 1, 1, 1},
 		25, 20, 28, 0, 20, 24, 45, 25,
 		9,  9,  8, 1,  2,  8, 16, 10,
@@ -4987,10 +5092,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"静かなる月の光",
 		"静かなる月の光",
+		"Lunachild",
+#else
+		"Lunachild",
+		"Lunachild",
 #endif
-		"Lunachild",
-		"Lunachild",
-
 		{ 0, 3, 1, -2, 0, 1},
 		20, 22, 30, 2, 30, 24, 40, 25,
 		7,  11,  12, 1,  4,  8, 15, 10,
@@ -5013,10 +5119,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"降り注ぐ星の光",
 		"降り注ぐ星の光",
+		"Starsapphire",
+#else
+		"Starsapphire",
+		"Starsapphire",
 #endif
-		"Starsapphire",
-		"Starsapphire",
-
 		{ 0, 2, 1, 2, -1, 1},
 		28, 24, 30, 5, 23, 24, 37, 40,
 		15, 12, 10, 0,  3,  8, 12, 16,
@@ -5038,10 +5145,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"七色の人形遣い",
 		"七色の人形遣い",
+		"Alice",
+#else
+		"Alice",
+		"Alice",
 #endif
-		"Alice",
-		"Alice",
-
 		{-1, 2, 1, 5, -1, 2},
 		40, 42, 28, 3, 27, 18, 50, 20,
 		16, 15, 12, 0,  3, 10, 21, 10,
@@ -5064,10 +5172,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"騒霊ヴァイオリスト",
 		"騒霊ヴァイオリスト",
+		"Lunasa",
+#else
+		"Lunasa",
+		"Lunasa",
 #endif
-		"Lunasa",
-		"Lunasa",
-
 		{2, 4, 3, 2, 2, 3},
 		20, 24, 32, 3, 18, 30, 47, 40,
 		10, 12, 12, 0,  1, 12, 16, 16,
@@ -5089,10 +5198,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"騒霊トランペッター",
 		"騒霊トランペッター",
+		"Merlin",
+#else
+		"Merlin",
+		"Merlin",
 #endif
-		"Merlin",
-		"Merlin",
-
 		{3, 0, 2, 2, 4, 4},
 		12, 20, 28, 1, 16, 32, 60, 36,
 		10, 10, 10, 0,  0, 13, 27, 15,
@@ -5114,10 +5224,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"騒霊キーボーディスト",
 		"騒霊キーボーディスト",
+		"Lyrica",
+#else
+		"Lyrica",
+		"Lyrica",
 #endif
-		"Lyrica",
-		"Lyrica",
-
 		{2, 3, 1, 5, 2, 3},
 		30, 28, 30, 3, 24, 38, 50, 50,
 		18, 15, 11, 1,  4, 15, 23, 20,
@@ -5140,10 +5251,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"地獄の妖精",
 		"地獄の妖精",
+		"Clownpiece",
+#else
+		"Clownpiece",
+		"Clownpiece",
 #endif
-		"Clownpiece",
-		"Clownpiece",
-
 		{10, 0, 10, 10, 10, 10},
 		30, 30, 36, 1, 24, 38, 65, 50,
 		18, 15, 15, 0,  4, 15, 30, 20,
@@ -5165,10 +5277,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"夢の支配者",
 		"夢の支配者",
+		"Doremy",
+#else
+		"Doremy",
+		"Doremy",
 #endif
-		"Doremy",
-		"Doremy",
-
 		{ -2, 5, 6, 1, -1, 2},
 		24, 32, 36, 5, 27, 40, 48, 40,
 		15, 16, 13, 0,  2, 12, 18, 14,
@@ -5190,10 +5303,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"古びた琵琶の付喪神",
 		"古びた琵琶の付喪神",
+		"Benben",
+#else
+		"Benben",
+		"Benben",
 #endif
-		"Benben",
-		"Benben",
-
 		{ 1, 3, 2, -1, 0, 1},
 		23, 28, 31, 2, 21, 32, 48, 36,
 		12, 16, 12, 0,  2,  10, 20,  8,
@@ -5216,10 +5330,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"古びた琴の付喪神",
 		"古びた琴の付喪神",
+		"Yatsuhashi",
+#else
+		"Yatsuhashi",
+		"Yatsuhashi",
 #endif
-		"Yatsuhashi",
-		"Yatsuhashi",
-
 		{ 0, 4, 2, 0, -1, 1},
 		28, 32, 31, 4, 24, 32, 42, 36,
 		15, 15, 12, 0,  3,  10, 14,  8,
@@ -5242,10 +5357,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"秘神流し雛",
 		"秘神流し雛",
+		"Hina",
+#else
+		"Hina",
+		"Hina",
 #endif
-		"Hina",
-		"Hina",
-
 		{-1, 1, 3, -2, 2, -16},
 		24, 24, 36, 6, 23, 10, 47, 20,
 		16, 12, 16, 0, 3,  5, 18, 10,
@@ -5267,10 +5383,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"紅魔館のメイド",
 		"紅魔館のメイド",
+		"Sakuya",
+#else
+		"Sakuya",
+		"Sakuya",
 #endif
-		"Sakuya",
-		"Sakuya",
-
 		{ 0, 4, 2, 3, 2, 3},
 		45, 25, 30, 5, 28, 40, 55, 64,
 		16, 14, 11, 0,  6, 12, 24, 24,
@@ -5292,10 +5409,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"光の三妖精",
 		"光の三妖精",
+		"Three-fairies",
+#else
+		"Three-fairies",
+		"Three-fairies",
 #endif
-		"Three-fairies",
-		"Three-fairies",
-
 		{ 3, 2, 1, 0, 2, 3},
 		25, 24, 31, 2, 25, 24, 50, 45,
 		9,  11, 10, 1,  5,  8, 20, 18,
@@ -5317,10 +5435,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"夢幻のパーカッショニスト",
 		"夢幻のパーカッショニスト",
+		"Raiko",
+#else
+		"Raiko",
+		"Raiko",
 #endif
-		"Raiko",
-		"Raiko",
-
 		{4, 4, 2, 3, 3, 2},
 		35, 36, 32, 2, 30, 30, 55, 40,
 		14, 13, 12, 0,  3, 12, 27, 18,
@@ -5344,10 +5463,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"化け狸十変化",
 		"化け狸十変化",
+		"Mamizou",
+#else
+		"Mamizou",
+		"Mamizou",
 #endif
-		"Mamizou",
-		"Mamizou",
-
 		{ 2, 4, 4, 2, 3, 3},
 		36, 35, 32, 5, 32, 25, 55, 48,
 		15, 14, 12, 0,  4, 10, 21, 21,
@@ -5369,10 +5489,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神隠しの主犯",
 		"神隠しの主犯",
+		"Yukari",
+#else
+		"Yukari",
+		"Yukari",
 #endif
-		"Yukari",
-		"Yukari",
-
 		{ 0, 4, 4, 1, 2, 3},
 		27, 38, 36, 5, 30, 27, 50, 45,
 		16, 16, 14, 1,  4, 18, 18, 15,
@@ -5395,10 +5516,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"橘色のイーグルラヴィ",
 		"橘色のイーグルラヴィ",
+		"Ringo",
+#else
+		"Ringo",
+		"Ringo",
 #endif
-		"Ringo",
-		"Ringo",
-
 		{ -1, 4, 2, -1, -1, 1},
 		48, 27, 30, 4, 32, 28, 50, 50,
 		20, 12, 10, 0,  5, 10, 22, 22,
@@ -5420,10 +5542,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"浅葱色のイーグルラヴィ",
 		"浅葱色のイーグルラヴィ",
+		"Seiran",
+#else
+		"Seiran",
+		"Seiran",
 #endif
-		"Seiran",
-		"Seiran",
-
 		{ 1, 0, -1, 2, 1, -1},
 		40, 20, 28, 3, 28, 28, 48, 60,
 		15, 10, 10, 0,  3, 12, 20, 27,
@@ -5445,10 +5568,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"月の頭脳",
 		"月の頭脳",
+		"Eirin",
+#else
+		"Eirin",
+		"Eirin",
 #endif
-		"Eirin",
-		"Eirin",
-
 		{3, 9, 8, 4, 5, 4},
 		45, 48, 45, 5, 40, 35, 60, 85,
 		16, 20, 16, 0,  5, 12, 24, 30,
@@ -5469,10 +5593,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"永遠と須臾の罪人",
 		"永遠と須臾の罪人",
+		"Kaguya",
+#else
+		"Kaguya",
+		"Kaguya",
 #endif
-		"Kaguya",
-		"Kaguya",
-
 		{2, 2, 3, -2, 0, 9},
 		24, 40, 36, 2, 27, 20, 45, 45,
 		8, 20, 12, 0,  2, 6, 16, 16,
@@ -5493,10 +5618,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"舌禍をもたらす女神",
 		"舌禍をもたらす女神",
+		"Sagume",
+#else
+		"Sagume",
+		"Sagume",
 #endif
-		"Sagume",
-		"Sagume",
-
 		{ 0, 3, 2, -2, -1, 2},
 		23, 48, 30, 5, 27, 30, 16, 45,
 		13, 18, 12, 0,  4, 12, 8, 18,
@@ -5521,10 +5647,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"月の防衛隊員",
 		"月の防衛隊員",
+		"Reisen2",
+#else
+		"Reisen2",
+		"Reisen2",
 #endif
-		"Reisen2",
-		"Reisen2",
-
 		{0, 1, -1, 2, 0, -1},
 		22, 20, 27, 3, 24, 30, 45, 50,
 		11, 10, 10, 0,  2, 10, 16, 21,
@@ -5547,10 +5674,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"海と山を繋ぐ月の姫",
 		"海と山を繋ぐ月の姫",
+		"Toyohime",
+#else
+		"Toyohime",
+		"Toyohime",
 #endif
-		"Toyohime",
-		"Toyohime",
-
 		{ 0, 4, 3, 0, 1, 3},
 		28, 40, 32, 5,  32, 30, 45, 45,
 		10, 18, 11, 0,   4, 10, 16, 18,
@@ -5573,10 +5701,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神霊の依り憑く月の姫",
 		"神霊の依り憑く月の姫",
+		"Yorihime",
+#else
+		"Yorihime",
+		"Yorihime",
 #endif
-		"Yorihime",
-		"Yorihime",
-
 		{ 2, 4, 2, 2, 2, 1},
 		33, 36, 33, 3,  30, 30, 80, 45,
 		11, 15, 12, 0,   3, 10, 27, 18,
@@ -5599,10 +5728,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"(無名の存在)",
 		"(無名の存在)",
+		"Junko",
+#else
+		"Junko",
+		"Junko",
 #endif
-		"Junko",
-		"Junko",
-
 		{ 2, 6, 9, 1, 4, 2},
 		80, 32, 60, 2, 15, 30, 45, 45,
 		30, 16, 20, 0,  2, 12, 24, 24,
@@ -5625,10 +5755,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"地獄の女神",
 		"地獄の女神",
+		"Hecatia",
+#else
+		"Hecatia",
+		"Hecatia",
 #endif
-		"Hecatia",
-		"Hecatia",
-
 		{ 1, 9, 9, 2, 3, 4},
 		30, 50, 50, 3, 27, 24, 48, 50,
 		23, 20, 18, 0,  5, 12, 23, 23,
@@ -5652,10 +5783,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"浮世の関を超える山姥",
 		"浮世の関を超える山姥",
+		"Nemuno",
+#else
+		"Nemuno",
+		"Nemuno",
 #endif
-		"Nemuno",
-		"Nemuno",
-
 		{0, 2, 2, 1, 0, 1},
 		20, 20, 27, 2, 28, 26, 50, 48,
 		10, 11, 10, 0,  4, 10, 16, 18,
@@ -5678,10 +5810,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神仏に心酔する守護神獣",
 		"神仏に心酔する守護神獣",
+		"Aunn",
+#else
+		"Aunn",
+		"Aunn",
 #endif
-		"Aunn",
-		"Aunn",
-
 		{1, 2, 4, -1, 1, 2},
 		18, 22, 36, 5, 32, 26, 55, 45,
 		10, 12, 12, 0,  5, 10, 22, 16,
@@ -5705,10 +5838,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"森で垂迹した魔法地蔵",
 		"森で垂迹した魔法地蔵",
+		"Narumi",
+#else
+		"Narumi",
+		"Narumi",
 #endif
-		"Narumi",
-		"Narumi",
-
 		{ -2, 2, 3, -1, 0, 1},
 		21, 27, 32, 1, 26, 25, 36, 30,
 		10, 12, 15, 0,  3,  7, 12, 10,
@@ -5731,10 +5865,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"判読眼のビブロフィリア",
 		"判読眼のビブロフィリア",
+		"Kosuzu",
+#else
+		"Kosuzu",
+		"Kosuzu",
 #endif
-		"Kosuzu",
-		"Kosuzu",
-
 		{ -2, 1, 0, 0, -1, 2},
 		16, 10, 20, 3, 27, 20, 30, 24,
 		 5, 16, 10, 0,  4,  7, 15, 12,
@@ -5756,10 +5891,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"神に近づく蝶の妖精",
 		"神に近づく蝶の妖精",
+		"Eternitylarva",
+#else
+		"Eternitylarva",
+		"Eternitylarva",
 #endif
-		"Eternitylarva",
-		"Eternitylarva",
-
 		{ -2, -2, -1, -1, 0, 0 },
 		12, 10, 20, 0, 15, 16, 20, 20,
 		16, 14, 14, 1,  5, 12, 20, 20,
@@ -5782,10 +5918,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"危険すぎるバックダンサー",
 		"危険すぎるバックダンサー",
+		"Mai",
+#else
+		"Mai",
+		"Mai",
 #endif
-		"Mai",
-		"Mai",
-
 		{ 1, 0, 0, 0, 1, 1 },
 		23, 27, 30, 1, 25, 40, 50, 45,
 		15, 12, 12, 0,  3, 12, 25, 15,
@@ -5807,10 +5944,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"危険すぎるバックダンサー",
 		"危険すぎるバックダンサー",
+		"Satono",
+#else
+		"Satono",
+		"Satono",
 #endif
-		"Satono",
-		"Satono",
-
 		{ 0, 1, 1, 0, 0, 1 },
 		23, 40, 30, 4, 25, 40, 45, 45,
 		15, 12, 12, 0,  3, 12, 15, 15,
@@ -5832,10 +5970,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"狂気なる地獄の妖精",
 		"狂気なる地獄の妖精",
+		"VFS_Clownpiece",
+#else
+		"VFS_Clownpiece",
+		"VFS_Clownpiece",
 #endif
-		"VFS_Clownpiece",
-		"VFS_Clownpiece",
-
 		{ 4, 1, 1, 4, 4, 1},
 		16, 20, 32, 3, 20, 32, 45, 40,
 		10, 12, 12, 0,  2, 10, 20, 16,
@@ -5858,10 +5997,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"最凶最悪の双子の妹",
 		"最凶最悪の双子の妹",
+		"Jyoon",
+#else
+		"Jyoon",
+		"Jyoon",
 #endif
-		"Jyoon",
-		"Jyoon",
-
 		{ 3, 2, -1, 2, 2, -4 },
 		32, 27, 40, 3, 32, 40, 60, 45,
 		12, 12, 15, 0,  5, 14, 25, 18,
@@ -5883,10 +6023,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"最凶最悪の双子の姉",
 		"最凶最悪の双子の姉",
+		"Shion",
+#else
+		"Shion",
+		"Shion",
 #endif
-		"Shion",
-		"Shion",
-
 		{ 0, 0, 0, 0, 0, -9 },
 		10, 22, 44, 1, 10, 20, 45, 45,
 		10, 10, 18, 1,  1, 10, 15, 15,
@@ -5908,10 +6049,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"究極の絶対秘神",
 		"究極の絶対秘神",
+		"Okina",
+#else
+		"Okina",
+		"Okina",
 #endif
-		"Okina",
-		"Okina",
-
 		{ 1, 8, 8, 4, 3, 5 },
 		45, 45, 35, 5, 47, 35, 40, 45,
 		27, 18, 14, 1,  6, 20, 20, 20,
@@ -5934,10 +6076,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"河原のアイドル水子",
 		"河原のアイドル水子",
+		"Eika",
+#else
+		"Eika",
+		"Eika",
 #endif
-		"Eika",
-		"Eika",
-
 		{ -1, 0, 2, 2, -2, 2 },
 		42, 20, 30, 3, 27, 25, 25, 45,
 		24, 12,  8, 0,  4, 16, 15, 24,
@@ -5959,10 +6102,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"古代魚の子連れ番人",
 		"古代魚の子連れ番人",
+		"Urumi",
+#else
+		"Urumi",
+		"Urumi",
 #endif
-		"Urumi",
-		"Urumi",
-
 		{ 3, 1, 1, 1, 2, 1 },
 		25, 25, 24, 2, 25, 25, 55, 40,
 		10, 12, 11, 0,  1, 12, 24, 16,
@@ -5984,10 +6128,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"地獄関所の番頭神",
 		"地獄関所の番頭神",
+		"Kutaka",
+#else
+		"Kutaka",
+		"Kutaka",
 #endif
-		"Kutaka",
-		"Kutaka",
-
 		{ 0, 4, 4, 2, 2, 4 },
 		32, 36, 30, 2, 32, 35, 45, 35,
 		12, 12, 15, 0,  6, 20, 23, 14,
@@ -6009,10 +6154,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"鬼傑組組長",
 		"鬼傑組組長",
+		"Yachie",
+#else
+		"Yachie",
+		"Yachie",
 #endif
-		"Yachie",
-		"Yachie",
-
 		{ -1, 6, 4, -3, 1, 3 },
 		30, 30, 30, 3, 30, 25, 60, 32,
 		16, 15, 12, 0,  4, 10, 16, 16,
@@ -6034,10 +6180,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"埴輪兵長",
 		"埴輪兵長",
+		"Mayumi",
+#else
+		"Mayumi",
+		"Mayumi",
 #endif
-		"Mayumi",
-		"Mayumi",
-
 		{ 3, 3, 4, 2, 3, 4 },
 		32, 24, 50, 3, 30, 30, 70, 55,
 		12, 12, 20, 0,  3, 16, 30, 30,
@@ -6059,10 +6206,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"孤立無援が誂えた造形神",
 		"孤立無援が誂えた造形神",
+		"Keiki",
+#else
+		"Keiki",
+		"Keiki",
 #endif
-		"Keiki",
-		"Keiki",
-
 		{ 2, 5, 5, 7, 2, 5 },
 		50, 50, 45, 3, 30, 30, 60, 48,
 		30, 20, 15, 0,  3, 20, 25, 24,
@@ -6084,10 +6232,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"勁牙組組長",
 		"勁牙組組長",
+		"Saki",
+#else
+		"Saki",
+		"Saki",
 #endif
-		"Saki",
-		"Saki",
-
 		{ 6, -2, 3, 6, 4, 4 },
 		25, 24, 30, 3, 20, 35, 80, 50,
 		 8, 12, 12, 0,  1, 20, 32, 25,
@@ -6111,10 +6260,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"鯢呑亭の看板娘",
 		"鯢呑亭の看板娘",
+		"Miyoi",
+#else
+		"Miyoi",
+		"Miyoi",
 #endif
-		"Miyoi",
-		"Miyoi",
-
 		{ 0, 1, 2, 0, -1, -2 },
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -6139,10 +6289,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"商売繁盛の縁起物",
 		"商売繁盛の縁起物",
+		"Mike",
+#else
+		"Mike",
+		"Mike",
 #endif
-		"Mike",
-		"Mike",
-
 		{ -1, 3, 0, 1, -1, 2 },
 		28, 30, 36, 2, 27, 16, 48,40,
 		12, 10, 12, 0,  3,  3, 16,15,
@@ -6165,10 +6316,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"山奥のビジネス妖怪",
 		"山奥のビジネス妖怪",
+		"Takane",
+#else
+		"Takane",
+		"Takane",
 #endif
-		"Takane",
-		"Takane",
-
 		{ -2, 4, 1, 1, -2, 4 },
 		27, 40, 28, 2, 30, 20, 45, 40,
 		10, 15,  9, 0,  4,  5, 15, 12,
@@ -6191,10 +6343,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"高地に棲む山女郎",
 		"高地に棲む山女郎",
+		"Sannyo",
+#else
+		"Sannyo",
+		"Sannyo",
 #endif
-		"Sannyo",
-		"Sannyo",
-
 		{ 0, 3, 3, 2, 0, 4 },
 		25, 36, 35, 3, 25, 20, 60, 50,
 		16, 12, 10, 0,  3,  5, 24, 18,
@@ -6216,10 +6369,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"本物の勾玉制作職人",
 		"本物の勾玉制作職人",
+		"Misumaru",
+#else
+		"Misumaru",
+		"Misumaru",
 #endif
-		"Misumaru",
-		"Misumaru",
-
 		{ 0, 1, 2, 0, -1, -2 },
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -6242,10 +6396,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"耳元で囁く邪悪な白狐",
 		"耳元で囁く邪悪な白狐",
+		"Tsukasa",
+#else
+		"Tsukasa",
+		"Tsukasa",
 #endif
-		"Tsukasa",
-		"Tsukasa",
-
 		{ 0, 1, 2, 0, -1, -2 },
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -6268,10 +6423,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"鴉天狗の大将",
 		"鴉天狗の大将",
+		"Megumu",
+#else
+		"Megumu",
+		"Megumu",
 #endif
-		"Megumu",
-		"Megumu",
-
 		{ 0, 1, 2, 0, -1, -2 },
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -6294,10 +6450,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"無主物の神",
 		"無主物の神",
+		"Chimata",
+#else
+		"Chimata",
+		"Chimata",
 #endif
-		"Chimata",
-		"Chimata",
-
 		{ 0, 1, 2, 0, -1, -2 },
 		20, 24, 28, 2, 16, 20, 45, 30,
 		12, 10,  9, 0,  4,   5,  15, 15,
@@ -6320,10 +6477,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"黒きドラゴンイーター",
 		"黒きドラゴンイーター",
+		"Momoyo",
+#else
+		"Momoyo",
+		"Momoyo",
 #endif
-		"Momoyo",
-		"Momoyo",
-
 		{ 5, -2, 2, 3, 5, -5 },
 		23, 24, 40, 2, 24, 25, 90, 50,
 		12, 12, 15, 0,  4, 15, 36, 20,
@@ -6347,10 +6505,11 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"無敗の剛欲同盟長",
 		"無敗の剛欲同盟長",
+		"Yuma",
+#else
+		"Yuma",
+		"Yuma",
 #endif // JP
-		"Yuma",
-		"Yuma",
-
 		{ 5, -2, 2, 3, 5, -5 },
 		23, 24, 40, 2, 24, 25, 90, 50,
 		12, 12, 15, 0,  4, 15, 36, 20,
@@ -6379,9 +6538,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"極めて普通",
 		"極めて普通",
+		"Ordinary",
+#else
+		"Ordinary",
+		"Ordinary",
 #endif
-		"Ordinary",
-		"Ordinary",
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  0,  0,  0,  0,
 		0, 1
@@ -6392,9 +6553,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"力自慢の",
 		"力自慢の",
+		"Mighty",
+#else
+		"Mighty",
+		"Mighty",
 #endif
-		"Mighty",
-		"Mighty",
 		{  2,  -2,  -1,  0,  1,  0 },
 		-5,  -5,  -3,  -1,  -2,  -2,  10,  0,
 		1, 0
@@ -6405,9 +6568,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"切れ者の",
 		"聡明な",
-#endif
+		"Shrewd",
+#else
 		"Shrewd",
 		"Clever",
+#endif
 		{  -2,  2,  1,  0,  -1,  0 },
 		3,  8,  2,  0,  3,  5,  -8,  -5,
 		-1, 0
@@ -6418,9 +6583,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"のんきな",
 		"のんきな",
+		"Easygoing",
+#else
+		"Easygoing",
+		"Easygoing",
 #endif
-		"Easygoing",
-		"Easygoing",
 		{  0,  -1,  2,  -1,  1,  1 },
 		-5,  2,  6,  -1,  0,  -2,  -3,  -6,
 		0, 0
@@ -6431,9 +6598,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"すばしっこい",
 		"すばしっこい",
+		"Nimble",
+#else
+		"Nimble",
+		"Nimble",
 #endif
-		"Nimble",
-		"Nimble",
 		{  -1,  1,  -1,  2,  -1,  -1 },
 		7,  2,  -1,  1,  5,  5,  0,  10,
 		0, 0
@@ -6444,9 +6613,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"命知らずな",
 		"おてんば",
-#endif
+		"Fearless",
+#else
 		"Fearless",
 		"Tomboy",
+#endif
 		{  2,  1,  1,  -1,  -1,  0 },
 		-5,  5,  -2,  0,  2,  -2,  10,  10,
 		-1, 0
@@ -6457,9 +6628,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"トリガーハッピー",
 		"トリガーハッピー",
+		"Trigger-happy",
+#else
+		"Trigger-happy",
+		"Trigger-happy",
 #endif
-		"Trigger-happy",
-		"Trigger-happy",
 		{  0,  4,  4,  2,  -4,  5 },
 		-10,  10, -10,  -3,  -5,  10,  5, 50,
 		-3, 0
@@ -6470,9 +6643,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"ダンディな",
 		"瀟洒な",
-#endif
+		"Dandy",
+#else
 		"Dandy",
 		"Elegant",
+#endif
 		{ -1,  1,  0,  1,  -1,  3 },
 		3,  3, 0, -1, 3, 3, -5, 5,
 		0, 0
@@ -6483,9 +6658,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"キャノンボーラー",
 		"キャノンボーラー",
+		"Cannonballer",
+#else
+		"Cannonballer",
+		"Cannonballer",
 #endif
-		"Cannonballer",
-		"Cannonballer",
 		{  1,  1,  1,  1,  1,  3 },
 		10,  5,  3,  0,  4,  2,  10,  10,
 		0, 0
@@ -6496,9 +6673,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"ラッキーマン",
 		"ラッキーガール",
+		"Lucky",
+#else
+		"Lucky",
+		"Lucky",
 #endif
-		"Lucky",
-		"Lucky",
 		{  -2,  -2,  -2,  -2,  -2,  2 },
 		10,  7,  3,  2, 10,  8,  15,  15,
 		0, 1
@@ -6509,9 +6688,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"がまんづよい",
 		"がまんづよい",
+		"Patient",
+#else
+		"Patient",
+		"Patient",
 #endif
-		"Patient",
-		"Patient",
 		{  -1,  -1,  1,  -2,  2,  0 },
 		-5,  -3,  3,  1,  0,  -3,  -6,  -6,
 		1, 0
@@ -6523,9 +6704,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"いかさま",
 		"いかさま",
+		"Munchkin",
+#else
+		"Munchkin",
+		"Munchkin",
 #endif
-		"Munchkin",
-		"Munchkin",
 		{ 10,  10,  10,  10,  10,  10 },
 		 20, 40, 30, 10, 40, 40,  80, 80,
 		 15, 1
@@ -6537,9 +6720,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"[特殊性格]",
 		"[特殊性格]",
+		"Special",
+#else
+		"Special",
+		"Special",
 #endif
-		"Special",
-		"Special",
 		{ 0, 0, 0, 0, 0, 0 },
 		3, 3, -3, -1, 3, 0, 0, 0,
 		0, 1
@@ -6550,10 +6735,11 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 #ifdef JP
 		"狂気の",
 		"狂気の",
+		"Berserk",
+#else
+		"Berserk",
+		"Berserk",
 #endif
-		"Berserk",
-		"Berserk",
-
 		{ 5, -5, -5, 5, 5, -5 },
 		-50, -50, -50, -10, -50, 10, 150, 0,
 		10, 0
@@ -15115,9 +15301,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"(専用性格未実装)",
 		"(専用性格未実装)",
+		"(Unimplemented)",
+#else
+		"(Unimplemented)",
+		"(Unimplemented)",
 #endif
-		"(Unimplemented)",
-		"(Unimplemented)",
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  0,  0,  0,  0,
 		0, 0
@@ -15128,9 +15316,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"日焼けした",
 		"日焼けした",
+		"Sunburnt",
+#else
+		"Sunburnt",
+		"Sunburnt",
 #endif
-		"Sunburnt",
-		"Sunburnt",
 		{  3,  3,  3,  3,  3,  3 },
 		5,  5,  5,  0,  5,  5,  30,  30,
 		5, 0
@@ -15141,9 +15331,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"書痴",
 		"書痴",
+		"Bibliomaniac",
+#else
+		"Bibliomaniac",
+		"Bibliomaniac",
 #endif
-		"Bibliomaniac",
-		"Bibliomaniac",
 		{ -2,  2,  2,  -2,  -2,  0 },
 		-5,  5,  5,  -2,  -5,  -5,  -50,  -50,
 		-2, 1
@@ -15154,9 +15346,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"理由なく好戦的な",
 		"理由なく好戦的な",
+		"Favorite",
+#else
+		"Favorite",
+		"Favorite",
 #endif
-		"Favorite",
-		"Favorite",
 		{  1,  -1,  0,  1,  1,  0 },
 		-20,  5,  -5,  -2,  -20,  0,  20,  20,
 		2, 0
@@ -15167,9 +15361,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"夢の世界の",
 		"夢の世界の",
+		"Dreamdweller",
+#else
+		"Dreamdweller",
+		"Dreamdweller",
 #endif
-		"Dreamdweller",
-		"Dreamdweller",
 		{ 1,  -1,  -1,  1,  1,  -1 },
 		0,  0, 0, -2, 0,  0,  10,  10,
 		0, 0
@@ -15180,9 +15376,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"悪夢に悩まされる",
 		"悪夢に悩まされる",
+		"Violet_Detector",
+#else
+		"Violet_Detector",
+		"Violet_Detector",
 #endif
-		"Violet_Detector",
-		"Violet_Detector",
 		{ 0,  0,  0,  0,  0,  0 },
 		0,  0, 0, 0, 0,  0,  0,  0,
 		0, 0
@@ -15193,9 +15391,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"意外に顔が広い",
 		"意外に顔が広い",
+		"Well_Connected",
+#else
+		"Well_Connected",
+		"Well_Connected",
 #endif
-		"Well_Connected",
-		"Well_Connected",
 		{ 0,  0,  0,  0,  0,  3 },
 		0,  0, 0, 0, 0,  0,  0,  0,
 		0, 0
@@ -15206,9 +15406,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"スマホ首の",
 		"スマホ首の",
+		"Very_Long_Neck",
+#else
+		"Very_Long_Neck",
+		"Very_Long_Neck",
 #endif
-		"Very_Long_Neck",
-		"Very_Long_Neck",
 		{ -2,  4,  4,  -2,  -2,  -4 },
 		-4,  8, 0, -2, 0,  0,  -20,  -10,
 		-3, 0
@@ -15219,9 +15421,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"奸佞邪智の鬼　",
 		"奸佞邪智の鬼　",
+		"Oni_Hermit",
+#else
+		"Oni_Hermit",
+		"Oni_Hermit",
 #endif
-		"Oni_Hermit",
-		"Oni_Hermit",
 		{ -3,  4,  -1,  2,  -2,  -2 },
 		5,  0,  5,  -3,  -5,  3,  10,  30,
 		0, 0
@@ -15232,9 +15436,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"妖精大集合の",
 		"妖精大集合の",
+		"Gathered",
+#else
+		"Gathered",
+		"Gathered",
 #endif
-		"Gathered",
-		"Gathered",
 		{ 5,  5,  5,  5,  5,  5 },
 		5,  5,  5,  -5,  5,  5,  25,  25,
 		5, 0
@@ -15245,9 +15451,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"探偵助手　",
 		"探偵助手　",
+		"Assistant",
+#else
+		"Assistant",
+		"Assistant",
 #endif
-		"Assistant",
-		"Assistant",
 		{ 0,  3,  0,  3,  0,  0 },
 		5, 5, 0, 3, 10, 0, 0, 0,
 		0, 0
@@ -15258,9 +15466,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"社会派ルポライター",
 		"社会派ルポライター",
+		"Social_Reporter",
+#else
+		"Social_Reporter",
+		"Social_Reporter",
 #endif
-		"Social_Reporter",
-		"Social_Reporter",
 		{ -1,  1,  1,  -1,  -1,  1 },
 		0, 0, 0, 0, 10, 0, -10, -10,
 		-1, 0
@@ -15271,9 +15481,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"石油王　",
 		"石油王　",
+		"Oil_Baron",
+#else
+		"Oil_Baron",
+		"Oil_Baron",
 #endif // JP
-		"Oil_Baron",
-		"Oil_Baron",
 		{ 0, -1, -1, 0, 1, 3 },
 		0, 0, 0, -1, 5, 0, 5, 5,
 		0, 0
@@ -15285,9 +15497,11 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 #ifdef JP
 		"闇市場調査員　",
 		"闇市場調査員　",
+		"Investigator",
+#else
+		"Investigator",
+		"Investigator",
 #endif
-		"Investigator",
-		"Investigator",
 		{ 0,  0,  0,  0,  0,  0 },
 		0,  5, 0, 0, 0,  0,  -5,  -5,
 		0, 0
