@@ -2023,7 +2023,7 @@ static int check_marisa_can_make_spell(int spell_num)
 	{
 		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
                     "You're investigating the black market right now. Go and search for ability cards."));
-		return;
+		return 0;
 	}
 
 	//未開発の魔法(ここには来ないはず)
@@ -2238,7 +2238,7 @@ bool make_marisa_magic(void)
 	{
 		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
                     "You're investigating the black market right now. Go and search for ability cards."));
-		return;
+		return FALSE;
 	}
 
 	//作成する魔法を選択　材料が足りていることも確認
@@ -2354,7 +2354,7 @@ bool carry_marisa_magic(void)
 	{
 		msg_print(_("今は闇市場の調査中だ。アビリティカードを探しに行こう。",
                     "You're investigating the black market right now. Go and search for ability cards."));
-		return;
+		return FALSE;
 	}
 
 	while(1)
