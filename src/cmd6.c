@@ -1880,7 +1880,7 @@ static void do_cmd_quaff_potion_aux(int item)
 			shion_comment_food(TRUE, NULL);
 
 #ifdef JP
-			msg_print(("「らんらーら　らららら♪」");
+			msg_print("「らんらーら　らららら♪」");
 			msg_print("「ららたった　ららら～♪」");
 #endif
 			break;
