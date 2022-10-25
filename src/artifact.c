@@ -3403,7 +3403,7 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 		case ACT_WHIRLWIND:
 		{
 			//v1.1.33 •ÊŠÖ”‚É•ª—£
-			whirlwind_attack();
+			whirlwind_attack(0);
 			break;
 		}
 

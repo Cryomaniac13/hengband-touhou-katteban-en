@@ -9220,7 +9220,8 @@ bool go_west(void)
 }
 
 //v1.1.33 全周囲攻撃 ACT_WHIRLWINDからコピー
-void whirlwind_attack(void)
+//v2.0.2 py_attackに使うmodeを指定できるようにした
+void whirlwind_attack(int mode)
 {
 	int y = 0, x = 0;
 	cave_type       *c_ptr;
@@ -9234,7 +9235,7 @@ void whirlwind_attack(void)
 		c_ptr = &cave[y][x];
 		m_ptr = &m_list[c_ptr->m_idx];
 		if (c_ptr->m_idx && (m_ptr->ml || cave_have_flag_bold(y, x, FF_PROJECT)))
-			py_attack(y, x, 0);
+			py_attack(y, x, mode);
 	}
 
 }

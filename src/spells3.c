@@ -1158,6 +1158,7 @@ msg_format("%sの帰還レベルを %d 階にセット。", d_name+d_info[select_dungeon].nam
  */
 /*:::劣化攻撃などによる装備の劣化*/
 /*:::slotで劣化対象を選べるようにした*/
+//mode:0x01だとpvalまでは下がらないらしい フラグ値なのか整数値なのかはっきりしない
 bool apply_disenchant(int mode, int slot)
 {
 	int             t = 0;

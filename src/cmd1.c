@@ -4000,6 +4000,9 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		mode = HISSATSU_URUMI;
 	}
 
+	//v2.0.2　特技「刃こぼれするまで切り刻め」は刃の付いた武器でないと発動しない
+	if (mode == HISSATSU_HAKOBORE && !object_has_a_blade(o_ptr)) return;
+
 	//v1.1.94 槍によるカウンター攻撃は槍でないと発動しない
 	if (mode == HISSATSU_COUNTER_SPEAR && o_ptr->tval != TV_SPEAR) return;
 
@@ -4175,6 +4178,12 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		if (mode == HISSATSU_FUIUCHI)
 			fuiuchi = TRUE;
 
+		//稠密の隠形鬼　隠密能力に応じて不意打ち判定　「闇との融和」と同じ判定でいいか
+		if (mode == HISSATSU_ONGYOU)
+		{
+			if (m_ptr->ml && (MON_CSLEEP(m_ptr) || randint1(p_ptr->lev * 3 + (p_ptr->skill_stl + 10) * 4) > r_ptr->level * 2)) fuiuchi = TRUE;
+		}
+
 	}
 
 
@@ -4297,9 +4306,13 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	//シンボル変更S→c
 	e_j_mukou = ((o_ptr->name1 == ART_EXCALIBUR_J) && (r_ptr->d_char == 'c'));
 
-	///sys item 必殺剣、毒針の攻撃回数修正
-	if ((mode == HISSATSU_COUNTER_SPEAR) || (mode == HISSATSU_ATTACK_ONCE) || (mode == HISSATSU_KYUSHO) || (mode == HISSATSU_MINEUCHI) || (mode == HISSATSU_3DAN) || (mode == HISSATSU_IAI)) num_blow = 1;
+	//ここから攻撃回数設定
 
+	//必殺剣、毒針
+	if ((mode == HISSATSU_COUNTER_SPEAR) || (mode == HISSATSU_ATTACK_ONCE) || (mode == HISSATSU_KYUSHO) || (mode == HISSATSU_MINEUCHI) || (mode == HISSATSU_3DAN) || (mode == HISSATSU_IAI))
+	{
+		num_blow = 1;
+	}
 	else if (mode == HISSATSU_COLD) num_blow = p_ptr->num_blow[hand]+2;
 	/*:::河童レイシャルの通背　攻撃回数が距離に応じ減少*/
 	else if (mode == HISSATSU_KAPPA)
@@ -4339,8 +4352,11 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 	}
 	else num_blow = p_ptr->num_blow[hand];
 
+
 	if(mode == HISSATSU_SHINMYOU) num_blow = num_blow * 3 / 2;
 	else if(mode == HISSATSU_UNZAN) num_blow = num_blow * (20+randint0(11)) / 10;
+	else if (mode == HISSATSU_HAKOBORE) num_blow *= 2;
+
 
 	/* Hack -- DOKUBARI always hit once */
 	///mod131223 tval
@@ -6056,6 +6072,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 	}	//←攻撃回数ループ終了
 
+
 	//ドレミー格闘攻撃で眠らせる処理
 	if (counting_sheep && !(*mdeath))
 	{
@@ -6141,6 +6158,12 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 		}
 
 	}
+	//ネムノ「刃こぼれするまで切り刻め」による武器劣化
+	else if (mode == HISSATSU_HAKOBORE)
+	{
+		apply_disenchant(0, INVEN_RARM + hand);
+	}
+
 
 }
 

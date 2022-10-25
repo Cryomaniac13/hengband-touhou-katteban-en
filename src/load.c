@@ -1080,7 +1080,7 @@ static void rd_monster(monster_type *m_ptr)
 		rd_u32b(&m_ptr->mflag4);
 
 		rd_s16b(&m_ptr->xtra_dir_param);
-		rd_s16b(&m_ptr->new_monster_param2);
+		rd_s16b(&m_ptr->timed_shard_count);
 		rd_s16b(&m_ptr->new_monster_param3);
 		rd_s16b(&m_ptr->new_monster_param4);
 		rd_s16b(&m_ptr->new_monster_param5);

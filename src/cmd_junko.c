@@ -2291,7 +2291,7 @@ bool	activate_nameless_art_aux(nameless_arts_activate_param_type *naap_ptr, int 
 	//v1.1.33 •ÊŠÖ”‚É“Æ—§
 	case JKF1_WHIRL_WIND:
 	{
-		whirlwind_attack();
+		whirlwind_attack(0);
 		break;
 	}
 	//“üg

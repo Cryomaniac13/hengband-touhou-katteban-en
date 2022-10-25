@@ -341,7 +341,7 @@ static void wr_monster(monster_type *m_ptr)
 	wr_u32b(m_ptr->mflag4);
 
 	wr_s16b(m_ptr->xtra_dir_param);
-	wr_s16b(m_ptr->new_monster_param2);
+	wr_s16b(m_ptr->timed_shard_count);
 	wr_s16b(m_ptr->new_monster_param3);
 	wr_s16b(m_ptr->new_monster_param4);
 	wr_s16b(m_ptr->new_monster_param5);

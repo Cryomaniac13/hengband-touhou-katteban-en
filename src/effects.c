@@ -533,7 +533,9 @@ bool set_mimic(int v, int p, bool do_dec)
 
 	if(p_ptr->riding && mimic_info[p].MIMIC_FLAGS & MIMIC_NO_RIDING && !do_dec)
 	{
-		if (CLASS_RIDING_BACKDANCE)
+		if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+			msg_print(_("寄生中は変身できない。", "You cannot transform while parasitising."));
+		else if (CLASS_RIDING_BACKDANCE)
 			msg_print(_("今は踊るのに忙しく変身できない。", "You are busy dancing right now and cannot transform."));
 		else
 			msg_print(_("まず馬から降りてからでないとその変身はできない。", "You have to get off your mount first before transforming."));
@@ -9523,11 +9525,15 @@ int mod_disen_dam(int dam){
 
 	base += is_hurt_disen();
 
+
+
 	if(p_ptr->resist_disen)
 	{
 	base *= 6;
 	base /= (randint1(4) + 7);
 	}
+
+
 
 	//if(base > 100) msg_print("体から力が消える気がする！");
 
@@ -9545,8 +9551,13 @@ int is_hurt_disen(){
 	if(prace_is_(RACE_MAGIC_JIZO)) mod = 33;
 	if(p_ptr->pclass == CLASS_ALICE) mod = 33;
 
+	if (p_ptr->pclass == CLASS_TSUKASA) mod = 25;
+
+
 	if(p_ptr->pclass == CLASS_KOGASA && p_ptr->lev > 39) mod = 0;
 	if(p_ptr->mimic_form == MIMIC_MIST) mod = 33;
+
+
 
 	if(mod>100 || mod < -100)
 	{

@@ -393,6 +393,11 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MIKE) return TRUE;
 			else return FALSE;
 
+		case CLASS_TSUKASA:
+			if (r_idx == MON_TSUKASA) return TRUE;
+			else return FALSE;
+
+
 	}
 
 

@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 1
+#define H_VER_PATCH 2
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1322,7 +1322,8 @@
 #define MAX_CLASS            150
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
-#define CLASS_RIDING_BACKDANCE	(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO)
+//v2.0.2 典の「寄生」も基本的に同じ扱いにする
+#define CLASS_RIDING_BACKDANCE	(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO || p_ptr->pclass == CLASS_TSUKASA)
 
 //v1.1.87 アビリティカードを扱う職業
 #define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_MIKE || p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER || is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
@@ -2000,6 +2001,7 @@
 #define ART_ONIKIRIMARU		333
 #define ART_BILLY_THE_KID	334
 #define ART_HANGOKU_SAKE	335
+#define ART_EIBON			336
 #define ART_MAGMA			338
 #define ART_TOUTETSU		340
 #define ART_FLAN			341
@@ -4055,6 +4057,10 @@
 #define SUMMON_HANIWA		102	//v1.1.64
 #define SUMMON_AQUATIC		103 //v1.1.69
 #define SUMMON_ONE_ORC			104
+#define SUMMON_ONLY_GOLD	105
+
+
+
 
 /*
  * Spell types used by project(), and related functions.
@@ -4252,10 +4258,13 @@
 #define GF_RAINBOW		165	//v1.1.63 虹・プリズム属性
 #define GF_CONTROL_FISH	166
 #define GF_KANAMEISHI	167 //v2.0.1 爆心地を岩地形にする隕石属性
+#define GF_HOLY_WATER	168 //破邪弱点にも効く水属性
+#define GF_TIMED_SHARD	169 //「遅効性の管狐弾」専用
 
-//ここを変更するときspell-xx.prfとgf_desc[]も変更すること
+//↑の最大+1
+#define MAX_GF			170
+//ここを追加変更するときspell-xx.prfとgf_desc[]も変更すること
 //ときどきproject()にある紫の境界操作関係の処理を手直しする
-#define MAX_GF			167
 
 /*
  * Some things which induce learning
@@ -7188,10 +7197,9 @@ extern int PlayerUID;　
 #define HISSATSU_FUKI   9
 #define HISSATSU_MAJIN  10
 #define HISSATSU_FUIUCHI 11
-//#define HISSATSU_BOOMER 11
 #define HISSATSU_DRAIN  12
 #define HISSATSU_SEKIRYUKA 13
-//#define HISSATSU_OTAKEBI 14
+#define HISSATSU_ONGYOU		14 //稠密の隠形鬼　隠密判定で不意打ち発生
 //#define HISSATSU_SHOUGE 15
 #define HISSATSU_CONF   16 //混乱の手と同じ効果。技としては使われていない
 #define HISSATSU_ISSEN  17
@@ -7225,6 +7233,7 @@ extern int PlayerUID;　
 #define HISSATSU_YOSHIKA		50 //芳香　死なない殺人鬼
 #define HISSATSU_GION			51 //祇園様の怒り
 #define HISSATSU_URUMI			52 //v1.1.69 潤美特殊
+#define HISSATSU_HAKOBORE		53 //2.0.2 ネムノ特殊
 
 #define HISSATSU_IAI    100
 
@@ -8022,6 +8031,7 @@ extern int PlayerUID;　
 #define MUSIC_NEW_SANNYO_SLOW			26 //山如　
 #define MUSIC_NEW_SANNYO_MINDBLAST		27 //山如　
 #define MUSIC_NEW_SANNYO_BERSERK		28 //山如　
+#define MUSIC_NEW_WAKASAGI_NINGYO		29 //わかさぎ姫　人魚の歌
 
 
 

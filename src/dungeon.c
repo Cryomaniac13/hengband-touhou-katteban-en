@@ -2559,7 +2559,8 @@ take_hit(DAMAGE_NOESCAPE, damage, "—â‹C‚ÌƒI[ƒ‰", -1);
 	}
 
 	//v1.1.41 •‘‚Æ—¢”T‚ªu‘•”õ‚ªd‚­‚Är•q‚É“®‚­‚Ì‚ª“ï‚µ‚¢v‚Æ‚«‚É—x‚Á‚Ä‚¢‚é‚Æ©‘R‰ñ•œ‘¬“x‘å•’á‰º
-	if (CLASS_RIDING_BACKDANCE && heavy_armor() && p_ptr->riding)
+	if (CLASS_RIDING_BACKDANCE && (p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO)
+		&& heavy_armor() && p_ptr->riding)
 	{
 		regen_amount /= 3;
 	}

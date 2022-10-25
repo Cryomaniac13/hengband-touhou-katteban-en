@@ -6401,23 +6401,24 @@ const player_class class_info[MAX_CLASS] =
 		"Tsukasa",
 		"Tsukasa",
 #endif
-		{ 0, 1, 2, 0, -1, -2 },
-		20, 24, 28, 2, 16, 20, 45, 30,
-		12, 10,  9, 0,  4,   5,  15, 15,
-		1, 20, 70
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
 
 		//追加値暫定
-				,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
-				,A_INT
-				,3,2,90,
-				{ 2,1,1,2,2,0,0,0,0,0
-				,3,3,3,3,3,3,2,2,2,2
-				,1 }
-				,110,0,2,2,
-				FALSE,FALSE,TRUE
-				,TRUE
-				,3
-				,MON_PARSEE
+		,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+		,A_INT
+		,3,2,100,
+
+		{ 2,2,1,1,2,0,0,0,0,0
+		,3,2,2,2,2,2,2,2,2,2
+		,1 }
+		,80,1,2,4,
+		FALSE,FALSE,TRUE
+		,FALSE
+		,4
+		,MON_TSUKASA
 	},
 	{
 #ifdef JP
@@ -14937,7 +14938,7 @@ const cptr gf_desc_name[MAX_GF] =
 	"鳥馴らし","蜘蛛の巣生成","皿投げ","ブレイジングスター","ソウルスカルプチュア",
 	"厄","蒸気","清蘭ビーム","純化","特殊射撃"
 	//161～
-	,"六根清浄斬","生物停止","狂気の松明","精神攻撃","虹","魚魅了",
+	,"六根清浄斬","生物停止","狂気の松明","精神攻撃","虹","魚魅了","要石ミサイル","聖水"
 #else
     "(none)",
 	"lightning","poison","acid","frost","fire",
@@ -14978,7 +14979,7 @@ const cptr gf_desc_name[MAX_GF] =
 	"train bird","spiderweb","throw plate","blazing star","soul sculpture",
 	"misfortune","steam","seiran beam","purification","special attack"
 	//161～
-	,"clearing six senses","stop living","light of insanity","mind attack","rainbow","charm fish",
+	,"clearing six senses","stop living","light of insanity","mind attack","rainbow","charm fish","keystone missile","holy water"
 #endif
 };
 

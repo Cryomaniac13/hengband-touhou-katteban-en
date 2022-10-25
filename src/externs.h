@@ -2523,7 +2523,7 @@ extern int mass_genocide_3(int rad, bool geno_friend, bool geno_unique);
 
 extern bool straygod_job_adviser(void);
 
-extern void whirlwind_attack(void);
+extern void whirlwind_attack(int mode);
 
 //v1.1.35 ƒlƒ€ƒm“ê’£‚èŠÖŒW
 extern void make_nemuno_sanctuary(void);

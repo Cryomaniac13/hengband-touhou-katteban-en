@@ -44,6 +44,305 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.0.2 典
+
+class_power_type class_power_tsukasa[] =
+{
+
+	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("寄生", "Parasitise"),
+	_("配下一体に寄生する。寄生中はそのモンスターの位置に重なり一緒に移動する。そのモンスターの攻撃でプレイヤーが経験値やアイテムを得ることができる。配下コマンドの騎乗からもこの特技と同じことができる。",
+    "Parasitises a follower. While parasitising, you move along with that monster on the same space. You gain experience and items from that monster's attacks. You also can use this special ability through follower commands.")},
+
+	{ 10,0,20,FALSE,FALSE,A_CHR,0,0,_("耳元で囁く", "Whisper into Ears"),
+	_("隣接するモンスター一体を言いくるめて配下にしようと試みる。モンスターが弱っていると成功しやすい。ユニークモンスターと賢いモンスターには効きづらく、特殊ユニークモンスター、クエスト打倒対象モンスター、精神を持たないモンスターには効果がない。",
+    "Attempts to talk an adjacent monster into becoming your follower. Works better against weakened monsters. Less effective against uniques and smart monsters, and does not affect special uniques, quest targets and mindless monsters.")},
+
+	{ 20,30,40,FALSE,TRUE,A_INT,0,0,_("遅効性の管狐弾", "Delayed Kuda-Gitsune Bullet"),
+	_("破片属性の半径0のロケットで攻撃する。モンスターに当たるとそのモンスターが行動するたびにダメージを与える。",
+    "Fires a shards rocket with radius 0. If it hits a monster, that monster starts taking damage for every action it performs.")},
+
+	{ 30,40,50,FALSE,FALSE,A_CHR,0,0,_("フォックスワインダー", "Fox Winder"),
+	_("寄生中の配下を加速させる。", "Hastes a parasitised follower.") },
+
+	{ 35,55,65,FALSE,TRUE,A_INT,0,0,_("管の中の邪悪", "Wickedness Within the Pipe"),
+	_("暗黒属性のビームを隣接した壁を除くランダムな方向に複数回放つ。",
+    "Fires multiple darkness beams in random directions, except adjacent walls.")},
+
+	{ 40,1,70,FALSE,TRUE,A_CHR,0,0,_("シリンダーフォックス", "Cylinder Fox"),
+	_("寄生中の配下に最大HPの1/5のダメージを与え、その1/3のMPを吸収する。非生命のモンスターには効果がない。",
+    "Deals damage to parasitised follower equal to 1/5 of maximum HP, and recovers MP equal to 1/3 of that value. Does not affect nonliving monsters.")},
+
+	{ 45,80,80,FALSE,TRUE,A_CHR,0,0,_("天狐龍星の舞", "Dance of Heavenly Foxes and Dragon Stars"),
+	_("視界内の全てを閃光属性で攻撃し、さらに周囲のモンスターを混乱・魅了・魔法力低下させようと試みる。",
+    "Hits everything in sight with light, and attempts to confuse, charm and reduce magical power of nearby monsters.")},
+
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+cptr do_cmd_class_power_aux_tsukasa(int num, bool only_info)
+{
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int dir;
+
+	switch (num)
+	{
+
+	case 0:
+	{
+
+		if (only_info)	return "";
+
+		if (!do_riding(FALSE)) return NULL;
+
+	}
+	break;
+	case 1://スカウト
+	{
+		int y, x;
+		int power = 20 + plev + chr_adj;
+		monster_type *m_ptr;
+		monster_race *r_ptr;
+
+		if (only_info) return format(_str_eff_power, power);
+
+		if (p_ptr->inside_arena)
+		{
+			msg_print(_("今その特技は使えない。", "You can't use that special ability right now."));
+			return NULL;
+		}
+
+
+		if (!get_rep_dir2(&dir)) return NULL;
+		if (dir == 5) return NULL;
+
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			char m_name[80];
+			r_ptr = &r_info[m_ptr->r_idx];
+			monster_desc(m_name, m_ptr, 0);
+
+			//起こす
+			set_monster_csleep(cave[y][x].m_idx, 0);
+
+			if (m_ptr->r_idx == MON_MEGUMU)
+			{
+				msg_format(_("%sはあなたの主人だ。", "%^s is your master."), m_name);
+				return NULL;
+			}
+
+			msg_format(_("あなたは%sに向けて囁きかけた...", "You start whispering to %s..."), m_name);
+
+			//SMARTに効きづらく弱ってる敵に効きやすいように
+			if (r_ptr->flags2 & RF2_SMART) power /= 3;
+			else if (r_ptr->flags2 & RF2_STUPID) power *= 2;
+
+			if (m_ptr->hp < m_ptr->max_maxhp / 2) power *= 2;
+			if (m_ptr->hp < m_ptr->max_maxhp / 8) power *= 2;
+
+			if (MON_SLOW(m_ptr))    power = power * 3 / 2;
+			if (MON_STUNNED(m_ptr)) power = power * 3 / 2;
+
+			if (MON_CONFUSED(m_ptr)) power = power * 3;
+			if (MON_MONFEAR(m_ptr)) power = power * 3;
+
+			if (MON_DEC_ATK(m_ptr)) power = power * 3 / 2;
+			if (MON_DEC_DEF(m_ptr)) power = power * 3 / 2;
+			if (MON_DEC_MAG(m_ptr)) power = power * 3 / 2;
+			if (MON_NO_MOVE(m_ptr)) power = power * 3 / 2;
+
+			if (MON_BERSERK(m_ptr)) power = 0;
+
+			if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND))
+			{
+				msg_format(_("%sは無反応だ。", "%^s does not respond."), m_name);
+			}
+			else if (is_pet(m_ptr))
+			{
+				msg_format(_("%sはすでにあなたの意のままだ。", "%^s already is under your control."), m_name);
+			}
+			else if (r_ptr->flagsr & RFR_RES_ALL || r_ptr->flags1 & (RF1_QUESTOR) || r_ptr->flags7 & RF7_VARIABLE || power < r_ptr->level)
+			{
+				msg_format(_("%sはあなたの誘いに耳を貸さない！", "%^s ignores your invitation!"), m_name);
+			}
+			//ユニークモンスターを仲間にするにはweird_luck要
+			else if (randint1(power) < r_ptr->level || (r_ptr->flags1 & RF1_UNIQUE) && !weird_luck())
+			{
+				msg_format(_("%sはあなたの誘いに乗らなかった。", "%^s doesn't go along with your invitation."), m_name);
+			}
+			else
+			{
+				msg_format(_("%sはあなたに従った。", "%^s is now following you."), m_name);
+				set_pet(m_ptr);
+			}
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+	case 2:
+	{
+		int dam = 5 + plev / 2;
+
+		if (only_info) return format(_("損傷:%d*10", "dam: %d * 10"), dam);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		//project_m()内でこれを受けたモンスターにカウントを開始し、process_monster()のモンスター行動時にカウントが続く限りダメージを与える
+		fire_rocket(GF_TIMED_SHARD, dir, dam, 0);
+
+		break;
+	}
+
+	case 3:
+	{
+		int v = 20;
+
+		if (only_info) return format(_str_eff_dur, v);
+
+		if (!p_ptr->riding)
+		{
+			msg_print(_("寄生中の配下がいない。", "You don't have a parasitised follower."));
+			return NULL;
+		}
+		else
+		{
+
+			char m_name[80];
+			monster_type *m_ptr = &m_list[p_ptr->riding];
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("%sを限界以上に頑張らせた！", "%^s shows more effort, breaking former limits!"),m_name);
+
+			if (MON_FAST(m_ptr)) v -= MON_FAST(m_ptr);
+
+			if(v>0)	set_monster_fast(p_ptr->riding, MON_FAST(m_ptr) + v);
+
+		}
+
+
+	}
+	break;
+
+
+	//管の中の邪悪
+	//スターライトの杖の暗黒属性バージョン 回数は5d3から6固定に
+	//期待dam lev30:300 lev40:360 lev50:400
+	case 4:
+	{
+		int beam_num = 6;
+		int dice = 6 + plev / 8;
+		int sides = 10;
+		int k;
+
+		int y, x;
+		int attempts;
+
+		if (only_info) return format(_("損傷:%dd%d * %d", "dam: %dd%d * %d"), dice, sides, beam_num);
+
+		for (k = 0; k < beam_num; k++)
+		{
+			attempts = 1000;
+
+			while (attempts--)
+			{
+				scatter(&y, &x, py, px, 4, 0);
+
+				if (!cave_have_flag_bold(y, x, FF_PROJECT)) continue;
+
+				if (!player_bold(y, x)) break;
+			}
+
+			project(0, 0, y, x, damroll(dice, sides), GF_DARK,
+				(PROJECT_BEAM | PROJECT_THRU | PROJECT_GRID | PROJECT_KILL), -1);
+		}
+	}
+	break;
+
+	case 5:
+	{
+
+		monster_type 	*m_ptr;
+		monster_race	*r_ptr;
+		int 	dam = 0, gain_mana = 0;
+		char m_name[80];
+
+		if (p_ptr->riding)
+		{
+			m_ptr = &m_list[p_ptr->riding];
+			r_ptr = &r_info[m_ptr->r_idx];
+
+			dam = m_ptr->max_maxhp / 5;
+
+			if (!monster_living(r_ptr)) dam = 0;
+
+			gain_mana = dam / 3;
+
+		}
+
+		if (only_info) return format(_("損傷:%d 回復:%d", "dam: %d heal: %d"), dam, gain_mana);
+
+		if(!p_ptr->riding)
+		{
+			msg_print(_("寄生中の配下がいない。", "You don't have a parasitised follower."));
+			return NULL;
+		}
+
+
+		monster_desc(m_name, m_ptr, 0);
+
+		if (!dam)
+		{
+			msg_format(_("%sからは力を吸えなかった。", "You couldn't draw any power from %s."), m_name);
+		}
+		else
+		{
+			bool dummy;
+			//念のためにユニークを倒せないようにしておく
+			if (r_ptr->flags1 & RF1_UNIQUE && dam > m_ptr->hp)dam = m_ptr->hp;
+
+			msg_format(_("%sから生命力を容赦なく吸い上げた！", "You mercilessly drain life force from %s!"), m_name);
+			mon_take_hit(p_ptr->riding, dam, &dummy, _("は倒れた", "is defeated"));
+			player_gain_mana(gain_mana);
+		}
+
+	}
+	break;
+
+	//天狐龍星の舞
+	case 6:
+	{
+		int base = plev * 5 + chr_adj * 5;
+
+		if (only_info) return format(_str_eff_dam, base);
+		msg_format(_("幻惑的な光の乱舞が辺りを埋め尽くした！", "Everything around you is flooded with chaotically dancing bewitching lights!"));
+		project_hack2(GF_LITE, 0, 0, base);
+		confuse_monsters(base);
+		charm_monsters(base);
+		project_hack(GF_DEC_MAG, base);
+
+		break;
+	}
+	break;
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
 
 
 //v1.1.93 ミケ
@@ -74,6 +373,10 @@ class_power_type class_power_mike[] =
 	_("隣接したモンスター一体からカードを買い取る。カードを持っているモンスターはそのカードの題材となった幻想郷の住人のみ。また同じカードを買えるのは一度のみ。",
     "Buys a card from an adjacent monster. The only monsters that hold cards are Gensoukyou residents that card was based on. You can buy each card one time only.")},
 
+	{ 35,64,70,FALSE,FALSE,A_CHR,0,0,_("三毛猫に小判", "Casting Koban Coins Before a Calico Cat"),
+	_("金を持っている敵対的なモンスターを召喚する。",
+    "Summons a hostile monster that carries money.")},
+
 	//(客を呼ぶが金が逃げる)
 	{ 40,120,90,FALSE,FALSE,A_CHR,0,0,_("弾幕万来", "Many Danmaku Guests"),
 	_("アビリティカードを持っている幻想郷の住人を友好的な状態で召喚する。ただしこの特技で呼ばれた者からカードを買おうとすると価格を倍以上に吹っ掛けてくる。一フロアに一度しか呼べない。",
@@ -85,7 +388,7 @@ class_power_type class_power_mike[] =
 
 cptr do_cmd_class_power_aux_mike(int num, bool only_info)
 {
-//	int dir, dice, sides, base, damage, i;
+    int i;
 
 	switch (num)
 	{
@@ -146,7 +449,27 @@ cptr do_cmd_class_power_aux_mike(int num, bool only_info)
 	}
 	break;
 
-	case 6:
+	case 6: //v2.0.2追加 三毛猫に小判 ONLY_GOLDフラグの敵を呼ぶ
+	{
+		bool flag = FALSE;
+
+		if (only_info) return format("");
+
+		for (i = 0; i<p_ptr->lev / 10; i++)
+		{
+			if ((summon_specific(-1, py, px, p_ptr->lev, SUMMON_ONLY_GOLD, (PM_ALLOW_GROUP | PM_FORCE_ENEMY | PM_ALLOW_UNIQUE))))flag = TRUE;
+		}
+		if (flag)
+			msg_print(_("金の匂いを感じる！", "You smell money!"));
+		else
+			msg_print(_("何も起こらなかった。", "Nothing happens."));
+
+		break;
+
+
+	}
+
+	case 7:
 	{
 
 
@@ -2473,7 +2796,11 @@ class_power_type class_power_urumi[] =
 	_("一定時間、武器攻撃が命中したときの重量ボーナスが増加し会心の一撃が出やすくなる。",
     "Temporarily increases weight bonus for your weapon, making it easier to score critical hits.")},
 
-	{ 32,40,60,FALSE,TRUE,A_CHR,0,0,_("デーモンシージ", "Demon Siege"),
+	{ 30,45,55,FALSE,TRUE,A_DEX,0,0,_("剽掠のさざ波", "Ripples of Rapacity"),
+	_("周囲のモンスターの移動を短時間妨害する。",
+    "Prevents nearby monsters from moving for a short period of time.")},
+
+	{ 35,40,60,FALSE,TRUE,A_CHR,0,0,"デーモンシージ",
 	_("指定したターゲット周辺に水棲系の配下モンスターを複数召喚する。水のないところには召喚できない。",
     "Summons several aquatic monsters around the target as your followers. Can only summon on water terrain.")},
 
@@ -2673,7 +3000,22 @@ cptr do_cmd_class_power_aux_urumi(int num, bool only_info)
 
 		}
 		break;
-		case 4: //デーモンシージ(水棲モンスター召喚)
+
+		//v2.0.2 剽掠のさざ波
+		case 4:
+		{
+
+			int dam = plev / 2 + 5;
+
+			if (only_info) return format(_str_eff_power, dam);
+
+			msg_print(_("濡れた蛇のようなものが辺りに絡みついた...", "Something like a drenched snake entangles nearby area..."));
+			project(0, 4, py, px, dam * 2, GF_NO_MOVE, PROJECT_GRID | PROJECT_JUMP | PROJECT_KILL, -1);
+
+		}
+		break;
+
+		case 5: //デーモンシージ(水棲モンスター召喚)
 		{
 			int i;
 			int y, x;
@@ -2707,7 +3049,7 @@ cptr do_cmd_class_power_aux_urumi(int num, bool only_info)
 		}
 		break;
 
-		case 5:
+		case 6:
 		{
 			int rad = 1;
 			int base = p_ptr->lev * 10 + chr_adj * 10;
@@ -2720,7 +3062,7 @@ cptr do_cmd_class_power_aux_urumi(int num, bool only_info)
 		break;
 
 		//ヘビーストーンベイビー
-		case 6:
+		case 7:
 		{
 			int inven_idx;
 			int dec_speed = 15;
@@ -3343,9 +3685,13 @@ class_power_type class_power_kutaka[] =
 	_("一時的に士気高揚・肉体強化を得る。また自分と近くのモンスターのテレポートを阻害する。",
     "Temporarily grants heroism and increases your physical stats; also prevents both yourself and nearby monsters from teleporting.")},
 
-	{ 40,55,70,FALSE,TRUE,A_CHR,0,0,_("獄界視線", "Hell Realm Sight-Line"),
+	{ 38,55,70,FALSE,TRUE,A_CHR,0,0,_("獄界視線", "Hell Realm Sight-Line"),
 	_("視界内のモンスター全てに強力な精神攻撃を行い、さらに金縛りにしようと試みる。",
     "Hits all monsters in sight with a powerful mental attack and attempts to bind them.")},
+
+	{ 43,60,75,FALSE,TRUE,A_WIS,0,0,_("命の分水嶺", "Watershed of Life"),
+	_("自分を中心とした水属性のボールを発生させる。この攻撃は水属性と破邪属性の両方の性質をもつ。",
+    "Generates a water ball centered on yourself. This attack has properties of both water and holy elements.")},
 
 	{ 45,96,80,FALSE,TRUE,A_CHR,0,0,_("全霊鬼渡り", "Highly Spirited Oniwatari"),
 	_("自分の周囲にいる幻想郷の存在ではないモンスターをフロアから追放しようと試みる。",
@@ -3526,7 +3872,19 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 
 		break;
 	}
-	case 9://全霊鬼渡り
+
+	case 9:
+	{
+		int dam = plev * 6 + chr_adj * 6;
+		if (only_info) return format(_str_eff_dam_around, dam / 2);
+
+		msg_print(_("あなたは幽明の境を侵す者を罰した！", "You punish those who violate otherworldly boundaries!"));
+		project(0, 5, py, px, dam, GF_HOLY_WATER, (PROJECT_KILL | PROJECT_JUMP), -1);
+
+	}
+	break;
+
+	case 10://全霊鬼渡り
 	{
 
 		int rad = plev;
@@ -3894,6 +4252,10 @@ class_power_type class_power_eika[] =
 	_("自分を中心とした広範囲に「守りのルーン」を配置する。",
     "Creates multiple runes of protection in a wide area centered on yourself.")},
 
+	{ 45,72,90,FALSE,TRUE,A_CHR,0,0,_("エイジャの積石", "Red Stone Stack of Aja"),
+	_("周囲5グリッド以内にある守りのルーンから1/3の確率でランダムなターゲットに核熱属性のビームが放たれる。",
+    "All runes of protection within 5 grids have 1/3 chance of firing a nuclear heat beam at a random target.")},
+
 
 	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
 };
@@ -3903,8 +4265,9 @@ class_power_type class_power_eika[] =
 /*:::瓔花用特技*/
 cptr do_cmd_class_power_aux_eika(int num, bool only_info)
 {
-	int dir;
+	int dir, i;
 	int plev = p_ptr->lev;
+  	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
 
 	switch (num)
 	{
@@ -3950,13 +4313,83 @@ cptr do_cmd_class_power_aux_eika(int num, bool only_info)
 
 	case 3:
 	{
-		int rad = plev / 5 - 6;
+		int rad = plev / 15;
 
 		if (only_info) return format(_("半径:%d", "rad: %d"), rad);
 		msg_format(_("あなたは子供霊たちと石積みコンテストを始めた...", "You start a stone stacking contest with infant spirits..."));
 		project(0, rad, py, px, rad*2, GF_MAKE_GLYPH, PROJECT_GRID, -1);
 		break;
 	}
+
+
+	case 4:
+	{
+		int dam = (plev + chr_adj)/2 ;
+		cave_type       *c_ptr;
+		bool flag = FALSE;
+		int x, y;
+		int x2, y2;
+		int test_count = 0;
+		if (only_info) return format(_("損傷:%d * 不定", "dam: %d * undef"), dam);
+
+		msg_print(_("周囲の積石が輝き始めた！", "Nearby stone stacks start glowing!"));
+		//ルーン数はチルドレンズリンボ一発で35(火炎耐性持ち閃光耐性抜け期待値250)、敷き詰めまくって90(同650)くらい
+		for (y = 1; y < cur_hgt - 1; y++)
+		{
+			for (x = 1; x < cur_wid - 1; x++)
+			{
+				int tmp_idx_cnt, target_who_tmp;
+				c_ptr = &cave[y][x];
+				if (!(c_ptr->info & CAVE_OBJECT) || !have_flag(f_info[c_ptr->mimic].flags, FF_GLYPH))
+					continue;
+
+				//攻撃回数が多くなりすぎるので発動確率を1/3にしてそのぶん威力で調整する
+				if (!one_in_(3)) continue;
+
+				if (distance(py, px, y, x) > 5) continue;
+
+				if (!los(py, px, y, x)) continue;
+
+				test_count++;
+
+				//ルーンのあるグリッドからさらにモンスターループ
+				tmp_idx_cnt = 0;
+				for (i = 1; i < m_max; i++)
+				{
+					monster_type *m_ptr = &m_list[i];
+
+					if (!m_ptr->r_idx) continue;
+					if (is_pet(m_ptr)) continue;
+					if (is_friendly(m_ptr)) continue;
+					if (!m_ptr->ml) continue;
+					if (!projectable(y, x, m_ptr->fy, m_ptr->fx)) continue;
+
+					tmp_idx_cnt++;
+					if (one_in_(tmp_idx_cnt)) target_who_tmp = i;
+				}
+
+				if (!tmp_idx_cnt)continue;
+				//ターゲットが決まったらビーム
+				hack_project_start_x = x;
+				hack_project_start_y = y;
+
+
+				(void)project(0, 0, m_list[target_who_tmp].fy, m_list[target_who_tmp].fx, dam, GF_NUKE, (PROJECT_BEAM | PROJECT_KILL | PROJECT_THRU), -1);
+
+				flag = TRUE;
+
+			}
+		}
+		if (!flag) msg_print(_("...気がしただけだった。", "...but that was just your imagination."));
+
+		hack_project_start_x = 0;
+		hack_project_start_y = 0;
+
+		if (cheat_xtra) msg_format("glyph_count:%d", test_count);
+
+	}
+	break;
+
 
 	default:
 		if (only_info) return _str_unimp;
@@ -5964,6 +6397,9 @@ class_power_type class_power_larva[] =
 	{ 40,150,90,FALSE,TRUE,A_CON,0,0,_("変異", "Mutate"),
 	_("ランダムな突然変異を得る。",
     "Gain a random mutation.")},
+	{ 44,40,75,FALSE,TRUE,A_DEX,0,0,_("デッドリーバタフライ", "Deadly Butterfly"),
+	_("自分を中心に地獄属性と防御力低下属性のボールを発生させる。",
+    "Generates a nether ball and a ball of lowering defense centered on yourself.")},
 	{ 48,64,80,FALSE,TRUE,A_CHR,0,0,_("真夏の羽ばたき", "Midsummer Wingbeats"),
 	_("一時的に種族が変わり大幅にパワーアップする。",
     "Temporarily changes your race and greatly powers you up.")},
@@ -6107,7 +6543,22 @@ cptr do_cmd_class_power_aux_larva(int num, bool only_info)
 
 	}
 	break;
-	case 8:
+
+
+	case 8://デッドリーバタフライ
+	{
+		int dam = plev * 5 + chr_adj * 5;
+		int rad = 2 + plev / 15;
+		if (only_info) return format(_str_eff_dam_around, dam / 2);
+
+		msg_print(_("禍々しく輝く鱗粉をまき散らした...", "You spread ominously glowing scales..."));
+		project(0, rad, py, px, dam, GF_NETHER, (PROJECT_KILL | PROJECT_JUMP | PROJECT_GRID | PROJECT_ITEM), -1);
+		project(0, rad, py, px, dam, GF_DEC_DEF, (PROJECT_KILL | PROJECT_JUMP | PROJECT_GRID | PROJECT_HIDE), -1);
+
+	}
+	break;
+
+	case 9:
 	{
 		int base = 7;
 		int time;
@@ -7123,7 +7574,7 @@ cptr do_cmd_class_power_aux_aunn(int num, bool only_info)
 			if(only_info) return format("");
 
 			msg_print(_("あなたは目まぐるしく跳ね回った！", "You spin arounding at blinding speed!"));
-			whirlwind_attack();
+			whirlwind_attack(0);
 		}
 		break;
 		case 5:
@@ -7185,6 +7636,10 @@ class_power_type class_power_nemuno[] =
         _("足元に守りのルーンを設置する。",
         "Places a rune of protection beneath your feet.")},
 
+	{35,35,55,TRUE,FALSE,A_STR,0,10,_("刃こぼれするまで切り刻め", "Mince Up Till Your Blade Chips"),
+	_("隣接したモンスター一体に通常の倍の回数の攻撃を行う。ただし攻撃後に武器が劣化する。刃のある武器を装備していないと使用できない。",
+    "Hits an adjacent monsters with double the usual amount of melee attacks. Disenchants your weapon after you finish attacking. Requires wielding an edged weapon.")},
+
 	{37,47,70,FALSE,TRUE,A_WIS,0,10,_("呪われた柴榑雨", "Cursed Torrential Rain"),
 		_("縄張りの中全てに強力な水属性攻撃を行う。",
         "Hits everything in your sanctuary with a powerful water attack.")},
@@ -7202,6 +7657,7 @@ class_power_type class_power_nemuno[] =
 
 cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 {
+    int dir;
 	int plev = p_ptr->lev;
 	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
 
@@ -7274,7 +7730,47 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 		break;
 	}
 
+	//v2.0.2 刃こぼれするまで切り刻め
 	case 5:
+	{
+		int y, x;
+		monster_type *m_ptr;
+
+		if (only_info) return format("");
+
+		if (!object_has_a_blade(&inventory[INVEN_RARM]) && !object_has_a_blade(&inventory[INVEN_LARM]))
+		{
+			msg_print(_("刃のついた武器を持っていない。", "You're not holding an edged weapon."));
+			return NULL;
+		}
+
+		if (!get_rep_dir2(&dir)) return NULL;
+		if (dir == 5) return NULL;
+
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (!m_ptr->r_idx || !m_ptr->ml)
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+		else
+		{
+			char m_name[80];
+			monster_race *r_ptr = &r_info[m_ptr->r_idx];
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("%sへ猛然と斬りかかった！", "You start violently cutting up %s!"), m_name);
+			py_attack(y, x, HISSATSU_HAKOBORE);
+		}
+
+		break;
+	}
+
+
+	case 6:
 	{
 		int base = plev * 4 + chr_adj * 5;
 		if (only_info) return format(_str_eff_dam, base);
@@ -7285,7 +7781,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 	}
 	break;
 
-	case 6:
+	case 7:
 	{
 		if (only_info) return "";
 
@@ -7305,7 +7801,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 	break;
 
 
-	case 7:
+	case 8:
 	{
 		int rad = 4;
 		if (only_info) return format("");
@@ -18204,9 +18700,13 @@ class_power_type class_power_tenshi[] =
 	{ 30,30,60,FALSE,TRUE,A_WIS,0,0,_("無念無想の境地", "State of Freedom from Worldly Thoughts"),
 		_("一定時間物理防御力と魔法防御力が上昇する。",
         "Temporarily raises physical defense and protection from magic.")},
-	{ 35,60,60,FALSE,TRUE,A_INT,0,0,_("カナメファンネル", "Kaname Funnel"),
+	{ 33,60,60,FALSE,TRUE,A_INT,0,0,_("カナメファンネル", "Kaname Funnel"),
 		_("宙を舞う要石を召喚する。要石は捕獲など一部行動の対象にならずフロア移動で消える。",
         "Summons a keystone floating in the air. It cannot be captured and disappears if you move to another level.")},
+	{ 38,50,70,FALSE,TRUE,A_INT,0,0,_("乾坤鳴動砲", "Qian & Kun Rumbling Cannon"),
+		_("隕石属性のロケットを発射する。モンスターのいない場所に当てるとそこに岩石地形を生成する。",
+        "Fires a meteor rocket. If it hits a location without a monster, it creates a pile of rubble there.")},
+
 	{ 40,66,80,FALSE,TRUE,A_CON,0,0,_("荒々しくも母なる大地よ", "Violent Land that Mothers All"),
 		_("視界内の全てに対し重力属性の攻撃を行う。",
         "Hits everything in sight with gravity.")},
@@ -18381,7 +18881,22 @@ cptr do_cmd_class_power_aux_tenshi(int num, bool only_info)
 
 		}
 		break;
+
 	case 8:
+		{
+
+		int dam = plev * 5 + chr_adj * 5;
+
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print(_("要石が飛んでいった！", "A keystone flies forth!"));
+		fire_rocket(GF_KANAMEISHI, dir, dam, 1);
+
+		}
+		break;
+
+	case 9:
 		{
 			int dam = plev * 3 + chr_adj * 5;
 
@@ -18390,7 +18905,7 @@ cptr do_cmd_class_power_aux_tenshi(int num, bool only_info)
 			project_hack2(GF_GRAVITY,0,0,dam);
 			break;
 		}
-	case 9:
+	case 10:
 		{
 			int rad = 3;
 			if(only_info) return format(_str_eff_area,rad);
@@ -18404,7 +18919,7 @@ cptr do_cmd_class_power_aux_tenshi(int num, bool only_info)
 			destroy_area(py,px,rad,FALSE,FALSE,TRUE);
 		}
 		break;
-	case 10:
+	case 11:
 		{
 			int damage = p_ptr->lev * 9 + chr_adj * 10;
 			if(damage < 400) damage = 400;
@@ -20539,10 +21054,15 @@ class_power_type class_power_nitori[] =
 	{21,0,0,FALSE,FALSE,A_DEX,0,0,_("キューリサウンドシステム", "Cucumber Sound System"),
 		_("轟音属性のビームを発射する。水妖エネルギー30を消費する。",
         "Fires a beam of sound. Consumes 30 water energy.")},
-	{27,0,0,FALSE,FALSE,A_DEX,0,0,_("菊一文字コンプレッサー", "Kiku-ichimonji Compressor"),
+	{26,0,0,FALSE,FALSE,A_DEX,0,0,_("菊一文字コンプレッサー", "Kiku-ichimonji Compressor"),
 		_("特殊な形状に爆発する水属性攻撃を放つ。威力は高いが射程は短い。水妖エネルギー200を消費する。",
         "Fires a water attack exploding in a special shape. High power, but low range. Consumes 200 water energy.")},
-	{33,40,60,FALSE,TRUE,A_WIS,0,5,_("シライトフォール", "Shiraito Falls"),
+
+	{30,0,0,FALSE,FALSE,A_DEX,0,0,_("ウォーター火炎放射器", "Water Flamethrower"),
+		_("蒸気属性のブレスを放つ。威力はHPの1/3。水妖エネルギー300を消費する。",
+        "Performs a steam breath attack. Damage is equal to 1/3 of your HP. Consumes 300 water energy.")},
+
+	{34,40,60,FALSE,TRUE,A_WIS,0,5,_("シライトフォール", "Shiraito Falls"),
 		_("自分を中心としたランダムな位置に水属性の球を連続で発生させる。",
         "Fires multiple balls of water at random positions in your vicinity.")},
 	{38,0,0,FALSE,TRUE,A_INT,0,0,_("オプティカルカモフラージュ", "Optical Camouflage"),
@@ -20561,7 +21081,7 @@ class_power_type class_power_nitori[] =
 int nitori_energy[] =
 {
 	0,0,0,0,0,0,
-	1,0,50,30,200,
+	1,0,50,30,200,300,
 	0,300,400,0
 
 };
@@ -20696,7 +21216,25 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 
 			break;
 		}
+
+	//v2.0.2
 	case 11:
+	{
+		int dam = p_ptr->chp / 3;
+		if (!dam) dam = 1;
+
+		if (only_info) return format(_str_eff_dam, dam);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_print(_("あなたは高温の蒸気を吹き付けた！", "You breathe superheated steam!"));
+		fire_ball(GF_STEAM, dir, dam, -1);
+
+		p_ptr->magic_num1[20] -= nitori_energy[skillnum];
+		if (p_ptr->pseikaku == SEIKAKU_TRIGGER) new_class_power_change_energy_need = 80;
+	}
+	break;
+
+	case 12:
 		{
 			int dam = 20 + plev + chr_adj;
 			if(only_info) return format(_("損傷:%d*不定", "dam: %d*undef"),dam);
@@ -20705,7 +21243,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 			cast_meteor(dam, 3,GF_WATER);
 		}
 		break;
-	case 12:
+	case 13:
 		{
 			int base = 20;
 			if(only_info) return format(_str_eff_dur_plus_1d,base,base);
@@ -20714,7 +21252,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 			if(!use_itemcard) p_ptr->magic_num1[20] -= nitori_energy[skillnum];
 			break;
 		}
-	case 13:
+	case 14:
 		{
 			int num = 8;
 			int dice = 3;
@@ -20730,7 +21268,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 		}
 
 
-	case 14:
+	case 15:
 		{
 			int damage = plev * 5 + chr_adj * 5;
 			if(only_info) return format(_str_eff_dam,damage);
@@ -21157,9 +21695,14 @@ class_power_type class_power_minoriko[] =
 	{	24,24,50,TRUE,FALSE,A_DEX,0,10,_("オヲトシハーベスター", "Owotoshi Harvester"),
 		_("隣接したモンスター全てに攻撃する。大鎌を装備していないと使えず、威力は大鎌による通常攻撃力に準ずる。",
         "Attacks all adjacent monsters. Requires wielding a large scythe, power is based on normal attack from that scythe.")},
-	{	32,30,70,TRUE,FALSE,A_WIS,0,0,_("スイートポテトルーム", "Sweet Potato Room"),
+	{	30,30,70,TRUE,FALSE,A_WIS,0,0,_("スイートポテトルーム", "Sweet Potato Room"),
 		_("「焼き芋」を生成する。食べると満腹度とMPが回復する。",
         "Creates Roast sweet potato. Eating it satisfies hunger and recovers MP.")},
+	//v2.0.2
+	{ 35,45,70,FALSE,TRUE,A_CON,0,0,_("五穀豊穣波", "Bumper Crop Waves"),
+		_("森林生成属性のビームを放つ。",
+        "Fires a beam that creates trees in its path.")},
+
 	{	40,48,80,FALSE,TRUE,A_CHR,0,0,_("ウォームカラーハーヴェスト", "Warm Color Harvest"),
 		_("周囲に気属性のボールを多数発生させる。威力は魅力に大きく依存する。",
         "Generates multiple Ki element balls in your vicinity. Power greatly depends on your charisma.")},
@@ -21230,7 +21773,18 @@ cptr do_cmd_class_power_aux_minoriko(int num, bool only_info)
 			break;
 		}
 
+
 	case 3:
+	{
+		if (only_info) return "";
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print("あなたは豊穣のパワーを放った！");
+		fire_beam(GF_MAKE_TREE, dir, 10);
+		break;
+	}
+
+
+	case 4:
 		{
 			int rad = 2 + chr_adj / 15;
 			int damage = 10 + chr_adj * 3;
@@ -26450,7 +27004,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 		}
 
 		msg_print(_("あなたは大きく武器を振り回した！", "You swing your weapon in a large arc!"));
-		whirlwind_attack();
+		whirlwind_attack(0);
 	}
 	break;
 
@@ -26804,8 +27358,8 @@ class_power_type class_power_mystia[] =
 		_("周囲の人間の移動を封じる歌を歌う。また歌いながら人間に攻撃すると人間スレイを得る。歌っている間はMPを消費し続ける。",
         "Sings a song that stops movement of nearby humans. Also, gives a human slayer effect to your attacks. Singing continuously consumes MP.")},
 	{40,36,75,FALSE,TRUE,A_CHR,0,0,_("真夜中のコーラスマスター", "Midnight Chorus Master"),
-		_("周囲の敵を魅了し配下にする歌を歌う。歌っている間はMPを消費し続ける。",
-        "Sings a song that charms nearby enemies into being your followers. Singing continuously consumes MP.")},
+		_("周囲の敵を魅了・攻撃力低下状態にする歌を歌う。歌っている間はMPを消費し続ける。",
+        "Sings a song that charms and lower attack power of nearby enemies into being your followers. Singing continuously consumes MP.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",
 		""},
@@ -26904,7 +27458,7 @@ cptr do_cmd_class_power_aux_mystia(int num, bool only_info)
 
 	case 8://真夜中のコーラスマスター
 		{
-			int power = chr_adj * 5;
+			int power = plev * 3 + chr_adj * 5;
 			if(only_info) return  format(_("効果:1d%d", "pow: 1d%d"),power);
 			do_spell(TV_BOOK_MUSIC, MUSIC_NEW_MYSTIA_CHORUSMASTER, SPELL_CAST);
 
@@ -30684,9 +31238,14 @@ class_power_type class_power_wakasagi[] =
 		_("周囲の水棲生物を魅了する歌を歌う。歌っている間はMPを消費し続ける。歌っているときにもう一度実行すると歌を止める。",
         "Sings a song to charm nearby aquatic beings. Singing will continuously reduce your MP. Using this ability while you're singing stops it.")},
 
-	{33,33,50,TRUE,FALSE,A_STR,0,10,_("ルナティックレッドスラップ", "Lunatic Red Slap"),
+	{32,33,50,TRUE,FALSE,A_STR,0,10,_("ルナティックレッドスラップ", "Lunatic Red Slap"),
 		_("隣接しているモンスター全てにダメージを与え、混乱耐性を持たない非ユニークモンスターを高確率で混乱させる。",
         "Deals damage to all adjacent monsters, and has high chance of confusing non-unique, non-confusion resistant monsters.")},
+
+	{36,40,70,FALSE,TRUE,A_CHR,0,0,_("人魚の歌", "Mermaid's Song"),
+		_("周囲のモンスターを魅了・魔法力低下させる歌を歌う。歌っている間はMPを消費し続ける。歌っているときにもう一度実行すると歌を止める。",
+        "Sings a song that charms and lowers magical power of nearby monsters. Singing will continuously reduce your MP. Using this ability while you're singing stops it.")},
+
 	{40,90,80,FALSE,TRUE,A_CHR,0,0,_("逆鱗の大荒波", "Raging Waves of the Reversed Scale"),
 		_("視界内に強力な水属性攻撃を行い周囲の地形を水にする。体力が減っていると威力が上がる。",
         "Hits everything in sight with a powerful water attack, and turns nearby terrain into water. Power increases if your current HP is low.")},
@@ -30747,12 +31306,13 @@ cptr do_cmd_class_power_aux_wakasagi(int num, bool only_info)
 
 	case 2://v1.1.75 スクールオブフィッシュ
 	{
-		int range = p_ptr->lev / 3;
-		if (only_info) return  format("");
+
+		int power = p_ptr->lev + adj_general[p_ptr->stat_ind[A_CHR]] * 3;
+		if (only_info) return  format(_str_eff_power,power);
 
 
 		//歌っているとき行動力コスト無消費で中断
-		if (p_ptr->magic_num2[0])
+		if (p_ptr->magic_num2[0] == MUSIC_NEW_WAKASAGI_SCHOOLOFFISH)
 		{
 			stop_singing();
 			return NULL;
@@ -30779,7 +31339,25 @@ cptr do_cmd_class_power_aux_wakasagi(int num, bool only_info)
 	}
 	break;
 
-	case 4:
+	case 4://v2.0.2 人魚の歌
+	{
+
+		int power = p_ptr->lev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
+		if (only_info) return  format(_str_eff_power, power);
+
+		//歌っているとき行動力コスト無消費で中断
+		if (p_ptr->magic_num2[0] == MUSIC_NEW_WAKASAGI_NINGYO)
+		{
+			stop_singing();
+			return NULL;
+		}
+
+		do_spell(TV_BOOK_MUSIC, MUSIC_NEW_WAKASAGI_NINGYO, SPELL_CAST);
+
+		break;
+	}
+
+	case 5:
 		{
 			int mult = 1 + ((p_ptr->mhp - p_ptr->chp) * 100 / p_ptr->mhp) / 10;
 			int rad = mult;
@@ -31024,15 +31602,16 @@ class_power_type class_power_suika[] =
 	{30,50,60,FALSE,TRUE,A_INT,0,0,_("濛々迷霧", "Deep Fog Labyrinth"),
 		_("一定時間霧に変化する。物理攻撃、切り傷・落石・ボルトが効きにくくなり隠密能力が大幅に上昇する。しかし身体能力が大幅に低下し元素と閃光と劣化の攻撃に弱くなってしまう。",
         "Transforms into mist. Gives you protection against physical attacks, cuts, cave-ins and bolt attacks and greatly increases strength. However, also greatly lowers physical abilities and makes you vulnerable to basic elements, light and disenchantment.")},
-
 	{35,30,70,FALSE,FALSE,A_DEX,0,0,_("鬼縛りの術", "Art of Oni Binding"),
 		_("モンスター一体を遠くから引き寄せて短時間移動不能にし、さらに高確率で魔法力低下状態にする。",
         "Pulls in a monster and prevents them from moving for a short period of time; also lowers their magic power with a high probability rate.")},
-
-	{39,48,65,FALSE,TRUE,A_DEX,0,0,_("インプスウォーム", "Imp Swarm"),
+	{38,48,65,FALSE,TRUE,A_DEX,0,0,_("インプスウォーム", "Imp Swarm"),
 		_("小型の分身を数体呼び出す。今いる階から出ると分身は消える。",
         "Summons multiple little clones of yourself. They disappear if you leave this level.")},
-	{45,80,70,FALSE,TRUE,A_WIS,0,0,_("ミッシングパープルパワー", "Missing Purple Power"),
+	{43,86,70,TRUE,TRUE,A_STR,0,20,_("稠密の隠形鬼", "Ongyouki of Density"),
+		_("周囲のグリッド全てに通常攻撃を行う。このとき隠密能力に応じた確率で敵に強烈な一撃を与える。",
+        "Performs a normal attack against all adjacent monsters. Has a chance to deliver powerful blows depending on your stealth.")},
+	{46,80,70,FALSE,TRUE,A_WIS,0,0,_("ミッシングパープルパワー", "Missing Purple Power"),
 		_("一定時間巨大化する。巨大化中は身体能力が爆発的に上昇するが巻物と魔道具が使用できない。Uコマンドで巨大化を解除できる。",
         "Temporarily become giant. Your physical abilities massively increase, but you cannot use magic devices or scrolls. Dispel transformation with 'U'.")},
 
@@ -31162,7 +31741,17 @@ cptr do_cmd_class_power_aux_suika(int num, bool only_info)
 			break;
 		}
 
-	case 7:
+	case 7: //v2.0.2 稠密の隠形鬼
+	{
+		if (only_info) return format("");
+
+		msg_print(_("あなたは突然大暴れした！", "You suddenly rampage around!"));
+		whirlwind_attack(HISSATSU_ONGYOU);
+	}
+	break;
+
+
+	case 8:
 		{
 			int time;
 			int percentage;
@@ -33270,7 +33859,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 		if( p_ptr->pseikaku == SEIKAKU_BERSERK); //性格狂気
 		else if(p_ptr->pclass == CLASS_JUNKO) ; //v1.1.17 純狐は狂戦士化状態でも特技を使える
 		else if(p_ptr->pclass == CLASS_SUIKA  && skillnum == 1);//ブレス
-		else if(p_ptr->pclass == CLASS_WAKASAGI  && (skillnum == 3 || skillnum == 4));//逆鱗
+		else if(p_ptr->pclass == CLASS_WAKASAGI  && (skillnum == 3 || skillnum == 5));//逆鱗
 		else if(p_ptr->pclass == CLASS_YOUMU  && (skillnum == 0 || skillnum == 3 || skillnum == 4 || skillnum == 6));//現世斬,未来永劫斬
 		else if(p_ptr->pclass == CLASS_KOGASA  && skillnum == 1);//フルスイング
 		else if(p_ptr->pclass == CLASS_KASEN && !is_special_seikaku(SEIKAKU_SPECIAL_KASEN) && skillnum == 3);//大喝
@@ -33541,7 +34130,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 	else if(p_ptr->pclass == CLASS_TENSHI)
 	{
 		if((inventory[INVEN_RARM].name1 != ART_HISOU) && (inventory[INVEN_LARM].name1 != ART_HISOU)
-			&& ( skillnum == 0 || skillnum == 5 || skillnum == 9 || skillnum == 10))
+			&& ( skillnum == 0 || skillnum == 5 || skillnum == 10 || skillnum == 11))
 		{
 #ifdef JP
 			my_strcpy(errmsg, "その技は緋想の剣を装備していないと使えない。", 150);
@@ -34509,7 +35098,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 
 	else if (p_ptr->pclass == CLASS_NEMUNO)
 	{
-		if (!IS_NEMUNO_IN_SANCTUARY && (skillnum == 2 || skillnum == 5 || skillnum == 6))
+		if (!IS_NEMUNO_IN_SANCTUARY && (skillnum == 2 || skillnum == 6 || skillnum == 7))
 		{
 #ifdef JP
 			my_strcpy(errmsg, "この特技は縄張りの中にいないと使えない。", 150);
@@ -35508,6 +36097,13 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_TSUKASA:
+		class_power_table = class_power_tsukasa;
+		class_power_aux = do_cmd_class_power_aux_tsukasa;
+		power_desc = power_desc_waza;
+		break;
+
+
 
 	default:
 #ifdef JP
@@ -36176,7 +36772,7 @@ const support_item_type support_item_list[] =
 	_("それは無属性ボールを放つ。威力は腕力に依存する。",
     "Fires a non-elemental ball. Power depends on your strength.")},
 	//ミッシングパープルパワー
-	{60, 50, 120,1,30,	MON_SUIKA,class_power_suika,do_cmd_class_power_aux_suika,7,
+	{60, 50, 120,1,30,	MON_SUIKA,class_power_suika,do_cmd_class_power_aux_suika,8,
 	_("鬼の分銅", "Oni Weight"),
 	_("それを使うと一定時間巨大化する。巨大化中は身体能力が爆発的に上昇するが巻物と魔道具が使用できない。Uコマンドで巨大化を解除できる。",
     "Temporarily turns you giant. Your physical stats drastically increase, but you cannot use scrolls or magic devices. Cancel giantform with 'U' command.")},
@@ -36206,7 +36802,7 @@ const support_item_type support_item_list[] =
 	_("緋緋色金製の八卦炉", "Hihiirokane Hakkero"),
 	_("それは極めて強力な分解属性のビームを放つ。",
     "Fires an extremely powerful disintegration beam.")},
-	//着せ替え魔法
+	//idx30 着せ替え魔法
 	{75, 25, 128,1,40,	MON_MARISA,class_power_marisa,do_cmd_class_power_aux_marisa,10,
 	_("魔法の小瓶", "Magic Vial"),
 	_("それを使うとその場で探索拠点にアクセスし、アイテム入れ替えや装備の変更ができる。一度でも拠点から出たら終了するので注意。",
@@ -36229,7 +36825,7 @@ const support_item_type support_item_list[] =
 	_("それは自分を中心に水属性のボールを発生させる。水上で使用すると威力が上がる。",
     "Generates a ball of water centered on yourself. Power increases if used in water terrain.")},
 	//逆鱗の大荒波
-	{55, 40, 100,3,12,	MON_WAKASAGI,class_power_wakasagi,do_cmd_class_power_aux_wakasagi,4,
+	{55, 40, 100,3,12,	MON_WAKASAGI,class_power_wakasagi,do_cmd_class_power_aux_wakasagi,5,
 	_("剥がれた鱗", "Peeled Scales"),
 	_("それは視界内に強力な水属性攻撃を行い周囲の地形を水にする。体力が減っていると威力が上がる。",
     "Hits everything in sight with a powerful water attack and turns nearby terrain into water. Power increases if you're low on health.")},
@@ -36761,7 +37357,7 @@ const support_item_type support_item_list[] =
 	_("それはマップ上下方向のみに爆発する短射程の水属性ボールを放つ。",
     "Fires short range balls of water towards the level's top and bottom edges.")},
 	//オプティカルカモフラージュ
-	{90,30, 120,1,18,	MON_NITORI,class_power_nitori,do_cmd_class_power_aux_nitori,12,
+	{90,30, 120,1,18,	MON_NITORI,class_power_nitori,do_cmd_class_power_aux_nitori,13,
 	_("光学迷彩スーツ", "Optical Camouflage Suit"),
 	_("それを使うと短時間透明になって敵から見えにくくなる。",
     "Temporarily makes you invisible, making it harder for enemies to see you.")},
@@ -36890,12 +37486,12 @@ const support_item_type support_item_list[] =
 	_("それはこのフロア限定で「カナメファンネル」を召喚する。",
     "Summons a Kaname funnel that can't leave this level.")},
 	//不譲土壌の剣
-	{55,30, 100,3,12,	MON_TENSHI,class_power_tenshi,do_cmd_class_power_aux_tenshi,9,
+	{55,30, 100,3,12,	MON_TENSHI,class_power_tenshi,do_cmd_class_power_aux_tenshi,10,
 	_("巨大な要石", "Huge Keystone"),
 	_("それは周囲の狭い範囲を*破壊*する。",
     "*Destroys* a small area.")},
 	//全人類の緋想天
-	{60,40, 128,1,45,	MON_TENSHI,class_power_tenshi,do_cmd_class_power_aux_tenshi,10,
+	{60,40, 128,1,45,	MON_TENSHI,class_power_tenshi,do_cmd_class_power_aux_tenshi,11,
 	_("天界の宝剣", "Jeweled Sword of Heaven"),
 	_("それは極めて強力な気属性のビームを放つ。",
     "Fires an extremely powerful beam of Ki.")},
@@ -37377,6 +37973,11 @@ const support_item_type support_item_list[] =
 		_("それを使うと一時的に幸運状態になるが、同時に反感状態になる。",
         "Temporarily makes you lucky, but makes you aggravate monsters as well.")},
 
+	//v2.0.2 典　遅効性の管狐弾
+		{ 80,40, 80,5,6,	MON_TSUKASA,class_power_tsukasa,do_cmd_class_power_aux_tsukasa,2,
+		_("ガラスの管", "Glass Pipe"),
+		_("それを使うと破片属性のロケットで攻撃する。攻撃を受けたモンスターは行動するたびにダメージを受ける。",
+        "Fires a shards rocket. A monster hit by this attack will keep taking damage for every action it performs.")},
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };

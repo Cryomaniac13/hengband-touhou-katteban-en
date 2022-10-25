@@ -3514,6 +3514,28 @@ static void process_monster(int m_idx)
 
 	if(r_ptr->flags1 & RF1_NEVER_MOVE) flag_never_move = TRUE;
 
+	//2.0.2 遅効性の管狐弾
+	//モンスターの行動ごとに一定のダメージを与える
+	if (m_ptr->timed_shard_count)
+	{
+		int dam = 5 + p_ptr->lev / 2;
+		bool dummy;
+
+		m_ptr->timed_shard_count -= 1;
+
+		mon_take_hit(m_idx, dam, &dummy, _("は管狐弾のダメージで倒れた。", "%^s is defeated by kuda-gitsune bullets."));
+
+		if (!m_ptr->r_idx) return;
+
+		if (!m_ptr->timed_shard_count)
+		{
+			char m_name[80];
+			monster_desc(m_name, m_ptr, 0);
+			msg_format(_("%sへの管狐弾の効果がなくなったようだ。", "%^s is no longer affected by kuda-gitsune bullets."), m_name);
+		}
+	}
+
+
 
 
 	/*::: -Hack- 小町などの移動抑止特技の特殊処理 効果持続中は該当モンスターをNEVER_MOVE扱いにするが破られることもある*/
@@ -5933,7 +5955,8 @@ void process_monsters(void)
 			if (MON_SLOW(m_ptr)) speed -= 10;
 
 			//プレイヤーよりモンスターのほうが遅い場合+10を上限に速度加算
-			if (speed < p_ptr->pspeed)
+			//v2.0.2 この処理は典には適用されない
+			if ((p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO) && speed < p_ptr->pspeed )
 				speed += MIN(10,(p_ptr->pspeed - speed)/2);
 		}
 		else if (p_ptr->riding == i)

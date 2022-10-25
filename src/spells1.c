@@ -114,6 +114,7 @@ byte spell_color(int type)
 
 			case GF_ARROW:          return (0x0F);
 			case GF_WATER:
+			case GF_HOLY_WATER:
 			case GF_MOSES:
 			case GF_SPECIAL_SHOT:
 				return (0x04);
@@ -124,6 +125,8 @@ byte spell_color(int type)
 			case GF_CONFUSION:      return (mh_attr(4));
 			case GF_SOUND:          return (0x09);
 			case GF_SHARDS:         return (0x08);
+			case GF_TIMED_SHARD:         return (0x08);
+
 			case GF_FORCE:          return (0x09);
 			case GF_INACT:        return (0x09);
 			case GF_GRAVITY:        return (0x09);
@@ -791,6 +794,7 @@ bool project_f(int who, int r, int y, int x, int dam, int typ)
 		{
 		case GF_TIME:
 		case GF_WATER:
+		case GF_HOLY_WATER:
 			message = _("消えた", "disappears");break;
 		case GF_COLD:
 		case GF_NORTHERN:
@@ -3246,6 +3250,67 @@ note = "には耐性がある。";
 			break;
 		}
 
+		//v2.0.2 聖水属性　水と破邪の複合属性
+		//今のところ久侘歌の「命の分水嶺」専用
+		case GF_HOLY_WATER:
+		{
+
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+#ifdef JP
+				note = "には完全な耐性がある！";
+#else
+				note = " is immune.";
+#endif
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+			if (r_ptr->flagsr & RFR_HURT_HOLY && r_ptr->flagsr & RFR_HURT_WATER)
+			{
+				note = _("はひどい痛手を受けた！", "is severely wounded!");
+				dam *= 3;
+
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_HOLY);
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_WATER);
+
+			}
+			else if (r_ptr->flagsr & RFR_HURT_HOLY)
+			{
+				note = _("は聖なる水を浴びて身をすくめた。", "shudders after being doused in holy water.");
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_HOLY);
+				dam *= 2;
+			}
+			else if (r_ptr->flagsr & RFR_HURT_WATER)
+			{
+				note = _("は水が苦手なようだ。", "doesn't like water.");
+				dam *= 2;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_WATER);
+			}
+
+			else if (r_ptr->flagsr & (RFR_RES_WATE | RFR_RES_HOLY))
+			{
+#ifdef JP
+				note = "には耐性がある。";
+#else
+				note = " resists.";
+#endif
+
+				dam *= 3; dam /= randint1(6) + 6;
+				if (r_ptr->flagsr & (RFR_RES_WATE) && is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_WATE);
+				if (r_ptr->flagsr & (RFR_RES_HOLY) && is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_HOLY);
+
+			}
+
+			if (dam > randint1(r_ptr->level * 3) && !(r_ptr->flagsr & (RFR_RES_WATE|RFR_RES_HOLY)) && !(r_ptr->flags3 & RF3_NO_STUN))
+				do_stun = (randint1(4) + randint0(dam / 10));
+
+		}
+		break;
+
 		/* Water (acid) damage -- Water spirits/elementals are immune */
 		case GF_WATER:
 		{
@@ -3381,6 +3446,53 @@ note = "には耐性がある。";
 			}
 			break;
 		}
+
+
+		case GF_TIMED_SHARD:
+
+		{
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+#ifdef JP
+				note = "には完全な耐性がある！";
+#else
+				note = " is immune.";
+#endif
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+			else if (r_ptr->flagsr & RFR_RES_SHAR)
+			{
+#ifdef JP
+				note = "には耐性がある。";
+#else
+				note = " resists.";
+#endif
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_SHAR);
+				break;
+
+			}
+			else
+			{
+#ifdef JP
+				note = "に管狐弾を食らわせた。";
+#else
+				note = " is hit by the kuda-gitsune bullets.";
+#endif
+
+			}
+			//10行動の間ダメージを与える
+			m_ptr->timed_shard_count = 10;
+
+			dam = 0;
+
+			break;
+		}
+
 
 		/* Shards -- Shard breathers resist */
 		case GF_SHARDS:
@@ -5372,15 +5484,15 @@ note = "には効果がなかった！";
 			}
 
 
-
-			if ((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_NAZGUL))
-				dam = dam * 2 / 3;
+			//v2.0.2 条件式を他のバステ系に揃えた。GF_CHARMが混乱耐性のある敵に効かないのは従来同様
+			//if ((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_NAZGUL))
+			//	dam = dam * 2 / 3;
 
 			/* Attempt a saving throw */
 			if ((r_ptr->flags1 & RF1_QUESTOR) ||
 			    (r_ptr->flags3 & RF3_NO_CONF) && typ == GF_CHARM ||
 			    (m_ptr->mflag2 & MFLAG2_NOPET) ||
-			    (r_ptr->level > randint1((dam - 10) < 1 ? 1 : (dam - 10)) + 5))
+				mon_saving_throw(m_ptr, dam)   )
 			{
 				/* Memorize a flag */
 				if (r_ptr->flags3 & RF3_NO_CONF)
@@ -8837,7 +8949,8 @@ note = "には効果がなかった。";
 	if (CLASS_RIDING_BACKDANCE && p_ptr->riding == who)
 	{
 		who = 0;
-		flag_monster_and_player_gain_exp = TRUE;
+
+		if(p_ptr->pclass != CLASS_TSUKASA) flag_monster_and_player_gain_exp = TRUE;
 	}
 
 	//早苗のおみくじは自分もモンスターもダメージを受けるようにここでwhoを0にする
@@ -10367,6 +10480,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 		/* Water -- stun/confuse */
 		///mod131229 sys res 水攻撃
 		case GF_WATER:
+		case GF_HOLY_WATER: //一応追加しておくが＠が受ける予定はない。この属性の攻撃を敵がするなら破邪弱点処理を追加すること
 		{
 #ifdef JP
 			if (fuzzy) msg_print("激流で攻撃された！");
@@ -10656,6 +10770,9 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #endif
 
 			dam = mod_disen_dam(dam);
+
+
+
 			if (!p_ptr->resist_disen && !CHECK_MULTISHADOW())
 			{
 				(void)apply_disenchant(0,0);
@@ -12779,10 +12896,10 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 		else if(typ == GF_MAKE_FLOWER) typ = GF_MOSES;//GF_KOKOROはこころ専用の特殊属性なので飛ばす
 		else if(typ == GF_STEAM) typ = GF_PURIFY;//GF_SEIRAN_BEAMを飛ばす
 		else if (typ == GF_PURIFY) typ = GF_LUNATIC_TORCH;//v1.1.63 特殊射撃用属性を飛ばす
-		else if (typ == GF_CONTROL_FISH) typ = GF_ELEC;//v1.1.63　末尾は最初に戻る　定期的に修正しよう (MAX_GFを使って自動的に設定すると特殊属性を追加したときにうっかり飛ばし忘れるかもしれんので手動で編集する)
+		else if (typ == GF_HOLY_WATER) typ = GF_ELEC;//v1.1.63　末尾は最初に戻る　定期的に修正しよう (MAX_GFを使って自動的に設定すると特殊属性を追加したときにうっかり飛ばし忘れるかもしれんので手動で編集する)
 		else typ++;
 
-		if (typ >= MAX_GF) typ = GF_ELEC;
+		if (typ >= MAX_GF) typ = GF_ELEC;//念のため
 	}
 
 	//v1.1.86 アビリティカード「はじける赤蛙」効果

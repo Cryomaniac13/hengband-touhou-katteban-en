@@ -10730,7 +10730,10 @@ static cptr do_new_spell_music2(int spell, int mode)
 
 		if (cont)
 		{
-				charm_monsters(randint1(chr_adj * 5) );
+
+				int power = plev * 3 + chr_adj * 5;
+				charm_monsters(power);
+				project_hack(GF_DEC_ATK, power);
 		}
 		break;
 	case MUSIC_NEW_KYOUKO_NENBUTSU: //響子　無限念仏
@@ -11020,6 +11023,25 @@ static cptr do_new_spell_music2(int spell, int mode)
 			project_hack(GF_CONTROL_FISH, plev + chr_adj * 3);
 		}
 		break;
+
+	case MUSIC_NEW_WAKASAGI_NINGYO: //わかさぎ姫　人魚の歌
+		if (cast)
+		{
+			stop_singing();
+			msg_print(_("幽遠な歌声がダンジョンに響き渡った...",
+                        "A haunting song echoes through the dungeon..."));
+			start_singing(MUSIC_NEW_WAKASAGI_NINGYO, MUSIC_NEW_WAKASAGI_NINGYO);
+		}
+
+		if (cont)
+		{
+			int power = plev + chr_adj * 5;
+			charm_monsters(power);
+			project_hack(GF_DEC_MAG, power);
+		}
+		break;
+
+
 
 	case MUSIC_NEW_SANNYO_SMOKE:
 		if (cast)

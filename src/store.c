@@ -6276,24 +6276,29 @@ void do_cmd_store(void)
 	if(hack_flag_access_home) which = STORE_HOME;
 	else if(hack_flag_access_home_orin) which = STORE_HOME;
 	else if (hack_flag_access_home_only_arrow) which = STORE_HOME;
-	else
+	else		which = f_info[c_ptr->feat].subtype;
+
+
+	//v2.0.2 一部職業の家でないとできないメンテを結界のほつれや魔法の小瓶カードでも行えるようにする
+	//建物タイプが家でお燐のアイテム運搬と魔法の矢筒を除けば常に有効に
+	if (which == STORE_HOME && !hack_flag_access_home_orin && !hack_flag_access_home_only_arrow)
 	{
-		which = f_info[c_ptr->feat].subtype;
-		///mod150110 橙　濡れている時は藍が式を付け直してくれる
-		if(p_ptr->pclass == CLASS_CHEN && p_ptr->magic_num1[0] && which == STORE_HOME)
+		//正邪と魔道具使いの充填
+		if (p_ptr->pclass == CLASS_SEIJA || p_ptr->pclass == CLASS_MAGIC_EATER)
+		{
+			restore_seija_item();
+		}
+
+		//橙が濡れている時は藍が式を付け直してくれる
+		if (p_ptr->pclass == CLASS_CHEN && p_ptr->magic_num1[0])
 		{
 			msg_print(_("主が現れ、式を憑け直してくれた。",
                         "You master appears and restores your shikigami powers."));
 			p_ptr->magic_num1[0] = 0;
 			p_ptr->update |= PU_BONUS;
 		}
-		///mod150401 正邪　アイテム充填回数回復
-		///mod150423 魔道具使いも追加
-		if((p_ptr->pclass == CLASS_SEIJA || p_ptr->pclass == CLASS_MAGIC_EATER ) && which == STORE_HOME)
-		{
-			restore_seija_item();
-		}
 	}
+
 
 	old_town_num = p_ptr->town_num;
 	/*:::家と博物館をどこの町からでも同じように使うため「＠がどの町にいるのか」を一時的に辺境にセット*/

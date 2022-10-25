@@ -1183,6 +1183,14 @@ static bool summon_specific_aux(int r_idx)
 
 		}
 
+		case SUMMON_ONLY_GOLD:
+		{
+			okay = (r_ptr->flags1 & (RF1_ONLY_GOLD));
+			break;
+
+		}
+
+
 	}
 
 	/* Result */
@@ -2134,12 +2142,19 @@ void monster_desc(char *desc, monster_type *m_ptr, int mode)
 		if (p_ptr->riding && (&m_list[p_ptr->riding] == m_ptr))
 		{
 #ifdef JP
-			if (CLASS_RIDING_BACKDANCE)
-				strcat(desc,"(強化中)");
+			if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+				strcat(desc,"(寄生中)");
+			else if (CLASS_RIDING_BACKDANCE)
+				strcat(desc, "(強化中)");
 			else
 				strcat(desc, "(乗馬中)");
 #else
-			strcat(desc,"(riding)");
+			if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+                strcat(desc, "(parasitising)");
+			else if (CLASS_RIDING_BACKDANCE)
+				strcat(desc, "(empowering)");
+			else
+				strcat(desc, "(riding)");
 #endif
 		}
 
@@ -5168,6 +5183,8 @@ msg_print("守りのルーンが壊れた！");
 	{
 		set_pet(m_ptr);
 	}
+
+
 	//敵対強制でないとき、条件を満たせば友好的になって出てくる処理
 	//TODO:そのうち整頓する
 	else if (!(mode & PM_FORCE_ENEMY))
@@ -5254,7 +5271,7 @@ msg_print("守りのルーンが壊れた！");
 			//v1.1.88 たかね
 			else if(p_ptr->pclass == CLASS_TAKANE &&  m_ptr->r_idx == MON_YAMAWARO)  set_friendly(m_ptr);
 			//v1.1.89 百々世
-			else if (p_ptr->pclass == CLASS_MOMOYO)
+			else if (p_ptr->pclass == CLASS_MOMOYO || p_ptr->pclass == CLASS_TSUKASA)
 			{
 				if (m_ptr->r_idx == MON_MEGUMU) set_friendly(m_ptr);
 			}

@@ -407,7 +407,8 @@ static named_num gf_desc[] =
 	{ "GF_MAKE_ACID_PUDDLE",			GF_MAKE_ACID_PUDDLE },
 	{ "GF_MAKE_STORM",			GF_MAKE_STORM },
 	{ "GF_KANAMEISHI",			GF_KANAMEISHI },
-
+	{ "GF_HOLY_WATER",			GF_HOLY_WATER },
+	{ "GF_TIMED_SHARD",			GF_TIMED_SHARD },
 
 
 	{NULL, 						0						}
@@ -3801,6 +3802,12 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 34)add_flag(flgs, TR_BRAND_POIS);
 
 		if (plev > 23) add_flag(flgs, TR_BLOWS);
+
+		break;
+	case CLASS_TSUKASA:
+
+		if (plev > 19) add_flag(flgs, TR_FREE_ACT);
+		if (plev > 39) add_flag(flgs, TR_RES_FEAR);
 
 		break;
 

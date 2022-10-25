@@ -2974,7 +2974,10 @@ msg_format("%s‚©‚çU‚è—Ž‚Æ‚³‚ê‚»‚¤‚É‚È‚Á‚ÄA•Ç‚É‚Ô‚Â‚©‚Á‚½B",m_name);
 	//v1.1.41 ƒoƒbƒNƒ_ƒ“ƒX‚Ì—Ž”n(ƒ‚ƒ“ƒXƒ^[Ž€–SŽž‚È‚Ç)‚Í—Ž”nƒ_ƒ[ƒW‚È‚µ
 	if (CLASS_RIDING_BACKDANCE)
 	{
-		msg_format(_("—x‚è‚ðŽ~‚ß‚½B", "You stop dancing."));
+		if(p_ptr->pclass == CLASS_TSUKASA)
+			msg_format(_("‚ ‚È‚½‚ÍŠñ¶æ‚©‚ç“¦‚ê‚½B", "You disengage from your current host."));
+		else
+            msg_format(_("—x‚è‚ðŽ~‚ß‚½B", "You stop dancing."));
 	}
 
 	else if (p_ptr->levitation && !force)
@@ -3191,7 +3194,10 @@ bool do_riding(bool force)
 		if (CLASS_RIDING_BACKDANCE)
 		{
 			monster_desc(m_name, m_ptr, 0);
-			msg_format(_("‚ ‚È‚½‚Í%s‚Ì”wŒã‚Å—x‚èŽn‚ß‚½...", "You started dancing behind %s..."), m_name);
+			if(p_ptr->pclass == CLASS_TSUKASA)
+				msg_format(_("‚ ‚È‚½‚Í%s‚É‚·‚èŠñ‚Á‚Ä”wŒã‚©‚çš‘‚«Žn‚ß‚½...", "You slip behind %s and start whispering..."), m_name);
+			else
+				msg_format(_("‚ ‚È‚½‚Í%s‚Ì”wŒã‚Å—x‚èŽn‚ß‚½...", "You started dancing behind %s..."), m_name);
 
 			if (p_ptr->pclass == CLASS_SATONO)
 				make_magic_list_satono();
@@ -3522,19 +3528,28 @@ void do_cmd_pet(void)
 		else
 			power_desc[num] = "”z‰º‚©‚ç~‚è‚é";
 #else
-		power_desc[num] = "get off a follower";
+		if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+			power_desc[num] = "stop parasitising";
+		else if (CLASS_RIDING_BACKDANCE)
+			power_desc[num] = "stop dancing";
+		else
+			power_desc[num] = "get off a follower";
 #endif
 	}
 	else
 	{
 #ifdef JP
-		if(CLASS_RIDING_BACKDANCE)
+		if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+			power_desc[num] = "”z‰º‚ÉŠñ¶‚·‚é";
+		else if(CLASS_RIDING_BACKDANCE)
 			power_desc[num] = "”z‰º‚Ì”wŒã‚Å—x‚é";
 		else
 			power_desc[num] = "”z‰º‚Éæ‚é";
 
 #else
-		if(CLASS_RIDING_BACKDANCE)
+		if (CLASS_RIDING_BACKDANCE && p_ptr->pclass == CLASS_TSUKASA)
+			power_desc[num] = "parasitise a follower";
+		else if(CLASS_RIDING_BACKDANCE)
 			power_desc[num] = "dance behind a follower";
 		else
 			power_desc[num] = "ride a follower";

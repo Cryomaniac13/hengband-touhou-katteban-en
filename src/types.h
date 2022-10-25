@@ -705,7 +705,8 @@ struct monster_type
 	u32b mflag3;
 	u32b mflag4;
 	s16b xtra_dir_param;
-	s16b new_monster_param2;
+	s16b timed_shard_count;//’xŒø«‚ÌŠÇŒÏ’e
+
 	s16b new_monster_param3;
 	s16b new_monster_param4;
 	s16b new_monster_param5;
