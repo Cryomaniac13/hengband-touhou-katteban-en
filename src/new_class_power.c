@@ -2800,7 +2800,7 @@ class_power_type class_power_urumi[] =
 	_("周囲のモンスターの移動を短時間妨害する。",
     "Prevents nearby monsters from moving for a short period of time.")},
 
-	{ 35,40,60,FALSE,TRUE,A_CHR,0,0,"デーモンシージ",
+	{ 35,40,60,FALSE,TRUE,A_CHR,0,0,_("デーモンシージ", "Demonic Siege"),
 	_("指定したターゲット周辺に水棲系の配下モンスターを複数召喚する。水のないところには召喚できない。",
     "Summons several aquatic monsters around the target as your followers. Can only summon on water terrain.")},
 
@@ -21778,7 +21778,7 @@ cptr do_cmd_class_power_aux_minoriko(int num, bool only_info)
 	{
 		if (only_info) return "";
 		if (!get_aim_dir(&dir)) return NULL;
-		msg_print("あなたは豊穣のパワーを放った！");
+		msg_print(_("あなたは豊穣のパワーを放った！", "You unleash the power of fertility!"));
 		fire_beam(GF_MAKE_TREE, dir, 10);
 		break;
 	}
