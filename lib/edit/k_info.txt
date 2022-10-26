@@ -6313,22 +6313,24 @@ D:$Magnetite ore. For some reason, demons like it.
 D:磁鉄鉱の鉱石だ。なぜか悪魔に好まれる。
 
 N:608:砒素鉱石
-E:Arsenic
+E:Arsenic ore
 G:*:y
 I:73:5:3000
 W:30:0:10:100
 A:1/255
 P:0:5d5:0:0:0
+D:$Ore containing arsenic, a deadly poison essential for magic experiments.
 D:砒素を含む鉱石だ。魔法の実験に欠かせないが猛毒だ。
 
 
 N:609:水銀鉱石
-E:Mercury
+E:Mercury ore
 G:*:w
 I:73:6:2000
 W:50:0:20:5000
 A:50/255
 P:0:1d1:0:0:0
+D:$Ore containing mercury, a strong poison.
 D:水銀を含んだ鉱石だ。毒性が強い。
 
 N:610:ミスリル
@@ -6785,12 +6787,14 @@ D:度数が高い割にすっきり飲める上質な酒だ。
 D:しかしヒトヨタケのエキスが仕込まれており一口でも飲むと急性アルコール中毒は必至である。
 
 N:657:鉄屑
-E:Iron
+E:Scrap iron
 G:*:D
 I:73:26:1000
 W:1:0:200:100
 A:30/16
 P:0:5d5:0:0:0
+D:$Useless junk and pieces of scrap iron - though there might be something
+D:$really valuable mixed in.
 D:使い道のない屑鉄やガラクタだ。だが中には大変な値打ち物が混ざっていないとも限らない。
 
 #キノコ追加

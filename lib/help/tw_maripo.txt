@@ -1,0 +1,127 @@
+=== MARIPO exchange ===
+
+
+=== Box Contents ===
+
+Boxes containing fixed artifacts will drop a Scroll of Artifact Creation
+instead if you've already found that artifact or are playing with fixed
+artifacts turned off.
+
+Name                                   MARIPO    Contents
+-------------------------------------------------------------------------------
+Red box                                20        Potion of Resist Fire
+White box                              20        Potion of Resist Cold
+Orange box                             30        Potion of Speed
+Yellow box                             40        Wand of Stone to Mud
+Green box                              50        Wand of Teleport Other
+Blue box                               70        Potion of Resistance
+Light blue box                         100       Potion of Healing
+Black box                              150       Potion of Enlightenment
+Box with something rattling inside     200       Staff of Speed
+Frost-covered box                      300       Ring of Ice
+Box with pungent odor                  500       Wand of Dragon's Breath
+Box leaking some strange liquid        700       Ring of Poison Resistance
+Box labeled 'Recommended for           800       Rod of Perception
+  beginners'
+Long box labeled 'DANGER - EXPLOSIVE'  1000      Staff of *Destruction*
+High-class bloodstained wooden box     1200      Golden Mead
+Box labeled 'Make sure to drink this   1500      Ultramarine Orb Elixir
+  -Eirin'
+Steel box tightly sealed with chains   2000      Staff of Mana Storm
+Low quality paper box labeled 'Amazon' 2500      Magical Figurine of Cyberdemon
+Old wooden box covered in tattered     4000      Spectral Katana (ego-item,
+  ofuda                                            generated as if found on
+                                                   dungeon level 75)
+Barnacle-covered rusty metal box       5000      * Jewel-Encrusted Crown
+                                                   of Numenor
+Expensive box emitting terrifying      6000      * Scimitar 'Soulsword'
+  moans
+Black box that looks just like         10000     * Mithril Chain Mail 
+  a coffin                                         of Lohengrin
+Almost weightless large white wooden   15000     * Hagoromo of the Moon
+  box
+Elegant lacquered box tied with        30000     Permanent white aura
+  a string                                         mutation
+
+
+=== MARIPO Exchange Rates ===
+
+Object kind         Name                          MARIPO
+---------------------------------------------------------
+Spellbooks          3rd volume                    30
+                    4th volume                    300
+Materials           Stone                         1
+                    Scrap Iron                    5
+                    Garnet                        30
+                    Glowing moss                  35
+                    Aquamarine                    35
+                    Moonstone                     35
+                    Peridot                       35
+                    Lapis Lazuli                  35
+                    Amethyst                      40
+                    Opal                          40
+                    Arsenic ore                   45
+                    Kyoumarubotan                 50
+                    Gelsemium Elegance            50
+                    Topaz                         50
+                    Magnetite                     60
+                    Ishizakura                    75
+                    Mercury ore                   90
+                    Mithril                       150
+                    Adamantite                    200
+                    Dragon Scale                  300
+                    Ice Scale                     300
+                    Nightmare Shard               300
+                    Shining Bamboo of Takakusa    400
+                    Dragon Orb                    500
+                    Sapphire                      550
+                    Emerald                       600
+                    Ruby                          650
+                    Dragon Nail                   1000
+                    Meteoric Iron                 1200
+                    Izanagi Object                1500
+                    Mysterium                     2000
+                    Hihiirokane                   3000
+Mushrooms           Poison                        3
+                    Blindness                     3
+                    Paranoia                      3
+                    Confusion                     3
+                    Hallucination                 3
+                    Paralysis                     3
+                    Weakness                      6
+                    Sickness                      6
+                    Stupidity                     6
+                    Naivety                       6
+                    Unhealth                      6
+                    Disease                       6
+                    Cure Poison                   10
+                    Cure Blindness                10
+                    Cure Paranoia                 10
+                    Cure Confusion                10
+                    Cure Serious Wounds           10
+                    Restore Strength              10
+                    Restore Constitution          10
+                    Cure Fatigue                  20
+                    Berserk Strength              20
+                    Restoring                     30
+                    Giant puffball                30
+Magic Mushrooms     Magic (Red)                   10
+                    Magic (White)                 10
+                    Magic (Blue)                  10
+                    Magic (Black)                 10
+                    Magic (Aqua)                  20
+                    Magic (Green)                 20
+                    Magic (Iridescent)            30
+                    Magic (Ashen)                 30
+                    Magic (Colorless)             30
+                    Magic (Super)                 2000
+Other               Datura Leaves                 10
+                    Skull                         30
+                    Pile of Broken Needles        150
+                    Crystal of Elder Things       800
+                    Koudoku Plate                 1200
+                    Mirror of Ruffnor             2000
+                    Phoenix Feather               3000
+                    Silver Key                    5000
+
+                    
