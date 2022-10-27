@@ -7445,7 +7445,7 @@ void	init_extra_dungeon_buildings(void)
 			building[i].actions[1] = BACT_IDENT_ONE;
 			building[i].member_costs[1] = 50;
 
-			sprintf(building[i].act_names[2], _("探索拠点を使う(一度のみ)", "Use exploration base (one time)"));
+			sprintf(building[i].act_names[2], _("探索拠点を使う(一度のみ)", "Exploration base (one time)"));
 			building[i].letters[2] = 'h';
 			building[i].actions[2] = BACT_EX_SEARCH_AROUND;
 
