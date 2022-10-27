@@ -15349,8 +15349,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"——R‚È‚­Dí“I‚È",
 		"Favorite",
 #else
-		"Favorite",
-		"Favorite",
+		"Aggressive",
+		"Aggressive",
 #endif
 		{  1,  -1,  0,  1,  1,  0 },
 		-20,  5,  -5,  -2,  -20,  0,  20,  20,

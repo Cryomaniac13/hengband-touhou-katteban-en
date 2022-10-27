@@ -1889,6 +1889,12 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 			if (!flavor)    basenm = "& Potion~ of %";
 			else if (aware) basenm = "& # Potion~ of %";
 			else            basenm = "& # Potion~";
+
+			// Special case for invulnerability potion re-flavor
+			if (o_ptr->sval == SV_POTION_INVULNERABILITY && (!flavor || aware))
+            {
+                basenm = "& Ultramarine Orb Elixir~";
+            }
 #endif
 
 			break;
