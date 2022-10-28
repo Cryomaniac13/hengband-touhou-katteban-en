@@ -16616,7 +16616,8 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_SEKIBANKI,CLASS_BANKI,NULL,"Rokuro",NULL,13 },
 	{ MON_SEKIBANKI,CLASS_BANKI,NULL,"Multiplicative",NULL,16 },
 	{ MON_SEKIBANKI,CLASS_BANKI,NULL,"Head",NULL,5 },
-	{ MON_SEKIBANKI,CLASS_BANKI,"Nimble",NULL,NULL,20 },
+	{ MON_SEKIBANKI,CLASS_BANKI,NULL,"Severed Head",NULL,10 },
+	{ MON_SEKIBANKI,CLASS_BANKI,NULL,"Nimble",NULL,20 },
 
 
 	{ MON_KAGEROU,CLASS_KAGEROU,NULL,"Bloodthirsty",NULL,18 },
