@@ -2527,7 +2527,7 @@ msg_print("精神が蝕まれる！");
 
 		//msg_print("ネクロノミコンを読んで正気を失った！");
 #else
-		msg_print("Your sanity is shaken by reading the Necronomicon!");
+		msg_print("Your mind is being eroded!");
 #endif
 
 	}
