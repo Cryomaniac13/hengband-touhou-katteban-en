@@ -17382,6 +17382,7 @@ D:『ラヴクラフト全集６』、創元推理文庫、p.173)
 N:853:地獄の番犬『ケルベロス』
 E:Cerberus, Guardian of Hades
 G:C:r
+I:130:100d100:50:160:10
 W:94:1:0:80000:0:0
 B:BITE:FIRE:27d19
 B:CLAW:FIRE:27d19
