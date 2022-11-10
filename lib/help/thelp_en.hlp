@@ -21,6 +21,9 @@ Keine - 'Let's start the special class on Gensouband.
 [[[[B| (o) ***Beginner's Guide***        (instruction_en .txt)
 
  (p) Hengband help files           (help.hlp)
+
+ (x) Gensouband spoilers           (tspoiler_en .hlp)
+
 [[[[y| (?) Help System Commands          (helpinfo.txt)
 
 ***** [a] tgeneral_en.hlp
@@ -39,3 +42,4 @@ Keine - 'Let's start the special class on Gensouband.
 ***** [n] teditor_en.txt
 ***** [o] instruction_en.txt
 ***** [p] help.hlp
+***** [x] tspoiler_en.hlp

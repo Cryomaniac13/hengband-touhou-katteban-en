@@ -7695,6 +7695,9 @@ G:,:r
 I:79:3:3000
 A:10/255
 W:0:0:10:2000
+D:$A berry of an African plant. The 'miraculin' glycoprotein it contains binds
+D:$to other acidity components and stimulates sweet taste receptors on the
+D:$tongue, making subsequently consumed sour foods taste sweet.
 D:アフリカアカテツの実だ。この実に含まれる「ミラクリン」という糖蛋白は他の酸味成分と結合して舌の甘味受容体を刺激する働きを持っており、
 D:それによりこの実を食べたあとで酸っぱいものを食べると甘味を感じるようになる。(参考：日本ミラクルフルーツ協会公式サイト)
 

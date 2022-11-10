@@ -1,352 +1,334 @@
-[[[[G|=== 自動拾い/破壊 オンライン・ヘルプ ===
+[[[[G|=== Auto-picker/Destroyer Online Help ===
 
-慧音「自動拾い/破壊とは、
-あなたが得たアイテムを自動的に拾ったり破壊したり銘を刻むシステムだ。
-ここから先は変愚蛮怒本家のヘルプをほとんど流用している。
-初心者は読まなくても差し支えはないだろう。
-冒険に慣れて探索効率が気になってきたら改めて読んでくれ。
+Keine - 'Auto-picker/Destroyer is a system
+that lets you automatically pick up, destroy, and/or inscribe items you find.
+Everything from now on is mostly copied from original Hengband help file.
+Beginners don't really have to read this; once you've gotten used to
+adventuring, I recommend checking this section out to raise your exploration
+effectiveness.
 
-なお、v1.1.03以降には以下の書式が新たに使えるようになった。」
+Starting from v1.1.03, you can use following settings.'
 
-　　?:[EQU $EXTRA_MODE ON]　(EXTRAモードのときにこれ以降の行が有効)
-　　?:[EQU $EXTRA_MODE OFF]　(EXTRAモードでないときにこれ以降の行が有効)
-　　?:[EQU $BERSERKER ON] (性格「狂気の」のときにこれ以降の行が有効)
-　　?:[EQU $BERSERKER OFF] (性格「狂気の」でないときにこれ以降の行が有効)
+　　?:[EQU $EXTRA_MODE ON]　(Applies when playing on Extra difficulty)
+　　?:[EQU $EXTRA_MODE OFF]　(Applies when not playing on Extra difficulty)
+　　?:[EQU $BERSERKER ON] (Applies for Berserk personality)
+　　?:[EQU $BERSERKER OFF] (Applies for non-Berserk personality)
 
 
---- 以下は変愚蛮怒本家のヘルプファイルをほぼ流用 ---
+--- Mostly copied from original Hengband ---
 
-[[[[o|参照したい項目の記号を押して下さい:
+[[[[o|=== Auto-Picker/Destroyer Editor ===
 
-    (a) 自動拾いエディタの基本操作       (#Editor)
-    (b) カット&ペースト                  (#CutAndPaste)
-    (c) 自動拾いにアイテムを登録         (#RegisterName)
-    (d) 持ち物の名前を挿入               (#InsertObjectName)
-    (e) 定型のキーワードを入力           (#InsertKeyword)
-    (f) 複数の行を同時に変更             (#MultiLines)
-    (g) 条件文                           (#Conditionals)
-    (h) エディタ無しで自動破壊登録       (#AutoRegister)
+Please choose one of the following online help files:
 
-    (i) 自動拾い/破壊設定の書式仕様      (#AutopickFormat)
-    (j) 条件式の書式仕様                 (#ConditionFormat)
-    (k) サンプル設定                     (lib/pref/picktype.prf)
+    (a) The Basics of Auto-picker Editor      (#Editor)            
+    (b) Cut and Paste                         (#CutAndPaste)       
+    (c) Register to Auto-picker               (#RegisterName)      
+    (d) Insert Name from your Inventory       (#InsertObjectName)  
+    (e) Insert Fixed Keyword                  (#InsertKeyword)     
+    (f) Change Multiple Lines at Once         (#MultiLines)        
+    (g) Conditionals                          (#Conditionals)      
+    (h) Auto Register an Item without Editor  (#AutoRegister)      
 
-***** [a] jeditor.txt#Editor
-***** [b] jeditor.txt#CutAndPaste
-***** [c] jeditor.txt#RegisterName
-***** [d] jeditor.txt#InsertObjectName
-***** [e] jeditor.txt#InsertKeyword
-***** [f] jeditor.txt#MultiLines
-***** [g] jeditor.txt#Conditionals
-***** [h] jeditor.txt#AutoRegister
-***** [i] jeditor.txt#AutopickFormat
-***** [j] jeditor.txt#ConditionFormat
-***** [k] ../pref/picktype.prf
+    (i) Format of Auto-picker/destroyer       (#AutopickFormat)      
+    (j) Format of Conditionals                (#ConditionFormat)     
+    (k) Sample Preference File                (lib/pref/pickpref.prf)
+
+***** [a] editor.txt#Editor
+***** [b] editor.txt#CutAndPaste
+***** [c] editor.txt#RegisterName
+***** [d] editor.txt#InsertObjectName
+***** [e] editor.txt#InsertKeyword
+***** [f] editor.txt#MultiLines
+***** [g] editor.txt#Conditionals
+***** [h] editor.txt#AutoRegister
+***** [i] editor.txt#AutopickFormat
+***** [j] editor.txt#ConditionFormat
+***** [k] ../pref/pickpref.prf
 
 ***** <Editor>
-[[[[G|--- 自動拾いエディタの基本操作 ---
+[[[[G|--- The Basics of Auto-picker Editor ---
 
-「自動拾いエディタ」は「自動拾い/破壊」の設定を書くための専用のテキス
-トエディタです。
+The "auto-picker editor" is a special text editor to write preferences
+for auto-picker/destroyer.
 
-ゲーム中に [[[[o|「_」キー|を押すか、オプション画面で「(P) 自動拾いエディタ」
-を選択するとエディタ画面に入ります。
+To open the editor, you can press the _ key in the game or choose
+"(P) Auto-picker/destroyer editor" in the options panel (=).
 
-基本的に普通のテキストエディタですから、[[[[o|カーソルキー| や [[[[o|Home|、[[[[o|End|、
-[[[[o|PageUp|、[[[[o|PageDown|の各キーでカーソルを移動して、自由に文字を入力するだけ
-で設定を書き変える事ができます。
+Like normal text editor, you can move the cursor by Left, Right, Up,
+Down arrow keys, and Home, End, PageUp, and PageDown keys.  And any
+letter keys pressed are written as a text.
 
-[[[[o|設定を終了するには ^W を押してください。変更は自動的にセーブされます。
-[[[[o|また、^Q を押すと設定変更を取りやめて何もセーブせずに終了します。
+Press ^W to finish the edito.  All changes will be saved automatically.
+Or press ^Q to quit and discard all changes.
 
-[[[[o|ESC|キーを押すとメニューが開きます。
-+----------------------------+
-| a) ヘルプ                  |
-| b) セーブ無しで終了     ^Q |
-| c) セーブして終了       ^W |
-| d) 全ての変更を破棄     ^Z |
-| e) 編集                 ▼ |
-| f) 検索                 ▼ |
-| g) カーソル移動         ▼ |
-| h) 色々挿入             ▼ |
-| i) 形容詞(一般)の選択   ▼ |
-| j) 形容詞(特殊)の選択   ▼ |
-| k) 名詞の選択           ▼ |
-| l) 拾い/破壊/放置の選択 ▼ |
-+----------------------------+
-ここで、 a～l のキーを押すとコマンドを実行するか、またはサブメニュー
-(▼と表示されている行)を開きます。
-
-行の右端に「^Q」や「^Z」と表示されているコマンドは、メニューを開かずに
-^Qや^Zを押す事で直接実行できます。
+Press ESC to open a command menu.
++---------------------------+
+| a) Help                   |
+| b) Quit without save   ^Q |
+| c) Save & Quit         ^W |
+| d) Revert all changes  ^Z |
+| e) Edit                 > |
+| f) Search               > |
+| g) Move cursor          > |
+| h) Insert...            > |
+| i) Adjective (general)  > |
+| j) Adjective (special)  > |
+| k) Keywords (noun)      > |
+| l) Command letter       > |
++---------------------------+
+Press a-l to choose a command or open a sub-menu.  Also you can press
+^Q, ^Z, etc. to use commands without opening this menu.
 
 
 ***** <CutAndPaste>
-[[[[G|--- カット&ペースト ---
+[[[[G|--- Cut and Paste
 
-似たような行を沢山書きたい時や、行の順番を入れ換えたい時にはカット&ペー
-ストが便利です。
-「e) 編集 ▼」サブメニューを開くと、
-+----------------------+
-| a) カット         ^X |
-| b) コピー         ^C |
-| c) ペースト       ^V |
-| d) 選択範囲の指定 ^G |
-| e) 行の残りを削除 ^K |
-| f) 1文字削除      ^D |
-| g) バックスペース ^H |
-| h) 改行           ^J |
-| i) 改行           ^M |
-+----------------------+
-このようなコマンドがあります。
+Cut and Paste are useful when you want to write many similer lines, or
+want to swap lines.
+Open submenu "e) Edit >",
++-------------------------+
+| a) Cut               ^X |
+| b) Copy              ^C |
+| c) Paste             ^V |
+| d) Select block      ^G |
+| e) Kill rest of line ^K |
+| f) Delete character  ^D |
+| g) Backspace         ^H |
+| h) Return            ^J |
+| i) Return            ^M |
++-------------------------+
 
-テキストの選択範囲は[[[[o|シフトキーを押しながらカーソルキーを押す|事で選択で
-きます。選択された文字は[[[[y|黄色|で表示されるので思い通りの部分が選択できた
-事を確認してから「[[[[o|^X|」でカットするなり、「[[[[o|^C|」でコピーするなりしてくだ
-さい。
+You can select a segment of the text using shift key + arrow keys.
+Selected text will be displayed in yellow.  You can press ^X to cut
+the selected text, or press ^C to copy the selected text to the
+clipboard.  Contents of the clipboard will be pasted on pressing ^V.
 
-ただし、変愚蛮怒の使用環境によってはうまくシフト+カーソルを認識できな
-いかもしれません。その場合は「[[[[o|^G|」を押した後でカーソルを移動する事で選
-択範囲を指定できます。
+Note that it's possible that Hengband cannot recognize shift+arrow
+keys on a minor environment.  In that case, you can press ^G and then
+move cursor to select text.
 
 
 ***** <RegisterName>
-[[[[G|--- 自動拾いにアイテムを登録 ---
+[[[[G|--- Register to Auto-picker ---
 
-1行に1つずつアイテムの名前を書く事で、そのアイテムを自動的に拾うように
-設定されます。
+You can set up automatic item pickup by writing that item's name on 
+a single line.
 
-例えばスピードの薬と食料を常に集めているならば、
+For example, if you wish to collect Potions of Speed and Rations of Food,
+you write down:
 
-スピードの薬
-食料
+potion of speed
+ration of food
 
-と書くだけです。自動拾いエディタはテキストエディタなのでキーを入力すれ
-ばそのまま書き込まれます。必要ならEnterキーを押して改行してください。
-ここで、今「スピードの薬」と書いた行にカーソルを合わせると、画面下に
+Since the auto-picker editor is a text editor, pressing a letter key types
+that letter. You can add a new line by pressing Enter. If you point the cursor
+at the line where you wrote down 'potion of speed', following description will
+be shown at bottom of the screen:
+
 [[[[D|--------------------------------------------------------------------------------
-全てのアイテムで、名前が「スピードの薬」を含むものを拾う。全体マップ('M')で'M'を
-押したときに表示する。
-[[[[D|--------------------------------------------------------------------------------
-このように設定内容の説明が表示されます。
-もしあなたが空腹充足の魔法を知っていて、食料はもはや必要無いのならば、
-行の先頭に自動破壊を意味する文字「!」を書き込みます。
-
-スピードの薬
-!食料
-
-そうすると、画面下の説明文は以下のようになります。
-[[[[D|--------------------------------------------------------------------------------
-全てのアイテムで、名前が「食料」を含むものを破壊する。全体マップ('M')で'K'を押し
-たときに表示する。
+Pickup all items which have "potion of speed" as part of its name.
+Display these items when you press the M key in the full 'M'ap.
 [[[[D|--------------------------------------------------------------------------------
 
-最後に「^W」(つまり、コントロールキーを押しながら W キー)を押して エディ
-タを終了すれば設定は終わりです。
+If, for example, you have means of magically satisfying hunger and no longer
+need rations of food, write down '!' at the start of the line to make items
+get automatically destroyed.
 
-エディタの中で何か間違った操作をしてしまった場合は「^Q」を押すと設定変
-更を取りやめて何もセーブせずに終了できるので安心です。
+potion of speed
+!ration of food
+
+The description at the bottom of screen will be the following:
+
+[[[[D|--------------------------------------------------------------------------------
+Destroy all items which have "ration of food" as part of its name.
+Display these items when you press the K key in the full 'M'ap.
+[[[[D|--------------------------------------------------------------------------------
+
+Pressing '^W' (that is, pressing 'W' while holding down Ctrl key) closes the
+editor.
+
+If you made a mistake during editing, press '^Q' to leave without saving any
+changes.
 
 
 ***** <InsertObjectName>
-[[[[G|--- 持ち物の名前を挿入 ---
+[[[[G|--- Insert Name from your Inventory ---
 
-例えば、あなたが沢山のアイテムを街に持ち帰って鑑定した時、
-リンゴジュース、スピード・モンスターの魔法棒、減毒の薬、噂の巻物、
-等々、あなたが必要としないガラクタを沢山見付けたとしましょう。
+Suppose you've returned to town with items to identify, and have found
+plenty of junk you don't need: apple juice, Wands of Haste Monster,
+Potions of Slow Poison, Scrolls of Rumour...
 
-あなたはこれら全ての物に興味が無いので自動破壊に設定する事にします。前
-項までで説明した方法だとこれらのアイテムの名前を一字一句間違えないよう
-に自分で入力しなければなりませんが、不要な種類のアイテムが見付かる度に
-名前を書き込むのは面倒です。
+Since you're not interested in any of these, you want to mark them for
+auto-destruction. You can write all of their names down one by one,
+but that can get pretty annoying.
 
-そんな時はESCでメニューを開き「h) 色々挿入 ▼」を選択してみましょう。
-+------------------------------------------+
-| a) 選択したアイテムの名前を挿入       ^I |
-| b) 自動破壊されたアイテムの名前を挿入    |
-| c) 条件分岐ブロックの例を挿入            |
-| d) マクロ定義を挿入                      |
-| e) キーマップ定義を挿入                  |
-+------------------------------------------+
-この中の、「a) 選択したアイテムの名前を挿入 ^I」が役に立ちそうです。こ
-のコマンドはメニューの中で「a」を押すか、メニューを開かずに「^I」を押
-せば実行できます。
+In a case like this, open the menu with ESC key, and pick h) Insert...
++---------------------------------------+
+| a) Insert name of choosen object   ^I |
+| b) Insert name of destroyed object    |
+| c) Insert conditional block           |
+| d) Insert a macro definition          |
+| e) Insert a keymap definition         |
++---------------------------------------+
+You want to pick 'a) Insert name of choosen object   ^I'.
+You also can use this command by pressing '^I' without opening the menu.
 
-そうすると、このようにアイテムを選択するメニューが現れます。
+It will open up a menu to pick an item from your inventory. By pressing
+a letter corresponding to one of your inventory slots, you can write down
+that item in the editor:
 
-(持ち物:a-f,'(',')', '/' 装備品, '-'床上, ESC) どのアイテムを登録しますか?
-     +-------------------  a) [[[[U|,| [[[[U|7つの 食料|                               3.5 kg
-     | a) ヘルプ           b) [[[[y|!| [[[[y|5つの 油つぼ|                             2.5 kg
-     | b) セーブ無しで終   c) [[[[U|!| [[[[B|リンゴジュースの薬|                       0.2 kg
-     | c) セ+------------  d) [[[[s|!| [[[[B|減毒の薬|                                 0.2 kg
-     | d) 全| a) 選択した  e) ? 噂の巻物                                 0.2 kg
-     | e) 編| b) 自動破壊  f) [[[[B|-| [[[[g|スピード・モンスターの魔法棒 (6回分)|     0.5 kg
-     | f) 検| c) 条件分岐
-     | g) カ| d) マクロ定義を挿入                      |
-     | h) 色| e) キーマップ定義を挿入                  |
-     | i) 形+------------------------------------------+
-     | j) 形容詞(特殊)の選択   ▼ |
-     | k) 名詞の選択           ▼ |
-     | l) 拾い/破壊/放置の選択 ▼ |
-     +----------------------------+
+soft drinks:^apple juice                
+^potion of slow poison                  
+magical devices:^scroll of rumour       
+magical devices:^wand of haste monster  
 
-ここで「c」を押して、リンゴジュースの薬を選択すると、この名前が自動拾
-いエディタに書き込まれます。他の3つについても同様に繰り返すと、
+By appending those lines with '!', you can mark those items for
+auto-destruction.
 
-^リンゴジュースの薬
-^減毒の薬
-魔法アイテム:^噂の巻物
-魔法アイテム:^スピード・モンスターの魔法棒
+By the way, scrolls/wands get appended with the 'magical devices' keyword.
+The description at the bottom of the screen reads the following:
 
-この様になります。それぞれの行の先頭に自動破壊を意味する「!」を書き加
-えれば設定完了です。
-
-
-ところで、巻物と魔法棒については「魔法アイテム」というキーワードが自動
-的に付加されました。画面下の説明を読むと以下のように書いてあります。
 [[[[D|--------------------------------------------------------------------------------
-全ての巻物や魔法棒や杖やロッドで、名前が「噂の巻物」で始まるものを拾う。全体マッ
-プ('M')で'M'を押したときに表示する。
+Pickup all scrolls, wands, staves or rods whose name is beginning with "scroll
+of rumour".  Display these items when you press the M key in the full 'M'ap. 
 [[[[D|--------------------------------------------------------------------------------
 
-他にも色々な種類のキーワードが補助的に付加される事があります。
+There are other various helpful keywords as well.
 
 
 ***** <InsertKeyword>
-[[[[G|--- 定型のキーワードを入力 ---
+[[[[G|--- Insert Fixed Keyword ---
 
-例えば、まだ鑑定していないブーツを全て「～を拾いますか？ [y/n]」の確認
-付きで自動拾いしたいとします。自動破壊を指定する文字は「!」で、放置を
-指定する文字は「~」で、単に名前だけを書けば自動拾いなのですが、確認付
-きで拾うのってどんな文字だったっけ？
+Suppose you want to automatically pick up all unidentified boots with a query
+confirming you want to pick it up. '!' marks an item for auto-destruction, 
+'~' leaves it on the floor, simply writing down an item's name auto-pickups it
+without a query, but how do you auto-pickup with an added confirmation prompt?
 
-答えを先に言うと、
+It works if you append ';':
 
-;未鑑定の靴
+;unidentified boots
 
-と書けばいいのですが、自動拾いエディタを使えば全てのキーワードを覚えて
-いなくてもメニューから選択するだけで入力できます。
+You don't have to remember all of those keywords while using the editor - you
+can use the menu:
 
- 「k) 名詞の選択 ▼」           →  「r) 靴」
- 「i) 形容詞(一般)の選択 ▼」   →  「b) 未鑑定の」
- 「l) 拾い/破壊/放置の選択 ▼」 →  「d) 「;」 (確認して拾う)」
+ 'k) Keywords (noun)      >' -> 'r) boots'
+ 'i) Adjective (general)  >' -> 'b) unidentified'
+ 'l) Command letter       >' -> 'd) ';' (Query to pick up)'
 
-の順番に選択すれば完了です。
-この時、画面下の表示は以下のようになります。
+The description at the bottom of the screen will be the following:
+ 
 [[[[D|--------------------------------------------------------------------------------
-未鑑定のブーツを確認の後に拾う。全体マップ('M')で'M'を押したときに表示する。
-
+Ask to pick up unidentified boots.  Display these items when you press the M key
+in the full 'M'ap.                                                              
 [[[[D|--------------------------------------------------------------------------------
 
-他にも多数のキーワードがあるので手当たり次第に色々選択して実験してみま
-しょう。画面下の表示でちゃんと解読してくれるので安心です。一通り実験し
-てみたら、[[[[o|Deleteキー| や [[[[o|Backspaceキー|を押して余計なキーワードは削除
-してしまいましょう。
+There are many other keywords available, so feel free to experiment with them.
+Detailed description of rules you're defining will be shown at the bottom of 
+the screen. Once you're done, remove keywords you don't need with [[[[o|Delete key| or
+[[[[o|Backspace key|.
 
-ちなみに「ダイス目0以上の」等の中の数字は自分で書き変えて使います。
+By the way, you can write down any numbers in rules like 'more than 0 dice'.
 
 
 ***** <MultiLines>
-[[[[G|---  複数の行を同時に変更  ---
+[[[[G|---  Change Multiple Lines at Once  ---
+By selecting multiple lines at the same time with Shift+arrow keys, you can
+apply a keyword to all of them by using the menu. For example, if you
+select those 4 lines you added like this:
 
-シフト+カーソルキーで複数の行を選択してからメニューを選ぶと、同時に複
-数の行にキーワードを付け加える事ができます。例えば先程の例の4行を選択
-[[[[o|(シフト+下向きカーソルキー を3回押す)|して、
+[[[[y|soft drinks:^apple juice               
+[[[[y|^potion of slow poison                 
+[[[[y|magical devices:^scroll of rumour      
+[[[[y|magical devices:^wand of haste monster 
 
-[[[[y|^リンゴジュースの薬
-[[[[y|^減毒の薬
-[[[[y|魔法アイテム:^噂の巻物
-[[[[y|魔法アイテム:^スピード・モンスターの魔法棒
+and then open the menu and use
+'l) Command letter       >' -> 'b) '!' (Auto destroy)',
+those lines will be changed to:
 
-この様にしてからメニューで
-「l) 拾い/破壊/放置の選択 ▼」 → 「b) 「!」 (自動破壊)」
-の順番に選ぶと一度の操作で
+[[[[y|!soft drinks:^apple juice               
+[[[[y|!^potion of slow poison                 
+[[[[y|!magical devices:^scroll of rumour      
+[[[[y|!magical devices:^wand of haste monster 
 
-[[[[y|!^リンゴジュースの薬
-[[[[y|!^減毒の薬
-[[[[y|!魔法アイテム:^噂の巻物
-[[[[y|!魔法アイテム:^スピード・モンスターの魔法棒
-
-と書き変えられます。他のキーワードも同様です。
+Same applies to other keywords.
 
 
 ***** <Conditionals>
-[[[[G|---  条件文  ---
+[[[[G|---  Conditionals  ---
 
-自動拾い/破壊の設定はプレイヤーの種族/職業/レベル等で条件付きで設定す
-る事が出来ます。
+You can set a condition based on player race/class/level for the 
+auto-picker/destroyer rules.
 
-エディタのメニューから
-「h) 色々挿入 ▼」 → 「c) 条件分岐ブロックの例を挿入」
-を選ぶと、[[[[o|条件式のひな型|が挿入されます。
+Open the editor menu, then pick
+'h) Insert...            >' -> 'c) Insert conditional block'
+to insert a [[[[o|conditional expression block|.
 
 ?:[AND [EQU $RACE Human] [EQU $CLASS Warrior] [GEQ $LEVEL 05]]
 ?:1
 
-「?:」という記号で始まる行が条件式です。この例だと1行目で「人間の戦士
-でレベルが5以上ならば」という条件を指定し、2行目の「?:1」では条件を解
-除してデフォルトの状態(常に条件式の値が1、つまり常に「真」) に戻してい
-ます。
+A line starting with '?:' is a conditional expression. The first line in this
+example describes a condition of 'Human Warrior of level 5 or higher',
+the second line '?:1' closes the conditional, returning to default state
+(default value of a conditional expressional is 1 - always true).
 
-この2行の間に書き込んだ設定行はこの条件が満たされるキャラクターに対し
-てのみ有効になります。例えば人間メイジに対しては
+Anything written between those two lines will be applied only to a character
+satisfying the described condition. For a Human Mage, it will be displayed
+like this:
 
 [[[[s|?:[AND [EQU $RACE Human] [EQU $CLASS Warrior] [GEQ $LEVEL 05]]
-[[[[s|!^リンゴジュースの薬
-[[[[s|!^減毒の薬
-[[[[s|!魔法アイテム:^噂の巻物
-[[[[s|!魔法アイテム:^スピード・モンスターの魔法棒
+[[[[s|!soft drinks:^apple juice               
+[[[[s|!^potion of slow poison                 
+[[[[s|!magical devices:^scroll of rumour      
+[[[[s|!magical devices:^wand of haste monster 
 ?:1
 
-の様に[[[[s|暗い色|のテキストで表示され、設定が無効になっている事が明示的に判
-ります。
+The rules are [[[[s|grayed out|, which means they're not being applied.
 
-条件式は自由に編集できます。例えばもっと条件を緩くして「全ての戦士」と
-いう条件にしたい場合には Deleteキー等で余計な条件を削除して、
+You can freely edit the expression; if you want to make it less restrictive,
+applying to all Warriors in general, delete the rest of the conditions:
+
 ?:[EQU $CLASS Warrior]
-という風に編集してください。
 
-[[[[o|カット&ペーストを活用して楽に編集しましょう。(#CutAndPaste [b]を参照)
+[[[[o|Using cut and paste makes editing far easier. (See #CutAndPaste [b])
 
 
 ***** <AutoRegister>
-[[[[G|---  エディタ無しで自動破壊登録  ---
+[[[[G|---  Auto Register an Item without Editor  ---
 
-アイテムを自動破壊に登録する作業はさらに簡単な方法があります。
-アイテムを壊すコマンド(「[[[[o|k|」または「[[[[o|^D|」)で手元のアイテムを選択し、
+There's an even easier way to mark an item for auto-destruction.
+If you use the 'destroy item' command ('[[[[o|k|' or '[[[[o|^D|'),
+it will show the following prompt:
 
-本当にスピード・モンスターの魔法棒 (5回分) を壊しますか? [y/n/Auto]
+Really destroy Wand of Haste Monster (5 charges)? [y/n/Auto]
 
-という風に質問された時に、[[[[o|シフトキーを押しながら「A」|を押します。
-以上で完了です。簡単でしょう？これだけで
+Pressing [[[[o|'A' while holding Shift key| destroys the item and adds
+the following rule to the end of auto-picker pref file:
 
-[[[[R|(!魔法アイテム:^スピード・モンスターの魔法棒
+[[[[R|(!magical devices:^wand of haste monster
 
-という設定が自動拾いの設定ファイルの最後に書き込まれます。
+Rules added in this manner are effective [[[[o|until your current character's|
+[[[[o|death|. This might be useful for items that are interesting only at the
+start of the game and become obsolete as you make progress; for example, once
+you find a Rod of Trap Detection, you don't need Scrolls of Trap Detection.
 
-この方法で自動登録された設定は、[[[[o|その時にプレイ中のキャラクターが死亡す|
-[[[[o|るまでの期間だけ有効|です。つまり、ゲームの序盤だけしか興味が無いアイテ
-ムは、次のキャラクターの序盤で自動破壊を解除する等の複雑な事を一切考え
-ず、不要になり次第どんどん登録してしまえば良いのです。例えばトラップ感
-知の巻物は、トラップ感知のロッドを拾った段階で不要になりますね。
+This also can be used for equipment. The rule added depends on whether the
+piece of equipment you're destroying is
+[[[[o|(1) unidentified
+[[[[o|(2) identified and nameless (average or good)
+[[[[o|(3) identified and is an ego-item
 
-装備品についても利用する事ができます。この時は装備品が
-[[[[o|(1)鑑定されていない場合
-[[[[o|(2)鑑定されていて無銘(並と上質)の場合
-[[[[o|(3)鑑定されていてエゴ(高級品)の場合
-のいずれかによって自動登録される内容が異なります。
-具体的には以下の表のような関係になります。
+Here's a table to illustrate this:
 
-選択したアイテム                自動登録される内容
-[[[[D|--------------------------      ---------------------------
-ダガー (1d4)[[[[o|(未鑑定の場合)|  →  [[[[R|(!未鑑定の武器:^ダガー|
-ダガー (1d4) {並}           →  [[[[R|(!無銘の武器:^ダガー|
-ダガー (1d4) (+0,+0)        →  [[[[R|(!無銘の武器:^ダガー|
-ダガー (1d4) {上質}         →  [[[[R|(!無銘の武器:^ダガー|
-ダガー (1d4) (+3,+2)        →  [[[[R|(!無銘の武器:^ダガー|
-ダガー (1d4) {高級品}       →  [[[[R|(!エゴ武器:ダガー|
-焼棄のダガー (1d4) (+5,+5)  →  [[[[R|(!ありふれたエゴ武器:^焼棄の|
-
+Chosen item                       Rule added
+[[[[D|--------------------------        ---------------------------
+Dagger (1d4) [[[[o|(unidentified)|     ->   [[[[R|(!unidentified weapons:^dagger|
+Dagger (1d4) {average}          ->   [[[[R|(!nameless weapons:^dagger|
+Dagger (1d4) (+0,+0)            ->   [[[[R|(!nameless weapons:^dagger|
+Dagger (1d4) {good}             ->   [[[[R|(!nameless weapons:^dagger|
+Dagger (1d4) (+3,+2)            ->   [[[[R|(!nameless weapons:^dagger|
+Dagger (1d4) {excellent}        ->   [[[[R|(!ego weapons:dagger|
+Dagger of Foxfire (1d4) (+2,+5) ->   [[[[R|(!common ego weapons:of foxfire|
 
 自動登録された設定を取り消したり編集する場合は、自動拾いエディタを使い
 ます。一番最後に追加されているので、[[[[o|End|キーで移動すると便利でしょう。
@@ -389,7 +371,7 @@
 
 
 ***** <AutopickFormat>
-[[[[G|====  自動拾い/破壊設定の書式仕様  ====
+[[[[G|====  Format of Auto-picker/destroyer  ====
 
 ユーザーディレクトリに"picktype.prf"又は "picktype-<名前>.prf" という
 ファイルを作って各行にアイテムの名前を書くと、変愚蛮怒にそのアイテムを

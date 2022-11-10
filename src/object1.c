@@ -2401,6 +2401,14 @@ bool screen_object(object_type *o_ptr, u32b mode)
 		}
 	}
 
+#ifndef JP
+    {
+        char score_value_line[70 * 20];
+        sprintf(score_value_line, ("It is worth %ld score."), (long)o_ptr->score_value);
+        info[i++] = score_value_line;
+    }
+#endif // JP
+
 	if (mode & SCROBJ_FORCE_DETAIL) trivial_info = 0;
 
 	/* No relevant informations */
