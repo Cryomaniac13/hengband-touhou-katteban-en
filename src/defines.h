@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 2
+#define H_VER_PATCH 3
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1370,8 +1370,9 @@
 #define SEIKAKU_SPECIAL_AYA			11
 #define SEIKAKU_SPECIAL_JYOON		12
 #define SEIKAKU_SPECIAL_MARISA		13
+#define SEIKAKU_SPECIAL_MEGUMU		14
 
-#define MAX_SEIKAKU_SPECIAL			14 //一つ上の最大+1
+#define MAX_SEIKAKU_SPECIAL			15 //一つ上の最大+1
 
 
 
@@ -2009,6 +2010,7 @@
 #define ART_CHIYOU			343
 #define ART_OOONOTE			344
 #define ART_NOMINOSUKUNE	345
+#define ART_MEGUMU			347
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/
@@ -4058,7 +4060,7 @@
 #define SUMMON_AQUATIC		103 //v1.1.69
 #define SUMMON_ONE_ORC			104
 #define SUMMON_ONLY_GOLD	105
-
+#define SUMMON_TENGU_MINION	106
 
 
 

@@ -1067,6 +1067,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_SANNYO) a_idx = ART_ANDVARI;
 			else if (p_ptr->pclass == CLASS_MIKE) a_idx = ART_DAIKOKU;
 			else if (p_ptr->pclass == CLASS_TSUKASA) a_idx = ART_EIBON;
+			else if (p_ptr->pclass == CLASS_MEGUMU) a_idx = ART_ODUNU;
 
 
 
@@ -4420,6 +4421,8 @@ void do_cmd_walk(bool pickup)
 			if(CHECK_FAIRY_TYPE == 22) energy_use /= 2;
 		}
 
+		//v2.0.3 高速移動などのenergy_use値調整を別関数に分離
+		/*
 		///sys 早駆けのターン消費
 		if (p_ptr->action == ACTION_HAYAGAKE) energy_use = energy_use * (45-(p_ptr->lev/2)) / 100;
 		///mod150105 村紗水中高速移動
@@ -4439,6 +4442,11 @@ void do_cmd_walk(bool pickup)
 			feature_type *f_ptr = &f_info[cave[py][px].feat];
 			if(!have_flag(f_ptr->flags, FF_WATER)) energy_use = energy_use * 4 / 3;
 		}
+		*/
+		walk_energy_modify();
+
+
+
 		/* Actually move the character */
 		move_player(dir, pickup, FALSE,FALSE);
 
@@ -7802,8 +7810,9 @@ static void travel_flow_aux(int y, int x, int n, bool wall)
 	/* Ignore unknown grid except in wilderness */
 	if (dun_level > 0 && !(c_ptr->info & CAVE_KNOWN)) return;
 
+	//2.0.3 氷塊地形は壁と同様に計算する
 	/* Ignore "walls" and "rubble" (include "secret doors") */
-	if (have_flag(f_ptr->flags, FF_WALL) ||
+	if (have_flag(f_ptr->flags, FF_WALL) || have_flag(f_ptr->flags, FF_ICE_WALL) ||
 		have_flag(f_ptr->flags, FF_CAN_DIG) ||
 		(have_flag(f_ptr->flags, FF_DOOR) && cave[y][x].mimic) ||
 		(!have_flag(f_ptr->flags, FF_MOVE) && have_flag(f_ptr->flags, FF_CAN_FLY) && !p_ptr->levitation))
@@ -7939,3 +7948,33 @@ void do_cmd_travel(void)
 	}
 }
 #endif
+
+
+//v2.0.3 歩くときの高速移動や人魚の尾などによるenergy_use値変更をdo_cmd_walk()から分離した
+//run_step()やtravel_step()からも使うため
+void walk_energy_modify(void)
+{
+
+	///sys 早駆けのターン消費
+	if (p_ptr->action == ACTION_HAYAGAKE) energy_use = energy_use * (45 - (p_ptr->lev / 2)) / 100;
+	///mod150105 村紗水中高速移動
+	else if (p_ptr->pclass == CLASS_MURASA)
+	{
+		feature_type *f_ptr = &f_info[cave[py][px].feat];
+		if (have_flag(f_ptr->flags, FF_WATER)) energy_use /= 3;
+	}
+	///mod131228 高速移動のターン消費
+	else if (p_ptr->speedster) energy_use = energy_use * (75 - p_ptr->lev / 2) / 100;
+	///mod131228 スライム変化時のターン消費
+	else if (p_ptr->mimic_form == MIMIC_SLIME && !p_ptr->levitation) energy_use = energy_use * 3 / 2;
+	///mod140907 人魚のターン消費
+	///mod150321 乗馬時は無関係
+	else if ((prace_is_(RACE_NINGYO) || p_ptr->muta3 & MUT3_FISH_TAIL) && !p_ptr->levitation && !p_ptr->riding)
+	{
+		feature_type *f_ptr = &f_info[cave[py][px].feat];
+		if (!have_flag(f_ptr->flags, FF_WATER)) energy_use = energy_use * 4 / 3;
+	}
+
+
+
+}

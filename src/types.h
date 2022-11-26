@@ -1050,7 +1050,7 @@ struct player_class
 	s16b c_mhp;			/* Class hit-dice adjustment */
 	s16b c_exp;			/* Class experience factor */
 
-	byte pet_upkeep_div; /* Pet upkeep divider */
+	byte pet_upkeep_div; /* Pet upkeep divider */ //大きいほどペット維持コストが高くなる
 
 	///mod140128 追加項目
 

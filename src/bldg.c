@@ -1793,6 +1793,19 @@ static void buy_hinaningyou()
 }
 
 
+//v2.0.3 アビリティカード売上げ記録変数に加算
+//性格いかさまやチートオプションを弾く処理を忘れていた。今更ながら追加するために別関数に分離。
+static void add_cardshop_profit(int price)
+{
+
+	if (p_ptr->noscore || p_ptr->pseikaku == SEIKAKU_MUNCHKIN) return;
+
+	if (total_pay_cardshop < 100000000) total_pay_cardshop += price;
+
+
+}
+
+
 //v1.1.87 山如の賭場の10連ガチャ
 static void buy_gacha_box()
 {
@@ -1909,7 +1922,8 @@ static void buy_gacha_box()
 	}
 	buy_gacha_box_count++;
 	//カードの合計支払額に加算
-	if(total_pay_cardshop < 100000000) total_pay_cardshop += price;
+	//if(total_pay_cardshop < 100000000) total_pay_cardshop += price;
+	add_cardshop_profit(price);
 
 
 	object_prep(o_ptr, lookup_kind(TV_CHEST, SV_CHEST_10_GACHA));
@@ -6676,24 +6690,24 @@ bool check_quest_unique_text(void)
 #endif
 			}
 		}
-		else if(pc == CLASS_HATATE || pc == CLASS_AYA)
+		else if(pr == RACE_KARASU_TENGU)//v2.0.3 鴉天狗全般同じメッセージにする
 		{
 			if(comp)
 			{
 #ifdef JP
 				strcpy(quest_text[line++], "余所者たちを単騎殲滅し、大いに面目を施した。");
-				strcpy(quest_text[line++], "さらに以前から目をつけていた宝物を上司から譲り受けることに成功した。");
+				strcpy(quest_text[line++], "さらに褒賞品として以前から目をつけていた宝物を譲り受けることに成功した。");
 #else
                 strcpy(quest_text[line++], "You've cleaned up those strangers by yourself, getting lots of attention.");
 				strcpy(quest_text[line++], "You also managed to obtain a treasure you've set your eyes upon");
-				strcpy(quest_text[line++], "from your superiors.");
+				strcpy(quest_text[line++], "as a reward.");
 #endif
 			}
 			else if(fail)
 			{
 #ifdef JP
 				strcpy(quest_text[line++], "またも失態を演じてしまった。");
-				strcpy(quest_text[line++], "当分の間新聞大会には顔を出せそうにない・・");
+				strcpy(quest_text[line++], "当分の間新聞大会には顔を出せそうにない……");
 #else
                 strcpy(quest_text[line++], "You've splendidly failed again.");
 				strcpy(quest_text[line++], "You'd rather avoid meeting other newspaper reporters for the time being...");
@@ -8743,7 +8757,49 @@ bool check_quest_unique_text(void)
 
 		//天狗専用　防風対策任務
 	case QUEST_TYPHOON:
+
+		if (pc == CLASS_MEGUMU)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "例年にない暴風が人里に近づいている。");
+				strcpy(quest_text[line++], "これは台風と呼ばれる外界の妖怪だ。");
+				strcpy(quest_text[line++], "密約に基づきこれを秘密裏に撃退しなければならない。");
+#else
+				strcpy(quest_text[line++], "An unusually powerful storm is approaching Human Village.");
+				strcpy(quest_text[line++], "It is a typhoon youkai from the Outside World.");
+				strcpy(quest_text[line++], "You have to secretly drive it away.");
+#endif
+			}
+			else if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "秘密任務は問題なく完了した。");
+				strcpy(quest_text[line++], "もっと高級な頭襟を皆に支給してやるだけの予算も確保できた。");
+#else
+				strcpy(quest_text[line++], "You completed your secret mission without problems.");
+				strcpy(quest_text[line++], "Your budget now allows you to give everyone more valuable");
+				strcpy(quest_text[line++], "tokins.");
+#endif
+			}
+			else
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "人里に被害を出す失態を犯してしまった。");
+				strcpy(quest_text[line++], "他の大天狗にも協力してもらいどうにか事なきを得たが、");
+				strcpy(quest_text[line++], "今後百年くらいは陰口を言われそうである。");
+#else
+				strcpy(quest_text[line++], "Your failure put Human Village into peril.");
+				strcpy(quest_text[line++], "You still managed to save the day by working together with");
+				strcpy(quest_text[line++], "other Great Tengu, but they'll be whispering behind your back");
+				strcpy(quest_text[line++], "for years to come.");
+#endif
+			}
+
+		}
 		break;
+
 
 		//急流下りクエ　順位を貼り出す特殊処理
 	case QUEST_TORRENT:
@@ -8776,13 +8832,13 @@ bool check_quest_unique_text(void)
 				}
 
 #ifdef JP
-				strcpy(quest_text[line++], "大会の結果が張り出されている・・");
+				strcpy(quest_text[line++], "大会の結果が張り出されている。");
 				strcpy(quest_text[line++], "　");
 				strcpy(quest_text[line++], format("優勝　：%s",name_list[0]));
 				strcpy(quest_text[line++], format("準優勝：%s",name_list[1]));
 				strcpy(quest_text[line++], format("第三位：%s",name_list[2]));
 #else
-                strcpy(quest_text[line++], "The results are...");
+                strcpy(quest_text[line++], "The tournament results are posted.");
 				strcpy(quest_text[line++], " ");
 				strcpy(quest_text[line++], format("1st place  : %s",name_list[0]));
 				strcpy(quest_text[line++], format("2nd place  : %s",name_list[1]));
@@ -14198,7 +14254,8 @@ void buy_ability_card(bool examine)
 				building_prt_gold();
 
 				//合計支払額に加算
-				if (total_pay_cardshop < 100000000) total_pay_cardshop += price;
+				//if (total_pay_cardshop < 100000000) total_pay_cardshop += price;
+				add_cardshop_profit(price);
 
 				//カード在庫リストの該当箇所を購入済みの0にする
 				p_ptr->magic_num2[c - 'a' + ABLCARD_MAGICNUM_SHIFT] = 0;
@@ -16219,6 +16276,13 @@ msg_print("お金が足りません！");
 		else
 			msg_print(_("あなたは温泉で体を癒やした...", "You heal your body in the hot springs..."));
 
+		//v2.0.3 埴輪や人形などの破損も直ることにする
+		if (RACE_BREAKABLE)
+		{
+			set_broken(-(BROKEN_MAX));
+			handle_stuff();
+		}
+
 		hp_player(200);
 		set_poisoned(0);
 		set_blind(0);
@@ -16234,6 +16298,15 @@ msg_print("お金が足りません！");
 
 		///mod140113 永遠亭用に強化した
 	case BACT_HEALING_PLUS:
+		msg_print(_("治療を受けた。", "You are healed."));
+
+		//v2.0.3 埴輪や人形などの破損も直ることにする
+		if (RACE_BREAKABLE)
+		{
+			set_broken(-(BROKEN_MAX));
+			handle_stuff();
+		}
+
 		hp_player(5000);
 		set_poisoned(0);
 		set_blind(0);
@@ -16247,8 +16320,6 @@ msg_print("お金が足りません！");
 
 		//v1.1.92 配下も回復する
 		bldg_heal_all_pets(100);
-
-		msg_print(_("治療を受けた。", "You are healed."));
 
 		paid = TRUE;
 		break;

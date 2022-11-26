@@ -2656,8 +2656,11 @@ void apply_random_unique_xtra_param(monster_race *r_ptr, int symbol_num, int bia
 			}
 			else if(bias == RUBIAS_BILE)
 			{
+				/*v2.0.3 –¢ŽÀ‘•‚Ì‹zŽûUŒ‚íœ
 				if(lev > 50 && randint0(power) > randint0(120)) r_ptr->blow[i].effect = RBE_MELT;
-				else if(randint0(power) > randint0(80)) r_ptr->blow[i].effect = RBE_UN_BONUS;
+				else
+				*/
+					if(randint0(power) > randint0(80)) r_ptr->blow[i].effect = RBE_UN_BONUS;
 				else if(randint0(power) > randint0(30)) r_ptr->blow[i].effect = RBE_ACID;
 			}
 			else if(bias == RUBIAS_ELEC)

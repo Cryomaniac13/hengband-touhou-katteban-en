@@ -494,6 +494,9 @@ static cptr seikaku_special_jouhou[MAX_SEIKAKU_SPECIAL] =
 	//魔理沙「闇市場調査員」
 	_("あなたはアビリティカードの闇市場の調査を始めました。この性格では通常の特技の代わりに職業「カード売人」と同じ特技を使用できます。スカートの隠しポケットにはいつもの自作の魔法の代わりにアビリティカードを8種類まで格納できます。魔法書を使った通常の魔法はこれまで通りに習得できます。",
     "You have started investigating the black market of ability cards. With this personality, you'll have the special abilities of a Card-Trader instead of your unique ones. You can store up to 8 kinds of ability cards in your hidden pockets instead of holding your self-made spells. You're still able to study normal spells from spellbooks."),
+	//龍「通貨発行者」
+	_("あなたはアビリティカードブームの仕掛け人で、カード交換用の通貨を発行して巨万の富を手にしました。このセーブデータで過去のプレイヤーがカード販売所に支払った総額の1/4を持ってゲームがスタートします。ただしこの資金は天狗社会の維持発展のために使われなければなりません。そのため街で一部の施設が使用不可能になります。ゲームのスコアも通常の1/4になります。",
+    "You are the instigator of the ability card craze, and you made a fortune by issuing the currency used for card exchange. You start the game with 1/4 of the total amount of money paid for purchasing cards by previous characters on this save file. However, you have to use those funds for maintaining and developing the tengu society, so you cannot use some facilities in towns. Your score is reduced to 1/4."),
 
 };
 
@@ -524,6 +527,7 @@ static int get_special_seikaku_index(int class_idx)
 	if (class_idx == CLASS_AYA)			return SEIKAKU_SPECIAL_AYA;
 	if (class_idx == CLASS_JYOON)		return SEIKAKU_SPECIAL_JYOON;
 	if (class_idx == CLASS_MARISA)		return SEIKAKU_SPECIAL_MARISA;
+	if (class_idx == CLASS_MEGUMU)		return SEIKAKU_SPECIAL_MEGUMU;
 
 
 	return SEIKAKU_SPECIAL_NONE;
@@ -1868,6 +1872,7 @@ static void get_money(void)
 
 	if(p_ptr->pclass == CLASS_TEWI) gold = 1000000;
 	else if (p_ptr->pclass == CLASS_SHION) gold = -99999999;
+	else if (is_special_seikaku(SEIKAKU_SPECIAL_MEGUMU)) gold = MAX(gold,(int)(total_pay_cardshop / 4));
 
 
 	/* Save the gold */
@@ -3236,6 +3241,9 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_SANNYO,2,0,TV_CLOTHES,SV_CLOTH_EASTERN,1 },
 
 	{ CLASS_TSUKASA,2,0,TV_CLOTHES,SV_CLOTHES,1 },
+
+	{ CLASS_MEGUMU,2,0,TV_CLOTHES, SV_CLOTH_SYUGEN,1 },
+	{ CLASS_MEGUMU,2,ART_MEGUMU,0,0,1 },
 
 	{-1,0,0,0,0,0} //終端dummy
 };
@@ -6322,8 +6330,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		"(未実装)" },
 	{ TRUE,"菅牧　典",CLASS_TSUKASA,RACE_YOUKO,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは大天狗に仕える管狐です。人に囁きかけて唆し破滅と混乱をもたらすことをこよなく好みます。あなたは配下モンスターの背後に隠れて操る「寄生」という特殊な騎乗状態になることができます。通常騎乗可能なモンスター以外にも寄生ができ、他のモンスターからの攻撃は高確率で配下モンスターが受け、また配下モンスターが戦うことで得た経験値やアイテムは全てあなたが横取りします。あなたの肉弾戦能力は全く話になりませんが代わりに魔法を一領域習得することができます。配下モンスターを盾にしつつ後ろから魔法や特技で攻撃するのが基本的な戦い方になります。あなたは服が汚れるのが嫌いで、劣化や汚染の攻撃で通常より多くのダメージを受けてしまいます。" },
-	{ FALSE,"飯綱丸　龍",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
-		"(未実装)" },
+	{ TRUE,"飯綱丸　龍",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
+		"あなたは妖怪の山で鴉天狗たちを束ねる大天狗です。非常に動きが素早く機知に富み文武両道の強さです。さらに視界内すべてを攻撃する強力な特技を複数習得します。ただし長く生きてきたためレベルアップに必要な経験値は多くなります。また頭には頭襟しか装備できません。" },
 	{ FALSE,"天弓　千亦",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
 		"(未実装)" },
 	{ TRUE,"姫虫　百々世",CLASS_MOMOYO,RACE_DAIYOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6338,9 +6346,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ FALSE,"Misumaru Tamatsukuri",CLASS_MISUMARU,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
 		"(unimplemented)" },
 	{ TRUE,"Tsukasa Kudamaki",CLASS_TSUKASA,RACE_YOUKO,ENTRY_KOURYUU,SEX_FEMALE,
-		"You are a kuda-gitsune servine a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
-	{ FALSE,"Megumu Iizunamaru",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
-		"(unimplemented)" },
+		"You are a kuda-gitsune serving a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
+	{ TRUE,"Megumu Iizunamaru",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
+		"You are a Great Tengu commanding the crow rengu of Youkai Mountain. You move very fast and are proficient in all areas. You also learn several powerful abilities hitting everything in your line of sight. However, you require a lot of experience to level up, and you have to wear a tokin on your head." },
 	{ FALSE,"Chimata Tenkyuu",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
 		"(unimplemented)" },
 	{ TRUE,"Momoyo Himemushi",CLASS_MOMOYO,RACE_DAIYOUKAI,ENTRY_KOURYUU,SEX_FEMALE,

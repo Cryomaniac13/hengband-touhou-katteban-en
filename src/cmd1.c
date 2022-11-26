@@ -3477,10 +3477,20 @@ cptr msg_py_atk(object_type *o_ptr,int mode)
 	}
 	if(tv == TV_STICK)
 	{
-		if(one_in_(4)) return _("を殴った。", "bash");
-		if(one_in_(3)) return _("を打ち据えた。", "beat up");
-		if(one_in_(2)) return _("を突いた。", "thrust at");
-		return _("を薙ぎ払った。", "sweep");
+		if (o_ptr->name1 == ART_MEGUMU)
+		{
+
+			if (one_in_(3)) return _("を三脚でぶん殴った！", "use your tripod to bludgeon");
+			if (one_in_(2)) return _("を三脚でぶっ叩いた！", "use your tripod to slam");
+			return _("に三脚を突き刺した！", "use your tripod to stab");
+		}
+		else
+		{
+		    if(one_in_(4)) return _("を殴った。", "bash");
+            if(one_in_(3)) return _("を打ち据えた。", "beat up");
+            if(one_in_(2)) return _("を突いた。", "thrust at");
+            return _("を薙ぎ払った。", "sweep");
+		}
 	}
 
 	if(tv == TV_AXE)
@@ -4337,10 +4347,15 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 			else
 				num_blow = p_ptr->num_blow[hand] * 3 / (m_ptr->cdis + 1);
 		}
-		else if (p_ptr->pclass == CLASS_KEIKI)
+		else if (p_ptr->pclass == CLASS_KEIKI )
 		{
 			num_blow = p_ptr->num_blow[hand];
 		}
+		else if (p_ptr->pclass == CLASS_MEGUMU)
+		{
+			num_blow = (p_ptr->num_blow[hand]+1)/2;
+		}
+
 		else
 		{
 			msg_print(_("ERROR:予期しないクラスでGF_SOULSCULPTUREが使われた",
@@ -9683,6 +9698,9 @@ void run_step(int dir)
 	/* Take time */
 	energy_use = 100;
 
+	//v3.0.2 走るコマンドのenergy_use値に高速移動などを適用する
+	walk_energy_modify();
+
 	/* Move the player, using the "pickup" flag */
 #ifdef ALLOW_EASY_DISARM /* TNB */
 
@@ -9833,6 +9851,9 @@ void travel_step(void)
 	}
 
 	energy_use = 100;
+
+	//v2.0.3 トラベルコマンドのenergy_use値に高速移動などを適用する
+	walk_energy_modify();
 
 	move_player(travel.dir, always_pickup, FALSE,FALSE);
 

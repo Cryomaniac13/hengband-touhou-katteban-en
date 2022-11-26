@@ -1190,6 +1190,13 @@ static bool summon_specific_aux(int r_idx)
 
 		}
 
+		//龍が呼ぶ天狗配下　天狗ユニークと大天狗を除く一般天狗
+		case SUMMON_TENGU_MINION:
+		{
+			okay = (r_ptr->d_char == 't' && r_idx != MON_G_TENGU && !(r_ptr->flags1 & RF1_UNIQUE));
+			break;
+		}
+
 
 	}
 
@@ -5274,6 +5281,10 @@ msg_print("守りのルーンが壊れた！");
 			else if (p_ptr->pclass == CLASS_MOMOYO || p_ptr->pclass == CLASS_TSUKASA)
 			{
 				if (m_ptr->r_idx == MON_MEGUMU) set_friendly(m_ptr);
+			}
+			else if (p_ptr->pclass == CLASS_MEGUMU)
+			{
+				if (m_ptr->r_idx == MON_MOMOYO || m_ptr->r_idx == MON_TSUKASA) set_friendly(m_ptr);
 			}
 
 

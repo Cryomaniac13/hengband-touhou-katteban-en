@@ -6390,6 +6390,14 @@ void throw_osaisen(void)
                     "You tried pouring an endless amount of money, but for some reason, it doesn't go into the donation box."));
 		return ;
 	}
+	//v2.0.3 龍専用性格
+	if (is_special_seikaku(SEIKAKU_SPECIAL_MEGUMU))
+	{
+		msg_print(_("この資金は天狗社会のために使われなければならない。",
+                    "You have to use your funds for the good of the tengu society."));
+		return;
+	}
+
 	if(quest[QUEST_CHAOS_WYRM].status != QUEST_STATUS_FINISHED && !EXTRA_MODE &&
 		!(p_ptr->pclass == CLASS_3_FAIRIES || p_ptr->pclass == CLASS_SUNNY || p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_STAR))
 	{

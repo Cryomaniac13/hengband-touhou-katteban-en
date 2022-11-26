@@ -44,6 +44,148 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+
+
+/*v2.0.3 飯綱丸龍専用技*/
+class_power_type class_power_megumu[] =
+{
+	{ 15,45,35,FALSE,TRUE,A_CHR,0,0,_("星火燎原の舞", "Star-Sparked Wildfire Dance"),
+	_("視界内の全てに対して火炎属性の攻撃を行い、周辺を明るくする。",
+        "Hits everything in sight with fire and illuminates nearby area.")},
+
+	{ 20,30,40,FALSE,FALSE,A_CHR,0,0,_("配下召喚", "Summon Followers"),
+	_("配下の天狗を数体呼び出す。",
+        "Summons several tengu followers.")},//大天狗は出さないようにする
+
+	{ 25,80,60,FALSE,TRUE,A_CHR,0,0,_("光彩陸離の舞", "Dazzling Iridescence Dance"),
+	_("視界内の全てに対して閃光属性の攻撃を行い、さらにモンスターを混乱させようと試みる。",
+        "Hits everything in sight with light and attempts to confuse monsters.")},
+
+	{ 30,0,80,FALSE,FALSE,A_WIS,0,0,_("光風霽月", "Clear and Tranquil Wind and Moon"),
+	_("HPとMPをわずかに回復させる。またバッドステータスからの回復を早める。",
+        "Slightly recovers HP and MP, and reduces negative status effect duration.")},
+
+	{ 35,120,70,FALSE,TRUE,A_DEX,0,0,_("天馬行空の舞", "Sky-Racing Heavenly Steeds Dance"),
+	_("視界内の全ての敵対的なモンスターに対して通常攻撃を行う。この攻撃はオーラによる反撃を受けないが攻撃回数が半分になる。",
+        "Performs melee attack against all hostile monsters in sight. You do not receive aura damage, but you deal half the usual amount of blows.")},
+
+	{ 40,200,75,FALSE,TRUE,A_WIS,0,0,_("天真爛漫の星", "Star of Ingenuous Brilliance"),
+	_("フロア全てのモンスターを金縛りにしようと試みる。ユニークモンスター・力強いモンスター・神格には効果が薄い。",
+        "Attempts to restrain all monsters on the level. Less effective against unique monsters, powerful monsters and deities.")},
+
+	{ 45,160,85,FALSE,TRUE,A_CHR,0,0,_("空々寂々の風", "Wind of Lonesome Emptiness"),
+	_("視界内の全てに対して無属性の攻撃を行う。",
+        "Hits everything in sight with a non-elemental attack.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+
+};
+
+cptr do_cmd_class_power_aux_megumu(int num, bool only_info)
+{
+	int dir, dice, sides, base, damage, i;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+
+	case 0:
+	{
+		base = plev + chr_adj * 5;
+		if (only_info) return format(_str_eff_dam, base);
+		msg_print(_("辺り一面が燃え上がった！", "Everything around you is set ablaze!"));
+		project_hack2(GF_FIRE, 0, 0, base);
+		(void)lite_room(py, px);
+		break;
+	}
+
+	case 1:
+	{
+		int level;
+		int num = 1 + plev / 10;
+		bool flag = FALSE;
+		level = plev + chr_adj;
+		if (only_info) return format(_("召喚レベル:%d", "sum lvl: %d"), level);
+		for (; num>0; num--)
+		{
+			if (summon_specific(-1, py, px, level, SUMMON_TENGU_MINION, (PM_FORCE_PET | PM_ALLOW_GROUP))) flag = TRUE;
+		}
+		if (flag) msg_format(_("天狗達を呼び出した！", "You call forth tengu!"));
+		else msg_format(_("何も現れなかった...", "Nobody appears..."));
+
+	}
+	break;
+
+
+	case 2:
+	{
+		base = plev * 2 + chr_adj * 5;
+		if (only_info) return format(_str_eff_dam, base);
+		msg_print(_("眩い光がダンジョンを彩った！", "Dazzling light illuminates the dungeon!"));
+		project_hack2(GF_LITE, 0, 0, base);
+		confuse_monsters(base);
+		break;
+	}
+
+
+	case 3:
+	{
+		if (only_info) return format("");
+
+		msg_print(_("あなたは瞑想を始めた...", "You start meditating..."));
+
+		hp_player(randint1(10 + p_ptr->lev / 5));
+		player_gain_mana(randint1(5 + p_ptr->lev / 10));
+		set_poisoned(p_ptr->poisoned - 10);
+		set_stun(p_ptr->stun - 10);
+		set_cut(p_ptr->cut - 10);
+		set_image(p_ptr->image - 10);
+
+	}
+	break;
+
+	case 4:
+	{
+		if (only_info) return format("");
+		msg_format(_("あなたは風のように駆け巡った！", "You dash around like the wind!"));
+		project_hack2(GF_SOULSCULPTURE, 0, 0, 100);
+	}
+	break;
+
+	case 5:
+	{
+		int base = plev * 7;
+		if (only_info) return format(_str_eff_power, base);
+
+		msg_print(_("ダンジョンが星の光で満たされる...", "The dungeon is flooded with starlight..."));
+		floor_attack(GF_STASIS, 0,0, base, 0);
+	}
+	break;
+
+
+	case 6:
+	{
+		int dam = plev * 7 + chr_adj * 10;
+		if (only_info) return format(_str_eff_dam, dam);
+		stop_raiko_music();
+		msg_print(_("澄み渡った風がダンジョンを吹き抜けた！", "A wind of emptiness blows through the dungeon!"));
+		project_hack2(GF_DISP_ALL, 0, 0, dam);
+		break;
+	}
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+
+
+	}
+	return "";
+}
+
+
 //v2.0.2 典
 
 class_power_type class_power_tsukasa[] =
@@ -28834,7 +28976,7 @@ class_power_type class_power_nazrin[] =
 
 cptr do_cmd_class_power_aux_nazrin(int num, bool only_info)
 {
-	int dir,dice,sides,base,damage,i;
+	int dir,damage,i;
 
 	switch(num)
 	{
@@ -29028,7 +29170,7 @@ bool item_tester_hook_make_tsukumo(object_type *o_ptr)
 
 cptr do_cmd_class_power_aux_tsukumo_master(int num, bool only_info)
 {
-	int dir,dice,sides,base;
+	//int dir,dice,sides,base;
 	switch(num)
 	{
 		//武器の付喪神化
@@ -36103,6 +36245,11 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_MEGUMU:
+		class_power_table = class_power_megumu;
+		class_power_aux = do_cmd_class_power_aux_megumu;
+		power_desc = power_desc_waza;
+		break;
 
 
 	default:
@@ -37978,6 +38125,13 @@ const support_item_type support_item_list[] =
 		_("ガラスの管", "Glass Pipe"),
 		_("それを使うと破片属性のロケットで攻撃する。攻撃を受けたモンスターは行動するたびにダメージを受ける。",
         "Fires a shards rocket. A monster hit by this attack will keep taking damage for every action it performs.")},
+
+
+	//v2.0.3 龍　天真爛漫の星
+		{ 120,40, 120,1,30,	MON_MEGUMU,class_power_megumu,do_cmd_class_power_aux_megumu,4,
+		_("渾天儀", "Armillary Sphere"),
+		_("それを使うとフロア全体のモンスターを金縛り状態にしようと試みる。ユニークモンスター、力強いモンスター、神格には効果が薄い。",
+        "Attempts to restrain all monsters on the level. Less effective against unique monsters, powerful monsters and deities.")},
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };

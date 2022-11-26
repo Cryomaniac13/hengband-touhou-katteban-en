@@ -5378,3 +5378,14 @@ D:$it starts dancing and playing music.
 D:無縁塚に咲いていた奇妙な花だ。近くで音を立てると音楽を奏でながら踊りだす。
 
 
+N:347:大天狗の三脚
+E:Tripod of Great Tengu
+I:27:8:0
+W:40:20:50:4990
+P:0:3d8:5:5:5
+F:SHOW_MODS
+F:FULL_NAME
+D:$Three iron bars connected to a board-shaped metal fixture. Originally used
+D:$to hold a camera in place while taking pictures, this tool has found other
+D:$uses in the tengu society.
+D:三本の鉄棒が板のような丈夫な金具に繋がっている。本来は写真撮影のときカメラがぶれないよう固定するための道具だが、天狗社会では別の使い方もあるようだ。

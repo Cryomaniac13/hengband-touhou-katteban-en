@@ -3483,10 +3483,10 @@ note = "には耐性がある。";
 #else
 				note = " is hit by the kuda-gitsune bullets.";
 #endif
-
 			}
 			//10行動の間ダメージを与える
 			m_ptr->timed_shard_count = 10;
+			get_angry = TRUE;
 
 			dam = 0;
 

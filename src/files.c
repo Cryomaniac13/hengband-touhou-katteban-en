@@ -3811,6 +3811,17 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 
 		break;
 
+	case CLASS_MEGUMU:
+		add_flag(flgs, TR_FREE_ACT);
+		add_flag(flgs, TR_RES_FIRE);
+		if (plev >  4) add_flag(flgs, TR_SPEED);
+		if (plev >  9) add_flag(flgs, TR_SEE_INVIS);
+		if (plev > 19) add_flag(flgs, TR_RES_CONF);
+		if (plev > 29) add_flag(flgs, TR_RES_LITE);
+
+		break;
+
+
 
 	default:
 		break; /* Do nothing */
@@ -12744,6 +12755,11 @@ int	calc_player_score_mult(void)
 			mult /= 3;
 		break;
 
+	case CLASS_MEGUMU:
+		//v2.0.3 専用性格はスコア1/4
+		if (is_special_seikaku(SEIKAKU_SPECIAL_MEGUMU))
+			mult /= 4;
+		break;
 
 
 	}

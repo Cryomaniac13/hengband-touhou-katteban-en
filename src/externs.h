@@ -2731,3 +2731,5 @@ extern bool rokuro_head_search_item(int v, bool flag_stop);
 extern bool set_hirarinuno_card(int v, bool do_dec);
 
 extern void break_market(void);
+
+extern void walk_energy_modify(void);

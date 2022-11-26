@@ -4307,7 +4307,8 @@ static void process_monster(int m_idx)
 	}
 
 	//八尺様特殊処理
-	if(m_ptr->r_idx == MON_HASSYAKUSAMA)
+	//v2.0.3 騎乗中(バックダンスや寄生などの特殊騎乗)のときテレポートをしないようにした
+	if(m_ptr->r_idx == MON_HASSYAKUSAMA && p_ptr->riding != m_idx)
 	{
 		if(hassyakusama_target_idx && !m_list[hassyakusama_target_idx].r_idx) hassyakusama_target_idx = 0;
 		//ターゲットがいない場合探す
