@@ -2084,7 +2084,7 @@ void	display_nameless_art_effect(nameless_arts_activate_param_type *naap_ptr, in
 	//ブレス系はxtra1に
 	if (naap_ptr->art_idx == JKF1_ATTACK_BREATH)
 	{
-		prt(format("威力/効果:現在HPの%d%%", naap_ptr->xtra1), 20, 30);
+		prt(format(_("威力/効果:現在HPの%d%%", "dam/pow: %d%% of cur HP"), naap_ptr->xtra1), 20, 30);
 	}
 	//2.0.4 自分中心ボールを/2に表記
 	else if (naap_ptr->art_idx == JKF1_ATTACK_AROUND)
