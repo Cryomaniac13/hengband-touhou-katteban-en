@@ -44,6 +44,154 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.0.4 魅須丸特技
+class_power_type class_power_misumaru[] =
+{
+
+	{ 1,25,30,FALSE,TRUE,A_DEX,0,0,_("勾玉制作", "Create Magatama"),
+	_("「勾玉」を制作する。制作した勾玉は装備して発動することができる。発動するときの効果は素材によってある程度変化する。",
+    "Creates a magatama. You can equip and activate magatama you've created. Activation effect depends on material used.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("勾玉装備", "Equip Magatama"),
+	_("制作した勾玉を専用スロットに装備する。レベルが上がると装備可能スロット数が増える。",
+    "Equips magatama you've created into a special slot. Amount of slots available depends on your level.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("勾玉確認", "Browse Magatama"),
+	_("装備した勾玉の発動時の効果を確認する。",
+    "Confirm activation effects of magatama you currently have equipped.")},
+	{ 1,0,0,FALSE,FALSE,A_INT,0,0,_("勾玉発動", "Activate Magatama"),
+	_("装備した勾玉を発動する。発動のたびに特技ごとに設定された追加のMPを消費する。",
+    "Activates an equipped magatama. Uses an additional amount of MP depending on its ability.")},
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("勾玉取り外し", "Remove Magatama"),
+	_("専用スロットに装備した勾玉を解除する。",
+    "Removes a magatama equipped in a special slot.")},
+
+	{ 20,20,30,FALSE,TRUE,A_INT,0,0,_("モンスター調査", "Analyze Monsters"),
+	_("周囲のモンスターの能力や耐性などを知る。",
+    "Learns about abilities and resistances of nearby monsters.")},
+
+	{ 25,32,50,FALSE,TRUE,A_CHR,0,0,_("虹龍陰陽玉", "Rainbow Dragon Yin-Yang Orbs"),
+	_("虹属性のボールを放つ。",
+    "Fires a ball of rainbow.")},
+
+	{ 30,1,60,FALSE,TRUE,A_INT,0,0,_("魔力食い(宝石)", "Eat Magic (Gemstones)"),
+	_("宝石から魔力を吸い取りMPを回復する。吸い取れる魔力の量は宝石の種類で変わる。",
+    "Drains mana from a gemstone, recovering MP. Amount of mana drained depends on the kind of gemstone.")},
+
+	{ 40,96,85,FALSE,TRUE,A_CHR,0,0,_("陰陽サフォケイション", "Yin-Yang Suffocation"),
+	_("視界内の全てに対して無属性の攻撃を行う。",
+    "Hits everything in sight with a non-elemental attack.")},
+
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy",	"" },
+};
+cptr do_cmd_class_power_aux_misumaru(int num, bool only_info)
+{
+	int dir, dice, sides, base, damage, i;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+
+	case 0:
+	{
+
+		if (only_info) return format("");
+
+		if (!make_magatama()) return NULL;
+	}
+	break;
+
+
+	//勾玉装備 inven2使用
+	case 1:
+	{
+		if (only_info) return format("");
+		if (!put_item_into_inven2()) return NULL;
+		break;
+	}
+
+	//勾玉確認 inven2に入った勾玉から特技リストを生成し、選択された技のパラメータを表示する
+	case 2:
+	{
+		if (only_info) return format("");
+
+		activate_magatama(TRUE);
+		return NULL; //見るだけなので行動順消費なし 純狐と菫子も同じにする
+	}
+	break;
+	//勾玉発動
+	case 3:
+	{
+		if (only_info) return format("");
+
+		activate_magatama(FALSE);
+
+	}
+	break;
+
+	//勾玉取り外し
+	case 4:
+	{
+		if (only_info) return format("");
+		if (!takeout_inven2()) return NULL;
+		break;
+	}
+
+	//調査
+	case 5:
+	{
+		if (only_info) return format("");
+		msg_print(_("勾玉を使って周囲のモンスターの情報を集めた...", "You gather information about nearby monsters using your magatama..."));
+		probing();
+		break;
+	}
+
+
+
+	case 6:
+	{
+		int rad = 2 + plev / 40;
+		int dice = 7;
+		int sides = plev / 2;
+		int base = plev + chr_adj * 2;
+
+		if (only_info) return format(_("半径:%d 損傷:%d+%dd%d", "rad: %d dam: %d+%dd%d"), rad, base, dice, sides);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_format(_("七色に輝く陰陽玉を放った！", "You launch rainbow-colored ying-yang orbs!"));
+		fire_ball(GF_RAINBOW, dir, base + damroll(dice, sides), rad);
+		break;
+	}
+
+
+	case 7:
+	{
+
+		if (only_info) return format("");
+
+		if (!eat_jewel()) return NULL;
+	}
+	break;
+
+	case 8:
+	{
+		int dam = plev * 4 + chr_adj * 6;
+		if (only_info) return format(_str_eff_dam, dam);
+		stop_raiko_music();
+		msg_print(_("大量の陰陽玉が部屋を埋め尽くした！", "Many ying-yang orbs fill up the room!"));
+		project_hack2(GF_DISP_ALL, 0, 0, dam);
+		break;
+	}
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
 
 
 /*v2.0.3 飯綱丸龍専用技*/
@@ -4944,7 +5092,8 @@ cptr do_cmd_class_power_aux_sumireko_d(int num, bool only_info)
 	case 1:
 	{
 		if (only_info) return format("");
-		if (!activate_nameless_art(TRUE)) return NULL;
+		activate_nameless_art(TRUE);
+		return NULL;//確認のみなので行動順消費しない
 	}
 	break;
 
@@ -8617,7 +8766,8 @@ cptr do_cmd_class_power_aux_junko(int num, bool only_info)
 	case 2:
 		{
 			if (only_info) return format("");
-			if (!activate_nameless_art(TRUE)) return NULL;
+			activate_nameless_art(TRUE);
+			return NULL;//確認のみなので行動順消費しない
 		}
 		break;
 
@@ -25784,21 +25934,6 @@ cptr do_cmd_class_power_aux_satori(int num, bool only_info)
 
 
 
-/*:::宝石(珍品は含まない)*/
-bool item_tester_hook_jewel(object_type *o_ptr)
-{
-	int sv = o_ptr->sval;
-	if(o_ptr->tval != TV_MATERIAL) return FALSE;
-
-	if(sv == SV_MATERIAL_GARNET || sv == SV_MATERIAL_AMETHYST || sv == SV_MATERIAL_AQUAMARINE ||
-	   sv == SV_MATERIAL_DIAMOND || sv == SV_MATERIAL_EMERALD || sv == SV_MATERIAL_MOONSTONE ||
-	   sv == SV_MATERIAL_RUBY  || sv == SV_MATERIAL_PERIDOT || sv == SV_MATERIAL_SAPPHIRE ||
-	   sv == SV_MATERIAL_OPAL  || sv == SV_MATERIAL_TOPAZ || sv == SV_MATERIAL_LAPISLAZULI) return TRUE;
-
-	return FALSE;
-}
-
-
 /*:::宝飾師の魔力食い*/
 class_power_type class_power_jeweler[] =
 {
@@ -25817,79 +25952,10 @@ cptr do_cmd_class_power_aux_jeweler(int num, bool only_info)
 
 	case 0:
 		{
-			cptr q,s;
-			int item;
-			object_type *o_ptr;
-			int mag;
 
 			if(only_info) return format("");
-			item_tester_hook = item_tester_hook_jewel;
 
-			q = _("どの宝石から魔力を吸収しますか? ", "Drain mana from which gemstone?");
-			s = _("あなたは魔力を吸収する宝石を持っていない。", "You don't have gemstones to drain mana from.");
-			if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return NULL;
-
-			if (item >= 0) o_ptr = &inventory[item];
-			else o_ptr = &o_list[0 - item];
-
-			if(o_ptr->tval != TV_MATERIAL)
-			{
-				msg_print(_("ERROR:魔力食いで素材以外が選択された",
-                            "ERROR: Item other than material chosen for magic eating"));
-				return NULL;
-			}
-			switch(o_ptr->sval)
-			{
-				case SV_MATERIAL_GARNET:
-				case SV_MATERIAL_AMETHYST:
-				case SV_MATERIAL_AQUAMARINE:
-				case SV_MATERIAL_MOONSTONE:
-				case SV_MATERIAL_PERIDOT:
-				case SV_MATERIAL_OPAL:
-				case SV_MATERIAL_TOPAZ:
-				case SV_MATERIAL_LAPISLAZULI:
-					mag = 100 + randint1(100);
-					break;
-				case SV_MATERIAL_SAPPHIRE:
-				case SV_MATERIAL_EMERALD:
-					mag = 300 + randint1(300);
-					break;
-				case SV_MATERIAL_RUBY:
-				case SV_MATERIAL_DIAMOND:
-					mag = 1000;
-					break;
-				default:
-				msg_print(_("ERROR:魔力食いで登録されていないアイテムが選択された",
-                            "ERROR: Unlisted item chosen for magic eating"));
-				return NULL;
-			}
-
-			msg_print(_("あなたは宝石を手に取り、魔力を吸収した。",
-                        "You put the gemstone in your hand and drain mana from it."));
-			p_ptr->csp += mag;
-
-			if(p_ptr->csp >= p_ptr->msp)
-			{
-				p_ptr->csp = p_ptr->msp;
-				p_ptr->csp_frac = 0;
-			}
-			p_ptr->redraw |= (PR_MANA);
-			p_ptr->window |= (PW_PLAYER);
-			p_ptr->window |= (PW_SPELL);
-
-			if (item >= 0)
-			{
-				inven_item_increase(item, -1);
-				inven_item_describe(item);
-				inven_item_optimize(item);
-			}
-			else
-			{
-				floor_item_increase(0 - item, -1);
-				floor_item_describe(0 - item);
-				floor_item_optimize(0 - item);
-			}
-
+			if (!eat_jewel()) return NULL;
 		}
 		break;
 
@@ -33303,7 +33369,7 @@ class_power_type class_power_tewi[] =
 };
 cptr do_cmd_class_power_aux_tewi(int num, bool only_info)
 {
-	int dir,dice,sides,base;
+	//int dir,dice,sides,base;
 	switch(num)
 	{
 	case 0:
@@ -33452,7 +33518,8 @@ class_power_type class_power_youmu[] =
 };
 cptr do_cmd_class_power_aux_youmu(int num, bool only_info)
 {
-	int dir,dice,sides,base;
+    //int dir, base, sides, dice;
+	int dir;
 	int plev = p_ptr->lev;
 	switch(num)
 	{
@@ -33654,11 +33721,9 @@ cptr do_cmd_class_power_aux_youmu(int num, bool only_info)
 		{
 			int i,cnt=0;
 			monster_type *m_ptr;
-			monster_race *r_ptr;
 			if(only_info) return "";
 			for (i = 1; i < m_max; i++)
 			{
-				int dist_tmp;
 				m_ptr = &m_list[i];
 				if (!m_ptr->r_idx) continue;
 				if((m_ptr->r_idx == MON_YOUMU) && (m_ptr->mflag & MFLAG_EPHEMERA)) cnt++;
@@ -36251,6 +36316,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_MISUMARU:
+		class_power_table = class_power_misumaru;
+		class_power_aux = do_cmd_class_power_aux_misumaru;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -38132,6 +38203,12 @@ const support_item_type support_item_list[] =
 		_("渾天儀", "Armillary Sphere"),
 		_("それを使うとフロア全体のモンスターを金縛り状態にしようと試みる。ユニークモンスター、力強いモンスター、神格には効果が薄い。",
         "Attempts to restrain all monsters on the level. Less effective against unique monsters, powerful monsters and deities.")},
+
+	//v2.0.4 虹龍陰陽玉
+		{ 40,30, 80,7,5,MON_MISUMARU,class_power_misumaru,do_cmd_class_power_aux_misumaru,6,
+		_("七色の陰陽玉", "Rainbow-Colored Ying-Yang Orbs"),
+		_("それは虹属性のボール攻撃を放つ。",
+        "Fires a ball of rainbow.")},
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };

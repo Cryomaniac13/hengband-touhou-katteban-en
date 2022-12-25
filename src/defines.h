@@ -79,8 +79,8 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 3
-#define H_VER_EXTRA 0
+#define H_VER_PATCH 4
+#define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
 //#define SCORE_SERVER_TEST
@@ -3535,6 +3535,12 @@
 
 //真・勝利後に香霖堂から買える珍品のSVAL Tval:82
 #define SV_STRANGE_OBJ_MAX	28	//k_infoに定義された珍品2のSVの最大値　
+
+//スペルカード、勾玉Tval:83
+#define SV_SPELLCARD_CARD		0
+#define SV_SPELLCARD_MAGATAMA	1
+
+
 
 //アビリティカード TV:85 カードの種別はsvalでなくpvalで管理する
 #define SV_ABILITY_CARD		1
@@ -8387,8 +8393,27 @@ extern int PlayerUID;　
 #define JKF1_EARTHQUAKES	61  //地震
 #define JKF1_DISARM			62  //周辺のトラップ解除
 #define JKF1_LUCKY			63  //幸運
-#define JKF1_MAX			63 //特技用構造体や名称決定リストの要素数に使う
 
+#define JKF1_DEBUFF			64	//指定したモンスター一体に能力低下 xtra1にどの能力を低下させるか記録
+#define JKF1_DISPEL			65	//魔力消去
+#define JKF1_DAZZLE			66	//周囲のモンスターに睡眠、混乱、朦朧、恐怖 xtra1にどれを付与するか記録
+#define JKF1_DETECT_ALL		67	//全感知 xtra1>0のとき地形感知も追加
+
+#define JKF1_MAX			67 //特技用構造体や名称決定リストの要素数に使う 最大79まで？
+//JKF1を増やすとき、nameless_skill_type_desc[]とnameless_arts_generate_table[]に情報を追加し、
+//make_nameless_arts_sub3_apply_other_params()で技パラメータ設定を、activate_nameless_art_aux()で発動時処理を行う
+//あとは純狐の純化時フラグ追加処理など
+
+//JKF1のテーブルの特技分類タイプ　魅須丸の勾玉制作に使う
+#define	JKF_TYPE_ATTACK		1	//攻撃魔法
+#define	JKF_TYPE_HEAL		2	//回復
+#define	JKF_TYPE_SENSE		3	//感知
+#define	JKF_TYPE_TELEPO		4	//テレポ系
+#define	JKF_TYPE_MELEE		5	//白兵系特技
+#define	JKF_TYPE_DEFENSE	6	//防御
+#define	JKF_TYPE_DEBUFF		7	//妨害・バステ
+#define	JKF_TYPE_OTHER		8	//ほか
+#define	JKF_TYPE_SPECIAL	9	//強力な特技
 
 
 //純狐用技設定フラグ2
@@ -8439,6 +8464,7 @@ extern int PlayerUID;　
 #define JKAP_QUARK_IDX	8
 #define JKAP_XTRA_VAL1	9
 #define JKAP_XTRA_VAL2	10
+
 
 //v1.1.21
 /*:::兵士用特技関連*/
@@ -8560,6 +8586,7 @@ extern int PlayerUID;　
 #define	NAMELESS_ART_MODE_JUNKO			1 //純狐用
 #define	NAMELESS_ART_MODE_SUMIREKO		2 //菫子専用性格「悪夢に悩まされる」用
 #define	NAMELESS_ART_MODE_SPELLCARD		3 //*真・勝利*後限定オマケアイテム「スペルカード」用
+#define NAMELESS_ART_MODE_MAGATAMA		4 //魅須丸勾玉制作
 
 //v1.1.57 摩多羅隠岐奈関連
 #define PATTERN_ATTACK_TYPE_MAX		11
@@ -8730,4 +8757,6 @@ extern int PlayerUID;　
 //v2.0 太歳星君打倒後にオベロンが鉄国の主として出て来れるかの判定　打倒直後にオベロンが飛んできて*破壊*とかしないようにしたいがどうしたものか
 #define CHECK_GUARDIAN_CAN_POP ((dungeon_type == DUNGEON_ANGBAND) ? (quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED) : TRUE)
 
+//v2.0.4 魅須丸用
+#define INVEN2_MAGATAMA_NUM_MAX	7
 

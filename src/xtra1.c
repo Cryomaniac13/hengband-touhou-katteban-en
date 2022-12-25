@@ -651,7 +651,7 @@ static struct {
 	{ TERM_YELLOW, "•x", "ŽUà" },
 	{ TERM_RED, "‰Ð", "à‰Ð" },
 	{ TERM_YELLOW, "”à", "ŒãŒË‚Ì—Í" },
-	{ TERM_YELLOW, "•„", "ƒXƒyƒ‹ƒJ[ƒh" },
+	{ TERM_YELLOW, "“Á", "“ÁŽêˆêŽžŒø‰Ê" },
 
 	{ TERM_YELLOW, "Œ|", "–³‰‚ÌŒ|”\ŽÒ" },
 	{ TERM_L_DARK, "d", "‰Ád" },
@@ -777,7 +777,7 @@ static struct {
 	{ TERM_YELLOW, "Wlt", "Spend" },
 	{ TERM_RED, "Ftn", "Fortune" },
 	{ TERM_YELLOW, "Dr", "Backdoor" },
-	{ TERM_YELLOW, "Sc", "Spllcard" },
+	{ TERM_YELLOW, "Spc", "SpclEff" },
 
 	{ TERM_YELLOW, "Pf", "UnatPrfm" },
 	{ TERM_L_DARK, "Wgt", "Weight" },
@@ -6168,6 +6168,14 @@ void calc_bonuses(void)
 		if (p_ptr->lev > 9) p_ptr->see_inv = TRUE;
 		if (p_ptr->lev > 19) p_ptr->resist_conf = TRUE;
 		if (p_ptr->lev > 29) p_ptr->resist_lite = TRUE;
+		break;
+
+	case CLASS_MISUMARU:
+		if (plev > 9) p_ptr->esp_human = TRUE;
+		if (plev > 19) p_ptr->esp_animal = TRUE;
+		if (plev > 24) p_ptr->resist_holy = TRUE;
+		if (plev > 29) p_ptr->esp_kwai = TRUE;
+		if (plev > 39) p_ptr->esp_evil = TRUE;
 		break;
 
 

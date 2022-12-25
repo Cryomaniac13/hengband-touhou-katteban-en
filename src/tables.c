@@ -6365,6 +6365,7 @@ const player_class class_info[MAX_CLASS] =
 			,3
 			,MON_SANNYO
 	},
+
 	{
 #ifdef JP
 		"本物の勾玉制作職人",
@@ -6374,24 +6375,25 @@ const player_class class_info[MAX_CLASS] =
 		"Misumaru",
 		"Misumaru",
 #endif
-		{ 0, 1, 2, 0, -1, -2 },
-		20, 24, 28, 2, 16, 20, 45, 30,
-		12, 10,  9, 0,  4,   5,  15, 15,
-		1, 20, 70
+		{ -2, 5, 4, 3, -2, 4 },
+		32, 45, 40, 3, 35, 20, 32, 32,
+		10, 18, 14, 0,  6,  5, 10, 10,
+		2, 75, 70
 
 		//追加値暫定
-				,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+				,{ 1,5,5,5,5,5,5,5,5,0,0,0,0,0,0,5 }
 				,A_INT
-				,3,2,90,
-				{ 2,1,1,2,2,0,0,0,0,0
-				,3,3,3,3,3,3,2,2,2,2
+				,3,1,80,
+				{ 1,1,1,1,3,0,0,0,0,0
+				,3,1,1,2,2,1,1,1,1,1
 				,1 }
-				,110,0,2,2,
+				,40,2,2,5,
 				FALSE,FALSE,TRUE
-				,TRUE
-				,3
-				,MON_PARSEE
+				,FALSE
+				,4
+				,MON_MISUMARU
 	},
+
 	{
 #ifdef JP
 		"耳元で囁く邪悪な白狐",
@@ -17229,7 +17231,7 @@ const cptr	nameless_skill_type_desc[JKF1_MAX + 1] =
 {
 #ifdef JP
 	"ダミー","ボルト攻撃","ボール攻撃","ビーム攻撃","ロケット攻撃","ブレス攻撃",
-	"大型レーザー攻撃","自分を中心とする巨大ボール攻撃","視界内攻撃","フロア全体攻撃","空腹充足",
+	"大型レーザー攻撃","自分中心巨大ボール","視界内攻撃","フロア全体攻撃","空腹充足",
 	//10
 	"回復","回復","モンスター感知","罠感知","アイテム感知",
 	"啓蒙","全復活","テレポート","次元の扉","全周囲攻撃",
@@ -17243,10 +17245,10 @@ const cptr	nameless_skill_type_desc[JKF1_MAX + 1] =
 	"壁抜け","破片オーラ","エレメント耐性","究極の耐性","エッセンス付与",
 	"エッセンス付与","鑑定","*破壊*","フロア静寂","周辺抹殺",
 	//50
-	"混沌招来(1d777)","視界内テレポートアウェイ","視界内死の光線","視界内水属性攻撃+水棲スレイ","視界内金縛り",
+	"混沌招来(1d777)","視界内テレポートアウェイ","視界内死の光線","視界内水棲スレイ攻撃","視界内金縛り",
 	"召喚阻害","現実変容","流星群","発光","隣接攻撃能力強化",
 	//60
-	"地震","周辺トラップ解除","幸運"
+	"地震","周辺トラップ解除","幸運","能力低下","魔力消去","幻惑","全感知"
 #else
     "dummy","bolt attack","ball attack","beam attack","rocket attack","breath attack",
 	"large laser attack","huge ball centered on yourself","line of sight attack","entire level attack","satisfy hunger",
@@ -17263,10 +17265,10 @@ const cptr	nameless_skill_type_desc[JKF1_MAX + 1] =
 	"wall walking","shard aura","element resistance","ultimate resistance","confer essence",
 	"confer essence","identify","*destruction*","silence level","*massacre*",
 	//50
-	"invoke chaos (1d777)","line of sight teleport away","line of sight death rays","line of sight water + aquatic slay","line of sight binding",
+	"invoke chaos (1d777)","line of sight teleport away","line of sight death rays","line of sight aquatic slay attack","line of sight binding",
 	"prevent summons","alter reality","meteor shower","emit light","empower melee attacks",
 	//60
-	"earthquake","destroy nearby traps","good fortune"
+	"earthquake","destroy nearby traps","good fortune", "lower abilities", "dispel magic", "dazzle", "detection"
 #endif
 
 };

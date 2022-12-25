@@ -8936,7 +8936,7 @@ static bool item_tester_hook_drain_essence(object_type *o_ptr)
 		if (tv == TV_SOUVENIR && sv == SV_SOUVENIR_ELDER_THINGS_CRYSTAL) return (TRUE);
 
 	}
-	if(p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_KEIKI)
+	if(p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_MISUMARU || p_ptr->pclass == CLASS_KEIKI)
 	{
 		if(tv == TV_MATERIAL) return (TRUE);
 		if(tv == TV_AMULET) return (TRUE);
@@ -12008,7 +12008,7 @@ void do_cmd_kaji(bool only_browse)
 	char choice;
 	int menu_line = (use_menu ? 1 : 0);
 
-	if(p_ptr->pclass != CLASS_SH_DEALER && p_ptr->pclass != CLASS_JEWELER && p_ptr->pclass != CLASS_KEIKI)
+	if(p_ptr->pclass != CLASS_SH_DEALER && p_ptr->pclass != CLASS_JEWELER && p_ptr->pclass != CLASS_KEIKI && p_ptr->pclass != CLASS_MISUMARU)
 	{
 			msg_print(_("Ç†Ç»ÇΩÇ…ÇÕçHñ[Ç≈Ç≈Ç´ÇÈÇ±Ç∆ÇÕÇ»Ç¢ÅB",
                         "You can't do anything in the workshop."));

@@ -6691,7 +6691,7 @@ byte calc_ex_dun_bldg_prob(int ex_bldg_idx)
 		else return (20 - lev / 10);
 	case BLDG_EX_UG_GUILDS: //ƒMƒ‹ƒh‚ª•K—v‚ÈE‚ÍƒMƒ‹ƒh‚É’H‚è’…‚«‚â‚·‚­‚µ‚Ä‚¨‚­
 		if(p_ptr->pclass == CLASS_ENGINEER || p_ptr->pclass == CLASS_NITORI || p_ptr->pclass == CLASS_ARCHER
-		|| p_ptr->pclass == CLASS_SH_DEALER || p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_CHEMIST)
+		|| p_ptr->pclass == CLASS_SH_DEALER || p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_CHEMIST || p_ptr->pclass == CLASS_MISUMARU)
 			return 100;
 		else return 10;
 

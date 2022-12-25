@@ -43,7 +43,14 @@ int calc_inven2_num(void)
 	else if (pc == CLASS_MIKE) num = 8;
 	//魔理沙専用性格　闇市場調査員 常に8
 	else if (is_special_seikaku(SEIKAKU_SPECIAL_MARISA)) num = 8;
+    //魅須丸 2-7
+	else if (pc == CLASS_MISUMARU)
+	{
+		num = 1 + p_ptr->lev / 8;
 
+		if (num > INVEN2_MAGATAMA_NUM_MAX) num = INVEN2_MAGATAMA_NUM_MAX;//上限7 ここを変えるとき勾玉発動ルーチンに影響がある
+
+	}
 
 
 	if(num > INVEN_ADD_MAX) num = INVEN_ADD_MAX;
@@ -321,6 +328,14 @@ static bool item_tester_inven2_card_dealer(object_type *o_ptr)
 	return (FALSE);
 }
 
+//v2.0.4 魅須丸の勾玉選定tester
+static bool item_tester_inven2_misumaru(object_type *o_ptr)
+{
+	if (o_ptr->tval == TV_SPELLCARD && o_ptr->sval == SV_SPELLCARD_MAGATAMA) return (TRUE);
+
+	return (FALSE);
+}
+
 /*:::アリスが人形に持たせるもの　武器と盾 反魔法不可*/
 static bool item_tester_inven2_alice(object_type *o_ptr)
 {
@@ -464,6 +479,11 @@ bool put_item_into_inven2(void)
 		s = _("アビリティカードを持っていない。", "You don't have ability cards.");
 		break;
 
+	case CLASS_MISUMARU:
+		item_tester_hook = item_tester_inven2_misumaru;
+		q = _("どの勾玉を身につけますか？ ", "Attach which magatama?");
+		s = _("勾玉を持っていない。", "You don't have magatama.");
+		break;
 
 	default:
 		msg_print(_("ERROR:この職業の追加インベントリ対象アイテムが定義されていない",
@@ -535,7 +555,7 @@ bool put_item_into_inven2(void)
 
 	/*:::自動的にまとめられるか判定しつつアイテムを自動的に空いてる追加インベントリに入れる職業（薬師、お燐）*/
 	/*:::エンジニアは1スロット1つしか入れないがどうせ機械はまとまらないのでこのルーチンのままで問題ないはず*/
-	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS))
+	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS) || pc == CLASS_MISUMARU)
 	{
 		int freespace = 99;
 		/*:::まとめられるか判定*/
@@ -803,6 +823,7 @@ bool put_item_into_inven2(void)
 		else if (pc == CLASS_SANNYO) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースに収納した。", "You store %s in your case."), o_name);
 		else if (pc == CLASS_MARISA) msg_format(_("%sをスカートの隠しポケットに入れた。", "You put %s in a hidden pocket on your skirt."), o_name);
+		else if (pc == CLASS_MISUMARU) msg_format(_("%sで身を飾った。", "You decorate yourself with %s."), o_name);
 
 		else msg_format(_("ERROR:追加インベントリにアイテム入れたときのメッセージがない",
                             "ERROR: No message upon putting item in extra inventory"));
@@ -865,7 +886,10 @@ bool put_item_into_inven2(void)
                                                     "You don't have space for %s in card case."), o_name);
 		else if (pc == CLASS_MARISA) msg_format(_("もうスカートの隠しポケットは一杯だ。",
                                                     "All of your skirt pockets are full."));
-		else msg_format(_("ERROR:追加インベントリにアイテム入れる場所がないときのメッセージがない",
+		else if (pc == CLASS_MISUMARU) msg_format(_("%sをつける場所がない。",
+                                                "You don't have free space to attach %s."), o_name);
+
+        else msg_format(_("ERROR:追加インベントリにアイテム入れる場所がないときのメッセージがない",
                             "ERROR: No message for no enough space in extra inventory"));
 
 		return FALSE;
@@ -904,6 +928,7 @@ bool takeout_inven2(void)
                                                             "Remove which machine?"), 0, 0);
 	else if( pc == CLASS_ALICE ) prt(_("どの装備を外しますか？", "Remove which equipment?"), 0, 0);
 	else if( pc == CLASS_SAKUYA ) prt(_("どの武器を取りますか？", "Take out which weapon?"), 0, 0);
+	else if (pc == CLASS_MISUMARU) prt(_("どの勾玉を取りますか？", "Remove which magatama?"), 0, 0);
 	else if (pc == CLASS_JYOON) prt(_("どの指輪を外しますか？", "Remove which ring?"), 0, 0);
 	else  prt(_("どのアイテムを取り出しますか？", "Take out which item?"), 0, 0);
 
@@ -997,6 +1022,7 @@ bool takeout_inven2(void)
 	else if (pc == CLASS_SANNYO) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_CARD_DEALER) msg_format(_("%sをケースから出した。", "You take %s out of card case."), o_name);
 	else if (pc == CLASS_MARISA) msg_format(_("スカートの隠しポケットから%sを出した。", "You take %s out of a hidden pocket on your skirt."), o_name);
+	else if (pc == CLASS_MISUMARU) msg_format(_("%sを取り外した。", "You take %s off."), o_name);
 	else msg_format(_("ERROR:追加インベントリからアイテム出したときのメッセージがない",
                         "ERROR: No message for taking item out of extra inventory"));
 

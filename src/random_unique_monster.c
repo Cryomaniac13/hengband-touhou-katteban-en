@@ -4066,6 +4066,12 @@ void apply_dream_dweller_xtra_param(monster_race *r_ptr)
 
 		break;
 
+	case	CLASS_MISUMARU:
+		r_ptr->flags5 |= RF5_BALL_MASK;
+		r_ptr->flags5 |= RF5_BA_DARK;
+		r_ptr->flags5 |= RF5_BA_LITE;
+		r_ptr->flags5 |= RF5_BA_MANA;
+		break;
 
 	}
 

@@ -319,6 +319,7 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF2_POIS, flag_val);
 				if (sv >= 2) add_junko_flag_val(JKF2_DISINTEGRATE, flag_val);
 				if (sv == 3)  add_junko_flag_val(JKF2_MAKE_WALL, flag_val);
+				if (sv >= 2) add_junko_flag_val(JKF1_DISPEL, flag_val);
 				break;
 			case TV_BOOK_FORESEE:
 				add_junko_flag_val(JKF1_IDENTIFY, flag_val);
@@ -332,6 +333,7 @@ bool convert_item_to_mana(void)
 				if (sv == 3) add_junko_flag_val(JKF1_S_STEALTH, flag_val);
 				if (sv == 3) add_junko_flag_val(JKF1_LUCKY, flag_val);
 				add_junko_flag_val(JKF2_TIME, flag_val);
+				add_junko_flag_val(JKF1_DETECT_ALL, flag_val);
 				break;
 			case TV_BOOK_ENCHANT:
 				add_junko_flag_val(JKF1_FOOD, flag_val);
@@ -471,6 +473,7 @@ bool convert_item_to_mana(void)
 				if (sv == 3) add_junko_flag_val(JKF1_VANISH_BEAM, flag_val);
 				add_junko_flag_val(JKF2_COLD, flag_val);
 				add_junko_flag_val(JKF2_NETHER, flag_val);
+				add_junko_flag_val(JKF1_DEBUFF, flag_val);
 				break;
 			case TV_BOOK_CHAOS:
 				add_junko_flag_val(JKF1_ATTACK_BALL, flag_val);
@@ -593,18 +596,22 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF2_LITE, 40 * amt);
 				break;
 			case SV_STAFF_MAPPING:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_ENLIGHT, 10 * amt);
 				break;
 			case SV_STAFF_DETECT_GOLD:
 			case SV_STAFF_DETECT_ITEM:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_DETECT_OBJ, 100 * amt);
 				break;
 			case SV_STAFF_DETECT_TRAP:
 			case SV_STAFF_DETECT_DOOR:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_DETECT_TRAPS, 100 * amt);
 				break;
 			case SV_STAFF_DETECT_INVIS:
 			case SV_STAFF_DETECT_EVIL:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_DETECT_MON, 70 * amt);
 				break;
 			case SV_STAFF_CURE_LIGHT:
@@ -648,6 +655,7 @@ bool convert_item_to_mana(void)
 			case SV_STAFF_MSTORM:
 				add_junko_flag_val(JKF2_MANA, 300 * amt);
 				add_junko_flag_val(JKF1_ATTACK_AROUND, 400 * amt);
+
 				break;
 			}
 
@@ -697,6 +705,7 @@ bool convert_item_to_mana(void)
 			case SV_WAND_CONFUSE_MONSTER:
 			case SV_WAND_FEAR_MONSTER:
 			case SV_WAND_CHARM_MONSTER:
+				add_junko_flag_val(JKF1_DAZZLE, 10 * amt);
 				add_junko_flag_val(JKF1_STASIS, 20 * amt);
 				break;
 			case SV_WAND_DRAIN_LIFE:
@@ -775,6 +784,7 @@ bool convert_item_to_mana(void)
 			{
 			case SV_ROD_DETECT_TRAP:
 			case SV_ROD_DETECT_DOOR:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_DETECT_TRAPS, 50 * amt);
 				break;
 			case SV_ROD_IDENTIFY:
@@ -787,12 +797,11 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF1_SELF_LIGHT, 100 * amt);
 				break;
 			case SV_ROD_MAPPING:
+				add_junko_flag_val(JKF1_DETECT_ALL, 50 * amt);
 				add_junko_flag_val(JKF1_ENLIGHT, 50 * amt);
 				break;
 			case SV_ROD_DETECTION:
-				add_junko_flag_val(JKF1_DETECT_TRAPS, 200 * amt);
-				add_junko_flag_val(JKF1_DETECT_OBJ, 200 * amt);
-				add_junko_flag_val(JKF1_DETECT_MON, 200 * amt);
+				add_junko_flag_val(JKF1_DETECT_ALL, 400 * amt);
 				break;
 			case SV_ROD_PROBING:
 				add_junko_flag_val(JKF1_DETECT_MON, 200 * amt);
@@ -823,12 +832,14 @@ bool convert_item_to_mana(void)
 				break;
 			case SV_ROD_SLEEP_MONSTER:
 			case SV_ROD_SLOW_MONSTER:
+				add_junko_flag_val(JKF1_DAZZLE, 10 * amt);
 				add_junko_flag_val(JKF1_STASIS, 30 * amt);
 				break;
 			case SV_ROD_DRAIN_LIFE:
 				add_junko_flag_val(JKF2_NETHER, 80 * amt);
 				break;
 			case SV_ROD_POLYMORPH:
+				add_junko_flag_val(JKF1_DAZZLE, 10 * amt);
 				add_junko_flag_val(JKF2_CHAOS, 20 * amt);
 				break;
 			case SV_ROD_ACID_BOLT:
@@ -864,6 +875,7 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF2_COLD, 100 * amt);
 				break;
 			case SV_ROD_HAVOC:
+				add_junko_flag_val(JKF1_DAZZLE, 100 * amt);
 				add_junko_flag_val(JKF1_CALL_CHAOS, 500 * amt);
 				add_junko_flag_val(JKF1_ATTACK_SIGHT, 500 * amt);
 				break;
@@ -1092,6 +1104,7 @@ bool convert_item_to_mana(void)
 				break;
 			case SV_MATERIAL_ARSENIC:
 			case SV_MATERIAL_MERCURY:
+				add_junko_flag_val(JKF1_DEBUFF, 50 * amt);
 				add_junko_flag_val(JKF2_POIS, 50 * amt);
 				break;
 			case SV_MATERIAL_MITHRIL:
@@ -1140,6 +1153,7 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF2_SHARDS, 100 * amt);
 				break;
 			case SV_MATERIAL_NIGHTMARE_FRAGMENT:
+				add_junko_flag_val(JKF1_DEBUFF, 50 * amt);
 				add_junko_flag_val(JKF1_STASIS, 300 * amt);
 				add_junko_flag_val(JKF1_DEATH_RAY, 300 * amt);
 				break;
@@ -1200,6 +1214,7 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF1_STASIS, 10 * amt);
 				break;
 			case SV_POTION_RUINATION:
+				add_junko_flag_val(JKF1_DEBUFF, 300 * amt);
 				add_junko_flag_val(JKF1_CALL_CHAOS, 50 * amt);
 				break;
 			case SV_POTION_DETONATIONS:
@@ -1552,7 +1567,7 @@ void junko_gain_equipment_flags(object_type *o_ptr, int amt, u32b flgs[TR_FLAG_S
 /************この下「名もなき技」関連*********************************/
 
 //純狐の技生成名候補二次元リストの要素数
-#define JUNKO_NAME_LIST_NUM1	76
+#define JUNKO_NAME_LIST_NUM1	81
 #define JUNKO_NAME_LIST_NUM_SUB	10
 
 //純狐技生成名リスト1 ここの添え字が技基本情報テーブルから参照される
@@ -1589,7 +1604,7 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"罠","罠","罠","仕掛け","仕掛け","敵の策","敵の策","愚策","愚策","愚策"},//トラップ
 	{"物体","物体","物品","物品","もの","もの","玩具","玩具","佩物","得物"},//アイテム
 	{"世界","世界","天下","森羅万象","天地","千里の野","山海","世","無辺","三界"},//フロア対象(攻撃以外)
-	{"に蒙を啓く","に蒙を啓く","に蒙を啓く","に蒙を啓く","に光をもたらす","に光をもたらす","に光をもたらす","を見通す","を見通す","を見透かす"},//啓蒙
+	{"に蒙を啓く","に蒙を啓く","に蒙を啓く","に蒙を啓く","に光をもたらす","に光をもたらす","に光をもたらす","をあまねく見通す","をあまねく見通す","をあまねく見通す"},//啓蒙
 //26
 	{"の穢れを拭い去る","の穢れを拭い去る","の穢れを拭い去る","に力を取り戻す","に力を取り戻す","に力を取り戻す","の枷を消し去る","の枷を消し去る","を常態に復する","の機能を修復する"},//能力、経験値復活
 	{"彼方へと跳躍する","彼方へと跳躍する","瞬きと共に移動する","瞬きと共に移動する","空間を歪める","空間を歪める","ここから消える","ここから消える","この場を離脱する","この場を離脱する"},//テレポ
@@ -1650,6 +1665,12 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"大地を","大地を","大地を","大地を","地を","地を","地を","地盤を","地盤を","地盤を"},
 	{"揺らす","揺らす","揺らす","揺るがす","揺るがす","揺るがす","揺さぶる","揺さぶる","崩す","崩す"},
 	{"幸運を引き寄せる","幸運を引き寄せる","幸運を掴み取る","運命を捻じ曲げる","運命を捻じ曲げる","豪運をもたらす","運気を高める","運気を高める","賽の目を操る","賽の目を操る"},
+//76
+	{ "この地","この地","この地","洞窟","洞窟","洞窟","魔窟","魔窟","未開の地","未開の地", }, //広範囲の地形
+	{ "を見渡す","を見渡す","を見通す","を見通す","を見透かす","を見透かす","を調べ上げる","を調べ上げる","を掌握する","を掌握する" }, //全感知、周辺感知
+	{ "を惑わす","を惑わす","を煙に巻く","を煙に巻く","の眼を曇らせる","の眼を曇らせる","を逃げ惑わせる","を逃げ惑わせる","を周章狼狽させる","を周章狼狽させる" }, //幻惑
+	{ "に枷をかける","に枷をかける","に枷をかける","の牙を鈍らせる","の牙を鈍らせる","の牙を鈍らせる","を無力化する","を無力化する","を貶める","を貶める" }, //能力低下
+	{ "の虚妄を剥ぎ取る","の虚妄を剥ぎ取る","の虚妄を剥ぎ取る","の本質を晒す","の本質を晒す","の本質を晒す","の正体を暴く","の正体を暴く","の力を奪う","の力を奪う" }, //魔力消去
 #else
 	{"Chang'e","Chang'e","Chang'e","Chang'e","Chang'e","Chang'e","Chang'e","Chang'e","Chang'e","Chang'e",},//ダミー兼嫦娥
 //1
@@ -1681,7 +1702,7 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"Trap","Trap","Trap","Mechanism","Mechanism","Enemy Plan","Enemy Plan","Foolish Plan","Foolish Plan","Foolish Plan"},//トラップ
 	{"Items","Items","Items","Items","Items","Items","Tools","Tools","Things","Treasures"},//アイテム
 	{"World","World","Under Heaven","All Creation","Heaven and Earth","Thousand Ri","Mountains an Sea","World","Unlimited","Three Worlds"},//フロア対象(攻撃以外)
-	{"Enlightening","Enlightening","Enlightening","Enlightening","Illuminating","Illuminating","Illuminating","Seeing Through","Seeing Through","Seeing Through"},//啓蒙
+	{"Enlightening","Enlightening","Enlightening","Enlightening","Illuminating","Illuminating","Illuminating","Seeing Way Through","Seeing Way Through","Seeing Way Through"},//啓蒙
 //26
 	{"Wiping Impurity","Wiping Impurity","Wiping Impurity","Restoring Power","Restoring Power","Restoring Power","Removing Restraints","Removing Restraints","Returning to Normal","Recovering Function"},//能力、経験値復活
 	{"Jumping Away","Jumping Away","Instantly Moving","Instantly Moving","Distorting Space","Distorting Space","Vanishing Away","Vanishing Away","Leaving this Place","Leaving this Place"},//テレポ
@@ -1742,6 +1763,12 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"Earth","Earth","Earth","Earth","Ground","Ground","Ground","Surface","Surface","Surface"},
 	{"Shaking","Shaking","Shaking","Trembling","Trembling","Trembling","Trembling","Trembling","Breaking","Breaking"},
 	{"Drawing on Good Fortune","Drawing on Good Fortune","Invoking Good Fortune","Warping Fortune","Warping Fortune","Bringing Good Luck","Raising Luck","Raising Luck","Manipulating Fortune","Manipulating Fortune"},
+//76
+	{ "This Land","This Land","This Land","Cavern","Cavern","Cavern","Den","Den","Unknown Lands","Unknown Lands", }, //広範囲の地形
+	{ "Observing","Observing","Overseeing","Overseeing","Seeing Through","Seeing Through","Investigating","Investigating","Seizing","Seizing" }, //全感知、周辺感知
+	{ "Misleading","Misleading","Befuddling","Befuddling","Eye-Clouding","Eye-Clouding","Beguiling","Beguiling","Beguiling","Beguiling" }, //幻惑
+	{ "Shackling","Shackling","Shackling","Fang-Breaking","Fang-Breaking","Fang-Breaking","Depowering","Depowering","Humbling","Humbling" }, //能力低下
+	{ "Falsehood-Dispelling","Falsehood-Dispelling","Falsehood-Dispelling","Truth-Revealing","Truth-Revealing","Truth-Revealing","Identity-Revealing","Identity-Revealing","Power-Stealing","Power-Stealing" }, //魔力消去
 #endif
 
 
@@ -1808,38 +1835,6 @@ cptr	junko_arts_name_words_2_atk[JKF2_END - JKF2_START + 1][JUNKO_NAME_LIST_NUM_
 	{"Viridifying","Viridifying","Viridifying","Surrounding with Thorns","Surrounding with Thorns","Restraining","Restraining","Blooming Flowers","Blooming Flowers","Blooming Flowers",},//森生成
 #endif
 };
-/*
-//純狐技生成名リスト2　属性(JKF2_*の数)に対応　防御用
-cptr	junko_arts_name_words_2_def[JKF2_END - JKF2_START + 1][JUNKO_NAME_LIST_NUM_SUB] =
-{
-	{"酸","酸","酸","酸","酸","酸","腐蝕","腐蝕","腐蝕性物質","腐蝕性物質"},//酸
-	{"電撃","電撃","電撃","雷","雷","稲妻","稲妻","落雷","落雷","雷"},//電撃
-	{"炎","炎","火","火","火炎","火炎","熱","熱","炎","炎",},//火炎
-	{"冷気","冷気","冷気","冷気","冷気","氷","氷","氷","氷","氷"},//冷気
-	{"毒","毒","毒","毒物","毒物","瘴気","瘴気","悪い風","病魔","病魔",},//毒
-	{"光","光","光","光","熱線","熱線","閃光","閃光","閃光","閃光"},//閃光
-	{"闇","闇","闇","闇","暗闇","暗闇","暗黒","暗黒","暗黒","暗黒",},//暗黒
-	{"破片","破片","破片","破片","破片","飛礫","飛礫","飛礫","飛礫","飛礫"},//破片
-	{"水","水","水","水","水流","水流","水流","水流","流水","流水"},//水
-	{"轟音","轟音","轟音","轟音","音","音","音","衝撃","衝撃","衝撃",},//轟音
-	{"核の炎","核の炎","核の炎","核の炎","核の炎","核熱","核熱","核熱","核熱","核熱"},//核熱
-	{"魔力","魔力","魔力","魔力","魔力","純魔力","純魔力","純魔力","純魔力","純魔力",},//魔力
-	{"星","星","星","流星","流星","流星","隕石","隕石","星辰","星辰",},//隕石
-	{"混沌","混沌","混沌","混沌","原初の力","原初の力","原初の力","反秩序","反秩序","反秩序",},//カオス
-	{"地獄の力","地獄の力","地獄の力","地獄の力","死穢","死穢","死穢","死穢","死穢","死穢",},//地獄
-	{"劣化","劣化","劣化","劣化","劣化","反魔力","反魔力","反魔力","反魔力","反魔力",},//劣化
-	{"時空の力","時空の力","時空の力","因果","因果","因果","空間の歪み","空間の歪み","空間の歪み","空間の歪み"},//時間逆転・空間歪曲共用
-	{"","","","","","","","","",""},//空間歪曲　上と耐性が被るので不要
-	{"破邪の力","破邪の力","破邪の力","破邪の力","聖なる力","聖なる力","聖なる力","聖なる力","聖なる力","聖なる力"},//破邪
-	{"地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火","地獄の劫火"},//地獄の劫火
-	{"分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃","分解攻撃"},//分解
-	{"風","風","風","風","竜巻","竜巻","竜巻","竜巻","野分","野分",},//竜巻
-	{"","","","","","","","","","",},//蒸気：敵が使わないので不要
-	{"","","","","","","","","","",},//岩生成：敵が使わないので不要
-	{"","","","","","","","","","",},//ドア生成：敵が使わないので不要
-	{"","","","","","","","","","",},//森生成：敵が使わないので不要
-};
-*/
 
 /*:::純狐技作成のためのフラグ加算処理*/
 void	add_junko_flag_val(int flag_num, int add_val)
@@ -1891,7 +1886,7 @@ struct nameless_arts_activate_param_type
 	s32b	base;		//基本効果値
 	s32b	dice;
 	s32b	sides;
-	s32b	counter_idx;	//tim_general[]のどのカウンタを使うかのインデックス値 0-4
+	s32b	counter_idx;	//tim_general[]のどのカウンタを使うかのインデックス値 0-4 なおスペルカードや魅須丸の勾玉はtim_general[]を使わない
 	s32b	quark_idx;	//技の名前を保存するためのquark_str()インデックス
 	s32b	xtra1;		//その他パラメータ
 	s32b	xtra2;
@@ -1917,92 +1912,158 @@ struct nameless_arts_generate_type
 	bool	attack;		//攻撃用の技のときTRUE
 	bool	use_counter;//tim_general[]カウンタを使うかどうか
 
+	byte	arts_type; //v2.0.4 勾玉制作用　特技の攻撃・防御・感知などの分類番号
+
 };
 
 /*:::「名もなき技」生成規則リスト*/
 //添字がJKF1_***に対応する
 const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 {
-	{255,0,0,0,0,0,0,{0,0,0,0,0},FALSE,FALSE,FALSE},//始端ダミー
+	{255,0,0,0,0,0,0,{0,0,0,0,0},FALSE,FALSE,FALSE,0},//始端ダミー
 //1
-	{10, 1, 3,  8, 2,  6,200,{1,-1,7,8,11},TRUE,TRUE,FALSE},//属性攻撃1 ボルト 20-60dam
-	{10, 7,12, 25, 3,  9,400,{1,-1,7,8,12},TRUE,TRUE,FALSE},//属性攻撃2 ボール 50-250dam
-	{15,15,10, 30, 6,  6,300,{1,-1,7,8,13},TRUE,TRUE,FALSE},//属性攻撃3 ビーム 50-200dam
-	{25,30,18, 60, 8,  8,300,{1,-1,7,8,12},TRUE,TRUE,FALSE},//属性攻撃4 ロケット 100-400dam
-	{40,25,30, 10, 5,  5,150,{1,-1,7,8,15},TRUE,TRUE,FALSE},//属性攻撃5 ブレス 現在HPの数分の一
-	{60,40,20, 50, 1, 30,400,{1,-1,7,8,13},TRUE,TRUE,FALSE},//属性攻撃6 大型レーザー 80-400dam
-	{15,10,10, 50, 3, 12,500,{1,-1,7,8,14},TRUE,TRUE,FALSE},//属性攻撃7 自分中心ボール 最大80-500dam
-	{45,40,25, 30, 4,  8,400,{1,-1,7,8,14},TRUE,TRUE,FALSE},//属性攻撃8 視界内攻撃 70-300dam
-	{80,57,60, 50, 1, 30,300,{6,-1,7,8,16},TRUE,TRUE,FALSE},//属性攻撃9 フロア攻撃 weird_luck要　300damくらい
-	{25, 1,10,  0, 0,  0,  0,{17,18,7,19,0},FALSE,FALSE,FALSE},//空腹充足
+	{20, 1, 3,  8, 2,  6,200,{1,-1,7,8,11},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃1 ボルト 20-60dam
+	{20,10,12, 25, 3,  9,400,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃2 ボール 50-250dam
+	{25,15,10, 30, 6,  6,300,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃3 ビーム 50-200dam
+	{35,35,18, 50, 8,  8,300,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃4 ロケット 80-350dam
+	{40,25,30, 10, 5,  5,150,{1,-1,7,8,15},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃5 ブレス 現在HPの数分の一
+	{55,45,35, 75, 1, 50,350,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃6 大型レーザー 100-450dam
+	{30,20,10, 50, 3, 12,500,{1,-1,7,8,14},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃7 自分中心ボール 最大80-500dam
+	{70,40,25, 30, 4,  8,400,{1,-1,7,8,14},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃8 視界内攻撃 70-300dam
+	{80,57,80, 50, 1, 30,300,{6,-1,7,8,16},TRUE,TRUE,FALSE,JKF_TYPE_SPECIAL},//属性攻撃9 フロア攻撃 weird_luck要　300damくらい
+	{25, 1,10,  0, 0,  0,  0,{17,18,7,19,0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//空腹充足
 //11
-	{25, 5, 5, 20, 2,  6,300,{17,20,7,19, 0},FALSE,FALSE,FALSE},//回復(弱)
-	{45,35,10,100, 0,  0,300,{17,20,7,19, 0},FALSE,FALSE,FALSE},//回復(強)
-	{20, 1, 5, 20, 0,  0,200,{ 1,21,7,19, 0},FALSE,FALSE,FALSE},//モンスター感知
-	{25, 1, 5, 20, 0,  0,200,{22,21,7,19, 0},FALSE,FALSE,FALSE},//罠感知
-	{30, 1, 5, 20, 0,  0,200,{23,21,7,19, 0},FALSE,FALSE,FALSE},//アイテム感知
-	{60,35,60,  0, 0,  0,  0,{24,25,7, 8,19},FALSE,FALSE,FALSE},//啓蒙
-	{35,12,30,  0, 0,  0,  0,{17,26,7, 8,19},FALSE,FALSE,FALSE},//能力、経験値復活
-	{15, 1, 7, 50, 0,  0,200,{27, 7,19, 0, 0},FALSE,FALSE,FALSE},//テレポ
-	{80,35,15, 20, 0,  0,300,{24,28, 7, 8,19},FALSE,FALSE,FALSE},//次元の扉
-	{40,30,30,  0, 0,  0,  0,{ 5,29, 7,19, 0},FALSE,TRUE,FALSE},//全周囲攻撃
+	{25,10, 5, 20, 2,  6,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL },//回復(弱)
+	{45,35,10,100, 0,  0,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//回復(強)
+	{20, 1, 5, 20, 0,  0,200,{ 1,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//モンスター感知
+	{25, 5, 5, 20, 0,  0,200,{22,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//罠感知
+	{30,10, 5, 20, 0,  0,200,{23,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//アイテム感知
+	{60,45,60,  0, 0,  0,  0,{24,25,7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//啓蒙
+	{35,25,30,  0, 0,  0,  0,{17,26,7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//能力、経験値復活
+	{25, 5, 7, 50, 0,  0,200,{27, 7,19, 0, 0},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//テレポ
+	{80,45,15, 20, 0,  0,300,{24,28, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//次元の扉
+	{40,30,30,  0, 0,  0,  0,{ 5,29, 7,19, 0},FALSE,TRUE,FALSE,JKF_TYPE_MELEE},//全周囲攻撃
 //21
-	{35,15, 6,  3, 0,  0,300,{ 1,30, 7,19, 0},FALSE,TRUE,FALSE},//入身
-	{65,40,72,  0, 0,  0,  0,{ 1,31, 7, 8,19},FALSE,TRUE,FALSE},//連続攻撃 xtra1の攻撃回数分攻撃する
-	{30, 5,10,  0, 0,  0,  0,{17,32, 7,19, 0},FALSE,FALSE,FALSE},//癒し
-	{80,40,99,  0, 0,  0,  0,{17,33, 7, 8,34},FALSE,FALSE,FALSE},//因果修復
-	{40,10,30,  0, 0,  0,  0,{23,26, 7,19, 0},FALSE,FALSE,FALSE},//解呪
+	{35,15, 6,  3, 0,  0,300,{ 1,30, 7,19, 0},FALSE,TRUE,FALSE,JKF_TYPE_MELEE },//入身
+	{65,35,72,  0, 0,  0,  0,{ 1,31, 7, 8,19},FALSE,TRUE,FALSE,JKF_TYPE_MELEE },//連続攻撃 xtra1の攻撃回数分攻撃する
+	{30,20,10,  0, 0,  0,  0,{17,32, 7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//癒し
+	{80,45,99,  0, 0,  0,  0,{17,33, 7, 8,34},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//因果修復
+	{40,15,30,  0, 0,  0,  0,{23,26, 7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL },//解呪
 //26
-	{80,20,25, 10, 1, 10,100,{35,7, 8,36, 0},FALSE,FALSE,TRUE},//ビーム・ボルト無効化
-	{80,30,25,  8, 1,  8,100,{37,9, 7, 8,36},FALSE,FALSE,TRUE},//爆風保護
-	{80,40,25,  5, 1,  5,100,{38,9, 7, 8,36},FALSE,FALSE,TRUE},//ブレス保護
-	{80,48,60,  4, 1,  4,  0,{39,9, 7, 8,36},FALSE,FALSE,TRUE},//*破壊*防御
-	{60,20,20, 15, 1, 15,100,{40,41,7, 8,36},FALSE,FALSE,TRUE},//魔法吸収
+	{60,20,25, 10, 1, 10,100,{35,7, 8,36, 0},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//ビーム・ボルト無効化
+	{70,40,25,  8, 1,  8,100,{37,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//爆風保護
+	{70,30,25,  5, 1,  5,100,{38,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//ブレス保護
+	{80,45,60,  4, 1,  4,  0,{39,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//*破壊*防御
+	{60,20,30, 15, 1, 15,100,{40,41,7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_SPECIAL },//魔法吸収
 //31
-	{45,20,30, 20, 1, 20,  0,{42,7,19, 0, 0},FALSE,FALSE,TRUE},//壁掘り
-	{55,30,50, 30, 0,  0,  0,{43,44,7,19, 0},FALSE,FALSE,TRUE},//魔道具強力使用
-
-	{40,10,12,  7, 1,  7,200,{17,45, 7, 8,19},FALSE,FALSE,FALSE},//肉体強化 強化量をxtra1に記録
-	{40,10,12,  7, 1,  7,200,{46,47, 7, 8,19},FALSE,FALSE,FALSE},//精神強化 強化量をxtra1に記録
-	{90,47,80,  4, 1,  4,  0,{48,10, 7, 8,36},FALSE,FALSE,FALSE},//無敵化
+	{45,20,30, 20, 1, 20,  0,{42,7,19, 0, 0},FALSE,FALSE,TRUE,JKF_TYPE_OTHER },//壁掘り
+	{80,40,50, 30, 0,  0,  0,{43,44,7,19, 0},FALSE,FALSE,TRUE,JKF_TYPE_OTHER },//魔道具強力使用
+	{40,25,12,  7, 1,  7,200,{17,45, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//肉体強化 強化量をxtra1に記録
+	{40,25,12,  7, 1,  7,200,{46,47, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_OTHER },//精神強化 強化量をxtra1に記録
+	{90,45,80,  4, 1,  4,  0,{48,10, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL},//無敵化
 //36
-	{30,20,15, 10, 1, 10,100,{17,49, 7, 8,19},FALSE,FALSE,FALSE},//加速
-	{40,30,20, 10, 1, 10,  0,{40, 9, 7, 8,36},FALSE,FALSE,FALSE},//魔法防御
-	{30,25,25, 20, 1, 20,  0,{50, 9, 7, 8,36},FALSE,FALSE,FALSE},//AC+50
-	{70,40,60, 10, 1, 10,  0,{48, 9, 7, 8,36},FALSE,FALSE,FALSE},//魔法の鎧
-	{80,45,70, 25, 1, 25,  0,{ 1,51, 7, 8,19},FALSE,FALSE,FALSE},//超隠密
+	{30,30,15, 10, 1, 10,100,{17,49, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_OTHER },//加速
+	{40,10,20, 10, 1, 10,  0,{40, 9, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE },//魔法防御
+	{30,15,25, 20, 1, 20,  0,{50, 9, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE},//AC+50
+	{80,40,60, 10, 1, 10,  0,{48, 9, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL },//魔法の鎧
+	{80,45,70, 25, 1, 25,  0,{ 1,51, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//超隠密
 //41
-	{60,35,50, 20, 1, 20,  0,{52,53, 7, 8,19},FALSE,FALSE,FALSE},//壁抜け
-	{40,20,30, 20, 1, 20,  0,{ 5,54, 7, 8,19},FALSE,FALSE,FALSE},//破片オーラ
-	{35,15,20, 15, 1, 15,100,{55, 9, 7, 8,36},FALSE,FALSE,FALSE},//エレメント耐性
-	{80,45,75, 15, 1, 15,  0,{48, 9, 7, 8,19},FALSE,FALSE,FALSE},//究極の耐性
-	{60,15,80,  0, 0,  0,  0,{23,56, 7, 8,19}, TRUE,FALSE,FALSE},//武器への能力付与
+	{60,35,50, 20, 1, 20,  0,{52,53, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL },//壁抜け
+	{40,10,30, 20, 1, 20,  0,{ 5,54, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//破片オーラ
+	{35,20,20, 15, 1, 15,100,{55, 9, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE },//エレメント耐性
+	{80,50,75, 15, 1, 15,  0,{48, 9, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE },//究極の耐性
+	{60,15,80,  0, 0,  0,  0,{23,56, 7, 8,19}, TRUE,FALSE,FALSE,0 },//武器への能力付与
 //46
-	{60,15,80,  0, 0,  0,  0,{23,56, 7, 8,19}, TRUE,FALSE,FALSE},//装備品への耐性付与
-	{35,10,15,  0, 0,  0,100,{23,57, 0, 0, 0},FALSE,FALSE,FALSE},//鑑定
-	{45,30,25,  5, 1,  4,100,{ 8,39, 0, 0, 0},FALSE, TRUE,FALSE},//*破壊*
-	{80,45,180, 0, 0,  0,  0,{24,58, 7, 8,16},FALSE,FALSE,FALSE},//静寂
-	{70,40,40,100, 0,  0,100,{ 5,60, 7, 8,16},FALSE, TRUE,FALSE},//周辺抹殺
+	{60,15,80,  0, 0,  0,  0,{23,56, 7, 8,19}, TRUE,FALSE,FALSE,0},//装備品への耐性付与
+	{35,15,15,  0, 0,  0,100,{23,57, 0, 0, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE },//鑑定
+	{70,25,25,  5, 1,  4,100,{ 8,39, 0, 0, 0},FALSE, TRUE,FALSE,JKF_TYPE_SPECIAL },//*破壊*
+	{80,50,180, 0, 0,  0,  0,{24,58, 7, 8,16},FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF},//静寂
+	{70,40,40,100, 0,  0,100,{ 5,60, 7, 8,16},FALSE, TRUE,FALSE,JKF_TYPE_TELEPO },//周辺抹殺
 //51
-	{70,30,60,  0, 0,  0,  0,{ 5,59, 7, 8,19},FALSE, TRUE,FALSE},//混沌招来
-	{40,20,20, 50, 1, 50,200,{ 5,60, 7, 8,19},FALSE,FALSE,FALSE},//視界内アウェイ
-	{75,25,35,  0, 0,  0,  0,{ 5,61,62, 0, 0},FALSE, TRUE,FALSE},//死の光線
-	{80,30,40, 50, 1, 50,200,{63,64, 7, 8,14},FALSE, TRUE,FALSE},//海が割れる日
-	{30,20,10, 50, 1, 50,200,{ 5,65, 7, 8,19},FALSE,FALSE,FALSE},//金縛り
+	{80,30,60,  0, 0,  0,  0,{ 5,59, 7, 8,19},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK},//混沌招来
+	{40,25,20, 50, 1, 50,200,{ 5,60, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//視界内アウェイ
+	{75,40,35,  0, 0,  0,  0,{ 5,61,62, 0, 0},FALSE, TRUE,FALSE,JKF_TYPE_DEBUFF},//死の光線
+	{80,30,40, 50, 1, 50,200,{63,64, 7, 8,14},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK },//海が割れる日
+	{30,20,10, 50, 1, 50,200,{ 5,65, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//金縛り
 //56
-	{70,15,20, 10, 1, 10,100,{66,60, 7, 8,19},FALSE,FALSE,FALSE},//召喚阻害
-	{55,35,50,  0, 0,  0,  0,{67, 7, 8,19, 0},FALSE,FALSE,FALSE},//現実変容
-	{80,45,60, 50, 1, 50,100,{68, 7, 8,16, 0},FALSE, TRUE,FALSE},//流星群
-	{30, 1, 5, 50, 1, 50,200,{17,71, 7, 8,19},FALSE,FALSE, TRUE},//発光
-	{80,20,25, 20, 0,  0,200,{17,72, 7, 8,19},FALSE,FALSE, TRUE},//白兵能力上昇
+	{70,35,20, 10, 1, 10,100,{66,60, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//召喚阻害
+	{55,35,50,  0, 0,  0,  0,{67, 7, 8,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO },//現実変容
+	{80,45,60, 50, 1, 50,100,{68, 7, 8,16, 0},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK },//流星群
+	{30, 1, 5, 50, 1, 50,200,{17,71, 7, 8,19},FALSE,FALSE, TRUE,JKF_TYPE_OTHER },//発光
+	{80,20,25, 20, 0,  0,200,{17,72, 7, 8,19},FALSE,FALSE, TRUE,JKF_TYPE_MELEE },//白兵能力上昇
 //61
-	{40,15,15,  3, 1,  3,100,{73,74, 7, 8,34},FALSE, TRUE,FALSE},//地震
-	{30, 1,10,  5, 0,  0,100,{22,10, 7, 8,19},FALSE,FALSE,FALSE},//トラップ解除
-	{60,30,50, 30, 1, 30,  0,{75, 7, 8,19, 0},FALSE,FALSE,FALSE},//幸運
+	{40,15,15,  3, 1,  3,100,{73,74, 7, 8,34},FALSE, TRUE,FALSE,JKF_TYPE_OTHER },//地震
+	{30, 5,10,  5, 0,  0,100,{22,10, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_OTHER },//トラップ解除
+	{60,30,50, 30, 1, 30,  0,{75, 7, 8,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL },//幸運
+//v2.0.4 64-67追加
+	{30,25,10, 50, 1, 50,200,{ 1,79, 7, 8,19 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//能力低下
+	{50, 5,20,  0, 0,  0,  0,{ 4,80, 7, 8,19 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//魔力消去
+	{40,30,30, 50, 1, 50,200,{ 5,78, 7, 8,13 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//幻惑
+	{40,30,30, 15, 0,  0,100,{ 76,77,7, 8, 62 },FALSE,FALSE,FALSE,JKF_TYPE_SENSE },//全感知+フロア感知
+
 
 //	{ 0, 0, 0,  0, 0,  0,  0,{ 0, 0,0, 0, 0},FALSE,FALSE,FALSE},//
 
 
+};
+
+
+
+//勾玉制作のための素材テーブル
+typedef struct magatama_material_type magatama_material_type;
+struct magatama_material_type
+{
+	byte tval;
+	byte sval;
+	byte mlev;//素材レベル　特技選定時のレベル判定に＠のレベルの代わりにこの素材レベルを使用する weird_luck()に通ると「会心の出来」になってレベル+10
+	int power;//高いほどパワーや威力が上がる 石1,下位宝石30,上位宝石50,伊弉諾物質150くらい 会心の出来のとき同じくボーナス
+	int suitable_skill_type;//この素材を使ったときに作られやすいスキル分類 JKF_TYPE_***に一致
+	int suitable_gf_type;//この素材を使って攻撃魔法が作られたとき選定されやすい属性 JKF2_***に一致
+};
+
+
+const magatama_material_type magatama_material_table[] =
+{
+	{ TV_MATERIAL,SV_MATERIAL_STONE			,0,5,JKF_TYPE_ATTACK,0 }, //石　レベル0 攻撃 会心の出来にならないと作成失敗する
+	{ TV_MATERIAL,SV_MATERIAL_MAGNETITE		,10,15,JKF_TYPE_ATTACK,0 }, //マグネタイト レベル5 攻撃
+	{ TV_MATERIAL,SV_MATERIAL_GARNET		,10,20,JKF_TYPE_TELEPO,0 }, //ガーネット lev10
+	{ TV_MATERIAL,SV_MATERIAL_AMETHYST		,10,20,JKF_TYPE_SENSE,0 }, //アメジスト lev10
+	{ TV_MATERIAL,SV_MATERIAL_AQUAMARINE	,10,20,JKF_TYPE_HEAL,0 }, //アクアマリン lev10
+	{ TV_MATERIAL,SV_MATERIAL_MOONSTONE		,10,20,JKF_TYPE_MELEE,0 }, //ムーンストーン lev10
+	{ TV_MATERIAL,SV_MATERIAL_PERIDOT		,10,20,JKF_TYPE_OTHER,0 }, //ペリドット lev10
+	{ TV_MATERIAL,SV_MATERIAL_OPAL			,10,20,0,0 },				//オパール lev10
+	{ TV_MATERIAL,SV_MATERIAL_TOPAZ			,10,20,JKF_TYPE_DEBUFF,0 }, //トパーズ lev10
+	{ TV_MATERIAL,SV_MATERIAL_LAPISLAZULI	,10,20,JKF_TYPE_DEFENSE,0 }, //ラピスラズリ lev10
+	{ TV_MATERIAL,SV_MATERIAL_HEMATITE		,15,25,JKF_TYPE_OTHER,0 },//京丸牡丹 レベル15 その他
+	{ TV_MATERIAL,SV_MATERIAL_ARSENIC		,20,30,JKF_TYPE_ATTACK,JKF2_POIS }, //砒素鉱石　レベル20 毒攻撃
+	{ TV_MATERIAL,SV_MATERIAL_SCRAP_IRON	,25,1 ,0,0 },				 //屑鉄　色々出来るがパワー低い
+	{ TV_MATERIAL,SV_MATERIAL_MERCURY		,25,30,JKF_TYPE_DEBUFF,0 }, //水銀 lev25 妨害
+	{ TV_MATERIAL,SV_MATERIAL_MITHRIL		,25,30,JKF_TYPE_HEAL,JKF2_LITE },//ミスリル lev25 回復
+	{ TV_MATERIAL,SV_MATERIAL_BROKEN_NEEDLE	,25,30,JKF_TYPE_MELEE,JKF2_SHARDS },	 //折れた針　lev25 肉弾
+	{ TV_MATERIAL,SV_MATERIAL_ISHIZAKURA	,25,35,JKF_TYPE_ATTACK,0 },		 //石桜　lev25 攻撃
+	{ TV_MATERIAL,SV_MATERIAL_ADAMANTITE	,25,35,JKF_TYPE_DEFENSE,0 },//アダマンタイト lev25 防御
+	{ TV_MATERIAL,SV_MATERIAL_NIGHTMARE_FRAGMENT,30,40,JKF_TYPE_DEBUFF,0 },		 //悪夢の欠片　lev30 妨害系
+	{ TV_MATERIAL,SV_MATERIAL_DRAGONSCALE	,30,40,JKF_TYPE_DEFENSE,0 }, //竜の鱗 lev30 防御
+	{ TV_MATERIAL,SV_MATERIAL_RYUUZYU		,35,70,JKF_TYPE_ATTACK,0 }, //龍珠 lev35 攻撃 パワー高め
+	{ TV_MATERIAL,SV_MATERIAL_DRAGONNAIL	,40,60,JKF_TYPE_MELEE,0 }, //竜の牙 lev40 白兵
+	{ TV_MATERIAL,SV_MATERIAL_EMERALD		,40,55,JKF_TYPE_TELEPO,0 }, //エメラルド lev40 テレポ
+	{ TV_MATERIAL,SV_MATERIAL_SAPPHIRE		,40,55,JKF_TYPE_SENSE,0 }, //サファイア lev40 感知
+	{ TV_MATERIAL,SV_MATERIAL_RUBY			,40,55,JKF_TYPE_OTHER,0 }, //ルビー lev40 ほか
+	{ TV_MATERIAL,SV_MATERIAL_DIAMOND		,40,65,JKF_TYPE_DEFENSE,0 }, //ダイアモンド lev40 防御
+	{ TV_MATERIAL,SV_MATERIAL_HOPE_FRAGMENT	,40,60,JKF_TYPE_HEAL,JKF2_HOLY }, //希望の結晶　lev40
+	{ TV_MATERIAL,SV_MATERIAL_IZANAGIOBJECT	,45,80,0,0 },			//伊弉諾物質 lev45 分類なし
+	{ TV_MATERIAL,SV_MATERIAL_METEORICIRON	,50,100,JKF_TYPE_ATTACK,JKF2_METEOR },	 //隕鉄　lev50 隕石攻撃
+	{ TV_MATERIAL,SV_MATERIAL_MYSTERIUM		,50,150,0,0 },			 //ミステリウム　lev50 分類なし
+	{ TV_MATERIAL,SV_MATERIAL_HIHIIROKANE	,50,200,JKF_TYPE_SPECIAL,0 }, //ヒヒイロカネ lev50 特殊
+
+	{ TV_SOUVENIR,SV_SOUVENIR_ELDER_THINGS_CRYSTAL	,20,75,0,0 }, //古きものの水晶
+	{ TV_SOUVENIR,SV_SOUVENIR_PRISM					,30,80,JKF_TYPE_SENSE,0 }, //三稜鏡　lev30 感知
+	{ TV_SOUVENIR,SV_SOUVENIR_KAPPA_5				,35,100,JKF_TYPE_SPECIAL,0 }, //河童の五色甲羅 lev35 特殊
+	{ TV_SOUVENIR,SV_SOUVENIR_ILMENITE				,40,120,JKF_TYPE_TELEPO,0 }, //月のイルメナイト
+	{ TV_SOUVENIR,SV_SOUVENIR_ASIA					,50,150,JKF_TYPE_ATTACK,JKF2_NUKE }, //エイジャ　lev50 核熱
+	{ TV_SOUVENIR,SV_SOUVENIR_MIRROR_OF_RUFFNOR		,50,150,JKF_TYPE_DEFENSE,0 }, //ラフノールの鏡　lev50 防御
+
+	{ 0,0,0,0,0 },//終端ダミー tval=0
 };
 
 
@@ -2020,12 +2081,41 @@ void	display_nameless_art_effect(nameless_arts_activate_param_type *naap_ptr, in
 	prt(format(_("消費MP:%d", "MP cost: %d"), naap_ptr->cost), 18, 30);
 	if (naap_ptr->rad>0) prt(format(_("半径:%d", "rad: %d"), ABS(naap_ptr->rad)), 19, 30);
 
-	if (naap_ptr->dice && naap_ptr->sides && naap_ptr->base)
+	//ブレス系はxtra1に
+	if (naap_ptr->art_idx == JKF1_ATTACK_BREATH)
+	{
+		prt(format("威力/効果:現在HPの%d%%", naap_ptr->xtra1), 20, 30);
+	}
+	//2.0.4 自分中心ボールを/2に表記
+	else if (naap_ptr->art_idx == JKF1_ATTACK_AROUND)
+	{
+		if (naap_ptr->dice && naap_ptr->sides && naap_ptr->base)
+			prt(format(_("威力/効果:最大(%dd%d+%d)/2", "dam/pow: max (%dd%d+%d)/2"), naap_ptr->dice, naap_ptr->sides, naap_ptr->base), 20, 30);
+		else if (naap_ptr->dice && naap_ptr->sides)
+			prt(format(_("威力/効果:最大(%dd%d)/2", "dam/pow: max (%dd%d)/2"), naap_ptr->dice, naap_ptr->sides), 20, 30);
+		else if (naap_ptr->base)
+			prt(format(_("威力/効果:最大%d", "dam/pow: max %d"), naap_ptr->base/2), 20, 30);
+
+	}
+	else
+	{
+		if (naap_ptr->dice && naap_ptr->sides && naap_ptr->base)
+			prt(format(_("威力/効果:%dd%d+%d", "dam/pow: %dd%d+%d"), naap_ptr->dice, naap_ptr->sides, naap_ptr->base), 20, 30);
+		else if (naap_ptr->dice && naap_ptr->sides)
+			prt(format(_("威力/効果:%dd%d", "dam/pow: %dd%d"), naap_ptr->dice, naap_ptr->sides), 20, 30);
+		else if (naap_ptr->base)
+			prt(format(_("威力/効果:%d", "dam/pow: %d"), naap_ptr->base), 20, 30);
+	}
+
+
+
+
+	/*if (naap_ptr->dice && naap_ptr->sides && naap_ptr->base)
 		prt(format(_("威力/効果:%dd%d+%d", "dam/pow: %dd%d+%d"), naap_ptr->dice, naap_ptr->sides, naap_ptr->base), 20, 30);
 	else if (naap_ptr->dice && naap_ptr->sides)
 		prt(format(_("威力/効果:%dd%d", "dam/pow: %dd%d"), naap_ptr->dice, naap_ptr->sides), 20, 30);
 	else if (naap_ptr->base)
-		prt(format(_("威力/効果:%d", "dam/pow: %d"), naap_ptr->base), 20, 30);
+		prt(format(_("威力/効果:%d", "dam/pow: %d"), naap_ptr->base), 20, 30);*/
 
 
 }
@@ -2413,7 +2503,7 @@ bool	activate_nameless_art_aux(nameless_arts_activate_param_type *naap_ptr, int 
 	case JKF1_MASTER_MELEE:
 	{
 
-		if (mode == NAMELESS_ART_MODE_SPELLCARD)
+		if (mode == NAMELESS_ART_MODE_SPELLCARD || mode == NAMELESS_ART_MODE_MAGATAMA)
 			set_tim_spellcard_effect(dice_roll_result, FALSE, art_idx);
 		else
 			set_tim_general(dice_roll_result, FALSE, counter_idx, art_idx);
@@ -2645,6 +2735,58 @@ bool	activate_nameless_art_aux(nameless_arts_activate_param_type *naap_ptr, int 
 		set_tim_lucky(dice_roll_result, FALSE);
 		break;
 	}
+
+
+	//感知など
+	case JKF1_DETECT_ALL:
+	{
+		detect_all(base);
+		if (xtra1)map_area(base);
+		break;
+	}
+
+	//幻惑
+	case JKF1_DAZZLE:
+	{
+		confuse_monsters(dice_roll_result);
+		if ((xtra1) % 2) stun_monsters(dice_roll_result);
+		if ((xtra1 >> 1) % 2) turn_monsters(dice_roll_result);
+		break;
+	}
+
+	//ターゲット能力低下 何を低下させるかxtra1に記録
+	case JKF1_DEBUFF:
+	{
+
+		if (!get_aim_dir(&dir)) return FALSE;
+
+		if (xtra1 == 1)
+			fire_ball_hide(GF_DEC_ATK, dir, dice_roll_result, 0);
+		else if (xtra1 == 2)
+			fire_ball_hide(GF_DEC_DEF, dir, dice_roll_result, 0);
+		else if (xtra1 == 3)
+			fire_ball_hide(GF_DEC_MAG, dir, dice_roll_result, 0);
+		else
+			fire_ball_hide(GF_DEC_ALL, dir, dice_roll_result, 0);
+
+		break;
+	}
+
+	//魔力消去
+	case JKF1_DISPEL:
+	{
+		int m_idx;
+
+		if (!target_set(TARGET_KILL)) return FALSE;
+		if (!player_has_los_bold(target_row, target_col)) break;
+		if (!projectable(py, px, target_row, target_col)) break;
+		m_idx = cave[target_row][target_col].m_idx;
+		if (!m_idx) break;
+		dispel_monster_status(m_idx);
+		break;
+	}
+
+
 
 	default:
 		msg_format(_("ERROR:activate_nameless_art_aux()へ不正なフラグ値が渡された(%d)",
@@ -2989,7 +3131,10 @@ int calc_make_spellcard_bonus(void)
 //名もなき技生成サブ関数1/3
 //特技art_idx(JKF1_***に対応する数でjunko_arts_table[]のインデックス)を決定する
 //成功したらart_idxを、失敗したら0を返す
-int	make_nameless_arts_sub1_choose_idx(int mode)
+//mode:生成モード　これを使うキャラによって変わる
+//material_idx;勾玉制作のときmagatama_material_table[]のインデックス
+//boost:勾玉制作のとき「会心の出来」かどうか
+int	make_nameless_arts_sub1_choose_idx(int mode, int material_idx, bool boost)
 {
 	int art_idx;
 	int loop_max = 100;
@@ -3003,48 +3148,81 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 		bool flag_ok = TRUE;
 
 		//まずレアリティに準じた確率でart_idxを選定する
-		if (mode == NAMELESS_ART_MODE_JUNKO)
-		{	//純狐はmagic_num2[]に格納されたフラグ値により選定確率が変化する(正直あまり機能していない気もする)
-
-			//あまり生成しすぎてフラグ値がなくなる事態を防ぐため、レベルが足りてるフラグ値を少し増やす。レアリティの高いフラグは増えづらい
-			for (i = 1; i <= JKF1_MAX; i++)
+		switch (mode)
+		{
+			//純狐はmagic_num2[]に格納されたフラグ値により選定確率が変化する(正直あまり機能していない気もする)
+			case NAMELESS_ART_MODE_JUNKO:
 			{
-				if (p_ptr->magic_num2[i] > 100) continue;
-				if (nameless_arts_generate_table[i].min_lev > plev) continue;
-				if (nameless_arts_generate_table[i].rarity > 30 && !one_in_(nameless_arts_generate_table[i].rarity/3)) continue;
-				p_ptr->magic_num2[i]++;
+
+				//あまり生成しすぎてフラグ値がなくなる事態を防ぐため、レベルが足りてるフラグ値を少し増やす。レアリティの高いフラグは増えづらい
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					if (p_ptr->magic_num2[i] > 100) continue;
+					if (nameless_arts_generate_table[i].min_lev > plev) continue;
+					if (nameless_arts_generate_table[i].rarity > 30 && !one_in_(nameless_arts_generate_table[i].rarity / 3)) continue;
+					p_ptr->magic_num2[i]++;
+				}
+
+				//フラグ値とレアリティに準じた確率で特技JKF値を選定する
+
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					randomizer += p_ptr->magic_num2[i] * 100 / (nameless_arts_generate_table[i].rarity);
+				}
+				randomizer = randint1(randomizer);
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					randomizer -= p_ptr->magic_num2[i] * 100 / (nameless_arts_generate_table[i].rarity);
+					if (randomizer <= 0) break;
+				}
+				art_idx = i;
+
 			}
-
-			//フラグ値とレアリティに準じた確率で特技JKF値を選定する
-
-			for (i = 1; i <= JKF1_MAX; i++)
+			break;
+			//勾玉制作は使用した素材と相性の良い特技が選定されやすくする
+			case NAMELESS_ART_MODE_MAGATAMA:
 			{
-				randomizer += p_ptr->magic_num2[i] * 100 / (nameless_arts_generate_table[i].rarity);
-			}
-			randomizer = randint1(randomizer);
-			for (i = 1; i <= JKF1_MAX; i++)
-			{
-				randomizer -= p_ptr->magic_num2[i] * 100 / (nameless_arts_generate_table[i].rarity);
-				if (randomizer <= 0) break;
-			}
-			art_idx = i;
 
-		}
-		else
-		{	//純狐以外はレアリティのみで決める
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					int tmp_rarity = nameless_arts_generate_table[i].rarity;
 
+					if (nameless_arts_generate_table[i].arts_type == magatama_material_table[material_idx].suitable_skill_type) tmp_rarity /= 8;
+					if (tmp_rarity < 1) tmp_rarity = 1;
+					randomizer += 1000 / tmp_rarity;
+				}
+				randomizer = randint1(randomizer);
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					int tmp_rarity = nameless_arts_generate_table[i].rarity;
 
-			for (i = 1; i <= JKF1_MAX; i++)
-			{
-				randomizer += 1000 / nameless_arts_generate_table[i].rarity;
+					if (nameless_arts_generate_table[i].arts_type == magatama_material_table[material_idx].suitable_skill_type)	tmp_rarity /= 8;
+					if (tmp_rarity < 1) tmp_rarity = 1;
+					randomizer -= 1000 / tmp_rarity;
+
+					if (randomizer <= 0) break;
+				}
+				art_idx = i;
+
 			}
-			randomizer = randint1(randomizer);
-			for (i = 1; i <= JKF1_MAX; i++)
+			break;
+
+			//ほかはレアリティのみで決める
+			default:
 			{
-				randomizer -= 1000 / nameless_arts_generate_table[i].rarity;
-				if (randomizer <= 0) break;
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					randomizer += 1000 / nameless_arts_generate_table[i].rarity;
+				}
+				randomizer = randint1(randomizer);
+				for (i = 1; i <= JKF1_MAX; i++)
+				{
+					randomizer -= 1000 / nameless_arts_generate_table[i].rarity;
+					if (randomizer <= 0) break;
+				}
+				art_idx = i;
+
 			}
-			art_idx = i;
 
 		}
 
@@ -3079,7 +3257,7 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 
 			//超能力にある技は出ないことにする
 			if (art_idx == JKF1_DETECT_MON || art_idx == JKF1_DETECT_TRAPS || art_idx == JKF1_DETECT_OBJ || art_idx == JKF1_ENLIGHT || art_idx == JKF1_TELEPO
-				|| art_idx == JKF1_SPEED || art_idx == JKF1_SHIELD || art_idx == JKF1_RES_ELEM || art_idx == JKF1_IDENTIFY)
+				|| art_idx == JKF1_SPEED || art_idx == JKF1_SHIELD || art_idx == JKF1_RES_ELEM || art_idx == JKF1_IDENTIFY || art_idx == JKF1_DETECT_ALL)
 			{
 				flag_ok = FALSE; break;
 			}
@@ -3114,7 +3292,8 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 			if (art_idx == JKF1_ATTACK_BOLT || art_idx == JKF1_FOOD || art_idx == JKF1_HEAL1 || art_idx == JKF1_DETECT_TRAPS || art_idx == JKF1_DETECT_OBJ) { flag_ok = FALSE; break; }
 			if (art_idx == JKF1_REMOVE_CURSE || art_idx == JKF1_IDENTIFY || art_idx == JKF1_SELF_LIGHT) { flag_ok = FALSE; break; }
 			//*破壊*防御はもう用がないはずなので出さない
-			if (art_idx == JKF1_DESTRUCT_DEF) { flag_ok = FALSE; break; }
+			//v2.0.4 真勝利後でもオベロン未打倒がありえるようになったので抑止中止
+			//if (art_idx == JKF1_DESTRUCT_DEF) { flag_ok = FALSE; break; }
 			//エッセンス付与はフラグ管理が面倒だし今更要らんと思うのでやめとく
 			if (art_idx == JKF1_ADD_ESSENCE1 || art_idx == JKF1_ADD_ESSENCE2) { flag_ok = FALSE; break; }
 			//レベル制限。でもたまに15レベル上まで出る
@@ -3122,6 +3301,30 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 			if (nameless_arts_generate_table[art_idx].min_lev >(plev + (weird_luck() ? 15 : 0))) { flag_ok = FALSE; break; }
 			break;
 
+			//魅須丸の勾玉制作
+		case NAMELESS_ART_MODE_MAGATAMA:
+			{
+				int material_level = magatama_material_table[material_idx].mlev;
+
+				if (boost) material_level += 10;
+
+				//素材パワーが0だと何もなし(石塊が材料だと「会心の出来」にならない限り失敗するようにするための処理)
+				if (material_level<1) return 0;
+
+				//特技分類なし(エッセンス付与のみ)は勾玉制作の対象外
+				if (!nameless_arts_generate_table[art_idx].arts_type) continue;
+
+				//レベル制限。＠のレベルでなく素材レベルを参照する。会心の出来だと10レベル上まで出る
+				if (nameless_arts_generate_table[art_idx].min_lev > material_level) { flag_ok = FALSE; break; }
+
+				//素材レベルより11レベル以上低い技は1/3、21レベル以上低い技は1/9、30レベル以上低い技は選定されない
+				if (nameless_arts_generate_table[art_idx].min_lev <= (material_level - 30) ) { flag_ok = FALSE; break; }
+				if (nameless_arts_generate_table[art_idx].min_lev < (material_level - 10) && !one_in_(3)) { flag_ok = FALSE; break; }
+				if (nameless_arts_generate_table[art_idx].min_lev < (material_level - 20) && !one_in_(3)) { flag_ok = FALSE; break; }
+
+
+			}
+			break;
 
 		default:
 			msg_format(_("ERROR:make_nameless_arts_sub1()に正しいmode値(%d)が設定されていない",
@@ -3149,6 +3352,8 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 		p_ptr->magic_num2[art_idx] -= MIN(50, p_ptr->magic_num2[art_idx]);
 	}
 
+	if (p_ptr->wizard) msg_format("magatama_art_idx:%d",art_idx);
+
 	return art_idx;
 
 }
@@ -3158,7 +3363,10 @@ int	make_nameless_arts_sub1_choose_idx(int mode)
 //特技art_idxを渡し、攻撃技の属性値を決める。
 //決めた属性値はnaap_ptr内に格納する
 //成功したらelem_idx(JKF2_***に対応する値)を、失敗するか不要な場合0を返す
-int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_type *naap_ptr)
+//mode:生成モード　これを使うキャラによって変わる
+//material_idx;勾玉制作のときmagatama_material_table[]のインデックス
+//boost:勾玉制作のとき「会心の出来」かどうか
+int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_type *naap_ptr, int material_idx, bool boost)
 {
 	int gf_idx, elem_idx,art_idx;
 	byte tmp_flags[MAGIC_NUM_SIZE];
@@ -3184,6 +3392,18 @@ int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_typ
 			else tmp_flags[i] = 50 + p_ptr->lev * 5;
 		}
 	}
+	//勾玉制作時には素材と相性の良い属性が選定されやすくする
+	else if (mode == NAMELESS_ART_MODE_MAGATAMA)
+	{
+		for (i = JKF2_START; i <= JKF2_END; i++)
+		{
+			if (i <= JKF2_POIS) tmp_flags[i] = 15;
+			else tmp_flags[i] = magatama_material_table[material_idx].mlev / 5;
+
+			if (magatama_material_table[material_idx].suitable_gf_type == i) tmp_flags[i] = 250;
+		}
+	}
+
 	//純狐はmagic_num2[]に記録されたフラグ値により属性の付与されやすさが変化する
 	else if (mode == NAMELESS_ART_MODE_JUNKO)
 	{
@@ -3343,6 +3563,12 @@ int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_typ
 					flag_ok = FALSE;
 			}
 		}
+		//勾玉制作のとき壁、森、ドア生成はできにくい
+		else if (mode == NAMELESS_ART_MODE_MAGATAMA)
+		{
+			if ((elem_idx == JKF2_MAKE_WALL || elem_idx == JKF2_MAKE_DOOR || elem_idx == JKF2_MAKE_TREE) && !weird_luck()) flag_ok = FALSE;
+
+		}
 
 		if (!flag_ok) continue;
 
@@ -3373,7 +3599,10 @@ int	make_nameless_arts_sub2_choose_gf(int mode, nameless_arts_activate_param_typ
 
 //名もなき技生成サブ関数3/3
 //特技のコストやダイスなどまだ決めてないパラメータを決定する
-void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_type *naap_ptr, int mode)
+//mode:生成モード　これを使うキャラによって変わる
+//material_idx;勾玉制作のときmagatama_material_table[]のインデックス
+//boost:勾玉制作のとき「会心の出来」かどうか
+void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_type *naap_ptr, int mode, int material_idx, bool boost)
 {
 
 	int art_idx, gf_idx, cost, rad, base, dice, sides, counter_idx, xtra1, xtra2;
@@ -3384,23 +3613,38 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 	mult = randnor(100, 20);
 	if (mult < 75) mult = 75;
 
+
 	//ダイス値などに対するボーナスを決定
 	switch (mode)
 	{
+	//純狐は純化によりエッセンスが貯まっている場合技がパワーアップする
 	case NAMELESS_ART_MODE_JUNKO:
-		//純狐は純化によりエッセンスが貯まっている場合技がパワーアップする
 		flag_bonus = 100 + p_ptr->magic_num2[naap_ptr->art_idx];
 		if (p_ptr->shero) flag_bonus += 100;
 		break;
+	//スペカ製作時は霧雨魔法店に貯まった魔力を消費する
 	case NAMELESS_ART_MODE_SPELLCARD:
-		//スペカ製作時は霧雨魔法店に貯まった魔力を消費する
 		flag_bonus = calc_make_spellcard_bonus();
 		break;
+	//勾玉制作時は素材により生成パワーが変わる。大量に作れるし4ボスなのでパワー弱め
+	case NAMELESS_ART_MODE_MAGATAMA:
+		flag_bonus = plev/2 + magatama_material_table[material_idx].power;
+		//会心の出来のときフラグ値ボーナスとmult値最低保証
+		if (boost)
+		{
+			flag_bonus += plev / 2 + randint1(plev);
+			if (mult < 110) mult = 110;
+		}
+
+		break;
+
 	default:
 		flag_bonus = 100 + plev * 2;
 		break;
 
 	}
+
+	if (cheat_xtra) msg_format("nameless art mult:%d", mult);
 
 	art_idx = naap_ptr->art_idx;
 	gf_idx = naap_ptr->gf_type;
@@ -3521,6 +3765,7 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 	case JKF1_ATTACK_AROUND:
 		rad = 1 + plev / 15 + (flag_bonus - 100) / 20;
 		if (rad > 8) rad = 8;
+		if (rad < 1) rad = 1;
 		break;
 	case JKF1_ATTACK_SPARK:
 		rad = 1;
@@ -3533,9 +3778,15 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 		if (randint1(100) < (plev + flag_bonus - 100)) rad = -2;
 		else rad = -1;
 
-		xtra1 = (flag_bonus - 100 + plev) / 2;
+		//v2.0.4 パワーが低いとき弱くなりすぎるので計算式変更
+		//xtra1 = (flag_bonus - 100 + plev) / 2;
+		xtra1 = plev / 3 + flag_bonus / 3;
+		//v2.0.4 元素系は強め
+		if (naap_ptr->gf_type <= GF_FIRE || naap_ptr->gf_type == GF_PLASMA) xtra1 += 16;
+
 		if (xtra1 > 100) xtra1 = 100;
 		if (xtra1 < 30) xtra1 = 30;
+
 	}
 	break;
 	case JKF1_RUSH_ATTACK:
@@ -3657,6 +3908,40 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 	case JKF1_CALL_METEOR:
 	{
 		rad = 1 + (plev + flag_bonus) / 80;
+		if (rad > 4) rad = 4;
+	}
+	break;
+
+    case JKF1_DAZZLE://幻惑
+	{
+		int chance = plev + flag_bonus / 4;
+		int bitflag = 0;
+
+		//常にconfuse_monsters()が発動するが追加で朦朧と恐怖も
+		if (randint0(100) < chance) bitflag += 1;
+		if (randint0(100) < chance) bitflag += 2;
+
+		xtra1 = bitflag;
+	}
+	break;
+
+	case JKF1_DEBUFF://ターゲット能力低下
+	{
+		//xtra1=0なら全能力低下、1,2,3ならそれぞれ攻撃、防御、魔法力低下
+		if (flag_bonus > 100)
+		{
+			xtra1 = 0;
+			//全能力低下のときパワー25%低下
+			base = (base * 3 + 1) / 4;
+			if (dice > 1) dice = (dice * 3 + 1) / 4;
+			else if (sides > 1) sides = (sides * 3 + 1) / 4;
+		}
+		else
+		{
+			xtra1 = randint1(3);
+		}
+
+
 	}
 	break;
 
@@ -3711,14 +3996,14 @@ bool	junko_make_nameless_arts(void)
 		cptr name_sep[5];
 
 		//発動IDX決定
-		naap.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_JUNKO);
+		naap.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_JUNKO,0,FALSE);
 		if (!naap.art_idx) return FALSE;
 
 		//属性決定
-		elem_flag_idx = make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_JUNKO, &naap);
+		elem_flag_idx = make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_JUNKO, &naap,0,FALSE);
 
 		//ダイス値などその他決定
-		make_nameless_arts_sub3_apply_other_params(&naap, NAMELESS_ART_MODE_JUNKO);
+		make_nameless_arts_sub3_apply_other_params(&naap, NAMELESS_ART_MODE_JUNKO,0,FALSE);
 
 
 		//命名
@@ -3856,14 +4141,14 @@ bool	okina_make_nameless_arts(int num)
 
 
 	//発動IDX決定
-	naap.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_SUMIREKO);
+	naap.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_SUMIREKO,0,FALSE);
 	if (!naap.art_idx) return FALSE;
 
 	//属性決定
-	(void)make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_SUMIREKO, &naap);
+	(void)make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_SUMIREKO, &naap,0,FALSE);
 
 	//ダイス値などその他決定
-	make_nameless_arts_sub3_apply_other_params(&naap, NAMELESS_ART_MODE_SUMIREKO);
+	make_nameless_arts_sub3_apply_other_params(&naap, NAMELESS_ART_MODE_SUMIREKO,0,FALSE);
 
 	screen_save();
 
@@ -4103,11 +4388,11 @@ void	bact_marisa_make_spellcard(void)
 	object_prep(o_ptr, k_idx);
 
 	//発動IDX決定
-	card_param.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_SPELLCARD);
+	card_param.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_SPELLCARD,0,FALSE);
 	//属性決定
-	make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_SPELLCARD, &card_param);
+	make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_SPELLCARD, &card_param,0,FALSE);
 	//ダイス値などその他決定
-	make_nameless_arts_sub3_apply_other_params(&card_param, NAMELESS_ART_MODE_SPELLCARD);
+	make_nameless_arts_sub3_apply_other_params(&card_param, NAMELESS_ART_MODE_SPELLCARD,0,FALSE);
 
 	//性能を表示し命名　性能表示部をカードを読むルーチンと共通化する
 	while (TRUE)
@@ -4208,6 +4493,324 @@ void use_spellcard(object_type *o_ptr)
 	//カード実行処理
 	activate_nameless_art_aux(&card_param, NAMELESS_ART_MODE_SPELLCARD);
 
+
+}
+
+
+//魅須丸が勾玉の素材にできるアイテムを判定する
+static bool item_tester_magatama_material(object_type *o_ptr)
+{
+	int i;
+	for (i = 0; magatama_material_table[i].tval; i++)
+	{
+		if (o_ptr->tval == magatama_material_table[i].tval && o_ptr->sval == magatama_material_table[i].sval) return TRUE;
+	}
+
+	return FALSE;
+}
+
+//bact_marisa_make_spellcard()を改変
+//魅須丸が特技「勾玉制作」で勾玉を作る
+//勾玉は「スペルカード」と同じく純狐系特技の発動パラメータを保存しておく特殊アイテム
+//行動順を消費するときTRUE
+bool make_magatama(void)
+{
+	int item;
+	cptr q, s;
+	object_type forge;
+	object_type	*o_ptr = &forge;//勾玉アイテム
+	object_type *mo_ptr;//素材アイテム
+	int k_idx;
+	nameless_arts_activate_param_type card_param;
+	int i;
+
+	int material_idx = -1;
+	bool boost = FALSE;
+
+	if (p_ptr->pclass != CLASS_MISUMARU) { msg_print(_("ERROR:魅須丸以外でmake_magatama()が呼ばれた",
+                                                    "ERROR: make_magatama() called for non-Misumaru")); return FALSE; }
+	if (inventory[INVEN_PACK - 1].k_idx)
+	{
+		msg_print(_("荷物が一杯だ。", "Your inventory is full."));
+		return FALSE;
+	}
+
+	//素材選択
+	q = _("「どの材料で勾玉を作りましょう？」", "'What material should be used to create the magatama?'");
+	s = _("勾玉の素材になるアイテムがありません。", "You don't have any items that could be used as magatama material.");
+	item_tester_hook = item_tester_magatama_material;
+	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return FALSE;
+
+	if (item >= 0)
+	{
+		mo_ptr = &inventory[item];
+	}
+	else
+	{
+		mo_ptr = &o_list[0 - item];
+	}
+
+	//素材テーブル内での素材インデックスを特定
+	for (i = 0; magatama_material_table[i].tval; i++)
+	{
+		if (mo_ptr->tval == magatama_material_table[i].tval && mo_ptr->sval == magatama_material_table[i].sval)
+		{
+			material_idx = i;
+			break;
+		}
+	}
+	if (material_idx < 0) { msg_print(_("ERROR:make_magatama()の素材生成テーブルがおかしい",
+                                        "ERROR: Weird material table data in make_magatama()")); return FALSE; }//paranoia
+
+
+	msg_print(_("あなたは勾玉の制作に取り掛かった...", "You start crafting magatama..."));
+	object_prep(o_ptr, lookup_kind(TV_SPELLCARD, SV_SPELLCARD_MAGATAMA));
+	//確率で「会心の出来」になって特技選定レベルやパワーが増加
+	if (weird_luck())
+	{
+		boost = TRUE;
+		msg_print(_("会心の出来だ！", "A critical success!"));
+	}
+
+	//発動IDX決定
+	card_param.art_idx = make_nameless_arts_sub1_choose_idx(NAMELESS_ART_MODE_MAGATAMA,material_idx,boost);
+
+	if (!card_param.art_idx)
+	{
+		msg_print(_("制作に失敗した...", "Your craftsmanship failed..."));
+		return TRUE;
+	}
+
+	//属性決定
+	make_nameless_arts_sub2_choose_gf(NAMELESS_ART_MODE_MAGATAMA, &card_param,material_idx,boost);
+
+	//ダイス値などその他決定
+	make_nameless_arts_sub3_apply_other_params(&card_param, NAMELESS_ART_MODE_MAGATAMA,material_idx,boost);
+
+	//勾玉に作った技のタイプや威力などのパラメータを記録
+	record_spellcard_param_onto_card(o_ptr, &card_param);
+	o_ptr->ident |= (IDENT_MENTAL);
+
+	//勾玉はスペルカードと違い☆名部分をクリアし、代わりに素材k_idxを記録
+	o_ptr->art_name = 0;
+	o_ptr->xtra6 = lookup_kind(mo_ptr->tval,mo_ptr->sval);
+
+	//素材消滅
+	if (item >= 0)
+	{
+		inven_item_increase(item, -1);
+		inven_item_describe(item);
+		inven_item_optimize(item);
+	}
+	else
+	{
+		floor_item_increase(0 - item, -1);
+		floor_item_describe(0 - item);
+		floor_item_optimize(0 - item);
+	}
+
+
+	msg_print(_("勾玉が完成した！", "Magatama finished!"));
+
+	screen_save();
+
+	display_nameless_art_effect(&card_param, NAMELESS_ART_MODE_MAGATAMA);
+
+	inkey();
+
+	screen_load();
+
+	inven_carry(o_ptr);
+	return TRUE;
+}
+
+//勾玉の一行簡略効果表示
+void magatama_effect_desc(char *desc, object_type *o_ptr)
+{
+
+	nameless_arts_activate_param_type card_param;
+	cptr desc1, desc2;
+
+	if (o_ptr->tval != TV_SPELLCARD || o_ptr->sval != SV_SPELLCARD_MAGATAMA)
+	{
+		sprintf(desc, "(ERROR)");
+		return;
+	}
+	if (!o_ptr->pval)
+	{
+		sprintf(desc, _("(失敗作)", "(failure)"));
+		return;
+	}
+
+	read_spellcard_param_from_card(o_ptr, &card_param);
+
+	desc1 = nameless_skill_type_desc[card_param.art_idx];
+	if (card_param.gf_type)
+	{
+		desc2 = gf_desc_name[card_param.gf_type];
+		sprintf(desc, _("【%s(%s)】", "[%s (%s)]"), desc1, desc2);
+	}
+	else
+	{
+		sprintf(desc, _("【%s】", "[%s]"), desc1);
+	}
+
+
+}
+
+//v2.0.4
+//魅須丸の勾玉特技使用ルーチン
+//純狐や菫子と違いmagic_num1[]でなくinven_add[]に装備した勾玉からスペルカードと同様に技パラメータを読み取ってリストする。
+//それ以外はactivate_nameless_arts()とほぼ同じ。リスト生成時と技発動時にそれぞれパラメータを読み取り直すのは冗長な気がするので技パラメータを配列にした
+//行動順消費するときTRUEを返す
+bool	activate_magatama(bool only_info)
+{
+
+	int num, i;
+	int list_num = 0;
+	int dir;
+	bool flag_choose = FALSE;
+	nameless_arts_activate_param_type naap_lis[INVEN2_MAGATAMA_NUM_MAX];
+	int inven2_idx_lis[INVEN2_MAGATAMA_NUM_MAX];
+
+	if (p_ptr->pclass != CLASS_MISUMARU)
+	{
+		msg_print(_("ERROR:activate_magatama()が魅須丸以外で呼ばれた",
+                    "ERROR: activate_magatma() called for non-Misumaru"));
+		return FALSE;
+	}
+
+	//技リストの生成 追加インベントリの空欄は詰める
+	for (i = 0; i<INVEN2_MAGATAMA_NUM_MAX; i++)
+	{
+		naap_lis[i].art_idx = 0;
+	}
+	for (i = 0; i<INVEN2_MAGATAMA_NUM_MAX; i++)
+	{
+		object_type *o_ptr = &inven_add[i];
+
+		if (!o_ptr->k_idx || o_ptr->tval != TV_SPELLCARD || o_ptr->sval != SV_SPELLCARD_MAGATAMA) continue;
+		if (!read_spellcard_param_from_card(o_ptr, &naap_lis[list_num])) return FALSE;
+		inven2_idx_lis[list_num] = i;//object_descのときもう一度inven_addにアクセスするのでこの技のアイテムの場所を保持
+		list_num++;
+
+	}
+	if (!list_num)
+	{
+		msg_print(_("勾玉を装備していない。", "You don't have any magatama equipped."));
+		return FALSE;
+	}
+
+	//ALLOW_REPEATリピート処理
+	if (repeat_pull(&num)) flag_choose = TRUE;
+
+	//技選択ループ
+	screen_save();
+	while (!flag_choose)
+	{
+		char c;
+		num = -1;
+
+		//画面クリア
+		for (i = 1; i<16; i++) Term_erase(17, i, 255);
+
+		if (only_info)
+			c_prt(TERM_WHITE, _("どの情報を確認しますか？", "Browse which?"), 3, 20);
+		else
+			c_prt(TERM_WHITE, _("どれを使いますか？", "Use which?"), 3, 20);
+
+		c_prt(TERM_WHITE, _("                                            使用MP 効果",
+                        "                                            MP cost  Effect"), 4, 20);
+		//リスト表示
+		for (i = 0; i<list_num; i++)
+		{
+			byte color;
+			char tmp_desc[64];
+			char tmp_desc2[64];
+			char o_name[MAX_NLEN];
+
+			if (!naap_lis[i].art_idx) break;//ここの技が作られていない
+
+			object_desc(o_name, &inven_add[inven2_idx_lis[i]], 0);
+
+			if (p_ptr->csp < naap_lis[i].cost) color = TERM_L_DARK;//MP不足
+			else  color = TERM_WHITE;
+
+			if (naap_lis[i].gf_type && naap_lis[i].art_idx != JKF1_ADD_ESSENCE1 && naap_lis[i].art_idx != JKF1_ADD_ESSENCE2)
+				sprintf(tmp_desc2, "[%s]", gf_desc_name[naap_lis[i].gf_type]);
+			else
+				sprintf(tmp_desc2, "");
+
+			if (naap_lis[i].gf_type == GF_MAKE_TREE || naap_lis[i].gf_type == GF_STONE_WALL || naap_lis[i].gf_type == GF_MAKE_DOOR)
+				sprintf(tmp_desc, "");
+			else if (naap_lis[i].art_idx == JKF1_ATTACK_BREATH) //ブレスはxtra1の値で威力が変わる
+				sprintf(tmp_desc, "(%d)", p_ptr->chp * naap_lis[i].xtra1 / 100);
+			else if (naap_lis[i].base < 1 && (naap_lis[i].dice < 1 || naap_lis[i].sides < 1))
+				sprintf(tmp_desc, "");
+			else if (naap_lis[i].base < 1)
+				sprintf(tmp_desc, "(%dd%d)", naap_lis[i].dice, naap_lis[i].sides);
+			else if (naap_lis[i].dice < 1 || naap_lis[i].sides < 1)
+				sprintf(tmp_desc, "(%d)", naap_lis[i].base);
+			else
+				sprintf(tmp_desc, "(%d+%dd%d)", naap_lis[i].base, naap_lis[i].dice, naap_lis[i].sides);
+
+			c_prt(color, format("%c) %-45s %-4d %s%s%s", ('a' + i), o_name,
+				naap_lis[i].cost, tmp_desc2, tmp_desc, ((naap_lis[i].art_idx == JKF1_ATTACK_AROUND) ? "/2" : "")), 5 + i, 17);
+
+		}
+
+		c = inkey();
+
+		if (c == ESCAPE)
+		{
+			break;
+		}
+
+		if (c >= 'a' && c <= ('a' + list_num - 1))
+		{
+			//技がないときを除き選択肢反映してループから出る
+			num = c - 'a';
+			if (!only_info) flag_choose = TRUE;
+			repeat_push(num);
+		}
+
+		//only_infoのとき画面に情報だけ表示してループ続行 ESCで終了
+		if (only_info && num >= 0)
+		{
+			display_nameless_art_effect(&naap_lis[num], NAMELESS_ART_MODE_SPELLCARD);
+			continue;
+		}
+
+	}
+	screen_load();
+
+	if (num < 0) return FALSE; //ESCは終了
+
+
+	if (cheat_xtra)
+	{
+		msg_format("name:%s", quark_str(naap_lis[num].quark_idx));
+		msg_format("idx:%d GF:%d", naap_lis[num].art_idx, naap_lis[num].gf_type);
+		msg_format("base:%d,dice:%d,sides:%d", naap_lis[num].base, naap_lis[num].dice, naap_lis[num].sides);
+		msg_format("counter_idx:%d", naap_lis[num].counter_idx);
+		msg_format("xtra:%d/%d", naap_lis[num].xtra1, naap_lis[num].xtra2);
+	}
+
+
+	if (p_ptr->csp < naap_lis[num].cost)
+	{
+		msg_print(_("MPが足りない。", "Not enough MP."));
+		return FALSE;
+	}
+
+	//特技実行
+	if (!activate_nameless_art_aux(&naap_lis[num], NAMELESS_ART_MODE_MAGATAMA)) return FALSE;
+
+	//MP消費
+	p_ptr->csp -= naap_lis[num].cost;
+	p_ptr->redraw |= (PR_HP | PR_MANA);
+
+	return TRUE;
 
 }
 

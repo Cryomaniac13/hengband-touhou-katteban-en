@@ -9550,6 +9550,7 @@ int is_hurt_disen(){
 	if(prace_is_(RACE_GOLEM)) mod = 33;
 	if(prace_is_(RACE_MAGIC_JIZO)) mod = 33;
 	if(p_ptr->pclass == CLASS_ALICE) mod = 33;
+	if (p_ptr->pclass == CLASS_MISUMARU) mod = 33;
 
 	if (p_ptr->pclass == CLASS_TSUKASA) mod = 25;
 

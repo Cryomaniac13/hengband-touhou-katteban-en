@@ -3821,6 +3821,13 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 
 		break;
 
+	case CLASS_MISUMARU:
+		if (plev > 9) add_flag(flgs, TR_ESP_HUMAN);
+		if (plev >19) add_flag(flgs, TR_ESP_ANIMAL);
+		if (plev >24) add_flag(flgs, TR_RES_HOLY);
+		if (plev >29) add_flag(flgs, TR_ESP_KWAI);
+		if (plev >39) add_flag(flgs, TR_ESP_EVIL);
+		break;
 
 
 	default:
@@ -7776,29 +7783,69 @@ static void dump_aux_class_special(FILE *fff)
 			}
 		}
 	}
-	//v1.1.52 菫子の特技をリストアップ
-	else if (is_special_seikaku(SEIKAKU_SPECIAL_SUMIREKO))
+	//v1.1.52 菫子専用性格の特技をリストアップ
+	//v2.0.4 魅須丸の勾玉も追加
+	else if (is_special_seikaku(SEIKAKU_SPECIAL_SUMIREKO) || p_ptr->pclass == CLASS_MISUMARU)
 	{
-		int i;
-		fprintf(fff, _("\n\n  [後戸の力]\n",
-                        "\n\n [Power of Backdoor]\n"));
+		int i,imax;
 
-		for (i = 0; i < 8; i++)
+
+		if (p_ptr->pclass == CLASS_MISUMARU)
+		{
+			fprintf(fff, _("\n\n  [勾玉の力]\n",
+                        "\n\n [Magatama Powers]\n"));
+			imax = INVEN2_MAGATAMA_NUM_MAX;
+		}
+		else
+		{
+			fprintf(fff, _("\n\n  [後戸の力]\n",
+                        "\n\n [Power of Backdoor]\n"));
+			imax = 8;
+		}
+
+		//特技最大数ループ
+		for (i = 0; i < imax; i++)
 		{
 			char buf[256] = "";
-			int quark_idx = JUNKO_ARTS_PARAM(i, JKAP_QUARK_IDX);
-			int art_idx = JUNKO_ARTS_PARAM(i, JKAP_JKF1);
-			int typ = JUNKO_ARTS_PARAM(i, JKAP_GF);
-			int rad = JUNKO_ARTS_PARAM(i, JKAP_RAD);
-			int base = JUNKO_ARTS_PARAM(i, JKAP_BASE);
-			int dice = JUNKO_ARTS_PARAM(i, JKAP_DICE);
-			int sides = JUNKO_ARTS_PARAM(i, JKAP_SIDES);
-			int cost = JUNKO_ARTS_PARAM(i, JKAP_COST);
-			int xtra1 = JUNKO_ARTS_PARAM(i, JKAP_XTRA_VAL1);
+			int quark_idx=0;
+			int art_idx,typ,rad,base,dice,sides,cost,xtra1;
 
-			if (!art_idx) break;
+			//魅須丸は装備している勾玉から技のパラメータを取得
+			if (p_ptr->pclass == CLASS_MISUMARU)
+			{
+				char o_name[128];
+				object_type *o_ptr = &inven_add[i];
 
-			fprintf(fff, "    %s(%s)\n",quark_str(quark_idx), nameless_skill_type_desc[art_idx]); //名称と特技種別
+				if (!o_ptr->k_idx || o_ptr->tval != TV_SPELLCARD) continue;
+
+				art_idx = o_ptr->pval;
+				typ = o_ptr->xtra1;
+				rad = o_ptr->xtra2;
+				base = o_ptr->ac;
+				dice = o_ptr->dd;
+				sides = o_ptr->to_a;
+				cost = o_ptr->to_h;
+				xtra1 = o_ptr->xtra4;
+				object_desc(o_name, o_ptr, OD_NAME_ONLY);
+				fprintf(fff, " %s(%s)\n", o_name, nameless_skill_type_desc[art_idx]); //名称と特技種別
+
+			}
+			//ほか(悪夢菫子)はp_ptr->magic_num1[]から技のパラメータを取得
+			else
+			{
+				quark_idx = JUNKO_ARTS_PARAM(i, JKAP_QUARK_IDX);
+				art_idx = JUNKO_ARTS_PARAM(i, JKAP_JKF1);
+				typ = JUNKO_ARTS_PARAM(i, JKAP_GF);
+				rad = JUNKO_ARTS_PARAM(i, JKAP_RAD);
+				base = JUNKO_ARTS_PARAM(i, JKAP_BASE);
+				dice = JUNKO_ARTS_PARAM(i, JKAP_DICE);
+				sides = JUNKO_ARTS_PARAM(i, JKAP_SIDES);
+				cost = JUNKO_ARTS_PARAM(i, JKAP_COST);
+				xtra1 = JUNKO_ARTS_PARAM(i, JKAP_XTRA_VAL1);
+				if (!art_idx) break;
+				fprintf(fff, "    %s(%s)\n", quark_str(quark_idx), nameless_skill_type_desc[art_idx]); //名称と特技種別
+			}
+
 			fprintf(fff, _("      消費MP:%-3d",
                             "      MP Cost:%-3d"), cost);
 			if (typ && art_idx != JKF1_ADD_ESSENCE1 && art_idx != JKF1_ADD_ESSENCE2)
@@ -7824,8 +7871,6 @@ static void dump_aux_class_special(FILE *fff)
                                 " Power/Eff:%d"),base);
 
 			fprintf(fff, "\n");
-
-
 
 		}
 
@@ -8793,6 +8838,10 @@ static void dump_aux_inventory2(FILE *fff)
 
 	//追加インベントリのない職は終了
 	if(!inven2_num) return;
+
+	//v2.0.4 魅須丸は勾玉特技リストのときに表示するのでここでは不要
+	if (p_ptr->pclass == CLASS_MISUMARU)
+		return;
 
 	switch(pc)
 	{

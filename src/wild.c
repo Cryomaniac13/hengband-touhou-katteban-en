@@ -730,7 +730,9 @@ void wilderness_gen(void)
 
 					if ((f_ptr->subtype == 2)
 						|| ((p_ptr->town_num == TOWN_HITOZATO || p_ptr->town_num == TOWN_KOURIN) && (f_ptr->subtype == 3))
-						|| (p_ptr->town_num == TOWN_KOUMA  && (f_ptr->subtype == 1)))
+						|| (p_ptr->town_num == TOWN_KOUMA  && (f_ptr->subtype == 1))
+						|| (p_ptr->town_num == TOWN_MYOURENJI && (f_ptr->subtype == 0))
+						)
 					{
 						if (c_ptr->m_idx) delete_monster_idx(c_ptr->m_idx);
 						p_ptr->oldpy = y;

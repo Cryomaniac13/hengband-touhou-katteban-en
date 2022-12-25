@@ -401,6 +401,9 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MEGUMU) return TRUE;
 			else return FALSE;
 
+		case CLASS_MISUMARU:
+			if (r_idx == MON_MISUMARU) return TRUE;
+			else return FALSE;
 
 	}
 

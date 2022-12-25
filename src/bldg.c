@@ -11772,7 +11772,7 @@ static int repair_broken_weapon_aux(int bcost)
 
 	///mod150311 修復武器エッセンス消去バグに対応
 	/*:::Hack - 鍛冶師と宝飾師のときのみ特殊フラグON 武器修復とエッセンス付加を両方行ったあと、エッセンスを消去したときにも武器修復された事実がわかるように*/
-	if(p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_SH_DEALER) o_ptr->xtra1 = 1;
+	if(p_ptr->pclass == CLASS_JEWELER || p_ptr->pclass == CLASS_SH_DEALER || p_ptr->pclass == CLASS_MISUMARU) o_ptr->xtra1 = 1;
 
 	/* Remove BROKEN flag */
 	o_ptr->ident &= ~(IDENT_BROKEN);

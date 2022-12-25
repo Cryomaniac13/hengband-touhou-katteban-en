@@ -2733,3 +2733,11 @@ extern bool set_hirarinuno_card(int v, bool do_dec);
 extern void break_market(void);
 
 extern void walk_energy_modify(void);
+
+extern bool eat_jewel(void);
+extern bool make_magatama(void);
+extern void magatama_effect_desc(char *desc, object_type *o_ptr);
+extern bool	activate_magatama(bool only_info);
+
+
+
