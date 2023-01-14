@@ -1923,24 +1923,24 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 	{255,0,0,0,0,0,0,{0,0,0,0,0},FALSE,FALSE,FALSE,0},//始端ダミー
 //1
 	{20, 1, 3,  8, 2,  6,200,{1,-1,7,8,11},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃1 ボルト 20-60dam
-	{20,10,12, 25, 3,  9,400,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃2 ボール 50-250dam
-	{25,15,10, 30, 6,  6,300,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃3 ビーム 50-200dam
-	{35,35,18, 50, 8,  8,300,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃4 ロケット 80-350dam
+	{20,10, 8, 25, 3,  9,400,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃2 ボール 50-250dam
+	{25,15, 8, 30, 6,  6,300,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃3 ビーム 50-200dam
+	{35,35,16, 40, 8,  8,300,{1,-1,7,8,12},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃4 ロケット 80-350dam
 	{40,25,30, 10, 5,  5,150,{1,-1,7,8,15},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃5 ブレス 現在HPの数分の一
-	{55,45,35, 75, 1, 50,350,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃6 大型レーザー 100-450dam
-	{30,20,10, 50, 3, 12,500,{1,-1,7,8,14},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃7 自分中心ボール 最大80-500dam
+	{55,45,35, 70,10, 10,350,{1,-1,7,8,13},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃6 大型レーザー 100-450dam
+	{30,20,10, 60, 3, 16,500,{1,-1,7,8,14},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃7 自分中心ボール 最大80-500dam
 	{70,40,25, 30, 4,  8,400,{1,-1,7,8,14},TRUE,TRUE,FALSE,JKF_TYPE_ATTACK },//属性攻撃8 視界内攻撃 70-300dam
 	{80,57,80, 50, 1, 30,300,{6,-1,7,8,16},TRUE,TRUE,FALSE,JKF_TYPE_SPECIAL},//属性攻撃9 フロア攻撃 weird_luck要　300damくらい
 	{25, 1,10,  0, 0,  0,  0,{17,18,7,19,0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//空腹充足
 //11
-	{25,10, 5, 20, 2,  6,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL },//回復(弱)
-	{45,35,10,100, 0,  0,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//回復(強)
-	{20, 1, 5, 20, 0,  0,200,{ 1,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//モンスター感知
-	{25, 5, 5, 20, 0,  0,200,{22,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//罠感知
+	{25,10, 4, 20, 2,  6,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL },//回復(弱)
+	{45,35, 8,100, 0,  0,300,{17,20,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//回復(強)
+	{20, 1, 3, 20, 0,  0,200,{ 1,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//モンスター感知
+	{25, 5, 4, 20, 0,  0,200,{22,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//罠感知
 	{30,10, 5, 20, 0,  0,200,{23,21,7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//アイテム感知
 	{60,45,60,  0, 0,  0,  0,{24,25,7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_SENSE},//啓蒙
 	{35,25,30,  0, 0,  0,  0,{17,26,7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//能力、経験値復活
-	{25, 5, 7, 50, 0,  0,200,{27, 7,19, 0, 0},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//テレポ
+	{25, 5, 5, 50, 0,  0,200,{27, 7,19, 0, 0},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//テレポ
 	{80,45,15, 20, 0,  0,300,{24,28, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//次元の扉
 	{40,30,30,  0, 0,  0,  0,{ 5,29, 7,19, 0},FALSE,TRUE,FALSE,JKF_TYPE_MELEE},//全周囲攻撃
 //21
@@ -1950,14 +1950,14 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 	{80,45,99,  0, 0,  0,  0,{17,33, 7, 8,34},FALSE,FALSE,FALSE,JKF_TYPE_HEAL},//因果修復
 	{40,15,30,  0, 0,  0,  0,{23,26, 7,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_HEAL },//解呪
 //26
-	{60,20,25, 10, 1, 10,100,{35,7, 8,36, 0},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//ビーム・ボルト無効化
+	{60,20,20, 10, 1, 10,100,{35,7, 8,36, 0},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//ビーム・ボルト無効化
 	{70,40,25,  8, 1,  8,100,{37,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//爆風保護
 	{70,30,25,  5, 1,  5,100,{38,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//ブレス保護
 	{80,45,60,  4, 1,  4,  0,{39,9, 7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_DEFENSE },//*破壊*防御
 	{60,20,30, 15, 1, 15,100,{40,41,7, 8,36},FALSE,FALSE,TRUE,JKF_TYPE_SPECIAL },//魔法吸収
 //31
 	{45,20,30, 20, 1, 20,  0,{42,7,19, 0, 0},FALSE,FALSE,TRUE,JKF_TYPE_OTHER },//壁掘り
-	{80,40,50, 30, 0,  0,  0,{43,44,7,19, 0},FALSE,FALSE,TRUE,JKF_TYPE_OTHER },//魔道具強力使用
+	{80,40,40, 20, 0,  0,  0,{43,44,7,19, 0},FALSE,FALSE,TRUE,JKF_TYPE_OTHER },//魔道具強力使用
 	{40,25,12,  7, 1,  7,200,{17,45, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//肉体強化 強化量をxtra1に記録
 	{40,25,12,  7, 1,  7,200,{46,47, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_OTHER },//精神強化 強化量をxtra1に記録
 	{90,45,80,  4, 1,  4,  0,{48,10, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL},//無敵化
@@ -1969,7 +1969,7 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 	{80,45,70, 25, 1, 25,  0,{ 1,51, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//超隠密
 //41
 	{60,35,50, 20, 1, 20,  0,{52,53, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_SPECIAL },//壁抜け
-	{40,10,30, 20, 1, 20,  0,{ 5,54, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//破片オーラ
+	{40,10,25, 20, 1, 20,  0,{ 5,54, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_MELEE },//破片オーラ
 	{35,20,20, 15, 1, 15,100,{55, 9, 7, 8,36},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE },//エレメント耐性
 	{80,50,75, 15, 1, 15,  0,{48, 9, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_DEFENSE },//究極の耐性
 	{60,15,80,  0, 0,  0,  0,{23,56, 7, 8,19}, TRUE,FALSE,FALSE,0 },//武器への能力付与
@@ -1978,9 +1978,9 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 	{35,15,15,  0, 0,  0,100,{23,57, 0, 0, 0},FALSE,FALSE,FALSE,JKF_TYPE_SENSE },//鑑定
 	{70,25,25,  5, 1,  4,100,{ 8,39, 0, 0, 0},FALSE, TRUE,FALSE,JKF_TYPE_SPECIAL },//*破壊*
 	{80,50,180, 0, 0,  0,  0,{24,58, 7, 8,16},FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF},//静寂
-	{70,40,40,100, 0,  0,100,{ 5,60, 7, 8,16},FALSE, TRUE,FALSE,JKF_TYPE_TELEPO },//周辺抹殺
+	{70,40,35,100, 0,  0,100,{ 5,60, 7, 8,16},FALSE, TRUE,FALSE,JKF_TYPE_TELEPO },//周辺抹殺
 //51
-	{80,30,60,  0, 0,  0,  0,{ 5,59, 7, 8,19},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK},//混沌招来
+	{80,30,45,  0, 0,  0,  0,{ 5,59, 7, 8,19},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK},//混沌招来
 	{40,25,20, 50, 1, 50,200,{ 5,60, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO},//視界内アウェイ
 	{75,40,35,  0, 0,  0,  0,{ 5,61,62, 0, 0},FALSE, TRUE,FALSE,JKF_TYPE_DEBUFF},//死の光線
 	{80,30,40, 50, 1, 50,200,{63,64, 7, 8,14},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK },//海が割れる日
@@ -1988,8 +1988,8 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 //56
 	{70,35,20, 10, 1, 10,100,{66,60, 7, 8,19},FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//召喚阻害
 	{55,35,50,  0, 0,  0,  0,{67, 7, 8,19, 0},FALSE,FALSE,FALSE,JKF_TYPE_TELEPO },//現実変容
-	{80,45,60, 50, 1, 50,100,{68, 7, 8,16, 0},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK },//流星群
-	{30, 1, 5, 50, 1, 50,200,{17,71, 7, 8,19},FALSE,FALSE, TRUE,JKF_TYPE_OTHER },//発光
+	{80,45,45, 50, 1, 50,100,{68, 7, 8,16, 0},FALSE, TRUE,FALSE,JKF_TYPE_ATTACK },//流星群
+	{30, 1, 3, 50, 1, 50,200,{17,71, 7, 8,19},FALSE,FALSE, TRUE,JKF_TYPE_OTHER },//発光
 	{80,20,25, 20, 0,  0,200,{17,72, 7, 8,19},FALSE,FALSE, TRUE,JKF_TYPE_MELEE },//白兵能力上昇
 //61
 	{40,15,15,  3, 1,  3,100,{73,74, 7, 8,34},FALSE, TRUE,FALSE,JKF_TYPE_OTHER },//地震
@@ -1998,8 +1998,8 @@ const nameless_arts_generate_type nameless_arts_generate_table[JKF1_MAX+1] =
 //v2.0.4 64-67追加
 	{30,25,10, 50, 1, 50,200,{ 1,79, 7, 8,19 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//能力低下
 	{50, 5,20,  0, 0,  0,  0,{ 4,80, 7, 8,19 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//魔力消去
-	{40,30,30, 50, 1, 50,200,{ 5,78, 7, 8,13 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//幻惑
-	{40,30,30, 15, 0,  0,100,{ 76,77,7, 8, 62 },FALSE,FALSE,FALSE,JKF_TYPE_SENSE },//全感知+フロア感知
+	{40,30,25, 50, 1, 50,200,{ 5,78, 7, 8,13 },FALSE,FALSE,FALSE,JKF_TYPE_DEBUFF },//幻惑
+	{40,30,20, 15, 0,  0,100,{ 76,77,7, 8, 62 },FALSE,FALSE,FALSE,JKF_TYPE_SENSE },//全感知+フロア感知
 
 
 //	{ 0, 0, 0,  0, 0,  0,  0,{ 0, 0,0, 0, 0},FALSE,FALSE,FALSE},//
@@ -3306,7 +3306,11 @@ int	make_nameless_arts_sub1_choose_idx(int mode, int material_idx, bool boost)
 			{
 				int material_level = magatama_material_table[material_idx].mlev;
 
+				//v2.0.4b 「会心の出来」になったときダイス値やベース値がない素材レベル以下の効果を高確率で弾くことにする
+				if (boost && !nameless_arts_generate_table[art_idx].base && nameless_arts_generate_table[art_idx].min_lev <= material_level && !one_in_(6))continue;
+
 				if (boost) material_level += 10;
+
 
 				//素材パワーが0だと何もなし(石塊が材料だと「会心の出来」にならない限り失敗するようにするための処理)
 				if (material_level<1) return 0;
@@ -3661,6 +3665,9 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 	//コスト決める
 	cost = nameless_arts_generate_table[art_idx].cost;
 	cost += cost * nameless_arts_generate_table[art_idx].lev_coef * (plev * 2) / 10000;
+	//v2.0.4b mult100を超えるときコストを増やさない
+	if(mult < 100) cost = cost * mult / 100;
+
 	cost = cost * mult / 100;
 	if (cost < 1) cost = 1;
 	if (cost > 400) cost = 400;
@@ -3681,7 +3688,16 @@ void	make_nameless_arts_sub3_apply_other_params(nameless_arts_activate_param_typ
 		{
 
 			//元素系はダメージ大きめにする
-			if (gf_idx >= GF_ELEC && gf_idx <= JKF2_FIRE)
+			//v2.0.4b 範囲指定をミスっていたのに気づいて修正
+			//if (gf_idx >= GF_ELEC && gf_idx <= JKF2_FIRE)
+
+			if (gf_idx >= GF_ELEC && gf_idx <= GF_FIRE)
+			{
+				base += base / 2 + randint1(base / 2);
+				dice += dice / 2 + randint1((dice + 1) / 2);
+				sides += (sides + 1) / 2;
+			}
+			else
 			{
 				base += randint1(base);
 				dice += dice / 2 + randint1((dice + 1) / 2);
@@ -4566,7 +4582,7 @@ bool make_magatama(void)
 	msg_print(_("あなたは勾玉の制作に取り掛かった...", "You start crafting magatama..."));
 	object_prep(o_ptr, lookup_kind(TV_SPELLCARD, SV_SPELLCARD_MAGATAMA));
 	//確率で「会心の出来」になって特技選定レベルやパワーが増加
-	if (weird_luck())
+	if (weird_luck() || p_ptr->wizard)
 	{
 		boost = TRUE;
 		msg_print(_("会心の出来だ！", "A critical success!"));

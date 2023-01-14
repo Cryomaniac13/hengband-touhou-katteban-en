@@ -16219,10 +16219,10 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_TSUKASA,CLASS_TSUKASA,NULL,"シリンダー",NULL,12 },
 	{ MON_TSUKASA,CLASS_TSUKASA,NULL,"管の中","の",25 },
 
-	{ MON_SANNYO,CLASS_SANNYO,NULL,"星火燎原","の",20 },
-	{ MON_SANNYO,CLASS_SANNYO,NULL,"光彩陸離","の",20 },
-	{ MON_SANNYO,CLASS_SANNYO,NULL,"天馬行空","の",20 },
-	{ MON_SANNYO,CLASS_SANNYO,NULL,"天真爛漫","の",20 },
+	{ MON_MEGUMU,CLASS_MEGUMU,NULL,"星火燎原","の",20 },
+	{ MON_MEGUMU,CLASS_MEGUMU,NULL,"光彩陸離","の",20 },
+	{ MON_MEGUMU,CLASS_MEGUMU,NULL,"天馬行空","の",20 },
+	{ MON_MEGUMU,CLASS_MEGUMU,NULL,"天真爛漫","の",20 },
 	{ MON_MEGUMU,CLASS_MEGUMU,"の","舞",NULL,1 },
 	{ MON_MEGUMU,CLASS_MEGUMU,"の","風",NULL,7 },
 

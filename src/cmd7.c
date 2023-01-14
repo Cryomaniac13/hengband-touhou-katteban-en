@@ -555,7 +555,7 @@ bool put_item_into_inven2(void)
 
 	/*:::自動的にまとめられるか判定しつつアイテムを自動的に空いてる追加インベントリに入れる職業（薬師、お燐）*/
 	/*:::エンジニアは1スロット1つしか入れないがどうせ機械はまとまらないのでこのルーチンのままで問題ないはず*/
-	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS) || pc == CLASS_MISUMARU)
+	if( pc == CLASS_CHEMIST || pc == CLASS_ORIN || pc == CLASS_ENGINEER || pc == CLASS_NITORI || pc == CLASS_SH_DEALER || pc == CLASS_UDONGE || (CHECK_ABLCARD_DEALER_CLASS) )
 	{
 		int freespace = 99;
 		/*:::まとめられるか判定*/
@@ -673,7 +673,8 @@ bool put_item_into_inven2(void)
 	}
 	//咲夜も追加　スロットを常に指定する
 	//v1.1.46 女苑も追加
-	else if(pc == CLASS_SAKUYA || pc == CLASS_JYOON)
+	//v2.0.5 魅須丸も追加しよう
+	else if(pc == CLASS_SAKUYA || pc == CLASS_JYOON || pc == CLASS_MISUMARU)
 	{
 		int wid,hgt;
 		int i;
@@ -693,7 +694,7 @@ bool put_item_into_inven2(void)
 		{
 			int tmp_len;
 
-			if (pc == CLASS_SAKUYA)
+			if (pc == CLASS_SAKUYA || pc == CLASS_MISUMARU)
 			{
 				if (inven_add[i].k_idx)
 				{

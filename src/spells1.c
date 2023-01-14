@@ -9784,17 +9784,13 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 
 	//v1.1.17 純狐一時スキル
 	//v1.1.52 菫子新性格追加
-	if(USE_NAMELESS_ARTS)
-	{
-		if(check_activated_nameless_arts(JKF1_VANISH_BEAM) && typ != GF_PSY_SPEAR &&
-			(flg & (PROJECT_BEAM | PROJECT_MASTERSPARK | PROJECT_REFLECTABLE)))
+	//v2.0.4bスペカや勾玉が無効だったので修正
+	if(check_activated_nameless_arts(JKF1_VANISH_BEAM) && typ != GF_PSY_SPEAR &&
+		(flg & (PROJECT_BEAM | PROJECT_MASTERSPARK | PROJECT_REFLECTABLE)))
 		{
 			msg_print(_("あなたは攻撃を無効化した！", "You have negated the attack!"));
 			return FALSE;
 		}
-
-	}
-
 
 
 	/*:::反射処理*/

@@ -7312,6 +7312,9 @@ void calc_bonuses(void)
 		p_ptr->kill_wall = TRUE;
 	}
 */
+	//v2.0.4b 適用忘れ修正
+	if (check_activated_nameless_arts(JKF1_KILL_WALL)) p_ptr->kill_wall = TRUE;
+
 	/* Hack -- apply racial/class stat maxes */
 	/* Apply the racial modifiers */
 	for (i = 0; i < 6; i++)
@@ -8602,6 +8605,7 @@ void calc_bonuses(void)
 	if (p_ptr->cursed & TRC_TELEPORT) p_ptr->cursed &= ~(TRC_TELEPORT_SELF);
 
 
+	/* ↓ほか種族や職業による特殊パラメータ変化↓ */
 
 	///mod140412 吸血鬼月齢パラメータ処理
 	if((prace_is_(RACE_VAMPIRE) || p_ptr->mimic_form == MIMIC_VAMPIRE)	)
@@ -8651,8 +8655,10 @@ void calc_bonuses(void)
 		p_ptr->dis_to_h[1] += 30;
 		new_speed += 2;
 	}
+
 	//サニー
-	else if(p_ptr->pclass == CLASS_SUNNY)
+	//v2.0.4b elseを取った
+	if(p_ptr->pclass == CLASS_SUNNY)
 	{
 		//v1.1.59 日光ポイントが「元気一杯」以上だと全パラメータ+1
 		if (p_ptr->magic_num1[0] >= SUNNY_CHARGE_SUNLIGHT_3)
@@ -8668,7 +8674,8 @@ void calc_bonuses(void)
 			for (i = 0; i < 6; i++) p_ptr->stat_add[i] -= 1;
 	}
 	//ルナ
-	else if(p_ptr->pclass == CLASS_LUNAR)
+	//v2.0.4b elseを取った
+	if(p_ptr->pclass == CLASS_LUNAR)
 	{
 		if(is_daytime())
 			for (i = 0; i < 6; i++) p_ptr->stat_add[i] -= 1;
@@ -8676,7 +8683,8 @@ void calc_bonuses(void)
 			for (i = 0; i < 6; i++) p_ptr->stat_add[i] += 1;
 	}
 	//霊夢(パラメータ)
-	else if(p_ptr->pclass == CLASS_REIMU)
+	//v2.0.4b elseを取った
+	if(p_ptr->pclass == CLASS_REIMU)
 	{
 		int rank = osaisen_rank();
 		for (i = 0; i < 6; i++) p_ptr->stat_add[i] += rank;
@@ -8693,7 +8701,9 @@ void calc_bonuses(void)
 			new_speed += plev / 5;
 		}
 	}
-	else if(p_ptr->pclass == CLASS_KANAKO)
+	//神奈子
+	//v2.0.4b elseを取った
+	if(p_ptr->pclass == CLASS_KANAKO)
 	{
 		int rank = kanako_rank();
 		for (i = 0; i < 6; i++) p_ptr->stat_add[i] += rank;
@@ -8704,13 +8714,17 @@ void calc_bonuses(void)
 		}
 	}
 	//ドレミーパラメータアップ
-	else if(p_ptr->pclass == CLASS_DOREMY && IN_DREAM_WORLD)
+	//v2.0.4b elseを取った
+	if(p_ptr->pclass == CLASS_DOREMY && IN_DREAM_WORLD)
 	{
 		for (i = 0; i < 6; i++) p_ptr->stat_add[i] += 2;
 
 	}
+
+
 	//v1.1.17 純狐白兵能力アップ
-	else if( check_activated_nameless_arts(JKF1_MASTER_MELEE))
+	//v2.0.4b elseを取った スペルカードによる一時効果発動を上のクラスで使えなかったのが直るはず
+	if( check_activated_nameless_arts(JKF1_MASTER_MELEE))
 	{
 		p_ptr->to_a += 30 + (p_ptr->lev * 2 / 5);
 		p_ptr->dis_to_a += 30 + (p_ptr->lev * 2 / 5);
@@ -8726,7 +8740,7 @@ void calc_bonuses(void)
 		p_ptr->dis_to_d[1] += plev / 3;
 	}
 
-	//v1.1.21 兵士パラメータアップ　獣人満月と累積するようにelseはつけない
+	//v1.1.21 兵士パラメータアップ
 	if (HAVE_SOLDIER_SKILL(SOLDIER_SKILL_COMBAT,SS_C_MUSCLE))
 	{
 		p_ptr->stat_add[A_STR] += 2;
@@ -8742,7 +8756,7 @@ void calc_bonuses(void)
 	}
 
 
-	//v1.1.86
+	//v1.1.86 カード関係のパラメータアップ
 	if (TRUE)
 	{
 		int card_num;

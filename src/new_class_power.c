@@ -57,7 +57,7 @@ class_power_type class_power_misumaru[] =
 	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("勾玉確認", "Browse Magatama"),
 	_("装備した勾玉の発動時の効果を確認する。",
     "Confirm activation effects of magatama you currently have equipped.")},
-	{ 1,0,0,FALSE,FALSE,A_INT,0,0,_("勾玉発動", "Activate Magatama"),
+	{ 1,0,0,FALSE,TRUE,A_INT,0,0,_("勾玉発動", "Activate Magatama"),
 	_("装備した勾玉を発動する。発動のたびに特技ごとに設定された追加のMPを消費する。",
     "Activates an equipped magatama. Uses an additional amount of MP depending on its ability.")},
 	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("勾玉取り外し", "Remove Magatama"),
