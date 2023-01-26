@@ -5558,7 +5558,7 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "速やかに一人で始末をつけないと天狗の誇りに関わる。");
 #else
                 strcpy(quest_text[line++], "While you were away, some strangers have settled in your house.");
-				strcpy(quest_text[line++], "They're perform suspicious rituals at night and harm those who get");
+				strcpy(quest_text[line++], "They're performing suspicious rituals at night and harm those who get");
 				strcpy(quest_text[line++], "too close. Your tengu pride tells you to quickly deal with it");
 				strcpy(quest_text[line++], "by yourself.");
 #endif
