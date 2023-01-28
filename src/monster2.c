@@ -303,11 +303,14 @@ void delete_monster_idx(int i)
 	if (!character_icky)
 		lite_spot(y, x);
 
-	//モンスターの消滅により変身可能になったかチェック
-	if(p_ptr->pclass == CLASS_NUE)
-	{
-		check_nue_undefined();
-	}
+	//ぬえがモンスターの消滅により変身可能になったかチェック
+	//v2.0.5 変身可能チェックはprocess_player()の＠の手番開始のときに限定することにしここではフラグだけ立てる。
+	//たぶんこれが想定しないときに呼ばれているのがクラッシュバグの原因
+	//if(p_ptr->pclass == CLASS_NUE)
+	//{
+	//	check_nue_undefined();
+	//}
+	flag_nue_check_undefined = TRUE;
 
 	/* Update some things */
 	if (r_ptr->flags7 & (RF7_LITE_MASK | RF7_DARK_MASK))
@@ -6062,6 +6065,48 @@ bool alloc_guardian(bool def_val)
 	return def_val;
 }
 
+//v2.0.5 はたての調査で見つけたモンスターの配置
+void alloc_hatate_search_mon()
+{
+	int try_num = 100;
+	int ox, oy;
+	int search_r_idx	= p_ptr->hatate_mon_search_ridx;
+	int search_dungeon	= p_ptr->hatate_mon_search_dungeon / 1000;
+	int search_level	= p_ptr->hatate_mon_search_dungeon % 1000;
+	bool flag_success = FALSE;
+
+	//特定フロアのみ
+	if (!search_r_idx) return;
+	if (search_dungeon != dungeon_type || search_level != dun_level) return;
+
+	if (search_r_idx < 0 || search_r_idx >= max_r_idx)
+	{
+		msg_format(_("ERROR:p_ptr->hatate_mon_search_ridxの値がおかしい(%d)",
+                    "ERROR: Weird value for p_ptr->hatate_mon_search_ridx (%d)"), search_r_idx);
+		return;
+	}
+
+	//指定されたユニークモンスターを配置
+	while (try_num)
+	{
+		/* Get a random spot */
+		oy = randint1(cur_hgt - 4) + 2;
+		ox = randint1(cur_wid - 4) + 2;
+
+		if (cave_empty_bold2(oy, ox) && monster_can_cross_terrain(cave[oy][ox].feat, &r_info[search_r_idx], 0))
+		{
+			if (place_monster_aux(0, oy, ox, search_r_idx, (PM_ALLOW_GROUP | PM_NO_KAGE | PM_NO_PET))) flag_success = TRUE;
+		}
+
+		try_num--;
+	}
+
+	if(flag_success) msg_format(_("調査によるとここに%sがいるはずだ。",
+                                "According to info you have, %s should be here."), r_name + r_info[search_r_idx].name);
+
+	return;
+
+}
 
 /*
  * Attempt to allocate a random monster in the dungeon.

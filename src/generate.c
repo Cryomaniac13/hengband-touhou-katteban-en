@@ -1482,6 +1482,9 @@ msg_format("モンスター数基本値を %d から %d に減らします", small_tester, i);
 
 	i += randint1(8);
 
+	//v2.05 はたてのモンスター探索により見つかったモンスターの配置
+	alloc_hatate_search_mon();
+
 	/* Put some monsters in the dungeon */
 /*:::モンスター配置*/
 	for (i = i + k; i > 0; i--)

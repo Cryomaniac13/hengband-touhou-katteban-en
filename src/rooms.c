@@ -6813,6 +6813,13 @@ byte calc_ex_dun_bldg_prob(int ex_bldg_idx)
 		if (p_ptr->prace == RACE_ZASHIKIWARASHI) return 30;
 		else return 10;
 
+	case BLDG_EX_HATATE:
+		//‚·‚Å‚Éƒ^[ƒQƒbƒg‚ª‚¢‚é‚Æ‚«‚Í‚»‚ÌƒtƒƒA‚ð’Ê‰ß‚·‚é‚Ü‚Å‚±‚ÌŒš•¨‚Ío‚È‚¢
+		if (p_ptr->hatate_mon_search_ridx) return 0;
+
+		if (p_ptr->pclass == CLASS_HATATE) return 50;
+		else return 10;
+
 	default:
 		msg_format(_("WARNING:Œš•¨idx(%d)‚ÌoŒ»Šm—¦‚ªÝ’è‚³‚ê‚Ä‚¢‚È‚¢",
                     "WARNING: Undefined rarity for building idx %d"),ex_bldg_idx);
@@ -6977,6 +6984,12 @@ void	init_extra_dungeon_buildings(void)
 			building[i].actions[2] = BACT_IDENTS;
 			building[i].member_costs[2] = 500;
 
+			sprintf(building[i].act_names[4], _("HŽ–‚·‚é", "Buy food and drink"));
+			building[i].letters[4] = 'f';
+			building[i].actions[4] = BACT_FOOD;
+			building[i].member_costs[4] = 100;
+
+
 			break;
 		}
 		case BLDG_EX_KOGASA:
@@ -7101,6 +7114,12 @@ void	init_extra_dungeon_buildings(void)
 			building[i].letters[2] = 'c';
 			building[i].actions[2] = BACT_LOSE_MUTATION;
 			building[i].member_costs[2] = 5000;
+
+			sprintf(building[i].act_names[4], _("HŽ–‚·‚é", "Buy food and drink"));
+			building[i].letters[4] = 'f';
+			building[i].actions[4] = BACT_FOOD;
+			building[i].member_costs[4] = 10;
+
 
 		}
 		break;
@@ -7449,6 +7468,58 @@ void	init_extra_dungeon_buildings(void)
 			building[i].letters[2] = 'h';
 			building[i].actions[2] = BACT_EX_SEARCH_AROUND;
 
+			sprintf(building[i].act_names[4], _("HŽ–‚·‚é", "Buy food and drink"));
+			building[i].letters[4] = 'f';
+			building[i].actions[4] = BACT_FOOD;
+			building[i].member_costs[4] = 10;
+
+		}
+		break;
+
+		case BLDG_EX_HATATE:
+		{
+			if (p_ptr->pclass == CLASS_HATATE)
+			{
+
+				sprintf(building[i].name, _("‰ä‚ªƒAƒWƒg", "Your hideout"));
+				sprintf(building[i].owner_name, _("•PŠCž©@‚Í‚½‚Ä", "Hatate Himekaidou"));
+
+				sprintf(building[i].act_names[0], _("l’T‚µ‚ð‚·‚é", "Search for someone"));
+				building[i].letters[0] = 's';
+				building[i].actions[0] = BACT_HATATE_SEARCH_MON;
+				building[i].member_costs[0] = 0;
+
+				sprintf(building[i].act_names[2], _("ŠÓ’è", "Identify"));
+				building[i].letters[2] = 'i';
+				building[i].actions[2] = BACT_IDENT_ONE;
+				building[i].member_costs[2] = 0;
+
+				sprintf(building[i].act_names[4], _("‹xŒe‚µ‚Ä‚¢‚­", "Rest"));
+				building[i].letters[4] = 'r';
+				building[i].actions[4] = BACT_REST;
+				building[i].member_costs[4] = 0;
+				sprintf(building[i].act_names[5], _("HŽ–‚·‚é", "Get food and drink"));
+				building[i].letters[5] = 'f';
+				building[i].actions[5] = BACT_FOOD;
+				building[i].member_costs[5] = 0;
+
+			}
+			else
+			{
+				sprintf(building[i].name, _("ŽE•—Œi‚È•”‰®", "Dull boring room"));
+				sprintf(building[i].owner_name, _("•PŠCž©@‚Í‚½‚Ä", "Hatate Himekaidou"));
+
+				sprintf(building[i].act_names[0], _("l’T‚µ‚ð—Š‚Þ", "Search for someone"));
+				building[i].letters[0] = 's';
+				building[i].actions[0] = BACT_HATATE_SEARCH_MON;
+				building[i].member_costs[0] = dun_level * 100;
+
+				sprintf(building[i].act_names[2], _("ŠÓ’è", "Identify"));
+				building[i].letters[2] = 'i';
+				building[i].actions[2] = BACT_IDENT_ONE;
+				building[i].member_costs[2] = 50;
+
+			}
 
 		}
 		break;
@@ -7488,7 +7559,7 @@ static byte build_type_ex(void)
 	building_ex_idx[0] = get_extra_dungeon_building_idx();
 
 	//ƒeƒXƒg—p
-	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_ZASHIKI;
+	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_HATATE;
 
 	/* Find and reserve some space in the dungeon.  Get center of room. */
 	if (!find_space(&yval, &xval, ysize, xsize)) return 0;

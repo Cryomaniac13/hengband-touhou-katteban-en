@@ -1260,7 +1260,7 @@ const cptr new_store_name[TOWN_MAX][MAX_STORES] = {
 	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","œ“Ÿs","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},//‰Í“¶
 	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","“D–_s","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},
 	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","èÁ“°","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},//èÁ“°
-	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","“D–_s","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},
+	{"‰®‘äw‰ÍéG‰İx","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","“D–_s","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},//–½˜@›
 	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","“D–_s","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},
 	{"’n‰ºG‰İ“X","’n‰º–h‹ï“X","’n‰º•Ší“X","’n‰º–ò“X/ğ‰®","’n‰ºŠª•¨“X","’n‰º–‚–@“X","ƒuƒ‰ƒbƒNƒ}[ƒPƒbƒg","‹’“_","’n‰º‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},
 	{"G‰İ“X","–h‹ï“X","•Ší“X","–ò“X/ğ‰®","Šª•¨“X","–‚–@“X","“D–_s","‹’“_","‘“X","ƒGƒ“ƒgƒ‰ƒ“ƒX"},
@@ -1275,7 +1275,7 @@ const cptr new_store_name[TOWN_MAX][MAX_STORES] = {
 	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Antique Market","Exploration Base","Bookstore","Entrance"},//‰Í“¶
 	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Thieves Market","Exploration Base","Bookstore","Entrance"},
 	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Kourindo","Exploration Base","Bookstore","Entrance"},//èÁ“°
-	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Thieves Market","Exploration Base","Bookstore","Entrance"},
+	{"Kappa General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Thieves Market","Exploration Base","Bookstore","Entrance"},//–½˜@›
 	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Thieves Market","Exploration Base","Bookstore","Entrance"},
 	{"Underground General Store","Underground Armoury","Underground Weapon Store","Underground Pharmacy/Liquor Store","Underground Scroll Store","Underground Magic Store","Black Market","Home","Underground Bookstore","Entrance"},
 	{"General Store","Armoury","Weapon Store","Pharmacy/Liquor Store","Scroll Store","Magic Store","Thieves Market","Exploration Base","Bookstore","Entrance"},

@@ -123,3 +123,5 @@ of Gunhill
 'Scream!'
 'Shine!'
 'Shoot!'
+'Funny Explosive Weapon'
+'Kappa 2001'

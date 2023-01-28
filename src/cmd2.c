@@ -7404,6 +7404,9 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 						if ((tdam > 0) && !object_is_potion(q_ptr))
 							anger_monster(m_ptr);
 
+						//v2.0.5 投擲にターゲット変更(反撃召喚など用)が設定されていなかった
+						set_target(m_ptr, py, px);
+
 						/* Take note */
 						if (fear && m_ptr->ml)
 						{

@@ -2739,5 +2739,8 @@ extern bool make_magatama(void);
 extern void magatama_effect_desc(char *desc, object_type *o_ptr);
 extern bool	activate_magatama(bool only_info);
 
+extern bool	flag_nue_check_undefined;
 
-
+//v2.0.5
+extern bool hatate_search_unique_monster(void);
+extern void alloc_hatate_search_mon();

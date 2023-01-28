@@ -223,6 +223,81 @@ static cptr comment_nazgul_loss2[MAX_COMMENT_1] =
 	"店の奥から巨大な影のような獣が出てきてあなたを睨み付けた。",
 };
 
+//v2.0.5 命蓮寺のにとりの屋台
+static cptr comment_nitori_agree[MAX_COMMENT_1] =
+{
+	"「毎度ありー！」",
+	"「これからもぜひうちで頼むよ！」",
+	"「さあさあ、他には何か御入用で？」",
+	"店主は美味そうにきゅうりを食べている。",
+};
+static cptr comment_nitori_profit1[MAX_COMMENT_1] =
+{
+	"「なんだ未鑑定か。それなら払えるのはこの程度だね」",
+	"「値打ち物を買い叩かれたくなかったら鑑定の巻物はいかが？」",
+	"「これは上客の予感だ！」",
+	"店主はニヤニヤ笑っている。",
+};
+static cptr comment_nitori_profit2[MAX_COMMENT_1] =
+{
+	"「残念だね！もう取引成立だよ！」",
+	"「冒険者相手の商売は金になるなぁ。」",
+	"「あっはっは！大儲けだ！」",
+	"店主は大笑いしている。",
+};
+static cptr comment_nitori_loss1[MAX_COMMENT_1] =
+{
+	"「お客さん困りますぜー。」",
+	"「お客さん困りますぜー。」",
+	"「この悪党め！塩撒いとけ塩！」",
+	"店主に睨まれた。",
+};
+static cptr comment_nitori_loss2[MAX_COMMENT_1] =
+{
+	"「ぎゃああああ！」",
+	"「だ、騙したなー！」",
+	"「く、屈辱だー！」",
+	"店主は泣きわめいている。",
+};
+
+//v2.0.5 命蓮寺のにとりの屋台(にとりが＠のとき)
+static cptr comment_funny_agree[MAX_COMMENT_1] =
+{
+	"「帰ってきたら武勇伝聞かせてねー！」",
+	"「帰ってきたら武勇伝聞かせてねー！」",
+	"店主は楽しげに手を振った。",
+	"店主は楽しげに手を振った。",
+};
+static cptr comment_funny_profit1[MAX_COMMENT_1] =
+{
+	"「あれー？鑑定もせずに売るほど急いでるのー？」",
+	"「あれー？鑑定もせずに売るほど急いでるのー？」",
+	"店主は笑っている。",
+	"店主は笑っている。",
+};
+static cptr comment_funny_profit2[MAX_COMMENT_1] =
+{
+	"「にとりったら川流れ的なミスだねー！」",
+	"「にとりったら川流れ的なミスだねー！」",
+	"「にとりったら川流れ的なミスだねー！」",
+	"「にとりったら川流れ的なミスだねー！」",
+};
+static cptr comment_funny_loss1[MAX_COMMENT_1] =
+{
+	"「にとりの交渉はキレッキレだねー！」",
+	"「にとりの交渉はキレッキレだねー！」",
+	"「にとりの交渉はキレッキレだねー！」",
+	"「にとりの交渉はキレッキレだねー！」",
+};
+static cptr comment_funny_loss2[MAX_COMMENT_1] =
+{
+	"「いいけど、私は店番のバイトだから結局にとりの損だよー？」",
+	"「いいけど、私は店番のバイトだから結局にとりの損だよー？」",
+	"「いいけど、私は店番のバイトだから結局にとりの損だよー？」",
+	"「いいけど、私は店番のバイトだから結局にとりの損だよー？」",
+};
+
+
 #else
 
 static cptr comment_basic_agree[MAX_COMMENT_1] =
@@ -382,6 +457,81 @@ static cptr comment_nazgul_loss2[MAX_COMMENT_1] =
 	"A huge shadowy beast comes out of the back of the store and glares at you.",
 	"A huge shadowy beast comes out of the back of the store and glares at you.",
 };
+
+//v2.0.5 命蓮寺のにとりの屋台
+static cptr comment_nitori_agree[MAX_COMMENT_1] =
+{
+	"'Come back again!'",
+	"'I hope you continue doing business with them!'",
+	"'Well, do you need anything else?'",
+	"The shopkeeper happily snacks on a cucumber.",
+};
+static cptr comment_nitori_profit1[MAX_COMMENT_1] =
+{
+	"'Unindentified stuff, huh? Well, that's all I could pay for that.'",
+	"'How about Scrolls of Identify to avoid understelling merchandise?'",
+	"'I have a good feeling about this!'",
+	"The shopkeeper grins happily.",
+};
+static cptr comment_nitori_profit2[MAX_COMMENT_1] =
+{
+	"'Too bad! The deal is already done!'",
+	"'Doing business with adventurers is very profitable.'",
+	"'Hahaha! Jackpot!'",
+	"The shopkeeper laughs loudly.",
+};
+static cptr comment_nitori_loss1[MAX_COMMENT_1] =
+{
+	"'You're a troublesome customer.'",
+	"'You're a troublesome customer.'",
+	"'You scoundrel!'",
+	"The shopkeeper stares at you.",
+};
+static cptr comment_nitori_loss2[MAX_COMMENT_1] =
+{
+	"'Gyaaaaaah!'",
+	"'You- You tricked me!'",
+	"'Argh, you made a fool out of me!'",
+	"The shopkeeper starts crying",
+};
+
+//v2.0.5 命蓮寺のにとりの屋台(にとりが＠のとき)
+static cptr comment_funny_agree[MAX_COMMENT_1] =
+{
+	"'Tell me about your heroic adventures when you come back!'",
+	"'Tell me about your heroic adventures when you come back!'",
+	"The shopkeeper happily waves her hand.",
+	"The shopkeeper happily waves her hand.",
+};
+static cptr comment_funny_profit1[MAX_COMMENT_1] =
+{
+	"'Oh? You don't have time to identify your merchandise before selling it?'",
+	"'Oh? You don't have time to identify your merchandise before selling it?'",
+	"The shopkeeper laughs.",
+	"The shopkeeper laughs.",
+};
+static cptr comment_funny_profit2[MAX_COMMENT_1] =
+{
+	"'You certainly didn't do well on that one, Nitori!",
+	"'You certainly didn't do well on that one, Nitori!",
+	"'You certainly didn't do well on that one, Nitori!",
+	"'You certainly didn't do well on that one, Nitori!",
+};
+static cptr comment_funny_loss1[MAX_COMMENT_1] =
+{
+	"'You're great at transactions, Nitori!",
+	"'You're great at transactions, Nitori!",
+	"'You're great at transactions, Nitori!",
+	"'You're great at transactions, Nitori!",
+};
+static cptr comment_funny_loss2[MAX_COMMENT_1] =
+{
+	"'Fine, but I'm just a part-time worker here, so aren't you the one losing out?",
+	"'Fine, but I'm just a part-time worker here, so aren't you the one losing out?",
+	"'Fine, but I'm just a part-time worker here, so aren't you the one losing out?",
+	"'Fine, but I'm just a part-time worker here, so aren't you the one losing out?",
+};
+
 
 #endif
 #define MAX_COMMENT_2A	2
@@ -649,6 +799,15 @@ static void say_comment_1(void)
 		msg_print(comment_bm_agree[randint0(MAX_COMMENT_1)]);
 	else if ( cur_store_num == STORE_BOOK &&  p_ptr->town_num == TOWN_HITOZATO) //鈴奈庵
 		msg_print(comment_suzuna_agree[randint0(MAX_COMMENT_1)]);
+	//v2.0.5 命蓮寺の屋台 プレイヤーがにとりかどうかで分岐
+	else if (p_ptr->town_num == TOWN_MYOURENJI)
+	{
+		if (p_ptr->pclass == CLASS_NITORI)
+			msg_print(comment_funny_agree[randint0(MAX_COMMENT_1)]);
+		else
+			msg_print(comment_nitori_agree[randint0(MAX_COMMENT_1)]);
+	}
+
 	else //ほかの店
 		msg_print(comment_basic_agree[randint0(MAX_COMMENT_1)]);
 
@@ -880,11 +1039,12 @@ static cptr comment_7d[MAX_COMMENT_7D] =
  */
 /*:::実際の価格より高く/安く売ったときに店主のリアクション*/
 ///mod140620 店によりメッセージ変更。大損の定義を「無価値な物を買い取った」から「3000以上カモられた」に変えた。「大儲け」の定義を「見積もりより実際価値が3000以上高い」に変えた。
+//v2.0.5 ↑1000にする
 static void purchase_analyze(s32b price, s32b value, s32b guess)
 {
 	/* Item was worthless, but we bought it */
 	//if ((value <= 0) && (price > value))
-	if ((price - value) >= 3000)
+	if ((price - value) >= 1000)
 	{
 		/* Comment */
 		//msg_print(comment_7a[randint0(MAX_COMMENT_7A)]);
@@ -895,6 +1055,14 @@ static void purchase_analyze(s32b price, s32b value, s32b guess)
 			msg_print(comment_nazgul_loss2[randint0(MAX_COMMENT_1)]);
 		else if ( cur_store_num == STORE_BOOK &&  p_ptr->town_num == TOWN_HITOZATO) //鈴奈庵
 			msg_print(comment_suzuna_loss2[randint0(MAX_COMMENT_1)]);
+		//v2.0.5 命蓮寺の屋台 プレイヤーがにとりかどうかで分岐
+		else if (p_ptr->town_num == TOWN_MYOURENJI)
+		{
+			if(p_ptr->pclass == CLASS_NITORI)
+				msg_print(comment_funny_loss2[randint0(MAX_COMMENT_1)]);
+			else
+				msg_print(comment_nitori_loss2[randint0(MAX_COMMENT_1)]);
+		}
 		else //ほかの店
 			msg_print(comment_basic_loss2[randint0(MAX_COMMENT_1)]);
 
@@ -933,7 +1101,7 @@ static void purchase_analyze(s32b price, s32b value, s32b guess)
 	}
 
 	/* Item was a great bargain, and we got away with it */
-	else if ((value - guess >= 3000) )
+	else if ((value - guess >= 1000) )
 	{
 		if (p_ptr->town_num == TOWN_KOURIN) //香霖堂
 			msg_print(comment_korin_profit2[randint0(MAX_COMMENT_1)]);
@@ -941,6 +1109,14 @@ static void purchase_analyze(s32b price, s32b value, s32b guess)
 			msg_print(comment_nazgul_profit2[randint0(MAX_COMMENT_1)]);
 		else if ( cur_store_num == STORE_BOOK &&  p_ptr->town_num == TOWN_HITOZATO) //鈴奈庵
 			msg_print(comment_suzuna_profit2[randint0(MAX_COMMENT_1)]);
+		//v2.0.5 命蓮寺の屋台 プレイヤーがにとりかどうかで分岐
+		else if (p_ptr->town_num == TOWN_MYOURENJI)
+		{
+			if (p_ptr->pclass == CLASS_NITORI)
+				msg_print(comment_funny_profit2[randint0(MAX_COMMENT_1)]);
+			else
+				msg_print(comment_nitori_profit2[randint0(MAX_COMMENT_1)]);
+		}
 		else //ほかの店
 			msg_print(comment_basic_profit2[randint0(MAX_COMMENT_1)]);
 		/* Comment */
@@ -968,6 +1144,14 @@ static void purchase_analyze(s32b price, s32b value, s32b guess)
 			msg_print(comment_nazgul_profit1[randint0(MAX_COMMENT_1)]);
 		else if ( cur_store_num == STORE_BOOK &&  p_ptr->town_num == TOWN_HITOZATO) //鈴奈庵
 			msg_print(comment_suzuna_profit1[randint0(MAX_COMMENT_1)]);
+		//v2.0.5 命蓮寺の屋台 プレイヤーがにとりかどうかで分岐
+		else if (p_ptr->town_num == TOWN_MYOURENJI)
+		{
+			if (p_ptr->pclass == CLASS_NITORI)
+				msg_print(comment_funny_profit1[randint0(MAX_COMMENT_1)]);
+			else
+				msg_print(comment_nitori_profit1[randint0(MAX_COMMENT_1)]);
+		}
 		else //ほかの店
 			msg_print(comment_basic_profit1[randint0(MAX_COMMENT_1)]);
 
@@ -1033,6 +1217,51 @@ static bool store_create_hook_general(int k_idx)
 
 	return (FALSE);
 }
+
+
+//命蓮寺にオープンした河城雑貨のアイテム生成hook
+static bool store_create_hook_general_nitori(int k_idx)
+{
+	object_kind *k_ptr = &k_info[k_idx];
+
+	//つるはし
+	if ((k_ptr->tval == TV_AXE) && (k_ptr->sval == SV_WEAPON_PICK))	return (TRUE);
+	//たいまつとランタン
+	if ((k_ptr->tval == TV_LITE) && (k_ptr->sval == SV_LITE_TORCH || k_ptr->sval == SV_LITE_LANTERN)) return (TRUE);
+	//油つぼ
+	if ((k_ptr->tval == TV_FLASK) && (k_ptr->sval == SV_FLASK_OIL))	return (TRUE);
+	//水
+	if ((k_ptr->tval == TV_SOFTDRINK) && (k_ptr->sval == SV_DRINK_WATER)) return (TRUE);
+	//ジュース
+	if ((k_ptr->tval == TV_SOFTDRINK) && (k_ptr->sval == SV_DRINK_APPLE_JUICE || k_ptr->sval == SV_DRINK_GRAPE_JUICE)) return (TRUE);
+	//食料、乾パン、干し肉、きゅうり
+	if ((k_ptr->tval == TV_FOOD) && (k_ptr->sval == SV_FOOD_RATION || k_ptr->sval == SV_FOOD_HARDBUSC || k_ptr->sval == SV_FOOD_VENISON || k_ptr->sval == SV_FOOD_CUCUMBER)) return (TRUE);
+	//クッキー
+	if ((k_ptr->tval == TV_SWEETS) && (k_ptr->sval == SV_SWEET_COOKIE)) return (TRUE);
+	//かっぱの里
+	if ((k_ptr->tval == TV_ALCOHOL) && (k_ptr->sval == SV_ALCOHOL_KAPPA)) return (TRUE);
+
+	//鑑定の巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_IDENTIFY) return (TRUE);
+	//解呪の巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_REMOVE_CURSE) return (TRUE);
+	//財宝感知の巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_DETECT_GOLD) return (TRUE);
+	//ドア・階段感知の巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_DETECT_DOOR) return (TRUE);
+	//ショートテレポの巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_PHASE_DOOR) return (TRUE);
+	//テレポートの巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_TELEPORT) return (TRUE);
+	//帰還の巻物
+	if (k_ptr->tval == TV_SCROLL && k_ptr->sval == SV_SCROLL_WORD_OF_RECALL) return (TRUE);
+
+
+
+
+	return (FALSE);
+}
+
 
 //防具店のアイテム生成hook
 static bool store_create_hook_armoury(int k_idx)
@@ -1749,6 +1978,9 @@ static s32b price_item(object_type *o_ptr, int greed, bool flip)
 		if (cur_store_num == STORE_BLACK)
 			price = price * 2;
 
+		//v2.0.5 命蓮寺の屋台は少し割高
+		if (p_ptr->town_num == TOWN_MYOURENJI) price = price * 4 / 3;
+
 
 		/* Compute the final price (with rounding) */
 		/* Hack -- prevent overflow */
@@ -1951,11 +2183,11 @@ static void mass_produce(object_type *o_ptr)
 	yamawaro_card_num = count_ability_card(ABL_CARD_YAMAWARO);
 	if (yamawaro_card_num)
 	{
-
 		if (one_in_(12 - yamawaro_card_num) && discount < 50) discount = 50;
-
-
 	}
+
+	//v2.0.5 命蓮寺のにとりの屋台は絶対割引しない　割引アイテムでインベントリが埋まって物が並びにくくならないようにする措置でもある
+	if (p_ptr->town_num == TOWN_MYOURENJI) discount = 0;
 
 
 	if (o_ptr->art_name)
@@ -2230,6 +2462,10 @@ static bool store_will_buy(object_type *o_ptr)
 				case TV_CLOAK:
 				case TV_SOUVENIR:
 				case TV_RIBBON:
+					//v2.0.5 雑貨屋は巻物と酒も買い取ることにする
+				case TV_SCROLL:
+				case TV_ALCOHOL:
+
 				break;
 				//雑貨屋は武器防具を釣竿と桶とつるはしのみ欲しがる
 				case TV_ARMOR:
@@ -3115,6 +3351,7 @@ static void store_create(void)
 			/* Hack -- fake level for apply_magic() */
 			//level = rand_range(1, STORE_OBJ_LEVEL);
 			if(p_ptr->town_num==TOWN_HITOZATO) level = 5;//人里
+			else if (p_ptr->town_num == TOWN_MYOURENJI) level = 5;//命蓮寺
 			else if(p_ptr->town_num==TOWN_TENGU) level = 10;//天狗の里
 			else if(p_ptr->town_num==TOWN_CHITEI) level = 20;//地底
 			else if(p_ptr->town_num==TOWN_KOUMA) level = 20;//紅魔館
@@ -3126,7 +3363,14 @@ static void store_create(void)
 			if (level > 127) level = 127;
 
 
-			if(cur_store_num == STORE_GENERAL) get_obj_num_hook = store_create_hook_general;
+			if (cur_store_num == STORE_GENERAL)
+			{
+				//v2.0.5 命蓮寺に河城雑貨をオープン。不足しがちな物資を少し割高で売ることにした
+				if(p_ptr->town_num == TOWN_MYOURENJI)
+					get_obj_num_hook = store_create_hook_general_nitori;
+				else
+					get_obj_num_hook = store_create_hook_general;
+			}
 			else if(cur_store_num == STORE_ARMOURY) get_obj_num_hook = store_create_hook_armoury;
 			else if(cur_store_num == STORE_WEAPON) get_obj_num_hook = store_create_hook_weapon;
 			else if(cur_store_num == STORE_TEMPLE) get_obj_num_hook = store_create_hook_liquor;
@@ -3155,7 +3399,10 @@ static void store_create(void)
 		object_prep(q_ptr, i);
 
 		/* Apply some "low-level" magic (no artifacts) */
-		apply_magic(q_ptr, level, AM_NO_FIXED_ART);
+		if(p_ptr->town_num == TOWN_MYOURENJI)
+			apply_magic(q_ptr, level, AM_FORCE_NORMAL);//にとりの屋台は強制通常品
+		else
+			apply_magic(q_ptr, level, AM_NO_FIXED_ART);
 
 		///mod140611 珍品は店に並ばない
 		if(q_ptr->tval == TV_SOUVENIR) continue;
@@ -6916,6 +7163,9 @@ void store_maint(int town_num, int store_num)
 
 	/* Hack -- prevent "overflow" */
 	if (j >= st_ptr->stock_size) j = st_ptr->stock_size - 1;
+
+	//test
+	//j = 18;
 
 	/* Acquire some new items */
 	while (st_ptr->stock_num < j) store_create();

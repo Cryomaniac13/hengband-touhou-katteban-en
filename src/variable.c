@@ -18,8 +18,8 @@
  */
 const cptr copyright[5] =
 {
-	"Copyright (c) 1989 James E. Wilson, Robert A. Keoneke",
 	"",
+	"Copyright (c) 1989 James E. Wilson, Robert A. Keoneke",
 	"This software may be copied and distributed for educational, research,",
 	"and not for profit purposes provided that this copyright and statement",
 	"are included in all such copies."
@@ -1735,5 +1735,8 @@ int	gv_test4=0;
 
 //v2.0.1 「生命爆発の薬」の効果による爆発を発生させるフラグ
 bool	flag_life_explode = FALSE;
+
+//v2.0.5 ぬえプレイ中にこのフラグが立っているとき行動時に正体不明状態に変身可能かどうかチェックする
+bool	flag_nue_check_undefined = TRUE;
 
 

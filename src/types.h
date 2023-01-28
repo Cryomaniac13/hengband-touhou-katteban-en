@@ -1723,7 +1723,12 @@ struct player_type
 	u32b ptype_new_flags3;
 	u32b ptype_new_flags4;
 
-	s16b future_use_s16b[16];
+	//v2.0.5 ‚Í‚½‚ÄŒš•¨Œø‰Ê future_use_s16b‚©‚ç2‚ÂŽg‚¤
+	s16b hatate_mon_search_ridx;
+	s16b hatate_mon_search_dungeon;
+
+
+	s16b future_use_s16b[14];
 	s32b future_use_s32b[8];
 
 

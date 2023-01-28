@@ -4866,6 +4866,8 @@ W:100:80:180:160000
 P:0:8d100:0:800:0
 F:ACTIVATE | FULL_NAME
 U:BFG9000
+D:$A weapon that fires giant energy bullets. Extremely powerful, but
+D:$difficult to properly use.
 D:巨大なエネルギー弾を放つ兵器だ。極めて強力だが扱いが難しい。
 
 N:302:天使銃
@@ -4897,6 +4899,8 @@ W:20:12:20:3000
 P:0:3d12:20:8:0
 F:ACTIVATE | FULL_NAME
 U:GUN_VARIABLE
+D:$A gun crudely constructed out of odd materials. Brought into Gensoukyou
+D:$by a certain outsider.
 D:妙な材質の粗雑な造りの銃だ。ある外来人が幻想郷に持ち込んだ。
 
 N:305:ハルコンネンⅡ
@@ -4917,6 +4921,7 @@ W:40:20:80:75000
 P:0:10d12:20:20:0
 F:ACTIVATE | XTRA_SHOTS | STEALTH | REGEN | RES_COLD
 U:GUN_VARIABLE
+D:$The beloved Mosin-Nagant of a legendary Finnish sniper.
 D:フィンランドの伝説的な狙撃手が愛用したモシン・ナガンだ。
 
 N:307:『フリーザー』
@@ -5079,6 +5084,8 @@ I:28:7:5
 W:50:25:400:120000
 P:0:7d7:-30:30:0
 F:STR | FULL_NAME |
+D:$A massive war axe imbued with power of demon gods.
+D:$Its power is astounding - assuming it hits the target.
 D:魔神の力を秘めた巨大な戦斧だ。当たりさえすれば威力は絶大だ。
 
 N:322:破壊神シヴァの戦斧

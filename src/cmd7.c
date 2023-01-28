@@ -6758,6 +6758,8 @@ void check_nue_undefined(void)
 	//正体不明以外の変身中には関係ない
 	if(p_ptr->mimic_form && p_ptr->mimic_form != MIMIC_NUE) return;
 
+	if (cheat_xtra) msg_print("nue_check");
+
 	//ぬえの正体を見破っている敵がいるか
 	for (i = 1; i < m_max; i++)
 	{
@@ -6796,14 +6798,19 @@ void check_nue_revealed(int m_idx, int chance_mult)
 	monster_race *r_ptr;
 	int chance=0;
 	int power = 0;
-	char m_name[80];
+	char m_name[120];
 
 	if(!m_ptr->r_idx) return;
 	r_ptr = &r_info[m_ptr->r_idx];
 	//ぬえ限定
 	if(p_ptr->pclass != CLASS_NUE) return;
+
+	//v2.05 los()では距離を判定していないらしく遠くの敵にも判定が発生するので距離に制限をつける
+	if (m_ptr->cdis > MAX_RANGE) return;
+
 	//正体不明以外の変身中には見破られない
 	if(p_ptr->tim_mimic && p_ptr->mimic_form != MIMIC_NUE) return;
+
 	//すでに見破られた敵には関係ない
 	if(m_ptr->mflag & MFLAG_SPECIAL) return;
 
@@ -7791,6 +7798,10 @@ bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_pt
 						message_pain(c_ptr->m_idx, tdam);
 						if ((tdam > 0) && !object_is_potion(q_ptr))
 							anger_monster(m_ptr);
+
+						//v2.0.5 投擲にターゲット変更(反撃召喚など用)が設定されていなかった
+						set_target(m_ptr, py, px);
+
 
 						if (fear && m_ptr->ml && mode != 5)
 						{

@@ -7717,6 +7717,26 @@ static void do_cmd_knowledge_buildings(void)
 
 		}
 
+		flag_notice_sth = TRUE;
+	}
+
+	if (p_ptr->hatate_mon_search_ridx)
+	{
+		int target_r_idx = p_ptr->hatate_mon_search_ridx;
+		int target_dungeon = p_ptr->hatate_mon_search_dungeon / 1000;
+		int target_level = p_ptr->hatate_mon_search_dungeon % 1000;
+
+		if (!r_info[p_ptr->hatate_mon_search_ridx].r_akills)
+		{
+#ifdef JP
+			fprintf(fff, "‚Í‚½‚Ä‚Ì’²¸‚É‚æ‚é‚ÆA%s‚Ì%dŠK‚ÉA\n", (d_name + d_info[target_dungeon].name), target_level);
+			fprintf(fff, "@y%sz‚ª‚¢‚é‚ç‚µ‚¢B\n\n",  (r_name + r_info[target_r_idx].name));
+#else
+			fprintf(fff, "According to Hatate's info, on level %d of %s\n", target_level, (d_name + d_info[target_dungeon].name));
+			fprintf(fff, "   you're likely find %s. \n\n",  (r_name + r_info[target_r_idx].name));
+#endif
+			flag_notice_sth = TRUE;
+		}
 
 	}
 

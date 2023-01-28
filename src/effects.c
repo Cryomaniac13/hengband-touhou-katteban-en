@@ -777,7 +777,9 @@ bool set_mimic(int v, int p, bool do_dec)
 
 	/*::: -Hack- ぬえが[正体不明]以外からの変身解除のとき、[正体不明]に変身可能かチェックして可能なら変身処理
 	 *::: check_nue_undefined()から再びset_mimic()が呼ばれる*/
-	if(check_nue) check_nue_undefined();
+	//v2.0.5 ここの処理もやめる。ぬえの自動変身は行動開始時にのみ確認する
+	if(check_nue) flag_nue_check_undefined = TRUE;
+	//if(check_nue) check_nue_undefined();
 
 	/* Result */
 	return (TRUE);

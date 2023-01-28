@@ -3671,8 +3671,12 @@ static bool inn_comm(int cmd)
 				return FALSE;
 			}
 
-			msg_print(_("店主は料理と飲み物を振舞ってくれた。",
+			if(EXTRA_MODE)
+				msg_print(_("あなたは手早く食事を済ませた。", "You quickly finish your meal."));
+			else
+				msg_print(_("店主は料理と飲み物を振舞ってくれた。",
                         "The owner serves you food and drink."));
+
 			(void)set_food(PY_FOOD_MAX - 1);
 			break;
 
@@ -3719,8 +3723,23 @@ static bool inn_comm(int cmd)
 
 				prevent_turn_overflow();
 
-				if ((prev_hour >= 18) && (prev_hour <= 23)) do_cmd_write_nikki(NIKKI_HIGAWARI, 0, NULL);
-				if ((prev_hour >= 18) && (prev_hour <= 23)) p_ptr->today_mon = 0; //霊夢の占いリセット
+				//宿に泊まって日付が変わるとき
+				if ((prev_hour >= 18) && (prev_hour <= 23))
+				{
+					do_cmd_write_nikki(NIKKI_HIGAWARI, 0, NULL);
+
+					p_ptr->today_mon = 0; //霊夢の占いリセット
+
+					//v2.05 はたての人探しリセット EXTRAでは日数経過でなくフロア通過でリセットされるのでここでは何もしない
+					if (!EXTRA_MODE)
+					{
+						p_ptr->hatate_mon_search_ridx = 0;
+						p_ptr->hatate_mon_search_dungeon = 0;
+
+					}
+
+				}
+
 				p_ptr->chp = p_ptr->mhp;
 
 				engineer_malfunction(0, 5000); //エンジニアの不調の機械が回復する
@@ -5535,33 +5554,67 @@ bool check_quest_unique_text(void)
 
 		else if(p_ptr->prace == RACE_KARASU_TENGU || p_ptr->prace == RACE_HAKUROU_TENGU)
 		{
-			if(comp)
+			//v2.0.5 建物「はたての家」を追加したのではたてのときセリフを変えておく
+			if (p_ptr->pclass == CLASS_HATATE)
 			{
+				if (comp)
+				{
 #ifdef JP
-				strcpy(quest_text[line++], "首尾良く侵入者を片付け、我が家を取り戻した。");
-				strcpy(quest_text[line++], "危うくゴシップのネタになるところだったが、とりあえず面子は保ったようだ。");
+					strcpy(quest_text[line++], "侵入者に突撃取材を敢行し、文の家を取り戻した。");
+					strcpy(quest_text[line++], "文の悔しがる顔が目に浮かぶようだ。");
 #else
-                strcpy(quest_text[line++], "You've cleaned up the intruders and got your house back.");
-				strcpy(quest_text[line++], "It was about to become a gossip story, but you've managed to save your face.");
+					strcpy(quest_text[line++], "You've driven the intruders out of Aya's house.");
+					strcpy(quest_text[line++], "You can picture the look of frustration on her face.");
 #endif
+				}
+				else if (fail)
+				{
+					msg_print(_("ERROR:ここには来ないはず", "ERROR: You shouldn't be seeing this"));
+				}
+				else
+				{
+#ifdef JP
+					strcpy(quest_text[line++], "しばらく留守にしている文の家に余所者が住み着いていた。");
+					strcpy(quest_text[line++], "余所者は夜な夜な怪しい儀式を繰り返し、近所に被害が出ているようだ。");
+					strcpy(quest_text[line++], "これは面白くなってきた。");
+#else
+                    strcpy(quest_text[line++], "While you were away, some strangers have settled in Aya's house.");
+                    strcpy(quest_text[line++], "They're performing suspicious rituals at night and harm those who get");
+                    strcpy(quest_text[line++], "too close. This is getting interesting.");
+#endif
+				}
 
-			}
-			else if(fail)
-			{
-				msg_print(_("ERROR:ここには来ないはず", "ERROR: You shouldn't be seeing this"));
 			}
 			else
 			{
+                if(comp)
+                {
 #ifdef JP
-				strcpy(quest_text[line++], "しばらく留守にしているうちに家に余所者が住み着いていた。");
-				strcpy(quest_text[line++], "余所者は夜な夜な怪しい儀式を繰り返し、近所に被害が出ているようだ。");
-				strcpy(quest_text[line++], "速やかに一人で始末をつけないと天狗の誇りに関わる。");
+                    strcpy(quest_text[line++], "首尾良く侵入者を片付け、我が家を取り戻した。");
+                    strcpy(quest_text[line++], "危うくゴシップのネタになるところだったが、とりあえず面子は保ったようだ。");
 #else
-                strcpy(quest_text[line++], "While you were away, some strangers have settled in your house.");
-				strcpy(quest_text[line++], "They're performing suspicious rituals at night and harm those who get");
-				strcpy(quest_text[line++], "too close. Your tengu pride tells you to quickly deal with it");
-				strcpy(quest_text[line++], "by yourself.");
+                    strcpy(quest_text[line++], "You've cleaned up the intruders and got your house back.");
+                    strcpy(quest_text[line++], "It was about to become a gossip story, but you've managed to save your face.");
 #endif
+
+                }
+                else if(fail)
+                {
+                    msg_print(_("ERROR:ここには来ないはず", "ERROR: You shouldn't be seeing this"));
+                }
+                else
+                {
+#ifdef JP
+                    strcpy(quest_text[line++], "しばらく留守にしているうちに家に余所者が住み着いていた。");
+                    strcpy(quest_text[line++], "余所者は夜な夜な怪しい儀式を繰り返し、近所に被害が出ているようだ。");
+                    strcpy(quest_text[line++], "速やかに一人で始末をつけないと天狗の誇りに関わる。");
+#else
+                    strcpy(quest_text[line++], "While you were away, some strangers have settled in your house.");
+                    strcpy(quest_text[line++], "They're performing suspicious rituals at night and harm those who get");
+                    strcpy(quest_text[line++], "too close. Your tengu pride tells you to quickly deal with it");
+                    strcpy(quest_text[line++], "by yourself.");
+#endif
+                }
 			}
 
 
@@ -6717,11 +6770,11 @@ bool check_quest_unique_text(void)
 			{
 #ifdef JP
 				strcpy(quest_text[line++], "南東の古い城塞にモンスターたちが巣食っているという情報を得た。");
-				strcpy(quest_text[line++], "以前自分の家に侵入した余所者と違い、今回の余所者はかなり凶悪らしい。");
+				strcpy(quest_text[line++], "以前の侵入事件と違い、今回の余所者はかなり凶悪らしい。");
 				strcpy(quest_text[line++], "皆に先んじてこれを解決し、汚名返上とスクープ獲得の一挙両得を狙うのも悪くない。");
 #else
                 strcpy(quest_text[line++], "You've received news that the old stronghold in the southeast has been taken");
-				strcpy(quest_text[line++], "over by monsters. Unlike those strangers settling in your house earlier,");
+				strcpy(quest_text[line++], "over by monsters. Unlike those strangers settling in the village earlier,");
 				strcpy(quest_text[line++], "this time the enemies are far nastier. It'd be a good idea to resolve");
 				strcpy(quest_text[line++], "this issue, maintaining your reputation and getting newspaper material");
 				strcpy(quest_text[line++], "at the same time.");
@@ -16144,10 +16197,16 @@ static void bldg_process_command(building_type *bldg, int i)
 	msg_flag = FALSE;
 	msg_print(NULL);
 
+	/*
 	if (is_owner(bldg))
 		bcost = bldg->member_costs[i];
 	else
+
 		bcost = bldg->other_costs[i];
+	*/
+
+	bcost = bldg->other_costs[i];
+
 
 	/* action restrictions */
 	///building ここ変更しないといけない
@@ -16716,6 +16775,10 @@ msg_print("お金が足りません！");
 
 	case BACT_MAKE_SPELLCARD:
 		bact_marisa_make_spellcard();
+		break;
+
+	case BACT_HATATE_SEARCH_MON:
+		paid = hatate_search_unique_monster();
 		break;
 
 	default:

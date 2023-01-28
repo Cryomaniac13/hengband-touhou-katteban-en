@@ -79,8 +79,8 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 4
-#define H_VER_EXTRA 2
+#define H_VER_PATCH 5
+#define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
 //#define SCORE_SERVER_TEST
@@ -4450,7 +4450,7 @@
 /*:::生成されたばかりのモンスターにはこのフラグがついて、1ターン何の処理もされない？*/
 #define MFLAG_BORN			0x00000010    /* Monster is still being born */
 #define MFLAG_NICE			0x00000020    /* Monster is still being nice */
-#define MFLAG_SPECIAL		0x00000040    /*:::職業ごと特殊フラグ　小傘がすでに驚かせた敵、帰還命令中の付喪神、幽々子の誘蛾灯に誘われた敵*/
+#define MFLAG_SPECIAL		0x00000040    /*:::職業ごと特殊フラグ　小傘がすでに驚かせた敵、帰還命令中の付喪神、ぬえの正体を見破った敵など*/
 #define MFLAG_SPECIAL2		0x00000080    /*:::種族ごと特殊フラグ　魔法使いがすでに魔力を吸った敵、野良神様がすでに回復させた敵、*/
 #define MFLAG_AISATSU_DONE	0x00000100	  /*:::RF1_AISATSUをもつモンスターが特殊行動を終了したフラグ*/
 #define MFLAG_NO_SPELL		0x00000200	  /*:::魔法を封じられた状態　映姫のタンオブウルフ*/
@@ -6194,9 +6194,10 @@ extern int PlayerUID;　
 #define BACT_GO_UNDERGROUND			89
 #define BACT_DESTROY_ITEM			90 //v1.1.92
 #define BACT_EX_RUMOR_NEW			91
+#define BACT_HATATE_SEARCH_MON		92 //v2.0.5
 
 //*::: MAX_BACTは現在特に使われてないらしい*/
-#define MAX_BACT                    	91
+#define MAX_BACT                    	92
 
 /*
  * Quest status
@@ -8240,9 +8241,9 @@ extern int PlayerUID;　
 #define BLDG_EX_CHIMATA		38 //月虹市場
 #define BLDG_EX_YUMA		39 //尤魔
 #define BLDG_EX_ZASHIKI		40 //座敷わらしのテレワーク　拠点使用可能
+#define BLDG_EX_HATATE		41 //はたての家
 
-#define BLDG_EX_MAX			41 //最後の建物番号+1
-
+#define BLDG_EX_MAX			42 //最後の建物番号+1
 
 
 #define CAST_MONSPELL_EXTRA_KYOUKO_YAMABIKO -1

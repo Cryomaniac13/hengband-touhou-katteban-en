@@ -2393,7 +2393,12 @@ static void rd_extra(void)
 		rd_s32b(&p_ptr->ptype_new_flags3);
 		rd_s32b(&p_ptr->ptype_new_flags4);
 
-		for (i = 0; i < 16; i++)
+		//v2.05 future_use_s16b‚©‚ç2‚ÂŽg‚¤
+		rd_s16b(&p_ptr->hatate_mon_search_ridx);
+		rd_s16b(&p_ptr->hatate_mon_search_dungeon);
+
+
+		for (i = 0; i < 14; i++)
 			rd_s16b(&p_ptr->future_use_s16b[i]);
 
 		for (i = 0; i < 8; i++)
