@@ -20,8 +20,8 @@ Q:4:T:他にも変なのが色々棲みついてるらしい。お前さんも見物に行ってみるかい？」
 
 # Description for quest reward
 ?:[EQU $QUEST4 3]
-Q:25:$T:Yuugi - 'Ooh, you beat down them all? You're pretty gutsy.
-Q:25:$T:Very well, the house is now yours! Use it as you like.'
+Q:$4:T:Yuugi - 'Ooh, you beat down them all? You're pretty gutsy.
+Q:$4:T:Very well, the house is now yours! Use it as you like.'
 Q:25:T:勇儀「ほう、あれを全部ぶちのめしてきたのか。中々肝が据わってるじゃないか。
 Q:25:T:よし、今日からあの家はお前さんのものだ！好きに使うといいさ。」
 ?:1
