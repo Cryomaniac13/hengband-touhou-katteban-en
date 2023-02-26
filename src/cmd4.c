@@ -7684,7 +7684,6 @@ static void do_cmd_knowledge_buildings(void)
 			if (!p_ptr->barter_value) break;
 			target_dungeon = p_ptr->barter_value / 1000;
 			target_level = p_ptr->barter_value % 1000;
-
 #ifdef JP
 			fprintf(fff, "霊夢の占いによると、今日%sの%d階に行くとお宝があるらしい。\n\n", (d_name + d_info[target_dungeon].name),target_level);
 #else
@@ -7714,19 +7713,19 @@ static void do_cmd_knowledge_buildings(void)
 		default:
 			fprintf(fff, _("(ERROR:この占い結果のメッセージが定義されていない)\n\n",
                             "(ERROR: No message found for divination result)\n\n"));
-
+			flag_notice_sth = TRUE;
 		}
 
-		flag_notice_sth = TRUE;
 	}
 
+	//はたてにモンスターを探してもらっているとき
 	if (p_ptr->hatate_mon_search_ridx)
 	{
 		int target_r_idx = p_ptr->hatate_mon_search_ridx;
 		int target_dungeon = p_ptr->hatate_mon_search_dungeon / 1000;
 		int target_level = p_ptr->hatate_mon_search_dungeon % 1000;
 
-		if (!r_info[p_ptr->hatate_mon_search_ridx].r_akills)
+		if (!r_info[target_r_idx].r_akills)
 		{
 #ifdef JP
 			fprintf(fff, "はたての調査によると、%sの%d階に、\n", (d_name + d_info[target_dungeon].name), target_level);

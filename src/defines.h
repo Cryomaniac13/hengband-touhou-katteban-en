@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 5
+#define H_VER_PATCH 6
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -4528,8 +4528,15 @@
 
 // !! は「常に1か0が得られる」という効果があるらしい
 
-
-///res mon item アイテムフラグ　耐性とかスレイ触るときに変更
+//v2.0.6 尤魔がアイテムフラグを得る時に除外するためのフラグ判定式
+//近接攻撃武器にのみつくフラグ
+#define	IS_WEAPON_FLAG(TR_FLG) ((TR_FLG) >= TR_CHAOTIC && (TR_FLG) <= TR_KILL_KWAI || (TR_FLG) == TR_THROW || (TR_FLG) == TR_RIDING || (TR_FLG) == TR_BOOMERANG)
+//弓にのみつくフラグ
+#define	IS_BOW_FLAG(TR_FLG) ((TR_FLG) == TR_XTRA_MIGHT || (TR_FLG) == TR_XTRA_SHOTS)
+//有益でないフラグ
+#define IS_BAD_FLAG(TR_FLG) ((TR_FLG) == TR_TELEPORT || (TR_FLG) >= TR_NO_TELE && (TR_FLG) <= TR_ADD_H_CURSE )
+//アイテムの表記関係など＠が使わないフラグ
+#define IS_SUB_FLAG(TR_FLG) ((TR_FLG) >= TR_IGNORE_ACID && (TR_FLG) <= TR_HOUSE && (TR_FLG) != TR_BOOMERANG)
 
 
 //新アイテム用フラグ
@@ -4696,7 +4703,6 @@
 //v1.1.94 TR_FLAG_SIZEを4→8にした
 #define TR_FLAG_OLD_SIZE       4
 #define TR_FLAG_SIZE           8
-
 
 
 //gen_flags関係のフラグ値
@@ -7493,7 +7499,7 @@ extern int PlayerUID;　
 /* Temporary flags macro */
 ///class 型や歌を含む一時効果判定
 #define IS_FAST() (p_ptr->fast || music_singing(MUSIC_SPEED) || music_singing(MUSIC_SHERO) || (p_ptr->kamioroshi & KAMIOROSHI_SUMIYOSHI) || music_singing(MUSIC_NEW_RAIKO_PRISTINE))
-#define IS_INVULN() (p_ptr->invuln || music_singing(MUSIC_INVULN) || (p_ptr->special_defense & MUSOU_TENSEI) || SUPER_SHION)
+#define IS_INVULN() (p_ptr->invuln || music_singing(MUSIC_INVULN) || (p_ptr->special_defense & MUSOU_TENSEI) || SUPER_SHION || (YUMA_ULTIMATE_MODE))
 #define IS_HERO() (p_ptr->hero || music_singing(MUSIC_HERO) || music_singing(MUSIC_SHERO) || music_singing(MUSIC_NEW_RAIKO_PRISTINE) || p_ptr->alcohol >= DRANK_1)
 #define IS_BLESSED() (p_ptr->blessed || music_singing(MUSIC_BLESS) || hex_spelling(HEX_BLESS))
 //v1.1.48 究極の耐性のとき元素二重耐性を得ることにした
@@ -8760,4 +8766,27 @@ extern int PlayerUID;　
 
 //v2.0.4 魅須丸用
 #define INVEN2_MAGATAMA_NUM_MAX	7
+
+//v2.0.6
+
+//尤魔関係
+#define YUMA_FLAG_DELETE_TURN	50
+#define YUMA_FLAG_DELETE_TICK	1000
+#define CHECK_YUMA_FOOD_STOCK ((p_ptr->pclass == CLASS_YUMA) ? (p_ptr->magic_num2[200]) : 0)
+#define YUMA_HAVE_ITEM_FLAGS(TR_FLAG_NUM) ((p_ptr->pclass == CLASS_YUMA) ? (p_ptr->magic_num2[TR_FLAG_NUM] > 0): (FALSE))
+
+//尤魔最終モード
+#define YUMA_ULTIMATE_MODE ((p_ptr->pclass == CLASS_YUMA) && (p_ptr->special_defense & SD_UNIQUE_CLASS_POWER))
+
+
+//calc_bonuses()で＠にアイテム関係のフラグを反映するときのモード
+#define PLAYER_ADD_OBJ_FLG_MODE_RESIST	0x00000001L //耐性
+#define PLAYER_ADD_OBJ_FLG_MODE_IMMUNE	0x00000002L //免疫
+#define PLAYER_ADD_OBJ_FLG_MODE_SPEED	0x00000004L //加速(他のpvalと表示される場所が違うので)
+#define PLAYER_ADD_OBJ_FLG_MODE_PVAL	0x00000008L //加速以外のpval(未使用)
+#define PLAYER_ADD_OBJ_FLG_MODE_SLAYS	0x00000010L //武器のスレイや属性(未使用)
+#define PLAYER_ADD_OBJ_FLG_MODE_WARNING	0x00000040L //警告(銘処理が必要かもしれないので分ける)
+#define PLAYER_ADD_OBJ_FLG_MODE_OTHERS	0x00000080L //ESPや能力維持や透明視認などほかの能力(投擲や乗馬など対象外のフラグもある)
+
+
 

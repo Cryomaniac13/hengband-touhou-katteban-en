@@ -2680,6 +2680,12 @@ cptr cast_monspell_new_aux(int num, bool only_info, bool fail, int xtra)
 		if (p_ptr->lev > 44) powerful = TRUE;
 		msg = _("行使した！", "use");
 	}
+	else if (p_ptr->pclass == CLASS_YUMA)
+	{
+		cast_lev = p_ptr->lev * 2;
+		cast_hp = p_ptr->chp * 3 / 2;
+		msg = _("再現した！", "reproduce");
+	}
 	else if (p_ptr->pclass == CLASS_RESEARCHER)
 	{
 		cast_lev = p_ptr->lev *2;
@@ -5472,7 +5478,8 @@ bool cast_monspell_new(void)
 	}
 	//隠岐奈　後戸の力
 	//v1.1.82b 弾幕研究家
-	else if (p_ptr->pclass == CLASS_OKINA || p_ptr->pclass == CLASS_RESEARCHER)
+	//v2.0.6 尤魔もこの方式で選択する
+	else if (p_ptr->pclass == CLASS_OKINA || p_ptr->pclass == CLASS_RESEARCHER || p_ptr->pclass == CLASS_YUMA)
 	{
 		int monspell_kind;
 		monspell_kind = choose_monspell_kind();//モンスター魔法分類(ボルト・ボール・ブレスなど)を選択。リピートなら前のを使用
@@ -5678,12 +5685,14 @@ bool cast_monspell_new(void)
 					if (p_ptr->pclass == CLASS_RESEARCHER && !check_monspell_learned(spell_list[i]))
 					{
 						flag_usable = FALSE;
-
-
-
-
 						strcat(psi_desc, _("(未習得)", "(unknown)"));
 
+					}
+					//v2.0.6 尤魔　未所持のパワーは隠す
+					else if(p_ptr->pclass == CLASS_YUMA && !p_ptr->magic_num1[spell_list[i]])
+					{
+						flag_usable = FALSE;
+						strcat(psi_desc, _("(未所持)", "(unavailable)"));
 					}
 					else
 					{
@@ -5783,7 +5792,12 @@ bool cast_monspell_new(void)
 		msg_format(_("まだその特技を習得していない。",
                     "You haven't learned this ability yet."));
 		return FALSE;
-
+	}
+	else if (p_ptr->pclass == CLASS_YUMA && !p_ptr->magic_num1[num])
+	{
+		msg_format(_("今はその特技を持っていない。",
+                    "You don't have this special ability right now."));
+		return FALSE;
 	}
 
 	if (chance)
@@ -12032,4 +12046,5 @@ void process_over_exert(int sleep_turn_base)
 	}
 
 }
+
 

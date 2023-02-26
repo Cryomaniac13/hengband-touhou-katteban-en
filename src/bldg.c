@@ -2381,6 +2381,22 @@ static bool korin_will_buy(object_type *o_ptr)
 
 }
 
+//v2.0.6
+//èÁ“°‚É’¿•i‚È‚Ç‚ð”„‚Á‚½‚Æ‚«‚Ì‰¿Ši
+//–Þ–‚‚ªH‚×‚½‚Æ‚«‚Ì‰h—{ŒvŽZ‚É‚àŽg‚¢‚½‚­‚È‚Á‚½‚Ì‚ÅŠÖ”‚ð•ª‚¯‚½
+int calc_korin_sell_price(object_type *o_ptr)
+{
+	int base_point = 0;
+	int i;
+
+	for (i = 0; korin_wants_table[i].tval; i++)
+	{
+		if (o_ptr->tval == korin_wants_table[i].tval && o_ptr->sval == korin_wants_table[i].sval) base_point = korin_wants_table[i].maripo;
+	}
+
+	return base_point;
+
+}
 
 
 /*::èÁ“°‚É’¿•i‚ð”„‚è‚Â‚¯‚é*/
@@ -2421,10 +2437,7 @@ static void sell_curiosity(void)
 
 	object_desc(o_name, q_ptr, 0);
 
-	for(i=0;korin_wants_table[i].tval;i++)
-	{
-		if(q_ptr->tval == korin_wants_table[i].tval && q_ptr->sval == korin_wants_table[i].sval) base_point = korin_wants_table[i].maripo;
-	}
+	base_point = calc_korin_sell_price(q_ptr);
 
 	total_point = base_point * amt;
 
@@ -3634,7 +3647,7 @@ static bool inn_comm(int cmd)
 			//Exƒ‚[ƒh‚Ìƒ~ƒXƒeƒBƒA‚Ì‰®‘ä‚É‚¢‚é‚Æ‚«
 			if(EXTRA_MODE && dun_level && building_ex_idx[f_info[cave[py][px].feat].subtype] == BLDG_EX_MYSTIA)
 			{
-				if(p_ptr->food < PY_FOOD_FULL -1 || p_ptr->blind)
+				if(p_ptr->food < PY_FOOD_FULL -1 || p_ptr->blind || p_ptr->pclass == CLASS_YUMA)
 				{
 					msg_print(_("“XŽå‚Í”ª–Ú‰V‚ÌŠ—Ä‚«‚ðU•‘‚Á‚Ä‚­‚ê‚½B",
                                 "The owner gives you some roast lamprey."));
@@ -3664,7 +3677,7 @@ static bool inn_comm(int cmd)
 
 			}
 
-			if (p_ptr->food >= PY_FOOD_FULL)
+			if (p_ptr->food >= PY_FOOD_FULL && p_ptr->pclass != CLASS_YUMA)
 			{
 				msg_print(_("¡‚Í–ž• ‚¾B", "You are already full."));
 
@@ -3719,6 +3732,12 @@ static bool inn_comm(int cmd)
 				{
 					dungeon_turn += MIN(turn - oldturn, TURNS_PER_TICK * 250);
 					if (dungeon_turn > dungeon_turn_limit) dungeon_turn = dungeon_turn_limit;
+				}
+
+				//v2.0.6 –Þ–‚‚ª“¾‚Ä‚¢‚é”\—Í‚â‘Ï«‚ªh‚É”‘‚Á‚½‚Æ‚«Ž¸‚í‚ê‚éˆ—
+				if (p_ptr->pclass == CLASS_YUMA && (turn - oldturn) >= YUMA_FLAG_DELETE_TICK)
+				{
+					yuma_lose_extra_power((turn - oldturn) / YUMA_FLAG_DELETE_TICK);
 				}
 
 				prevent_turn_overflow();

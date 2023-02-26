@@ -919,6 +919,11 @@ static void regenhp(int percent)
 	{
 		percent = percent * p_ptr->lev / 10;
 	}
+	//尤魔もレベルによって*急回復*
+	else if (p_ptr->pclass == CLASS_YUMA)
+	{
+		percent = percent * (10 + p_ptr->lev) / 6;
+	}
 	else if (p_ptr->pclass == CLASS_SUWAKO && p_ptr->tim_general[0])//諏訪子冬眠
 	{
 		percent *= 10;
@@ -939,6 +944,7 @@ static void regenhp(int percent)
 		}
 	}
 
+
 	/*
 	 * Extract the new hitpoints
 	 *
@@ -946,6 +952,8 @@ static void regenhp(int percent)
 	 */
 	new_chp = 0;
 	new_chp_frac = (p_ptr->mhp * percent + PY_REGEN_HPBASE);
+
+
 
 	/* Convert the unit (1/2^16) to (1/2^32) */
 	s64b_LSHIFT(new_chp, new_chp_frac, 16);
@@ -1950,6 +1958,7 @@ static bool terrain_dam(int feat_flag)
 	//地形ダメージ一切無効の面々
 	if (IS_INVULN()) return FALSE;
 	if (p_ptr->pclass == CLASS_SUWAKO) return FALSE;
+	if (p_ptr->pclass == CLASS_YUMA) return FALSE;
 	if (p_ptr->pclass == CLASS_FUTO && p_ptr->lev > 29) return FALSE;
 	if (SAKUYA_WORLD) return FALSE;
 	if (p_ptr->pclass == CLASS_HIGH_MAGE && p_ptr->realm1 == TV_BOOK_NATURE) return FALSE;
@@ -5732,6 +5741,9 @@ static void process_world(void)
 	if (turn % TURNS_PER_TICK) return;
 	/*:::ここから先、内部的10turn(ゲーム上で1ターン)ごとの処理*/
 
+	//v2.0.6 尤魔が食事で得た特技や耐性が消えるカウントダウン
+	if (p_ptr->pclass == CLASS_YUMA && turn % YUMA_FLAG_DELETE_TICK == 0) yuma_lose_extra_power(1);
+
 	/*** Check the Time and Load ***/
 	///system アングバンドへの門・・・？
 	///sysdel
@@ -6362,6 +6374,7 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		else if (!(turn % (TURNS_PER_TICK*5)))
 		{
 			/* Basic digestion rate based on speed */
+			//無加速10,加速+10で20
 			int digestion = SPEED_TO_ENERGY(p_ptr->pspeed);
 
 			/* Regeneration takes more food */
@@ -6379,17 +6392,20 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 			/* Slow digestion takes less food */
 			if (p_ptr->slow_digest)
 				digestion -= 5;
+
 			///mod140608 種族ごとに満腹減少をちょっと補正
 			if(p_ptr->prace == RACE_SENNIN) digestion /= 3;
 			if(p_ptr->prace == RACE_FAIRY) digestion /= 3;
 			if(p_ptr->pclass == CLASS_HINA)	digestion /= 3;
 			if(p_ptr->prace == RACE_ONI) digestion += 10;
 
+			//v2.0.6 尤魔満腹度消費増加　レベルにより最大10倍
+			if (p_ptr->pclass == CLASS_YUMA) digestion = digestion * (10 + p_ptr->lev) / 6;
 
 			/* Minimal digestion */
 			if (digestion < 1) digestion = 1;
 			/* Maximal digestion */
-			if (digestion > 100) digestion = 100;
+			if (digestion > 1000) digestion = 1000;
 
 			//妖精(光合成)
 			if(CHECK_FAIRY_TYPE ==37 && !dun_level && turn % (TURNS_PER_TICK * TOWN_DAWN) < 50000)
@@ -6403,10 +6419,11 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 
 
 		/* Getting Faint */
-		if ((p_ptr->food < PY_FOOD_FAINT))
+		if (p_ptr->food < PY_FOOD_FAINT)
 		{
 			/* Faint occasionally */
-			if (!p_ptr->paralyzed && (randint0(100) < 10))
+			//v2.0.6 尤魔は空腹で麻痺しない(process_player()で暴走状態になる)
+			if (!p_ptr->paralyzed && (randint0(100) < 10) && p_ptr->pclass != CLASS_YUMA)
 			{
 				/* Message */
 #ifdef JP
@@ -6429,10 +6446,14 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 				int dam = (PY_FOOD_STARVE - p_ptr->food) / 10;
 
 				/* Take damage */
+				//v2.0.6 尤魔究極モードの無敵化でも空腹ダメージを受けるようにここの無敵化処理を削除する
+				//まあ尤魔以外で無敵化時の空腹ダメージを気にする状況もそうないだろう
 #ifdef JP
-				if (!IS_INVULN()) take_hit(DAMAGE_LOSELIFE, dam, "空腹", -1);
+				//if (!IS_INVULN())
+					take_hit(DAMAGE_LOSELIFE, dam, "空腹", -1);
 #else
-				if (!IS_INVULN()) take_hit(DAMAGE_LOSELIFE, dam, "starvation", -1);
+				//if (!IS_INVULN())
+                    take_hit(DAMAGE_LOSELIFE, dam, "starvation", -1);
 #endif
 			}
 		}
@@ -8252,6 +8273,7 @@ static void process_player(void)
 
 	/* No turn yet */
 	if (p_ptr->energy_need > 0) return;
+
 	/*:::コマンドがリピート中のときは時間を更新しない*/
 	if (!command_rep)
 	{
@@ -8261,6 +8283,13 @@ static void process_player(void)
 
 	}
 	/*** Check for interupts ***/
+
+	//v2.0.6 尤魔の飢餓モード
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		if (check_yuma_ultimate_mode()) return;
+	}
+
 
 	/*:::完全休憩処理　-1や-2だと完全回復まで続けるらしい*/
 	///sys もし将来「最大値を超えてHPを回復する」何かを実装するとき、ここ気を付けないとループする

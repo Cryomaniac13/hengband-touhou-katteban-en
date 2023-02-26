@@ -1806,7 +1806,7 @@ static bool cmd_racial_power_aux(s32b command)
 				dummy = plev + randint1(plev) * MAX(1, plev / 10);   /* Dmg */
 				if (drain_life(dir, dummy))
 				{
-					if (p_ptr->food < PY_FOOD_FULL)
+					if (p_ptr->food < PY_FOOD_FULL || p_ptr->pclass == CLASS_YUMA)
 						/* No heal if we are "full" */
 						(void)hp_player(dummy);
 					else

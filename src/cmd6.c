@@ -13,6 +13,8 @@
 #include "angband.h"
 #include "player/player-log.h"
 
+static void do_cmd_quaff_potion_aux(int item, bool flag_ignore_warning);
+
 /*
  * This file includes code for eating food, drinking potions,
  * reading scrolls, aiming wands, using staffs, zapping rods,
@@ -108,14 +110,17 @@ static bool shion_comment_food(bool high_quality, cptr kind)
 /*:::食物摂取効果　今の＠に食べられるアイテムがすでに選択済み*/
 ///item race sys 何かを食べたときの効果
 ///mod131223 食糧摂取　全面変更 tval,sval
-static void do_cmd_eat_food_aux(int item)
+//v2.0.6 尤魔が使うのでstaticを外してほかから呼べるように。また食べたときにTRUE,食べられなかったときFALSEを返す
+bool do_cmd_eat_food_aux(int item)
 {
 	int ident, lev;
 	object_type *o_ptr;
+	int food_val;
 
 	bool no_bad_effect = FALSE;
 
 	if(p_ptr->pclass == CLASS_EIRIN) no_bad_effect = TRUE;
+	if (p_ptr->pclass == CLASS_YUMA) no_bad_effect = TRUE;
 
 	if (music_singing_any() && !CLASS_IS_PRISM_SISTERS) stop_singing();
 	if (hex_spelling_any()) stop_hex_spell_all();
@@ -131,6 +136,12 @@ static void do_cmd_eat_food_aux(int item)
 	{
 		o_ptr = &o_list[0 - item];
 	}
+
+	//v2.0.6 尤魔の実装によりpval通りに満腹度が増加するとは限らなくなったので一度food_valに記録し必要に応じて書き換える
+	food_val = o_ptr->pval;
+
+	if (cheat_xtra && p_ptr->pclass == CLASS_YUMA)
+		msg_format("eat_food_aux - item:%d tval:%d sval:%d num:%d", item, o_ptr->tval, o_ptr->sval, o_ptr->number);
 
 	/* Sound */
 	sound(SOUND_EAT);
@@ -516,12 +527,12 @@ static void do_cmd_eat_food_aux(int item)
 				if(p_ptr->pclass == CLASS_BYAKUREN || p_ptr->pclass == CLASS_ICHIRIN)
 				{
 					msg_print("あなたは戒律により肉を食べられない。");
-					return;
+					return FALSE;
 				}
 				if(p_ptr->prace == RACE_LUNARIAN)
 				{
 					msg_print("この食物は穢れに満ちていて食べられない。");
-					return;
+					return FALSE;
 				}
 				msg_print("歯ごたえがあっておいしい。");
 				ident = TRUE;
@@ -535,12 +546,12 @@ static void do_cmd_eat_food_aux(int item)
 				if(p_ptr->pclass == CLASS_BYAKUREN || p_ptr->pclass == CLASS_ICHIRIN)
 				{
 					msg_print("これは肉なのか植物なのか？念のために止めておこう。");
-					return;
+					return FALSE;
 				}
 				if(p_ptr->prace == RACE_LUNARIAN)
 				{
 					msg_print("こんな気持ちの悪いものを食べたくない。");
-					return;
+					return FALSE;
 				}
 				msg_print("これはなんとも形容しがたい味だ。");
 				ident = TRUE;
@@ -588,12 +599,12 @@ static void do_cmd_eat_food_aux(int item)
 				if(p_ptr->pclass == CLASS_BYAKUREN || p_ptr->pclass == CLASS_ICHIRIN)
 				{
 					msg_print("Your religion prohibits eating meat.");
-					return;
+					return FALSE;
 				}
 				if(p_ptr->prace == RACE_LUNARIAN)
 				{
 					msg_print("This food is full of impurity and is not fit for consumption.");
-					return;
+					return FALSE;
 				}
 				msg_print("Chewy and delicious.");
 				ident = TRUE;
@@ -607,12 +618,12 @@ static void do_cmd_eat_food_aux(int item)
 				if(p_ptr->pclass == CLASS_BYAKUREN || p_ptr->pclass == CLASS_ICHIRIN)
 				{
 					msg_print("Is this meat or plant matter? You decline to eat just in case.");
-					return;
+					return FALSE;
 				}
 				if(p_ptr->prace == RACE_LUNARIAN)
 				{
 					msg_print("You have no intention of eating such unpleasant things.");
-					return;
+					return FALSE;
 				}
 				msg_print("Indescribable taste.");
 				ident = TRUE;
@@ -677,7 +688,7 @@ static void do_cmd_eat_food_aux(int item)
 				{
 					msg_print(_("あなたは戒律により肉を食べられない。",
                                 "Your religion prohibits you from eating meat."));
-					return;
+					return FALSE;
 				}
 				else
 				{
@@ -761,6 +772,8 @@ static void do_cmd_eat_food_aux(int item)
 			case SV_FOOD_STRANGE_BEAN:
 			{
 				msg_print(_("不気味な味と食感だ...", "It has an unsettling taste and texture..."));
+
+				if (no_bad_effect) break;
 
 				if (one_in_(2) && !(p_ptr->resist_pois || IS_OPPOSE_POIS()))
 				{
@@ -1129,6 +1142,31 @@ static void do_cmd_eat_food_aux(int item)
 
 
 	}
+	else
+	{
+
+		if (p_ptr->pclass != CLASS_YUMA)
+		{
+			msg_format(_("ERROR:このアイテムを食べたときの処理が記述されていない(class:%d tv:%d sv:%d)",
+                    "ERROR: Undefined logic for eating this item (class: %d tv: %d sv: %d)"), p_ptr->pclass, o_ptr->tval, o_ptr->sval);
+			return FALSE;
+		}
+
+		//飲み物系を瓶ごと食べたときはquaff_potion_aux()に渡す。そこでアイテム減少処理や満腹処理などを行うのでここでは処理終了する。
+		if (o_ptr->tval == TV_POTION || o_ptr->tval == TV_COMPOUND || o_ptr->tval == TV_ALCOHOL || o_ptr->tval == TV_SOFTDRINK)
+		{
+			do_cmd_quaff_potion_aux(item, TRUE);
+
+			return TRUE;
+		}
+
+		//ここでfood_valが0のときは処理未定義アイテム。食べずに残す
+		food_val = yuma_eat_other_things(o_ptr);
+		if (!food_val) return FALSE;
+
+	}
+
+
 	/* Combine / Reorder the pack (later) */
 	p_ptr->notice |= (PN_COMBINE | PN_REORDER);
 	///del131214 virtue
@@ -1160,7 +1198,7 @@ static void do_cmd_eat_food_aux(int item)
 	if (prace_is_(RACE_VAMPIRE) || (p_ptr->mimic_form == MIMIC_VAMPIRE))
 	{
 		/* Reduced nutritional benefit */
-		(void)set_food(p_ptr->food + (o_ptr->pval / 10));
+		(void)set_food(p_ptr->food + (food_val / 10));
 #ifdef JP
 msg_print("あなたのような者にとって食糧など僅かな栄養にしかならない。");
 #else
@@ -1175,13 +1213,15 @@ msg_print("あなたの飢えは新鮮な血によってのみ満たされる！");
 #endif
 
 	}
-	else if ((
+	//杖の食事処理　回数を1だけ減らす　尤魔は杖ごと食べるのでここでは処理しない
+	else if (
+		p_ptr->pclass != CLASS_YUMA &&
+		(
 		//prace_is_(RACE_SKELETON) ||
 		  prace_is_(RACE_GOLEM) ||
 		 prace_is_(RACE_ANDROID) ||
 		 prace_is_(RACE_TSUKUMO) ||
 		p_ptr->pclass == CLASS_YOSHIKA && p_ptr->lev > 29
-
 		 )
 		 && (o_ptr->tval == TV_STAFF || o_ptr->tval == TV_WAND))
 	{
@@ -1195,7 +1235,7 @@ msg_print("あなたの飢えは新鮮な血によってのみ満たされる！");
 #else
 			msg_print("You must first pick up the staffs.");
 #endif
-			return;
+			return FALSE;
 		}
 
 #ifdef JP
@@ -1219,7 +1259,7 @@ msg_print("あなたの飢えは新鮮な血によってのみ満たされる！");
 			p_ptr->notice |= (PN_COMBINE | PN_REORDER);
 			p_ptr->window |= (PW_INVEN);
 
-			return;
+			return FALSE;
 		}
 
 #ifdef JP
@@ -1282,7 +1322,7 @@ msg_print("あなたの飢えは新鮮な血によってのみ満たされる！");
 		p_ptr->window |= (PW_INVEN | PW_EQUIP);
 
 		/* Don't eat a staff/wand itself */
-		return;
+		return TRUE;
 	}
 	///del131221 item バルログの死体食い
 #if 0
@@ -1354,13 +1394,13 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 #endif
 	else if(o_ptr->tval == TV_MATERIAL)
 	{
-		(void)set_food(p_ptr->food + o_ptr->pval);
+		(void)set_food(p_ptr->food + food_val);
 	}
 
 	else if(p_ptr->pclass == CLASS_KOGASA || p_ptr->pclass == CLASS_DOREMY || p_ptr->pclass == CLASS_HINA)
 	{
 		msg_print(_("こんな物では全然腹が膨れない。", "This hardly satiates you."));
-		set_food(p_ptr->food + ((o_ptr->pval) / 20));
+		set_food(p_ptr->food + ((food_val) / 20));
 	}
 	else if(p_ptr->pclass == CLASS_MEDICINE)
 	{
@@ -1373,7 +1413,7 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 		else if (o_ptr->tval != TV_MUSHROOM && o_ptr->sval != SV_MUSHROOM_POISON)
 		{
 			msg_print(_("こんな物では全然腹が膨れない。", "This hardly satiates you."));
-			set_food(p_ptr->food + ((o_ptr->pval) / 50));
+			set_food(p_ptr->food + ((food_val) / 50));
 		}
 	}
 	else if (prace_is_(RACE_HANIWA))
@@ -1401,7 +1441,7 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 			msg_print(_("敵を倒して力を奪わなければ。",
                         "You have to feed on power of your defeated enemies."));
 
-		set_food(p_ptr->food + ((o_ptr->pval) / 20));
+		set_food(p_ptr->food + ((food_val) / 20));
 	}
 
 
@@ -1409,15 +1449,31 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 	///item エルフの口糧
 	else if (o_ptr->tval == TV_FOOD && o_ptr->sval == SV_FOOD_SENTAN)
 	{
-		/* Waybread is always fully satisfying. */
-		set_food(MAX(p_ptr->food, PY_FOOD_MAX - 1));
-		msg_print(_("一瞬で満腹になった!", "You are full!"));
+		if (p_ptr->pclass == CLASS_YUMA)
+		{
+			msg_print(_("見た目からは信じられないほどの栄養価だ！",
+                    "It's unbelievably nutritious!"));
+			(void)set_food(p_ptr->food + 10000);
+		}
+		else
+		{
+			/* Waybread is always fully satisfying. */
+			set_food(MAX(p_ptr->food, PY_FOOD_MAX - 1));
+			msg_print(_("一瞬で満腹になった!", "You are full!"));
+		}
 	}
 	//v1.1.43 オニフスベとスーパーキノコは満腹になる
 	else if (o_ptr->tval == TV_MUSHROOM && (o_ptr->sval == SV_MUSHROOM_MON_SUPER || o_ptr->sval == SV_MUSHROOM_PUFFBALL))
 	{
-		/* Waybread is always fully satisfying. */
-		set_food(MAX(p_ptr->food, PY_FOOD_MAX - 1));
+		if (p_ptr->pclass == CLASS_YUMA)
+		{
+			(void)set_food(p_ptr->food + 10000);
+		}
+		else
+		{
+			/* Waybread is always fully satisfying. */
+			set_food(MAX(p_ptr->food, PY_FOOD_MAX - 1));
+		}
 	}
 
 	//v1.1.86 山童はキュウリを食べても満腹にならないことにした
@@ -1453,18 +1509,18 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 			/* Redraw mana */
 			p_ptr->redraw |= (PR_MANA);
 		}
-		(void)set_food(p_ptr->food + o_ptr->pval);
+		(void)set_food(p_ptr->food + food_val);
 	}
 	//鈴瑚がだんごを食べても食べ過ぎにはならない
 	else if(p_ptr->pclass == CLASS_RINGO && o_ptr->tval == TV_SWEETS && o_ptr->sval == SV_SWEETS_DANGO)
 	{
-		int food = MIN(p_ptr->food + o_ptr->pval,PY_FOOD_MAX - 1);
+		int food = MIN(p_ptr->food + food_val,PY_FOOD_MAX - 1);
 		if(p_ptr->food < PY_FOOD_MAX) set_food(food);
 	}
 	else
 	{
 		/* Food can feed the player */
-		(void)set_food(p_ptr->food + o_ptr->pval);
+		(void)set_food(p_ptr->food + food_val);
 	}
 
 #ifdef NEW_PLAYER_LOG
@@ -1493,6 +1549,8 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 	//飲食は「エイボンの霧の車輪」の妨げにならない
 	break_eibon_flag = FALSE;
 
+	return TRUE;
+
 }
 
 
@@ -1504,10 +1562,13 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
 ///mod131223 食べられるアイテム
 static bool item_tester_hook_eatable(object_type *o_ptr)
 {
+
+	//v2.0.6 尤魔はあらゆるものを食用可能
+	if (p_ptr->pclass == CLASS_YUMA) return TRUE;
+
 	if (o_ptr->tval==TV_FOOD) return TRUE;
 	if (o_ptr->tval==TV_MUSHROOM) return TRUE;
 	if (o_ptr->tval==TV_SWEETS) return TRUE;
-
 
 	/*:::昔は骸骨が骨を食べることができたらしい*/
 #if 0
@@ -1595,7 +1656,7 @@ void do_cmd_eat_food(void)
 {
 	int         item;
 	cptr        q, s;
-
+	byte mode;
 
 	if (p_ptr->special_defense & (KATA_MUSOU | KATA_KOUKIJIN))
 	{
@@ -1614,7 +1675,14 @@ void do_cmd_eat_food(void)
 	s = "You have nothing to eat.";
 #endif
 
-	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return;
+	mode = (USE_INVEN | USE_FLOOR);
+
+	if (p_ptr->pclass == CLASS_YUMA) mode |= USE_EQUIP;
+
+	if (!get_item(&item, q, s, mode)) return;
+
+	if (item > INVEN_PACK && !get_check_strict(_("本当に装備しているものを食べますか？",
+                                                "Are you sure you want to eat a piece of your equipment?"), CHECK_NO_ESCAPE)) return;
 
 	/* Eat the object */
 	do_cmd_eat_food_aux(item);
@@ -1656,7 +1724,8 @@ int calc_alcohol_mod(int num, bool check)
 /*:::薬を飲む処理　薬選択済み*/
 ///item 薬を飲む
 //v1.1.19 化け狸が油を飲む処理に対応
-static void do_cmd_quaff_potion_aux(int item)
+//v2.0.6 危険な薬を飲む時も確認をしないオプションを追加　尤魔が食事コマンドで瓶ごと食べるとき
+static void do_cmd_quaff_potion_aux(int item , bool flag_ignore_warning)
 {
 	int         ident, lev, power;
 	object_type *o_ptr;
@@ -1668,6 +1737,9 @@ static void do_cmd_quaff_potion_aux(int item)
 	bool no_bad_effect = FALSE;
 
 	if(p_ptr->pclass == CLASS_EIRIN) no_bad_effect = TRUE;
+
+	//尤魔も何飲んでも倒れない
+	if(p_ptr->pclass == CLASS_YUMA) no_bad_effect = TRUE;
 
 	if(inventory[INVEN_RARM].name1 == ART_HOSHIGUMA || inventory[INVEN_LARM].name1 == ART_HOSHIGUMA) hoshiguma = TRUE;
 
@@ -1732,13 +1804,13 @@ static void do_cmd_quaff_potion_aux(int item)
 		return;
 	}
 
-	if(o_ptr->tval == TV_ALCOHOL && o_ptr->sval == SV_ALCOHOL_MARISA && !hoshiguma)
+	if(o_ptr->tval == TV_ALCOHOL && o_ptr->sval == SV_ALCOHOL_MARISA && !hoshiguma && !flag_ignore_warning)
 	{
 		msg_print(_("・・嫌な予感がする。", "...You have a bad feeling about this."));
 		if (!get_check(_("本当に飲みますか？", "Are you really sure?"))) return;
 	}
 
-	if(p_ptr->prace == RACE_LUNARIAN && o_ptr->tval == TV_POTION && o_ptr->sval == SV_POTION_LIFE)
+	if(p_ptr->prace == RACE_LUNARIAN && o_ptr->tval == TV_POTION && o_ptr->sval == SV_POTION_LIFE && !flag_ignore_warning)
 	{
 		char i;
 		msg_print(_("この薬はあなたにとって耐え難い穢れに満ちている。",
@@ -1781,7 +1853,7 @@ static void do_cmd_quaff_potion_aux(int item)
                         "You have a very bad feeling about this. Better not drink this sake."));
 			return;
 		}
-		else
+		else if(!flag_ignore_warning)
 		{
 			msg_print(_("・・嫌な予感がする。", "...You have a bad feeling about this."));
             if (!get_check(_("本当に飲みますか？", "Are you really sure?"))) return;
@@ -1789,7 +1861,7 @@ static void do_cmd_quaff_potion_aux(int item)
 
 	}
 
-	if(o_ptr->tval == TV_COMPOUND && (o_ptr->sval == SV_COMPOUND_YOKOSHIMA || o_ptr->sval == SV_COMPOUND_ICHIKORORI || o_ptr->sval == SV_COMPOUND_HOURAI))
+	if(o_ptr->tval == TV_COMPOUND && (o_ptr->sval == SV_COMPOUND_YOKOSHIMA || o_ptr->sval == SV_COMPOUND_ICHIKORORI || o_ptr->sval == SV_COMPOUND_HOURAI) && !flag_ignore_warning)
 	{
 		int i;
 		if( !get_check_strict(_("本当に飲みますか？", "Are you really sure?"), CHECK_NO_HISTORY)) return;
@@ -1804,7 +1876,7 @@ static void do_cmd_quaff_potion_aux(int item)
 
 	///mod151108 警告追加
 	if((o_ptr->tval == TV_ALCOHOL || o_ptr->tval == TV_FLASK && o_ptr->sval == SV_FLASK_OIL)
-		&& !(p_ptr->muta2 & MUT2_ALCOHOL))
+		&& !(p_ptr->muta2 & MUT2_ALCOHOL) && !flag_ignore_warning)
 	{
 		int tmp = q_ptr->pval;
 		if(hoshiguma && tmp < 5000) tmp = 5000;
@@ -2267,10 +2339,20 @@ static void do_cmd_quaff_potion_aux(int item)
 		case SV_COMPOUND_ICHIKORORI:
 			if(no_bad_effect)
 			{
-				msg_print(_("あなたはすんでのところで自分が何を飲もうとしたのか気付いて捨てた。",
+				if (p_ptr->pclass == CLASS_YUMA)
+				{
+					msg_print(_("あなたは劇毒を苦もなく飲み干して栄養にした！",
+                            "You consume the deadly poison without any harm, nourishing yourself!"));
+					set_tim_addstat(A_CON, 110, 20 + randint1(20), FALSE);
+					ident = TRUE;
+				}
+				else
+				{
+					msg_print(_("あなたはすんでのところで自分が何を飲もうとしたのか気付いて捨てた。",
                             "Realizing what you're about to drink, you throw it away."));
-				ident=TRUE;
-				break;
+					ident = TRUE;
+					break;
+				}
 			}
 
 			else
@@ -2353,8 +2435,17 @@ static void do_cmd_quaff_potion_aux(int item)
 
 
 		default:
-			msg_print(_("それは飲むものじゃない。", "You can't drink that."));
-			return;
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				msg_print(_("それは飲むものじゃない...があなたは気にせず飲んだ。",
+                        "You can't drink that... but you don't care and drink it anyway."));
+			}
+			else
+			{
+				msg_print(_("それは飲むものじゃない。", "You can't drink that."));
+				return;
+
+			}
 		}
 
 	}
@@ -2557,6 +2648,21 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 			break;
 
 		case SV_POTION_RUINATION:
+
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				msg_print(_("あなたは劇毒を苦もなく飲み干して栄養にした！",
+                            "You consume the deadly poison without any harm, nourishing yourself!"));
+				set_tim_addstat(A_STR, 105, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_INT, 105, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_WIS, 105, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_CON, 105, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_DEX, 105, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_CHR, 105, 20 + randint1(20), FALSE);
+				ident = TRUE;
+				break;
+			}
+
 			if(no_bad_effect){ident=TRUE;break;}
 
 #ifdef JP
@@ -2607,6 +2713,16 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 			break;
 
 		case SV_POTION_DETONATIONS:
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				msg_print(_("腹の中で何かが爆発したが、あなたは爆発すら呑み込んだ！",
+                            "Something explodes in your stomach, but you consume that explosion!"));
+				set_tim_addstat(A_STR, 110, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_DEX, 110, 20 + randint1(20), FALSE);
+				ident = TRUE;
+				break;
+			}
+
 			if(no_bad_effect)
 			{
 				msg_print(_("ペロッ、この味は..ニトログリセリン！", "This taste... that's nitroglycerine!"));
@@ -2636,6 +2752,17 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 			break;
 
 		case SV_POTION_DEATH:
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				msg_print(_("あなたは劇毒を苦もなく飲み干して栄養にした！",
+                            "You consume the deadly poison without any harm, nourishing yourself!"));
+				hp_player(5000);
+				set_ultimate_res(20 + randint1(20), FALSE);
+
+				ident = TRUE;
+				break;
+			}
+
 			if(no_bad_effect){ident=TRUE;break;}
 			//chg_virtue(V_VITALITY, -1);
 			//chg_virtue(V_UNLIFE, 5);
@@ -3076,6 +3203,18 @@ msg_print("「オクレ兄さん！」");
 			break;
 
 		case SV_POTION_NANIKASUZUSHIKUNARU:
+
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				msg_print(_("あなたは劇毒を苦もなく飲み干して栄養にした！",
+                            "You consume the deadly poison without any harm, nourishing yourself!"));
+				set_tim_addstat(A_INT, 110, 20 + randint1(20), FALSE);
+				set_tim_addstat(A_WIS, 110, 20 + randint1(20), FALSE);
+				ident = TRUE;
+				break;
+			}
+
+
 			if(no_bad_effect){ident=TRUE;break;}
 			if(p_ptr->immune_cold) break;
 			msg_print(_("体の中から物凄く冷えた！", "You are suddenly extremely cold!"));
@@ -3334,7 +3473,7 @@ void do_cmd_quaff_potion(void)
 	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return;
 
 	/* Quaff the potion */
-	do_cmd_quaff_potion_aux(item);
+	do_cmd_quaff_potion_aux(item,FALSE);
 
 	//飲食は「エイボンの霧の車輪」の妨げにならない
 	break_eibon_flag = FALSE;
@@ -7826,7 +7965,7 @@ s = "使えるものがありません。";
 		/* Quaff a potion */
 		case TV_POTION:
 		{
-			do_cmd_quaff_potion_aux(item);
+			do_cmd_quaff_potion_aux(item,FALSE);
 			break;
 		}
 

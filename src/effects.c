@@ -192,6 +192,7 @@ void set_action(int typ)
 
 	/* Redraw the state */
 	p_ptr->redraw |= (PR_STATE);
+
 }
 
 /* reset timed flags */
@@ -314,6 +315,7 @@ void reset_tim_flags(void)
 
 	if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 
+	if ((p_ptr->pclass == CLASS_YUMA) && (p_ptr->lev > 19)) p_ptr->oppose_pois = 1;
 
 	if ( p_ptr->pseikaku == SEIKAKU_BERSERK) p_ptr->shero = 1;
 
@@ -4643,6 +4645,7 @@ bool set_oppose_pois(int v, bool do_dec)
 	if ((p_ptr->pclass == CLASS_NINJA) && (p_ptr->lev > 44)) v = 1;
 
 	if ((p_ptr->pclass == CLASS_MOMOYO) && (p_ptr->lev > 19)) v = 1;
+	if ((p_ptr->pclass == CLASS_YUMA) && (p_ptr->lev > 19)) v = 1;
 
 	if (p_ptr->is_dead) return FALSE;
 
@@ -5379,8 +5382,54 @@ bool set_food(int v)
 
 	bool notice = FALSE;
 
-	/* Hack -- Force good values */
-	v = (v > 20000) ? 20000 : (v < 0) ? 0 : v;
+	//v2.0.6
+	//尤魔特殊処理
+	//食べ過ぎにならない。
+	//満腹度を13000*10までストックできる。
+	//15000を超えたらストックを1増やして13000マイナスし、
+	//2000を下回ったらストックを1減らして13000プラスする。
+	//ストックはp_ptr->magic_num2[200]に記録する。
+	if ( p_ptr->pclass == CLASS_YUMA)
+	{
+		//int max_stock = 3 + p_ptr->lev / 7;
+		int max_stock = 10;
+		int stock = p_ptr->magic_num2[200];
+
+		//宿や特殊効果発動などの「満腹になる」処理が正常に働かなくなるので、
+		//この値をセットして呼ばれたときは現在満腹度+10000と見なす。
+		if (v == PY_FOOD_MAX - 1)  v = p_ptr->food + 10000;
+
+		if (stock == max_stock && v >= PY_FOOD_MAX)
+		{
+			v = PY_FOOD_MAX - 1;
+		}
+		else if (stock < max_stock && v >= PY_FOOD_MAX)
+		{
+			v -= 13000;
+			if (v >= PY_FOOD_MAX) v = PY_FOOD_MAX - 1;
+			stock++;
+			notice = TRUE;
+		}
+		else if (stock > 0 && v < PY_FOOD_ALERT)
+		{
+			v += 13000;
+			stock--;
+			notice = TRUE;
+		}
+		else if (stock == 0 && v < 0)
+		{
+			v = 0;
+		}
+
+		p_ptr->magic_num2[200] = stock;
+	}
+	else
+	{
+
+		/* Hack -- Force good values */
+		v = (v > 20000) ? 20000 : (v < 0) ? 0 : v;
+
+	}
 
 	///mod140113 魔法使いは空腹にならないようにした
 	if(prace_is_(RACE_MAGICIAN) && v < PY_FOOD_ALERT) v = PY_FOOD_ALERT;
@@ -5422,7 +5471,8 @@ bool set_food(int v)
 	}
 
 	/* Normal */
-	else if (p_ptr->food < PY_FOOD_FULL)
+	//v2.0.6 尤魔は通常の満腹以上にならない
+	else if (p_ptr->food < PY_FOOD_FULL || p_ptr->pclass == CLASS_YUMA)
 	{
 		old_aux = 3;
 	}
@@ -5438,6 +5488,9 @@ bool set_food(int v)
 	{
 		old_aux = 5;
 	}
+
+
+
 
 	/* Fainting / Starving */
 	if (v < PY_FOOD_FAINT)
@@ -5458,7 +5511,8 @@ bool set_food(int v)
 	}
 
 	/* Normal */
-	else if (v < PY_FOOD_FULL)
+	//v2.0.6 尤魔は通常の満腹以上にならない
+	else if (v < PY_FOOD_FULL || p_ptr->pclass == CLASS_YUMA)
 	{
 		new_aux = 3;
 	}
@@ -5620,6 +5674,7 @@ msg_print("やっとお腹がきつくなくなった。");
 	/* Use the value */
 	p_ptr->food = v;
 
+
 	/* Nothing to notice */
 	if (!notice) return (FALSE);
 
@@ -5657,6 +5712,8 @@ bool set_alcohol(int v)
 
 	//永琳はさらに酒に強い
 	if(p_ptr->pclass == CLASS_EIRIN && v >= DRANK_2) v = DRANK_2 - 1;
+	//尤魔も
+	if (p_ptr->pclass == CLASS_YUMA && v >= DRANK_2) v = DRANK_2 - 1;
 
 	//性格狂気も
 	if(p_ptr->pseikaku == SEIKAKU_BERSERK && v >= DRANK_4) v = DRANK_4 - 1;
@@ -6867,19 +6924,31 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 			{
 #ifdef JP
 				//msg_print("バリアが切り裂かれた！");
-				msg_print("回避不可能の攻撃を受けた！");
+
+				if(YUMA_ULTIMATE_MODE)
+					msg_print("無限の胃袋を突き破られた！");
+				else
+					msg_print("回避不可能の攻撃を受けた！");
 #else
-				msg_print("You get hit by an unavoidable attack!");
+				if(YUMA_ULTIMATE_MODE)
+					msg_print("Your boundless stomach has been pierced!");
+				else
+					msg_print("You get hit by an unavoidable attack!");
 #endif
 			}
 
 			else if (one_in_(PENETRATE_INVULNERABILITY))
 			{
 #ifdef JP
-				msg_print("攻撃を無効化できなかった！");
-				//msg_print("無敵のバリアを破って攻撃された！");
+				if (YUMA_ULTIMATE_MODE)
+					msg_print("攻撃の吸収に失敗した！");
+				else
+					msg_print("攻撃を無効化できなかった！");
 #else
-				msg_print("You failed to negate the attack!");
+				if (YUMA_ULTIMATE_MODE)
+					msg_print("You failed to absorb the attack!");
+				else
+					msg_print("You failed to negate the attack!");
 #endif
 			}
 			/*:::ダメージを受けずに終了*/
@@ -7079,25 +7148,36 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 	if((damage_type == DAMAGE_ATTACK || damage_type == DAMAGE_FORCE || damage_type == DAMAGE_NOESCAPE)	&& damage > 0 && p_ptr->chp >= 0 &&
 		((p_ptr->pclass == CLASS_MEDICINE && cave_have_flag_bold(py, px, FF_POISON_PUDDLE) && cave_have_flag_bold(py, px, FF_DEEP))
 			|| p_ptr->reactive_heal
+//			|| ((CHECK_YUMA_FOOD_STOCK) >= 5)
 			|| (p_ptr->mimic_form == MIMIC_SLIME)
 			|| (p_ptr->pclass == CLASS_HIGH_MAGE && p_ptr->realm1 == TV_BOOK_LIFE && p_ptr->lev > 39)))
 	{
 		bool regenerator = FALSE;
 		int heal = damroll(3,MAX(p_ptr->lev / 4,1));
 		if(p_ptr->reactive_heal && (p_ptr->pclass == CLASS_HIGH_MAGE && p_ptr->realm1 == TV_BOOK_LIFE && p_ptr->lev > 39)) regenerator = TRUE;
+//		if ((CHECK_YUMA_FOOD_STOCK) >= 9) regenerator = TRUE;
 		if(regenerator) heal = heal * 3;
+
 		p_ptr->chp +=heal;
 		if(regenerator) msg_format(_("受けたばかりの傷がみるみる塞がっていく！",
                                     "The wounds you just received start closingly rapidly!"));
 		else msg_format(_("受けたばかりの傷が少し癒えた！",
                             "The wounds you just received have healed a bit!"));
 		if(p_ptr->reactive_heal) set_reactive_heal(p_ptr->reactive_heal - randint1(2),TRUE);
+		//尤魔リアクティブヒールは満腹度消費
+//		if ((CHECK_YUMA_FOOD_STOCK) >= 5)
+//		{
+//			set_food(p_ptr->food - heal * 10);
+//		}
 		if(p_ptr->chp >= p_ptr->mhp)
 		{
 			p_ptr->chp = p_ptr->mhp;
 			p_ptr->chp_frac = 0;
 
 		}
+
+
+
 	}
 	if(p_ptr->pclass == CLASS_SEIJA && p_ptr->magic_num1[SEIJA_ITEM_JIZO] && p_ptr->chp < p_ptr->mhp / 2)
 	{

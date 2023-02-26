@@ -6513,24 +6513,25 @@ const player_class class_info[MAX_CLASS] =
 		"Yuma",
 		"Yuma",
 #endif // JP
-		{ 5, -2, 2, 3, 5, -5 },
-		23, 24, 40, 2, 24, 25, 90, 50,
-		12, 12, 15, 0,  4, 15, 36, 20,
-		12, 80, 40
+		{ 2, 4, 3, 1, 7, -3 },
+		20, 32, 60, 4, 30, 25, 65, 40,
+		13, 12, 20, 0,  5, 15, 27, 18,
+		14, 160, 50
 
 		//追加値暫定
-					,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
-					,A_INT
-					,6,5,60,
-					{ 5,3,1,5,3,0,0,0,0,0
-					,5,4,4,4,4,5,4,4,2,2
-					,1 }
-					,25,5,5,3,
-					FALSE,FALSE,TRUE
-					,FALSE
-					,5
-					,MON_YUMA
+		,{ 1,4,4,0,0,4,0,0,4,4,4,4,4,0,0,4 }
+		,A_INT
+		,5,4,80,
+		{ 3,3,2,2,3,0,0,0,0,0
+		,3,3,3,4,4,5,4,5,2,2
+		,2 }
+		,14,0,5,5,
+		FALSE,FALSE,TRUE
+		,FALSE
+		,4
+		,MON_YUMA
 	},
+
 
 };
 
@@ -6550,6 +6551,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		0,  0,  0,  0,  0,  0,  0,  0,
 		0, 1
 		,FALSE
+		,FALSE
 	},
 
 	{
@@ -6564,6 +6566,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		{  2,  -2,  -1,  0,  1,  0 },
 		-5,  -5,  -3,  -1,  -2,  -2,  10,  0,
 		1, 0
+		,FALSE
 		,FALSE
 	},
 
@@ -6580,6 +6583,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		3,  8,  2,  0,  3,  5,  -8,  -5,
 		-1, 0
 		,FALSE
+		,FALSE
 	},
 
 	{
@@ -6594,6 +6598,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		{  0,  -1,  2,  -1,  1,  1 },
 		-5,  2,  6,  -1,  0,  -2,  -3,  -6,
 		0, 0
+		,FALSE
 		,FALSE
 	},
 
@@ -6610,6 +6615,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		7,  2,  -1,  1,  5,  5,  0,  10,
 		0, 0
 		,FALSE
+		,FALSE
 	},
 
 	{
@@ -6624,6 +6630,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		{  2,  1,  1,  -1,  -1,  0 },
 		-5,  5,  -2,  0,  2,  -2,  10,  10,
 		-1, 0
+		,FALSE
 		,FALSE
 	},
 
@@ -6640,6 +6647,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		-10,  10, -10,  -3,  -5,  10,  5, 50,
 		-3, 0
 		,FALSE
+		,TRUE
 	},
 
 	{
@@ -6654,6 +6662,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		{ -1,  1,  0,  1,  -1,  3 },
 		3,  3, 0, -1, 3, 3, -5, 5,
 		0, 0
+		,FALSE
 		,FALSE
 	},
 
@@ -6670,6 +6679,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		10,  5,  3,  0,  4,  2,  10,  10,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 
 	{
@@ -6685,6 +6695,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		10,  7,  3,  2, 10,  8,  15,  15,
 		0, 1
 		,FALSE
+		,TRUE
 	},
 
 	{
@@ -6699,6 +6710,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		{  -1,  -1,  1,  -2,  2,  0 },
 		-5,  -3,  3,  1,  0,  -3,  -6,  -6,
 		1, 0
+		,FALSE
 		,FALSE
 	},
 
@@ -6716,6 +6728,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		 20, 40, 30, 10, 40, 40,  80, 80,
 		 15, 1
 		,FALSE
+		,TRUE
 	},
 	//v1.1.32 ここにはチルノの「日焼けした」などの特殊な性格を設定する。
 	//p_ptr->pseikakuがSEIKAKU_SPECIAL(12)のとき、ap_ptrに対してseikaku_info[]でなくseikaku_info_special[]へのポインタが入る。
@@ -6732,6 +6745,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		3, 3, -3, -1, 3, 0, 0, 0,
 		0, 1
 		,TRUE
+		,TRUE
 	},
 
 	{
@@ -6747,6 +6761,7 @@ const player_seikaku seikaku_info[MAX_SEIKAKU] =
 		-50, -50, -50, -10, -50, 10, 150, 0,
 		10, 0
 		,FALSE
+		,TRUE
 	},
 
 
@@ -15313,6 +15328,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  0,  0,  0,  0,  0,  0,  0,
 		0, 0
 		,TRUE
+		,TRUE
 	},
 	//v1.1.32 チルノ専用
 	{
@@ -15328,6 +15344,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		5,  5,  5,  0,  5,  5,  30,  30,
 		5, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.32b パチュリー専用
 	{
@@ -15343,6 +15360,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		-5,  5,  5,  -2,  -5,  -5,  -50,  -50,
 		-2, 1
 		,FALSE
+		,TRUE
 	},
 	//v1.1.34 成美専用
 	{
@@ -15358,6 +15376,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		-20,  5,  -5,  -2,  -20,  0,  20,  20,
 		2, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.44 うどんげ専用
 	{
@@ -15373,6 +15392,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  0, 0, -2, 0,  0,  10,  10,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.52 菫子専用
 	{
@@ -15388,6 +15408,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  0, 0, 0, 0,  0,  0,  0,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.59 針妙丸2専用
 	{
@@ -15403,6 +15424,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  0, 0, 0, 0,  0,  0,  0,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.60 赤蛮奇専用
 	{
@@ -15418,6 +15440,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		-4,  8, 0, -2, 0,  0,  -20,  -10,
 		-3, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.64 華扇専用
 	{
@@ -15433,6 +15456,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		5,  0,  5,  -3,  -5,  3,  10,  30,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.68 光の三妖精専用
 	{
@@ -15448,6 +15472,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		5,  5,  5,  -5,  5,  5,  25,  25,
 		5, 0
 		,FALSE
+		,TRUE
 	},
 	//v1.1.77 お燐専用
 	{
@@ -15463,6 +15488,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		5, 5, 0, 3, 10, 0, 0, 0,
 		0, 0
 		, FALSE
+		,TRUE
 	},
 	//v1.1.80 文専用
 	{
@@ -15478,6 +15504,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0, 0, 0, 0, 10, 0, -10, -10,
 		-1, 0
 		, FALSE
+		,TRUE
 	},
 		//v1.1.92 女苑専用
 	{
@@ -15493,6 +15520,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0, 0, 0, -1, 5, 0, 5, 5,
 		0, 0
 		, FALSE
+		,TRUE
 	},
 
 	//v2.0.1 魔理沙専用
@@ -15509,6 +15537,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  5, 0, 0, 0,  0,  -5,  -5,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 
 
@@ -15526,6 +15555,7 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		0,  0, 0, 0, 0,  0,  0,  0,
 		0, 0
 		,FALSE
+		,TRUE
 	},
 
 };
@@ -17397,4 +17427,165 @@ ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 
 
 
+
+//v2.0.6 装備品のTR_***のフラグの記述名称
+const cptr equipment_tr_flag_names[TR_FLAG_MAX + 1] =
+{
+	_("腕力", "Strength"),//0
+	_("知能", "Intelligence"),
+	_("賢さ", "Wisdom"),
+	_("器用", "Dexterity"),
+	_("耐久", "Constitution"),
+	_("魅力", "Charisma"),
+
+	_("魔道具支配", "Magic Device Use"),
+	_("隠密", "Stealth"),
+	_("探索", "Searching"),
+	_("赤外線視力", "Infravision"),
+	_("掘削", "Tunnelling"),
+
+	_("加速", "Speed"),
+	_("攻撃回数", "Extra Blows"),
+	_("カオス攻撃", "Chaos Brand"),
+	_("吸血攻撃", "Vampiric"),
+	_("理力攻撃", "Force Brand"),
+
+	_("切れ味", "Sharpness"),
+	_("*切れ味*", "*Sharpness*"),
+	_("地震", "Earthquakes"),
+	_("毒攻撃", "Poison Brand"),
+	_("酸攻撃", "Acid Brand"),
+
+	_("電撃攻撃", "Lightning Brand"),
+	_("火炎攻撃", "Fire Brand"),
+	_("冷気攻撃", "Cold Brand"),
+	_("混沌特効", "Slay Chaotic"),
+	_("秩序特効", "Slay Lawful"),
+
+	_("動物特効", "Slay Animals"),
+	_("人間特効", "Slay Humans"),
+	_("死人特効", "Slay Undead"),
+	_("竜特効", "Slay Dragons"),
+	_("神格特効", "Slay Deities"),
+
+	_("悪魔特効", "Slay Demons"),
+	_("妖怪特効", "Slay Youkai"),
+	_("*混沌特効*", "*Slay Chaotic*"),
+	_("*秩序特効*", "*Slay Lawful*"),
+	_("*動物特効*", "*Slay Animals*"),
+
+	_("*人間特効*", "*Slay Humans*"),
+	_("*死人特効*", "*Slay Undead*"),
+	_("*竜特効*", "*Slay Dragons*"),
+	_("*神格特効*", "*Slay Deities*"),
+	_("*悪魔特効*", "*Slay Demons*"),
+
+	_("*妖怪特効*", "*Slay Youkai*"),
+	_("混沌ESP", "Chaotic ESP"),
+	_("秩序ESP", "Lawful ESP"),
+	_("動物ESP", "Animal ESP"),
+	_("人間ESP", "Human ESP"),
+
+	_("死人ESP", "Undead ESP"),
+	_("竜ESP", "Dragon ESP"),
+	_("神格ESP", "Deity ESP"),
+	_("悪魔ESP", "Demon ESP"),
+	_("妖怪ESP", "Youkai ESP"),
+
+	_("無生物ESP", "Nonliving ESP"),
+	_("ユニークESP", "Unique ESP"),
+	_("腕力維持", "Sustain Strength"),
+	_("知能維持", "Sustain Intelligence"),
+	_("賢さ維持", "Sustain Wisdom"),
+
+	_("器用維持", "Sustain Dexterity"),
+	_("耐久維持", "Sustain Constitution"),
+	_("魅力維持", "Sustain Charisma"),
+	_("魔法難度低下", "Easy Spellcasting"),
+	_("消費魔力減少", "Cheap Spellcasting"),
+
+	_("強力射撃", "Shooting Power"),
+	_("射撃回数", "Extra Shots"),
+	_("投擲", "Throwing"),
+	_("乗馬適格", "Riding"),
+	_("反射", "Reflection"),
+
+	_("酸免疫", "Immunity to Acid"),
+	_("電撃免疫", "Immunity to Lightning"),
+	_("火炎免疫", "Immunity to Fire"),
+	_("冷気免疫", "Immunity to Cold"),
+	_("酸耐性", "Resist Acid"),
+
+	_("電撃耐性", "Resist Lightning"),
+	_("火炎耐性", "Resist Fire"),
+	_("冷気耐性", "Resist Cold"),
+	_("毒耐性", "Resist Poison"),
+	_("閃光耐性", "Resist Light"),
+
+	_("暗黒耐性", "Resist Darkness"),
+	_("破片耐性", "Resist Shards"),
+	_("轟音耐性", "Resist Sound"),
+	_("地獄耐性", "Resist Nether"),
+	_("水耐性", "Resist Water"),
+
+	_("混沌耐性", "Resist Chaos"),
+	_("劣化耐性", "Resist Disenchantment"),
+	_("破邪耐性", "Resist Holy"),
+	_("時空耐性", "Resist Time"),
+	_("麻痺耐性", "Free Action"),
+
+	_("恐怖耐性", "Resist Fear"),
+	_("盲目耐性", "Resist Blindness"),
+	_("混乱耐性", "Resist Confusion"),
+	_("狂気耐性", "Resist Insanity"),
+	_("浮遊", "Levitation"),
+
+	_("透明視認", "See Invisible"),
+	_("遅消化", "Slow Digestion"),
+	_("急回復", "Regeneration"),
+	_("光源", "Light Source"),
+	_("警告", "Warning"),
+
+	_("祝福", "Blessed"),
+	_("テレポート", "Teleportation"),
+	_("二刀流", "Dual Wielding"),
+	_("高速移動", "Swift Movement"),
+	_("テレパシー", "Telepathy"),
+
+	_("火炎オーラ", "Fire Aura"),
+	_("電撃オーラ", "Lightning Aura"),
+	_("冷気オーラ", "Cold Aura"),
+	_("反テレポート", "Anti-Teleportation"),
+	_("反魔法", "Anti-Magic"),
+
+	_("太古の怨念", "Ancient Foul Curse"),
+	_("反感", "Aggravation"),
+	_("経験値減少", "EXP Drain"),
+	_("弱い呪い増加", "Gain Weak Curses"),
+	_("(強い呪い増加", "Gain Strong Curses"),
+
+	_("酸破壊防止", "Indestructible (Acid)"),
+	_("電撃破壊防止", "Indestructible (Lightning)"),
+	_("火炎破壊防止", "Indestructible (Fire)"),
+	_("冷気破壊防止", "Indestructible (Cold)"),
+	_("発動可能", "Activate"),
+
+	_("素材", "Material"),
+	_("使用可能", "Usable"),
+	_("ブーメラン", "Boomerang"),
+	_("記述", "Description"),
+	_("(こころの仮面専用)", "(Kokoro mask)"),
+
+	_("(未使用)", "(unused)"),
+	"(SHOW_MODS)",
+	"(HIDE_TYPE)",
+	"(FULL_NAME)",
+	"(FIXED_FLAVOR)",
+
+	_("居住可能", "Inhabitable"),
+	_("罠解除", "Disarming"),
+	_("魔法防御", "Protection from Magic"),
+	_("(終端ダミー)", "(term dummy)"),
+
+};
 

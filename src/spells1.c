@@ -10449,12 +10449,12 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			}
 			else if (p_ptr->resist_neth)
 			{
-				if (!(prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST)))
+				if (!(prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST) || p_ptr->pclass == CLASS_YUMA))
 					dam *= 6; dam /= (randint1(4) + 7);
 			}
 			else if (!CHECK_MULTISHADOW()) drain_exp(200 + (p_ptr->exp / 100), 200 + (p_ptr->exp / 1000), 75);
 
-			if ((p_ptr->pclass == CLASS_YOSHIKA || prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST)) && !CHECK_MULTISHADOW())
+			if ((p_ptr->pclass == CLASS_YOSHIKA || prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST) || p_ptr->pclass == CLASS_YUMA) && !CHECK_MULTISHADOW())
 			{
 #ifdef JP
 				msg_print("’n–‚Ì—Í‚ð‹zŽû‚µ‚½I");

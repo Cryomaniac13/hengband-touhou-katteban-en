@@ -1069,8 +1069,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_TSUKASA) a_idx = ART_EIBON;
 			else if (p_ptr->pclass == CLASS_MEGUMU) a_idx = ART_ODUNU;
 			else if (p_ptr->pclass == CLASS_MISUMARU) a_idx = ART_PALANTIR;
-
-
+			else if (p_ptr->pclass == CLASS_YUMA) a_idx = ART_CHIYOU;
 
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//™¶¬
@@ -3382,6 +3381,12 @@ void do_cmd_tunnel(void)
 			/* Tunnel through walls */
 			/*:::ŽÀÛ‚Éƒgƒ“ƒlƒ‹‚ðŒ@‚éì‹Æ*/
 			more = do_cmd_tunnel_aux(y, x);
+
+			//–Þ–‚‚Í’Ç‰Á‚Å–ž• “x‚ðÁ”ï‚·‚é
+			if (p_ptr->pclass == CLASS_YUMA)
+			{
+				set_food(p_ptr->food - (50 + p_ptr->lev * 2));
+			}
 		}
 	}
 

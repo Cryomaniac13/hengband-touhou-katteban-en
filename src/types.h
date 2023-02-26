@@ -1125,6 +1125,10 @@ struct player_seikaku
 	//byte sex;			/* seibetu seigen */
 
 	bool flag_nofixed;
+
+	//v2.0.6 あまり普通でない性格　尤魔がランダムに性格が変わるときの除外判定に使う
+	bool flag_strange_select;
+
 };
 
 

@@ -2744,3 +2744,12 @@ extern bool	flag_nue_check_undefined;
 //v2.0.5
 extern bool hatate_search_unique_monster(void);
 extern void alloc_hatate_search_mon();
+
+//v2.0.6
+extern bool yuma_swallow(int rad);
+extern void	yuma_lose_extra_power(int dec_val);
+extern const cptr equipment_tr_flag_names[TR_FLAG_MAX + 1];
+extern bool do_cmd_eat_food_aux(int item);
+extern int yuma_eat_other_things(object_type *o_ptr);
+extern int calc_korin_sell_price(object_type *o_ptr);
+extern bool check_yuma_ultimate_mode(void);

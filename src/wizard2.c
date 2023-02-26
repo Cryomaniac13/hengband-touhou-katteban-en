@@ -138,6 +138,13 @@ static void do_cmd_wiz_hack_ben_2(void)
 	object_type forge;
 	char desc[160];
 
+	//–Þ–‚@‹ó• ‚Å“|‚ê‚é’¼‘O‚É‚·‚é
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		p_ptr->magic_num2[200] = 0;
+		set_food(100);
+		return;
+	}
 
 	if (gv_test1 > 0)
 	{
@@ -598,6 +605,16 @@ static void do_cmd_wiz_hack_ben(void)
 
     (void)probing();
 
+	msg_format("today_mon:%d", p_ptr->today_mon);
+	msg_format("hatate_mon:%d", p_ptr->hatate_mon_search_ridx);
+	msg_format("hatate_dun:%d", p_ptr->hatate_mon_search_dungeon);
+
+
+	msg_format("food:%d", p_ptr->food);
+	if(p_ptr->pclass == CLASS_YUMA) msg_format("foodstock:%d", p_ptr->magic_num2[200]);
+
+
+	return;
 
 	msg_format("testmsg:o_cnt:%d", o_cnt);
 
@@ -607,7 +624,6 @@ static void do_cmd_wiz_hack_ben(void)
 		if (i % 10 == 0) msg_print("     ");
 	}
 
-	return;
 
 
 	msg_format("turn:%d", turn);
@@ -646,7 +662,6 @@ static void do_cmd_wiz_hack_ben(void)
 	//msg_format("turn: %d  recall:%d", turn, p_ptr->word_recall);
 	msg_format("alcohol: %d",p_ptr->alcohol);
 	//msg_format("cut:%d stun:%d broken:%d", p_ptr->cut, p_ptr->stun, p_ptr->race_multipur_val[0]);
-	msg_format("food:%d", p_ptr->food);
 
 
 	msg_format("cur:%d max:%d",cur_hgt,cur_wid);

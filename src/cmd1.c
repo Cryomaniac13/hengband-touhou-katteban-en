@@ -7699,6 +7699,12 @@ bool py_attack(int y, int x, int mode)
 
 	}
 
+	//–Þ–‚‚ÍUŒ‚‚·‚é‚½‚Ñ‚É–ž• “x‚ðÁ”ï‚·‚é
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		set_food(p_ptr->food - (100 + p_ptr->lev * 8));
+	}
+
 	if ((p_ptr->special_defense & KATA_IAI) && ((mode != HISSATSU_IAI) || mdeath))
 	{
 		set_action(ACTION_NONE);

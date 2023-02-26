@@ -2377,6 +2377,13 @@ msg_print("体を悪くしてしまった！");
 		}
 	}
 
+	//尤魔は魔法を使うたびに満腹度を消費する
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		set_food(p_ptr->food - (300 + (9+spell)*30));
+	}
+
+
 	/* Redraw mana */
 	p_ptr->redraw |= (PR_MANA);
 

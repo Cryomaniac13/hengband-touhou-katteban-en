@@ -990,7 +990,10 @@ static void prt_status(void)
 	if (p_ptr->clawextend) ADD_FLG(BAR_CLAWEXTEND);
 
 	///mod140325
-	if (p_ptr->reactive_heal || (p_ptr->pclass == CLASS_MEDICINE && cave_have_flag_bold(py, px, FF_POISON_PUDDLE) && cave_have_flag_bold(py, px, FF_DEEP))) ADD_FLG(BAR_REACTIVE_HEAL);
+	if (p_ptr->reactive_heal
+		|| (p_ptr->pclass == CLASS_MEDICINE && cave_have_flag_bold(py, px, FF_POISON_PUDDLE) && cave_have_flag_bold(py, px, FF_DEEP))
+//		|| ((CHECK_YUMA_FOOD_STOCK) >= 5)
+		) ADD_FLG(BAR_REACTIVE_HEAL);
 
 	///mod140329
 	if (p_ptr->radar_sense) ADD_FLG(BAR_RADAR);
@@ -1619,8 +1622,25 @@ static void prt_depth(void)
  */
 static void prt_hunger(void)
 {
+	//v2.0.6 尤魔特殊処理 p_ptr->magic_num2[200]に満腹度のストックを貯められる
+	if ((CHECK_YUMA_FOOD_STOCK) > 0)
+	{
+#ifdef JP
+		if(p_ptr->magic_num2[200] == 10)
+			c_put_str(TERM_L_GREEN, format("満腹",p_ptr->magic_num2[200]), ROW_HUNGRY, COL_HUNGRY);
+		else
+			c_put_str(TERM_L_GREEN, format("%d分", p_ptr->magic_num2[200]), ROW_HUNGRY, COL_HUNGRY);
+#else
+		if(p_ptr->magic_num2[200] == 10)
+			c_put_str(TERM_L_GREEN, format("Full",p_ptr->magic_num2[200]), ROW_HUNGRY, COL_HUNGRY);
+		else
+			c_put_str(TERM_L_GREEN, format("%d/10", p_ptr->magic_num2[200]), ROW_HUNGRY, COL_HUNGRY);
+#endif
+
+
+	}
 	/* Fainting / Starving */
-	if (p_ptr->food < PY_FOOD_FAINT)
+	else if (p_ptr->food < PY_FOOD_FAINT)
 	{
 #ifdef JP
 		c_put_str(TERM_RED, "衰弱  ", ROW_HUNGRY, COL_HUNGRY);
@@ -1653,7 +1673,8 @@ static void prt_hunger(void)
 	}
 
 	/* Normal */
-	else if (p_ptr->food < PY_FOOD_FULL)
+	//v2.0.6 尤魔は通常の満腹にならない
+	else if (p_ptr->food < PY_FOOD_FULL || p_ptr->pclass == CLASS_YUMA)
 	{
 		c_put_str(TERM_L_GREEN, "      ", ROW_HUNGRY, COL_HUNGRY);
 	}
@@ -1897,8 +1918,10 @@ sprintf(text, "  %2d", command_rep);
 		}
 	}
 
+
+
 	/* Display the info (or blanks) */
-	c_put_str(attr, format("%5.5s",text), ROW_STATE, COL_STATE);
+	c_put_str(attr, format("%5.5s", text), ROW_STATE, COL_STATE);
 
 
 	///mod150114 表示位置変更
@@ -4227,6 +4250,9 @@ static void calc_torch(void)
 
 	if(p_ptr->pclass == CLASS_KAGUYA) p_ptr->cur_lite += p_ptr->lev / 10;
 
+	if (YUMA_HAVE_ITEM_FLAGS(TR_LITE)) p_ptr->cur_lite++;
+
+
 	//依神女苑の特殊インベントリに入っている指輪の処理
 	if (p_ptr->pclass == CLASS_JYOON)
 	{
@@ -4484,6 +4510,131 @@ bool buki_motteruka(int i)
 
 
 
+
+
+//アイテムフラグが記録されたflgs[TR_FLAG_SIZE]を読み込んで＠にその耐性や能力を付与する
+//calc_bonuses()からのみ呼ぶ
+//new_speed値だけはcalc_bonuses()内で後で処理するのでアドレスを受け取って加算
+//尤魔・女苑・アリスなど特殊インベントリにアイテムフラグを記憶するクラス全般の処理をここに統合したいが当面は尤魔のみ
+static void calc_bo_player_gain_flgs(u32b flgs[TR_FLAG_SIZE], int pval_src, int *new_speed)
+{
+
+	int pv;
+
+	//pval処理
+	if (p_ptr->pclass == CLASS_JYOON) pv = pval_src / 2;
+	else if (p_ptr->pclass == CLASS_YUMA) pv = 1;
+	else pv = pval_src;
+
+	//耐性や呪いなどフラグ処理
+
+	//マイナス効果　尤魔は無効
+	if (p_ptr->pclass != CLASS_YUMA)
+	{
+		if (have_flag(flgs, TR_AGGRAVATE))   p_ptr->cursed |= TRC_AGGRAVATE;
+		if (have_flag(flgs, TR_NO_MAGIC)) p_ptr->anti_magic = TRUE;
+		if (have_flag(flgs, TR_NO_TELE))  p_ptr->anti_tele = TRUE;
+	}
+
+	//警告　女苑はアイテムに彫られた銘をチェックする必要があるのでここでは処理しない
+	//if (p_ptr->pclass != CLASS_JYOON && have_flag(flgs, TR_WARNING)) p_ptr->warning = TRUE;
+
+	if (have_flag(flgs, TR_DEC_MANA))    p_ptr->dec_mana = TRUE;
+	if (have_flag(flgs, TR_SLOW_DIGEST)) p_ptr->slow_digest = TRUE;
+	if (have_flag(flgs, TR_REGEN))       p_ptr->regenerate = TRUE;
+	if (have_flag(flgs, TR_TELEPATHY))   p_ptr->telepathy = TRUE;
+	if (have_flag(flgs, TR_ESP_ANIMAL))  p_ptr->esp_animal = TRUE;
+	if (have_flag(flgs, TR_ESP_UNDEAD))  p_ptr->esp_undead = TRUE;
+	if (have_flag(flgs, TR_ESP_DEMON))   p_ptr->esp_demon = TRUE;
+	if (have_flag(flgs, TR_ESP_KWAI))     p_ptr->esp_kwai = TRUE;
+	if (have_flag(flgs, TR_ESP_DEITY))   p_ptr->esp_deity = TRUE;
+	if (have_flag(flgs, TR_ESP_DRAGON))  p_ptr->esp_dragon = TRUE;
+	if (have_flag(flgs, TR_ESP_HUMAN))   p_ptr->esp_human = TRUE;
+	if (have_flag(flgs, TR_ESP_EVIL))    p_ptr->esp_evil = TRUE;
+	if (have_flag(flgs, TR_ESP_GOOD))    p_ptr->esp_good = TRUE;
+	if (have_flag(flgs, TR_ESP_NONLIVING)) p_ptr->esp_nonliving = TRUE;
+	if (have_flag(flgs, TR_ESP_UNIQUE))  p_ptr->esp_unique = TRUE;
+
+	if (have_flag(flgs, TR_SEE_INVIS))   p_ptr->see_inv = TRUE;
+	if (have_flag(flgs, TR_LEVITATION))     p_ptr->levitation = TRUE;
+	if (have_flag(flgs, TR_FREE_ACT))    p_ptr->free_act = TRUE;
+
+	if (have_flag(flgs, TR_IM_FIRE)) p_ptr->immune_fire = TRUE;
+	if (have_flag(flgs, TR_IM_ACID)) p_ptr->immune_acid = TRUE;
+	if (have_flag(flgs, TR_IM_COLD)) p_ptr->immune_cold = TRUE;
+	if (have_flag(flgs, TR_IM_ELEC)) p_ptr->immune_elec = TRUE;
+
+	if (have_flag(flgs, TR_RES_ACID))   p_ptr->resist_acid = TRUE;
+	if (have_flag(flgs, TR_RES_ELEC))   p_ptr->resist_elec = TRUE;
+	if (have_flag(flgs, TR_RES_FIRE))   p_ptr->resist_fire = TRUE;
+	if (have_flag(flgs, TR_RES_COLD))   p_ptr->resist_cold = TRUE;
+	if (have_flag(flgs, TR_RES_POIS))   p_ptr->resist_pois = TRUE;
+	if (have_flag(flgs, TR_RES_FEAR))   p_ptr->resist_fear = TRUE;
+	if (have_flag(flgs, TR_RES_CONF))   p_ptr->resist_conf = TRUE;
+	if (have_flag(flgs, TR_RES_SOUND))  p_ptr->resist_sound = TRUE;
+	if (have_flag(flgs, TR_RES_LITE))   p_ptr->resist_lite = TRUE;
+	if (have_flag(flgs, TR_RES_DARK))   p_ptr->resist_dark = TRUE;
+	if (have_flag(flgs, TR_RES_CHAOS))  p_ptr->resist_chaos = TRUE;
+	if (have_flag(flgs, TR_RES_DISEN))  p_ptr->resist_disen = TRUE;
+	if (have_flag(flgs, TR_RES_SHARDS)) p_ptr->resist_shard = TRUE;
+	if (have_flag(flgs, TR_RES_BLIND))  p_ptr->resist_blind = TRUE;
+	if (have_flag(flgs, TR_RES_NETHER)) p_ptr->resist_neth = TRUE;
+
+	if (have_flag(flgs, TR_REFLECT))  p_ptr->reflect = TRUE;
+	if (have_flag(flgs, TR_SH_FIRE))  p_ptr->sh_fire = TRUE;
+	if (have_flag(flgs, TR_SH_ELEC))  p_ptr->sh_elec = TRUE;
+	if (have_flag(flgs, TR_SH_COLD))  p_ptr->sh_cold = TRUE;
+
+	if (have_flag(flgs, TR_SUST_STR)) p_ptr->sustain_str = TRUE;
+	if (have_flag(flgs, TR_SUST_INT)) p_ptr->sustain_int = TRUE;
+	if (have_flag(flgs, TR_SUST_WIS)) p_ptr->sustain_wis = TRUE;
+	if (have_flag(flgs, TR_SUST_DEX)) p_ptr->sustain_dex = TRUE;
+	if (have_flag(flgs, TR_SUST_CON)) p_ptr->sustain_con = TRUE;
+	if (have_flag(flgs, TR_SUST_CHR)) p_ptr->sustain_chr = TRUE;
+
+	if (have_flag(flgs, TR_SPEEDSTER)) p_ptr->speedster = TRUE;
+	if (have_flag(flgs, TR_RES_WATER))  p_ptr->resist_water = TRUE;
+	if (have_flag(flgs, TR_RES_HOLY))  p_ptr->resist_holy = TRUE;
+	if (have_flag(flgs, TR_RES_TIME))  p_ptr->resist_time = TRUE;
+	if (have_flag(flgs, TR_RES_INSANITY))  p_ptr->resist_insanity = TRUE;
+	if (have_flag(flgs, TR_EASY_SPELL)) p_ptr->easy_spell = TRUE;
+
+
+	//追加射撃は未処理
+	//if (have_flag(flgs, TR_XTRA_SHOTS)) extra_shots_sum++;
+	//強力投擲未処理
+	//if (o_ptr->tval == TV_RING && o_ptr->sval == SV_RING_MIGHTY_THROW) p_ptr->mighty_throw = TRUE;
+
+	//pval処理
+	if (have_flag(flgs, TR_MAGIC_MASTERY))    p_ptr->skill_dev += 8 * pv;
+	if (have_flag(flgs, TR_STR)) p_ptr->stat_add[A_STR] += pv;
+	if (have_flag(flgs, TR_INT)) p_ptr->stat_add[A_INT] += pv;
+	if (have_flag(flgs, TR_WIS)) p_ptr->stat_add[A_WIS] += pv;
+	if (have_flag(flgs, TR_DEX)) p_ptr->stat_add[A_DEX] += pv;
+	if (have_flag(flgs, TR_CON)) p_ptr->stat_add[A_CON] += pv;
+	if (have_flag(flgs, TR_CHR)) p_ptr->stat_add[A_CHR] += pv;
+	if (have_flag(flgs, TR_STEALTH)) p_ptr->skill_stl += pv;
+	if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_srh += pv * 5;
+
+	if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += pv * 5;
+	if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += pv;
+	if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += pv * 20;
+
+	if (have_flag(flgs, TR_DISARM)) p_ptr->skill_dis += pv * 5 / 2;
+	if (have_flag(flgs, TR_SAVING)) p_ptr->skill_sav += pv * 2;
+
+	//女苑の追加攻撃は複数指輪を合計するのでここでは処理しない
+	//if (p_ptr->pclass != CLASS_JYOON && have_flag(flgs, TR_BLOWS))
+	//{
+	//	extra_blows[0] += pv;
+	//	extra_blows[1] += pv;
+	//}
+
+	//加速も外で処理しようか？
+	if (have_flag(flgs, TR_SPEED)) *new_speed += pv;
+
+
+}
 
 
 /*
@@ -6178,7 +6329,59 @@ void calc_bonuses(void)
 		if (plev > 39) p_ptr->esp_evil = TRUE;
 		break;
 
+	case CLASS_YUMA:
+		{
+			int tmp_flgs[TR_FLAG_SIZE];
+			int food_stock;
 
+			for (i = 0; i < TR_FLAG_SIZE; i++)
+				tmp_flgs[i] = 0;
+
+			p_ptr->regenerate = TRUE;
+			p_ptr->free_act = TRUE;
+			p_ptr->resist_neth = TRUE;
+			p_ptr->see_inv = TRUE;
+			p_ptr->resist_pois = TRUE;
+			if (p_ptr->lev > 19)
+			{
+				p_ptr->oppose_pois = 1;
+				p_ptr->redraw |= PR_STATUS;
+			}
+			p_ptr->skill_dig += p_ptr->lev * 5;
+
+			//magic_num2[]に記録している装備品フラグ処理
+			for (i = 0; i<TR_FLAG_MAX; i++)
+			{
+				if(p_ptr->magic_num2[i] ) add_flag(tmp_flgs, i);
+			}
+			calc_bo_player_gain_flgs(tmp_flgs, 1, &new_speed);
+
+
+			food_stock = CHECK_YUMA_FOOD_STOCK;
+			//満腹度でパワーアップ
+			if (food_stock)
+			{
+
+				p_ptr->to_a += food_stock * 3;
+				p_ptr->dis_to_a += food_stock * 3;
+				p_ptr->to_h[0] += food_stock;
+				p_ptr->to_h[1] += food_stock;
+				p_ptr->to_h_m += food_stock;
+				p_ptr->to_d[0] += food_stock;
+				p_ptr->to_d[1] += food_stock;
+				p_ptr->to_d_m += food_stock;
+				p_ptr->dis_to_h[0] += food_stock;
+				p_ptr->dis_to_h[1] += food_stock;
+				p_ptr->dis_to_d[0] += food_stock;
+				p_ptr->dis_to_d[1] += food_stock;
+
+				extra_blows[0] += food_stock / 5;
+				extra_blows[1] += food_stock / 5;
+				for (i = 0; i < 6; i++) p_ptr->stat_add[i] += food_stock / 8;
+
+			}
+		}
+	break;
 
 	default:
 		break;

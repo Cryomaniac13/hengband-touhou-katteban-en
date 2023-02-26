@@ -4040,7 +4040,7 @@ bool mutation_power_aux(u32b power)
 
 				if (drain_life(dir, dummy))
 				{
-					if (p_ptr->food < PY_FOOD_FULL)
+					if (p_ptr->food < PY_FOOD_FULL || p_ptr->pclass == CLASS_YUMA)
 						/* No heal if we are "full" */
 						(void)hp_player(dummy);
 					else

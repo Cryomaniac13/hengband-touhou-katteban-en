@@ -1109,7 +1109,7 @@ bool dispel_check(int m_idx)
 	int i;
 
 	/* Invulnabilty (including the song) */
-	if (IS_INVULN() && !(p_ptr->special_defense & MUSOU_TENSEI) && !SUPER_SHION) return (TRUE);
+	if (IS_INVULN() && !(p_ptr->special_defense & MUSOU_TENSEI) && !SUPER_SHION && (YUMA_ULTIMATE_MODE)) return (TRUE);
 
 	//v1.1.44 イビルアンジュレーション
 	if (p_ptr->special_defense & EVIL_UNDULATION_MASK) return (TRUE);
@@ -1226,6 +1226,7 @@ bool dispel_check(int m_idx)
 	{
 		if ((p_ptr->pclass == CLASS_NINJA) && p_ptr->lev > 44);//非対象
 		else if ((p_ptr->pclass == CLASS_MOMOYO) && p_ptr->lev > 19);
+		else if ((p_ptr->pclass == CLASS_YUMA) && p_ptr->lev > 19);
 		else
 		{
 			if (p_ptr->oppose_pois || music_singing(MUSIC_NEW_LYRICA_SOLO) || music_singing(MUSIC_RESIST)) return (TRUE);

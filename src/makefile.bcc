@@ -79,8 +79,8 @@ OBJ = \
 	variable.obj wild.obj wizard1.obj wizard2.obj xtra1.obj xtra2.obj \
 	z-form.obj z-rand.obj z-term.obj z-util.obj z-virt.obj \
 	chuukei.obj \
-	ability_card.obj bldg2.obj cmd7.obj cmd_junko.obj new_class_power.obj \
-	random_unique_monster.obj straygod.obj \
+	ability_card.obj bldg2.obj cmd7.obj cmd_junko.obj cmd_yuma.obj \ 
+	new_class_power.obj random_unique_monster.obj straygod.obj \
 	io\io-plain-read-write.obj \
 	player\player-log.obj \
 	player\player-log-object.obj \

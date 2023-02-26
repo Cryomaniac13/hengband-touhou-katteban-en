@@ -2830,6 +2830,141 @@ static void display_player_various(void)
 
 
 
+
+
+#define PLAYER_ADD_OBJ_FLG_MODE_RESIST	0x00000001L //耐性
+#define PLAYER_ADD_OBJ_FLG_MODE_IMMUNE	0x00000002L //免疫
+#define PLAYER_ADD_OBJ_FLG_MODE_SPEED	0x00000004L //加速(他のpvalと表示される場所が違うので)
+#define PLAYER_ADD_OBJ_FLG_MODE_PVAL	0x00000008L //加速以外のpval(未使用)
+#define PLAYER_ADD_OBJ_FLG_MODE_SLAYS	0x00000010L //武器のスレイや属性(未使用)
+
+#define PLAYER_ADD_OBJ_FLG_MODE_WARNING	0x00000040L //警告(銘処理が必要かもしれないので分ける)
+#define PLAYER_ADD_OBJ_FLG_MODE_OTHERS	0x00000080L //ESPや能力維持や透明視認などほかの能力(投擲や乗馬など対象外のフラグもある)
+
+
+
+
+//player_flags()とplayer_immunity()内でのみ使う
+//特別なインベントリにアイテムを装備している＠がそのアイテムの耐性フラグなどを＠のフラグとして表示するための関数
+//obj_flgsからflgsへ必要なフラグをコピー
+//今のところ饕餮専用　いずれ女苑とかアリスも統合したい
+static void player_add_object_flag(u32b flgs[TR_FLAG_SIZE], u32b obj_flgs[TR_FLAG_SIZE], u32b mode)
+{
+
+	//必要なフラグをコピー(同じflgsなのでそのままコピーしようかと思ったがpvalやスレイなど関係ないフラグも多いので一つ一つコピーする
+
+	//耐性
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_RESIST)
+	{
+
+		if (have_flag(obj_flgs, TR_RES_ACID)) add_flag(flgs, TR_RES_ACID);
+		if (have_flag(obj_flgs, TR_RES_ELEC)) add_flag(flgs, TR_RES_ELEC);
+		if (have_flag(obj_flgs, TR_RES_FIRE)) add_flag(flgs, TR_RES_FIRE);
+		if (have_flag(obj_flgs, TR_RES_COLD)) add_flag(flgs, TR_RES_COLD);
+		if (have_flag(obj_flgs, TR_RES_POIS)) add_flag(flgs, TR_RES_POIS);
+		if (have_flag(obj_flgs, TR_RES_LITE)) add_flag(flgs, TR_RES_LITE);
+		if (have_flag(obj_flgs, TR_RES_DARK)) add_flag(flgs, TR_RES_DARK);
+		if (have_flag(obj_flgs, TR_RES_SHARDS)) add_flag(flgs, TR_RES_SHARDS);
+		if (have_flag(obj_flgs, TR_RES_SOUND)) add_flag(flgs, TR_RES_SOUND);
+		if (have_flag(obj_flgs, TR_RES_NETHER)) add_flag(flgs, TR_RES_NETHER);
+		if (have_flag(obj_flgs, TR_RES_WATER)) add_flag(flgs, TR_RES_WATER);
+		if (have_flag(obj_flgs, TR_RES_CHAOS)) add_flag(flgs, TR_RES_CHAOS);
+		if (have_flag(obj_flgs, TR_RES_DISEN)) add_flag(flgs, TR_RES_DISEN);
+		if (have_flag(obj_flgs, TR_RES_HOLY)) add_flag(flgs, TR_RES_HOLY);
+		if (have_flag(obj_flgs, TR_RES_TIME)) add_flag(flgs, TR_RES_TIME);
+
+		if (have_flag(obj_flgs, TR_FREE_ACT)) add_flag(flgs, TR_FREE_ACT);
+		if (have_flag(obj_flgs, TR_RES_BLIND)) add_flag(flgs, TR_RES_BLIND);
+		if (have_flag(obj_flgs, TR_RES_FEAR)) add_flag(flgs, TR_RES_FEAR);
+		if (have_flag(obj_flgs, TR_RES_CONF)) add_flag(flgs, TR_RES_CONF);
+		if (have_flag(obj_flgs, TR_RES_INSANITY)) add_flag(flgs, TR_RES_INSANITY);
+
+	}
+
+	//免疫
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_IMMUNE)
+	{
+
+		if (have_flag(obj_flgs, TR_IM_ACID)) add_flag(flgs, TR_RES_ACID);
+		if (have_flag(obj_flgs, TR_IM_ELEC)) add_flag(flgs, TR_RES_ELEC);
+		if (have_flag(obj_flgs, TR_IM_FIRE)) add_flag(flgs, TR_RES_FIRE);
+		if (have_flag(obj_flgs, TR_IM_COLD)) add_flag(flgs, TR_RES_COLD);
+
+	}
+
+	//加速
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_SPEED)
+	{
+		if (have_flag(obj_flgs, TR_SPEED)) add_flag(flgs, TR_SPEED);
+	}
+
+	//加速以外のpvalは未使用
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_PVAL)
+	{
+		msg_print(_("未実装", "Unimplemented"));
+	}
+	//武器のスレイや属性(未実装)
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_SLAYS)
+	{
+		msg_print(_("未実装", "Unimplemented"));
+	}
+	//警告
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_WARNING)
+	{
+		if (have_flag(obj_flgs, TR_WARNING)) add_flag(flgs, TR_WARNING);
+	}
+
+	//その他の能力
+	if (mode & PLAYER_ADD_OBJ_FLG_MODE_OTHERS)
+	{
+
+		if (have_flag(obj_flgs, TR_ESP_EVIL)) add_flag(flgs, TR_ESP_EVIL);
+		if (have_flag(obj_flgs, TR_ESP_GOOD))  add_flag(flgs, TR_ESP_GOOD);
+		if (have_flag(obj_flgs, TR_ESP_ANIMAL))  add_flag(flgs, TR_ESP_ANIMAL);
+		if (have_flag(obj_flgs, TR_ESP_HUMAN))  add_flag(flgs, TR_ESP_HUMAN);
+		if (have_flag(obj_flgs, TR_ESP_UNDEAD))  add_flag(flgs, TR_ESP_UNDEAD);
+		if (have_flag(obj_flgs, TR_ESP_DRAGON))  add_flag(flgs, TR_ESP_DRAGON);
+		if (have_flag(obj_flgs, TR_ESP_DEITY))  add_flag(flgs, TR_ESP_DEITY);
+		if (have_flag(obj_flgs, TR_ESP_DEMON))  add_flag(flgs, TR_ESP_DEMON);
+		if (have_flag(obj_flgs, TR_ESP_KWAI))  add_flag(flgs, TR_ESP_KWAI);
+		if (have_flag(obj_flgs, TR_ESP_NONLIVING))  add_flag(flgs, TR_ESP_NONLIVING);
+		if (have_flag(obj_flgs, TR_ESP_UNIQUE))  add_flag(flgs, TR_ESP_UNIQUE);
+		if (have_flag(obj_flgs, TR_TELEPATHY))  add_flag(flgs, TR_TELEPATHY);
+
+		if (have_flag(obj_flgs, TR_SUST_STR)) add_flag(flgs, TR_SUST_STR);
+		if (have_flag(obj_flgs, TR_SUST_INT)) add_flag(flgs, TR_SUST_INT);
+		if (have_flag(obj_flgs, TR_SUST_WIS)) add_flag(flgs, TR_SUST_WIS);
+		if (have_flag(obj_flgs, TR_SUST_DEX)) add_flag(flgs, TR_SUST_DEX);
+		if (have_flag(obj_flgs, TR_SUST_CON)) add_flag(flgs, TR_SUST_CON);
+		if (have_flag(obj_flgs, TR_SUST_CHR)) add_flag(flgs, TR_SUST_CHR);
+
+		if (have_flag(obj_flgs, TR_EASY_SPELL)) add_flag(flgs, TR_EASY_SPELL);
+		if (have_flag(obj_flgs, TR_DEC_MANA)) add_flag(flgs, TR_DEC_MANA);
+		if (have_flag(obj_flgs, TR_REFLECT)) add_flag(flgs, TR_REFLECT);
+
+		if (have_flag(obj_flgs, TR_LEVITATION)) add_flag(flgs, TR_LEVITATION);
+		if (have_flag(obj_flgs, TR_SEE_INVIS)) add_flag(flgs, TR_SEE_INVIS);
+		if (have_flag(obj_flgs, TR_SLOW_DIGEST)) add_flag(flgs, TR_SLOW_DIGEST);
+		if (have_flag(obj_flgs, TR_REGEN)) add_flag(flgs, TR_REGEN);
+		if (have_flag(obj_flgs, TR_LITE)) add_flag(flgs, TR_LITE);
+		if (have_flag(obj_flgs, TR_SPEEDSTER)) add_flag(flgs, TR_SPEEDSTER);
+
+		if (have_flag(obj_flgs, TR_SH_FIRE)) add_flag(flgs, TR_SH_FIRE);
+		if (have_flag(obj_flgs, TR_SH_ELEC)) add_flag(flgs, TR_SH_ELEC);
+		if (have_flag(obj_flgs, TR_SH_COLD)) add_flag(flgs, TR_SH_COLD);
+
+		//強力射撃、追加射撃、投擲、乗馬、祝福、テレポート、二刀流、反魔法、反テレポ、ブーメラン、呪い型フラグは非対象
+
+	}
+
+
+}
+
+
+
+
+
+
 /*
  * Obtain the "flags" for the player as if he was an item
  */
@@ -3829,6 +3964,29 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev >39) add_flag(flgs, TR_ESP_EVIL);
 		break;
 
+
+	case CLASS_YUMA:
+		{
+			u32b obj_flgs[TR_FLAG_SIZE];
+			u32b mode = (PLAYER_ADD_OBJ_FLG_MODE_RESIST| PLAYER_ADD_OBJ_FLG_MODE_SPEED| PLAYER_ADD_OBJ_FLG_MODE_WARNING| PLAYER_ADD_OBJ_FLG_MODE_OTHERS);
+
+			for (i = 0; i < TR_FLAG_SIZE; i++)
+				obj_flgs[i] = 0;
+
+			//magic_num2[]に記録している装備品フラグ処理
+			for (i = 0; i<TR_FLAG_MAX; i++)
+			{
+				if (p_ptr->magic_num2[i]) add_flag(obj_flgs, i);
+			}
+			player_add_object_flag(flgs, obj_flgs, mode);
+
+			add_flag(flgs, TR_REGEN);
+			add_flag(flgs, TR_FREE_ACT);
+			add_flag(flgs, TR_RES_NETHER);
+			add_flag(flgs, TR_SEE_INVIS);
+			add_flag(flgs, TR_RES_POIS);
+		}
+		break;
 
 	default:
 		break; /* Do nothing */
@@ -5423,6 +5581,19 @@ static void player_immunity(u32b flgs[TR_FLAG_SIZE])
 
 	}
 
+	//尤魔が食べた免疫装備
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		u32b obj_flgs[TR_FLAG_SIZE];
+		u32b mode = (PLAYER_ADD_OBJ_FLG_MODE_IMMUNE);
+		//magic_num2[]に記録している装備品フラグ処理
+		for (i = 0; i<TR_FLAG_MAX; i++)
+		{
+			if (p_ptr->magic_num2[i]) add_flag(obj_flgs, i);
+		}
+		player_add_object_flag(flgs, obj_flgs, mode);
+
+	}
 
 	if(p_ptr->pclass == CLASS_BYAKUREN && p_ptr->lev > 44 && p_ptr->tim_general[0])
 	{
@@ -5568,6 +5739,11 @@ static void player_vuln_flags(u32b flgs[TR_FLAG_SIZE])
 	{
 		add_flag(flgs, TR_RES_SOUND);
 		add_flag(flgs, TR_RES_SHARDS);
+	}
+
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		add_flag(flgs, TR_SLOW_DIGEST);
 	}
 
 	if(IS_VULN_FEAR)

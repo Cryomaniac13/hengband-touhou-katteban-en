@@ -3250,6 +3250,13 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_MISUMARU,2,0,TV_MATERIAL,SV_MATERIAL_MAGNETITE,1 },
 	{ CLASS_MISUMARU,2,0,TV_MATERIAL,SV_MATERIAL_OPAL,1 },
 
+	{ CLASS_YUMA,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_YUMA,2,ART_TOUTETSU,0,0,1 },
+	{ CLASS_YUMA,2,0,TV_FLASK, SV_FLASK_OIL,20 },
+
+
+
+
 
 	{-1,0,0,0,0,0} //I’[dummy
 };
@@ -6386,8 +6393,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("ˆË_@‡‰‘", "Shion Yorigami"),CLASS_SHION,RACE_DEITY,ENTRY_TASOGARE,SEX_FEMALE,
 		_("‚ ‚È‚½‚Í’N‚©‚ç‚àŒ™‚í‚ê‚é•n–R_‚Å‚·B‘å•Ï‚ÈØ‹à‚ğ•ø‚¦‚Ä‚¨‚èAÀ¿“I‚É“X‚âŠX‚Ì{İ‚ğ—˜—p‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB‚³‚ç‚Éô‚í‚ê‚Ä‚¢‚È‚¢‘•”õ•i‚Í‘¦À‚É·‚µ‰Ÿ‚³‚¦‚ç‚ê”¼“ú‚Ù‚Ç‚Å–vû‚³‚ê‚Ä‚µ‚Ü‚¢‚Ü‚·B‚ ‚È‚½‚ªƒ_ƒ“ƒWƒ‡ƒ“‚Å•’Ê‚Éí‚¤‚±‚Æ‚Í‹É‚ß‚Ä¢“ï‚ÅAu‹­§Š®‘SœßˆËv‚Ì“Á‹Z‚ğg‚Á‚Äƒ‚ƒ“ƒXƒ^[‚Ì‘Ì‚ğæ‚Áæ‚Á‚Äí‚¤‚±‚Æ‚É‚È‚è‚Ü‚·B‚ ‚È‚½‚ÍüˆÍ‚Å‹N‚±‚Á‚½•sK‚ğ­‚µ‚¸‚Â‚»‚Ìg‚É’~Ï‚µ‚Ä‚¢‚«A’™‚ß‚ñ‚¾•sK‚ğŠJ•ú‚µ‚Ä‚Æ‚Ä‚Â‚à‚È‚­‹¥ˆ«‚ÈuƒX[ƒp[•n–R_v‚É•Ïg‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B",
         "You are a poverty god hated by everyone. You're in massive debt, and can't use shops or other town facilities. Also, any non-cursed items you equip will be seized, disappearing in about half a day. Fighting in the dungeon will be extremely tough, but you can use your 'Forceful Perfect Possession' ability to possess a monster's body. You slightly accumulate misfortune around you in your body, and you can transform into a terrible 'Super Poverty God' by releasing the accumulated misfortune.")},
-	{ FALSE,_("ébéW@–Ş–‚", "Yuuma Toutetsu"),CLASS_YUMA,RACE_DEITY,ENTRY_TASOGARE,SEX_FEMALE,
-		_("(–¢À‘•)", "(unimplemented)") },
+	{ TRUE,_("ébéW@–Ş–‚", "Yuuma Toutetsu"),CLASS_YUMA,RACE_DEITY,ENTRY_TASOGARE,SEX_FEMALE,
+		_("‚ ‚È‚½‚Í’{¶ŠE‚Å„—~“¯–¿‚ğ—¦‚¢‚é“¯–¿’·‚Å‚·B–d—ª‚Æ“÷’eí‚Ì—¼•û‚ÉG‚ÅA‚Æ‚­‚É‘Ï‹v—Í‚É—D‚ê‚Ü‚·B‚ ‚ç‚ä‚é•¨‚ğH‚×‚é‚±‚Æ‚ª‚Å‚«AH‚×‚½‚à‚Ì‚É‚æ‚Á‚Ä‰h—{‚¾‚¯‚Å‚È‚­‘Ï«A”\—ÍA“Á‹ZAŒoŒ±’lAMP‚È‚Ç—lX‚È‚à‚Ì‚ğŠl“¾‚µ‚Ü‚·B‚ ‚È‚½‚Í’Êí‚Ì\”{‚Ì–• “xŒÀŠE‚ğ‚à‚¿‚Ü‚·‚ª• ‚ªŒ¸‚é‘¬“x‚ª‚»‚êˆÈã‚É‘‚­A‚³‚ç‚É—×ÚUŒ‚‚â“Á‹Z‚Ìg—p‚É‚æ‚Á‚Ä‚à–• “x‚ğ‘å•‚ÉÁ”ï‚µ‚Ü‚·B‚È‚é‚×‚­• ‚ªŒ¸‚ç‚È‚¢s“®‚ğS‚ª‚¯‚Ü‚µ‚å‚¤B‚à‚µ• ‚ªŒ¸‚Á‚Ä“|‚ê‚Ä‚µ‚Ü‚¤‚Æ‘€ì•s”\‚É‚È‚èüˆÍ‚Ì‚ ‚ç‚ä‚é‚à‚Ì‚ğ–³·•Ê‚É‹z‚¢‚İn‚ß‚Ü‚·B‰½‚à‹z‚¢‚Ş‚à‚Ì‚ª‚È‚¢ê‡ƒQ[ƒ€ƒI[ƒo[‚É‚È‚é‚Ü‚Å~‚Ü‚è‚Ü‚¹‚ñB",
+        "You are the leader of Gouyoku Alliance in the Animal Realm. You excel both at scheming and combat, and are exceptionally tough. You can eat anything, and aside from satiating your hunger, you can gain resistances, abilities, experience and MP. You can eat ten times as much as a normal person, but you grow hungry extremely quick as well, and your satiation level will drop as you fight in melee or use special abilities. Plan your action to avoid getting too hungry. If you faint from lack of food, you will start indiscriminately absorbing everything nearby, but the game is over if you still fail to consume anything.") },
 
 
 	{TRUE,_("Œõ‚ÌO—d¸", "Fairies of Light"),CLASS_3_FAIRIES,RACE_FAIRY,ENTRY_OTHER,SEX_FEMALE,
@@ -8253,6 +8261,12 @@ void gain_perma_mutation(void)
 	if (p_ptr->pclass == CLASS_YACHIE)	p_ptr->muta2_perma |= MUT2_BIGHORN | MUT2_BIGTAIL;
 
 	if (p_ptr->pclass == CLASS_MOMOYO) p_ptr->muta1_perma |= MUT1_EAT_ROCK;
+
+	if (p_ptr->pclass == CLASS_YUMA)
+	{
+		p_ptr->muta1_perma |= (MUT1_EAT_ROCK | MUT1_EAT_MAGIC);
+		p_ptr->muta2_perma |= MUT2_BIGHORN;
+	}
 
 
 	p_ptr->muta1 = p_ptr->muta1_perma;
