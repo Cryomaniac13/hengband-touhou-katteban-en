@@ -5289,6 +5289,11 @@ msg_print("守りのルーンが壊れた！");
 			{
 				if (m_ptr->r_idx == MON_MOMOYO || m_ptr->r_idx == MON_TSUKASA) set_friendly(m_ptr);
 			}
+			else if (p_ptr->pclass == CLASS_CHIMATA)
+			{
+				if (m_ptr->r_idx == MON_MOMOYO || m_ptr->r_idx == MON_TSUKASA || p_ptr->pclass == CLASS_MEGUMU) set_friendly(m_ptr);
+			}
+
 
 
 			//v1.1.59 針妙丸性格「意外に顔が広い」 WANTEDとQUESTOR以外の東方ユニークが常に友好

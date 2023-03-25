@@ -353,6 +353,31 @@ bool make_attack_normal(int m_idx)
 			d_side *= 2;
 		}
 
+		//v2.0.7 ç–’u–³Žå‚Ö‚Ì‹Ÿ•¨v‚ðŽó‚¯‚½“G‚Í“Á’è‚Ì•ª—Þ‚ÌUŒ‚‚ð‚Å‚«‚È‚­‚È‚é
+		if (p_ptr->pclass == CLASS_CHIMATA && m_ptr->mflag & MFLAG_SPECIAL)
+		{
+			switch (method)
+			{
+			case RBM_STING:
+			case RBM_SLASH:
+			case RBM_CHARGE:
+			case RBM_EXPLODE:
+			case RBM_SPEAR:
+			case RBM_BOOK:
+			case RBM_INJECT:
+			case RBM_STRIKE:
+			case RBM_PLAY:
+			case RBM_SMOKE:
+				msg_format(_("%s‚ÍUŒ‚‚Å‚«‚È‚¢I", "%^s is unable to attack!"), m_name);
+				continue; //UŒ‚‰ñ”ð
+
+			default:
+				break;
+
+			}
+		}
+
+
 		/*:::ƒLƒXƒ‚ª“Á’è‚ÌUŒ‚‚ð‰ñ”ð‚·‚éˆ—*/
 		///mod141118 ƒLƒXƒ
 		if(p_ptr->pclass == CLASS_KISUME && p_ptr->concent )

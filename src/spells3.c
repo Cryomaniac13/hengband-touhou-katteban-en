@@ -8343,3 +8343,60 @@ bool eat_jewel(void)
 	return TRUE;
 
 }
+
+
+//v2.0.7 フロアに特定条件に合うモンスターがいたら大まかな距離を知らせる
+//search_specific_object()のモンスター版
+//mode 1:千亦がアビリティカードの力を手に入れられるモンスター
+void	search_specific_monster(int mode)
+{
+
+	int i;
+	int count = 0;
+	int temp_dist = 999, temp_dist_new;
+
+	for (i = 1; i < m_max; i++)
+	{
+		monster_type *m_ptr = &m_list[i];
+
+		if (!m_ptr->r_idx) continue;
+
+
+		if (mode == 1)
+		{
+			if (!chimata_can_copy(m_ptr->r_idx)) continue;
+		}
+		else
+		{
+			msg_format("ERROR:search_specific_monster(%d)", mode);
+			return;
+		}
+
+		count++;
+		temp_dist_new = m_ptr->cdis;
+		if (temp_dist_new < temp_dist)	temp_dist = temp_dist_new;
+	}
+	if (count < 1)
+	{
+		if (mode == 1) msg_format(_("この階にはアビリティカードの題材になりそうな者はいないようだ。",
+                                    "Doesn't look like there are any suitable people for ability cards on this floor."));
+	}
+	else
+	{
+		char msg_mode[40];
+		char msg_dist[16];
+
+		if (mode == 1) my_strcpy(msg_mode, _("非日常の予兆", "something out of the ordinary"), sizeof(msg_mode) - 2);
+
+		if (temp_dist < 15) my_strcpy(msg_dist, _("近い！", "It's close!"), sizeof(msg_dist) - 2);
+		else if (temp_dist < 30) my_strcpy(msg_dist, _("やや近い。", "It's pretty close."), sizeof(msg_dist) - 2);
+		else if (temp_dist < 60) my_strcpy(msg_dist, _("やや遠い。", "It's pretty far away."), sizeof(msg_dist) - 2);
+		else if (temp_dist < 100) my_strcpy(msg_dist,_("遠い。", "It's far away."), sizeof(msg_dist) - 2);
+		else  my_strcpy(msg_dist, _("かなり遠い。", "It's very far away."), sizeof(msg_dist) - 2);
+
+		msg_format(_("%sを感じる。%s", "You sense %s. %s"), msg_mode, msg_dist);
+	}
+
+
+
+}

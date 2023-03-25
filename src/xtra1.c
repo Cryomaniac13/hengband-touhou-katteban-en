@@ -4252,6 +4252,8 @@ static void calc_torch(void)
 
 	if (YUMA_HAVE_ITEM_FLAGS(TR_LITE)) p_ptr->cur_lite++;
 
+	//v2.0.7 千亦はランク7以上で光る
+	if ((CHIMATA_CARD_RANK) >= 7) p_ptr->cur_lite++;
 
 	//依神女苑の特殊インベントリに入っている指輪の処理
 	if (p_ptr->pclass == CLASS_JYOON)
@@ -6382,6 +6384,78 @@ void calc_bonuses(void)
 			}
 		}
 	break;
+
+	case CLASS_CHIMATA:
+		{
+			int card_rank;
+			//所持カードからカード流通ランクを計算
+			chimata_calc_card_rank();
+
+			card_rank = CHIMATA_CARD_RANK;
+
+			//ランクごとに2ずつ隠密減少
+			p_ptr->skill_stl -= (card_rank - 1) * 2;
+			p_ptr->see_inv = TRUE;
+
+			if (plev > 39) p_ptr->resist_chaos = TRUE;
+
+			if (card_rank >= 2)
+			{
+				p_ptr->resist_conf = TRUE;
+			}
+			if (card_rank >= 3)
+			{
+				p_ptr->free_act = TRUE;
+			}
+			if (card_rank >= 4)
+			{
+				p_ptr->stat_add[A_INT]++;
+				p_ptr->stat_add[A_WIS]++;
+				p_ptr->stat_add[A_CHR]++;
+				p_ptr->resist_blind = TRUE;
+			}
+			if (card_rank >= 5)
+			{
+				p_ptr->stat_add[A_STR]++;
+				p_ptr->stat_add[A_DEX]++;
+				p_ptr->stat_add[A_CON]++;
+				p_ptr->resist_fear = TRUE;
+
+			}
+			if (card_rank >= 6)
+			{
+				p_ptr->stat_add[A_INT]++;
+				p_ptr->stat_add[A_WIS]++;
+				p_ptr->stat_add[A_CHR]++;
+				p_ptr->resist_insanity = TRUE;
+			}
+			if (card_rank >= 7)
+			{
+				p_ptr->stat_add[A_STR]++;
+				p_ptr->stat_add[A_DEX]++;
+				p_ptr->stat_add[A_CON]++;
+				p_ptr->resist_lite = TRUE;
+				p_ptr->resist_dark = TRUE;
+			}
+			if (card_rank >= 8)
+			{
+				for (i = 0; i < 6; i++) p_ptr->stat_add[i]++;
+				p_ptr->telepathy = TRUE;
+			}
+			if (card_rank >= 9)
+			{
+				for (i = 0; i < 6; i++) p_ptr->stat_add[i]++;
+				p_ptr->resist_time = TRUE;
+				new_speed += 5;
+			}
+
+
+		}
+
+		break;
+
+
+
 
 	default:
 		break;

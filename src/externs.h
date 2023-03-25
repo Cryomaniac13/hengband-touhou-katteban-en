@@ -2753,3 +2753,10 @@ extern bool do_cmd_eat_food_aux(int item);
 extern int yuma_eat_other_things(object_type *o_ptr);
 extern int calc_korin_sell_price(object_type *o_ptr);
 extern bool check_yuma_ultimate_mode(void);
+
+//v2.0.7
+extern int 	chimata_calc_card_rank(void);
+extern void chimata_comment_card_rank(void);
+extern bool	chimata_activate_ability_card_power(bool only_info);
+extern int	chimata_can_copy(int r_idx);
+extern void	search_specific_monster(int mode);

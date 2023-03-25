@@ -405,6 +405,11 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MISUMARU) return TRUE;
 			else return FALSE;
 
+		case CLASS_CHIMATA:
+			if (r_idx == MON_CHIMATA) return TRUE;
+			else return FALSE;
+
+
 	}
 
 
@@ -1677,6 +1682,14 @@ void monster_death(int m_idx, bool drop_item)
 	/*:::モンスターが指定したアイテムを落とすことを可能にするフラグ*/
 	bool drop_chosen_item = drop_item && !cloned && !p_ptr->inside_arena
 		&& !p_ptr->inside_battle && !is_pet(m_ptr);
+
+	//千亦の「無主への供物」を受けた敵はアイテムを落とさない
+	if (p_ptr->pclass == CLASS_CHIMATA && (m_ptr->mflag & MFLAG_SPECIAL))
+	{
+		drop_chosen_item = FALSE;
+		drop_item = FALSE;
+
+	}
 
 	//配下を倒した時　野良神様処理
 	if(drop_item && is_pet(m_ptr))
@@ -3698,6 +3711,16 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 		///msg140304
 		msg_print(_("Qコマンドでゲームを終了してスコアを残すことができます。",
                     "You can finish the game and record your score with the 'Q' command."));
+
+
+		//v2.0.7 千亦がラスボスを倒したら「100回目のブラックマーケット」のカードを獲得する
+		if (p_ptr->pclass == CLASS_CHIMATA)
+		{
+			msg_print(_("あなたは「百回目のブラックマーケット」のカードを入手した！",
+                    "You have obtained the 'Hundredth Black Market' card!"));
+			p_ptr->magic_num2[ABL_CARD_100TH_MARKET] = 1;
+			p_ptr->update |= PU_BONUS;
+		}
 
 		//v1.1.25 フラグ処理
 		//v2.0 ラスボス「太歳星君」を倒してもダンジョン制覇にはならない

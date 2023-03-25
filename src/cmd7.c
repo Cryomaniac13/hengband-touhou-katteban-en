@@ -9472,10 +9472,15 @@ void metamorphose_to_monster(int r_idx , int time)
 /*:::本当に今更だが、MPを回復するルーチンを独立する。
  *気が向いたら過去の記述も置き換えよう。剣術家などMP上限突破する職に注意。
  *既にMPが最大の場合FALSEを返す
+ *v2.0.7 得られるMPが0のときにもFALSE
  */
 bool player_gain_mana(int mana)
 {
+
 	if(p_ptr->csp >= p_ptr->msp) return FALSE;
+
+	if (!mana) return FALSE;
+
 	p_ptr->csp += mana;
 	if(p_ptr->csp >= p_ptr->msp)
 	{

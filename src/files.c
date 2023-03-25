@@ -3988,6 +3988,56 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		}
 		break;
 
+	case CLASS_CHIMATA:
+		{
+			int card_rank = (CHIMATA_CARD_RANK);
+
+			add_flag(flgs, TR_SEE_INVIS);
+			if (plev > 39) 	add_flag(flgs, TR_RES_CHAOS);
+
+			if (card_rank >= 2)
+			{
+				add_flag(flgs, TR_RES_CONF);
+			}
+			if (card_rank >= 3)
+			{
+				add_flag(flgs, TR_FREE_ACT);
+			}
+			if (card_rank >= 4)
+			{
+				add_flag(flgs, TR_RES_BLIND);
+
+			}
+			if (card_rank >= 5)
+			{
+				add_flag(flgs, TR_RES_FEAR);
+
+			}
+			if (card_rank >= 6)
+			{
+				add_flag(flgs, TR_RES_INSANITY);
+
+			}
+			if (card_rank >= 7)
+			{
+				add_flag(flgs, TR_LITE);
+				add_flag(flgs, TR_RES_LITE);
+				add_flag(flgs, TR_RES_DARK);
+
+			}
+			if (card_rank >= 8)
+			{
+				add_flag(flgs, TR_TELEPATHY);
+			}
+			if (card_rank >= 9)
+			{
+				add_flag(flgs, TR_RES_TIME);
+				add_flag(flgs, TR_SPEED);
+			}
+
+		}
+		break;
+
 	default:
 		break; /* Do nothing */
 	}
@@ -8673,6 +8723,17 @@ static void dump_aux_race_history(FILE *fff)
 			fprintf(fff, "  %s: %d \n",soldier_skill_table[i][0].name, p_ptr->magic_num2[i]);
 
 		}
+	}
+
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		int card_num = chimata_calc_card_rank();
+		int percent = card_num * 100 / ABILITY_CARD_LIST_LEN;
+		fprintf(fff, _("\n  [市場]", "\n  [Marketplace]"));
+		fprintf(fff, _("\nあなたは%d種類のアビリティカードを作って流通させた。(達成度%d%%) \n",
+                    "You have created %d kinds of ability cards currently in circulation. (completion rate %d%%) \n"), card_num,percent);
+
+
 	}
 
 	if(p_ptr->pclass == CLASS_KAGUYA)
