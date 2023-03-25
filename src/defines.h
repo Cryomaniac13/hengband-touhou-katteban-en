@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 6
+#define H_VER_PATCH 7
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1326,7 +1326,9 @@
 #define CLASS_RIDING_BACKDANCE	(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO || p_ptr->pclass == CLASS_TSUKASA)
 
 //v1.1.87 アビリティカードを扱う職業
+//千亦は含まない。カード販売所や高騰度を使わずmagic_num[]に保有カードを記録するため
 #define CHECK_ABLCARD_DEALER_CLASS	(p_ptr->pclass == CLASS_MIKE || p_ptr->pclass == CLASS_TAKANE || p_ptr->pclass == CLASS_SANNYO || p_ptr->pclass == CLASS_CARD_DEALER || is_special_seikaku(SEIKAKU_SPECIAL_MARISA))
+
 //v1.1.90 駒草山如にカード売人系特技と吟遊詩人系特技を持たせようとしたらp_ptr->magic_num[]の使われる場所が被ったので弥縫策でカード売人系特技の使用箇所をシフトさせる
 //v2.0.1 魔理沙専用性格のときにカード売人特技を使うことにした。通常の特技によるmagic_num[]は使わなくなるはずだが念のためシフトしておく
 #define ABLCARD_MAGICNUM_SHIFT (p_ptr->pclass == CLASS_SANNYO ? 32:p_ptr->pclass == CLASS_MARISA ? 80:0)
@@ -8768,16 +8770,13 @@ extern int PlayerUID;　
 #define INVEN2_MAGATAMA_NUM_MAX	7
 
 //v2.0.6
-
 //尤魔関係
 #define YUMA_FLAG_DELETE_TURN	50
 #define YUMA_FLAG_DELETE_TICK	1000
 #define CHECK_YUMA_FOOD_STOCK ((p_ptr->pclass == CLASS_YUMA) ? (p_ptr->magic_num2[200]) : 0)
 #define YUMA_HAVE_ITEM_FLAGS(TR_FLAG_NUM) ((p_ptr->pclass == CLASS_YUMA) ? (p_ptr->magic_num2[TR_FLAG_NUM] > 0): (FALSE))
-
 //尤魔最終モード
 #define YUMA_ULTIMATE_MODE ((p_ptr->pclass == CLASS_YUMA) && (p_ptr->special_defense & SD_UNIQUE_CLASS_POWER))
-
 
 //calc_bonuses()で＠にアイテム関係のフラグを反映するときのモード
 #define PLAYER_ADD_OBJ_FLG_MODE_RESIST	0x00000001L //耐性
@@ -8788,5 +8787,9 @@ extern int PlayerUID;　
 #define PLAYER_ADD_OBJ_FLG_MODE_WARNING	0x00000040L //警告(銘処理が必要かもしれないので分ける)
 #define PLAYER_ADD_OBJ_FLG_MODE_OTHERS	0x00000080L //ESPや能力維持や透明視認などほかの能力(投擲や乗馬など対象外のフラグもある)
 
+//v2.0.7 千亦関係
+//カード流通ランクをp_ptr->magic_num2[255]に記録
+#define CHIMATA_CARD_RANK	(p_ptr->pclass == CLASS_CHIMATA ? p_ptr->magic_num2[255] : 0)
+#define CHECK_CHIMATA_HAVE_CARD(CARD_IDX) (p_ptr->pclass == CLASS_CHIMATA ? (p_ptr->magic_num2[(CARD_IDX)]) : 0)
 
 

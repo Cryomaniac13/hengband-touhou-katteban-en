@@ -6449,6 +6449,7 @@ const player_class class_info[MAX_CLASS] =
 		,4
 		,MON_MEGUMU
 	},
+
 	{
 #ifdef JP
 		"無主物の神",
@@ -6458,23 +6459,22 @@ const player_class class_info[MAX_CLASS] =
 		"Chimata",
 		"Chimata",
 #endif
-		{ 0, 1, 2, 0, -1, -2 },
-		20, 24, 28, 2, 16, 20, 45, 30,
-		12, 10,  9, 0,  4,   5,  15, 15,
-		1, 20, 70
-
+		{ -2, 2, 2, 0, -2, 2 },//流通ランクによって全+4
+		40, 20, 18, 16, 16, 20, 40, 40,
+		24, 18, 15,  0,  8, 10, 12, 12,
+		0, 90, 70
 		//追加値暫定
-					,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
-					,A_INT
-					,3,2,90,
-					{ 2,1,1,2,2,0,0,0,0,0
-					,3,3,3,3,3,3,2,2,2,2
-					,1 }
-					,110,0,2,2,
-					FALSE,FALSE,TRUE
-					,TRUE
-					,3
-					,MON_PARSEE
+		,{ 1,4,3,4,3,4,3,3,3,3,3,3,4,0,0,3 }
+		,A_INT
+		,3,1,100,
+		{ 1,2,1,1,2,0,0,0,0,0
+		,2,2,2,2,2,2,2,2,2
+		,2 }
+		,20,1,5,5,
+		FALSE,FALSE,TRUE
+		,FALSE
+		,3
+		,MON_CHIMATA
 	},
 	{
 #ifdef JP
@@ -17331,7 +17331,7 @@ pattern_attack_type pattern_attack_table[PATTERN_ATTACK_TYPE_MAX + 1] =
 ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 {
 
-	{ _("空白のカード", "Blank Card")		,0,0,FALSE,0,0 ,0}, //通常生成されない。凡庸化するとこのカードになる。千亦プレイ時以外に使い道はない
+	{ _("空白のカード", "Blank Card")		,0,0,TRUE,10,10 ,0}, //通常生成されない。凡庸化するとこのカードになる。千亦プレイ時以外に使い道はない
 	{ _("命のカード", "Life Card")			                ,1,11,FALSE,0,0,0 },
 	{ _("スペルのカード", "Spell Card")		                ,1,10,FALSE,0,0,0 },
 	{ _("勝手に天下の回り物", "Money Comes and Goes")	    ,1,22,FALSE,0,0,MON_NAZRIN },
@@ -17386,17 +17386,17 @@ ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 	{ _("大天狗の麦飯", "Great Tengu's Barley Rice")		,3,77,TRUE,70,100 ,MON_MEGUMU},
 	//空色の勾玉は出さない
 	//↓v2.0.1追加
-	{ _("資本主義のジレンマ ", "Capitalist's Dilemma")		,2,30,FALSE,0,0,MON_NITORI },
-	{ _("魔法使いの基礎勉強 ", "Magician's Basic Study")	,2,47,FALSE,0,0,MON_PATCHOULI },
-	{ _("破壊の美学 ", "Beauty of Destruction")				,3,80,TRUE,75,50,MON_FLAN },
-	{ _("龍の通り道 ", "Dragon's Passage")   				,3,88,FALSE,0,0,MON_FUTO },
-	{ _("けしかける狛犬 ", "Unleash the Guardian Hounds")	,2,33,TRUE,65,15,MON_AUNN },
+	{ _("資本主義のジレンマ", "Capitalist's Dilemma")		,2,30,FALSE,0,0,MON_NITORI },
+	{ _("魔法使いの基礎勉強", "Magician's Basic Study")	,2,47,FALSE,0,0,MON_PATCHOULI },
+	{ _("破壊の美学", "Beauty of Destruction")				,3,80,TRUE,75,50,MON_FLAN },
+	{ _("龍の通り道", "Dragon's Passage")   				,3,88,FALSE,0,0,MON_FUTO },
+	{ _("けしかける狛犬", "Unleash the Guardian Hounds")	,2,33,TRUE,65,15,MON_AUNN },
 	{ _("生命爆発の薬 ", "Life Explosion Elixir")			,4,118,TRUE,95,100,MON_EIRIN },
 	{ _("生命の豊穣 ", "Bumper Crop of Life")				,3,65,FALSE,0,0,MON_MINORIKO },
 	{ _("不屈の脳筋 ", "Indominable Meathead")				,3,63,FALSE,0,0,MON_SAKI },
 	{ _("半霊のスペア ", "Spare Half-Ghost")      			,2,26,FALSE,0,0,0 },
 	{ _("静かなる輝き", "Quiet Twinkling")        			,1,17,TRUE,50,15,MON_3FAIRIES },
-	{ _("狂おしい静寂 ", "Lunatic Silence")       			,1,17,TRUE,50,15,MON_3FAIRIES },
+	{ _("狂おしい静寂", "Lunatic Silence")       			,1,17,TRUE,50,15,MON_3FAIRIES },
 	{ _("賑やかな無力", "Exuberant Powerlessness")			,1,17,TRUE,50,15,MON_3FAIRIES },
 	{ _("刺激的な鱗粉", "Stimulating Scales")     			,1,19,TRUE,40,30,MON_LARVA },
 	{ _("山姥の包丁", "Yamanba's Kitchen Knife")			,3,62,TRUE,55,20,MON_NEMUNO },
@@ -17414,13 +17414,13 @@ ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 	{ _("正直すぎる道しるべ", "Too-Honest Signpost")		,2,48,TRUE,50,50,MON_KUTAKA },
 	{ _("急がば三途の回り道", "Three Crossings Hasty Detour")		,2,49,TRUE,50,25,MON_KOMACHI },
 	{ _("ひらり布", "Nimble Fabric")        				,2,29,TRUE,50,30,MON_SEIJA },
-	{ _("抗いがたきジュリ扇", "Irresistible Julie Fan")		,3,83,FALSE,0,0,0 },
-	{ _("煤けた団扇", "Soot-covered Uchiwa")				,3,84,FALSE,0,0,0 },
+	{ _("抗いがたきジュリ扇", "Irresistible Julie Fan")		,3,83,FALSE,0,0,MON_JYOON },
+	{ _("煤けた団扇", "Soot-covered Uchiwa")				,3,84,FALSE,0,0,MON_SHION_2 },
 	{ _("数えたくなる羊", "Sheep You Want to Count")		,3,77,TRUE,80,100,MON_DOREMY },
 	{ _("純粋な自己肯定感", "Pristine Self-Confidence")		,4,123,TRUE,70,50,MON_JUNKO },
-	{ _("ゆのみ霊夢", "Teacup Reimu")        				,4,143,TRUE,80,50,0 },//買い取りで入手できない
-	{ _("ゆのみ魔理沙", "Teacup Marisa")          			,4,147,TRUE,80,50,0 },//買い取りで入手できない
-	{ _("百回目のブラックマーケット ", "Hundredth Black Market")	,4,160,FALSE,0,0,0 },
+	{ _("ゆのみ霊夢", "Teacup Reimu")        				,4,143,TRUE,80,50,MON_REIMU },//レベル90以上限定
+	{ _("ゆのみ魔理沙", "Teacup Marisa")          			,4,147,TRUE,80,50,MON_MARISA },//レベル90以上限定
+	{ _("百回目のブラックマーケット", "Hundredth Black Market")	,4,160,FALSE,0,0,0 },
 
 
 };

@@ -4,6 +4,146 @@
 
 
 
+//千亦専用
+//r_idxを渡して「このモンスターから生成できるアビリティカードはあるか」を判定する。
+//複数あるときは最初のcard_idxを返す。
+//なければ0を返す。0は「空白のカード」のcard_idxだが千亦の初期所持カードなので失敗値として使っても問題ない
+int	chimata_can_copy(int r_idx)
+{
+
+	int i;
+	monster_race *r_ptr;
+
+	if (r_idx < 1 || r_idx >= max_r_idx) { msg_format("ERROR:chimata_can_copy(%d)", r_idx); return 0; }
+
+	r_ptr = &r_info[r_idx];
+
+	//カードidxでループ
+	for (i = 1; i<ABILITY_CARD_LIST_LEN; i++)
+	{
+		//対象モンスターかどうか
+		if (r_idx != ability_card_list[i].r_idx) continue;
+
+		//magic_num2[card_idx]が0以外なら所有済みなのでパス
+		if (p_ptr->magic_num2[i]) continue;
+
+		//ゆのみレイマリはレベル90以上限定とする
+		if (i == ABL_CARD_YUNOMI_REIMU && r_ptr->level < 90) continue;
+		if (i == ABL_CARD_YUNOMI_MARISA && r_ptr->level < 90) continue;
+
+		break;
+	}
+
+	if (i == ABILITY_CARD_LIST_LEN) return 0;
+	return i;
+
+
+}
+
+//v2.0.7 千亦が空白のカードを使用してアビリティカードを作成する
+//作ったカードはp_ptr->magic_num2[card_idx]を1にするという形で記録する
+//行動順消費したときTRUE
+static bool	chimata_use_blank_card(void)
+{
+
+	int i;
+	monster_type *m_ptr;
+	int y, x;
+	int m_idx, dir;
+	int new_card_idx;
+	char m_name[120];
+	int prob;
+
+	int old_rank, new_rank;
+
+	if (p_ptr->inside_arena)
+	{
+		msg_print(_("ここでは使えない。", "You can't use this here."));
+		return FALSE;
+	}
+
+	//隣接モンスターを指定
+	if (!get_rep_dir2(&dir) || dir == 5) return FALSE;
+	y = py + ddy[dir];
+	x = px + ddx[dir];
+	m_idx = cave[y][x].m_idx;
+	m_ptr = &m_list[m_idx];
+	if (!m_idx || !m_ptr->ml)
+	{
+		msg_print(_("そこには何もいない。", "There's nobody here."));
+		return FALSE;
+	}
+
+	//指定したモンスターからカードを生成可能か？
+	new_card_idx = chimata_can_copy(m_ptr->r_idx);
+	if (!new_card_idx)
+	{
+		msg_print(_("この者では今一つ意欲が湧かない。", "You're not feeling very motivated copying this person's ability."));
+		return FALSE;
+	}
+
+	//成功率計算
+	//(知能+器用+レベル差*2)% 寝てると+50%、起きてて恐怖混乱朦朧どれかなら+25%、防御低下状態なら+25%、最低保証5%
+	//常に起きてて異常耐性完備でクエストにしか出ないフランと隠岐奈が一番の強敵か？あとマミゾウとぬえも相当大変。
+	//lev70の隠岐奈の場合lev,INT,DEX全て40で成功率20%、破滅の薬とか投げつけて防御低下が入れば45%まで上がる計算
+	//lev90レイマリはlev50INTDEX40からINTに限界突破入れて防御低下を通してようやく35%
+
+	prob = (p_ptr->stat_ind[A_INT] + 3) + (p_ptr->stat_ind[A_DEX] + 3) + (p_ptr->lev - r_info[m_ptr->r_idx].level) * 2;
+	if (MON_CSLEEP(m_ptr)) prob += 50;
+	else if (MON_CONFUSED(m_ptr) || MON_STUNNED(m_ptr) || MON_MONFEAR(m_ptr)) prob += 25;
+	if (MON_DEC_DEF(m_ptr)) prob += 25;
+
+	if (prob > 100) prob = 100;
+	if (prob < 5) prob = 5;
+
+	if (!get_check_strict(format(_("実行しますか？(成功率%d%%)", "Attempt? (success rate %d%%)"), prob), CHECK_DEFAULT_Y)) return FALSE;
+
+	monster_desc(m_name, m_ptr, 0);
+
+	msg_format(_("あなたは%sの力を模倣し始めた...", "You start imitating the ability of %s..."),m_name);
+
+	//成功
+	if (randint0(100) < prob)
+	{
+		msg_format(_("成功だ！「%s」が完成した！", "Success! '%s' was created!"), ability_card_list[new_card_idx].card_name);
+
+		old_rank = (CHIMATA_CARD_RANK);
+
+		//入手済みフラグ
+		p_ptr->magic_num2[new_card_idx] = 1;
+
+		chimata_calc_card_rank();
+
+		new_rank = (CHIMATA_CARD_RANK);
+
+		if (old_rank != new_rank)
+		{
+			msg_print(_("アビリティカードの流通が新たな段階に入った気がする！",
+               "You feel the popularity of ability cards reaching a new level!"));
+			p_ptr->update |= (PU_BONUS | PU_LITE | PU_HP | PU_MANA);
+			update_stuff();
+		}
+
+		//他にもある場合通知しとく
+		if (chimata_can_copy(m_ptr->r_idx))
+		{
+			msg_print(_("まだ他にも作れそうだ！", "Looks like there's another ability card you could create!"));
+		}
+
+	}
+	//失敗
+	else
+	{
+		msg_print(_("力のコピーに失敗した！", "You failed to copy the ability!"));
+	}
+
+	//起きて敵対
+	set_monster_csleep(cave[y][x].m_idx, 0);
+	anger_monster(m_ptr);
+
+	return TRUE;
+
+}
 
 //アビリティカード生成時にapply_magic()の代わりに呼ぶ。apply_magic()に放り込んでもそこから呼ばれるがランクなどの指定はできない。
 //カードのIDXがo_ptr->pvalに記録される。IDXはability_card_list[]の添字に一致する。
@@ -116,6 +256,15 @@ int	count_ability_card(int card_idx)
 		msg_format(_("ERROR:count_ability_card()に不正なidx(%d)が渡された",
                     "ERROR: Incorrect idx (%d) passed to count_abiltiy_card()"), card_idx);
 		return 0;
+
+	}
+
+	//千亦はp_otr->magic_num2[card_idx]に保有の有無を、カード流通ランクで枚数を記録
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		if (!CHECK_CHIMATA_HAVE_CARD(card_idx)) return 0;
+
+		return (CHIMATA_CARD_RANK);
 
 	}
 
@@ -401,9 +550,20 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 
 	case ABL_CARD_BLANK:
 	{
-		if (only_info) return format(_(" このカードはなんの役にも立たない。",
+		if (p_ptr->pclass != CLASS_CHIMATA)
+		{
+			if (only_info) return format(_(" このカードはなんの役にも立たない。",
                                         " This card doesn't look useful at all."));
+            msg_print(_("使うと装備品が全て足元に落ちそうになった！慌てて装備し直した。",
+                    "All of your equipment falls down at your feet! You rush and re-equip your items."));
+        }
+		else
+		{
+			if (only_info) return format(_(" このカードを使って新たなカードを作ることができる。対象のモンスターに隣接して使わなければならない。成功率はレベル差・知能・器用で決まる。睡眠・混乱・朦朧・恐怖・防御低下状態のモンスターには成功しやすい。この行為はモンスターを怒らせる。",
+                                    " Using this card lets you create a new card. You must target an adjacent monster. Success rate depends on level difference, intelligence and dexterity. Works better on sleeping, confused, stunned, terrified monsters or monsters with lowered defense. Makes the monster hostile."));
 
+			if (!chimata_use_blank_card()) return NULL;
+		}
 	}
 	break;
 
@@ -568,6 +728,13 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 		{
 			msg_print(_("地上では使えない。", "You cannot use it on surface."));
 			return NULL;
+		}
+
+		if (EXTRA_MODE)
+		{
+			msg_print(_("今は使えない。", "You cannot use it now."));
+			return NULL;
+
 		}
 
 		recall_player(base+randint1(base));
@@ -2011,6 +2178,9 @@ bool	buy_abilitycard_from_mon(void)
 		//現実変容カードも出ない
 		if (EXTRA_MODE && i == ABL_CARD_DOREMY) continue;
 
+		//v2.0.7 ゆのみ霊夢、魔理沙はレベル90以降限定で買取可能に
+		if (i == ABL_CARD_YUNOMI_REIMU && dun_level < 90) continue;
+		if (i == ABL_CARD_YUNOMI_MARISA && dun_level < 90) continue;
 
 		//売却済みフラグが立っているカードはもう出ない。符号付き変数を無理やりビットフラグに使うのはなんか不安なので下位16bitだけフラグに使う。
 		if ((p_ptr->magic_num1[(i / 16)+ ABLCARD_MAGICNUM_SHIFT] >> (i % 16)) & 1L) continue;
@@ -2121,3 +2291,417 @@ void break_market()
 
 
 }
+
+
+//千亦がアビリティカードを発動するときの失敗率計算　魔道具術師とほぼ同じ
+int calc_chimata_activate_fail_rate(int card_idx)
+{
+	int level, chance;
+
+	if (card_idx < 0 || card_idx >= ABILITY_CARD_LIST_LEN)
+	{
+		msg_format("ERROR:calc_chimata_activate_fail_rate(%d)", card_idx);
+		return 0;
+	}
+
+	//成功率はロッドと同じ計算を使う。k_info[].levelに当たる値としてability_card_list[card_idx].difficultyを使用する
+	level = (ability_card_list[card_idx].difficulty * 5 / 6 - 5);
+	chance = level * 4 / 5 + 20;
+	chance -= 3 * (adj_mag_stat[p_ptr->stat_ind[A_INT]] - 1);
+	level /= 2;
+	if (p_ptr->lev > level)
+	{
+		chance -= 3 * (p_ptr->lev - level);
+	}
+	chance = mod_spell_chance_1(chance);
+	chance = MAX(chance, adj_mag_fail[p_ptr->stat_ind[A_INT]]);
+	if (p_ptr->stun > 50) chance += 25;
+	else if (p_ptr->stun) chance += 15;
+	if (chance > 95) chance = 95;
+	chance = mod_spell_chance_2(chance);
+
+	return chance;
+}
+
+
+
+//千亦がカードを確認または発動する
+//カードの所持未所持はp_ptr->magic_num2[card_idx]で判定され、
+//発動済みのカードのチャージターンはp_ptr->magic_num1[card_idx]に記録される
+//ターゲットキャンセルなど行動順消費しなかったときFALSE
+bool	chimata_activate_ability_card_power(bool only_info)
+{
+
+	int card_idx_list[100];//5ページ分
+	int col_max = 20;//1ページに20枚まで表示
+	int page_num = 0;
+
+	int i;
+	int fail_rate;
+	int card_idx;//選択されたカード
+	int card_idx_list_len = 0;//使用可能なカードのリスト
+	bool flag_choice = FALSE;//カードが選択されたフラグ
+	bool flag_need_redraw = TRUE;//カードリスト再描画フラグ
+
+	object_type dummyitem;
+	object_type *o_ptr = &dummyitem;
+
+	int card_number; //保有カードの一種類ごとの枚数　流通ランクと同じ値になる
+
+	if (p_ptr->pclass != CLASS_CHIMATA)
+	{
+		msg_format("ERROR:chimata_activate_ability_card_power(class:%d)", p_ptr->pclass);
+		return FALSE;
+	}
+	//ないとは思うけど今後さらにアビリティカードが大量に追加されたときに備えて一応
+	if (ABILITY_CARD_LIST_LEN >= 100)
+	{
+		msg_format(_("ERROR:chimata_activate_ability_card_power()のページ数が足りない",
+                    "ERROR: Not enough pages amount in chimata_activate_ability_card_power()"));
+		return FALSE;
+	}
+
+	card_number = (CHIMATA_CARD_RANK);
+
+	//card_idx_listにability_card_list[]のidx値を格納する。
+	//そのまま使わないのは発動用選択のとき発動用でないカードを飛ばすため
+	for (i = 0; i<ABILITY_CARD_LIST_LEN; i++)
+	{
+		if (!only_info && !ability_card_list[i].activate) continue;
+		card_idx_list[card_idx_list_len++] = i;
+	}
+
+#ifdef ALLOW_REPEAT
+	//リピートのときカードidxを取得する
+	if (repeat_pull(&card_idx))
+	{
+		flag_choice = TRUE;
+		flag_need_redraw = FALSE;
+	}
+#endif
+
+	if (flag_need_redraw) screen_save();
+
+	//選択画面を表示してカードを選択するループ
+	while (!flag_choice)
+	{
+
+		char c;
+		int tmp;
+
+		//カードリストを表示
+		if (flag_need_redraw)
+		{
+
+			for (i = 2; i<25; i++) Term_erase(17, i, 255);
+
+			c_put_str(TERM_WHITE, _("　　　　       名称　　　　　　　　失率",
+                                    "               Name                Fail"), 3, 20);
+			for (i = 0; i<col_max; i++)
+			{
+				int tmp_card_idx;
+				if (page_num * col_max + i >= card_idx_list_len) break;
+
+				tmp_card_idx = card_idx_list[page_num * col_max + i];
+
+				//未所持
+				if (!CHECK_CHIMATA_HAVE_CARD(tmp_card_idx))
+				{
+					if (tmp_card_idx == ABL_CARD_100TH_MARKET)
+						c_put_str(TERM_L_DARK, _("(*勝利*すると開放される)",
+                                                "(unlocked for *WINNERS*)"), 4 + i, 20);
+					else if (tmp_card_idx == ABL_CARD_YUNOMI_REIMU)
+						c_put_str(TERM_L_DARK, _("(レベル90以上の？？からのみ入手できる)",
+                                                "(obtain from level 90+ ?????)"), 4 + i, 20);
+					else if (tmp_card_idx == ABL_CARD_YUNOMI_MARISA)
+						c_put_str(TERM_L_DARK, _("(レベル90以上の？？？からのみ入手できる)",
+                                                "(obtain from level 90+ ??????)"), 4 + i, 20);
+					else if (tmp_card_idx == ABL_CARD_SHION)
+						c_put_str(TERM_L_DARK, _("(本気を出した？？からのみ入手できる)",
+                                                "(obtain from true form of ?????)"), 4 + i, 20);
+					else
+						c_put_str(TERM_L_DARK, _("？？？？？？？",
+                                                "????????????"), 4 + i, 20);
+				}
+				//発動用カード
+				else if (ability_card_list[tmp_card_idx].activate)
+				{
+					int valid_card_num;//チャージ中でない使用可能カードの枚数
+
+					fail_rate = calc_chimata_activate_fail_rate(tmp_card_idx);
+
+					valid_card_num = (card_number * ability_card_list[tmp_card_idx].charge_turn - p_ptr->magic_num1[tmp_card_idx]) / ability_card_list[tmp_card_idx].charge_turn;
+
+					//充填中のカードは灰色にする
+					if (valid_card_num)
+						c_put_str(TERM_WHITE, format("%c) %25s(%d/%d)  %3d%%", ('a' + i), ability_card_list[tmp_card_idx].card_name, valid_card_num, card_number, fail_rate), 4 + i, 20);
+					else
+						c_put_str(TERM_L_DARK, format("%c) %25s(%d/%d)  %3d%%", ('a' + i), ability_card_list[tmp_card_idx].card_name, valid_card_num, card_number, fail_rate), 4 + i, 20);
+
+
+				}
+				//所有効果カード
+				else
+				{
+					c_put_str(TERM_WHITE, format("%c) %30s  ---", ('a' + i), ability_card_list[tmp_card_idx].card_name), 4 + i, 20);
+
+				}
+			}
+
+			c_put_str(TERM_WHITE, _("(スペース:次のページ ESC:キャンセル)",
+                                    "(Spacebar: Next page ESC: Cancel)"), 4 + i, 20);
+
+			flag_need_redraw = FALSE;
+		}
+
+		//入力を受け付けてチェック
+
+		c = inkey();
+
+		//キャンセル
+		if (c == ESCAPE)
+		{
+			screen_load();
+			return FALSE;
+		}
+
+		//スペースはページ番号を増やし再描画
+		if (c == ' ')
+		{
+			page_num++;
+			//ページがリスト数を超えたら最初のページへ
+			if (page_num * col_max >= card_idx_list_len) page_num = 0;
+			flag_need_redraw = TRUE;
+			continue;
+		}
+		//範囲外　入力し直し
+		if (c < 'a' || c >= ('a' + col_max))
+		{
+			continue;
+		}
+
+		//ページ番号と入力値からリストのインデックスを計算
+		tmp = page_num * col_max + (c - 'a');
+
+		//範囲内だがリストの終端以降　入力し直し
+		if (tmp >= card_idx_list_len)
+		{
+			continue;
+		}
+		card_idx = card_idx_list[tmp];
+
+		//未習得のカードを選択　入力し直し
+		if (!CHECK_CHIMATA_HAVE_CARD(card_idx))
+		{
+			continue;
+		}
+
+#ifdef ALLOW_REPEAT
+		repeat_push(card_idx);
+#endif
+
+		flag_need_redraw = TRUE; //ループを出てすぐscreen_load()をするためTRUEにする
+		break;
+	}//カード選択ループ終了
+
+	if (flag_need_redraw) screen_load();
+
+	//カードの力を使うためのダミーアイテム生成
+	object_prep(o_ptr, lookup_kind(TV_ABILITY_CARD, SV_ABILITY_CARD));
+	o_ptr->pval = card_idx;
+	o_ptr->ident |= (IDENT_MENTAL);
+	o_ptr->timeout = p_ptr->magic_num1[card_idx];
+	o_ptr->number = card_number;
+
+
+	//カードを確認するだけの場合は行動順消費なしで終了
+	if (only_info)
+	{
+		screen_object(o_ptr, SCROBJ_FORCE_DETAIL);
+		return FALSE;
+	}
+
+	//充填中のカードはメッセージを出してFALSEで終了　リピートで呼ばれることもあるのでループ外で処理する
+	if (o_ptr->timeout > ability_card_list[card_idx].charge_turn * (o_ptr->number - 1))
+	{
+		if (flush_failure) flush();
+		msg_print(_("まだチャージが終わっていない。", "Still charging."));
+
+		return FALSE;
+	}
+
+	//発動失敗判定
+	fail_rate = calc_chimata_activate_fail_rate(card_idx);
+	if (randint0(100) < fail_rate)
+	{
+		msg_print(_("カードの力の発動に失敗した。", "You failed to activate the card's ability."));
+		return TRUE;
+	}
+
+	if (card_idx != ABL_CARD_BLANK)	msg_format(_("「%s」の力を開放した！", "You unleash the power of '%s'!"), ability_card_list[card_idx].card_name);
+
+	//ダミーカードを実行部分に渡す
+	if (!use_ability_card_aux(o_ptr, FALSE)) return FALSE;
+
+	//チャージ値を設定
+	p_ptr->magic_num1[card_idx] += ability_card_list[card_idx].charge_turn;
+
+	return TRUE;
+
+}
+
+
+
+//千亦がカードの流通ランクを計算する
+//カードの所持非所持はp_ptr->magic_num2[card_idx]に記録されており、
+//所持している種類によって流通ランクが決められp_ptr->magic_num2[255]に保存される
+//このランクは各種のカードを持っている「枚数」として扱われる
+//戻り値はランクでなく所有枚数。枚数を表示したい時に使えるように
+int 	chimata_calc_card_rank(void)
+{
+
+	int card_num = 0;
+	int card_rank = 0;
+	int i;
+
+	if (p_ptr->pclass != CLASS_CHIMATA)
+	{
+		msg_format("ERROR:chimata_calc_card_rank(class:%d)", p_ptr->pclass);
+		return 0;
+	}
+
+
+	for (i = 0; i<ABILITY_CARD_LIST_LEN; i++)
+	{
+		if (p_ptr->magic_num2[i]) card_num++;
+	}
+
+	if (card_num == ABILITY_CARD_LIST_LEN)
+		card_rank = 9;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 2)
+		card_rank = 8;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 5)
+		card_rank = 7;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 10)
+		card_rank = 6;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 20)
+		card_rank = 5;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 35)
+		card_rank = 4;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 55)
+		card_rank = 3;
+	else if (card_num >= ABILITY_CARD_LIST_LEN - 75)
+		card_rank = 2;
+	else
+		card_rank = 1;
+
+	p_ptr->magic_num2[255] = card_rank;
+
+	if (p_ptr->wizard) msg_format("card num:%d rank:%d", card_num, card_rank);
+
+	return card_num;
+}
+
+
+//千亦がカードの流通ランクによってメッセージを表示する
+void chimata_comment_card_rank(void)
+{
+
+	int card_rank, card_num;
+	int i;
+
+	if (p_ptr->pclass != CLASS_CHIMATA)
+	{
+		msg_format("ERROR:chimata_comment_card_rank(class:%d)", p_ptr->pclass);
+		return;
+	}
+
+
+	//カードを数えてランクを計算
+	card_num = chimata_calc_card_rank();
+
+	//計算したランクをp_ptr->magic_num[255]から取得
+	card_rank = CHIMATA_CARD_RANK;
+
+	screen_save();
+
+	for (i = 10; i<16; i++) Term_erase(17, i, 255);
+
+	prt(format(_("流通ランク:%d/9", "Popularity Rank: %d/9"), card_rank), 11, 20);
+	switch (card_rank)
+	{
+	case 1:
+
+		prt(_("まだほとんど誰もアビリティカードのことを知らない。",
+                "Hardly anyone is aware of the ability cards."), 12, 20);
+		prt(_("この体が消えてしまう前にもっとカードを流通させないといけない。",
+            "You have to make them more popular before you fade away."), 13, 20);
+		prt(_("「空白のカード」を使い新たなカードを作って広めよう。",
+            "Use your 'Blank Card' to create new ones."), 14, 20);
+		break;
+
+	case 2:
+		prt(_("まだまだカードの知名度は低い。",
+            "The cards are still an obscure concept."), 12, 20);
+		prt(_("気を抜くと風に飛ばされそうになる...",
+            "You might get scattered by the wind if you're not careful..."), 13, 20);
+		break;
+
+	case 3:
+		prt(_("山師たちが密かにカードを買い漁っているようだ。",
+            "Looks like some opportunists are secretly purchasing your cards."), 12, 20);
+		prt(_("まだ少し体が透き通っている。",
+            "Your body is still fairly transparent."), 13, 20);
+		break;
+
+	case 4:
+		prt(_("カードが知る人ぞ知る最先端ホビーとして認知されてきた。",
+            "The cards have been recognized as a popular hobby."), 12, 20);
+		prt(_("挨拶を返されることが増えてきたように感じる。",
+            "You feel being more and more worshipped."), 13, 20);
+		break;
+
+	case 5:
+		prt(_("カードが広く流通し始めた。", "The cards are widely popular."), 12, 20);
+		prt(_("立振舞に力強さが戻ってきた。",
+            "Strength has returned to your body."), 13, 20);
+		break;
+
+	case 6:
+		prt(_("妖怪の山でカード集めが一大ブームだ！",
+            "There's a card collector boom at Youkai Mountain!"), 12, 20);
+		prt(_("行き交う人々がみな好意的な視線を向けてくる。",
+            "All those visitors are looking at you favorably."), 13, 20);
+		break;
+
+	case 7:
+		prt(_("妖精たちもみんなカードで遊んでいる！", "All of the fairies are playing cards!"), 12, 20);
+		prt(_("なんだか周りが明るいと思ったら自分の後光だった。",
+            "You thought it was getting bright, but it's just your radiant backglow."), 13, 20);
+		break;
+
+	case 8:
+		prt(_("人里の住人も先を争ってカードを買い求めている！",
+            "Human Village residents are scrambling to buy more cards!"), 12, 20);
+		prt(_("膨大な信仰の力が体を満たすのを感じる！",
+            "You feel an immense amount of faith!"), 13, 20);
+		break;
+
+	case 9:
+		prt(_("いまや幻想郷のあらゆる人妖がアビリティカードに夢中だ！",
+            "All residents of Gensoukyou are obsessed over collecting cards!"), 12, 20);
+		prt(_("ついにかつての輝かしい日々が戻ってきた！",
+            "Your glorious days of former power are finally back!"), 13, 20);
+		break;
+
+	default:
+		msg_format("ERROR:shimata_comment_card_rank(%d)", card_rank);
+		break;
+	}
+
+	inkey();
+
+	screen_load();
+
+}
+

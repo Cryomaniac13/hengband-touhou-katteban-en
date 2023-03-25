@@ -4802,10 +4802,12 @@ static void process_world_aux_recharge(void)
 			if (o_ptr->pval < 0 || o_ptr->pval >= ABILITY_CARD_LIST_LEN)
 			{
 				msg_format(_("ERROR:不正なカードidx(%d)を持ったアビリティカードが充填処理された",
-                            "ERROR: Rechargin logic called for an ability card with an incorrect card idx (%d)"), o_ptr->pval);
+                            "ERROR: Recharging logic called for an ability card with an incorrect card idx (%d)"), o_ptr->pval);
 				continue;
 			}
 			base_charge_time = ability_card_list[o_ptr->pval].charge_turn;//一枚あたりの基本チャージ時間
+
+			if (!base_charge_time) { msg_format(" ERROR:card_charge(%d)", o_ptr->pval); continue; }
 
 			//基本チャージ時間が0だったら即刻チャージを終了させて次へ。
 			//普通こんな事は起こらないが、もし発動型カードを所有型カードに仕様変更したときチャージ中のカードを持ってたらここに来る
@@ -4853,6 +4855,51 @@ static void process_world_aux_recharge(void)
 			}
 		}
 
+
+	}
+
+
+	//v2.0.7 千亦がmagic_num[]に記録した保有カードの充填
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		for (i = 0; i < ABILITY_CARD_LIST_LEN; i++)
+		{
+			int base_charge_time, temp;
+
+			//千亦はチャージ値をmagic_num1[card_idx]に記録している
+			if (!p_ptr->magic_num1[i]) continue;
+
+			base_charge_time = ability_card_list[i].charge_turn;//一枚あたりの基本チャージ時間
+
+			if (!base_charge_time) { msg_format(" ERROR:card_charge(%d)", i); continue; }
+
+			//例えば3本中1本だけが充填中のとき、3本とも充填中のときに比べてタイムアウト値の減り方が1/3になる処理
+			//カードの枚数は流通ランクに等しい
+			temp = (p_ptr->magic_num1[i] + (base_charge_time - 1)) / base_charge_time;
+			if (temp > CHIMATA_CARD_RANK) temp = CHIMATA_CARD_RANK;
+
+			//「法力経典」カードによる充填ブースト
+			if (hiziri_card_num)
+			{
+				int prob = CALC_ABL_KYOUTEN_RECHARGE_BONUS(hiziri_card_num);//増加率
+																			//基本充填量*増加率の整数部分はそのまま加算
+				int bonus = temp * prob / 100;
+				//基本充填量*増加率の余り部分はそれを%値として判定通れば加算
+				if (randint1(100) <= (temp*prob) % 100) bonus++;
+
+				temp += bonus;
+			}
+
+
+			/* Decrease timeout by that number. */
+			p_ptr->magic_num1[i] -= temp;
+
+			/* Boundary control. */
+			if (p_ptr->magic_num1[i] < 0) p_ptr->magic_num1[i] = 0;
+
+			//アイテムではないので通知処理は行わない
+
+		}
 
 	}
 
@@ -8011,7 +8058,13 @@ static void process_upkeep_with_speed(void)
 
 			if (randint0(100) < prob && target_who > 0 && target_okay())
 			{
-				fire_rocket(GF_ROCKET, 5, p_ptr->lev * 2,1);
+				monster_type *m_ptr = &m_list[target_who];
+
+				if (is_hostile(m_ptr))
+				{
+					fire_rocket(GF_ROCKET, 5, p_ptr->lev * 2, 1);
+				}
+
 
 			}
 		}
@@ -8235,6 +8288,20 @@ static void process_player(void)
 			get_hecatia_seikaku();
 			//追加インベントリの前半に入っているのはどの体の装備品かフラグ　とりあえず地球
 			p_ptr->magic_num2[1] = HECATE_BODY_EARTH;
+
+		}
+
+		//v2.0.7 千亦の初期所持カード
+		if (p_ptr->pclass == CLASS_CHIMATA)
+		{
+			p_ptr->magic_num2[ABL_CARD_BLANK] = 1;
+			p_ptr->magic_num2[ABL_CARD_LIFE] = 1;
+			p_ptr->magic_num2[ABL_CARD_SPELL] = 1;
+			p_ptr->magic_num2[ABL_CARD_MUGIMESHI] = 1;
+			p_ptr->magic_num2[ABL_CARD_TSUKASA] = 1;
+			p_ptr->magic_num2[ABL_CARD_MUKADE] = 1;
+
+			chimata_calc_card_rank();
 
 		}
 

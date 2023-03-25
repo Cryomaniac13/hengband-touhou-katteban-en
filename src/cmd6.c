@@ -1142,17 +1142,11 @@ bool do_cmd_eat_food_aux(int item)
 
 
 	}
-	else
+	//v2.0.6b 魔道具食事系職業でエラーになってしまったので条件式変更
+	else if (p_ptr->pclass == CLASS_YUMA)
 	{
 
-		if (p_ptr->pclass != CLASS_YUMA)
-		{
-			msg_format(_("ERROR:このアイテムを食べたときの処理が記述されていない(class:%d tv:%d sv:%d)",
-                    "ERROR: Undefined logic for eating this item (class: %d tv: %d sv: %d)"), p_ptr->pclass, o_ptr->tval, o_ptr->sval);
-			return FALSE;
-		}
-
-		//飲み物系を瓶ごと食べたときはquaff_potion_aux()に渡す。そこでアイテム減少処理や満腹処理などを行うのでここでは処理終了する。
+		//飲み物系を瓶ごと食べたときは薬服用処理に渡す。そこでアイテム減少処理や満腹処理などを行うのでここでは処理終了する。
 		if (o_ptr->tval == TV_POTION || o_ptr->tval == TV_COMPOUND || o_ptr->tval == TV_ALCOHOL || o_ptr->tval == TV_SOFTDRINK)
 		{
 			do_cmd_quaff_potion_aux(item, TRUE);
@@ -1165,6 +1159,7 @@ bool do_cmd_eat_food_aux(int item)
 		if (!food_val) return FALSE;
 
 	}
+	//それ以外、魔道具を食う系の職業で魔道具を食べたときなどはここでは何もしない
 
 
 	/* Combine / Reorder the pack (later) */
@@ -2964,6 +2959,28 @@ msg_print("恐ろしい光景が頭に浮かんできた。");
 #endif
 				p_ptr->window |= (PW_PLAYER);
 				ident = TRUE;
+			}
+			//v2.0.7 千亦も魔道具術師のようにMPでなくアビリティカードを回復する
+			else if (p_ptr->pclass == CLASS_CHIMATA)
+			{
+				int i;
+				bool flag_recharge_sth = FALSE;
+				int card_rank = (CHIMATA_CARD_RANK);//カード流通ランクが所持枚数に等しい
+				for (i = 0; i < ABILITY_CARD_LIST_LEN; i++)
+				{
+					int new_charge;
+					if (!p_ptr->magic_num1[i]) continue;//magic_num1[ability_card_idx]にチャージ値を記録している
+
+					new_charge = p_ptr->magic_num1[i] - (card_rank * ability_card_list[i].charge_turn + 2) / 3;
+					if (new_charge < 0) new_charge = 0;
+
+					p_ptr->magic_num1[i] = new_charge;
+					flag_recharge_sth = TRUE;
+				}
+				ident = TRUE;
+				if (flag_recharge_sth) msg_print(_("アビリティカードの力がある程度充填された。",
+                                                "The power of your ability cards has been recharged."));
+
 			}
 			else if (p_ptr->csp < p_ptr->msp)
 			{

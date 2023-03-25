@@ -1814,6 +1814,15 @@ static void buy_gacha_box()
 	object_type *o_ptr = &forge;
 	char o_name[MAX_NLEN];
 
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		msg_print(_("「おい入るな。奥には何もないぞ。」",
+                    "'Hey, don't go in. There's nothing in here.'"));
+
+		return;
+	}
+
+
 	if (!CHECK_ABLCARD_DEALER_CLASS)
 	{
 		msg_print(_("「おっと、この奥はカードの売人専用だ。」",
@@ -4279,6 +4288,20 @@ put_str("今ここで受けられるクエストはないようだ。", 8, 0);
 			return;
 		}
 		break;
+	case QUEST_REIMU_ATTACK:
+
+		//千亦はアビリティカードが報酬のクエストを受けられない。
+		//check_ignoring_quest()を使うとアジトが半壊してダークエルフクエが受けられなくなるのでここで処理
+		if (p_ptr->pclass == CLASS_CHIMATA)
+		{
+			put_str(_("今ここで受けられるクエストはないようだ。",
+                    "It doesn't look like you can receive a quest here right now."), 8, 0);
+			return;
+		}
+		break;
+
+
+
 	}
 
 	q_ptr = &quest[q_index];
@@ -10505,8 +10528,14 @@ bool check_ignoring_quest(int questnum)
 		if (ironman_no_fixed_art) return TRUE;
 
 		break;
+
+	case QUEST_MORIYA_2:
+		if (pc == CLASS_CHIMATA) return TRUE;//千亦はアビリティカードが報酬のクエストを受けられない
+		break;
+
 	case QUEST_REIMU_ATTACK:
 		if (pc == CLASS_REIMU) return TRUE;
+
 		break;
 
 	case QUEST_YAKUZA_1:
@@ -13921,6 +13950,13 @@ void trading_ability_cards(void)
 	int trade_chance, trade_num; //選定される交換カード候補数,実際に選定されたカード数
 	object_type barter_list[10];
 
+	//v2.0.7 千亦プレイ時にはカードランクだけ表示する
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		chimata_comment_card_rank();
+		return;
+	}
+
 	if (inventory[INVEN_PACK - 1].k_idx)
 	{
 		msg_print(_("今は荷物が一杯だ。", "Your inventory is full."));
@@ -14160,6 +14196,37 @@ void buy_ability_card(bool examine)
 
 	object_type barter_list[10];
 
+
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		int card_rank = CHIMATA_CARD_RANK;
+
+		if (card_rank < 3)
+		{
+			c_put_str(TERM_WHITE, _("「こちらはすでに準備万端ですよ。", "'I'm ready as well."), 10, 20);
+			c_put_str(TERM_WHITE, _("商品の確保は貴方に懸かっているんですから頑張ってくださいね？」",
+                                "It's up to you to secure the goods, so good luck with that!'"), 11, 20);
+		}
+		else if (card_rank < 5)
+		{
+			c_put_str(TERM_WHITE, _("「売れ始めましたよ！", "'The sales are starting!"), 10, 20);
+			c_put_str(TERM_WHITE, _("面白くなってきたわー！」", "'Now it's getting interesting!'"), 11, 20);
+		}
+		else if (card_rank < 8)
+		{
+			c_put_str(TERM_WHITE, _("「大繁盛ですよ！", "'We're making a great profit!"), 10, 20);
+			c_put_str(TERM_WHITE, _("やはり飯綱丸様の目に狂いはありませんでしたね。」",
+                                    "As I knew, Miss Iizunamaru was right on point.'"), 11, 20);
+		}
+		else
+		{
+			c_put_str(TERM_WHITE, _("「い、忙しい...", "'S-so busy..."), 10, 20);
+			c_put_str(TERM_WHITE, _("そろそろ利益確定して手仕舞いにしませんか...？」",
+                                    "Isn't it time to lock in the profits we got and close the business?'"), 11, 20);
+		}
+
+		return;
+	}
 	if (p_ptr->pclass == CLASS_TSUKASA)
 	{
 		msg_print(_("主はカードで十分に稼いだ。もうここに用はない。",

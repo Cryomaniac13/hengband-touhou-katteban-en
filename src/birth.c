@@ -3254,6 +3254,7 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_YUMA,2,ART_TOUTETSU,0,0,1 },
 	{ CLASS_YUMA,2,0,TV_FLASK, SV_FLASK_OIL,20 },
 
+	{ CLASS_CHIMATA,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 
 
 
@@ -6345,8 +6346,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		"あなたは大天狗に仕える管狐です。人に囁きかけて唆し破滅と混乱をもたらすことをこよなく好みます。あなたは配下モンスターの背後に隠れて操る「寄生」という特殊な騎乗状態になることができます。通常騎乗可能なモンスター以外にも寄生ができ、他のモンスターからの攻撃は高確率で配下モンスターが受け、また配下モンスターが戦うことで得た経験値やアイテムは全てあなたが横取りします。あなたの肉弾戦能力は全く話になりませんが代わりに魔法を一領域習得することができます。配下モンスターを盾にしつつ後ろから魔法や特技で攻撃するのが基本的な戦い方になります。あなたは服が汚れるのが嫌いで、劣化や汚染の攻撃で通常より多くのダメージを受けてしまいます。" },
 	{ TRUE,"飯綱丸　龍",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは妖怪の山で鴉天狗たちを束ねる大天狗です。非常に動きが素早く機知に富み文武両道の強さです。さらに視界内すべてを攻撃する強力な特技を複数習得します。ただし長く生きてきたためレベルアップに必要な経験値は多くなります。また頭には頭襟しか装備できません。" },
-	{ FALSE,"天弓　千亦",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
-		"(未実装)" },
+	{ TRUE,"天弓　千亦",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
+		"あなたは市場の神です。しかしあなたが司る非日常の場としての市場はとうの昔に廃れ、あなたは力を失い消え入りそうになっています。そんなときにある大天狗が起死回生のビジネススキームを持ち込んできました。これが成功すればあなたは再びかつての力を取り戻すことができるでしょう。そのためには幻想郷中の人妖に接触して能力をコピーし、アビリティカードとして流通させなければなりません。能力のコピーには知能と器用さが必要です。コピーする前に倒してしまうとその者の能力は二度と手に入らないので気をつけましょう。最初期のあなたは隠密能力だけは高いのですが他の能力は低めです。多くのカードが流通するとあなたの能力と特技は強力になり、代わりに隠密能力は低下します。" },
 	{ TRUE,"姫虫　百々世",CLASS_MOMOYO,RACE_DAIYOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは凶悪な大蜈蚣(オオムカデ)の大妖怪です。非常に高い肉体能力と戦闘系技能をもち、様々な攻撃や防御の特技を習得し、さらにレベルが上がると攻撃に毒属性が追加されます。またつるはしを装備すると武器の威力にボーナスがつきます。一対一の殴り合いならほぼ敵なしでしょう。ただし隠密や探索はからっきしです。中盤以降はなるべく周囲に注意を払いましょう。あなたは食事コマンドで鉱石を食べて一時的に特別な効果を得ることができます。" },
 #else
@@ -6362,8 +6363,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		"You are a kuda-gitsune serving a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
 	{ TRUE,"Megumu Iizunamaru",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a Great Tengu commanding the crow rengu of Youkai Mountain. You move very fast and are proficient in all areas. You also learn several powerful abilities hitting everything in your line of sight. However, you require a lot of experience to level up, and you have to wear a tokin on your head." },
-	{ FALSE,"Chimata Tenkyuu",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
-		"(unimplemented)" },
+	{ TRUE,"Chimata Tenkyuu",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
+		"You are the goddess of the marketplace. However, marketplaces acting as special places of commerce you are governing are fading away, and you are losing your power! At that time, a Great Tengu proposed a business scheme that would bring you revival. If it succeeds, you would be able to regain the power you have lost. In order to do that, you have to contact the residents of Gensoukyou, copy their abilities and distribute them as ability cards. Copying abilities requires intelligence and dexterity. If you defeat someone before copying, you won't be able to obtain their ability - be careful! At start of game, your stealth is high, but your other skills are low. As cards get more popular your skills and abilities will power up, but your stealth will be lowered." },
 	{ TRUE,"Momoyo Himemushi",CLASS_MOMOYO,RACE_DAIYOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a wicked great youkai centipede. You have extremely high physical stats and combat skills, you learn various offensive and defensive abilities, and eventually your attacks will be poisonous. If you're wielding a digging implement, your weapon power increases. You're matchless when it comes to one-on-one fights. However, you're horrible at stealth and searching. You should pay close attention to your surroundings once you get past midgame. You can eat gemstones, temporarily gaining special effects." },
 #endif
@@ -6566,6 +6567,9 @@ void extra_mode_score_mult(int *mult, int class_idx)
 		mod = 50;
 		break;
 
+	case CLASS_CHIMATA:
+		mod = 200;
+		break;
 
 	default:
 		return; //何もしない

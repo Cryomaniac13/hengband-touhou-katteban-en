@@ -45,6 +45,206 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
 
+
+
+
+//v2.07 千亦
+//magic_num2[card_idx]にアビリティカード保有フラグ、
+//magic_num1[card_idx]に発動タイプカードのタイムアウト値、
+//magic_num2[255]に現在のカード流通ランクを記録
+class_power_type class_power_chimata[] =
+{
+	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("流通ランクの確認", "Check Popularity Rank"),
+	_("完成したアビリティカードの数とアビリティカードの人気を確認できる。",
+    "Checks popularity of ability cards and amount of ability cards created.") },
+	{ 1,0,0,FALSE,FALSE,A_INT,0,0,_("バレットマーケット", "Bullet Market"),
+	_("完成したアビリティカードの一覧を表示し、選択したカードの説明を読む。行動順を消費しない。種類ごとのカード保有枚数は流通ランクに伴い増加する。",
+    "Displays a list of created ability cards and lets you browse card descriptions. Does not consume energy. Amount of cards held increases with popularity rank.")},
+	{ 1,0,0,FALSE,TRUE,A_INT,0,0,_("バレットドミニオン", "Bullet Dominion"),
+	_("完成したアビリティカードを選択して発動する。発動成功率は知能で判定する。発動したカードは再使用までに一定時間のチャージが必要。",
+    "Activates a created ability card. Failure rate depends on intelligence. Activated cards need to recharge before you can use them again.")},
+
+	{ 15,20,50,FALSE,FALSE,A_INT,0,0,_("鑑識", "Identify"),
+	_("アイテムをひとつ鑑定する。レベル35以降はアイテムの完全な情報を得る。",
+    "Identifies an item. At level 35, grants full knowledge of an item.")},
+
+	{ 25,40,50,FALSE,TRUE,A_CHR,0,0,_("虹人環", "Rainbow Ring of People"),
+	_("虹属性のボールを放つ。アビリティカードの流通ランクが上がると威力も上がる。",
+    "Fires a ball of rainbow element. Power increases depending on ability card popularity rank.")},
+
+	{ 30,30,55,FALSE,FALSE,A_INT,0,0,_("弾幕狂蒐家の妄執", "Danmaku Hoarder's Obsession"),
+	_("現在のフロアにアビリティカードを作れるモンスターが存在するかどうか確認し、その大まかな距離を知ることができる",
+    "Checks if current floor has a monster you could create an ability card from, and roughly estimates distance to that monster.")},
+
+	{ 35,50,65,FALSE,TRUE,A_WIS,0,0,_("無主への供物", "An Offering to the Ownerless"),
+	_("モンスター一体を高確率で攻撃・防御・魔法力低下状態にする。さらにそのモンスターが特定の分類の隣接攻撃を使用できなくなる。ただしこの特技を受けたモンスターは倒してもアイテムを落とさなくなる。",
+    "Has a high chance of lowering a monster's attack, defense and magical power; also, makes that monster unable to use several kinds of melee attacks. However, defeating a monster under this condition makes them drop no items.")},
+
+	{ 45,160,85,FALSE,TRUE,A_CHR,0,0,_("弾幕のアジール", "Asylum of Danmaku"),
+	_("視界内のすべてを虹属性で攻撃する。アビリティカードの流通ランクが上がると威力も上がる。",
+    "Hits everything in sight with rainbow element. Power increases depending on ability card popularity rank.")},
+
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_chimata(int num, bool only_info)
+{
+	int dir, damage;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	int card_rank = (CHIMATA_CARD_RANK);
+
+	switch (num)
+	{
+	//ランク確認
+	case 0:
+	{
+		if (only_info) return format("");
+
+		chimata_comment_card_rank();
+
+		return NULL;
+		break;
+
+	}
+	//カード確認
+	case 1:
+	{
+		if (only_info) return format("");
+		chimata_activate_ability_card_power(TRUE);
+		return NULL; //見るだけなので行動順消費なし
+
+	}
+	//カード発動
+	case 2:
+	{
+		if (only_info) return format("");
+		if(!chimata_activate_ability_card_power(FALSE)) return NULL;
+
+		break;
+	}
+
+	//鑑識
+	case 3:
+	{
+		if (only_info) return format("");
+
+		if (plev < 35)
+		{
+			if (!ident_spell(FALSE)) return NULL;
+		}
+		else
+		{
+			if (!identify_fully(FALSE)) return NULL;
+		}
+
+		break;
+	}
+
+	//虹人環
+	case 4:
+	{
+		int rad;
+
+		//EXTRAのアイテムカードでは階層*3.5とする(EXTRAではカード高騰度の7倍に相当)
+		//最初p_ptr->ability_card_price_rate*7にしようとしたがなんか処理が迂遠でトラブルの元になりそうなのでシンプルにした
+		if (p_ptr->pclass != CLASS_CHIMATA && use_itemcard)
+		{
+			damage = dun_level * 7 / 2;
+			if (damage > 500) damage = 500;
+			if (damage < 1) damage = 1;
+			rad = 1 + dun_level / 40;
+		}
+		else
+		{
+			damage = (1 + card_rank) * (10 + plev / 2 + chr_adj / 2);
+			rad = 1 + card_rank / 2;
+		}
+
+		if (only_info) return format(_("半径:%d 損傷:%d", "rad: %d dam: %d"), rad, damage);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print(_("七色の光が美しい弧を描いた。", "You draw a beautiful arc in seven colors."));
+		fire_ball(GF_RAINBOW, dir, damage, rad);
+		break;
+	}
+
+	//カードにできるモンスター探知
+	case 5:
+	{
+		if (only_info) return format("");
+		msg_print(_("あなたはフロアの雰囲気を探り始めた...", "You start looking through the atmosphere of this floor..."));
+		search_specific_monster(1);
+		break;
+	}
+
+	//無主への供物
+	case 6:
+	{
+		int power = plev * 4 + chr_adj * 4;
+		monster_type *m_ptr;
+		char m_name[120];
+
+		if (only_info) return format(_str_eff_power, power);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !projectable(target_row, target_col, py, px) || !cave[target_row][target_col].m_idx)
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                        "You have to pick a target in sight."));
+			return NULL;
+		}
+
+		m_ptr = &m_list[cave[target_row][target_col].m_idx];
+
+		monster_desc(m_name, m_ptr, 0);
+
+		if(one_in_(4))
+			msg_format(_("あなたは%sに向かって＄のような奇妙なポーズをとった。",
+                        "You strike an odd $-shaped pose, facing towards %s."), m_name);
+		else
+			msg_format(_("あなたは%sが持つものの所有権を無に返した！",
+                        "You reduce the possessions %s is holding to nothing!"), m_name);
+
+		project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_DEC_ALL, PROJECT_KILL, -1);
+
+		//一部の隣接攻撃をできなくなりドロップが無くなるフラグ
+		m_ptr->mflag |= (MFLAG_SPECIAL);
+
+
+	}
+	break;
+
+	case 7:
+	{
+
+		damage = (1 + card_rank) * (10 + plev / 2 + chr_adj / 2) * 2;
+
+		if (only_info) return format(_str_eff_dam, damage);
+
+		msg_print(_("虹色の光の乱舞が空間を染め上げた！",
+                    "The air around you gets colored in rainbow lights!"));
+		project_hack2(GF_RAINBOW, 0, 0, damage);
+		break;
+	}
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
 //v2.0.6 尤魔
 //p_ptr->magic_num1[0-130?]に青魔系フラグを、magic_num2[0-130?]に武器防具フラグを、magic_num2[200]に満腹度ストックを記録
 class_power_type class_power_yuma[] =
@@ -89,7 +289,7 @@ class_power_type class_power_yuma[] =
 
 cptr do_cmd_class_power_aux_yuma(int num, bool only_info)
 {
-	int dir, dice, sides, base, damage, i;
+	int dir, base, damage;
 	int plev = p_ptr->lev;
 	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
 	int digestion = 200 + plev * 6 + (3+num) * 200;
@@ -228,7 +428,7 @@ cptr do_cmd_class_power_aux_yuma(int num, bool only_info)
 
 		digestion = 10000;
 
-		if(use_itemcard && (p_ptr->food + PY_FOOD_WEAK) < digestion || !use_itemcard && !CHECK_YUMA_FOOD_STOCK)
+		if(use_itemcard && (p_ptr->food - PY_FOOD_WEAK) < digestion || !use_itemcard && !CHECK_YUMA_FOOD_STOCK)
 		{
 			msg_print(_("栄養が足りない。", "You're not satiated enough."));
 			return NULL;
@@ -334,7 +534,7 @@ class_power_type class_power_misumaru[] =
 
 cptr do_cmd_class_power_aux_misumaru(int num, bool only_info)
 {
-	int dir, dice, sides, base, damage, i;
+	int dir;
 	int plev = p_ptr->lev;
 	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
 
@@ -407,7 +607,7 @@ cptr do_cmd_class_power_aux_misumaru(int num, bool only_info)
 		if (only_info) return format(_("半径:%d 損傷:%d+%dd%d", "rad: %d dam: %d+%dd%d"), rad, base, dice, sides);
 
 		if (!get_aim_dir(&dir)) return NULL;
-		msg_format(_("七色に輝く陰陽玉を放った！", "You launch rainbow-colored ying-yang orbs!"));
+		msg_print(_("七色に輝く陰陽玉を放った！", "You launch rainbow-colored ying-yang orbs!"));
 		fire_ball(GF_RAINBOW, dir, base + damroll(dice, sides), rad);
 		break;
 	}
@@ -36577,6 +36777,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_CHIMATA:
+		class_power_table = class_power_chimata;
+		class_power_aux = do_cmd_class_power_aux_chimata;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -38465,11 +38671,17 @@ const support_item_type support_item_list[] =
 		_("それは虹属性のボール攻撃を放つ。",
         "Fires a ball of rainbow.")},
 
-	//v2.0.4 尤魔　ガイアの血液
+	//v2.0.6 尤魔　ガイアの血液
 		{ 100,50, 120,3,16,	MON_YUMA,class_power_yuma,do_cmd_class_power_aux_yuma,6,
 		_("獣神のピアス", "Beast God's Earring"),
 		_("それを使うと体力を全回復し、切り傷と能力低下を治癒し、さらに腕力器用耐久を短時間上昇させる。ただし満腹度を大量に消費する。",
         "Fully recovers HP, cures cuts and stat drain, and raises strength, dexterity and constitution for a short time. However, it greatly reduces your satiation level.")},
+
+	//v2.0.7 千亦　虹人環
+		{ 150,40, 80,7,7,	MON_CHIMATA,class_power_chimata,do_cmd_class_power_aux_chimata,4,
+		_("虹色のカチューシャ", "Rainbow Headband"),
+		_("それは虹属性のボールを放つ。アビリティカードの高騰度に応じて威力が上がる。",
+        "Fires a ball of rainbow element. Power increases depending on how popular ability cards are.")},
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };
