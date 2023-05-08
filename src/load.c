@@ -2390,7 +2390,7 @@ static void rd_extra(void)
 
 		rd_s32b(&p_ptr->animal_ghost_align_flag);
 		rd_s32b(&p_ptr->quest_special_flag);
-		rd_s32b(&p_ptr->ptype_new_flags3);
+		rd_s32b(&p_ptr->cooking_material_flag);
 		rd_s32b(&p_ptr->ptype_new_flags4);
 
 		//v2.05 future_use_s16b‚©‚ç2‚ÂŽg‚¤

@@ -224,14 +224,14 @@ B:0:N:酒場:天狗の酔客たち:天狗
 B:0:A:0:クエスト:0:0:q:6:0
 
 B:$2:N:Divine Mausoleum Branch Office:Toyosatomimi no Miko:Saint
-B:$2:A:0:Recall to dungeon:100:200:r:33:0
+B:$2:A:0:Recall to dungeon:100:100:r:33:0
 B:$2:A:1:Teleport to a dungeon level:1000000:1000000:t:34:0
 B:$2:A:2:Teleport to another location:300:300:m:42:0
 B:$2:A:3:Recharging:0:0:c:25:0
 B:$2:A:4:Recharge all items:0:0:a:45:0
 B:$2:M:0:0:0:0:0:2:0:0:0:0
 B:2:N:神霊廟出張所:豊聡耳　神子:聖人
-B:2:A:0:ダンジョンへ帰還:100:200:r:33:0
+B:2:A:0:ダンジョンへ帰還:100:100:r:33:0
 B:2:A:1:階を指定してテレポート:1000000:1000000:t:34:0
 B:2:A:2:他の町へ移動:300:300:m:42:0
 B:2:A:3:再充填:0:0:c:25:0

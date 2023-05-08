@@ -17589,3 +17589,27 @@ const cptr equipment_tr_flag_names[TR_FLAG_MAX + 1] =
 
 };
 
+
+//v2.0.8 鯢呑亭に持ち込める食物モンスターリスト
+//モンスターにはRF8_FOODを設定しておく必要がある
+monster_food_type monster_food_list[] =
+{
+
+	{ MON_SUPPON,500,_("すっぽんの生き血酒", "Soft-shelled turtle bloodwine") },	//士気高揚
+
+	{ MON_WILD_BOAR,5000,_("山鯨の大鍋", "Wild boar pot") },//耐久増加
+
+	{ MON_WILD_BOAR_2,10000,_("大猪の妖獣のグリル", "Great boar youkai grill") },//腕力大幅増加
+
+	{ MON_BADGER,5000,_("穴熊の丸焼き", "Roast badger") },//器用増加
+
+	{ MON_RIVER_CRAB,2000,_("沢蟹の素揚げ", "Deep-fried river crab") },//水耐性？
+
+
+
+	//16を超えると料理選択画面のページ送りの実装が必要
+	//32以上になると記録するフラグ変数を増やす必要がある
+
+	{ 0,0,"dummy" }//r_idxが0の終端ダミー
+
+};

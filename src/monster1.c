@@ -575,9 +575,9 @@ static void roff_aux(int r_idx, int mode)
 	if (r_ptr->level == 0)
 	{
 #ifdef JP
-		hooked_roff(format("%^s‚Í’¬‚ÉZ‚İ", wd_he[msex]));
+		hooked_roff(format("%^s‚Í’nã‚ÉZ‚İ", wd_he[msex]));
 #else
-		hooked_roff(format("%^s lives in the town", wd_he[msex]));
+		hooked_roff(format("%^s lives on the surface", wd_he[msex]));
 #endif
 
 		old = TRUE;

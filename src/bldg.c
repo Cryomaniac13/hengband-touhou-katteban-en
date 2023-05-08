@@ -21,6 +21,8 @@ static bool leave_bldg = FALSE;
 /*:::種族、職業、領域が一致してるかどうか判定？詳細不明　削除予定*/
 static bool is_owner(building_type *bldg)
 {
+
+	//現状全てのプレイヤーをメンバー扱いとしている
 	return TRUE;
 /*
 	if (bldg->member_class[p_ptr->pclass] == BUILDING_OWNER)
@@ -16283,16 +16285,17 @@ static void bldg_process_command(building_type *bldg, int i)
 	msg_flag = FALSE;
 	msg_print(NULL);
 
-	/*
+
+
+	//v2.0.8 いつからか知らんがEXTRA建物で価格をmember_costsに設定してるのにここでother_costsで処理してるから全部の価格が0になってた
+	//元の処理に戻す。is_owner()は現状常にTRUEなのでmember_costs[]のみが参照される
 	if (is_owner(bldg))
 		bcost = bldg->member_costs[i];
 	else
 
 		bcost = bldg->other_costs[i];
-	*/
 
-	bcost = bldg->other_costs[i];
-
+	if(cheat_room) msg_format("cost:%d", bcost);
 
 	/* action restrictions */
 	///building ここ変更しないといけない
@@ -16865,6 +16868,10 @@ msg_print("お金が足りません！");
 
 	case BACT_HATATE_SEARCH_MON:
 		paid = hatate_search_unique_monster();
+		break;
+
+	case BACT_GEIDONTEI_COOKING:
+		geidontei_cooking();
 		break;
 
 	default:

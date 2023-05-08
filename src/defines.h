@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 7
+#define H_VER_PATCH 8
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -5160,6 +5160,8 @@
 #define RF8_STAY_AT_HOME2       0x00001000/*:::指定ダンジョン以外ではレアリティ10倍*/
 #define RF8_STAY_AT_HOME3       0x00002000/*:::指定ダンジョン以外では出現しない*/
 
+#define RF8_FOOD				0x00004000 //このモンスターを倒すとp_ptr->cooking_material_flagにフラグが記録され、鯢呑亭に行くとその素材を料理してもらうことができる。
+
 
 #define RF8_WILD_ALL            0x80000000/*:::街、荒地、森、草地で出る*/
 
@@ -6203,9 +6205,10 @@ extern int PlayerUID;　
 #define BACT_DESTROY_ITEM			90 //v1.1.92
 #define BACT_EX_RUMOR_NEW			91
 #define BACT_HATATE_SEARCH_MON		92 //v2.0.5
+#define BACT_GEIDONTEI_COOKING		93	//v2.0.8
 
 //*::: MAX_BACTは現在特に使われてないらしい*/
-#define MAX_BACT                    	92
+#define MAX_BACT                    	93
 
 /*
  * Quest status
@@ -7041,6 +7044,7 @@ extern int PlayerUID;　
 #define MON_3FAIRIES		1268
 #define MON_GETTOMECA		1269
 #define MON_MANFACE_DOG		1270
+#define MON_UWABAMI			1271
 #define MON_BAMBOO_FAIRY	1272
 #define MON_SEIRAN			1273
 #define MON_RINGO			1274
@@ -7088,6 +7092,7 @@ extern int PlayerUID;　
 #define MON_SHION_2			1321
 #define MON_SUMIREKO_2		1322 //idx1267のコピー。お尋ね者フラグがない闘技場専用。元のidxのまま闘技場に出すにはセリフに違和感があるのでコピーした。
 #define MON_EEL				1323
+#define MON_WILD_BOAR		1324
 #define MON_ANCIENT_SHIP	1327
 
 #define MON_HANIWA_F1		1332
@@ -7110,8 +7115,12 @@ extern int PlayerUID;　
 #define MON_LAIKA			1348
 
 #define MON_KAWAUSO			1349
+
+#define MON_SUPPON			1352
+#define MON_WILD_BOAR_2		1353
 #define MON_SYOUZYOU		1354
 #define MON_MIYOI			1355
+#define MON_BADGER			1356
 
 //v1.1.86
 #define MON_MIKE			1357
@@ -7134,7 +7143,12 @@ extern int PlayerUID;　
 #define MON_SUIRYUU			1378
 #define MON_OBERON		    1379
 
-#define MON_IDX_MAX			1380	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_FISHERMAN		1380
+#define MON_FISHERMAN2		1381 //倒すと蟒蛇に変身する
+
+#define MON_RIVER_CRAB		1382
+
+#define MON_IDX_MAX			1383	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 

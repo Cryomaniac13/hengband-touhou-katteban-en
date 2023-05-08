@@ -125,14 +125,14 @@ B:0:A:5:珍品を買う:0:0:s:84:0
 ?:1
 
 B:$3:N:Divine Mausoleum Branch Office:Toyosatomimi no Miko:Saint
-B:$3:A:0:Recall to dungeon:100:200:r:33:0
+B:$3:A:0:Recall to dungeon:100:100:r:33:0
 B:$3:A:1:Teleport to a dungeon level:1000000:1000000:t:34:0
 B:$3:A:2:Teleport to another location:300:300:m:42:0
 B:$3:A:3:Recharging:0:0:c:25:0
 B:$3:A:4:Recharge all items:0:0:a:45:0
 B:$3:M:0:0:0:0:0:2:0:0:0:0 
 B:3:N:神霊廟出張所:豊聡耳　神子:聖人
-B:3:A:0:ダンジョンへ帰還:100:200:r:33:0
+B:3:A:0:ダンジョンへ帰還:100:100:r:33:0
 B:3:A:1:階を指定してテレポート:1000000:1000000:t:34:0
 B:3:A:2:他の町へ移動:300:300:m:42:0
 B:3:A:3:再充填:0:0:c:25:0

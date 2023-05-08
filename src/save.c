@@ -1010,7 +1010,7 @@ static void wr_extra(void)
 
 	wr_u32b(p_ptr->animal_ghost_align_flag);
 	wr_u32b(p_ptr->quest_special_flag);
-	wr_u32b(p_ptr->ptype_new_flags3);
+	wr_u32b(p_ptr->cooking_material_flag);
 	wr_u32b(p_ptr->ptype_new_flags4);
 
 	//v2.05 future_use_s16b‚©‚ç2‚ÂŽg‚¤

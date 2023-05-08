@@ -411,14 +411,14 @@ B:2:N:寺子屋:上白沢　慧音:ワーハクタク
 B:2:A:0:クエスト:0:0:q:6:0
 
 B:$3:N:Divine Mausoleum Branch Office:Toyosatomimi no Miko:Saint
-B:$3:A:0:Recall to dungeon:100:200:r:33:0
+B:$3:A:0:Recall to dungeon:100:100:r:33:0
 B:$3:A:1:Teleport to a dungeon level:1000000:1000000:t:34:0
 B:$3:A:2:Teleport to another location:300:300:m:42:0
 B:$3:A:3:Recharging:0:0:c:25:0
 B:$3:A:4:Recharge all items:0:0:a:45:0
 B:$3:M:0:0:0:0:0:2:0:0:0:0
 B:3:N:神霊廟出張所:豊聡耳　神子:聖人
-B:3:A:0:ダンジョンへ帰還:100:200:r:33:0
+B:3:A:0:ダンジョンへ帰還:100:100:r:33:0
 B:3:A:1:階を指定してテレポート:1000000:1000000:t:34:0
 B:3:A:2:他の町へ移動:300:300:m:42:0
 B:3:A:3:再充填:0:0:c:25:0
@@ -487,9 +487,11 @@ B:11:A:0:索道に乗って守矢神社へ行く:500:500:a:81:0
 B:$12:N:Geidontei:Miyoi Okunoda:
 B:$12:A:0:Buy food and drink:10:10:f:18:1
 B:$12:A:1:Quest:0:0:q:6:0
+B:$12:A:2:Bring ingredients:0:0:c:93:0
 B:12:N:鯢呑亭:奥野田　美宵:
 B:12:A:0:食事をする:10:10:f:18:1
 B:12:A:1:クエスト:0:0:q:6:0
+B:12:A:2:食材を持ち込む:0:0:c:93:0
 
 #足りなくなったらEXTRAみたいにギルドを一箇所にまとめよう
 

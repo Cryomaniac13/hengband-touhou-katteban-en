@@ -1722,9 +1722,9 @@ struct player_type
 	s16b future_use_counter7;
 	s16b future_use_counter8;
 
-	u32b animal_ghost_align_flag; //v1.1.91
-	u32b quest_special_flag; //v1.1.98 一部クエストをどんな状態で進行したか記録する
-	u32b ptype_new_flags3;
+	u32b animal_ghost_align_flag;	//v1.1.91
+	u32b quest_special_flag;		//v1.1.98 一部クエストをどんな状態で進行したか記録する
+	u32b cooking_material_flag;		//v2.0.8 鯢呑亭に持ち込める料理素材モンスターの素材所持フラグ 各ビットがmonster_food_list[]のインデックス
 	u32b ptype_new_flags4;
 
 	//v2.0.5 はたて建物効果 future_use_s16bから2つ使う
@@ -1891,7 +1891,7 @@ struct building_type
 
 	char act_names[8][30];          /* action names */
 	s32b member_costs[8];           /* Costs for class members of building */
-	s32b other_costs[8];		    /* Costs for nonguild members */
+	s32b other_costs[8];		    /* Costs for nonguild members ←現在全てのプレイヤーがis_owner()を通るためここの価格は使われないはず*/
 	char letters[8];                /* action letters */
 	s16b actions[8];                /* action codes */
 	s16b action_restr[8];           /* action restrictions */
@@ -2609,6 +2609,14 @@ typedef struct
 
 } ability_card_type;
 
+//v2.0.8 鯢呑亭に持ち込める食物モンスターリスト
+typedef struct
+{
+	int r_idx;  	//モンスターidx
+	int food_amount;//満腹度上昇
+	cptr desc;	//料理名称
+
+}monster_food_type;
 
 
 

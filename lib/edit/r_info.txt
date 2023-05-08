@@ -25945,7 +25945,7 @@ I:120:5d20:10:25:10
 W:6:1:0:30:0:0
 B:CRUSH:HURT:1d16
 F:BASH_DOOR | WILD_WOOD | WILD_MOUNTAIN | WILD_TOWN
-F:ANIMAL | WILD_ONLY| GEN_NEUTRAL
+F:ANIMAL | WILD_ONLY| GEN_NEUTRAL | FOOD
 D:ずんぐりした胴体をもつ体長1メートル強の獣だ。山から人里に降りてきて畑を荒らすこともある。肉は牡丹や山鯨などと呼ばれ美味である。
 
 N:1325:蝶の妖精
@@ -26406,7 +26406,7 @@ I:105:3d30:6:20:20
 W:5:3:0:20:0:0
 B:BITE:INERTIA:1d20
 F:RAND_25 | AQUATIC | WILD_SHORE | COLD_BLOOD
-F:ANIMAL | IM_FIRE | RES_WATE
+F:ANIMAL | IM_FIRE | RES_WATE | FOOD
 D:柔らかい甲羅を持つ爬虫類だ。顎の力が強く一度噛みついたらなかなか離れない。
 D:肉や血は極めて滋味に富むとされ古くから珍重されてきた。
 
@@ -26416,13 +26416,13 @@ G:q:U
 I:115:12d60:20:120:0
 W:28:2:0:700:0:0
 B:CRUSH:SUPERHURT:10d10
-F:ANIMAL | KWAI | HURT_HOLY | 
+F:ANIMAL | KWAI | HURT_HOLY | FOOD
 F:GEN_NEUTRAL | WILD_WOOD | WILD_MOUNTAIN
 F:NO_FEAR
 D:$A giant boar that has turned into a youkai after living for many years.
 D:$Its meat is very delicious, but an unskilled hunter is more likely to become
 D:$its meal instead.
-D:年を経て妖怪化した大猪だ。その肉は非常に美味であるが、生半可な腕で挑むと逆に餌にされてしまうだろう。
+D:年を経て妖怪化しつつある大猪だ。その肉は非常に美味であるが、生半可な腕で挑むと逆に餌にされてしまうだろう。
 
 
 N:1354:猩々？
@@ -26973,6 +26973,48 @@ D:「オベロン、アンバーの君主。あの緑と金の服装で、目の前に立っている。背が
 D:高く、肩幅が広く、胸が厚い。白髪のいくらか混じった黒い顎ひげ。髪の毛は
 D:相変わらず。緑の石のはまった金の指輪、金色の剣。」
 D:（ロジャー・ゼラズニイ、岡部宏之訳「アンバーの九王子」早川書房、p.181）
+
+N:1380:漁師
+E:Fisherman
+G:p:B
+I:110:3d3:10:1:255
+W:0:1:0:0:0:0
+B:HIT:HURT:1d6
+F:MALE | WILD_ONLY | WILD_SHORE | HUMAN |
+F:RAND_25 | GEN_FRIENDLY
+F:ONLY_GOLD | DROP_60 |
+F:TAKE_ITEM | OPEN_DOOR | 
+D:$He makes his living catching river fish and crabs in the stream.
+D:沢で川魚や沢蟹などを捕って暮らしているようだ。
+
+#倒すと蟒蛇に変身する
+N:1381:漁師
+E:Fisherman
+G:p:B
+I:115:30d3:30:60:30
+W:10:3:0:30:0:0
+B:HIT:HURT:4d6
+F:MALE | WILD_ONLY | WILD_MOUNTAIN | WILD_WOOD | HUMAN |
+F:RAND_25 | GEN_FRIENDLY
+F:ONLY_GOLD | DROP_60 |
+F:TAKE_ITEM | OPEN_DOOR | 
+D:$He makes his living catching river fish and crabs in the stream.
+D:$But why a fisherman would be in a place like this?
+D:沢で川魚や沢蟹などを捕って暮らしているようだ。
+D:だがなぜ漁師がこんな所にいるのだろう？
+
+N:1382:沢蟹の群れ
+E:River crab swarm
+G:l:R
+I:110:2d5:10:3:10
+W:0:2:0:3:0:0
+B:HIT:HURT:1d5
+F:WEIRD_MIND | CAN_SWIM | 
+F:ANIMAL | WILD_SHORE | FOOD | RES_WATE
+D:$A small freshwater crab.
+D:淡水に生息する小さなカニだ。
+
+
 
 
 

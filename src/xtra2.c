@@ -1748,6 +1748,40 @@ void monster_death(int m_idx, bool drop_item)
 		do_cmd_write_nikki(NIKKI_NAMED_PET, 3, m_name);
 	}
 
+	//v2.0.8 倒したモンスターが食材として扱える場合材料所持フラグとして記録
+	if (r_ptr->flags8 & RF8_FOOD)
+	{
+		int tmp_idx;
+
+		for (tmp_idx = 0; monster_food_list[tmp_idx].r_idx; tmp_idx++)
+		{
+			if (m_ptr->r_idx == monster_food_list[tmp_idx].r_idx) break;
+		}
+
+		if (!monster_food_list[tmp_idx].r_idx)
+		{
+			msg_format(_("ERROR:r_idx(%d)の食材情報がmonster_food_list[]に記録されていない",
+                        "ERROR: r_idx (%d) food info isn't listed in monster_food_list[]"), m_ptr->r_idx);
+
+		}
+		else if (tmp_idx >= 32)
+		{
+			msg_format(_("ERROR:monster_food_list[]の長さに記録部分が対応していない",
+                        "ERROR: monster_food_list[] length doesn't match that of saved data"));
+
+		}
+		//白蓮と一輪と月の民は食肉モンスターを狩らない
+		else if (p_ptr->pclass == CLASS_BYAKUREN || p_ptr->pclass == CLASS_ICHIRIN || p_ptr->prace == RACE_LUNARIAN)
+		{
+			;
+		}
+		else
+		{
+			//倒したモンスターの情報が記録されたmonster_food_list[]のインデックスをビットフラグとして記録
+			p_ptr->cooking_material_flag |= (1L << tmp_idx);
+
+		}
+	}
 
 
 
@@ -4679,6 +4713,24 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 				msg_format(_("%sはスーパー貧乏神へと変化した！",
                             "%s transforms into a super poverty god!"),m_name);
 			}
+		}
+		//v2.0.8 蟒蛇に変身する漁師
+		else if (m_ptr->r_idx == MON_FISHERMAN2 &&
+			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA))
+		{
+			int dummy_y = m_ptr->fy;
+			int dummy_x = m_ptr->fx;
+			u32b mode = PM_NO_ENERGY;
+			if (is_pet(m_ptr)) mode |= PM_FORCE_PET;
+			else if(is_friendly(m_ptr))mode |= PM_FORCE_FRIENDLY;
+			else mode |= PM_FORCE_ENEMY;
+			delete_monster_idx(m_idx);
+			if (summon_named_creature(0, dummy_y, dummy_x, MON_UWABAMI, mode))
+			{
+				msg_format(_("なんと%sは蟒蛇の変化した姿だった！",
+                            "What? %s was a transformed Uwabami!"), m_name);
+			}
+
 		}
 		else
 		{

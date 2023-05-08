@@ -585,7 +585,7 @@ static cptr r_info_flags8[] =
 	"STAY_AT_HOME1",
 	"STAY_AT_HOME2",
 	"STAY_AT_HOME3",
-	"XXX8X14",
+	"FOOD",
 	"XXX8X15",
 	"XXX8X16",
 	"XXX8X17",

@@ -2760,3 +2760,7 @@ extern void chimata_comment_card_rank(void);
 extern bool	chimata_activate_ability_card_power(bool only_info);
 extern int	chimata_can_copy(int r_idx);
 extern void	search_specific_monster(int mode);
+
+//v2.0.8
+extern monster_food_type monster_food_list[];
+extern void geidontei_cooking();
