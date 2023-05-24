@@ -8359,7 +8359,7 @@ static void display_monster_list(int col, int row, int per_page, s16b mon_idx[],
 			///msg131221
 			else c_put_str((r_ptr->max_num == 0 ? TERM_L_DARK : TERM_WHITE), (r_ptr->max_num == 0 ? "‘Å“|Ï" : "–¢‘Å“|"), row + i, 74);
 #else
-			else c_put_str((r_ptr->max_num == 0 ? TERM_L_DARK : TERM_WHITE), (r_ptr->max_num == 0 ? " dead" : "alive"), row + i, 73);
+			else c_put_str((r_ptr->max_num == 0 ? TERM_L_DARK : TERM_WHITE), (r_ptr->max_num == 0 ? "defeated" : " active"), row + i, 73);
 #endif
 		}
 	}
