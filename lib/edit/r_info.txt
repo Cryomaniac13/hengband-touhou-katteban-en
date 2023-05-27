@@ -26467,7 +26467,7 @@ I:110:2d12:30:10:30
 W:2:3:0:8:0:0
 B:CLAW:HURT:1d6
 B:CLAW:HURT:1d6
-F:RAND_25 | WILD_GRASS | WILD_WOOD | WILD_MOUNTAIN
+F:RAND_25 | WILD_GRASS | WILD_WOOD | WILD_MOUNTAIN | FOOD
 F:ANIMAL | GEN_NEUTRAL
 D:$An animal that digs deep burrows with its sharp claws. Its meat is delicious.
 D:鋭い爪で深く入り組んだ巣穴を掘る動物だ。タヌキなどと一緒くたにムジナと呼ばれることもある。肉は脂が乗って美味いらしい。
@@ -26994,7 +26994,7 @@ G:p:B
 I:115:30d3:30:60:30
 W:10:3:0:30:0:0
 B:HIT:HURT:4d6
-F:MALE | WILD_ONLY | WILD_MOUNTAIN | WILD_WOOD | HUMAN |
+F:MALE | WILD_ONLY | WILD_MOUNTAIN | WILD_WOOD | KWAI |
 F:RAND_25 | GEN_FRIENDLY
 F:ONLY_GOLD | DROP_60 |
 F:TAKE_ITEM | OPEN_DOOR | 

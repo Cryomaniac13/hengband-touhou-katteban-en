@@ -3256,6 +3256,8 @@ outfit_type birth_outfit_class[] = {
 
 	{ CLASS_CHIMATA,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 
+	{ CLASS_MIYOI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_MIYOI,2,ART_IBUKI,0,0,1 },
 
 
 
@@ -3389,10 +3391,10 @@ void player_outfit(void)
 
 
 	//v1.1.79 新種族「座敷わらし」の初期の移動屋敷
-	if (p_ptr->prace == RACE_ZASHIKIWARASHI)
+	//v2.0.9 美宵は伊吹瓢固定。★初期所持処理から装備する
+	if (p_ptr->prace == RACE_ZASHIKIWARASHI && p_ptr->pclass != CLASS_MIYOI)
 	{
 		object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_INN));
-
 		object_copy(&inven_special[INVEN_SPECIAL_ZASHIKI_WARASHI_HOUSE], q_ptr);
 
 	}
@@ -3453,8 +3455,10 @@ void player_outfit(void)
 			int tmp_k_idx;
 			artifact_type *a_ptr = &a_info[birth_outfit_class[i].artifact_idx];
 
-			/*:::★が出ないオプションがONのときにしか関係ない*/
-			if(a_ptr->cur_num) continue;
+			//★が出ないオプションがONのとき、
+			//player_outfit()の直前に全ての★のcur_numが1になって生成されなくなる
+			//v2.0.9 例外として美宵の家のみ生成可能にする
+			if(a_ptr->cur_num && p_ptr->pclass != CLASS_MIYOI) continue;
 
 			if (!a_ptr->name)
 			{
@@ -3514,7 +3518,20 @@ void player_outfit(void)
 			a_info[birth_outfit_class[i].artifact_idx].cur_num+=1;
 
 			q_ptr->ident |= (IDENT_MENTAL);
-			add_outfit(q_ptr);
+
+			//v2.0.9 美宵の「伊吹瓢」特殊処理
+			if (p_ptr->pclass == CLASS_MIYOI)
+			{
+				object_aware(q_ptr);
+				object_known(q_ptr);
+				q_ptr->ident |= (IDENT_MENTAL);
+				object_copy(&inven_special[INVEN_SPECIAL_ZASHIKI_WARASHI_HOUSE], q_ptr);
+
+			}
+			else
+			{
+				add_outfit(q_ptr);
+			}
 
 		}
 		//念のため
@@ -6433,8 +6450,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		_("あなたは地獄出身の妖精です。少し前の異変で重要な働きをこなし、その後は主からの密命を受けて地上で暮らしています。妖精でありながら地獄で頭角を現すほどの力を持っていますが、頭の中身は普通の妖精並みです。あなたは手に持った松明で人々を狂わせることができ、また地獄出身だけあって火炎と地獄の属性攻撃に対する耐性があります。",
         "You are a fairy from Hell. You did play an important part in an earlier incident, and after that you received a secret mission from your mistress to live on the surface. You might be a fairy, but you're powerful enough to stand out in Hell, but you're not that smarter than an average fairy. The torch you're holding can induce insanity in people, and as a resident of Hell, you resist fire and nether.")},
 
-	{ FALSE,_("奥野田　美宵", "Miyoi Okunoda"),CLASS_MIYOI,RACE_YOUKAI,ENTRY_OTHER,SEX_FEMALE,
-		_("(未実装)", "(unimplemented)") },
+	{ TRUE,_("奥野田　美宵", "Miyoi Okunoda"),CLASS_MIYOI,RACE_ZASHIKIWARASHI,ENTRY_OTHER,SEX_FEMALE,
+		_("あなたは伊吹萃香の酒瓢箪『伊吹瓢』に棲み着く座敷わらしです。瓢箪の影響によるものか人を酔い潰して夢や記憶に干渉する酔魔のような力を持っています。あなたには戦う力はほとんどありませんが、愛想よくお酒を勧めて敵の心すら開かせるほどの接客能力があります。お酒を何度も飲ませてそのまま酔い潰してしまえば倒したのと同じ扱いになります。しかし中には酒を勧めても応じないモンスターやいくら酒を飲んでも酔わないモンスターもいます。そういった敵に襲われてしまったらあなたにできることは逃亡あるのみです。あなたに必要な能力は魅力です。接客の成功率だけでなく飲ませる酒の強さにも影響を与えます。",
+        "You are a zashiki-warashi living in the Ibuki Gourd of Suika Ibuki. Living in it has granted you the power to drive people drunk and interfere with their dreams and memories. You don't have much combat power, but you serve customers so well you can placate your enemies by offering them drinks. Making someone pass out by serving them enough alcohol is treated the same as defeating them. However, there are monsters who won't accept your drinks, or who can drink a lot without passing out. If you get attacked by those monsters, retreat might be your only option. Charisma is your required ability - it affects not only your customer service, but the strengths of your drinks as well.") },
 
 
 

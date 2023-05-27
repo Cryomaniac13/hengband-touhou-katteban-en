@@ -4275,6 +4275,14 @@ put_str("今ここで受けられるクエストはないようだ。", 8, 0);
 
 	//v1.1.85 鯢呑亭クエストは片方受領するともう片方を受領することはできなくなる
 	case QUEST_GEIDON_HUMAN:
+		if (p_ptr->pclass == CLASS_MIYOI)
+		{
+			put_str(_("店主には何か悩みがあるようだが、あなたに話してはくれなかった。",
+                    "The owner seems to be troubled by something, but refuses to speak to you."), 8, 0);
+			put_str(_("深夜にお客さんから聞いてみよう。",
+                    "You can try asking the customers here at night."), 9, 0);
+			return;
+		}
 		if (quest[QUEST_GEIDON_KWAI].status != QUEST_STATUS_UNTAKEN)
 		{
 			put_str(_("もうこの時間帯のクエストを受けることはできない。",
@@ -16871,7 +16879,7 @@ msg_print("お金が足りません！");
 		break;
 
 	case BACT_GEIDONTEI_COOKING:
-		geidontei_cooking();
+		geidontei_cooking(p_ptr->pclass == CLASS_MIYOI);//美宵のときのみ「自分で作るフラグ」ON
 		break;
 
 	default:
@@ -17236,11 +17244,15 @@ void do_cmd_bldg(void)
 	{
 		if (is_daytime()) //日中は閉店
 		{
-			msg_print(_("「ごめんなさい。まだ開店前なんですよー。」",
+			if(p_ptr->pclass == CLASS_MIYOI)
+				msg_print(_("まだ開店前だ。",
+                        "It's before opening time."));
+			else
+				msg_print(_("「ごめんなさい。まだ開店前なんですよー。」",
                         "'Sorry, we're not open yet.'"));
 			return;
 		}
-		else if (is_midnight()) //深夜は妖怪専用
+		else if (is_midnight() && p_ptr->pclass != CLASS_MIYOI) //深夜は妖怪専用
 		{
 			if (player_looks_human_side())
 			{
@@ -17253,7 +17265,7 @@ void do_cmd_bldg(void)
 		}
 		else //深夜以外の夜間は人間専用
 		{
-			if (!player_looks_human_side())
+			if (!player_looks_human_side() && p_ptr->pclass != CLASS_MIYOI)
 			{
 				if (one_in_(2))msg_print(_("美宵「ちょっ！貴方はまだ駄目ですよ！」",
                                         "Miyou - 'Wait! You can't go in here!'"));

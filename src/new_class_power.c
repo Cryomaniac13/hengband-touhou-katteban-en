@@ -44,6 +44,303 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.09 美宵
+class_power_type class_power_miyoi[] =
+{
+
+	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("看板娘のお酌", "Signature Drink"),
+	_("隣接したモンスター一体を友好的にし、さらに酒を飲ませて泥酔度を上昇させる。泥酔度が最大HPを超えたモンスターは酔い潰して倒した扱いになる。魅力が高いほど成功しやすい。人間に効きやすく、無生物・酒豪・毒耐性・巨大・力強いモンスターには効きづらい。武器を持たずに隣接攻撃しようとするとこの特技が発動する。",
+    "Turns an adjacent monster friendly, and serves them alcohol, making them drunk. A monster whose drunkenness level exceeds maximum HP passes out and is treated as being defeated. Higher CHR makes success more likely. Effective against humans; not good against nonliving beings, heavy drinkers, poison resistant, gigantic or powerful monsters. Striking in melee without a weapon equipped uses this ability.")},
+
+	{ 10,20,30,FALSE,TRUE,A_CHR,0,0,_("記憶消去Ⅰ", "Amnesia I"),
+	_("隣接したモンスターをフロアから放逐する。酔っているモンスターには非常に効きやすい。ユニークモンスターと通常の精神を持たないモンスターには効果がない。",
+    "Makes adjacent monsters leave the floor. Very effective against drunk monsters. Does not effect unique monsters or monsters with unusual mind.")},
+
+	{ 15,30,40,FALSE,FALSE,A_DEX,0,0,_("調理", "Cooking"),
+	_("一部のモンスターを材料に料理を作り、料理の種類に応じた一時効果を得る。材料となるモンスターを事前に倒しておく必要がある。",
+    "Cooks using some monsters as ingredients. You gain a temporary effect depending on dish you cook. Requires defeating monsters you want to use as ingredients.")},
+
+	{ 20,20,50,FALSE,FALSE,A_INT,0,0,_("周辺調査", "Sense Surroundings"),
+	_("周囲のモンスターとトラップを感知する。レベル30以上でアイテム、レベル40以上で地形も感知する。",
+    "Detects nearby monsters and traps. At level 30, detects items. At level 40, maps out nearby area.")},
+
+	{ 25,30,45,FALSE,FALSE,A_CHR,0,0,_("絶品の煮物", "Exquisite Simmered Dishes"),
+	_("隣接したモンスター全てにお酒を勧める。",
+    "Serves alcohol to all adjacent monsters.")},
+
+	{ 30,50,60,FALSE,TRUE,A_CHR,0,0,_("記憶消去Ⅱ", "Amnesia II"),
+	_("一定時間視界外のモンスターから認識されなくなる。無生物や精神を持たないモンスターには効果がない。",
+    "Temporarily makes you harder to notice for monsters out of line of sight. Not effective against nonliving or mindless beings.")},
+
+	{ 35,80,70,FALSE,FALSE,A_DEX,0,0,_("森をも酔わせる大鍋", "Cauldron that Intoxicates Forests"),
+	_("視界内の全てのモンスターに強制的に酒を呑ませる。",
+    "Forcibly servers alcohol to all monsters in sight.")},
+
+	{ 40,0,0,FALSE,FALSE,A_CHR,0,0,_("お勧めの一本", "Recommended Bottle"),
+	_("隣接したモンスター一体を高確率で友好的にし、さらに泥酔度を大幅に上昇させる。酒を一本消費し、酒の価格と強さによって効力が変わる。",
+    "Makes an adjacent monster friendly with high probability rate, and makes them severely drunk. Uses a bottle of alcohol; effect changes depending on alcohol's strength and price.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_miyoi(int num, bool only_info)
+{
+	int dir, dice, sides, base, damage, i;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+
+	case 0: //看板娘のお酌
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+
+		int power = 10 + plev + chr_adj * 3;
+		int alcohol = plev * 3 + chr_adj * 5;
+
+		if (only_info) return format(_("効力:%d 酒:%d", "pow: %d drnk: %d"), power, alcohol);
+
+		if (!get_rep_dir2(&dir)) return FALSE;
+		if (dir == 5) return FALSE;
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+
+			msg_print(_("あなたは愛想よくお酒を勧めた。", "You amiably offer a drink."));
+			miyoi_serve_alcohol(m_ptr, alcohol, power);
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+
+
+	case 1://記憶消去Ⅰ
+	{
+
+		int rad = 1;
+		int power = p_ptr->lev * 3 + chr_adj * 5;
+		if (only_info) return format(_("範囲:%d 効力:%d", "rad: %d pow: %d"), rad, power);
+
+		msg_format(_("あなたはにこにこ笑いながら両手を振った。", "You chuckle and wave your hands."));
+		if (mass_genocide_2(power, rad, 3))
+			msg_print(_("周囲の者は不思議そうな顔をしながら去っていった...",
+                        "Nearby people start leaving with a confused look on their faces..."));
+
+		break;
+	}
+
+	case 2:
+	{
+
+		if (only_info) return format("");
+
+		if (!geidontei_cooking(TRUE)) return NULL;
+
+	}
+	break;
+
+
+	case 3://周辺調査
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+
+		msg_print(_("あなたは周囲に危険がないかを探った...",
+                    "You search surroundings for signs of possible danger..."));
+
+		detect_monsters_normal(rad);
+		detect_monsters_invis(rad);
+		detect_traps(rad, TRUE);
+		if (plev > 29)
+		{
+			detect_objects_gold(rad);
+			detect_objects_normal(rad);
+		}
+		if (plev > 39)
+		{
+			map_area(rad);
+		}
+
+		break;
+	}
+
+
+	case 4: //絶品の煮物
+	{
+
+		int y, x, i;
+		monster_type *m_ptr;
+		bool msg_flag = FALSE;
+
+		int power = 10 + plev + chr_adj * 2;
+		int alcohol = plev * 2 + chr_adj * 2;
+
+		if (only_info) return format(_("効力:%d 酒:%d", "pow: %d drnk: %d"), power, alcohol);
+
+		//隣接グリッドのモンスター全てを接客
+		for (i = 1; i <= 9; i++)
+		{
+			y = py + ddy[i];
+			x = px + ddx[i];
+
+			if (!in_bounds(y, x)) continue;
+			if (player_bold(y, x)) continue;
+
+			m_ptr = &m_list[cave[y][x].m_idx];
+
+			if (!m_ptr->r_idx || !m_ptr->ml) continue;
+
+			if (!msg_flag) msg_print(_("あなたは自慢の煮物を振る舞った！",
+                                    "You proudly serve dishes of your own making!"));
+			msg_flag = TRUE;
+
+			miyoi_serve_alcohol(m_ptr, alcohol, power);
+
+		}
+
+		if (!msg_flag)
+		{
+			msg_print(_("辺りには誰もいない。", "There's nobody nearby."));
+			return NULL;
+		}
+
+	}
+	break;
+
+	case 5:
+	{
+		base = p_ptr->lev;
+		if (only_info) return format(_("期間:%d + 1d%d", "dur: %d+1d%d"), base, base);
+		set_tim_general(base + randint1(base), TRUE, 0, 0);
+		break;
+	}
+
+
+	case 6: //視界内アルコール攻撃
+	{
+
+		int alcohol = plev * 5 + chr_adj * 5;
+
+		if (only_info) return format(_("酒:%d", "drnk: %d"), alcohol);
+
+		msg_print(_("あなたは大鍋に大量の酒を投入した。辺りは猛烈な酒の香りに包まれた！",
+                "You pour a lot of alcohol into a massive cauldron. The area is filled with severe scent of strong alcohol!"));
+		project_hack2(GF_ALCOHOL, 0, 0, alcohol);
+
+	}
+	break;
+
+	case 7: //お勧めの一本
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+		object_type *o_ptr;
+		cptr q, s;
+		int item;
+		int power = 20 + plev + chr_adj;
+		int alcohol = plev * 3 + chr_adj * 5;
+
+		if (only_info) return format(_("効力:不定", "pow: undef"));
+
+		item_tester_tval = TV_ALCOHOL;
+
+		q = _("どのお酒を提供しますか? ", "Offer which drink?");
+		if (use_itemcard)
+			s = _("酒を持っていない。", "You don't have any alcohol.");
+		else
+			s = _("いつもの瓢箪しか持っていない。", "You don't have anything aside from your gourd.");
+
+		if (!get_item(&item, q, s, (USE_INVEN))) return NULL;
+
+		o_ptr = &inventory[item];
+
+		if (!get_rep_dir2(&dir)) return FALSE;
+		if (dir == 5) return FALSE;
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		//特殊処理　一部の酒はpowerに-1を設定し一撃で酔い潰す処理にする
+		if (m_ptr->r_idx == MON_OROCHI && o_ptr->sval == SV_ALCOHOL_KUSHINADA)
+		{
+			msg_print(_("八岐大蛇に特製の毒酒を捧げた！",
+                        "You offer the special poisoned sake to Yamata-no-Orochi!"));
+			power = -1;
+		}
+		else if (o_ptr->name1 == ART_HANGOKU_SAKE)
+		{
+			msg_print(_("何やら只ならぬ雰囲気のお酒を振る舞った...",
+                        "You serve a bottle of sake that has something eerie about it..."));
+			power = -1;
+		}
+		//酒の値段が高いほど魅力判定値、酒が強いほどアルコール度数に加算
+		else
+		{
+			int value = object_value_real(o_ptr);
+
+			if (value >= 50000) power += 300;
+			else if (value >= 10000) power += 100;
+			else if (value >= 1000) power += 30;
+			else if (!value) power -= 50;
+
+			if (o_ptr->pval > 10000) alcohol += 5000 + (o_ptr->pval-5000) / 5;
+			else if (o_ptr->pval > 3000) alcohol += 2000 + (o_ptr->pval-3000) / 4;
+			else alcohol += o_ptr->pval / 3;
+		}
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+
+			if(power > 0) msg_print(_("あなたは懐から秘蔵の一本を取り出した！",
+                                    "You take out one of your treasured bottles from your pocket!"));
+
+			//酒を飲ませたときアイテム減少処理
+			if (miyoi_serve_alcohol(m_ptr, alcohol, power))
+			{
+				inven_item_increase(item, -1);
+				inven_item_describe(item);
+				inven_item_optimize(item);
+			}
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+
+
+	}
+	break;
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
+
 
 
 
@@ -36783,6 +37080,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_MIYOI:
+		class_power_table = class_power_miyoi;
+		class_power_aux = do_cmd_class_power_aux_miyoi;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -38682,6 +38985,13 @@ const support_item_type support_item_list[] =
 		_("虹色のカチューシャ", "Rainbow Headband"),
 		_("それは虹属性のボールを放つ。アビリティカードの高騰度に応じて威力が上がる。",
         "Fires a ball of rainbow element. Power increases depending on how popular ability cards are.")},
+
+	//v2.0.9 美宵　お勧めの一本
+		{ 120,30, 70,8,3,	MON_MIYOI,class_power_miyoi,do_cmd_class_power_aux_miyoi,7,
+		_("クジラの形をした帽子", "Whale-shaped Hat"),
+		_("それはモンスター一体を友好的にして酒を呑ませる。酒を一本消費し、消費した酒によって効果と成功率が変わる。人間に効果が高い。",
+        "Turns a monster friendly and serves them alcohol. Uses up alcohol item from your inventory, effect and power depends on kind of item used. Effective against humans.")},
+
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
 };

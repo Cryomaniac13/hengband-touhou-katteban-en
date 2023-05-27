@@ -1701,6 +1701,7 @@ errr check_load_init(void)
 #define ENTRY_GUN_CHARGE_LEFT	52
 #define ENTRY_HECATIA_BODY		53
 #define ENTRY_ANIMAL_GHOST_STRIFE	54
+#define ENTRY_SPECIAL_ATTACK	55
 
 
 ///sys ステータス画面の項目とそれぞれの表示位置
@@ -1772,6 +1773,8 @@ static struct
 	{ 1, 18, 25, "装填時間"},
 	{ 1,  7, -1, "体　　　 : "},
 	{ 1,  7, -1, "所属勢力 : " },
+	{ 1, 10, 25, "(特殊)" },
+
 };
 #else
 = {
@@ -1833,6 +1836,8 @@ static struct
 	{ 1, 18, 25, "EquipTime"},
 	{ 1,  7, -1, "Body     : "},
 	{ 1,  7, -1, "Alignment: " },
+	{ 1, 10, 25, "(Special)" },
+
 };
 #endif
 
@@ -1914,9 +1919,13 @@ static void display_player_melee_bonus(int hand, int hand_entry)
 	sprintf(buf, "(%+d,%+d)", show_tohit, show_todam);
 
 	/* Dump the bonuses to hit/dam */
-	//アリスの武器熟練度を適当に計算して加算
 	if(IS_METAMORPHOSIS)
 		display_player_one_line(ENTRY_MONSTER_ATTACK, "(---,---)", TERM_L_BLUE);
+	//v2.0.9 美宵特殊
+	else if (p_ptr->pclass == CLASS_MIYOI && p_ptr->do_martialarts && !p_ptr->mimic_form)
+	{
+		display_player_one_line(ENTRY_SPECIAL_ATTACK, "(---,---)", TERM_L_BLUE);
+	}
 	else if (p_ptr->pclass == CLASS_ALICE && !p_ptr->do_martialarts)
 		display_player_one_line(ENTRY_ALICE_DOLL_ATTACK, buf, TERM_L_BLUE);
 	else if (!buki_motteruka(INVEN_RARM) && !buki_motteruka(INVEN_LARM))
@@ -2780,6 +2789,10 @@ static void display_player_various(void)
 			desc = format(_("%d+α", "%d+@"), damage[0] / 100);
 
 	}
+	else if (p_ptr->pclass == CLASS_MIYOI && p_ptr->do_martialarts && !p_ptr->mimic_form)
+	{
+		;//美宵特集格闘はダメージを表示しない
+	}
 	else if(IS_METAMORPHOSIS)
 	{
 		display_player_one_line(ENTRY_BLOWS, format("%d", blows1), TERM_L_BLUE);
@@ -2806,8 +2819,14 @@ static void display_player_various(void)
 			desc = format(_("%d+%d+α","%d+%d+@"), blows1 * damage[0] / 100, blows2 * damage[1] / 100);
 	}
 
-
-	display_player_one_line(ENTRY_AVG_DMG, desc, TERM_L_BLUE);
+	if (p_ptr->pclass == CLASS_MIYOI && p_ptr->do_martialarts && !p_ptr->mimic_form)
+	{
+		;//美宵特集格闘はダメージを表示しない
+	}
+	else
+	{
+		display_player_one_line(ENTRY_AVG_DMG, desc, TERM_L_BLUE);
+	}
 
 	if(p_ptr->do_martialarts && p_ptr->pclass == CLASS_MEIRIN)
 	{
@@ -4036,6 +4055,12 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 			}
 
 		}
+		break;
+
+	case CLASS_MIYOI:
+		if (plev > 9) add_flag(flgs, TR_SLOW_DIGEST);
+		if (plev > 29) add_flag(flgs, TR_RES_WATER);
+
 		break;
 
 	default:

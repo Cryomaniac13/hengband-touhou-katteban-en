@@ -5279,7 +5279,9 @@ bool hatate_search_unique_monster(void)
 //v2.0.8
 //倒した素材モンスターを鯢呑亭に持ち込んで料理してもらう
 //素材モンスターはRF8_FOODが設定されており、倒したときにp_ptr->cooking_material_flagに記録されている
-void geidontei_cooking()
+//flag_self:自分で料理するときTRUE メッセージのみ変化
+//行動順消費するときTRUE(美宵特技以外では関係ない)
+bool geidontei_cooking(bool flag_self )
 {
 
 	int material_list[16];
@@ -5295,7 +5297,7 @@ void geidontei_cooking()
 		{
 			msg_print(_("ERROR:geidontei_cooking()で料理選択画面のページ送りが未実装",
                     "ERROR: page selection not implemented for cooking selection screen in geidontei_cooking()"));
-			return;
+			return FALSE;
 		}
 
 		//該当の素材をもっているとき
@@ -5309,8 +5311,13 @@ void geidontei_cooking()
 
 	if (!material_num)
 	{
-		msg_print(_("持ち込む素材がない。", "You haven't brought any ingredients."));
-		return;
+		if(!flag_self)
+			msg_print(_("持ち込む素材がない。", "You haven't brought any ingredients."));
+        else
+			msg_print(_("料理の材料がない。", "You don't have cooking ingredients."));
+
+
+		return FALSE;
 	}
 
 	screen_save();
@@ -5323,12 +5330,15 @@ void geidontei_cooking()
 
 		food_list_idx = material_list[0];
 
-		prt(format(_("「%s」を作ってくれるようだ。", "Looks like I can make '%^s'."), monster_food_list[food_list_idx].desc), 8, 20);
+        if(!flag_self)
+			prt(format(_("「%s」を作ってくれるようだ。", "Looks like I can make '%^s'."), monster_food_list[food_list_idx].desc), 8, 20);
+		else
+			prt(format(_("「%s」が作れそうだ。", "Looks like you can make '%^s'."), monster_food_list[food_list_idx].desc), 8, 20);
 
-		if (!get_check_strict(_("注文しますか？", "Shall you order?"), CHECK_DEFAULT_Y))
+		if (!get_check_strict(flag_self ? _("作りますか？", "Cook it?"): _("注文しますか？", "Shall you order?"), CHECK_DEFAULT_Y))
 		{
 			screen_load();
-			return;
+			return FALSE;
 		}
 	}
 	//複数作れるときは料理をリストして選択
@@ -5336,7 +5346,11 @@ void geidontei_cooking()
 	{
 		int choose;
 
-		prt(_("何を作ってもらいますか？(ESC:キャンセル)", "What do you want to cook? (ESC: cancel)"), 4, 20);
+		if(!flag_self)
+			prt(_("何を作ってもらいますか？(ESC:キャンセル)", "What do you want to order? (ESC: cancel)"), 4, 20);
+		else
+			prt(_("何を作りますか？(ESC:キャンセル)", "What do you want to cook? (ESC: cancel)"), 4, 20);
+
 		for (i = 0; i<material_num; i++)
 		{
 			prt(format("%c) %s", 'a' + i, monster_food_list[material_list[i]].desc), 5 + i, 20);
@@ -5351,7 +5365,7 @@ void geidontei_cooking()
 			if (c == ESCAPE)
 			{
 				screen_load();
-				return;
+				return FALSE;
 			}
 
 			choose = c - 'a';
@@ -5365,7 +5379,9 @@ void geidontei_cooking()
 
 	}
 
-	if (one_in_(3))
+	if(flag_self)
+		msg_print(_("あなたは鼻歌を歌いながら料理を始めた...", "You start cooking as you hum to yourself..."));
+	else if (one_in_(3))
 		msg_print(_("「これ美味しいよー」", "'It's delicious~'"));
 	else if(one_in_(3))
 		msg_print(_("「料理のことならこの奥野田美宵にお任せあれ！」",
@@ -5396,8 +5412,13 @@ void geidontei_cooking()
 		break;
 
 	case MON_WILD_BOAR_2:
-		prt(_("巨大な肉塊を皆に振る舞って豪快に頬張った！",
-            "Everybody eagerly feasted upon huge chunks of meat!"), 8, 20);
+		if(!dun_level) //店かダンジョン内かを区別するのにflag_selfだとまだ都合が悪いので適当に判定する
+			prt(_("巨大な肉塊を皆に振る舞って豪快に頬張った！",
+                "Everybody eagerly feasted upon huge chunks of meat!"), 8, 20);
+		else
+			prt(_("巨大な肉塊を豪快に焼き上げた！",
+                "Huge chunks of meat were grilled with gusto!"), 8, 20);
+
 		prt(_("力があふれる気がする！",
             "You feel overflowing with power!"), 9, 20);
 		set_tim_addstat(A_STR, 4, 5000, FALSE);
@@ -5424,7 +5445,7 @@ void geidontei_cooking()
 		default:
 			msg_format(_("ERROR:この料理(idx:%d)を食べたときの処理が定義されていない",
                     "ERROR: Undefined logic for eating this dish (idx: %d)"), food_list_idx);
-			return;
+			return FALSE;
 
 	}
 
@@ -5438,7 +5459,7 @@ void geidontei_cooking()
 
 	screen_load();
 
-	return;
+	return TRUE;
 
 
 

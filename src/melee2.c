@@ -3466,10 +3466,15 @@ static void process_monster(int m_idx)
 
 	int				card_num_jellyfish = 0;
 
+	int alcohol_rank = 0;
+
 	//v1.1.45 モンスター魔法使用率をこの変数で管理することにした。基本r_ptr->freq_spellと同じだが里乃のバックダンスでボーナスがつく
 	int monster_spell_freq;
 
 	monster_spell_freq = r_ptr->freq_spell;
+
+	//泥酔度がMAXHPの25%を超えるごとにランク1加算
+	if (MON_DRUNK(m_ptr)) alcohol_rank = MON_DRUNK(m_ptr) * 4 / MAX(m_ptr->maxhp,1);
 
 	//v1.1.94 「すでに行動遅延を受けているフラグ」を削除する
 	m_ptr->mflag &= ~(MFLAG_ALREADY_DELAYED);
@@ -3786,6 +3791,19 @@ static void process_monster(int m_idx)
 	{
 		if (check_mon_blind(m_idx)) aware = FALSE;
 	}
+
+	//v2.0.9 美宵記憶消去
+	if (p_ptr->pclass == CLASS_MIYOI && p_ptr->tim_general[0])
+	{
+		if (!(r_ptr->flags2 & (RF2_WEIRD_MIND | RF2_EMPTY_MIND)) //無精神には効かない
+			&& !(r_ptr->flags3 & RF3_NONLIVING) //無生物には効かない
+			&& !player_can_see_bold(m_ptr->fy,m_ptr->fx) //視界内には効かない
+			)
+		{
+			aware = FALSE;
+		}
+	}
+
 
 	//v2.0.1 アビリティカードのひらり布
 	if (p_ptr->tim_hirari_nuno)
@@ -4157,6 +4175,27 @@ static void process_monster(int m_idx)
 	{
 		/* Sometimes skip move */
 		if (one_in_(2)) return;
+	}
+
+	//泥酔度が高いと確率で何もしない
+	if (alcohol_rank >= 2)
+	{
+		if (randint1(5) < alcohol_rank)
+		{
+			char m_name[80];
+
+			/* Acquire the monster name */
+			monster_desc(m_name, m_ptr, 0);
+
+			if(one_in_(3))
+				msg_format(_("%^sはぼーっとしている。", "%^s is in a drunken daze."), m_name);
+			else if(one_in_(2))
+				msg_format(_("%^sは酔拳の構えをとった！", "%^s takes the drunken fist stance!"), m_name);
+			else
+				msg_format(_("%^sはつんのめって転んだ！", "%^s stumbles and falls down!"), m_name);
+
+		}
+
 	}
 
 	if (is_riding_mon)
@@ -6141,13 +6180,15 @@ void mproc_init(void)
 //m_ptr->mtimed[7]以降が対象
 //一時効果が発生/終了したときTRUEを返す。数値の増減だけならFALSE。
 //「攻撃力が下がった！」などのメッセージはこの中では出さない。
+//アルコールのみ出すことにする
 bool set_monster_timed_status_add(int mtimed_type, int m_idx, int v)
 {
 	monster_type *m_ptr = &m_list[m_idx];
 	bool notice = FALSE;
+	int old_val,new_val;
 
 	/* Hack -- Force good values */
-	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+	v = (v > 30000) ? 30000 : (v < 0) ? 0 : v;
 
 	if (mtimed_type <= MTIMED_INVULNER || mtimed_type >= MAX_MTIMED)
 	{
@@ -6158,6 +6199,8 @@ bool set_monster_timed_status_add(int mtimed_type, int m_idx, int v)
 
 	if (cheat_xtra)
 		msg_format("m_idx%d timed2: type(%d) val(%d)",m_idx, mtimed_type, v);
+
+	old_val = m_ptr->mtimed[mtimed_type];
 
 	/* Open */
 	if (v)
@@ -6180,6 +6223,55 @@ bool set_monster_timed_status_add(int mtimed_type, int m_idx, int v)
 
 	/* Use the value */
 	m_ptr->mtimed[mtimed_type] = v;
+
+	new_val = m_ptr->mtimed[mtimed_type];
+
+	//メッセージ
+	if (mtimed_type == MTIMED2_DRUNK)
+	{
+		monster_type *m_ptr = &m_list[m_idx];
+		int old_rank, new_rank;
+
+		if (m_ptr->r_idx && m_ptr->maxhp && m_ptr->hp >= 0)
+		{
+
+			//モンスター泥酔度がMAXHPの25%を超えるごとに泥酔度ランク1加算
+			old_rank = old_val * 4 / m_ptr->maxhp;
+			new_rank = new_val * 4 / m_ptr->maxhp;
+
+			if (old_rank != new_rank)
+			{
+				char m_name[120];
+				monster_desc(m_name, m_ptr, 0L);
+
+				if (!new_rank)
+					msg_format(_("%^sの酔いが覚めた。", "%^s is no longer drunk."),m_name);
+				else if (new_rank == 1)
+				{
+					if(new_rank > old_rank)
+						msg_format(_("%^sは楽しそうにしている。", "%^s looks enjoyed."), m_name);
+					else
+						msg_format(_("%^sは酔いが覚めてきたようだ。", "%^s is sobering up."), m_name);
+				}
+				else if (new_rank == 2)
+				{
+					if (new_rank > old_rank)
+						msg_format(_("%^sは酔ってフラフラだ。", "%^s is swaying drunkenly."), m_name);
+					else
+						msg_format(_("%^sは少し自分を取り戻した。", "%^s comes back to senses somewhat."), m_name);
+				}
+				else if (new_rank == 3)
+				{
+					if (new_rank > old_rank)
+						msg_format(_("%^sはもうすぐ酔い潰れそうだ。", "%^s is about to pass out."), m_name);
+					else
+						msg_format(_("%^sは倒れそうになっていたが踏みとどまった。", "%^s was about to collapse, but manages to recover."), m_name);//←このメッセージはほぼ出ない
+				}
+				//4以上になると良い潰して倒す扱いになる
+			}
+		}
+
+	}
 
 	if (!notice) return FALSE;
 
@@ -6784,6 +6876,10 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 		break;
 
 	case MTIMED2_DRUNK:
+		//アルコールの回復はHPの自然回復と同じにする
+		recover_val = m_ptr->maxhp / 100;
+		if (r_info[m_ptr->r_idx].flags2 & RF2_REGENERATE) recover_val *= 2;
+
 		if (set_monster_timed_status_add(MTIMED2_DRUNK, m_idx, MON_DRUNK(m_ptr) - recover_val))
 		{
 			if (is_seen(m_ptr))

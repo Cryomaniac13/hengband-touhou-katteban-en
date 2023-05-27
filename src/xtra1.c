@@ -537,6 +537,7 @@ static void prt_stat(int stat)
 #define BAR_COUNTER				110
 #define BAR_LIFE_EXPLODE		111 //v2.0.1 生命爆発の薬
 #define BAR_HIRARINUNO			112 //v2.0.1 ひらり布(アビリティカード)
+#define BAR_MIYOI_FORGOTTEN		113 //v2.0.9 美宵記憶消去
 
 //ここの値は127が現在の限界である。(v1.1.46で95から拡張)
 
@@ -669,6 +670,7 @@ static struct {
 	{ TERM_RED, "反", "カウンター" },
 	{ TERM_YELLOW, "爆", "生命爆発" },
 	{ TERM_VIOLET, "布", "ひらり布" },
+	{ TERM_BLUE, "忘", "忘却" },
 
 
 	{0, NULL, NULL}
@@ -796,6 +798,7 @@ static struct {
 
 	{ TERM_YELLOW, "Exp", "LifeExpl" },
 	{ TERM_VIOLET, "Fab", "Fabric" },
+	{ TERM_BLUE, "Amn", "Amnesia" },
 
 
 	{0, NULL, NULL}
@@ -1130,6 +1133,11 @@ static void prt_status(void)
 		ADD_FLG(BAR_WASTE_MONEY);
 	if (p_ptr->pclass == CLASS_JYOON && p_ptr->tim_general[0])
 		ADD_FLG(BAR_PLUCK_PIGEON);
+
+	if (p_ptr->pclass == CLASS_MIYOI && p_ptr->tim_general[0])
+		ADD_FLG(BAR_MIYOI_FORGOTTEN);
+
+
 	//v1.1.73
 	if (p_ptr->pclass == CLASS_YACHIE && p_ptr->magic_num1[0])
 		ADD_FLG(BAR_YACHIE_BRIBE);
@@ -6451,6 +6459,14 @@ void calc_bonuses(void)
 
 
 		}
+
+		break;
+	case CLASS_MIYOI:
+
+		if (plev > 9) p_ptr->slow_digest = TRUE;
+
+		if (plev > 29) p_ptr->resist_water = TRUE;
+
 
 		break;
 

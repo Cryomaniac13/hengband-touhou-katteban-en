@@ -3962,6 +3962,8 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 
 	monster_type    exp_mon;
 
+	bool flag_drunk = FALSE;
+
 	/* Innocent until proven otherwise */
 	bool        innocent = TRUE, thief = FALSE;
 	//int         i;
@@ -3981,6 +3983,9 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 		delete_monster_idx(m_idx);
 		return FALSE;
 	}
+
+	//v2.0.9 美宵が酔わせて倒したときのフラグ
+	if (MON_DRUNK(m_ptr) > m_ptr->maxhp) flag_drunk = TRUE;
 
 	if(SAKUYA_WORLD)
 	{
@@ -4046,7 +4051,8 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 		//妹紅は6/7で復活する
 		///mod150502 諏訪子特殊処理 「赤口（ミシャグチ）さま」発動中はworld_monster=-1になって敵の呪いなどを受けない
 		//v1.1.52 新アリーナ内では6/7から3/4へ　下の正邪は新アリーナに出ないので変えない
-		if (m_ptr->r_idx == MON_MOKOU && !one_in_(7) && !world_monster)
+		//v2.0.9 美宵に酔い潰された場合復活しない
+		if (m_ptr->r_idx == MON_MOKOU && !one_in_(7) && !world_monster && !flag_drunk)
 		{
 			int rez_chance = p_ptr->inside_arena ? 4 : 7;
 
@@ -4209,6 +4215,10 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 			{
 				if(randint1(p_ptr->lev) < randint1(r_ptr->level)) set_deity_bias(DBIAS_WARLIKE, 1);
 			}
+
+			//v2.0.9 美宵のアイテムカードで敵を酔い潰したとき
+			if (flag_drunk) set_deity_bias(DBIAS_COSMOS, -3);
+
 		}
 
 
@@ -4318,7 +4328,8 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 		///sys mon アンバーの血の呪い オベロンは100%にしようか
 		///mod150502 諏訪子特殊処理 「赤口（ミシャグチ）さま」発動中はworld_monster=-1になって敵の呪いなどを受けない
 		///mod150711 妹紅パゼストバイフェニックスのときも血の呪いを受けない
-		if ((r_ptr->flags3 & RF3_ANG_AMBER) && one_in_(2) && !world_monster && !flag_mokou_possess && !(m_ptr->mflag & MFLAG_EPHEMERA))
+		//v2.0.9 酔い潰したときは血の呪いが発動しない
+		if ((r_ptr->flags3 & RF3_ANG_AMBER) && one_in_(2) && !world_monster && !flag_mokou_possess && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
 		{
 			int curses = 1 + randint1(3);
 			bool stop_ty = FALSE;
@@ -4341,7 +4352,26 @@ msg_format("%^sは恐ろしい血の呪いをあなたにかけた！", m_name);
 
 
 		/*:::死にセリフ*/
-		if ((r_ptr->flags2 & RF2_CAN_SPEAK) &&
+		//v2.0.9 酔い潰したときは専用メッセージ
+		if(flag_drunk)
+		{
+			switch (randint1(4))
+			{
+			case 0:
+				msg_format(_("%^sは夢の中で超巨大猪に吹っ飛ばされた！",
+                            "%^s dreams of being knocked away by a humongous wild boar!"),m_name);break;
+			case 1:
+				msg_format(_("%^sは夢の中でクジラに押し潰された！",
+                            "%^s dreams of being crushed by a whale!"),m_name);break;
+			case 2:
+				msg_format(_("%^sは夢の中で巨大サンショウウオに丸呑みにされた！",
+                            "%^s dreams of being swallowed whole by a giant salamander!"),m_name);break;
+			default:
+				msg_format(_("%^sは夢の中で巨大猩々に天まで投げ飛ばされた！",
+                            "%^s dreams of being thrown up into the skies by giant apes!"), m_name);break;
+			}
+		}
+		else if ((r_ptr->flags2 & RF2_CAN_SPEAK) &&
 			!(m_ptr->mflag & MFLAG_NO_SPELL) &&
 			!((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES) && (p_ptr->tim_general[0] && m_ptr->cdis <= p_ptr->lev / 5 || p_ptr->tim_general[1])) &&
 			!p_ptr->silent_floor
@@ -4595,7 +4625,8 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 
 
 		///mod140118 アリスが倒れたら人形が全て爆発する
-		if (m_ptr->r_idx == MON_ALICE && !world_monster)
+		//v2.0.9 酔い潰したら爆発しない
+		if (m_ptr->r_idx == MON_ALICE && !world_monster && !flag_drunk)
 		{
 			int i;
 			bool flag_msg = TRUE;
@@ -4639,7 +4670,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		/*:::イケタ処理*/
 		/* Mega hack : replace IKETA to BIKETAL */
 		if ((m_ptr->r_idx == MON_IKETA) &&
-		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA))
+		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4683,7 +4714,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 		/*:::モズグス様変身処理追加*/
 		else if ((m_ptr->r_idx == MON_MOZGUS) &&
-		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA))
+		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4701,7 +4732,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 		//v1.1.42 紫苑パワーアップ復活
 		else if ((m_ptr->r_idx == MON_SHION_1) &&
-			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA))
+			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;

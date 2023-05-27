@@ -5523,6 +5523,7 @@ bool mass_genocide(int power, bool player_cast)
 //mode0:鈴瑚の浄化作戦　妖怪、悪魔、獣にのみ有効　ノーダメージ
 //mode1:久侘歌の全霊鬼渡し　幻想郷の住人フラグのない敵に有効　ノーダメージ
 //mode2:アビリティカード「純粋な自己肯定感」　ノーダメージ 野良神様の評判悪化なし
+//mode3:美宵の記憶消去　ノーダメージ、酔っているモンスターに効果大
 bool mass_genocide_2(int power, int rad, int mode)
 {
 	int  i;
@@ -5559,6 +5560,14 @@ bool mass_genocide_2(int power, int rad, int mode)
 		}
 		else if (mode == 2)
 		{
+			result |= genocide_aux(i, power, TRUE, 0, "");
+
+		}
+		else if (mode == 3)
+		{
+			if (r_ptr->flags2 & (RF2_EMPTY_MIND|RF2_WEIRD_MIND)) continue;
+
+			if (MON_DRUNK(m_ptr)) power *= 2;
 			result |= genocide_aux(i, power, TRUE, 0, "");
 
 		}

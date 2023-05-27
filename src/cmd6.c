@@ -8659,3 +8659,154 @@ bool do_cmd_magic_eater(bool only_browse, bool powerful)
         return TRUE;
 }
 
+
+
+
+
+//美宵が酒を勧めてモンスターを友好的にする判定
+//酒を飲ませるのに成功したときTRUEを返す
+bool	miyoi_make_mon_friendly(monster_type *m_ptr, int power)
+{
+
+	int r_idx = m_ptr->r_idx;
+	monster_race *r_ptr;
+
+	char m_name[120];
+
+	if (!r_idx)
+	{
+		msg_format("ERROR:miyoi_make_mon_friendly()");
+		return FALSE;
+	}
+	r_ptr = &r_info[r_idx];
+
+	if (is_pet(m_ptr) || is_friendly(m_ptr)) return TRUE;
+
+
+	monster_desc(m_name, m_ptr, 0);
+
+	//人間に効きやすい
+	if (r_ptr->flags3 & RF3_HUMAN)
+	{
+		power *= 2;
+	}
+
+	if (p_ptr->cursed & TRC_AGGRAVATE)
+	{
+		msg_format(_("今のあなたの言葉には誰も耳を貸さない！",
+                    "Nobody's going to listen to you right now!"));
+		return FALSE;
+	}
+
+	if (r_ptr->level > randint1(power))
+	{
+		msg_format(_("%sはあなたの誘いに応じなかった！",
+                    "%s does not respond to your invitation!"), m_name);
+		return FALSE;
+	}
+
+	//クエスト打倒対象は友好的にならない。何度も呑ませるならその都度判定を通す必要がある
+	if (r_ptr->flags1 & RF1_QUESTOR)
+	{
+		msg_format(_("%sとあなたは戦いの前に盃を交わした。",
+                    "You exchange drinks with %s before commencing combat."), m_name);
+	}
+	else
+	{
+		if (one_in_(3))
+			msg_format(_("%sはあなたの愛想に絆され警戒を解いた。",
+                        "%s responds to your affection, letting guard down."), m_name);
+		else if (one_in_(2))
+			msg_format(_("%sと意気投合した！",
+                        "You hit it off with %s!"), m_name);
+		else
+			msg_format(_("%sと乾杯した！",
+                        "You make a toast with %s!"), m_name);
+
+		set_friendly(m_ptr);
+
+	}
+
+	return TRUE;
+
+
+}
+
+
+//v2.0.9
+//美宵がモンスターにお酒を提供する
+//特技「看板娘のお酌」「秘蔵の一本」か特殊格闘から呼ばれる
+//モンスターを友好的にする処理と友好的なモンスターに酒属性攻撃を行う処理
+//alcohol:アルコールの強さ
+//charm_power:友好的にする魅力判定値
+//対象が酒を飲んだときTRUEを返す
+bool	miyoi_serve_alcohol(monster_type *m_ptr, int alcohol, int charm_power)
+{
+	int r_idx = m_ptr->r_idx;
+	monster_race *r_ptr;
+
+	char m_name[120];
+
+	if (!r_idx)
+	{
+		msg_format("ERROR:miyoi_offer_alcohol()");
+		return FALSE;
+	}
+	r_ptr = &r_info[r_idx];
+	monster_desc(m_name, m_ptr, 0);
+
+	//起こす
+	set_monster_csleep(cave[m_ptr->fy][m_ptr->fx].m_idx, 0);
+
+	//誘いに応じない面々
+	if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND))
+	{
+		msg_format(_("%sは無反応だ。", "%s does not respond."), m_name);
+		return FALSE;
+	}
+	if (r_idx == MON_BYAKUREN)
+	{
+		msg_format(_("%sは戒律に触れるからと酒を固辞した。",
+                    "%s can't drink because of her religion."), m_name);
+		return FALSE;
+	}
+	if (r_idx == MON_SEIJA || r_idx == MON_SEIJA_D)
+	{
+		msg_format(_("%sはどうあってもあなたを信用しないようだ！",
+                    "%s doesn't trust you at all!"), m_name);
+		return FALSE;
+	}
+
+	//菫子って酒を飲んだっけ？
+	if (r_idx == MON_SUMIREKO)
+	{
+		msg_format(_("%sは未成年だからと酒を固辞した。",
+                    "%s can't drink because she's underage."), m_name);
+		return FALSE;
+	}
+
+	//一撃で倒す特殊処理
+	if (charm_power < 0)
+	{
+		project(0, 0, m_ptr->fy, m_ptr->fx, -1, GF_ALCOHOL, (PROJECT_KILL | PROJECT_JUMP), FALSE);
+		return TRUE;
+	}
+
+	//友好的でないモンスターにはまず魅力判定を通さないと酒を呑ませられない
+	if (!is_friendly(m_ptr))
+	{
+		//判定に成功したらモンスターが友好的になる(QUESTOR除く)
+		if (!miyoi_make_mon_friendly(m_ptr, charm_power)) return FALSE;
+
+	}
+
+	msg_format(_("%sにお酒を飲ませた！",
+                "You serve alcohol to %s!"), m_name);
+
+	//モンスターの泥酔度上昇をGF_ALCOHOL経由で行う。いくら飲んでも潰れないモンスターはそちらで処理
+	project(0, 0, m_ptr->fy, m_ptr->fx, alcohol, GF_ALCOHOL, (PROJECT_KILL | PROJECT_JUMP), FALSE);
+
+	return TRUE;
+
+}
+

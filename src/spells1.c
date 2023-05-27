@@ -8910,7 +8910,92 @@ note = "には効果がなかった。";
 		}
 		break;
 
+		//v2.0.9 酒を呑ませる属性
+		case GF_ALCOHOL:
+		{
 
+			if (seen) obvious = TRUE;
+
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				note = _("には効果がなかった！", "is unaffected!");
+				dam = 0;
+				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
+				break;
+			}
+
+			if (dam < 0)//一撃で倒す特殊処理
+			{
+				dam = 30000;
+
+			}
+			//アルコール耐性
+			//無生物は酔わない
+			else if (r_ptr->flags3 & RF3_NONLIVING)
+			{
+				dam = 0;
+			}
+			//鬼やウワバミは非常に酒に強い
+			else if (m_ptr->r_idx == MON_SUIKA || m_ptr->r_idx == MON_YUGI || m_ptr->r_idx == MON_KASEN || m_ptr->r_idx == MON_YUMA || m_ptr->r_idx == MON_UWABAMI)
+			{
+				dam /= 16;
+				note = _("にはかなり耐性がある！", "resists a lot!");
+			}
+
+			//天狗は酒に強い
+			else if (r_ptr->d_char == 't')
+			{
+				dam /= 4;
+				note = _("には耐性がある。", "resists.");
+			}
+			/*
+			//毒耐性で抵抗させようかと思ったがやめた
+			else if (r_ptr->flagsr & RFR_IM_POIS)
+			{
+				dam /= 3;
+				note = "には耐性がある。";
+
+			}
+			*/
+			//巨大な敵と力強い敵は酔いにくい
+			else if (r_ptr->flags2 & (RF2_GIGANTIC | RF2_POWERFUL))
+			{
+				dam /= 2;
+				note = _("はいくらか耐性を示した。", "resists somewhat.");
+			}
+
+			//人間には効果3倍、人間型生物には効果2倍
+			if (r_ptr->flags3 & RF3_HUMAN)
+			{
+				dam *= 3;
+
+			}
+			else if (r_ptr->flags3 & RF3_DEMIHUMAN)
+			{
+				dam *= 2;
+			}
+
+
+			if (!dam)
+			{
+				note = _("は全く酔う様子がない！", "isn't getting drunk at all!");
+				break;
+			}
+
+			//泥酔度上昇
+			set_monster_timed_status_add(MTIMED2_DRUNK, c_ptr->m_idx, MON_DRUNK(m_ptr) + dam);
+
+			//泥酔度がモンスターの最大HPを超えたら即死ダメージ
+			if (MON_DRUNK(m_ptr) > m_ptr->maxhp)
+			{
+				dam = m_ptr->maxhp + 1;
+			}
+			else
+			{
+				dam = 0;
+			}
+			break;
+		}
 
 		/* Default */
 		default:
@@ -8974,7 +9059,8 @@ note = "には効果がなかった。";
 	}
 
 	//v1.1.22 最大ダメージを9999にする
-	if(dam > 9999) dam = 9999;
+	//v2.0.9 アルコールのときだけはこの制限を取り払う
+	if(typ != GF_ALCOHOL && dam > 9999) dam = 9999;
 
 	///sysdel virtue
 	/*

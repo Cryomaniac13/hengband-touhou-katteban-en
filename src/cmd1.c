@@ -7341,6 +7341,8 @@ bool py_attack(int y, int x, int mode)
 	//アリス人形攻撃用フラグ　反魔法洞窟で攻撃不可
 	bool			alice_doll_attack = (p_ptr->pclass == CLASS_ALICE && !p_ptr->do_martialarts);
 
+	bool			flag_miyoi_serve_alcohol = FALSE;
+
 	cave_type       *c_ptr = &cave[y][x];
 	monster_type    *m_ptr = &m_list[c_ptr->m_idx];
 	monster_race    *r_ptr = &r_info[m_ptr->r_idx];
@@ -7360,6 +7362,10 @@ bool py_attack(int y, int x, int mode)
 		delete_monster_idx(c_ptr->m_idx);
 		return FALSE;
 	}
+
+	//特殊フラグ　美宵の格闘攻撃はモンスターに酒を呑ませる
+	if (p_ptr->pclass == CLASS_MIYOI && p_ptr->do_martialarts && !p_ptr->mimic_form)
+		flag_miyoi_serve_alcohol = TRUE;
 
 	/* Disturb the player */
 	disturb(0, 1);
@@ -7433,6 +7439,27 @@ bool py_attack(int y, int x, int mode)
 		health_track(c_ptr->m_idx);
 	}
 
+	//v2.0.9 美宵特集格闘
+	if (flag_miyoi_serve_alcohol)
+	{
+		int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+		int power = 10 + p_ptr->lev + chr_adj * 3;
+		int alcohol = p_ptr->lev * 3 + chr_adj * 5;
+
+		if (!m_ptr->ml)
+		{
+			msg_print(_("そっちには見えない何かがいて進めない。",
+                        "There's something you can't see in the way."));
+			return FALSE;
+		}
+
+		msg_print(_("あなたは愛想よくお酒を勧めた。",
+                    "You amiably offer a drink."));
+		miyoi_serve_alcohol(m_ptr, alcohol, power);
+		return FALSE;
+
+	}
+
 	///del131223 斬鉄剣制限解除
 #if 0
 	if ((r_ptr->flags1 & RF1_FEMALE) &&
@@ -7472,6 +7499,7 @@ bool py_attack(int y, int x, int mode)
 		}
 
 	}
+
 
 	///sys class item フレンドリーアタック　ストブリ
 	/* Stop if friendly */
