@@ -1071,6 +1071,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_MISUMARU) a_idx = ART_PALANTIR;
 			else if (p_ptr->pclass == CLASS_YUMA) a_idx = ART_CHIYOU;
 			else if (p_ptr->pclass == CLASS_CHIMATA) a_idx = ART_CADUCEUS;
+			else if (p_ptr->pclass == CLASS_MIYOI) a_idx = ART_TUOR;
 
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//Åôê∂ê¨

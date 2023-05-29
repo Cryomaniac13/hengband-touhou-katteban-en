@@ -409,6 +409,10 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_CHIMATA) return TRUE;
 			else return FALSE;
 
+		case CLASS_MIYOI:
+			if (r_idx == MON_MIYOI) return TRUE;
+			else return FALSE;
+
 
 	}
 
@@ -1264,6 +1268,7 @@ void check_quest_completion(monster_type *m_ptr)
 			}
 			case QUEST_TYPE_KILL_ALL:
 			{
+
 				if (!is_hostile(m_ptr)) break;
 
 				//「いま倒されている途中なのが最後の敵対モンスター」のとき
@@ -1671,6 +1676,8 @@ void monster_death(int m_idx, bool drop_item)
 
 	u32b mo_mode = 0L;
 
+	bool flag_drunk = FALSE;
+
 	bool do_gold = (!(r_ptr->flags1 & RF1_ONLY_ITEM));
 	bool do_item = (!(r_ptr->flags1 & RF1_ONLY_GOLD));
 	bool cloned = (m_ptr->smart & SM_CLONED) ? TRUE : FALSE;
@@ -1682,6 +1689,8 @@ void monster_death(int m_idx, bool drop_item)
 	/*:::モンスターが指定したアイテムを落とすことを可能にするフラグ*/
 	bool drop_chosen_item = drop_item && !cloned && !p_ptr->inside_arena
 		&& !p_ptr->inside_battle && !is_pet(m_ptr);
+
+	if (MON_DRUNK(m_ptr) > m_ptr->maxhp)flag_drunk = TRUE;
 
 	//千亦の「無主への供物」を受けた敵はアイテムを落とさない
 	if (p_ptr->pclass == CLASS_CHIMATA && (m_ptr->mflag & MFLAG_SPECIAL))
@@ -1797,6 +1806,9 @@ void monster_death(int m_idx, bool drop_item)
 			int d_dice = r_ptr->blow[i].d_dice;
 			int d_side = r_ptr->blow[i].d_side;
 			int damage = damroll(d_dice, d_side);
+
+			//酔い潰したモンスターは爆発しない
+			if (flag_drunk) break;
 
 			if(m_ptr->r_idx == MON_SAGUME_MINE) rad = 4;
 
@@ -3985,7 +3997,14 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 	}
 
 	//v2.0.9 美宵が酔わせて倒したときのフラグ
-	if (MON_DRUNK(m_ptr) > m_ptr->maxhp) flag_drunk = TRUE;
+	if (MON_DRUNK(m_ptr) > m_ptr->maxhp)
+	{
+		flag_drunk = TRUE;
+		//v2.0.9b 美宵が良い潰して倒したときクエスト完了にならないので、
+		//弥縫策として倒す瞬間だけ敵対させることにする。
+		//set_hostile()を使うと周囲の友好モンスターが全部敵対するのでフラグだけいじる
+		if (is_friendly(m_ptr) ) m_ptr->smart &= ~SM_FRIENDLY;
+	}
 
 	if(SAKUYA_WORLD)
 	{
