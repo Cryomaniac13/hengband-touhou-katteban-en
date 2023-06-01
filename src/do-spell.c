@@ -19072,8 +19072,8 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (name) return "生命体感知";
 		if (desc) return "近くの命を持つモンスターを感知する。";
 #else
-		if (name) return "Detect Doors & Traps";
-		if (desc) return "Detects traps, doors, and stairs in your vicinity.";
+		if (name) return "Detect Living Beings";
+		if (desc) return "Detects living monsters in your vicinity.";
 #endif
 
 		{
