@@ -2424,7 +2424,7 @@ const player_race race_info[MAX_RACES] =
 		62,  1, 180,  6,
 		0,
 		0xFFFFFFF,
-		{ 0,3,3,3,3,3,3,3,3,3,3,3,3,5,5,5 },//realm
+		{0,3,3,3,3,3,3,3,3,3,3,3,3,5,5,5},
 		70,//scoremul
 		FALSE,FALSE,FALSE,FALSE//FLAG
 		,'g',(RF3_HANIWA),
@@ -17605,6 +17605,11 @@ monster_food_type monster_food_list[] =
 
 	{ MON_RIVER_CRAB,2000,_("沢蟹の素揚げ", "Deep-fried river crab") },//水耐性？
 
+	//v2.0.10追加
+	{MON_NEWT,3000,_("赤腹イモリのスープ", "Red-bellied newt soup")},//急回復
+	{ MON_VORPAL_BUNNY ,5000,_("兎鍋", "Rabbit stew")},//毒耐性
+	{ MON_BALL_LIGHTNING,3000,_("雷トカゲのレバ刺し", "Lightning lizard liver sashimi")},//電撃耐性
+	{ MON_LAMPREY,5000,_("ヤツメウナギの串揚げ", "Fried lamprey skewers") },//盲目耐性
 
 
 	//16を超えると料理選択画面のページ送りの実装が必要

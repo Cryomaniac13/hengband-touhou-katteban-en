@@ -1784,6 +1784,11 @@ void monster_death(int m_idx, bool drop_item)
 		{
 			;
 		}
+		//兎系＠は兎を狩らない
+		else if ((p_ptr->pclass == CLASS_TEWI || p_ptr->prace == RACE_GYOKUTO) && m_ptr->r_idx == MON_VORPAL_BUNNY)
+		{
+			;
+		}
 		else
 		{
 			//倒したモンスターの情報が記録されたmonster_food_list[]のインデックスをビットフラグとして記録

@@ -3664,6 +3664,9 @@ static bool inn_comm(int cmd)
                                 "The owner gives you some roast lamprey."));
 					(void)set_food(PY_FOOD_MAX - 1);
 					set_blind(0);
+					//v2.0.10’Ç‰Á
+					set_tim_invis(5000, FALSE);
+
 					break;
 				}
 				else

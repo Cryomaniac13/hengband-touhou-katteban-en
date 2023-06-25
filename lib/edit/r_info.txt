@@ -573,7 +573,7 @@ W:1:1:0:4:0:0
 B:BITE:HURT:1d7
 B:BITE:HURT:1d7
 F:WEIRD_MIND | CAN_SWIM |
-F:WILD_GRASS | WILD_WASTE | WILD_SHORE | WILD_SWAMP | WILD_MOUNTAIN |
+F:WILD_GRASS | WILD_WASTE | WILD_SHORE | WILD_SWAMP | WILD_MOUNTAIN | FOOD
 F:ANIMAL
 D:$A small, harmless lizard.
 D:小さな害のないトカゲだ。
@@ -3397,7 +3397,7 @@ I:120:10d10:40:40:0
 W:11:3:0:40:0:0
 B:BITE:HURT:6d1
 B:BITE:HURT:7d1
-F:BASH_DOOR | WILD_MOUNTAIN
+F:BASH_DOOR | WILD_MOUNTAIN | FOOD
 F:ANIMAL
 S:1_IN_8
 S:BLINK
@@ -24864,10 +24864,12 @@ I:130:20d20:100:200:0
 W:36:6:0:4500:150000:1301
 B:CRUSH:ELEC:15d15
 B:CRUSH:FIRE:15d15
-F:CAN_FLY | SELF_LITE_2 | RAND_25 | RAND_50 | BASH_DOOR
+F:CAN_FLY | SELF_LITE_2 | RAND_25 | RAND_50 | BASH_DOOR | FOOD
 F:AURA_ELEC | KILL_BODY | WILD_VOLCANO | WILD_MOUNTAIN | WILD_WASTE
 F:IM_ELEC | IM_FIRE | RES_LITE | NO_SLEEP | NO_STUN | ANIMAL | KWAI | GEN_NEUTRAL
-D:跳ねるように飛来する鞠のような形の雷だ。よく見ると中に何か生き物のような影が見える・・
+D:$It's a bouncing ball of lightning. As you look closer, you think you can
+D:$make out a form of some creature inside it...
+D:跳ねるように飛来する鞠のような形の雷だ。よく見ると中に何か生き物のような影が見える...
 
 
 N:1259:『万歳楽』
@@ -27016,6 +27018,18 @@ D:淡水に生息する小さなカニだ。
 
 
 
+N:1383:ヤツメウナギ
+E:Lamprey
+G:l:D
+I:110:10d8:25:50:0
+W:12:5:0:30:0:0
+B:BITE:EXP_VAMP:1d12
+F:ANIMAL | AQUATIC | WILD_SHORE | WILD_OCEAN | RES_WATE | FRIENDS | FOOD
+D:$A very primitive aquatic being. It latches onto its prey with its sucker-covered
+D:$mouth, sucking their vital fluids. It's believed consuming it cures night
+D:$blindness.
+D:非常に原始的な水棲生物だ。吸盤のような口で獲物に吸い付いて体液を吸う。
+D:その肉は夜盲症に効くとされる。
 
 
 ###注意：モンスターを追加したときdefines.hのMON_IDX_MAXを増やさないと音楽再生でバグる###

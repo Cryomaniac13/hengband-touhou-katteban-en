@@ -5442,6 +5442,32 @@ bool geidontei_cooking(bool flag_self )
 		break;
 
 
+		//イモリのスープ
+	case MON_NEWT:
+		prt(_("元気が湧き出る気がする！", "You feel energized!"), 8, 20);
+		set_tim_regen(5000, FALSE);
+		break;
+
+		//兎鍋
+	case MON_VORPAL_BUNNY:
+		prt(_("あっさりして体に良さそうな味だ。", "It has a light flavor and is good for your health."), 8, 20);
+		set_oppose_pois(5000, FALSE);
+		if(one_in_(3)) prt(_("兎角同盟から反感を買った気がする...", "You feel as if you've aggravated the Rabbit Alliance..."), 9, 20);//別に何も起こらない
+		break;
+
+		//球電のキモ
+	case MON_BALL_LIGHTNING:
+		prt(_("食べたら体がビリビリし始めた。", "Your body starts to tingle as you finish eating."), 8, 20);
+		set_oppose_elec(5000, FALSE);
+		break;
+
+		//ヤツメウナギ
+	case MON_LAMPREY:
+		prt(_("目がスッキリよく見える気がする。", "You feel you can see very clearly now."), 8, 20);
+		set_blind(0);
+		set_tim_invis(5000, FALSE);
+
+		break;
 		default:
 			msg_format(_("ERROR:この料理(idx:%d)を食べたときの処理が定義されていない",
                     "ERROR: Undefined logic for eating this dish (idx: %d)"), food_list_idx);

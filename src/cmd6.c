@@ -1087,7 +1087,7 @@ bool do_cmd_eat_food_aux(int item)
 					case 7:
 						msg_print(_("きな粉をまぶした団子だ。", "That was a dumpling sprinkled with soybean flour.")); break;
 					case 8:
-						msg_print(_("鈴瑚屋の新作だ！", "That was Suzuya's new work!")); break;
+						msg_print(_("夏季限定の冷やし団子だ。", "That was a chilled summer special dumpling.")); break;
 					default:
 						msg_print(_("餡の入った月見団子だ。", "That was a moon dumpling with red bean paste."));break;
 					}

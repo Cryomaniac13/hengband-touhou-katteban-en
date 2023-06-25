@@ -79,8 +79,8 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 9
-#define H_VER_EXTRA 2
+#define H_VER_PATCH 10
+#define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
 //#define SCORE_SERVER_TEST
@@ -6523,12 +6523,12 @@ extern int PlayerUID;　
 //#define MON_BEGGAR        12
 //#define MON_LEPER         13
 #define MON_FAIRY_MAID	  14
+#define MON_ZOMBIE_FAIRY	15
 #define MON_D_FAIRY			16
 #define MON_FAIRY_EX		17
 #define MON_TSUKUMO_1		18
 #define MON_TSUKUMO_2		19
-//#define MON_LION_HEART    19
-//#define MON_GHB           39
+#define MON_NEWT			23
 #define MON_ZOMBIE_FAIRY	15
 #define MON_G_W_CENTIPEDE	24
 #define MON_WHITEMOUSE		27
@@ -7033,6 +7033,7 @@ extern int PlayerUID;　
 #define MON_TUTUGAMUSHI		1255
 #define MON_YUUTEN			1256
 #define MON_HAKUSEN		1257
+#define MON_BALL_LIGHTNING	1258
 #define MON_TAMA			1259
 #define MON_KAPPA_OKURI		1260
 #define MON_NINJA_SLAYER	1261
@@ -7147,8 +7148,9 @@ extern int PlayerUID;　
 #define MON_FISHERMAN2		1381 //倒すと蟒蛇に変身する
 
 #define MON_RIVER_CRAB		1382
+#define MON_LAMPREY			1383	//ヤツメウナギ
 
-#define MON_IDX_MAX			1383	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_IDX_MAX			1384	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
