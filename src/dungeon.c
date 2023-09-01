@@ -21,6 +21,7 @@ static bool load = TRUE;
 //「広域マップではdungeon_turn値が増えにくい処理」をHPMP自動回復処理が行われている間は適用しないようにするための判定値と思われる
 static int wild_regen = 20;
 
+
 /*
  * Return a "feeling" (or NULL) about an item.  Method 1 (Heavy).
  */
@@ -6325,7 +6326,7 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 	}
 
 	/* Date changes */
-	/*:::日記記入と本日の賞金首変更　日付はどこで変わるのか？*/
+	/*日付が変わったときの処理　日記記入と本日の賞金首変更*/
 	///system
 	if (!hour && !min)
 	{
@@ -6333,7 +6334,17 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		{
 			p_ptr->today_mon = 0; //霊夢占いリセット
 
+
 			do_cmd_write_nikki(NIKKI_HIGAWARI, 0, NULL);
+
+			//v2.05 はたての人探しリセット EXTRAでは日数経過でなく対象フロア通過でリセットするのでここでは何もしない
+			if (!EXTRA_MODE)
+			{
+				p_ptr->hatate_mon_search_ridx = 0;
+				p_ptr->hatate_mon_search_dungeon = 0;
+			}
+
+
 		//	determine_today_mon(FALSE);
 		}
 	}
@@ -8647,8 +8658,24 @@ msg_print("中断しました。");
 		}
 	}
 
+
+
 	//v1.1.27 結界ガードシステム
 	count_damage_guard_break = 0;
+
+
+	//v2.0.5 ぬえが変身可能かどうかチェックし、可能なら変身する
+	//変身可能チェックはここ限定にする。恐らくモンスターが消滅したときの変身可能チェックが想定しないときに呼ばれているのがクラッシュバグの原因
+	if (p_ptr->pclass == CLASS_NUE && flag_nue_check_undefined)
+	{
+
+		check_nue_undefined();
+
+		flag_nue_check_undefined = FALSE;
+
+	}
+
+
 
 	/*** Handle actual user input ***/
 
@@ -9376,10 +9403,12 @@ static void dungeon(bool load_game)
 
 
 	//ぬえ専用処理　フロアに入った直後の変身判定
-	if(p_ptr->pclass == CLASS_NUE)
-	{
-		check_nue_undefined();
-	}
+	//v2.0.5 この判定をprocess_player()に移す。ここではフラグだけ立てる
+	//if(p_ptr->pclass == CLASS_NUE)
+	//{
+	//	check_nue_undefined();
+	//}
+	flag_nue_check_undefined = TRUE;
 
 	/*:::Mega Hack - Extraモードダンジョン内建物の名前やできることを設定　セーブ＆ロードに対応するためフロアに降り立った直後に呼ぶ*/
 	if(EXTRA_MODE && dun_level)
@@ -9668,6 +9697,14 @@ static void dungeon(bool load_game)
 			ability_card_trade_count = 0;
 			set_abilitycard_price_rate();
 			make_ability_card_store_list();
+		}
+
+		//v2.0.5 EXTRAではたてのモンスター捜索をしている場合そのフロアを通過したらリセット
+		if (EXTRA_MODE && dun_level >= p_ptr->hatate_mon_search_dungeon % 1000)
+		{
+			if (p_ptr->wizard) msg_print("hatate reset");
+			p_ptr->hatate_mon_search_dungeon = 0;
+			p_ptr->hatate_mon_search_ridx = 0;
 		}
 
 		//v1.1.13 公転周期の罠の解除
