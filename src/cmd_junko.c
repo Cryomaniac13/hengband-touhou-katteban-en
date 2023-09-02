@@ -1677,7 +1677,7 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"Enemy","Enemy","Human","Human","Target","Target","Prey","Prey","Opponent","Opponent"},//攻撃の標的など1
 	{"Inchling","Fool","Horse","Bat","Dog","Hypocrite","Parrot","Deer","Frog","Insects"},//攻撃の標的など2
 	{"Tiger","Woodpecker","Hound","Shriek","Sparrow","Carp","Turtle","Beaver","Tanuki","Birdman"},//攻撃の標的など3
-	{"Cornered Rat","Wily Rabbit","Kazuma","Caged Bird","Monkey","Paper Tiger","Travller","Sheep","Fish","Carp"},//攻撃の標的など4
+	{"Cornered Rat","Wily Rabbit","Kazuma","Caged Bird","Monkey","Paper Tiger","Traveller","Sheep","Fish","Carp"},//攻撃の標的など4
 	{"Summer Insects","Disorderly Flock","Hundred Bees","Bamboo Shoots","Spiders","Elephant","Swallow","Flock","Rabbit Hole","Rabbit Swarm"},//攻撃の標的など5 周囲や視界攻撃用
 //6
 	{"All","All","All","World","World","World","Earth","Heaven and Earth","All Over Heaven","Six Paths"},//攻撃の標的など　フロア攻撃
@@ -1716,7 +1716,7 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"Power","Power","Power","Light","Light","Light","Thought","Though","Factor","Factor"},//名詞ほか
 	{"Diverting Rays","Diverting Rays","Diverting Rays","Dodging Bullets","Dodging Bullets","Dodging Bullets","Dodging Danmaku","Dodging Danmaku","Erasing Lasers","Negating Beams"},//ビーム・ボルト無効
 //36
-	{"Measure","Interference","Defense","Denfese","Countermeasure","Countermeasure","Means","Intervention","Cover","Protection"},//名詞（防御用）
+	{"Measure","Interference","Defense","Defense","Countermeasure","Countermeasure","Means","Intervention","Cover","Protection"},//名詞（防御用）
 	{"Flying","Flying","Explosion","Explosion","Explosion","Explosion","Storm","Storm","Bomb","Bomb"},//ボール、ロケット
 	{"Blast Attack","Blast Attack","Breath","Breath","Breath","Breath","Breath","Breath","Breath Attack","Breath Attack"},//ブレス
 	{"Destructive Power","Destructive Power","Destructive Light","Destructive Light","Light of Ruin","Light of Ruin","Word of Destruction","Word of Destruction","*Destruction*","*Destruction*"},//*破壊*阻止
@@ -1747,13 +1747,13 @@ cptr	junko_arts_name_words_1[JUNKO_NAME_LIST_NUM1][JUNKO_NAME_LIST_NUM_SUB] =
 	{"Banishing","Banishing","Banishing","Throwing Away","Throwing Away","Throwing Away","Making Disappear","Making Disappear","Removing from Sight","Removing from Sight"},//視界内アウェイ、周辺抹殺
 //61
 	{"Killing with Gaze","Killing with Gaze","Killing with Gaze","Killing with Gaze","Liver Crushing","Liver Crushing","Shooting Through","Shooting Through","Skewering","Skewering"},//死の光線
-	{"Eye","Eye","Eye","Beam","Beam","Beam","Glaer","Glare","Stare","Staer"},//死の光線2
+	{"Eye","Eye","Eye","Beam","Beam","Beam","Glare","Glare","Stare","Stare"},//死の光線2
 	{"River","River","Sea","Sea","Lake","Lake","Great River","Great River","Waterfall","Waterfall"},//海が割れる日1
-	{"Dripping","Dripping","Splititng","Splititng","Splititng","Drying","Drying","Drying","Water Withdrawing","Water Withdrawing"},//海が割れる日2
+	{"Dripping","Dripping","Splitting","Splitting","Splitting","Drying","Drying","Drying","Water Withdrawing","Water Withdrawing"},//海が割れる日2
 	{"Binding","Binding","Binding","Binding","Stopping","Stopping","Stopping","Calling to Stop","Calling to Stop","Calling to Stop"},//金縛り
 //66
 	{"Uninvited Guests","Uninvited Guests","Annoyances","Annoyances","New Enemies","New Enemies","Enemy Shadows","Enemy Shadows","Those in My Way","Those in My Way"},//召喚阻害
-	{"Go Away Somewher Else","Awaken from Eternal Dream","Go to Another World","See Dreams of Another World","See an Unfamiliar World","Go Away Somewher Else","Awaken from Eternal Sleep","Go to Another World","See Dreams of Another World","See an Unfamiliar World"},//現実変容
+	{"Go Away Somewhere Else","Awaken from Eternal Dream","Go to Another World","See Dreams of Another World","See an Unfamiliar World","Go Away Somewhere Else","Awaken from Eternal Sleep","Go to Another World","See Dreams of Another World","See an Unfamiliar World"},//現実変容
 	{"Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars","Dropping Stars"},//流星群
 	{"Cloudless","Straightforward","Innocent","Original","Essential","Essential","Prime","Original","Nameless","Nameless"},//純粋2
 	{"Means","Ways of Doing","Hands-On","In my Hand","Hand","Efficacy","Temperament","Effect Power","Means","Mechanism"},//補助特技など2
