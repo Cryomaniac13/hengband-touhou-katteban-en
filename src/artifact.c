@@ -5629,6 +5629,14 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 			break;
 		}
 
+		case ACT_TRANSPORTATION_TRAP:
+		{
+			int v = 10 + randint1(10);
+
+			set_tim_transportation_trap(v, FALSE);
+
+		}
+		break;
 
 
 

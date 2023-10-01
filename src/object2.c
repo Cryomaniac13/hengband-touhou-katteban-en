@@ -6969,10 +6969,14 @@ s16b choose_random_trap(void)
 	while (1)
 	{
 
-		//v1.1.24 TRAPの19番目以降はハルマゲなどの特殊トラップなので互換性確保が面倒なためここで無理やり追加。
+		//v1.1.24 TRAPの18-20はハルマゲなどの特殊トラップになっており通常罠を追加することが想定されていない
+		//normal_traps[]周辺作り直すのは面倒なのでレーザートラップ追加にあたりここに無理やり放り込んだ
 		//折角なので輝夜刺客クエと月都万象展クエでは全部これになるようにしてみた
-		if(p_ptr->inside_quest == QUEST_KILL_GUYA && one_in_(2) || p_ptr->inside_quest == QUEST_MOON_VAULT && !one_in_(5)|| dun_level > 19 && one_in_(19))
+		//v2.0.11 トラバサミを実装したのでさらに無理やり追加。もっとまともな処理にすべきだがあまり大規模に罠を増やす予定も今のところないのでこのまま
+		if(p_ptr->inside_quest == QUEST_KILL_GUYA && one_in_(2) || p_ptr->inside_quest == QUEST_MOON_VAULT && !one_in_(5)|| dun_level > 19 && one_in_(20))
 			feat = f_tag_to_index_in_init("TRAP_BEAM");
+		else if ( one_in_(19))
+			feat = f_tag_to_index_in_init("TRAP_BEAR");
 		else
 			/* Hack -- pick a trap */
 			feat = normal_traps[randint0(MAX_NORMAL_TRAPS)];
@@ -7002,6 +7006,18 @@ s16b choose_random_trap(void)
 	if(difficulty == DIFFICULTY_EASY && dungeon_type == DUNGEON_ANGBAND &&  dun_level == 50) continue;
 
 		break;
+	}
+
+	//v2.0.11 慧ノ子のトラップ生成は全てトラバサミになる
+	if (hack_flag_enoko_make_beartrap)
+	{
+		feat = f_tag_to_index_in_init("TRAP_BEAR");
+	}
+
+	//テスト用
+	if (p_ptr->wizard)
+	{
+		feat = f_tag_to_index_in_init("TRAP_BEAR");
 	}
 
 	return feat;

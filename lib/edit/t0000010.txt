@@ -126,7 +126,7 @@ B:0:A:7:スペルカードを作る:0:0:s:85:0
 
 B:$3:N:Rainbow Cavern of Earth Spirits:empty:　
 B:$3:A:0:Go underground:0:0:a:89:0
-B:3:N:地霊虹洞への入り口:無人:　
+B:3:N:地霊虹洞:無人:　
 B:3:A:0:地底へ行く:0:0:a:89:0
 
 # Town Layout

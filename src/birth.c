@@ -3259,6 +3259,8 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_MIYOI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_MIYOI,2,ART_IBUKI,0,0,1 },
 
+	{ CLASS_BITEN,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_BITEN,2,ART_BITEN,0,0,1 },
 
 
 	{-1,0,0,0,0,0} //終端dummy
@@ -5982,10 +5984,12 @@ static void edit_history(void)
 #define ENTRY_TENKUU	11
 #define ENTRY_KIKEI		12
 #define ENTRY_KOURYUU	13
-#define ENTRY_TASOGARE	14
-#define ENTRY_OTHER		15
+#define ENTRY_JUUOUEN	14
+#define ENTRY_TASOGARE	15
+#define ENTRY_OTHER		16
 
-#define ENTRY_MAX 16 //↑+1
+
+#define ENTRY_MAX 17 //↑+1
 
 
 const	cptr select_unique_entry[ENTRY_MAX] = {
@@ -6004,8 +6008,9 @@ const	cptr select_unique_entry[ENTRY_MAX] = {
 		"l)天空璋",
 		"m)鬼形獣",
 		"n)虹龍洞",
-		"o)黄昏弾幕アクション",
-		"p)その他の作品",
+        "o)獣王園",
+		"p)黄昏弾幕アクション",
+		"q)その他の作品",
 #else
         "a) Regular protagonists",
 		"b) Embodiment of Scarlet Devil",
@@ -6021,8 +6026,9 @@ const	cptr select_unique_entry[ENTRY_MAX] = {
 		"l) Hidden Star in Four Seasons",
 		"m) Wily Beast and Weakest Creature",
 		"n) Unconnected Marketeers",
-		"o) Tasogare Danmaku Action",
-		"p) Other works",
+		"o) Unfinished Dream of All Living Ghost",
+		"p) Tasogare Danmaku Action",
+		"q) Other works",
 #endif
 	};
 
@@ -6038,7 +6044,7 @@ struct unique_player_type
 	cptr info;	//キャラメイク時に表示される説明文
 };
 
-#define UNIQUE_PLAYER_NUM 121
+#define UNIQUE_PLAYER_NUM 127
 #define CLASS_DUMMY 255
 #define RACE_DUMMY 255
 static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
@@ -6313,8 +6319,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		_("あなたは妖怪の山で独自の生活を営む山姥です。自らの縄張りを荒らす者には容赦をしません。ダンジョンの中で誰もいない部屋を自分の縄張りにすることができ、そこで敵を迎え撃つときにこそあなたの力は最も発揮されます。縄張りから出ているときのあなたはそれほど強いわけではないので、敵地に攻め込まざるを得ない状況への対処は苦手です。",
         "You are a yamanba living in solitude at Youkai Mountain. You don't forgive those who intrude on your territory. You can mark a dungeon room without anyone else in it as your 'sanctuary', and you will be more powerful when facing enemies there. You're not that strong outside your territory, so you will have trouble fighting on enemy grounds.")},
 	{TRUE,_("高麗野 あうん", "Aunn Komano"),CLASS_AUNN,RACE_WARBEAST,ENTRY_TENKUU,SEX_FEMALE,
-		_("あなたは狛犬です。神社やお寺に勝手に住み着いて陰ながら守護しています。狛犬なので他の獣人ほど素早くありませんが体が丈夫で破邪攻撃を弱点としません。また仙術の心得も少しは持っています。あなたの頭には大きな角が生えており、それを使って強力な攻撃をすることができますがその代わりに兜をかぶることができません。",
-        "You are a komainu. You live at shrines and temples, secretly protecting them. You're not as agile as other half-beasts, but you're strong and aren't vulnerable to holy attacks. You also have some proficiency in hermit arts. You have large horns on your head that you can use for combat, but you can't wear helmets.")},
+		_(		"あなたは狛犬です。神社やお寺に勝手に住み着いて陰ながら守護しています。狛犬なので他の獣人ほど素早くありませんが体が丈夫で破邪攻撃を弱点としません。また仙術の心得も少しは持っています。あなたの頭には大きな角が生えており、それを使って強力な攻撃をすることができますがその代わりに兜をかぶることができません。実はあなたは体を二つ持っており、一部の特技を使うと二人共が一箇所に現れて一緒に戦います。",
+        "You are a komainu. You live at shrines and temples, secretly protecting them. You're not as agile as other half-beasts, but you're strong and aren't vulnerable to holy attacks. You also have some proficiency in hermit arts. You have large horns on your head that you can use for combat, but you can't wear helmets. Actually, there are two of you, and by using a special ability, you can both appear in the same place to fight together.")},
 	{TRUE,_("矢田寺 成美", "Narumi Yatadera"),CLASS_NARUMI,RACE_MAGIC_JIZO,ENTRY_TENKUU,SEX_FEMALE,
 		_("あなたは魔法の森の魔力で生命を得て動き出したお地蔵さんです。衆生の救済を自らの使命と考えていますが、出不精でほとんど森から出ようとしません。あなたは生命操作の魔法を最も得意としており、魔力の流れにも敏感です。人里離れた森で風雪に耐えてきたため冷気攻撃に強い耐性を持ちます。",
         "You are a jizo in Forest of Magic that has been magically animated. While you see bringing salvation as your mission, you're lazy and rarely leave the forest. You're exceptionally skilled at life manipulation magic, and are sensitive to mana flows as well. Enduring blizzards in the remote forest made you resistant to cold.")},
@@ -6386,6 +6392,19 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		"You are a wicked great youkai centipede. You have extremely high physical stats and combat skills, you learn various offensive and defensive abilities, and eventually your attacks will be poisonous. If you're wielding a digging implement, your weapon power increases. You're matchless when it comes to one-on-one fights. However, you're horrible at stealth and searching. You should pay close attention to your surroundings once you get past midgame. You can eat gemstones, temporarily gaining special effects." },
 #endif
 
+	{ TRUE,_("孫　美天", "Son Biten"),CLASS_BITEN,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("あなたはほんの少し前までただの山猿でしたが、ある鬼にそそのかされて聖地の霊を喰ったことで妖怪化しました。その後紆余曲折を経て畜生界の動物霊の暴力組織「鬼傑組」の遊撃隊に所属しています。もとが猿だけあって森での立ち回りはお手の物です。戦闘においては棒術と投擲を得意とします。さらに仙術を一領域習得することができますがこちらの適性はあまり高くありません。",
+        "You used to be an ordinary mountain monkey, but a certain oni enticed you into eating spirits residing in a sanctuary, turning you into a youkai. Eventually, you ended up joining the Kiketsu Family group of animal ghosts in Animal Realm. As a monkey, you're good at traversing forest terrain, and you have proficient with staff combat and throwing. You also can study one realm of Hermit Arts, though your aptitude for it isn't that high.")},
+	{ FALSE,_("三頭　慧ノ子", "Enoko Mitsugashira"),CLASS_ENOKO,RACE_WARBEAST,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("未実装", "unimplemented") },
+	{ FALSE,_("天火人　ちやり", "Chiyari Tenkajin"),CLASS_CHIYARI,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("未実装", "unimplemented") },
+	{ FALSE,_("豫母都　日狭美", "Hisami Yomotsu"),CLASS_HISAMI,RACE_DEATH,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("未実装", "unimplemented") },
+	{ FALSE,_("日白　残無", "Zanmu Nippaku"),CLASS_BITEN,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("未実装", "unimplemented") },
+
+
 	{TRUE,_("伊吹　萃香", "Suika Ibuki"),CLASS_SUIKA,RACE_ONI,ENTRY_TASOGARE,SEX_FEMALE,
 	_("あなたは幻想郷で長らく忘れられていた強大な鬼です。小柄ながら最高クラスの身体能力を持ち格闘と鈍器を得意とします。密と疎を操る能力を持ち、巨大化したり霧になったりアイテムを集めるなど多彩な技を習得します。あなたはいくら酒を飲んでも倒れませんが、酔いが醒めると能力が大幅に低下してしまいます。",
     "You are a powerful oni that has long been forgotten in Gensoukyou. You might be small, but you have absolutely exceptional physical stats and are skilled both at martial arts and blunt weapons. You are capable of manipulating density, which gives you various abilities like becoming giant, turning into mist or collecting items. You won't get knocked out no matter how much sake you drink, but your stats are significantly lowered if you're sober.")},
@@ -6454,6 +6473,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		_("あなたは伊吹萃香の酒瓢箪『伊吹瓢』に棲み着く座敷わらしです。瓢箪の影響によるものか人を酔い潰して夢や記憶に干渉する酔魔のような力を持っています。あなたには戦う力はほとんどありませんが、愛想よくお酒を勧めて敵の心すら開かせるほどの接客能力があります。お酒を何度も飲ませてそのまま酔い潰してしまえば倒したのと同じ扱いになります。しかし中には酒を勧めても応じないモンスターやいくら酒を飲んでも酔わないモンスターもいます。そういった敵に襲われてしまったらあなたにできることは逃亡あるのみです。あなたに必要な能力は魅力です。接客の成功率だけでなく飲ませる酒の強さにも影響を与えます。",
         "You are a zashiki-warashi living in the Ibuki Gourd of Suika Ibuki. Living in it has granted you the power to drive people drunk and interfere with their dreams and memories. You don't have much combat power, but you serve customers so well you can placate your enemies by offering them drinks. Making someone pass out by serving them enough alcohol is treated the same as defeating them. However, there are monsters who won't accept your drinks, or who can drink a lot without passing out. If you get attacked by those monsters, retreat might be your only option. Charisma is your required ability - it affects not only your customer service, but the strengths of your drinks as well.") },
 
+	{ FALSE,_("宮出口　瑞霊", "Mizuchi Miyadeguchi"),CLASS_BITEN,RACE_YOUKAI,ENTRY_OTHER,SEX_FEMALE,
+		_("未実装", "unimplemented") },
 
 
 
@@ -6605,7 +6626,7 @@ static bool get_unique_player(void)
 	cptr str;
 	char c;
 	int entry;
-	unique_player_type table[12];
+	unique_player_type table[16];
 	int cnt_table;
 #ifdef JP
 	char temp[80*9];
@@ -6670,7 +6691,7 @@ static bool get_unique_player(void)
 		cnt_table = 0;
 		for (i = 0; i < UNIQUE_PLAYER_NUM; i++)if (unique_player_table[i].entry == entry)
 		{
-			if (cnt_table == 12)
+			if (cnt_table == 16)
 			{
 				put_str(_("ERROR:get_unique_player()のcnt_tableが一杯", "ERROR: cnt_table of get_unique_player() is full"), 12, 10);
 				break;
@@ -8277,6 +8298,7 @@ void gain_perma_mutation(void)
 	if (p_ptr->pclass == CLASS_KUTAKA) p_ptr->muta2_perma |= (MUT2_BIRDBRAIN);
 
 	if(p_ptr->pclass == CLASS_URUMI) p_ptr->muta2_perma |= MUT2_BIGHORN;
+	if (p_ptr->pclass == CLASS_BITEN) p_ptr->muta2_perma |= MUT2_TAIL;
 
 	if (p_ptr->pclass == CLASS_SAKI)p_ptr->muta3_perma |= MUT3_SPEEDSTER | MUT3_WINGS;
 

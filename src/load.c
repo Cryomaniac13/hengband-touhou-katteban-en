@@ -2385,8 +2385,8 @@ static void rd_extra(void)
 		rd_s16b(&p_ptr->tim_aggravation);
 		rd_s16b(&p_ptr->tim_rokuro_head_search);
 		rd_s16b(&p_ptr->tim_hirari_nuno);
-		rd_s16b(&p_ptr->future_use_counter7);
-		rd_s16b(&p_ptr->future_use_counter8);
+		rd_s16b(&p_ptr->tim_no_move);
+		rd_s16b(&p_ptr->transportation_trap);
 
 		rd_s32b(&p_ptr->animal_ghost_align_flag);
 		rd_s32b(&p_ptr->quest_special_flag);

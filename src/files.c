@@ -2549,6 +2549,8 @@ static void display_player_various(void)
 
 	if(CHECK_USE_GUN) flag_use_gun = TRUE;
 
+	//突然変異などで追加格闘が出る可能性があるときはここでmuta_attを加算してステータス画面の攻撃回数のところに「+α」を表示する
+	if (p_ptr->pclass == CLASS_AUNN && p_ptr->multishadow) muta_att++;
 	if((!check_invalidate_inventory(INVEN_RARM) && inventory[INVEN_RARM].tval == TV_SHIELD || !check_invalidate_inventory(INVEN_LARM) && inventory[INVEN_LARM].tval == TV_SHIELD) && ref_skill_exp(SKILL_SHIELD) > 3200) muta_att++;
 	if (p_ptr->muta2 & MUT2_HARDHEAD || (buki_motteruka(INVEN_RARM) && ref_skill_exp(SKILL_MARTIALARTS) > 3200)) muta_att++;
 	if (p_ptr->muta2 & MUT2_HORNS)     muta_att++;
@@ -4060,8 +4062,13 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 	case CLASS_MIYOI:
 		if (plev > 9) add_flag(flgs, TR_SLOW_DIGEST);
 		if (plev > 29) add_flag(flgs, TR_RES_WATER);
-
 		break;
+
+	case CLASS_BITEN:
+		if (plev > 24) add_flag(flgs, TR_FREE_ACT);
+		if (plev > 39) add_flag(flgs, TR_RES_FEAR);
+		break;
+
 
 	default:
 		break; /* Do nothing */

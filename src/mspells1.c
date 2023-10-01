@@ -4851,6 +4851,13 @@ msg_format("%sは無傷の球の呪文を唱えた。", m_name);
 				breath(y, x, m_idx, GF_INACT, 100, 3, FALSE, 0, FALSE);
 				break;
 
+			case MON_HISAMI:
+				if (blind) msg_format(_("突然体が何かに締め付けられた！", "Suddenly, something restrains your body!"), m_name);
+				else msg_format(_("地面から蔓のようなものが生えてきてあなたを拘束した！", "Vine-like things sprout from the ground and restrain you!"), m_name);
+
+				breath(y, x, m_idx, GF_NO_MOVE, 10+randint1(10), 3, FALSE, 0, FALSE);
+				break;
+
 			case MON_CHIMATA:
 				if (blind) msg_format(_("%^sから異様なエネルギーが放射された！",
                                         "%^s releases extraordinary energy!"), m_name);
@@ -5431,14 +5438,22 @@ msg_print("しかし効力を跳ね返した！");
 		case 160+13:
 		{
 			disturb(1, 1);
+
+			if (m_ptr->r_idx == MON_ENOKO)
+			{
+				msg_format(_("%^sはあなたの周りに何かをバラ撒いた！",
+                        "%^s scatters something around you!"), m_name);
+				hack_flag_enoko_make_beartrap = TRUE;
+			}
+
 #ifdef JP
-if (blind) msg_format("%^sが何かをつぶやいた。周りの地面に何かが現れた気がする。", m_name);
+            else if (blind) msg_format("%^sが何かをつぶやいた。周りの地面に何かが現れた気がする。", m_name);
 #else
-			if (blind) msg_format("%^s mumbles, and then cackles evilly.", m_name);
+			else if (blind) msg_format("%^s mumbles, and then cackles evilly.", m_name);
 #endif
 
 #ifdef JP
-else msg_format("%^sが呪文を唱えた。周りの地面に何かが現れた気がする。", m_name);
+            else msg_format("%^sが呪文を唱えた。周りの地面に何かが現れた気がする。", m_name);
 #else
 			else msg_format("%^s casts a spell and cackles evilly.", m_name);
 #endif
@@ -5446,6 +5461,9 @@ else msg_format("%^sが呪文を唱えた。周りの地面に何かが現れた気がする。", m_name)
 			learn_spell(MS_MAKE_TRAP);
 			nue_check_mult = 30;
 			(void)trap_creation(y, x);
+
+			hack_flag_enoko_make_beartrap = FALSE;
+
 			break;
 		}
 
@@ -5490,10 +5508,12 @@ msg_print("記憶が薄れてしまった。");
 			disturb(1, 1);
 			{
 #ifdef JP
-if( m_ptr->r_idx == MON_KOISHI) msg_format("%^sがあなたの目を深く覗き込んだ…", m_name);
-else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
+            if( m_ptr->r_idx == MON_KOISHI) msg_format("%^sがあなたの目を深く覗き込んだ…", m_name);
+            else if (m_ptr->r_idx == MON_ZANMU) msg_format("%^sと対峙していると途方もない虚無感に襲われた！", m_name);
+            else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
 #else
             if( m_ptr->r_idx == MON_KOISHI) msg_format("%^s stares deep into your eyes...", m_name);
+            else if (m_ptr->r_idx == MON_ZANMU) msg_format("As you confront %s, you suddenly feel a tremendous sense of emptiness!", m_name);
             else	msg_format("The great will of %^s invades your mind...", m_name);
 #endif
 

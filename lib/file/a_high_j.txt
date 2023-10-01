@@ -115,6 +115,7 @@ N: 8:BIAS_WIS
 萱野姫の
 正八幡大菩薩の
 『神代鉱石』
+『タイニーシャングリラ』
 
 N: 9:BIAS_DEX
 N:16:BIAS_ROGUE

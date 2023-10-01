@@ -2195,6 +2195,7 @@ P:0:6d5:20:20:0
 F:ACTIVATE | LITE | BRAND_FIRE | FREE_ACT | RES_FIRE | INFRA | RIDING |
 F:SLAY_EVIL | SLAY_DRAGON | SLAY_UNDEAD | SLAY_DEMON | VORPAL |
 F:CHR | SUST_CHR | RES_FEAR | RES_LITE | RES_BLIND | REGEN | SHOW_MODS |
+F:RES_CHAOS
 F:XTRA_RES_OR_POWER
 U:SUMMON_DAWN
 D:$Forged in the farthest East by a race of mighty spellcasters, this 
@@ -5396,3 +5397,31 @@ D:$Three iron bars connected to a board-shaped metal fixture. Originally used
 D:$to hold a camera in place while taking pictures, this tool has found other
 D:$uses in the tengu society.
 D:三本の鉄棒が板のような丈夫な金具に繋がっている。本来は写真撮影のときカメラがぶれないよう固定するための道具だが、天狗社会では別の使い方もあるようだ。
+
+
+N:348:孫美天の
+E:of Son Biten
+I:27:4:2
+W:30:20:20:70000
+P:0:1d9:12:12:6
+F:STR | CON | 
+F:SLAY_ANIMAL | SLAY_KWAI | ACTIVATE | QUESTITEM | THROW
+U:TRANSPORTATION_TRAP
+D:$A long transparent staff that looks like a test tube, used by Son Biten.
+D:$There's something smoke-like sealed inside.
+D:孫美天が持つ長い試験管のような透明な棒だ。中には何か煙のようなものが封じられているのが見える。
+
+N:349:三頭慧ノ子の
+E:of Enoko Mitsugashira
+I:48:37:3
+W:50:50:3:80000
+P:0:1d6:5:5:0
+F:STR | INT | WIS | BLESSED | FREE_ACT | AGGRAVATE | ACTIVATE | QUESTITEM
+U:TRANSPORTATION_TRAP
+D:$The jewel worn by Enoko Mitsugashira around her neck.
+D:$It has enough power to awaken an animal, turning it into a youkai.
+D:$However, you feel as if you're going to get attacked by robbers if
+D:$you're holding it.
+D:三頭慧ノ子が首にかけている宝玉だ。
+D:獣を覚醒させ妖獣にするほどの力を秘めている。
+D:しかしこれを持っているとよく強盗に襲われる気がする。

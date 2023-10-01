@@ -491,6 +491,17 @@ bool make_attack_normal(int m_idx)
 				continue;
 			}
 
+			//v2.0.11 移送の罠によるカウンター抹殺判定
+			if (p_ptr->transportation_trap && check_transportation_trap(m_ptr,130))
+			{
+				msg_format(_("%^sは移送の罠にかかってこのフロアから消えた。",
+                            "%^s is caught in the transportation trap and disappears from this level."), m_name);
+				delete_monster_idx(m_idx);
+				return TRUE;
+			}
+
+
+
 			if((m_ptr->mflag & MFLAG_NO_SPELL) ||
 			p_ptr->silent_floor)
 			{

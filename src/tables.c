@@ -6532,6 +6532,178 @@ const player_class class_info[MAX_CLASS] =
 		,MON_YUMA
 	},
 
+	{
+#ifdef JP
+		"小さな聖域の大聖",
+		"小さな聖域の大聖",
+		"Biten",
+#else
+        "Biten",
+        "Biten",
+#endif
+		{ 2, 3, 2, 0, 1, 2 },
+		32, 32, 32, 3, 22, 20, 60, 60,
+		12, 12, 10, 0,  2,  5, 20, 24,
+		3, 40, 40
+
+		//追加値暫定
+		,{ 1,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0 }
+		,A_INT
+		,5,4,80,
+
+			{ 3,2,2,1,4,0,0,0,0,0
+			,2,2,2,3,5,3,3,4,2,2
+			,1 }
+			,55,4,2,2,
+			FALSE,FALSE,TRUE
+			,FALSE
+			,3
+			,MON_BITEN
+	},
+	{
+#ifdef JP
+		"森閑のケルベロス",
+		"森閑のケルベロス",
+		"Enoko",
+#else
+        "Enoko",
+        "Enoko",
+#endif
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
+
+		//追加値暫定
+			,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+			,A_INT
+			,3,2,100,
+
+			{ 2,2,1,1,2,0,0,0,0,0
+			,3,2,2,2,2,2,2,2,2,2
+			,1 }
+			,80,1,2,4,
+			FALSE,FALSE,TRUE
+			,FALSE
+			,4
+			,MON_TSUKASA
+	},
+	{
+#ifdef JP
+		"穢れた有機物の怪物",
+		"穢れた有機物の怪物",
+		"Chiyari",
+#else
+        "Chiyari",
+        "Chiyari",
+#endif
+
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
+
+		//追加値暫定
+			,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+			,A_INT
+			,3,2,100,
+
+			{ 2,2,1,1,2,0,0,0,0,0
+			,3,2,2,2,2,2,2,2,2,2
+			,1 }
+			,80,1,2,4,
+			FALSE,FALSE,TRUE
+			,FALSE
+			,4
+			,MON_TSUKASA
+	},
+	{
+#ifdef JP
+		"地獄の美しきストーカー",
+		"地獄の美しきストーカー",
+		"Hisami",
+#else
+        "Hisami",
+        "Hisami",
+#endif
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
+
+		//追加値暫定
+			,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+			,A_INT
+			,3,2,100,
+
+			{ 2,2,1,1,2,0,0,0,0,0
+			,3,2,2,2,2,2,2,2,2,2
+			,1 }
+			,80,1,2,4,
+			FALSE,FALSE,TRUE
+			,FALSE
+			,4
+			,MON_TSUKASA
+	},
+	{
+#ifdef JP
+		"寂滅為楽の王",
+		"寂滅為楽の王",
+		"Zanmu",
+#else
+        "Zanmu",
+        "Zanmu",
+#endif
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
+
+		//追加値暫定
+			,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+			,A_INT
+			,3,2,100,
+
+			{ 2,2,1,1,2,0,0,0,0,0
+			,3,2,2,2,2,2,2,2,2,2
+			,1 }
+			,80,1,2,4,
+			FALSE,FALSE,TRUE
+			,FALSE
+			,4
+			,MON_TSUKASA
+	},
+
+	{
+#ifdef JP
+		"爪弾きにされた反獄の怨霊",
+		"爪弾きにされた反獄の怨霊",
+		"Mizuchi",
+#else
+        "Mizuchi",
+        "Mizuchi",
+#endif
+		{ -3, 2, 1, 0, -2, 2 },
+		20, 30, 35, 4, 16, 20, 35, 40,
+		12, 12, 12, 0,  3,  5, 12, 15,
+		2, 30, 40
+
+		//追加値暫定
+				,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
+				,A_INT
+				,3,2,100,
+
+				{ 2,2,1,1,2,0,0,0,0,0
+				,3,2,2,2,2,2,2,2,2,2
+				,1 }
+				,80,1,2,4,
+				FALSE,FALSE,TRUE
+				,FALSE
+				,4
+				,MON_TSUKASA
+	},
+
+
 
 };
 
@@ -12331,6 +12503,17 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sにローリング頭突きを決めた！",
         "You strike %s with a rolling headbutt!"),				MELEE_MODE_SUIKEN,48, 40, 10, 12, MELEE_STUN3 ,12 },
 
+	//v2.0.11 あうん追加攻撃用
+	{ _("あなたの分身が%sへ追撃を見舞った。",
+        "Your clone follows up with a strike at %s."),				MELEE_MODE_AUNN_2, 1, 0, 5, 5, 0 ,6 },
+	{ _("あなたの分身が%sへ回転体当たりを食らわせた！",
+        "Your clone hits %s with a spinning tackle!"),   MELEE_MODE_AUNN_2,15, 15, 7, 7, MELEE_STUN ,6 },
+	{ _("あなたの分身が%sへ錐揉み頭突きを食らわせた！。",
+        "Your clone headbutts %s with her horn!"),	MELEE_MODE_AUNN_2,30, 25, 9, 9, MELEE_STUN ,8 },
+	{ _("あなたたちは%sに鮮やかなツープラトンを決めた！",
+        "You, along with your clone, deliver a brilliant two-platoon strike to %s!"), MELEE_MODE_AUNN_2,45, 40, 12,12, MELEE_STUN2 ,12 },
+
+
 	{ _("終端用dummy", "terminator dummy"),0,0,0,1,1,0}
 };
 
@@ -13473,6 +13656,10 @@ const activation_type activation_info[] =
 
 		{ "BLAST_MISSILES", ACT_BLAST_MISSILES, 50, 5000,{ 10, 20 },
 		  _("マジックミサイル連射", "magic missile barrage") },
+
+
+		  { "TRANSPORTATION_TRAP", ACT_TRANSPORTATION_TRAP, 40, 5000,{ 0, 0 },
+		  _("移送の罠", "transportation trap") },
 
 
 
@@ -16279,6 +16466,26 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_YUMA,CLASS_YUMA,NULL,"血液",NULL,16 },
 	{ MON_YUMA,CLASS_YUMA,"の","夕餉",NULL,8 },
 
+	{ MON_BITEN,CLASS_BITEN,NULL,"モンキー",NULL,15 },
+	{ MON_BITEN,CLASS_BITEN,NULL,"マジック",NULL,5 },
+
+	{ MON_ENOKO,CLASS_ENOKO,NULL,"ケルベロス",NULL,15 },
+	{ MON_ENOKO,CLASS_ENOKO,NULL,"ファイア",NULL,5 },
+
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"カースド",NULL,15 },
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"デビル",NULL,5 },
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"デビル",NULL,15 },
+
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"脱獄",NULL,15 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"ストーカー",NULL,5 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"脱獄",NULL,5 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"ストーカー",NULL,15 },
+
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"亡羊","の",20 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"純霊",NULL,18 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"弾",NULL,7 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"キングダム",NULL,2 },
+
 
 	{ MON_REIMU,CLASS_REIMU,NULL,"夢想",NULL,16},
 	{ MON_REIMU,CLASS_REIMU,NULL,"封印",NULL,3 },
@@ -16294,6 +16501,7 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_REIMU,CLASS_REIMU,"は","撮影禁止です",NULL,0 },
 	{ MON_REIMU,CLASS_REIMU,NULL,"盗撮者調伏",NULL,30 },
 	{ MON_REIMU,CLASS_REIMU,NULL,"大入り",NULL,15 },
+	{ MON_REIMU,CLASS_REIMU,NULL,"在庫全て","の",25 },
 
 	{ MON_MARISA,CLASS_MARISA,NULL,"マスター",NULL,12 },
 	{ MON_MARISA,CLASS_MARISA,NULL,"スパーク",NULL,6 },
@@ -16986,6 +17194,26 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_YUMA,CLASS_YUMA,NULL,"Blood",NULL,16 },
 	{ MON_YUMA,CLASS_YUMA,NULL,"Dinner","of",8 },
 
+	{ MON_BITEN,CLASS_BITEN,NULL,"Monkey",NULL,15 },
+	{ MON_BITEN,CLASS_BITEN,NULL,"Magic",NULL,5 },
+
+	{ MON_ENOKO,CLASS_ENOKO,NULL,"Cerberus",NULL,15 },
+	{ MON_ENOKO,CLASS_ENOKO,NULL,"Fire",NULL,5 },
+
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"Cursed",NULL,15 },
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"Devil",NULL,5 },
+	{ MON_CHIYARI,CLASS_CHIYARI,NULL,"Devil",NULL,15 },
+
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"Jailbreak",NULL,15 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"Stalker",NULL,5 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"Jailbreak",NULL,5 },
+	{ MON_HISAMI,CLASS_HISAMI,NULL,"Stalker",NULL,15 },
+
+	{ MON_ZANMU,CLASS_ZANMU,"of","Lost Sheep",NULL,20 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"Pure Spirit",NULL,18 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"Shot",NULL,7 },
+	{ MON_ZANMU,CLASS_ZANMU,NULL,"Kingdom",NULL,2 },
+
 
 	{ MON_REIMU,CLASS_REIMU,NULL,"Dream",NULL,16},
 	{ MON_REIMU,CLASS_REIMU,NULL,"Seal",NULL,3 },
@@ -17001,6 +17229,7 @@ const nightmare_spellname_type	nightmare_spellname_table[] =
 	{ MON_REIMU,CLASS_REIMU,NULL,"Photography Strictly Prohibited",NULL,0 },
 	{ MON_REIMU,CLASS_REIMU,NULL,"Sneak-Photographer",NULL,30 },
 	{ MON_REIMU,CLASS_REIMU,NULL,"Bonus Packets",NULL,15 },
+	{ MON_REIMU,CLASS_REIMU,NULL,"Entire Stock","of",25 },
 
 	{ MON_MARISA,CLASS_MARISA,NULL,"Master",NULL,12 },
 	{ MON_MARISA,CLASS_MARISA,NULL,"Spark",NULL,6 },

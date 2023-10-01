@@ -538,6 +538,8 @@ static void prt_stat(int stat)
 #define BAR_LIFE_EXPLODE		111 //v2.0.1 ¶–½”š”­‚Ì–ò
 #define BAR_HIRARINUNO			112 //v2.0.1 ‚Ğ‚ç‚è•z(ƒAƒrƒŠƒeƒBƒJ[ƒh)
 #define BAR_MIYOI_FORGOTTEN		113 //v2.0.9 ”üª‹L‰¯Á‹
+#define BAR_NO_MOVE				114 //v2.0.11 ˆÚ“®‹Ö~
+#define BAR_TRANSPORTATION_TRAP	115 //v2.0.11 ˆÚ‘—‚Ìã©
 
 //‚±‚±‚Ì’l‚Í127‚ªŒ»İ‚ÌŒÀŠE‚Å‚ ‚éB(v1.1.46‚Å95‚©‚çŠg’£)
 
@@ -671,6 +673,8 @@ static struct {
 	{ TERM_YELLOW, "”š", "¶–½”š”­" },
 	{ TERM_VIOLET, "•z", "‚Ğ‚ç‚è•z" },
 	{ TERM_BLUE, "–Y", "–Y‹p" },
+	{ TERM_RED, "”›", "ˆÚ“®‹Ö~" },
+	{ TERM_WHITE, "‘—", "ˆÚ‘—‚Ìã©" },
 
 
 	{0, NULL, NULL}
@@ -799,6 +803,8 @@ static struct {
 	{ TERM_YELLOW, "Exp", "LifeExpl" },
 	{ TERM_VIOLET, "Fab", "Fabric" },
 	{ TERM_BLUE, "Amn", "Amnesia" },
+	{ TERM_RED, "Imb", "Immob" },
+	{ TERM_WHITE, "TT", "TprtTrap" },
 
 
 	{0, NULL, NULL}
@@ -894,6 +900,9 @@ static void prt_status(void)
 	/* Blessed */
 	if (IS_BLESSED()) ADD_FLG(BAR_BLESSED);
 
+	//v2.0.11 ˆÚ“®‹Ö~
+	if (p_ptr->tim_no_move) ADD_FLG(BAR_NO_MOVE);
+
 	/* Shield */
 	if (p_ptr->magicdef) ADD_FLG(BAR_MAGICDEFENSE);
 
@@ -976,6 +985,8 @@ static void prt_status(void)
 
 	//v2.0.1
 	if (p_ptr->special_defense & SD_LIFE_EXPLODE) ADD_FLG(BAR_LIFE_EXPLODE);
+
+	if (p_ptr->transportation_trap) ADD_FLG(BAR_TRANSPORTATION_TRAP);
 
 	///mod140502
 	if (p_ptr->lucky) ADD_FLG(BAR_LUCKY);
@@ -1986,7 +1997,7 @@ sprintf(text, "  %2d", command_rep);
 			strcpy(text, _("…‰j", "Swim"));
 		}
 	}
-	else if(have_flag(f_ptr->flags, FF_TREE) && !p_ptr->kill_wall && (p_ptr->pclass != CLASS_RANGER && !prace_is_(RACE_YAMAWARO)))
+	else if(have_flag(f_ptr->flags, FF_TREE) && !p_ptr->kill_wall && (p_ptr->pclass != CLASS_BITEN && p_ptr->pclass != CLASS_RANGER && !prace_is_(RACE_YAMAWARO)))
 	{
 		if(p_ptr->speedster)
 		{
@@ -6462,14 +6473,15 @@ void calc_bonuses(void)
 
 		break;
 	case CLASS_MIYOI:
-
 		if (plev > 9) p_ptr->slow_digest = TRUE;
-
 		if (plev > 29) p_ptr->resist_water = TRUE;
-
-
 		break;
 
+	case CLASS_BITEN:
+
+		if (plev > 24) p_ptr->free_act = TRUE;
+		if (plev > 39) p_ptr->resist_fear = TRUE;
+		break;
 
 
 
@@ -7779,6 +7791,19 @@ void calc_bonuses(void)
 			p_ptr->dis_to_d[0] += 5;
 			p_ptr->dis_to_d[1] += 5;
 			new_speed += 2;
+
+		}
+		//v2.0.11 ”ü“V‚ÍX‚Åƒpƒ[ƒAƒbƒv
+		else if (p_ptr->pclass == CLASS_BITEN && have_flag(f_ptr->flags, FF_TREE))
+		{
+			p_ptr->speedster = TRUE;
+			p_ptr->to_h[0] += plev / 6;
+			p_ptr->to_h[1] += plev / 6;
+			p_ptr->to_h_m += plev / 6;
+			p_ptr->dis_to_h[0] += plev / 6;
+			p_ptr->dis_to_h[1] += plev / 6;
+			p_ptr->to_a += p_ptr->lev / 2;
+			p_ptr->dis_to_a += p_ptr->lev / 2;
 
 		}
 		//1.1.22 •ºmö•š‹Z”\
@@ -9675,6 +9700,18 @@ void calc_bonuses(void)
 		p_ptr->dis_to_d[0] -= 5;
 		p_ptr->dis_to_d[1] -= 5;
 	}
+
+	//v2.0.11 ˆÚ“®‹Ö~ ‹ßÚ–½’†‚É‘å•‚Èƒyƒiƒ‹ƒeƒB
+	if (p_ptr->tim_no_move)
+	{
+		p_ptr->to_h[0] -= 25;
+		p_ptr->to_h[1] -= 25;
+		p_ptr->to_h_m -= 25;
+		p_ptr->dis_to_h[0] -= 25;
+		p_ptr->dis_to_h[1] -= 25;
+
+	}
+
 
 	if (p_ptr->afraid)
 	{

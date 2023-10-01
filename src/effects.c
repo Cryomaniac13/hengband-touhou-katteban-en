@@ -296,6 +296,9 @@ void reset_tim_flags(void)
 
 	p_ptr->tim_aggravation = 0L;
 
+	p_ptr->tim_no_move = 0L;
+	p_ptr->transportation_trap = 0L;
+
 	while(p_ptr->energy_need < 0) p_ptr->energy_need += ENERGY_NEED();
 	world_player = FALSE;
 	///race clalss 一時効果解除でも一部の職や種族は一部効果が継続する
@@ -421,6 +424,7 @@ void dispel_player(void)
 	//v1.1.93
 	(void)set_tim_aggravation(0, TRUE);
 
+	set_tim_transportation_trap(0, TRUE);
 
 	//v1.1.17 純狐一時効果も
 	//v1.1.52 菫子新性格追加
@@ -3816,7 +3820,7 @@ bool set_multishadow(int v, bool do_dec)
 		{
 			if(p_ptr->pclass == CLASS_NUE || p_ptr->pclass == CLASS_AUNN)
 				msg_format(_("あなたの隣に分身が姿を現した。", "Your clone appears by your side."));
-			if (p_ptr->pclass == CLASS_SHINMYOUMARU)
+			else if (p_ptr->pclass == CLASS_SHINMYOUMARU)
 				msg_format(_("あなたは七人に分身した！", "You split into seven people!"));
 			else
 				msg_print(_("あなたの周りに幻影が生まれた。", "Shadows appear around you."));
@@ -3831,9 +3835,15 @@ bool set_multishadow(int v, bool do_dec)
 		if (p_ptr->multishadow)
 		{
 #ifdef JP
-msg_print("幻影が消えた。");
+			if (p_ptr->pclass == CLASS_AUNN)
+				msg_format("あなたの分身は神社に戻った。");
+			else
+				msg_print("幻影が消えた。");
 #else
-			msg_print("Your Shadow disappears.");
+            if (p_ptr->pclass == CLASS_AUNN)
+                msg_print("Your clone returns to the shrine.");
+            else
+                msg_print("Your Shadow disappears.");
 #endif
 
 			notice = TRUE;
@@ -9481,6 +9491,81 @@ bool set_tim_addstat(int stat, int amount, int v, bool do_dec)
 
 
 
+//v2.0.11 移動禁止のバッドステータス
+//トラバサミの罠や敵の特別行動による拘束など
+bool set_no_move(int v)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+
+	/* Open */
+	if (v)
+	{
+		set_tsuyoshi(0, TRUE);
+		if (!p_ptr->tim_no_move)
+		{
+#ifdef JP
+			msg_print("その場から移動できなくなった！");
+#else
+			msg_print("You become unable to move from this place!");
+#endif
+			/* Sniper */
+			notice = TRUE;
+		}
+	}
+
+	/* Shut */
+	else
+	{
+		if (p_ptr->tim_no_move)
+		{
+#ifdef JP
+			msg_print("移動できるようになった。");
+#else
+			msg_print("You can freely move again.");
+#endif
+
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	p_ptr->tim_no_move = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+	//v1.1.58
+	flag_update_floor_music = TRUE;
+	/* Disturb */
+	if (disturb_state) disturb(0, 1);
+
+	/* Redraw map */
+	//p_ptr->redraw |= (PR_MAP);
+
+	/* Update the health bar */
+	p_ptr->redraw |= (PR_HEALTH | PR_UHEALTH);
+
+	/* Update monsters */
+	p_ptr->update |= (PU_MONSTERS | PU_BONUS);
+
+	/* Window stuff */
+	//p_ptr->window |= (PW_OVERHEAD | PW_DUNGEON);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
+
 
 
 ///mod140103 神聖耐性のために追加
@@ -10253,3 +10338,64 @@ bool set_hirarinuno_card(int v, bool do_dec)
 	/* Result */
 	return (TRUE);
 }
+
+
+
+//移送の罠
+//＠が移送の罠状態になると隣接攻撃してきたモンスターに判定で抹殺処理
+bool set_tim_transportation_trap(int v, bool do_dec)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+	/* Open */
+	if (v)
+	{
+		if (p_ptr->transportation_trap && !do_dec)
+		{
+			if (p_ptr->transportation_trap>v) return FALSE;
+		}
+		else if (!p_ptr->transportation_trap)
+		{
+			msg_print(_("移送の罠が発動した。", "You activate a transportation trap."));
+			notice = TRUE;
+		}
+	}
+
+	/* Shut */
+	else
+	{
+		if (p_ptr->transportation_trap)
+		{
+			msg_print(_("移送の罠の発動が止まった。", "Your transportation trap is no longer active."));
+
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	p_ptr->transportation_trap = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+
+	/* Disturb */
+	if (disturb_state) disturb(0, 0);
+
+	/* Recalculate bonuses */
+	p_ptr->update |= (PU_BONUS);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
+

@@ -1739,4 +1739,5 @@ bool	flag_life_explode = FALSE;
 //v2.0.5 ぬえプレイ中にこのフラグが立っているとき行動時に正体不明状態に変身可能かどうかチェックする
 bool	flag_nue_check_undefined = TRUE;
 
-
+//v2.0.11 慧ノ子(モンスター)のトラップ生成が全てトラバサミになる特殊フラグ
+bool	hack_flag_enoko_make_beartrap = FALSE;

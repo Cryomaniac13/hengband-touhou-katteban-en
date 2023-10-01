@@ -2068,10 +2068,53 @@ void activate_floor_trap(int y, int x, u32b mpe_mode)
 
 		break;
 	}
+	//トラバサミ 対象が地上にいるときNO_MOVE属性のボール発生
+	//原作では空を飛んでるので空中トラバサミにして飛んでる奴にも効くようにしようかとも思ったが、それはそれで何か変なので普通のトラバサミにする
+	case TRAP_BEAR:
+	{
+		int power = MAX(10, dun_level);
+
+		if (trap_player)
+		{
+			if (p_ptr->levitation)
+			{
+				msg_print(_("トラバサミを飛び越えた。", "You fly over a beartrap."));
+			}
+			else
+			{
+				msg_print(_("トラバサミにかかった！", "You get caught in a beartrap!"));
+				project(PROJECT_WHO_TRAP, 0, y, x, power, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER), -1);
+			}
+
+		}
+		else if (trap_monster)
+		{
+			if (r_ptr->flags7 & RF7_CAN_FLY)
+			{
+				msg_format(_("%sは悠々とトラバサミの上を飛んでいる。",
+                            "%^s is leisurely floating above the beartrap."), m_name);
+			}
+			else
+			{
+				msg_format(_("%sはトラバサミにかかった！", "%^s gets caught in a beartrap!"), m_name);
+				project(PROJECT_WHO_TRAP, 0, y, x, power, GF_NO_MOVE, (PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL | PROJECT_PLAYER), -1);
+			}
+
+		}
+		else
+		{
+			msg_print(_("トラバサミが閉じる音が響いた。", "You hear the sound of a beartrap snapping shut."));
+
+		}
+
+
+
+	}
+	break;
 
 
 	//↓実装を検討していたが保留。
-	//f_infoのインデックスが255を超えるのでどこかに問題が起こるかもしれない。今後もう少し落ち着いたときにやる
+	//f_infoのインデックスが255を超えるのでどこかに問題が起こるかもしれない。normal_traps[]の扱いも面倒くさい。今後もう少し落ち着いたときにやる
 	/*
 	case TRAP_CEILING: //吊り天井トラップ 部屋中に150+1d150のダメージ
 	{
@@ -6218,7 +6261,7 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 	//int				martial_arts_method = 0;
 	int i;
 
-	int method[10];
+	int method[30];
 
 	num_blow=0;
 	for(i=0;i<10;i++) method[i]=0;
@@ -6240,6 +6283,18 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			method[num_blow++] = MELEE_MODE_SHIELD;
 
 	}
+
+	//v2.0.11 あうんの分身中は分身が追加攻撃を行う
+	if (p_ptr->pclass == CLASS_AUNN && p_ptr->multishadow)
+	{
+		method[num_blow++] = MELEE_MODE_AUNN_2;
+		if (ref_skill_exp(SKILL_MARTIALARTS) > 1600 + randint0(1600))
+			method[num_blow++] = MELEE_MODE_AUNN_2;
+		if (ref_skill_exp(SKILL_MARTIALARTS) > 3200 + randint0(3200))
+			method[num_blow++] = MELEE_MODE_AUNN_2;
+
+	}
+
 	/*:::武器攻撃をした時か両手に荷物を持っているとき、体術熟練度に応じ追加で格闘 格闘熟練度が20以上か石頭変異所持時*/
 	///mod141116 キスメには武器攻撃時の追加格闘がない
 	///mod141221 忍者も同じ
@@ -8028,7 +8083,7 @@ bool move_player_effect(int ny, int nx, u32b mpe_mode)
 
 			///mod140316 水地形パワーアップ処理などのためにPU_BONUSも更新するようにした
 
-			if(p_ptr->pclass == CLASS_MURASA || p_ptr->pclass == CLASS_WAKASAGI ||  p_ptr->prace == RACE_KAPPA || p_ptr->prace == RACE_YAMAWARO )
+			if(p_ptr->pclass == CLASS_MURASA || p_ptr->pclass == CLASS_WAKASAGI ||  p_ptr->prace == RACE_KAPPA || p_ptr->prace == RACE_YAMAWARO || p_ptr->pclass == CLASS_BITEN)
 			{
 				/* 冗長なのでメッセージ削除
 				if(have_flag(f_ptr->flags, FF_WATER) && !have_flag(of_ptr->flags, FF_WATER) )
@@ -8421,6 +8476,12 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 	bool do_past = FALSE;
 
 
+	//v2.0.11 移動禁止
+	if (p_ptr->tim_no_move && !c_ptr->m_idx)
+	{
+		msg_print(_("その場から動けない！", "You cannot move from this place!"));
+		return;
+	}
 
 
 	if(IS_METAMORPHOSIS && !c_ptr->m_idx)
@@ -8783,9 +8844,10 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 	 */
 	/*:::木の上で減速する処理*/
 	//v1.1.86 山童は減速しないことにした
+	//v2.0.11 美天も減速しない
 	else if (have_flag(f_ptr->flags, FF_TREE) && !p_can_kill_walls && !p_ptr->levitation)
 	{
-		if ((p_ptr->pclass != CLASS_RANGER && !prace_is_(RACE_YAMAWARO))  && (!p_ptr->riding || !(riding_r_ptr->flags8 & RF8_WILD_WOOD))) energy_use *= 2;
+		if ((p_ptr->pclass != CLASS_RANGER && p_ptr->pclass != CLASS_BITEN && !prace_is_(RACE_YAMAWARO))  && (!p_ptr->riding || !(riding_r_ptr->flags8 & RF8_WILD_WOOD))) energy_use *= 2;
 	}
 
 	//v1.1.91 石油地形上で減速する処理

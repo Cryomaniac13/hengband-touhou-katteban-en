@@ -778,7 +778,8 @@ bool do_cmd_eat_food_aux(int item)
 				if (one_in_(2) && !(p_ptr->resist_pois || IS_OPPOSE_POIS()))
 				{
 					msg_print(_("あなたは苦しくなってきた。", "You are suddenly in pain."));
-					take_hit(DAMAGE_NOESCAPE, 100 + randint1(100), _("食あたり", "food poisoning"), -1);
+					take_hit(DAMAGE_NOESCAPE, 25 + randint1(50), _("食あたり", "food poisoning"), -1);
+					set_poisoned(100);
 				}
 				else if (one_in_(2) && !p_ptr->sustain_con)
 				{
@@ -6046,7 +6047,7 @@ static void do_cmd_use_special_item(int item)
 				msg_print(_("壺を撫でてみたが何も起こらなかった..", "You tried stroking the jar, but nothing happened..."));
 		}
 	}
-	//v1.1.19
+	//v1.1.19 道寿の壺　油生成
 	else if(o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_DOUJU)
 	{
 		object_type forge, *q_ptr = &forge;
@@ -6079,6 +6080,17 @@ static void do_cmd_use_special_item(int item)
 			msg_print(_("スマートフォンを弄っていると光りだした！", "As you were playing with the smartphone, it starts shining!"));
 		lite_area(damroll(1, 2), 2);
 	}
+	//v2.0.11 月の宝玉
+	//「穢れをほんのりと祓う」らしいので解毒と弱解呪だけやっておく
+	//本当にその程度の効果なら清蘭はどうやって兎の楽園など作るつもりだったのかという疑問はあるが
+	else if (o_ptr->tval == TV_SOUVENIR && o_ptr->sval == SV_SOUVENIR_MOON_ORB)
+	{
+		msg_print(_("穢れがほんのりと祓われる気がする...", "You feel impurity being purged slightly..."));
+		set_poisoned(0);
+		remove_curse();
+
+	}
+
 	//v1.1.56 スペカ
 	else if (o_ptr->tval == TV_SPELLCARD)
 	{
@@ -8757,6 +8769,14 @@ bool	miyoi_serve_alcohol(monster_type *m_ptr, int alcohol, int charm_power)
 
 	//起こす
 	set_monster_csleep(cave[m_ptr->fy][m_ptr->fx].m_idx, 0);
+
+	//v2.0.11 夢日記では無効
+	if (p_ptr->inside_arena)
+	{
+		msg_format(_("%sは弾幕で決着をつける気満々だ！",
+                    "%^s is fully determined to settle it with a danmaku battle!"), m_name);
+		return FALSE;
+	}
 
 	//誘いに応じない面々
 	if (r_ptr->flags2 & (RF2_EMPTY_MIND | RF2_WEIRD_MIND))

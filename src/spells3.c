@@ -389,6 +389,21 @@ bool teleport_player_aux(int dis, u32b mode)
 		return FALSE;
 	}
 
+	//v2.0.11 移動禁止　物理的移動を禁止するが魔法的なテレポートは移動禁止を解除する
+	//同じ処理をteleport_player_to()にも記述する
+	if (p_ptr->tim_no_move)
+	{
+		if (mode & TELEPORT_NONMAGICAL)
+		{
+			msg_print(_("あなたはその場から動けない！", "You cannot move from this place!"));
+			return FALSE;
+		}
+		else
+		{
+			set_no_move(0);
+		}
+	}
+
 	/* Initialize counters */
 	total_candidates = 0;
 	for (i = 0; i <= MAX_TELEPORT_DISTANCE; i++)
@@ -508,6 +523,9 @@ void teleport_player(int dis, u32b mode)
 				monster_race *r_ptr = &r_info[m_ptr->r_idx];
 				monster_desc(m_name, m_ptr, 0x00);
 				chance = 50 * r_ptr->level / 128 + 40;
+
+				if (m_ptr->r_idx == MON_HISAMI) chance = 101;//日狭美は追尾成功率100%
+
 				///mod140103 追尾テレポートをフラグ方式に実装した。さらに成功判定はここに入れてメッセージ追加。成功率を少し変えた。
 				//ついでにパッシブテレポにはついてこないようにしておくか？と思ったがついてきたほうが面白そう
 				if ((r_ptr->flags2 & RF2_TELE_AFTER) && (randint1(100) < chance) && !MON_CSLEEP(m_ptr))
@@ -589,6 +607,22 @@ void teleport_player_to(int ny, int nx, u32b mode)
 
 		return;
 	}
+
+	//v2.0.11 移動禁止　物理的移動を禁止するが魔法的なテレポートは移動禁止を解除する
+	//同じ処理をteleport_player_aux()にも記述する
+	if (p_ptr->tim_no_move)
+	{
+		if (mode & TELEPORT_NONMAGICAL)
+		{
+			msg_print(_("あなたはその場から動けない！", "You cannot move from this place!"));
+			return;
+		}
+		else
+		{
+			set_no_move(0);
+		}
+	}
+
 
 	/* Find a usable location */
 	while (1)
@@ -8398,5 +8432,28 @@ void	search_specific_monster(int mode)
 	}
 
 
+
+}
+
+//v2.0.11
+//移送の罠の成功判定
+//make_attack_normal()で＠がモンスターから隣接攻撃を受けたときに呼ばれる
+//特技から能動的に発動するときにもパワー多めで呼ばれる
+bool	check_transportation_trap(monster_type *m_ptr, int power)
+{
+	monster_race *r_ptr = &r_info[m_ptr->r_idx];
+
+	//クエスト打倒対象には無効
+	if (r_ptr->flags1 & RF1_QUESTOR) return FALSE;
+	//夢日記やクエストダンジョンでは無効
+	if (p_ptr->inside_arena || p_ptr->inside_battle || p_ptr->inside_quest) return FALSE;
+
+	//ユニークモンスターには効きづらい
+	if (r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) power /= 2;
+	//時空耐性持ちには効きづらい
+	if (r_ptr->flagsr & RFR_RES_TIME) power /= 2;
+
+	if (randint1(power) > r_ptr->level) return TRUE;
+	return FALSE;
 
 }

@@ -1216,6 +1216,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
 				break;
 			}
 
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_WOLF;
 			muta_desc = _("オオカミの動物霊に憑依された！", "You get possessed by a wolf animal ghost!");
@@ -1230,6 +1233,8 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
 
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_OTTER;
@@ -1245,6 +1250,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_EAGLE;
 			muta_desc = _("オオワシの動物霊に憑依された！", "You get possessed by an eagle animal ghost!");
@@ -1258,6 +1266,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_JELLYFISH;
 			muta_desc = _("クラゲの動物霊に憑依された！", "You get possessed by a jellyfish animal spirit!");
@@ -1271,6 +1282,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_COW;
 			muta_desc = _("ウシの動物霊に憑依された！", "You get possessed by a cow animal spirit!");
@@ -1284,6 +1298,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_CHICKEN;
 			muta_desc = _("ヒヨコの動物霊に憑依された！", "You get possessed by a chicken animal spirit!");
@@ -1297,6 +1314,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_TORTOISE;
 			muta_desc = _("カメの動物霊に憑依された！", "You get possessed by a tortoise animal spirit!");
@@ -1310,6 +1330,9 @@ muta_desc = "慈悲深い白いオーラがあなたをとりまいた...";
                             "An animal ghost approached and ran away upon seeing you."));
 				break;
 			}
+			//すでに特定勢力に参加している面々と参加しそうにない人
+			if (p_ptr->pclass == CLASS_BITEN || p_ptr->pclass == CLASS_ENOKO || p_ptr->pclass == CLASS_CHIYARI || p_ptr->pclass == CLASS_ZANMU) break;
+
 			muta_class = &(p_ptr->muta4);
 			muta_which = MUT4_GHOST_HANIWA;
 			muta_desc = _("ハニワの……動物？……霊？に憑依された！",

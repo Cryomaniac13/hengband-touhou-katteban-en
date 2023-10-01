@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 10
+#define H_VER_PATCH 11
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1315,11 +1315,17 @@
 #define CLASS_MOMOYO			148
 
 #define CLASS_YUMA				149
-
+//v2.0.11
+#define CLASS_BITEN				150
+#define CLASS_ENOKO				151
+#define CLASS_CHIYARI			152
+#define CLASS_HISAMI			153
+#define CLASS_ZANMU				154
+#define CLASS_MIZUCHI			155
 
 /*Maximum number of player "class" types (see "table.c", etc)*/
 /*:::class_info[]の項目数 CLASS_**の最終+1　キャラメイク時のクラス数はbirth.cのMAX_CLASS_CHOICEなので注意*/
-#define MAX_CLASS            150
+#define MAX_CLASS            156
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
 //v2.0.2 典の「寄生」も基本的に同じ扱いにする
@@ -1760,7 +1766,8 @@
 
 //v1.1.24
 #define TRAP_BEAM		21
-
+//v2.0.11
+#define TRAP_BEAR		22
 
 
 /* Maximum locked/jammed doors */
@@ -2013,6 +2020,8 @@
 #define ART_OOONOTE			344
 #define ART_NOMINOSUKUNE	345
 #define ART_MEGUMU			347
+#define ART_BITEN			348
+#define ART_ENOKO			349
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/
@@ -2425,6 +2434,8 @@
 #define ACT_MAKE_BLIZZARD		187
 #define ACT_DIG_OIL				188
 #define ACT_BLAST_MISSILES		189
+//v2.0.11
+#define ACT_TRANSPORTATION_TRAP		190
 
 
 #define ACT_CAST_OFF            250
@@ -2950,6 +2961,7 @@
 #define SV_AMULET_HAKUREI				34
 #define SV_AMULET_SHIOMITSUTAMA			35
 #define SV_AMULET_SUKUNE				36
+#define SV_AMULET_ENOKO					37
 
 ///SVAL笛:TVAL49
 #define SV_WHISTLE                  	1
@@ -3278,7 +3290,7 @@
 #define SV_SOUVENIR_ELDER_THINGS_CRYSTAL	31	//v1.1.80
 #define SV_SOUVENIR_EMPTY_BOTTLE		32
 #define SV_SOUVENIR_KODOKUZARA			33 //v1.1.98 蠱毒皿
-
+#define SV_SOUVENIR_MOON_ORB			34 //v2.0.11 月の宝玉
 
 
 //SVAL:素材TV:73
@@ -4069,6 +4081,7 @@
 #define SUMMON_ONE_ORC			104
 #define SUMMON_ONLY_GOLD	105
 #define SUMMON_TENGU_MINION	106
+#define SUMMON_MONKEYS		107
 
 
 
@@ -6557,6 +6570,7 @@ extern int PlayerUID;　
 #define MON_MANES         128
 #define MON_LOST_SOUL     133
 #define MON_ROBIN_HOOD    138
+#define MON_FLYING_MONKEY	145
 #define MON_NOV_PALADIN_G 147
 #define MON_PHANTOM_W     152
 #define MON_GIANT_GREY_RAT	156
@@ -6797,6 +6811,7 @@ extern int PlayerUID;　
 #define MON_MASTER_MYS    916
 #define MON_G_MASTER_MYS  917
 #define MON_IE            921
+#define MON_NIKKO_MONKEY	925
 #define MON_TSUCHINOKO    926
 #define MON_MARIO		927
 #define MON_GCWADL        929
@@ -7149,6 +7164,13 @@ extern int PlayerUID;　
 
 #define MON_RIVER_CRAB		1382
 #define MON_LAMPREY			1383	//ヤツメウナギ
+
+
+#define MON_ENOKO			1385
+#define MON_BITEN			1386
+#define MON_CHIYARI			1387
+#define MON_HISAMI			1388
+#define MON_ZANMU			1389
 
 #define MON_IDX_MAX			1384	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
@@ -7862,6 +7884,7 @@ extern int PlayerUID;　
 #define MELEE_MODE_3_FAIRIES_2	103 //三月精専用性格
 #define MELEE_MODE_SUIKEN		104 //v1.1.78 酔拳
 #define MELEE_MODE_JYOON_3		105 //v1.1.92 女苑専用性格用
+#define MELEE_MODE_AUNN_2		106 //v2.0.11 あうん追加攻撃用
 
 /*:::格闘効果の特殊効果分類*/
 #define MELEE_STUN				1	//朦朧

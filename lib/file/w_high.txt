@@ -93,6 +93,7 @@ of Abyss
 of Demogorgon
 of Death
 of Namo
+'Blood-Sucking Beast'
 
 N:15:BIAS_LAW
 N:13:BIAS_PRIESTLY

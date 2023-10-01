@@ -10838,6 +10838,18 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			break;
 		}
 
+		//v2.0.11 移動禁止属性をプレイヤーにも適用
+		case GF_NO_MOVE:
+		{
+
+			if (!CHECK_MULTISHADOW())
+			{
+				set_no_move(dam);
+			}
+
+			dam = 0;
+			break;
+		}
 
 
 

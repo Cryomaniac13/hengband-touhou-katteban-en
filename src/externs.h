@@ -2767,3 +2767,9 @@ extern bool geidontei_cooking(bool flag_self);
 
 //v2.0.9
 extern bool	miyoi_serve_alcohol(monster_type *m_ptr, int alcohol, int charm_power);
+
+//v2.0.11
+extern bool set_no_move(int v);
+extern bool	hack_flag_enoko_make_beartrap;
+extern bool set_tim_transportation_trap(int v, bool do_dec);
+extern bool	check_transportation_trap(monster_type *m_ptr, int power);

@@ -1717,10 +1717,10 @@ struct player_type
 	//v2.0.1 アビリティカードのひらり布の有効時間(正邪の特技のひらり布ではない)
 	s16b tim_hirari_nuno;
 
-
-	//v1.1.81 将来の拡張用に変数を増やしておく
-	s16b future_use_counter7;
-	s16b future_use_counter8;
+	//v2.0.11 移動禁止のバッドステータス
+	s16b tim_no_move;
+	//v2.0.11 移送の罠
+	s16b transportation_trap;
 
 	u32b animal_ghost_align_flag;	//v1.1.91
 	u32b quest_special_flag;		//v1.1.98 一部クエストをどんな状態で進行したか記録する

@@ -2064,6 +2064,8 @@ struct marisa_store_type marisa_wants_table[] =
 
 	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA ,1200 },
 
+	{ TV_SOUVENIR,SV_SOUVENIR_MOON_ORB ,300 },
+
 	{0,0,0}//終端用ダミー
 };
 
@@ -2376,6 +2378,7 @@ struct marisa_store_type korin_wants_table[] =
 	{ TV_SOUVENIR,SV_SOUVENIR_ELDER_THINGS_CRYSTAL ,30000 },
 
 	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA ,66000 },
+	{ TV_SOUVENIR,SV_SOUVENIR_MOON_ORB ,20000 },
 
 	{0,0,0}//終端用ダミー
 };
@@ -9755,79 +9758,75 @@ bool check_quest_unique_text(void)
 #endif
 			}
 			//ほか一般動物霊　所属勢力で分岐
+			//v2.0.11 新入り3人も同じメッセージを表示するため分岐を変えた
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA || pc == CLASS_ENOKO)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "早鬼「丁度いいところに来たな！今から抗争に行くぞ！");
+                strcpy(quest_text[line++], "行き先は旧血の池地獄だ。尤魔の奴が引き篭もって何かしているらしい！");
+                strcpy(quest_text[line++], "いつもすぐ逃げ出す卑怯者を蹴倒してやるチャンスだ！みんな私に続け！」");
+#else
+                strcpy(quest_text[line++], "Saki - 'You came at a good time! We're going to war!");
+                strcpy(quest_text[line++], "We're heading to Former Lake of Blood Hell. Yuuma's hiding there,");
+                strcpy(quest_text[line++], "planning to do something! It's our chance to kick some cowards who");
+                strcpy(quest_text[line++], "keep on running away! Everyone, follow me!'");
+#endif
+			}
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU || pc == CLASS_BITEN)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "八千慧「緊急の任務よ！");
+                strcpy(quest_text[line++], "旧血の池地獄にて石油という有用な資源が大量に発見されました。");
+                strcpy(quest_text[line++], "現在は剛欲同盟に支配されており、放置するわけにはいきません。");
+                strcpy(quest_text[line++], "この地を奪取すべく急いで兵力を集めているけど、");
+                strcpy(quest_text[line++], "勁牙組や霊長園も我々と同じことを考えているみたい。");
+                strcpy(quest_text[line++], "おそらく一大抗争になるからあなたもこれに加わって。");
+                strcpy(quest_text[line++], "あと石油はよく燃えるから石油の上では炎攻撃の威力が増すわ。");
+				strcpy(quest_text[line++], "強力な火竜を雇って連れて行くけど巻き込まれないように立ち回ってね。」");
+#else
+                strcpy(quest_text[line++], "Yachie - 'There's an urgent mission!");
+                strcpy(quest_text[line++], "We've discovered a large amount of useful resource called 'oil' in");
+                strcpy(quest_text[line++], "Former Lake of Blood Hell. It's under control of Gouyoku Alliance");
+                strcpy(quest_text[line++], "right now; we can't leave it like that. We're moving our forces");
+                strcpy(quest_text[line++], "to that location, and Keiga Family and Primate Garden are doing the");
+                strcpy(quest_text[line++], "same. It's likely to end up in a major conflict, so I'd like you to");
+                strcpy(quest_text[line++], "take part in it. Oil burns well, so fire deals more damage on oil");
+                strcpy(quest_text[line++], "terrain. We've brought a powerful fire wyrm, so avoid getting in");
+                strcpy(quest_text[line++], "the way of its attacks.'");
+#endif
+			}
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_GOUYOKU || pc == CLASS_CHIYARI)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "地面から聞こえる尤魔の声「おいお前。すぐに地下の旧血の池地獄まで来い。");
+                strcpy(quest_text[line++], "我々の石油を狙って他勢力の連中が攻めてきた。");
+                strcpy(quest_text[line++], "どう転ぶにしろ少しは敵に出血を強いなければ利権に食い込むこともできん。");
+                strcpy(quest_text[line++], "お前も加わってなるべく敵の数を減らせ。");
+                strcpy(quest_text[line++], "とくに敵の援軍の火竜が厄介だ。火炎対策をしておけ。");
+                strcpy(quest_text[line++], "それにしても防衛戦など全く割に合わん。ああ腹が減る...」");
+#else
+                strcpy(quest_text[line++], "Yuuma voice from the ground - 'Hey, you. Come quickly to the Former");
+                strcpy(quest_text[line++], "Lake of Blood Hell underground. Other forces are attacking, trying");
+                strcpy(quest_text[line++], "to obtain out oil. No matter how you look at it, we'll have to make");
+                strcpy(quest_text[line++], "them bleed to maintain profits. Join in and reduce enemy forces as");
+                strcpy(quest_text[line++], "much as you can. Their fire wyrm in particular is a nasty one.");
+                strcpy(quest_text[line++], "Protect yourself against fire attacks. Still, I really don't like");
+                strcpy(quest_text[line++], "being on the defense. I'm so hungry...'");
+#endif
+			}
 			else if (pr == RACE_ANIMAL_GHOST)
 			{
-				switch (CHECK_ANIMAL_GHOST_STRIFE)
-				{
-				case ANIMAL_GHOST_STRIFE_KEIGA:
 #ifdef JP
-					strcpy(quest_text[line++], "早鬼「丁度いいところに来たな！今から抗争に行くぞ！");
-					strcpy(quest_text[line++], "行き先は旧血の池地獄だ。尤魔の奴が引き篭もって何かしているらしい！");
-					strcpy(quest_text[line++], "いつもすぐ逃げ出す卑怯者を蹴倒してやるチャンスだ！みんな私に続け！」");
+                strcpy(quest_text[line++], "畜生界の動物霊がこの下の旧血の池地獄で抗争を始めるようだ。");
+                strcpy(quest_text[line++], "自分には関係のない話だが、どこかに味方して恩を売ってもいい。");
+                strcpy(quest_text[line++], "あるいは全員倒してしまえば実に痛快だろう。");
 #else
-                    strcpy(quest_text[line++], "Saki - 'You came at a good time! We're going to war!");
-					strcpy(quest_text[line++], "We're heading to Former Lake of Blood Hell. Yuuma's hiding there,");
-					strcpy(quest_text[line++], "planning to do something! It's our chance to kick some cowards who");
-					strcpy(quest_text[line++], "keep on running away! Everyone, follow me!'");
+                strcpy(quest_text[line++], "The animal ghosts from Animal Realm are going to start a war at Former");
+                strcpy(quest_text[line++], "Lake of Blood Hell. It's none of your business, but you might join");
+                strcpy(quest_text[line++], "someone to win their favor. Or you could just beat them all up.");
 #endif
-					break;
-
-				case ANIMAL_GHOST_STRIFE_KIKETSU:
-#ifdef JP
-					strcpy(quest_text[line++], "八千慧「あなたに緊急の任務を与えます。");
-					strcpy(quest_text[line++], "旧血の池地獄にて石油という有用な資源が大量に発見されました。");
-					strcpy(quest_text[line++], "現在は剛欲同盟に支配されており、放置するわけにはいきません。");
-					strcpy(quest_text[line++], "この地を奪取すべく急ぎ兵力を集めていますが、");
-					strcpy(quest_text[line++], "勁牙組や霊長園にも我々と同様の動きが見られます。");
-					strcpy(quest_text[line++], "おそらく一大抗争になるでしょう。あなたもこれに加わりなさい。");
-					strcpy(quest_text[line++], "石油はよく燃えるので石油の上では炎の威力が増します。");
-					strcpy(quest_text[line++], "強力な火竜を雇って連れて行くので巻き込まれないように立ち回りなさい。」");
-#else
-					strcpy(quest_text[line++], "Yachie - 'I have an urgent mission for you.");
-					strcpy(quest_text[line++], "We've discovered a large amount of useful resource called 'oil' in");
-					strcpy(quest_text[line++], "Former Lake of Blood Hell. It's under control of Gouyoku Alliance");
-					strcpy(quest_text[line++], "right now; we can't leave it like that. We're moving our forces");
-					strcpy(quest_text[line++], "to that location, and Keiga Family and Primate Garden are doing the");
-					strcpy(quest_text[line++], "same. It's likely to end up in a major conflict. I'd like you to");
-					strcpy(quest_text[line++], "take part in it. Oil burns well, so fire deals more damage on oil");
-					strcpy(quest_text[line++], "terrain. We've brought a powerful fire wyrm, so avoid getting in");
-					strcpy(quest_text[line++], "the way of its attacks.'");
-#endif
-					break;
-
-
-				case ANIMAL_GHOST_STRIFE_GOUYOKU:
-#ifdef JP
-					strcpy(quest_text[line++], "地面から聞こえる尤魔の声「おいお前。すぐに地下の旧血の池地獄まで来い。");
-					strcpy(quest_text[line++], "我々の石油を狙って他勢力の連中が攻めてきた。");
-					strcpy(quest_text[line++], "どう転ぶにしろ少しは敵に出血を強いなければ利権に食い込むこともできん。");
-					strcpy(quest_text[line++], "お前も加わってなるべく敵の数を減らせ。");
-					strcpy(quest_text[line++], "とくに敵の援軍の火竜が厄介だ。火炎対策をしておけ。");
-					strcpy(quest_text[line++], "それにしても防衛戦など全く割に合わん。ああ腹が減る...」");
-#else
-					strcpy(quest_text[line++], "Yuuma voice from the ground - 'Hey, you. Come quickly to the Former");
-					strcpy(quest_text[line++], "Lake of Blood Hell underground. Other forces are attacking, trying");
-					strcpy(quest_text[line++], "to obtain out oil. No matter how you look at it, we'll have to make");
-					strcpy(quest_text[line++], "them bleed to maintain profits. Join in and reduce enemy forces as");
-					strcpy(quest_text[line++], "much as you can. Their fire wyrm in particular is a nasty one.");
-					strcpy(quest_text[line++], "Protect yourself against fire attacks. Still, I really don't like");
-					strcpy(quest_text[line++], "being on the defense. I'm so hungry...'");
-#endif
-					break;
-				default:
-#ifdef JP
-					strcpy(quest_text[line++], "畜生界の動物霊がこの下の旧血の池地獄で抗争を始めるようだ。");
-					strcpy(quest_text[line++], "自分には関係のない話だが、どこかに味方して恩を売ってもいい。");
-					strcpy(quest_text[line++], "あるいは全員倒してしまえば実に痛快だろう。");
-#else
-					strcpy(quest_text[line++], "The animal ghosts from Animal Realm are going to start a war at Former");
-                    strcpy(quest_text[line++], "Lake of Blood Hell. It's none of your business, but you might join");
-                    strcpy(quest_text[line++], "someone to win their favor. Or you could just beat them all up.");
-#endif
-
-					break;
-				}
 			}
+
 			//ほか一般埴輪
 			else if (pr == RACE_HANIWA)
 			{
@@ -9903,7 +9902,7 @@ bool check_quest_unique_text(void)
 					strcpy(quest_text[line++], "You also have received an interesting item from your informant.");
 #endif
 				}
-				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA)
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA || pc == CLASS_ENOKO)
 				{
 #ifdef JP
 					strcpy(quest_text[line++], "早鬼「見たか！やはり最後に勝つのは暴力だ！");
@@ -9939,10 +9938,10 @@ bool check_quest_unique_text(void)
 					strcpy(quest_text[line++], "surface.");
 #endif
 				}
-				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU)
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU || pc == CLASS_BITEN)
 				{
 #ifdef JP
-					strcpy(quest_text[line++], "八千慧「素晴らしい。思っていたより遥かに使えるようですね。");
+					strcpy(quest_text[line++], "八千慧「素晴らしい。思っていたより遥かに使えるようね。");
 					strcpy(quest_text[line++], "あとは私に任せなさい。あなたには充分な報酬を与えましょう。」");
 #else
 					strcpy(quest_text[line++], "Yachie - 'That was splendid. You're far more useful than I thought. Leave");
@@ -9975,7 +9974,7 @@ bool check_quest_unique_text(void)
 					strcpy(quest_text[line++], "consume it someday.");
 #endif
 				}
-				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU)
+				else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_GOUYOKU || pc == CLASS_CHIYARI)
 				{
 #ifdef JP
 					strcpy(quest_text[line++], "尤魔「クックック...天晴な強さじゃないか。気に入ったぞ。");
@@ -10101,50 +10100,46 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "You were painfully defeated in conflict.");
 #endif
 			}
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA || pc == CLASS_ENOKO)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "早鬼「ええい、なんだあの鬱陶しい油は！");
+                strcpy(quest_text[line++], "悔しくなんか無いぞ！でも次は絶対に勝つからな！」");
+#else
+                strcpy(quest_text[line++], "Saki - 'Hey, what's up with that annoying oil?");
+                strcpy(quest_text[line++], "I have no regrets! Next time, we'll win for sure!'");
+#endif
+			}
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU || pc == CLASS_BITEN)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "八千慧「まあこの手の争いは戦闘が終わってからが本番です。");
+                strcpy(quest_text[line++], "あとは私がやりましょう。あなたは元の任務に戻りなさい。」");
+#else
+                strcpy(quest_text[line++], "Yachie - 'Well, the real conflict starts after a battle like this");
+                strcpy(quest_text[line++], "is over. Leave it to me and resume your original mission.'");
+#endif
+			}
+			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_GOUYOKU || pc == CLASS_CHIYARI)
+			{
+#ifdef JP
+                strcpy(quest_text[line++], "尤魔「まあいい。あれが誰のものになろうが勝手に忍び込んで食うまでだ。");
+                strcpy(quest_text[line++], "しかしなぜこんなに早く連中に石油のことが漏れた？");
+                strcpy(quest_text[line++], "やはりあの胡散臭い奴の差し金か？」");
+#else
+                strcpy(quest_text[line++], "Yuuma - 'Oh well; I don't care who controls it, I'll sneak in and");
+                strcpy(quest_text[line++], "devour it anyway. However, how did they find out about the oil so");
+                strcpy(quest_text[line++], "quickly?'");
+#endif
+			}
 			else if (pr == RACE_ANIMAL_GHOST)
 			{
-				switch (CHECK_ANIMAL_GHOST_STRIFE)
-				{
-				case ANIMAL_GHOST_STRIFE_KEIGA:
-#ifdef JP
-					strcpy(quest_text[line++], "早鬼「ええい、なんだあの鬱陶しい油は！");
-					strcpy(quest_text[line++], "悔しくなんか無いぞ！でも次は絶対に勝つからな！」");
-#else
-					strcpy(quest_text[line++], "Saki - 'Hey, what's up with that annoying oil?");
-					strcpy(quest_text[line++], "I have no regrets! Next time, we'll win for sure!'");
-#endif
-					break;
-
-				case ANIMAL_GHOST_STRIFE_KIKETSU:
-#ifdef JP
-					strcpy(quest_text[line++], "八千慧「まあこの手の争いは戦闘が終わってからが本番です。");
-					strcpy(quest_text[line++], "あとは私がやりましょう。あなたは元の任務に戻りなさい。」");
-#else
-					strcpy(quest_text[line++], "Yachie - 'Well, the real conflict starts after a battle like this");
-					strcpy(quest_text[line++], "is over. Leave it to me and resume your original mission.'");
-#endif
-					break;
-
-				case ANIMAL_GHOST_STRIFE_GOUYOKU:
-#ifdef JP
-					strcpy(quest_text[line++], "尤魔「まあいい。あれが誰のものになろうが勝手に忍び込んで食うまでだ。");
-					strcpy(quest_text[line++], "しかしなぜこんなに早く連中に石油のことが漏れた？");
-					strcpy(quest_text[line++], "やはりあの胡散臭い奴の差し金か？」");
-#else
-					strcpy(quest_text[line++], "Yuuma - 'Oh well; I don't care who controls it, I'll sneak in and");
-					strcpy(quest_text[line++], "devour it anyway. However, how did they find out about the oil so");
-					strcpy(quest_text[line++], "quickly?'");
-#endif
-					break;
-				default:
 #ifdef JP
 					strcpy(quest_text[line++], "あなたは畜生界住人たちの熾烈な抗争から命からがら逃げ出した。");
 #else
 					strcpy(quest_text[line++], "You ran for your life from the violent battle between the");
 					strcpy(quest_text[line++], "residents of Animal Realm.");
 #endif
-					break;
-				}
 			}
 			else if (pr == RACE_HANIWA)
 			{
@@ -11058,6 +11053,7 @@ bool item_tester_hook_repair_material(object_type *o_ptr)
 		case SV_SOUVENIR_PHOENIX_FEATHER:
 		case SV_SOUVENIR_ASIA:
 		case SV_SOUVENIR_SHILVER_KEY:
+		case SV_SOUVENIR_MOON_ORB:
 			return TRUE;
 		}
 	}
@@ -11176,6 +11172,7 @@ const struct guild_arts_type repair_weapon_power_table[] =
 	{TV_SOUVENIR,SV_SOUVENIR_PHOENIX_FEATHER,20,-1," "},
 	{TV_SOUVENIR,SV_SOUVENIR_ASIA,25,-1," "},
 	{ TV_SOUVENIR,SV_SOUVENIR_SHILVER_KEY,25,-1," " },
+	{ TV_SOUVENIR,SV_SOUVENIR_MOON_ORB,10,-1," " },
 
 	{0,0,0,0,_("終端用ダミー", "dummy terminator")}
 };
@@ -11790,6 +11787,18 @@ static int repair_broken_weapon_aux(int bcost)
 		dd_bonus += 2;
 		ds_bonus += 2;
 	}
+	//月の宝玉 /死悪妖
+	else if (mo_ptr->tval == TV_SOUVENIR && mo_ptr->sval == SV_SOUVENIR_MOON_ORB)
+	{
+
+		o_ptr->to_d += randint1(5);
+		o_ptr->to_h += randint1(5);
+		add_flag(o_ptr->art_flags, TR_SLAY_UNDEAD);
+		add_flag(o_ptr->art_flags, TR_SLAY_DEMON);
+		add_flag(o_ptr->art_flags, TR_SLAY_KWAI);
+		add_flag(o_ptr->art_flags, TR_BLESSED);
+	}
+
 	else { msg_format(_("ERROR:武器修復でこの素材の処理が書かれていない",
                         "ERROR: Undefined logic for this material for weapon repair")); return (0);}
 
@@ -13901,6 +13910,7 @@ static bool reimu_fortune_teller()
 					if (r_ptr->flags1 & RF1_FORCE_DEPTH) continue;
 					if (r_ptr->level > lev_check) continue;
 					if (r_ptr->level < p_ptr->lev) continue;
+					if (r_ptr->rarity > 100) continue; //v2.0.11追加 特殊モンスターや登場禁止モンスター
 					count++;
 					if(one_in_(count)) target_idx = i;
 
@@ -17059,17 +17069,17 @@ msg_print("ここにはクエストの入口はない。");
 						selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
 					}
 				//早鬼
-					else if (p_ptr->pclass == CLASS_SAKI)
+					else if (p_ptr->pclass == CLASS_SAKI || p_ptr->pclass == CLASS_ENOKO)
 					{
 						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
 					}
 				//八千慧
-					else if (p_ptr->pclass == CLASS_YACHIE)
+					else if (p_ptr->pclass == CLASS_YACHIE || p_ptr->pclass == CLASS_BITEN)
 					{
 						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
 					}
 				//尤魔
-					else if (p_ptr->pclass == CLASS_YUMA)
+					else if (p_ptr->pclass == CLASS_YUMA || p_ptr->pclass == CLASS_CHIYARI)
 					{
 						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
 					}

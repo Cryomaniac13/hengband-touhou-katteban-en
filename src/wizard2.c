@@ -138,6 +138,16 @@ static void do_cmd_wiz_hack_ben_2(void)
 	object_type forge;
 	char desc[160];
 
+	//移動禁止テスト
+	if (!p_ptr->tim_no_move)
+	{
+		set_no_move(100);
+	}
+	else
+	{
+		set_no_move(0);
+	}
+
 	//尤魔　空腹で倒れる直前にする
 	if (p_ptr->pclass == CLASS_YUMA)
 	{
@@ -554,7 +564,7 @@ static bool wiz_dimension_door(void)
 
 	if (!tgt_pt(&x, &y)) return FALSE;
 
-	teleport_player_to(y, x, TELEPORT_NONMAGICAL);
+	teleport_player_to(y, x, TELEPORT_ANYPLACE);//v2.0.11 NONMAGICALからANYPLACEにした
 
 	return (TRUE);
 }

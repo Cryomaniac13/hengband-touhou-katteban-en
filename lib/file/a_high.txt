@@ -85,6 +85,7 @@ of Divine Protection
 of the First Day
 of the Isles of the Blessed
 of the Holy Grail
+'Tiny Shangri-La'
 
 N: 9:BIAS_DEX
 N:16:BIAS_ROGUE

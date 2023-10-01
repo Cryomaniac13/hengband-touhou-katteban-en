@@ -1072,6 +1072,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_YUMA) a_idx = ART_CHIYOU;
 			else if (p_ptr->pclass == CLASS_CHIMATA) a_idx = ART_CADUCEUS;
 			else if (p_ptr->pclass == CLASS_MIYOI) a_idx = ART_TUOR;
+			else if (p_ptr->pclass == CLASS_BITEN) a_idx = ART_NYOIBOU;
 
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//☆生成
@@ -6882,8 +6883,13 @@ static bool item_tester_hook_boomerang(object_type *o_ptr)
  */
 /*:::投擲*/
 /*:::mult:投擲パワー　強力投擲変異以外は1*/
-/*:::boomerang:剣術家の「ブーメラン」のときTRUE*/
-/*:::shriken 忍者の八方手裏剣のときインベントリ番号、それ以外のとき-1が入ってる。宇佐見菫子特技による特殊投擲のとき-2*/
+/*:::boomerang:剣術家の「ブーメラン」のときTRUE mult値が跳ね上がるのでほかの特技でTRUEにするとき注意*/
+/*shriken:
+ *忍者の八方手裏剣のときインベントリ番号が入っていた(現在使われていない)
+ *それ以外のとき-1が入ってる。宇佐見菫子特技による特殊投擲のとき-2、美天の棒投擲のとき-3
+ TODO:
+ boomerangとshurikenのフラグの扱いと内部の処理が混乱しているのでそのうち整理したい
+ */
 
 bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 {
@@ -6913,7 +6919,8 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 
 	u32b flgs[TR_FLAG_SIZE];
 	cptr q, s;
-	bool come_back = FALSE;
+	bool success_catch = FALSE; //「必ず投げたものが帰ってきてキャッチできる」フラグと「投げたものをキャッチできた」フラグを兼用している
+
 	bool do_drop = TRUE;
 
 	if (mimic_info[p_ptr->mimic_form].MIMIC_FLAGS & MIMIC_ONLY_MELEE)
@@ -6924,12 +6931,12 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 
 	if(p_ptr->pclass == CLASS_SUMIREKO && shuriken == -2 && p_ptr->lev > 34) sumireko_throwing = TRUE;
 
-	/*:::忍者の八方手裏剣のときは投げるアイテムが決まっている*/
 	if (p_ptr->special_defense & KATA_MUSOU)
 	{
 		set_action(ACTION_NONE);
 	}
 
+	/*:::忍者の八方手裏剣のときは投げるアイテムが決まっている*/
 	if (shuriken >= 0)
 	{
 		item = shuriken;
@@ -6956,6 +6963,25 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 		}
 		else if (buki_motteruka(INVEN_LARM)) item = INVEN_LARM;
 		else item = INVEN_RARM;
+	}
+	//v2.0.11 美天の棒投げ　棒しか投げられない
+	else if (shuriken == -3)
+	{
+		/* Get an item */
+#ifdef JP
+		q = "どの棒を投げますか? ";
+		s = "投げるアイテムがない。";
+#else
+		q = "Throw which staff? ";
+		s = "You have nothing to throw.";
+#endif
+		item_tester_tval = TV_STICK;
+		if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR | USE_EQUIP)))
+		{
+			flush();
+			return FALSE;
+		}
+
 	}
 	/*:::それ以外の時は投げるものを選ぶ*/
 	else
@@ -7070,6 +7096,9 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	/* Max distance of 10-18 */
 	if (tdis > mul) tdis = mul;
 
+	//美天の棒投げ　少し射程が長い
+	if (shuriken == -3) tdis += 3;
+
 	if(tdis > 18) tdis = 18;
 	if(tdis < 1) tdis = 1;
 
@@ -7090,8 +7119,6 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 		if (!get_aim_dir(&dir)) return FALSE;
 
 		/* Predict the "target" location */
-		/*:::なぜ99など掛けるのだろうか？射程が可変だからとりあえず大き目にしてある？
-		 *:::ターゲットがいるときは別処理なのでこれで支障ないのか*/
 		tx = px + 99 * ddx[dir];
 		ty = py + 99 * ddy[dir];
 
@@ -7110,6 +7137,8 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	//    (q_ptr->name1 == ART_AEGISFANG) || boomerang)
 	if ( have_flag(flgs, TR_BOOMERANG) || boomerang)
 		return_when_thrown = TRUE;
+
+	if (shuriken == -3) return_when_thrown = TRUE;
 
 	/*:::アイテム減少、「まだ○個の△を持っている」などの記述*/
 	/* Reduce and describe inventory */
@@ -7153,6 +7182,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 
 	if(energy_use < 20) energy_use = 20;//paranoia
 
+	if (p_ptr->wizard) msg_format("throw_aux() use_energy:%d", energy_use);
 
 	///class　投擲速度ボーナス 上の速度ボーナスを入れたので削除した
 	/*:::盗賊と忍者は速度にボーナス*/
@@ -7348,7 +7378,6 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 					}
 
 					if(suitable_item && object_is_artifact(q_ptr)) dd *= 2; //投擲向きのアーティファクトを投げた時のボーナス追加
-
 					tdam = damroll(dd, ds);
 					/* Apply special damage XXX XXX XXX */
 					tdam = tot_dam_aux(q_ptr, tdam, m_ptr, 0, TRUE);
@@ -7383,7 +7412,6 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 
 					///mod150620 ダメージに重量ボーナスがつくようにしてみた
 					tdam += damroll(MAX(1,(tdis / 3)), MAX(q_ptr->weight/10,1));
-
 
 					/* Modify the damage */
 					tdam = mon_damage_mod(m_ptr, tdam, FALSE);
@@ -7540,22 +7568,25 @@ msg_print("これはあまり良くない気がする。");
 		int back_chance = randint1(30)+20+((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 		char o2_name[MAX_NLEN];
 
-		//ブーメランフラグ付きの★☆を剣術家特技「ブーメラン」で投げたら必ず返ってくる
-		if (have_flag(flgs, TR_BOOMERANG) && object_is_artifact(q_ptr) && boomerang) come_back = TRUE;
+		//ブーメランフラグ付きの★☆を剣術家特技「ブーメラン」で投げたら必ず回収できる
+		if (have_flag(flgs, TR_BOOMERANG) && object_is_artifact(q_ptr) && boomerang) success_catch = TRUE;
 
-		//菫子特殊投擲は必ず返ってくる
-		if(sumireko_throwing) come_back = TRUE;
+		//菫子特殊投擲は必ず回収できる
+		if(sumireko_throwing) success_catch = TRUE;
 
-		//投擲熟練度が高い場合必ず返ってくる
-		if (ref_skill_exp(SKILL_THROWING) >= 5600) come_back = TRUE;
+		//美天が初期所持の★を棒投げした場合必ず返ってくる
+		if (shuriken == -3 && q_ptr->name1 == ART_BITEN) success_catch = TRUE;
 
-		if (cheat_xtra && come_back) msg_print("(come back)");
+		//投擲熟練度が高い場合必ず回収できる
+		if (ref_skill_exp(SKILL_THROWING) >= 5600) success_catch = TRUE;
+
+		if (cheat_xtra && success_catch) msg_print("(come back)");
 
 		j = -1;
 		if (boomerang) back_chance += 4+randint1(5);
 		object_desc(o2_name, q_ptr, (OD_OMIT_PREFIX | OD_NAME_ONLY));
 
-		if((back_chance > 30) && !one_in_(100) || come_back)
+		if((back_chance > 30) && !one_in_(100) || success_catch)
 		{
 			for (i = cur_dis - 1; i > 0; i--)
 			{
@@ -7579,7 +7610,7 @@ msg_print("これはあまり良くない気がする。");
 				}
 			}
 			//必ず戻ってくる場合メッセージを変える
-			if (come_back)
+			if (success_catch)
 			{
 				if (item >= 0)
 				{
@@ -7602,7 +7633,7 @@ msg_print("これはあまり良くない気がする。");
 #else
 				msg_format("%s comes back to you.", o2_name);
 #endif
-				come_back = TRUE;
+				success_catch = TRUE;
 			}
 			else
 			{
@@ -7636,7 +7667,7 @@ msg_print("これはあまり良くない気がする。");
 		}
 	}
 
-	if (come_back)
+	if (success_catch)
 	{
 		if (item == INVEN_RARM || item == INVEN_LARM)
 		{

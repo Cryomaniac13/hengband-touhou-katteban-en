@@ -413,6 +413,22 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MIYOI) return TRUE;
 			else return FALSE;
 
+		case CLASS_BITEN:
+			if (r_idx == MON_BITEN) return TRUE;
+			else return FALSE;
+
+		case CLASS_ENOKO:
+			if (r_idx == MON_ENOKO) return TRUE;
+			else return FALSE;
+		case CLASS_CHIYARI:
+			if (r_idx == MON_CHIYARI) return TRUE;
+			else return FALSE;
+		case CLASS_HISAMI:
+			if (r_idx == MON_HISAMI) return TRUE;
+			else return FALSE;
+		case CLASS_ZANMU:
+			if (r_idx == MON_ZANMU) return TRUE;
+			else return FALSE;
 
 	}
 
@@ -2505,6 +2521,17 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			object_prep(q_ptr, k_idx);
 			apply_magic(q_ptr, object_level, am_mode);
 			(void)drop_near(q_ptr, -1, y, x);
+
+			//v2.0.11 確率で月の宝玉も落とすことにする
+			if (one_in_(4) || p_ptr->wizard)
+			{
+				k_idx = lookup_kind(TV_SOUVENIR, SV_SOUVENIR_MOON_ORB);
+
+				q_ptr = &forge;
+				object_prep(q_ptr, k_idx);
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+
 		}
 		break;
 	case MON_ORIN:
@@ -2539,6 +2566,17 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 				object_prep(q_ptr, lookup_kind(TV_SWEETS, SV_SWEETS_DANGO));
 				(void)drop_near(q_ptr, -1, wy, wx);
 			}
+
+			//v2.0.11 確率で月の宝玉も落とすことにする
+			if (one_in_(4))
+			{
+				int k_idx = lookup_kind(TV_SOUVENIR, SV_SOUVENIR_MOON_ORB);
+
+				q_ptr = &forge;
+				object_prep(q_ptr, k_idx);
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+
 		}
 		break;
 		//てゐに高草郡の光る竹追加
@@ -3433,6 +3471,15 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			chance = 66;
 			break;
 
+		case MON_BITEN:
+			a_idx = ART_BITEN;
+			chance = 100;
+			break;
+
+		case MON_ENOKO:
+			a_idx = ART_ENOKO;
+			chance = 100;
+			break;
 
 
 
@@ -4005,7 +4052,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 	if (MON_DRUNK(m_ptr) > m_ptr->maxhp)
 	{
 		flag_drunk = TRUE;
-		//v2.0.9b 美宵が良い潰して倒したときクエスト完了にならないので、
+		//v2.0.9b 美宵が酔い潰して倒したときクエスト完了にならないので、
 		//弥縫策として倒す瞬間だけ敵対させることにする。
 		//set_hostile()を使うと周囲の友好モンスターが全部敵対するのでフラグだけいじる
 		if (is_friendly(m_ptr) ) m_ptr->smart &= ~SM_FRIENDLY;

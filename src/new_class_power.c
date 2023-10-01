@@ -44,6 +44,214 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.0.11 美天特技
+class_power_type class_power_biten[] =
+{
+
+	{ 7,10,25,FALSE,FALSE,A_INT,0,0,_("殺気感知", "Detect Murderous Intent"),
+	_("周囲の精神を持つモンスターを感知する。",
+    "Detects nearby non-mindless monsters.") },
+
+	{ 16,20,35,FALSE,FALSE,A_DEX,0,0,_("棒投げ", "Throw Staff"),
+	_("棒系の武器を投擲する。通常の投擲より飛距離が長くなりやすい。この特技で投げた棒はブーメラン扱いになり高確率で戻ってくる。「★孫美天のクォータースタッフ」を投げると必ず戻ってくる。",
+    "Throws a staff weapon. Throw range is higher compared to ordinary throw. The staff thrown with this ability is treated as a boomerang, and has high chance to return to you. If you throw '*Quarterstaff of Son Biten', it is guaranteed to return.")},
+
+	{ 24,30,45,FALSE,TRUE,A_CHR,0,0,_("サル召喚", "Summon Monkeys"),
+	_("猿系のモンスター数体を配下として召喚する。",
+    "Summons several monkeys as your followers.")},
+
+	{ 30,0,50,FALSE,FALSE,A_CHR,0,0,_("移送", "Transport Away"),
+	_("モンスター一体を現在のフロアから追放する。「★孫美天のクォータースタッフ」を所持していないと使えない。友好的なモンスターには効きやすくユニークモンスターには効きづらい。クエスト打倒対象のモンスターには効果がない。",
+    "Transports a single monster away from this level. Requires '*Quarterstaff of Son Biten'. Effective against friendly monsters, less effective against unique monsters. Does not affect quest targets.")},
+
+	{ 37,74,60,TRUE,FALSE,A_STR,0,20,_("範囲攻撃", "Area Attack"),
+	_("隣接したグリッド全てに攻撃する。棒系武器を装備していないと使えない。",
+    "Attacks all adjacent grids. Requires having a staff weapon equipped.")},
+
+	{ 44,96,90,FALSE,TRUE,A_DEX,0,0,_("モンキーマジック", "Monkey Magic"),
+		_("視界内の全てに対しダメージを与える。威力は右手に装備した棒武器を投げたときの威力によって決まる。武器属性やスレイは考慮されない。",
+        "Deals damage to everyone in sight. Power depends on damage that would be dealt by throwing the staff weapon equipped in your right hand, but is not affected by elemental brands or slays.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy",	"" },
+};
+
+
+cptr do_cmd_class_power_aux_biten(int num, bool only_info)
+{
+	int dir;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+	case 0:// 殺気感知
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+		detect_monsters_mind(rad);
+		break;
+	}
+	case 1: //棒投げ
+	{
+		if (only_info) return format("");
+
+		//shurikenに-3を入れ、必ずブーメランになる代わりに棒しか投げられないようにする
+		if (!do_cmd_throw_aux(1, FALSE, -3)) return NULL;
+
+		//cmd_throw_aux()で投擲熟練度により低下した消費行動力を特技消費行動力の値に反映..しようと思ったが投擲指輪+グロンド投擲が強すぎるのでやめた
+		//new_class_power_change_energy_need = energy_use;
+	}
+	break;
+
+
+
+	case 2://猿召喚
+	{
+		int i;
+		bool flag = FALSE;
+		if (only_info) return "";
+
+		for (i = 0; i<(2 + p_ptr->lev / 20); i++)
+		{
+			if ((summon_specific(-1, py, px, p_ptr->lev, SUMMON_MONKEYS, (PM_ALLOW_GROUP | PM_FORCE_PET))))flag = TRUE;
+		}
+		if (flag)
+			msg_print(_("猿達を呼び出した！", "You summon monkeys!"));
+		else
+			msg_print(_("何も現れなかった...", "Nobody appears..."));
+		break;
+
+	}
+
+	//移送の罠の能動的な発動
+	case 3:
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+
+		int power = plev + chr_adj * 5;
+
+		if (only_info) return format(_str_eff_power, power);
+
+		if (!check_equip_specific_fixed_art(ART_BITEN, FALSE))
+		{
+			msg_print(_("罠の仕掛けられた棒がない！", "You don't have the trapped staff!"));
+			return NULL;
+		}
+
+		if (!get_rep_dir2(&dir)) return FALSE;
+		if (dir == 5) return FALSE;
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			char m_name[120];
+
+			if (is_friendly(m_ptr)) power *= 2;
+
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("あなたは%sを騙して移送の罠にかけようとした...",
+                        "You try to trick %s into triggering the transportation trap..."),m_name);
+
+			if (check_transportation_trap(m_ptr, power))
+			{
+				msg_format(_("%sはこのフロアから消えた。", "%^s disappears from the level."), m_name);
+
+				delete_monster_idx(cave[y][x].m_idx);
+
+				break;
+			}
+
+			msg_print(_("失敗！", "Failure!"));
+
+			if (is_friendly(m_ptr))
+			{
+				msg_format(_("%sは怒った！", "%^s gets angry!"),m_name);
+				set_hostile(m_ptr);
+			}
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+
+
+	case 4: //周囲攻撃
+	{
+		if (only_info) return format("");
+
+		if (inventory[INVEN_RARM].tval != TV_STICK)
+		{
+			msg_print(_("棒を装備していないとこの特技は使えない。", "You cannot use this ability without having a staff equipped."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは棒をぶん回した！", "You swing your staff around!"));
+		whirlwind_attack(0);
+	}
+	break;
+
+	case 5: //モンキーマジック
+	{
+
+		int dam=0;
+		object_type *o_ptr = &inventory[INVEN_RARM];
+
+		if (o_ptr->tval != TV_STICK)
+		{
+			dam = 0;
+		}
+		else
+		{
+			//投擲時ダメージ概算　投擲向き★ボーナスとか重量ボーナスとかは細かく計算せず雑に参入している
+			int mult = 3;
+			u32b flgs[TR_FLAG_SIZE];
+
+			if (p_ptr->mighty_throw) mult++;
+			object_flags(o_ptr, flgs);
+			if (have_flag(flgs, TR_THROW)) mult ++;
+
+			dam = o_ptr->dd * (o_ptr->ds + 1) / 2 + (o_ptr->to_d > 0 ? o_ptr->to_d : -1 * (o_ptr->to_d))+p_ptr->to_d_m;
+
+			dam *= mult;
+
+		}
+
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (o_ptr->tval != TV_STICK)
+		{
+			msg_print(_("棒を装備していないとこの特技は使えない。", "You cannot use this ability without having a staff equipped."));
+			return NULL;
+		}
+
+		project_hack2(GF_ARROW, 0, 0, dam);
+		msg_print(_("あなたの投げた棒は周囲の全ての敵を薙ぎ倒して戻ってきた！",
+                    "You hurl your staff, and it cleaves through all your enemies and returns to you!"));
+
+		break;
+	}
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
 //v2.09 美宵
 class_power_type class_power_miyoi[] =
 {
@@ -568,7 +776,11 @@ class_power_type class_power_yuma[] =
 	_("特技「この世に存在してはならない暴食」で倒したモンスターの特技を使う。特技ごとに追加のMPと成功判定が必要。",
     "Uses special abilities of monsters defeated with 'Gluttony Not Meant to Be in This World'. Special abilities have their own MP costs and failure rates.")},
 
-	{35,45,65,FALSE,TRUE,A_STR,0,0,_("強引で未熟な蒸留装置", "Forcible and Immature Distillation Device"),
+	{ 33,30,60,FALSE,TRUE,A_CON,0,0,_("ゴージライザー", "Gorge Riser"),
+	_("周辺を*破壊*する。半径は現在の満腹度によって変化する。満腹度を大量に消費する。",
+    "*Destroys* nearby area. Radius depends on your current satiation level. Greatly reduces satiation.")},
+
+	{36,45,65,FALSE,TRUE,A_STR,0,0,_("強引で未熟な蒸留装置", "Forcible and Immature Distillation Device"),
 	_("自分の位置を中心に巨大なボールを複数回発生させる。ボールの属性は石油・蒸気・火炎・汚染からランダム。",
     "Generates several huge balls centered on yourself. Ball element is randomly chosen from oil, steam, fire or pollution.")},
 
@@ -683,6 +895,31 @@ cptr do_cmd_class_power_aux_yuma(int num, bool only_info)
 
 	case 5:
 	{
+		int food = CHECK_YUMA_FOOD_STOCK;
+		int rad = 3 * food;
+		if (only_info) return format(_str_eff_area, rad);
+
+		digestion = 13000;
+
+		if (rad<1)
+		{
+			msg_print(_("栄養が足りない。", "You're not satiated enough."));
+			return NULL;
+		}
+
+		msg_print(_("体内のエネルギーを開放した！", "You release energy from your body!"));
+		destroy_area(py, px, rad, FALSE, FALSE, FALSE);
+
+		set_food(p_ptr->food - digestion);
+
+
+	}
+	break;
+
+
+
+	case 6:
+	{
 		int rad = 3 + plev / 24;
 		int count = plev / 10 - 1;
 		damage = 200 + plev * 3 + chr_adj * 5;
@@ -718,12 +955,12 @@ cptr do_cmd_class_power_aux_yuma(int num, bool only_info)
 	}
 	break;
 
-	case 6:
+	case 7:
 	{
 		base = 10;
 		if (only_info) return format(_str_eff_dur,base);
 
-		digestion = 10000;
+		digestion = 13000;
 
 		if(use_itemcard && (p_ptr->food - PY_FOOD_WEAK) < digestion || !use_itemcard && !CHECK_YUMA_FOOD_STOCK)
 		{
@@ -752,7 +989,7 @@ cptr do_cmd_class_power_aux_yuma(int num, bool only_info)
 	}
 	break;
 
-	case 7:
+	case 8:
 	{
 		damage = 200 + plev * 3 + chr_adj * 5;
 
@@ -1081,7 +1318,6 @@ cptr do_cmd_class_power_aux_megumu(int num, bool only_info)
 
 
 //v2.0.2 典
-
 class_power_type class_power_tsukasa[] =
 {
 
@@ -1097,10 +1333,18 @@ class_power_type class_power_tsukasa[] =
 	_("破片属性の半径0のロケットで攻撃する。モンスターに当たるとそのモンスターが行動するたびにダメージを与える。",
     "Fires a shards rocket with radius 0. If it hits a monster, that monster starts taking damage for every action it performs.")},
 
+	{ 25,10,40,FALSE,TRUE,A_DEX,0,0,_("暗殺", "Assassinate"),
+	_("確率でモンスターを一撃で倒すが失敗すると1ダメージになる攻撃を行う。配下に寄生中は使えない。武器を持っていないといけない。ユニークモンスターには効果がない。",
+    "Performs an attack that has a chance to defeat a monster in a single strike, but deals 1 damage if it fails. Cannot be used if you're parasitising a follower. Requires having a weapon. Does not affect unique monsters.")},
+
 	{ 30,40,50,FALSE,FALSE,A_CHR,0,0,_("フォックスワインダー", "Fox Winder"),
 	_("寄生中の配下を加速させる。", "Hastes a parasitised follower.") },
 
-	{ 35,55,65,FALSE,TRUE,A_INT,0,0,_("管の中の邪悪", "Wickedness Within the Pipe"),
+	{ 34,30,55,FALSE,FALSE,A_INT,0,0,_("珍品探索", "Search for Curios"),
+	_("現在のフロアに「珍品」に分類されるアイテムがあるかどうかとその大まかな距離を調べる。",
+    "Gives a rough estimate of distance to 'Curio' items on this level, if such items are present.")},
+
+	{ 37,55,65,FALSE,TRUE,A_INT,0,0,_("管の中の邪悪", "Wickedness Within the Pipe"),
 	_("暗黒属性のビームを隣接した壁を除くランダムな方向に複数回放つ。",
     "Fires multiple darkness beams in random directions, except adjacent walls.")},
 
@@ -1240,6 +1484,54 @@ cptr do_cmd_class_power_aux_tsukasa(int num, bool only_info)
 
 	case 3:
 	{
+		int y, x;
+		monster_type *m_ptr;
+
+		if (only_info) return format("");
+
+		if (p_ptr->riding)
+		{
+			msg_print(_("この特技は一人でないと使えない。", "You have to act by yourself to use this special ability."));
+			return NULL;
+		}
+		else if (p_ptr->do_martialarts)
+		{
+			msg_format(_("武器を持っていない。", "You're not holding a weapon."));
+			return NULL;
+		}
+
+		if (!get_rep_dir2(&dir)) return NULL;
+		if (dir == 5) return NULL;
+
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (!m_ptr->r_idx || !m_ptr->ml)
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+		else
+		{
+			char m_name[80];
+			monster_race *r_ptr = &r_info[m_ptr->r_idx];
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("あなたは武器を構えて%sの後ろから忍び寄った…", "You sneak behind %s, preparing your weapon..."), m_name);
+
+			py_attack(y, x, HISSATSU_KYUSHO);
+		}
+
+		break;
+	}
+
+
+
+
+
+	case 4:
+	{
 		int v = 20;
 
 		if (only_info) return format(_str_eff_dur, v);
@@ -1269,10 +1561,19 @@ cptr do_cmd_class_power_aux_tsukasa(int num, bool only_info)
 	break;
 
 
+	case 5:
+	{
+		if (only_info) return format("");
+		msg_print(_("あなたは配下の管狐たちに珍しい物の捜索を命じた。", "You order your kuda-gitsune subordinates to search for rare items."));
+		search_specific_object(7);
+		break;
+	}
+
+
 	//管の中の邪悪
 	//スターライトの杖の暗黒属性バージョン 回数は5d3から6固定に
 	//期待dam lev30:300 lev40:360 lev50:400
-	case 4:
+	case 6:
 	{
 		int beam_num = 6;
 		int dice = 6 + plev / 8;
@@ -1303,7 +1604,7 @@ cptr do_cmd_class_power_aux_tsukasa(int num, bool only_info)
 	}
 	break;
 
-	case 5:
+	case 7:
 	{
 
 		monster_type 	*m_ptr;
@@ -1354,7 +1655,7 @@ cptr do_cmd_class_power_aux_tsukasa(int num, bool only_info)
 	break;
 
 	//天狐龍星の舞
-	case 6:
+	case 8:
 	{
 		int base = plev * 5 + chr_adj * 5;
 
@@ -3223,13 +3524,19 @@ class_power_type class_power_yachie[] =
 	_("このフロアで自分に対して敵対召喚されてくるモンスターを買収しようと試みる。買収に成功すると所持金が減少する。",
     "Starts attempting to bribe any hostile summoned monsters on this level to fight on your side. A successful bribe spends some of your money.")},
 
-	{ 40,50,70,FALSE,TRUE,A_STR,0,0,_("龍紋弾", "Dragon Crest Bullets"),
+	{ 39,50,70,FALSE,TRUE,A_STR,0,0,_("龍紋弾", "Dragon Crest Bullets"),
 	_("水属性の強力なボールを放つ。",
     "Fires a powerful ball of water.")},
 
-	{ 45,66,75,FALSE,TRUE,A_INT,0,0,_("搦手の鬼畜生", "Devilish Beasts Attacking from the Rear"),
+	{ 44,66,75,FALSE,TRUE,A_INT,0,0,_("搦手の鬼畜生", "Devilish Beasts Attacking from the Rear"),
 	_("フロアにいる複数の配下を指定したモンスターの隣にテレポートさせ、さらにその配下をすぐに行動できるようにする。",
     "Teleporta several of your followers on this level next to the target monster, and also makes them act immediately.")},
+
+	{ 48,120,80,FALSE,TRUE,A_CHR,0,0,_("吉弔大結界", "Great Kicchou Barrier"),
+	_("自分を中心とした広範囲に守りのルーンを敷き詰め、さらに近くのモンスターを能力低下状態にしようと試みる。",
+    "Fills a wide area around you with runes of protection, and attempts to lower abilities of nearby monsters.")},
+
+
 
 	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy",	"" },
 };
@@ -3511,6 +3818,20 @@ cptr do_cmd_class_power_aux_yachie(int num, bool only_info)
 
 	}
 	break;
+
+	case 9:
+	{
+		int rad = 6;
+		int power = plev * 6 + chr_adj * 10;
+		if (only_info) return format(_("効力:～%d", "pow: ~%d"), power/2);
+
+		project(0, rad, py, px, 0, GF_MAKE_GLYPH, PROJECT_GRID | PROJECT_JUMP | PROJECT_HIDE, -1);
+		msg_print(_("巨大な結界が発動した！", "You set up a massive barrier!"));
+		project(0, rad, py, px, power, GF_DEC_ALL, PROJECT_KILL | PROJECT_JUMP | PROJECT_HIDE, -1);
+
+	}
+	break;
+
 
 	default:
 	{
@@ -8532,8 +8853,8 @@ class_power_type class_power_aunn[] =
         "Summons a lot of friendly canine monsters.")},
 
 	{43,72,85,FALSE,TRUE,A_CHR,0,0,_("一人阿吽の呼吸", "Solitary A-Un Breathing"),
-		_("ごく短期間分身し、モンスターからの攻撃の半分を回避する。",
-        "Creates a clone of yourself for a short period of time, letting you avoid about half of enemy attacks.")},
+		_("神社にいるもう一人の自分を短時間呼び出しモンスターからの攻撃の半分を回避する。さらに隣接攻撃時に複数回の追撃が発生するようになる。",
+        "Calls up another one of you from the shrine for a short period of time, letting you avoid about half of enemy attacks. Also gives you additional attacks in melee combat.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
 };
@@ -10826,6 +11147,12 @@ cptr do_cmd_class_power_aux_sagume(int num, bool only_info)
 	case 0:
 		{
 			if(only_info) return _("効力:不定", "pow: undef");
+
+			if (p_ptr->inside_arena)
+			{
+				msg_print(_("ここでは使えない。", "You can't use it here."));
+				return NULL;
+			}
 
 			if(one_in_(10)) msg_print(_("「...そうでは無い。」", "'...That's not it.'"));
 			else if(one_in_(9)) msg_print(_("「運命は逆転し始めた。」", "'Fate has begun to turn over.'"));
@@ -25190,7 +25517,7 @@ cptr do_cmd_class_power_aux_wriggle(int num, bool only_info)
 			if(one_in_(4))msg_print(_("あなたは特殊な香りを放った・・", "You release a special pheromone..."));
 			else if(one_in_(3))msg_print(_("あなたは蟲の言葉で話しかけた・・", "You start speaking insect language..."));
 			else if(one_in_(2))msg_print(_("あなたは妖しい光を放った・・", "You emit a bewitching light..."));
-			else msg_print(_("あなたは触覚を誘惑的に動かした・・", "You move alluringly..."));
+			else msg_print(_("あなたは触角を誘惑的に動かした・・", "You move your antennae alluringly..."));
 
 			for (j = 1; j < m_max; j++)
 			{
@@ -34181,6 +34508,13 @@ cptr do_cmd_class_power_aux_tewi(int num, bool only_info)
 			monster_type *m_ptr;
 			if(only_info) return "";
 
+			if (p_ptr->inside_arena)
+			{
+				msg_print(_("フロアの雰囲気は敵対的だ。ここでの説得は無意味だ。",
+                            "The atmosphere here is too hostile. Your speeches would be meaningless."));
+				return NULL;
+			}
+
 #ifdef JP
 			if(one_in_(4))
 				msg_format("あなたは一瀉千里の名口上を披露した！");
@@ -37088,6 +37422,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_BITEN:
+		class_power_table = class_power_biten;
+		class_power_aux = do_cmd_class_power_aux_biten;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -38977,7 +39317,7 @@ const support_item_type support_item_list[] =
         "Fires a ball of rainbow.")},
 
 	//v2.0.6 尤魔　ガイアの血液
-		{ 100,50, 120,3,16,	MON_YUMA,class_power_yuma,do_cmd_class_power_aux_yuma,6,
+		{ 100,50, 120,3,16,	MON_YUMA,class_power_yuma,do_cmd_class_power_aux_yuma,7,
 		_("獣神のピアス", "Beast God's Earring"),
 		_("それを使うと体力を全回復し、切り傷と能力低下を治癒し、さらに腕力器用耐久を短時間上昇させる。ただし満腹度を大量に消費する。",
         "Fully recovers HP, cures cuts and stat drain, and raises strength, dexterity and constitution for a short time. However, it greatly reduces your satiation level.")},
@@ -38993,6 +39333,12 @@ const support_item_type support_item_list[] =
 		_("クジラの形をした帽子", "Whale-shaped Hat"),
 		_("それはモンスター一体を友好的にして酒を呑ませる。酒を一本消費し、消費した酒によって効果と成功率が変わる。人間に効果が高い。",
         "Turns a monster friendly and serves them alcohol. Uses up alcohol item from your inventory, effect and power depends on kind of item used. Effective against humans.")},
+
+	//v2.0.11 美天　サル召喚
+		{ 90,20, 70,1,20,	MON_BITEN,class_power_biten,do_cmd_class_power_aux_biten,2,
+		_("緊箍児", "Golden Headband"),_("それは大量の猿を召喚する。", "Summons a large amount of monkeys.") },
+
+
 
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},

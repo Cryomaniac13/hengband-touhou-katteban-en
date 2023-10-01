@@ -1089,6 +1089,11 @@ bool convert_item_to_mana(void)
 				add_junko_flag_val(JKF2_HELL, 1000 * amt);
 				break;
 
+			case SV_SOUVENIR_MOON_ORB:
+				add_junko_flag_val(JKF2_LITE, 200 * amt);
+				add_junko_flag_val(JKF2_HOLY, 300 * amt);
+				break;
+
 			}
 		}
 		else if (tv == TV_MATERIAL) //ëfçﬁ

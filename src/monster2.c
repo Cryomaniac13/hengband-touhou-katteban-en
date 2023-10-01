@@ -1200,6 +1200,12 @@ static bool summon_specific_aux(int r_idx)
 			break;
 		}
 
+		case SUMMON_MONKEYS:
+		{
+			okay = (r_idx == MON_FLYING_MONKEY || r_idx == MON_NIKKO_MONKEY);
+			break;
+		}
+
 
 	}
 

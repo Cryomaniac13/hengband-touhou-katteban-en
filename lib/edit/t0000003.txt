@@ -280,7 +280,7 @@ B:5:A:6:折れた武器を修復する:1000:1000:g:47:0
 
 B:$6:N:Rainbow Cavern of Earth Spirits:empty:　
 B:$6:A:0:Go to Forest of Magic:0:0:a:89:0
-B:6:N:地霊虹洞への入り口:無人:　
+B:6:N:地霊虹洞:無人:　
 B:6:A:0:地上の魔法の森へ行く:0:0:a:89:0
 
 
