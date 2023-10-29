@@ -6973,6 +6973,7 @@ s16b choose_random_trap(void)
 		//normal_traps[]周辺作り直すのは面倒なのでレーザートラップ追加にあたりここに無理やり放り込んだ
 		//折角なので輝夜刺客クエと月都万象展クエでは全部これになるようにしてみた
 		//v2.0.11 トラバサミを実装したのでさらに無理やり追加。もっとまともな処理にすべきだがあまり大規模に罠を増やす予定も今のところないのでこのまま
+		//TODO:今後これ以上罠を増やすなら処理を整理すべき
 		if(p_ptr->inside_quest == QUEST_KILL_GUYA && one_in_(2) || p_ptr->inside_quest == QUEST_MOON_VAULT && !one_in_(5)|| dun_level > 19 && one_in_(20))
 			feat = f_tag_to_index_in_init("TRAP_BEAM");
 		else if ( one_in_(19))
@@ -7014,11 +7015,8 @@ s16b choose_random_trap(void)
 		feat = f_tag_to_index_in_init("TRAP_BEAR");
 	}
 
-	//テスト用
-	if (p_ptr->wizard)
-	{
-		feat = f_tag_to_index_in_init("TRAP_BEAR");
-	}
+	//トラバサミのテスト用
+	//if (p_ptr->wizard)feat = f_tag_to_index_in_init("TRAP_BEAR");
 
 	return feat;
 }
@@ -12475,6 +12473,11 @@ bool generate_seven_star_sword(void)
 	{
 		msg_print(_("あなたは自ら武器を持つつもりはない。",
                     "You have no intention of wielding weapons yourself."));
+		return FALSE;
+	}
+	if (p_ptr->pclass == CLASS_ENOKO)
+	{
+		msg_print(_("トラバサミが邪魔で武器を持てない。", "You can't hold a weapon - your beartrap will get in the way."));
 		return FALSE;
 	}
 

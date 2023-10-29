@@ -6483,6 +6483,28 @@ void calc_bonuses(void)
 		if (plev > 39) p_ptr->resist_fear = TRUE;
 		break;
 
+	case CLASS_ENOKO:
+		//“Á‹Zu‘Ò‚¿•š‚¹v’†‚ÍUŒ‚‰ñ”ã¸
+		if (p_ptr->concent)
+		{
+			extra_blows[0] += 2;
+			extra_blows[1] += 2;
+		}
+		//Ž©‘OÌŒ@”\—Í pval‚É‚µ‚Ä+1`+6’ö“x
+		p_ptr->skill_dig += 20 + plev * 2;
+
+		p_ptr->to_a += 5 + plev / 2;
+		p_ptr->dis_to_a += 5 + plev / 2;
+
+		if (plev >  9) p_ptr->resist_fire = TRUE;
+		if (plev > 29) p_ptr->resist_neth = TRUE;
+		if (p_ptr->lev > 39)
+		{
+			p_ptr->oppose_fire = 1;
+			p_ptr->redraw |= PR_STATUS;
+		}
+
+		break;
 
 
 	default:

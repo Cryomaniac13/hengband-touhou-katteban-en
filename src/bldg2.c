@@ -5245,6 +5245,31 @@ bool hatate_search_unique_monster(void)
 				search_floor = d_info[search_dungeon].mindepth + randint0(3);
 			}
 
+			//v2.0.12 40レベル以上浅いフロアには出ないことにする
+			if (r_ptr->level > search_floor + 40)
+			{
+#ifdef JP
+				if (hatate)
+					prt("　画像が不鮮明だ。自分が行ける場所から遠すぎるのかもしれない。", 9, 20);
+				else
+				{
+					prt("　ちょっと画像が不鮮明ね...", 9, 20);
+					prt("　もう少し探索範囲を広げてくれれば分かるかも。」", 10, 20);
+				}
+#else
+				if (hatate)
+					prt("  The picture is unclear. You might be too far away from the destination.", 9, 20);
+				else
+				{
+					prt("  The picture is a bit unclear...", 9, 20);
+					prt("  I might be able to tell more if you explore a bit deeper.'", 10, 20);
+				}
+#endif
+				inkey();
+				return FALSE;
+
+			}
+
 		}
 
 #ifdef JP

@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 11
+#define H_VER_PATCH 12
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -7172,7 +7172,7 @@ extern int PlayerUID;　
 #define MON_HISAMI			1388
 #define MON_ZANMU			1389
 
-#define MON_IDX_MAX			1384	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_IDX_MAX			1390	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -7704,9 +7704,12 @@ extern int PlayerUID;　
 
 /*:::赤魔やスペマスなど呪文を学習済の職の判定*/
 #define REALM_SPELLMASTER (cp_ptr->realm_aptitude[0] == 2)
+
+
 ///mod141116 p_ptr->concentを使う職の判定
 //v1.1.14 依姫追加
-#define CLASS_USE_CONCENT	(p_ptr->pclass == CLASS_SNIPER || p_ptr->pclass == CLASS_SOLDIER || p_ptr->pclass == CLASS_KISUME || p_ptr->pclass == CLASS_YUGI || p_ptr->pclass == CLASS_SANAE || p_ptr->pclass == CLASS_MEIRIN || p_ptr->pclass == CLASS_YATSUHASHI || p_ptr->pclass == CLASS_BENBEN || p_ptr->pclass == CLASS_RAIKO || p_ptr->pclass == CLASS_YORIHIME || p_ptr->pclass == CLASS_RESEARCHER)
+//TODO:この判定式要るのか？reset_concentration()
+#define CLASS_USE_CONCENT	(p_ptr->pclass == CLASS_SNIPER || p_ptr->pclass == CLASS_SOLDIER || p_ptr->pclass == CLASS_KISUME || p_ptr->pclass == CLASS_YUGI || p_ptr->pclass == CLASS_SANAE || p_ptr->pclass == CLASS_MEIRIN || p_ptr->pclass == CLASS_YATSUHASHI || p_ptr->pclass == CLASS_BENBEN || p_ptr->pclass == CLASS_RAIKO || p_ptr->pclass == CLASS_YORIHIME || p_ptr->pclass == CLASS_RESEARCHER || p_ptr->pclass == CLASS_ENOKO)
 
 
 
@@ -7885,6 +7888,7 @@ extern int PlayerUID;　
 #define MELEE_MODE_SUIKEN		104 //v1.1.78 酔拳
 #define MELEE_MODE_JYOON_3		105 //v1.1.92 女苑専用性格用
 #define MELEE_MODE_AUNN_2		106 //v2.0.11 あうん追加攻撃用
+#define MELEE_MODE_ENOKO		107 //v2.0.12 慧ノ子
 
 /*:::格闘効果の特殊効果分類*/
 #define MELEE_STUN				1	//朦朧
@@ -8593,10 +8597,14 @@ extern int PlayerUID;　
 
 #define SCORE_SERVER_STR_LEN	40
 
+//ダンジョンのグリッドに対する追加フラグ
+//cave[][].cave_xtra_flagに保持
+#define CAVE_XTRA_FLAG_NEMUNO		0x00000001	//ネムノの縄張り
+#define CAVE_XTRA_FLAG_YOUR_TRAP	0x00000002	//＠が設置したトラップ
+
+
 //v1.1.35 ネムノが縄張りにいるかどうかの判定
 #define IS_NEMUNO_IN_SANCTUARY	(p_ptr->pclass == CLASS_NEMUNO && (cave[py][px].cave_xtra_flag & CAVE_XTRA_FLAG_NEMUNO))
-
-#define CAVE_XTRA_FLAG_NEMUNO	0x00000001	//ネムノの縄張り
 
 //v1.1.37 恐怖弱点 変身していない小鈴の特殊処理用
 #define IS_VULN_FEAR (p_ptr->pclass == CLASS_KOSUZU && !p_ptr->mimic_form)

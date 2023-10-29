@@ -4069,6 +4069,13 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 39) add_flag(flgs, TR_RES_FEAR);
 		break;
 
+	case CLASS_ENOKO:
+
+		add_flag(flgs, TR_TUNNEL);
+		if (p_ptr->lev > 9) add_flag(flgs, TR_RES_FIRE);
+		if (p_ptr->lev > 29) add_flag(flgs, TR_RES_NETHER);
+		break;
+
 
 	default:
 		break; /* Do nothing */

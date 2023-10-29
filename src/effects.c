@@ -311,6 +311,7 @@ void reset_tim_flags(void)
 	if ((p_ptr->pclass == CLASS_ORIN || p_ptr->pclass == CLASS_FLAN) && (p_ptr->lev > 34)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_MOKOU) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39)) p_ptr->oppose_fire = 1;
+	if ((p_ptr->pclass == CLASS_ENOKO) && (p_ptr->lev > 39)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 
 	if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
@@ -4511,6 +4512,7 @@ bool set_oppose_fire(int v, bool do_dec)
 	if ((p_ptr->pclass == CLASS_ORIN || p_ptr->pclass == CLASS_FLAN) && (p_ptr->lev > 34)) v=1;
 	else if ((p_ptr->pclass == CLASS_MOKOU) && (p_ptr->lev > 29)) v=1;
 	else if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39)) v=1;
+	else if ((p_ptr->pclass == CLASS_ENOKO) && (p_ptr->lev > 39)) v = 1;
 	else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29)) v = 1;
 	else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29)) v = 1;
 	else if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29)) v = 1;

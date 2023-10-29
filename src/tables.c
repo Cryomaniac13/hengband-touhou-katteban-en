@@ -6542,8 +6542,8 @@ const player_class class_info[MAX_CLASS] =
         "Biten",
 #endif
 		{ 2, 3, 2, 0, 1, 2 },
-		32, 32, 32, 3, 22, 20, 60, 60,
-		12, 12, 10, 0,  2,  5, 20, 24,
+		32, 24, 32, 3, 22, 20, 60, 60,
+		12, 11, 10, 0,  2,  5, 20, 24,
 		3, 40, 40
 
 		//追加値暫定
@@ -6569,24 +6569,24 @@ const player_class class_info[MAX_CLASS] =
         "Enoko",
         "Enoko",
 #endif
-		{ -3, 2, 1, 0, -2, 2 },
-		20, 30, 35, 4, 16, 20, 35, 40,
-		12, 12, 12, 0,  3,  5, 12, 15,
-		2, 30, 40
+		{ 1, -2, -2, 2, 4, 0 },
+		45, 30, 30, 4, 16, 20, 55, 24,
+		18, 12, 10, 0,  2,  5, 18,  8,
+		8, 30, 40
 
 		//追加値暫定
-			,{ 1,5,5,5,5,0,0,0,0,5,5,5,5,0,0,5 }
-			,A_INT
-			,3,2,100,
+		,{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+		,A_INT
+		,3,2,100,
 
-			{ 2,2,1,1,2,0,0,0,0,0
-			,3,2,2,2,2,2,2,2,2,2
+		{ 4,1,1,1,1,0,0,0,0,0
+			,1,1,1,1,1,1,1,1,1,1
 			,1 }
-			,80,1,2,4,
+			,80,1,3,2,
 			FALSE,FALSE,TRUE
 			,FALSE
-			,4
-			,MON_TSUKASA
+			,3
+			,MON_ENOKO
 	},
 	{
 #ifdef JP
@@ -12513,6 +12513,33 @@ const martial_arts_new ma_blows_new[] =
 	{ _("あなたたちは%sに鮮やかなツープラトンを決めた！",
         "You, along with your clone, deliver a brilliant two-platoon strike to %s!"), MELEE_MODE_AUNN_2,45, 40, 12,12, MELEE_STUN2 ,12 },
 
+	//v2.0.12 慧ノ子
+	{ _("%sを噛んだ。",
+        "You bite %s."),           					MELEE_MODE_ENOKO, 1, 0,   2,  4, 0 ,2 },
+	{ _("%sをトラバサミで殴った。",
+        "You hit %s with a beartrap."),           		MELEE_MODE_ENOKO, 5, 3,   2,  5, MELEE_STUN ,3 },
+	{ _("トラバサミで%sに食いついた。",
+        "You bite %s with a beartrap."),				MELEE_MODE_ENOKO,10, 5,   2,  7, MELEE_SLOW ,4 },
+	{ _("%sにワンツー噛み付きを食らわせた。",
+        "You strike %s with a one-two punch."),  		MELEE_MODE_ENOKO,15, 10,  4,  5, 0 ,5 },
+	{ _("%sをトラバサミで掴んでねじり上げた。",
+        "You grab %s with a beartrap and twist it."),		MELEE_MODE_ENOKO,20, 12,  5,  5, MELEE_DEC_ATK ,5 },
+	{ _("%sに両手から火を吹き付けた！",
+        "You breathe fire from both of your arms at %s!"), 				MELEE_MODE_ENOKO,24, 15,  6,  6, MELEE_FIRE ,3 },
+	{ _("%sに右ストレート噛みつきを食らわせた。",
+        "You hit %s with a right straight punch."),		MELEE_MODE_ENOKO,28, 20,  3, 15,  0 ,12 },
+	{ _("%sをトラバサミで掴んで振り回した！",
+        "You grab %s with a beartrap, swinging it around!"),     	MELEE_MODE_ENOKO,32, 25,  6,  8, MELEE_DEC_MAG ,6 },
+	{ _("%sにトラバサミの刃が勢い良く食い込んだ！",
+        "You deeply drive the blades of your beartrap into %s!"), 	MELEE_MODE_ENOKO,36, 30,  7,  8, MELEE_SLOW ,8 },
+	{ _("%sにダブルアッパー噛みつきを食らわせた！",
+        "You strike %s with a double uppercut!"), 	MELEE_MODE_ENOKO,39, 35,  8,  8, MELEE_STUN ,8 },
+	{ _("赤熱する刃が%sを焼き焦がした！",
+        "You scorch %s with red-hot blades!"), 			MELEE_MODE_ENOKO,42, 35,  9,  9, MELEE_FIRE ,6 },
+	{ _("%sにトラバサミのデスロールを見舞った！",
+        "You hit %s with a beartrap death roll!"),   	MELEE_MODE_ENOKO,45, 40, 10, 10, MELEE_DEC_ATK ,10 },
+	{ _("%sを三つの顎で噛んで噛んで噛みまくった！",
+        "You keep chomping and chomping and chomping on %s with three of your jaws!"),   MELEE_MODE_ENOKO,47, 40, 12, 12, MELEE_DELAY ,12 },
 
 	{ _("終端用dummy", "terminator dummy"),0,0,0,1,1,0}
 };
@@ -17847,3 +17874,39 @@ monster_food_type monster_food_list[] =
 	{ 0,0,"dummy" }//r_idxが0の終端ダミー
 
 };
+
+//慧ノ子が生成できるトラップのリスト
+//player_level,trap_idx,f_tag,trap_name
+//player_levelの昇順に記述する
+enoko_make_trap_type enoko_make_trap_list[] =
+{
+	{ 1,TRAP_BEAR,"TRAP_BEAR",_("トラバサミ", "beartrap") },//アイテムカードでも配置可能にするため低レベルに
+	{ 15,TRAP_PIT,"TRAP_PIT",_("落とし穴", "pit trap") }, //ダメージ+朦朧付与　飛行無効
+
+	{ 18,TRAP_SLOW,"TRAP_SLOW",_("減速ダーツの罠", "slowness dart trap") },
+	{ 20,TRAP_LOSE_STR,"TRAP_LOSE_STR",_("腕力低下ダーツの罠", "strength drain dart trap") },
+	//{15,TRAP_LOSE_DEX,"","器用低下ダーツの罠"},対モンスターでは腕力も器用も攻撃力低下なので片方外す
+	{ 22,TRAP_LOSE_CON,"TRAP_LOSE_CON",_("耐久低下ダーツの罠", "constitution drain dart trap") },
+
+	//{25,TRAP_BLIND,"","盲目ガスの罠"},対モンスターでは混乱ガスと同じなので外す
+	{ 24,TRAP_SLEEP,"TRAP_SLEEP",_("睡眠ガスの罠", "sleeping gas trap") },
+	{ 26,TRAP_CONFUSE,"TRAP_CONFUSE",_("混乱ガスの罠", "confusion gas trap") },
+	{ 28,TRAP_TELEPORT,"TRAP_TELEPORT",_("テレポートの罠", "teleport trap") },
+
+	{ 30,TRAP_POISON,"TRAP_POISON",_("毒ガスの罠", "poison gas trap") },
+	{ 32,TRAP_FIRE,"TRAP_FIRE",_("火炎の罠", "fire trap") },
+	{ 34,TRAP_ACID,"TRAP_ACID",_("酸の罠", "acid trap") },
+	//{30,TRAP_ALARM,"","警報"},対モンスターではあまりメリットがないので外しておく
+
+	{ 36,TRAP_TRAPDOOR,"TRAP_TRAPDOOR",_("落とし戸", "trapdoor") },
+	{ 38,TRAP_BEAM,"TRAP_BEAM",_("レーザー・トラップ", "laser trap") },
+
+	{ 40,TRAP_POISON_PIT,"TRAP_POISON_PIT",_("石油地形生成罠", "oil creation trap") },
+	{ 42,TRAP_SPIKED_PIT,"TRAP_SPIKED_PIT",_("水地形生成罠", "water creation trap") },
+	{ 45,TRAP_TY_CURSE,"TRAP_TY_CURSE",_("太古の呪いの罠", "Ancient Foul Curse trap") },//対モンスターでは高判定の全能力低下+移動禁止
+	{ 48,TRAP_ARMAGEDDON,"TRAP_ARMAGEDDON",_("ハルマゲドン・トラップ", "Armageddon trap") },
+
+	{ 0,0,"","dummy" }//player_levelが0の終端ダミー
+
+};
+

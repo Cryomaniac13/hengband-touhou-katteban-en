@@ -2619,6 +2619,16 @@ typedef struct
 }monster_food_type;
 
 
+//v2.0.12
+//慧ノ子が生成できるトラップのリストに使う
+//通常のトラップ配置はplace_trap()など参照　
+typedef struct enoko_make_trap_type
+{
+	int player_level; //＠がこのトラップを配置可能になるレベル 0は終端ダミー
+	int trap_idx;	//TRAP_TRAPDOORなどの値。f_info.txtのSUBTYPE_XXの値と同じ
+	cptr f_tag;		//f_info.txtの地形タグ文字列　これを地形idxに変換してcave[][].featに入れると地形が変更される
+	cptr trap_name; //トラップ名 f_infoから取ってもいいがちょっと注釈も入れたいので個別に記述している
 
+}enoko_make_trap_type;
 
 

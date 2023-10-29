@@ -3702,7 +3702,12 @@ static void init_windows(void)
 	td = &data[0];
 	WIPE(td, term_data);
 #ifdef JP
+
+#ifdef SCORE_SERVER_TEST
+	td->s = "(テストサーバ)幻想蛮怒(テストサーバ)";
+#else
 	td->s = "幻想蛮怒";
+#endif
 #else
 	td->s = "Gensouband";
 #endif

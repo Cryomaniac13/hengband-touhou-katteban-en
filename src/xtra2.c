@@ -2579,6 +2579,25 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 
 		}
 		break;
+
+	//v2.0.12 普通のイーグルラヴィも低確率で宝玉を落とすようにする
+	case MON_EAGLE_RABBIT:
+		if (drop_chosen_item)
+		{
+			q_ptr = &forge;
+
+			if (one_in_(64))
+			{
+				int k_idx = lookup_kind(TV_SOUVENIR, SV_SOUVENIR_MOON_ORB);
+
+				q_ptr = &forge;
+				object_prep(q_ptr, k_idx);
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+
+		}
+		break;
+
 		//てゐに高草郡の光る竹追加
 	case MON_TEWI:
 		if (drop_chosen_item)
@@ -6497,6 +6516,11 @@ static int target_set_aux(int y, int x, int mode, cptr info)
 			name = f_name + f_ptr->name;
 		}
 
+		//v2.0.12 自分で生成したトラップにカーソルを合わせたとき「あなたの」と接頭語がつくようにしておく
+		if (have_flag(f_ptr->flags, FF_TRAP) && c_ptr->cave_xtra_flag & CAVE_XTRA_FLAG_YOUR_TRAP)
+		{
+			s1 = _("あなたの", "(your) ");
+		}
 
 		/* Pick a prefix */
 		if (*s2 &&

@@ -44,6 +44,161 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.0.12 慧ノ子
+class_power_type class_power_enoko[] =
+{
+	{ 5,3,10,FALSE,FALSE,A_INT,0,0,_("トラップ感知", "Detect Traps"),
+	_("周囲にある罠を感知する。", "Detects nearby traps.") },
+
+	{ 12,15,30,FALSE,TRUE,A_INT,0,0,_("トラップ設置", "Set Trap"),
+	_("自分のいるグリッドにトラップを設置する。設置できるトラップの種類はレベルアップで増える。モンスターがこのグリッドを通過しようとするときトラップが発動する。高レベルなモンスターや賢いモンスターはトラップを無効化しやすい。",
+    "Sets up a trap in at your position. You'll be able to set up different kind of traps as you level up. The trap will activate once a monster enters its grid. High level monsters and smart monsters can disarm traps more easily.")},
+
+	{ 20,5,35,FALSE,FALSE,A_DEX,0,0,_("トラップ発動", "Activate Traps"),
+	_("トラップを発動させるビームを放つ。発動したトラップにモンスターを巻き込むことができる。プレイヤーも範囲内にいるとダメージを受ける。",
+    "Fires a beam that activates traps. Activated traps can affect monsters in their vicinity. You also take damage if you happen to be close enough.")},
+
+	{ 26,25,50,FALSE,FALSE,A_STR,0,0,_("火炎のブレス", "Breathe Fire"),
+	_("現在HPの1/4の威力の炎のブレスを吐く。",
+    "Breathes fire with power equal to 1/4 of your current HP.")},
+
+	{ 32,0,0,FALSE,FALSE,A_DEX,0,0,_("待ち伏せ", "Lie in Wait"),
+	_("その場で何もせず待機する。次の行動が隣接攻撃のとき攻撃回数が上昇する。",
+    "Wait in place doing nothing. Increases amount of melee blows you can perform with your next action.")},
+
+	{ 38,10,70,FALSE,FALSE,A_CON,0,0,_("再生", "Regeneration"),
+	_("HPを回復し傷や毒を治療する。満腹度を消費する。",
+    "Heals HP and cures cuts and poison. Makes you more hungry.")},
+
+	{ 43,90,85,FALSE,FALSE,A_STR,0,0,_("ケルベロスファイア", "Cerberus Fire"),
+	_("現在HPの1/4の威力の炎のブレスを同じターゲットに3連続で吐く。",
+    "Breathes fire with power equal to 1/4 of your current HP at the same target 3 times in a row.")},
+
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_enoko(int num, bool only_info)
+{
+	int dir;
+	int plev = p_ptr->lev;
+
+	switch (num)
+	{
+
+	case 0:
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+
+		msg_print(_("周辺の罠のありかを探った。", "You search for traps in nearby area."));
+		detect_traps(rad, TRUE);
+
+	}
+	break;
+
+	case 1: //トラップ設置
+	{
+
+		if (only_info) return format("");
+
+		//アイテムカード「トラバサミ」使用時は置かれるトラップがトラバサミに固定される
+		if (!place_chosen_trap(plev,use_itemcard)) return NULL;
+
+	}
+	break;
+
+	case 2:
+	{
+		int range = 4 + p_ptr->lev / 3;
+		if (only_info) return format(_str_eff_area, range);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_print(_("あなたは地面に掌を押し当てた。", "You strike the ground with your fist."));
+		fire_beam(GF_ACTIV_TRAP, dir, 0);
+
+	}
+	break;
+
+
+	case 3: //火炎のブレス
+	{
+		int dam;
+		dam = p_ptr->chp / 4;
+		if (dam<1) dam = 1;
+		if (dam > 1600) dam = 1600;
+
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print(_("あなたは炎を吐いた！", "You breathe fire!"));
+
+		fire_ball(GF_FIRE, dir, dam, (p_ptr->lev > 35 ? -3 : -2));
+		break;
+	}
+
+	case 4: //待ち伏せ p_ptr->concent使用
+	{
+		if (only_info) return format("");
+
+		do_cmd_concentrate(0);
+
+		break;
+	}
+
+	case 5://再生
+	{
+		int use_food = 1000;
+		int base = p_ptr->lev * 2;
+		if (only_info) return format(_("回復:%d+1d%d", "heal %d+1d%d"), base, base);
+
+		if (p_ptr->food < use_food + PY_FOOD_WEAK)
+		{
+			msg_print(_("回復に使う栄養が足りないようだ。", "You don't have enough nutrients to regenerate."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは自分の体に意識を集中した..", "You concentrate on your body..."));
+		hp_player(base + randint1(base));
+		set_poisoned(0);
+		set_cut(0);
+		set_food(p_ptr->food - use_food);
+
+	}
+	break;
+
+	case 6: //ケルベロスファイア(火炎のブレス*3)
+	{
+		int i, dam;
+		dam = p_ptr->chp / 4; //＠のHPが多めだし石油罠でブーストできるので少し控えめにしとく
+		if (dam<1) dam = 1;
+		if (dam > 1600) dam = 1600;
+
+		if (only_info) return format(_("損傷:%d * 3", "dam: %d*3"), dam);
+
+		if (!get_aim_dir(&dir)) return NULL;
+
+		//真・吸血と同じ繰り返し方法にしておく
+		for (i = 0; i<3; i++)
+		{
+			fire_ball(GF_FIRE, dir, dam, (p_ptr->lev > 35 ? -3 : -2));
+		}
+	}
+	break;
+
+
+
+	default:
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
 //v2.0.11 美天特技
 class_power_type class_power_biten[] =
 {
@@ -2291,7 +2446,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 		return NULL;
 
 	}
-	break;
 	case 4://一服
 
 	{
@@ -2300,7 +2454,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
 
 	case 5:
 	{
@@ -2310,7 +2463,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
 
 	case 6:
 	{
@@ -2320,7 +2472,7 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
+
 	case 7:
 	{
 		int power = 40 + plev * 2;
@@ -2329,10 +2481,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
-
-
-
 
 	case 8:
 	{
@@ -2343,7 +2491,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 	}
 	break;
 
-
 	case 9:
 	{
 		int power = 40 + plev * 2;
@@ -2352,7 +2499,7 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
+
 	case 10:
 	{
 		int power = 50 + plev * 2;
@@ -2361,7 +2508,7 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
+
 	case 11:
 	{
 		if (only_info) return format("");
@@ -2369,8 +2516,6 @@ cptr do_cmd_class_power_aux_sannyo(int num, bool only_info)
 
 		break;
 	}
-	break;
-
 
 	default:
 		if (only_info) return format(_str_unimp);
@@ -37428,6 +37573,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_ENOKO:
+		class_power_table = class_power_enoko;
+		class_power_aux = do_cmd_class_power_aux_enoko;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -39338,6 +39489,11 @@ const support_item_type support_item_list[] =
 		{ 90,20, 70,1,20,	MON_BITEN,class_power_biten,do_cmd_class_power_aux_biten,2,
 		_("緊箍児", "Golden Headband"),_("それは大量の猿を召喚する。", "Summons a large amount of monkeys.") },
 
+	//v2.0.12 慧ノ子　トラップ設置(トラバサミのみ)
+		{ 80,10,50,5,5,	MON_ENOKO,class_power_enoko,do_cmd_class_power_aux_enoko,1,
+		_("トラバサミ", "Beartrap"),
+		_("地面にトラバサミを仕掛ける。モンスターがかかると短時間移動禁止状態になる。",
+        "Sets up a beartrap on the ground. A monster that gets caught will be immobilized for a short time.")},
 
 
 

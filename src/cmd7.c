@@ -5967,6 +5967,9 @@ bool do_cmd_concentrate(int mode)
 {
 	int max;
 
+	if (!(CLASS_USE_CONCENT)) msg_print(_("ERROR:CLASS_USE_CONCENT‚É‚È‚¢E‹Æ‚Ådo_cmd_concentrate()‚ªŒÄ‚Î‚ê‚Ä‚¢‚é",
+                                        "ERROR: do_cmd_concentrate() called for a class that isn't CLASS_USED_CONCENT"));
+
 	p_ptr->concent++;
 	switch(p_ptr->pclass)
 	{
@@ -6064,9 +6067,22 @@ bool do_cmd_concentrate(int mode)
 		}
 		break;
 
+	case CLASS_ENOKO:
+		max = 1;
+		if (p_ptr->concent > max)
+		{
+			p_ptr->concent = max;
+			msg_print(_("‚ ‚È‚½‚ÍUŒ‚‚Ì‹@‰ï‚ğ‰M‚Á‚Ä‚¢‚é...", "You wait for a chance to strike..."));
+		}
+		else
+		{
+			msg_print(_("‚ ‚È‚½‚Í•¨‰A‚É‰B‚ê‚Äg‚ğ’á‚­‚µ‚½B", "You hide in the shadows and stay low."));
+		}
+		break;
+
 	default:
-		msg_print(_("‚±‚ÌE‹Æ‚Ìconcentrate’l‰ÁZƒ‹[ƒ`ƒ“‚ª“o˜^‚³‚ê‚Ä‚¢‚È‚¢",
-                    "Undefined concentrate addition routine for this class"));
+		msg_print(_("ERROR:‚±‚ÌE‹Æ‚Ìdo_cmd_concentrate()‚Ìˆ—‚ª‹Lq‚³‚ê‚Ä‚¢‚È‚¢",
+                    "ERROR: do_cmd_concentrate() logic not defined for this class"));
 		return FALSE;
 	}
 

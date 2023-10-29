@@ -5470,6 +5470,7 @@ msg_format("%^s%s", m_name, monmessage);
 
 				/* Redraw the new grid */
 				lite_spot(ny, nx);
+
 			}
 			else
 			{
@@ -5479,6 +5480,46 @@ msg_format("%^s%s", m_name, monmessage);
 				/* Move the player */
 				if (!move_player_effect(ny, nx, MPE_DONT_PICKUP)) break;
 			}
+
+			//v2.0.12 敵対的なモンスターが＠の作ったトラップに踏み入ったときの解除判定とトラップ発動処理
+			if (have_flag(f_ptr->flags, FF_TRAP) && is_hostile(m_ptr) && (c_ptr->cave_xtra_flag & CAVE_XTRA_FLAG_YOUR_TRAP))
+			{
+
+				int rlev = r_ptr->level;
+				if (rlev < 5) rlev = 5;
+				if (r_ptr->flags2 & (RF2_POWERFUL)) rlev = rlev * 3 / 2;
+				if (r_ptr->flags2 & (RF2_GIGANTIC)) rlev /= 2;
+
+				if (r_ptr->flags2 & (RF2_SMART)) rlev *= 2;
+				else if (r_ptr->flags2 & (RF2_EMPTY_MIND)) rlev /= 2;
+				else if (r_ptr->flags2 & RF2_STUPID) rlev = 0;
+
+				if (randint1(rlev) > p_ptr->lev)
+				{
+					msg_print(_("トラップが破壊された！", "The trap gets destroyed!"));
+					cave_alter_feat(ny, nx, FF_DISARM);
+					note_spot(ny, nx);
+					lite_spot(ny, nx);
+				}
+				else
+				{
+					//床トラップの発動
+					activate_floor_trap(ny, nx, 0);
+					note_spot(ny, nx);
+					lite_spot(ny, nx);
+					//トラップで倒したとき
+					if (!m_ptr->r_idx)
+					{
+						p_ptr->update |= (PU_FLOW);
+						p_ptr->window |= (PW_OVERHEAD | PW_DUNGEON);
+						return;
+					}
+				}
+				note_spot(ny, nx);
+				lite_spot(ny, nx);
+
+			}
+
 
 			/* Possible disturb */
 			if (m_ptr->ml &&

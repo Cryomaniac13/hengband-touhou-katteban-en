@@ -2773,3 +2773,7 @@ extern bool set_no_move(int v);
 extern bool	hack_flag_enoko_make_beartrap;
 extern bool set_tim_transportation_trap(int v, bool do_dec);
 extern bool	check_transportation_trap(monster_type *m_ptr, int power);
+
+//v2.0.12
+extern enoko_make_trap_type enoko_make_trap_list[];
+extern bool place_chosen_trap(int plev, bool only_beartrap);
