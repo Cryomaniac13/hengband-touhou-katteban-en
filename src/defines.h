@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 12
+#define H_VER_PATCH 13
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -226,8 +226,9 @@
 #define QUEST_REIMU_ATTACK	70 //巫女警報発令中
 #define QUEST_YAKUZA_1		71
 #define QUEST_HANGOKU2		72
+#define QUEST_YAKUZA_2		73
 
-#define QUEST_MAX			73 //クエストの最後の番号+1
+#define QUEST_MAX			74 //クエストの最後の番号+1
 
 //v1.1.24 急流下りクエストでこのターン数以下で入賞
 #define QT_TURN1			250
@@ -3117,6 +3118,8 @@
 #define SV_CHEST_YAKUZA1		59
 //v1.1.98 連続昏睡事件Ⅱ
 #define SV_CHEST_HANGOKU2		60
+//v2.0.13 動物霊戦争2
+#define SV_CHEST_YAKUZA2		61
 
 //SVAL:人形 TV:61
 #define SV_FIGURINE_NORMAL	0
@@ -8795,6 +8798,10 @@ extern int PlayerUID;　
 #define ANIMAL_GHOST_Q1_COMP			0x00000200L //クエスト1を勝って終わらせた
 #define ANIMAL_GHOST_Q1_ACHIEVE			0x00000400L //クエスト1を味方勢力ボス生存で勝って終わらせた
 #define ANIMAL_GHOST_Q1_XXX				0x00000800L //予備領域
+#define ANIMAL_GHOST_Q2_BEAT_KEIGA		0x00001000L //クエスト2で特定勢力の反感を買った
+#define ANIMAL_GHOST_Q2_BEAT_KIKETSU	0x00002000L
+#define ANIMAL_GHOST_Q2_BEAT_GOUYOKU	0x00004000L
+#define ANIMAL_GHOST_Q2_XXX				0x00008000L //予備領域
 
 
 //v1.1.92 女苑(専用性格)がツケで買い物をできるかどうか

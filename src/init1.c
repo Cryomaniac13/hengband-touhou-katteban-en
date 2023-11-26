@@ -4257,6 +4257,7 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 	else if (buf[0] == 'Q')
 	{
 		int num;
+		int quest_idx;
 		quest_type *q_ptr;
 
 		/*:::クエスト情報テキストでは$を日本語と英語の区別に使っている*/
@@ -4274,7 +4275,8 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 		if (num < 3) return (PARSE_ERROR_TOO_FEW_ARGUMENTS);
 
 		/* Get the quest */
-		q_ptr = &(quest[atoi(zz[0])]);
+		quest_idx = atoi(zz[0]);
+		q_ptr = &(quest[quest_idx]);
 
 		///quest
 		/* Process "Q:<q_index>:Q:<type>:<num_mon>:<cur_num>:<max_num>:<level>:<r_idx>:<k_idx>:<flags>" -- quest info */
@@ -4305,8 +4307,12 @@ static errr process_dungeon_file_aux(char *buf, int ymin, int xmin, int ymax, in
 				//お尋ね者クエストはWANTEDフラグのユニークモンスターを一緒に設定しないといけない
 				if(q_ptr->type == QUEST_TYPE_BOUNTY_HUNT)
 				{
-					if(!q_ptr->r_idx || !(r_ptr->flags3 & RF3_WANTED) || !(r_ptr->flags1 & RF1_UNIQUE))
-						return(PARSE_ERROR_WANTED_UNIQUE);
+					//ただしヤクザ戦争2のクエストでは受領するまで賞金首が選択されていないのでこのエラーを出さない
+					if (quest_idx != QUEST_YAKUZA_2)
+					{
+						if (!q_ptr->r_idx || !(r_ptr->flags3 & RF3_WANTED) || !(r_ptr->flags1 & RF1_UNIQUE))
+							return(PARSE_ERROR_WANTED_UNIQUE);
+					}
 				}
 
 				/*:::お尋ね者以外の打倒モンスターがユニークの場合QUESTORフラグを立てる*/

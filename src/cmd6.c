@@ -690,6 +690,12 @@ bool do_cmd_eat_food_aux(int item)
                                 "Your religion prohibits you from eating meat."));
 					return FALSE;
 				}
+				else if (p_ptr->prace == RACE_LUNARIAN)
+				{
+					msg_print(_("この食物は穢れに満ちていて食べられない。", "This food is full of impurity and is not fit for consumption."));
+					return FALSE;
+				}
+
 				else
 				{
 					msg_print(_("脂が乗っていて実に美味だ！", "It's fat and really delicious!"));

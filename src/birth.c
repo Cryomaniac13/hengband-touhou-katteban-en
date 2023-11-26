@@ -317,7 +317,7 @@ static cptr class_jouhou[MAX_CLASS] =
 
 "‚ ‚È‚½‚ÍE‚Á‚½‚èˆÀ‚­”ƒ‚¢Žæ‚Á‚½ŽG‘½‚È•¨‚ð”„‚Á‚Ä•é‚ç‚µ‚Ä‚¢‚Ü‚·B‚»‚Ì–Ú—˜‚«‚ÍŠm‚©‚ÅAŠÓ’è‚ÉŠÖ‚µ‚Ä‚Í‚Ç‚ÌE‹Æ‚æ‚è‚à—D‚ê‚Ä‚¢‚Ü‚·B–‚“¹‹ï‚â’Tõ‚Ì‹Z”\‚É—D‚êAd‚¢‰×•¨‚ð‰^‚Ô‚±‚Æ‚ª‚Å‚«A“X‚Å‚ÌŒðÂ‚ª“¾ˆÓ‚Å‚·B‚Ü‚½‚ ‚È‚½‚É‚Í–‚–@‚Ì‘•”õ•i‚ðì‚è•Ï‚¦‚é‹Zp‚ª‚ ‚èAƒMƒ‹ƒh‚Å‘fÞ‚Æ‚È‚éƒAƒCƒeƒ€‚©‚ç”\—Í‚ð’Šo‚µ•Ê‚Ì•‹ï‚É•t‰Á‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B‚½‚¾‚µ‚ ‚È‚½‚ÌŠî–{“I‚Èí“¬”\—Í‚Í‚»‚ê‚Ù‚Ç‚‚¢‚à‚Ì‚Å‚Í‚È‚­A–‚–@‚àˆêØŽg—p‚Å‚«‚Ü‚¹‚ñBƒ_ƒ“ƒWƒ‡ƒ“‚Ì‰œ‚É’H‚è’…‚­‚É‚Íª‹C‹­‚­‘fÞ‚ðW‚ß‚Ä‘•”õ‚ð’b‚¦Aí—Í‚Ì’êã‚°‚ð}‚é•K—v‚ª‚ ‚è‚Ü‚·B‚ ‚È‚½‚Í–`Œ¯—p‚ÌƒUƒbƒN‚É‰Á‚¦‚ÄE‚Á‚½‚à‚Ì‚ð‰^‚Ô‚½‚ß‚Ì“¹‹ï” ‚ðŽ‚Á‚Ä‚¢‚Ü‚·B",
 
-"‚ ‚È‚½‚Í–‚–@‚Ì‘•ü•i‚ðˆµ‚¤•óÎ×HŽt‚Å‚·B•óÎ‚â‘•ü•i‚©‚ç–‚—Í‚ð’Šo‚µA‘¼‚Ì‘•ü•i‚É“Á•Ê‚È•óü‚ðŽ{‚·‚±‚Æ‚Å–‚—Í‚ð•t—^‚·‚é‹Zp‚ðŽ‚Á‚Ä‚¢‚Ü‚·Bì‹Æ‚ÍŠX‚Ì•óüƒMƒ‹ƒh‚Ås‚¢‚Ü‚·B‚ ‚È‚½‚ÍŽèæ‚ªŠí—p‚Å–‚–@‚Ì“¹‹ï‚Ìˆµ‚¢‚É—D‚ê‚Ü‚·‚ªA‹ßÚí“¬”\—Í‚Íˆê”Êl‚Æ•Ï‚í‚è‚Ü‚¹‚ñB–‚–@‚ðˆê—ÌˆæK“¾‰Â”\‚Å‚·‚ªƒ–‚–@E‚É”ä‚×‚é‚Æ‚â‚â‘fŽ¿‚É—ò‚è‚Ü‚·BC“¾‚·‚é–‚–@—Ìˆæ‚ÍTd‚É‘I‘ð‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤BƒŒƒxƒ‹‚ªã‚ª‚é‚ÆŽèŽ‚¿‚Ì•óÎ‚©‚ç–‚—Í‚ð‹zŽû‚µ‚ÄMP‚ð‰ñ•œ‚·‚é“Á‹Z‚ðK“¾‚µ‚Ü‚·B",
+"‚ ‚È‚½‚Í–‚–@‚Ì‘•ü•i‚ðˆµ‚¤•óÎ×HŽt‚Å‚·B•óÎ‚â‘•ü•i‚©‚ç–‚—Í‚ð’Šo‚µA‘¼‚Ì‘•ü•i‚É“Á•Ê‚È•óü‚ðŽ{‚·‚±‚Æ‚Å–‚—Í‚ð•t—^‚·‚é‹Zp‚ðŽ‚Á‚Ä‚¢‚Ü‚·Bì‹Æ‚ÍŠX‚Ì•óüƒMƒ‹ƒh‚Ås‚¢‚Ü‚·B‚ ‚È‚½‚ÍŽèæ‚ªŠí—p‚Å–‚–@‚Ì“¹‹ï‚Ìˆµ‚¢‚É—D‚ê‚Ü‚·‚ªA‹ßÚí“¬”\—Í‚Íˆê”Êl‚Æ•Ï‚í‚è‚Ü‚¹‚ñB‚Ü‚½‚ ‚È‚½‚Í–‚–@Žg‚¢‚Å‚à‚ ‚è–‚–@‚ðˆê—ÌˆæK“¾‰Â”\‚Å‚·‚ªƒˆ‚ÈƒƒCƒW‚É”ä‚×‚é‚Æ‚â‚â‘fŽ¿‚É—ò‚è‚Ü‚·BC“¾‚·‚é–‚–@—Ìˆæ‚ÍTd‚É‘I‘ð‚·‚é•K—v‚ª‚ ‚é‚Å‚µ‚å‚¤BƒŒƒxƒ‹‚ªã‚ª‚é‚ÆŽèŽ‚¿‚Ì•óÎ‚©‚ç–‚—Í‚ð‹zŽû‚µ‚ÄMP‚ð‰ñ•œ‚·‚é“Á‹Z‚ðK“¾‚µ‚Ü‚·B",
 
 "‚ ‚È‚½‚Í“ÁŽê‚ÈŒP—û‚ðÏ‚ñ‚¾‹°‚é‚×‚«ˆÃŽEŽÒ‚Å‚·BˆÃˆÅ‚Ì’†‚Å‚àŽüˆÍ‚ðŒ©’Ê‚·‚±‚Æ‚ª‚Å‚«A‚Ü‚½ˆÃˆÅ‚Ì’†‚Å‚Í“G‚ÉŒ©‚Â‚©‚ç‚¸‚És“®‚Å‚«‚Ü‚·B’ZŒ•‚â‘fŽè‚ÌˆêŒ‚‚Å“G‚ð–³—Í‰»‚µA‚‚¢“Š±‹Z”\‚ðŽ‚¿A‚³‚ç‚É‚Í”Ep‚ÆŒÄ‚Î‚ê‚é“ÁŽê‹Z”\‚ðŽg‚¢‚±‚È‚µ‚Ü‚·BUŒ‚‚É‚¨‚¢‚Ä‚Í‚»‚Ì‹­‚³‚ðˆâŠ¶‚È‚­”­Šö‚µ‚Ü‚·‚ªAˆê•û‚Å–hŒä–Ê‚É‚Í‚â‚â•sˆÀ‚ª‚ ‚è‚Ü‚·B‘Ï«‚ÆAC‚É‚Í—D‚ê‚Ä‚¢‚é‚à‚Ì‚Ì‘Ì—Í‚ÉŒ‡‚¯A‚‚âd‚¢•Ší–h‹ï‚ðˆêØ‘•”õ‚Å‚«‚Ü‚¹‚ñB”Ep‚É‚æ‚é–hŒä‚à“–‚½‚èŠO‚ê‚Ì‚ ‚éƒŠƒXƒL[‚È‚à‚Ì‚Å‚·B”Ep‚ÌŽg—p‚É‚ÍŽå‚ÉŠí—p‚³‚ ‚é‚¢‚Í’m”\‚ª‰e‹¿‚µ‚Ü‚·B",
 
@@ -377,7 +377,7 @@ static cptr class_jouhou[MAX_CLASS] =
 
 "You live by selling miscellaneous items that you pick up or buy cheaply. You are better than any other class when it comes to appraising items. You're excellent at using magic devices and searching, can carry heavy loads and bargain well. You also have the ability to reshape magic equipment; you can extract abilities from materials in the guild and add them to other equipment. However, you're not that good at combat and can't use magic. In order to reach the depths of the dungeon, you need to patiently collect materials and craft your equipment in order to raise your strength. In addition to your inventory you have a toolbox to store stuff you've picked up.",
 
-"You are a jeweler working on magical ornaments. You can extract magical power from gems and jewelry and apply it to other jewelry items. This is performed at Jewelry Guild in town. You are good at using magic devices, but your combat abilities aren't greater than those of ordinary people. You can study a single realm of magic, but you're somewhat inferior to pure magical classes. You have to carefully pick the realm you're going to study. As you level up, you will learn how to recover MP by absorbing mana from gems.",
+"You are a jeweler working on magical ornaments. You can extract magical power from gems and jewelry and apply it to other jewelry items. This is performed at Jewelry Guild in town. You are good at using magic devices, but your combat abilities aren't greater than those of ordinary people. You are also a spellcaster capable of studying a single realm of magic, but you're somewhat inferior to pure magical classes. You have to carefully pick the realm you're going to study. As you level up, you will learn how to recover MP by absorbing mana from gems.",
 
 "You are a terrifying assassin with special training. You can see the surroundings even in the dark, and you can act in the dark without being noticed by enemies. You can disable enemies with a single blow of a dagger or a bare hand, are very good at throwing and can learn special abilities called 'ninjutsu'. While your offense is excellent, your defense is a bit lacking. You have great resistances and AC, but you're frail and can't equip shields or heavy armor. Ninjutsu defense is also risky. Ninjutsu relies mainly on your dexterity or intelligence.",
 
@@ -2343,6 +2343,11 @@ void determine_random_questor(quest_type *q_ptr)
 		if(r_ptr->flags3 & RF3_WANTED) continue;
 		if (r_ptr->flags1 & RF1_QUESTOR) continue;
 
+		//2.0.13 ƒ„ƒNƒUí‘ˆ2ƒNƒGƒXƒg‚ÅÜ‹àŽñÝ’è‚³‚ê‚é‚©‚à‚µ‚ê‚È‚¢ŽOl‚Íƒ‰ƒ“ƒNƒG‚É‘I‚Î‚ê‚È‚¢
+		if (r_idx == MON_ENOKO) continue;
+		if (r_idx == MON_BITEN) continue;
+		if (r_idx == MON_CHIYARI) continue;
+
 		//v1.1.59 j–­ŠÛV«Ši@“Œ•ûƒ†ƒj[ƒN‚ªƒ‰ƒ“ƒNƒG‚É‘I‚Î‚ê‚È‚¢
 		if (is_special_seikaku(SEIKAKU_SPECIAL_SHINMYOUMARU) && is_gen_unique(r_idx)) continue;
 
@@ -2369,6 +2374,9 @@ void determine_random_questor(quest_type *q_ptr)
 		 */
 		if (r_ptr->level > (q_ptr->level + (q_ptr->level / 20))) break;
 	}
+
+	//test v2.0.13 Ú×‚Ícastle_quest‚Ì–¢‰ðŒˆƒoƒOmemo
+	//if (q_ptr->level == 38) r_idx = MON_BITEN;
 
 	q_ptr->r_idx = r_idx;
 }

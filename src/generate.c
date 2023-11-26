@@ -768,7 +768,8 @@ bool place_quest_monsters(void)
 			r_ptr->max_num = 1;
 		}
 
-		mode = (PM_NO_KAGE | PM_NO_PET);
+		//v2.0.13 PM_FORCE_ENEMY’Ç‰Á
+		mode = (PM_NO_KAGE | PM_NO_PET | PM_FORCE_ENEMY);
 
 		if (!(r_ptr->flags1 & RF1_FRIENDS))
 			mode |= PM_ALLOW_GROUP;

@@ -1,0 +1,37 @@
+# Name
+Q:$73:N:Yakuza War in Animal Realm -Assassins Unleashed-
+Q:73:N:畜生界やくざ戦争-放たれた刺客編-
+
+# Definition
+Q:$73:Q:10:0:0:1:40:1385:0:0:0
+Q:73:Q:10:0:0:1:40:1385:0:0:0
+
+# Description for quest
+?:[LEQ $QUEST73 2]
+Q:$73:T:With the ownership of the land on surface being suddenly lost,
+Q:$73:T:animal spirits started to fight over it. Each of their forces
+Q:$73:T:has a newcomer who is to serve as their foothold to advance
+Q:$73:T:on surface, and they put bounties on their enemies' newcomers.
+Q:$73:T:If you're looking to make some money, grab one of their wanted
+Q:$73:T:person posters.
+Q:73:T:地上の土地の霊的な所有権が突然宙に浮き、
+Q:73:T:それを巡って畜生界の動物霊たちの争いが始まった。
+Q:73:T:動物霊の勢力にはそれぞれ地上進出の足がかりとなる新入りがいて、
+Q:73:T:各勢力は互いの新入りに賞金をかけたようだ。
+Q:73:T:ひと稼ぎするつもりなら手配書をどれか一枚持っていくのもいいだろう。
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST73 3]
+Q:$73:T:You turn in the bounty and collect you reward. You leave the
+Q:$73:T:building as various animal spirits look at you with both approval
+Q:$73:T:and hostility.
+Q:73:T:あなたは賞金首を捕まえて突き出し、報酬の入った箱を受け取った。
+Q:73:T:動物霊たちからの好意と敵意の混じった視線を受けながら建物を出た。
+?:1
+
+?:[EQU $QUEST73 5]
+Q:$73:T:(this quest can't be failed)
+Q:73:T:(このクエストは失敗しない)
+?:1
+

@@ -24943,8 +24943,8 @@ D:魔界から来たらしく、暗い色の服を着て赤黒く光る羽を生やしている。
 N:1263:テスト妖精
 E:Test fairy
 G:F:w
-I:110:200d150:111:200:0
-W:127:255:0:50:0:0
+I:110:20d15:111:200:0
+W:12:255:0:50:0:0
 B:CRUSH:SHATTER:2d1
 F:UNIQUE2 | ATTR_MULTI | ATTR_ANY | HURT_HOLY
 F:FORCE_SLEEP | FORCE_MAXHP | SELF_LITE_1 |
@@ -24957,7 +24957,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN | RES_TELE |
 F:STUPID
 D:テスト用の妖精だ。もしこのモンスターが通常出現したらバグなので製作者までご一報下さい。
 S:1_IN_2
-S:TPORT
+S:BA_FIRE
 
 N:1264:地獄鴉
 E:Hell raven

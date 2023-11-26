@@ -9953,8 +9953,8 @@ static void do_cmd_knowledge_quests_current(FILE *fff)
 					case QUEST_TYPE_BOUNTY_HUNT:
 						r_ptr = &r_info[quest[i].r_idx];
 						strcpy(name, r_name + r_ptr->name);
-						sprintf(note,_(" - ダンジョンに潜伏したお尋ね者を倒す。",
-                                        " - search the dungeon and defeat the wanted person."));
+						sprintf(note,_(" - ダンジョンで%sを倒す。",
+                                        " - defeat %s in a dungeon."), name);
 						break;
 
 					case QUEST_TYPE_KILL_NUMBER:

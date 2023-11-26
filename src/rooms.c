@@ -7559,7 +7559,7 @@ static byte build_type_ex(void)
 	building_ex_idx[0] = get_extra_dungeon_building_idx();
 
 	//テスト用
-	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_HATATE;
+	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_MARISA;
 
 	/* Find and reserve some space in the dungeon.  Get center of room. */
 	if (!find_space(&yval, &xval, ysize, xsize)) return 0;

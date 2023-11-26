@@ -4163,7 +4163,8 @@ bool apply_mon_race_marisa(void)
 	if(lev > 49) r_ptr->flags3 |= RF3_NO_CONF;
 	if(lev > 79) r_ptr->flags3 |= RF3_NO_STUN;
 
-	r_ptr->flags4 |= RF4_DANMAKU;
+	//v2.0.13 |=だったのを=に修正
+	r_ptr->flags4 = RF4_DANMAKU;
 	if(lev > 39 && (lev % 7 == 3)) r_ptr->flags4 |= RF4_BA_CHAO;
 	if( (lev % 7 == 5)) r_ptr->flags4 |= RF4_DISPEL;
 
@@ -4771,7 +4772,8 @@ static bool place_monster_one(int who, int y, int x, int r_idx, u32b mode)
 				return FALSE;
 			}
 
-			if(quest_number(dun_level))
+			//v2.0.13 この抑止処理はこのモンスター自身がQUESTORのときパス
+			if(quest_number(dun_level) && !(r_ptr->flags1 & RF1_QUESTOR))
 			{
 				if(cheat_hear) msg_print(_("現在階層がクエスト中のためお尋ね者の生成が抑止された。",
                                             "Generation stopped for wanted person because current dungeon level is quest."));

@@ -2309,6 +2309,58 @@ static bool cmd_racial_power_aux(s32b command)
 			}
 			break;
 
+		case RACE_MAGICIAN:
+		{
+
+			int y, x, dummy = 0;
+			cave_type *c_ptr;
+			/* Only works on adjacent monsters */
+			if (!get_rep_dir(&dir, FALSE)) return FALSE;   /* was get_aim_dir */
+			y = py + ddy[dir];
+			x = px + ddx[dir];
+			c_ptr = &cave[y][x];
+			if (!c_ptr->m_idx)
+			{
+				msg_print(_("そこには何もいない。", "There's nobody here."));
+				break;
+			}
+			else
+			{
+				//v2.0.13 レイシャルの性能を変更
+				//必ず命中し判定で魔法力低下状態にする。
+				//魔法力低下状態の敵からはMPを奪えなくなる。
+				monster_type    *m_ptr = &m_list[c_ptr->m_idx];
+				monster_race    *r_ptr = &r_info[m_ptr->r_idx];
+				char            m_name[80];
+
+				monster_desc(m_name, m_ptr, 0);
+
+				if (!HAS_ANY_MAGIC(r_ptr))
+				{
+					msg_format(_("%sは魔力を持っていない。", "%^s has no magical power."),m_name);
+				}
+				else if (MON_DEC_MAG(m_ptr))
+				{
+					msg_format(_("%sからはしばらく魔力を奪えそうにない。", "You can't steal mana from %s right now."), m_name);
+				}
+				else if (r_ptr->flagsr & RFR_RES_ALL)
+				{
+					msg_format(_("%sからは魔力を奪えない！", "You cannot steal mana from %s!"), m_name);
+				}
+				else
+				{
+					msg_format(_("%sから魔力を吸い取った！", "You drain mana from %s!"), m_name);
+					player_gain_mana(r_ptr->level / 2 + randint1(r_ptr->level / 2) + p_ptr->lev / 2 +  randint1(p_ptr->lev/2));
+					(void)set_monster_csleep(c_ptr->m_idx, 0);
+					project(0, 0, m_ptr->fy, m_ptr->fx, p_ptr->lev * 3, GF_DEC_MAG, (PROJECT_JUMP | PROJECT_KILL),-1);
+				}
+			}
+
+
+			break;
+		}
+
+#if 0
 			//魔力奪取 monster_type.mflagのSPECIAL2フラグを使う
 		case RACE_MAGICIAN:
 		{
@@ -2341,15 +2393,15 @@ static bool cmd_racial_power_aux(s32b command)
 
 				if(m_ptr->mflag & MFLAG_SPECIAL2)
 				{
-					msg_format(_("%sからはもう魔力を奪えないようだ。", "Doesn't look like you can steal mana from %s."),m_name);
+					msg_format(_("%sからはもう魔力を奪えないようだ。", "Looks like you can't steal any more mana from %s."),m_name);
 				}
 				else if(randint1(fail) > plev)
 				{
-					msg_format(_("%sから魔力を奪うのに失敗した。", "You try to steal mana from %s, but fail."),m_name);
+					msg_format(_("%sから魔力を奪うのに失敗した。", "You fail to steal mana from %s."),m_name);
 				}
 				else
 				{
-					msg_format(_("%sから魔力を吸い取った！", "You drain mana from %s!"),m_name);
+					msg_format(_("%sから魔力を吸い取った！", "You drain mana from %s!"), m_name);
 					p_ptr->csp += r_ptr->level;
 					if (p_ptr->csp >= p_ptr->msp)
 					{
@@ -2363,52 +2415,11 @@ static bool cmd_racial_power_aux(s32b command)
 					p_ptr->redraw |= (PR_MANA);
 				}
 
-#if 0
-				monster_type    *m_ptr = &m_list[c_ptr->m_idx];
-				monster_race    *r_ptr = &r_info[m_ptr->r_idx];
-				char            m_name[80];
-				int fail = r_ptr->level + r_ptr->ac / 2;
-				if(r_ptr->flags2 & RF2_SMART) fail*=2;
-				if(r_ptr->flags1 & RF1_UNIQUE) fail*=2;
-				if(r_ptr->flags2 & RF2_STUPID) fail/=2;
-				if(r_ptr->flags7 & RF7_CAN_FLY) fail=fail * 3 / 2;
-				if(MON_STUNNED(m_ptr)) fail /= 3;
-				if(MON_CONFUSED(m_ptr)) fail /= 3;
-				if(MON_CSLEEP(m_ptr)) fail = 0;
-
-				fail -= p_ptr->lev + adj_general[p_ptr->stat_ind[A_DEX]] + ref_skill_exp(SKILL_MARTIALARTS) / 200;
-				monster_desc(m_name, m_ptr, 0);
-				if(fail<0) fail = 0;
-
-				if(m_ptr->mflag & MFLAG_SPECIAL2)
-				{
-					msg_format("%sからはもう魔力を吸えないようだ。",m_name);
-				}
-				else if(randint0(100) < fail)
-				{
-					msg_format("%sに触ろうとしたがかわされた。",m_name);
-					break;
-				}
-				else
-				{
-					msg_format("%sから魔力を吸い取った！",m_name);
-					p_ptr->csp += r_ptr->level;
-					if (p_ptr->csp >= p_ptr->msp)
-					{
-						p_ptr->csp = p_ptr->msp;
-						p_ptr->csp_frac = 0;
-					}
-					(void)set_monster_csleep(c_ptr->m_idx, 0);
-
-					if(randint0(100) > r_ptr->level ) m_ptr->mflag |= MFLAG_SPECIAL2;
-
-					touch_zap_player(m_ptr);
-					p_ptr->redraw |= (PR_MANA);
-				}
-#endif
 			}
 			break;
 		}
+
+#endif
 		case RACE_KARASU_TENGU:
 		{
 			//写真撮影
@@ -4674,8 +4685,8 @@ strcpy(power_desc[num].name, "魔力奪取");
 			power_desc[num].cost = 1;
 			power_desc[num].stat = A_INT;
 			power_desc[num].fail = 30;
-			power_desc[num].info = _("隣接したモンスター一体から魔力を奪う。高レベルな敵や力強い敵には効きにくい。",
-                                    "Steals mana from an adjacent monster. Less effective against high-level or powerful enemies.");
+			power_desc[num].info = _("隣接したモンスター一体から魔力を奪い、さらに短時間魔力低下状態にする。魔力低下状態のモンスターと魔法を持たないモンスターからは奪えない。",
+                                    "Steals mana from an adjacent monster, and lowers their magical power for a while. Cannot steal mana from monsters afflicted with lowered magical power or monsters that don't use magic.");
 			power_desc[num++].number = -1;
 			break;
 

@@ -7744,6 +7744,16 @@ static void dump_aux_display_player(FILE *fff)
 		fprintf(fff, "%s\n", buf);
 	}
 
+	//v2.0.13 体力ランクを表示する
+	//ゲーム終了時と自己分析後のみ
+	if (p_ptr->is_dead || (p_ptr->knowledge & KNOW_HPRATE))
+	{
+		int percent = (int)(((long)p_ptr->player_hp[PY_MAX_LEVEL - 1] * 200L) /
+			(2 * p_ptr->hitdie + ((PY_MAX_LEVEL - 1 + 3) * (p_ptr->hitdie + 1))));
+
+		fprintf(fff, _("\n 現在の体力ランク : %d/100\n", "Current life rating: %d/100"), percent);
+	}
+
 	fprintf(fff, "\n");
 }
 

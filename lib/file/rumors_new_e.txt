@@ -330,6 +330,44 @@ Lyrica - 'Yes, are you requesting a performance? What, you don't?'
 N:12:Moriya Shrine new arena
                          NIGHTMARE DIARY\                          HOW TO USE IT\ \-If you read it, you'll get attacked by dream residents.\-If you are defeated in a nightmare, it's not a game over in real world.\-You don't get experience or items for defeating monsters in Nightmare World.\-You cannot perform destruction or distortion in Nightmare World.\-You cannot banish or charm monsters in Nightmare World.\-All beneficial effects are dispelled once you enter Nightmare World.\-Your allies are instantly banished from Nightmare World (aside from mounts)\-You can challenge new nightmare stages once you win enough times.\-Any consumables used in Nightmare World will stay used up once you return.\-You cannot fly in the Nightmare World.\-Since this is Dream World as well, I can show my true potential.
 
+N:14:False Heaven Shelf Bar (changes in recent versions)
+Did you know?\There's a cave connecting Forest of Magic and Capital of Former Hell.\It's far faster compared to going through that hole in south-west of Gensoukyou.
+Humans that go into that mine-like place without oxygen run out of breath and collapse.\How can a human get inside?\Would something that lets you breathe underwater help in this case?
+I saw a person holding a gun in each hand run up to an enemy and start brawling.\I thought he was crazy, but he was pretty strong.\You might be able to do something like that if you master both fireams and martial arts.
+Have you heard about Geidontei bar in Human Village?\From midnight to dawn, it's exclusively for youkai.\If you visit them after hunting badgers or wild boars, they'll prepare you a delicious meal.
+Have you heard about Hatate Himekaidou, the crow tengu?\She's a shut-in, but recently she has started a business tracking down people.\She lives at south-east in Tengu Village.
+Have you seen those fishermen wandering in mountains?\They're probably uwabami in disguise.\If you mistake them for humans and try to mess with them, you'll get swallowed whole.
+Behind Moriya Shrine, there's a youkai who governs over dreams.\If you look at her diary she's offering, you'll get sent to the Dream World\as a test subject for combination spellcards.
+There was a skilled blacksmith karakasa-obake, but she's recently started haunting Hakurei Shrine.\Is that normal for a youkai?
+I saw the Hakurei shrine maiden jump over Sanzu River, heading for the opposite shore.\I'm amazed she's not daunted by the dangerzone full of giant fish and sea dragons.
+Don't carelessly eat whatever you find in the Forest of Magic.\Especially not the beans - they're not safe for youkai either.
+There's a place spouting a pitch-black oil called 'petroleum'.\It burns spectacularly when you set it on fire;\it's fun to lure enemies into it and then attack with fire magic.
+Got caught in a beartrap and can't move?\Don't panic and use a scroll of teleportation. You'll teleport by yourself, leaving the trap behind.
+If you hit a block of ice with light magic, it will start to refract and cause a massive explosion.\You might get hurt as well.
+If you resist confusion and deliberately trigger a confusion gas trap,\you can confuse nearby enemies.\How do you trigger a trap deliberately?\Not sure what's so hard to understand about it, you just step on it like when you go downstairs.
+Did you know about the Grassroots Youkai Network group hanging out behind the shrine?\They run a screening process on potential new members.\If you're a human using transformation magic to look like a youkai,\they might find you intereseting and let you in.
+The 'Barrier Guard' ability that spellcaster classes can use\gets more powerful if you have equipment that reduces spell costs or makes spellcasting easier.
+If you throw a Potion of Berserk Strength at spellcaster enemies,\they might charge at you to beat you up instead of casting spells.
+Lousy stat decreasing potions like 'Potion of Weakness'\can be thrown at monsters to weaken them.\Potions of Ruination are particularly powerful, and can be sold at a high price.
+A proficient martial artist can stun enemies in melee, but a proficient staff wielder can do so as well.
+A proficient martial artist can stun enemies in melee, and some unusual martial art styles can also slow enemies or reduce their abilities.
+I saw a hermit standing on top of a flying dragon while fighting barehanded.\I wonder how much of a skilled rider you have to be to pull this off?
+If you're a skilled at using shields, you might use it to bash your enemies as you fight them in melee.
+Have you seen magical weapons that come back to you when thrown?\It requires a lot of skill to always catch one when it comes back.
+A proficient short blade user can strike both fast and hard.
+If you're not good with using weapons, go with long blades.\Even if you're not skilled, you will be able to handle it with enough training.
+A katana master can slay even a massive beast with a single strike.
+Don't underestimate a proficient staff wielder.\They can use their staff both for offense and defense, and if you let your guard down, they'll kick you hard.
+A powerful axe blow cleaves through enemy armor and scaled, leaving their defense in tatters.
+A skilled spear wielder can anticipate enemy attacks and deliver powerful counters.
+A skilled bow user can quickly let loose many arrows.
+Shards, disenchantment and mental attacks\not only deal damage, but also can weaken your enemies for a while.
+Long ago, confusion and sleep were almost useless against named enemies,\but nowadays, they might be effective to some extent, depending on the enemy.\What do I mean by 'old days'? Old days is old days.
+While in forest terrain, yamawaro move quicker than usual and are more powerful.\When they were kappa, they were stronger while in water, but they lost this ability.\To a casual observer, it might look like just a change of clothes, but that's how youkai are.
+Ability cards?\There are some active traders around here.\They might give you something if you do them a favor.
+You want a high rank ability card?\There's an ability card exchange venue open at night at Moriya Shrine.\There might be some generous people willing to give away high rank cards,\but be prepared to wait for months if you want to get the highest ranking ones.
+Have you heard about drunken fist style?\I thought it was just a joke among drunkards,\but looks like when a proficient martial artist gets drunk, they can fight using drunken fist style.
+
 N:20:Archer Guild explanation
 Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materialsÅF\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
 

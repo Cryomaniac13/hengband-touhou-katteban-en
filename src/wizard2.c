@@ -615,14 +615,20 @@ static void do_cmd_wiz_hack_ben(void)
 
     (void)probing();
 
+	msg_format("yakuzaII_target_r_idx:%d", quest[QUEST_YAKUZA_2].r_idx);
+
+	if (r_info[MON_BITEN].flags1 & RF1_QUESTOR) msg_print("biten_questor");
+	if (r_info[MON_BITEN].flags3 & RF3_WANTED) msg_print("biten_wanted");
+
+	msg_format("yakuzaII_stat:%d", quest[QUEST_YAKUZA_2].status);
+
+	/*
 	msg_format("today_mon:%d", p_ptr->today_mon);
 	msg_format("hatate_mon:%d", p_ptr->hatate_mon_search_ridx);
 	msg_format("hatate_dun:%d", p_ptr->hatate_mon_search_dungeon);
-
-
 	msg_format("food:%d", p_ptr->food);
 	if(p_ptr->pclass == CLASS_YUMA) msg_format("foodstock:%d", p_ptr->magic_num2[200]);
-
+	*/
 
 	return;
 
@@ -674,7 +680,6 @@ static void do_cmd_wiz_hack_ben(void)
 	//msg_format("cut:%d stun:%d broken:%d", p_ptr->cut, p_ptr->stun, p_ptr->race_multipur_val[0]);
 
 
-	msg_format("cur:%d max:%d",cur_hgt,cur_wid);
 
 	return;
 

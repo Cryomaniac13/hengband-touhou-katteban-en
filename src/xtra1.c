@@ -4375,6 +4375,7 @@ static void calc_torch(void)
 
 	}
 
+
 	/* max radius is 14 (was 5) without rewriting other code -- */
 	/* see cave.c:update_lite() and defines.h:LITE_MAX */
 	if (d_info[dungeon_type].flags1 & DF1_DARKNESS && p_ptr->cur_lite > 1)
@@ -4391,6 +4392,17 @@ static void calc_torch(void)
 
 	/* end experimental mods */
 
+	//v2.0.13 ‚¨—Ó‚Í‘¼‚ÉŒõŒ¹‚ª‚È‚¢‚Æ‚«Ž©‘OŒõŒ¹+1(K”ö‚Ìæ‚ªŒõ‚é)
+	if (p_ptr->pclass == CLASS_ORIN && p_ptr->cur_lite < 1)
+	{
+		p_ptr->cur_lite++;
+		if (p_ptr->old_lite != p_ptr->cur_lite)
+			msg_print(_("‚ ‚È‚½‚ÌK”ö‚Ìæ‚ª˜º‚©‚É”R‚¦‚Ä•Ó‚è‚ðÆ‚ç‚µ‚½B",
+                    "The tip of your tail starts to faintly burn, illuminating nearby area."));
+
+	}
+
+
 	/* Notice changes in the "lite radius" */
 	if (p_ptr->old_lite != p_ptr->cur_lite)
 	{
@@ -4404,6 +4416,8 @@ static void calc_torch(void)
 		if ((p_ptr->cur_lite > 0) && (p_ptr->special_defense & NINJA_S_STEALTH))
 			set_superstealth(FALSE);
 	}
+
+
 }
 
 

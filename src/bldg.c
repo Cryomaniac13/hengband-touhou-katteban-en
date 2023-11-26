@@ -2114,6 +2114,10 @@ bool marisa_will_buy(object_type *o_ptr)
 	{
 		if(o_ptr->tval == marisa_wants_table[i].tval && o_ptr->sval == marisa_wants_table[i].sval) return TRUE;
 	}
+
+	//v2.0.13 伊吹瓢を高額買取することにする。職業魔理沙のときの魔力抽出の対象にはならない。
+	if (p_ptr->pclass != CLASS_MARISA && o_ptr->name1 == ART_IBUKI) return TRUE;
+
 	return FALSE;
 
 }
@@ -2197,8 +2201,16 @@ static void material_2_maripo(void)
 
 	object_desc(o_name, q_ptr, 0);
 
-	for(i=0;marisa_wants_table[i].tval;i++)
-		if(q_ptr->tval == marisa_wants_table[i].tval && q_ptr->sval == marisa_wants_table[i].sval) base_point = marisa_wants_table[i].maripo;
+	//v2.0.13 伊吹瓢は1500MARIPOと交換してくれるようにする
+	if (o_ptr->name1 == ART_IBUKI)
+	{
+		base_point = 1500;
+	}
+	else
+	{
+		for (i = 0; marisa_wants_table[i].tval; i++)
+			if (q_ptr->tval == marisa_wants_table[i].tval && q_ptr->sval == marisa_wants_table[i].sval) base_point = marisa_wants_table[i].maripo;
+	}
 
 	total_point = base_point * amt;
 
@@ -2222,6 +2234,7 @@ static void material_2_maripo(void)
 	msg_format(_("%dポイントのMARIPOを獲得した。", "You obtained %d MARIPO."),total_point);
 
 	///mod150219 魔理沙魔力獲得
+	//v2.0.13 伊吹瓢を渡したときには魔力を得られないはず
 	marisa_gain_power(q_ptr, 100);
 
 	inven_item_increase(item, -amt);
@@ -4142,6 +4155,119 @@ bool check_quest_deliver_item(int q_index)
 
 }
 
+
+
+//ヤクザ戦争2クエストでターゲットを選ぶ
+//選択したターゲットのr_idxを返す。キャンセルは0
+//castle_quest()でクエスト受領文章が出ているときに実行され追加の選択肢を表示する
+int	select_quest_yakuza2_target()
+{
+	char c;
+	int i;
+	int r_idx;
+
+	bool flag_enoko = TRUE;
+	bool flag_biten = TRUE;
+	bool flag_chiyari = TRUE;
+
+	//選択肢から自分に関係ある勢力を除外
+	//新入り3人
+	if (p_ptr->pclass == CLASS_ENOKO) flag_enoko = FALSE;
+	if (p_ptr->pclass == CLASS_BITEN) flag_biten = FALSE;
+	if (p_ptr->pclass == CLASS_CHIYARI) flag_chiyari = FALSE;
+
+	//動物霊の所属
+	if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KEIGA)  flag_enoko = FALSE;
+	if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU)  flag_biten = FALSE;
+	if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_GOUYOKU)  flag_chiyari = FALSE;
+
+	//動物霊憑依
+	if (p_ptr->muta4 & (MUT4_GHOST_WOLF)) flag_enoko = FALSE;
+	if (p_ptr->muta4 & (MUT4_GHOST_OTTER)) flag_biten = FALSE;
+	if (p_ptr->muta4 & (MUT4_GHOST_EAGLE)) flag_chiyari = FALSE;
+
+	//ヤクザクエスト1のときの選択肢
+	if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KEIGA) flag_enoko = FALSE;
+	if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_KIKETSU) flag_biten = FALSE;
+	if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_ALIGN_GOUYOKU) flag_chiyari = FALSE;
+
+	//すでに倒していたら除外(過去バージョンで倒してからバージョンアップしたとき)
+	if(r_info[MON_ENOKO].r_akills) flag_enoko = FALSE;
+	if (r_info[MON_BITEN].r_akills) flag_biten = FALSE;
+	if (r_info[MON_CHIYARI].r_akills) flag_chiyari = FALSE;
+
+	//ランクエ対象だったら除外
+	//v2.0.13以降はこの三人はランクエ選定されない。過去バージョンでランクエ選定されて倒さずにバージョンアップしたときのための処理
+	if (r_info[MON_ENOKO].flags1 & RF1_QUESTOR) flag_enoko = FALSE;
+	if (r_info[MON_BITEN].flags1 & RF1_QUESTOR) flag_biten = FALSE;
+	if (r_info[MON_CHIYARI].flags1 & RF1_QUESTOR) flag_chiyari = FALSE;
+
+	//ターゲットが残らない場合キャンセル
+	if (!flag_enoko && !flag_biten && !flag_chiyari)
+	{
+		c_put_str(TERM_WHITE, _("しかしあなたの受けられそうな手配書は残っていなかった。", "However, there are no suitable wanted person posters left for you."), 15, 0);
+		c_put_str(TERM_WHITE, _("このクエストを受領することはできないようだ。", "You are unable to accept this quest."), 16, 0);
+		return 0;
+	}
+
+	//残ったターゲットを一覧表示
+	c_put_str(TERM_WHITE, _("誰を狙いますか？(ESC:キャンセル)", "Which target do you pick? (ESC: cancel)"), 14, 2);
+	if (flag_enoko)
+		c_put_str(TERM_WHITE, _("a) 『三頭 慧ノ子』  ($50,000+腕力の薬)",   "a) Enoko Mitsugashira ($50,000 + Potion of Strength)"), 15, 5);
+	if (flag_biten)
+		c_put_str(TERM_WHITE, _("b) 『孫 美天』      ($60,000+知能の薬)",   "b) Son Biten          ($60,000 + Potion of Intelligence)"), 16, 5);
+	if (flag_chiyari)
+		c_put_str(TERM_WHITE, _("c) 『天火人 ちやり』($70,000+耐久力の薬)", "c) Chiyari Tenkajin   ($70,000 + Potion of Constitution)"), 17, 5);
+
+	//ターゲットを選択
+	//ターゲットが属する勢力から反感を買うフラグを記録
+	while (TRUE)
+	{
+		r_idx = 0;
+		c = inkey();
+
+		if (c == ESCAPE)
+		{
+			clear_bldg(4, 18);
+			return 0;
+		}
+
+		if (c == 'a' && flag_enoko)
+		{
+			r_idx = MON_ENOKO;
+			p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q2_BEAT_KEIGA;
+		}
+		if (c == 'b' && flag_biten)
+		{
+			r_idx = MON_BITEN;
+			p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q2_BEAT_KIKETSU;
+		}
+		if (c == 'c' && flag_chiyari)
+		{
+			r_idx = MON_CHIYARI;
+			p_ptr->animal_ghost_align_flag |= ANIMAL_GHOST_Q2_BEAT_GOUYOKU;
+		}
+
+		if (r_idx) break;
+	}
+
+	//選択したモンスターに賞金首フラグを立て、すでに倒してたら復活させる
+	r_info[r_idx].flags3 |= RF3_WANTED;
+	if (!r_info[r_idx].max_num)
+	{
+		if (cheat_hear) msg_print(_("選択したモンスターが打倒済みなので復活させる", "The chosen monster was already defeated, and is now reborn"));
+		r_info[r_idx].max_num = 1;
+	}
+
+	clear_bldg(4, 18);
+	c_put_str(TERM_WHITE, _("あなたは手配書の一枚を手に取った。", "You take one of the wanted person posters."), 5, 5);
+
+
+	return r_idx;
+
+}
+
+
 /*
  * Request a quest from the Lord.
  */
@@ -4159,6 +4285,15 @@ static void castle_quest(void)
 	/* Current quest of the building */
 	/*:::クエストインデックスを得る。*/
 	q_index = cave[py][px].special;
+
+	//v2.0.13 未解決バグmemo
+	//ヤクザ戦争2クエスト(QUEST_YAKUZA2)で選択した賞金首がランクエ対象でもあった場合、
+	//ランクエフロアに行って該当モンスターを倒すと両方のクエストが完了状態になるのだが、
+	//その後ヤクザ戦争2クエストの建物に来るとなぜかq_indexが0になって報酬生成処理に行かない。
+	//ランクエフロア以外で倒したらちゃんと完了する。
+	//何がどうなったらt0000014.txtに直打ちされた数字に影響が出るのか全く不明。
+	//非常に不気味だがとりあえずランクエ選定済みの敵は賞金首に選択できないようにしておく
+	if(cheat_xtra)msg_format("idx:%d", q_index);
 
 	//v1.1.85
 	// -Mega Hack- 鯢呑亭クエスト(人間用)を深夜に受けると鯢呑亭クエスト(妖怪用)になる処理
@@ -4454,10 +4589,33 @@ msg_format("クエスト: %sを %d体倒す", name,q_ptr->max_num);
 #endif
 
 		}
+		//v2.0.13 ヤクザ戦争2クエストの特殊処理
+		//クエスト文章を表示したあとどの賞金首を狙うか選択肢を表示し、選ばれたモンスターをquest[].r_idxに記録する。
+		else if (q_index == QUEST_YAKUZA_2)
+		{
+
+			int tmp_r_idx;
+			get_questinfo(q_index, TRUE);
+
+			tmp_r_idx = select_quest_yakuza2_target();
+
+			if (tmp_r_idx)
+			{
+				q_ptr->r_idx = tmp_r_idx;
+			}
+			else
+			{
+				//キャンセルした場合クエストを未受領に戻してまたクエスト文章と選択肢が出るようにする
+				q_ptr->status = QUEST_STATUS_UNTAKEN;
+			}
+		}
+		//通常のクエスト　クエスト文章表示
 		else
 		{
 			get_questinfo(q_index, TRUE);
 		}
+
+
 	}
 }
 
@@ -9776,13 +9934,13 @@ bool check_quest_unique_text(void)
 			{
 #ifdef JP
                 strcpy(quest_text[line++], "八千慧「緊急の任務よ！");
-                strcpy(quest_text[line++], "旧血の池地獄にて石油という有用な資源が大量に発見されました。");
-                strcpy(quest_text[line++], "現在は剛欲同盟に支配されており、放置するわけにはいきません。");
+                strcpy(quest_text[line++], "旧血の池地獄で石油という有用な資源が大量に発見された。");
+                strcpy(quest_text[line++], "現在は剛欲同盟に支配されていて、放置するわけにはいかない。");
                 strcpy(quest_text[line++], "この地を奪取すべく急いで兵力を集めているけど、");
                 strcpy(quest_text[line++], "勁牙組や霊長園も我々と同じことを考えているみたい。");
                 strcpy(quest_text[line++], "おそらく一大抗争になるからあなたもこれに加わって。");
                 strcpy(quest_text[line++], "あと石油はよく燃えるから石油の上では炎攻撃の威力が増すわ。");
-				strcpy(quest_text[line++], "強力な火竜を雇って連れて行くけど巻き込まれないように立ち回ってね。」");
+				strcpy(quest_text[line++], "強力な火竜を雇って連れて行くから巻き込まれないように立ち回ってね。」");
 #else
                 strcpy(quest_text[line++], "Yachie - 'There's an urgent mission!");
                 strcpy(quest_text[line++], "We've discovered a large amount of useful resource called 'oil' in");
@@ -10113,8 +10271,8 @@ bool check_quest_unique_text(void)
 			else if (CHECK_ANIMAL_GHOST_STRIFE == ANIMAL_GHOST_STRIFE_KIKETSU || pc == CLASS_BITEN)
 			{
 #ifdef JP
-                strcpy(quest_text[line++], "八千慧「まあこの手の争いは戦闘が終わってからが本番です。");
-                strcpy(quest_text[line++], "あとは私がやりましょう。あなたは元の任務に戻りなさい。」");
+                strcpy(quest_text[line++], "八千慧「まあこの手の争いは戦闘が終わってからが本番だ。");
+                strcpy(quest_text[line++], "あとは私がやっておく。あなたは元の任務に戻りなさい。」");
 #else
                 strcpy(quest_text[line++], "Yachie - 'Well, the real conflict starts after a battle like this");
                 strcpy(quest_text[line++], "is over. Leave it to me and resume your original mission.'");
@@ -10330,6 +10488,100 @@ bool check_quest_unique_text(void)
 
 		break;
 
+		//v2.0.13 ヤクザ戦争2クエスト
+	case QUEST_YAKUZA_2:
+		if (pc == CLASS_ENOKO)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "早鬼「いよいよ始めるぞ。準備はいいな？");
+				strcpy(quest_text[line++], "まずはあそこの手配書から好きな奴を選んで叩きのめして来い。");
+				strcpy(quest_text[line++], "お前が地上進出の一番槍だ。任せたぞ！」");
+#else
+				strcpy(quest_text[line++], "Saki - 'Well, let's get started. Are you ready?");
+				strcpy(quest_text[line++], "First of all, pick any target out of those wanted posters you like");
+				strcpy(quest_text[line++], "and beat them up. You'll be the first to go on the surface.");
+				strcpy(quest_text[line++], "I'm leaving this to you!'");
+#endif
+			}
+			if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "早鬼「よくやった！まずはライバルをひとつ蹴落としたな。");
+				strcpy(quest_text[line++], "これを飲んでもっと強くなれよ。」");
+#else
+				strcpy(quest_text[line++], "Saki - 'Well done! That's one rival kicked down.");
+				strcpy(quest_text[line++], "Drink this, and you'll become even stronger.'");
+#endif
+			}
+		}
+		if (pc == CLASS_BITEN)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "八千慧「機は熟した。そろそろ始めよう。");
+				strcpy(quest_text[line++], "まずは敵勢力の橋頭堡を潰さないとね。");
+				strcpy(quest_text[line++], "そこの手配書から好きなほうを選びなさい。");
+				strcpy(quest_text[line++], "三頭慧ノ子は魔法の森最深部、");
+				strcpy(quest_text[line++], "天火人ちやりは旧灼熱地獄を根城にしているそうよ。」");
+#else
+				strcpy(quest_text[line++], "Yachie - 'The time is right. Let's get started.");
+				strcpy(quest_text[line++], "First of all, we'll have to destroy the enemy forces.");
+				strcpy(quest_text[line++], "Pick anyone you like out of those wanted posters.");
+				strcpy(quest_text[line++], "Enoko Mitsugashira is in the depths of Forest of Magic,");
+				strcpy(quest_text[line++], "and Chiyari Tenkajin resides in Former Hell.'");
+#endif
+			}
+			if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "八千慧「まずは一歩リードね。");
+				strcpy(quest_text[line++], "その報酬で戦力を整えなさい。」");
+#else
+				strcpy(quest_text[line++], "Yachie - 'That's a step in the right direction.");
+				strcpy(quest_text[line++], "Use this reward to enhance your combat prowess.'");
+#endif
+			}
+		}
+		if (pc == CLASS_CHIYARI)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "尤魔「やっと来たか。さっそく他の組の地上勢力を追い払うぞ。");
+				strcpy(quest_text[line++], "ちょうど奴らは互いに賞金を懸け合ってるからうちで頂いてしまおう。");
+				strcpy(quest_text[line++], "勁牙組の犬肉は魔法の森でよく見かける。");
+				strcpy(quest_text[line++], "鬼傑組の猿肉はあちこちで活動しているようだ。");
+				strcpy(quest_text[line++], "天狗の里には人探しが得意な鳥肉がいるらしいから情報を買うのもいいな。」");
+#else
+				strcpy(quest_text[line++], "Yuuma - 'Finally, you're here. Let's clean up the other forces.");
+				strcpy(quest_text[line++], "They're going to put bounties on each other, so we'll take those.");
+				strcpy(quest_text[line++], "Keiga Family's dog is frequently seen in Forest of Magic.");
+				strcpy(quest_text[line++], "Kiketsu Family's monkey seems to wander around everywhere.");
+				strcpy(quest_text[line++], "There's a bird in Tengu Village who's good at tracking people down,");
+				strcpy(quest_text[line++], "so you might want to buy info from her.'");
+#endif
+			}
+			if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "「スッキリした顔をしているな。");
+				strcpy(quest_text[line++], "報酬を受け取るのを忘れるなよ。」");
+#else
+				strcpy(quest_text[line++], "'You look refreshed.");
+				strcpy(quest_text[line++], "Don't forget about your reward.'");
+#endif
+			}
+		}
+
+
+
+
+
+		break;
+
 
 	default:
 		break;
@@ -10348,11 +10600,9 @@ bool check_quest_unique_text(void)
 /*:::Mega Hack - 一部ユニーククラスは特定のクエストを最初から受けられない。*/
 /*:::今の＠で受けられないクエストのときTRUEを返す。*/
 /*:::処理としては、該当クエストをゲームスタート時に全て失敗済にし、ダンプやステータスに表示しない。*/
-
-/*:::…ミスに気がついた。これだとここでTRUEになったクエストが失敗終了の状態で初期町生成される。つまり例えばフランは妹様クエだけでなく京丸牡丹クエも受けられない。*/
+/*:::↑後日ミスに気がついた。これだとここでTRUEになったクエストが失敗終了の状態で初期町生成される。つまり例えばフランは妹様クエだけでなく京丸牡丹クエも受けられない。*/
 /*:::どうしたものか。とりあえず放置。*/
 /*:::↑txxxxxxx.txtの条件分岐に細工して凌ぐしかないか。*/
-
 //ここの他にもcastle_quest()のところで受注の可能不可能を決めている処理がある。
 //暴風対策や羽衣婚活など。
 //あちらでは種族変容とかしたら受けられるが受けられないときにその後のクエスト(今はないはず)も受けられない。
@@ -10548,6 +10798,13 @@ bool check_ignoring_quest(int questnum)
 
 	case QUEST_YAKUZA_1:
 		if (pc == CLASS_OKINA) return TRUE;
+		break;
+
+		//v2.0.13 賞金首クエスト　各勢力組長とどこにも肩入れしない人は受領不可
+	case QUEST_YAKUZA_2:
+		if (pc == CLASS_SAKI || pc == CLASS_YACHIE || pc == CLASS_YUMA || pc == CLASS_ZANMU || pc == CLASS_EIKI || pc == CLASS_REIMU)
+			return TRUE;
+		break;
 
 	}
 
@@ -14966,7 +15223,13 @@ void grassroots_trading_cards(void)
 		ref_totalcost = ref_cost * ref_num * mult / 100;
 
 	}
-	else if (ex_bldg_idx == BLDG_EX_MARISA) //移動魔法店でアイテムを渡したとき
+	else if (ex_bldg_idx == BLDG_EX_MARISA && o_ptr->name1 == ART_IBUKI) //v2.0.13 移動魔法店で伊吹瓢を渡したとき
+	{
+		ref_cost = 300;
+		ref_totalcost = 300;
+
+	}
+	else if (ex_bldg_idx == BLDG_EX_MARISA) //移動魔法店でそれ以外のアイテムを渡したとき
 	{
 		ref_pval = -1;
 
@@ -17041,8 +17304,8 @@ msg_print("ここにはクエストの入口はない。");
 
 		}
 
-			//v1.1.91 抗争クエスト1
-			//抗争クエに入るとき、どちらの勢力につくか選択してフラグをp_ptr->animal_ghost_align_flagに記録する
+		//v1.1.91 抗争クエスト1
+        //抗争クエに入るとき、どちらの勢力につくか選択してフラグをp_ptr->animal_ghost_align_flagに記録する
 		else if (cave[py][px].special == QUEST_YAKUZA_1)
 			{
 				int i;
@@ -17052,79 +17315,86 @@ msg_print("ここにはクエストの入口はない。");
 				//選択可能な勢力をフラグで設定
 				//プロテウスリングとかで変身中のときも考慮する？
 
-					//動物霊に憑依されている場合最優先でその所属に固定
-					if (p_ptr->muta4 & MUT4_GHOST_WOLF)
+				//動物霊に憑依されている場合最優先でその所属に固定
+				if (p_ptr->muta4 & MUT4_GHOST_WOLF)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
+				}
+				else if (p_ptr->muta4 & MUT4_GHOST_EAGLE)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+				}
+				else if (p_ptr->muta4 & MUT4_GHOST_OTTER)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+				}
+				else if (p_ptr->muta4 & MUT4_GHOST_HANIWA)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
+				}
+			//早鬼
+				else if (p_ptr->pclass == CLASS_SAKI || p_ptr->pclass == CLASS_ENOKO)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
+				}
+			//八千慧
+				else if (p_ptr->pclass == CLASS_YACHIE || p_ptr->pclass == CLASS_BITEN)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+				}
+			//尤魔
+				else if (p_ptr->pclass == CLASS_YUMA || p_ptr->pclass == CLASS_CHIYARI)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+				}
+			//埴輪と袿姫
+				else if (p_ptr->prace == RACE_HANIWA || p_ptr->pclass == CLASS_KEIKI)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
+				}
+			//ほか種族動物霊は所属勢力で決まる。無所属(あるいは今後実装されるかもしれない正体不明の集団)は埴輪以外全て選択可能
+				else if (p_ptr->prace == RACE_ANIMAL_GHOST)
+				{
+					switch (CHECK_ANIMAL_GHOST_STRIFE)
 					{
+					case ANIMAL_GHOST_STRIFE_KEIGA:
 						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
-					}
-					else if (p_ptr->muta4 & MUT4_GHOST_EAGLE)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
-					}
-					else if (p_ptr->muta4 & MUT4_GHOST_OTTER)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
-					}
-					else if (p_ptr->muta4 & MUT4_GHOST_HANIWA)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
-					}
-				//早鬼
-					else if (p_ptr->pclass == CLASS_SAKI || p_ptr->pclass == CLASS_ENOKO)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
-					}
-				//八千慧
-					else if (p_ptr->pclass == CLASS_YACHIE || p_ptr->pclass == CLASS_BITEN)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
-					}
-				//尤魔
-					else if (p_ptr->pclass == CLASS_YUMA || p_ptr->pclass == CLASS_CHIYARI)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
-					}
-				//埴輪と袿姫
-					else if (p_ptr->prace == RACE_HANIWA || p_ptr->pclass == CLASS_KEIKI)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_HANIWA);
-					}
-				//ほか種族動物霊は所属勢力で決まる。無所属(あるいは今後実装されるかもしれない正体不明の集団)は埴輪以外全て選択可能
-					else if (p_ptr->prace == RACE_ANIMAL_GHOST)
-					{
-						switch (CHECK_ANIMAL_GHOST_STRIFE)
-						{
-						case ANIMAL_GHOST_STRIFE_KEIGA:
-							selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA);
-							break;
+						break;
 
-						case ANIMAL_GHOST_STRIFE_KIKETSU:
-							selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
-							break;
+					case ANIMAL_GHOST_STRIFE_KIKETSU:
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KIKETSU);
+						break;
 
-						case ANIMAL_GHOST_STRIFE_GOUYOKU:
-							selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
-							break;
-						default:
-							selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
-							break;
-						}
+					case ANIMAL_GHOST_STRIFE_GOUYOKU:
+						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU);
+						break;
+					default:
+						selectable_flags = (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+						break;
 					}
-				//神奈子とフランは剛欲か全滅
-					else if (p_ptr->pclass == CLASS_KANAKO || p_ptr->pclass == CLASS_FLAN)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
-					}
-				//さとまいは？埴輪か全滅？
-				//霊夢・映姫・久侘歌・種族死神は全滅オンリー
-					else if (p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_EIKI || p_ptr->pclass == CLASS_KUTAKA || p_ptr->prace == RACE_DEATH)
-					{
-						selectable_flags = (ANIMAL_GHOST_ALIGN_KILLTHEMALL);
-					}
-					else //上に挙げた条件に当てはまらないとき全て選択可能
-					{
-						selectable_flags |= (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_HANIWA | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
-					}
+				}
+			//神奈子とフランは剛欲か全滅
+				else if (p_ptr->pclass == CLASS_KANAKO || p_ptr->pclass == CLASS_FLAN)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+				}
+			//さとまいは？埴輪か全滅？
+			//霊夢・映姫・久侘歌・種族死神は全滅オンリー
+				else if (p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_EIKI || p_ptr->pclass == CLASS_KUTAKA || p_ptr->prace == RACE_DEATH)
+				{
+					selectable_flags = (ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+				}
+				else //上に挙げた条件に当てはまらないとき全て選択可能
+				{
+					selectable_flags |= (ANIMAL_GHOST_ALIGN_KEIGA | ANIMAL_GHOST_ALIGN_KIKETSU | ANIMAL_GHOST_ALIGN_GOUYOKU | ANIMAL_GHOST_ALIGN_HANIWA | ANIMAL_GHOST_ALIGN_KILLTHEMALL);
+				}
+
+				//v2.0.13 ヤクザクエスト2で倒した賞金首の属する組織には味方できない。もし味方できる組織がいなくなったら全員倒すの選択肢しか出ない
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q2_BEAT_KEIGA) selectable_flags &= ~(ANIMAL_GHOST_ALIGN_KEIGA);
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q2_BEAT_KIKETSU) selectable_flags &= ~(ANIMAL_GHOST_ALIGN_KIKETSU);
+				if (p_ptr->animal_ghost_align_flag & ANIMAL_GHOST_Q2_BEAT_GOUYOKU) selectable_flags &= ~(ANIMAL_GHOST_ALIGN_GOUYOKU);
+				if (!selectable_flags) selectable_flags = ANIMAL_GHOST_ALIGN_KILLTHEMALL;
+
 				screen_save();
 				for (i = 1; i<9; i++)Term_erase(12, i, 255);
 

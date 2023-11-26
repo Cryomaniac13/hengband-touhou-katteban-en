@@ -4452,8 +4452,19 @@ note(format("クエストが多すぎる(%u)！", max_quests_load));
 						rd_byte(&quest[i].dungeon);
 					/* Mark uniques */
 					if (quest[i].status == QUEST_STATUS_TAKEN || quest[i].status == QUEST_STATUS_UNTAKEN)
+					{
+						//クエスト対象モンスターがユニークの場合QUESTORフラグを立てている。ランダムクエスト用か
 						if ((r_info[quest[i].r_idx].flags1 & RF1_UNIQUE) && (quest[i].type != QUEST_TYPE_BOUNTY_HUNT))
 							r_info[quest[i].r_idx].flags1 |= RF1_QUESTOR;
+					}
+
+
+					//v2.0.13 受領済み賞金首クエスト対象モンスターにはWANTEDフラグを立てることにする。
+					//ヤクザ戦争2クエストでr_info.txtにないWANTEDフラグをあとから設定するため
+					if (quest[i].type == QUEST_TYPE_BOUNTY_HUNT && quest[i].status == QUEST_STATUS_TAKEN)
+					{
+							r_info[quest[i].r_idx].flags3 |= RF3_WANTED;
+					}
 				}
 
 

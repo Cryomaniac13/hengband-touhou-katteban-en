@@ -1633,6 +1633,7 @@ cptr use_ability_card_aux(object_type *o_ptr, bool only_info)
 			return NULL;
 		}
 		msg_print(_("‚ ‚È‚½‚Í‹S‚ÌŽð‚ðˆê‘§‚É™ì‚Á‚½I", "You down the oni sake in a single gulp!"));
+		set_afraid(0);//v2.0.13
 		percen = p_ptr->chp * 100 / p_ptr->mhp;
 		v = base + randint1(base);
 		if(p_ptr->alcohol < DRANK_3-1) set_alcohol(DRANK_3-1);

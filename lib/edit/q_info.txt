@@ -262,4 +262,6 @@
 ?:[EQU $QUEST_NUMBER 72]
 %:quest72_t05_hangoku_2.txt
 
-
+#v2.0.13 ヤクザバトル2
+?:[EQU $QUEST_NUMBER 73]
+%:quest73_t14_yakuza_battle2.txt
