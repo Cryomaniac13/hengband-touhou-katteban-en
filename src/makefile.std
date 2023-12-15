@@ -113,7 +113,7 @@ CC = gcc
 #
 # Options for Japanese version (comment out for English version)
 
-JP_OPT= -D"JP" -D"EUC" -DDEFAULT_LOCALE="\"ja_JP.eucJP\""
+#JP_OPT= -D"JP" -D"EUC" -DDEFAULT_LOCALE="\"ja_JP.eucJP\""
 
 ###################################################################
 

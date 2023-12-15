@@ -47,4 +47,7 @@ directories to the src subdirectory of the Touhou Katteban Hengband files, and
 run "make -f makefile.std".  The resulting executable is named "hengband" and
 is placed at the top level of the Touhou Katteban Hengband files.  To run it
 from a terminal, change directories to the top level of the Touhou Katteban
-Hengband files and run "./hengband".
+Hengband files and run "./hengband". Note that if you have your `MAKEFLAGS`
+environment variable set to use multiple jobs (-j2 or higher), there is a good 
+chance compilation will fail. If you encounter an error during compilation,
+consider using `unset MAKEFLAGS && make -f makefile.std` instead.
