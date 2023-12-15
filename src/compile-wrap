@@ -56,7 +56,7 @@ for header in `find "$src_dir" -name '*.h' -print` "$src_dir"/maid-x11.c ; do
 	fi
 	if test -e "$dest_dir" ; then
 		if test ! -d "$dest_dir" ; then
-			rm "$dest_dir" || exit 1
+			rm -f "$dest_dir" || exit 1
 			mkdir "$dest_dir" || exit 1
 		fi
 	else
@@ -79,14 +79,14 @@ for header in `find "$src_dir" -name '*.h' -print` "$src_dir"/maid-x11.c ; do
 	dest_path="$dest_dir"/"$header_base"
 	if test $is_special -eq 0 ; then
 		if test -e "$dest_path" ; then
-			rm -r "$dest_path" || exit 1
+			rm -rf "$dest_path" || exit 1
 		fi
-		ln -s "$src_path" "$dest_path" || exit 1
+		ln -sf "$src_path" "$dest_path" || exit 1
 	elif test ! "$dest_path" -nt "$header" ; then
 		# Regenerate if it does not exist or is older than the header
 		# that is preprocessed to generate it.
 		if test -e "$dest_path" ; then
-			rm -r "$dest_path" || exit 1
+			rm -rf "$dest_path" || exit 1
 		fi
 		nkf -e "$header" > "$dest_path" || exit 1
 	fi
@@ -108,7 +108,7 @@ else
 fi
 if test -e "$dest_dir" ; then
 	if test ! -d "$dest_dir" ; then
-		rm "$dest_dir" || exit 1
+		rm -f "$dest_dir" || exit 1
 		mkdir "$dest_dir" || exit 1
 	fi
 else

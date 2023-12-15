@@ -13,8 +13,11 @@
 # Base Heng ini file
 hengband.ini
 
-# Builds
+# Builds 
 *.exe
+.build/
+hengband
+src/hengband
 
 # Archives
 *.zip
