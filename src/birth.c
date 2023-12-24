@@ -3273,6 +3273,8 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_ENOKO,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_ENOKO,2,ART_ENOKO,0,0,1 },
 
+	{ CLASS_CHIYARI,2,0,TV_CLOTHES, SV_CLOTH_T_SHIRT,1 },
+
 	{-1,0,0,0,0,0} //終端dummy
 };
 
@@ -6408,8 +6410,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("三頭　慧ノ子", "Enoko Mitsugashira"),CLASS_ENOKO,RACE_WARBEAST,ENTRY_JUUOUEN,SEX_FEMALE,
 		_("あなたは破戒僧だった頃の日白残無の肉を食らって永遠の呪いを受けたヤマイヌです。両腕に物騒なトラバサミが取り付けられており、これによって強力な格闘攻撃ができますが代わりに武器や盾を装備することができなくなります。薬や巻物などの消耗品は問題なく使用できます。またあなたは罠の扱いを得意としており、罠を設置して敵を罠にかけることができます。敵と対峙する前にダメージを与えたり弱体化させるなどのトリッキーな戦い方が可能です。あなたは鬼の宝玉を首からかけています。この宝玉はあなたに大きな力をもたらしますが、これを装備していると周りの人妖が宝を狙って襲いかかってきます。",
         "You are a yamainu who ate the flesh of Zanmu Nippaku back when she was a human, and got eternally cursed as a result. You have beartraps attached to both of your arms; this lets you deliver powerful blows in melee, but you can't use weapons or shields. You still can use consumables like potions or scrolls. You are proficient at using traps; you can place them, making enemies get caught into them. You can fight in a tricky manner, dealing damage and weakening your enemies before engaging them. You are wearing an oni gemstone on your neck. It grants you great power, but humans and youkai alike will attack you, trying to get it.") },
-	{ FALSE,_("天火人　ちやり", "Chiyari Tenkajin"),CLASS_CHIYARI,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
-		_("未実装", "unimplemented") },
+	{ TRUE,_("天火人　ちやり", "Chiyari Tenkajin"),CLASS_CHIYARI,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("あなたは「天火人」と呼ばれる吸血妖怪です。旧血の池地獄に長い間引き籠もっていましたが最近外に出てきました。あなたは通常の食事が口に合わず、代わりに特技で他者から血を奪ってそれを飲むことで腹を満たして体力と魔力を回復します。あなたは呪われた血が好みのためゾンビやデーモンの血でも気にしません。またあなたは自らの血を使って攻撃力を大幅に強化する特技を持っています。使いすぎて出血ダメージで倒れないように気をつけましょう。",
+        "You are a tenkajin - a blood-drinking youkai. You've secluded yourself at Former Hell of Blood Pools for a long time, but recently you've started going outside. You're not satiated with ordinary food - instead you have to steal blood from others using your ability, and drinking it satiates you, healing and restoring magical power as well. You like cursed blood, so you don't mind drinking blood of zombies and demons as well. Also, you can use your own blood to greatly power up your attacks. Just be careful not to collapse from blood loss if you use it too much.") },
 	{ FALSE,_("豫母都　日狭美", "Hisami Yomotsu"),CLASS_HISAMI,RACE_DEATH,ENTRY_JUUOUEN,SEX_FEMALE,
 		_("未実装", "unimplemented") },
 	{ FALSE,_("日白　残無", "Zanmu Nippaku"),CLASS_BITEN,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
@@ -8317,6 +8320,8 @@ void gain_perma_mutation(void)
 
 	if (p_ptr->pclass == CLASS_MOMOYO) p_ptr->muta1_perma |= MUT1_EAT_ROCK;
 
+	if (p_ptr->pclass == CLASS_CHIYARI)	p_ptr->muta2_perma |= MUT2_BIGHORN | MUT2_BIGTAIL;
+
 	if (p_ptr->pclass == CLASS_YUMA)
 	{
 		p_ptr->muta1_perma |= (MUT1_EAT_ROCK | MUT1_EAT_MAGIC);
@@ -8384,19 +8389,7 @@ void player_birth(void)
 	//鬼の角やラッキーマンのオーラなど生来型変異を得る
 	gain_perma_mutation();
 
-	/*:::特殊処理　鬼はゲーム開始時から酔っている*/
-	///mod150205↑萃香だけにした
-	if(p_ptr->pclass == CLASS_SUIKA) p_ptr->alcohol = 2000;
-
-	/*:::特殊処理　わかさぎ姫と影狼は最初から草の根妖怪ネットワークに加入している*/
-	if(p_ptr->pclass == CLASS_WAKASAGI) p_ptr->grassroots = 1;
-	if(p_ptr->pclass == CLASS_KAGEROU) p_ptr->grassroots = 1;
-
-	//特殊処理　藍は最初から鉄獄の場所を知っている
-	if(p_ptr->pclass == CLASS_RAN) max_dlv[DUNGEON_ANGBAND] = 1;
-
-	//特殊処理　雛は厄が500溜まっている
-	if(p_ptr->pclass == CLASS_HINA) p_ptr->magic_num1[0] = 500;
+	//v2.0.14 ここに一部の職業の初期設定処理があったがprocess_player()のhack_startupのところにまとめた
 
 
 	/* Note player birth in the message recall */

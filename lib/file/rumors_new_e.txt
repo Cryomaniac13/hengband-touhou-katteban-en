@@ -271,7 +271,7 @@ At level 30-40 you'll start running into enemies you might be\unable to defeat i
 Beyond level 40, enemy attacks become far stronger than before.\It'd be wise to collect equipment and supplies at this point to raise\your own strength.
 I've heard minor youkai have set up a mutual aid network to\exchange information and items. One of their branches is at the\back of the shrine. I can't participate because of my position, though.
 Around level 30 it becomes important to detect enemies from afar.\I have good ears for this,\and several magic realms have spells for monster detection.\ \If you can't use spells or ears...\You'll have to find a rare Rod of Detection.
-Are you using pawn shops?\They often sell powerful equipment and useful supplies.\It's very expensive, but check it out if you have the money.
+Are you visiting black markets?\They often sell powerful equipment and useful supplies.\It's very expensive, but check it out if you have the money.
 Have you heard of 'double resistance'?\It applies to acid, lightning, fire, cold and poison attacks;\if you get resistance from a piece of equipment and then also gain\temporary resistance from a spell or a potion, you'll greatly\reduce the damage you're taking.\That's essential to know around level 40.
 Weapon proficiency can be surprisingly important.\If you won't work on it, you won't be able to properly land a hit on powerful enemies.\Well, when our priest gets serious, she can land a hit even with\weapons she's not skilled with.
 Around level 30 enemies that inflict hallucination will start appearing.\You can protect yourself with chaos resistance, but it's hard to obtain.\You have to use a Potion or Staff of Curing to heal hallucinations.
@@ -289,6 +289,8 @@ In the forest to south-west, there's a path leading to a hermit residence.\There
 To the north-west there's an inverted castle floating in the sky.\It used to be a resistance base, but now it's a monster lair.\Looks like you can't cast spells in it for some reason.
 You can find many golden nuggets and magic materials\in the Hell Valley. However, watch out for gasses and vengeful spirits.\It's a dangerous place.
 There's a route to the Dream World around the lake of Youkai Mountain.\Those who sleep and see dreams enter this place, so everyone's awake\because they're sleeping in the first place.\As you go deeper inside, you can find many vaults there.\You can obtain some rare materials unavailable otherwise here, but it's\not a place for unskilled adventurers.
+Sanzu River is to north-east of here.\Once you cross it, you'll be at the gates of Hell.\There's a lot of nasty monsters in Sanzu River, and they'll strike as soon as you enter it.\Don't approach it.
+To the west of Tengu Village there's a place called False Heaven Shelf.\There's a youkai gambling den, a yamawaro hideout and a dangerous mineshaft there.\There's a new game involving ability cards in the gambling den,\but I don't recommend visiting it if you're not proficient enough.
 You easily can get lost if you walk around the bamboo forest\near Eientei. You can avoid this if you're flying.
 Are you worried about money?\The deeper you go in, the better items you will find, so quickly\diving might be a good item. If you're not confident in your skills,\you can dig up treasures on early levels with a digging implement and\Scrolls of Treasure Detection.
 Hmm. Do you understand what you have to take with you\into the dungeon? Take plenty of Scrolls of Teleportation and\healing potions, 2-3 Scrolls of Word of Recall, and bring several\various staves of detection if you can.
@@ -367,6 +369,7 @@ While in forest terrain, yamawaro move quicker than usual and are more powerful.
 Ability cards?\There are some active traders around here.\They might give you something if you do them a favor.
 You want a high rank ability card?\There's an ability card exchange venue open at night at Moriya Shrine.\There might be some generous people willing to give away high rank cards,\but be prepared to wait for months if you want to get the highest ranking ones.
 Have you heard about drunken fist style?\I thought it was just a joke among drunkards,\but looks like when a proficient martial artist gets drunk, they can fight using drunken fist style.
+I heard that the armoury in Former Hell is selling their brand of T-shirts.
 
 N:20:Archer Guild explanation
 Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materialsÅF\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.

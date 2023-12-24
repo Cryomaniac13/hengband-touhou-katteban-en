@@ -1192,6 +1192,7 @@ bool dispel_check(int m_idx)
 		else if ((p_ptr->pclass == CLASS_MOKOU) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_ENOKO) && (p_ptr->lev > 39));//”ñ‘ÎÛ
+		else if ((p_ptr->pclass == CLASS_CHIYARI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29));

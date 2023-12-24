@@ -2160,33 +2160,33 @@ static void process_world_aux_hp_and_sp(void)
 		int dam;
 
 		/* Mortal wound or Deep Gash */
-		if (p_ptr->cut > 1000)
+		if (p_ptr->cut > CUT_7)
 		{
 			dam = 200;
 		}
 
-		else if (p_ptr->cut > 200)
+		else if (p_ptr->cut > CUT_6)
 		{
 			dam = 80;
 		}
 
 		/* Severe cut */
-		else if (p_ptr->cut > 100)
+		else if (p_ptr->cut > CUT_5)
 		{
 			dam = 32;
 		}
 
-		else if (p_ptr->cut > 50)
+		else if (p_ptr->cut > CUT_4)
 		{
 			dam = 16;
 		}
 
-		else if (p_ptr->cut > 25)
+		else if (p_ptr->cut > CUT_3)
 		{
 			dam = 7;
 		}
 
-		else if (p_ptr->cut > 10)
+		else if (p_ptr->cut > CUT_2)
 		{
 			dam = 3;
 		}
@@ -8258,6 +8258,9 @@ static void process_player(void)
 		if(p_ptr->pclass == CLASS_SOLDIER)
 			get_soldier_skillpoint();
 
+		//v2.0.14 ‚¿‚â‚è‚ÌŒŒ‰t‚Ì‰ŠúŠŽ
+		if (p_ptr->pclass == CLASS_CHIYARI) p_ptr->magic_num1[0] = 100;
+
 		//v1.1.52 ä¿ŽqV«Ši
 		if (is_special_seikaku(SEIKAKU_SPECIAL_SUMIREKO))
 		{
@@ -8329,6 +8332,21 @@ static void process_player(void)
 			chimata_calc_card_rank();
 
 		}
+
+		/* ‹S‚ÍƒQ[ƒ€ŠJŽnŽž‚©‚çŒ‚Á‚Ä‚¢‚é*/
+		///mod150205ªäÂ‚¾‚¯‚É‚µ‚½
+		if (p_ptr->pclass == CLASS_SUIKA) p_ptr->alcohol = 2000;
+
+		/*::: ‚í‚©‚³‚¬•P‚Æ‰e˜T‚ÍÅ‰‚©‚ç‘‚Ìª—d‰öƒlƒbƒgƒ[ƒN‚É‰Á“ü‚µ‚Ä‚¢‚é*/
+		if (p_ptr->pclass == CLASS_WAKASAGI) p_ptr->grassroots = 1;
+		if (p_ptr->pclass == CLASS_KAGEROU) p_ptr->grassroots = 1;
+
+		// —•‚ÍÅ‰‚©‚ç“S–‚ÌêŠ‚ð’m‚Á‚Ä‚¢‚é
+		if (p_ptr->pclass == CLASS_RAN) max_dlv[DUNGEON_ANGBAND] = 1;
+
+		// —‚Í–ï‚ª500—­‚Ü‚Á‚Ä‚¢‚é
+		if (p_ptr->pclass == CLASS_HINA) p_ptr->magic_num1[0] = 500;
+
 
 		hack_startup = FALSE;
 	}

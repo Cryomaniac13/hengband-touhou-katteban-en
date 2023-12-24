@@ -44,6 +44,331 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+
+
+
+//v2.0.13 ちやり
+//magic_num1[0]に採血によるMPストックを記録
+class_power_type class_power_chiyari[] =
+{
+
+	{ 1,0,25,FALSE,FALSE,A_DEX,0,0,_("採血", "Draw Blood"),
+	_("隣接する生物・アンデッド・デーモンのモンスター一体から血を奪ってダメージを与える。実体のないモンスターには効果がない。高レベルの敵ほど多くの血を奪える。足元が「石油」地形の場合はそこから血液を得る。",
+    "Steals blood from an adjacent living being, undead or a demon monster, dealing damage. Does not affect immaterial monsters. You steal more blood from higher level enemies. If you're standing in oil terrain, you can gather blood from there.")},
+
+	{ 1,0,0,FALSE,FALSE,A_DEX,0,0,_("血を飲む", "Drink Blood"),
+	_("特技「採血」で奪った血を飲み、HPとMPと満腹度を回復する。",
+    "Drink blood stolen by 'Draw Blood' special ability, recovering HP/MP and satiating hunger.")},
+
+	{ 12,12,30,FALSE,TRUE,A_CHR,0,2,_("鬼火", "Onibi"),
+	_("火炎属性のボールで攻撃する。切り傷の深さに応じて威力が上昇する。",
+    "Fires a ball of fire. Power increases depend on your wound severity.")},
+
+	{ 20,10,0,TRUE,FALSE,A_STR,0,0,_("自傷", "Self-Harm"),
+	_("自分自身に切り傷をつける。繰り返すと傷が悪化する。切り傷の深さに応じて特技や魔法の威力(レベル判定値)が上昇するが毎ターンごとにダメージを受ける。",
+    "Inflict wounds upon yourself. Repeating it makes your wounds more severe. Depending on severity of your wounds, your special abilities and magical power increases, but you take damage every turn.")},
+
+	{ 27,27,40,TRUE,FALSE,A_DEX,0,10,_("汚染のボルト", "Pollution Bolt"),
+	_("汚染属性のボルトを放つ。切り傷の深さに応じて威力が上昇する。",
+    "Fires a bolt of pollution. Power increases depend on your wound severity.")},
+
+	{ 33,45,65,FALSE,TRUE,A_STR,0,0,_("移送の罠", "Transportation Trap"),
+	_("隣接するモンスター一体を高確率で現在のフロアから追放する。",
+    "Banishes an adjacent monster from this level with high probability.")},
+
+	{ 40,40,75,FALSE,TRUE,A_CHR,0,0,_("凶暴な鬼火", "Violent Onibi"),
+	_("プラズマ属性の強力なボールで攻撃する。切り傷の深さに応じて威力が上昇する。",
+    "Fires a powerful ball of plasma. Power increases depend on your wound severity.")},
+
+	{ 46,90,80,FALSE,TRUE,A_CHR,0,0,_("カースドデビル", "Cursed Devil"),
+	_("自分の周囲に強力な地獄の業火属性と血の呪い属性の攻撃を行う。切り傷の深さに応じて威力が上昇する。種族が悪魔や魔王になっているとさらに上昇する。",
+    "Attacks area around yourself with powerful hellfire and blood curse element attacks. Power increases depend on your wound severity. Power increases even further if you're in demon form.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+cptr do_cmd_class_power_aux_chiyari(int num, bool only_info)
+{
+	int dir, i;
+	int plev = calc_spell_caster_level(FALSE);//プレイヤーレベル+切り傷によるブーストを適用　性格狂気によるブーストは適用しない
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	int max_blood_stock = 100 + p_ptr->lev * 6;
+	int cur_blood_stock = p_ptr->magic_num1[0];
+
+	switch (num)
+	{
+
+	case 0://採血
+	{
+		int y, x;
+		monster_type *m_ptr;
+		monster_race *r_ptr;
+
+		if (only_info) return format(_("現在:%d/%d", "cur: %d/%d"), cur_blood_stock, max_blood_stock);
+
+		if (cur_blood_stock == max_blood_stock)
+		{
+			msg_print(_("もう血が一杯だ。", "Your blood stock is full."));
+			return NULL;
+		}
+
+		if (cave_have_flag_bold(py, px, FF_OIL_FIELD))
+		{
+			int gain = MAX(20,dun_level);
+			msg_print(_("足元に溜まった古代の血液を補給した。", "You collect the ancient blood pooled beneath your feet."));
+			cur_blood_stock += gain;
+			if (cur_blood_stock > max_blood_stock) cur_blood_stock = max_blood_stock;
+			p_ptr->magic_num1[0] = cur_blood_stock;
+
+			break;
+		}
+
+		if (!get_rep_dir2(&dir)) return NULL;
+		if (dir == 5) return NULL;
+
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			char m_name[80];
+			monster_desc(m_name, m_ptr, 0);
+			r_ptr = &r_info[m_ptr->r_idx];
+
+			if (r_ptr->flags2 & RF2_PASS_WALL)
+			{
+				msg_format(_("注射針が%sの体をすり抜けた！", "The needle passes through %s!"), m_name);
+			}
+			else if (r_ptr->flags3 & (RF3_DEMON | RF3_UNDEAD) || monster_living(r_ptr))
+			{
+				int gain;
+				msg_format(_("%sに注射針を突き刺した！", "You stab %s with a needle!"), m_name);
+
+				gain = MAX(r_ptr->level,10) + randint1(r_ptr->level);
+				if (r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) gain *= 2;
+				gain += plev / 2 + randint1(plev / 2);
+
+				project(0, 0, m_ptr->fy, m_ptr->fx, randint1(MAX(10,plev)), GF_ARROW, PROJECT_KILL | PROJECT_JUMP, -1);
+				msg_format(_("血液を採取した。", "You collect blood."), m_name);
+
+				cur_blood_stock += gain;
+				if (cur_blood_stock > max_blood_stock)cur_blood_stock = max_blood_stock;
+
+				p_ptr->magic_num1[0] = cur_blood_stock;
+
+			}
+			else
+			{
+				msg_format(_("%sに注射針を突き刺した...が血を奪えなかった。", "You stab %s with a needle... but you fail to steal blood."), m_name);
+				project(0, 0, m_ptr->fy, m_ptr->fx, randint1(MAX(5, plev)), GF_ARROW, PROJECT_KILL | PROJECT_JUMP, -1);
+
+			}
+			anger_monster(m_ptr);
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+
+		break;
+	}
+	case 1://血を飲む
+	{
+		int heal_hp = cur_blood_stock;
+		int gain_mana = cur_blood_stock/2;
+
+
+		if (only_info) return format(_("回復:%dHP/%dMP", "heal %dHP/%dMP"), heal_hp, gain_mana);
+
+		if (!cur_blood_stock)
+		{
+			msg_print(_("血の備蓄が空っぽだ。", "Your blood reserves are empty."));
+			return NULL;
+		}
+
+		msg_print(_("集めた血を飲み干した。", "You drink the blood you've gathered."));
+		hp_player(heal_hp);
+		player_gain_mana(gain_mana);
+		if (p_ptr->food < PY_FOOD_MAX - 1)
+		{
+			int food = MAX(1000, cur_blood_stock * 100);
+			if (p_ptr->food + food >= PY_FOOD_MAX) food = PY_FOOD_MAX - 1 - p_ptr->food;
+			set_food(p_ptr->food + food);
+		}
+		p_ptr->magic_num1[0] = 0;
+		break;
+	}
+
+
+
+
+	case 2://鬼火
+	{
+		int base = 20 + plev * 2 + chr_adj;
+
+		if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (!fire_ball_jump(GF_FIRE, dir, base+randint1(base), 1, _("鬼火を放った。", "You launch a will-o'-the-wisp."))) return NULL;
+
+		break;
+	}
+	case 3://自傷
+	{
+		int add_cut = plev;
+
+		if (only_info) return format("");
+
+
+		if (p_ptr->cut < CUT_2)
+		{
+			msg_print(_("指先から血が滲んだ。", "Blood drips from your fingertips."));
+			set_cut(p_ptr->cut + CUT_2 + 10);
+		}
+		else if (p_ptr->cut < CUT_4)
+		{
+			if (p_ptr->chp < 50 && !get_check_strict(_("本当にこれ以上自分の体を傷つけますか？", "Do you really want to wound yourself further?"), CHECK_OKAY_CANCEL)) return NULL;
+
+			msg_print(_("掌から血が流れ落ちた。", "Blood runs down from your palms."));//大変な傷
+			set_cut(p_ptr->cut + CUT_4);
+
+		}
+		else if (p_ptr->cut < CUT_6)
+		{
+			if (p_ptr->chp < 100 && !get_check_strict(_("*本当に*これ以上自分の体を傷つけますか？", "Do you *really* want to wound yourself further?"), CHECK_OKAY_CANCEL)) return NULL;
+
+			msg_print(_("手首から血が迸った！", "Blood shoots out of your wrists!"));//重傷
+			set_cut(p_ptr->cut + CUT_6);
+
+		}
+		else
+		{
+			if (p_ptr->chp < 300 && !get_check_strict(_("***本当に***これ以上自分の体を傷つけますか？", "Do you ***REALLY*** want to wound yourself further?"), CHECK_OKAY_CANCEL)) return NULL;
+			msg_print(_("全身から血が噴き出した！", "Blood gushes out of your entire body!"));//深刻な大怪我
+			set_cut(p_ptr->cut + CUT_7);
+		}
+
+
+	}
+	break;
+
+	case 4: //注射器投げ
+	{
+
+		int	dam = plev * 3 + chr_adj * 3;
+
+		if (use_itemcard) dam = 200;
+
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_format(_("血を詰めた注射器を飛ばした。", "You throw a syringe filled with blood."));
+		fire_bolt(GF_POLLUTE, dir, dam);
+
+	}
+	break;
+
+	case 5://移送の罠
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+
+		int power = plev + chr_adj * 5;
+
+		if (only_info) return format(_str_eff_power, power);
+
+
+		if (!get_rep_dir2(&dir)) return FALSE;
+		if (dir == 5) return FALSE;
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			char m_name[120];
+
+			if (is_friendly(m_ptr)) power *= 2;
+
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("あなたは%sを騙して移送の罠にかけようとした...",
+                        "You try to trick %s into triggering the transportation trap..."), m_name);
+
+			if (check_transportation_trap(m_ptr, power))
+			{
+				msg_format(_("%sはこのフロアから消えた。", "%^s disappears from the level."), m_name);
+
+				delete_monster_idx(cave[y][x].m_idx);
+
+				break;
+			}
+
+			msg_print(_("失敗！", "Failure!"));
+
+			if (is_friendly(m_ptr))
+			{
+				msg_format(_("%sは怒った！", "%^s gets angry!"),m_name);
+				set_hostile(m_ptr);
+			}
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+
+	case 6://凶暴な鬼火
+		{
+			int base = plev * 4 + chr_adj * 5;
+
+			if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
+
+			if (!get_aim_dir(&dir)) return NULL;
+			if (!fire_ball_jump(GF_PLASMA, dir, base+randint1(base), 3, _("巨大な鬼火が荒れ狂った！", "A huge will-o'-the-wisp rages around!"))) return NULL;
+
+			break;
+		}
+
+	case 7: //カースドデビル
+	{
+		int base = plev * 8 + chr_adj * 8;
+
+		if (p_ptr->mimic_form == MIMIC_DEMON_LORD) base += base / 3;
+		else if (p_ptr->mimic_form == MIMIC_DEMON) base += base / 5;
+
+
+		if (only_info) return format(_("損傷:～%d * 2", "dam: ~%d * 2"), base / 2);
+
+		msg_format(_("呪われた血を撒き散らした！", "You scatter cursed blood around!"));
+		project(0, 6, py, px, base, GF_HELL_FIRE, (PROJECT_GRID | PROJECT_KILL), -1);
+		project(0, 6, py, px, base, GF_BLOOD_CURSE, (PROJECT_GRID | PROJECT_HIDE | PROJECT_KILL), -1);
+
+	}
+	break;
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
+
+
 //v2.0.12 慧ノ子
 class_power_type class_power_enoko[] =
 {
@@ -37580,6 +37905,11 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_CHIYARI:
+		class_power_table = class_power_chiyari;
+		class_power_aux = do_cmd_class_power_aux_chiyari;
+		power_desc = power_desc_waza;
+		break;
 
 	default:
 #ifdef JP
@@ -39489,10 +39819,16 @@ const support_item_type support_item_list[] =
 		_("緊箍児", "Golden Headband"),_("それは大量の猿を召喚する。", "Summons a large amount of monkeys.") },
 
 	//v2.0.12 慧ノ子　トラップ設置(トラバサミのみ)
-		{ 80,10,50,5,5,	MON_ENOKO,class_power_enoko,do_cmd_class_power_aux_enoko,1,
+		{ 80,10,50,5,4,	MON_ENOKO,class_power_enoko,do_cmd_class_power_aux_enoko,1,
 		_("トラバサミ", "Beartrap"),
 		_("地面にトラバサミを仕掛ける。モンスターがかかると短時間移動禁止状態になる。",
         "Sets up a beartrap on the ground. A monster that gets caught will be immobilized for a short time.")},
+
+	//v2.0.14 ちやり　汚染ボルト
+		{100,25,75,5,5,	MON_CHIYARI,class_power_chiyari,do_cmd_class_power_aux_chiyari,4,
+		_("汚染された血液", "Polluted Blood"),
+		_("それは汚染属性のボルトで敵を攻撃する。",
+        "Attacks enemies with a pollution bolt.")},
 
 
 

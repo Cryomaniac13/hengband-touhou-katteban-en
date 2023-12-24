@@ -311,6 +311,7 @@ void reset_tim_flags(void)
 	if ((p_ptr->pclass == CLASS_ORIN || p_ptr->pclass == CLASS_FLAN) && (p_ptr->lev > 34)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_MOKOU) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39)) p_ptr->oppose_fire = 1;
+	if ((p_ptr->pclass == CLASS_CHIYARI) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_ENOKO) && (p_ptr->lev > 39)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29)) p_ptr->oppose_fire = 1;
 
@@ -4512,6 +4513,7 @@ bool set_oppose_fire(int v, bool do_dec)
 	if ((p_ptr->pclass == CLASS_ORIN || p_ptr->pclass == CLASS_FLAN) && (p_ptr->lev > 34)) v=1;
 	else if ((p_ptr->pclass == CLASS_MOKOU) && (p_ptr->lev > 29)) v=1;
 	else if ((p_ptr->pclass == CLASS_FUTO) && (p_ptr->lev > 39)) v=1;
+	else if ((p_ptr->pclass == CLASS_CHIYARI) && (p_ptr->lev > 29)) v = 1;
 	else if ((p_ptr->pclass == CLASS_ENOKO) && (p_ptr->lev > 39)) v = 1;
 	else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29)) v = 1;
 	else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29)) v = 1;
@@ -4960,43 +4962,43 @@ bool set_cut(int v)
 	}
 
 	/* Mortal wound */
-	if (p_ptr->cut > 1000)
+	if (p_ptr->cut > CUT_7)
 	{
 		old_aux = 7;
 	}
 
 	/* Deep gash */
-	else if (p_ptr->cut > 200)
+	else if (p_ptr->cut > CUT_6)
 	{
 		old_aux = 6;
 	}
 
 	/* Severe cut */
-	else if (p_ptr->cut > 100)
+	else if (p_ptr->cut > CUT_5)
 	{
 		old_aux = 5;
 	}
 
 	/* Nasty cut */
-	else if (p_ptr->cut > 50)
+	else if (p_ptr->cut > CUT_4)
 	{
 		old_aux = 4;
 	}
 
 	/* Bad cut */
-	else if (p_ptr->cut > 25)
+	else if (p_ptr->cut > CUT_3)
 	{
 		old_aux = 3;
 	}
 
 	/* Light cut */
-	else if (p_ptr->cut > 10)
+	else if (p_ptr->cut > CUT_2)
 	{
 		old_aux = 2;
 	}
 
 	/* Graze */
-	else if (p_ptr->cut > 0)
+	else if (p_ptr->cut > CUT_1)
 	{
 		old_aux = 1;
 	}
@@ -5008,43 +5010,43 @@ bool set_cut(int v)
 	}
 
 	/* Mortal wound */
-	if (v > 1000)
+	if (v > CUT_7)
 	{
 		new_aux = 7;
 	}
 
 	/* Deep gash */
-	else if (v > 200)
+	else if (v > CUT_6)
 	{
 		new_aux = 6;
 	}
 
 	/* Severe cut */
-	else if (v > 100)
+	else if (v > CUT_5)
 	{
 		new_aux = 5;
 	}
 
 	/* Nasty cut */
-	else if (v > 50)
+	else if (v > CUT_4)
 	{
 		new_aux = 4;
 	}
 
 	/* Bad cut */
-	else if (v > 25)
+	else if (v > CUT_3)
 	{
 		new_aux = 3;
 	}
 
 	/* Light cut */
-	else if (v > 10)
+	else if (v > CUT_2)
 	{
 		new_aux = 2;
 	}
 
 	/* Graze */
-	else if (v > 0)
+	else if (v > CUT_1)
 	{
 		new_aux = 1;
 	}
@@ -9649,6 +9651,7 @@ int is_hurt_holy(){
 	if(p_ptr->pclass == CLASS_KOGASA && p_ptr->pseikaku == SEIKAKU_SHIAWASE && p_ptr->lev > 44) mod = 0;
 	else if(p_ptr->pclass == CLASS_KASEN) mod=33;
 	else if(p_ptr->pclass == CLASS_ORIN) mod=66;
+	else if(p_ptr->pclass == CLASS_CHIYARI) mod = 66;
 	else if(p_ptr->pclass == CLASS_MURASA) mod=66;
 	else if(p_ptr->pclass == CLASS_NAZRIN || p_ptr->pclass == CLASS_SHOU) mod=0;
 	else if(p_ptr->pclass == CLASS_SHOU && p_ptr->lev > 44) mod=-100;

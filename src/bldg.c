@@ -3658,6 +3658,7 @@ static bool inn_comm(int cmd)
 				|| p_ptr->prace == RACE_MAGIC_JIZO
 				|| p_ptr->prace == RACE_ANIMAL_GHOST//v1.1.85Å@ñYÇÍÇƒÇΩÇÃÇ≈í«â¡
 				|| p_ptr->prace == RACE_HANIWA
+				|| p_ptr->pclass == CLASS_CHIYARI
 				)
 			{
 				msg_print(_("Ç†Ç»ÇΩå¸ÇØÇÃêHéñÇÕÇ±Ç±Ç…ÇÕÇ»Ç¢ÇÊÇ§ÇæÅB",
@@ -10760,6 +10761,12 @@ bool check_ignoring_quest(int questnum)
 		if (pr == RACE_ANIMAL_GHOST) return TRUE;
 		if (pc == CLASS_SAKI) return TRUE;
 		if (pc == CLASS_YACHIE) return TRUE;
+
+		//v2.0.14 ñYÇÍÇƒÇΩÇÃÇ≈í«â¡
+		if (pc == CLASS_YUMA) return TRUE;
+		if (pc == CLASS_ENOKO) return TRUE;
+		if (pc == CLASS_BITEN) return TRUE;
+		if (pc == CLASS_CHIYARI) return TRUE;
 
 		break;
 

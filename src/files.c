@@ -4076,6 +4076,16 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 29) add_flag(flgs, TR_RES_NETHER);
 		break;
 
+	case CLASS_CHIYARI:
+		add_flag(flgs, TR_RES_FIRE);
+		add_flag(flgs, TR_RES_NETHER);
+		if (p_ptr->lev > 19) add_flag(flgs, TR_RES_POIS);
+		if (p_ptr->lev > 34) add_flag(flgs, TR_SH_FIRE);
+		if (p_ptr->lev > 39) add_flag(flgs, TR_RES_DISEN);
+
+
+		break;
+
 
 	default:
 		break; /* Do nothing */

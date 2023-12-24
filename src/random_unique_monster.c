@@ -663,8 +663,28 @@ static int	set_random_unique_bias_of_your_dream(void)
 
 	case CLASS_MOMOYO:
 		bias_num = RUBIAS_POWER;
-
 		break;
+
+	case CLASS_YUMA:
+		if (one_in_(2))	bias_num = RUBIAS_TOUGHNESS;
+		else bias_num = RUBIAS_MULTI_BREATH;
+		break;
+
+	case CLASS_BITEN:
+		if (one_in_(2))	bias_num = RUBIAS_PHYSICAL;
+		else bias_num = RUBIAS_POWER;
+		break;
+
+	case CLASS_ENOKO:
+		if (one_in_(2))	bias_num = RUBIAS_TOUGHNESS;
+		else bias_num = RUBIAS_FIRE;
+		break;
+
+	case CLASS_CHIYARI:
+		if (one_in_(2))	bias_num = RUBIAS_CURSE;
+		else bias_num = RUBIAS_DEMONIC;
+		break;
+
 
 	}
 

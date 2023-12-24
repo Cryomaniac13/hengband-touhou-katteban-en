@@ -2210,7 +2210,7 @@ static void prt_cut(void)
 {
 	int c = p_ptr->cut;
 
-	if (c > 1000)
+	if (c > CUT_7)
 	{
 #ifdef JP
 		c_put_str(TERM_L_RED, "[‚È‘å‰ö‰ä", ROW_CUT, COL_CUT);
@@ -2219,7 +2219,7 @@ static void prt_cut(void)
 #endif
 
 	}
-	else if (c > 200)
+	else if (c > CUT_6)
 	{
 #ifdef JP
 		c_put_str(TERM_RED, "‚Ð‚Ç‚¢[Žè  ", ROW_CUT, COL_CUT);
@@ -2228,7 +2228,7 @@ static void prt_cut(void)
 #endif
 
 	}
-	else if (c > 100)
+	else if (c > CUT_5)
 	{
 #ifdef JP
 		c_put_str(TERM_RED, "‘å‰ö‰ä      ", ROW_CUT, COL_CUT);
@@ -2237,7 +2237,7 @@ static void prt_cut(void)
 #endif
 
 	}
-	else if (c > 50)
+	else if (c > CUT_4)
 	{
 #ifdef JP
 		c_put_str(TERM_ORANGE, "‘å•Ï‚È    ", ROW_CUT, COL_CUT);
@@ -2246,7 +2246,7 @@ static void prt_cut(void)
 #endif
 
 	}
-	else if (c > 25)
+	else if (c > CUT_3)
 	{
 #ifdef JP
 		c_put_str(TERM_ORANGE, "‚Ð‚Ç‚¢    ", ROW_CUT, COL_CUT);
@@ -2255,7 +2255,7 @@ static void prt_cut(void)
 #endif
 
 	}
-	else if (c > 10)
+	else if (c > CUT_2)
 	{
 #ifdef JP
 		c_put_str(TERM_YELLOW, "Œy        ", ROW_CUT, COL_CUT);
@@ -6512,11 +6512,64 @@ void calc_bonuses(void)
 
 		if (plev >  9) p_ptr->resist_fire = TRUE;
 		if (plev > 29) p_ptr->resist_neth = TRUE;
-		if (p_ptr->lev > 39)
+        if (p_ptr->lev > 39)
 		{
 			p_ptr->oppose_fire = 1;
 			p_ptr->redraw |= PR_STATUS;
 		}
+
+		break;
+
+	case CLASS_CHIYARI:
+		p_ptr->resist_fire = TRUE;
+		p_ptr->resist_neth = TRUE;
+		if (plev > 19)p_ptr->resist_pois = TRUE;
+		if (p_ptr->lev > 29)
+		{
+			p_ptr->oppose_fire = 1;
+			p_ptr->redraw |= PR_STATUS;
+		}
+		if (plev > 34) p_ptr->sh_fire = TRUE;
+		if (plev > 39) p_ptr->resist_disen = TRUE;
+
+		//Ø‚è‚Åƒpƒ[ƒAƒbƒv
+		if (p_ptr->cut > CUT_7)
+		{
+			new_speed += 5;
+			extra_blows[0]+=2;
+			extra_blows[1]+=2;
+			p_ptr->to_a += 100;
+			p_ptr->dis_to_a += 100;
+			p_ptr->to_d[0] += 20;
+			p_ptr->to_d[1] += 20;
+			p_ptr->to_d_m += 20;
+			p_ptr->dis_to_d[0] += 20;
+			p_ptr->dis_to_d[1] += 20;
+		}
+		else if (p_ptr->cut > CUT_5)
+		{
+			new_speed += 2;
+			extra_blows[0]++;
+			extra_blows[1]++;
+			p_ptr->to_a += 50;
+			p_ptr->dis_to_a += 50;
+			p_ptr->to_d[0] += 10;
+			p_ptr->to_d[1] += 10;
+			p_ptr->to_d_m += 10;
+			p_ptr->dis_to_d[0] += 10;
+			p_ptr->dis_to_d[1] += 10;
+		}
+		else if (p_ptr->cut > CUT_3)
+		{
+			p_ptr->to_a += 20;
+			p_ptr->dis_to_a += 20;
+			p_ptr->to_d[0] += 5;
+			p_ptr->to_d[1] += 5;
+			p_ptr->to_d_m += 5;
+			p_ptr->dis_to_d[0] += 5;
+			p_ptr->dis_to_d[1] += 5;
+		}
+
 
 		break;
 

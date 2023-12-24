@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 13
+#define H_VER_PATCH 14
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -4707,15 +4707,11 @@
 #define TR_HIDE_TYPE           123     /* Hide "pval" description */
 #define TR_FULL_NAME           124
 #define TR_FIXED_FLAVOR        125
+#define TR_HOUSE				126	//v1.1.79 種族「座敷わらし」が移動屋敷として住めるアイテム
+#define TR_DISARM				127 //v1.1.99 解除
+#define TR_SAVING				128 //v1.1.99 魔法防御
 
-#define TR_HOUSE					126	//v1.1.79 種族「座敷わらし」が移動屋敷として住めるアイテム
-//あとひとつだけフラグを増やせると思う
-//#define TR_FLAG_MAX            127 //v1.1.79 TR_HOUSE追加のため126→127
-
-#define TR_DISARM			127 //v1.1.99 解除
-#define TR_SAVING			128 //v1.1.99 魔法防御
-
-#define TR_FLAG_MAX            129 //解除と魔法防御を追加
+#define TR_FLAG_MAX            129 //↑の一番大きい番号+1 TR_FLAG_SIZEを拡張したので256までいけるはず
 
 
 //v1.1.94 TR_FLAG_SIZEを4→8にした
@@ -8008,6 +8004,17 @@ extern int PlayerUID;　
 
 //v1.1.66 ステータス「破損」状態の度合いを確認
 #define REF_BROKEN_VAL	((RACE_BREAKABLE) ? (p_ptr->race_multipur_val[0]) : 0)
+
+
+//v2.0.14
+//今更だがハードコーディングされてる切り傷の閾値をまとめておく
+#define	CUT_7	1000	//1000を超えたとき「深刻な大怪我」
+#define	CUT_6	200
+#define	CUT_5	100
+#define	CUT_4	50
+#define	CUT_3	25
+#define	CUT_2	10
+#define	CUT_1	0	//0を超えたとき「かすり傷」
 
 /*:::破邪領域神降ろし*/
 #define KAMIOROSHI_AMATO		0x00000001

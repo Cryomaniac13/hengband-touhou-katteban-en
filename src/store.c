@@ -1295,6 +1295,9 @@ static bool store_create_hook_armoury(int k_idx)
 	if((k_ptr->tval == TV_GLOVES) && (k_ptr->sval <= SV_HAND_GAUNTLETS)&& p_ptr->town_num >= TOWN_CHITEI)return (TRUE);
 	if((k_ptr->tval == TV_BOOTS) && (k_ptr->sval <= SV_LEG_SABATON) && p_ptr->town_num >= TOWN_CHITEI)return (TRUE);
 
+	//v2.0.14 地底にTシャツが置かれる
+	if ((k_ptr->tval == TV_CLOTHES) && (k_ptr->sval == SV_CLOTH_T_SHIRT) && p_ptr->town_num == TOWN_CHITEI) return (TRUE);
+
 	return (FALSE);
 }
 

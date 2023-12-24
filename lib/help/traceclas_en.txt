@@ -192,7 +192,7 @@ Resistances/abilities/characteristics:
   Levitation
   Holy energy resistance (20)
 Magic realm aptitude:
-  3/1/1/1 - 2/4/1/7 - 1/1/1/1
+  3/1/1/1 - 2/6/1/7 - 1/1/1/1
 Other:
   Satiation level lowers very slowly
   Can hold short blades with both hands
@@ -450,7 +450,7 @@ Resistances/abilities/characteristics:
   Blindness resistance
   See invisible (10)
 Magic realm aptitude:
-  3/4/7/3 - 5/3/3/3 - 7/5/4/5
+  3/4/7/3 - 5/3/3/3 - 7/5/5/5
 Other:
   Can remove cursed items without uncursing (might fail)
   Can prevent item curses from activating
@@ -488,7 +488,7 @@ Resistances/abilities/characteristics:
   Fear resistance (20)
   Insanity resistance (40)
 Magic realm aptitude:
-  3/4/7/3 - 5/3/3/3 - 7/5/4/5
+  5/3/7/4 - 4/2/4/3 - 6/5/6/5
 Other:
   Doesn't gain experience trhough combat; treats total value of equipment
     as experience
@@ -1172,7 +1172,7 @@ Resistances/abilities/characteristics:
   Cold resistance
   Warning (30)  
 Magic realm aptitude:
-  3/3/3/3 - 2/0/0/3 - 8/7/8/6
+  3/3/3/3 - 1/0/1/3 - 8/7/8/6
 Other:
   Has different racial powers depending on what group you belong to
     (randomly decided at the start of game)
@@ -1205,7 +1205,7 @@ Resistances/abilities/characteristics:
   Warning
   Human ESP (30)
 Magic realm aptitude:
-  5/9/7/5 - 6/6/4/5 - 4/5/5/3
+  5/9/6/5 - 6/6/4/5 - 4/5/5/3
 Other:
   Aside from standard equipment, they have to use a special item called a
     'mobile household'
@@ -1823,7 +1823,7 @@ Str: 1  Int: 0 Wis:2 Dex: 1 Con: 1 Chr: 0
 Dsm: 25(7) MDev: 30(10) MProt: 36(15)  Stl: 2(0) Srh: 24(2)
 Fighting: 60(18) Shooting: 40(16)
 Hit Dice: +4
-XP Penalty: 25%
+XP Penalty: 45%
 Score: 75%
 Base max amount of blows: 5
 MP: B
@@ -1918,8 +1918,8 @@ and abilities you're using to enemy characteristics.'
 Str: -2 Int: 3  Wis:1  Dex: 1 Con: 0 Chr: -2
 Dsm: 24(10) MDev: 32(12) MProt: 33(11)  Stl: 2(0) Srh: 21(3)
 Fighting: 40(10) Shooting: 20(8)
-Hit Dice: +2
-XP Penalty: 30
+Hit Dice: +1
+XP Penalty: 45
 Score: 70%
 Base max amount of blows: 3
 MP: C
@@ -2255,7 +2255,7 @@ Str: -1 Int: 4 Wis:0 Dex: 1 Con: 0 Chr: 2
 Dsm: 37(11) MDev: 32(12) MProt: 32(10)  Stl: 4(0) Srh: 36(5)
 Fighting: 47(18) Shooting: 52(20)
 Hit Dice: +3
-XP Penalty: 50
+XP Penalty: 30
 Score: 100%
 Base max amount of blows: 4
 MP: C
@@ -2457,9 +2457,9 @@ bad at fighting powerful enemies with essence-imbued crossbow and bolts.'
 Str: -2  Int: 2 Wis:0 Dex: 2 Con: -2 Chr: 2
 Dsm: 30(10) MDev: 40(17) MProt: 36(12)  Stl: 2(0) Srh: 24(3)
 Fighting: 40(15) Shooting: 30(10)
-Hit Dice: +2
+Hit Dice: +1
 XP Penalty: 50
-Score: 80%
+Score: 75%
 Base max amount of blows: 4
 MP: B
 Follower cost coefficient: 45
@@ -2802,7 +2802,7 @@ Hit Dice modifier: 10
 Other:
   Always berserk
   Higher normal limit for strength/constitution
-  Sustain strrength/intelligence/constitution, regeneration, free action,
+  Sustain strength/dexterity/constitution, regeneration, free action,
     fear resistance, immune to insanity, cannot be turned into statue
   Gets swift movement and stun resistance on higher levels
   Cannot get knocked out by drinking too much

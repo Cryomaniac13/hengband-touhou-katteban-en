@@ -5775,6 +5775,8 @@ void apply_magic(object_type *o_ptr, int lev, u32b mode)
 		return;
 	}
 
+	//test
+	//if (o_ptr->tval == TV_CLOTHES && o_ptr->sval == SV_CLOTH_T_SHIRT) msg_print("chk");
 
 	/* Examine real objects */
 	if (o_ptr->k_idx)
