@@ -10394,6 +10394,10 @@ quit_fmt("'%s' という名前は不正なコントロールコードを含んでいます。", player_nam
 
 	///mod140316 セーブファイル名を＠名からの自動設定でなく自分で指定するようにした。ユニークプレイヤーの実装で同名セーブファイル上書きが起こりやすくなったため。
 	/*:::セーブファイル名を指定する。今の環境ではここにはキャラメイク時にしか入らないはず。*/
+	///
+	/// Added a precompiler option for to bring back original behaviour; apparently this function can get
+	/// called upon program launch before character creation on non-Windows platforms (including .live server)
+#ifndef DONT_ASK_FOR_SAVEFILE_NAME
 	if (sf)
 	{
 		bool flag_err;
@@ -10465,7 +10469,8 @@ quit_fmt("'%s' という名前は不正なコントロールコードを含んでいます。", player_nam
 	}
 
 
-#if 0
+//#if 0
+#else
 	/*:::上の変更がミスだったときのためのバックアップ:::*/
 	/* Change the savefile name */
 	if (sf)

@@ -57,6 +57,7 @@ CCOPTS = -Od -jb -j1 -Hc -tW -lGn -e$(EXE_FILE) \
 	-D_WIN32_WINNT=0x0400 -DWINVER=0x0501 \
 	-DUSE_TRANSPARENCY $(JP_OPT) \
 #	-DNEW_PLAYER_LOG \
+#	-DDONT_ASK_FOR_SAVEFILE_NAME \
 	-g255
 
 # Compile flags:
