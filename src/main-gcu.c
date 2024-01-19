@@ -868,7 +868,7 @@ static errr Term_xtra_gcu_sound(int v)
    if (!sound_file[v]) return (1);
 
    sprintf(buf,"./gcusound.sh %s\n", sound_file[v]);
-   
+
    return (system(buf) < 0);
 
 #if 0
@@ -1205,8 +1205,8 @@ errr init_gcu(int argc, char *argv[])
    core_aux = hook_quit;
 
    /* Hack -- Require large screen, or Quit with message */
-   i = ((LINES < 24) || (COLS < 80));
-   if (i) quit("Angband needs an 80x24 'curses' screen");
+   i = ((LINES < 38) || (COLS < 120));
+   if (i) quit("Angband needs an 120x38 'curses' screen");
 
 
 #ifdef A_COLOR
@@ -1314,27 +1314,27 @@ errr init_gcu(int argc, char *argv[])
       switch (i)
       {
 	 /* Upper left */
-	 case 0: rows = 24;
-	    cols = 80;
+	 case 0: rows = 38;
+	    cols = 120;
 	    y = x = 0;
 	    break;
 	 /* Lower left */
-	 case 1: rows = LINES - 25;
-	    cols = 80;
-	    y = 24;
+	 case 1: rows = LINES - 39;
+	    cols = 120;
+	    y = 38;
 	    x = 0;
 	    break;
 	 /* Upper right */
-	 case 2: rows = 24;
-	    cols = COLS - 81;
+	 case 2: rows = 38;
+	    cols = COLS - 121;
 	    y = 0;
-	    x = 81;
+	    x = 121;
 	    break;
 	 /* Lower right */
-	 case 3: rows = LINES - 25;
-	    cols = COLS - 81;
-	    y = 24;
-	    x = 81;
+	 case 3: rows = LINES - 39;
+	    cols = COLS - 121;
+	    y = 38;
+	    x = 121;
 	    break;
 	 /* XXX */
 	 default: rows = cols = 0;
