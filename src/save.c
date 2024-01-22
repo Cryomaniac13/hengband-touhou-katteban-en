@@ -13,6 +13,36 @@
 #include "angband.h"
 
 
+// Adapted from English Hengband variants; dumps relevant character info
+// into a separate file to be parsed later
+//
+// Can be used to make the variant work better with .live server
+//
+/*Exo's character information patch*/
+void updatecharinfoS(void)
+{
+    //File Output + Lookup Tables
+	char tmp_Path[1024];
+	FILE *oFile;
+	path_build(tmp_Path, sizeof(tmp_Path), ANGBAND_DIR_USER, "CharOutput.txt");
+	oFile = fopen(tmp_Path, "w");
+
+	fprintf(oFile, "{\n");
+	fprintf(oFile, "race: \"%s\",\n", rp_ptr->title);
+	fprintf(oFile, "class: \"%s\",\n", cp_ptr->title);
+
+	fprintf(oFile, "mapName: \"%s\",\n", map_name());
+	fprintf(oFile, "dLvl: \"%i\",\n", dun_level);
+	if (p_ptr->realm1 > 0)fprintf(oFile, "mRealm1: \"%s\",\n", realm_names[p_ptr->realm1]);
+	if (p_ptr->realm2 > 0)fprintf(oFile, "mRealm2: \"%s\",\n", realm_names[p_ptr->realm2]);
+
+	fprintf(oFile, "cLvl: \"%i\",\n", p_ptr->lev);
+	fprintf(oFile, "isDead: \"%i\",\n", p_ptr->is_dead);
+	fprintf(oFile, "killedBy: \"%s\"\n", p_ptr->died_from);
+	fprintf(oFile, "}");
+	fclose(oFile);
+}
+
 
 /*
  * Some "local" parameters, used to help write savefiles
@@ -1990,6 +2020,9 @@ static bool wr_savefile_new(void)
 
 	/* Write the "encoded checksum" */
 	wr_u32b(x_stamp);
+
+	// Update character info dump
+	updatecharinfoS();
 
 	/* Error in save */
 	if (ferror(fff) || (fflush(fff) == EOF)) return FALSE;

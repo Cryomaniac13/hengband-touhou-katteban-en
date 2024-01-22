@@ -53,6 +53,38 @@
 #define MAX_TRIES 100
 
 
+// Adapted from English Hengband variants; dumps relevant character info
+// into a separate file to be parsed later
+//
+// Can be used to make the variant work better with .live server
+//
+// Same function as the one used during saving the character
+//
+/*Exo's character information patch*/
+void updatecharinfoL(void)
+{
+    //File Output + Lookup Tables
+	char tmp_Path[1024];
+	FILE *oFile;
+	path_build(tmp_Path, sizeof(tmp_Path), ANGBAND_DIR_USER, "CharOutput.txt");
+	oFile = fopen(tmp_Path, "w");
+
+	fprintf(oFile, "{\n");
+	fprintf(oFile, "race: \"%s\",\n", rp_ptr->title);
+	fprintf(oFile, "class: \"%s\",\n", cp_ptr->title);
+
+	fprintf(oFile, "mapName: \"%s\",\n", map_name());
+	fprintf(oFile, "dLvl: \"%i\",\n", dun_level);
+	if (p_ptr->realm1 > 0)fprintf(oFile, "mRealm1: \"%s\",\n", realm_names[p_ptr->realm1]);
+	if (p_ptr->realm2 > 0)fprintf(oFile, "mRealm2: \"%s\",\n", realm_names[p_ptr->realm2]);
+
+	fprintf(oFile, "cLvl: \"%i\",\n", p_ptr->lev);
+	fprintf(oFile, "isDead: \"%i\",\n", p_ptr->is_dead);
+	fprintf(oFile, "killedBy: \"%s\"\n", p_ptr->died_from);
+	fprintf(oFile, "}");
+	fclose(oFile);
+}
+
 /*
  * Local "savefile" pointer
  */
@@ -4851,6 +4883,9 @@ note("ダンジョンデータ読み込み失敗");
 		}
 //note(format("chk::ghost?"));inkey();
 	}
+
+	// Update character info dump
+	updatecharinfoL();
 
 ///\sys131117 FAKE_VERからH_VERへ変更、変愚旧バージョン互換関係の変換全削除
 #if 0
