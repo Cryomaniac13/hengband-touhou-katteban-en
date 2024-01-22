@@ -57,35 +57,12 @@
 # include <curses.h>
 #endif
 
-/**
- * Simple rectangle type
- */
-struct rect_s
-{
-    int  x,  y;
-    int cx, cy;
-};
-typedef struct rect_s rect_t, *rect_ptr;
-
-/* Trivial rectangle utility to make code a bit more readable */
-rect_t rect(int x, int y, int cx, int cy)
-{
-    rect_t r;
-    r.x = x;
-    r.y = y;
-    r.cx = cx;
-    r.cy = cy;
-    return r;
-}
-
-
 typedef struct term_data term_data;
 
 struct term_data
 {
    term t;
 
-   rect_t  r;
    WINDOW *win;
 };
 
@@ -93,8 +70,6 @@ struct term_data
 
 static term_data data[MAX_TERM_DATA];
 
-#define MAP_MIN_CX 120
-#define MAP_MIN_CY 38
 
 /*
  * Hack -- try to guess which systems use what commands
@@ -1166,53 +1141,6 @@ static errr term_data_init(term_data *td, int rows, int cols, int y, int x)
    return (0);
 }
 
-static errr term_data_init(term_data *td)
-{
-   term *t = &td->t;
-
-   /* Make sure the window has a positive size */
-   if (td->r.cy <= 0 || td->r.cx <= 0 || td->r.x + td->r.cx > COLS || td->r.y + td->r.cy > LINES) return (0);
-
-   /* Create a window */
-   td->win = newwin(td->r.cy, td->r.cx, td->r.y, td->r.x);
-
-   /* Make sure we succeed */
-   if (!td->win)
-   {
-      plog("Failed to setup curses window.");
-      return (-1);
-   }
-
-   /* Initialize the term */
-   term_init(t, td->r.cx, td->r.cy, 256);
-
-   /* Avoid the bottom right corner */
-   t->icky_corner = TRUE;
-
-   /* Erase with "white space" */
-   t->attr_blank = TERM_WHITE;
-   t->char_blank = ' ';
-
-   /* Set some hooks */
-   t->init_hook = Term_init_gcu;
-   t->nuke_hook = Term_nuke_gcu;
-
-   /* Set some more hooks */
-   t->text_hook = Term_text_gcu;
-   t->wipe_hook = Term_wipe_gcu;
-   t->curs_hook = Term_curs_gcu;
-   t->xtra_hook = Term_xtra_gcu;
-
-   /* Save the data */
-   t->data = td;
-
-   /* Activate it */
-   Term_activate(t);
-
-
-   /* Success */
-   return (0);
-}
 
 static void hook_quit(cptr str)
 {
@@ -1223,343 +1151,218 @@ static void hook_quit(cptr str)
        endwin();
 }
 
-/* Parse 27,15,*x30 up to the 'x'. * gets converted to a big number
-   Parse 32,* until the end. Return count of numbers parsed */
-static int _parse_size_list(cptr arg, int sizes[], int max)
-{
-    int i = 0;
-    cptr start = arg;
-    cptr stop = arg;
-
-    for (;;)
-    {
-        if (!*stop || !isdigit(*stop))
-        {
-            if (i >= max) break;
-            if (*start == '*')
-                sizes[i] = 255;
-            else
-            {
-                /* rely on atoi("23,34,*") -> 23
-                   otherwise, copy [start, stop) into a new buffer first.*/
-                sizes[i] = atoi(start);
-            }
-            i++;
-            if (!*stop || *stop != ',') break;
-
-            stop++;
-            start = stop;
-        }
-        else
-            stop++;
-    }
-    return i;
-}
-
 
 /*
- * Prepare "curses" for use by the file "z-term.c"
+ * Prepare "curses" for use by the file "term.c"
  *
  * Installs the "hook" functions defined above, and then activates
  * the main screen "term", which clears the screen and such things.
  *
  * Someone should really check the semantics of "initscr()"
  */
-errr init_gcu(int argc, char **argv)
+errr init_gcu(int argc, char *argv[])
 {
-	int i;
+   int i;
 
-	int num_term = MAX_TERM_DATA, next_win = 0;
+   int num_term = 4, next_win = 0;
+   char path[1024];
 
-	/* Extract the normal keymap */
-	keymap_norm_prepare();
+   /* Parse args */
+   for (i = 1; i < argc; i++)
+   {
+      if (prefix(argv[i], "-B")) {
+         bold_extended = TRUE;
+      } else if (prefix(argv[i], "-K")) {
+         keep_terminal_colors = TRUE;
+      }
+   }
 
-	/* Initialize */
-	if (initscr() == NULL) return (-1);
+   setlocale(LC_ALL, "");
 
-	/* Activate hooks */
-	quit_aux = hook_quit;
-	core_aux = hook_quit;
+#ifdef USE_SOUND
 
-	/* Require standard size screen */
-	if ((LINES < 38) || (COLS < 120))
-	{
-		quit("Gensouband needs at least an 120x38 'curses' screen");
-	}
+   /* Build the "sound" path */
+   path_build(path, sizeof(path), ANGBAND_DIR_XTRA, "sound");
 
-
-#ifdef USE_GRAPHICS
-
-	/* Set graphics flag */
-	use_graphics = arg_graphics;
+   /* Allocate the path */
+   ANGBAND_DIR_XTRA_SOUND = string_make(path);
 
 #endif
+
+   /* Extract the normal keymap */
+   keymap_norm_prepare();
+
+#if defined(USG)
+   /* Initialize for USG Unix */
+   if (initscr() == NULL) return (-1);
+#else
+   /* Initialize for others systems */
+   if (initscr() == (WINDOW*)ERR) return (-1);
+#endif
+
+   /* Activate hooks */
+   quit_aux = hook_quit;
+   core_aux = hook_quit;
+
+   /* Hack -- Require large screen, or Quit with message */
+   i = ((LINES < 38) || (COLS < 120));
+   if (i) quit("Angband needs an 120x38 'curses' screen");
+
 
 #ifdef A_COLOR
 
-	/*** Init the Color-pairs and set up a translation table ***/
+   /*** Init the Color-pairs and set up a translation table ***/
 
-	/* Do we have color, and enough color, available? */
-	can_use_color = ((start_color() != ERR) && has_colors() &&
-	                 (COLORS >= 8) && (COLOR_PAIRS >= 8));
+   /* Do we have color, and enough color, available? */
+   can_use_color = ((start_color() != ERR) && has_colors() &&
+		    (COLORS >= 8) && (COLOR_PAIRS >= 8));
 
-#ifdef REDEFINE_COLORS
+   if (!can_change_color()) keep_terminal_colors = TRUE;
 
-	/* Can we change colors? */
-	can_fix_color = (can_use_color && can_change_color() &&
-	                 (COLORS >= 16) && (COLOR_PAIRS > 8));
+   if (can_use_color)
+   {
+      /* Prepare the color pairs */
+      /* PAIR_WHITE (pair 0) is *always* WHITE on BLACK */
+      init_pair(PAIR_RED, COLOR_RED, bg_color);
+      init_pair(PAIR_GREEN, COLOR_GREEN, bg_color);
+      init_pair(PAIR_YELLOW, COLOR_YELLOW, bg_color);
+      init_pair(PAIR_BLUE, COLOR_BLUE, bg_color);
+      init_pair(PAIR_MAGENTA, COLOR_MAGENTA, bg_color);
+      init_pair(PAIR_CYAN, COLOR_CYAN, bg_color);
+      init_pair(PAIR_BLACK, COLOR_BLACK, bg_color);
 
+      /* Prepare the colors */
+      colortable[TERM_DARK] = (COLOR_PAIR(PAIR_BLACK));
+      colortable[TERM_WHITE] = (COLOR_PAIR(PAIR_WHITE) | A_BRIGHT);
+      colortable[TERM_SLATE] = (COLOR_PAIR(PAIR_WHITE));
+      colortable[TERM_ORANGE] = (COLOR_PAIR(PAIR_YELLOW) | A_BRIGHT);
+      colortable[TERM_RED] = (COLOR_PAIR(PAIR_RED));
+      colortable[TERM_GREEN] = (COLOR_PAIR(PAIR_GREEN));
+      colortable[TERM_BLUE] = (COLOR_PAIR(PAIR_BLUE));
+      colortable[TERM_UMBER] = (COLOR_PAIR(PAIR_YELLOW));
+      colortable[TERM_L_DARK] = (COLOR_PAIR(PAIR_BLACK) | A_BRIGHT);
+      colortable[TERM_L_WHITE] = (COLOR_PAIR(PAIR_WHITE));
+      colortable[TERM_VIOLET] = (COLOR_PAIR(PAIR_MAGENTA));
+      colortable[TERM_YELLOW] = (COLOR_PAIR(PAIR_YELLOW) | A_BRIGHT);
+      colortable[TERM_L_RED] = (COLOR_PAIR(PAIR_MAGENTA) | A_BRIGHT);
+      colortable[TERM_L_GREEN] = (COLOR_PAIR(PAIR_GREEN) | A_BRIGHT);
+      colortable[TERM_L_BLUE] = (COLOR_PAIR(PAIR_BLUE) | A_BRIGHT);
+      colortable[TERM_L_UMBER] = (COLOR_PAIR(PAIR_YELLOW));
+      handle_extended_color_tables();
+   }
 #endif
 
-	/* Attempt to use customized colors */
-	if (can_fix_color)
-	{
-		/* Prepare the color pairs */
-		for (i = 1; i <= 8; i++)
-		{
-			/* Reset the color */
-			if (init_pair(i, i - 1, 0) == ERR)
-			{
-				quit("Color pair init failed");
-			}
+#ifdef USE_SOUND
+   /* Handle "arg_sound" */
+   if (use_sound != arg_sound)
+   {
+      /* Initialize (if needed) */
+      if (arg_sound && !init_sound())
+      {
+	 /* Warning */
+	 plog("Cannot initialize sound!");
 
-			/* Set up the colormap */
-			colortable[i - 1] = (COLOR_PAIR(i) | A_NORMAL);
-			colortable[i + 7] = (COLOR_PAIR(i) | A_BRIGHT);
-		}
+	 /* Cannot enable */
+	 arg_sound = FALSE;
+      }
 
-		/* Take account of "gamma correction" XXX XXX XXX */
-
-		/* Prepare the "Angband Colors" */
-		Term_xtra_gcu_react();
-	}
-
-	/* Attempt to use colors */
-	else if (can_use_color)
-	{
-		/* Color-pair 0 is *always* WHITE on BLACK */
-
-		/* Prepare the color pairs */
-		init_pair(1, COLOR_RED,     COLOR_BLACK);
-		init_pair(2, COLOR_GREEN,   COLOR_BLACK);
-		init_pair(3, COLOR_YELLOW,  COLOR_BLACK);
-		init_pair(4, COLOR_BLUE,    COLOR_BLACK);
-		init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
-		init_pair(6, COLOR_CYAN,    COLOR_BLACK);
-		init_pair(7, COLOR_BLACK,   COLOR_BLACK);
-
-		/* Prepare the "Angband Colors" -- Bright white is too bright */
-		colortable[0] = (COLOR_PAIR(7) | A_NORMAL);	/* Black */
-		colortable[1] = (COLOR_PAIR(0) | A_NORMAL);	/* White */
-		colortable[2] = (COLOR_PAIR(6) | A_NORMAL);	/* Grey XXX */
-		colortable[3] = (COLOR_PAIR(1) | A_BRIGHT);	/* Orange XXX */
-		colortable[4] = (COLOR_PAIR(1) | A_NORMAL);	/* Red */
-		colortable[5] = (COLOR_PAIR(2) | A_NORMAL);	/* Green */
-		colortable[6] = (COLOR_PAIR(4) | A_NORMAL);	/* Blue */
-		colortable[7] = (COLOR_PAIR(3) | A_NORMAL);	/* Umber */
-		colortable[8] = (COLOR_PAIR(7) | A_BRIGHT);	/* Dark-grey XXX */
-		colortable[9] = (COLOR_PAIR(6) | A_BRIGHT);	/* Light-grey XXX */
-		colortable[10] = (COLOR_PAIR(5) | A_NORMAL);	/* Purple */
-		colortable[11] = (COLOR_PAIR(3) | A_BRIGHT);	/* Yellow */
-		colortable[12] = (COLOR_PAIR(5) | A_BRIGHT);	/* Light Red XXX */
-		colortable[13] = (COLOR_PAIR(2) | A_BRIGHT);	/* Light Green */
-		colortable[14] = (COLOR_PAIR(4) | A_BRIGHT);	/* Light Blue */
-		colortable[15] = (COLOR_PAIR(3) | A_NORMAL);	/* Light Umber XXX */
-	}
-
+      /* Change setting */
+      use_sound = arg_sound;
+   }
 #endif
 
+#ifdef USE_GRAPHICS
 
-	/*** Low level preparation ***/
+   /* Try graphics */
+   if (arg_graphics)
+   {
+      /* if USE_NCURSES_ACS is defined, we can do something with graphics in curses! */
+#ifdef USE_NCURSES_ACS
+      use_graphics = TRUE;
+#endif
+   }
+
+#endif /* USE_GRAPHICS */
+
+
+
+   /*** Low level preparation ***/
 
 #ifdef USE_GETCH
 
-	/* Paranoia -- Assume no waiting */
-	nodelay(stdscr, FALSE);
+   /* Paranoia -- Assume no waiting */
+   nodelay(stdscr, FALSE);
 
 #endif
 
-	/* Prepare */
-	cbreak();
-	noecho();
-	nonl();
+   /* Prepare */
+   cbreak();
+   noecho();
+   nonl();
+   raw();
 
-	/* Extract the game keymap */
-	keymap_game_prepare();
+   /* Extract the game keymap */
+   keymap_game_prepare();
 
 
-   /* Parse Args and Prepare the Terminals. Rectangles are specified
-      as Width x Height, right? The game will allow you to have two
-      strips of extra terminals, one on the right and one on the bottom.
-      The map terminal will than fit in as big as possible in the remaining
-      space.
+   /*** Now prepare the term(s) ***/
+   for (i = 0; i < num_term; i++)
+   {
+      int rows, cols;
+      int y, x;
 
-      Examples:
-        composband -mgcu -- -right 30x27,* -bottom *x7 will layout as
+      switch (i)
+      {
+	 /* Upper left */
+	 case 0: rows = 38;
+	    cols = 120;
+	    y = x = 0;
+	    break;
+	 /* Lower left */
+	 case 1: rows = LINES - 39;
+	    cols = 120;
+	    y = 38;
+	    x = 0;
+	    break;
+	 /* Upper right */
+	 case 2: rows = 38;
+	    cols = COLS - 121;
+	    y = 0;
+	    x = 121;
+	    break;
+	 /* Lower right */
+	 case 3: rows = LINES - 39;
+	    cols = COLS - 121;
+	    y = 38;
+	    x = 121;
+	    break;
+	 /* XXX */
+	 default: rows = cols = 0;
+	     y = x = 0;
+	     break;
+      }
 
-        Term-0: Map (COLS-30)x(LINES-7) | Term-1: 30x27
-        --------------------------------|----------------------
-        <----Term-3: (COLS-30)x7------->| Term-2: 30x(LINES-27)
+      /* No non-windows */
+      if (rows <= 0 || cols <= 0) continue;
 
-        composband -mgcu -- -bottom *x7 -right 30x27,* will layout as
+      /* Initialize */
+      term_data_init(&data[next_win], rows, cols, y, x);
 
-        Term-0: Map (COLS-30)x(LINES-7) | Term-2: 30x27
-                                        |------------------------------
-                                        | Term-3: 30x(LINES-27)
-        ---------------------------------------------------------------
-        <----------Term-1: (COLS)x7----------------------------------->
+      /* Store */
+      angband_term[next_win] = Term;
 
-        Notice the effect on the bottom terminal by specifying its argument
-        second or first. Notice the sequence numbers for the various terminals
-        as you will have to blindly configure them in the window setup screen.
+      next_win++;
+   }
 
-        EDIT: Added support for -left and -top.
-    */
-    {
-        rect_t remaining = rect(0, 0, COLS, LINES);
-        int    spacer_cx = 1;
-        int    spacer_cy = 1;
-        int    next_term = 1;
-        int    term_ct = 1;
+   /* Activate the "Angband" window screen */
+   Term_activate(&data[0].t);
 
-        for (i = 1; i < argc; i++)
-        {
-            if (strcmp(argv[i], "-spacer") == 0)
-            {
-                i++;
-                if (i >= argc)
-                    quit("Missing size specifier for -spacer");
-                sscanf(argv[i], "%dx%d", &spacer_cx, &spacer_cy);
-            }
-            else if (strcmp(argv[i], "-right") == 0 || strcmp(argv[i], "-left") == 0)
-            {
-                cptr arg, tmp;
-                bool left = strcmp(argv[i], "-left") == 0;
-                int  cx, cys[MAX_TERM_DATA] = {0}, ct, j, x, y;
+   /* Store */
+   term_screen = &data[0].t;
 
-                i++;
-                if (i >= argc)
-                    quit(format("Missing size specifier for -%s", left ? "left" : "right"));
-
-                arg = argv[i];
-                tmp = strchr(arg, 'x');
-                if (!tmp)
-                    quit(format("Expected something like -%s 60x27,* for two %s hand terminals of 60 columns, the first 27 lines and the second whatever is left.", left ? "left" : "right", left ? "left" : "right"));
-                cx = atoi(arg);
-                remaining.cx -= cx;
-                if (left)
-                {
-                    x = remaining.x;
-                    y = remaining.y;
-                    remaining.x += cx;
-                }
-                else
-                {
-                    x = remaining.x + remaining.cx;
-                    y = remaining.y;
-                }
-                remaining.cx -= spacer_cx;
-                if (left)
-                    remaining.x += spacer_cx;
-
-                tmp++;
-                ct = _parse_size_list(tmp, cys, MAX_TERM_DATA);
-                for (j = 0; j < ct; j++)
-                {
-                    int cy = cys[j];
-                    if (y + cy > remaining.y + remaining.cy)
-                        cy = remaining.y + remaining.cy - y;
-                    if (next_term >= MAX_TERM_DATA)
-                        quit(format("Too many terminals. Only %d are allowed.", MAX_TERM_DATA));
-                    if (cy <= 0)
-                    {
-                        quit(format("Out of bounds in -%s: %d is too large (%d rows max for this strip)",
-                            left ? "left" : "right", cys[j], remaining.cy));
-                    }
-                    data[next_term++].r = rect(x, y, cx, cy);
-                    y += cy + spacer_cy;
-                    term_ct++;
-                }
-            }
-            else if (strcmp(argv[i], "-top") == 0 || strcmp(argv[i], "-bottom") == 0)
-            {
-                cptr arg, tmp;
-                bool top = strcmp(argv[i], "-top") == 0;
-                int  cy, cxs[MAX_TERM_DATA] = {0}, ct, j, x, y;
-
-                i++;
-                if (i >= argc)
-                    quit(format("Missing size specifier for -%s", top ? "top" : "bottom"));
-
-                arg = argv[i];
-                tmp = strchr(arg, 'x');
-                if (!tmp)
-                    quit(format("Expected something like -%s *x7 for a single %s terminal of 7 lines using as many columns as are available.", top ? "top" : "bottom", top ? "top" : "bottom"));
-                tmp++;
-                cy = atoi(tmp);
-                ct = _parse_size_list(arg, cxs, MAX_TERM_DATA);
-
-                remaining.cy -= cy;
-                if (top)
-                {
-                    x = remaining.x;
-                    y = remaining.y;
-                    remaining.y += cy;
-                }
-                else
-                {
-                    x = remaining.x;
-                    y = remaining.y + remaining.cy;
-                }
-                remaining.cy -= spacer_cy;
-                if (top)
-                    remaining.y += spacer_cy;
-
-                tmp++;
-                for (j = 0; j < ct; j++)
-                {
-                    int cx = cxs[j];
-                    if (x + cx > remaining.x + remaining.cx)
-                        cx = remaining.x + remaining.cx - x;
-                    if (next_term >= MAX_TERM_DATA)
-                        quit(format("Too many terminals. Only %d are allowed.", MAX_TERM_DATA));
-                    if (cx <= 0)
-                    {
-                        quit(format("Out of bounds in -%s: %d is too large (%d cols max for this strip)",
-                            top ? "top" : "bottom", cxs[j], remaining.cx));
-                    }
-                    data[next_term++].r = rect(x, y, cx, cy);
-                    x += cx + spacer_cx;
-                    term_ct++;
-                }
-            }
-        }
-
-        /* Map Terminal */
-        if (remaining.cx < MAP_MIN_CX || remaining.cy < MAP_MIN_CY)
-            quit(format("Failed: Gensouband needs an %dx%d map screen, not %dx%d", MAP_MIN_CX, MAP_MIN_CY, remaining.cx, remaining.cy));
-        data[0].r = remaining;
-        term_data_init(&data[0]);
-        angband_term[0] = Term;
-
-        /* Child Terminals */
-        for (next_term = 1; next_term < term_ct; next_term++)
-        {
-            term_data_init(&data[next_term]);
-            angband_term[next_term] = Term;
-        }
-    }
-
-	/* Activate the "Angband" window screen */
-	Term_activate(&data[0].t);
-
-	/* Remember the active screen */
-	term_screen = &data[0].t;
-
-	/* Success */
-	return (0);
+   /* Success */
+   return (0);
 }
-
 
 
 #endif /* USE_GCU */
