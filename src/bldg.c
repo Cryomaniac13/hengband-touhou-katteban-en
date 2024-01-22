@@ -16157,7 +16157,7 @@ bool bldg_remove_curse( void)
                             "Suwako comes out and absorbs the curse with a grin."));
 			else
 				msg_print(_("神奈子が出てきて「ハァーー！！」と気合を放った！",
-                            "Kanako comes out and yell out 'Haaaah!!'"));
+                            "Kanako comes out and yells out 'Haaaah!!'"));
 			break;
 
 		case 3:
