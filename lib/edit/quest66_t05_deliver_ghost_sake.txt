@@ -11,16 +11,14 @@ Q:66:Q:9:0:0:0:45:0:0:1
 Q:$66:T:Chen - 'I've been working with Ran-sama to investigate
 Q:$66:T: the ghosts in Netherworld! I'm ashamed to say it, but I ran
 Q:$66:T: away! I can't find Yukari either, so I don't know what to do!
-Q:$66:T:
-Q:$66:T: That's it, they might have possessed Marisa!
+Q:$66:T: ...That's it, they might have possessed Marisa!
 Q:$66:T: If you find Marisa acting weird, be careful. She's probably
 Q:$66:T: possessed by a vengeful spirit! If you find some suspicious
 Q:$66:T: sake, please bring it here!'
 Q:66:T:橙「藍様と一緒に頑張って冥界中の幽霊を調べたのに！
 Q:66:T:　とっくに逃げてたなんて悔しいー！
 Q:66:T:　紫様も見つからないしどうしよう！
-Q:66:T:
-Q:66:T:　そうだ、ひょっとしたらまた魔理沙に取り憑いてるかも！
+Q:66:T:　…そうだ、ひょっとしたらまた魔理沙に取り憑いてるかも！
 Q:66:T:　様子のおかしい魔理沙を見つけたら気をつけて。たぶん怨霊に取り憑かれているわ！
 Q:66:T:　もし怪しいお酒を持ってたらここに持ってきて！」
 ?:1

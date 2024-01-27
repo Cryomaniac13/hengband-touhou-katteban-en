@@ -9795,11 +9795,13 @@ static void dungeon(bool load_game)
 		}
 
 		//v1.1.77 お燐(専用性格)の追跡対象モンスターをクリア
+		/* v2.0.15 追跡対象をMFLAG_SPECIALで管理することにしたのでクリアする必要がなくなった
 		if (is_special_seikaku(SEIKAKU_SPECIAL_ORIN) && p_ptr->magic_num1[0])
 		{
 			msg_print(_("追跡を中断した。", "Your tracking is interrupted."));
 			p_ptr->magic_num1[0] = 0;
 		}
+		*/
 
 		//妹紅インペリシャブルシューティングを解除
 		else if(p_ptr->pclass == CLASS_MOKOU && p_ptr->magic_num2[0])

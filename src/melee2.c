@@ -5042,17 +5042,14 @@ msg_format("%^s%s", m_name, monmessage);
 		}
 
 
-
-
-
-
 		/*:::「旧神の印」の処理 混沌勢力モンスターの移動を高確率で阻害し、破壊されたら爆発する*/
 		if (do_move && is_elder_sign(c_ptr) && (r_ptr->flags3 & RF3_ANG_CHAOS) )
 		{
 
 			do_move = FALSE;
 
-			if (!is_pet(m_ptr) && randint1(r_ptr->level) > 80 + randint1(p_ptr->lev))
+			//v2.0.15 友好モンスターも＠の足元の爆発ルーンを踏みに来ないことにする
+			if (!is_pet(m_ptr) && !is_friendly(m_ptr) && randint1(r_ptr->level) > 80 + randint1(p_ptr->lev))
 			{
 				/* Describe observable breakage */
 				if (c_ptr->info & CAVE_MARK)
@@ -5078,7 +5075,8 @@ msg_format("%^s%s", m_name, monmessage);
 			do_move = FALSE;
 
 			/* Break the ward */
-			if (!is_pet(m_ptr) && (randint1(BREAK_GLYPH) < r_ptr->level))
+			//v2.0.15 友好モンスターも＠の足元のルーンを踏みに来ないことにする
+			if (!is_pet(m_ptr) && !is_friendly(m_ptr) && (randint1(BREAK_GLYPH) < r_ptr->level))
 			{
 				/* Describe observable breakage */
 				if (c_ptr->info & CAVE_MARK)
@@ -5111,7 +5109,8 @@ msg_format("%^s%s", m_name, monmessage);
 			do_move = FALSE;
 
 			/* Break the ward */
-			if (!is_pet(m_ptr))
+			//v2.0.15 友好モンスターも＠の足元の爆発ルーンを踏みに来ないことにする
+			if (!is_pet(m_ptr) && !is_friendly(m_ptr))
 			{
 				/* Break the ward */
 				if (randint1(BREAK_MINOR_GLYPH) > r_ptr->level)
@@ -5231,6 +5230,7 @@ msg_format("%^s%s", m_name, monmessage);
 			}
 
 			/* The player is in the way.  Attack him. */
+			//配下や友好モンスターのときもここに入ってmake_attack_normal()に行き、そこで何もせず返ってくる
 			if (do_move)
 			{
 //				if (!p_ptr->riding || one_in_(2))

@@ -220,10 +220,12 @@ void delete_monster_idx(int i)
 	}
 
 	//v1.1.77 お燐(専用性格)の追跡対象モンスターが消えたら追跡中断
+	/* v2.0.15 追跡対象をMFLAG_SPECIALで管理することにしたのでクリアする必要がなくなった
 	if (is_special_seikaku(SEIKAKU_SPECIAL_ORIN) && i == p_ptr->magic_num1[0])
 	{
 		p_ptr->magic_num1[0] = 0;
 	}
+	*/
 
 	/* Hack -- Reduce the racial counter */
 	/*:::モンスターのフロア存在数を1減らす*/
@@ -2932,6 +2934,14 @@ void update_mon(int m_idx, bool full)
 	if(cave[m_ptr->fy][m_ptr->fx].cave_xtra_flag & CAVE_XTRA_FLAG_NEMUNO)
 		flag = TRUE;
 
+	//v1.1.77 お燐(専用性格)の特技「追跡」の対象のモンスター
+	//v2.0.15 感知範囲外でも有効
+	if (is_special_seikaku(SEIKAKU_SPECIAL_ORIN) && (m_ptr->mflag & MFLAG_SPECIAL)) flag = TRUE;
+
+	//v2.0.15 	日狭美のストーキング対象も同様
+	if (p_ptr->pclass == CLASS_HISAMI && (m_ptr->mflag & MFLAG_SPECIAL)) flag = TRUE;
+
+
 	/* Nearby */
 	/*:::視界内（になりうる距離）にいるとき*/
 	if (d <= (in_darkness ? MAX_SIGHT / 2 : MAX_SIGHT))
@@ -3108,9 +3118,6 @@ void update_mon(int m_idx, bool full)
 
 			if(CHECK_FAIRY_TYPE == 21 && (r_ptr->flags3 & (RF3_FAIRY))) flag = TRUE;
 
-			//v1.1.77 お燐(専用性格)の特技「追跡」の対象のモンスター
-
-			if (is_special_seikaku(SEIKAKU_SPECIAL_ORIN) && m_idx == p_ptr->magic_num1[0]) flag = TRUE;
 
 			//椛Lv35以降の完全感知　全てを感知するがモンスターの属性について何も学べない
 			//レーダーセンスも同じ処理にする
@@ -7062,3 +7069,24 @@ bool is_gen_unique(int r_idx)
 
 
 }
+
+
+//v2.0.15 MFLAG_SPECIALを付与されたモンスターがフロアにいるかどうか確認する。
+//最初に見つかったモンスターのm_idxを返す。いなければ0を返す。複数存在するかどうかは確認しない。
+int search_special_flag_mon(void)
+{
+	int i;
+
+	for (i = 1; i < m_max; i++)
+	{
+		if (!m_list[i].r_idx)
+			continue;
+		if (m_list[i].mflag & MFLAG_SPECIAL)
+			return i;
+	}
+
+	return 0;
+}
+
+
+

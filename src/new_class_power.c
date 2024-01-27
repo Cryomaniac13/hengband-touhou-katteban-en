@@ -47,7 +47,449 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
 
 
 
-//v2.0.13 ちやり
+//v2.0.15 日狭美
+//ストーキング中のモンスターのmflagにMFLAG_SPECIALを立てる
+class_power_type class_power_hisami[] =
+{
+
+	{ 5,5,20,FALSE,TRUE,A_INT,0,0,_("モンスター感知", "Detect Monsters"),
+	_("周囲のモンスターを感知する。",
+    "Detects nearby monsters.")},
+
+	{ 12,20,30,FALSE,TRUE,A_DEX,0,0,_("拘束", "Restrain"),
+	_("モンスター一体を短時間移動禁止状態にする。ユニークモンスターや力強いモンスターには脱出されやすい。",
+    "Immobilizes a monster for a short period of time. Unique monsters and powerful monsters are more likely to escape.")},
+
+	{ 20,0,0,FALSE,FALSE,A_CHR,0,0,_("ストーキングⅠ", "Stalking I"),
+	_("視界内の自分よりレベルの高いモンスター一体を指定し、そのモンスターを常に感知し続ける。一度対象を定めたらそのモンスターがフロアにいる限り対象を変更できない。ストーキング中のモンスターにさらに使うとそのモンスターの情報を調査する。",
+    "Pick a monster in your field of view with higher level than your, and you will be able to continuously sense that monster's presence. You cannot pick another target while that monster remains on this level. If you use this on a monster you're already stalking, you'll gain information about it.")},
+
+	{ 27,0,50,FALSE,FALSE,A_CHR,0,0,_("キャッチ", "Catch"),
+	_("隣接するアンデッド一体をフロアから追放する。追放した敵のレベルに応じた金が手に入るが、プレイヤーの魅力・モンスターとのレベル差・モンスターの残り体力によっては減額されたりマイナスになることがある。クエストダンジョンでは使えない。配下とユニークモンスターには効果がない。",
+    "Banishes an adjacent undead monster from the level. You get money depending on the banished enemy's level, but depending on your charisma, difference between your and monster's levels, and that monster's remaining health, you might lose money as well. Cannot be used in quests. Not effective against followers or unique monsters.")},
+
+	{ 35,40,70,FALSE,FALSE,A_DEX,0,0,_("ストーキングⅡ", "Stalking II"),
+	_("ストーキング中のモンスターの近くにテレポートする。テレポート無効地形や反テレポートバリアなどを無視するが、その場合プレイヤーは1d100のダメージを受ける。",
+    "Teleports close to the monster you're stalking. Ignores terrain that prevents teleportation and anti-teleport barriers, but you take 1d100 damage in that case.")},
+
+	{ 40,72,75,FALSE,TRUE,A_CHR,0,0,_("脱獄ストーカー", "Jailbreak Stalker"),
+	_("ストーキング中かつ拘束中のターゲットに対して強力な遅鈍属性攻撃を行い、さらに全能力低下状態にしようと試みる。",
+    "Hits a target you're stalking that is also being restrained with a powerful inertia element attack, and attempts to lower all of their stats.")},
+
+	{ 45,160,80,FALSE,TRUE,A_INT,0,0,_("ストーキングⅢ", "Stalking III"),
+	_("フロア全ての地形とモンスターを感知する。さらにその状態で感知したモンスター一体を指定してストーキングすることができる。",
+    "Maps out the entire level and detects all monsters. You can pick one of detected monsters and designate it as stalking target.")},
+
+
+{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_hisami(int num, bool only_info)
+{
+	int dir, i;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	int max_blood_stock = 50 + p_ptr->lev * 7;
+	int cur_blood_stock = p_ptr->magic_num1[0];
+
+	switch (num)
+	{
+	case 0://モンスター感知
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_range, rad);
+
+		msg_print(_("あなたは他者の気配を探った...", "You search for presence of others..."));
+		detect_monsters_normal(rad);
+		detect_monsters_invis(rad);
+
+		break;
+	}
+	case 1://拘束
+	case 2://ストーキング1
+	case 5://脱獄ストーカー
+	{
+		int y, x;
+		monster_type *m_ptr;
+		int power = 0;
+
+		if (num == 1)
+		{
+			power = plev;
+			if (use_itemcard && power < 30) power = 30;
+
+			if (only_info) return format(_str_eff_power, power);
+		}
+		else if (num == 2)
+		{
+			if (only_info) return format("");
+
+		}
+		else if (num == 5)
+		{
+			power = plev * 5 + chr_adj * 5;
+			if (only_info) return format(_str_eff_dam, power);
+		}
+
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                    "You have to pick a target in your field of view."));
+			return NULL;
+		}
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			monster_race *r_ptr = &r_info[m_ptr->r_idx];
+			char m_name[120];
+
+			if (num == 1) //拘束
+			{
+				if (fire_ball_jump(GF_NO_MOVE, dir, power, 0, _("地中からツタが伸び出て巻き付いた！",
+                                                                "Vines shoot out from the ground!"))) return NULL;
+			}
+			else if (num == 2)//ストーキング
+			{
+				monster_desc(m_name, m_ptr, 0);
+
+				//すでにストーキング中のモンスターの場合調査することにする
+				if (m_ptr->mflag & MFLAG_SPECIAL)
+				{
+					char buf[256];
+					int speed, mon_ac;
+					msg_format(_("瞬きもせず%sを見つめた...", "You stare at %s without blinking..."),m_name);
+
+					if (m_ptr->mflag2 & MFLAG2_KAGE)m_ptr->mflag2 &= ~(MFLAG2_KAGE);
+					lore_do_probe(m_ptr->r_idx);
+					speed = m_ptr->mspeed - 110;
+					if (MON_FAST(m_ptr)) speed += 10;
+					if (MON_SLOW(m_ptr)) speed -= 10;
+					if (ironman_nightmare) speed += 5;
+					mon_ac = r_ptr->ac;
+					if (MON_DEC_DEF(m_ptr)) mon_ac = MONSTER_DECREASED_AC(mon_ac);
+					sprintf(buf, _(" ... HP:%d/%d AC:%d 速度:%s%d ",
+                                    " ... HP:%d/%d AC:%d Spd:%s%d "), m_ptr->hp, m_ptr->maxhp, mon_ac, (speed > 0) ? "+" : "", speed);
+					if (MON_CSLEEP(m_ptr)) strcat(buf, _("睡眠 ", "Slp "));
+					if (MON_STUNNED(m_ptr)) strcat(buf, _("朦朧 ", "Stun "));
+					if (MON_MONFEAR(m_ptr)) strcat(buf, _("恐怖 ", "Fear "));
+					if (MON_CONFUSED(m_ptr)) strcat(buf, _("混乱 ", "Conf "));
+					if (MON_INVULNER(m_ptr)) strcat(buf, _("無敵 ", "Inv "));
+					buf[strlen(buf) - 1] = '\0';
+
+					msg_format("%s", buf);
+				}
+				//レベルが低い相手には無効
+				else if (r_ptr->level < p_ptr->lev)
+				{
+					msg_format(_("%sは格下だ。興味を惹かれない。", "%^s is inferior to you. You're not interested."), m_name);
+					break;
+				}
+				else if (search_special_flag_mon())
+				{
+					msg_format(_("あなたが付き纏う標的は他にいる。", "You are stalking another target."));
+					return NULL;
+				}
+				else
+				{
+					msg_format(_("あなたは%sの一挙手一投足に注目し始めた。", "You start paying attention to every move %s makes."), m_name);
+					m_ptr->mflag |= MFLAG_SPECIAL;
+				}
+
+			}
+			else if (num == 5)//脱獄ストーカー
+			{
+				monster_desc(m_name, m_ptr, 0);
+
+				if (!(m_ptr->mflag & MFLAG_SPECIAL))
+				{
+					msg_format(_("%sは標的ではない。", "%s is not a target."), m_name);
+					return NULL;
+				}
+				if (!MON_NO_MOVE(m_ptr))
+				{
+					msg_format(_("まず拘束しないといけない。", "You have to restrain your target first."));
+					return NULL;
+				}
+
+				msg_format(_("%sにさらに幾重ものツタが巻き付いて締め上げた！",
+                            "The vines tighten even more, wrapping around %s!"),m_name);
+				project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_INACT, PROJECT_JUMP | PROJECT_KILL, -1);
+				if(m_ptr->r_idx)
+					project(0, 0, m_ptr->fy, m_ptr->fx, power, GF_DEC_ALL, PROJECT_JUMP | PROJECT_HIDE | PROJECT_KILL, -1);
+
+			}
+			else
+			{
+				msg_format(_("ERROR:num値未定義(%d)", "ERROR: num value (%d)"), num);
+				return NULL;
+			}
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+
+		break;
+	}
+
+	case 3://キャッチ
+
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+		monster_race *r_ptr;
+		char m_name[120];
+
+		if (only_info) return format("");
+
+		//クエストダンジョンでは無効
+		if ((p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest)) || EXTRA_QUEST_FLOOR)
+		{
+			msg_print(_("ここでは使えない。", "You can't use it here."));
+			return NULL;
+		}
+
+		//隣接モンスターを指定
+		if (!get_rep_dir2(&dir)) return FALSE;
+		if (dir == 5) return FALSE;
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			int gain_money;
+			int bonus_line;
+			int mult;
+
+			r_ptr = &r_info[m_ptr->r_idx];
+			monster_desc(m_name, m_ptr, 0);
+
+			//アンデッド以外には無効
+			if (!(r_ptr->flags3 & RF3_UNDEAD))
+			{
+				msg_format(_("%sは死者ではない。管轄外だ。", "%^s is not undead. That's out of your jurisdiction."), m_name);
+				break;
+			}
+			//配下には無効
+			if (is_pet(m_ptr))
+			{
+				msg_format(_("%sはあなたの配下だ。", "%^s is your follower."), m_name);
+				break;
+			}
+
+			msg_format(_("あなたは勧誘を始めた...", "You start leading %s away..."));
+
+			//起こす
+			set_monster_csleep(cave[y][x].m_idx, 0);
+
+			//ユニークには無効
+			if (r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2)
+			{
+				msg_format(_("%sはあなたの甘い言葉に惑わされなかった！", "%^s does not fall for your sweet speeches!"), m_name);
+				break;
+			}
+
+			//基本報酬
+			gain_money = r_ptr->level * r_ptr->level * r_ptr->level / 4;
+			if (gain_money < 100) gain_money = 100;
+			//増殖するモンスターは大幅に減らす
+			if (r_ptr->flags2 & RF2_MULTIPLY) gain_money /= 10;
+
+			//報酬が満額出る敵HP(%) 基本25%からレベル差と魅力補正値で変動し最低10%
+			bonus_line = 25 - r_ptr->level + p_ptr->lev + chr_adj;
+			if (bonus_line < 10) bonus_line = 10;
+
+			//敵の現在HPが満額ラインから1%高くなるごとに報酬が2%減っていく。マイナスになることもある
+			//lev50chr40でlev55HP100%の敵にプラマイゼロ
+			//lev50chr50でlev75まで行ける
+			mult = 100 - (m_ptr->hp * 100 / m_ptr->max_maxhp - bonus_line) * 2;
+			if (mult > 100) mult = 100;
+
+			//multが0以下なら続けるか確認する
+			if (mult<0 && !get_check_strict(_("交渉の旗色が悪い。続けますか？", "Negotiations aren't going well. Continue?"), CHECK_DEFAULT_Y)) return "";
+
+			msg_format(_("あなたは%sを地獄へご案内した！", "You lead %s into Hell!"), m_name);
+
+			if (mult > 50) msg_print(_("ボーナスが出た！", "You gain a bonus!"));
+			else if (mult >= 0) msg_print(_("しかしボーナスの大部分を分け前として渡すことになった。", "You had to give them a good portion of your bonus money."));
+			else msg_print(_("ボーナスを全て渡しても足りず自腹を切る羽目になった...", "You gave them all of your bonus money, but that wasn't enough, and you had to pay out of your own wallet..."));
+
+			//モンスター消滅
+			check_quest_completion(m_ptr);
+			delete_monster_idx(cave[y][x].m_idx);
+
+			if (mult >= 0) msg_format(_("$%dを受け取った。", "You receive $%d."),gain_money * mult / 100);
+			else msg_format(_("$%dを失った。", "You lose $%d."), gain_money * mult / 100 * -1);
+
+			p_ptr->au += gain_money * mult / 100;
+			if (p_ptr->au < 0) p_ptr->au = 0; //借金にはならないようにしとく。別にやってもゲーム上問題はないんだが
+			p_ptr->redraw |= PR_GOLD;
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+	case 4: //ストーキングⅡ
+	{
+		int m_idx,x,y;
+		bool flag_damage = FALSE;
+		if (only_info) return format("");
+
+		m_idx = search_special_flag_mon();
+
+		if (!m_idx)
+		{
+			msg_print(_("ストーキング中のモンスターがいない。", "You're not stalking anyone."));
+			return NULL;
+		}
+		x = m_list[m_idx].fx;
+		y = m_list[m_idx].fy;
+
+		teleport_player_to(y, x, TELEPORT_NONMAGICAL|TELEPORT_ANYPLACE);
+
+		//反テレポ
+		if (p_ptr->anti_tele)
+		{
+			msg_print(_("不思議な力がテレポートを防...ごうとしたが力づくで飛んだ！", "A mysterious force prevents you from teleporting... but you push through with sheer force!"));
+			flag_damage = TRUE;
+		}
+		//テレポ不可地形
+		else if (cave[py][px].info & CAVE_ICKY)
+		{
+			msg_print(_("あなたはテレポート防壁を突き破って侵入した！", "You break through the anti-telportation barrier!"));
+			flag_damage = TRUE;
+		}
+		else if (cave_have_flag_bold(py, px, FF_WALL))
+		{
+			msg_print(_("あなたは壁の隙間から現れた！", "You appear out of cracks in the wall!"));
+			if(!p_ptr->wraith_form && !p_ptr->kabenuke )flag_damage = TRUE;
+		}
+		else if (cave_have_flag_bold(py, px, FF_DOOR) && !cave_have_flag_bold(py, px, FF_MOVE))
+		{
+			msg_print(_("あなたはドアの隙間から現れた！", "You appear out of a gap in the door!"));
+			if (!p_ptr->wraith_form && !p_ptr->kabenuke)flag_damage = TRUE;
+		}
+		else if (cave_have_flag_bold(py, px, FF_LAVA))
+		{
+			msg_print(_("あなたは溶岩の中から現れた！", "You appear out of lava!"));
+			if(!p_ptr->immune_fire) flag_damage = TRUE;
+		}
+		else if (cave_have_flag_bold(py, px, FF_WATER))
+		{
+			msg_print(_("あなたは水の中から現れた！", "You appear out of water!"));
+			if (!p_ptr->resist_water) flag_damage = TRUE;
+		}
+		else if (cave_have_flag_bold(py, px, FF_TREE))
+		{
+			msg_print(_("あなたは木の洞から現れた！", "You appear out of the tree!"));
+		}
+		//岩石
+		else if (cave_have_flag_bold(py, px, FF_TUNNEL))
+		{
+			msg_print(_("あなたは岩の下から現れた！", "You appear out from beneath the rock!"));
+			if (!p_ptr->wraith_form && !p_ptr->kabenuke)flag_damage = TRUE;
+		}
+
+		if (IS_INVULN()) flag_damage = FALSE;
+
+		if (flag_damage) take_hit(DAMAGE_NOESCAPE, damroll(1, 100), _("無謀なストーキング", "reckless stalking"), -1);
+
+
+	}
+	break;
+
+	case 6:
+	{
+		if (only_info) return format(_("距離:なし", "rng: none"));
+
+		msg_print(_("あなたは案内人の力を自重せず行使した。", "You use your power as a guide without hesitating."));
+
+		wiz_lite(FALSE);
+		detect_monsters_normal(255);
+		redraw_stuff();
+
+		if (p_ptr->paralyzed || p_ptr->confused || p_ptr->image)
+		{
+			break;//状態異常を食らったら何もしない
+		}
+		else if (search_special_flag_mon())
+		{
+			msg_print(_("あなたにはすでに追跡中の標的がいる。", "There's already a target you're pursuing."));
+		}
+		else
+		{
+			int x, y;
+			monster_type *m_ptr;
+			monster_race *r_ptr;
+			char m_name[120];
+			//モンスターを一体選択してストーキングする
+
+			msg_print(_("モンスターを一体指定できる。(カーソルを合わせて't')", "Pick a monster. (position the cursor and press 't')"));
+
+			if (!target_set(TARGET_FULL_RANGE | TARGET_LOOK)) break;
+
+			x = target_col;
+			y = target_row;
+
+			m_ptr = &m_list[cave[y][x].m_idx];
+
+			if (!m_ptr->r_idx || !m_ptr->ml)
+			{
+				msg_print(_("そこには何もいない。", "There's nobody here."));
+				break;
+			}
+
+			r_ptr = &r_info[m_ptr->r_idx];
+			monster_desc(m_name, m_ptr, 0);
+
+			if (r_ptr->level < p_ptr->lev)
+			{
+				msg_format(_("%sは格下だ。興味を惹かれない。", "%^s is inferior to you. You're not interested."), m_name);
+				break;
+			}
+			else
+			{
+				msg_format(_("あなたは%sを標的に定めた。", "You pick %s as your target."), m_name);
+				m_ptr->mflag |= MFLAG_SPECIAL;
+			}
+
+		}
+
+
+	}
+	break;
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
+
+//v2.0.14 ちやり
 //magic_num1[0]に採血によるMPストックを記録
 class_power_type class_power_chiyari[] =
 {
@@ -3431,6 +3873,7 @@ return "";
 
 /*:::v1.1.77 お燐(専用性格)専用技*/
 //追跡モンスターのm_idxを格納するためにp_ptr->magic_num1[0]を使用する
+//v2.0.15 ↑の方法だとセーブ・ロードなどでm_listが圧縮されたとき挙動が変になるのでMFLAG_SPECIALで管理することにした
 class_power_type class_power_orin2[] =
 {
 	{ 5,10,20,FALSE,FALSE,A_INT,0,1,_("聞き込み", "Sleuthing"),
@@ -3496,7 +3939,7 @@ cptr do_cmd_class_power_aux_orin2(int num, bool only_info)
 	{
 		monster_type *m_ptr;
 		int y, x;
-
+		int new_m_idx;
 		if (only_info) return  format("");
 
 		//隣接モンスター指定
@@ -3505,23 +3948,30 @@ cptr do_cmd_class_power_aux_orin2(int num, bool only_info)
 
 		y = py + ddy[dir];
 		x = px + ddx[dir];
-		m_ptr = &m_list[cave[y][x].m_idx];
+		new_m_idx = cave[y][x].m_idx;
+		m_ptr = &m_list[new_m_idx];
 
-		if (cave[y][x].m_idx && (m_ptr->ml))
+		if (new_m_idx && (m_ptr->ml))
 		{
 			char m_name[80];
-
+			int old_m_idx;
 			monster_desc(m_name, m_ptr, 0);
 
-			if (cave[y][x].m_idx == p_ptr->magic_num1[0])
+			old_m_idx = search_special_flag_mon();
+			//v2.0.15 セーブ・ロードなどでm_listが圧縮されたとき挙動が変になるのでMFLAG_SPECIALで管理することにした
+			//if (cave[y][x].m_idx == p_ptr->magic_num1[0])
+			if(old_m_idx == new_m_idx)
 			{
 				msg_format(_("すでに追跡中だ。", "You are already in pursuit."));
 				return NULL;
 			}
 			else
 			{
+				//これまで追跡していたモンスターのフラグをクリア
+				if (old_m_idx) m_list[old_m_idx].mflag &= ~(MFLAG_SPECIAL);
+
 				msg_format(_("あなたは%sの追跡を開始した。", "You start pursuing %s."), m_name);
-				p_ptr->magic_num1[0] = cave[y][x].m_idx;
+				m_ptr->mflag |= MFLAG_SPECIAL;
 			}
 
 		}
@@ -37911,6 +38361,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_HISAMI:
+		class_power_table = class_power_hisami;
+		class_power_aux = do_cmd_class_power_aux_hisami;
+		power_desc = power_desc_waza;
+		break;
+
 	default:
 #ifdef JP
 		msg_print("あなたは職業による特技を持っていない。");
@@ -39830,6 +40286,11 @@ const support_item_type support_item_list[] =
 		_("それは汚染属性のボルトで敵を攻撃する。",
         "Attacks enemies with a pollution bolt.")},
 
+	//v2.0.15 ヒサミ
+		{ 70,20,80,7,3,	MON_HISAMI,class_power_hisami,do_cmd_class_power_aux_hisami,1,
+		_("山葡萄", "Wild Grapes"),
+        _("それはモンスター一体を一時的に移動不能状態にする。",
+        "Immobilizes a monster for a short period of time.")},
 
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},

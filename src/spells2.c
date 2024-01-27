@@ -9453,7 +9453,9 @@ bool orin_escape(int m_idx)
 	if (p_ptr->confused || p_ptr->blind || p_ptr->paralyzed || p_ptr->image) return FALSE;
 	if (randint0(200) < p_ptr->stun) return FALSE;
 
-	if (p_ptr->magic_num1[0] != m_idx) return FALSE;
+	//if (p_ptr->magic_num1[0] != m_idx) return FALSE;
+	//v2.0.15 ŠÇ—•û–@•ÏX
+	if (!(m_ptr->mflag & MFLAG_SPECIAL)) return FALSE;
 
 	if (p_ptr->csp < 30 || one_in_(6) || randint1(r_ptr->level) > (p_ptr->lev+ p_ptr->stat_ind[A_DEX]+3))
 	{

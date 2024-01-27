@@ -2780,3 +2780,8 @@ extern bool place_chosen_trap(int plev, bool only_beartrap);
 
 //v2.0.14
 extern int calc_spell_caster_level(bool apply_berserker);
+
+//v2.0.15
+extern int search_special_flag_mon(void);
+
+

@@ -4082,10 +4082,12 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 19) add_flag(flgs, TR_RES_POIS);
 		if (p_ptr->lev > 34) add_flag(flgs, TR_SH_FIRE);
 		if (p_ptr->lev > 39) add_flag(flgs, TR_RES_DISEN);
-
-
 		break;
 
+	case CLASS_HISAMI:
+		add_flag(flgs, TR_SUST_CHR);
+		if (p_ptr->lev > 39) add_flag(flgs, TR_RES_TIME);
+		break;
 
 	default:
 		break; /* Do nothing */

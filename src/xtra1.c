@@ -6573,6 +6573,11 @@ void calc_bonuses(void)
 
 		break;
 
+	case CLASS_HISAMI:
+		p_ptr->sustain_chr = TRUE;
+		if (plev > 39) p_ptr->resist_time = TRUE;
+		break;
+
 
 	default:
 		break;

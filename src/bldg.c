@@ -10809,7 +10809,7 @@ bool check_ignoring_quest(int questnum)
 
 		//v2.0.13 賞金首クエスト　各勢力組長とどこにも肩入れしない人は受領不可
 	case QUEST_YAKUZA_2:
-		if (pc == CLASS_SAKI || pc == CLASS_YACHIE || pc == CLASS_YUMA || pc == CLASS_ZANMU || pc == CLASS_EIKI || pc == CLASS_REIMU)
+		if (pc == CLASS_SAKI || pc == CLASS_YACHIE || pc == CLASS_YUMA || pc == CLASS_ZANMU || pc == CLASS_HISAMI || pc == CLASS_EIKI || pc == CLASS_REIMU)
 			return TRUE;
 		break;
 

@@ -3275,6 +3275,8 @@ outfit_type birth_outfit_class[] = {
 
 	{ CLASS_CHIYARI,2,0,TV_CLOTHES, SV_CLOTH_T_SHIRT,1 },
 
+	{ CLASS_HISAMI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+
 	{-1,0,0,0,0,0} //終端dummy
 };
 
@@ -6393,7 +6395,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,"Sannyo Komakusa",CLASS_SANNYO,RACE_YOUKAI,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a yamajorou youkai who runs a gambling den at Youkai Mountain. You can smoke special tobacco that can, for example, stun or confuse nearby enemies. Once you start smoking, the tobacco's effect will keep applying each turn, but your MP will keep draining as well. You also have some skills as a gambling den owner, and have some combat techniques using a fan. You are gambling to make a profit on buying the 'ability cards'. However, card prices will start rising once competition starts increasing. Save up money and buy cards as soon as possible." },
 	{ TRUE,"Misumaru Tamatsukuri",CLASS_MISUMARU,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
-		"You are a magataman crafter. You can create magatama from materials (like ores) and activate various abilities after equipping them into special slots. Power and kind of those abilities varies depending on which materials you use. Also, you can use jeweler workshops in towns to extract essences from gemstones or accessories and then apply them to a different accessory. You also can study one realm of magic, but you're not good at combat. Also, you're vulnerable to disenchantment attacks." },
+		"You are a magatama crafter. You can create magatama from materials (like ores) and activate various abilities after equipping them into special slots. Power and kind of those abilities varies depending on which materials you use. Also, you can use jeweler workshops in towns to extract essences from gemstones or accessories and then apply them to a different accessory. You also can study one realm of magic, but you're not good at combat. Also, you're vulnerable to disenchantment attacks." },
 	{ TRUE,"Tsukasa Kudamaki",CLASS_TSUKASA,RACE_YOUKO,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a kuda-gitsune serving a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
 	{ TRUE,"Megumu Iizunamaru",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6413,11 +6415,11 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("天火人　ちやり", "Chiyari Tenkajin"),CLASS_CHIYARI,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
 		_("あなたは「天火人」と呼ばれる吸血妖怪です。旧血の池地獄に長い間引き籠もっていましたが最近外に出てきました。あなたは通常の食事が口に合わず、代わりに特技で他者から血を奪ってそれを飲むことで腹を満たして体力と魔力を回復します。あなたは呪われた血が好みのためゾンビやデーモンの血でも気にしません。またあなたは自らの血を使って攻撃力を大幅に強化する特技を持っています。使いすぎて出血ダメージで倒れないように気をつけましょう。",
         "You are a tenkajin - a blood-drinking youkai. You've secluded yourself at Former Hell of Blood Pools for a long time, but recently you've started going outside. You're not satiated with ordinary food - instead you have to steal blood from others using your ability, and drinking it satiates you, healing and restoring magical power as well. You like cursed blood, so you don't mind drinking blood of zombies and demons as well. Also, you can use your own blood to greatly power up your attacks. Just be careful not to collapse from blood loss if you use it too much.") },
-	{ FALSE,_("豫母都　日狭美", "Hisami Yomotsu"),CLASS_HISAMI,RACE_DEATH,ENTRY_JUUOUEN,SEX_FEMALE,
+	{ TRUE,_("豫母都　日狭美", "Hisami Yomotsu"),CLASS_HISAMI,RACE_DEATH,ENTRY_JUUOUEN,SEX_FEMALE,
+		_("あなたは地獄の住人の黄泉醜女(ヨモツシコメ)です。日白残無の部下として地獄の案内人をしたり裁きを待つ魂を勝手に地獄に誘ったりして暮らしています。戦闘においては魔法を主体に戦います。また敵を拘束したり特定の敵をどこまでも追いかけ回すような特技を習得します。あなたは甘味を食べるとMPを回復することができます。",
+        "You are a yomotsu-shikome, a resident of Hell. As a subordinate of Zanmu Nippaku, your duty is to lure souls awaiting judgment into Hell. When it comes to combat, you fight primarily with magic. You also have special abilities that let you restrain enemies or relentlessly pursue a specific foe. You can recover MP by consuming sweets.") },
+	{ FALSE,_("日白　残無", "Zanmu Nippaku"),CLASS_ZANMU,RACE_ONI,ENTRY_JUUOUEN,SEX_FEMALE,
 		_("未実装", "unimplemented") },
-	{ FALSE,_("日白　残無", "Zanmu Nippaku"),CLASS_BITEN,RACE_YOUKAI,ENTRY_JUUOUEN,SEX_FEMALE,
-		_("未実装", "unimplemented") },
-
 
 	{TRUE,_("伊吹　萃香", "Suika Ibuki"),CLASS_SUIKA,RACE_ONI,ENTRY_TASOGARE,SEX_FEMALE,
 	_("あなたは幻想郷で長らく忘れられていた強大な鬼です。小柄ながら最高クラスの身体能力を持ち格闘と鈍器を得意とします。密と疎を操る能力を持ち、巨大化したり霧になったりアイテムを集めるなど多彩な技を習得します。あなたはいくら酒を飲んでも倒れませんが、酔いが醒めると能力が大幅に低下してしまいます。",

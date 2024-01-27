@@ -6701,7 +6701,8 @@ bool target_set(int mode)
 			c_ptr = &cave[y][x];
 
 			/* Allow target */
-			if (target_able(c_ptr->m_idx))
+			//v2.0.15 TARGET_LOOK‚Ì‚Æ‚«Ž‹ŠEŠO‚Å‚àƒ^[ƒQƒbƒg‚ÉÝ’è(t)‚Å‚«‚é‚æ‚¤‚É‚·‚é
+			if (target_able(c_ptr->m_idx) || (mode & TARGET_LOOK))
 			{
 #ifdef JP
 strcpy(info, "qŽ~ tŒˆ pŽ© oŒ» +ŽŸ -‘O");
@@ -6754,7 +6755,7 @@ strcpy(info, "qŽ~ pŽ© oŒ» +ŽŸ -‘O");
 				case '5':
 				case '0':
 				{
-					if (target_able(c_ptr->m_idx))
+					if (target_able(c_ptr->m_idx) || (mode & TARGET_LOOK))
 					{
 						health_track(c_ptr->m_idx);
 						target_who = c_ptr->m_idx;
