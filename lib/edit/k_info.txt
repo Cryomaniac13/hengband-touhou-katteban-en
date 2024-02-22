@@ -6340,6 +6340,7 @@ I:73:7:5000
 W:55:0:20:10000
 A:55/255
 P:0:5d5:0:0:0
+D:$A valuable lump of mithril, also called 'true-silver'.
 D:「まことの銀」と呼ばれる貴重なミスリルの塊だ。
 
 N:611:アダマンタイト
@@ -6349,6 +6350,7 @@ I:73:8:7500
 W:65:0:200:10000
 A:65/255
 P:0:5d5:0:0:0
+D:$Weird ore called 'adamantite'. Extremely tough, but very heavy as well.
 D:アダマンタイトと呼ばれる奇妙な鉱物だ。極めて丈夫だが凄まじく重い。
 
 N:612:竜の爪
@@ -6358,6 +6360,7 @@ I:73:9:100
 W:80:0:10:70000
 A:80/255
 P:0:5d5:0:0:0
+D:$Dragon nail. Using them for mixing potions dramatically powers up their effect.
 D:龍族の爪だ。薬を調合するときに混ぜると効果が飛躍的に強まるという。
 
 N:613:竜の鱗
@@ -6367,6 +6370,7 @@ I:73:10:100
 W:60:0:30:30000
 A:60/255
 P:0:5d5:0:0:0
+D:$Dragon scale. Hard to come by in Gensoukyou.
 D:龍族の鱗だ。通常幻想郷では滅多に手に入らない。
 
 N:614:ゲルセミウム・エレガンス
@@ -6376,6 +6380,7 @@ I:73:11:100
 W:45:0:4:2000
 A:45/255
 P:0:5d5:0:0:0
+D:$Young shoots of Gelsemium Elegance - said to be the most poisonous plant. Some people brew tea from it.
 D:最強の猛毒植物といわれるゲルセミウム・エレガンスの若芽だ。これでお茶を淹れるとんでもない人もいるらしい。
 
 N:615:ガーネット

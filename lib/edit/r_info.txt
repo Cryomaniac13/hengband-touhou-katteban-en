@@ -3925,7 +3925,7 @@ D:それは頑丈な甲羅を持った邪悪な昆虫だ。
 
 
 N:237:河童
-E:kappa
+E:Kappa
 G:K:g
 I:115:20d18:10:50:1
 W:21:1:4:200:1000:320
@@ -3954,7 +3954,7 @@ D:$A hideous, smallish giant that is often found near or with orcs.
 D:醜怪な小型のジャイアントで、しばしばオークと共に見受けられる。
 
 N:239:山童
-E:yamawaro
+E:Yamawaro
 G:K:o
 I:110:18d14:10:30:1
 W:17:1:0:100:5000:1225
