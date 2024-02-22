@@ -9810,7 +9810,7 @@ static void do_cmd_knowledge_stat(void)
  */
 static void do_cmd_knowledge_quests_current(FILE *fff)
 {
-	char tmp_str[120];
+	char tmp_str[160];
 	char rand_tmp_str[200] = "\0";
 	char name[80];
 	monster_race *r_ptr;
@@ -9865,7 +9865,7 @@ static void do_cmd_knowledge_quests_current(FILE *fff)
 
 			if (quest[i].type != QUEST_TYPE_RANDOM)
 			{
-				char note[80] = "\0";
+				char note[100] = "\0";
 
 				if (quest[i].status == QUEST_STATUS_TAKEN || quest[i].status == QUEST_STATUS_STAGE_COMPLETED)
 				{
