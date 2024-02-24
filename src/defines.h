@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 15
+#define H_VER_PATCH 16
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -7171,7 +7171,7 @@ extern int PlayerUID;　
 #define MON_HISAMI			1388
 #define MON_ZANMU			1389
 
-#define MON_IDX_MAX			1390	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_IDX_MAX			1391	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 

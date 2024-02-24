@@ -1786,8 +1786,9 @@ static void random_slay(object_type *o_ptr)
 		break;
 
 	case BIAS_PRIESTLY:
-		if((o_ptr->tval == TV_SWORD || o_ptr->tval == TV_POLEARM || o_ptr->tval == TV_KATANA|| o_ptr->tval == TV_AXE || o_ptr->tval == TV_SPEAR ) &&
-		   !(have_flag(o_ptr->art_flags, TR_BLESSED)))
+		//v2.0.16 武器種別の制限をなくした
+		//if((o_ptr->tval == TV_SWORD || o_ptr->tval == TV_POLEARM || o_ptr->tval == TV_KATANA|| o_ptr->tval == TV_AXE || o_ptr->tval == TV_SPEAR ) &&
+		 if(  !(have_flag(o_ptr->art_flags, TR_BLESSED)))
 		{
 			/* A free power for "priestly" random artifacts */
 			add_flag(o_ptr->art_flags, TR_BLESSED);
@@ -2486,15 +2487,23 @@ bool create_artifact(object_type *o_ptr, bool a_scroll)
 	{
 		switch (randint1(max_type))
 		{
-			/*:::複数能力アップフラグ　隠密や魔道具もある*/
+			/*:::pval能力アップフラグ　隠密や魔道具もある*/
 			case 1: case 2:
-				random_plus(o_ptr);
-				has_pval = TRUE;
-				break;
+				if (object_is_ammo(o_ptr))
+				{
+					; //何もせずcase3,4へ
+				}
+				else
+				{
+					random_plus(o_ptr);
+					has_pval = TRUE;
+					break;
+				}
 			/*:::近接武器のときダイスブーストのチャンス　そうでないとき耐性を得る*/
+			//v2.0.16 矢などもダイスブーストする
 			case 3: case 4:
 
-				if (one_in_(2) && object_is_melee_weapon(o_ptr))
+				if (one_in_(2) && object_is_melee_weapon(o_ptr) || object_is_ammo(o_ptr))
 				{
 					if (a_cursed && !one_in_(13)) break;
 					if (one_in_(13))
@@ -2511,9 +2520,22 @@ bool create_artifact(object_type *o_ptr, bool a_scroll)
 				break;
 			/*:::能力付加　維持やテレパスなど*/
 			case 5:
-				random_misc(o_ptr);
+				//矢玉は低確率でダメージブースト
+				//random_misc()でのブースト処理のみを雑に反映したもの
+				if (object_is_ammo(o_ptr))
+				{
+					if (one_in_(7))
+					{
+						o_ptr->to_h += 4 + randint1(11);
+						o_ptr->to_d += 4 + randint1(11);
+					}
+				}
+				else
+				{
+					random_misc(o_ptr);
+				}
 				break;
-			///mod131229 武器にスレイが付きやすく、防具に能力が付きやすくした
+				///mod131229 武器にスレイが付きやすく、防具に能力が付きやすくした
 			case 6:
 				if(object_is_weapon_ammo(o_ptr)) random_slay(o_ptr);
 				else random_misc(o_ptr);
@@ -2700,7 +2722,8 @@ bool create_artifact(object_type *o_ptr, bool a_scroll)
 
 	/*:::発動能力付加　武器1/3,防具1/6　矢にもつくのか？*/
 	///mod160504 銃にはつかないようにする
-	if (!a_cursed && o_ptr->tval != TV_GUN &&
+	//v2.0.16 矢にもつかないようにする
+	if (!a_cursed && o_ptr->tval != TV_GUN && !object_is_ammo(o_ptr) &&
 	    one_in_(object_is_armour(o_ptr) ? ACTIVATION_CHANCE * 2 : ACTIVATION_CHANCE))
 	{
 		o_ptr->xtra2 = 0;

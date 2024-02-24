@@ -2111,8 +2111,10 @@ static void wiz_quantity_item(object_type *o_ptr)
 	char        tmp_val[100];
 
 
-	/* Never duplicate artifacts */
-	if (object_is_artifact(o_ptr)) return;
+	//v2.0.16 矢、ボルト、針のランダムアーティファクトは個数を変えられるようにする
+	if (object_is_fixed_artifact(o_ptr)) return;
+	if (object_is_artifact(o_ptr) && !object_is_needle_arrow_bolt(o_ptr)) return;
+
 
 	/* Store old quantity. -LM- */
 	tmp_qnt = o_ptr->number;

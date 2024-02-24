@@ -11517,6 +11517,7 @@ static bool make_nemuno_sanctuary_aux2(byte y, byte x)
 }
 
 //v1.1.35 ネムノが縄張りを作る。lite_room()を参考にした。
+//v2.0.16 「縄張り」を「聖域」に変えた。外來韋編での記述より。
 void make_nemuno_sanctuary(void)
 {
 	bool flag_success = TRUE;
@@ -11533,7 +11534,7 @@ void make_nemuno_sanctuary(void)
 
 	if(!(cave[py][px].info & CAVE_ROOM))
 	{
-		msg_print(_("部屋でない場所を縄張りにすることはできない。",
+		msg_print(_("部屋でない場所を聖域にすることはできない。",
                     "You cannot set up a sanctuary outside of a room."));
 		return;
 	}
@@ -11586,12 +11587,12 @@ void make_nemuno_sanctuary(void)
 
 	if(!flag_success)
 	{
-		msg_print(_("この部屋には敵対的な気配がする！ここを縄張りにすることはできない。",
+		msg_print(_("この部屋には敵対的な気配がする！ここを聖域にすることはできない。",
                     "There's a hostile presence in this room! You cannot set up a sanctuary here."));
 	}
 	else if(temp_n < 4)
 	{
-		msg_print(_("ここは狭すぎて縄張りに向かない。",
+		msg_print(_("ここは狭すぎて聖域にできない。",
                     "There's too little space here."));
 	}
 	else
@@ -11608,7 +11609,7 @@ void make_nemuno_sanctuary(void)
 			lite_spot(y,x);
 		}
 
-		msg_print(_("あなたはこの部屋を新たな縄張りにした！",
+		msg_print(_("あなたはこの部屋を不可侵の聖域に定めた！",
                     "You set up a new sanctuary in this room!"));
 		p_ptr->update |= (PU_BONUS | PU_HP);
 
@@ -11656,11 +11657,11 @@ void erase_nemuno_sanctuary(bool force,bool redraw)
 	{
 		if(force)
 		{
-			msg_print(_("縄張りを奪われてしまった！", "Your sanctuary got seized!"));
+			msg_print(_("聖域を奪われてしまった！", "Your sanctuary got seized!"));
 		}
 		else
 		{
-			msg_print(_("あなたは古い縄張りを放棄した。", "You have discarded an old sanctuary."));
+			msg_print(_("あなたは古い聖域を放棄した。", "You have discarded an old sanctuary."));
 		}
 	}
 	//v1.1.54 ネムノ召喚阻害特技の解除

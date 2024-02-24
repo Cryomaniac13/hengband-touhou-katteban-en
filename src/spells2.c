@@ -5992,7 +5992,7 @@ bool destroy_area(int y1, int x1, int r, bool in_generate, bool force_floor, boo
 			//v1.1.35 ƒlƒ€ƒm“ê’£‚èÁ‹Ž
 			if(player_bold(y, x) && IS_NEMUNO_IN_SANCTUARY )
 			{
-				msg_print(_("‚ ‚È‚½‚Ì“ê’£‚è‚ª”j‰ó‚³‚ê‚½I", "Your sanctuary is destroyed!"));
+				msg_print(_("¹ˆæ‚ªN‚³‚ê‚½I", "Your sanctuary is destroyed!"));
 				p_ptr->update |= (PU_BONUS|PU_HP);
 				p_ptr->redraw |= (PR_STATUS);
 				p_ptr->special_defense &= ~(SD_UNIQUE_CLASS_POWER);

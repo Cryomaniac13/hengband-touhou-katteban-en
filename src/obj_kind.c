@@ -296,8 +296,6 @@ bool object_is_weapon_ammo(object_type *o_ptr)
  * Check if an object is ammo
  */
 ///item TVAL関連処理
-///mod131223
-///mod150805 MAGICWEAPONも含めた
 bool object_is_ammo(object_type *o_ptr)
 {
 	if (TV_MISSILE_BEGIN <= o_ptr->tval && o_ptr->tval <= TV_MISSILE_END) return TRUE;
@@ -338,6 +336,17 @@ bool object_is_weapon_armour_ammo(object_type *o_ptr)
 
 	return FALSE;
 }
+
+//v2.0.16 針と矢とボルト　☆として複数個数生成可能にする
+bool object_is_needle_arrow_bolt(object_type *o_ptr)
+{
+	if (o_ptr->tval == TV_ARROW) return TRUE;
+	if (o_ptr->tval == TV_BOLT) return TRUE;
+	if (o_ptr->tval == TV_OTHERWEAPON && o_ptr->sval == SV_OTHERWEAPON_NEEDLE) return TRUE;
+
+	return FALSE;
+}
+
 
 
 /*

@@ -5818,8 +5818,10 @@ void do_cmd_fire_aux(int item, object_type *j_ptr)
 				{
 					char m_name[80];
 					monster_desc(m_name, m_ptr, 0);
+
 					/* STICK TO */
-					/*:::アーティファクトの矢は刺さる*/
+					//v2.0.16 矢が刺さる処理をなくす
+					/*
 					if (object_is_fixed_artifact(q_ptr))
 					{
 
@@ -5830,6 +5832,7 @@ void do_cmd_fire_aux(int item, object_type *j_ptr)
 						msg_format("%^s have stuck into %s!",o_name, m_name);
 #endif
 					}
+                    */
 
 					/* Message */
 					message_pain(c_ptr->m_idx, tdam);
@@ -5846,6 +5849,34 @@ void do_cmd_fire_aux(int item, object_type *j_ptr)
 							msg_format(_("%^sは混乱したようだ。", "%^s is confused."), m_name);
 							(void)set_monster_confused(c_ptr->m_idx, MON_CONFUSED(m_ptr) + 10 + randint0(p_ptr->lev) / 5);
 						}
+
+						//v2.0.16 地震が付いてたら朦朧 耐性があっても確率で
+						if (have_flag(flgs, TR_IMPACT) && (!(r_ptr->flags3 & RF3_NO_STUN) || (randint0(p_ptr->lev) > randint0(r_ptr->level))))
+						{
+							msg_format(_("%^sは朦朧とした。", "%^s is stunned."), m_name);
+							(void)set_monster_stunned(c_ptr->m_idx, MON_STUNNED(m_ptr) + 10 + randint0(p_ptr->lev) / 5);
+						}
+						//v2.0.16 吸血
+						if (have_flag(flgs, TR_VAMPIRIC) && monster_living(r_ptr) && tdam > 5)
+						{
+							int drain_heal = damroll(2, tdam / 6);
+
+							if (p_ptr->wizard) msg_format("drain:%d", drain_heal);
+							hp_player(drain_heal);
+
+						}
+						//v2.0.16 祝福　破邪弱点モンスターの魔法力低下
+						if (have_flag(flgs, TR_BLESSED) && (r_ptr->flagsr & RFR_HURT_HOLY))
+						{
+							if (p_ptr->lev > randint0(r_ptr->level * ((r_ptr->flags1 & RF1_UNIQUE) ? 2 : 1)))
+							{
+								if (set_monster_timed_status_add(MTIMED2_DEC_MAG, c_ptr->m_idx, MON_DEC_MAG(m_ptr) + 8 + randint1(8)))
+									msg_format(_("%^sは魔法力が下がったようだ。", "%^s has lost some magic power."), m_name);
+							}
+						}
+
+
+
 					}
 
 					/* Take note */
@@ -5936,7 +5967,7 @@ void do_cmd_fire_aux(int item, object_type *j_ptr)
 	/*:::矢玉の破壊率計算*/
 	j = (hit_body ? breakage_chance(q_ptr) : 0);
 
-	if (stick_to)
+	if (stick_to) //v2.0.16 ★矢を刺さらなくしたのでここに入ることはもうない
 	{
 		int m_idx = cave[y][x].m_idx;
 		monster_type *m_ptr = &m_list[m_idx];

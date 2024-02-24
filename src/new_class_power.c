@@ -65,8 +65,8 @@ class_power_type class_power_hisami[] =
     "Pick a monster in your field of view with higher level than your, and you will be able to continuously sense that monster's presence. You cannot pick another target while that monster remains on this level. If you use this on a monster you're already stalking, you'll gain information about it.")},
 
 	{ 27,0,50,FALSE,FALSE,A_CHR,0,0,_("キャッチ", "Catch"),
-	_("隣接するアンデッド一体をフロアから追放する。追放した敵のレベルに応じた金が手に入るが、プレイヤーの魅力・モンスターとのレベル差・モンスターの残り体力によっては減額されたりマイナスになることがある。クエストダンジョンでは使えない。配下とユニークモンスターには効果がない。",
-    "Banishes an adjacent undead monster from the level. You get money depending on the banished enemy's level, but depending on your charisma, difference between your and monster's levels, and that monster's remaining health, you might lose money as well. Cannot be used in quests. Not effective against followers or unique monsters.")},
+	_("隣接するアンデッド一体をフロアから追放する。追放した敵のレベルに応じてMPが回復するが、プレイヤーの魅力・モンスターとのレベル差・モンスターの残り体力によっては量が減ったり交渉失敗することがある。クエストダンジョンでは使えない。配下とユニークモンスターには効果がない。",
+    "Banishes an adjacent undead monster from the level. You get MP depending on the banished enemy's level, but depending on your charisma, difference between your and monster's levels, and that monster's remaining health, that amount might get reduced, and your negotiations can fail. Cannot be used in quests. Not effective against followers or unique monsters.")},
 
 	{ 35,40,70,FALSE,FALSE,A_DEX,0,0,_("ストーキングⅡ", "Stalking II"),
 	_("ストーキング中のモンスターの近くにテレポートする。テレポート無効地形や反テレポートバリアなどを無視するが、その場合プレイヤーは1d100のダメージを受ける。",
@@ -267,9 +267,10 @@ cptr do_cmd_class_power_aux_hisami(int num, bool only_info)
 		x = px + ddx[dir];
 		m_ptr = &m_list[cave[y][x].m_idx];
 
+		//v2.0.16 外來韋編によるとボーナスは金じゃないらしいのでMPに変える
 		if (cave[y][x].m_idx && (m_ptr->ml))
 		{
-			int gain_money;
+			int gain_mana;
 			int bonus_line;
 			int mult;
 
@@ -302,40 +303,46 @@ cptr do_cmd_class_power_aux_hisami(int num, bool only_info)
 			}
 
 			//基本報酬
-			gain_money = r_ptr->level * r_ptr->level * r_ptr->level / 4;
-			if (gain_money < 100) gain_money = 100;
+			gain_mana = r_ptr->level * r_ptr->level / 10;
+			if (gain_mana < 10) gain_mana = 10;
 			//増殖するモンスターは大幅に減らす
-			if (r_ptr->flags2 & RF2_MULTIPLY) gain_money /= 10;
+			if (r_ptr->flags2 & RF2_MULTIPLY) gain_mana /= 10;
 
 			//報酬が満額出る敵HP(%) 基本25%からレベル差と魅力補正値で変動し最低10%
 			bonus_line = 25 - r_ptr->level + p_ptr->lev + chr_adj;
 			if (bonus_line < 10) bonus_line = 10;
 
-			//敵の現在HPが満額ラインから1%高くなるごとに報酬が2%減っていく。マイナスになることもある
+			//敵の現在HPが満額ラインから1%高くなるごとに報酬が2%減っていく
 			//lev50chr40でlev55HP100%の敵にプラマイゼロ
 			//lev50chr50でlev75まで行ける
 			mult = 100 - (m_ptr->hp * 100 / m_ptr->max_maxhp - bonus_line) * 2;
 			if (mult > 100) mult = 100;
 
-			//multが0以下なら続けるか確認する
-			if (mult<0 && !get_check_strict(_("交渉の旗色が悪い。続けますか？", "Negotiations aren't going well. Continue?"), CHECK_DEFAULT_Y)) return "";
+			//multが0以下なら続けるか確認する→交渉失敗
+			//if (mult<0 && !get_check_strict("交渉の旗色が悪い。続けますか？", CHECK_DEFAULT_Y)) return "";
+			if (mult <= 0)
+			{
+				msg_format(_("条件が折り合わない。%sとの交渉に失敗した。", "You couldn't agree to acceptable terms. Negotiations with %s failed."), m_name);
+				break;
+			}
 
 			msg_format(_("あなたは%sを地獄へご案内した！", "You lead %s into Hell!"), m_name);
 
-			if (mult > 50) msg_print(_("ボーナスが出た！", "You gain a bonus!"));
-			else if (mult >= 0) msg_print(_("しかしボーナスの大部分を分け前として渡すことになった。", "You had to give them a good portion of your bonus money."));
-			else msg_print(_("ボーナスを全て渡しても足りず自腹を切る羽目になった...", "You gave them all of your bonus money, but that wasn't enough, and you had to pay out of your own wallet..."));
+			if (mult > 50)
+                msg_print(_("ボーナスが出た！", "You gain a bonus!"));
+			else if (mult >= 0)
+                msg_print(_("しかしボーナスの大部分を分け前として渡すことになった。", "You had to give them a good portion of your bonus money."));
 
 			//モンスター消滅
 			check_quest_completion(m_ptr);
 			delete_monster_idx(cave[y][x].m_idx);
 
-			if (mult >= 0) msg_format(_("$%dを受け取った。", "You receive $%d."),gain_money * mult / 100);
-			else msg_format(_("$%dを失った。", "You lose $%d."), gain_money * mult / 100 * -1);
+			gain_mana = gain_mana * mult / 100;
+			if (gain_mana < 1) gain_mana = 1;
 
-			p_ptr->au += gain_money * mult / 100;
-			if (p_ptr->au < 0) p_ptr->au = 0; //借金にはならないようにしとく。別にやってもゲーム上問題はないんだが
-			p_ptr->redraw |= PR_GOLD;
+			msg_format(_("%dの魔力を得た。", "You gain %d mana."), gain_mana);
+
+			player_gain_mana(gain_mana);
 
 		}
 		else
@@ -9901,11 +9908,11 @@ class_power_type class_power_nemuno[] =
         "Prepares some food.")},
 
 	{15,30,30,TRUE,FALSE,A_CHR,0,20,_("聖域作成Ⅰ", "Create Sanctuary I"),
-		_("誰もいない部屋を「縄張り」にする。縄張りの中では能力が大幅に上昇し、恐怖耐性、麻痺耐性、急回復を得る。また縄張りに入ってきたモンスターを常に感知する。縄張りから離れている間に他のモンスターが縄張りに入ると縄張りを奪われることがある。",
+		_("誰もいない部屋を「聖域」にする。聖域の中では能力が大幅に上昇し、恐怖耐性、麻痺耐性、急回復を得る。また聖域に入ってきたモンスターを常に感知する。聖域から離れている間に他のモンスターが聖域に入るとそこが聖域でなくなることがある。",
         "Makes a room with nobody else in it your 'sanctuary'. While inside, your stats are greatly raised, and you gain resistance to fear, free action and regeneration. You always are able to sense monsters entering your sanctuary. Your sanctuary might be broken if another monster enters it while you're not there.")},
 
 	{20,30,40,FALSE,TRUE,A_WIS,0,0,_("囚われの秋雨", "Imprisoning Autumn Rain"),
-		_("縄張りの中全てに低威力の遅鈍属性攻撃を行う。",
+		_("聖域の中全てに低威力の遅鈍属性攻撃を行う。",
         "Hits everything in your sanctuary with a low power inertia attack.")},
 
 	{25,25,50,FALSE,FALSE,A_STR,0,0,_("山姥の包丁研ぎ", "Yamanba's Kitchen Knife Sharpening"),
@@ -9921,15 +9928,15 @@ class_power_type class_power_nemuno[] =
     "Hits an adjacent monsters with double the usual amount of melee attacks. Disenchants your weapon after you finish attacking. Requires wielding an edged weapon.")},
 
 	{37,47,70,FALSE,TRUE,A_WIS,0,10,_("呪われた柴榑雨", "Cursed Torrential Rain"),
-		_("縄張りの中全てに強力な水属性攻撃を行う。",
+		_("聖域の中全てに強力な水属性攻撃を行う。",
         "Hits everything in your sanctuary with a powerful water attack.")},
 
 	{40,30,70,FALSE,TRUE,A_INT,0,0,_("窮僻の山姥", "Deeply-Secluded Yamanba"),
-		_("縄張りの中で敵が使う召喚魔法を高確率で阻害する。縄張りから出るか縄張りが効力を失うと効果が切れる。",
+		_("聖域の中で敵が使う召喚魔法を高確率で阻害する。聖域から出るか聖域が効力を失うと効果が切れる。",
         "Prevents enemies in your sanctuary from using summoning spells with high probability rate. Effect ends if you leave your sanctuary or if your sanctuary disappears.")},
 
 	{43,60,80,FALSE,FALSE,A_STR,0,0,_("マウンテンマーダー", "Mountain Murder"),
-		_("周囲の広範囲のモンスターに対して無差別攻撃を行う。対象との距離によって攻撃回数が増減する。縄張り内にいるとき攻撃回数がさらに増える。この攻撃ではオーラダメージを受けない。",
+		_("周囲の広範囲のモンスターに対して無差別攻撃を行う。対象との距離によって攻撃回数が増減する。聖域内にいるとき攻撃回数がさらに増える。この攻撃ではオーラダメージを受けない。",
         "Performs indiscriminate melee attacks against nearby monsters. Amount of blows depends on distance from the target, and is further increased if you're inside your sanctuary. You don't receive aura damage from these attacks.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
@@ -9960,12 +9967,12 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 
 			if (IS_NEMUNO_IN_SANCTUARY)
 			{
-				msg_print(_("ここはすでにあなたの縄張りだ。", "This already is your sanctuary."));
+				msg_print(_("ここはすでに聖域だ。", "This already is your sanctuary."));
 				return NULL;
 			}
 			if (!(cave[py][px].info & CAVE_ROOM))
 			{
-				msg_print(_("部屋でない場所を縄張りにすることはできない。", "You have to be in a room to set up a sanctuary."));
+				msg_print(_("部屋でない場所を聖域にすることはできない。", "You have to be in a room to set up a sanctuary."));
 				return NULL;
 			}
 			make_nemuno_sanctuary();
@@ -10067,7 +10074,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 
 		if (!IS_NEMUNO_IN_SANCTUARY)
 		{
-			msg_print(_("縄張りの中でないと使えない。", "You have to be in your sanctuary to use this ability."));
+			msg_print(_("聖域の中でないと使えない。", "You have to be in your sanctuary to use this ability."));
 			return NULL;
 		}
 
@@ -37310,7 +37317,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 		if (!IS_NEMUNO_IN_SANCTUARY && (skillnum == 2 || skillnum == 6 || skillnum == 7))
 		{
 #ifdef JP
-			my_strcpy(errmsg, "この特技は縄張りの中にいないと使えない。", 150);
+			my_strcpy(errmsg, "この特技は聖域の中にいないと使えない。", 150);
 #else
             my_strcpy(errmsg, "You cannot use this ability outside of sanctuary.", 150);
 #endif

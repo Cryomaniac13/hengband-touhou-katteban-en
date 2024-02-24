@@ -1553,10 +1553,17 @@ s32b object_value_real(object_type *o_ptr)
 	}
 
 	//「針」は価格1/10
-	if(o_ptr->tval == TV_OTHERWEAPON && o_ptr->sval == SV_OTHERWEAPON_NEEDLE && !object_is_artifact(o_ptr))
+	//v2.0.16 ☆も1/10のままにする
+	if(o_ptr->tval == TV_OTHERWEAPON && o_ptr->sval == SV_OTHERWEAPON_NEEDLE )
 	{
 		value /= 10;
 		if(value < k_info[o_ptr->k_idx].cost) value = k_info[o_ptr->k_idx].cost;
+	}
+	//v2.0.16 矢の☆も1/10にする
+	else if (object_is_needle_arrow_bolt(o_ptr) && object_is_artifact(o_ptr))
+	{
+		value /= 10;
+		if (value < k_info[o_ptr->k_idx].cost) value = k_info[o_ptr->k_idx].cost;
 	}
 
 
@@ -1987,9 +1994,6 @@ int object_similar_part(object_type *o_ptr, object_type *j_ptr)
 			/* Require identical "pval" code */
 			if (o_ptr->pval != j_ptr->pval) return 0;
 
-			/* Artifacts never stack */
-			if (object_is_artifact(o_ptr) || object_is_artifact(j_ptr)) return 0;
-
 			/* Require identical "ego-item" names */
 			if (o_ptr->name2 != j_ptr->name2) return 0;
 
@@ -2015,6 +2019,16 @@ int object_similar_part(object_type *o_ptr, object_type *j_ptr)
 			if (o_ptr->ac != j_ptr->ac) return 0;
 			if (o_ptr->dd != j_ptr->dd) return 0;
 			if (o_ptr->ds != j_ptr->ds) return 0;
+
+
+			if (object_is_artifact(o_ptr) || object_is_artifact(j_ptr))
+			{
+				if (!object_is_needle_arrow_bolt(o_ptr)) return 0;
+				if (object_is_fixed_artifact(o_ptr) || object_is_fixed_artifact(j_ptr))	return 0;
+
+				//☆名が同じなら同一視する。アイテムフラグと殺戮値も他でチェックされるので多分衝突はないだろう
+				if (o_ptr->art_name != j_ptr->art_name) return 0;
+			}
 
 			/* Probably okay */
 			break;
@@ -3159,7 +3173,13 @@ static void a_m_aux_1(object_type *o_ptr, int level, int power)
 			/* Very good */
 			if (power > 1)
 			{
-				if (power > 2) /* power > 2 is debug only */
+				int chance = 25 - level / 12;
+
+				///mod150205 ★禁止オプションのときは☆が出やすくしてみる
+				if (ironman_no_fixed_art) chance = chance * 2 / 3;
+				if (EXTRA_MODE) chance = chance * 3 / 4;
+
+				if (one_in_(chance) || (power > 2)) /* power > 2 is debug only */
 				{
 					create_artifact(o_ptr, FALSE);
 					break;
@@ -3167,15 +3187,6 @@ static void a_m_aux_1(object_type *o_ptr, int level, int power)
 
 				o_ptr->name2 = get_random_ego(INVEN_EGO_AMMO, TRUE);
 
-				//殺戮の矢玉削除
-				/*
-				switch (o_ptr->name2)
-				{
-				case EGO_SLAYING_BOLT:
-					o_ptr->dd++;
-					break;
-				}
-				*/
 				/* Hack -- super-charge the damage dice */
 				while (one_in_(10L * o_ptr->dd * o_ptr->ds)) o_ptr->dd++;
 
@@ -5993,8 +6004,8 @@ bool make_object(object_type *j_ptr, u32b mode)
 	/* Apply magic (allow artifacts) */
 	apply_magic(j_ptr, object_level, mode);
 
-	/* Hack -- generate multiple spikes/missiles */
-	///item tval
+	//v2.0.16 矢と針はランダムアーティファクトでも複数生成されることにした
+	/*
 	switch (j_ptr->tval)
 	{
 		case TV_BULLET:
@@ -6012,14 +6023,24 @@ bool make_object(object_type *j_ptr, u32b mode)
 		}
 	}
 	///mod160205 「針」の個数処理
-	if(j_ptr->tval == TV_OTHERWEAPON && j_ptr->sval == SV_OTHERWEAPON_NEEDLE && !object_is_artifact(j_ptr))
+	if (j_ptr->tval == TV_OTHERWEAPON && j_ptr->sval == SV_OTHERWEAPON_NEEDLE && !object_is_artifact(j_ptr))
 	{
 		//v1.1.62 EXTRAモードで個数増加
-		if(EXTRA_MODE)
+		if (EXTRA_MODE)
 			j_ptr->number = 16 + (byte)damroll(4, 6);
 		else
 			j_ptr->number = 8 + (byte)damroll(2, 6);
 	}
+	*/
+
+	if (object_is_needle_arrow_bolt(j_ptr) && !object_is_fixed_artifact(j_ptr))
+	{
+		if (EXTRA_MODE)
+			j_ptr->number = 24 + (byte)damroll(6, 7);
+		else
+			j_ptr->number = (byte)damroll(6, 7);
+	}
+
 
 	//Extraモードで消耗品の一部が複数生成される
 	//v1.1.20 少し数減らす
@@ -10127,7 +10148,8 @@ static void drain_essence(void)
 		drain_value[i] *= o_ptr->number;
 		drain_value[i] = drain_value[i] * dec / 4;
 		drain_value[i] = MAX(drain_value[i], 0);
-		if ((o_ptr->tval >= TV_BULLET) && (o_ptr->tval <= TV_BOLT)) drain_value[i] /= 10;
+//		if ((o_ptr->tval >= TV_BULLET) && (o_ptr->tval <= TV_BOLT)) drain_value[i] /= 10;
+		if(object_is_needle_arrow_bolt(o_ptr)) drain_value[i] /= 10;
 		if (drain_value[i])
 		{
 			observe = TRUE;

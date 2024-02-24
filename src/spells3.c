@@ -2997,11 +2997,12 @@ bool artifact_scroll(void)
 		if (o_ptr->number > 1)
 		{
 #ifdef JP
-			msg_print("複数のアイテムに魔法をかけるだけのエネルギーはありません！");
-			msg_format("%d 個の%sが壊れた！",(o_ptr->number)-1, o_name);
+			//矢や針を複数生成できることにしたがそれに関して整合を取るのが面倒なのでこのメッセージを消す
+	//		msg_print("複数のアイテムに魔法をかけるだけのエネルギーはありません！");
+	//		msg_format("%d 個の%sが壊れた！",(o_ptr->number)-1, o_name);
 #else
-			msg_print("Not enough enough energy to enchant more than one object!");
-			msg_format("%d of your %s %s destroyed!",(o_ptr->number)-1, o_name, (o_ptr->number>2?"were":"was"));
+			//msg_print("Not enough enough energy to enchant more than one object!");
+			//msg_format("%d of your %s %s destroyed!",(o_ptr->number)-1, o_name, (o_ptr->number>2?"were":"was"));
 #endif
 
 			if (item >= 0)
@@ -3014,6 +3015,17 @@ bool artifact_scroll(void)
 			}
 		}
 		okay = create_artifact(o_ptr, TRUE);
+
+		//v2.0.16 矢や針の個数変更
+		//create_artifact()内でやると少々動作が怪しいのでここで行う
+		if (object_is_needle_arrow_bolt(o_ptr))
+		{
+			o_ptr->number = 15 + randint1(5);
+			if(one_in_(4)) o_ptr->number += 5 + randint1(5);
+			if(one_in_(7)) o_ptr->number += 5 + randint1(5);
+			if(weird_luck()) o_ptr->number += 5 + randint1(5);
+		}
+
 	}
 
 	/* Failure */

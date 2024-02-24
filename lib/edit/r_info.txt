@@ -27136,5 +27136,19 @@ S:1_IN_3 |
 S:DANMAKU | TELE_AWAY | HEAL | COSMIC_HORROR | BA_LITE | BA_DARK | BA_CHAO | BA_HOLY | BA_DISTORTION | BRAIN_SMASH | TPORT | S_MONSTERS | HELLFIRE
 D:（説明文未作成）
 
+N:1390:イタコAI
+E:Itako-AI
+G:p:D
+I:120:1d10:20:0:0
+W:1:1:0:10:0:0
+F:FEMALE | FORCE_MAXHP | QUANTUM | NEVER_BLOW | RAND_50 | WILD_ALL
+F:NO_STUN | NO_SLEEP | NO_CONF | NO_FEAR
+F:CAN_FLY | 
+F:RES_TIME | RES_TELE
+D:$An information gathering AI sent from the Outside World.
+D:外界から送り込まれた情報収集用AIだ。これはすでに情報収集を済ませた残滓のようだ。
+
+
+
 
 ###注意：モンスターを追加したときdefines.hのMON_IDX_MAXを増やさないと音楽再生でバグる###
