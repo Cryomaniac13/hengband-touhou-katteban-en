@@ -698,7 +698,7 @@ errr top_twenty(void)
 	sprintf(the_score.uid, "%7u", player_uid);
 	sprintf(the_score.sex, "%c", (p_ptr->psex ? 'm' : 'f'));
 	sprintf(the_score.p_r, "%2d", p_ptr->prace);
-	sprintf(the_score.p_c, "%2d", p_ptr->pclass);
+	sprintf(the_score.p_c, "%3d", p_ptr->pclass);
 	sprintf(the_score.p_a, "%2d", p_ptr->pseikaku);
 
 	/* Save the level and such */
