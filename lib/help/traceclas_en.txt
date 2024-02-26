@@ -2811,7 +2811,7 @@ Other:
   Always fails to use scrolls/staves/wands/rods or activate items
     (some classes have exceptions)
   Spells are more powerful, but their failure rate has a lower limit, and
-   failing to cast a spell might destroy the spellbook
+   failing to cast a spell might cause bad things to happen
   Has 'Recall' as racial power
   Cannot use item cards in Extra mode
   Cannot push past friendly/follower monsters, attacks them instead
