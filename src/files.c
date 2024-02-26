@@ -12065,7 +12065,8 @@ void close_game(void)
 
 
 	/* Build the filename */
-	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 	/* Grab permissions */
 	safe_setuid_grab();

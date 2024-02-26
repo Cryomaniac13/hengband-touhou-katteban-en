@@ -2007,7 +2007,11 @@ struct high_score
 
 	char sex[2];		/* Player Sex (string) */
 	char p_r[3];		/* Player Race (number) */
+#ifdef FIX_SCORES_FORMAT
+	char p_c[4];		/* Player Class (number) */
+#else
 	char p_c[3];		/* Player Class (number) */
+#endif
 	char p_a[3];		/* Player Seikaku (number) */
 
 	char cur_lev[4];		/* Current Player Level (number) */

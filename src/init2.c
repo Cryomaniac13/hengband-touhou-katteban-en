@@ -2419,7 +2419,8 @@ void init_angband(void)
 	/*** Verify (or create) the "high score" file ***/
 
 	/* Build the filename */
-	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 	/* Attempt to open the high score file */
 	fd = fd_open(buf, O_RDONLY);

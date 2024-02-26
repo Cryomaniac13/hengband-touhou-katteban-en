@@ -550,7 +550,8 @@ void display_scores(int from, int to)
 	char buf[1024];
 
 	/* Build the filename */
-	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 	/* Open the binary high score file, for reading */
 	highscore_fd = fd_open(buf, O_RDONLY);
@@ -886,7 +887,8 @@ void show_highclass(void)
 	screen_save();
 
 	/* Build the filename */
-	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 	highscore_fd = fd_open(buf, O_RDONLY);
 
@@ -981,7 +983,8 @@ sprintf(tmp_str,"ç≈çÇÇÃ%s", race_info[race_num].title);
 	prt(tmp_str, 5, 15);
 
 	/* Build the filename */
-	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+	path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 	highscore_fd = fd_open(buf, O_RDONLY);
 

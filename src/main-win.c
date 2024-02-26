@@ -4514,7 +4514,8 @@ static void process_menus(WORD wCmd)
 			char buf[1024];
 
 			/* Build the filename */
-			path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+			//path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, "scores.raw");
+			path_build(buf, sizeof(buf), ANGBAND_DIR_APEX, SCORES_RAW_FILE);
 
 			/* Open the binary high score file, for reading */
 			highscore_fd = fd_open(buf, O_RDONLY);

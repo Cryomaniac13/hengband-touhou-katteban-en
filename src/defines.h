@@ -8854,3 +8854,9 @@ extern int PlayerUID;@
 #define CHECK_CHIMATA_HAVE_CARD(CARD_IDX) (p_ptr->pclass == CLASS_CHIMATA ? (p_ptr->magic_num2[(CARD_IDX)]) : 0)
 
 
+#define SCORES_RAW_FILE "scores.raw"
+/*#ifdef FIX_SCORES_FORMAT
+#define SCORES_RAW_FILE "scores_fix.raw"
+#else
+#define SCORES_RAW_FILE "scores.raw"
+#endif*/
