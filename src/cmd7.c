@@ -10934,7 +10934,7 @@ bool gain_soldier_skill(void)
 			else
 			{
 				if(j == SOLDIER_SKILL_NUM_MAX)
-					sprintf(buf,_("  %c) %s(2ポイント必要)", " %c) %s (req 2 points)"),('a' + i), soldier_skill_table[i][j].name);
+					sprintf(buf,_("  %c) %s(2ポイント必要)", "  %c) %s (req 2 points)"),('a' + i), soldier_skill_table[i][j].name);
 				else
 					sprintf(buf,"  %c) %s",('a' + i), soldier_skill_table[i][j].name);
 			}
