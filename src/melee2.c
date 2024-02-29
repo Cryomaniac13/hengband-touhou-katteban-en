@@ -3488,7 +3488,7 @@ static void process_monster(int m_idx)
 			{
 			char m_name[80];
 			monster_desc(m_name, m_ptr, 0);
-			msg_format(_("%sはこのフロアから逃亡した！", "%s runs away from this floor!"),m_name);
+			msg_format(_("%sはこのフロアから逃亡した！", "%^s runs away from this floor!"),m_name);
 			delete_monster_idx(m_idx);
 			return;
 
@@ -3563,13 +3563,13 @@ static void process_monster(int m_idx)
 
 		if(smash)
 		{
-			msg_format(_("%sは束縛を振り払った！", "%s breaks free of restraints!"),m_name);
+			msg_format(_("%sは束縛を振り払った！", "%^s breaks free of restraints!"),m_name);
 			set_monster_timed_status_add(MTIMED2_NO_MOVE, m_idx, 0);
 			if (one_in_(2)) flag_never_move = FALSE;
 		}
 		else if(one_in_(7))
 		{
-			msg_format(_("%sは動けない！", "%s can't move!"), m_name);
+			msg_format(_("%sは動けない！", "%^s can't move!"), m_name);
 			return;
 
 		}
@@ -3601,7 +3601,7 @@ static void process_monster(int m_idx)
 
 		if(randint1(power) > p_ptr->lev * 2 )
 		{
-			if(see_m) msg_format(_("%sは巣を引きちぎった！", "%s tears away the webs!"),m_name);
+			if(see_m) msg_format(_("%sは巣を引きちぎった！", "%^s tears away the webs!"),m_name);
 			cave_set_feat(m_ptr->fy, m_ptr->fx, feat_floor);
 
 		}
@@ -3614,7 +3614,7 @@ static void process_monster(int m_idx)
 			flag_never_move = TRUE;
 			if(one_in_(3))
 			{
-				if(see_m) msg_format(_("%sは巣の中でもがいている。", "%s is still stuck in the webs."),m_name);
+				if(see_m) msg_format(_("%sは巣の中でもがいている。", "%^s is still stuck in the webs."),m_name);
 				return;
 			}
 		}
@@ -3660,7 +3660,7 @@ static void process_monster(int m_idx)
 			char m_name[80];
 			monster_desc(m_name, m_ptr, 0);
 			if(see_m) msg_format(_("フェムトファイバーの組紐が%sを締め上げた！",
-                                    "%s is tied up with femtofiber bonds!"),m_name);
+                                    "%^s is tied up with femtofiber bonds!"),m_name);
 			return;
 		}
 	}
@@ -3868,7 +3868,7 @@ static void process_monster(int m_idx)
 	{
 		char m_name[80];
 		monster_desc(m_name, m_ptr, 0);
-		msg_format(_("%sは消えた。", "%s disappears."), m_name);
+		msg_format(_("%sは消えた。", "%^s disappears."), m_name);
 		delete_monster_idx(m_idx);
 		return;
 
