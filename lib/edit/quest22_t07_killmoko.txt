@@ -13,7 +13,7 @@ Q:22:Q:6:0:0:0:65:1113:0:0:6
 Q:$22:T:Kaguya - 'You look pretty strong.
 Q:$22:T:Wouldn't you do something for me?
 Q:$22:T:It's simple. You just have to kill a certain someone.
-Q:$22:T:Å@
+Q:$22:T:
 Q:$22:T:Please wait.
 Q:$22:T:Don't worry, it's fine. Don't hold back, she's the kind of
 Q:$22:T:person who wouldn't die no matter how many times you kill her.
