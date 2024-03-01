@@ -17647,7 +17647,7 @@ ability_card_type ability_card_list[ABILITY_CARD_LIST_LEN] =
 	{ _("生命爆発の薬 ", "Life Explosion Elixir")			,4,118,TRUE,95,100,MON_EIRIN },
 	{ _("生命の豊穣 ", "Bumper Crop of Life")				,3,65,FALSE,0,0,MON_MINORIKO },
 	{ _("不屈の脳筋 ", "Indominable Meathead")				,3,63,FALSE,0,0,MON_SAKI },
-	{ _("半霊のスペア ", "Spare Half-Ghost")      			,2,26,FALSE,0,0,0 },
+	{ _("半霊のスペア ", "Spare Half-Ghost")      			,2,26,FALSE,0,0,MON_YOUMU },
 	{ _("静かなる輝き", "Quiet Twinkling")        			,1,17,TRUE,50,15,MON_3FAIRIES },
 	{ _("狂おしい静寂", "Lunatic Silence")       			,1,17,TRUE,50,15,MON_3FAIRIES },
 	{ _("賑やかな無力", "Exuberant Powerlessness")			,1,17,TRUE,50,15,MON_3FAIRIES },
