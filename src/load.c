@@ -67,7 +67,7 @@ void updatecharinfoL(void)
 	char tmp_Path[1024];
 	FILE *oFile;
 	path_build(tmp_Path, sizeof(tmp_Path), ANGBAND_DIR_USER, "CharOutput.txt");
-	oFile = fopen(tmp_Path, "w");
+	oFile = my_fopen(tmp_Path, "w");
 
 	fprintf(oFile, "{\n");
 	fprintf(oFile, "race: \"%s\",\n", rp_ptr->title);
