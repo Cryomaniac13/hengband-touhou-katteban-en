@@ -7338,8 +7338,8 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 #ifdef JP
 				sprintf(dummy, "%s%s%s", !p_ptr->paralyzed ? "" : p_ptr->free_act ? "’¤‘œó‘Ô‚Å" : "–ƒáƒó‘Ô‚Å", p_ptr->image ? "Œ¶Šo‚É˜c‚ñ‚¾" : "", hit_from);
 #else
-				sprintf(dummy, "%s%s%s", hit_from, !p_ptr->paralyzed ? "" : p_ptr->free_act ? "while turned into a statue" : "while paralyzed",
-                        !p_ptr->image ? "" : p_ptr->paralyzed ? "and hallucinating" : "while hallucinating");
+				sprintf(dummy, "%s%s%s", hit_from, !p_ptr->paralyzed ? "" : p_ptr->free_act ? " while turned into a statue" : " while paralyzed",
+                        !p_ptr->image ? "" : p_ptr->paralyzed ? " and hallucinating" : " while hallucinating");
 #endif
 				my_strcpy(p_ptr->died_from, dummy, sizeof p_ptr->died_from);
 			}
@@ -7392,7 +7392,7 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 				sprintf(tmp, "%s‚Å%s‚É“|‚³‚ê‚½B", buf, p_ptr->died_from);
 
 #else
-				sprintf(tmp, "killed by %s %s.", p_ptr->died_from, buf);
+				sprintf(tmp, "defeated by %s %s.", p_ptr->died_from, buf);
 #endif
 				do_cmd_write_nikki(NIKKI_BUNSHOU, 0, tmp);
 			}
