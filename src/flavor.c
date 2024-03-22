@@ -2955,7 +2955,7 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 	}
 	else if(o_ptr->tval == TV_ITEMCARD)
 	{
-		t = object_desc_str(t, format(_("『%s』", "'%s'"),support_item_list[o_ptr->pval].name));
+		t = object_desc_str(t, format(_("『%s』", " '%s'"),support_item_list[o_ptr->pval].name));
 	}
 	else if (o_ptr->tval == TV_ABILITY_CARD)
 	{
