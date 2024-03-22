@@ -1450,13 +1450,14 @@ D:火花を散らす巨大な鉞（まさかり）だ。雷神の加護を受けているといわれる。
 ##### 槍 TVAL:29#####
 
 N:131:ジャベリン
-E:& Spear~
+E:& Javelin~
 G:/:W
 I:29:1:0
 W:5:0:20:30
 A:5/1
 P:0:1d5:0:0:0
 F:SHOW_MODS | THROW
+D:$A short spear designed for throwing.
 D:投擲用の短槍だ。
 
 N:132:スピア
