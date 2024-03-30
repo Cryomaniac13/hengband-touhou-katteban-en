@@ -540,6 +540,7 @@ static void prt_stat(int stat)
 #define BAR_MIYOI_FORGOTTEN		113 //v2.0.9 ”üª‹L‰¯Á‹
 #define BAR_NO_MOVE				114 //v2.0.11 ˆÚ“®‹Ö~
 #define BAR_TRANSPORTATION_TRAP	115 //v2.0.11 ˆÚ‘—‚Ìã©
+#define BAR_VOID				116 //v2.0.17 c–³‹•–³‘€ì
 
 //‚±‚±‚Ì’l‚Í127‚ªŒ»İ‚ÌŒÀŠE‚Å‚ ‚éB(v1.1.46‚Å95‚©‚çŠg’£)
 
@@ -675,6 +676,7 @@ static struct {
 	{ TERM_BLUE, "–Y", "–Y‹p" },
 	{ TERM_RED, "”›", "ˆÚ“®‹Ö~" },
 	{ TERM_WHITE, "‘—", "ˆÚ‘—‚Ìã©" },
+	{ TERM_L_DARK, "–³", "‹•–³‚Ì—Í" },
 
 
 	{0, NULL, NULL}
@@ -805,6 +807,7 @@ static struct {
 	{ TERM_BLUE, "Amn", "Amnesia" },
 	{ TERM_RED, "Imb", "Immob" },
 	{ TERM_WHITE, "TT", "TprtTrap" },
+	{ TERM_L_DARK, "Vd", "VoidPwr" },
 
 
 	{0, NULL, NULL}
@@ -1153,6 +1156,8 @@ static void prt_status(void)
 	if (p_ptr->pclass == CLASS_YACHIE && p_ptr->magic_num1[0])
 		ADD_FLG(BAR_YACHIE_BRIBE);
 
+	if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+		ADD_FLG(BAR_VOID);
 
 
 	/* Hex spells */
@@ -6578,6 +6583,15 @@ void calc_bonuses(void)
 		if (plev > 39) p_ptr->resist_time = TRUE;
 		break;
 
+	case CLASS_ZANMU:
+		p_ptr->free_act = TRUE;
+		p_ptr->warning = TRUE;
+		p_ptr->resist_neth = TRUE;
+		p_ptr->see_inv = TRUE;
+		if (plev > 24)p_ptr->resist_conf = TRUE;
+		if (plev > 34)p_ptr->sustain_int = TRUE;
+		if (plev > 34)p_ptr->sustain_wis = TRUE;
+		break;
 
 	default:
 		break;

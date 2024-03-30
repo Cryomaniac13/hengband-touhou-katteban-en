@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 16
+#define H_VER_PATCH 17
 #define H_VER_EXTRA 1
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -2023,6 +2023,7 @@
 #define ART_MEGUMU			347
 #define ART_BITEN			348
 #define ART_ENOKO			349
+#define ART_IKKYU			350
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/

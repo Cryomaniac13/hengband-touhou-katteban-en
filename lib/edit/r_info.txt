@@ -22342,7 +22342,7 @@ S:1_IN_4 |
 S:DANMAKU | CONF | BLINK | BRAIN_SMASH | BEAM_LITE | BR_SOUN
 D: (詳細説明未実装)
 
-N:1111:月の頭脳『八意永琳』
+N:1111:月の頭脳『八意　永琳』
 E:Eirin Yagokoro, Brain of the Moon
 G:p:b
 I:125:20d250:50:160:0
@@ -22669,7 +22669,7 @@ S:FIRE_STORM | ICE_STORM | THUNDER_STORM | ACID_STORM | TOXIC_STORM | TORNADO
 D: (詳細説明未実装)
 
 
-N:1129:地獄の輪禍『火焔猫 燐』
+N:1129:地獄の輪禍『火焔猫　燐』
 #救援召喚はゾンビフェアリーや怨霊を呼ぶ
 E:Rin Kaenbyou, Hell's Traffic Accident
 G:f:D
@@ -22879,7 +22879,7 @@ S:1_IN_5 |
 S:DANMAKU | BR_SOUN
 D: (詳細説明未実装)
 
-N:1140:忠実な死体『宮古 芳香』
+N:1140:忠実な死体『宮古　芳香』
 E:Yoshika Miyako, Loyal Undead
 G:z:b
 I:110:100d16:20:30:30
@@ -23170,7 +23170,7 @@ S:1_IN_7 |
 S:DANMAKU | BR_FIRE
 D:萃香の髪から生まれた小型の分身だ。
 
-N:1156:美しき緋の衣『永江 衣玖』
+N:1156:美しき緋の衣『永江　衣玖』
 E:Iku Nagae, Beautiful Scarlet Cloth
 G:Y:w
 I:120:10d200:70:150:80
@@ -23276,7 +23276,7 @@ S:DANMAKU | BA_NETH | HOLD | HASTE | BLINK | TPORT | TELE_TO | TELE_AWAY | BA_HO
 S:BA_WATE
 D: (詳細説明未実装)
 
-N:1162:楽園の最高裁判長『四季映姫・ヤマザナドゥ 』
+N:1162:楽園の最高裁判長『四季映姫・ヤマザナドゥ』
 E:Eiki Shiki Yamaxanadu, Supreme Judge of Paradise
 G:S:b
 I:120:90d70:150:175:0
@@ -24957,7 +24957,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN | RES_TELE |
 F:STUPID
 D:テスト用の妖精だ。もしこのモンスターが通常出現したらバグなので製作者までご一報下さい。
 S:1_IN_2
-S:BA_FIRE
+S:BA_FIRE | BA_MANA | BO_MANA | BO_NETH | HELLFIRE | MISSILE | DISPEL
 
 N:1264:地獄鴉
 E:Hell raven
@@ -25720,7 +25720,7 @@ S:1_IN_4 |
 S:DANMAKU | CAUSE_2 | SCARE | HASTE
 D: (詳細説明未実装)
 
-N:1312:神仏に心酔する守護神獣『高麗野 あうん』
+N:1312:神仏に心酔する守護神獣『高麗野　あうん』
 E:Aunn Komano, The Guardian Beast Devoted to Shintoism and Buddhism
 G:k:R
 I:110:40d20:50:100:10
@@ -25736,7 +25736,7 @@ F:IM_ELEC | IM_FIRE | IM_COLD | IM_POIS | RES_LITE | RES_SOUN | RES_HOLY
 S:1_IN_4
 S:SHRIEK | DANMAKU | PUNISH_3 | BEAM_LITE
 
-N:1313:森で垂迹した魔法地蔵『矢田寺 成美』
+N:1313:森で垂迹した魔法地蔵『矢田寺　成美』
 E:Narumi Yatadera, The Magical Jizo who Manifested in the Forest
 G:h:W
 I:110:110d12:30:135:50
@@ -25754,7 +25754,7 @@ D: (詳細説明未実装)
 
 
 
-N:1314:危険すぎるバックダンサー『爾子田 里乃』
+N:1314:危険すぎるバックダンサー『爾子田　里乃』
 E:Satono Nishida, The All-Too-Dangerous Backup Dancer
 G:p:v
 I:120:160d10:50:80:0
@@ -25774,7 +25774,7 @@ S:BA_LITE | FORGET
 S:SPECIAL
 D: (詳細説明未実装)
 
-N:1315:危険すぎるバックダンサー『丁礼田 舞』
+N:1315:危険すぎるバックダンサー『丁礼田　舞』
 E:Mai Teireida, The All-Too-Dangerous Backup Dancer
 G:p:G
 I:120:160d10:50:80:0
@@ -25794,7 +25794,7 @@ S:PSY_SPEAR
 S:SPECIAL
 D: (詳細説明未実装)
 
-N:1316:究極の絶対秘神『摩多羅 隠岐奈』
+N:1316:究極の絶対秘神『摩多羅　隠岐奈』
 E:Okina Matara, The Ultimate, Absolute Secret God
 G:S:y
 I:130:72d100:100:160:0
@@ -25832,7 +25832,7 @@ D:$A huge glowing orb that moves around as it shoots bullets, it follows the wil
 D:$of its caster.
 D:巨大な光球が弾を放ちながら迫ってくる。使用者の意思に従って動いているようだ。
 
-N:1318:判読眼のビブロフィリア『本居 小鈴』
+N:1318:判読眼のビブロフィリア『本居　小鈴』
 E:Kosuzu Motoori, Bibliophile with a Deciphering Eye
 G:p:r
 I:115:120d30:50:80:0
@@ -26242,7 +26242,7 @@ S:DANMAKU | SLOW
 D: (詳細説明未実装)
 
 
-N:1343:地獄関所の番頭神『庭渡 久侘歌』
+N:1343:地獄関所の番頭神『庭渡　久侘歌』
 E:Kutaka Niwatari, Clerical God of Hell's Checkpoint
 G:B:y
 I:115:25d30:60:60:0
@@ -26267,7 +26267,7 @@ B:PUNCH:STUN:5d5
 B:STRIKE:TERRIFY:6d6
 B:WHISPER:CONFUSE:
 B:WHISPER:DR_MANA:10d20
-F:UNIQUE | FEMALE | FORCE_SLEEP | FORCE_MAXHP | ONLY_ITEM | DROP_GREAT | DROP_3D2
+F:UNIQUE | FEMALE | FORCE_SLEEP | FORCE_MAXHP | ONLY_ITEM | DROP_GOOD | DROP_GREAT | DROP_3D2
 F:SMART | OPEN_DOOR | NO_STUN | NO_CONF | NO_SLEEP | REGENERATE | UNDEAD | ANIMAL | DRAGON
 F:COLD_BLOOD | TAKE_ITEM | STAY_AT_HOME1
 F:GEN_NEUTRAL
@@ -26638,7 +26638,7 @@ D:巨大な丸太があなたに迫ってくる！押し潰される前に逃げろ！
 
 #特殊処理:尤魔のメイルシュトロムは石油地形を生成する
 #特別行動:周囲の石油地形を吸い込んで大幅に体力回復
-N:1366:無敗の剛欲同盟長『饕餮 尤魔』
+N:1366:無敗の剛欲同盟長『饕餮　尤魔』
 E:Yuuma Toutetsu, Undefeated Matriarch of the Gouyoku Alliance
 G:G:B
 I:130:60d50:30:120:20
@@ -27048,7 +27048,7 @@ D:$This spirit used to hold ownership of nearby land, but it got relinquished
 D:$through power of a certain deity, and the spirit was driven out from its land.
 D:この辺りの土地の権利を持っていた霊だ。しかしとある神の力によって所有権が無に帰し土地から追い出されてしまった。
 
-N:1385:森閑のケルベロス『三頭 慧ノ子』
+N:1385:森閑のケルベロス『三頭　慧ノ子』
 E:Enoko Mitsugashira, Cerberus of Forested Silence
 G:k:w
 I:120:45d30:60:80:50
@@ -27065,7 +27065,7 @@ S:1_IN_4 |
 S:DANMAKU | TRAPS | BR_FIRE
 D: (詳細説明未実装)
 
-N:1386:小さな聖域の大聖『孫 美天』
+N:1386:小さな聖域の大聖『孫　美天』
 E:Son Biten, Great Sage of the Small Sanctuary
 G:H:u
 I:120:16d100:50:100:50
@@ -27083,7 +27083,7 @@ S:1_IN_5 |
 S:DANMAKU | BLINK | TELE_APPROACH | S_KIN | SHOOT
 D: (詳細説明未実装)
 
-N:1387:穢れた有機物の怪物『天火人 ちやり』
+N:1387:穢れた有機物の怪物『天火人　ちやり』
 E:Chiyari Tenkajin, Monster of Tainted Organic Material
 G:Y:r
 I:120:15d110:30:100:70
@@ -27099,7 +27099,7 @@ S:1_IN_3 |
 S:DANMAKU | BA_POLLUTE | FIRE_STORM | TOXIC_STORM | CAUSE_4 | BO_NETH | BA_FIRE
 D: (詳細説明未実装)
 
-N:1388:地獄の美しきストーカー『豫母都 日狭美』
+N:1388:地獄の美しきストーカー『豫母都　日狭美』
 #特別行動:移動禁止属性ボール攻撃/テレポート追尾成功率100%
 E:Hisami Yomotsu, Beautiful Stalker of Hell
 G:Y:b
@@ -27119,7 +27119,7 @@ S:DANMAKU | BO_NETH | HOLD | TELE_TO | TELE_HI_APPROACH |
 S:SPECIAL
 D: (詳細説明未実装)
 
-N:1389:寂滅為楽の王『日白 残無』
+N:1389:寂滅為楽の王『日白　残無』
 E:Zanmu Nippaku, King of the Silent Bliss of Nirvana
 G:O:B
 I:130:80d80:70:160:30

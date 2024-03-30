@@ -4220,9 +4220,15 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 		case ACT_RESIST_ALL:
 		{
 #ifdef JP
-			msg_print("様々な色に輝いている...");
+			if (o_ptr->name1 == ART_IKKYU)
+				msg_print("全てを受け入れる境地に至った気がする...");
+			else
+				msg_print("様々な色に輝いている...");
 #else
-			msg_print("It glows many colours...");
+			if (o_ptr->name1 == ART_IKKYU)
+				msg_print("You feel as if you've reached the state when you can accept everything...");
+			else
+				msg_print("It glows many colours...");
 #endif
 			(void)set_oppose_acid(randint1(40) + 40, FALSE);
 			(void)set_oppose_elec(randint1(40) + 40, FALSE);

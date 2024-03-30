@@ -5281,6 +5281,7 @@ msg_print("守りのルーンが壊れた！");
 			else if (p_ptr->pclass == CLASS_CLOWNPIECE && m_ptr->r_idx == MON_JUNKO)  set_friendly(m_ptr);
 			else if (p_ptr->pclass == CLASS_VFS_CLOWNPIECE && m_ptr->r_idx == MON_JUNKO)  set_friendly(m_ptr);
 			else if (p_ptr->pclass == CLASS_HECATIA && (r_ptr->flags7 & RF7_FROM_HELL))  set_friendly(m_ptr);
+			else if (p_ptr->pclass == CLASS_ZANMU && (r_ptr->flags7 & RF7_FROM_HELL))  set_friendly(m_ptr);
 			else if (p_ptr->pclass == CLASS_HECATIA && m_ptr->r_idx == MON_JUNKO)  set_friendly(m_ptr);
 			else if (p_ptr->pclass == CLASS_JYOON && m_ptr->r_idx == MON_SHION_1)  set_friendly(m_ptr);
 			//v1.1.65 妖夢と瓔花は幻想郷のGシンボルと仲が良いことにしておく

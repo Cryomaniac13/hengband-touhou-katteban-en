@@ -5425,3 +5425,17 @@ D:$you're holding it.
 D:三頭慧ノ子が首にかけている宝玉だ。
 D:獣を覚醒させ妖獣にするほどの力を秘めている。
 D:しかしこれを持っているとよく強盗に襲われる気がする。
+
+N:350:一休宗純の
+E:of Ikkyuu Soujun
+I:27:4:4
+W:80:45:18:120000
+P:0:1d9:10:10:5
+F:INT | WIS | SEARCH | SAVING | EASY_SPELL
+F:FREE_ACT | RES_FEAR | RES_INSANITY | RES_NETHER | SHOW_MODS
+F:ACTIVATE
+U:RESIST_ALL
+D:とんち話で有名な一休和尚の杖だ。
+D:彼は杖の先に頭蓋骨を据え付けて正月の街を歩き命の儚さを説いて回ったという。
+D:『有漏路より　無漏路へ帰る　一休み　雨降らば降れ　風吹かば吹け』
+

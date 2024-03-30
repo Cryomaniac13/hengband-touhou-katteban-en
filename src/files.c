@@ -4089,6 +4089,21 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 39) add_flag(flgs, TR_RES_TIME);
 		break;
 
+	case CLASS_ZANMU:
+		add_flag(flgs, TR_FREE_ACT);
+		add_flag(flgs, TR_WARNING);
+		add_flag(flgs, TR_RES_NETHER);
+		add_flag(flgs, TR_SEE_INVIS);
+
+		if (p_ptr->lev > 24) add_flag(flgs, TR_RES_CONF);
+		if (p_ptr->lev > 34) add_flag(flgs, TR_SUST_INT);
+		if (p_ptr->lev > 34) add_flag(flgs, TR_SUST_WIS);
+
+
+		break;
+
+
+
 	default:
 		break; /* Do nothing */
 	}

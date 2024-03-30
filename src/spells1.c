@@ -10305,6 +10305,13 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			if (fuzzy) msg_print("You are hit by something!");
 #endif
 
+			//v2.0.17 残無虚無操作による無属性耐性
+			if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+			{
+				dam = (dam + 1) / 2;
+				msg_print(_("あなたには耐性がある！", "You resist!"));
+			}
+
 			get_damage = take_hit(DAMAGE_ATTACK, dam, killer, monspell);
 			break;
 		}
@@ -10407,11 +10414,13 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			{
 				dam = dam * 6 / (randint1(5) + 7);
 			}
-			if(p_ptr->pclass == CLASS_HECATIA)
+
+			if (p_ptr->pclass == CLASS_HECATIA || p_ptr->pclass == CLASS_ZANMU && p_ptr->lev > 39)
 			{
 				msg_print(_("あなたには耐性がある。", "You resist."));
 				dam /= 2;
 			}
+
 
 			/*
 			if (p_ptr->align > 10)
@@ -10518,14 +10527,16 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 				learn_spell(monspell);
 				break;
 			}
-			//v1.1.15
-			else if(p_ptr->pclass == CLASS_HECATIA)
+			//v1.1.15 ヘカ地獄免疫
+			//v2.0.17 残無も追加
+			else if(p_ptr->pclass == CLASS_HECATIA || (p_ptr->pclass == CLASS_ZANMU && p_ptr->lev > 29))
 			{
 				dam = 0;
 				msg_print(_("あなたには完全な耐性がある！", "You are fully immune!"));
 				learn_spell(monspell);
 				break;
 			}
+
 			else if (prace_is_(RACE_HANIWA))
 			{
 				dam = 0;
@@ -11388,6 +11399,14 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 				dam = dam * 3 / 2;
 			}
 
+			//v2.0.17 残無虚無操作による無属性耐性
+			if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+			{
+				dam = (dam + 1) / 2;
+				msg_print(_("あなたには耐性がある！", "You resist!"));
+			}
+
+
 			get_damage = take_hit(DAMAGE_ATTACK, dam, killer, monspell);
 			break;
 		}
@@ -11489,6 +11508,14 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			if (fuzzy) msg_print("You are hit by an aura of magic!");
 #endif
 
+			//v2.0.17 残無虚無操作による無属性耐性
+			if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+			{
+				dam = (dam + 1) / 2;
+				msg_print(_("あなたには耐性がある！", "You resist!"));
+			}
+
+
 			get_damage = take_hit(DAMAGE_ATTACK, dam, killer, monspell);
 			break;
 		}
@@ -11527,6 +11554,13 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			{
 				msg_print(_("あなたは幾らかの耐性を示した。", "You resist somewhat."));
 				dam = dam * 2 / 3;
+			}
+
+			//v2.0.17 残無虚無操作による無属性耐性
+			if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+			{
+				dam = (dam + 1) / 2;
+				msg_print(_("あなたには耐性がある！", "You resist!"));
 			}
 
 			get_damage = take_hit(DAMAGE_ATTACK, dam, killer, monspell);

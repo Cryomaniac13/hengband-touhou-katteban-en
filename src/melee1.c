@@ -2826,6 +2826,14 @@ msg_format("%sは体力を回復したようだ。", m_name);
 					}
 					if(process_ringo_im(GF_NETHER)) break;
 
+					//v2.0.17 残無地獄免疫　ヘカーティアも忘れてたので追加
+					if (p_ptr->pclass == CLASS_HECATIA || (p_ptr->pclass == CLASS_ZANMU && p_ptr->lev > 29))
+					{
+						msg_print(_("あなたは死の力に抵抗した。", "You resist the deathly power."));
+						break;
+					}
+
+
 					//v2.0 地獄耐性で威力減衰
 					if (p_ptr->resist_neth)
 						damage = damage * (randint1(3) + 5) / 10;

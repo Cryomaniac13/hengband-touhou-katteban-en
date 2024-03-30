@@ -685,6 +685,10 @@ static int	set_random_unique_bias_of_your_dream(void)
 		else bias_num = RUBIAS_DEMONIC;
 		break;
 
+	case CLASS_ZANMU:
+		if (one_in_(2))	bias_num = RUBIAS_NETH;
+		else bias_num = RUBIAS_HOLY;
+		break;
 
 	}
 

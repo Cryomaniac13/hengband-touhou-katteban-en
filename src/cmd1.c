@@ -4358,7 +4358,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 			if (!(cave[py][px].info & CAVE_GLOW) && m_ptr->ml && (MON_CSLEEP(m_ptr) || randint1(p_ptr->lev * 3 + (p_ptr->skill_stl + 10) * 4) > r_ptr->level * 2)) fuiuchi = TRUE;
 		}
 
-		if (o_ptr->tval == TV_KATANA && check_katana_critical(m_ptr, mode))
+		//v2.0.17 武器欄が無効のときには刀のクリティカルヒットは出ない
+		if (o_ptr->tval == TV_KATANA && !weapon_invalid && check_katana_critical(m_ptr, mode))
 		{
 			fuiuchi = TRUE;
 			flag_katana_critical = TRUE;

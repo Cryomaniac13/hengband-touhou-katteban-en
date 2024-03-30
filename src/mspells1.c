@@ -311,7 +311,7 @@ static void remove_bad_spells(int m_idx, u32b *f4p, u32b *f5p, u32b *f6p, u32b *
 
 	if (smart & (SM_RES_NETH))
 	{
-		if (prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST) || p_ptr->pclass == CLASS_HECATIA)
+		if (prace_is_(RACE_SPECTRE) || prace_is_(RACE_ANIMAL_GHOST) || p_ptr->pclass == CLASS_HECATIA || (p_ptr->pclass == CLASS_ZANMU && p_ptr->lev > 29))
 		{
 			f4 &= ~(RF4_BR_NETH);
 			f5 &= ~(RF5_BA_NETH);
@@ -2786,6 +2786,14 @@ bool make_attack_spell(int m_idx, int special_flag)
 			if (blind) msg_format("%^s mumbles powerfully.", m_name);
 			else msg_format("%^s invokes a spell to dispel magic.", m_name);
 #endif
+
+			//v2.0.17 Žc–³‹•–³‘€ì‚É‚æ‚é–³‘®«‘Ï«
+			if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
+			{
+				msg_print(_("‚ ‚È‚½‚Í–‚—ÍÁ‹Ž‚É’ïR‚µ‚½I", "You resist the dispelling!"));
+				break;
+			}
+
 			dispel_player();
 			if (p_ptr->riding) dispel_monster_status(p_ptr->riding);
 

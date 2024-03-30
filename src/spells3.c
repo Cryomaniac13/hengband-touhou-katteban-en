@@ -8469,7 +8469,7 @@ bool	check_transportation_trap(monster_type *m_ptr, int power)
 	//クエスト打倒対象には無効
 	if (r_ptr->flags1 & RF1_QUESTOR) return FALSE;
 	//夢日記やクエストダンジョンでは無効
-	if (p_ptr->inside_arena || p_ptr->inside_battle || p_ptr->inside_quest) return FALSE;
+	if (p_ptr->inside_arena || p_ptr->inside_battle || p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest)) return FALSE;
 
 	//ユニークモンスターには効きづらい
 	if (r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) power /= 2;

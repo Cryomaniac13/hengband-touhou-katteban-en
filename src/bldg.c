@@ -17277,7 +17277,8 @@ msg_print("‚±‚±‚É‚ÍƒNƒGƒXƒg‚Ì“üŒû‚Í‚È‚¢B");
 			///mod150328 ‚Ê‚¦‚Í’Kw‰c‚Ì‚Ý
 			else if(p_ptr->pclass == CLASS_NUE) enable_a = FALSE;
 			//—ì–²‚Æ‰f•P‚ÍŸr–Å‚Ì‚Ý
-			else if(p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_EIKI)
+			//v2.0.17 Žc–³‚à‘S–Å‚Ì‚Ý‚É‚µ‚Æ‚­
+			else if(p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_EIKI || p_ptr->pclass == CLASS_ZANMU)
 			{
 				 enable_a = FALSE;
 				 enable_b = FALSE;

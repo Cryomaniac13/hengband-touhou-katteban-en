@@ -47,6 +47,315 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
 
 
 
+// v2.0.17 残無専用技
+class_power_type class_power_zanmu[] =
+{
+
+	{ 5,10,25,FALSE,FALSE,A_INT,0,0,_("周辺調査", "Sense Surroundings"),
+	_("周囲のモンスターとトラップを感知する。さらにレベル20でアイテム、レベル30で地形を感知する。",
+    "Detects nearby monsters and traps. At level 20, detects objects, at level 30 maps nearby area.")},
+
+	{ 10,0,0,FALSE,FALSE,A_WIS,0,0,_("精神統一", "Concentrate Mind"),
+	_("精神を集中して魔力を回復する。",
+    "Concenctrates your mind, recovering MP.")},
+
+	{ 15,25,35,FALSE,TRUE,A_INT,0,0,_("虚無操作Ⅰ", "Void Manipulation I"),
+	_("モンスター一体を高確率でフロアから追放する。クエスト打倒対象のモンスターには効果がない。",
+    "Banishes a monster from this level with high probability. Does not affect quest targets.")},
+
+	{ 20,25,40,FALSE,FALSE,A_CHR,0,5,_("純霊弾", "Pure Spirit Shot"),
+	_("分解属性のボールを放つ。", "Fires a ball of disintegration.") },
+
+	{ 25,50,50,FALSE,FALSE,A_WIS,0,0,_("虚無操作Ⅱ", "Void Manipulation II"),
+	_("ダンジョンを「ほぼ」一瞬で作り変える。地上やクエストが進行中のフロアでは効果がない。",
+    "Recreates current dungeon level almost instantly. Does not work on surface or in quest levels.")},
+
+	{ 30,56,60,FALSE,TRUE,A_CHR,0,12,_("無心純霊弾", "Insentient Pure Spirit Shot"),
+	_("周囲のランダムなターゲットに向かって分解属性のボールを連射する。",
+    "Repeatedly fires balls of disintegration at nearby targets.") },
+
+	{ 35,80,70,FALSE,TRUE,A_INT,0,0,_("虚無操作Ⅲ", "Void Manipulation III"),
+	_("一時的に「未来予知」「レーダーセンス」を得る。",
+    "Temporarily gives effects of Foresight and Radar Sense.")},
+
+	{ 40,160,80,FALSE,TRUE,A_CHR,0,0,_("亡羊のキングダム", "Kingdom of Lost Sheep"),
+	_("周囲の広範囲のモンスターを友好的にしようと試みる。クエスト打倒対象モンスターと精神を持たないモンスターには効果がない。",
+    "Attempts to make nearby monsters friendly. Does not affect quest targets and mindless monsters.") },
+
+	{ 45,120,85,FALSE,TRUE,A_CHR,0,0,_("虚無操作Ⅳ", "Void Manipulation IV"),
+	_("一時的に無属性攻撃に対する耐性を得る。",
+    "Temporarily gives resistance to non-elemental attacks.")},
+
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+
+};
+
+cptr do_cmd_class_power_aux_zanmu(int num, bool only_info)
+{
+	int dir, dice, sides, base, damage, i;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+
+	case 0://周辺調査
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+
+		msg_print(_("あなたは周囲の情報を推測した。",
+                    "You take a guess at your surroundings."));
+
+		detect_monsters_normal(rad);
+		detect_monsters_invis(rad);
+		detect_traps(rad, TRUE);
+		if (plev > 19)
+		{
+			detect_objects_gold(rad);
+			detect_objects_normal(rad);
+		}
+		if (plev > 29)
+		{
+			map_area(rad);
+		}
+
+		break;
+	}
+
+
+
+	case 1:
+		{
+			if (only_info) return format("");
+
+			msg_print(_("精神を集中した。", "You concentrate your mind."));
+			player_gain_mana(plev / 8 + randint1(plev / 8));
+
+		}
+		break;
+
+
+	case 2://移送の罠強化版
+	{
+
+		int y, x;
+		monster_type *m_ptr;
+
+		int power = 50 + plev * 4 + chr_adj * 5;
+
+		if (only_info) return format(_str_eff_power, power);
+
+		if (p_ptr->inside_arena || p_ptr->inside_battle || p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest) || EXTRA_QUEST_FLOOR)
+		{
+			msg_print(_("ここでは使えない。", "You can't use it here."));
+			return NULL;
+		}
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                        "You have to clearly pick a target in sight."));
+			return NULL;
+		}
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (cave[y][x].m_idx && (m_ptr->ml))
+		{
+			char m_name[120];
+
+			monster_desc(m_name, m_ptr, 0);
+
+			msg_format(_("耐え難い虚無感が%sを襲った！",
+                        "An unbearable feeling of emptiness assaults %s!"), m_name);
+
+			if (check_transportation_trap(m_ptr, power))
+			{
+				msg_format(_("%sはこのフロアから消えた。", "%^s vanishes from the level."), m_name);
+
+				delete_monster_idx(cave[y][x].m_idx);
+
+				break;
+			}
+
+			msg_print(_("失敗！", "Failure!"));
+
+			if (is_friendly(m_ptr))
+			{
+				msg_format(_("%sは怒った！", "%^s gets angry!"), m_name);
+				set_hostile(m_ptr);
+			}
+
+		}
+		else
+		{
+			msg_format(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+	}
+	break;
+
+	case 3: //純霊弾
+	{
+		int rad = 2 + plev / 40;
+		int base = plev + chr_adj * 2;
+		int dice = 15 + plev / 2;
+		int sides = 7 + chr_adj / 10;
+
+		if (only_info) return format(_("半径:%d 損傷:%d+%dd%d", "rad:%d dam:%d+%dd%d"), rad, base, dice, sides);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		fire_ball(GF_DISINTEGRATE, dir, base + damroll(dice, sides), rad);
+	}
+	break;
+
+
+	case 4://即時現実変容
+	{
+		if (only_info) return "";
+
+		if (p_ptr->inside_arena || (EXTRA_MODE))
+		{
+			msg_print(_("今その特技は使えない。", "You can't use this special ability right now."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは今とは違う世界の可能性に思いを馳せた。",
+                    "You think about possible existence of a different world."));
+
+		p_ptr->alter_reality = 1;
+		p_ptr->redraw |= (PR_STATUS);
+
+	}
+	break;
+
+
+	case 5://無心純霊弾　夢想封印と似た計算にする
+	{
+		int rank = 8;
+		int rad = 1 + plev / 40 + rank / 4;
+		bool flag = FALSE;
+		int num = 3 + plev / 15 + rank / 2;
+		int dam = plev + chr_adj;
+
+		if (use_itemcard) rank = 5;
+
+		if (dam < 30) dam = 30;
+
+		if (only_info) return format(_("損傷:%d * %d", "dam: %d*%d"), dam, num);
+
+		msg_format(_("あなたの周りに幾つもの霊光が現れた・・", "Many spiritual lights appear around you..."));
+		for (i = 0; i<num; i++)
+		{
+			if (fire_random_target(GF_DISINTEGRATE, dam, 3, rad, 0))flag = TRUE;
+			if (i == 0 && !flag)
+			{
+				msg_format(_("しかし敵が見当たらなかった。", "However, you didn't find any enemies."));
+				break;
+			}
+		}
+		break;
+
+	}
+
+	case 6:
+	{
+		int v;
+		base = p_ptr->lev / 2;
+		if (only_info) return format(_("期間:%d + 1d%d", "dur: %d+1d%d"), base, base);
+		v = randint1(base) + base;
+		msg_print(_("あなたの想像力は現在と未来を紡ぎ出した！", "Your imagination creates the present and the future!"));
+
+		set_radar_sense(v, FALSE);
+		set_foresight(v, FALSE);
+
+		break;
+	}
+
+	case 7:
+	{
+		char m_name[80];
+		int range = MAX(10, chr_adj);
+		if (only_info) return format(_str_eff_area,range);
+
+		if (p_ptr->cursed & TRC_AGGRAVATE)
+		{
+			msg_print(_("今は誰もあなたの話に耳を貸してくれそうにない。", "Nobody's going to listen to you right now."));
+			return NULL;
+		}
+		if ((p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest)) || EXTRA_QUEST_FLOOR)
+		{
+			msg_print(_("ここはすでに戦場だ。説得の前にすることがある。", "You're on a battlefield. You have things to do before you start giving lectures."));
+			return NULL;
+		}
+
+		if(one_in_(3))
+			msg_print(_("あなたは道行くモンスター達へ辻説法を始めた。", "You start preaching to monsters passing by..."));
+		else if (one_in_(2))
+			msg_print(_("あなたはこのフロアの改革案のプレゼンテーションを始めた。", "You begin your presentation on your reform plans for this level."));
+		else
+			msg_print(_("あなたは演説を始めた。", "You begin your speech."));
+
+		for (i = 1; i < m_max; i++)
+		{
+			monster_type *m_ptr;
+			m_ptr = &m_list[i];
+			if (!m_ptr->r_idx) continue;
+			if (m_ptr->cdis > range) continue;
+
+			//起こす
+			set_monster_csleep(i, 0);
+
+			if (!is_hostile(m_ptr)) continue;
+			monster_desc(m_name, m_ptr, 0);
+
+
+			if ((r_info[m_ptr->r_idx].flags1 & RF1_QUESTOR)
+				|| (r_info[m_ptr->r_idx].flagsr & RFR_RES_ALL)
+				|| (r_info[m_ptr->r_idx].flags2 & RF2_EMPTY_MIND)
+				)
+			{
+				msg_format(_("%sは敵対的なままだ！", "%^s remains hostile!"), m_name);
+			}
+			else
+			{
+				msg_format(_("%sはあなたに友好的になった。", "%^s becomes friendly towards you."), m_name);
+				set_friendly(m_ptr);
+			}
+		}
+
+		break;
+	}
+
+
+	case 8:
+	{
+		base = 10 + p_ptr->lev / 5;
+		if (only_info) return format(_("期間:%d + 1d%d", "dur: %d+1d%d"), base, base);
+		set_tim_general(base + randint1(base), TRUE, 0, 0);
+		break;
+	}
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+
+
+	}
+	return "";
+}
+
+
+
+
 //v2.0.15 日狭美
 //ストーキング中のモンスターのmflagにMFLAG_SPECIALを立てる
 class_power_type class_power_hisami[] =
@@ -38374,6 +38683,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_ZANMU:
+		class_power_table = class_power_zanmu;
+		class_power_aux = do_cmd_class_power_aux_zanmu;
+		power_desc = power_desc_waza;
+		break;
+
 	default:
 #ifdef JP
 		msg_print("あなたは職業による特技を持っていない。");
@@ -40298,6 +40613,13 @@ const support_item_type support_item_list[] =
 		_("山葡萄", "Wild Grapes"),
         _("それはモンスター一体を一時的に移動不能状態にする。",
         "Immobilizes a monster for a short period of time.")},
+
+	//v2.0.17 残無 無心純霊弾
+		{ 100, 60, 128,6,12,	MON_ZANMU,class_power_zanmu,do_cmd_class_power_aux_zanmu,5,
+		_("真っ赤な髑髏", "Bright-Red Skull"),
+		_("それは周囲のランダムな敵に分解属性のボールを連続で放つ。レベルが上がると威力、数、爆発半径が上昇する。",
+        "Repeatedly fires disintegration balls at random nearby enemies. Power, amount and radius increases with level.") },
+
 
 
 	{0,0,0,0,0,0,NULL,NULL,0,_("終端ダミー", "terminator dummy"),""},
