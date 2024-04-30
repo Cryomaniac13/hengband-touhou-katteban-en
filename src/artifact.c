@@ -1442,7 +1442,7 @@ static void random_misc(object_type * o_ptr)
 			for(i=0;i<n;i++)
 				idx[i] = randint1(8);
 
-			while (n--) switch (idx[n])
+			for (i = 0; i < n; i++) switch (idx[i])
 			{
 			case 1:
 				add_flag(o_ptr->art_flags, TR_ESP_ANIMAL);

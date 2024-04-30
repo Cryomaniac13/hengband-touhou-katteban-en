@@ -3702,6 +3702,11 @@ void roff_top(int r_idx)
 			m_ptr = &m_list[i];
 			if (m_ptr->r_idx == r_idx ) break;
 		}
+		if (i == m_max)
+		{
+			msg_print("ERROR:roff_top()");
+			return;
+		}
 		if(i == m_max || !m_ptr->hold_o_idx)
 		{
 			if(p_ptr->pclass == CLASS_TSUKUMO_MASTER) sprintf(buf2,_("(à»ëOÇÃïtërê_)", "(former tsukumogami)"));

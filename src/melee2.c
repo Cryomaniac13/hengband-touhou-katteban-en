@@ -257,7 +257,7 @@ void mon_take_hit_mon(int m_idx, int dam, bool *fear, cptr note, int who)
 
 	if (p_ptr->riding && (m_idx == p_ptr->riding)) disturb(1, 1);
 
-	if((m_ptr->r_idx == MON_SEIJA || m_ptr->r_idx == MON_SEIJA) && !one_in_(7) )
+	if(m_ptr->r_idx == MON_SEIJA && !one_in_(7) )
 	{
 		if (seen) msg_print(_("³×‚Í–­‚È•z‚ÅUŒ‚‚ğˆí‚ç‚µ‚½B",
                                 "Seija uses some weird fabric to evade the attack."));

@@ -397,7 +397,7 @@ int yuma_eat_other_things(object_type *o_ptr)
 
 	}
 	//何でも食べる設定だが、*真・勝利*後のトロフィー的なものは食べなくてもよかろう
-	else if (o_ptr->tval == TV_SPELLCARD || o_ptr->tval == TV_ANTIQUE || o_ptr->tval == TV_ANTIQUE)
+	else if (o_ptr->tval == TV_SPELLCARD || o_ptr->tval == TV_ANTIQUE)
 	{
 		msg_print(_("これを食べるのは勿体ない。", "There's nothing to gain from eating this."));
 		food_val = 0;

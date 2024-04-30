@@ -7800,7 +7800,7 @@ bool get_random_target(int mode, int range)
 	int i;
 	monster_type *m_ptr;
 	int tmp_idx_cnt=0;
-	int target_who_tmp;
+	int target_who_tmp=0;
 
 	if(m_max < 2) return (FALSE);
 	for (i = 1; i < m_max; i++)
@@ -7843,7 +7843,7 @@ bool fire_random_target(int typ, int dam, int method, int rad, int range)
 	int i;
 	monster_type *m_ptr;
 	int tmp_idx_cnt=0;
-	int target_who_tmp;
+	int target_who_tmp=0;
 
 	if(m_max < 2) return (FALSE);
 	for (i = 1; i < m_max; i++)

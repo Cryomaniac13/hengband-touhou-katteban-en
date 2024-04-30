@@ -674,7 +674,7 @@ bool set_mimic(int v, int p, bool do_dec)
 			if(IS_METAMORPHOSIS && (p_ptr->mimic_form < MIMIC_METAMORPHOSE_NORMAL || p_ptr->mimic_form > MIMIC_METAMORPHOSE_GIGANTIC))p_ptr->special_defense &= ~(SD_METAMORPHOSIS);
 
 			//‹ã\‹ãŽo–…‚ªˆê•”•Ïg‚ð‚µ‚½ê‡‰‰‘t‰ðœ
-			if(p_ptr->pclass == CLASS_BENBEN && p_ptr->pclass == CLASS_YATSUHASHI)
+			if(p_ptr->pclass == CLASS_BENBEN || p_ptr->pclass == CLASS_YATSUHASHI)
 			{
 				if( mimic_info[p].MIMIC_FLAGS & (MIMIC_ONLY_MELEE | MIMIC_NO_CAST)) stop_tsukumo_music();
 			}
@@ -6620,7 +6620,7 @@ void change_race(int new_race, cptr effect_msg)
 	for(i=INVEN_RARM;i<INVEN_TOTAL;i++)
 	{
 		if(!inventory[i].k_idx) continue;
-		if(!wield_check(i,i))
+		if(!wield_check(i,i,0))
 		{
 			object_type forge, *q_ptr = &forge;
 			char obj_name[160];

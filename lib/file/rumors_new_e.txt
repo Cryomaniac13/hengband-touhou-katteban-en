@@ -370,6 +370,10 @@ Ability cards?\There are some active traders around here.\They might give you so
 You want a high rank ability card?\There's an ability card exchange venue open at night at Moriya Shrine.\There might be some generous people willing to give away high rank cards,\but be prepared to wait for months if you want to get the highest ranking ones.
 Have you heard about drunken fist style?\I thought it was just a joke among drunkards,\but looks like when a proficient martial artist gets drunk, they can fight using drunken fist style.
 I heard that the armoury in Former Hell is selling their brand of T-shirts.
+If you use a Scroll of Artifact Creation on arrows or needles,\it will result in a stack of artifact projectiles.\Amount of artifact projectiles won't be affected by size of original stack.
+If a force branded arrow hits an enemy, it will deal extra damage\in exchange for MP drain. Looks like they started working this way *long ago*.
+If an earthquake branded arrow hits an enemy, it can stun them by making\them shudder violently.
+
 
 N:20:Archer Guild explanation
 Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materialsÅF\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.

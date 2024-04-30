@@ -2178,7 +2178,7 @@ static void material_2_maripo(void)
 	object_type *o_ptr;
 	cptr q, s;
 	char o_name[MAX_NLEN];
-	int i, base_point, total_point;
+	int i, base_point=0, total_point;
 
 	building_prt_maripo();
 
@@ -6091,6 +6091,42 @@ bool check_quest_unique_text(void)
 #endif
 			}
 		}
+		else if (pr == RACE_FAIRY)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「そこの穴？あれは下水道に通じる人孔よ。");
+				strcpy(quest_text[line++], "最近何かが棲み着いてるみたいで近々調査する予定よ。");
+				strcpy(quest_text[line++], "危ないから入らないようにね。」");
+#else
+                strcpy(quest_text[line++], "Akyuu - 'That hole? That's a manhole leading to the sewers.");
+				strcpy(quest_text[line++], "Looks like something started living there recently,");
+				strcpy(quest_text[line++], "so I'm planning to investigate.");
+				strcpy(quest_text[line++], "It's dangerous, so don't go in.'");
+#endif
+			}
+			else if (fail)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「そう、そこまでひどいことになっていたのね。");
+				strcpy(quest_text[line++], "最近本当に物騒なんだから気をつけなさい。」");
+#else
+				strcpy(quest_text[line++], "Akyuu - 'Oh, it has gotten that bad.");
+				strcpy(quest_text[line++], "It's getting dangerous out here lately, so be careful.");
+#endif
+			}
+			else
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「死者だの大ワニだのを倒してきた…ですって？");
+				strcpy(quest_text[line++], "貴方、妖精から妖怪になりかけてない？」");
+#else
+				strcpy(quest_text[line++], "Akyuu - 'You... defeated the undead and a giant crocodile?");
+				strcpy(quest_text[line++], "Are you about to turn into a youkai from a fairy?");
+#endif
+			}
+		}
 		break;
 
 		//破滅1　チルノ
@@ -9334,6 +9370,59 @@ bool check_quest_unique_text(void)
 #endif
 			}
 		}
+		else if (pr == RACE_FAIRY)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「ねえ、貸本屋の小鈴をどこかで見なかった？");
+				strcpy(quest_text[line++], "　いま行方不明になってて皆で探してるの。");
+				strcpy(quest_text[line++], "　できればお友達にも聞いてみてほしいわ。」");
+#else
+				strcpy(quest_text[line++], "Akyuu - 'Hey, have you seen Kosuzu from the bookstore?");
+				strcpy(quest_text[line++], "  She's gone missing, and we're searching for her.");
+				strcpy(quest_text[line++], "  Please ask your friends about her if you can.'");
+#endif
+			}
+			if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「そう、そんな事になっていたなんて...");
+				strcpy(quest_text[line++], "　妖精のあなたが連れ戻してくれたのは僥倖というものね。");
+				strcpy(quest_text[line++], "　そのリュックはあげるからできればあまり噂にしないであげて。」");
+				strcpy(quest_text[line++], "　");
+				strcpy(quest_text[line++], "　");
+				strcpy(quest_text[line++], "　　　　　　　　(妖精の危険度を上方修正したほうがいいかしら...)");
+#else
+				strcpy(quest_text[line++], "Akyuu - 'Oh, so that's what happened...");
+				strcpy(quest_text[line++], "  But luckily, you managed to bring her back.");
+				strcpy(quest_text[line++], "  I'll give you this backpack, please don't spread any rumors.");
+				strcpy(quest_text[line++], "  ");
+				strcpy(quest_text[line++], "  ");
+				strcpy(quest_text[line++], "      (I probably should raise the danger level of fairies...)");
+#endif
+
+			}
+			if (fail)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "阿求「神社で小鈴に襲われたですって？");
+				strcpy(quest_text[line++], "　ありがとう、すぐに保護させるわ。");
+				strcpy(quest_text[line++], "　小鈴が迷惑かけてごめんなさいね。");
+				strcpy(quest_text[line++], "　でもこのことはできれば秘密にしてあげて？」");
+#else
+				strcpy(quest_text[line++], "Akyuu - 'You got attacked by Kosuzu at the shrine?");
+				strcpy(quest_text[line++], "  Thank you, we'll secure her right away.");
+				strcpy(quest_text[line++], "  Sorry for the trouble she caused you.");
+				strcpy(quest_text[line++], "  Could you please keep this a secret?'");
+#endif
+
+			}
+
+		}
+
+
+
 		break;
 
 		//夢の世界の＠打倒クエ　v1.1.52 菫子特殊性格セリフ変更
@@ -9826,6 +9915,21 @@ bool check_quest_unique_text(void)
                 strcpy(quest_text[line++], "The shrine maiden has destroyed the half of your");
 				strcpy(quest_text[line++], "hideout and finally went back. Just what is going to happen");
 				strcpy(quest_text[line++], "to you?");
+#endif
+			}
+		}
+		else if (pr == RACE_FAIRY)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "たかね「なんだ妖精か。いや今は妖精の手も借りたい。");
+				strcpy(quest_text[line++], "　今からみんなで博麗霊夢と弾幕ごっこをやるんだ！");
+				strcpy(quest_text[line++], "　パワーアップアイテムは持ったか？よし突っ込め！」");
+#else
+                strcpy(quest_text[line++], "Takane - 'Huh, a fairy? I'd like you to lend us a hand.");
+				strcpy(quest_text[line++], "  We're going to play danmaku with Reimu Hakurei!");
+				strcpy(quest_text[line++], "　Do you have power up items? Alright, go ahead!'");
 #endif
 			}
 		}
@@ -11563,7 +11667,7 @@ static int repair_broken_weapon_aux(int bcost)
 
 	if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP))) return (0);
 
-	if(!(wield_check(item,INVEN_PACK))) return (0);
+	if(!(wield_check(item,INVEN_PACK,0))) return (0);
 
 	/* Get the item (in the pack) */
 	o_ptr = &inventory[item];
@@ -11600,7 +11704,7 @@ static int repair_broken_weapon_aux(int bcost)
 		msg_print(_("私の話を聞いていなかったのか？", "Are you listening to me?"));
 		return (0);
 	}
-	if(!(wield_check(mater,INVEN_PACK))) return (0);
+	if(!(wield_check(mater,INVEN_PACK,0))) return (0);
 
 	/* Get the item (in the pack) */
 	mo_ptr = &inventory[mater];
@@ -14824,7 +14928,7 @@ void grassroots_barter()
 			//flush();
 			return;
 		}
-		if(!(wield_check(item,INVEN_PACK)))
+		if(!(wield_check(item,INVEN_PACK,0)))
 		{
 			//flush();
 			return;
@@ -15074,7 +15178,7 @@ void grassroots_barter()
 void grassroots_trading_cards(void)
 {
 	int i;
-	int ref_pval,ref_num,ref_cost,ref_totalcost; //プレイヤーが渡したカードの情報
+	int ref_pval=0,ref_num,ref_cost,ref_totalcost; //プレイヤーが渡したカードの情報
 	char c;
 	int cs;
 	cptr q, s;
@@ -16506,7 +16610,7 @@ static void yuma_eats_cursed_item(void)
 	if (!get_item(&item, q, s, (USE_INVEN | USE_EQUIP))) return;
 	o_ptr = &inventory[item];
 
-	if (!(wield_check(item, INVEN_PACK)))
+	if (!(wield_check(item, INVEN_PACK,0)))
 	{
 		return;
 	}

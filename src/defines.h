@@ -79,8 +79,8 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 17
-#define H_VER_EXTRA 1
+#define H_VER_PATCH 18
+#define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
 //#define SCORE_SERVER_TEST
@@ -2644,6 +2644,8 @@
 #define SV_WEAPON_BLADE_OF_CHAOS	11
 #define SV_WEAPON_HIHIIROKANE		12
 #define SV_WEAPON_SEVEN_STAR	13
+#define SV_WEAPON_MAGIC_SWORD	14
+
 
 //SVAL:刀 TV:25
 #define SV_WEAPON_BROKEN_KATANA	1
@@ -3490,6 +3492,9 @@
 #define SV_ALCOHOL_MAMUSHI	31
 #define SV_ALCOHOL_GEIDON	32
 #define SV_ALCOHOL_DOBUROKU	33
+#define SV_ALCOHOL_ONITUBUSHI 34
+
+
 
 
 

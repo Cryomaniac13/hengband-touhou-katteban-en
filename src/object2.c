@@ -12486,8 +12486,8 @@ void apply_kogasa_magic(object_type *o_ptr, int lev, bool birth)
 //v1.1.57
 //隠岐奈特技「七星の剣」　一時的な剣を生成して利き腕に持つ
 //失敗したときにFALSEを返す
-//剣の消滅処理はprocess_world()内の特殊処理で行う
-bool generate_seven_star_sword(void)
+//v2.0.18 mode値を追加。0が隠岐奈で1がフラン
+bool generate_seven_star_sword(int mode)
 {
 	int plev = p_ptr->lev;
 	object_type forge;
@@ -12513,22 +12513,39 @@ bool generate_seven_star_sword(void)
 		return FALSE;
 	}
 	//アイテム準備
-	object_prep(o_ptr, lookup_kind(TV_SWORD, SV_WEAPON_SEVEN_STAR));
-	//パラメータ設定
-	o_ptr->dd = 7;
-	o_ptr->ds = 7;
-	o_ptr->to_d = plev / 3;
-	o_ptr->to_h = plev / 3;
-	//スレイ付与
-	add_flag(o_ptr->art_flags, TR_KILL_DEMON);
-	add_flag(o_ptr->art_flags, TR_KILL_UNDEAD);
-	add_flag(o_ptr->art_flags, TR_KILL_KWAI);
-	add_flag(o_ptr->art_flags, TR_SLAY_EVIL);
-	add_flag(o_ptr->art_flags, TR_LITE);
+	if (mode == 0)
+	{
+		msg_print(_("星々の力があなたの手の中で剣の形を取った！", "The power of stars takes form of a sword in your hand!"));
+		object_prep(o_ptr, lookup_kind(TV_SWORD, SV_WEAPON_SEVEN_STAR));
+		//パラメータ設定
+		o_ptr->dd = 7;
+		o_ptr->ds = 7;
+		o_ptr->to_d = plev / 3;
+		o_ptr->to_h = plev / 3;
+		//スレイ付与
+		add_flag(o_ptr->art_flags, TR_KILL_DEMON);
+		add_flag(o_ptr->art_flags, TR_KILL_UNDEAD);
+		add_flag(o_ptr->art_flags, TR_KILL_KWAI);
+		add_flag(o_ptr->art_flags, TR_SLAY_EVIL);
+		add_flag(o_ptr->art_flags, TR_LITE);
+		//発動スターバースト
+		add_flag(o_ptr->art_flags, TR_ACTIVATE);
+		o_ptr->xtra2 = ACT_BA_LITE;
 
-	//発動スターバースト
-	add_flag(o_ptr->art_flags, TR_ACTIVATE);
-	o_ptr->xtra2 = ACT_BA_LITE;
+	}
+	else
+	{
+		msg_print(_("あなたは魔力を凝縮して剣を形作った！", "You condense magical power and form a sword!"));
+		object_prep(o_ptr, lookup_kind(TV_SWORD, SV_WEAPON_MAGIC_SWORD));
+		//パラメータ設定
+		o_ptr->dd = 1 + plev / 7;
+		o_ptr->ds = 7 + plev / 50;
+		o_ptr->to_d = plev / 2;
+		o_ptr->to_h = 0;
+
+	}
+
+
 	//鍛冶アイテム扱いにする
 	o_ptr->xtra3 = SPECIAL_ESSENCE_OTHER;
 
@@ -12560,9 +12577,6 @@ bool generate_seven_star_sword(void)
 
 	}
 	p_ptr->total_weight += o_ptr->weight;
-
-	msg_print(_("星々の力があなたの手の中で剣の形を取った！",
-                "The power of stars takes form of a sword in your hand!"));
 
 	p_ptr->update |= (PU_BONUS | PU_TORCH);
 	p_ptr->redraw |= (PR_EQUIPPY | PR_HP | PR_MANA);

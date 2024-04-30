@@ -51,6 +51,9 @@ cptr            p = "•KŽEŒ•";
 	bool            flag, redraw;
 	int menu_line = (use_menu ? 1 : 0);
 
+	for (i = 0; i < 32; i++) sentaku[i] = 0;
+
+
 	/* Assume cancelled */
 	*sn = (-1);
 
@@ -75,6 +78,8 @@ cptr            p = "•KŽEŒ•";
 
 	/* No redraw yet */
 	redraw = FALSE;
+
+
 
 	for (i = 0; i < 32; i++)
 	{

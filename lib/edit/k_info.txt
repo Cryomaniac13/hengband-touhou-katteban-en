@@ -9487,3 +9487,28 @@ W:1:0:10:100
 A:1/255
 P:0:2d4:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+
+N:909:魔法の剣
+E:& Magic Sword~
+G:|:r
+I:24:14:0
+W:10:0:40:0
+A:1/255
+P:0:2d5:0:0:0
+F:SHOW_MODS
+F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A sword you formed out of mana.
+D:あなたが魔力で生成した剣だ。
+
+N:910:鬼潰し
+E:Onitsubushi
+G:!:r
+I:78:34:8000
+W:0:0:40:3000
+A:30/3
+P:0:1d1:0:0:0
+D:$Sake made in subterranean hot spring resort.
+D:$Of course, it won't knock an oni out.
+D:地底の温泉街で作られている酒だ。
+D:もちろんこれを飲んで潰れる鬼はいない。
+

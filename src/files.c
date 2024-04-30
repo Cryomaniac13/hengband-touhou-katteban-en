@@ -8914,7 +8914,7 @@ static void dump_aux_skills(FILE *fff)
 {
 	int i,skill_exp;
 #ifdef JP
-	char skill_name[SKILL_EXP_MAX][12] ={"Ši“¬","‚","æ”n","“ñ“—¬","“Š±","","","","","","’ZŒ•","’·Œ•","“","“İŠí","–_","•€","‘„","’·•¿•Ší","‹|","ƒNƒƒXƒ{ƒE","e"};
+	char skill_name[SKILL_EXP_MAX][16] ={"Ši“¬","‚","æ”n","“ñ“—¬","“Š±","","","","","","’ZŒ•","’·Œ•","“","“İŠí","–_","•€","‘„","’·•¿•Ší","‹|","ƒNƒƒXƒ{ƒE","e"};
 #else
     char skill_name[SKILL_EXP_MAX][14] ={
 	    "Martial Arts",

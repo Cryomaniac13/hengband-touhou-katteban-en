@@ -1922,7 +1922,7 @@ void monster_desc(char *desc, monster_type *m_ptr, int mode)
 	seen = (m_ptr && ((mode & MD_ASSUME_VISIBLE) || (!(mode & MD_ASSUME_HIDDEN) && m_ptr->ml)));
 
 	/*:::“ÁŽêˆ—*/
-	if(m_ptr->ap_r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI) seen = FALSE;
+	if(m_ptr->r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI) seen = FALSE;
 
 	//‚Ê‚¦‚Ì³‘Ì•s–¾‚ÌŽí
 	if(m_ptr->mflag & MFLAG_NUE_UNKNOWN ) seen = FALSE;

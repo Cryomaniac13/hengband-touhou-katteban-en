@@ -1906,7 +1906,7 @@ extern int is_hurt_lite(void);
 
 
 ///mod140122 ‘•”õ§ŒÀŠÖ”
-extern bool wield_check( int item_old, int item_new);
+extern bool wield_check( int item_old, int item_new, int mode);
 
 ///mod140126 ‹¶‹C–Æ‰u”»’è
 extern bool immune_insanity(void);
@@ -2609,7 +2609,7 @@ extern void use_spellcard(object_type *o_ptr);
 extern bool set_tim_spellcard_effect(int v, bool do_dec, int art_idx);
 
 //v1.1.57
-extern bool generate_seven_star_sword(void);
+extern bool generate_seven_star_sword(int mode);
 extern pattern_attack_type pattern_attack_table[];
 extern bool pattern_attack(void);
 

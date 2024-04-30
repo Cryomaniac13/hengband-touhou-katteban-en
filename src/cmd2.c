@@ -7078,7 +7078,7 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 	}
 
 	///mod140415 外せない装備を投げないようにする
-	if(item >= INVEN_RARM && !wield_check(item,INVEN_PACK)) return FALSE;
+	if(item >= INVEN_RARM && !wield_check(item,INVEN_PACK,1)) return FALSE;
 
 	/* Item is cursed */
 	/*:::装備中のものを投げようとして呪われている場合*/
@@ -7627,8 +7627,13 @@ msg_print("これはあまり良くない気がする。");
 			j = 0;
 		}
 	}
+	//v2.0.18 フランの生成した剣は必ず壊れる
+	else if (q_ptr->tval == TV_SWORD && q_ptr->sval == SV_WEAPON_MAGIC_SWORD)
+	{
+		do_drop = FALSE;
+	}
 
-	if (return_when_thrown)
+	else if (return_when_thrown)
 	{
 		int back_chance = randint1(30)+20+((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
 		char o2_name[MAX_NLEN];

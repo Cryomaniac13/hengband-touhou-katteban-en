@@ -7268,7 +7268,7 @@ static void do_cmd_knowledge_skill_exp(void)
 	char file_name[1024];
 #ifdef JP
 	//char skill_name[3][17]={"マーシャルアーツ", "二刀流          ", "乗馬            "};
-	char skill_name[SKILL_EXP_MAX][12] ={"格闘","盾","乗馬","二刀流","投擲","","","","","","短剣","長剣","刀","鈍器","棒","斧","槍","長柄武器","弓","クロスボウ","銃"};
+	char skill_name[SKILL_EXP_MAX][16] ={"格闘","盾","乗馬","二刀流","投擲","","","","","","短剣","長剣","刀","鈍器","棒","斧","槍","長柄武器","弓","クロスボウ","銃"};
 #else
 	//char skill_name[3][20]={"Martial Arts    ", "Dual Wielding   ", "Riding          "};
 	char skill_name[SKILL_EXP_MAX][14] ={

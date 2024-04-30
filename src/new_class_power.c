@@ -7218,7 +7218,7 @@ cptr do_cmd_class_power_aux_okina(int num, bool only_info)
 	case 8: //七星の剣
 	{
 		if (only_info) return format(_("期間:25", "dur: 25"));
-		if (!generate_seven_star_sword()) return NULL;
+		if (!generate_seven_star_sword(0)) return NULL;
 		break;
 	}
 
@@ -29472,12 +29472,15 @@ class_power_type class_power_flan[] =
 	{24,18,50,FALSE,FALSE,A_DEX,0,0,_("きゅっとしてドカーン", "Kyuu~, and BOOM!"),
 		_("ターゲットとその周辺3+1d3グリッドを*破壊*する。ターゲットは明示的に指定しなければならない。(25-レベル/2)%の確率で想定外の大破壊が起こる。地上やクエストダンジョンでは使えない。",
         "*Destroys* target and the area around it in radius 3+1d3. You must explicitly pick a target. Can cause unexpectedly large destruction with (25 - level/2)% chance. Cannot be used on surface or quest levels.")},
-	{29,32,60,FALSE,TRUE,A_INT,0,8,_("カタディオプトリック", "Catadioptric"),
+	{27,32,60,FALSE,TRUE,A_INT,0,8,_("カタディオプトリック", "Catadioptric"),
 		_("特殊な軌道のビームを5発放つ。",
         "Fires 5 special orbital beams.")},
-	{32,64,70,FALSE,TRUE,A_DEX,0,0,_("フォーオブアカインド", "Four of a Kind"),
+	{30,64,70,FALSE,TRUE,A_DEX,0,0,_("フォーオブアカインド", "Four of a Kind"),
 		_("分身を三体出現させる。ただし分身は命令に関わらずあなたを範囲攻撃に巻き込む。",
         "Creates three clones of yourself. They will involve you in their area of effect spells disregarding your orders.")},
+	{33,30,60,FALSE,TRUE,A_DEX,0,0,_("剣生成", "Create Sword"),
+		_("一時的に「魔法の剣」を生成して装備する。どちらかの腕が空いているときにしか使えない。この武器を投擲以外で装備から外すことはできない。投擲すると必ず壊れる。",
+        "Temporarily creates a 'Magic Sword' as a piece of equipment. Requires a free hand equipment slot. Cannot be removed, except by throwing. Always breaks when thrown.")},
 	{36,80,70,FALSE,TRUE,A_CHR,0,0,_("カゴメカゴメ", "Kagome-Kagome"),
 		_("視界内全てに無属性ダメージを与え、さらに短時間移動禁止にする。",
         "Hits everyone in sight with non-elemental attack, and prevents them from moving.")},
@@ -29661,7 +29664,15 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 		}
 		break;
 
-	case 7:
+	case 7: //剣生成
+	{
+		if (only_info) return format(_("期間:25", "dur: 25"));
+		if (!generate_seven_star_sword(1)) return NULL;
+		break;
+	}
+
+
+	case 8:
 		{
 			int base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
 			if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
@@ -29672,7 +29683,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 
 			break;
 		}
-	case 8: //レーヴァテイン
+	case 9: //レーヴァテイン
 		{
 
 			int dam =  calc_weapon_dam(0) + calc_weapon_dam(1);
@@ -29687,7 +29698,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			break;
 		}
 		break;
-	case 9: //495年の波紋
+	case 10: //495年の波紋
 		{
 			int dam = plev * 3 + chr_adj * 5;
 			int rad = 2;
@@ -29702,7 +29713,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			break;
 		}
 
-	case 10: //スカーレットニヒリティ
+	case 11: //スカーレットニヒリティ
 		{
 			cptr q, s;
 			int item;
@@ -36703,7 +36714,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #endif
 			return FALSE;
 		}
-		else if((skillnum == 1 || skillnum == 7) && !buki_motteruka(INVEN_RARM) && !buki_motteruka(INVEN_LARM))
+		else if((skillnum == 1 || skillnum == 9) && !buki_motteruka(INVEN_RARM) && !buki_motteruka(INVEN_LARM))
 		{
 #ifdef JP
 			my_strcpy(errmsg, "その技は近接武器を持っていないと使えない。", 150);
@@ -39497,7 +39508,7 @@ const support_item_type support_item_list[] =
 	_("それを使うとこのフロア限定で「フランドール・スカーレット」の分身が三体出現する。分身は配下扱いだが命令に関わらずプレイヤーを範囲攻撃に巻き込む。",
     "Summons 3 clones of Flandre Scarlet as your followers that can't leave this level. They will involve you in their area of effect attacks regardless of your orders.")},
 	//レーヴァテイン
-	{90, 60, 128,4,18,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,8,
+	{90, 60, 128,4,18,	MON_FLAN,class_power_flan,do_cmd_class_power_aux_flan,9,
 	_("捻じれた黒杖", "Bent Black Rod"),
 	_("それは自分を中心に強力な地獄の劫火属性のボールを発生させる。",
     "Generate a powerful ball of hellfire centered on yourself.")},

@@ -754,10 +754,10 @@ void do_cmd_wield(bool mochikae)
 	/*:::武器・盾・リングのスロット決定処理終了*/
 
 	///mod140122 装備制限処理追加
-	if(!(wield_check(slot,item))) return;
+	if(!(wield_check(slot,item,0))) return;
 
 	//v1.1.43 need_takeoffの装備外し制限処理が抜けていたので追加
-	if (need_takeoff && !(wield_check(need_takeoff, INVEN_PACK))) return;
+	if (need_takeoff && !(wield_check(need_takeoff, INVEN_PACK,0))) return;
 
 	/* Prevent wielding into a cursed slot */
 	if (object_is_cursed(&inventory[slot]))
@@ -1444,7 +1444,7 @@ void do_cmd_wield_3_fairies(void)
 	}
 	/*:::武器・盾・リングのスロット決定処理終了*/
 
-	if(!(wield_check(slot,item))) return;
+	if(!(wield_check(slot,item,0))) return;
 
 
 	/* Prevent wielding into a cursed slot */
@@ -1968,7 +1968,7 @@ void do_cmd_takeoff(void)
 		flag_quickdraw = TRUE;
 
 	///mod140122 装備制限
-	if(!(wield_check(item,INVEN_PACK))) return;
+	if(!(wield_check(item,INVEN_PACK,0))) return;
 
 	///sys 装備限定職、種族処理記述要 （装備解除）
 	//v1.1.28 ちょっと記述と仕様変更
@@ -2227,7 +2227,7 @@ void do_cmd_drop(void)
 	}
 
 	///mod140122 装備制限
-	if(!(wield_check(item,INVEN_PACK))) return;
+	if(!(wield_check(item,INVEN_PACK,0))) return;
 
 
 	/* Hack -- Cannot remove cursed items */
@@ -3738,7 +3738,9 @@ void do_cmd_query_symbol(void)
 /*:::これで問題ないとは思うが我ながらかなりひどいやり方だ。ポインタをいまだによく分かっていない。*/
 ///mod140914 ユニーククラスが石仮面などで種族変容した時外してはいけないものも外れてしまうので条件式を少し変更
 //slot==item_newのときはOKにしておく
-bool wield_check( int slot, int item_new)
+//v2.0.18 パラメータmodeを追加
+//mode0:普通 1:投擲時
+bool wield_check( int slot, int item_new, int mode)
 {
 	object_type *o_ptr_old = &inventory[slot];
 	object_type *o_ptr_new;
@@ -3763,6 +3765,12 @@ bool wield_check( int slot, int item_new)
 		return (FALSE);
 	}
 
+	//v2.0.18 一時アイテム「魔法の剣」は投擲時を除き外せない
+	if (o_ptr_old->tval == TV_SWORD && o_ptr_old->sval == SV_WEAPON_MAGIC_SWORD && mode != 1)
+	{
+		msg_print(_("その装備を外すことはできない。", "You cannot remove this equipment."));
+		return (FALSE);
+	}
 
 
 	//v1.1.57 一時アイテム「七星剣」は外せない

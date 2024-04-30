@@ -1412,8 +1412,9 @@ static bool store_create_hook_liquor(int k_idx)
 
 		return (TRUE);
 		break;
-	default:
-		return (FALSE);
+
+	case SV_ALCOHOL_ONITUBUSHI:
+		if (p_ptr->town_num == TOWN_CHITEI) return TRUE;
 		break;
 	}
 
@@ -5499,7 +5500,7 @@ static void store_sell(void)
 
 
 	///mod140122 ‘•”õ§ŒÀ
-	if(!(wield_check(item,INVEN_PACK))) return;
+	if(!(wield_check(item,INVEN_PACK,0))) return;
 
 	//v1.1.62 –‚–@‚Ì–î“›”­“®
 	if (hack_flag_access_home_only_arrow)
