@@ -9929,7 +9929,7 @@ bool check_quest_unique_text(void)
 #else
                 strcpy(quest_text[line++], "Takane - 'Huh, a fairy? I'd like you to lend us a hand.");
 				strcpy(quest_text[line++], "  We're going to play danmaku with Reimu Hakurei!");
-				strcpy(quest_text[line++], "Å@Do you have power up items? Alright, go ahead!'");
+				strcpy(quest_text[line++], "  Do you have power up items? Alright, go ahead!'");
 #endif
 			}
 		}
