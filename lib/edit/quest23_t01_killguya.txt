@@ -35,7 +35,7 @@ Q:23:T:冗談よ。ちょっと待ってて……」
 Q:$23:T:Mokou - 'Ugh! Why does nothing go right for me?
 Q:$23:T:That Kaguya... That Kaguya...'
 Q:$23:T:
-Q:$23:T:　　Suddenly, temperature in the shop starts rising. You and
+Q:$23:T:   Suddenly, temperature in the shop starts rising. You and
 Q:$23:T:   the other visitors run away.
 Q:23:T:妹紅「むきー！なんで私のやること成す事うまくいかないの！
 Q:23:T:そう、あの忌々しい晩もそうだった。あの輝夜の奴が…」

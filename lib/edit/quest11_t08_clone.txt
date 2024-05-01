@@ -46,7 +46,7 @@ Q:$11:T:everything up; it makes everything 'new' and 'clear', and
 Q:$11:T:the 'Fusion' part gives it that novel tone...
 Q:$11:T:
 Q:$11:T:
-Q:$11:T:　　　　　　　　　　　　　　　　　　　　　You ran away.
+Q:$11:T:                          You ran away.
 Q:11:T:無理だったか。仕方がないな……
 Q:11:T:それじゃ地底の技術者から手に入れた掃除機を使おう。
 Q:11:T:名前は「ニュークリアフュージョン」、用途は「全てを綺麗にする」というものだ。

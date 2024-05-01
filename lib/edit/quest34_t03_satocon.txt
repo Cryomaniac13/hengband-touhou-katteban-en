@@ -30,7 +30,7 @@ Q:34:T:良ければ貴方も手伝ってくれませんか？」
 ?:[EQU $QUEST34 3]
 Q:$34:T:Satori - 'I can't believe she brought something like this.
 Q:$34:T:Even then, we managed to drive her away. Thank you.
-Q:$34:T:　
+Q:$34:T: 
 Q:$34:T:...Oh, you have some interest in my book collection as well?
 Q:$34:T:It's not that valuable to me, so please take this.'
 Q:34:T:さとり「まさかあんな物を持ち出してくるとはね。
