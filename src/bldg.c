@@ -6471,8 +6471,8 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "ルナチャイルド「というか貴方本当に妖精なの？」");
 				strcpy(quest_text[line++], "スターサファイア「お礼にこれを差し上げますわ。私たちの宝物よ。」");
 #else
-                strcpy(quest_text[line++], "Sunnymilk - 'Awesome! The dawn of us fairies is at hand!'");
-				strcpy(quest_text[line++], "Lunachild - 'Are you really a fairy?'");
+                strcpy(quest_text[line++], "Sunny Milk - 'Awesome! The dawn of us fairies is at hand!'");
+				strcpy(quest_text[line++], "Luna Child - 'Are you really a fairy?'");
 				strcpy(quest_text[line++], "Star Sapphire - 'Take this as your reward. It's our treasure.'");
 #endif
 			}
@@ -6483,8 +6483,8 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "ルナチャイルド「あーあ、また引っ越しかぁ。」");//一行40字まで
 				strcpy(quest_text[line++], "スターサファイア「今度の盆栽は出来が良かったのに残念ねえ。」");//一行40字まで
 #else
-                strcpy(quest_text[line++], "Sunnymilk - 'Did you see it? Was it cool?'");
-				strcpy(quest_text[line++], "Lunachild - 'We'll have to move again.'");//一行40字まで
+                strcpy(quest_text[line++], "Sunny Milk - 'Did you see it? Was it cool?'");
+				strcpy(quest_text[line++], "Luna Child - 'We'll have to move again.'");//一行40字まで
 				strcpy(quest_text[line++], "Star Sapphire - 'It's pity I'm leaving my bonsai behind.'");//一行40字まで
 #endif
 			}
@@ -6495,8 +6495,8 @@ bool check_quest_unique_text(void)
 				strcpy(quest_text[line++], "ルナチャイルド「強そうなドラゴンに一回休みにされちゃうよ。」");
 				strcpy(quest_text[line++], "スターサファイア「頼りの巫女も昼寝ばっかり。困ったものねぇ。」");
 #else
-                strcpy(quest_text[line++], "Sunnymilk - 'Wait, it's dangerous to go into the forest!'");
-				strcpy(quest_text[line++], "Lunachild - 'There's a strong dragon who'll take you down.'");
+                strcpy(quest_text[line++], "Sunny Milk - 'Wait, it's dangerous to go into the forest!'");
+				strcpy(quest_text[line++], "Luna Child - 'There's a strong dragon who'll take you down.'");
 				strcpy(quest_text[line++], "Star Sapphire - 'And that shrine maiden is still sleeping...'");
 #endif
 			}

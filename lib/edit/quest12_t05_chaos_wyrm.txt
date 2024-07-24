@@ -8,8 +8,8 @@ Q:12:Q:6:0:0:0:65:0:0:0:6
 
 # Description for quest
 ?:[LEQ $QUEST12 2]
-Q:$12:T:Sunnymilk - 'There's a creepy bad dragon wandering near house!'
-Q:$12:T:Lunachild - 'Huh? I thought it was pretty cool-looking.'
+Q:$12:T:Sunny Milk - 'There's a creepy bad dragon wandering near house!'
+Q:$12:T:Luna Child - 'Huh? I thought it was pretty cool-looking.'
 Q:$12:T:Star Sapphire - 'Could you drive it away, please? We're in
 Q:$12:T:trouble.'
 Q:12:T:ƒTƒj[ƒ~ƒ‹ƒNu„‚½‚¿‚Ì‰Æ‚Ìü‚è‚ğ‹C‚¿ˆ«‚¢—³‚ª‚¤‚ë‚Â‚¢‚Ä‚é‚ÌIv
@@ -20,8 +20,8 @@ Q:12:T:ƒXƒ^[ƒTƒtƒ@ƒCƒAu‚Ç‚¤‚©’Ç‚¢•¥‚Á‚Ä’¸‚¯‚Ü‚¹‚ñ‚©H–{“–‚É¢‚Á‚Ä‚¢‚é‚Ì‚Å‚·B
 
 # Description for quest reward
 ?:[EQU $QUEST12 3]
-Q:$12:T:Sunnymilk - 'At last! I'm going to go back and take a nap.'
-Q:$12:T:Lunachild - 'You'd have to give a reward first...'
+Q:$12:T:Sunny Milk - 'At last! I'm going to go back and take a nap.'
+Q:$12:T:Luna Child - 'You'd have to give a reward first...'
 Q:$12:T:Star Sapphire - 'Take this. I think it's a valuable item that's
 Q:$12:T:normally hard to find.'
 Q:12:T:ƒTƒj[ƒ~ƒ‹ƒNu‚ [—Ç‚©‚Á‚½B‹A‚Á‚Ä‚¨’‹Q‚µ‚Ü‚µ‚åBv
@@ -31,8 +31,8 @@ Q:12:T:ƒXƒ^[ƒTƒtƒ@ƒCƒAu‚±‚ê‚ğ·‚µã‚°‚Ü‚·B–Å‘½‚Éè‚É“ü‚ç‚È‚¢’l‘Å‚¿•¨‚Å‚·‚æH
 
 # Description for quest failed
 ?:[EQU $QUEST12 5]
-Q:$12:T:Sunnymilk - 'Eh, you ran away?'
-Q:$12:T:Lunachild - 'We have to move again? I'm not done with my pickles...'
+Q:$12:T:Sunny Milk - 'Eh, you ran away?'
+Q:$12:T:Luna Child - 'We have to move again? I'm not done with my pickles...'
 Q:$12:T:Star Sapphire - *sob*
 Q:12:T:ƒTƒj[ƒ~ƒ‹ƒNu‚¦[A“¦‚°‹A‚Á‚Ä‚«‚½‚ÌHv
 Q:12:T:ƒ‹ƒiƒ`ƒƒƒCƒ‹ƒhu‚Ü‚½ˆø‚Á‰z‚µH‚Ì•¨‚à‚Ü‚½’Ğ‚¯’¼‚µ‚¶‚á‚È‚¢cv
