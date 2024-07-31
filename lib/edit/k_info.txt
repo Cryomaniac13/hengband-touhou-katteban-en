@@ -7805,7 +7805,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 #ハルモニア
 N:749:首飾り:眩い
-E:& Torque~:Rusty
+E:& Necklace~:Rusty
 G:":y
 I:48:31:0
 W:30:0:3:45000
@@ -8231,7 +8231,7 @@ D:$Generates an acid ball (dam: 1600) upon being broken.
 D:それは割れるとダメージ1600の酸属性のボールを発生させる。
 
 N:789:玉:丸い
-E:& Torque~:Round
+E:& Furball~:Round
 G:":y
 I:48:33:0
 W:30:0:3:72000
