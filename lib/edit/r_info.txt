@@ -223,6 +223,7 @@ F:OPEN_DOOR | GEN_NEUTRAL | WILD_ALL | TAKE_ITEM
 F:RES_HOLY
 S:1_IN_7
 S:DANMAKU
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
 D:幻想郷の至る所に出現する自然の具現だ。
 
 #J0#
@@ -9317,6 +9318,11 @@ B:EXPLODE:SHATTER:100d2
 F:FORCE_SLEEP | FORCE_MAXHP | UNIQUE | REFLECTING | FLAG_50F
 F:EMPTY_MIND | COLD_BLOOD | BASH_DOOR | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS
 F:NO_FEAR | NO_CONF | NO_SLEEP | NONLIVING | RES_TELE
+D:$It is the left hand of Killer Queen, the visual manifestation of 
+D:$the life energy of Yoshikage Kira. 
+D:$It will follow the heat of the adventurer's body forever. 
+D:$"Sheer Heart Attack in Killer Queen will definitely 
+D:$kill the prey at which he's aimed ...."
 D:吉良吉影のスタンド『キラークイーン』の左手だ。冒険者の体温を頼りに
 D:どこまでも追いかける。「『キラークイーン』の『シアーハートアタック』
 D:は狙った獲物は絶対に仕留める……」
@@ -13107,6 +13113,10 @@ F:BASH_DOOR | NO_CONF | NO_SLEEP | NO_FEAR | ANG_FRIENDLY | MALE | CAN_SPEAK
 S:1_IN_4 | 
 S:HEAL | S_KIN | BA_NETH | BA_DARK
 S:S_DEMON | S_ANIMAL
+D:$A thin man with pure albino-white hair and skin. 
+D:$He wields a large sword with ease disproportionate to his frail physique, 
+D:$and looks at you with blood-red eyes. 
+D:$The great black sword pulsates with an ominous glow, and emits a strange singing tone...
 D:アルビノの真っ白な髪と肌をした痩せた男だ。
 D:その貧弱な体格に不釣り合いな大剣を軽々と構え、
 D:血のような真っ赤な目でこちらを見ている。
@@ -17927,6 +17937,7 @@ F:RES_ALL | POWERFUL | KILL_EXP |
 F:NO_CONF | NO_SLEEP | NO_STUN | EMPTY_MIND | RES_TELE |
 S:1_IN_1 |
 S:BLINK | BO_MANA | BA_CHAO | BA_FIRE | TPORT  | PSY_SPEAR
+D:$Is a bit of magical slime wrapped in hard metal.
 D:固い金属に包まれたスライムだ。
 
 N:872:『八岐大蛇』
@@ -17946,6 +17957,8 @@ F:OPEN_DOOR | BASH_DOOR | POWERFUL | MOVE_BODY | CAN_SWIM | RES_WATE |
 F:IM_FIRE | IM_COLD | IM_POIS | IM_ELEC | NO_CONF | NO_SLEEP
 S:1_IN_2 | 
 S:BR_FIRE | BR_CHAO | BR_POIS | BR_DISE | BR_PLAS | BR_NUKE | BR_DARK
+D:$Is a legendary snake, with eight necks and eight tails, living in Izumo. 
+D:$If denied sacrificial victims, it causes floods and annihilates people.
 D:出雲の国に棲む伝説の蛇で、八つの首と八つの尾を持つ。
 D:いけにえを拒むと洪水を起こして人々を全滅させる。
 
@@ -18068,6 +18081,10 @@ F:UNDEAD | IM_COLD | IM_POIS | RES_NETH | RES_DARK | HURT_LITE |
 F:NO_CONF | NO_SLEEP | RES_TIME | RES_TELE | REFLECTING | FLAG_50F
 S:1_IN_4 | 
 S:SCARE | S_KIN | WORLD | TELE_TO
+D:$Dio, who became an immortal vampire with the help of a stone mask, looks 
+D:$only at the adventurer. Watch out for The World, Dio's stand or visual 
+D:$manifestation of his life energy: "I don't know what his stand is, but 
+D:$it is certain that it can only be used at close range."
 D:石仮面の力で不死の吸血鬼となったディオは冒険者を餌としか見ていない。
 D:『ザ・ワールド』に気をつけろ！「奴のスタンドの正体は分からないが、
 D:至近距離でしか使えないことは確かだッ」
@@ -18086,6 +18103,8 @@ F:KILL_WALL | CAN_SWIM | KILL_BODY | ANG_FRIENDLY | RES_HOLY
 F:FORCE_MAXHP | ONLY_GOLD | DROP_2D2 | DROP_3D2 | GIGANTIC
 S:1_IN_3
 S:SPECIAL
+D:$A mass of worms, mad with rage, rushes towards you strewing miasma 
+D:$in its wake.
 D:怒りに狂った王蟲の群は瘴気をまき散らしながら突進してくる。
 
 N:880:時を統べる者『リチャード・ウォン』
@@ -18107,6 +18126,9 @@ S:TPORT | SCARE | S_KIN | BLINK | HEAL |
 S:TELE_TO | CONF | BO_MANA | BRAIN_SMASH |
 S:BA_WATE | TELE_AWAY |
 S:DISPEL | WORLD | PSY_SPEAR
+D:$He has psychic powers that allow him to freely manipulate time and 
+D:$space. He keeps calm and is always smiling, but beneath that mask 
+D:$is a cold-blooded soul.
 D:時間と空間を自在に操る超能力者。
 D:冷静沈着で、常に余裕の笑みを浮かべている。
 D:だが、その仮面の下には冷血な魂が宿り、自分自身の欲望の為なら手段を選ばない。
@@ -18129,6 +18151,9 @@ F:NO_SLEEP | RES_TELE | RES_NETH | RES_TIME | POWERFUL | CAN_FLY |
 S:1_IN_3 | 
 S:TPORT | BLIND | HOLD | BLINK | HEAL | HASTE |
 S:TELE_TO | CONF | BO_MANA | BRAIN_SMASH | PSY_SPEAR
+D:$Seeing the look in your eyes, he asks, "Do you know me?" You're 
+D:$very tempted to answer, "Of course! You're Superman Locke! 
+D:$Immortal, the strongest ESPer ever!
 D:「そうだ！超人ロック！」「僕を知っているのか？」
 D:「もちろん！不老不死にして、史上最強のエスパー！」
 D:（聖悠紀、超人ロック「赤いサーペント」）
@@ -18152,6 +18177,8 @@ S:TPORT | BLIND | BLINK | HEAL | HASTE
 S:CONF | BO_MANA | BRAIN_SMASH | PSY_SPEAR |
 S:BA_NETH | BA_DARK | BA_CHAO |
 S:S_MONSTERS | S_DEMON | S_KIN
+D:$She tried to destroy Earth solely because she wanted to fight 
+D:$Locke, the Superman, as a superhuman.
 D:彼女はただ超人として超人との戦いを望むが故に、皇帝に扮し地球を
 D:滅ぼそうとした。「とにかくある朝起きてみるとディナールは皇帝
 D:レイザークの神聖なる領地となっていたのだ」
@@ -18174,6 +18201,7 @@ F:NO_FEAR | NO_CONF | NO_SLEEP |
 S:1_IN_5
 S:BA_FORCE | BO_MANA | CONF | BLIND | BLINK | BA_FIRE | CAUSE_3 | CAUSE_4 | TORNADO
 S:TPORT | TELE_TO | BA_DARK | BRAIN_SMASH | BR_SOUN | TELE_AWAY | S_KIN | S_KWAI
+D:$One of the leaders of the tengu of Youkai Mountain. Their great powers live up to their title.
 D:妖怪の山で天狗社会の幹部に位置する者達だ。その名に恥じない強い力を持つ。
 
 N:884:有毒ガス
@@ -18805,6 +18833,8 @@ S:1_IN_3 |
 S:BLIND | CONF | SCARE | 
 S:BA_DARK | BO_NETH | BR_NETH | BR_DARK | BR_POIS | HAND_DOOM |
 S:S_DEMON | S_KIN | DISPEL | S_HI_DEMON
+D:$Said to be the commander of a hellish army, this terrifying demon can 
+D:$cause ruin merely by saying his own name.
 D:その名を口にするだけで破滅をもたらすほどの恐るべきデーモンであり、
 D:地獄の軍勢の指揮官であると言われている。
 
@@ -19138,6 +19168,10 @@ F:OPEN_DOOR | RES_NETH | ANG_CHAOS
 F:IM_FIRE | NO_CONF | NO_SLEEP
 S:1_IN_3 |
 S:S_DEMON | BA_CHAO | BO_PLAS | BR_FIRE | BR_PLAS
+D:$This horrible creature has four legs, nine arms, and bluish skin. It 
+D:$wears a high golden crown with horns on either side. Large fangs 
+D:$protrude from its mouth. 
+D:$ According to legend, it guards an artifact that Ishtar wants.
 D:脚が４本。腕は９本。
 D:両脇から角が出ている丈高めの黄金の冠をかぶる。体色は青。牙を持つ。
 D:女神イシターを封印したと伝えられる。
@@ -19158,6 +19192,9 @@ F:DROP_2D2 | DROP_1D2 | DROP_GOOD | ONLY_ITEM | CAN_SWIM | ANG_NEUTRAL
 F:IM_COLD | IM_POIS | IM_ACID | IM_ELEC | IM_FIRE | REGENERATE |
 S:1_IN_3 |
 S:CAUSE_4 | TELE_TO
+D:$He is the rightful master of the martial art, Hokuto Shinken. 
+D:$At a time when power seems to be everything, 
+D:$he lives in love and fights for love. 
 D:一子相伝とされる北斗神拳の伝承者だ。力が全てを支配すると思われた
 D:時代にあって愛に生き、愛のために戦っている。
 
@@ -19430,6 +19467,7 @@ F:ONLY_GOLD | DROP_90 |
 F:EMPTY_MIND | BASH_DOOR | REFLECTING | ANG_CHAOS
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | IM_ACID |
 F:NO_CONF | NO_SLEEP | NO_FEAR | NONLIVING
+D:$It walks on four legs and has a shiny shell like that of a beetle.
 D:このモンスターに対してはあまりの魔法の無力さに呆然とするであろう。
 D:噂では中にクリボーが入っているとか……
 
@@ -19443,6 +19481,7 @@ F:FORCE_SLEEP |
 F:FRIENDS |
 F:OPEN_DOOR | BASH_DOOR |
 F:ANIMAL | NO_CONF | NO_SLEEP
+D:$This dog is about to explode.
 D:今にも爆発しそうな犬だ。
 
 N:953:折れたデスソード
@@ -19457,6 +19496,7 @@ B:HIT:POISON:1d1
 F:NONLIVING | NO_FEAR |
 F:STUPID | COLD_BLOOD | NO_CONF | NO_SLEEP |
 F:IM_COLD | IM_FIRE | IM_ELEC | IM_POIS
+D:$This broken sword moves about, searching for prey.
 D:獲物の血を求めて動き回る折れた剣だ。
 
 N:954:オークの弩弓隊
@@ -19606,6 +19646,10 @@ F:DROP_1D2 | DROP_90 | DROP_GOOD | ONLY_ITEM | CAN_SWIM |
 F:REGENERATE |
 S:1_IN_6 |
 S:BR_SHAR | TELE_TO
+D:$This muscle-bound man with a horned helmet has won the Great Galaxy 
+D:$Bodybuiling championship ten times in a row. He is eager to prevent 
+D:$anyone from challenging his title. He's also known for his signature 
+D:$move, the Bo Emperor Building Cutter."
 D:銀河ボディビルコンテスト十連続グランドチャンピオン。
 D:必殺技はボ帝ビルカッター。
 
@@ -19634,6 +19678,9 @@ F:NO_CONF | NO_SLEEP | NO_FEAR
 S:1_IN_5 | 
 S:BLIND | CONF | SCARE | CAUSE_2 | BA_POIS |
 S:S_MONSTER
+D:$This strange creature, transformed into an image of a strange creature 
+D:$that is transformed into an abandoned box, waits for a stupid adventurer 
+D:$to get close to its poisonous claws.
 D:放置された箱に化けている奇妙な生物の像に化けている奇妙な生物で、
 D:愚かな冒険者がその毒のある爪の射程に入るのを待ち構えている。
 
@@ -19652,6 +19699,7 @@ F:OPEN_DOOR | CAN_SWIM | CAN_FLY |
 F:NO_CONF | NO_SLEEP | TAKE_ITEM |
 S:1_IN_4 |
 S:BA_ELEC | HASTE | HOLD | CONF | BLIND | INVULNER
+D:$Absolutely not a Mario analog!
 D:断じてマリオの類似品ではない！(本人主張)
 
 N:967:ガキ大将『ジャイアン』
@@ -19669,6 +19717,7 @@ F:DROP_2D2 | ONLY_GOLD | FLAG_50F
 F:OPEN_DOOR | BASH_DOOR | TAKE_ITEM | MOVE_BODY | RES_SOUN
 S:1_IN_5 |
 S:BR_SOUN |
+D:$What's yours is mine, and what's mine is mine.
 D:お前のものは俺のもの。俺のものは俺のもの。
 
 N:968:氷竜『ブラムド』
@@ -19902,6 +19951,8 @@ F:CAN_FLY | GEN_NEUTRAL | DEITY
 F:IM_COLD | IM_ELEC | IM_ACID | IM_POIS | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | FRIENDS
 F:ONLY_GOLD | DROP_1D2
+D:$An embodiment of various human desires.
+D:$This one seems to be derived from business greed.
 D:雑多な欲望の具現だ。商売欲に関する神霊のようだ。
 
 N:980:コアトル
@@ -19932,6 +19983,8 @@ F:BASH_DOOR | CAN_FLY | AURA_ELEC | SELF_LITE_2 |
 F:ANIMAL | IM_ELEC | RIDING |
 S:1_IN_5
 S:BR_ELEC | BA_ELEC |
+D:$It is neither a email client nor an international rescue team.
+D:これは雷鳥でもなければ国際救助隊でもない。
 
 N:982:デュラハン
 E:Dullahan
@@ -19947,6 +20000,7 @@ F:COLD_BLOOD | OPEN_DOOR | CAN_FLY | ANG_CHAOS | HURT_HOLY
 F:UNDEAD | IM_COLD | IM_POIS | RES_NETH | NO_CONF | NO_SLEEP |
 S:1_IN_5
 S:BLIND | HOLD | SCARE | CAUSE_4 | BO_NETH | S_UNDEAD
+D:$Carrying its head in its hand, this ominous monster comes to announce death.
 D:この不吉なモンスターは自分の首を脇に抱え、死を告げにやってくる。
 
 N:983:ヒバゴン
@@ -19959,6 +20013,10 @@ B:CLAW:HURT:1d7
 B:BITE:HURT:2d7
 F:OPEN_DOOR | BASH_DOOR | WILD_MOUNTAIN | GEN_NEUTRAL
 F:ANIMAL
+D:$Resembling a monkey but, at five feet tall, much larger than monkey, this
+D:$ animal must be one of the mysterious beasts that live around Mt. Hiba in
+D:$ Hiroshima Prefecture.
+D:$  It may or may not appear in a certain psychic photograph.
 D:広島県の比婆山一帯に現れる「サルに似ているが、サルよりも大きな」謎の動物。
 
 N:984:小神霊（紫）
@@ -19972,6 +20030,8 @@ F:CAN_FLY | GEN_NEUTRAL| PASS_WALL
 F:IM_FIRE | IM_ELEC | IM_ACID | IM_POIS | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | FRIENDS
 F:ONLY_GOLD | DROP_90
+D:$An embodiment of various human desires.
+D:$This one seems to be derived from the desire for longevity.
 D:雑多な欲望の具現だ。長寿欲に関する神霊のようだ。
 
 N:985:ユニコーン
@@ -19986,6 +20046,7 @@ B:BITE:LOSE_ALL:3d8
 F:REFLECTING | DROP_1D2 | DROP_2D2 | RES_DISE | ANIMAL | RES_HOLY | HURT_HELL
 F:REGENERATE | IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | 
 F:NO_CONF | NO_SLEEP | RES_TELE | CAN_SWIM | RIDING
+D:$It is a white horse with a horn on its forehead.
 D:額に一本の角を持った白馬で、乙女にのみ心を許すと言われる。
 
 N:986:猫又
@@ -19999,6 +20060,8 @@ F:MALE | FORCE_SLEEP | DROP_1D2 | ANIMAL | HURT_HOLY
 F:SMART | OPEN_DOOR | BASH_DOOR | ANG_NEUTRAL | KWAI
 S:1_IN_3 |
 S:SCARE | CAUSE_2 | S_MONSTER
+D:$This cat has a second tail.  There are fables about old cats becoming
+D:$ such creatures and bedeviling people.
 D:猫が年老いると次第に高い知能と分かれた尻尾を持ち、猫又になるという。
 
 N:987:鉄巨人
@@ -20012,6 +20075,7 @@ B:PRESS:SUPERHURT:12d12
 F:REFLECTING | DROP_1D2 | DROP_2D2 | DROP_3D2 | ONLY_ITEM | FORCE_MAXHP | FORCE_SLEEP |
 F:REGENERATE | IM_FIRE | IM_COLD | IM_POIS | IM_ELEC | ANG_NEUTRAL
 F:NO_CONF | NO_SLEEP | RES_TELE | RIDING | GIGANTIC | NONLIVING | EMPTY_MIND
+D:$A gigantic iron golem. The dungeon shakes with each step it takes.
 D:あまりにも巨大な鉄のゴーレムだ。ダンジョンを揺らしながらこちらへと歩んでくる。
 
 N:988:鳳凰
@@ -20032,6 +20096,10 @@ F:NO_STUN | NO_CONF | NO_SLEEP | RIDING
 S:1_IN_3 |
 S:SCARE | BRAIN_SMASH | DRAIN_MANA |
 S:BR_FIRE | BR_LITE | BR_SOUN | HEAL | S_ANGEL
+D:$It is a ruler among the birds and a symbol of virtue and grace.  It has
+D:$ the beak of a rooster, the face of a swallow, the forehead of a fowl,
+D:$ the neck of a snake, the back of a tortoise, the hindquarters of a stag,
+D:$ and tail of a fish.
 D:伝説の聖なる鳥だ。前は鴻、後は麟、顎は燕、嘴は鶏、頸は蛇、尾は魚、額は鸛、
 D:顋は鴛、背は亀甲、羽は五采を備え、龍の紋様を持つと言う。
 
@@ -20052,6 +20120,8 @@ F:RES_DISE | RES_NETH | RES_HOLY | HURT_HELL
 F:NO_STUN | NO_CONF | NO_SLEEP | RIDING
 S:1_IN_6 |
 S:BLIND | ALARM | DISPEL | INVULNER | S_ANGEL
+D:$It is deer-like but with the scales of a dragon and the tail of an ox.
+D:$  All accounts attest to its holiness and power.
 D:龍の鱗に牛の尾、馬の蹄を持ち、角の生えた四本足の聖なる獣で、
 D:王者が仁のある政治を行った時に姿を現わすと言われている。
 
@@ -20065,10 +20135,11 @@ B:BITE:HURT:3d8
 B:KICK:HURT:4d10
 B:KICK:HURT:4d10
 F:DROP_2D2 | ANIMAL | NO_SLEEP | CAN_FLY | RIDING
+D:$It is a large white horse with wings.
 D:翼の生えた天駆ける白馬だ。
 
 N:991:オーディンの乗馬『スレイプニル』
-E:Sleipnir, the Odin's Steed
+E:Sleipnir, Odin's Steed
 G:q:o
 I:130:40d100:20:140:50
 W:51:3:0:17000:0:0
@@ -20079,6 +20150,8 @@ B:BITE:HURT:10d10
 F:FORCE_MAXHP | UNIQUE | ANIMAL | CAN_FLY | ANG_NEUTRAL
 F:REGENERATE | BASH_DOOR | IM_FIRE | IM_COLD | IM_ELEC | DEITY
 F:IM_POIS | NO_CONF | NO_SLEEP | NO_FEAR | RIDING
+D:$This great eight-legged horse is Odin's mount.
+D:$It is said to be the child of Loki, the giant.
 D:オーディンの乗馬たるスレイプニルは、8本の足を持つ名馬である。
 D:巨人ロキの子供であると言われている。
 
@@ -20095,6 +20168,10 @@ F:UNIQUE | MALE | CAN_SPEAK | WILD_WOOD |
 F:FORCE_SLEEP | FORCE_MAXHP | RAND_25 | ANG_COSMOS
 F:SMART | OPEN_DOOR | BASH_DOOR | MOVE_BODY | RIDING |
 F:ANIMAL | IM_FIRE | IM_POIS | NO_CONF | NO_SLEEP
+D:$As large as a small horse, Huan, the hound of Valinor, has the ability
+D:$to understand and speak the languages of elves and men. However, he 
+D:$never speaks in front of Feanor's sons as he's only allowed to speak 
+D:$three times before he dies.
 D:ヴァリノールの猟犬たるフアンは特別な力を持ち、人語を理解し、そして
 D:話すことができる。しかし、フェアノールの子息達の前で話すことは無い。
 D:なぜならば彼は死ぬまでに3度しか話をすることを許されておらず、
@@ -20259,6 +20336,8 @@ F:DRAGON | NO_CONF | NO_SLEEP | NO_SLEEP | NO_FEAR | RIDING |
 F:IM_ACID | IM_FIRE | IM_ELEC | IM_COLD | RES_WATE
 S:1_IN_4 |
 S:BLIND | CONF | SCARE | HOLD | BR_GRAV
+D:$A huge dragon with thick, green-brown scales.
+D:$It stands silently, as if it had been there a thousand years.
 D:緑褐色の重厚な鱗を持つ巨大なドラゴンだ。
 D:千年前からそこにいるかのように静かに佇んでいる。
 
@@ -20281,6 +20360,8 @@ F:RES_HOLY | RES_LITE | RES_DARK | SELF_LITE_2
 S:1_IN_4 |
 S:BLIND | CONF | SCARE | 
 S:BR_SOUN | TORNADO
+D:$A huge dragon that dances in the air with a majestic gold glow.
+D:$When it catches sight of you and growls in displeasure, the air trembles and the dungeon rumbles.
 D:まばゆい黄金の輝きを放ち悠然と宙を舞う巨大なドラゴンだ。
 D:それがあなたを視止め不快げに唸ると、それだけで大気が震撼しダンジョンが鳴動する。
 
@@ -20347,6 +20428,9 @@ F:OPEN_DOOR | CAN_SWIM | ANG_COSMOS
 F:NO_CONF | NO_SLEEP | TAKE_ITEM | 
 S:1_IN_5 |
 S:BA_FIRE | HOLD | BO_FIRE | HEAL
+D:$Merlin the magician summoned this young warrior to complete a variety 
+D:$of tasks. Pip carries a dubious sword, created by Merlin and modeled 
+D:$on King Arthur's Excalibur.
 D:かの大魔術師マーリンが異世界から召喚した(と言い張っている)戦士だ。
 D:「若者はエクスカリバーを短くしたような怪しげな剣を持ち、
 D:稲妻だとか火の玉だとか、わけのわからぬことを呟いている。」
@@ -20369,6 +20453,8 @@ F:IM_ACID | IM_ELEC | IM_POIS | NO_CONF | NO_SLEEP
 S:1_IN_2 | CAUSE_3 | BA_FIRE | HOLD | BLIND | CONF | SCARE
 S:TRAPS | BO_PLAS | BO_NETH
 S:BA_DARK | S_HOUND
+D:$This black-haired sorceror does all he can to wither crops, steal pigs, 
+D:$dry up waterways, and kidnap a queen.
 D:「そこには、魔法の杖を持った黒髪、黒髭、黒い目をして、
 D:黒いローブをまとったいかにも極悪非道といった感じの男が描かれた絵が、
 D:無造作に貼り付けてある」
@@ -20492,6 +20578,7 @@ F:INVISIBLE | COLD_BLOOD | PASS_WALL | CAN_FLY | ANG_NEUTRAL
 F:UNDEAD | IM_COLD | IM_POIS | RES_NETH | NO_CONF | NO_SLEEP
 S:1_IN_6 | 
 S:CAUSE_1
+D:$It's determined to keep clinging on.
 D:それは未練がましい。
 
 #
@@ -20597,6 +20684,10 @@ F:DROP_2D2 | DROP_1D2 | DROP_GOOD | ONLY_ITEM | CAN_SWIM |
 F:IM_COLD | IM_POIS | IM_ACID | IM_ELEC | IM_FIRE | REGENERATE |
 S:1_IN_4 |
 S:BA_FORCE | TELE_TO
+D:$Raou is the eldest of four honorary brothers, another being Kenshirou, 
+D:$who were trained by the master of Hokuto Shinken, a martial art. 
+D:$Headstrong, Raou tries to forge a new order through conquest 
+D:$in a turbulent dark era.
 D:ラオウは北斗神拳伝承者ケンシロウの義兄であり北斗神拳の使い手である。
 D:激動の闇の時代に、己の信念で新たな時代を築こうとした。
 
@@ -20614,6 +20705,7 @@ B:BITE:HURT:6d6
 F:FORCE_MAXHP | UNIQUE | ANIMAL | ANG_NEUTRAL
 F:REGENERATE | BASH_DOOR | IM_FIRE | IM_COLD | IM_ELEC | FLAG_50F
 F:IM_POIS | NO_CONF | NO_SLEEP | NO_FEAR | RIDING
+D:$This rough horse, with its large black body, is just right for Raou.
 D:黒く大きな体をしたこの荒ぶる馬は、まさにラオウの乗馬にふさわしい。
 
 #
@@ -20644,6 +20736,8 @@ F:CAN_FLY | GEN_NEUTRAL| PASS_WALL
 F:IM_FIRE | IM_COLD | IM_ACID | IM_POIS | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | FRIENDS
 F:ONLY_GOLD | DROP_90
+D:$An embodiment of various human desires.
+D:$This one seems to be derived from the desire for bombs.
 D:雑多な欲望の具現だ。ボム欲に関する神霊のようだ。
 
 #:::救援召喚でサイバイマンを呼ぶ
@@ -20841,6 +20935,8 @@ F:CAN_FLY | GEN_NEUTRAL| PASS_WALL
 F:IM_FIRE | IM_ELEC | IM_COLD | IM_POIS | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | FRIENDS
 F:ONLY_GOLD | DROP_90
+D:$An embodiment of various human desires.
+D:$This one seems to be derived from unfulfilled desires.
 D:雑多な欲望の具現だ。この世への未練に関する神霊のようだ。
 
 N:1033:『ディファイラー』
@@ -20904,6 +21000,7 @@ F:MALE | HUMAN |
 F:DROP_1D2 | OPEN_DOOR | BASH_DOOR | ANG_CHAOS
 S:1_IN_2 |
 S:TRAPS | BLINK
+D:$Be careful!  When you see him, you're likely already surrounded with traps.
 D:気をつけろ！姿を見たときはすでに罠に囲まれているぞ。
 
 N:1037:聖堂騎士
@@ -20980,6 +21077,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | HAS_LITE_1
 F:DROP_2D2
 S:1_IN_4
 S:DANMAKU | CONF | SCARE | SLOW | MIND_BLAST
+D:$An embodied collection of strong human emotions.
 D:人の強い感情の集合体だ。
 
 N:1041:大神霊
@@ -20998,6 +21096,7 @@ F:DROP_4D2 | DROP_2D2
 S:1_IN_4
 S:DANMAKU | BR_HOLY | BLINK | TELE_AWAY | HEAL | DISPEL
 S:BO_HOLY | BEAM_LITE | PUNISH_3 | 
+D:$A powerful ghost who has achieved godhood.
 D:神格を得た強力な亡霊だ。
 
 N:1042:幻の鯨『イッカク』
@@ -21076,6 +21175,8 @@ F:EMPTY_MIND | BASH_DOOR | POWERFUL | KILL_WALL | KILL_ITEM |
 F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN | NONLIVING
 S:1_IN_6 | 
 S:BR_DISI
+D:$You see streams of dust spiraling inward from rapidly crumbling stone on
+D:$ the walls or floor.
 D:周囲のものが渦巻き状に分解されていくのが見える。
 
 N:1046:黒色王『ウルファング』
@@ -21325,6 +21426,8 @@ F:FORCE_SLEEP | RES_HOLY | DEITY
 F:DROP_90
 S:1_IN_6
 S:DANMAKU
+D:$A weak, unnoteworthy god with no shrine.
+D:$If you bully her you might get punished.
 D:神社を持たない雑多な神様だ。
 D:力は弱いがいじめるとバチが当たるかもしれない。
 
@@ -21340,6 +21443,7 @@ F:IM_ELEC | ANIMAL | GEN_NEUTRAL
 F:SELF_LITE_1 |
 S:1_IN_6 | 
 S:BR_ELEC | FORGET
+D:$Looks cute, but if you're not careful, you'll probably get turned into an imbecile.
 D:かわいらしい外見をしているが、油断すると痴呆にされてしまうだろう。
 
 N:1061:『恐竜バーニーちゃん』
@@ -21421,6 +21525,9 @@ S:TPORT | BLINK | TELE_AWAY | HASTE |
 S:SLOW | HOLD | TELE_HI_APPROACH
 S:BR_TIME | BR_NEXU | BR_GRAV | BR_INER |
 S:S_DRAGON
+D:$The figure is distorted, like but not like the way swirling water or air
+D:$ above a hot surface can twist a shape, but it appears to be a huge dragon,
+D:$ somehow.
 D:このような存在にはかつて出会ったことがない。
 D:その周囲の空間も時も歪んで見えるためよく分からないが、
 D:なんとなく巨大なドラゴンがいるように見える。
@@ -21478,6 +21585,7 @@ F:BASH_DOOR | WILD_WOOD | WILD_GRASS
 F:ANIMAL | KWAI | HURT_HOLY | GEN_KWAI
 S:1_IN_8
 S:BLINK
+D:$It's a youkai rabbit, often found in bamboo groves.
 D:兎の妖怪だ。竹藪によく生息している。
 
 N:1068:混沌のサマ師『ディオニソス』
@@ -21760,13 +21868,16 @@ F:ONLY_ITEM | DROP_1D2 | DROP_GOOD | DROP_GREAT | WILD_WOOD | FLAG_50F
 F:TAKE_ITEM | OPEN_DOOR | BASH_DOOR | ANG_NEUTRAL
 S:1_IN_4
 S:SHOOT | BLINK
+D:$He is an elementary school student who, with his weapons such as the 
+D:$Alpha Gun, Visual Belt, and Sky Rod, indiscriminately slaughters 
+D:$Juralians on a daily basis."
 D:アルファガン、ビジュームベルト、スカイロッドなどの破壊兵器を所持し、
 D:毎日のようにジュラル星人を大量虐殺している小学生だ。 
 D:「チャージマン！殺してやる！」「それは僕が言う言葉だ！」
 D:（『チャージマン研！』アニメ第３６話・『戦慄!悪魔の病院』）
 
 N:1082:ジュラル星人
-E:Jural Alien
+E:Juralian
 G:h:v
 I:105:3d6:10:10:10
 W:5:8:0:20:0:0
@@ -21777,6 +21888,10 @@ F:DROP_90 | OPEN_DOOR | BASH_DOOR | FRIENDS | ANG_NEUTRAL
 F:WILD_WOOD | HAS_LITE_1 | DEMIHUMAN
 S:1_IN_6
 S:SHOOT
+D:$This maroon-colored, vaguely humanoid, creature with one eye, 
+D:$tentacle-like limbs, slim waist and broad chest is a member of 
+D:$an advanced civilization from another world. 
+D:$They have invaded this world to steal its resources.
 D:彼等の文明は地球より５００年進んでいるそうだ。
 D:「これから毎日家を焼こうぜ」
 D:（『チャージマン研！』アニメ第２５話・『雄一少年を救え！』）
@@ -21791,8 +21906,9 @@ F:OPEN_DOOR | FEMALE | BASH_DOOR | WILD_WOOD | WILD_GRASS
 F:ANIMAL | KWAI | HURT_HOLY | GEN_KWAI
 S:1_IN_6
 S:DANMAKU | BLINK | TRAPS
+D:$A youkai rabbit which has become powerful enough to take the form of 
+D:$a human. It's always cheerful, but surprisingly cunning.
 D:力を得て人型をとった兎の妖怪だ。いつも陽気にしているが意外に狡賢い。
-
 
 N:1084:『コカトリス』
 E:Cockatrice
@@ -23425,6 +23541,14 @@ F:OPEN_DOOR | BASH_DOOR | ANG_AMBER
 S:1_IN_4 |
 S:BLIND | CONF | TPORT | BLINK | TELE_AWAY | TELE_TO | TORNADO
 S:HEAL | TRAPS | MIND_BLAST | BRAIN_SMASH | PSY_SPEAR | FIRE_STORM
+D:$Random is the youngest of the nine Princes of Amber.
+D:$He is sneaky, mercurial and coarse, but also
+D:$surprisingly loyal.
+D:$"...a wily-looking little man, with a sharp nose and a
+D:$laughing mouth and a shock of straw-colored hair. He was dressed
+D:$in something like a Renaissance costume of orange, red, and brown.
+D:$He wore long hose and a tight-fitting embroidered doublet."
+D:$(Roger Zelazny, Nine Princes in Amber, p.28)
 D:ランダムは九王子の末弟で、あちこちの影を遊び歩いて過ごしていた。
 D:打算的で気分屋だが意外に義理堅いところもある。
 D:「ずるそうな顔つきの小男。尖った鼻、笑っている口、むぎわらを束ねたような髪。
@@ -23487,6 +23611,8 @@ F:EMPTY_MIND | COLD_BLOOD | OPEN_DOOR | BASH_DOOR |
 F:UNDEAD | FRIENDS
 F:IM_COLD | IM_ELEC | IM_POIS | RES_NETH | DROP_1D2 | ONLY_ITEM | DROP_GOOD
 F:NO_CONF | NO_SLEEP | NO_FEAR | ANG_CHAOS
+D:$A skeletal soldier created with a dragon tooth catalyst.
+D:$Commanded in large numbers by powerful mages, no ordinary warrior can match their might.
 D:竜の牙を触媒にして創りだされた骨の兵士だ。
 D:並の戦士ではとても敵わないほどの強さだが、強力な魔道士はこれを大量に使役する。
 
@@ -23508,6 +23634,10 @@ S:SCARE | CONF | S_DEMON | S_UNDEAD | S_MONSTER | BLINK | TPORT | TELE_HI_APPROA
 S:BRAIN_SMASH | BA_POLLUTE | BA_DISTORTION
 S:BR_DARK | BR_CHAO | BR_NETH | BR_POIS | 
 S:FIRE_STORM | ACID_STORM | ICE_STORM | TOXIC_STORM
+D:$Nameless bizarre deities from the court of Azathoth, held at the centre 
+D:$of Ultimate Chaos. Blind, voiceless and mindless, many of them dance
+D:$endlessly beyond time and space, but some have taken up residence in
+D:$this world.
 D:名もなき異形の神々だ。
 D:多くは最高神アザトートに仕え宇宙の深淵で果てなき舞いを続けているが、
 D:何らかの奇怪な理由でこの世界にやってくるものもいる。
@@ -23526,6 +23656,7 @@ F:ATTR_MULTI | ATTR_ANY | EMPTY_MIND | STUPID | STAY_AT_HOME3 | FRIENDS
 F:DROP_90 | DROP_60 | DROP_1D2 | FORCE_SLEEP |
 F:IM_POIS | IM_COLD | NONLIVING | HURT_HOLY | RES_NETH | RES_TIME | RES_CHAO
 F:NO_CONF | NO_FEAR
+D:$A bizarre musician who is forever playing a flute to soothe the supreme Blind Idiot God Azathoth.
 D:最高神アザトートの傍らで永遠にフルートを吹き鳴らし続ける異形の奏者だ。
 
 N:1176:ポイズン・ジャイアント
@@ -23541,6 +23672,8 @@ F:TAKE_ITEM | OPEN_DOOR | BASH_DOOR | ANG_CHAOS
 F:DEMIHUMAN | IM_POIS | MALE |  
 S:1_IN_8 | 
 S:BR_POIS
+D:$A giant whose toxic skin is covered in boils.
+D:$Smoke billows from all over its body.
 D:腫物に覆われた毒々しい色の肌を持つ巨人だ。体のあちこちから煙を上げている・・
 
 N:1177:黒の剣
@@ -23554,6 +23687,8 @@ F:IM_POIS | IM_COLD | IM_FIRE | IM_ELEC | RES_NETH | RES_CHAO | ANG_CHAOS
 F:FORCE_SLEEP | FORCE_MAXHP | CAN_FLY | NEVER_MOVE |
 F:COLD_BLOOD | BASH_DOOR | NONLIVING | WEIRD_MIND | KILL_EXP
 F:NO_CONF | NO_SLEEP | NO_FEAR
+D:$A great sword which hovers in the air, glowing ominously.
+D:$It has evil intent and will slash at you to drink your soul.
 D:宙に浮き禍々しく光る大剣だ。
 D:邪悪な意思を持っており、あなたの魂をすすろうと斬りかかってくる。
 
@@ -23591,6 +23726,8 @@ F:RES_CHAO | RES_DISE | RES_INER | RES_TIME | FORCE_DEPTH
 F:RES_TELE | NO_FEAR | NO_CONF | NO_STUN | NO_SLEEP | 
 S:1_IN_1 | 
 S:DISPEL | FORGET | ROCKET | WAVEMOTION | BR_FIRE | BO_MANA | HOLD | FIRE_STORM | TOXIC_STORM
+D:$The ultimate weapon of the ancient Ronkan civilisation.
+D:$Even the heroes with the Twelve Weapons couldn't defeat it.
 D:古代ロンカ文明の最終兵器だ。十二の武器を持つ勇者達でも敵わない。
 
 N:1180:『ミカエル』
@@ -23610,12 +23747,14 @@ F:IM_ACID | IM_FIRE | IM_ELEC | IM_POIS | RES_LITE | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_2 |
 S:1_IN_3 | 
 S:SPECIAL
+D:$An archangel whose name means 'One Who Is Like God', he
+D:$lead a vast host of angels to defeat Satan... oh wait. Hold on.
 D:「誰が神のごとくあろうか」という意味の名を持つ大天使で、
 D:天使の大軍を率いてサタンと戦ったと言われ…おや？ちょっと待てよ？
 
 
 N:1181:ダイアモンドナイト
-E:Diamond Knight
+E:Diamond knight
 G:p:y
 I:130:100d100:50:200:0
 W:105:3:0:50000:0:0
@@ -23630,12 +23769,15 @@ F:DROP_3D2 | DROP_GOOD | DROP_GREAT | ONLY_ITEM | NO_FEAR
 F:IM_FIRE | IM_COLD | IM_POIS | IM_ACID | IM_ELEC | REGENERATE | 
 S:1_IN_4
 S:TELE_APPROACH
+D:$A knight wearing elaborately decorated heavy armour.
+D:$It's impossible to see the face behind the thick helmet.
+D:$He approaches, dazzling sword in hand...
 D:精巧な装飾のなされた重厚な甲冑に身を包んだ騎士だ。
 D:厚い兜の奥の表情は窺い知ることができない。
 D:眩く輝く大剣を構えてこちらに歩み寄ってくる…
 
 N:1182:レッサー・デーモン
-E:Lesser Demon
+E:Lesser demon
 G:U:R
 I:110:12d55:20:70:80
 W:30:3:0:600:0:0
@@ -23653,7 +23795,7 @@ D:$A lesser demon, it glares at you with its eyes burning like fire.
 D:下位の悪魔だ。燃えるような目であなたを睨み付けている。
 
 N:1183:グレーター・デーモン
-E:Greater Demon
+E:Greater demon
 G:U:B
 I:115:45d66:20:170:80
 W:60:3:0:8000:0:0
@@ -23712,6 +23854,8 @@ F:DRAGON | NO_CONF | NO_SLEEP | RES_TELE
 S:1_IN_4 |
 S:BR_ELEC | BR_AQUA | BA_WATE | THUNDER_STORM | BLINK | TELE_AWAY | TELE_TO
 S:S_DRAGON | BR_CHAO | TELE_HI_APPROACH
+D:$A dragon with wings and four legs, an auspicious beast that symbolises transformation.
+D:$It flies freely though the Heavens and brings about storms.
 D:四本足と翼を持つ龍だ。変幻を象徴する瑞獣で天を自在に駆け嵐を呼ぶという。
 
 N:1186:霊亀
@@ -23731,10 +23875,10 @@ F:BASH_DOOR | POWERFUL | MOVE_BODY | RIDING
 F:NO_CONF | NO_SLEEP | RES_TELE
 S:1_IN_5 |
 S:BR_DISE | BR_TIME 
+D:$A giant sacred turtle that carries Mount Hourai upon its shell, 
+D:$which is said to be a paradise inhabited by ageless hermits.
 D:甲羅に山を背負っている巨大な聖なる亀だ。
 D:甲羅の山は蓬莱山と呼ばれ、不老不死の仙人たちが住む楽園であるという。
-
-
 
 N:1187:図書館防衛用ゴーレム
 E:Library defender golem
@@ -23748,6 +23892,8 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NONLIVING
 F:STAY_AT_HOME2
 S:1_IN_4
 S:DANMAKU
+D:$A golem created by a wizard to protect her library from thieves.
+D:$It looks strangely familiar.
 D:ある魔女が図書館を泥棒から守るために作ったゴーレムだ。
 D:なんだかどれもどこかで見たような姿をしている。
 
@@ -23765,6 +23911,8 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NONLIVING
 F:STAY_AT_HOME2
 S:1_IN_4
 S:DANMAKU | BEAM_LITE | BA_FIRE | BA_COLD | BA_ELEC
+D:$A golem created by a wizard to protect her library from thieves.
+D:$Aside from being so large that you have to look up at it, it looks strangely familiar.
 D:ある魔女が図書館を泥棒から守るために作ったゴーレムだ。
 D:見上げるほどに大きいことを除けば、なんだかどれもどこかで見たような姿をしている。
 
@@ -23780,6 +23928,7 @@ F:MALE | FORCE_SLEEP | ONLY_ITEM | DROP_1D2 | ANIMAL
 F:KWAI | GEN_KWAI | NO_STUN | FULL_MOON | REGENERATE | OPEN_DOOR | BASH_DOOR  |
 F:WILD_WOOD
 F:RES_DARK | HURT_HOLY
+D:$A typical beastman. Often found in forests and bamboo groves.
 D:典型的な獣人だ。竹林や森によく住んでいる。
 
 N:1190:狼女
@@ -23794,6 +23943,7 @@ F:FEMALE | FORCE_SLEEP | ONLY_ITEM | DROP_1D2 | ANIMAL
 F:KWAI | GEN_KWAI | NO_STUN | FULL_MOON | REGENERATE | OPEN_DOOR | BASH_DOOR  |
 F:WILD_WOOD
 F:RES_DARK | HURT_HOLY
+D:$A typical beast-woman. Often found in forests and bamboo groves.
 D:典型的な獣人だ。竹林や森によく住んでいる。
 
 
@@ -23811,6 +23961,7 @@ F:OPEN_DOOR | BASH_DOOR |
 F:IM_COLD | IM_POIS | RES_DARK | RES_NETH | NO_CONF | NO_SLEEP |
 S:1_IN_6 | 
 S:CONF | DARKNESS | SCARE | MIND_BLAST
+D:$A shinigami who works in Higan. Hermits and celestials are beyond their jurisdiction, but they'll fight anyway.
 D:彼岸で働く死神だ。仙人や天人を見たら管轄外だが一応戦う。
 
 N:1192:死神(船頭)
@@ -23828,6 +23979,7 @@ F:OPEN_DOOR | BASH_DOOR | FROM_HELL
 F:IM_FIRE | IM_COLD | IM_POIS | RES_DARK | RES_NETH | NO_CONF | NO_SLEEP | RES_WATE
 S:1_IN_6 | 
 S:CONF | DARKNESS | HOLD | MIND_BLAST | BO_NETH
+D:$A shinigami who works on the Sanzu River. Hermits and celestials are beyond their jurisdiction, but they'll fight anyway.
 D:三途の川で働く死神だ。仙人や天人を見たら管轄外だが一応戦う。
 
 N:1193:死神(お迎え担当)
@@ -23845,6 +23997,7 @@ F:OPEN_DOOR | BASH_DOOR | FEMALE | FROM_HELL
 F:IM_ACID | IM_FIRE | IM_COLD | IM_POIS | RES_DARK | RES_NETH | RES_HOLY | NO_CONF | NO_SLEEP |
 S:1_IN_4 | 
 S:CONF | HOLD | BLIND | BLINK | BRAIN_SMASH | CAUSE_4 | HASTE | BO_NETH | BA_NETH | TPORT | TELE_HI_APPROACH | 
+D:$A shinigami who works outside of Higan. They seek out hermits and celestials and usher their souls to hell if not fought off.
 D:現世で働く死神だ。仙人や天人は彼女達を撃退できないと地獄へご案内されると言われている。
 
 
@@ -23861,6 +24014,7 @@ F:RES_HOLY | FORCE_SLEEP
 F:STAY_AT_HOME1
 S:1_IN_4
 S:HOLD | SCARE | BLIND | PUNISH_2 | HEAL | BA_FIRE | BA_ELEC | BLINK
+D:$A novice hermit who bravely battles youkai and evil spirits despite inexperience.
 D:まだまだ修行の浅い仙人だが、妖怪や悪霊を見ると勇ましく戦う。
 
 N:1195:仙人
@@ -23879,6 +24033,7 @@ F:STAY_AT_HOME1
 S:1_IN_4
 S:HOLD | SCARE | BLIND | PUNISH_3 | HEAL | HASTE | BO_HOLY | BO_MANA | THUNDER_STORM
 S:BLINK | TPORT | TELE_AWAY
+D:$A virtuous mystic who has mastered powerful hermetic arts.
 D:強力な仙術を修めた徳の高い仙人だ。
 
 N:1196:天人
@@ -23897,6 +24052,8 @@ S:1_IN_4
 S:PUNISH_4 | HEAL | HASTE | BA_HOLY | BA_LITE | BO_MANA | THUNDER_STORM | FIRE_STORM | PSY_SPEAR
 S:BLINK | TPORT | TELE_AWAY | TELE_APPROACH | INVULNER | S_KIN
 S:S_DEITY
+D:$A human who has achieved superhuman powers after hundreds of years of training 
+D:$and has been promoted to a resident of Heaven.
 D:何百年もの長い修行を終え、超人的な力を手にして天界で暮らす者達だ。
 
 N:1197:鼻高天狗
@@ -23916,6 +24073,7 @@ F:NO_CONF | NO_SLEEP |
 S:1_IN_6
 S:BA_FORCE | BO_MANA | CONF | BLIND | BLINK | BA_FIRE | CAUSE_3 | CAUSE_4 |
 S:TPORT | BEAM_LITE | MIND_BLAST | TELE_AWAY | S_KWAI
+D:$A long-nosed tengu in charge of business and administration work on Youkai Mountain.
 D:山で事務を主に担当する、鼻の高い天狗だ。
 
 N:1198:亡霊
@@ -23932,6 +24090,7 @@ F:HUMAN | INVISIBLE | COLD_BLOOD | PASS_WALL | CAN_FLY | GEN_NEUTRAL
 F:UNDEAD | IM_COLD | IM_POIS | RES_NETH | NO_CONF | NO_SLEEP
 S:1_IN_6 | 
 S:SCARE | CAUSE_1 | CAUSE_2
+D:$A ghostly human who seems to have retained some of its appearance and memories from its previous life.
 D:人間の霊魂だ。生前の姿と記憶をある程度保っているようだ。
 
 N:1199:大怨霊
@@ -23950,6 +24109,8 @@ F:UNDEAD | IM_FIRE | IM_ELEC | IM_POIS | RES_NETH | RES_DARK | GEN_WARLIKE
 F:NO_CONF | NO_SLEEP
 S:1_IN_4 | 
 S:SCARE | HOLD | CAUSE_2 | CAUSE_3 | MIND_BLAST | BA_ELEC
+D:$A apparition formed from the condensation of strong negative emotions.
+D:$It thinks of nothing else but harming others, and is a dangerous opponent even to youkai.
 D:強い負の感情が凝縮された霊魂だ。常に他者を傷つけることばかり考えており、妖怪すら取り殺す危険な相手だ。
 
 N:1200:怨霊
@@ -23968,6 +24129,8 @@ F:UNDEAD | IM_FIRE | IM_POIS | RES_NETH | RES_DARK | GEN_WARLIKE
 F:NO_CONF | NO_SLEEP | HAS_LITE_1
 S:1_IN_5 | 
 S:SCARE | CAUSE_1 | CAUSE_2 |
+D:$A apparition formed of pure resentment and anger, which attacks the minds of others.
+D:$Unlike ghosts, vengeful spirits are warm to the touch.
 D:人間の恨みや怒りが純化された霊魂で、標的の精神に攻撃を加えてくる。怨霊は幽霊と違い触ると温かいらしい。
 
 N:1201:究極生命体『カーズ』
@@ -23989,6 +24152,9 @@ F:NO_CONF | NO_SLEEP | CAN_FLY |
 F:BASH_DOOR | POWERFUL |
 S:1_IN_5 |
 S:BR_SHAR |
+D:$"And this beauty! What radiance! More wonderful than anything I've ever seen!" 
+D:$"Finally... finally, I have conquered the sun!"
+D:$(Hirohiko Araki, Jojo's Bizarre Adventure, Vol. 12)
 D:「そして　あの！美しい！なんという輝き！今まで見た何よりもすばらしい…」
 D:「あの太陽をついに…ついに…克服したぞ！」
 D:(荒木飛呂彦　ジョジョの奇妙な冒険 12巻)
@@ -24008,11 +24174,12 @@ F:SMART | OPEN_DOOR |
 F:NO_CONF | NO_SLEEP | NO_FEAR
 S:1_IN_5 | 
 S:HEAL | PUNISH_3 |
+D:$"Repent, ye dead! Discover faith in death!" (Kentaro Miura, Berserk, chapter 20)
 D:「悔い改めよ亡者ども！信仰とは死ぬことと見つけたり！」　　(三浦建太郎　「ベルセルク」 20巻)
 
 #1202を倒すまでは通常出現しない
 N:1203:使徒？『モズグス』
-E:Mozgus, the Apostle
+E:Mozgus, the Apostle?
 G:R:W
 I:125:80d80:20:180:0
 W:70:2:0:48000:0:0
@@ -24027,6 +24194,8 @@ F:OPEN_DOOR |
 F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN
 S:1_IN_4 | 
 S:BR_HOLY | BR_FIRE
+D:$"You fool who does not fear God, God's punishment is swift and certain! 
+D:$I will punish you on behalf of heaven!" (Kentaro Miura, Berserk, chapter 20)
 D:「神を畏れぬ愚か者よ　天罰覿面！　天に代わりてこの私が！あなたにバチを当てましょう！」
 D:　　(三浦建太郎　「ベルセルク」 20巻)
 
@@ -24087,7 +24256,7 @@ D:普段は彼岸から出てこないが、寿命を不正に延ばす者を直々に裁くために現世に来るこ
 
 
 N:1207:UMA『チュパカブラ』
-E:Chupacabra
+E:Cryptid 'Chupacabra'
 G:y:w
 I:135:15d15:30:60:0
 W:16:4:0:800:0:0
@@ -24099,7 +24268,7 @@ F:FORCE_MAXHP | GEN_NEUTRAL
 F:ANIMAL | 
 S:1_IN_2
 S:BLINK | TELE_APPROACH
-D:$A new monster imported from the Outside World. Moves quickly and drains blood of livestock.
+D:$A new monster imported from the Outside World(?). Moves quickly and drains blood of livestock.
 D:外界から輸入？されてきた新顔の怪物だ。素早い動きで家畜の血を吸う。
 
 N:1208:宙に浮かぶ魔法陣(赤)
@@ -24112,6 +24281,7 @@ F:IM_FIRE | IM_POIS | IM_ACID | ONLY_ITEM | DROP_60 | NONLIVING | FRIENDS | STUP
 F:STAY_AT_HOME2 | HAS_LITE_1
 S:1_IN_1
 S:BO_FIRE
+D:$A magic inscription floating in the air. Often set up by wizards to intercept intruders.
 D:空中に浮かぶ魔法陣だ。侵入者迎撃用に魔法使いが設置していることが多い。
 
 N:1209:宙に浮かぶ魔法陣(青)
@@ -24124,6 +24294,7 @@ F:IM_COLD | IM_ELEC | IM_POIS | ONLY_ITEM | DROP_60 | NONLIVING | FRIENDS | STUP
 F:STAY_AT_HOME2 | HAS_LITE_1
 S:1_IN_1
 S:BO_ELEC
+D:$A magic inscription floating in the air. Often set up by wizards to intercept intruders.
 D:空中に浮かぶ魔法陣だ。侵入者迎撃用に魔法使いが設置していることが多い。
 
 N:1210:宙に浮かぶ魔法陣(白)
@@ -24136,6 +24307,7 @@ F:IM_COLD | IM_POIS | IM_ACID | ONLY_ITEM | DROP_60 | NONLIVING | FRIENDS | STUP
 F:STAY_AT_HOME2 | HAS_LITE_1
 S:1_IN_1
 S:BO_COLD
+D:$A magic inscription floating in the air. Often set up by wizards to intercept intruders.
 D:空中に浮かぶ魔法陣だ。侵入者迎撃用に魔法使いが設置していることが多い。
 
 N:1211:宙に浮かぶ魔法陣(大)
@@ -24148,6 +24320,7 @@ F:IM_COLD | IM_POIS | IM_ACID | ONLY_ITEM | DROP_90 | NONLIVING | STUPID
 F:STAY_AT_HOME2 | HAS_LITE_1 | KILL_EXP
 S:1_IN_1
 S:BEAM_LITE
+D:$A magic inscription floating in the air. Often set up by wizards to intercept intruders.
 D:空中に浮かぶ、精巧で大きな魔法陣だ。侵入者迎撃用に魔法使いが設置していることが多い。
 
 N:1212:『魔法の森の主』
@@ -24181,6 +24354,8 @@ F:STAY_AT_HOME3
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_4 | 
 S:BO_FIRE | SCARE |
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だがおとなしく採取されてはくれないだろう。
 
 N:1214:魔法おばけキノコ(青)
@@ -24196,6 +24371,8 @@ F:IM_ELEC | IM_POIS
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_4 | 
 S:BO_ELEC | CONF |
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だがおとなしく採取されてはくれないだろう。
 
 N:1215:魔法おばけキノコ(黒)
@@ -24211,6 +24388,8 @@ F:IM_ACID | IM_POIS
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_4 | 
 S:BO_ACID | SCARE |
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だがおとなしく採取されてはくれないだろう。
 
 N:1216:魔法おばけキノコ(白)
@@ -24226,6 +24405,8 @@ F:IM_COLD | IM_POIS
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_4 | 
 S:BO_COLD | CONF |
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だがおとなしく採取されてはくれないだろう。
 
 N:1217:魔法おばけキノコ(緑)
@@ -24241,6 +24422,8 @@ F:STAY_AT_HOME3
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_3 | 
 S:BA_POIS | BR_POIS | HOLD |
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。採取する前に自分が菌糸の苗床にならないようにしよう。
 
 N:1218:魔法おばけキノコ(極彩色)
@@ -24257,6 +24440,8 @@ F:IM_POIS | RES_CHAO
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_3 | 
 S:BR_CHAO | HOLD | BLIND
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だが魔法の森ではキノコがあなたを賞味するかもしれない。
 
 N:1219:魔法おばけキノコ(灰色)
@@ -24272,6 +24457,8 @@ F:IM_POIS | RES_NETH
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_3 | 
 S:BR_NETH | HOLD | BLIND
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だが魔法の森ではキノコがあなたを賞味するかもしれない。
 
 N:1220:魔法おばけキノコ(透明)
@@ -24288,6 +24475,8 @@ F:IM_POIS | RES_SHAR
 F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 |
 S:1_IN_3 | 
 S:BR_SHAR | HOLD | BLIND
+D:$These mushrooms are a local specialty of the Forest of Magic.
+D:$But they won't let themselves be picked quietly.
 D:魔法の森特産のおばけキノコだ。だが魔法の森ではキノコがあなたを賞味するかもしれない。
 
 
@@ -24346,6 +24535,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1 | AURA_COLD
 F:NO_STUN | CAN_FLY
 S:1_IN_1 | 
 S:ICE_STORM | BO_ICEE | BA_COLD
+D:$I'm so proud of my subordinate!
 D:あたいの自慢の配下よ！
 
 #デコイ人形用のダミーキャラ
@@ -24380,6 +24570,7 @@ F:HURT_HOLY | IM_ACID | IM_FIRE | IM_COLD | IM_POIS | RES_NETH | TAKE_ITEM | CAN
 F:OPEN_DOOR | BASH_DOOR | STAY_AT_HOME1
 S:1_IN_4
 S:DANMAKU | TRAPS | HOLD | BEAM_LITE | BA_WATE | BO_PLAS | BR_AQUA
+D:$Kappa live in Hell too. They're said to be more terrifying than those above ground.
 D:地獄にも河童が棲んでいる。地上の河童より凄みがあるらしい。
 
 #可変パラメータの特殊ユニーク
@@ -24576,6 +24767,7 @@ W:9:5:0:20:0:0
 B:BITE:HURT:1d5
 F:WILD_WOOD | WILD_GRASS  | GEN_KWAI
 F:ANIMAL | KWAI | HURT_HOLY | FRIENDS
+D:$Large rats that rush around rapidly as if they are searching for something.
 D:素早い動きをする大型のネズミ達だ。妙に統制がとれていて、何かを探しているようにも見える・・
 
 
@@ -24589,6 +24781,7 @@ F:IM_FIRE | IM_POIS | IM_ACID | NONLIVING | FRIENDS | STUPID
 F:STAY_AT_HOME2 | HAS_LITE_1
 S:1_IN_1
 S:DANMAKU
+D:$A magic inscription floating in the air. Often set up by wizards to intercept intruders.
 D:空中に浮かぶ魔法陣だ。侵入者迎撃用に魔法使いが設置していることが多い。
 
 N:1242:賢者の石
@@ -24604,6 +24797,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | SELF_LITE_1
 F:NO_STUN | CAN_FLY
 S:1_IN_1 | 
 S:ICE_STORM | FIRE_STORM | ACID_STORM | THUNDER_STORM | TOXIC_STORM
+D:$A substance that's said to be the ultimate magical product.
 D:究極の魔法の産物とされる物質だ。
 
 #赤蛮奇の頭　可変パラメータ
@@ -24618,6 +24812,7 @@ F:FEMALE | FORCE_MAXHP
 F:KWAI | BASH_DOOR
 F:CAN_FLY
 F:HURT_HOLY
+D:$It's a clone of Sekibanki's head. It chases and attacks the enemy.
 D:赤蛮奇の頭の分身だ。敵を追いかけて攻撃する。
 
 #赤蛮奇の頭　可変パラメータ
@@ -24633,6 +24828,7 @@ F:CAN_FLY
 F:HURT_HOLY
 S:1_IN_1
 S:BEAM_LITE
+D:$It's a clone of Sekibanki's head. It stays still and fires non-elemental lasers.
 D:赤蛮奇の頭の分身だ。その場を動かずに無属性のレーザーで攻撃する。
 
 N:1245:ハシビロコウ
@@ -24643,6 +24839,7 @@ W:26:20:0:80:0:0
 B:BITE:HURT:4d6
 B:BITE:HURT:4d6
 F:ANIMAL | CAN_FLY | WILD_WASTE | WILD_MOUNTAIN | WILD_WOOD | GEN_NEUTRAL
+D:$A large bird with a large beak. It stares disconcertingly, as still as a statue.
 D:大きな嘴を持つ大型の鳥類だ。全く動かずにこちらを見つめてくる・・
 
 N:1246:コモドドラゴン
@@ -24672,9 +24869,10 @@ F:OPEN_DOOR |
 F:GEN_NEUTRAL
 S:1_IN_6 | 
 S:CAUSE_2 | CAUSE_3
+D:$A ghostly human possessing a great will.
+D:$It looks much like a living person, but will kill you easily if you let your guard down.
 D:強い念を持った人間の霊だ。傍目には生きた人間と全く変わらないが、
 D:油断すると取り殺されてしまうだろう。
-
 
 N:1248:劣化ハウンド
 E:Disenchantment hound
@@ -24691,7 +24889,7 @@ F:BASH_DOOR | FLAG_50F
 F:ANIMAL | RES_DISE | NO_CONF | NO_SLEEP
 S:1_IN_5 | 
 S:BR_DISE
-D:$A dull-colored canine form. Vegetation withers and water turns muddy as it passes through.
+D:$A dull-coloured canine form. Vegetation withers and water turns muddy as it passes through.
 D:くすんだ色をした犬のような塊だ。
 D:その塊がのたうつように進むと、周囲の植物は見る間に枯れ水たまりは濁っていく。
 
@@ -24737,7 +24935,7 @@ D:突如、壁や床にボコボコと穴が開いた。飛びかかってくる犬のシルエットのような形だ
 
 
 N:1251:邪龍
-E:Dark Dragon
+E:Dark dragon
 G:D:D
 I:125:55d100:50:140:50
 W:64:3:0:32000:0:0
@@ -24787,10 +24985,11 @@ F:SMART | GEN_NEUTRAL | RES_HOLY | HURT_HELL | GEN_MOON
 F:IM_ACID | IM_COLD | DEMIHUMAN | STAY_AT_HOME2
 S:1_IN_3 |
 S:SHOOT | BLINK
+D:$A Moon Rabbit soldier wielding a bayonetted rifle. Her ears stick out of her helmet.
 D:月の兎の兵士だ。耳が出るヘルメットを被って銃剣を構えている。
 
 N:1254:UMA『モケーレ・ムベンベ』
-E:Mokele-mbembe
+E:Cryptid 'Mokele-mbembe'
 G:R:U
 I:120:200d24:20:90:20
 W:42:10:0:10000:0:0
@@ -24803,6 +25002,8 @@ F:GEN_NEUTRAL | UNIQUE | FORCE_MAXHP
 F:BASH_DOOR | MOVE_BODY | REGENERATE
 F:ANIMAL | RIDING | NO_STUN | NO_SLEEP
 F:IM_FIRE | IM_ACID | IM_POIS | RES_WATE
+D:$A huge quadruped herbivore with smooth skin, a long neck, long tail, and a single long tooth.
+D:$Came in from the Outside World(?).
 D:アフリカ大陸中央部の密林に生息していると伝えられる怪物だ。
 D:体の大きさはカバとゾウの間ぐらい、体長は5～10mで、ヘビのように長い首と尾を持ち、4本脚で、
 D:3本の爪をもつとされる。
@@ -24818,6 +25019,8 @@ F:COLD_BLOOD | EMPTY_MIND | KWAI
 F:ANIMAL | IM_POIS | INVISIBLE
 F:RES_DARK | GEN_NEUTRAL | CAN_SWIM
 F:NO_FEAR | NO_CONF | NO_STUN | NO_SLEEP | 
+D:$Highly venomous insects too small to be seen with the naked eye.
+D:$Those who are bitten suffer from high fevers.
 D:ツツガムシは肉眼で見えないほどの小さな虫だ。
 D:しかし強い毒を持っており、刺された者は高熱に苦しむという。
 
@@ -24835,6 +25038,8 @@ F:HURT_HOLY | RES_DARK | RES_NETH | UNIQUE | SMART | FORCE_SLEEP
 S:1_IN_3
 S:PUNISH_4 | HEAL | BO_MANA | BO_NETH | HOLD | BLIND
 S:BLINK | TPORT | TELE_AWAY
+D:$A famous monk from the Edo period.
+D:$He was excommunicated for his stupidity, but suddenly became an expert in spirit exorcism...
 D:江戸時代の高名な僧侶だ。
 D:愚鈍だったため檀通上人から破門されたが、ある夜突然怨霊退治のエキスパートとなった...
 
@@ -24854,6 +25059,8 @@ F:RES_DARK | RES_NETH | UNIQUE | SMART | FORCE_SLEEP
 S:1_IN_4
 S:BA_POIS | BLIND | CONF | HASTE
 S:BLINK | S_KIN
+D:$A priest of about 60 years old. He used to draw pictures of cats and tigers to scare off rats.
+D:$It's said that the rats that saw his drawings immediately disappeared...
 D:齢六十前後の坊主だ。鼠避けとして猫や虎の絵を書いて歩いた。
 D:白仙の描いた絵を見た鼠たちはたちどころに姿を消したという...
 
@@ -24882,6 +25089,9 @@ B:PRESS:HURT:12d12
 F:BASH_DOOR |
 F:ANIMAL | RIDING | CAN_SWIM | UNIQUE | ANG_FRIENDLY | STAY_AT_HOME2
 F:IM_ACID | IM_FIRE | IM_COLD | RES_WATE | WILD_OCEAN | WILD_SHORE | FORCE_MAXHP
+D:$Said to be a legendary monster fish.
+D:$'It is seven foot long, has a dark grey body, 6-inch long hair,
+D:$a rat-like head, red eyes, and a tail split like a swallow's...'
 D:伝説の怪魚とされる。「長さ七尺、総身鼠色、毛の長さ七寸、頭鼠の如し、目赤し、尾は二股にして燕のごとし……」
 
 N:1260:送り提灯
@@ -24897,6 +25107,8 @@ F:HURT_HOLY
 F:STAY_AT_HOME2
 S:1_IN_6
 S:DANMAKU | BO_FIRE
+D:$A lantern floats in the air and moves of its own accord.
+D:$It's actually being held up by an invisible kappa.
 D:誰も持っていない提灯がいくつも宙に浮かんで進んでいる。
 D:その正体は河童の運送係であった。
 
@@ -24918,6 +25130,9 @@ F:IM_ACID | IM_ELEC | IM_FIRE | IM_COLD |
 F:NO_FEAR | NO_CONF
 S:1_IN_4 |
 S:TELE_HI_APPROACH | SHOOT | BLINK | TELE_TO | SPECIAL
+D:$A ninja feared as the Reaper of Neo-Saitama.
+D:$He wears red and black ninja attire and a sinister mask with the characters "Ninja" and "Kill" inscribed on each cheek.
+D:$His eyes burn with a desire for revenge against all ninjas.
 D:ネオサイタマの死神と恐れられるニンジャだ。
 D:赤黒の忍者装束を纏い、左右の頬に「忍」「殺」と刻まれた禍々しい仮面をつけている。
 D:その瞳は全てのニンジャへの復讐に燃えている。
@@ -24988,6 +25203,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | RAND_50
 F:NO_STUN | CAN_FLY
 S:1_IN_3 | 
 S:DANMAKU
+D:$A keystone that flies around under Tenshi's power.
 D:天子の術で飛び回る要石だ。
 
 
@@ -25002,6 +25218,7 @@ F:VARIABLE
 F:BASH_DOOR | RAND_25
 F:CAN_FLY | GIGANTIC
 F:HURT_HOLY | RES_DARK | RES_NETH | RES_WATE
+D:$A jealousy monster created by you. The more jealous you are of its target, the stronger it becomes.
 D:あなたによって生み出された嫉妬の怪物だ。あなたの嫉妬の念が強いほど怪物も強くなる。
 
 #注：idx1322に同パラメータのキャラ(闘技場専用)がコピーされている。何かパラメータいじるなら両方変えることが望ましい。
@@ -25067,6 +25284,7 @@ W:7:100:0:1:0:0
 B:MOAN:CONFUSE:
 F:WILD_TOWN | WILD_ONLY | FORCE_MAXHP | CAN_SPEAK
 F:RAND_50 | RAND_25 | ANIMAL | KWAI |
+D:$A stray dog rummaging through the trash. Oh? Wait a minute...
 D:野良犬がゴミをあさっている。おや？ちょっと待てよ…
 
 N:1271:蟒蛇
@@ -25347,6 +25565,8 @@ F:OPEN_DOOR | FEMALE | BASH_DOOR | WILD_WOOD | WILD_GRASS |
 F:KWAI | RES_HOLY | GEN_MOON | HURT_HELL | DROP_90 | ONLY_ITEM
 S:1_IN_6
 S:SHOOT | BLINK | TPORT
+D:$A member of the Moon Rabbit Earth Recon Unit.
+D:$They're not treated well considering the danger of the job, so morale tends to be low.
 D:月の兎の調査部隊だ。危険な割に待遇が悪いので士気は低いようだ。
 
 N:1287:(特殊フィールド)
@@ -25371,6 +25591,7 @@ F:IM_POIS | RES_WATE | IM_ACID
 F:NO_SLEEP | NO_STUN
 S:1_IN_3
 S:SPECIAL2
+D:$"This soil will grow good Saibamen." (Akira Toriyama, Dragon Ball)
 D:「この土ならいい栽培マンが育つぜ」(鳥山明「DRAGON BALL」)
 
 N:1289:夢塊
@@ -25406,6 +25627,9 @@ B:TOUCH:MUTATE:
 F:UNIQUE | FEMALE
 F:WILD_GRASS | WILD_WOOD | WILD_ONLY | FORCE_MAXHP | CAN_SPEAK
 F:RAND_25 | RAND_50 | HUMAN | KWAI | CAN_SPEAK |
+D:$A old woman peddling in a place like this? 
+D:$Looking closely at the large cloth bundle on her back,
+D:$you can see what looks like human feet sticking out...
 D:こんな所に行商の老婆がいる。大きな風呂敷包みを背負っているが、
 D:よく見ると、風呂敷包みから飛び出しているのは人の足のように見える…
 
@@ -25422,6 +25646,7 @@ F:FORCE_MAXHP | ANIMAL | KWAI | DEITY | GEN_NEUTRAL
 F:ONLY_ITEM | DROP_2D2 | DROP_3D2 | DROP_GOOD | WILD_VOLCANO | WILD_MOUNTAIN | WILD_WASTE
 F:REGENERATE | BASH_DOOR | IM_FIRE | IM_COLD | IM_ELEC | RES_TIME | RES_NETH | RES_TELE
 F:NO_CONF | NO_SLEEP | NO_FEAR | RIDING
+D:$It is said to the horse of the god Toshigami, or a haunting upon the person who killed the horse.
 D:首のない馬が走り回っている。歳神様の乗馬だとも馬を殺した者への祟りだとも言われている。
 
 #永琳のときの輝夜　可変パラメータ
@@ -25450,6 +25675,7 @@ F:WEIRD_MIND | COLD_BLOOD | NONLIVING | HURT_FIRE |
 F:NO_CONF | NO_SLEEP | NO_FEAR
 S:1_IN_4
 S:MIND_BLAST | BEAM_LITE
+D:$A portrait of a stern-looking man hanging on the wall. Oh? Wait a minute...
 D:厳めしい顔つきの肖像画が壁にかけられている。おや？ちょっと待てよ...
 
 N:1295:『八尺さま』
@@ -25467,6 +25693,7 @@ F:KWAI | FEMALE | POWERFUL | NO_CONF | NO_SLEEP | NO_FEAR
 F:IM_FIRE | IM_COLD | RES_DARK | RES_NETH
 S:1_IN_8
 S:TELE_HI_APPROACH | BRAIN_SMASH
+D:$A woman who stands over 8 foot tall, wearing a white dress and hat, and with an eerie laugh.
 D:外見は身の丈八尺(2m40cm)に及ぶ女性だ。白いワンピースを着て帽子を被っており、不気味な声で笑う。
 
 N:1296:月の衛士
@@ -25484,6 +25711,8 @@ F:MALE | GEN_MOON | HAS_LITE_1 | STAY_AT_HOME3
 F:IM_FIRE | IM_COLD | IM_POIS | RES_LITE | RES_HOLY | RES_TELE | HURT_HELL
 S:1_IN_4
 S:BEAM_LITE 
+D:$Guards of the Lunarian nobility. 
+D:$They wear medieval continental-style armour and wield beam-like swords.
 D:月の貴人を警護する兵士たちだ。中世の大陸風の鎧を身にまとい、ビームのような剣を携えている。
 
 
@@ -25551,7 +25780,7 @@ F:FORCE_MAXHP | MULTIPLY
 F:EMPTY_MIND | COLD_BLOOD | GEN_MOON
 F:RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | NO_SLEEP | RAND_25
-D:$One of weapons of the Lunarian civilization.
+D:$A proud weapon of the Lunarian civilization.
 D:月の文明が誇る兵器の一つだ。
 
 N:1301:雷龍
@@ -25584,6 +25813,8 @@ F:UNIQUE2 | FORCE_MAXHP
 F:NO_CONF | NO_SLEEP | NO_FEAR | HURT_HOLY | REFLECTING | ELDRITCH_HORROR
 S:1_IN_1
 S:MIND_BLAST | BRAIN_SMASH
+D:$A bizarre entity that twists and wiggles strangely. 
+D:$It is said that all who see it go mad.
 D:奇妙な動きで体をくねらせる謎の存在だ。それを見た者は気が狂うという。
 
 
@@ -25600,6 +25831,13 @@ F:IM_FIRE | IM_POIS | NO_SLEEP | NO_CONF
 F:MALE | ANG_COSMOS | DEMIHUMAN
 S:1_IN_3 |
 S:SHOOT
+D:$Firearms were not used in Amber since gunpowder does not work there:
+D:$ chemistry is not always the same in Amber and the parallel worlds that
+D:$ are shadows of it.  Prince Corwin, by accident, had found a substance in
+D:$ Avalon that could work as powder and primer in Amber and its closest
+D:$ shadows.  With that in mind, he devised a plan to take Amber using a small
+D:$ force armed with automatic rifles.  This gunner, from a parallel world
+D:$ where Corwin is worshipped as a god, is one of that force.
 D:アンバーの王子コーウィンは、並行世界の化学的作用が必ずしも
 D:共通でない事を知っている。そこで彼はあらゆる影から数多くの鉱物を取り寄せ、
 D:各世界で作用する火薬を生産し、現代地球の銃器で利用できる手法を確立した。
@@ -25615,6 +25853,8 @@ F:NEVER_BLOW
 F:RAND_50 | CAN_FLY | ANG_NEUTRAL | FORCE_MAXHP | COLD_BLOOD
 F:IM_FIRE | IM_POIS | NO_SLEEP | NO_CONF | DROP_90
 F:EMPTY_MIND
+D:$A strange flying machine shaped like an awkward bird.
+D:$It has weapons stored in its round fuselage.
 D:ぎこちなく飛ぶ鳥のような形をした奇妙な機械だ。丸い胴体部分には武器が保管されている。
 
 N:1305:清掃ボット
@@ -25632,6 +25872,7 @@ S:1_IN_4
 S:BEAM_LITE | TELE_TO | BA_POLLUTE
 F:KILL_ITEM
 F:RIDING | NONLIVING | EMPTY_MIND | STUPID
+D:$Alpha Complex is kept spotless at all times by the perfectly coordinated work of highly capable cleaning bots.
 D:アルファ・コンプレックスは完璧に統率された優秀な清掃ボットたちの働きにより常に清潔に保たれています。
 
 N:1306:小舟
@@ -25643,6 +25884,7 @@ F:NEVER_BLOW| COLD_BLOOD | FORCE_MAXHP
 F:STUPID | EMPTY_MIND | RIDING | ONLY_RIDING
 F:AQUATIC
 F:HURT_ROCK | NO_FEAR | NO_STUN | NO_CONF | NO_SLEEP | IM_COLD | IM_POIS | RES_WATE
+D:$A small boat you've been assigned. You can use it, or swim on your own.
 D:あなたに割り当てられた小舟だ。あなたはこれに乗ってもいいし自力で泳いでもいい。
 
 N:1307:ヒダル神
@@ -25671,6 +25913,8 @@ F:GEN_KWAI | RIDING | WILD_ONLY | WILD_WOOD | WILD_MOUNTAIN
 F:IM_FIRE | IM_COLD | IM_POIS | 
 S:1_IN_3 | 
 S:BLINK
+D:$A whirlwind that spontaneously appears in the mountains.
+D:$It is said that a tengu stirs it up, or that a tengu is inside it.
 D:山に突如巻き起こるつむじ風だ。天狗が起こすとも天狗が中に入っているともいわれる。
 
 N:1309:蝦蟇
@@ -25682,6 +25926,8 @@ B:TOUCH:POISON:2d5
 F:RAND_50 | WILD_ONLY | WILD_SHORE | WILD_SWAMP |
 F:BASH_DOOR | CAN_SWIM | FRIENDS
 F:ANIMAL | KWAI
+D:$An astonishingly large toad.
+D:$It is said to be a messenger of the giant toad of Youkai Mountain.
 D:驚くほど大きなガマガエル(ニホンヒキガエル)だ。
 D:妖怪の山の大蝦蟇の使いだという。
 
@@ -26031,7 +26277,7 @@ D:$A prehistoric terror living in Sanzu River.
 D:それは三途の川に棲む有史以前の恐怖だ。
 
 N:1331:海龍
-E:SeaDragon
+E:Sea dragon
 G:D:B
 I:120:64d100:40:160:50
 W:64:2:0:30000:0:0
@@ -26064,6 +26310,7 @@ F:OPEN_DOOR | BASH_DOOR | GEN_HUMAN | HANIWA | FRIENDS | COLD_BLOOD
 F:NO_CONF | NO_FEAR | NO_SLEEP | REGENERATE
 F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
+D:$A Haniwa wielding a sword, created from clay by the sculpting god Haniyasukami-uchigi-hime.
 D:造形神『埴安神　袿姫』により生み出された、剣を持つ埴輪だ。
 
 
@@ -26082,6 +26329,7 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_2
 S:SHOOT
+D:$A Haniwa wielding a bow, created from clay by the sculpting god Haniyasukami-uchigi-hime.
 D:造形神『埴安神　袿姫』により生み出された、弓を持つ埴輪だ。
 
 N:1334:騎馬兵埴輪
@@ -26100,6 +26348,7 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_4
 S:SHOOT
+D:$A Haniwa horseman riding a Haniwa horse, created from clay by the sculpting god Haniyasukami-uchigi-hime.
 D:造形神『埴安神　袿姫』により生み出された、埴輪の馬に乗った埴輪の騎兵だ。
 
 N:1335:熟練剣士埴輪
@@ -26116,6 +26365,8 @@ F:OPEN_DOOR | BASH_DOOR | GEN_HUMAN | HANIWA | ESCORT | COLD_BLOOD
 F:NO_CONF | NO_FEAR | NO_SLEEP | REGENERATE
 F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
+D:$An elite of the Haniwa Corps. 
+D:$Its colour is more lustrous than other Haniwa, and it wields a shining sword sharply.
 D:埴輪兵団の精鋭だ。
 D:白く輝く剣を帯び、他のハニワより動きにキレがあって色艶も良い。
 
@@ -26134,6 +26385,8 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_2
 S:SHOOT
+D:$An elite of the Haniwa Corps. 
+D:$It wields a powerful bow with a watchful eye.
 D:埴輪兵団の精鋭だ。
 D:強力な弓を構えこちらを油断なく窺っているようだ。
 
@@ -26153,6 +26406,8 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_3
 S:SHOOT
+D:$An elite of the Haniwa Corps. 
+D:$It looks somewhat proud riding its intricately decorated horse.
 D:埴輪兵団の精鋭だ。
 D:精巧な装飾で飾られた馬に乗りどことなく誇らしげだ。
 
@@ -26170,6 +26425,8 @@ F:COLD_BLOOD | OPEN_DOOR | BASH_DOOR | FRIENDS | STAY_AT_HOME1
 F:UNDEAD | ANIMAL | CAN_FLY | DROP_1D2
 F:IM_COLD | IM_POIS | RES_NETH |
 F:NO_SLEEP | NO_FEAR | GEN_KWAI
+D:$An animal spirit that belongs to the huge Keiga Family. 
+D:$They seek to dominate the Animal Realm through brute strength.
 D:畜生界の巨大組織「勁牙組」に所属する動物霊だ。
 D:強靭な肉体で畜生界を支配しようとしている。
 
@@ -26188,6 +26445,8 @@ F:IM_COLD | IM_POIS | RES_NETH | RES_DARK | HAS_DARK_1
 F:NO_SLEEP | NO_CONF | GEN_KWAI| SMART
 S:1_IN_3
 S:TELE_HI_APPROACH | CAUSE_3 | DRAIN_MANA | HOLD | BLIND | CONF | BLINK | SHRIEK
+D:$An animal spirit that belongs to the huge Kiketsu Family. 
+D:$They seek to dominate the Animal Realm through underhanded tactics.
 D:畜生界の巨大組織「鬼傑組」に所属する動物霊だ。
 D:奇襲や搦め手で畜生界を支配しようとしている。
 
@@ -26206,6 +26465,8 @@ F:IM_COLD | IM_POIS | RES_NETH | RES_DARK |
 F:NO_SLEEP | NO_CONF | GEN_KWAI| SMART
 S:1_IN_3
 S:TPORT | BLINK | HASTE | HEAL
+D:$An animal spirit that belongs to the huge Gouyouku Alliance. 
+D:$They seek to dominate the Animal Realm through aerial superiority.
 D:畜生界の巨大組織「剛欲同盟」に所属する動物霊だ。
 D:俯瞰視点からの戦いで畜生界を支配しようとしている。
 
@@ -26350,6 +26611,8 @@ F:UNIQUE
 F:FORCE_MAXHP | WILD_TOWN | WILD_ONLY 
 F:RAND_50 | ANIMAL | NONLIVING | GEN_FRIENDLY
 F:NO_SLEEP
+D:$A strange object that runs around like a puppy. 
+D:$Apparently it's kept as a pet at Kourindou.
 D:子犬のように辺りを駆け回る不思議な物体だ。
 D:香霖堂のペットとして飼われているらしい。
 
@@ -26409,6 +26672,8 @@ W:5:3:0:20:0:0
 B:BITE:INERTIA:1d20
 F:RAND_25 | AQUATIC | WILD_SHORE | COLD_BLOOD
 F:ANIMAL | IM_FIRE | RES_WATE | FOOD
+D:$A reptile with a soft shell. It has strong jaws and is difficult to remove if it bites.
+D:$Its flesh and blood have been highly prized since ancient times.
 D:柔らかい甲羅を持つ爬虫類だ。顎の力が強く一度噛みついたらなかなか離れない。
 D:肉や血は極めて滋味に富むとされ古くから珍重されてきた。
 
