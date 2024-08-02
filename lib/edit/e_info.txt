@@ -925,14 +925,14 @@ F:ACTIVATE
 U:HELO
 
 N:110:ñ≥ëoÇÃ
-E:and Matchlessness
+E:and Peerlessness
 X:27:10
 W:0:0:0:8000
 #C:10:10:0:0
 F:WARNING
 
 N:111:èCóÖìπÇÃ
-E:of Shugendo
+E:of Asura
 X:27:15
 W:30:0:0:8000
 #C:0:30:-30:0
@@ -963,7 +963,7 @@ F:ACTIVATE
 U:BO_MANA
 
 N:115:âŒãÖÇÃ
-E:and Fire ball
+E:and Fire Ball
 X:27:10
 W:40:0:0:1500
 C:0:0:0:0
@@ -987,7 +987,7 @@ F:ACTIVATE
 U:BA_ELEC_2
 
 N:118:é_ÇÃãÖÇÃ
-E:and Acid ball
+E:and Acid Ball
 X:27:10
 W:40:0:0:1500
 C:0:0:0:0
