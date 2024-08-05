@@ -19542,8 +19542,8 @@ B:BITE:HURT:1d8
 B:KICK:HURT:2d4
 F:WILD_WASTE | BASH_DOOR | GEN_NEUTRAL
 F:ANIMAL | RIDING
-D:$As for the horse with the animal of four feet which can run fast, 
-D:$it was utilized for a long time as the vehicle of the human.
+D:$This four-legged beast is capable of running quickly.  Others like it
+D:$ have been used by humans as vehicles since ancient times.
 D:馬は速く駆けることのできる四本足の獣で、
 D:古くから人間の乗り物として利用されてきた。
 
@@ -19559,7 +19559,7 @@ B:KICK:HURT:2d4
 F:WILD_WASTE | BASH_DOOR | RAND_25 | GEN_WARLIKE
 F:ANIMAL | RIDING
 D:$This creature is gentle and submissive until you try to ride it.  
-D:$Watch out for it's reckless kicking.
+D:$Watch out for its reckless kicking.
 D:馬は普段は従順で大人しい生き物であるが、
 D:一旦暴走しだすと手がつけられなくなる。
 
@@ -20286,7 +20286,7 @@ B:CRUSH:SHATTER:12d12
 F:ANIMAL | FORCE_MAXHP | BASH_DOOR | TAKE_ITEM | RAND_50 |
 F:REGENERATE | ANG_NEUTRAL | FLAG_50F
 F:DROP_60 | DROP_90 | DROP_1D2 | DROP_2D2 | DROP_3D2 | DROP_4D2 | RIDING
-D:$A massive chikovo. Looks like it can carry lots of items!
+D:$A massive chiokovo. Looks like it can carry lots of items!
 D:巨大なチォコヴォだ。それは大量のアイテムを蓄えている！
 
 N:1000:極楽界ドラゴン『バハムート』
@@ -20650,8 +20650,7 @@ B:EXPLODE:HURT:30d2
 F:EMPTY_MIND | COLD_BLOOD | ANG_NEUTRAL
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS |
 F:NO_FEAR | NO_CONF | NO_SLEEP | NONLIVING | RES_TELE
-D:$It is a small bomb of a form like a spider. 
-D:$It walks toward you!
+D:$It is a small bomb in a spider-like package.  It walks toward you!
 D:蜘蛛のような形の小さな爆弾で、あなたに向って歩き、爆発する。
 
 #
@@ -20854,8 +20853,8 @@ B:BITE:HURT:3d10
 F:MALE | ESCORT
 F:BASH_DOOR | FORCE_MAXHP | UNIQUE | ANG_NEUTRAL
 F:ANIMAL | WILD_WOOD | WILD_MOUNTAIN | NO_SLEEP | NO_FEAR
-D:$A king of mad bear. He had built his stronghold at Hutago mountain, 
-D:$and is reigning over there.
+D:$He is king of the mad bears.  He has built his stronghold at Hutago
+D:$ mountain and reigns from there.
 D:二子峠に己の牙城を築き上げ君臨する凶熊どもの王だ。
 
 N:1028:凶熊
@@ -21113,9 +21112,8 @@ F:ONLY_ITEM | DROP_2D2 | DROP_GOOD |
 F:IM_COLD | RES_WATE |
 F:IM_POIS | NO_CONF | NO_SLEEP | NO_STUN |
 F:RIDING
-D:$This is the whale of the tradition which gets across to the Inuit 
-D:$who lives in the world of winter. It is said that the mystical horn 
-D:$of this whale cures all illnesses.
+D:$This is the legendary whale of the Inuit living in the winter world.  It
+D:$ is said that the horn of this whale can cure any disease.
 D:冬の世界に住むイヌイット族に伝わる伝説の鯨で，
 D:その神秘の角はあらゆる病に効くとされる。
 
@@ -21139,8 +21137,8 @@ F:OPEN_DOOR | BASH_DOOR | SMART |
 F:ANIMAL | IM_ACID | IM_FIRE | IM_COLD | IM_POIS | NO_CONF | NO_SLEEP
 S:1_IN_3 |
 S:BO_COLD | BA_COLD | BO_ICEE | BR_COLD
-D:$This bird is the porter of the mansion in which Dio Brando hides and lives. 
-D:$For it, a dog may be a favorite food.
+D:$This bird guards the mansion in which Dio Brando hides and lives.  Dogs
+D:$ may be its favorite food.
 D:ディオが隠れ棲む館の門番であるこの鳥は犬が
 D:大好物なのかもしれない。
 
@@ -21501,7 +21499,7 @@ F:ONLY_ITEM | DROP_1D2 | DROP_GOOD |
 S:1_IN_6
 S:S_KIN
 D:$This huge louse is the ruin of the sad man 
-D:$who had become a louse just because he loves louses.
+D:$who had become a louse just because he loves lice.
 D:この巨大なシラミはシラミを愛するあまりシラミになってしまった
 D:哀れな人間のなれの果てだ。
 
@@ -21698,7 +21696,7 @@ F:UNIQUE | MALE | HAS_LITE_2 | HUMAN | ANG_CHAOS
 F:FORCE_MAXHP | CAN_SPEAK | WILD_ALL |
 F:ONLY_ITEM | DROP_1D2 | DROP_GOOD | 
 F:OPEN_DOOR | BASH_DOOR
-D:$He is a junior brother of king of southerings Meng Huo.
+D:$He is a junior brother of the king of the southerners, Meng Huo.
 D:南蛮王孟獲の弟だ。武勇には多少の自信がある。
 
 N:1074:火の神『祝融』
@@ -21714,8 +21712,8 @@ F:FORCE_MAXHP | CAN_SPEAK | WILD_ALL |
 F:ONLY_ITEM | DROP_1D2 | DROP_GOOD | OPEN_DOOR | BASH_DOOR |
 S:1_IN_9
 S:SHRIEK
-D:$She is the wife of king Meng Huo. She is called as the avater of 
-D:$flame spirit.
+D:$She is the wife of king Meng Huo.  She is said to be an avatar of a
+D:$ flame spirit.
 D:南蛮王孟獲の妻だ。彼女は火の神の化身と言われている。
 D:その武勇を侮るな。
 
@@ -21924,8 +21922,8 @@ F:ONLY_GOLD | DROP_2D2 | DROP_4D2 | ANG_NEUTRAL
 F:NO_SLEEP | RES_INER | IM_POIS |
 S:1_IN_5 |
 S:SHRIEK
-D:$It will make animals into stone-like objects. Be aware,
-D:$you become to stone if you touch it with your empty hand!
+D:$It can turn an animal into a stone statue.  Beware, you will turn to
+D:$ stone if you touch it with your bare hand!
 D:こいつは獲物を石像のようにしちまうんだ。
 D:気をつけろ！素手で触ると石になっちまうぞ。
 
