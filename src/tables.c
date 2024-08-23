@@ -2628,10 +2628,10 @@ const player_class class_info[MAX_CLASS] =
 #ifdef JP
 		"守護者",
 		"守護者",
-		"Protector",
+		"Guardian",
 #else
-		"Protector",
-		"Protector",
+		"Guardian",
+		"Guardian",
 #endif
 		{ 1, -2, 2, -1, 2, 3},
 		16, 20, 37, 1, 18, 35, 68, 40,
@@ -10427,7 +10427,7 @@ const option_type option_info[] =
 	{ &left_hander,                 FALSE, OPT_PAGE_BIRTH, 6, 15,
 	"left_hander",                  "左利きである" },
 #else
-	{ &left_hander,                 FALSE, OPT_PAGE_BIRTH, 6, 13,
+	{ &left_hander,                 FALSE, OPT_PAGE_BIRTH, 6, 15,
 	"left_hander",                  "Left-Hander" },
 #endif
 #ifdef JP
@@ -10638,7 +10638,7 @@ const option_type option_info[] =
 	{ &record_arena,                TRUE,  OPT_PAGE_PLAYRECORD, 4, 24,
 	"record_arena",                 "夢日記での勝敗を記録する" },
 #else
-	{ &record_arena,                TRUE,  OPT_PAGE_PLAYRECORD, 4, 21,
+	{ &record_arena,                TRUE,  OPT_PAGE_PLAYRECORD, 4, 24,
 	"record_arena",                 "Record arena victories" },
 #endif
 
@@ -13409,7 +13409,7 @@ const activation_type activation_info[] =
 	{ "SCARE_AREA", ACT_SCARE_AREA, 20, 2500, {20, 0},
 	  _("モンスター恐慌", "frighten monsters") },
 	{ "AGGRAVATE", ACT_AGGRAVATE, 0, 100, {0, 0},
-	  _("モンスターを怒らせる", "aggravete monsters") },
+	  _("モンスターを怒らせる", "aggravate monsters") },
 
 	{ "CHARM_ANIMAL", ACT_CHARM_ANIMAL, 40, 7500, {200, 0},
 	  _("動物魅了", "charm animal") },
@@ -13439,7 +13439,7 @@ const activation_type activation_info[] =
 	  _("蛸の大群召喚", "summon octopus") },
 
 	{ "CHOIR_SINGS", ACT_CHOIR_SINGS, 60, 20000, {300, 0},
-	  _("回復(777)、癒し、士気高揚", "heal 777 hit points, curing and heloism") },
+	  _("回復(777)、癒し、士気高揚", "heal 777 hit points, curing and heroism") },
 	{ "CURE_LW", ACT_CURE_LW, 10, 500, {10, 0},
 	  _("恐怖除去/体力回復(30)", "remove fear and heal 30 hp") },
 	{ "CURE_MW", ACT_CURE_MW, 20, 750, {3, 3},
@@ -13634,7 +13634,7 @@ const activation_type activation_info[] =
 	  _("遅鈍のボルト(4d6)", "bolt of inertia (4d6)") },
 
 	  { "MATARA", ACT_MATARA, 50, 10000, {100, 0},
-	  _("鼓を鳴らす", "ring the drum") },
+	  _("鼓を鳴らす", "play the drum") },
 	  { "HYAKKIYAKOU", ACT_HYAKKIYAKOU, 30, 10000, {10, 10},
 	  _("百鬼夜行", "hundred oni night parade") },
 
@@ -14149,7 +14149,7 @@ cptr alice_doll_name[INVEN_DOLL_NUM_MAX] =
 	_("蓬莱人形", "Hourai Doll"),
 	_("露西亜人形", "Russian Doll"),
 	_("倫敦人形", "London Doll"),
-	_("オルレアン人形", "Orlean Doll"),
+	_("オルレアン人形", "Orleans Doll"),
 	_("京人形", "Kyoto Doll"),
 	_("ゴリアテ人形", "Goliath Doll"),
 };
@@ -14200,7 +14200,7 @@ struct marisa_magic_type marisa_magic_table[MARISA_MAX_MAGIC_KIND] =
 	{0,0,0,10,0,0,0,0},FALSE},
 	{_("エスケープベロシティ", "Escape Velocity"),
 	_("隣接した敵全てに魔力属性攻撃を行い、\\その後一瞬で短距離のテレポートを行う。",
-    "Deals mana damage to all adjacent enemies, \\then immediately teleports aways a short distance."),
+    "Deals mana damage to all adjacent enemies, \\then teleports away a short distance."),
 	{0,0,5,0,0,10,0,0},FALSE},
 
 	{_("コールドインフェルノ", "Cold Inferno"),
@@ -14243,7 +14243,7 @@ struct marisa_magic_type marisa_magic_table[MARISA_MAX_MAGIC_KIND] =
 	{0,0,0,20,20,20,0,20},TRUE},
 	{_("強化丹", "Enhanced Elixir"),
 	_("体力を最大値まで回復し全てのステータス異常を治癒する薬を作る。",
-    "Creates a potion that fully recovers HP and curess all status abnormalities."),
+    "Creates a potion that fully recovers HP and cures all status abnormalities."),
 	{0,50,0,50,0,0,0,20},TRUE},
 	{_("スターダストレヴァリエ", "Stardust Reverie"),
 	_("自分の周囲に強力な閃光属性のボールを連続で発生させる。",
@@ -15313,7 +15313,7 @@ soldier_skill_type soldier_skill_table[SOLDIER_SKILL_ARRAY_MAX][SOLDIER_SKILL_NU
 		{0,_("近接射撃技術", "Close-Range Shooting"),
             _("モンスターに至近距離で射撃したときクリティカルヒットが発生しやすくなる。",
             "Increases critical hit chance when shooting monsters at close range.")},
-		{0,_("一撃離脱戦法", "Hit and Away Tacttics"),
+		{0,_("一撃離脱戦法", "Hit and Away Tactics"),
             _("隣接攻撃のあと一瞬で離脱する特技「ヒット＆アウェイ」を使用可能になる。",
             "Lets you use the 'Hit and Away' special ability.")},
 		{0,_("戦地調達", "Battlefield Preparations"),
@@ -15343,7 +15343,7 @@ soldier_skill_type soldier_skill_table[SOLDIER_SKILL_ARRAY_MAX][SOLDIER_SKILL_NU
             "Increases searching skill. \\At level 10, lets you use the 'Survey Surroundings' special ability.")},
 		{0,_("障害物製作技術", "Create Obstacles"),
             _("隣接した床一か所を岩石地形にする「バリケード設置」を使用可能になる。",
-            "Lets you use the 'Set Up Barricade' special ability that creates rubbles on an adjacent open floor.")},
+            "Lets you use the 'Set Up Barricade' special ability that creates rubble on an adjacent open floor.")},
 		{0,_("ポータル設置", "Set Up Portal"),
             _("フロアの床に二箇所までポータル地形を設置でき、ポータル間を移動できる。\\テレポート妨害の効果を受けない。\\三箇所目以降を設置しようとすると古いポータルから順に消える。",
             "Sets up to 2 portals on open floor that you can move between. \\Ignores teleportation prevention. \\Placing a third portal will remove your first.")},
@@ -15389,7 +15389,7 @@ soldier_skill_type soldier_skill_table[SOLDIER_SKILL_ARRAY_MAX][SOLDIER_SKILL_NU
             "Lets you use the 'Create Ammo' special ability to turn materials into ammo. \\This ammo can be used with 'Switch Ammo' to perform powerful shooting attacks.")},
 		{40,_("ナイトビジョン", "Night Vision"),
             _("暗闇でも物が見られるようになる。\\暗闇で近接攻撃や銃による射撃を行ったときクリティカルヒット率が上昇する。\\視界に頼らないモンスターには効果が薄い。",
-            "Makes you able to see in the dark. \\Increases critical hit chance for melee and shooting attacks while in darkness. \\Less effectvie against monsters not relying on sight.")},
+            "Makes you able to see in the dark. \\Increases critical hit chance for melee and shooting attacks while in darkness. \\Less effective against monsters not relying on sight.")},
 		{45,_("魔弾の射手", "Freischutz"),
             _("射撃成功率と全ての射撃のクリティカルヒット判定値が大幅に増加する。\\またアーティファクト発動「魔弾の射手」が精神集中と周囲の敵の数に応じて強化される。",
             "Greatly raises shooting attack success rate and critical hit chance. \\Also, the 'Freischutz' artifact activation will increase in power based on your concentration state and amount of enemies nearby.")},
@@ -15444,22 +15444,22 @@ soldier_bullet_type soldier_bullet_table[] =
 	{0,_("ダミー","dummy"),"",0},
 	//31-48宝石弾
 	{0,_("猛毒弾","toxic bullet"),_("威力3倍の毒属性になる。","3x damage from poison"),SS_M_MATERIAL_BULLET},
-	{0,_("獣殺しの弾丸","animal slayer"),_("獣に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to animals; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("磁力弾","magnetic bullet"),_("無生物に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to nonliving; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("破魔の弾丸","demon slayer"),_("妖怪・アンデッド・デーモンに対して威力が2倍になる。\\ボルトでも反射されない。","2x damage against youkai, undead, and demons; even shots not refected"),SS_M_MATERIAL_BULLET},
-	{0,_("怨霊の弾丸","widow maker"),_("人間に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage to humans; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("太陽の弾丸","bird shot"),_("飛行するモンスターに対して威力が2倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","2x damage to flying monsters; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("銀の弾丸","silver bullet"),_("混沌の勢力に威力1.5倍、\\妖怪・アンデッド・デーモンに対して威力が3倍になる。\\クリティカルヒット率が上昇する。\\ボルトでも反射されない。","1.5x damage to chaotic forces; 3x damage against youkai, undead, and domes; increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("重量弾","heavy ammunition"),_("威力2倍の通常の射撃になる。\\クリティカルヒット率が上昇する。反射されない。","2x damage; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("獣殺しの弾丸","animal slayer"),_("獣に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to animals; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("磁力弾","magnetic bullet"),_("無生物に対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage to nonliving; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("破魔の弾丸","demon slayer"),_("妖怪・アンデッド・デーモンに対して威力が2倍になる。\\ボルトでも反射されない。","2x damage against youkai, undead, and demons; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("怨霊の弾丸","widow maker"),_("人間に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage to humans; greatly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("太陽の弾丸","bird shot"),_("飛行するモンスターに対して威力が2倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","2x damage to flying monsters; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("銀の弾丸","silver bullet"),_("混沌の勢力に威力1.5倍、\\妖怪・アンデッド・デーモンに対して威力が3倍になる。\\クリティカルヒット率が上昇する。\\ボルトでも反射されない。","1.5x damage to chaotic forces; 3x damage against youkai, undead, and demons; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("重量弾","heavy bullet"),_("威力2倍の通常の射撃になる。\\クリティカルヒット率が上昇する。反射されない。","2x damage; increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
 	{0,_("ドラゴンブレス弾","dragon's breath bullet"),_("3倍の威力のブレスになる。","3x damage; acts like breath weapon"),SS_M_MATERIAL_BULLET},
 	{0,_("水龍の弾丸","water dragon bullet"),_("威力3倍の極寒属性ロケットになる。","a frigid rocket with 3x damage"),SS_M_MATERIAL_BULLET},
-	{0,_("竜殺しの弾丸","dragon slayer"),_("竜に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against dragons; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("神殺しの弾丸","god slayer"),_("神格に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against deities; greatly increased criticals; even shots not reflected"),SS_M_MATERIAL_BULLET},
-	{0,_("悪夢の弾丸","nightmare bullet"),_("地獄の業火弱点のモンスターに対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage against holy monsters; greatly increased criticals; event shots not reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("竜殺しの弾丸","dragon slayer"),_("竜に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against dragons; greatly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("神殺しの弾丸","god slayer"),_("神格に対して威力が3倍になりクリティカルヒット率が大幅に上昇する。\\ボルトでも反射されない。","3x damage against deities; greatly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("悪夢の弾丸","nightmare bullet"),_("地獄の業火弱点のモンスターに対して威力が3倍になりクリティカルヒット率が上昇する。\\ボルトでも反射されない。","3x damage against holy monsters; greatly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
 	{0,_("聖なる弾丸","holy bullet"),_("威力3倍の破邪属性ロケットになる。","radius 2 racket; 3x damage"),SS_M_MATERIAL_BULLET},
 	{0,_("真紅の弾丸","crimson bullet"),_("威力5倍の火炎属性ビームになる。","beam of fire; 5x damage"),SS_M_MATERIAL_BULLET},
-	{0,_("金剛弾","Kongo bullet"),_("威力4倍の光の剣属性のビームになる。","slashing light beam; 4x damage"),SS_M_MATERIAL_BULLET},
-	{0,_("流星弾","meteor"),_("威力4倍の通常射撃になる。\\クリティカルヒット率が大幅に上昇する。反射されない。","4x damage; significantly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
+	{0,_("金剛弾","diamond bullet"),_("威力4倍の光の剣属性のビームになる。","slashing light beam; 4x damage"),SS_M_MATERIAL_BULLET},
+	{0,_("流星弾","meteor bullet"),_("威力4倍の通常射撃になる。\\クリティカルヒット率が大幅に上昇する。反射されない。","4x damage; significantly increased criticals; can't be reflected"),SS_M_MATERIAL_BULLET},
 	{0,_("緋緋色金の弾丸", "scarlet gold bullet"),_("威力10倍の分解属性大型ビームになる。","disintegrating beam; 10x damage"),SS_M_MATERIAL_BULLET},
 
 

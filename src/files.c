@@ -8778,7 +8778,7 @@ static void dump_aux_race_history(FILE *fff)
 	if(p_ptr->pclass == CLASS_MOKOU)
 	{
 		fprintf(fff, _("\n[ƒŠƒUƒŒƒNƒVƒ‡ƒ“‰ñ”] %d‰ñ\n",
-                        "\n[Times ressurected] %d time(s)\n"), p_ptr->magic_num1[0]);
+                        "\n[Times resurrected] %d time(s)\n"), p_ptr->magic_num1[0]);
 	}
 	if (p_ptr->pclass == CLASS_SHION)
 	{

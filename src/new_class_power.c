@@ -57,7 +57,7 @@ class_power_type class_power_zanmu[] =
 
 	{ 10,0,0,FALSE,FALSE,A_WIS,0,0,_("精神統一", "Concentrate Mind"),
 	_("精神を集中して魔力を回復する。",
-    "Concenctrates your mind, recovering MP.")},
+    "Concentrates your mind, recovering MP.")},
 
 	{ 15,25,35,FALSE,TRUE,A_INT,0,0,_("虚無操作Ⅰ", "Void Manipulation I"),
 	_("モンスター一体を高確率でフロアから追放する。クエスト打倒対象のモンスターには効果がない。",
@@ -76,7 +76,7 @@ class_power_type class_power_zanmu[] =
 
 	{ 35,80,70,FALSE,TRUE,A_INT,0,0,_("虚無操作Ⅲ", "Void Manipulation III"),
 	_("一時的に「未来予知」「レーダーセンス」を得る。",
-    "Temporarily gives effects of Foresight and Radar Sense.")},
+    "Temporarily gives effects of Future Sight and Radar Sense.")},
 
 	{ 40,160,80,FALSE,TRUE,A_CHR,0,0,_("亡羊のキングダム", "Kingdom of Lost Sheep"),
 	_("周囲の広範囲のモンスターを友好的にしようと試みる。クエスト打倒対象モンスターと精神を持たないモンスターには効果がない。",
@@ -10015,7 +10015,7 @@ cptr do_cmd_class_power_aux_narumi(int num, bool only_info)
 			}
 			if(cnt >= max_num)
 			{
-				msg_format(_("これ以上作り出せない。", "You can't creat any more."),num);
+				msg_format(_("これ以上作り出せない。", "You can't create any more."),num);
 				return NULL;
 			}
 
@@ -10169,7 +10169,7 @@ cptr do_cmd_class_power_aux_aunn(int num, bool only_info)
 		{
 			if(only_info) return format("");
 
-			msg_print(_("あなたは目まぐるしく跳ね回った！", "You spin arounding at blinding speed!"));
+			msg_print(_("あなたは目まぐるしく跳ね回った！", "You spin around at blinding speed!"));
 			whirlwind_attack(0);
 		}
 		break;
@@ -10263,7 +10263,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 		{
 			object_type forge, *q_ptr = &forge;
 			if(only_info) return _("食料を生成", "create food");
-			msg_print(_("あなたは手際よく食物を集め始めた..", "You start carefully collection food..."));
+			msg_print(_("あなたは手際よく食物を集め始めた..", "You start carefully collecting food..."));
 			object_prep(q_ptr, lookup_kind(TV_FOOD, SV_FOOD_RATION));
 			q_ptr->discount = 99;
 			drop_near(q_ptr, -1, py, px);
@@ -21983,7 +21983,7 @@ class_power_type class_power_magic_eater[] =
 
 	{20,20,45,FALSE,TRUE,A_INT,0,0,_("魔力充填Ⅱ", "Replenish Magic II"),
 		_("体に取り込んだ杖・魔法棒・ロッドの使用回数を充填する。充填量にはレベル・知能・アイテムレベル・最大使用可能回数が影響し、高難度な魔道具は一度の充填では使用回数が増えないことがある。",
-        "Replenishes amount of charges of absorbed staves/wands/rods. Replenished amount depends on your level, charisma, item level and macimum amount of charges. High difficulty magic devices might not get replenished at all.")},
+        "Replenishes amount of charges of absorbed staves/wands/rods. Replenished amount depends on your level, charisma, item level and maximum amount of charges. High difficulty magic devices might not get replenished at all.")},
 
 	{30,30,60,FALSE,TRUE,A_INT,0,0,_("魔力充填Ⅲ", "Replenish Magic III"),
 		_("発動済みの装備品の充填時間を短縮する。",
@@ -23876,7 +23876,7 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 			int damage = plev * 5 + chr_adj * 5;
 			if(only_info) return format(_str_eff_dam,damage);
 			msg_format(_("辺りは一瞬にして深い水の底になった。",
-                        "Your surroundings instantly become deeply flooded with water."));
+                        "Your surroundings instantly become flooded with deep water."));
 			project_hack2(GF_WATER_FLOW,0,0,2);
 			project_hack2(GF_WATER,0,0,damage);
 			p_ptr->update |= (PU_BONUS);
@@ -24057,7 +24057,7 @@ cptr do_cmd_class_power_aux_remy(int num, bool only_info)
 						if(r_ptr->flags3 & RF3_HUMAN)
 							msg_format(_("この血は最高に美味だ！", "This blood is the best!"));
 						else
-							msg_format(_("意外に悪くない味だ。", "That tasted surprisingly well."),m_name);
+							msg_format(_("意外に悪くない味だ。", "That tasted surprisingly good."),m_name);
 					}
 					else
 					{
@@ -24431,7 +24431,7 @@ class_power_type class_power_sanae[] =
         "Fires non-elemental bolts in a rapid succession. Requires at least 3rd level of chanting to Kanako. Amount of bolts increases with chant duration.")},
 	{ 7,5,20,FALSE,TRUE,A_WIS,0,1,_("コバルトスプレッド", "Cobalt Spread"),
 		_("障害物に当たると爆発する汚染属性の蛙の弾を放つ。詠唱(諏訪子)が3段階以上必要。詠唱が長いほど威力と爆発半径が上がる。",
-        "Fires a frog bullet that explodes into pollution when it hits an obstacled. Requires at least 3rd level of chanting to Suwako. Power and explosion radius increases with chant duration.")},
+        "Fires a frog bullet that explodes into pollution when it hits an obstacle. Requires at least 3rd level of chanting to Suwako. Power and explosion radius increases with chant duration.")},
 	{ 10,3,45,FALSE,FALSE,A_INT,0,0,_("霊的知覚", "Spiritual Perception"),
 		_("周囲のモンスターを感知する。レベルが上がると範囲が広がる。この技によって詠唱が途切れることはない。(失敗すると途切れる)",
         "Detects nearby monsters. Area of detection increases with your level. This ability does not interrupt chanting unless it fails.")},
@@ -26127,7 +26127,7 @@ class_power_type class_power_murasa[] =
         "Floods everything in sight, dealing water damage to enemies.")},
 	{46,72,75,FALSE,TRUE,A_CHR,0,0,_("ディープシンカー", "Deep Sinker"),
 		_("隣接した敵に強力な水属性攻撃を行い、非ユニークで水耐性のない生物を高確率で一撃で倒す。自分が深い水にいないと使えず、空を飛んでいる敵・力強い敵・巨大な敵には効きにくい。",
-        "Hits an adjacent enemy with a powerful water attack. Has a high chance of defeating non-unique living beins without water resistance in a single strike. Cannot be used unless standing in deep water, and less effective against flying, powerful or gigantic enemies.")},
+        "Hits an adjacent enemy with a powerful water attack. Has a high chance of defeating non-unique living beings without water resistance in a single strike. Cannot be used unless standing in deep water, and less effective against flying, powerful or gigantic enemies.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",
 		""},
@@ -27824,7 +27824,7 @@ cptr do_cmd_class_power_aux_toziko(int num, bool only_info)
 			if(use_itemcard)
 				msg_format(_("カードが激しく放電した！", "There is an intense electric discharge from the card!"));
 			else
-				msg_format(_("あなたは激しく放電した。", "You intensily discharge electricity."));
+				msg_format(_("あなたは激しく放電した。", "You intensely discharge electricity."));
 			project(0, rad, py, px, base, GF_ELEC, PROJECT_KILL | PROJECT_ITEM, -1);
 			break;
 		}
@@ -29431,7 +29431,7 @@ cptr do_cmd_class_power_aux_shou(int num, bool only_info)
 			if(sides < 1) sides = 1;
 			if(only_info) return format(_str_eff_dam_dice_sides,dice,sides);
 			msg_format(_("浄化の光が周囲を焼き尽くした！",
-                        "Purifying light scorches area around you!"));
+                        "Purifying light scorches the area around you!"));
 			project_hack2(GF_HOLY_FIRE,dice,sides,0);
 			break;
 		}
@@ -29492,7 +29492,7 @@ class_power_type class_power_flan[] =
         "Generates multiple powerful disintegration balls at random positions in your vicinity. Power increases as you current HP gets lower.")},
 	{50,-100,95,FALSE,TRUE,A_WIS,0,0,_("スカーレットニヒリティ", "Scarlet Nihility"),
 		_("MP全て(最低100)とアイテム「フォービドゥンフルーツ」を消費し、極めて強力な万能属性のボール攻撃を行う。「フォービドゥンフルーツ」を使わずにこの特技を使用すると「虚無召来」の効果が発生する。",
-        "Uses up all of your MP (at least 100) and consumes a 'Forbidden Fruit' item; fires an extremely powerful irresistable ball attack. Using this special ability without 'Forbidden Fruit' activates the effect of 'Call the Void'.")},
+        "Uses up all of your MP (at least 100) and consumes a 'Forbidden Fruit' item; fires an extremely powerful irresistible ball attack. Using this special ability without 'Forbidden Fruit' activates the effect of 'Call the Void'.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
 };
@@ -29677,7 +29677,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			int base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
 			if (only_info) return format(_("損傷:%d+1d%d", "dam: %d+1d%d"), base, base);
 
-			msg_print(_("あなたの魔力が檻のように部屋を埋め尽くした！", "Your magical power fills the room in form of a cage!"));
+			msg_print(_("あなたの魔力が檻のように部屋を埋め尽くした！", "Your magical power fills the room in the form of a cage!"));
 			project_hack2(GF_MISSILE, 1, base, base);
 			project_hack(GF_NO_MOVE, base / 20);
 
@@ -29693,7 +29693,7 @@ cptr do_cmd_class_power_aux_flan(int num, bool only_info)
 			if(use_itemcard) dam = 500 + plev*20;
 
 			if(only_info) return format(_("損傷:最大%d", "dam: up to %d"),dam/2);
-			msg_print(_("災厄の炎が周囲を焼き払った！", "Calamitious flames scorch the area!"));
+			msg_print(_("災厄の炎が周囲を焼き払った！", "Calamitous flames scorch the area!"));
 			project(0, rad, py, px, dam, GF_HELL_FIRE, PROJECT_KILL | PROJECT_ITEM, -1);
 			break;
 		}
@@ -29868,10 +29868,10 @@ class_power_type class_power_mystia[] =
         "Stops singing the song you're singing right now. Doesn't consume energy.")},
 	{3,3,20,FALSE,TRUE,A_CHR,0,0,_("梟の夜鳴声", "Hooting in the Night"),
 		_("あなたが今いる部屋を暗くする。",
-        "Darkness nearby area.")},
+        "Darkens nearby area.")},
 	{5,8,30,FALSE,TRUE,A_CHR,0,0,_("夜雀の歌", "Song of the Night Sparrow"),
 		_("周囲のモンスターを鳥目にする歌を歌う。歌っている間はMPを消費し続ける。鳥目になった敵は高確率であなたの位置を見失い無防備にあなたの攻撃を受けるが、部屋が明るかったり敵が視覚に頼らない存在だと効果が薄い。",
-        "Sings a song that makes nearby monsters night-blind. Singing continuously consumes MP. Night-blind enemies have high chance of losing sight of you, becoming defenseles before your attack. Less effective in illuminated areas or against enemies not relying on vision.")},
+        "Sings a song that makes nearby monsters night-blind. Singing continuously consumes MP. Night-blind enemies have high chance of losing sight of you, becoming defenseless before your attacks. Less effective in illuminated areas or against enemies not relying on vision.")},
 	{10,10,30,FALSE,TRUE,A_DEX,0,0,_("毒蛾の鱗粉", "Poisonous Moth's Scales"),
 		_("周辺の敵を混乱させる。",
         "Confuses nearby enemies.")},
@@ -29889,7 +29889,7 @@ class_power_type class_power_mystia[] =
         "Sings a song that stops movement of nearby humans. Also, gives a human slayer effect to your attacks. Singing continuously consumes MP.")},
 	{40,36,75,FALSE,TRUE,A_CHR,0,0,_("真夜中のコーラスマスター", "Midnight Chorus Master"),
 		_("周囲の敵を魅了・攻撃力低下状態にする歌を歌う。歌っている間はMPを消費し続ける。",
-        "Sings a song that charms and lower attack power of nearby enemies into being your followers. Singing continuously consumes MP.")},
+        "Sings a song that lowers attack power of nearby enemies and charms them into being your followers. Singing continuously consumes MP.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",
 		""},
@@ -30031,7 +30031,7 @@ class_power_type class_power_banki[] =
         "Makes two of your nearby head clones disappear and fires a powerful non-elemental beam. This attack doesn't deal damage to your other heads.")},
 	{ 38,88,70,FALSE,TRUE,A_CHR,0,0,_("デュラハンナイト", "Dullahan Night"),
 		_("視界内全てに対し「死の光線」属性の攻撃を複数回行う。攻撃回数は視界内のあなたの首の数によって増える。",
-        "Hits everyone in sight with multiple death ray attacks. Amount of attacks increases depending on amount of your heads in sight.")},
+        "Hits everyone in sight with multiple death ray attacks. Number of attacks increases depending on amount of your heads in sight.")},
 
 	{ 44,60,75,FALSE,TRUE,A_DEX,0,0,_("ヘルズレイ", "Hell's Ray"),
 		_("指定したターゲット周辺に向けて無属性のビームを数発放つ。頭の分身がいてそのターゲットに視線が通っている場合頭の分身からも同じようにビームを放つ。この攻撃であなたと分身がダメージを受けることはない。",
@@ -30421,7 +30421,7 @@ class_power_type class_power_librarian[] =
 {
 	{40,0,50,FALSE,TRUE,A_DEX,0,0,_("高速詠唱", "High-Speed Casting"),
 		_("素早く魔法を詠唱する。ただし消費MPが30%増加し、魔法詠唱成功後にキャンセルしても行動順を消費する。",
-        "Casts a spell, consuming less energy than unusual. However, MP cost is increased by 30%, and energy is consumed even if you cancel casting a spell.")},
+        "Casts a spell, consuming less energy than usual. However, MP cost is increased by 30%, and energy is consumed even if you cancel casting a spell.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",
 		""},
@@ -30493,7 +30493,7 @@ class_power_type class_power_patchouli[] =
         "Generates a ball of sound centered on yourself, and hits everything in sight with nuclear heat.")},
 	{ 48,96,80,FALSE,TRUE,A_INT,0,0,_("賢者の石", "Philosopher Stone"),
 		_("強力な元素攻撃を行う「賢者の石」を配下として召喚する。階移動すると消える。",
-        "Summons a Philosopher Stone which uses powerful elemental attacks as your follower. Disappear if you move to another level.")},
+        "Summons a Philosopher's Stone which uses powerful elemental attacks as your follower. Disappears if you move to another level.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
 };
@@ -30660,7 +30660,7 @@ cptr do_cmd_class_power_aux_patchouli(int num, bool only_info)
 			}
 
 			if(summon_named_creature(0, py, px, MON_PHILOSOPHER_STONE, PM_EPHEMERA)) msg_print(_("賢者の石を呼び出した！",
-                                                                                                "You call forth a Philosopher Stone!"));
+                                                                                                "You call forth a Philosopher's Stone!"));
 			else msg_print(_("魔法に失敗した。", "Your spell failed."));
 
 		break;
@@ -31026,16 +31026,16 @@ class_power_type class_power_magic_knight_elem[] =
 {
 	{8,16,30,FALSE,TRUE,A_INT,0,0,_("炎の魔法剣", "Magic Sword (Fire)"),
 		_("短時間の間、火炎属性で攻撃できるようになる。",
-        "For a short period of time, makes you currently wielde weapon attack with fire.")},
+        "For a short period of time, makes you currently wielded weapon attack with fire.")},
 	{16,16,30,FALSE,TRUE,A_INT,0,0,_("氷の魔法剣", "Magic Sword (Frost)"),
 		_("短時間の間、冷気属性で攻撃できるようになる。",
-        "For a short period of time, makes you currently wielde weapon attack with cold.")},
+        "For a short period of time, makes you currently wielded weapon attack with cold.")},
 	{24,16,30,FALSE,TRUE,A_INT,0,0,_("雷の魔法剣", "Magic Sword (Lightning)"),
 		_("短時間の間、電撃属性で攻撃できるようになる。",
-        "For a short period of time, makes you currently wielde weapon attack with lightning.")},
+        "For a short period of time, makes you currently wielded weapon attack with lightning.")},
 	{32,16,30,FALSE,TRUE,A_INT,0,0,_("酸の魔法剣", "Magic Sword (Acid)"),
 		_("短時間の間、酸属性で攻撃できるようになる。",
-        "For a short period of time, makes you currently wielde weapon attack with acid.")},
+        "For a short period of time, makes you currently wielded weapon attack with acid.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",
 		""},
@@ -31778,7 +31778,7 @@ class_power_type class_power_shinmyoumaru[] =
         "Fully recovers HP, restores experience and stat drain and removes negative effects. The price is either memory loss (50%) or equipment disenchantment (20%).")},
 	{37,37,0,FALSE,FALSE,A_WIS,0,0,_("この階全部見えろ！", "Make Me See the Entire Level!"),
 		_("マップを明るく照らし、全ての地形・アイテム・トラップ・モンスターを感知する。代償として＜幻覚(30%)・経験値大幅一時減少(20%)・ダンジョンの壁が消えてモンスターが起きる(10%)＞のいずれかが起こることがある。",
-        "Lights up the entire map, reveals the layout and detects items, traps and monsters. The price is either halluciantion (30%), great experience drain (20%) or dungeon walls disappearing and monsters waking up (10%).")},
+        "Lights up the entire map, reveals the layout and detects items, traps and monsters. The price is either hallucination (30%), great experience drain (20%) or dungeon walls disappearing and monsters waking up (10%).")},
 	{40,75,80,FALSE,TRUE,A_WIS,0,0,_("輝針剣", "Shining Needle Sword"),
 		_("ターゲット周辺に向けて防御不可能なビーム攻撃を連続で放つ。",
         "Fires multiple unblockable beams at the area near the target.")},
@@ -31899,7 +31899,7 @@ void koduchi_payment(int kind)
 		break;
 	case 17: //エキサイトモンスター
 		msg_print(_("恐ろしい音がダンジョンに鳴り響いた！",
-                    "A terrifying sound echose through the dungeon!"));
+                    "A terrifying sound echoes through the dungeon!"));
 		aggravate_monsters(0,TRUE);
 		break;
 
@@ -32314,7 +32314,7 @@ cptr do_cmd_class_power_aux_shinmyoumaru(int num, bool only_info)
 			if(only_info) return format(_("充填:%dターン", "chrg: %d turns"),charge);
 
 			msg_print(_("小槌を振ると千里先をも見通せるようになった！",
-                        "As you swing the mallet, you feel like you can see for thousands miles!"));
+                        "As you swing the mallet, you feel like you can see for thousands of miles!"));
 
 			wiz_lite(FALSE);
 			(void)detect_traps(255, TRUE);
@@ -32340,7 +32340,7 @@ cptr do_cmd_class_power_aux_shinmyoumaru(int num, bool only_info)
 			if(only_info) return format(_("損傷:(%dd%d) * %d", "dam: (%dd%d) * %d"),dice,sides,num);
 
 			if (!get_aim_dir(&dir)) return NULL;
-			msg_format(_("眩く輝く%s刃を放った！", "You throw %sdazzlingly shining blades!"),(p_ptr->mimic_form==MIMIC_GIGANTIC)?
+			msg_format(_("眩く輝く%s刃を放った！", "You throw %s dazzlingly shining blades!"),(p_ptr->mimic_form==MIMIC_GIGANTIC)?
                                                                                                 _("巨大な", "giant, "):"");
 			fire_blast(GF_PSY_SPEAR, dir, dice, sides, num, 2,(PROJECT_BEAM | PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM));
 
@@ -33523,7 +33523,7 @@ cptr do_cmd_class_power_aux_koishi(int num, bool only_info)
 	{
 		base = plev + adj_general[p_ptr->stat_ind[A_CHR]] * 5;
 		if (only_info) return format(_("効力:%d+1d%d", "pow: %d+1d%d"), base, base);
-		msg_format(_("強烈な抑圧が発動された！", "You cause intense supression!"));
+		msg_format(_("強烈な抑圧が発動された！", "You cause intense suppression!"));
 
 		//v1.1.95
 		project_hack2(GF_SUPER_EGO, 1, base, base);
@@ -34367,7 +34367,7 @@ class_power_type class_power_kasen[] =
         "Breathes sound. Power is equal to 1/3 of current HP.")},
 	{45,70,75,FALSE,TRUE,A_INT,0,0,_("方術", "Fangshi"),
 		_("空間操作の術を使い、周囲の敵が自分を見失いやすくなる。",
-        "Performs a spatial manipulation technique, making it harder for neabry enemies to notice you.")},
+        "Performs a spatial manipulation technique, making it harder for nearby enemies to notice you.")},
 
 
 
@@ -34676,7 +34676,7 @@ cptr do_cmd_class_power_aux_kogasa(int num, bool only_info)
 			base = p_ptr->lev * 4 + chr_adj * 7;
 
 			if (only_info) return format(_str_eff_dam_around, base / 2);
-			msg_format(_("あなたは水弾をばら撒いた。", "You scatter water bullets arounds."));
+			msg_format(_("あなたは水弾をばら撒いた。", "You scatter water bullets around."));
 			project(0, rad, py, px, base, GF_WATER, PROJECT_KILL | PROJECT_ITEM, -1);
 			break;
 		}
@@ -34839,7 +34839,7 @@ class_power_type class_power_komachi[] =
         "Has low chance of defeating an adjacent enemy in single strike, and medium chance of halving their HP. Effects only living beings and does nothing if resisted. Requires wielding a scythe.")},
 	{38,44,70,FALSE,TRUE,A_WIS,0,0,_("死者選別の鎌", "Scythe that Chooses the Dead"),
 		_("敵の頭上から光の刃を落とす。アンデッドの場合4倍のダメージを与えて高確率で一撃で倒す。鎌を装備していないと使えない。",
-        "Drop a blade of light on top of an enemy. Deals quadraple damage to undead and has a high chance of defeating them in a single strike. Requires wielding a scythe.")},
+        "Drop a blade of light on top of an enemy. Deals quadruple damage to undead and has a high chance of defeating them in a single strike. Requires wielding a scythe.")},
 
 	{40,50,80,FALSE,FALSE,A_DEX,0,0,_("距離を操るⅡ", "Manipulation of Distance II"),
 		_("一グリッド分の壁や扉をすり抜ける。抜けた先にモンスターがいる場合失敗する。テレポート不可地形の中にも入れる。",
@@ -35292,7 +35292,7 @@ cptr do_cmd_class_power_aux_iku(int num, bool only_info)
 	case 1:
 		{
 			if(only_info) return format(_("期間:20+1d20", "dur: 20+1d20"));
-			msg_format(_("トゲのようなオーラをまとった。", "You don an thorn-like aura."));
+			msg_format(_("トゲのようなオーラをまとった。", "You don a thorn-like aura."));
 			  set_dustrobe(20+randint1(20),FALSE);
 			break;
 		}
@@ -35502,7 +35502,7 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 			if(only_info) return "";
 
 			msg_format(_("周囲の存在から放たれる波長を読み取った。",
-                        "You read wavelengthes emitted by nearby beings."));
+                        "You read wavelengths emitted by nearby beings."));
 			probing();
 			break;
 		}
@@ -36238,7 +36238,7 @@ class_power_type class_power_maid[] =
         "Returns from depths of dungeons by any means necessary.")},
 	{	40,1,70,FALSE,FALSE,A_CHR,0,0,_("ティータイム", "Teatime"),
 		_("リラックスしてMPを回復する。お茶菓子として菓子を消費する。",
-        "Relax and recover MP. Uses sweets as tea conficteonery.")},
+        "Relax and recover MP. Uses sweets as tea confectionery.")},
 
 	{	99,0,0,FALSE,FALSE,0,0,0,"dummy",	""	},
 };
@@ -36488,7 +36488,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #ifdef JP
 				my_strcpy(errmsg, "その奇跡を起こすには神奈子様に捧げる詠唱が足りない。", 150);
 #else
-                my_strcpy(errmsg, "You haven't perform enough prayers to Lady Kanako to cause this miracle.", 150);
+                my_strcpy(errmsg, "You haven't performed enough prayers to Lady Kanako to cause this miracle.", 150);
 #endif
 				return FALSE;
 			}
@@ -36508,7 +36508,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #ifdef JP
 				my_strcpy(errmsg, "その奇跡を起こすには諏訪子様に捧げる詠唱が足りない。", 150);
 #else
-                my_strcpy(errmsg, "You haven't perform enough prayers to Lady Suwako to cause this miracle.", 150);
+                my_strcpy(errmsg, "You haven't performed enough prayers to Lady Suwako to cause this miracle.", 150);
 #endif
 				return FALSE;
 			}
@@ -37209,7 +37209,7 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 #ifdef JP
 				my_strcpy(errmsg, "ここでは落ち着いて眠れない。", 150);
 #else
-                my_strcpy(errmsg, "You can't peacefully slep here.", 150);
+                my_strcpy(errmsg, "You can't peacefully sleep here.", 150);
 #endif
 				return FALSE;
 			}

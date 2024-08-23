@@ -4479,7 +4479,7 @@ static bool get_player_class(void)
 #endif
 
 	cptr help_index[MAX_CLASS_CHOICE+1] =
-	{"Warrior","Mage","Shrine-Maiden","Explorer","Ranger","Protector",
+	{"Warrior","Mage","Shrine-Maiden","Explorer","Ranger","Guardian",
 	"Teacher","Maid","Martial-Artist","Mindcrafter","High-Mage","Civilian",
 	"Shugenja","Magic-Knight","Danmakulogist","Marksman","Magic-Eater","Engineer",
 	"Librarian","Samurai","Soldier","Chemist","Cavalry","Tsukumo-Master","Secondhand-Dealer","Jeweler",
