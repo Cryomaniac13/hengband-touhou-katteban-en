@@ -191,7 +191,7 @@ C:10:10:0:3
 F:VORPAL | TUNNEL
 
 N:19:—•‘‚Μ
-E:of the Boisterous Dance
+E:of the Riotous Dance
 X:24:25
 W:0:24:0:12000
 C:0:0:0:3
@@ -220,7 +220,7 @@ W:0:24:0:8000
 F:BRAND_ACID | RES_ACID | IGNORE_ACID
 
 N:23:—‹b‚Μ
-E:of Raijuu
+E:of the Raijuu
 X:24:20
 W:0:18:0:4500
 F:BRAND_ELEC | RES_ELEC | IGNORE_ELEC
@@ -232,13 +232,13 @@ W:0:12:0:3000
 F:BRAND_FIRE | RES_FIRE | IGNORE_FIRE | LITE
 
 N:25:•XΈ‚Μ
-E:of Ice Fairies
+E:of the Ice Fairy
 X:24:15
 W:0:12:0:2500
 F:BRAND_COLD | RES_COLD | IGNORE_COLD
 
 N:26:ε…εn‚Μ
-E:of Centipede
+E:of the Centipede
 X:24:20
 W:0:24:0:8000
 C:8:8:0:2
@@ -441,7 +441,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:50:‹S_’·‚Μ
-E:of Kishin Lord
+E:of the Kishin Lord
 X:31:70
 W:0:80:0:44444
 C:5:5:10:3
@@ -452,7 +452,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:REGEN | SHOW_MODS
 
 N:51:–‚E_‚Μ
-E:of Makai God
+E:of the Makai God
 X:31:80
 W:0:240:0:66666
 C:0:0:30:4
@@ -505,7 +505,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:57:ƒIƒ‹ƒƒAƒ“‚Μ
-E:@Orlean
+E:@Orleans
 X:25:40
 W:0:96:0:25000
 C:0:0:20:0
@@ -634,7 +634,7 @@ W:0:24:0:0
 F:INT | WIS | CHR | NO_MAGIC
 
 N:73:βM‚θ_‚Μ
-E:of Scourge God
+E:of the Curse God
 X:33:0
 C:0:0:0:5
 W:0:18:0:0
@@ -673,7 +673,7 @@ F:STEALTH | XTRA_H_RES | XTRA_POWER
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:78:’n–ιλ‚Μ
-E:of Hell Raven
+E:of the Hell Raven
 X:32:20
 W:0:30:0:9000
 C:0:0:5:0
@@ -681,7 +681,7 @@ F:IGNORE_FIRE | SH_FIRE | RES_FIRE
 F:RES_LITE | RES_NETHER
 
 N:79:—³‹{‚Μg‚Ά‚Μ
-E:of Dragon Palace Messenger
+E:of the Dragon Palace Messenger
 X:32:20
 W:0:20:0:6000
 C:0:0:4:0
@@ -689,7 +689,7 @@ F:IGNORE_ELEC | SH_ELEC | RES_ELEC
 F:LEVITATION | XTRA_RES
 
 N:80:α—‚Μ
-E:of Yuki-Onna
+E:of the Yuki-Onna
 X:32:20
 W:0:20:0:3000
 C:0:0:4:0
@@ -697,7 +697,7 @@ F:SH_COLD | RES_COLD
 F:XTRA_POWER
 
 N:81:‹z‹S‚Μ
-E:of Vampire
+E:of the Vampire
 X:32:45
 W:0:100:0:30000
 C:5:5:0:5
@@ -705,7 +705,7 @@ F:SPEED | LEVITATION | RES_DARK | SEE_INVIS | INFRA | STEALTH | RES_NETHER
 F:SHOW_MODS
 
 N:82:“y’wε‚Μ
-E:of Tsuchigumo
+E:of the Tsuchigumo
 X:32:0
 W:0:48:0:0
 C:0:0:20:4
@@ -714,7 +714,7 @@ F:HEAVY_CURSE | CURSED | RES_POIS | RES_DARK
 F:RES_BLIND | FREE_ACT | RES_FEAR | SEE_INVIS
 
 N:83:•‚—V—μ‚Μ
-E:of Floating Spirits
+E:of the Wandering Ghost
 X:32:0
 W:0:8:0:0
 C:10:10:0:3
@@ -763,14 +763,14 @@ F:STR | SHOW_MODS | HIDE_TYPE | XTRA_H_RES
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:89:¬«–‚‚Μ
-E:of the Small Devil
+E:of the Imp
 X:34:20
 W:0:16:0:3000
 C:0:0:0:4
 F:MAGIC_MASTERY | HIDE_TYPE
 
 N:90:ƒLƒ‡ƒ“ƒV[‚Μ
-E:of Jiangshi
+E:of the Jiangshi
 X:34:0
 W:0:12:0:0
 C:0:0:0:5
@@ -778,7 +778,7 @@ F:INT | WIS | DEX | REGEN | RES_NETHER
 
 #ECC³‘ε•‘‰Α
 N:91:‹Φυ‚Μ
-E:of Taboo
+E:@Taboo
 X:34:0
 W:0:72:0:0
 C:0:0:50:0
@@ -822,7 +822,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 #‰B–§A‰Α‘¬‘‰Α—\’θ
 N:97:‰ΞΤ‚Μ
-E:of Kasha
+E:of the Kasha
 X:35:0
 W:0:48:0:0
 C:0:0:0:2
@@ -847,7 +847,7 @@ F:NO_TELE | RES_NETHER
 
 
 N:100:–ο_‚Μ
-E:of Misfortune God
+E:of the Misfortune God
 X:35:0
 W:0:48:0:0
 C:0:0:20:0
@@ -907,7 +907,7 @@ W:0:36:0:0
 C:0:0:0:0
 
 N:108:—HΊ‚Μ
-E:(Mysterious)
+E:@Occult
 X:30:20
 W:0:36:0:5000
 C:0:0:0:0
@@ -1012,14 +1012,14 @@ U:SPEED
 
 
 N:121:λl‚Μ
-E:of Hunter
+E:of the Hunter
 X:27:10
 W:30:0:0:8000
 C:0:0:0:3
 F:STEALTH
 
 N:122:ƒƒCƒh’·‚Μ
-E:of Chief Maid
+E:of the Chief Maid
 X:27:30
 W:30:0:0:2500
 C:0:0:0:3
@@ -1105,7 +1105,7 @@ C:0:0:0:0
 F:EASY_SPELL
 
 N:134:—΄_‚Μ
-E:of Dragon God
+E:of the Dragon God
 X:27:50
 W:100:0:0:100000
 C:0:0:20:5
@@ -1114,7 +1114,7 @@ F:ESP_EVIL
 U:ULTIMATE_RESIST
 
 N:135:Χ_‚Μ
-E:of Wicked God
+E:of the Wicked God
 X:27:50
 W:100:0:0:100000
 C:20:20:20:5
@@ -1130,7 +1130,7 @@ C:0:0:0:0
 F:DRAIN_EXP | CURSED | HEAVY_CURSE
 
 N:137:”ρ–\—Ν‚Μ
-E:of Pacifist
+E:of the Pacifist
 X:27:0
 W:0:0:0:0
 C:20:20:0:3
@@ -1165,7 +1165,7 @@ C:0:0:0:0
 F:TELEPORT
 
 N:142:ƒAƒ‹ƒrƒm‚Μ
-E:and Albino
+E:of the Albino
 X:27:0
 W:0:0:0:0
 C:0:0:20:3
@@ -1174,7 +1174,7 @@ F:CURSED | HEAVY_CURSE | CON
 
 ########################### Ego Amulet ####################
 N:143:εl‚Μ
-E:of Hermit
+E:of the Hermit
 X:29:5
 W:30:0:0:200
 C:0:0:0:3
@@ -1445,7 +1445,7 @@ C:0:0:0:0
 F:SPEED
 
 N:179:‹P‚­
-E:of Brilliance
+E:@Brilliant
 X:26:25
 W:60:60:0:15000
 C:0:0:0:0
@@ -1504,7 +1504,7 @@ F:CURSED | HEAVY_CURSE | TY_CURSE | AGGRAVATE
 F:RANDOM_CURSE2
 
 N:187:–@‹V®Ο‚έ…‹β’e“ª‚Μ
-E:of Mercury Bullets
+E:(Mercury Bullets)
 X:21:40
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:BLESSED
@@ -1548,7 +1548,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:RES_FIRE | RES_LITE | LEVITATION | LITE
 
 N:194:ƒ}ƒbƒhƒTƒCƒGƒ“ƒeƒBƒXƒg‚Μ
-E:of Mad Scientist
+E:of the Mad Scientist
 X:21:30
 W:15:40:0:16000
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
@@ -1563,7 +1563,7 @@ C:0:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:196:•n–R_‚Μ
-E:of Poverty
+E:of the Poverty God
 X:31:0
 W:0:48:0:0
 C:0:0:0:0
@@ -1578,7 +1578,7 @@ F:BRAND_ACID | IGNORE_ACID
 W:0:12:0:30
 
 N:198:“V’T—‚Μ
-E:of Track Deity
+E:of Ama-no-Sagume
 X:23:10
 F:SLAY_DEITY
 W:30:24:0:40
@@ -1586,7 +1586,7 @@ C:5:5:0:0
 
 #–Xq‚Μ‚έ
 N:199:’T’γ‚Μ
-E:@Detective
+E:of the Detective
 X:33:12
 W:0:32:0:2500
 C:0:0:0:4
@@ -1645,7 +1645,7 @@ C:0:0:15:4
 F:SAVING | XTRA_E_RES | XTRA_H_RES
 
 N:206:“V”n‚Μ
-E:of Celestial Steeds
+E:of the Celestial Steed
 X:35:60
 W:0:120:0:30000
 C:0:0:10:5
@@ -1714,7 +1714,7 @@ C:0:0:0:3
 F:CHR | XTRA_H_RES
 
 N:215:—ι—–‚Μ
-E:@Valley Lily
+E:@Lily-of-the-Valley
 X:20:20
 W:0:24:0:1500
 F:BRAND_POIS | RES_POIS

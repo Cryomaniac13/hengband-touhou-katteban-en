@@ -3728,6 +3728,7 @@ F:HURT_HOLY
 F:STAY_AT_HOME1
 S:1_IN_6
 S:DANMAKU
+D:$A familiar type of youkai often found in swamps and rivers. She is very wary.
 D:沼や川に多く住む身近な妖怪だ。警戒心が強い。
 
 #J0#
@@ -3938,6 +3939,8 @@ F:OPEN_DOOR | BASH_DOOR
 F:STAY_AT_HOME1
 S:1_IN_5
 S:BR_AQUA | DANMAKU
+D:$Kappa become much stronger when lurking in water, strong enough
+D:$to drag cattle or horses under.
 D:水中に潜む河童は力が増し、牛馬すら引きずり込むという。
 
 #J0#
@@ -3969,6 +3972,9 @@ F:HURT_HOLY
 F:WILD_MOUNTAIN | WILD_WOOD
 S:1_IN_4
 S:DANMAKU | SHOOT
+D:$A youkai that resembles a kappa but lives in the mountains, where
+D:$they have developed a sophisticated commercial system. Her hobby
+D:$seems to be playing at wilderness survival.
 D:河童に似た妖怪だ。山奥のアジトに暮らし、高度な商業システムを構築しているという。
 D:山の中でサバイバルゲームをすることが趣味のようだ。
 
@@ -5340,6 +5346,8 @@ F:STAY_AT_HOME1
 S:1_IN_5
 S:BO_WATE | DANMAKU | TRAPS | HOLD
 #TMP S:BEAM_LITE
+D:$A kappa wearing a large backpack from which various things
+D:$pop out like a jack-in-the-box.
 D:大きなリュックを背負った河童だ。リュックからはびっくり箱のように様々なものが飛び出す。
 
 
@@ -6580,7 +6588,8 @@ B:BITE:EXP_VAMP:6d6
 F:RAND_50 | COLD_BLOOD | REGENERATE | CAN_FLY | HURT_HOLY
 F:ANIMAL | IM_COLD | IM_POIS | RES_NETH | GEN_NEUTRAL
 F:NO_CONF | NO_SLEEP | NO_FEAR
-D:$ ...
+D:$A bat that has become a youkai in its search for human blood.
+D:$Vampires can also transform into these.
 D:人血を求めて妖怪化した大型の蝙蝠だ。吸血鬼が変身してこの姿になることもある。
 
 #J0#
@@ -12114,6 +12123,7 @@ F:OPEN_DOOR | BASH_DOOR | REGENERATE |
 F:IM_POIS | IM_COLD
 S:1_IN_6
 S:DANMAKU | ALARM
+D:$A tengu patrolwoman from the mountains.
 D:山で哨戒の役割を担う天狗だ。
 
 
@@ -16638,6 +16648,8 @@ F:IM_POIS | IM_COLD | IM_ELEC |
 S:1_IN_5
 S:DANMAKU | BA_FORCE | BO_MANA | SLOW | CONF | HOLD | BLIND | BLINK | TORNADO
 S:TPORT | HASTE | TELE_AWAY | TELE_APPROACH
+D:$A fast-moving tengu news reporter from the mountains.
+D:$She has significant sorcerous power and can fight in many ways.
 D:山で報道部隊の役割を担う素早い天狗だ。高い妖力を持ち多彩な攻撃をする。
 
 #JZ#
@@ -19649,7 +19661,7 @@ S:BR_SHAR | TELE_TO
 D:$This muscle-bound man with a horned helmet has won the Great Galaxy 
 D:$Bodybuiling championship ten times in a row. He is eager to prevent 
 D:$anyone from challenging his title. He's also known for his signature 
-D:$move, the Bo Emperor Building Cutter."
+D:$move, the Bo Emperor Building Cutter.
 D:銀河ボディビルコンテスト十連続グランドチャンピオン。
 D:必殺技はボ帝ビルカッター。
 
@@ -20031,7 +20043,7 @@ F:IM_FIRE | IM_ELEC | IM_ACID | IM_POIS | RES_HOLY
 F:NO_CONF | NO_SLEEP | NO_FEAR | FRIENDS
 F:ONLY_GOLD | DROP_90
 D:$An embodiment of various human desires.
-D:$This one seems to be derived from the desire for longevity.
+D:$This one seems to be derived from the desire for a long life.
 D:雑多な欲望の具現だ。長寿欲に関する神霊のようだ。
 
 N:985:ユニコーン
@@ -24172,7 +24184,7 @@ F:SMART | OPEN_DOOR |
 F:NO_CONF | NO_SLEEP | NO_FEAR
 S:1_IN_5 | 
 S:HEAL | PUNISH_3 |
-D:$"Repent, ye dead! Discover faith in death!" (Kentaro Miura, Berserk, chapter 20)
+D:$"Repent, ye dead! Discover faith in death!" (Kentaro Miura, Berserk, volume 20)
 D:「悔い改めよ亡者ども！信仰とは死ぬことと見つけたり！」　　(三浦建太郎　「ベルセルク」 20巻)
 
 #1202を倒すまでは通常出現しない
@@ -24193,7 +24205,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN
 S:1_IN_4 | 
 S:BR_HOLY | BR_FIRE
 D:$"You fool who does not fear God, God's punishment is swift and certain! 
-D:$I will punish you on behalf of heaven!" (Kentaro Miura, Berserk, chapter 20)
+D:$I will punish you on behalf of heaven!" (Kentaro Miura, Berserk, volume 21)
 D:「神を畏れぬ愚か者よ　天罰覿面！　天に代わりてこの私が！あなたにバチを当てましょう！」
 D:　　(三浦建太郎　「ベルセルク」 20巻)
 
@@ -24663,6 +24675,7 @@ F:CHAMELEON | WILD_WOOD | DROP_2D2 | ANIMAL | GEN_KWAI
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_ACID | IM_POIS |
 S:1_IN_1
 S:SPECIAL
+D:$Youkai foxes are famed for their transformation skills.
 D:狐の妖怪だ。その変身の技は有名である。
 
 
@@ -25088,8 +25101,8 @@ F:BASH_DOOR |
 F:ANIMAL | RIDING | CAN_SWIM | UNIQUE | ANG_FRIENDLY | STAY_AT_HOME2
 F:IM_ACID | IM_FIRE | IM_COLD | RES_WATE | WILD_OCEAN | WILD_SHORE | FORCE_MAXHP
 D:$Said to be a legendary monster fish.
-D:$'It is seven foot long, has a dark grey body, 6-inch long hair,
-D:$a rat-like head, red eyes, and a tail split like a swallow's...'
+D:$"It is seven foot long, has a dark grey body, 6-inch long hair,
+D:$a rat-like head, red eyes, and a tail split like a swallow's..."
 D:伝説の怪魚とされる。「長さ七尺、総身鼠色、毛の長さ七寸、頭鼠の如し、目赤し、尾は二股にして燕のごとし……」
 
 N:1260:送り提灯
@@ -25129,7 +25142,7 @@ F:NO_FEAR | NO_CONF
 S:1_IN_4 |
 S:TELE_HI_APPROACH | SHOOT | BLINK | TELE_TO | SPECIAL
 D:$A ninja feared as the Reaper of Neo-Saitama.
-D:$He wears red and black ninja attire and a sinister mask with the characters "Ninja" and "Kill" inscribed on each cheek.
+D:$He wears red and black ninja attire and a sinister mask with the characters "Nin" and "Kill" inscribed on each cheek.
 D:$His eyes burn with a desire for revenge against all ninjas.
 D:ネオサイタマの死神と恐れられるニンジャだ。
 D:赤黒の忍者装束を纏い、左右の頬に「忍」「殺」と刻まれた禍々しい仮面をつけている。
@@ -26624,6 +26637,9 @@ B:CLAW:HURT:1d5
 B:BITE:HURT:1d10
 F:OPEN_DOOR | WILD_SHORE | WILD_SWAMP | CAN_SWIM
 F:ANIMAL | WILD_ONLY| GEN_NEUTRAL| FRIENDS
+D:$An animal with short limbs and a slender elongated body.
+D:$It's good at swimming and is found near water.
+D:$Old otters are said to have powers of illusion.
 D:短い四肢と流れるように細長い胴体を持つ獣だ。泳ぎが得意で水辺に棲んでいる。
 D:年経たカワウソは化けて人を惑わすとされる。
 
