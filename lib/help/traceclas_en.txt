@@ -1482,8 +1482,8 @@ However, they're not that good at using magic devices.'
 
 
 
-***** <Protector>
---- Protector ---
+***** <Guardian>
+--- Guardian ---
 Str: 1  Int: -2 Wis:2 Dex: -1 Con: 2 Chr: 3
 Dsm: 16(7) MDev: 20(10) MProt: 37(14)  Stl: 1(0) Srh: 18(2)
 Fighting: 68(24) Shooting: 40(15)

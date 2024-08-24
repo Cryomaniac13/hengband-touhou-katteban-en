@@ -4217,6 +4217,9 @@ I:27:2:2
 W:80:60:50:50000
 P:0:9d6:0:30:0
 F:SHOW_MODS | CHR | RES_DISEN | RES_LITE
+D:$Yuuka Kazami's beloved pure white parasol. Offers complete protection
+D:$against ultraviolet rays. Fell spells of annihilation swirl and dance as 
+D:$you swing death's myrmidon down.
 D:風見幽香の愛用する真っ白な日傘だ。紫外線対策も完璧。
 D:この死の用心棒を振り降ろす時、内に宿る禍々しい破壊の魔力が渦巻いて踊る。
 
