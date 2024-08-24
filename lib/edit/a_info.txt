@@ -2903,7 +2903,7 @@ I:21:0:0
 W:35:35:2:5000
 P:0:8d4:30:19:0
 F:KILL_DRAGON | INSTA_ART | SHOW_MODS
-D:$Dealiest of arrows, imbued with elemental strength, this shaft is 
+D:$Deadliest of arrows, imbued with elemental strength, this shaft is 
 D:$feared especially by the wyrmkin.
 D:Œã‚É‰¤‚Æ‚È‚éŒÎ‚ÌŠX‚Ì‰A‹C–Êƒoƒ‹ƒh‚ª—´‚ğË”²‚¢‚½“`à‚Ì•‚¢–î‚¾B
 D:”Ş‚ª—´‚ğË”²‚¢‚½‚±‚Ì–î‚Í‰Ì‚É‰S‚í‚êŒê‚èŒp‚ª‚ê‚Ä‚¢‚éB
