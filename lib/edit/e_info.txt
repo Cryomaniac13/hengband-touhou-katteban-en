@@ -763,7 +763,7 @@ F:STR | SHOW_MODS | HIDE_TYPE | XTRA_H_RES
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:89:è¨à´ñÇÇÃ
-E:of the Imp
+E:of the Little Devil
 X:34:20
 W:0:16:0:3000
 C:0:0:0:4

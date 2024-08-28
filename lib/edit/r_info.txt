@@ -10498,7 +10498,7 @@ D:$It is a giant beetle, whose carapace shimmers with vibrant energies.
 D:‚»‚ê‚Í‹‘å‚Èb’‚ÅA‚»‚Ìb—…‚Í[–‚µ‚½ƒGƒlƒ‹ƒM[‚Å‹P‚¢‚Ä‚¢‚éB
 
 N:587:¬ˆ«–‚
-E:Small demon
+E:Koakuma
 G:u:s
 I:110:20d20:50:50:20
 W:27:3:0:300:0:0

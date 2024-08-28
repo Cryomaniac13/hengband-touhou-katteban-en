@@ -2041,7 +2041,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"¬ˆ«–‚",
 #endif
-		"Imp",
+		"Koakuma",
 
 		{ -1, 2, -2, 1, 0, -2 },
 		5, 10, 10, 2, 12, 3, 0, 0,

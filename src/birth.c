@@ -217,7 +217,7 @@ static cptr race_jouhou[MAX_RACES] =
 
 "You are a nyuudou. They are youkai with good physical strength, but they also can grow bigger or smaller, appear or vanish. Their ambiguous substance gives them high physical defense, and they gain resistance to paralysis, shards and sound at higher levels. They make better warriors than mages, though they are proficient at Youkai arts of Transformation.",
 
-"You are an imp. Imp is a generic term for demons without much power. They are intelligent and are more suited towards using magic, but they have some combat proficiency as well. They are good at Arcane and Youkai arts, but are very bad at Hermit arts. Imps resist darkness and nether and aren't bothered too much by otherworldly horrors, but are more vulnerable to holy attacks compared to average youkai.",
+"You are a koakuma. 'Koakuma' ('little devil') is a generic term for demons without much power. They are intelligent and are more suited towards using magic, but they have some combat proficiency as well. They are good at Arcane and Youkai arts, but are very bad at Hermit arts. Koakuma resist darkness and nether and aren't bothered too much by otherworldly horrors, but are more vulnerable to holy attacks compared to average youkai.",
 
 "You are a stone statue animated by magic. You have high strength and constitution, but you move slowly. You almost lack intelligence, making using magic extremely difficult. Your stone body gives you many resistances, but disenchantment attacks will severely hurt you. You feed on rocks and minerals, and eating rare minerals can heal you and give you beneficial effects. At higher levels you will be able to eat dungeon walls.",
 

@@ -725,8 +725,8 @@ They're strong at physical combat and excel at defense as well, but their
 penalties are high.'
 
 
-***** <Imp>
---- Imp ---
+***** <Koakuma>
+--- Koakuma ---
 Str: -1  Int: 2  Wis:-2 Dex: 1 Con: 0 Chr: -2
 Dsm: 5 MDev: 10 MProt: 10  Stl: 2 Srh: 2 
 Fighting: 0 Shooting: 0
@@ -745,7 +745,7 @@ Magic realm aptitude:
 Other:
   None
 
-Keine - 'Imps, also called 'small devils' or similar names, are demons
+Keine - 'Koakuma - also called 'little devils' or 'imps' - are demons
 without much power. According to rumors, they were summoned from other worlds,
 making them completely unaffected by otherworldly horrors. They also are
 resistance to darkness and nether, but are very vulnerable to holy attacks.
