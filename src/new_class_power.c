@@ -35163,7 +35163,7 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 			else msg_print("‚ ‚È‚½‚Í•Ç‚ÌŒú‚³‚ğ‘€ì‚µ‚Ä‚·‚è”²‚¯‚½B");
 #else
 			if(one_in_(10))msg_print("'Through alaya-vijnana, even empty void can be as the great heavens!'");
-            if (one_in_(9))msg_print("'Can't let a barrier like that get in the way of my job!'");
+            else if (one_in_(9))msg_print("'Can't let a barrier like that get in the way of my job!'");
 			else msg_print("You manipulate the thickness of the wall and go through.");
 #endif
 
