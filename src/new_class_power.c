@@ -1520,7 +1520,7 @@ class_power_type class_power_miyoi[] =
 
 	{ 35,80,70,FALSE,FALSE,A_DEX,0,0,_("森をも酔わせる大鍋", "Cauldron that Intoxicates Forests"),
 	_("視界内の全てのモンスターに強制的に酒を呑ませる。",
-    "Forcibly servers alcohol to all monsters in sight.")},
+    "Forcibly serves alcohol to all monsters in sight.")},
 
 	{ 40,0,0,FALSE,FALSE,A_CHR,0,0,_("お勧めの一本", "Recommended Bottle"),
 	_("隣接したモンスター一体を高確率で友好的にし、さらに泥酔度を大幅に上昇させる。酒を一本消費し、酒の価格と強さによって効力が変わる。",
@@ -4890,7 +4890,7 @@ cptr do_cmd_class_power_aux_yachie(int num, bool only_info)
 
 			if (m_ptr->mflag & MFLAG_ISOLATION)
 			{
-				msg_format(_("既に効いている。", "The ability already is in effect."));
+				msg_format(_("既に効いている。", "The ability is already in effect."));
 
 			}
 			else if (chance <= r_ptr->level)
@@ -5691,7 +5691,7 @@ cptr do_cmd_class_power_aux_urumi(int num, bool only_info)
 
 				if (m_ptr->mflag & MFLAG_SPECIAL)
 				{
-					msg_format(_("すでに効いている。", "The ability already is in effect."));
+					msg_format(_("すでに効いている。", "The ability is already in effect."));
 					return NULL;
 				}
 				else
@@ -5979,7 +5979,7 @@ cptr do_cmd_class_power_aux_sangetsu_2(int num, bool only_info)
 		if (only_info) return format(_("期間:%d 範囲:%d", "dur: %d rad: %d"), time, rad);
 		if (p_ptr->tim_general[0] || p_ptr->tim_general[1])
 		{
-			msg_print(_("すでに能力を使っている。", "This ability already is in effect."));
+			msg_print(_("すでに能力を使っている。", "This ability is already in effect."));
 			return NULL;
 		}
 
@@ -5993,7 +5993,7 @@ cptr do_cmd_class_power_aux_sangetsu_2(int num, bool only_info)
 		if (only_info) return format("");
 		if (!p_ptr->tim_general[0] && !p_ptr->tim_general[1])
 		{
-			msg_print(_("能力を使っていない。", "You haven't used the ability."));
+			msg_print(_("能力を使っていない。", "The ability isn't active."));
 			return NULL;
 		}
 
@@ -6059,15 +6059,13 @@ cptr do_cmd_class_power_aux_sangetsu_2(int num, bool only_info)
 
 		if (!one_in_(5))
 			msg_print(_("みんなで作戦会議を始めた..", "Everyone is discussing strategies..."));
-#ifdef JP
 		else if (p_ptr->prace == RACE_NINJA)
 		{
-			if(one_in_(3))	msg_print("「囲んで棒で叩く！」");
-			else if (one_in_(2))	msg_print("「何事も暴力で解決するのが一番だ」");
-			else msg_print("「ガンバルゾー！」");
+			if(one_in_(3))	msg_print(_("「囲んで棒で叩く！」", "'Let's all surround them and beat them with sticks!'"));
+			else if (one_in_(2))	msg_print(_("「何事も暴力で解決するのが一番だ」", "'Violence is the number one solution to everything.'"));
+			else msg_print(_("「ガンバルゾー！」", "'Ganbarzo!'"));
 
 		}
-#endif
 		else
 		{
 			if (one_in_(3))	msg_print(_("チルノとピースが喧嘩を始めた。", "Cirno and Piece start fighting."));
@@ -6195,7 +6193,7 @@ cptr do_cmd_class_power_aux_sangetsu_2(int num, bool only_info)
 		if (only_info) return format(_str_eff_dur, time);
 		if (p_ptr->tim_general[1])
 		{
-			msg_print(_("すでに能力を使っている。", "You already have used this ability."));
+			msg_print(_("すでに能力を使っている。", "This ability is already active."));
 			return NULL;
 		}
 
@@ -6265,7 +6263,7 @@ class_power_type class_power_kutaka[] =
 
 	{ 24,36,50,FALSE,TRUE,A_INT,0,0,_("鬼渡の試練", "Trial of Oniwatari"),
 	_("視界内のモンスターをテレポートさせようと試みる。",
-    "Attempts to teleport monsters in sight.")},
+    "Attempts to teleport away monsters in sight.")},
 
 	{ 28,56,50,FALSE,TRUE,A_CON,0,20,_("目覚めよ、葬られた幽霊達よ", "Awaken, O Buried Phantoms"),
 	_("視界内全てに轟音属性攻撃を行う。周囲の敵が起きる。さらに友好的な幽霊系のモンスターが数体現れる。",
@@ -6309,7 +6307,7 @@ cptr do_cmd_class_power_aux_kutaka(int num, bool only_info)
 		int rad = DETECT_RAD_DEFAULT;
 		if (only_info) return format(_str_eff_area, rad);
 
-		msg_print(_("あなたは敵の気配を探った...", "You search for presence of enemies..."));
+		msg_print(_("あなたは敵の気配を探った...", "You search for the presence of enemies..."));
 		detect_monsters_normal(rad);
 		detect_monsters_invis(rad);
 		if (plev > 14)
@@ -7055,7 +7053,7 @@ class_power_type class_power_okina[] =
 
 	{ 43,50,80,FALSE,FALSE,A_CHR,0,0,_("無縁の芸能者", "Performers Unattached to Society"),
 	_("一時的にあらゆる技能レベルが現在の魅力値と同じとして扱われる。",
-    "Temporarily makes all of you skill levels equal to your current charisma.")},
+    "Temporarily makes all of your skill levels equal to your current charisma.")},
 
 	{ 47,100,80,FALSE,TRUE,A_CHR,0,0,_("背面の暗黒猿楽", "The Back Face's Dark Sarugaku"),
 	_("視界内の全てに対し、極めて強力な暗黒属性攻撃と狂気属性攻撃を行う。暗い所でしか使えない。",
@@ -7715,7 +7713,7 @@ cptr do_cmd_class_power_aux_shion(int num, bool only_info)
 		if (only_info) return format(_str_eff_power, power);
 
 		if (use_itemcard) msg_print(_("カードの中の鉢から破滅のオーラが噴き出した！", "A ruinous aura erupts from the bowl in the card!"));
-		else msg_print(_("あなたの持つ鉢から破滅のオーラが噴き出した！", "Ruins aura erupts from your bowl!"));
+		else msg_print(_("あなたの持つ鉢から破滅のオーラが噴き出した！", "A ruinous aura erupts from your bowl!"));
 
 		project_hack(GF_HAND_DOOM, power);
 
@@ -7758,7 +7756,7 @@ class_power_type class_power_jyoon[] =
     "Detects items and treasure. At level 30, also detects monsters carrying items or treasure.")},
 	{ 20,0,0,FALSE,FALSE,A_CHR,0,0,_("散財", "Waste Money"),
 	_("散財を始める。所持金が$1000以上必要。散財中は格闘攻撃の威力が大幅に上昇するが攻撃のたびに所持金が減少する。もう一度このコマンドを実行すると元に戻る。このコマンドの実行には行動順を消費しない。",
-    "Starts wasting money. Requires having at least $1000. Greatly raises your martial art power, but reduces amount of money with each hit. Performing this action once again cancels the effect. Does not consume energy.")},
+    "Starts wasting money. Requires having at least $1000. Greatly raises your martial art power, but spends money with each hit. Performing this action again cancels the effect. Does not consume energy.")},
 	{ 25,25,0,TRUE,FALSE,A_DEX,30,10,_("突進", "Rush"),
 	_("数グリッドを一瞬で移動する。途中にモンスターがいたら気属性ダメージを与えて止まる。",
     "Moves multiple spaces in an instant. If you hit a monster, you stop and deal Ki damage.")},
@@ -8064,7 +8062,7 @@ class_power_type class_power_udonge_d[] =
 
 	{ 5,10,25,FALSE,FALSE,A_STR,0,0,_("ルナティッククランプ", "Lunatic Clamp"),
 	_("利き腕に装備中の「ルナティックガン」の残弾を1つ消費し、銃と同じ威力の低射程の轟音属性ブレスを放つ。",
-    "Spends 1 ammo in 'Lunatic Gun' you're holding in your dominant hand; performs a short range sound breath attack with power equal to your gun's.")},
+    "Spends 1 ammo in 'Lunatic Gun' you're holding in your dominant hand to perform a short range sound breath attack with power equal to your gun's.")},
 	{ 12,20,55,FALSE,FALSE,A_INT,0,0,_("波長分析", "Wavelength Analysis"),
 	_("周囲にあるものを感知する。レベルが上がると感知できるものの種類と範囲が増える。",
     "Detects various things in nearby area. As your level increases, you'll be able to detect more and in wider area.")},
@@ -8073,7 +8071,7 @@ class_power_type class_power_udonge_d[] =
     "Fires a half physical, half mental laser. Less effective against enemies with unusual mind, insanity inducing enemies and unique monsters.")},
 	{ 20,30,75,FALSE,FALSE,A_INT,0,0,_("波長診断", "Wavelength Diagnosis"),
 	_("視界内のモンスターの波長を読み取って能力やパラメータなどを調査する。",
-    "Reads the wavelength of monsters in sight to learn their abilites and stats.")},
+    "Reads the wavelength of monsters in sight to learn their abilities and stats.")},
 
 	{ 25,40,60,FALSE,FALSE,A_STR,0,0,_("メディスンチェスト(投擲)", "Medicine Chest (Throw)"),
 	_("薬籠を豪快に投げつける。薬籠の中にあるアイテムは全てばら撒かれて薬は割れる。「*爆発*の薬」は視界内ダメージでなく通常の爆発になる。",
@@ -8085,7 +8083,7 @@ class_power_type class_power_udonge_d[] =
 
 	{ 35,40,70,FALSE,TRUE,A_INT,0,0,_("ディスオーダーアイ", "Disorder Eye"),
 	_("近距離視界内の好きな場所に瞬間移動する。このとき次の行動までにかかる時間が少し減少する。",
-    "Teleports to a specified location in sight withing short distance. Consumes less energy than normal action.")},
+    "Teleports to a specified location in sight within a short distance. Consumes less energy than a normal action.")},
 
 	{ 40,80,75,FALSE,TRUE,A_CHR,0,0,_("ルナティックレッドアイズ", "Lunatic Red Eyes"),
 	_("視界内の全てに対して強力な精神攻撃を行う。",
@@ -8093,7 +8091,7 @@ class_power_type class_power_udonge_d[] =
 
 	{ 43,64,70,FALSE,TRUE,A_STR,0,0,_("ルナティックエコー", "Lunatic Echo"),
 	_("利き腕に装備中の「ルナティックガン」の残弾を全て消費し、銃威力*残弾の威力の強力な轟音属性ビームを放つ。",
-    "Spends all ammo in 'Lunatic Gun' you're holding in your dominant hand; fires a powerful sound beam with power equal to (gun power * amount of ammo apent).")},
+    "Spends all ammo in 'Lunatic Gun' you're holding in your dominant hand to fire a powerful sound beam with power (gun power * amount of ammo spent).")},
 	{ 48,180,90,FALSE,TRUE,A_CHR,0,0,_("イビルアンジュレーション", "Evil Undulation"),
 	_("敵からの攻撃を三回無効化するバリアを張る。ただしアイテムの破壊や光の剣属性の攻撃は防げない。通常の無敵化と違い解除時に行動遅延しない。",
     "Creates a barrier that negates three enemy attacks. Does not block Psycho-Spear attacks or prevent item destruction. Unlike normal invincibility, does not consume energy when the effect ends.")},
@@ -8560,7 +8558,7 @@ class_power_type class_power_satono[] =
 
 	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("踊る", "Dance"),
 	_("配下一体の背後で踊る。背後で踊っている間はそのモンスターの位置に重なり一緒に移動する。モンスターの魔法使用率が魅力に応じて強化され、モンスターの攻撃でプレイヤーが経験値やアイテムを得ることができる。装備が重いときに踊っているとプレイヤーの自然回復速度が低下する。",
-    "Dances behind the back of a follower. While dancing, you occupy the same space as that monster. The monster's spell casting rate is increased depending on your charisma, and you gain experince and items from the monster's attacks. Your regeneration rate is lowered if you're dancing while using heavy equipment.")},
+    "Dances behind the back of a follower. While dancing, you occupy the same space as that monster. The monster's spell casting rate is increased depending on your charisma, and you gain experience and items from the monster's attacks. Your regeneration rate is lowered if you're dancing while using heavy equipment.")},
 
 	{ 10,0,20,FALSE,FALSE,A_CHR,0,0,_("スカウト", "Scout"),
 	_("隣接するモンスター一体を配下にしようと試みる。成功率はレベル差と魅力で決まる。ユニークモンスターにはかなり効きづらく、特殊ユニークモンスター、クエスト打倒対象モンスター、精神を持たないモンスターには効果がない。",
@@ -8596,7 +8594,7 @@ class_power_type class_power_satono[] =
 
 	{ 45,75,90,FALSE,TRUE,A_CHR,0,0,_("クレイジーバックダンス", "Crazy Backup Dance"),
 	_("自分が背後で踊っているモンスターを一時的に無敵化する。",
-    "Temporarilye makes the monster you're dancing behind invincible.")},
+    "Temporarily makes the monster you're dancing behind invincible.")},
 
 	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
 };
@@ -8607,7 +8605,7 @@ class_power_type class_power_mai[] =
 
 	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("踊る", "Dance"),
 	_("配下一体の背後で踊る。背後で踊っている間はそのモンスターの位置に重なり一緒に移動する。モンスターの隣接攻撃、AC、HP回復速度が魅力に応じて強化され、モンスターの攻撃でプレイヤーが経験値やアイテムを得ることができる。装備が重いときに踊っているとプレイヤーの自然回復速度が低下する。",
-    "Dances behind the back of a follower. While dancing, you occupy the same space as that monster. The monster's melee attack power, AC and HP recovery is increased depending on your charisma, and you gain experince and items from the monster's attacks. Your regeneration rate is lowered if you're dancing while using heavy equipment.")},
+    "Dances behind the back of a follower. While dancing, you occupy the same space as that monster. The monster's melee attack power, AC and HP recovery is increased depending on your charisma, and you gain experience and items from the monster's attacks. Your regeneration rate is lowered if you're dancing while using heavy equipment.")},
 
 	{ 10,0,20,FALSE,FALSE,A_CHR,0,0,_("スカウト", "Scout"),
 	_("隣接するモンスター一体を配下にしようと試みる。成功率はレベル差と魅力で決まる。ユニークモンスターにはかなり効きづらく、特殊ユニークモンスター、クエスト打倒対象モンスター、精神を持たないモンスターには効果がない。",
@@ -8643,7 +8641,7 @@ class_power_type class_power_mai[] =
 
 	{ 45,75,90,FALSE,TRUE,A_CHR,0,0,_("クレイジーバックダンス", "Crazy Backup Dance"),
 	_("自分が背後で踊っているモンスターを一時的に無敵化する。",
-    "Temporarilye makes the monster you're dancing behind invincible.")},
+    "Temporarily makes the monster you're dancing behind invincible.")},
 
 	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
 };
@@ -9444,7 +9442,7 @@ class_power_type class_power_kosuzu[] =
 	{14,10,50,FALSE,TRUE,A_INT,0,0,_("著者不明の易書", "Book of an Unknown Author"),
 		_("フロアの雰囲気を感知する。レベル20で近くのトラップ、レベル30で近くのモンスターも感知する。",
         "Senses the feeling of current dungeon level. At level 20, detects traps, at level 30 detects monsters.")},
-	{21,0,50,FALSE,TRUE,A_INT,0,0,_("今昔百鬼拾遺稗田写本", "'Hundred Demons of Past and Present'"),
+	{21,0,50,FALSE,TRUE,A_INT,0,0,_("今昔百鬼拾遺稗田写本", "Hundred Demons of Past and Present"),
 		_("このフロア限定でモンスター「煙々羅」を配下として召喚する。",
         "Summons an Enenra as your follower. It can't leave this level.")},
 	{28,0,0,FALSE,TRUE,A_INT,0,0,_("怨霊の艶書", "Book of Vengeful Spirits"),
@@ -9453,9 +9451,9 @@ class_power_type class_power_kosuzu[] =
 	{35,20,60,FALSE,TRUE,A_CHR,0,0,_("狐文字のノート", "Kitsune Notebook"),
 		_("このフロア限定でモンスター「妖怪狐」を配下として一体召喚する。",
         "Summons a Youkai fox as your follower. It can't leave this level.")},
-	{42,80,70,FALSE,TRUE,A_INT,0,0,_("私家版百鬼夜行絵巻最終章補遺", "Personal Hundred Oni Night Parade Scroll"),
+	{42,80,70,FALSE,TRUE,A_INT,0,0,_("私家版百鬼夜行絵巻最終章補遺", "Self-Published Night Parade Picture Scroll"),
 		_("絵巻物の邪鬼に取り憑かれる。取り憑かれている間は種族や特技が変化する。★私家版百鬼夜行絵巻最終章補遺を装備していないと使えない。",
-        "Become possessed by a demon from the scroll. Your race and special abilities change during possession. Requires having 'Personal Hundred Oni Night Parade Scroll - Final Chapter'.")},
+        "Become possessed by a demon from the scroll. Your race and special abilities change during possession. Requires having 'Self-Published Night Parade Picture Scroll - Final Chapter Appendix'.")},
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
 };
 
@@ -9493,9 +9491,7 @@ cptr do_cmd_class_power_aux_kosuzu(int num, bool only_info)
 			int rad = DETECT_RAD_DEFAULT;
 			if(only_info) return format(_str_eff_area,rad);
 
-#ifdef JP
-			msg_print("あなたは筮竹を取り出し、記憶を頼りに卦を立て始めた...");
-#endif
+			msg_print(_("あなたは筮竹を取り出し、記憶を頼りに卦を立て始めた...", "You take out your divination sticks and begin telling your fortune..."));
 			p_ptr->feeling_turn = 0;
 
 			if(plev > 19) detect_traps(rad,TRUE);
@@ -9649,7 +9645,7 @@ cptr do_cmd_class_power_aux_narumi2(int num, bool only_info)
 			int rad = 25 + plev / 2;
 			if(only_info) return format(_str_eff_area,rad);
 
-			msg_print(_("あなたはその場に佇んで生命の気配を探した..", "You stand still and search for presence of life..."));
+			msg_print(_("あなたはその場に佇んで生命の気配を探した..", "You stand still and search for the presence of life..."));
 			detect_monsters_living(rad);
 
 			break;
@@ -9862,7 +9858,7 @@ cptr do_cmd_class_power_aux_narumi2(int num, bool only_info)
 #ifdef JP
 			fire_ball_jump(GF_HOLY_FIRE,dir,base+randint1(sides),5,(randint0(4)?"あなたは有り余る力の全てをぶつけた！":"「残念無念、また来世ー！」"));
 #else
-            fire_ball_jump(GF_HOLY_FIRE,dir,base+randint1(sides),5,"You let all of your power out!");
+            fire_ball_jump(GF_HOLY_FIRE,dir,base+randint1(sides),5,(randint0(4)?"You let all of your power out!":"'A bitter shame! See you in your next life!'"));
 #endif
 
 		}
@@ -10079,7 +10075,7 @@ class_power_type class_power_aunn[] =
 
 	{30,25,40,FALSE,FALSE,A_CON,0,0,_("石像化", "Statue Form"),
 		_("モンスターから認識されなくなる。視界内にモンスターがいる状態では使用できない。ダメージを受けたり待機、休憩、飲食など以外の行動をすると効果が切れる。",
-        "Makes is harder for monsters to notice you. Cannot be used with monsters in sight. The effect ends if you take damage or perform an action other than waiting/resting/eating.")},
+        "Makes it harder for monsters to notice you. Cannot be used with monsters in sight. The effect ends if you take damage or perform an action other than waiting/resting/eating.")},
 
 	{35,35,60,TRUE,FALSE,A_STR,50,10,_("コマ犬回し", "Koma-Inu Spin"),
 		_("周囲のモンスター全てに攻撃する。装備が重いと失敗しやすい。",
@@ -10387,7 +10383,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 			return NULL;
 		}
 
-		msg_print(_("辺りは人を寄せ付けない雰囲気に満ちた。", "There suddenly is a hostile feeling towards unwelcome guests in your vicinity."));
+		msg_print(_("辺りは人を寄せ付けない雰囲気に満ちた。", "Your territory becomes inhospitable to unwelcome guests."));
 
 		p_ptr->special_defense |= SD_UNIQUE_CLASS_POWER;
 		p_ptr->redraw |= (PR_STATUS);
@@ -10409,7 +10405,7 @@ cptr do_cmd_class_power_aux_nemuno(int num, bool only_info)
 		else if (one_in_(2))
 			msg_format(_("山姥のやり方でよそ者を迎えた！", "You give the strangers a yamanba's welcome!"));
 		else
-			msg_format(_("手当たり次第に掻っ捌いた！", "You slash widly!"));
+			msg_format(_("手当たり次第に掻っ捌いた！", "You slash wildly!"));
 
 
 		project(0,rad,py,px,100,GF_SOULSCULPTURE, PROJECT_KILL,-1);
@@ -10479,7 +10475,7 @@ class_power_type class_power_soldier[] =
         "Changes an adjacent open floor into rubble.")},
 	{10,0,40,FALSE,FALSE,A_INT,0,0,_("銃弾変更", "Switch Ammo"),
 		_("銃の属性や種類を変更して射撃を行う。変更する銃弾の種類によってMP消費や残弾消費が別途発生する。銃に「射撃」以外の属性がついていると銃の威力が元素1/2、それ以外2/3に低下する。ロケットランチャーや一部の特殊な銃はこの特技の対象にならない。",
-        "Performs a shooting attack after switching the kind of ammo you're using. MP and ammo consumptions varies depending on ammo used. If the gun attacks with a non-standard element, its power is reduced to 1/2 if it's a base element, and to 2/3 otherwise. Cannot be used with rocket launchers or some other special guns.")},
+        "Performs a shooting attack after switching the kind of ammo you're using. MP and ammo consumption varies depending on ammo used. If the gun attacks with a non-standard element, its power is reduced to 1/2 if it's a base element, and to 2/3 otherwise. Cannot be used with rocket launchers or some other special guns.")},
 	{12,16,40,FALSE,FALSE,A_INT,0,0,_("食料調達", "Prepare Food"),
 		_("アイテム「食料」を生成する。",
         "Creates a food ration.")},
@@ -10509,7 +10505,7 @@ class_power_type class_power_soldier[] =
         "Uses material items to create ammo. Created ammo can be used through the 'Switch Ammo' ability.")},
 	{35,40,65,FALSE,FALSE,A_DEX,0,0,_("全耐性", "Resistance"),
 		_("一時的に元素耐性を得る。",
-        "Grants temporary resistnace to basic elements.")},
+        "Grants temporary resistance to basic elements.")},
 	{40,65,75,FALSE,FALSE,A_STR,0,0,_("アドレナリン・コントロール", "Adrenaline Control"),
 		_("一時的に加速、肉体強化、狂戦士化状態になる。",
         "Temporarily increases speed and physical stats, and makes you berserk.")},
@@ -12024,10 +12020,8 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 			else
 			{
 
-#ifdef JP
 				if(one_in_(7))
-					msg_print("「穢土に生まれ、悪心に操られし穢身、お前の浄土はここではない！」");
-#endif
+					msg_print(_("「穢土に生まれ、悪心に操られし穢身、お前の浄土はここではない！」", "'Child of a filthy world, impure body commanded by malice, this is not your Pure Land!'"));
 
 				mass_genocide(power, TRUE);
 			}
@@ -12394,10 +12388,8 @@ cptr do_cmd_class_power_aux_sagume(int num, bool only_info)
 			if(one_in_(10)) msg_print(_("「...そうでは無い。」", "'...That's not it.'"));
 			else if(one_in_(9)) msg_print(_("「運命は逆転し始めた。」", "'Fate has begun to turn over.'"));
 			else if(one_in_(8)) msg_print(_("「これはいわば勅命よ。」", "'Consider that an imperial order.'"));
-#ifdef JP
-			else if (one_in_(7)) msg_print("「穢れに満ちた狂宴を続けるが良い！」");
-#endif
-			else msg_print(_("あなたは敵に向けて語り始めた..","'You start speaking to the enemies...'"));
+			else if (one_in_(7)) msg_print(_("「穢れに満ちた狂宴を続けるが良い！」", "'Continue this impure banquet!'"));
+			else msg_print(_("あなたは敵に向けて語り始めた..", "You start speaking to the enemies..."));
 
 			if(process_warning(px,py,TRUE))
 			{
@@ -12602,7 +12594,7 @@ class_power_type class_power_kaguya[] =
         "Grants invulnerability for 5 turns.")},
 	{48,160,85,FALSE,TRUE,A_STR,0,0,_("金閣寺の一枚天井", "Seamless Ceiling of Kinkaku-ji"),
 		_("プレイヤーを中心とする縦横7グリッドに対し極めて強力な分解属性攻撃を行う。「金閣寺の一枚天井」を所持していないと使えない。また範囲内に永久壁やマップ端や上り階段などがあると失敗する。",
-        "Performs an extremely powerful disintegration attack in a 7x7 area centered on yourself. Requires having possession of 'Seamless Ceiling of Kinkaku-ji'. Fails if there are permanent walls or stairs leading upwards in area of effect.")},
+        "Performs an extremely powerful disintegration attack in a 7x7 area centered on yourself. Requires possession of 'Seamless Ceiling of Kinkaku-ji'. Fails if there are permanent walls or stairs leading upwards in area of effect.")},
 	{50,255,90,FALSE,TRUE,A_INT,0,0,_("須臾の術Ⅱ", "Manipulate Instantaneous II"),
 		_("5回連続で行動する。",
         "Perform 5 actions in a row.")},
@@ -13019,7 +13011,7 @@ cptr do_cmd_class_power_aux_eirin(int num, bool only_info)
 			int power = 50 + plev * 4;
 			if(only_info) return format(_str_eff_power,power);
 
-			msg_print(_("幻覚をもたらす香を焚いた...", "You burn a hallucination inducing incense..."));
+			msg_print(_("幻覚をもたらす香を焚いた...", "You burn a hallucination-inducing incense..."));
 			stun_monsters(power);
 			confuse_monsters(power);
 		}
@@ -13050,7 +13042,7 @@ cptr do_cmd_class_power_aux_eirin(int num, bool only_info)
 	case 3:
 		{
 			if(only_info) return "";
-			msg_print(_("過去の記憶を探った...", "You search you memories of the past..."));
+			msg_print(_("過去の記憶を探った...", "You search your memories of the past..."));
 			identify_pack();
 			probing();
 		}
@@ -14657,7 +14649,7 @@ cptr do_cmd_class_power_aux_mamizou(int num, bool only_info)
 
 			if(FULL_MOON) sides *= 2;
 			if(only_info) return format(_("損傷:%dd%d*2", "dam: %dd%d*2"),dice,sides);
-			msg_print(_("壮大な狸囃子が始まった！", "The magnificient tanuki belly-drumming has begun!"));
+			msg_print(_("壮大な狸囃子が始まった！", "The magnificent tanuki belly-drumming has begun!"));
 			project_hack2(GF_DARK,dice,sides,0);
 			project_hack2(GF_SOUND,dice,sides,0);
 
@@ -14886,7 +14878,7 @@ cptr do_cmd_class_power_aux_raiko(int num, bool only_info)
 			int base = plev * 12 + chr_adj * 10;
 			if(only_info) return format(_str_eff_dam_around,base / 2);
 			stop_raiko_music();
-			msg_format(_("雷雲が巻き起こり、雷鳴が轟いた！", "Thunderclouds starts swirling, and there is a roar of thunder!"));
+			msg_format(_("雷雲が巻き起こり、雷鳴が轟いた！", "Thunderclouds start swirling, and there is a roar of thunder!"));
 			project(0, rad, py, px, base, GF_ELEC, PROJECT_KILL | PROJECT_ITEM | PROJECT_GRID, -1);
 			project(0, rad/2, py, px, rad, GF_MAKE_STORM, (PROJECT_GRID | PROJECT_HIDE), -1);
 			break;
@@ -15092,7 +15084,7 @@ cptr do_cmd_class_power_aux_sangetsu(int num, bool only_info)
 			if(only_info) return format(_("期間:%d 範囲:%d", "dur: %d rad: %d"),time,rad);
 			if(p_ptr->tim_general[0] || p_ptr->tim_general[1])
 			{
-				msg_print(_("すでに能力を使っている。", "This ability already is in effect."));
+				msg_print(_("すでに能力を使っている。", "The ability is already in effect."));
 				return NULL;
 			}
 
@@ -22387,9 +22379,7 @@ cptr do_cmd_class_power_aux_martial_artist(int num, bool only_info)
 				}
 				if(r_ptr->flags3 & RF3_UNDEAD)
 				{
-#ifdef JP
-					msg_format("「ふるえるぞハート！燃え尽きるほどヒート！刻むぞ血液のビート！」");
-#endif
+					msg_format(_("「ふるえるぞハート！燃え尽きるほどヒート！刻むぞ血液のビート！」", "'My heart resonates! With the heat of a raging fire! Feel the beat of my pulse!'"));
 					damage *= 2;
 				}
 				msg_format(_("%sに波紋エネルギーを叩き込んだ！", "You slam %s with Hamon energy!"),m_name);
@@ -30469,7 +30459,7 @@ class_power_type class_power_patchouli[] =
         "Surround yourself with rotating blades, counterattacking nearby enemies. Treated as an aura of shards.")},
 	{ 24,28,45,FALSE,TRUE,A_INT,0,0,_("セントエルモピラー", "Saint Elmo's Pillar"),
 		_("強力なプラズマ属性の球を放つ。",
-        "Fires powerful ball of plasma.")},
+        "Fires a powerful ball of plasma.")},
 	{ 28,36,50,FALSE,TRUE,A_INT,0,0,_("メタルファティーグ", "Metal Fatigue"),//v1.1.95
 		_("周囲のモンスターを攻撃力低下、防御力低下状態にする。",
         "Lowers attack and defense power of nearby monsters.")},
@@ -33148,7 +33138,7 @@ cptr do_cmd_class_power_aux_seiga(int num, bool only_info)
 
 			if(!dun_level)
 			{
-				msg_print(_("ダンジョンの中でないとこの技は使えない。", "You can't use this ability outside dungeon."));
+				msg_print(_("ダンジョンの中でないとこの技は使えない。", "You can't use this ability outside of a dungeon."));
 				return NULL;
 
 			}
@@ -33159,7 +33149,7 @@ cptr do_cmd_class_power_aux_seiga(int num, bool only_info)
 			}
 			else if(dun_level == d_info[dungeon_type].maxdepth)
 			{
-				msg_print(_("ここは既にダンジョンの最深層のようだ。", "You already are on the lowest level in this dungeon."));
+				msg_print(_("ここは既にダンジョンの最深層のようだ。", "You already are on the lowest level of this dungeon."));
 				return NULL;
 			}
 			else
@@ -35172,6 +35162,7 @@ cptr do_cmd_class_power_aux_komachi(int num, bool only_info)
 			else if (one_in_(9))msg_print("「この様な障壁で阻まれてしまうくらいでは仕事にならないんでねぇ」");
 			else msg_print("あなたは壁の厚さを操作してすり抜けた。");
 #else
+			if(one_in_(10))msg_print("'Through alaya-vijnana, even empty void can be as the great heavens!'");
             if (one_in_(9))msg_print("'Can't let a barrier like that get in the way of my job!'");
 			else msg_print("You manipulate the thickness of the wall and go through.");
 #endif
@@ -35286,7 +35277,7 @@ cptr do_cmd_class_power_aux_iku(int num, bool only_info)
 
 			if (!get_aim_dir(&dir)) return NULL;
 			if(!fire_ball_jump(GF_ELEC, dir, base + damroll(dice,sides), rad,_("あなたは天に向けて指を差した。",
-                                                                                "You point your finger towards the heaven."))) return NULL;
+                                                                                "You point your finger towards the heavens."))) return NULL;
 			break;
 		}
 	case 1:
@@ -35336,7 +35327,7 @@ cptr do_cmd_class_power_aux_iku(int num, bool only_info)
 			base = p_ptr->lev * 10 + adj_general[p_ptr->stat_ind[A_CHR]] * 10;
 			if(only_info) return format(_str_eff_dam_around,base / 2);
 			msg_format(_("あなたは天に向けて指を差した。",
-                        "You point your finger towards the heaven."));
+                        "You point your finger towards the heavens."));
 			project(0, rad, py, px, base, GF_ELEC, PROJECT_KILL | PROJECT_ITEM, -1);
 			break;
 		}
@@ -35474,9 +35465,9 @@ cptr do_cmd_class_power_aux_udonge(int num, bool only_info)
 
 			if(use_itemcard)
 				msg_format(_("周囲の色々なことが分かった気がする...",
-                            "You feel you know more about nearby area..."));
+                            "You feel you know more about the nearby area..."));
 			else
-				msg_format(_("周囲の波長を分析した・・", "You analyze ambient wavelength..."));
+				msg_format(_("周囲の波長を分析した・・", "You analyze ambient wavelengths..."));
 			detect_doors(rad);
 			if(p_ptr->lev > 4) detect_monsters_normal(rad);
 			if(p_ptr->lev > 9) detect_traps(rad, TRUE);
@@ -35671,7 +35662,7 @@ class_power_type class_power_tewi[] =
 
 	{10,7,25,FALSE,FALSE,A_DEX,0,0,_("落とし穴", "Trap Hole"),
 		_("足元に落とし穴を掘る。誰も見ていない場所でないと実行できない。浮遊していない敵は落とし穴に落ちて気絶、朦朧、行動遅延することがある。",
-        "Digs a trap hole in your location. Has to be done in a place where nobody can see you. When a non-flying enemy falls into a trap hole, they might get knocked out, stunned or slowed.")},
+        "Digs a trap hole at your location. Cannot be performed when in sight of anyone. When a non-flying enemy falls into a trap hole, they might get knocked out, stunned or slowed.")},
 	{20,12,25,FALSE,FALSE,A_INT,0,0,_("爆発トラップ", "Explosive Rune"),
 		_("敵が通ったら爆発するルーンを床に仕掛ける。",
         "Sets up a rune on the floor that explodes when an enemy crosses it.")},
@@ -35683,7 +35674,7 @@ class_power_type class_power_tewi[] =
         "Uses hemostatic medicine to recover HP and cure wounds.")},
 	{38,45,70,FALSE,FALSE,A_INT,0,0,_("レーザートラップ", "Laser Trap"),
 		_("このフロア限定でレーザーを放つ魔法陣を設置する。",
-        "Places a magical circle that fires laser. It cannot leave this floor.")},
+        "Places a magical circle that fires lasers. It cannot leave this floor.")},
 	{44,64,80,FALSE,TRUE,A_CHR,0,0,_("エンシェントデューパー", "Ancient Duper"),
 		_("視界内のモンスター全てを友好的にする。ただしこの特技の発動に失敗したときフロアのモンスター全てが激怒する。クエストの討伐対象モンスターには効果がない。",
         "Turns all monsters in sight friendly. However, if you fail to activate this ability, all monsters on this floor will be angered. Does not affect quest target monsters.")},
@@ -36308,7 +36299,7 @@ cptr do_cmd_class_power_aux_maid(int num, bool only_info)
 
 			if(p_ptr->tim_general[0])
 			{
-				msg_format(_("お茶はさっき飲んだばかりだ。", "You just have drank tea."));
+				msg_format(_("お茶はさっき飲んだばかりだ。", "You have just had tea."));
 				return NULL;
 			}
 
@@ -39957,7 +39948,7 @@ const support_item_type support_item_list[] =
 
 	//転読
 	{150,70, 128,3,25,	MON_BYAKUREN,class_power_byakuren,do_cmd_class_power_aux_byakuren,0,
-	_("魔人経巻", "Sorcerer's Sutra Scroll "),
+	_("魔人経巻", "Sorcerer's Sutra Scroll"),
 	_("それは一定時間身体能力を大幅に上昇させる。レベル30で加速、レベル35で元素一時耐性が追加される。",
     "Temporarily greatly increases your physical stats. At level 30, increases speed; at level 35, grants temporary resistance to basic elements.")},
 	//インドラの雷
