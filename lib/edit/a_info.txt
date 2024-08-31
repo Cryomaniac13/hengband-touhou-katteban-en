@@ -544,8 +544,8 @@ F:RES_HOLY |
 F:ACTIVATE
 U:CHOIR_SINGS
 D:$The shining armor of Lohengrin the son of Parsifal.
-D:$ If you wears it, the holy grail gives to you the devine protection
-D:$  from all evils. (W.R.Wagner, 'Parsifal')
+D:$ The Holy Grail gives divine protection from all evils to the wearer.
+D:$  (W.R.Wagner, 'Parsifal')
 D:聖杯守護の騎士パルジファルの息子、ローエングリンの輝く鎧だ。
 D:身に付ける者はあらゆる邪悪なものを退け聖杯の加護を得る。
 D:(ワーグナー、「パルジファル」)
@@ -624,7 +624,7 @@ P:13:1d2:5:5:20
 F:BLOWS | RES_SHARDS | SLOW_DIGEST |
 F:SUST_STR | SUST_DEX | SUST_CON | SUST_INT | SUST_WIS | SUST_CHR |
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD
-D:$The leather armor which has a power of Shiva the god of destruction.
+D:$The leather armor of Shiva, the god of destruction.
 D:ヒンズー教の最高神は創造の神ブラフマン、維持の神ヴィシュヌ、
 D:そして破壊神シヴァだ。これはその中でも最も強力なシヴァの力が宿った
 D:鎧だ。
@@ -638,7 +638,7 @@ I:41:2:4
 W:20:3:60:45000
 P:7:0d0:0:0:20
 F:STEALTH | RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_DARK | XTRA_H_RES
-D:$Familar with the secret ways hidden in darkness, this leather cuirass is 
+D:$Familiar with the secret ways hidden in darkness, this leather cuirass is 
 D:$truly more than it appears.
 D:「霧の宝石」を意味する名を持つ、この革の胴鎧は、
 D:暗闇に隠れる秘密の手段に、その見かけよりも遥かに適している。
@@ -731,7 +731,7 @@ I:44:5:5
 W:30:50:10:100000
 P:2:0d0:0:0:18
 F:INT | WIS | CHR | SUST_INT | SUST_WIS | SUST_CHR | RES_BLIND | IM_ELEC
-D:$This is the helm of Indra the god of thunderstorms.
+D:$This is the helm of Indra, the god of thunderstorms.
 D:雷神インドラの兜だ。
 
 # The Massive Iron Crown of Morgoth
@@ -880,7 +880,7 @@ F:SEE_INVIS | NO_MAGIC | ACTIVATE |
 F:RES_DISEN | RES_FEAR | FREE_ACT | RES_ACID | RES_COLD | RES_POIS |
 F:TELEPORT
 U:TERROR
-D:$This is terrible, scary, fearful, dreadful, bloodcurding, hair-rising
+D:$This is terrible, scary, fearful, dreadful, bloodcurdling, hair-raising
 D:$ frightening mask.
 D:なんとも恐ろしい、不気味で、おどろおどろしく、髪が逆立ち、血も凍り、
 D:ぞっとして鳥肌が立つような仮面だ。
@@ -900,8 +900,9 @@ F:RES_CHAOS | LITE | SEE_INVIS | REGEN | ACTIVATE
 F:XTRA_POWER | XTRA_H_RES
 F:RES_HOLY
 U:CURE_700
-D:$The gold grown which is decorated with much jewerly is the symbol
-D:$ of the throne of Amber. Princes of Amber scrambled for it violently.
+D:$Wrought of silver with seven high points each topped by a gem, this crown
+D:$ is the symbol of the throne of Amber.  The Princes of Amber scrambled for
+D:$ it violently.
 D:アンバーの王位の象徴である、多数の宝石で飾られた金の王冠だ。
 D:これをめぐって骨肉の争いが王子たちの間で繰り広げられた。
 
@@ -919,7 +920,7 @@ W:30:20:10:100000
 P:1:0d0:0:0:19
 F:STEALTH | SEARCH | FREE_ACT | SEE_INVIS | TELEPATHY
 D:$The cloak of Jack of Shadows. He is one of the kings who rule
-D:$ night side of the earth at which rotetion stopped.
+D:$ the night side of the earth where rotation has stopped.
 D:$(R.Zelazny, 'Jack of Shadows')
 D:自転が止まった地球で夜の世界を支配する王の一人、
 D:泥棒の王である不死身の『影のジャック』のクロークだ。
@@ -1112,6 +1113,8 @@ I:45:6:3
 W:10:40:40:60000
 P:3:1d1:0:0:10
 F:SUST_CON | CON | REGEN | DEX
+D:$These gauntlets belonged to Prince Corwin of Amber and are
+D:$imbued with his extraordinary toughness.
 D:並外れた強靭さを持つアンバーの王子コーウィンのガントレットだ。
 
 # The Set of Gauntlets 'Pauraegen'
@@ -1216,6 +1219,9 @@ P:2:1d1:0:0:15
 U:CURE_POISON
 F:DEX | HIDE_TYPE | CHR | SUST_CHR | ACTIVATE | FREE_ACT |
 F:RES_NETHER | RES_CHAOS | SUST_CON
+D:$Flora is away from Amber's palace most of the time and enjoys finding new
+D:$boyfriends in the parallel worlds that are shadows of Amber.
+D:$Her boots are enchanted with magic to make the wearer more attractive.
 D:フローラはほとんどの時間アンバーの宮殿を離れていて、
 D:影の世界で新しいボーイフレンドを見つけては楽しんでいる。
 D:彼女のブーツには身に付けた者を魅力的に見せる魔法がかかっている。
@@ -1254,7 +1260,7 @@ W:30:20:20:100000
 P:4:1d1:5:5:16
 F:SPEED | DEX | SUST_DEX | FREE_ACT | LEVITATION
 F:RES_WATER
-D:$The boots has an agility of Shiva the god of destruction.
+D:$These boots have the ability of Shiva, the god of destruction.
 D:破壊神シヴァの力を持った革の靴だ。
 
 
@@ -1293,7 +1299,7 @@ F:DEX | HIDE_TYPE | STEALTH | SEARCH | SLAY_HUMAN |
 F:BRAND_POIS |
 F:FREE_ACT | RES_DARK | SUST_DEX | SEE_INVIS | SHOW_MODS | THROW
 F:RES_WATER
-D:$The dagger of Caine the leader of Amber fleets.
+D:$The dagger of Caine, the leader of Amber's fleets.
 D:アンバーの艦隊を指揮するケインのダガーだ。
 
 # The Dagger 'Narthanc'
@@ -1458,9 +1464,9 @@ P:0:3d5:12:16:0
 F:SEARCH | BRAND_ELEC | KILL_DRAGON | RES_FEAR |
 F:RES_ELEC | LITE | RES_FIRE | RES_POIS |
 F:SLOW_DIGEST | SHOW_MODS | RIDING
-D:$The sword of Sigurd which is alos called Balmung or Gram.
-D:$ He slashed the anvil of Mime's blacksmith and used to
-D:$ kill the dragon Fafnir.
+D:$The sword of Sigurd which is also called Balmung or Gram.
+D:$ With it, Sigurd cut the anvil at Mime's forge in half and slew Fafner,
+D:$ the dragon.
 D:「ノートゥングさ、その名は。ヴォータンがとねりこの幹
 D:に突き立てた剣だ。それを引き抜くことのでき
 D:た者だけが、わがものとしうるわけだ。」
@@ -2490,7 +2496,7 @@ W:50:25:80:100000
 P:0:0d0:10:14:0
 F:SPEED | RES_FIRE | XTRA_MIGHT | ACTIVATE | SHOW_MODS | XTRA_RES_OR_POWER
 U:BRAND_FIRE_BOLTS
-D:$Magic power of this crossbow of Brand the prince of Amber will enable
+D:$The magic power of this crossbow of Brand, the prince of Amber, will enable
 D:$ you to move faster.
 D:トランプの魔力を自分の物にし、新たな宇宙を創造しようとした
 D:アンバーの王子ブランドが使っていたクロスボウだ。
@@ -2713,7 +2719,7 @@ P:0:8d6:0:30:0
 F:STEALTH | INT | WIS | AGGRAVATE | CURSED | HEAVY_CURSE |
 F:SHOW_MODS | CHAOTIC | IMPACT | SPEED
 F:RANDOM_CURSE0
-D:$This is disruptive heave thing made by Micro$oft.
+D:$This is disruptive heavy thing made by Micro$oft.
 D:$It will bring many troubles to its user.
 D:マイクロンフトによって作られたもので、重くて破壊力がある。
 D:使用する者に災いをもたらす。
@@ -3989,7 +3995,7 @@ F:DEX | CON | CHR | SEARCH | INFRA | HIDE_TYPE |
 F:RES_FEAR | RES_BLIND | RES_SOUND |
 F:WARNING | ESP_HUMAN |
 D:$This is Yositsune's kabuto. It defended his head against 
-D:$many arrows and blades from his ememies.
+D:$many arrows and blades from his enemies.
 D:源氏の勇者源義経の飾りのついた星兜だ。義経はこれをかぶり、
 D:平氏からの刃や矢の攻撃を防いだ。
 
@@ -4038,7 +4044,7 @@ I:26:2:0
 W:45:18:120:2500
 P:0:4d6:15:15:0
 F:RIDING | WARNING | SLAY_EVIL | KILL_DEMON | ESP_DEMON
-D:$Sigh, this useless sword again? But wait...
+D:$What, this useless sword again?  Oh!  Wait a minute ....
 D:なんだ、またこの役立たずの剣か。おや？ちょっと待てよ……
 
 # The Light Crossbow 'Wiizapper' (x3)
@@ -4124,6 +4130,8 @@ P:0:1d1:0:0:25
 F:STR | CON
 F:RES_FIRE | RES_COLD | RES_ELEC | RES_POIS | RES_ACID | 
 F:RES_CONF | RES_BLIND | RES_FEAR | FREE_ACT
+D:$This headband embodies the indomitable spirit of the legendary biker boss.
+D:$Inexplicably, they'll sometimes wash up in Gensoukyou in groups.
 D:伝説の総長の不屈の闘志が込められたハチマキだ。
 D:なぜか時々数本まとめて幻想郷に流れ着く。
 
@@ -4134,10 +4142,11 @@ W:25:10:300:10
 P:30:1d1:0:0:70
 F:CON | RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS
 F:AGGRAVATE | TY_CURSE
+D:$It's hard to believe armour as magnificent as this can even exist...
 D:あまりにも見事な鎧だ。この世に存在するとは思えないほどに……
 
 N:228:役小角の
-E:of En no Ozunu
+E:of En no Ozuno
 I:44:2:4
 W:80:30:2:100000
 P:1:1d1:0:0:19
@@ -4147,7 +4156,7 @@ F:RES_CONF | RES_BLIND | RES_FEAR | FREE_ACT
 F:ESP_KWAI | ESP_DEITY | DEC_MANA
 F:ACTIVATE
 U:SCARE_AREA
-
+D:$Emperor Mommu bestowed this black tokin upon Ozuno the mountain ascetic, founder of Shugendo.
 D:修験道の開祖とされる役小角が文武天皇より賜った黒い冠だ。
 
 N:229:『鋼鉄のメンポ』
@@ -4156,17 +4165,20 @@ I:44:6:3
 W:80:66:20:0
 P:3:1d1:8:8:17
 F:SPEED | STEALTH | SEARCH | STR | DEX | CON | INFRA | HIDE_TYPE | SHOW_MODS |
+D:$A steel mask with the characters "Nin" and "Kill" inscribed on its cheeks.
+D:$The will of something terrifying is imbued within it...
 D:「忍」「殺」という文字が彫られた鋼鉄の面だ。
 D:何か恐ろしいものの意志が込められているような感じがする…
 
 N:230:伝説の魔女の
-E:of Legendary Witch
+E:of the Legendary Witch
 I:44:4:2
 W:10:5:8:20000
 P:2:0d0:0:0:13
 F:INT | WIS | CHR | SEE_INVIS
 F:ACTIVATE
 U:NERUNERUNERUNE
+D:$The jet-black hat of a witch that everyone knows, but who nobody can name.
 D:誰もが知るがその名を知らない、伝説の魔女が被っていた漆黒の帽子だ。
 
 N:231:赤の女王の
@@ -4176,8 +4188,8 @@ W:80:40:30:150000
 P:0:1d1:0:0:15
 F:SPEED
 F:RES_LITE | RES_BLIND | RES_TIME | FREE_ACT | LEVITATION | SPEEDSTER
-D:$"It takes all the running you can do, to keep in the same  place."
-D:$        (Lewis Carroll, 'Through the Looking-Glass')
+D:$"It takes all the running you can do, to keep in the same place."
+D:$(Lewis Carroll, 'Through the Looking-Glass')
 D:“It takes all the running you can do, to keep in the same  place.”
 D:　　　　　　（ルイス・キャロル『鏡の国のアリス』）
 
@@ -4189,6 +4201,10 @@ P:1:1d1:5:5:24
 F:STR | WIS | CON | SHOW_MODS | QUESTITEM
 F:RES_FEAR | FREE_ACT | RES_CONF | RES_CHAOS | RES_DISEN
 F:INSTA_ART
+D:$A metal case the size of a large cigarette pack with a bracelet attached.
+D:$Whatever was once inside is missing and only the battered casing remains, but it's
+D:$been miraculously unaffected by corrosion. The bracelet is inscribed with alien
+D:$characters, which would read 'Koriel', if anyone were capable of reading them.
 D:煙草の箱ほどの大きさの金属のケースに手首にはめるための帯が付いている。
 D:ケースはひしゃげて中にあった機械は失われているが不思議なほど腐食の跡がない。
 D:帯には誰にも読めない文字で「コリエル」と彫られている。
@@ -4208,6 +4224,10 @@ P:0:0d0:0:0:30
 F:LEVITATION | FREE_ACT | QUESTITEM | CHR | WIS | SPEED | ACTIVATE
 F:RES_TIME | RES_LITE | RES_DARK | LITE
 U:DIM_DOOR
+D:$A long piece of silvery cloth that is completely massless;
+D:$it is spun from moonlight itself.
+D:$It has the power to connect the Moon and the Earth, but
+D:$will cause the wearer to lose their mind.
 D:月の光を編んで作られたゼロ質量の長大な布だ。満月と地上を繋ぐ力を持つが、
 D:着用者の心を失わせるという。
 
@@ -4231,6 +4251,7 @@ P:0:3d5:15:15:0
 F:KILL_UNDEAD
 F:SLAY_DEMON | SLAY_DEITY | SLAY_HUMAN | SLAY_ANIMAL | SLAY_EVIL | SLAY_GOOD
 F:SLAY_DRAGON | SLAY_KWAI | FORCE_WEAPON
+D:$A treasured sword of Heaven which can sense its opponent's temperament and strike at their weaknesses.
 D:天界の宝剣だ。剣自らが相手の気質を感じ取りその弱点を突くという。
 
 N:237:『楼観剣』
@@ -4239,6 +4260,8 @@ I:25:4:0
 W:30:30:60:80000
 P:0:5d4:10:15:0
 F:SHOW_MODS | RIDING | KILL_UNDEAD | VORPAL
+D:$A youkai-forged greatsword. The things it cannot cut are next to none.
+D:$It's claimed that it can strike ten ghosts dead with one slash.
 D:妖怪が鍛えた長大な太刀だ。斬れぬものなどあんまりない。
 D:一振りで幽霊十匹分の殺傷力を持つという。
 
@@ -4248,6 +4271,8 @@ I:25:2:0
 W:30:30:30:60000
 P:0:3d4:15:10:0
 F:SHOW_MODS | RIDING | KILL_UNDEAD | SLAY_HUMAN
+D:$The heirloom sword of the Konpaku which only they can wield.
+D:$It can dispel the doubts and hesitations of those it cuts.
 D:魂魄家の家宝の刀で魂魄家の者にしか扱えない。
 D:斬られたものの迷いを断つという。
 
@@ -4259,13 +4284,15 @@ P:0:3d4:20:20:0
 F:SHOW_MODS | BLOWS
 
 N:240:『斬魔刀』
-E:'Zanmatou'
+E:'Zanbatou'
 I:24:9:5
 W:80:160:2000:120000
 P:0:9d9:-30:20:20
 F:SHOW_MODS | STR | RES_FEAR | FREE_ACT | RES_INSANITY | RES_SHARDS
 F:SLAY_DEMON | SLAY_DRAGON | SLAY_EVIL | ACTIVATE
 U:HYPER_BERSERK
+D:$'"What... what is this?"   "It's a dragon slayer."'          
+D:$	(Kentaro Miura, 'Berserk')
 D:「な…何だこれは…？」「ドラゴンころしだよ」
 D:　　　　　　　　　　　　　　　(三浦健太郎「ベルセルク」)
 
@@ -4277,6 +4304,8 @@ P:0:3d5:5:15:0
 F:SHOW_MODS | RIDING | BRAND_COLD | RES_COLD | IM_COLD
 F:ACTIVATE
 U:BA_COLD_3
+D:$It's the ice sword you've been saving up so much for.
+D:$Even if you have it, you don't have to worry about being killed in town.
 D:念願のアイスソードだ。持っていても町で殺されたりはしない。
 
 
@@ -4289,6 +4318,7 @@ P:0:2d8:10:10:0
 F:SHOW_MODS
 F:ACTIVATE
 U:DEST_DOOR
+D:$A mysterious weapon that is suspiciously implicated in numerous incidents.
 D:数多の事件の陰に見え隠れする謎の武装だ。
 
 #装備時ペット維持コスト低下
@@ -4300,6 +4330,8 @@ P:0:1d2:0:0:0
 F:CHR | SHOW_MODS | QUESTITEM
 F:ACTIVATE | DEC_MANA
 U:CHARM_OTHERS
+D:$A dangerous artifact that can interfere with the minds of others and control them.
+D:$When equipped, it significantly increases the number of subordinates you can maintain.
 D:非常に危険な古代の秘宝だ。他者の精神に干渉し支配する力を持つといわれている。
 D:これを装備していると配下の維持可能数が大幅に上昇する。
 
@@ -4312,11 +4344,13 @@ W:45:10:40:20000
 P:0:1d1:0:0:0
 F:ACTIVATE | INT | WIS | SEARCH
 U:ALTER_REALITY
+D:$This golden lamp is engraved with strange patterns.
+D:$When lit, it projects scenes from other worlds.
 D:奇妙な紋様が刻まれた黄金のランプだ。
 D:これに灯をともすと異界の景色が映し出されるという。
 
 N:245:『人魂灯』
-E:'Hitodama Lantern'
+E:'Jinkontou'
 I:39:11:0
 W:30:30:40:15000
 P:0:1d1:0:0:0
@@ -4324,6 +4358,8 @@ F:INSTA_ART
 F:SH_COLD | RES_NETHER | SEE_INVIS
 F:ACTIVATE
 U:SUMMON_GHOSTS
+D:$A lantern of the Netherworld, lit by human souls.
+D:$It's said that ghosts can always see its light no matter how distant.
 D:「じんこんとう」と読む。人魂で明かりを灯す冥界の小さな行灯だ。
 D:幽霊はどんなに遠くからでもこの光が見えるという。
 
@@ -4381,6 +4417,8 @@ I:39:12:3
 W:80:80:30:100000
 P:0:1d1:0:0:0
 F:SEE_INVIS | INSTA_ART | WIS | CHR | ESP_EVIL | RES_NETHER
+D:$A sacred artifact of the treasure god Bishamonten.
+D:$It's the prize of Myouren temple and is handled with great care by Shou Toramaru...
 D:毘沙門天から遣わされた宝塔だ。命蓮寺の宝であり、寅丸星が大事に保管していた・・
 
 N:251:『源頼政の弓』
@@ -4389,6 +4427,12 @@ I:31:2:3
 W:50:40:24:120000
 P:0:0d0:24:16:0
 F:DEX | WIS | SEE_INVIS | RES_CONF | RES_DARK | XTRA_MIGHT | SHOW_MODS | ESP_KWAI
+D:$This bow was used to slay the Nue that was haunting the imperial palace.
+D:$"Yorimasa took a great arrow and shot it over the roof of the palace
+D:$where the cry had been heard. The Nue, startled by the arrow,
+D:$sprung briefly into the air. He quickly took a small arrow,
+D:$and shot it down with a single hit, the Nue landing clean in front of him."                
+D:$	('Heike Monogatari', chapter 15)
 D:源頼政が紫宸殿で鵺を討ち取った弓だ。
 D:「頼政策（はかりこと）に、まづ大鏑をとつて番ひ、鵺のこゑしつる内裏のうへへぞ射上げたる。
 D:鵺、鏑の音に驚いて、虚空にしばしひらめいたり。
@@ -4427,6 +4471,8 @@ F:STR | CON | CHR | BLESSED | ACTIVATE
 F:SLAY_EVIL | SLAY_DEMON |
 F:RES_DARK | RES_NETHER | RES_TIME
 U:SATIATE
+D:$Daikokuten, one of the Seven Gods of Luck who was born from the syncretism
+D:$of Mahakala and Oukuninushi-no-mikoto, is often seen carrying this golden mallet.
 D:大国主命とマハーカーラが神仏習合して生まれ、七福神の一柱としても知られる大黒天の槌だ。
 
 N:255:天目一箇神の
@@ -4436,6 +4482,9 @@ W:80:100:40:75000
 P:0:1d1:0:0:0
 F:ACTIVATE | STR | CON | INSTA_ART | RES_FIRE | RES_LITE | WARNING | SH_FIRE
 U:SANAGI
+D:$A large iron bell forged by the one-eyed blacksmith god.
+D:$It's said to have been rung as an instrument in the festival
+D:$that was held to lure Amaterasu-oomikami from the cave she hid herself in.
 D:隻眼の製鉄神である天目一箇神（あめのまひとつのかみ）の作った鉄製の大鈴だ。
 D:鉄鐸と書いて「さなぎ」と読む。
 D:天照大神の岩戸隠れのとき祭りの鳴り物として使われたという。
@@ -4449,6 +4498,7 @@ W:80:40:90:78000
 P:0:6d4:16:16:0
 F:STR | DEX | SPEED | STEALTH | VORPAL
 F:RES_LITE | RES_FEAR | SLAY_DEITY
+D:$Kronos used this sickle to carry out the wrath of his mother Gaia and 'slay' his father, Uranus.
 D:農耕神クロノスが大地母神ガイアの怒りを込めて父神たる天空神ウラノスを「討ち取った」鋭利な大鎌だ。
 
 #v1.1.86 固定ベースアイテムでなくしたときにレアリティ設定の調整を忘れてた。レアリティ160→16
@@ -4472,6 +4522,8 @@ F:DEX  | SPEED | KILL_KWAI | LITE
 F:FREE_ACT | RES_FEAR | RES_ACID | SHOW_MODS
 F:ACTIVATE
 U:FISHING
+D:$Shinmyoumaru Sukuna's favoured sword. It appears to be just a sewing needle,
+D:$but it may contain the power of Issun-Boushi, the slayer of oni.
 D:少名針妙丸の愛刀だ。一見ただの縫い針だが、この針には鬼をも倒した一寸法師の力が込められているのかもしれない。
 
 N:259:五火七禽
@@ -4482,10 +4534,11 @@ P:0:4d6:10:10:15
 F:CHR | QUESTITEM | ACTIVATE | FORCE_WEAPON | IMPACT | BRAND_FIRE | RES_SOUND
 F:SHOW_MODS
 U:GOKASHITIKIN
+D:$'Five Fires and Seven Birds'. A spiritual weapon that produces shockwaves and jets of flame.
 D:「ごかしちきんおう」と読む。五色の炎を放つと言われる宝具だ。
 
 N:260:『天之蘿摩船』
-E:'Ame-no-kagamifune'
+E:'Ame-no-kagami-no-fune'
 I:44:1:4
 W:60:40:4:100000
 P:1:1d1:0:0:19
@@ -4494,17 +4547,23 @@ F:RES_POIS | RES_NETHER | SEE_INVIS | RES_WATER
 F:RES_CONF | RES_BLIND | FREE_ACT | REGEN | SLOW_DIGEST | HOUSE
 F:ACTIVATE
 U:CURE_700
+D:$A little boat made from the shell of a milkweed pod.
+D:$Sukuna-hikona, dwarf god of medicine, agriculture and brewery,
+D:$appeared riding this boat and built the land with Oukuninushi-no-mikoto.
 D:「あめのかがみのふね」と読む、ガガイモの実の殻で出来た小さな船だ。
 D:薬と農業と酒造の神である少彦名命はこの船に乗って現れ、大国主命と共に国造りを行った。
 
 N:261:空海上人の
-E:of Kukai
+E:of Saint Kuukai
 I:27:6:4
 W:70:30:50:125000
 P:0:1d7:12:10:10
 F:INT | WIS | TUNNEL | ACTIVATE | RES_DARK | RES_INSANITY
 F:FREE_ACT | BLESSED | XTRA_H_RES | SLAY_UNDEAD | SLAY_DEMON | SLAY_KWAI | SLAY_EVIL
 U:SUMMON_FOUNTAIN
+D:$Kuukai, the founder of Shingon Buddhism, performed a miracle by sticking this staff into the ground
+D:$and causing a spring to gush forth. There are apparently over 1,000 of these springs across Japan.
+D:$When this staff is equipped together with Kuukai's hat, the staff will be strengthened.
 D:真言宗の開祖である空海（弘法大師）の錫杖だ。
 D:空海はこの杖を大地に突き立てて泉を湧かせる奇跡を起こしたという。
 D:このような泉は「弘法水」と呼ばれ全国に千箇所以上あるそうな。
@@ -4516,6 +4575,7 @@ W:70:30:200:120000
 P:0:8d4:15:20:0
 F:STEALTH | WIS | SLAY_HUMAN | KILL_HUMAN | THROW
 F:RES_DARK | RES_NETHER | RES_FEAR | RIDING
+D:$This scythe is property of the grim reaper with the harvest of thousands of souls to his name.
 D:幾千の人間から魂を刈り取ってきた由緒正しい死神の大鎌だ。
 
 # 特殊処理：クエスト放棄回数分ダイスが増える
@@ -4538,6 +4598,7 @@ F:STR | WIS | CHR |
 F:KILL_KWAI | SLAY_KWAI | SLAY_DEMON | SLAY_UNDEAD | SLAY_EVIL | FREE_ACT |
 F:SEE_INVIS | RES_NETHER | RES_DARK
 F:BLESSED | SHOW_MODS | RIDING | ESP_EVIL
+D:$The evil-subduing spear of the fortune-war god.
 D:悪鬼を調伏する毘沙門天の槍だ。
 
 N:265:『西行法師墨染桜』
@@ -4547,6 +4608,10 @@ W:80:45:18:120000
 P:0:1d9:12:12:5
 F:INT | SEARCH | HIDE_TYPE | EASY_SPELL | CHR | SPEEDSTER
 F:FREE_ACT | SLOW_DIGEST | SHOW_MODS | REGEN | RES_HOLY
+D:$"Cherry trees of Fukakusa fields,                            
+D:$  if there is a heart among you,                              
+D:$  bloom in ink-black this year."                               
+D:$	(Saigyo, at Kifune Shrine, reciting Kamitsukeno no Mineo)
 D:「深草の　野辺の桜木心あらば　またこの里に墨染に咲け」
 D:　　　　　　　　　　　　　　　　　　　　(西行法師)
 
@@ -4567,7 +4632,7 @@ D:何の変哲もない赤いシャツと青いオーバーオールだ。
 D:しかし着用すると力が湧き上がり、不屈の闘志がその身に宿るような気がする。
 
 N:267:血の伯爵夫人エリーザベトの
-E:of Elizabeth Bathory, the Bloody Countess
+E:of Elizabeth, the Bloody Countess
 I:40:5:-5
 W:70:20:20:100000
 P:3:0d0:0:5:-10
@@ -4580,7 +4645,7 @@ D:$woman to bathe in their blood.
 D:数百人の娘を惨殺しその血を浴びたというエリーザベト・バートリのドレスだ。
 
 N:268:白峰相模坊天狗の
-E:of Shiramine Sagamibou
+E:of Sagamibou, Tengu of Shiramine
 I:40:10:2
 W:50:30:40:145000
 P:4:0d0:0:0:36
@@ -4588,11 +4653,13 @@ F:HIDE_TYPE
 F:STR | INT | WIS | DEX | CON | CHR
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | RES_DARK
 F:FREE_ACT | RES_CONF | RES_FEAR
+D:$Sagamibou Tengu, one of the eight Great Tengu, serves the spirit of Emperor Sutoku,
+D:$and remains guardian of the sacred grounds of Shiramine to this day.
 D:日本八大天狗に数えられる相模坊天狗の装束だ。
 D:相模坊天狗は崇徳上皇の霊に仕え、白峰の霊域を今も守り続けているという。
 
 N:269:安倍晴明の
-E:of Abe-no-Seimei
+E:of Abe no Seimei
 I:40:8:4
 W:70:40:30:160000
 P:4:0d0:0:0:32
@@ -4601,6 +4668,7 @@ F:INT | WIS | CHR | MAGIC_MASTERY
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_LITE | RES_DARK
 F:FREE_ACT | RES_CONF | ACTIVATE | ESP_EVIL | ESP_KWAI | EASY_SPELL
 U:DETECT_UNIQUE
+D:$The outfit of a famed court magician and exorcist of the Heian period.
 D:平安時代の高名な陰陽師である安倍晴明の装束だ。
 
 N:270:格闘家ゴウケンの
@@ -4610,11 +4678,13 @@ W:20:20:16:40000
 P:3:0d0:5:10:12
 F:STR | DEX | CON | HIDE_TYPE | RES_FIRE | RES_COLD | FREE_ACT | RES_FEAR
 F:SH_FIRE
+D:$This karate gi, missing its right shoulder, was worn by a master martial
+D:$artist who was thought dead but later rose from his grave.
 D:死んだと思われていたが後に復活を果たした強靭な格闘家の道着だ。
 D:右肩の部分が大きく破れている。
 
 N:271:白薔薇姫の
-E:of White Rose Princess
+E:of Princess White Rose
 I:40:5:4
 W:35:7:20:120000
 P:3:0d0:0:0:20
@@ -4623,6 +4693,7 @@ F:RES_ACID | RES_FIRE | RES_ELEC | RES_COLD | RES_POIS | RES_DARK | ACTIVATE
 F:RES_FEAR | RES_CONF
 F:SUST_CHR | SUST_WIS
 U:CURING
+D:$Of all the mystic princesses created by Charm Lord Orlouge, Princess White Rose is the only one said to have a kind heart.
 D:魅惑の君オルロワージュの寵姫の中で最も優しい心を持つと言われる白薔薇姫の衣装だ。
 
 N:272:猿飛佐助の
@@ -4633,16 +4704,18 @@ P:4:0d0:10:0:20
 F:SPEED | DEX | STEALTH | SHOW_MODS
 F:RES_ACID | RES_FIRE | RES_ELEC | RES_COLD | RES_POIS
 F:RES_CONF | SLOW_DIGEST | SPEEDSTER
+D:$The clothes of a legendary ninja of the Sanada Ten Braves.
 D:真田十勇士の一人として知られる伝説の忍者、猿飛佐助の装束だ。
 
 N:273:岡っ引き半七の
-E:of Okahiki Hanshichi
+E:of Hanshichi the Private Eye
 I:40:6:7
 W:25:12:20:45000
 P:3:0d0:0:0:10
 F:SEARCH
 F:RES_FIRE | RES_ELEC | RES_COLD
 F:RES_CONF | ESP_UNIQUE | WARNING
+D:$The outfit of a legendary thief-catcher from Mikawa town, Kanda, Tokyo.
 D:神田三河町の伝説の御用聞きの服だ。
 
 N:274:使い魔アスタルテの
@@ -4655,6 +4728,7 @@ F:RES_ACID | RES_FIRE | RES_ELEC | RES_COLD | RES_POIS | RES_DARK | RES_NETHER
 F:ACTIVATE
 F:RES_CONF
 U:RUNE_EXPLO
+D:$The crimson-red clothes of a demon servant of the sealed Satan.
 D:封印された魔神の使い魔アスタルテの真紅のドレスだ。
 
 N:275:『天羽々斬』
@@ -4665,26 +4739,32 @@ P:0:6d5:16:9:0
 F:STR | CON | REGEN | RES_FEAR |
 F:HIDE_TYPE | VORPAL | EX_VORPAL
 F:SLAY_EVIL | SLAY_DEITY | KILL_KWAI | SLAY_ANIMAL
+D:$This is the sword wielded by Susanoo to behead the eight-headed snake, the Yamata-no-Orochi.
+D:$When he began to cut off the snake's eight tails, the blade chipped against
+D:$the Kusanagi-no-tsurugi that was hidden inside.
 D:「あめのはばきり」と読む。須佐之男命（すさのおのみこと）が八岐大蛇を討伐するときに振るった剣だ。
 D:しかし八岐大蛇の尻尾に斬りつけたとき、中にあった草薙の剣に刃が当たって刃先が欠けたという。
 
 N:276:月の女神嫦娥の
-E:of Moon Goddess Chang'e
+E:of Chang'e, the Moon Goddess
 I:40:5:4
 W:80:50:20:145000
 P:3:0d0:0:0:32
 F:INT | WIS | CON | CHR
 F:RES_ACID | RES_FIRE | RES_ELEC | RES_COLD | RES_POIS | RES_DARK | BLESSED
 F:RES_FEAR | RES_CONF | RES_INSANITY | LEVITATION | REGEN | DEC_MANA | RES_HOLY
+D:$A long-discarded garment of the sinner goddess, who is now imprisoned in the Lunar Capital for eternity.
 D:月の都に永遠に幽閉されている大罪の女神が遠い昔に纏っていた衣だ。
 
 N:277:風の谷ジルの子ナウシカの
-E:of Nausicaa
+E:of Nausicaa, of the Valley of the Wind
 I:41:5:4
 W:45:24:100:80000
 P:18:1d4:0:0:17
 F:WIS | CHR | HIDE_TYPE | XTRA_H_RES |
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | REFLECT | ESP_ANIMAL
+D:$The old women of the castle enchanted each plate of this armour to protect Nausicaa from being shot.
+D:$She was told to never take it off, even when going to bed.
 D:ナウシカを矢玉から守るようにと城ババ達が一枚一枚小板にまじないをかけて綴った胴鎧だ。
 D:寝るときであろうと絶対に脱ぐなと言われていた。
 
@@ -4706,6 +4786,8 @@ F:SLAY_EVIL | KILL_UNDEAD | SLAY_UNDEAD | KILL_DEMON | SLAY_DEMON | KILL_KWAI | 
 F:FREE_ACT | RES_NETHER | RES_DARK | LITE | BLESSED
 F:SEE_INVIS | SHOW_MODS | XTRA_POWER | XTRA_H_RES | ACTIVATE
 U:BANISH_EVIL
+D:$A ritual instrument known as the 'kagura bells' comprised of many small bells strung together around a handle in a tiered arrangement.
+D:$This particular set belongs to the shrine maiden god Izunome.
 D:伊豆能売が持っていた鈴だ。
 D:たくさんの小さな鈴を繋いで柄と飾り布をつけた、「神楽鈴」と呼ばれる形のものだ。
 
@@ -4717,6 +4799,10 @@ P:24:1d4:0:0:20
 F:STR | CON | CHR |
 F:RES_ACID | RES_COLD | RES_ELEC | RES_FEAR | RES_POIS | REFLECT |
 F:XTRA_H_RES | BLESSED
+D:$This armour was gifted to Fujiwara no Hidesato by the Dragon God
+D:$as a reward for slaying the giant centipede of Mt. Mikami.
+D:$The Dragon God's protection will deflect arrows away from the wearer,
+D:$however, the suit is very heavy.
 D:藤原秀郷が三上山の大ムカデを退治したとき琵琶湖の龍神から褒美に授かったとされる大鎧だ。
 D:この鎧を着ていると龍神の加護により矢が鎧を避けるという。ただし大変に重い。
 
@@ -4729,6 +4815,17 @@ P:0:1d1:0:0:0
 F:WIS | INT | ACTIVATE | RES_DARK | RES_INSANITY | INSTA_ART | FULL_NAME
 F:ESP_DEMON | ESP_DEITY | HOUSE
 U:TRAPEZOHEDRON
+D:$"And beyond all else he glimpsed an infinite gulf of darkness, where
+D:$solid and semisolid forms were known only by their windy stirrings,
+D:$and cloudy patterns of force seemed to superimpose order on chaos
+D:$and hold forth a key to all the paradoxes and arcana of the worlds
+D:$we know. Then all at once the spell was broken by an access of gnawing,
+D:$indeterminate panic fear. Blake choked and turned away from the stone,
+D:$conscious of some formless alien presence close to him and watching him
+D:$with horrible intentness.                      
+D:$It was then, in the gathering twilight, that he thought he saw a faint trace of
+D:$luminosity in the crazily angled stone."
+D:$	(H.P. Lovecraft, 'The Haunter of the Dark')
 D:黒く輝く不揃いな多面体の結晶が、奇怪な装飾の施された金属製の小箱に収められている。
 D:この結晶を見つめていると様々な知識が頭に流れ込んでくるが、
 D:同時に何かに見つめ返されているような気になってくる…
@@ -4743,6 +4840,9 @@ F:FULL_NAME |
 F:SLAY_EVIL | KILL_UNDEAD | SLAY_UNDEAD | KILL_DEMON | SLAY_DEMON
 F:SLAY_KWAI | SLAY_HUMAN
 F:SHOW_MODS | QUESTITEM
+D:$The scepter of the yama, upon which the yama records one's every misdeed.
+D:$The rod grows heavier with each sin written upon it and is used to beat the sinner until they repent.
+D:$It's also re-usable thanks to its thoughtful eco-friendly design.
 D:罪人を打ち据えて罰するための閻魔の笏だ。罪人の罪を書き込むことで重さが増すという。
 D:使ったあとは消してまた使えるエコロジー設計だ。
 
@@ -4756,6 +4856,9 @@ F:DEC_MANA | LEVITATION | RES_CONF | RES_CHAOS
 F:RES_FIRE | RES_NETHER | SEE_INVIS | ACTIVATE | SHOW_MODS
 F:TELEPORT | SPEEDSTER
 U:CURE_700
+D:$Entwined by two serpents and decorated with wings, this is the short staff
+D:$of Hermes the herald, patron god of merchants, inventors, thieves, travelers
+D:$and many other people.
 D:商人・発明家・泥棒・旅人など様々な者達の守護神として知られるギリシャ神話のトリックスター、ヘルメスの杖だ。
 D:二匹の蛇が巻き付き翼の飾りがついた短い杖で、ラテン語読みでカドゥケウスともいう。
 
@@ -4767,8 +4870,8 @@ W:40:40:20:55000
 P:0:4d6:0:0:0
 F:ACTIVATE | STR | SPEED
 U:LUNATIC_TIME
-D:$The torch of the Netherworld held by hell fairies. Its light is said to
-D:$drive people insane.
+D:$A torch of the underworld that the hell fairy holds up.
+D:$Its light is said to drive people insane.
 D:地獄の妖精が掲げる冥界の松明だ。この松明の光は人を狂わせるという。
 
 N:285:地獄の女神ヘカーティアの
@@ -4793,6 +4896,9 @@ F:INT | WIS | CHR | SEARCH | HIDE_TYPE | ACTIVATE
 F:RES_WATER | RES_SOUND | RES_BLIND | RES_CONF | RES_ACID |
 F:SEE_INVIS | WARNING | SLOW_DIGEST | REGEN | FREE_ACT
 U:RUNE_PROT
+D:$Ichikishima-hime-no-mikoto was born of Susanoo's sword
+D:$when it was chewed up by Amaterasu-oomikami, and she later
+D:$became syncretised with Benzaiten as a god of music and water.
 D:素戔嗚尊(すさのおのみこと)の剣から生まれ、
 D:後に弁財天と習合した市杵嶋姫命（いちきしまひめのみこと）の冠だ。
 
@@ -4805,6 +4911,7 @@ P:0:3d7:12:12:10
 F:SHOW_MODS | INT | WIS | CHR | RES_LITE | TELEPORT | ACTIVATE
 F:KILL_ANIMAL | SLAY_ANIMAL | CHAOTIC | FULL_NAME
 U:TRANSPORT_ITEM
+D:$This bewitchingly beautiful parasol is a favoured item of the Youkai Sage.
 D:妖怪の賢者と呼ばれる大妖怪八雲紫の愛用する妖美な日傘だ。
 
 N:288:ハルモニアの
@@ -4814,6 +4921,9 @@ W:70:50:10:120000
 P:0:0d0:0:0:5
 F:HIDE_TYPE | LITE | RES_DARK | RES_LITE | RES_CHAOS | SEE_INVIS | INSTA_ART
 F:WIS | CON | CHR | RES_SHARDS | RES_HOLY | AGGRAVATE | TY_CURSE | DEC_MANA
+D:$Hephaestus the blacksmith god presented this necklace to
+D:$Harmonia, goddess of harmony, to celebrate her wedding.
+D:$It's dazzlingly beautiful...
 D:調和の女神ハルモニアの婚礼の祝いに鍛冶神ヘパイストスから贈られた、
 D:眩く輝くあまりにも美しい首飾りだ…
 
@@ -4885,6 +4995,7 @@ P:0:1d1:32:64:16
 F:CHR | TUNNEL | QUESTITEM | ACTIVATE
 F:SHOW_MODS
 U:TOYOHIME
+D:$Among the most advanced Lunar weapons, this fan can create winds that purify matter to the subatomic level.
 D:物質を素粒子レベルで浄化する風を起こす月の最新兵器だ。綿月豊姫が所持していたが…
 
 N:295:バック郷の
@@ -4895,6 +5006,7 @@ P:1:1d1:0:0:19
 F:SPEED | STEALTH | WIS
 F:RES_FEAR | RES_BLIND | RES_CONF | XTRA_RES_OR_POWER | ACTIVATE
 U:MIGHTY_THROW
+D:$Hobbits are experts of slinging and stealth, and their stout spirits never give up in the face of adversity.
 D:ホビットは投石と隠し身の達人であり、そして逆境に屈しない強い心を持っている。
 
 N:296:狐の
@@ -4914,6 +5026,7 @@ I:34:1:4
 W:60:60:2:1620
 P:0:1d1:0:0:0
 F:CHR | INT | QUESTITEM
+D:$A research notebook on spell cards authored by a certain magician.
 D:スペルカードの研究書だ。ある魔法使いが書き記したとされている。
 
 N:298:鞍馬山天狗のタライ
@@ -4970,6 +5083,8 @@ W:75:20:100:70000
 P:0:0d0:0:500:0
 F:ACTIVATE | FULL_NAME
 U:BAROQUE
+D:$"Head for the depths of the Nerve Tower, that is your mission. Use it, there is significance in you using it."
+D:$	(Sting, 'BAROQUE')
 D:「神経塔下層へ向かう、それがおまえの使命。使え、おまえが使うことに意味がある。」
 D:(スティング「BAROQUE」)
 
@@ -5024,6 +5139,9 @@ W:75:25:40:96000
 P:0:24d16:10:30:0
 F:ACTIVATE | SPEED | CON | RES_LITE
 U:GUN_VARIABLE
+D:$This fiendish gun is owned by the ruthless space pirate Youmei.
+D:$It rapidly absorbs heat from its target before shattering it to pieces.                                     
+D:$(Chouhei Kambayashi, 'The Enemy's the Pirates!')
 D:ヨウメイという名の冷酷な宇宙海賊が持つ魔銃だ。標的の熱エネルギーを急激に吸い取り破砕消滅させる。
 D:(神林長平　「敵は海賊」)
 
@@ -5034,6 +5152,8 @@ W:65:15:40:70000
 P:0:20d16:10:20:0
 F:ACTIVATE | STEALTH | INT | DEX | FULL_NAME
 U:GUN_VARIABLE
+D:$A machine-like Stand that shoots weird darts.
+D:$Anything that the darts stick into melts and crumples.
 D:不気味な針を撃ち出すスタンドだ。その針が刺さった物は溶け崩れてしまう。
 
 N:309:『天之麻迦古弓』
@@ -5043,6 +5163,10 @@ W:80:45:24:100000
 P:0:0d0:12:40:0
 F:CHR | SEARCH | RES_ELEC | REGEN | SLOW_DIGEST | XTRA_H_RES
 F:XTRA_MIGHT | SHOW_MODS | ESP_DEITY | ESP_ANIMAL | TY_CURSE
+D:$When Ame no Wakahiko was sent from heaven to unify the Earth, he
+D:$was given this bow by Takamimusubi-no-kami. When the gods sent
+D:$a divine messenger to check in on him, he mistakenly shot and killed it.
+D:$The arrow flew to heaven, came back and destroyed Ame no Wakahiko himself.
 D:「あまのまかこゆみ」と読む。地上の平定のために高天原から遣わされた天若日子(あめのわかひこ)が
 D:高御産巣日神(たかみむすびのかみ)から与えられた弓だ。
 D:しかしその弓から放たれた矢は天からの使者を射殺し、そして天若日子自身を滅ぼすことになった。
@@ -5057,6 +5181,7 @@ F:HIDE_TYPE | VORPAL | BRAND_FIRE | BRAND_COLD | BRAND_ELEC | BRAND_ACID
 F:SLAY_EVIL | RES_FIRE | RES_ACID | RES_COLD | RES_ELEC | ESP_DEITY
 F:ACTIVATE
 U:RESIST_ALL
+D:$The favoured sword of Watatsuki no Yorihime, who is capable of channeling the power of any of the myriad gods.
 D:八百万の神様全ての力を借りられるという綿月依姫の愛刀だ。
 
 N:311:潮満瓊
@@ -5068,6 +5193,8 @@ F:CHR | MAGIC_MASTERY | SEARCH | HIDE_TYPE | FULL_NAME | ACTIVATE
 F:SEE_INVIS | FREE_ACT | RES_WATER | RES_ACID | BLESSED
 F:INSTA_ART
 U:SHIOMITSUTAMA
+D:$One of the jewels that were given to Yamasachihiko by Toyotama-hime.
+D:$It has the power to raise the tide if placed in the sea.
 D:豊玉姫が山幸彦へ授けたとされる宝物の一つだ。海に漬けるとたちまちのうちに潮が満ちるという。
 
 N:312:帝釈天の
@@ -5079,10 +5206,12 @@ F:STR | WIS | CON | INSTA_ART
 F:KILL_EVIL | KILL_DEMON | KILL_DRAGON | SLAY_KWAI
 F:RES_ELEC | RES_HOLY | RES_FEAR | RES_WATER | BLESSED | LITE
 F:BRAND_ELEC | THROW
+D:$This vajra was wielded by the thunder god Indra to slay the serpentine asura Vritra,
+D:$who blocked the waters of the world with his body.
 D:帝釈天(インドラ神)が邪竜ヴリトラを滅ぼした独鈷杵(ヴァジュラ)だ。
 
 N:313:『村雨丸』
-E:'Musasamemaru'
+E:'Murasamemaru'
 I:25:3:3
 W:20:40:30:88000
 P:0:3d4:20:20:0
@@ -5090,6 +5219,13 @@ F:WIS | DEX | CHR | STEALTH | RES_FIRE | RES_FEAR | FREE_ACT | SEE_INVIS
 F:SLAY_EVIL | SLAY_KWAI | SLAY_HUMAN | VORPAL | RIDING
 F:ACTIVATE
 U:RESIST_FIRE
+D:$A treasured sword handed down through the Ashikaga clan.      
+D:$"He once again drew the Murasame that he had sheathed at his waist,
+D:$and swung it with all his might. The miraculous blade spewed
+D:$water from the tip. Even one hundred paces, two
+D:$hundred paces from Dousetsu, Genpachi, Sousuke and the others,
+D:$the flames flickering on the bank fell extinguished."
+D:$	(Kyokutei Bakin, 'Nansou Satomi Hakkenden')
 D:足利家に伝わる宝刀だ。「腰に納めし村雨の太刀をふたたび引抜て。ちからの限りうち振れば。
 D:刀刄の奇特過たず。その刀尖より迸る。水気は遠く散乱して。百歩二百歩あなたなる。道節現八荘助らが。
 D:ほとりに閃く火の焔すら。うち消されつつ落ちてけり。」(滝沢馬琴「南総里見八犬伝」)
@@ -5103,6 +5239,9 @@ F:STEALTH | RES_DISEN | RES_LITE | FREE_ACT | SEE_INVIS | LITE
 F:SLAY_KWAI | SLAY_HUMAN | VORPAL
 F:ACTIVATE
 U:LIGHT
+D:$A treasured sword of the Aso family. There are stories
+D:$of how it was repaired by a gathering of fireflies,
+D:$and of how it glowed by itself, causing it to be found by enemies.
 D:阿蘇家の宝刀だ。蛍が集まって刃こぼれした刀身を直した、
 D:ひとりでに光って敵に見つかる原因になったなどの逸話がある。
 
@@ -5113,6 +5252,11 @@ W:25:50:30:80000
 P:0:3d4:18:18:0
 F:STR | DEX | CON | CHR | SPEED | RES_POIS | RES_FEAR | FREE_ACT
 F:KILL_KWAI | SLAY_KWAI | SLAY_HUMAN | VORPAL | BLESSED | SUST_STR
+D:$A sword of great reknown that has been called many different names by the Seiwa Genji clan.
+D:$It was originally called 'Hizakirimaru'.                                              
+D:$When Yorimitsu used it to slay a tsuchigumo, he named it 'Kumokirimaru'.                                               
+D:$When Tameyoshi heard it sound like a snake in the night, he named it 'Hoemaru'.                                           
+D:$Then Yoshitsune named it 'Usuberi' for the spring mountains of Kumano.
 D:様々な逸話をもち何度も名を変えた名刀だ。
 D:最初は「膝切丸」という名だったが、
 D:のちに源頼光が土蜘蛛をこの刀で退治して「蜘蛛切丸」と名を改め、
@@ -5128,6 +5272,8 @@ F:SPEED | DEX | CON | STEALTH | VORPAL | SEE_INVIS | VAMPIRIC
 F:SLAY_HUMAN | SLAY_DEITY
 F:ACTIVATE
 U:DAZZLE
+D:$A katana of great power that was hidden away in the Ancient Egyptian Ninja ruins.
+D:$Ninja Slayer broke it in half...
 D:古代エジプトニンジャ遺跡に封印されていた、強大な力を秘めるカタナだ。
 D:ニンジャスレイヤーによって真っ二つに折られてしまったが...
 
@@ -5139,6 +5285,8 @@ P:0:6d4:15:15:0
 F:STR | WIS | TUNNEL
 F:SLAY_EVIL | KILL_KWAI | SLAY_UNDEAD
 F:RES_POIS | RES_NETHER
+D:$The monk Gennou used this sledgehammer to smash the killing stone Sesshou-seki,
+D:$which contained the spirit of the kitsune Tamamo no Mae.
 D:妖狐玉藻前が変じた殺生石を叩き壊した玄翁和尚の大金槌だ。
 
 N:318:『バロール』
@@ -5148,6 +5296,7 @@ W:80:80:1000:160000
 P:0:8d6:10:20:0
 F:RES_FEAR | RES_CONF | RES_BLIND | FREE_ACT | RES_CHAOS | SEE_INVIS
 F:FORCE_WEAPON
+D:$A gigantic, brutally spiked ball that contains a magic stone at its core, shining brilliant blue.
 D:八方に棘の付いた巨大な球体だ。その内部には見事な青い魔石が煌々と輝いている。
 
 N:319:ビリー・カーンの
@@ -5157,6 +5306,8 @@ W:15:15:24:30000
 P:0:2d11:12:12:12
 F:STR | DEX
 F:BRAND_FIRE | SLAY_HUMAN | THROW | BOOMERANG
+D:$The three-piece staff wielded by Billy Kane, a key member
+D:$of the Southtown crime syndicate, the Howard Connection.
 D:サウスタウンの闇の勢力ハワード・コネクションの重鎮にして棒術の達人であるビリー・カーンの愛用の棒だ。
 
 N:320:『ブラックロッド』
@@ -5168,21 +5319,24 @@ F:STR | INT | DEX | TUNNEL | HIDE_TYPE | FORCE_WEAPON |
 F:EASY_SPELL | THROW
 F:ACTIVATE
 U:MID_RANGE_ATTACK
+D:$An ornate black short staff forged by the Underworld smith Lon Beruk.
+D:$It converts its wielder's magical power into physical power, and can
+D:$transform its shape on command.
 D:魔界の名工「ロン・ベルク」の作による漆黒の短杖だ。
 D:使用者の魔法力を打撃力に変換し、また使用者の命令によりその形を変える。
 
 N:321:魔神の斧
-E:Axe of Demon Gods
+E:Demon's Axe
 I:28:7:5
 W:50:25:400:120000
 P:0:7d7:-30:30:0
 F:STR | FULL_NAME |
-D:$A massive war axe imbued with power of demon gods.
-D:$Its power is astounding - assuming it hits the target.
+D:$A massive war axe imbued with the power of a demon.
+D:$Its destruction is astounding - assuming it hits the target.
 D:魔神の力を秘めた巨大な戦斧だ。当たりさえすれば威力は絶大だ。
 
 N:322:破壊神シヴァの戦斧
-E:Shiva's Battle Axe
+E:Battle Axe of Shiva, God of Destruction
 I:28:8:4
 W:80:12:240:200000
 P:0:6d7:20:25:0
@@ -5190,6 +5344,9 @@ F:STR | WIS | CON | CHR | FULL_NAME |
 F:SLAY_EVIL | SLAY_HUMAN | SLAY_DEITY
 F:BRAND_ELEC | BRAND_FIRE | THROW
 F:RES_FEAR | RES_CONF | RES_CHAOS | SEE_INVIS
+D:$This parashu axe is the weapon of Shiva the destroyer.
+D:$Shiva gave it to Parashurama, avatar of Vishnu, who used it to slay
+D:$upstart challengers, and who threw it at Ganesha, breaking his tooth.
 D:破壊神シヴァがヴィシュヌ神の化身パラシュラーマに与えた戦斧(パラシュ)だ。
 D:パラシュラーマはこの斧を振るって傲慢な武人たちを滅ぼし、行く手を遮ったガネーシャ神の牙をへし折ったという。
 
@@ -5201,6 +5358,7 @@ P:0:2d4:15:15:0
 F:FULL_NAME | STR | CHR | TUNNEL
 F:KILL_ANIMAL | SLAY_KWAI | ACTIVATE
 U:TORNADO
+D:$A treasure of the tengu that was in the possession of one of the Great Tengu of Youkai Mountain.
 D:妖怪の山の大天狗の一人が持っていた天狗の秘宝だ。
 
 N:324:『シルバーブレード』
@@ -5212,6 +5370,9 @@ F:DEX | BLOWS | THROW | VORPAL
 F:SLAY_KWAI | SLAY_UNDEAD | RES_DISEN | RES_FEAR
 F:ACTIVATE
 U:BO_INACT
+D:$A bewitched knife that Sakuya Izayoi somehow obtained.
+D:$Its sharpness never dulls no matter how much it's used,
+D:$but it seems like wielding it makes you want to cut up youkai.
 D:十六夜咲夜がどこからか手に入れた妖剣だ。
 D:斬っても斬っても切れ味が落ちないが、持っていると妖怪を斬りたくなるらしい。
 
@@ -5224,6 +5385,7 @@ P:0:1d1:0:0:0
 F:CHR | DEX | RES_CONF | RES_CHAOS | RES_FEAR | BLESSED | QUESTITEM
 F:ACTIVATE
 U:MATARA
+D:$The drum beaten by Matara-jin, god of Noh theater.
 D:能楽の守護神である摩多羅神の小鼓だ。
 
 N:326:金太郎の鉞
@@ -5234,40 +5396,49 @@ P:0:5d6:16:16:0
 F:STR | CON | CHR | FULL_NAME | RIDING | REGEN
 F:KILL_KWAI | SLAY_ANIMAL | SLAY_EVIL
 F:BRAND_ELEC | RES_FEAR | SUST_STR
+D:$The hatchet carried by the famous child prodigy Kintarou.
+D:$As an adult, he took the name Sakata no Kintoki, became one
+D:$of the four master warriors under Minamoto no Yorimitsu,
+D:$and was a heroic defender of the capital.
 D:日本の昔話で有名な怪童金太郎が担いでいた大マサカリだ。
 D:金太郎は長じて坂田金時と名を改め源頼光四天王の一人となり、京の都を悩ませる幾多の妖怪たちを討伐したという。
 
 N:327:空海上人の
-E:of Kukai
+E:of Saint Kuukai
 I:44:14:4
 W:75:30:14:100000
 P:1:1d1:0:0:15
 F:INT | WIS | SEARCH
 F:RES_COLD | RES_LITE | RES_HOLY | RES_NETHER | SEE_INVIS | 
 F:RES_CONF | RES_BLIND | FREE_ACT | SLOW_DIGEST
+D:$The wicker hat worn by Kuukai, the founder of Shingon Buddhism,
+D:$on his travels. Disciples following in his steps lead to the creation of a pilgrimage.
+D:$When this hat is worn together with Kuukai's staff, the staff will be strengthened.
 D:空海(弘法大師)が諸国遍歴のときに愛用した網代笠だ。
 D:後に大師の足跡を高弟たちが辿り、それがお遍路の起源となった。
 D:この笠と共に空海上人の錫杖を装備すると錫杖が強化される。
 
 N:328:私家版百鬼夜行絵巻最終章補遺
-E:Personal Hundred Oni Night Parade Scroll - Final Chapter
+E:Self-Published Night Parade Picture Scroll - Final Chapter Appendix
 I:34:3:3
 W:60:60:2:150000
 P:0:1d1:0:0:20
 F:QUESTITEM | ACTIVATE | FULL_NAME
 F:RES_DARK | DEC_MANA | READABLE | HOUSE
 U:HYAKKIYAKOU
+D:$A demon book sealing many terrible youkai within.
+D:$The sorcerous energy it emits is palpable even just by looking at it.
 D:危険な妖怪が封じられた曰く付きの妖魔本だ。見ているだけでも巻物の放つ妖気が伝わってくる。
 
-
-N:329:赤い
+N:329:赤い靴
 E:'Red Shoes'
 I:46:1:5
 W:20:100:8:72000
 P:1:1d1:12:12:12
-F:SPEED | CHR | FREE_ACT | RES_CONF | REGEN
+F:SPEED | CHR | FREE_ACT | RES_CONF | REGEN | FULL_NAME
 F:CURSED | HEAVY_CURSE | PERMA_CURSE | AGGRAVATE | ACTIVATE
 U:SWORD_DANCE
+D:$These lovely red shoes fill you with an urge to dance.
 D:とても可愛らしい真っ赤な靴だ。あなたはこれを履いて舞踏会に出かけたくなるだろう。
 
 #v1.1.48追加　テレパスはファフナーの血の逸話をちょっとこじつけ
@@ -5280,6 +5451,9 @@ F:CON | CHR | ACTIVATE | INSTA_ART | HIDE_TYPE
 F:RES_DARK | RES_DISEN | MAGIC_MASTERY | SEARCH
 F:LITE | TELEPATHY | ADD_H_CURSE | CURSED | HEAVY_CURSE |
 U:ALCHEMY
+D:$A magic ring that can create gold, owned by the dwarf Andvari.
+D:$After the trickster Loki robbed him, Andvari cursed his ring
+D:$to bring ruin to all who possess it.
 D:いたずら者『ロキ』が黒妖精アンドヴァリから奪い取った、黄金を生み出す魔法の指輪だ。
 D:この美しい黄金の指輪にはアンドヴァリの呪いがかけられており、指輪の所有者たちに次々と破滅をもたらした。
 D:「その指輪を持っていけ！その指輪と黄金にはわたしの呪いがかかっているぞ！
@@ -5296,6 +5470,7 @@ P:0:4d8:20:20:0
 F:STR | WIS | VORPAL | SHOW_MODS | SLAY_UNDEAD | SLAY_ANIMAL
 F:FREE_ACT | INFRA | RES_FEAR | RES_CONF | RES_CHAOS | QUESTITEM
 F:ACTIVATE | LITE | WARNING
+D:$The sculptor god Haniyasukami-uchigi-hime created this sword specially for the commander of the Haniwa Army Corps.
 D:造形神『埴安神 袿姫』が埴輪兵団の兵長のために創り出した特別製の剣だ。
 U:SUMMON_HANIWA
 
@@ -5310,6 +5485,8 @@ F:INT | DEX | CHR | DISARM
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | RES_WATER | RES_NETHER
 F:ACTIVATE | QUESTITEM
 U:ULTIMATE_RESIST
+D:$An apron hand-made by the sculptor god Haniyasukami-uchigi-hime.
+D:$It's woven with special ceramic fibers. Mundane attacks won't even leave a scratch.
 D:造形神『埴安神 袿姫』手製のエプロンだ。
 D:特殊セラミックファイバーが織り込まれており並大抵の攻撃では傷一つつかない。
 
@@ -5321,6 +5498,13 @@ P:0:2d3:16:16:0
 F:STR | DEX | CON | SPEED | SEARCH
 F:VORPAL | SLAY_EVIL | SLAY_UNDEAD | SLAY_DEMON | SLAY_KWAI | KILL_KWAI
 F:THROW | RES_NETHER | FREE_ACT | RES_FEAR | LITE |
+D:$A piece of the legendary sword wielded by Watanabe no Tsuna, with which
+D:$he cut off Ibaraki-doji's arm.                    
+D:$"Without the least trepidation, he drew the sword
+D:$and instantly slashed upward with it, cutting the oni's arm clean off.
+D:$Released, he fell to the roof of Kitano Shrine, and the oni,
+D:$with its arm severed, flew away towards Otagi."           
+D:$	('Heike Monogatari', The Book of Swords)
 D:源頼光四天王の渡辺綱が茨木童子の腕を斬り落とした名刀の破片だ。
 D:「綱は少しも騒がず件の鬚切をさつと抜き、空様に鬼が手をふつと切る。
 D:綱は北野の社の廻廊の星の上にどうと落つ。鬼は手を切られながら愛宕へぞ飛び行く。」
@@ -5334,6 +5518,7 @@ W:50:90:15:100000
 P:0:12d16:48:48:0
 F:ACTIVATE | XTRA_SHOTS | SPEED | DEX | WARNING
 U:GUN_VARIABLE
+D:$The .41 Long Colt, weapon of choice of the legendary gunmen of the American frontier.
 D:アメリカ開拓時代の伝説的ガンマンが愛用した.41ロングコルトだ。
 
 #特殊★　消耗可能な酒のアーティファクト
@@ -5353,6 +5538,10 @@ W:75:150:2:120000
 F:INT | SPEED | ACTIVATE | INSTA_ART | HIDE_TYPE | HOUSE
 F:RES_CHAOS | RES_CONF | RES_INSANITY | MAGIC_MASTERY | SEARCH | EASY_SPELL
 U:CAPTURE
+D:$A stunning gold ring set with a purple gem, discovered by Eibon, the archmage from ancient Hyperborea.                    
+D:$"'Since, as I think, in truth you are the demon of this magic ring and thus my rightful servant, therefore get you into it.'
+D:$With a second shriek the demon flashed from the wall and fell feet first into the tiny confines of the ring."  
+D:$	(Laurence J. Cornford, 'The Demon of the Ring')
 D:赤みがかった金色の指輪だ。紫の宝石がはめ込まれている。
 D:古代大陸ハイパーボリアの大魔道士エイボンが所有していたとされる。
 
@@ -5377,7 +5566,7 @@ F:DEC_MANA | SH_FIRE | TUNNEL
 F:BRAND_FIRE | RES_FIRE | ACTIVATE | SHOW_MODS
 F:XTRA_RES_OR_POWER
 U:MAKE_MAGMA
-D:$This staff has the power of magma sealed inside, powerful enough to melt
+D:$This staff has the power of magma sealed inside, power enough to melt
 D:$even rock.
 D:巨岩をも溶かすマグマの力が封じ込められた杖だ。
 
@@ -5392,6 +5581,7 @@ F:IM_COLD | RES_COLD | RES_DISEN | FREE_ACT | RES_CONF | SH_COLD
 F:HEAVY_CURSE | AGGRAVATE | 
 F:ACTIVATE
 U:MAKE_BLIZZARD
+D:$This cursed mask could freeze the entire St. Hermelin High School.
 D:聖エルミン学園を丸ごと凍り付かせるほどの力を秘めた呪われた仮面だ。
 
 N:340:饕餮のスプーン
@@ -5455,6 +5645,8 @@ I:37:5:3
 W:40:20:120:70000
 P:10:1d6:0:0:10
 F:CON | RES_COLD | RES_ACID | FREE_ACT | RES_FEAR | XTRA_H_RES | FULL_NAME
+D:$Carried by Mononobe no Ooonote, this tower shield protected Mononobe no Me
+D:$during his charge against the master archer Asake no Iratsuko.
 D:強弓の名手である朝日郎(あさけのいらつこ)の討伐のために物部目(もののべのめ)が誂えた大盾だ。
 D:物部大斧手(もののべのおおおのて)はこの大盾を構えて物部目を守って突撃し、物部目が朝日郎を斬り伏せるまで守り通した。
 
@@ -5465,6 +5657,11 @@ W:70:100:3:120000
 P:0:1d6:5:5:5
 F:STR | CON | CHR | BLESSED | FREE_ACT | RES_FEAR | ACTIVATE
 U:SUMMON_HANIWA
+D:$A magatama owned by Nomi no Sukune, the great sumo wrestler of
+D:$ancient Japan and the ancestor of haniwa craftsmen.        
+D:$"Henceforth in future ages these things of clay shall be placed in tombs
+D:$to substitute for men, so that men are not harmed."                                           
+D:$		 ('Nihon Shoki', chapter 6)
 D:古代日本最強の力士にして埴輪職人の祖でもある野見宿禰の勾玉だ。
 D:「今より以後、是の土物を以て生ける人に更易へ、陵墓に樹てて、後葉の法則とせむ」(日本書紀)
 
@@ -5480,7 +5677,7 @@ D:無縁塚に咲いていた奇妙な花だ。近くで音を立てると音楽を奏でながら踊りだす。
 
 
 N:347:大天狗の三脚
-E:Tripod of Great Tengu
+E:Great Tengu's Tripod
 I:27:8:0
 W:40:20:50:4990
 P:0:3d8:5:5:5
@@ -5531,4 +5728,3 @@ U:RESIST_ALL
 D:とんち話で有名な一休和尚の杖だ。
 D:彼は杖の先に頭蓋骨を据え付けて正月の街を歩き命の儚さを説いて回ったという。
 D:『有漏路より　無漏路へ帰る　一休み　雨降らば降れ　風吹かば吹け』
-

@@ -6936,7 +6936,7 @@ note_dies = "は倒れた。";
 #ifdef JP
 				note = "に抵抗された！";
 #else
-				note = "is unaffected!";
+				note = " is unaffected!";
 #endif
 				dam = 0;
 				break;
@@ -7704,7 +7704,7 @@ note = "には効果がなかった！";
 #ifdef JP
 note = "には効果がなかった。";
 #else
-				note = "is unaffected!";
+				note = " is unaffected!";
 #endif
 				dam = 0;
 			}
@@ -8882,7 +8882,7 @@ note = "には効果がなかった。";
 
 			if (r_ptr->flagsr & RFR_RES_ALL)
 			{
-				note = _("には効果がなかった！", "is unaffected!");
+				note = _("には効果がなかった！", " is unaffected!");
 				dam = 0;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
@@ -8918,7 +8918,7 @@ note = "には効果がなかった。";
 
 			if (r_ptr->flagsr & RFR_RES_ALL)
 			{
-				note = _("には効果がなかった！", "is unaffected!");
+				note = _("には効果がなかった！", " is unaffected!");
 				dam = 0;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_RES_ALL);
 				break;
