@@ -146,7 +146,7 @@ void get_table_name_aux(char *out_string)
 		}
 	}
 
-	out_string[0] = toupper(out_string[1]);
+	out_string[0] = toupper(out_string[0]);
 
 	out_string[16] = '\0';
 #endif
@@ -192,6 +192,7 @@ void get_table_sindarin_aux(char *out_string)
 	strcat(tmp, Syllable);
 	sindarin_to_kana(out_string, tmp);
 #else
+    out_string[0] = toupper(out_string[0]);
 	strcat(out_string, Syllable);
 #endif
 }
