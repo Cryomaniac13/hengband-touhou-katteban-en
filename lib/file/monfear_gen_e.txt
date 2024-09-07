@@ -1,5 +1,148 @@
 #monfear for Gensoukyou uniques
 
+N:1090:Cirno
+says, 'Isn't- isn't it about time you gave me a break?'
+screams, 'Wawawawawa!'
+
+N:1091:Meiling
+says, 'Damn. Time for my last stand battle formation!'
+
+N:1092:Patchouli
+sobs, 'I'm so anemic I can't finish reciting my spells.'
+says, 'This is the worst day ever!'
+
+N:1096:Letty
+says, 'No, wait! I'm the mastermind, but I'm normal!'
+
+
+N:1102:Youmu
+says, 'Oh no, Lady Yuyuko! When I close my eyes it goes completely dark!'
+
+N:1106:Wriggle
+squeals, 'Eeek!'
+
+N:1107:Mystia
+says, 'This place is no good either~'
+says, 'I thought a human had come carrying an onion. But who or what are you~?'
+
+N:1109:Tewi
+says, 'I can't afford to be captured~!'
+says, 'Wait, wait, hold it. Do I look like a deceitful rabbit~?'
+
+N:1110:Udongein
+says, 'I've got to get out of here fast...'
+
+N:1117:Nitori
+shrieks, 'Hiiyui!?'
+says, 'You, you're too strong for my weapons...'
+
+N:1119:Aya
+says, 'Uncompromisingly accurate reportage is sometimes criticised.'
+says, 'What are you doing, attacking an upstanding citizen?'
+
+N:1120:Sanae
+says, 'There's a dangerous feeling... let's retreat and call my allies.'
+says, 'Wha-wha-what?'
+says, 'I think I've been tricked! That stupid tanuki!'
+
+N:1129:Rin
+says, 'I wasn't plotting anything!'
+
+N:1132:Nazrin
+says, 'Hey, I still have work to do.'
+says, 'I'm telling you, I'm not hiding anything from you!'
+
+N:1133:Kogasa
+says, 'Sadism?'
+says, 'Damn! I ought to go down to the shrine and cause a mess!'
+
+N:1135:Murasa
+says, 'Hey, you crazy?'
+
+N:1139:Kyouko
+says, 'Beating me won't do any good, you know...'
+says, 'Oh, this unworthy yamabiko still lacks training!'
+
+N:1143:Futo
+says, 'What! Thou art no mundane creature.'
+says, 'Kuh! What manner of being art thou?'
+says, 'Ugh! Thou hast conditioned thy body?'
+
+N:1146:Banki
+says, 'Wha, what's with you? You're actually strong.'
+says, 'Unfortunate, but I guess I'll take a step back for now...'
+
+N:1147:Kagerou
+squeals, 'Eek!'
+
+N:1149:Yatsuhashi
+says, 'Wow, I can't stand up to this!'
+
+N:1150:Seija
+says, 'Not yet! I haven't given up yet!'
+says, 'Has my infamy already spread so far?'
+
+N:1152:Raiko
+says, 'I'm still no master of the art.'
+
+N:1158:Kokoro
+says, 'Scary... this person is scary.'
+
+
+
+N:1161:Komachi
+says, 'This is bad. I can't be wasting time here.'
+says, 'Well, I'll be off then... I have a job, you know...'
+
+N:1227:Marisa
+says, 'Damn it, what the hell do you mean?'
+says, 'What the...?'
+says, 'I don't understand! What the hell is happening!?'
+says, 'What...? You're that strong? This is nuts.'
+
+N:1267:Sumireko
+says, 'I have to escape to the peaceful Outside World!'
+says, 'Forgive me already!'
+says, 'Eek, why are you attacking me!?'
+
+N:1268:Three Fairies
+says, 'Waaaatsu!?'
+says, 'We're sorry we're sorry!'
+says, 'Re, retreat!!'
+says, 'Star, why didn't... she's gone!?'
+
+N:1273:Seiran
+says, 'The earthlings are too strong!'
+says, 'Where are my damn reinforcements?'
+is sending a distress signal.
+
+N:1277:Clownpiece
+says, 'W, why...?'
+says, 'Nobody told me this would happen.'
+
+N:1299:Rei'sen
+is trembling and muttering something.
+
+N:1320:Shion
+says, 'It's not like I want to be poor.'
+
+N:1342:Urumi
+says, 'Too bad, I wanted to feed you to my ancient fish.'
+
+N:1343:Kutaka
+says, 'What on earth are you!?'
+says, 'I'm finding this rather confusing.'
+
+N:1345:Mayumi
+says, 'What a fearsome strategy!'
+says, 'Feels like I'm living in a dream!'
+
+N:1355:Miyoi
+says, 'Fueeh~'
+makes a GYO!?
+
+N:1361:Tsukasa
+says, 'Haa, this is bad.'
+
 N:*:Default lines
 #Gensoukyou uniques have no default lines
-
