@@ -1170,7 +1170,7 @@ bool make_attack_normal(int m_idx)
 				    msg_format("%^s%s", m_name, act);
 				abbreviate = 1;/*‚Q‰ñ–ÚˆÈ~‚ÍÈ—ª */
 #else
-				msg_format("%^s %s%s", m_name, act, do_silly_attack ? " you." : "");
+			msg_format("%^s %s%s", m_name, act, do_silly_attack ? "" : "");
 #endif
 			}
 
