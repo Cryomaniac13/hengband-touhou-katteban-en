@@ -17,6 +17,8 @@
                        http://hengband.sourceforge.jp/
                 Gensouband:    Miyamasa
                 English translation: Cryomaniac
+   Contributors for English version: backwardsEric (Linux port)
+                                     Z8PNKbbY (Translation)
 
         Gensouband is also a derivative work of Touhou Project.
         Touhou Project is a copyrighted work of Team Shanghai Alice.
