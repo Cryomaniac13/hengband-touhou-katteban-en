@@ -4049,6 +4049,7 @@ static void process_world_aux_curse(void)
 			//if (!get_rnd_line("chainswd_j.txt", 0, noise))
 
 #else
+			if (!get_rnd_line("storm.txt", 0, noise))
 			//if (!get_rnd_line("storm.txt", 0, noise)))
 #endif
 				msg_print(noise);

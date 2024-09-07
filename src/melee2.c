@@ -2194,18 +2194,12 @@ act = "%s‚Ì¨Œ³‚ÅŒ‰¹‚ğo‚µ‚½B";
 			/* Message */
 			if (act && see_either)
 			{
-#ifdef JP
+
 				if (do_silly_attack) act = silly_attacks2[randint0(MAX_SILLY_ATTACK)];
 				strfmt(temp, act, t_name);
+#ifdef JP
 				msg_format("%^s‚Í%s", m_name, temp);
 #else
-                // TODO - silly attacks not ready for English version
-				/*if (do_silly_attack)
-				{
-					act = silly_attacks2[randint0(MAX_SILLY_ATTACK)];
-					strfmt(temp, "%^s %s.", act, t_name);
-				}
-				else */strfmt(temp, act, t_name);
 				msg_format("%^s %s", m_name, temp);
 #endif
 			}

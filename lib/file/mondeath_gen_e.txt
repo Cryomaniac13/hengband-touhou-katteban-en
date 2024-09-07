@@ -1,6 +1,302 @@
 #mondeath for Gensoukyou uniques
 
+N:1091:Meiling
+says, 'I'm so sorry, Mistress!'
+
+N:1092:Patchouli
+says, 'Mukyuu.'
+says, 'Mukyuu'
+
+N:1093:Sakuya
+says, 'Ah, I wanted to be the one to resolve the incident.'
+
+N:1094:Remilia
+says, 'I'll beat you next time.'
+
+N:1095:Flandre
+says, 'This can't be real. I can't believe it...'
+
+N:1096:Letty
+says, 'Boo-hoo~'
+
+N:1102:Youmu
+says, 'Outrageous!'
+
+N:1103:Yuyuko
+says, 'Good night~'
+
+N:1107:Mystia
+sings, 'Circling on my injured wings~... eh, ah, aah-'
+says, 'Harahorotia~'
+sings, 'It flew to the roof, broke and disappeared~'
+
+N:1108:Keine
+says, 'If only it had been a full moon, I could've...'
+
+N:1110:Udongein
+says, 'Goodness. You're far more than I expected.'
+says, 'Ah, master will scold me.'
+
+N:1113:Mokou
+says, 'What?! I'm reaching my limit...!'
+says, 'Ow, ow! I won't die, but it hurts~'
+
+N:1116:Hina
+says, 'I was just trying to be nice and drive you away...'
+
+N:1117:Nitori
+says, 'Aww, my optical camouflage suit broke.'
+says, 'Uuu, I lose.'
+
+N:1119:Aya
+says, 'Hmm. I would've been better off taking pictures in secret.'
+
+N:1120:Sanae
+says, 'Such strength...'
+says, 'You can't let yourself be held back by common sense in Gensoukyou.'
+
+N:1122:Suwako
+says, 'Auuuuu.'
+
+N:1125:Yamame
+says, 'You're as tough as expected... a failed capture!'
+says, 'Boo-hoo... I'm starving.'
+
+N:1127:Yuugi
+says, 'Well done! I love how strong you are! From now on, we're friends.'
+says, 'Well done! I expected nothing less from someone who made it down here.'
+
+N:1128:Satori
+says, 'Oh my. Well, you did make it this far underground.'
+mutters, 'Reading human minds too much makes me feel ill.'
+
+N:1129:Rin
+exclaims, 'Good job! Wouldn't have thought I'd lose.'
+exclaims, 'Wow, you're amazing! I'm so moved!'
+
+N:1130:Utsuho
+says, 'Wait, what were we doing?'
+
+N:1131:Koishi
+says, 'Ohhhh goodness! I lost.'
+
+N:1133:Kogasa
+says, 'You smashed me up-'
+says, 'I've had enough, no more, please.'
+says, 'Oh, what's the point of a youkai who can't surprise people?'
+
+N:1134:Ichirin
+says, 'I hate to admit it, but we're utterly beaten. Our foe was too much...'
+says, 'Aww, we lose.'
+
+N:1135:Murasa
+says, 'You're strong... so who are you exactly?'
+
+N:1136:Shou
+says, 'I lose... what you're doing is not wrong either.'
+
+N:1137:Byakuren
+says, 'I've lost...? This is bad for business.'
+
+N:1139:Kyouko
+yells, 'I'M DONE FOOOOOR!'
+
+N:1140:Yoshika
+shouts, 'GWAAAAARGH! I'm done fooooor!'
+says, 'Wake me up at 10 PM.'
+
+N:1141:Seiga
+says, 'Oh my, how splendid. The people of Gensoukyou truly are talented.'
+
+N:1143:Futo
+says, 'Slept had I fourteen-hundred years only to be defeated utterly?'
+says, 'Ugh. On this happening I concede defeat.'
+
+N:1144:Miko
+says, 'Do you hear that? It's the sound of everyone praising you.'
+says, 'In truth I had planned to become the hope of this world, but I shall concede to you.'
+
+N:1146:Banki
+mutters, 'Bah...'
+yelps, 'Gyah!'
+
+N:1147:Kagerou
+squeals, 'Eek! My cuticle!'
+
+N:1148:Benben
+says, 'Um, I give, I give! I surrender!'
+
+N:1149:Yatsuhashi
+says, 'Wa-hooi, this person is strong.'
+
+N:1150:Seija
+says, 'What the hell?'
+
+N:1151:Sukuna
+bawls, 'I can't believe I lost!'
+bawls, 'I've LOOOSST!'
+
+N:1152:Raiko
+says, 'My, my! I concede.'
+says, 'Poor sad tools...'
+
+N:1159:Medicine
+says, 'Aah, geez. Repairing my body will take some time.'
+
+N:1161:Komachi
+squeals, 'Kyan!'
+
+N:1226:Reimu
+says, 'So be it. Don't take your wicked scheming too far.'
+says, 'I couldn't hear the gods' voices today, that's all.'
+says, 'Now I'm starting to feel the pain from the fall down here.'
+says, 'Ow, ow, ow!'
+says, 'I finally found the enemy, but it's this absurd?'
+says, 'This is no place for a human to be!'
+says, 'I guess I'll have to try again...'
+
+
+N:1227:Marisa
+says, 'Well, I lost, so there's nothing for it. Go home and sleep.'
+says, 'I lost even though I tried harder than usual...'
+says, 'Uwah, you're really something.'
+
+N:1230:Mamizou
+says, 'Let's leave it at that for today.'
+says, 'I give up! Any more and I'll be feeling it tomorrow.'
+
+N:1267:Sumireko
+says, 'Youkai are scary after all...'
+
+N:1268:Three Fairies
+squeals, 'Kyan!' <x3>
+
+N:1273:Seiran
+says, 'Guuu, this is why I didn't want to be in the ground forces!'
+
+N:1274:Ringo
+says, 'Ahh, so there are some strong people on Earth too.'
+
+N:1275:Doremy
+says, 'Your nightmares were delicious.'
+
+N:1276:Sagume
+says, 'This one is terribly powerful. Perhaps with you...'
+
+N:1277:Clownpiece
+says, 'I'm tired, can I go home already?'
+says, 'I've run out of energy.'
+
+N:1297:Yorihime
+N:1298:Toyohime
+gasps, 'Gah...!'
+
+N:1299:Rei'sen
+says, 'I miss my old life...'
+
+N:1310:Larva
+says, 'I sub-miiiit.'
+says, 'I lose~. You sure are impressive!'
+
+N:1311:Nemuno
+says, 'You sure are tough! Who're you?'
+says, 'I can't not like strong folk! Wanna stop by my place?'
+
+N:1312:Aunn
+says, 'I've done my best for the shrine, but I got beaten up.'
+says, 'I hate violence...'
+
+N:1313:Narumi
+says, 'Oh my, I've lost.'
+
+N:1314:Satono
+says, 'A passing grade, I guess.'
+says, 'It seems I underestimated you.'
+
+N:1315:Mai
+says, 'Wow, you're super strong! I didn't expect that!'
+says, 'All right, congratulations! You paaaassed!'
+
+N:1316:Okina
+says, 'I've been defeeeated!'
+says, 'Brilliant! Magnificent!'
+
+N:1318:Kosuzu
+loses consciousness, and the picture scroll tumbles away!
+
+N:1341:Eika
+says, 'Gugugu... so strong...'
+says, 'Uuu... my tears won't stop.'
+bawls, 'The children were looking forward to the stone-stacking contest so much...'
+
+N:1342:Urumi
+says, 'Okay. I'll stop trying to drown you.'
+
+N:1343:Kutaka
+says, 'W-Well done. If you're determined to go on, I won't keep you any longer.'
+says, 'I'll forget about you, because I'm a bird-brain.'
+
+N:1344:Yachie
+says, 'Ugh! I can't use my full potential in a fair fight!'
+
+N:1345:Mayumi
+says, 'Such strength! Nothing like the human spirits from the Animal Realm!'
+
+N:1346:Keiki
+says, 'My fine ceramics won't even be scratched.'
+
+N:1347:Saki
+says, 'Your performance, I'm, I'm moved!'
+says, 'I- I regret nothing!'
+says, 'I wonder if you would consider joining the Keiga family?'
+
+N:1355:Miyoi
+says, 'Hi~yaa'
+
+
+N:1357:Mike
+sputters, 'Kku...!'
+
+N:1358:Takane
+says, 'Good grief...'
+says, 'I surrender, I surrender! I've been saying it all along!'
+
+N:1359:Sannyo
+says, 'Grh, you're too much...'
+says, 'I have no choice... I give up.'
+
+
+N:1360:Misumaru
+says, 'Spectacular!'
+says, 'Not half bad.'
+
+N:1361:Tsukasa
+says, 'Funyuu~'
+
+N:1362:Megumu
+says, 'Hehehe, splendid.'
+says, 'I'm fond of those who are brave and powerful.'
+
+N:1364:Momoyo
+says, 'Thanks for letting me shoot all the danmaku I wanted!'
+says, 'Come back and rob me any time!'
+says, 'Let's have a rematch!'
+
+
+N:1366:Yuuma
+says, 'I'll admit my loss this time.'
+
+N:1385:Enoko
+says, 'Str... strong...'
+
+N:1386:Biten
+says, 'That was fun! Let's have a rematch!'
+
+N:1387:Chiyari
+says, 'I give, I give!'
+
+N:1388:Hisami
+says, 'Ahh, beautiful power.'
+
 N:*:Default lines
 #Gensoukyou uniques have no default lines
-
-
