@@ -101,8 +101,14 @@ void get_table_name_aux(char *out_string)
 	strcat(out_string, Syllable);
 #else
 #define MAX_SYLLABLES 164       /* Used with scrolls (see below) */
+    char NamePart[80];
+	get_rnd_line("aname_e.txt", 1, NamePart);
+	strcpy(out_string, NamePart);
+	strcat(out_string, " ");
+	get_rnd_line("aname_e.txt", 2, NamePart);
+	strcat(out_string, NamePart);
 
-	static cptr syllables[MAX_SYLLABLES] = {
+	/*static cptr syllables[MAX_SYLLABLES] = {
 		"a", "ab", "ag", "aks", "ala", "an", "ankh", "app",
 		"arg", "arze", "ash", "aus", "ban", "bar", "bat", "bek",
 		"bie", "bin", "bit", "bjor", "blu", "bot", "bu",
@@ -148,7 +154,7 @@ void get_table_name_aux(char *out_string)
 
 	out_string[0] = toupper(out_string[0]);
 
-	out_string[16] = '\0';
+	out_string[16] = '\0';*/
 #endif
 }
 
