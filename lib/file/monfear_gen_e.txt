@@ -54,7 +54,7 @@ N:1119:Aya
 # 「正確すぎる情報は、時として批難されるものです。」
 says, 'Uncompromisingly accurate reportage is sometimes criticized.'
 # 「もう……。善良な市民の味方を攻撃してどうするんですか」
-says, 'What are you doing, attacking an upstanding citizen?'
+says, 'What are you doing, attacking an ally of upstanding citizens?'
 
 N:1120:Sanae
 # 「何かヤバイ雰囲気……ひとまず退散して味方を呼んでこようかしら」
