@@ -23558,7 +23558,7 @@ D:$"...a wily-looking little man, with a sharp nose and a
 D:$laughing mouth and a shock of straw-colored hair. He was dressed
 D:$in something like a Renaissance costume of orange, red, and brown.
 D:$He wore long hose and a tight-fitting embroidered doublet."
-D:$(Roger Zelazny, Nine Princes in Amber, p.28)
+D:$(Roger Zelazny, 'Nine Princes in Amber', p.28)
 D:ランダムは九王子の末弟で、あちこちの影を遊び歩いて過ごしていた。
 D:打算的で気分屋だが意外に義理堅いところもある。
 D:「ずるそうな顔つきの小男。尖った鼻、笑っている口、むぎわらを束ねたような髪。
@@ -24162,9 +24162,9 @@ F:NO_CONF | NO_SLEEP | CAN_FLY |
 F:BASH_DOOR | POWERFUL |
 S:1_IN_5 |
 S:BR_SHAR |
-D:$"And this beauty! What radiance! More wonderful than anything I've ever seen!" 
+D:$"And this beauty! What radiance! More wonderful than anything I've ever seen!"  
 D:$"Finally... finally, I have conquered the sun!"
-D:$(Hirohiko Araki, Jojo's Bizarre Adventure, Vol. 12)
+D:$(Hirohiko Araki, 'Jojo's Bizarre Adventure', Vol. 12)
 D:「そして　あの！美しい！なんという輝き！今まで見た何よりもすばらしい…」
 D:「あの太陽をついに…ついに…克服したぞ！」
 D:(荒木飛呂彦　ジョジョの奇妙な冒険 12巻)
@@ -24184,7 +24184,7 @@ F:SMART | OPEN_DOOR |
 F:NO_CONF | NO_SLEEP | NO_FEAR
 S:1_IN_5 | 
 S:HEAL | PUNISH_3 |
-D:$"Repent, ye dead! Discover faith in death!" (Kentaro Miura, Berserk, volume 20)
+D:$"Repent, ye dead! Discover faith in death!" (Kentaro Miura, 'Berserk', volume 20)
 D:「悔い改めよ亡者ども！信仰とは死ぬことと見つけたり！」　　(三浦建太郎　「ベルセルク」 20巻)
 
 #1202を倒すまでは通常出現しない
@@ -24205,7 +24205,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN
 S:1_IN_4 | 
 S:BR_HOLY | BR_FIRE
 D:$"You fool who does not fear God, God's punishment is swift and certain! 
-D:$I will punish you on behalf of heaven!" (Kentaro Miura, Berserk, volume 21)
+D:$I will punish you on behalf of heaven!" (Kentaro Miura, 'Berserk', volume 21)
 D:「神を畏れぬ愚か者よ　天罰覿面！　天に代わりてこの私が！あなたにバチを当てましょう！」
 D:　　(三浦建太郎　「ベルセルク」 20巻)
 
@@ -26321,7 +26321,7 @@ F:OPEN_DOOR | BASH_DOOR | GEN_HUMAN | HANIWA | FRIENDS | COLD_BLOOD
 F:NO_CONF | NO_FEAR | NO_SLEEP | REGENERATE
 F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
-D:$A Haniwa wielding a sword, created from clay by the sculpting god Haniyasukami-uchigi-hime.
+D:$A Haniwa wielding a sword, created from clay by the sculptor god Keiki Haniyasushin.
 D:造形神『埴安神　袿姫』により生み出された、剣を持つ埴輪だ。
 
 
@@ -26340,7 +26340,7 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_2
 S:SHOOT
-D:$A Haniwa wielding a bow, created from clay by the sculpting god Haniyasukami-uchigi-hime.
+D:$A Haniwa wielding a bow, created from clay by the sculptor god Keiki Haniyasushin.
 D:造形神『埴安神　袿姫』により生み出された、弓を持つ埴輪だ。
 
 N:1334:騎馬兵埴輪
@@ -26359,7 +26359,7 @@ F:EMPTY_MIND | NONLIVING | STAY_AT_HOME1
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_POIS | RES_WATE | RES_HOLY | RES_NETH | HURT_ROCK
 S:1_IN_4
 S:SHOOT
-D:$A Haniwa horseman riding a Haniwa horse, created from clay by the sculpting god Haniyasukami-uchigi-hime.
+D:$A Haniwa horseman riding a Haniwa horse, created from clay by the sculptor god Keiki Haniyasushin.
 D:造形神『埴安神　袿姫』により生み出された、埴輪の馬に乗った埴輪の騎兵だ。
 
 N:1335:熟練剣士埴輪
