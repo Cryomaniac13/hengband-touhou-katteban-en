@@ -1,147 +1,211 @@
 #monfear for Gensoukyou uniques
 
 N:1090:Cirno
+# 「く、も、もうそろそろかんべんしてー」
 says, 'Isn't- isn't it about time you gave me a break?'
+# 「わわわわわ！」
 screams, 'Wawawawawa!'
 
 N:1091:Meiling
+# 「くそ、背水の陣だ！」
 says, 'Damn. Time for my last stand battle formation!'
 
 N:1092:Patchouli
+# 「しくしく、貧血でスペルが唱え切れないの」
 sobs, 'I'm so anemic I can't finish reciting my spells.'
+# 「今日は厄日だわ！」
 says, 'This is the worst day ever!'
 
 N:1096:Letty
+# 「ちょい、待って！私は黒幕だけど、普通よ」
 says, 'No, wait! I'm the mastermind, but I'm normal!'
 
-
 N:1102:Youmu
+# 「幽々子さま、大変です。目を瞑ったら真っ暗です！」
 says, 'Oh no, Lady Yuyuko! When I close my eyes it goes completely dark!'
 
 N:1106:Wriggle
+# 「ひぇぇ」
 squeals, 'Eeek!'
 
 N:1107:Mystia
+# 「ここも駄目だ～！」
 says, 'This place is no good either~'
+# 「久しぶりのヒトネギだと思ったのに。あんた達、一体何者なのよ～」
 says, 'I thought a human had come carrying an onion. But who or what are you~?'
 
 N:1109:Tewi
-says, 'I can't afford to be captured~!'
+# 「捕まる訳にはいかないわー」
+says, 'I can't afford to be captured-!'
+# 「ちょっとちょっと。私が人を騙すような兎に見えます～？」
 says, 'Wait, wait, hold it. Do I look like a deceitful rabbit~?'
 
 N:1110:Udongein
+# 「早くここから脱出しないと……」
 says, 'I've got to get out of here fast...'
 
 N:1117:Nitori
+# 「ひゅい！？」
 shrieks, 'Hiiyui!?'
+# 「つ、強い。私の兵器で倒せないなんて……」
 says, 'You, you're too strong for my weapons...'
 
 N:1119:Aya
-says, 'Uncompromisingly accurate reportage is sometimes criticised.'
+# 「正確すぎる情報は、時として批難されるものです。」
+says, 'Uncompromisingly accurate reportage is sometimes criticized.'
+# 「もう……。善良な市民の味方を攻撃してどうするんですか」
 says, 'What are you doing, attacking an upstanding citizen?'
 
 N:1120:Sanae
+# 「何かヤバイ雰囲気……ひとまず退散して味方を呼んでこようかしら」
 says, 'There's a dangerous feeling... let's retreat and call my allies.'
+# 「お、おにょい？」
 says, 'Wha-wha-what?'
+# 「騙されたかもしれないわー！あのバカ狸にー！」
 says, 'I think I've been tricked! That stupid tanuki!'
 
 N:1129:Rin
+# 「何も企んでなんかないよー」
 says, 'I wasn't plotting anything!'
 
 N:1132:Nazrin
+# 「おおっと、私にはまだやるべき事がある。」
 says, 'Hey, I still have work to do.'
+# 「何にも隠し事なんかしてないってばよー」
 says, 'I'm telling you, I'm not hiding anything from you!'
 
 N:1133:Kogasa
+# 「さでずむ？」
 says, 'Sadism?'
+# 「ちくしょう！こうなったら神社に降りて暴れてやる」
 says, 'Damn! I ought to go down to the shrine and cause a mess!'
 
 N:1135:Murasa
+# 「な、お前ヤバくね？」
 says, 'Hey, you crazy?'
 
 N:1139:Kyouko
+# 「私を倒しても何にもならないわよー」
 says, 'Beating me won't do any good, you know...'
+# 「不肖ヤマビコ、まだまだ修行が足りないわ！」
 says, 'Oh, this unworthy yamabiko still lacks training!'
 
 N:1143:Futo
+# 「何だと？おぬし、ただ者ではないな？」
 says, 'What! Thou art no mundane creature.'
+# 「くっ！おぬしは何者だ？」
 says, 'Kuh! What manner of being art thou?'
+# 「くっ。おぬし、鍛えているな？」
 says, 'Ugh! Thou hast conditioned thy body?'
 
 N:1146:Banki
+# 「な、なによあんた。強いじゃないのよ」
 says, 'Wha, what's with you? You're actually strong.'
+# 「く、くやしいけど、ここは大人しく退くか……」
 says, 'Unfortunate, but I guess I'll take a step back for now...'
 
 N:1147:Kagerou
+# 「ひえー」
 squeals, 'Eek!'
 
 N:1149:Yatsuhashi
+# 「わーお、こりゃ無理だー」
 says, 'Wow, I can't stand up to this!'
 
 N:1150:Seija
+# 「まだだ、まだ諦めないぞ！」
 says, 'Not yet! I haven't given up yet!'
+# 「こんなところまで追手が……」
 says, 'Has my infamy already spread so far?'
 
 N:1152:Raiko
+# 「まだまだ使いこなせてないかなぁ」
 says, 'I'm still no master of the art.'
 
 N:1158:Kokoro
+# 「怖い……この人怖いよう」
 says, 'Scary... this person is scary.'
 
-
-
 N:1161:Komachi
+# 「いかん。こんな所で油を売っている場合ではない」
 says, 'This is bad. I can't be wasting time here.'
+# 「じゃ、あたいはこれにて……仕事があるんでねぇ」
 says, 'Well, I'll be off then... I have a job, you know...'
 
 N:1227:Marisa
+# 「くそ、一体、何だと言うんだ？」
 says, 'Damn it, what the hell do you mean?'
+# 「なん……だと？」
 says, 'What the...?'
+# 「判らん判らん。一体何が起きてるんだ？」
 says, 'I don't understand! What the hell is happening!?'
+# 「なんと……こんなに強かったなんて、これはやばいな」
 says, 'What...? You're that strong? This is nuts.'
 
 N:1267:Sumireko
+# 「逃げなきゃ外の世界へ早く！」
 says, 'I have to escape to the peaceful Outside World!'
+# 「ねえもう許してよう」
 says, 'Forgive me already!'
+# 「ひえー何で攻撃してくるのー」
 says, 'Eek, why are you attacking me!?'
 
 N:1268:Three Fairies
-says, 'Waaaatsu!?'
+# 「わぁっ！？」
+yells, 'Waaaatsu!?'
+# 「ごめんなさいごめんなさーい！」
 says, 'We're sorry we're sorry!'
+# 「てっ…撤収ーっ！！」
 says, 'Re, retreat!!'
+# 「なによスターちゃんと……っていないし！」
 says, 'Star, why didn't... she's gone!?'
 
 N:1273:Seiran
+# 「地上人つよいじゃーんやだー」
 says, 'The earthlings are too strong!'
+# 「やだー何で援軍が誰も来ないのよー」
 says, 'Where are my damn reinforcements?'
+# はどこかに救難信号を送っている。
 is sending a distress signal.
 
 N:1277:Clownpiece
+# 「な、なんで……？」
 says, 'W, why...?'
+# 「話が違うわよー」
 says, 'Nobody told me this would happen.'
 
 N:1299:Rei'sen
+# は震えながら何かをつぶやいている。
 is trembling and muttering something.
 
 N:1320:Shion
+# 「私だって好きで貧乏している訳じゃないのにー。」
 says, 'It's not like I want to be poor.'
 
 N:1342:Urumi
+# 「なんだ強いじゃないか。折角、古代魚達の餌にしてやろうと思ったのに。」
 says, 'Too bad, I wanted to feed you to my ancient fish.'
 
 N:1343:Kutaka
+# 「何なのよーあんた達は」
 says, 'What on earth are you!?'
+# 「説明がなさ過ぎて困ります」
 says, 'I'm finding this rather confusing.'
 
 N:1345:Mayumi
+# 「なんと恐ろしい策！」
 says, 'What a fearsome strategy!'
+# 「夢のような現実だわ！」
 says, 'Feels like I'm living in a dream!'
 
 N:1355:Miyoi
+# 「ふえぇ」
 says, 'Fueeh~'
+# (GYO!?)
 makes a GYO!?
 
 N:1361:Tsukasa
+# 「はあ、これは参った」
 says, 'Haa, this is bad.'
 
 N:*:Default lines
