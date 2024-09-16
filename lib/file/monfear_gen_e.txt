@@ -152,7 +152,7 @@ says, 'Eek, why are you attacking me!?'
 
 N:1268:Three Fairies
 # 「わぁっ！？」
-yells, 'Waaaatsu!?'
+yells, 'Waaaaa!?'
 # 「ごめんなさいごめんなさーい！」
 says, 'We're sorry we're sorry!'
 # 「てっ…撤収ーっ！！」
@@ -190,7 +190,7 @@ N:1343:Kutaka
 # 「何なのよーあんた達は」
 says, 'What on earth are you!?'
 # 「説明がなさ過ぎて困ります」
-says, 'I'm finding this rather confusing.'
+says, 'I'm finding this situation rather confusing.'
 
 N:1345:Mayumi
 # 「なんと恐ろしい策！」
