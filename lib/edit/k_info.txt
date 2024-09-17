@@ -7653,7 +7653,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 D:特殊処理用
 
 N:733:ウルトラソニック眠り猫
-E:& Ultrasonic Whistle~
+E:& Ultrasonic Sleeping Cat~
 G:`:u
 I:72:10:0
 W:10:0:50:3000
@@ -8045,7 +8045,7 @@ D:変身中は身体能力と格闘能力が大幅に上昇するが、多くの武器防具が無効化され、
 D:魔法、魔道具、巻物が使えなくなる。
 
 N:772:時空消滅内服液
-E:& Medicine~ of Temporal Disappearnace
+E:& Medicine~ of Temporal Disappearance
 G:!:b
 I:81:12:0
 W:1:0:5:0
@@ -8661,7 +8661,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 D:大きな羊皮紙にくるまれた香木製の箱だ。箱には不気味な彫刻が施されている…
 
 N:830:銀の鍵
-E:Silver key
+E:Silver Key
 G:\:w
 I:72:18:0
 W:25:0:10:100000
@@ -8673,7 +8673,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | USABLE
 
 
 N:831:オニフスベ:白くて大きな
-E:& Giant puffball~
+E:& Giant Puffball~
 G:,:y
 I:74:32:10000
 W:10:0:20:1
@@ -9016,7 +9016,7 @@ D:不思議な材質の半透明の球だ。中には星のような文様がひとつ浮かび上がっているのが
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:864:優曇華の盆栽
-E:udonge
+E:Bonsai Udonge
 G:&:v
 I:82:26:0
 W:1:0:150:70000000
@@ -9360,7 +9360,7 @@ D:$A small box decorated with lots of flair. You can't wait to open it!
 D:やたらと派手に光る小箱だ。これを開けるときには興奮を抑えきれないだろう！
 
 N:897:酔魔の酒の空き瓶
-E:& Empty alcohol bottle~
+E:& Empty Alcohol Bottle~
 G:!:w
 I:72:32:0
 W:25:0:5:10
@@ -9403,7 +9403,7 @@ F:INSTA_ART
 
 
 N:901:ルナティックガン改
-E:Lunatic gun Mk II
+E:Lunatic Gun Mk II
 G:}:w
 I:33:11:0
 W:45:0:30:10000
@@ -9439,7 +9439,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 
 N:904:奇妙な豆
-E:Strange bean
+E:Strange Bean
 G:,:g
 I:80:12:5000
 W:65:0:10:10
