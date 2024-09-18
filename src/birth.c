@@ -7074,7 +7074,7 @@ static bool player_birth_aux(void)
 //	put_str("–¼‘O  :", 1,26);
 	put_str("–¼‘O  :", 1,16);
 #else
-	put_str("Name  :", 1,26);
+	put_str("Name  :", 1,16);
 #endif
 
 #ifdef JP
@@ -8118,7 +8118,7 @@ if(flag_general || flag_outsider)
 			if ((c == 'r')) break;
 		}
 		if(ok) break;
-		put_str("                                                       ", 3, 30);
+		put_str("                                                        ", 3, 29);
 		put_str("                                                       ", 4, 30);
 		put_str("                                                       ", 5, 30);
 		put_str("                                                       ", 6, 30);
