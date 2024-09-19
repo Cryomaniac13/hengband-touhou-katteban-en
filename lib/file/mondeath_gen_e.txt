@@ -1,4 +1,5 @@
 #mondeath for Gensoukyou uniques
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
 
 N:1091:Meiling
 # 「済みません、お嬢様～」

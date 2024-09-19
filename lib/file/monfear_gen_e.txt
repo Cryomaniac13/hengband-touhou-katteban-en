@@ -1,4 +1,5 @@
 #monfear for Gensoukyou uniques
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
 
 N:1090:Cirno
 # 「く、も、もうそろそろかんべんしてー」
