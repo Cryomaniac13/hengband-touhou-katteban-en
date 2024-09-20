@@ -1,301 +1,427 @@
 #mondeath for Gensoukyou uniques
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
 
 N:1091:Meiling
+# 「済みません、お嬢様～」
 says, 'I'm so sorry, Mistress!'
 
 N:1092:Patchouli
+# 「むきゅー。」
 says, 'Mukyuu.'
+# 「むぎゅー」
 says, 'Mukyuu'
 
 N:1093:Sakuya
+# 「あら、私が先に異変を解決したかったのに」
 says, 'Ah, I wanted to be the one to resolve the incident.'
 
 N:1094:Remilia
+# 「あんたは次の機会に倒してやる」
 says, 'I'll beat you next time.'
 
 N:1095:Flandre
+# 「嘘みたい。私が負けるなんて・・・」
 says, 'This can't be real. I can't believe it...'
 
 N:1096:Letty
+# 「しくしく～」
 says, 'Boo-hoo~'
 
 N:1102:Youmu
+# 「理不尽なー」
 says, 'Outrageous!'
 
 N:1103:Yuyuko
+# 「おやすみ～」
 says, 'Good night~'
 
 N:1107:Mystia
+# 「傷ついた翼にまわる～……って、あ、あれー……」
 sings, 'Circling on my injured wings~... eh, ah, aah-'
+# 「はらほろてぃあ～」
 says, 'Harahorotia~'
+# 「屋根まで飛んで壊れて消えたー♪」
 sings, 'It flew to the roof, broke and disappeared~'
 
 N:1108:Keine
+# 「満月さえあればこんな奴には……」
 says, 'If only it had been a full moon, I could've...'
 
 N:1110:Udongein
+# 「なんていうこと。思ってたよりずっと強い……」
 says, 'Goodness. You're far more than I expected.'
+# 「ああ、師匠にしかられるぅ。」
 says, 'Ah, master will scold me.'
 
 N:1113:Mokou
+# 「なんてこと！もう体力の限界が……」
 says, 'What?! I'm reaching my limit...!'
+# 「痛い痛い、死なないけど痛い～。」
 says, 'Ow, ow! I won't die, but it hurts~'
 
 N:1116:Hina
+# 「私は親切に追い返そうとしただけなのに……」
 says, 'I was just trying to be nice and drive you away...'
 
 N:1117:Nitori
+# 「あーあ、私の光学迷彩スーツが壊れちった」
 says, 'Aww, my optical camouflage suit broke.'
+# 「ううう、負けちった」
 says, 'Uuu, I lose.'
 
 N:1119:Aya
+# 「うーん。隠し撮りしてれば良かったです……」
 says, 'Hmm. I would've been better off taking pictures in secret.'
 
 N:1120:Sanae
+# 「強い……。」
 says, 'Such strength...'
+# 「この幻想郷では常識に囚われてはいけな
 says, 'You can't let yourself be held back by common sense in Gensoukyou.'
 
 N:1122:Suwako
+# 「あーうー。」
 says, 'Auuuuu.'
 
 N:1125:Yamame
+# 「やっぱり強いー捕獲失敗！」
 says, 'You're as tough as expected... a failed capture!'
+# 「しくしく……ひもじいです」
 says, 'Boo-hoo... I'm starving.'
 
 N:1127:Yuugi
+# 「お見事！その腕っ節、気に入ったよ！今日からお前は朋友だ」
 says, 'Well done! I love how strong you are! From now on, we're friends.'
+# 「お見事！その腕っ節、流石にここまで一人で降りてくるだけあるね」
 says, 'Well done! I expected nothing less from someone who made it down here.'
 
 N:1128:Satori
+# 「あらら。こんな地底深くまで降りてくるだけあるわ～」
 says, 'Oh my. Well, you did make it this far underground.'
+# 「人間の心を読み過ぎると気持ち悪くなるのよ」
 mutters, 'Reading human minds too much makes me feel ill.'
 
 N:1129:Rin
+# 「お見事！あたいが負けるとは思わなかったわ」
 exclaims, 'Good job! Wouldn't have thought I'd lose.'
+# 「くー、本当にやるねぇ。あたい、いたく感動したよ！」
 exclaims, 'Wow, you're amazing! I'm so moved!'
 
 N:1130:Utsuho
+# 「って、何をしてたんだっけ？」
 says, 'Wait, what were we doing?'
 
 N:1131:Koishi
+# 「あらららら、負けちゃった」
 says, 'Ohhhh goodness! I lost.'
 
 N:1133:Kogasa
+# 「当って砕けたー」
 says, 'You smashed me up-'
+# 「もう戦いは懲り懲りです」
 says, 'I've had enough, no more, please.'
+# 「ああ、驚いて貰えない妖怪に価値なんて……。」
 says, 'Oh, what's the point of a youkai who can't surprise people?'
 
 N:1134:Ichirin
+# 「悔しいけど……完敗ね。この仇はきっと……」
 says, 'I hate to admit it, but we're utterly beaten. Our foe was too much...'
+# 「あららららー、負けちゃった。」
 says, 'Aww, we lose.'
 
 N:1135:Murasa
+# 「強い……貴方は一体何者？」
 says, 'You're strong... so who are you exactly?'
 
 N:1136:Shou
+# 「負けた……貴方も間違ってはいないというのね」
 says, 'I lose... what you're doing is not wrong either.'
 
 N:1137:Byakuren
+# 「負けちゃった……か。これでは商売あがったりね」
 says, 'I've lost...? This is bad for business.'
 
 N:1139:Kyouko
+# 「やーらーれーたー！」
 yells, 'I'M DONE FOOOOOR!'
 
 N:1140:Yoshika
+# 「うおー！　やーらーれーたー」
 shouts, 'GWAAAAARGH! I'm done fooooor!'
+# 「２２時になったら起こしてね」
 says, 'Wake me up at 10 PM.'
 
 N:1141:Seiga
+# 「あららら、お見事です。流石、幻想郷の人達は腕が立ちますねー」
 says, 'Oh my, how splendid. The people of Gensoukyou truly are talented.'
 
 N:1143:Futo
+# 「こんなにあっさり負けてしまうとは。我はなんの為に千四百年も眠っていたのだろうか」
 says, 'Slept had I fourteen-hundred years only to be defeated utterly?'
+# 「ぐぐ、今回は勝ちを譲ろうぞ」
 says, 'Ugh. On this happening I concede defeat.'
 
 N:1144:Miko
+# 「聞こえるでしょう？　みなが君を称賛する声が」
 says, 'Do you hear that? It's the sound of everyone praising you.'
+# 「本当は私がこの世界の希望になる予定だったけど、ここは君に譲るとしよう」
 says, 'In truth I had planned to become the hope of this world, but I shall concede to you.'
 
 N:1146:Banki
+# 「がっくし。」
 mutters, 'Bah...'
+# 「ぎゃー！」
 yelps, 'Gyah!'
 
 N:1147:Kagerou
+# 「ひー、私のキューティクルが」
 squeals, 'Eek! My cuticle!'
 
 N:1148:Benben
+# 「うーん、まいったまいった。降参よー」
 says, 'Um, I give, I give! I surrender!'
 
 N:1149:Yatsuhashi
+# 「わっほーい。この人、強かったー」
 says, 'Wa-hooi, this person is strong.'
 
 N:1150:Seija
+# 「くう、なんてこった。」
 says, 'What the hell?'
 
 N:1151:Sukuna
+# 「しくしく。この私が敗れるなんてー」
 bawls, 'I can't believe I lost!'
+# 「負ーけーたー。」
 bawls, 'I've LOOOSST!'
 
 N:1152:Raiko
+# 「あらららら降参よー」
 says, 'My, my! I concede.'
+# 「道具って切ないわー」
 says, 'Poor sad tools...'
 
 N:1159:Medicine
+# 「ああもう……躰の修復に時間がかかりそう」
 says, 'Aah, geez. Repairing my body will take some time.'
 
 N:1161:Komachi
+# 「きゃん！」
 squeals, 'Kyan!'
 
 N:1226:Reimu
+# 「仕様が無いわね。悪巧みも程ほどにするのよ」
 says, 'So be it. Don't take your wicked scheming too far.'
+# 「今日は声が聞こえなかっただけだもん」
 says, 'I couldn't hear the gods' voices today, that's all.'
+# 「あいたー。落とし穴落下のダメージが今頃」
 says, 'Now I'm starting to feel the pain from the fall down here.'
+# 「あいたたた。」
 says, 'Ow, ow, ow!'
+# 「ようやっと敵を見つけたのに、こんなに出鱈目だなんて…」
 says, 'I finally found the enemy, but it's this absurd?'
+# 「にんげんむきのばしょではない！」
 says, 'This is no place for a human to be!'
+# 「出直すしかなさそう……」
 says, 'I guess I'll have to try again...'
 
-
 N:1227:Marisa
+# 「まぁ負けたんだから仕様が無い。帰って寝る。」
 says, 'Well, I lost, so there's nothing for it. Go home and sleep.'
+# 「負けたか……いつもより頑張ったんだがな」
 says, 'I lost even though I tried harder than usual...'
+# 「うわぁお前強いなぁ。」
 says, 'Uwah, you're really something.'
 
 N:1230:Mamizou
+# 「今日のところはこの位にしておいてやるぞい。」
 says, 'Let's leave it at that for today.'
+# 「降参じゃ！これ以上は明日に響く」
 says, 'I give up! Any more and I'll be feeling it tomorrow.'
 
 N:1267:Sumireko
+# 「やっぱり妖怪は怖かった……」
 says, 'Youkai are scary after all...'
 
 N:1268:Three Fairies
+# 「ぎゃん！(x3)」
 squeals, 'Kyan!' <x3>
 
 N:1273:Seiran
+# 「ぐうう、だから現地部隊は嫌だったのにー」
 says, 'Guuu, this is why I didn't want to be in the ground forces!'
 
 N:1274:Ringo
+# 「ああ、地上にもずいぶんと強い奴がいたもんね」
 says, 'Ahh, so there are some strong people on Earth too.'
 
 N:1275:Doremy
+# 「貴方の悪夢は私が美味しく頂きました」
 says, 'Your nightmares were delicious.'
 
 N:1276:Sagume
+# 「そんなに強いんですもの、貴方ならきっと……」
 says, 'This one is terribly powerful. Perhaps with you...'
 
 N:1277:Clownpiece
+# 「眠いよう、もう帰っていい？」
 says, 'I'm tired, can I go home already?'
+# 「もう力が残ってないや」
 says, 'I've run out of energy.'
 
 N:1297:Yorihime
 N:1298:Toyohime
-gasps, 'Gah...!'
+# 「ぎゃふん」
+gasps in disbelief.
 
 N:1299:Rei'sen
+# 「あの頃が懐かしい..」
 says, 'I miss my old life...'
 
 N:1310:Larva
+# 「こうさーん。」
 says, 'I sub-miiiit.'
+# 「負けたー。あんた、なかなかやるね！」
 says, 'I lose~. You sure are impressive!'
 
 N:1311:Nemuno
+# 「あんた強いな。何者なんだ？」
 says, 'You sure are tough! Who're you?'
+# 「強いやつは嫌いではない。うちに寄っていくか？」
 says, 'I can't not like strong folk! Wanna stop by my place?'
 
 N:1312:Aunn
+# 「負けたー。神社に尽くしてきたのにボコボコにされたー。」
 says, 'I've done my best for the shrine, but I got beaten up.'
+# 「暴力はんたーい。」
 says, 'I hate violence...'
 
 N:1313:Narumi
+# 「あらら、負けちゃった。」
 says, 'Oh my, I've lost.'
 
 N:1314:Satono
+# 「そうねぇ。及第点、かなぁ。」
 says, 'A passing grade, I guess.'
+# 「舐めてかかってたわね。」
 says, 'It seems I underestimated you.'
 
 N:1315:Mai
+# 「これは手強い。予想外だな。」
 says, 'Wow, you're super strong! I didn't expect that!'
+# 「よーし、おめでとう！　ごーかーく！」
 says, 'All right, congratulations! You paaaassed!'
 
 N:1316:Okina
+# 「やられたー！」
 says, 'I've been defeeeated!'
+# 「見事だ！素晴らしすぎる！」
 says, 'Brilliant! Magnificent!'
 
 N:1318:Kosuzu
+# を失神させて絵巻を奪った！
 loses consciousness, and the picture scroll tumbles away!
 
 N:1341:Eika
+# 「ぐぐぐ……強い。」
 says, 'Gugugu... so strong...'
+# 「うう……涙が止まらない。」
 says, 'Uuu... my tears won't stop.'
+# 「しくしくしく……。子供達が楽しみにしていた積み石コンテストが……。」
 bawls, 'The children were looking forward to the stone-stacking contest so much...'
 
 N:1342:Urumi
+# 「良いだろう。お前を河に沈めるのはやめてやる。」
 says, 'Okay. I'll stop trying to drown you.'
 
 N:1343:Kutaka
+# 「お、お見事です。そこまでの覚悟があるのなら、もう止めません。」
 says, 'W-Well done. If you're determined to go on, I won't keep you any longer.'
+# 「私は貴方のことを忘れます。鳥頭ですから。」
 says, 'I'll forget about you, because I'm a bird-brain.'
 
 N:1344:Yachie
+# 「キー！正々堂々じゃなければ有利に戦えるのに！」
 says, 'Ugh! I can't use my full potential in a fair fight!'
 
 N:1345:Mayumi
+# 「つ、強い！　畜生界の人間霊とは訳が違う……！」
 says, 'Such strength! Nothing like the human spirits from the Animal Realm!'
 
 N:1346:Keiki
+# 「私のファインセラミックスは傷つきもしないわ」
 says, 'My fine ceramics won't even be scratched.'
 
 N:1347:Saki
+# 「か、感動した！」
 says, 'Your performance, I'm, I'm moved!'
+# 「く、悔しくなんかない。」
 says, 'I- I regret nothing!'
+# 「どうだ、勁牙組に入って貰えないだろうか？」
 says, 'I wonder if you would consider joining the Keiga family?'
 
 N:1355:Miyoi
+# 「ひゃあ」
 says, 'Hi~yaa'
 
-
 N:1357:Mike
+# 「っく……！」
 sputters, 'Kku...!'
 
 N:1358:Takane
+# 「強すぎる……」
 says, 'Good grief...'
+# 「降参降参！だから降参だってばー！」
 says, 'I surrender, I surrender! I've been saying it all along!'
 
 N:1359:Sannyo
-says, 'Grh, you're too much...'
+# 「ぐ、強すぎる」
+snarls, 'Grh, you're too much...'
+# 「仕方が無い……降参だ」
 says, 'I have no choice... I give up.'
 
-
 N:1360:Misumaru
+# 「お見事！」
 says, 'Spectacular!'
+# 「やるじゃない」
 says, 'Not half bad.'
 
 N:1361:Tsukasa
+# 「ふにゅー」
 says, 'Funyuu~'
 
 N:1362:Megumu
+# 「ふっふっふ　お見事」
 says, 'Hehehe, splendid.'
+# 「強くて勇気のある者は好きです」
 says, 'I'm fond of those who are brave and powerful.'
 
 N:1364:Momoyo
+# 「思う存分弾幕を撃たせてくれてありがとう！」
 says, 'Thanks for letting me shoot all the danmaku I wanted!'
+# 「いつでも盗掘しに来い！」
 says, 'Come back and rob me any time!'
+# 「また勝負しようじゃないか！」
 says, 'Let's have a rematch!'
 
-
 N:1366:Yuuma
+# 「今回は負けを認めよう」
 says, 'I'll admit my loss this time.'
 
 N:1385:Enoko
+# 「つ、強い」
 says, 'Str... strong...'
 
 N:1386:Biten
-says, 'That was fun! Let's have a rematch!'
+# 「楽しかったよ！もう一戦しようよ」
+says, 'That was fun! Let's fight again!'
 
 N:1387:Chiyari
+# 「降参降参」
 says, 'I give, I give!'
 
 N:1388:Hisami
+# 「ああー強くて素敵だわー」
 says, 'Ahh, beautiful power.'
 
 N:*:Default lines

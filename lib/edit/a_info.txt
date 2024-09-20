@@ -4130,7 +4130,7 @@ P:0:1d1:0:0:25
 F:STR | CON
 F:RES_FIRE | RES_COLD | RES_ELEC | RES_POIS | RES_ACID | 
 F:RES_CONF | RES_BLIND | RES_FEAR | FREE_ACT
-D:$This headband embodies the indomitable spirit of the legendary biker boss.
+D:$This headband embodies the indomitable spirit of a legendary biker boss.
 D:$Inexplicably, they'll sometimes wash up in Gensoukyou in groups.
 D:伝説の総長の不屈の闘志が込められたハチマキだ。
 D:なぜか時々数本まとめて幻想郷に流れ着く。
@@ -5252,7 +5252,7 @@ W:25:50:30:80000
 P:0:3d4:18:18:0
 F:STR | DEX | CON | CHR | SPEED | RES_POIS | RES_FEAR | FREE_ACT
 F:KILL_KWAI | SLAY_KWAI | SLAY_HUMAN | VORPAL | BLESSED | SUST_STR
-D:$A sword of great reknown that has been called many different names by the Seiwa Genji clan.
+D:$A sword of great renown that has been called many different names by the Seiwa Genji clan.
 D:$It was originally called 'Hizakirimaru'.                                              
 D:$When Yorimitsu used it to slay a tsuchigumo, he named it 'Kumokirimaru'.                                               
 D:$When Tameyoshi heard it sound like a snake in the night, he named it 'Hoemaru'.                                           
@@ -5470,7 +5470,7 @@ P:0:4d8:20:20:0
 F:STR | WIS | VORPAL | SHOW_MODS | SLAY_UNDEAD | SLAY_ANIMAL
 F:FREE_ACT | INFRA | RES_FEAR | RES_CONF | RES_CHAOS | QUESTITEM
 F:ACTIVATE | LITE | WARNING
-D:$The sculptor god Haniyasukami-uchigi-hime created this sword specially for the commander of the Haniwa Army Corps.
+D:$The sculptor god Keiki Haniyasushin created this sword specially for the commander of the Haniwa Army Corps.
 D:造形神『埴安神 袿姫』が埴輪兵団の兵長のために創り出した特別製の剣だ。
 U:SUMMON_HANIWA
 
@@ -5485,7 +5485,7 @@ F:INT | DEX | CHR | DISARM
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS | RES_WATER | RES_NETHER
 F:ACTIVATE | QUESTITEM
 U:ULTIMATE_RESIST
-D:$An apron hand-made by the sculptor god Haniyasukami-uchigi-hime.
+D:$An apron hand-made by the sculptor god Keiki Haniyasushin.
 D:$It's woven with special ceramic fibers. Mundane attacks won't even leave a scratch.
 D:造形神『埴安神 袿姫』手製のエプロンだ。
 D:特殊セラミックファイバーが織り込まれており並大抵の攻撃では傷一つつかない。

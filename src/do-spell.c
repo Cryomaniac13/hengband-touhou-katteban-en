@@ -18400,7 +18400,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (name) return "怨霊憑依";
 		if (desc) return "モンスター一体に怨霊を憑依させ、高確率で狂戦士化させる。抵抗されると無効。妖怪に効きやすいが通常の精神を持たないモンスターには効かない。";
 #else
-		if (name) return "Vengeful Spirit Possession";
+		if (name) return "Incite Possession";
 		if (desc) return "Makes a single monster possessed a vengeful spirit, making it berserk with a high probability rate. Does nothing if resisted. Works well against youkai, but does not affect monsters with unusual mind.";
 #endif
 
@@ -20097,7 +20097,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 
 		if (desc) return "一定時間回復力が強化され、さらに毒に対する耐性を得る。";
 #else
-		if (name) return "Transform Circulatory Organs";
+		if (name) return "Transform Vascular System";
 		if (desc) return "Grants temporary regeneration and resistance to poison.";
 #endif
 
@@ -24463,8 +24463,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "天石門別命降臨";
 		if (desc) return "天石門別命(あまのいわとわけのみこと)をその身に降ろし、周囲全ての地形、アイテム、モンスターを消失させる。";
 #else
-		if (name) return "Descent of Ama-no-Iwato-Wake-no-Mikoto";
-		if (desc) return "Become possessed by Ama-no-Iwato-Wake-no-Mikoto; wipes away all terrain, items and monsters in your vicinity.";
+		if (name) return "Ama-no-Iwatowake";
+		if (desc) return "Become possessed by Ama-no-Iwatowake-no-Mikoto; wipes away all terrain, items and monsters in your vicinity.";
 #endif
 		{
 			int rad = 3 + plev / 4;
@@ -24483,7 +24483,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "石凝姥命降臨";
 		if (desc) return "石凝姥命(いしこりどめのみこと)をその身に降ろす。一定時間、閃光攻撃に対する完全な免疫と反射能力を得る。";
 #else
-		if (name) return "Descent of Ishikori-dome-no-Mikoto";
+		if (name) return "Ishikori-dome";
 		if (desc) return "Become possessed by Ishikori-dome-no-Mikoto. Grants temporary immunity to light and reflection.";
 #endif
 
@@ -24504,8 +24504,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "飯綱権現降臨";
 		if (desc) return "飯綱権現(いづなごんげん)をその身に降ろす。一定時間、直接攻撃によって混沌の勢力のモンスターに大きなダメージを与えられるようになる。";
 #else
-		if (name) return "Descent of Izuna-Gongen";
-		if (desc) return "Become possessed by Izuna-Gongen. Temporarily makes your melee attacks deal extra damage to chaotically aligned monsters.";
+		if (name) return "Izuna Gongen";
+		if (desc) return "Become possessed by Izuna Gongen. Temporarily makes your melee attacks deal extra damage to chaotically aligned monsters.";
 #endif
 
 		{
@@ -24515,14 +24515,14 @@ static cptr do_new_spell_punish(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print(_("飯縄権現の護法の力が身に宿った！", "The power of Izuna-Gongen resides in your body!"));
+				msg_print(_("飯縄権現の護法の力が身に宿った！", "The power of Izuna Gongen resides in your body!"));
 				set_kamioroshi(KAMIOROSHI_IZUNA, randint1(base) + base);
 			}
 		}
 		break;
 
 	case 27:
-		if (name) return _("伊豆能売降臨", "Descent of Izunome");
+		if (name) return _("伊豆能売降臨", "Izunome");
 		if (desc) return _("伊豆能売(いづのめ)をその身に降ろし、視界内全てに対して強力な破邪属性攻撃を行い、さらに呪われた装備を解呪する。",
                             "Become possessed by Izunome; hits everything in sight with a powerful holy attack, and removes curses from your equipment.");
 		{
@@ -24550,7 +24550,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "住吉三神降臨";
 		if (desc) return "上筒男命（うわつつのおのみこと）、中筒男命（なかつつのおのみこと）、底筒男命（そこつつのおのみこと）をその身に降ろす。一定時間、加速、高速移動能力、水耐性、時空攻撃耐性、警告を得る。";
 #else
-		if (name) return "Descent of Sumiyoshi Sanjin";
+		if (name) return "Sumiyoshi Sanjin";
 		if (desc) return "Become possessed by Uwatsutsu-no-O-no-Mikoto, Nakatsutsu-no-O-no-Mikoto and Sokotsutsu-no-O-no-Mikoto. Grants temporary haste, swift movement, resistance to water and time, and warning.";
 #endif
 
@@ -24573,8 +24573,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "愛宕権現降臨";
 		if (desc) return "愛宕権現（あたごごんげん）をその身に降ろす。一定時間、炎に対する完全な免疫と強力な火炎のオーラを得て火炎属性攻撃ができるようになる。";
 #else
-		if (name) return "Descent of Atago-Gongen";
-		if (desc) return "Become possessed by Atago-Gongen. Grants temporary immunity to fire, strong fire aura and ability to use fire attacks.";
+		if (name) return "Atago Gongen";
+		if (desc) return "Become possessed by Atago Gongen. Grants temporary immunity to fire, strong fire aura and ability to use fire attacks.";
 #endif
 
 		{
@@ -24584,7 +24584,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print(_("愛宕様の神火が身に宿った！", "Divine flame of Atago-Gongen resides in your body!"));
+				msg_print(_("愛宕様の神火が身に宿った！", "Divine flame of Atago Gongen resides in your body!"));
 				set_kamioroshi(KAMIOROSHI_ATAGO, randint1(base) + base);
 			}
 		}
@@ -24595,7 +24595,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "天宇受売命降臨";
 		if (desc) return "天宇受売命（あめのうずめのみこと）をその身に降ろす。一定時間、暗黒・地獄・地獄の業火属性の攻撃への耐性、AC上昇、魔法防御上昇、魅力大幅上昇を得る。";
 #else
-		if (name) return "Descent of Ame-no-Uzume-no-Mikoto";
+		if (name) return "Ame-no-Uzume";
 		if (desc) return "Become possessed by Ame-no-Uzume-no-Mikoto. Grants temporary resistance to darkness, nether and hellfire, raises AC and protection from magic, and greatly raises charisma.";
 #endif
 
@@ -24614,7 +24614,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 
 
 	case 31:
-		if (name) return _("天照大御神降臨", "Descent of Amaterasu Oomikami");
+		if (name) return _("天照大御神降臨", "Amaterasu Oomikami");
 		if (desc) return _("天照大御神(あまてらすおおみかみ)をその身に降ろし、周囲の敵に大打撃を与える。自分の近くにいるモンスターほど効果が大きい。天宇受売命を降ろしているときに使うとさらに効果が増す。",
                             "Become possessed by Amaterasu Oomikami. Delivers severe damage to enemies in your vicinity; deals more damage to nearby monsters. Even more effective if used while being possessed by Ame-no-Uzume-no-Mikoto.");
 		{
@@ -25410,7 +25410,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 		break;
 
 	case 17:
-		if (name) return _("人体発火現象", "Spontaneous Human Combustion");
+		if (name) return _("人体発火現象", "Spontan. Human Combustion");
 		if (desc) return _("周囲のランダムな生物一体の場所に強力なプラズマ属性の球が発生する。",
                             "Generates a powerful ball of plasma on top of a random nearby living being.");
 		{
