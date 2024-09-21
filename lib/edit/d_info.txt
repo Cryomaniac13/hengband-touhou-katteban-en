@@ -232,6 +232,7 @@ F:FINAL_OBJECT_575
 
 N:15:“ø—´“´
 E:Kouryuudou
+D:$the Rainbow Dragon Cave
 D:“ø—´“´
 P:4:39
 W:30:65:10:3:18:80:80:25:0x0000:0x0000

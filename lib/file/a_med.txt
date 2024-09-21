@@ -10,6 +10,7 @@ N: 1:BIAS_ELEC
 #『ラバー・コート』
 'Rubber Coat'
 #猛き雷神の
+of the Fierce Thunder God
 #ヘルダイバーの
 of Helldiver
 #フィンゴン王の
@@ -265,7 +266,7 @@ N: 7:BIAS_INT
 #『賢者の知見』
 'Magi's Seeing'
 #『知恵の木の実』
-'Fruit of the Tree of Knowledge'
+'Fruit of the Tree of Wisdom'
 #『思金神の閃き』
 'Omoikane's Insight'
 #道士徐福の
