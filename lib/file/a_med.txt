@@ -1,173 +1,413 @@
 N: 1:BIAS_ELEC
-'Registor'
-'Rubber Coat'
+#『嵐雲招雷』
+'Storm Clouds'
+#『百万ボルト』
 'One Million Volt'
+#『レジスター』
+'Registor'
+#『エレクトロン』
 'Electron'
-'Call of Thundercloud'
-of R'lyeh
-of Thunder
+#『ラバー・コート』
+'Rubber Coat'
+#猛き雷神の
+#ヘルダイバーの
 of Helldiver
+#フィンゴン王の
+of Fingon
+#海底都市ルルイエの
+of R'lyeh
+#『黒い海に紅く』
+'Crimson in the Black Sea'
+#『サタデーナイトフィーバー』
+'Saturday Night Fever'
 
 N: 2:BIAS_POIS
+#『薬師の壷』
+'Medicine Pot'
+#『大黄牡丹』
+#『補中益気』
+'Bu Zhong Yi Qi'
+#『白虎加人参』
+#『蠍座の聖衣』
+'Scorpio Robe'
+#『烏柩沙摩明王』
+'Ucchusma'
+#『仏母大孔雀明王』
+'Mahamayuri'
+#『ポイズン・バリア』
 'Poison Barrier'
-of Scorpio
-of Cleanness
+#免疫の
 of Immunity
+#コボルド王ムガッシュの
 of Mughash
-of the Snake Master
-of the Bee Master
+#『リジッドパラダイス』
+'Rigid Paradise'
+#『ポイズンボディ』
+'Poison Body'
 
 N: 3:BIAS_FIRE
-'Blessed Fusion'
+#『祝融』
+'Zhurong'
+#『炎返し』
 'Flameturner'
+#『赤い太陽』
 'Red Sun'
+#『砂漠の狐』
+'Desert Fox'
+#『熱帯雨林』
+'Tropical Rainforest'
+#『陽炎の翼』
 'Shimmering Wings'
+#『灼熱の獅子』
 'Lion in Flame'
+#『サラマンダー』
 'Salamander'
+#『フレイム・コート』
 'Flamecoat'
-of Libyan Desert
-of Tropics
-of Desert
+#灼熱の地サハラの
+of Sahara
+#悪魔ルンゴルシンの
 of Lungorthin
+#明治十七年の
+of Meiji 17
+#煙々羅の
+of the Enenra
 
 N: 4:BIAS_COLD
+#『氷姫』
 'Icy Princess'
+#『白雪』
 'White Snow'
+#『白氷』
+'White Ice'
+#『大氷原』
 'Great Icefield'
+#『銀世界』
+'Snowy World'
+#『怒涛の鮫』
+'Surging Shark'
+#モランの
+#オーロラの
+of Aurora
+#トゥアゴン王の
+of Turgon
+#極寒の地シベリアの
 of Siberia
-of White Ice
-of Arctic Ocean
-of Antarctic Land
+#『嵐の中の不協和音』
+'Dissonance Within the Storm'
+#『ノーザンウイナー』
+'Northern Winner'
+#『駒草咲くパーペチュアルスノー』
+'Perpetual Snow of Komakusa'
 
 N: 5:BIAS_ACID
-'Gelatinous Cube'
-'Skin of Dhole'
-'Shield of Water'
-'Oozearmor'
+#『王水』
 of Aqua Regia
-of the Devine Jewel
+#『守護宝玉』
+'Guardian Jewel'
+#『ドールの皮膚』
+'Skin of Dhole'
+#『ウーズ・アーマー』
+'Oozearmor'
+#『ゼラチン・キューブ』
+'Gelatinous Cube'
+#水鏡の
+of Reflecting Water
+#ダイヤモンドの
 of Diamond
+#黒髪のカランシアの
+of Caranthir
+#『惨憺たる大海原』
+'Miserable Depths of the Ocean'
+#筒川大明神の
+#『ジェリーストーン』
+'Jelly Stone'
 
 N:12:BIAS_CHAOS
-'Day of the Dove'
-'Prince of Chaos'
-'Chaos Tile'
-'Sad Giant's Shield'
-'Ever-Faithful'
+#『凪の時』
+'Time of Calm'
+#『法の番人』
 'Guard of Law'
+#『カオス・タイル』
+'Chaos Tile'
+#『秩序を乱す者』
+'Disruptor of Order'
+#『理性の導き手』
+'Guide of Reason'
+#『カオス・プリンス』
+'Prince of Chaos'
+#調和の
 of Harmony
-of Reason
+#セルダンの
 of Seldon
+#混世魔王の
 of the Chaos Lord
+#『狂気の瞳』
+'Lunatic Eyes'
+#『カゴメカゴメ』
+'Kagome-Lagome'
+#『星条旗のピエロ』
+'Star-Spangled Pierrot'
 
 N:14:BIAS_NECROMANTIC
-'Hand of Vecna'
-'Total Eclipse'
+#『深淵の底』
 'The Depth of Abyss'
+#『漆黒の烏』
 'Jet-black Bird'
-'Necrologia'
+#『皆既日食』
 'Total Solar Eclipse'
+#『ベクナの手』
+'Hand of Vecna'
+#『死より得るもの』
+'Necrologia'
+#『アンダーテイカー』
 'Undertaker'
-of Rituals
+#ワラキア公の
 of the Ruler of Wallachia
+#魔女モルガンの
+#骸骨王カントラスの
+of Cantoras
+#死せる神ダルニザーンの
+of Darnizhaan
+#暗きものの王ヴォルーンの
+#『古きユアンシェン』
+'Old Yuanxian'
+#『幽冥の鬼神』
+'Demon God of Netherworld'
+#『ビハインドユー』
+'Behind You'
+#『ロストリバー』
+'Lost River'
 
-N:15:BIAS_LAW
+#N:15:BIAS_LAW
 N:13:BIAS_PRIESTLY
 N: 8:BIAS_WIS
-'Enlightenment from Heven'
+#『天啓』
+'Enlightenment from Heaven'
+#『聖唱歌』
 'Holy Chant'
+#『聖祈言』
 'Holy Prayer'
-'Righteousness'
-'Gospel'
-'Guardian Angel'
-'Hope and Glory'
-'AEther Flash'
-'Parament of Holy Brume'
-'Holy Destiny'
-'Keeper of Light'
-'Righteous Aura'
-'Nuts of Wisdom'
-of Eden
+#『信仰心』
 of Piety
+#『ゴスペル』
+'Gospel'
+#『守護天使』
+'Guardian Angel'
+#『天上の光』
+'Heavenly Light'
+#『希望と栄光』
+'Hope and Glory'
+#『聖霧の法衣』
+'Parament of Holy Brume'
+#『聖なる宿命』
+'Holy Destiny'
+#『光の守り手』
+'Keeper of Light'
+#『ライタス・オーラ』
+'Righteous Aura'
+#敬虔な信者の
 of the Pious Believer
-of Ceremony
-of Revelation
-of Rite
+#祝福の地エデンの
+of Eden
+#風祝の
+of the Wind Priestess
+#仙台四郎の
+of Shirou Sendai
+#守護神獣の
+of the Guardian Beast
+#『即席菩提』
+'Instant Bodhi'
+#『不朽の曼珠沙華』
+'Everlasting Red Spider Lily'
 
 N:16:BIAS_ROGUE
 N: 9:BIAS_DEX
-'Silentwalker'
-'Mercury'
-'Darknesslurker'
+#『影』
 'Shadow'
-'Phantom'
+#『空蝉』
+'Utsusemi'
+#『忍び足』
+'Silentwalker'
+#『雲隠れ』
+'Hidden in Clouds'
+#『妖精の翅』
+'Fairy Wings'
+#『闇の護り手』
 'Keeper of Darkness'
+#『闇に棲む者』
+'Darknesslurker'
+#『窖に潜む者』
 'Crypt Creep'
-'Smoke Ball'
-of Nevrast
-of Quietness
-of the Ninja
-of Phasing
-of the Fairy
+#『マーキュリー』
+'Mercury'
+#宵闇の
+of Dusk
+#バギンズ家の
+of Baggins
+#冥界ニブルヘイムの
+of Niflheimr
+#お宇佐さまの素い
+#恋色
+of the Color of Love
+#『手長足長』
+'Long-Arm and Long-Leg'
 
 N:17:BIAS_MAGE
 N: 7:BIAS_INT
-'Magi's Seeing'
-'Sign of Brilliance'
+#『知性の証』
+'Proof of Intelligence'
+#『知識の書』
 'Tome of Intelligence'
-of *intelligence*
-of the Wizard
-of Knowledge
-of the Spellcaster
-of Arcane
-of Martin
+#『コンラの泉』
+#『薔薇の女王』
+'Queen of Roses'
+#『賢者の知見』
+'Magi's Seeing'
+#『知恵の木の実』
+'Fruit of the Tree of Knowledge'
+#『思金神の閃き』
+'Omoikane's Insight'
+#道士徐福の
+#ヴォルデモード卿の
+of Lord Voldemort
+#『ラクトガール』
+'Locked Girl'
+#宮負定雄の
+of Yasuo Miyaoi
+#アガサクリスＱの
+of Agatha Chris Q
+#『ルーシッドドリーマー』
+'Lucid Dreamer'
 
 N:18:BIAS_WARRIOR
 N: 6:BIAS_STR
+#『鋼の猛牛』
 'Steel Bull'
+#『力の化身』
 'Avatar of Might'
-'Terminater'
+#『ダイ・ハード』
 'Die Hard'
-'Power Shield'
-'Power Matrix'
+#『ターミネーター』
+'Terminater'
+#『フォース・シールド』
+'Force Shield'
+#『ストーン・コールド』
 'Stonecold'
-of Vader
-of the Valkyrie
-of Daybreak
-of Diamond
+#『パワー・マトリクス』
+'Power Matrix'
+#皇帝戦士の
+of the Warrior Emperor
+#第六天魔王の
+of Dairokuten-Maou
+#悲しき巨人の
 of Sad Giant
+#戦神バルキリーの
+of the Valkyrie
+#明治十七年の
+of Meiji 17
+#守り守られし
+'Guarding and Being Guarded'
 
 N:19:BIAS_RANGER
 N:10:BIAS_CON
-'Hound'
-'Red Belet'
-'Bear's Hand'
+#『春眠』
 'Springsleeper'
-'Life of Leaf'
-of Hyper Nature
-of the Hunter
+#『青葉』
+'Green Leaves'
+#『桜嵐』
+'Cherry Blossom Storm'
+#『橘花』
+'Tachibana'
+#『紫陽花』
+'Hydrangea'
+#『閃烈の銀狼』
+'Sparkling Wolf'
+#『孤高の荒鷲』
+'Noble Eagle'
+#『レッド・ベレー』
+'Red Beret'
+#『ヴァーナル・ブルーム』
+'Vernal Bloom'
+#杜の護りの
+of Sylvan Protection
+#森の王シルヴァンの
+of Sylvain
+#常春の都マリネラの
 of Marinera
+#虎柄の
+of Tiger Stripes
+#『メタフィジカルマインド』
+'Metaphysical Mind'
 
 N:11:BIAS_CHR
-'Snow White'
+#『乙女の願い』
 'Maiden's Hope'
-'Undiscoverd Paradise'
-'Kiss of Saccubus'
+#『秘密の花園』
+'Undiscovered Paradise'
+#『麗しの白虎』
+'Belle Tiger'
+#『サキュバスの接吻』
+'Kiss of Succubus'
+#弁才天の
+of Benzaiten
+#白雪姫の
+of Snow White
+#シンデレラの
 of Cinderella
-of Benten
+#白きアレゼルの
+of Aredhel
+#湖の姫ニミュエの
 of Nimue
+#『ハートフェルトファンシー』
+'Heartfelt Fancy'
+#冴月麟の
+of Rin Satsuki
+#『一対の神獣』
+'Pair of Divine Beasts'
+#織姫の
+of Zhinu
+#彦星の
+of Hikoboshi
 
 N:*:Default
-'Dal-i-Thalion'
-'Guardian'
-'Defender'
+#プラチナイェンダー印
+(Platinum Yendorian)
+#『鉄肌』
 'Steelskin'
+#『黒虎』
+'Black Tiger'
+#『霧雨』
+'Drizzle'
+#『残月』
+'Waning Crescent'
+#『彩雲』
+'Iridescent Clouds'
+#『陽炎』
+'Heat Haze'
+#『ガーディアン』
+'Guardian'
+#『キャメロット』
 'Camelot'
-of Champion
-of Crystal
-of Icarus
-of the Dark Tiger
-of Kevlar
+#『ディフェンダー』
+'Defender'
+#ラーの
+of Ra
+#ボーグの
 of the Borg
-of Gondor
+#イカルスの
+of Icarus
+#ケヴラーの
+of Kevlar
+#クリスタルの
+of Crystal
+#ベレゲノンの
 of Belegennon
+#チャンピオンの
+of Champion
+#ゴンドール王国の
+of Gondor
+#ハクタクの
+of the Hakutaku
+#『永遠の春夢』
+'Eternal Spring Dream'

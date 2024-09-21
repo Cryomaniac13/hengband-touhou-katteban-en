@@ -413,7 +413,7 @@ N:*:Default
 #『バトル・フォース』
 'Battle Force'
 #『ダル=イ=サリオン』
-'Dal-i-thalion'
+'Dal-i-Thalion'
 #帝国の
 of the Empire
 #創造主達の
