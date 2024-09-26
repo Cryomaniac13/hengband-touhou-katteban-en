@@ -2721,14 +2721,14 @@ D:$iron.
 D:サバトンとも呼ばれる、重くて丈夫な鉄製のブーツだ。
 
 N:246:ドラゴン皮の靴
-E:& Pair~ of Dragonskin Boots
+E:& Pair~ of Dragonhide Boots
 G:]:G
 I:46:8:0
 W:60:0:30:10000
 A:60/5
 P:5:1d3:0:0:10
 F:IGNORE_ACID | IGNORE_FIRE | IGNORE_ELEC | IGNORE_COLD
-D:$Boots made from dragon skin with powerful defensive powers.
+D:$Boots made from dragon hide with powerful defensive powers.
 D:竜の皮を加工して作ったブーツだ。強力な防御効果を持つ。
 
 
