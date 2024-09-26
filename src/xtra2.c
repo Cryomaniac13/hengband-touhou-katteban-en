@@ -8791,14 +8791,14 @@ void gain_maid_reward(void)
 	else if(type < 70)
 	{
 		msg_print(_("主が誰かに宛てたらしい恋文が誤配されてきた。",
-                    "Looks like it's a misdelivering love letter from your master addressed to someone else."));
+                    "Looks like it's a misdelivered love letter from your master addressed to someone else."));
 		msg_print(_("あなたは忠誠心を発揮して見なかったことにした。",
                     "You show your loyalty by pretending not to see it."));
 	}
 	else if(type < 73)
 	{
 		msg_print(_("酔っ払っているとしか思えない筆跡で前衛的なポエムが書かれている。",
-                    "It's some avant-gard poem in clearly drunk handwriting."));
+                    "It's some avant-garde poem written in clearly drunk handwriting."));
 		msg_print(_("あなたは忠誠心を発揮して見なかったことにした。",
                     "You show your loyalty by pretending not to see it."));
 	}
