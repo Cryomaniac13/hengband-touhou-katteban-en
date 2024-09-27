@@ -2187,7 +2187,7 @@ const deity_type deity_table[MAX_DEITY_TABLE_ENTRY]={
 
 	//低秩序　中好戦　中名声
 	//魔法難度低下
-	{2,_("乱数の神様", "Random Number God"),
+	{2,_("乱数の神様", "RandomNumber God"),
 	0,128,128,
 	{0,0,0,0,0,0},10,10,20,0,10,0,0,0},
 
