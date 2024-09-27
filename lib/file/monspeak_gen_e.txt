@@ -1,4 +1,1799 @@
 #monspeak for Gensoukyou uniques
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
+
+N:1089:Rumia
+# 「そーなのかー」
+says, 'Is that so?'
+# はふよふよと飛んでいる。
+hovers softly in the air.
+
+N:1090:Cirno
+# 「目の前に強敵がいるのよ？」
+says, 'Don't you see the formidable foe in front of you?'
+# 「あんたなんて、英吉利牛と一緒に冷凍保存してやるわ！！」
+says, 'I'll deep-freeze you along with some English beef!!'
+# 「楽勝、楽勝、泰河勝！さあ、勝負だ！」
+says, 'Piece of cake, piece of cake, Tower of Pisa cake! Now let's go!'
+# 「妖精の未来はあたいが創る！」
+says, 'I will create the future of fairies!'
+# 「やるきだな！　いつでもかかってこい！」
+says, 'You wanna fight!? Bring it on whenever you want!'
+
+N:1091:Meiling
+# 「ふふふ。私には全て判っている。お前は太歳星君が差し向けた妖怪だ！」
+says, 'Hehehe. I already understand everything. You're a youkai sent by Taisui Xingjun!'
+# 「あ、さっきはどうも」
+says, 'Ah, thank you for earlier.'
+# 「うーん、変な奴と会っちゃったなぁ。」
+says, 'Hmm, I've run into a weirdo.'
+# 「少々出来るようだが、私の力には及ばないね！」
+says, 'You have a little strength, but it's no match for mine!'
+# は太極拳の構えをとった。
+takes up a tai chi stance.
+
+N:1092:Patchouli
+# 「えぇーと、目の前のを消極的にやっつけるには……」
+looks in a book and says, 'Let's see, how to defeat what's in front of me without effort...'
+# 「えぇーと、簡単に素材のアクを取り除く調理法は……」
+looks in a book and says, 'Let's see, how to easily remove the causticity from the ingredient...'
+# 「とっておきの魔法。見せてあげるわ！」
+says, 'I'll show you my ace magic!'
+# 「……またネズミがいるようね。」
+says '...looks like there's another rat.'
+# 「ちゃんと準備してきてあるんだから。貴方に勝つには……ウナギ。」
+looks in a book and says, 'I'm well-prepared. To defeat you... use eel.'
+# 「ちゃんと準備してきてあるんだから。貴方に勝つには……ゴーヤ。」
+looks in a book and says, 'I'm well-prepared. To defeat you... use bitter melons.'
+# 「ちゃんと準備してきてあるんだから。貴方に勝つには……高麗人参。」
+looks in a book and says, 'I'm well-prepared. To defeat you... use ginseng.'
+# は咳き込んでいる。
+erupts into a coughing fit.
+
+N:1093:Sakuya
+# 「怪しいわ。あなた」
+says, 'Something's suspicious. You.'
+# 「あー、お掃除が進まない！お嬢様に怒られるじゃない！！」
+says, 'Ah, the cleaning isn't getting anywhere! The Mistress will be angry with me!!'
+# 「このナイフの錆びにしてあげましょう」
+says, 'Let's make this knife rust.'
+# 「よし、敵だわ！そろそろナイフが乾く頃合いでしたわ」
+says, 'Great, an enemy! My knife was starting to get dry.'
+# 「貴方も何か悩んでいるようですが、貴方にはお仕置きが必要ですので……」
+says, 'It seems you have your own worries, but you still need to be punished...'
+# は瞬時に消えた…と思ったらまた元の場所に現れた。
+vanishes for a moment, then reappears in the same spot.
+
+N:1094:Remilia
+# 「君は何故こんな事をしたのかね」
+says, 'Why did you do such a thing?'
+# 「無駄無駄無駄ぁ。」
+says, 'Futile, futile, futile.'
+# 「咲夜ー。もっとちゃんと犯人を選んでよー！」
+says, 'Sakuyaaa, please choose the suspects more carefully!'
+# 「……咲夜ー。家の中に変な人が居るよー」
+says, '...Sakuyaaa, there's a weird person in the mansion!'
+# 「たーべちゃうぞー！」
+hisses, 'L~e~t's eat!'
+# は愉しげにステップを踏んでいる。
+treads with enthusiasm.
+
+N:1095:Flandre
+# 「あなたが、コンティニュー出来ないのさ！」
+says, 'You can't use a continue!'
+# 「一緒に遊んでくれるのかしら？」
+says, 'Will you play with me?'
+# 「きゅっとしてドカーンね」
+says, 'I go "squeeze" and it goes "boom".'
+# は何かを口ずさんでいる・・
+is humming a tune...
+# はニヤニヤ笑いながら手を握ったり開いたりしている...
+grins and open and closes her fist...
+# 「紅魔館でこんな強い悪意を感じたのは久しぶりだよ」
+says, 'It's been a while since I've felt such powerful malice inside the mansion.'
+# 「やっぱりただのポンコツね」
+says, 'You're just ordinary useless junk after all.'
+# 「よーし、久々に暴れられるわー！」
+says, 'All right! I get to run wild for the first time in ages!'
+# 「躱すな！死ねい！」
+says, 'Don't dodge! Die!'
+# 「ただ破壊しがたい物を破壊したいだけ」
+says, 'I just want to destroy the indestructible.'
+# 「私は全てをぶち壊す破壊神だ！」
+says, 'I'm a god of destruction who's going to destroy everything!'
+# 「さあ行くよ！」
+says, 'Here I come!'
+
+N:1096:Letty
+# 「くろまく～」
+hums, 'Pulling strings, what fun~!'
+# 「私が眠らせてあげるわ。安らかな春眠。」
+says, 'I'll help you to sleep. A peaceful deep sleep.'
+# 「なんだか今年は調子が良いわ～」
+says, 'Somehow this year has been wonderful~'
+
+N:1097:Chen
+# 「ここに迷い込んだら最後！」
+says, 'Straying into here is the end!'
+# 「おかしいと思ったら人に聞く！」
+says, 'If you think it's strange, ask someone!'
+# は素早く駆け回っている。
+zooms around.
+
+N:1098:Alice
+# 「あー。こんな所に珍しい顔ね。」
+says, 'Ah. An unusual sight somewhere like this.'
+# 「弾幕はブレイン。常識よ」
+says, 'Danmaku is about brains. That's common sense.'
+# 「……どのみち、貴方はコテンパンにしないといけないようね」
+says, '...in any case, it wouldn't do if you weren't beaten to a pulp.'
+# の周囲の人形が威圧的に刃を向けた。
+assembles dolls about her, and they point their weapons threateningly.
+
+N:1099:Lunasa
+# 「宴にはまだ速い」
+says, 'You are early for the banquet.'
+# 「雑音は、始末するまで」
+says, 'Unwanted noise, go away.'
+# 「あなたは食料役」
+says, 'You're attending as the food.'
+# 「本当に優れた音楽は騒音と変わらないのよ」
+says, 'Excellent music is no different from noise.'
+
+N:1100:Merlin
+# 「まぁ、プチ宴会にはなるかな？」
+says, 'I guess it'll be a mini banquet?'
+# 「私の演奏を聴いて、無事だった食料は無いわ」
+says, 'No dish has escaped my performance alive!'
+# 「私の音は感情の音、トランペットのぐるぐるは感情の増幅器なのよ」
+says, 'My sounds are the sounds of emotion, and my trumpet's dizziness the amplifier!'
+
+N:1101:Lyrica
+# 「さあ演奏開始よ～　姉さん、やっちゃいな！」
+says, 'Well, let's start playing~. Sisters, go ahead!'
+# 「いぬにく、いぬにく～」
+chants, 'Dog meat, dog meat~'
+# 「私の音は幻想の音、あの世の音。」
+says, 'My sound is the sound of fantasy, of the world beyond.'
+
+N:1102:Youmu
+# 「妖怪が鍛えたこの楼観剣に斬れぬものなど、あんまり無い！ 」
+says, 'The things that my youkai-forged Roukanken cannot cut are next to none!'
+# 「さぁ、斬られる前か潰される前に、どこに行けば良いのか言いなさい！」
+says, 'Now, before you are chopped or mashed, tell me which way I should be going!'
+# 「この異変は、お前がやったのだろう？そうなら斬る。違うのなら斬って先に進む」
+says, 'Are you responsible for this incident? If so, I'll slash you. If not, I'll slash you and move on.'
+# 「取り敢えず、斬りに来た。話はそれからだ」
+says, 'For now, I'm here to slash you. That's my story.'
+
+N:1103:Yuyuko
+# 「一瞬も全て。全ても一瞬。あなたと遊んでいる時間も必然よ」
+says, 'An instant is everything. Everything is an instant. It's inevitable that I spend time playing with you.'
+# 「私を倒してみせなさい！」
+says, 'Show me that you can defeat me!'
+# は指をくるくる回している。
+twirls her fingers around and around.
+
+N:1104:Ran
+# 「目どころか、色々当てられない状態にしてやるよ」
+says, 'I will make you not only unbearable to look at but incapable of much at all.'
+# 「私は橙とは桁が違くてよ、色々と」
+says, 'I am orders of magnitude different from Chen.'
+# 「紫様が作った方程式は私の力を無敵の物に変える。」
+says, 'Lady Yukari's equations will increase my power indefinitely.'
+# 「…私が貴方を式神にしてあげようか？」
+says, '...do you want to become my shikigami?'
+# 「よい心がけね。早死にできるわよ」
+says, 'What a good attitude. You'll die early.'
+# 「ま、別に良いですけど」
+says, 'Ah, whatever.'
+
+N:1105:Yukari
+# 「どうも、うちの藍が迷惑をかけたようで」
+says, 'It appears my Ran has caused some nuisance for you.'
+# 「永遠にお休みなさい」
+says, 'Sleep for all eternity.'
+# 「何でそんなにカリカリしてるのかしら？」
+says, 'Why do you look so annoyed? Are you lacking calcium?'
+# 「あなたは気がついていない。極楽と地獄の境界が曖昧になっている事に」
+says, 'You don't yet know. The border between paradise and hell is becoming ambiguous.'
+# 「あなたは気がついていない。すでに、昼と夜の境界は私の手の内にあることに」
+says, 'You don't yet know. The border between day and night is already in the palm of my hand.'
+# 「ちょいとお時間良いかしら？」
+says, 'May I borrow a little of your time?'
+# 「その優しい火が～♪命取られて消えていく～♪」
+croons, 'That gentle flame~, it takes your life and disappears~'
+
+N:1106:Wriggle
+# 「蛍様が出て喜ばない奴なんて、久しぶりに見たよ！」
+says, 'It's been such a long time since I've met someone not pleased to see fireflies!'
+# 「私を無視するとはいい度胸だわ。」
+pouts, 'You have some nerve, ignoring me.'
+# の周りを沢山の蛍が飛んでいる。
+fills the air with fireflies.
+
+N:1107:Mystia
+# 「私が鳥目にしてあげる！」
+says, 'I'll make you night-blind!'
+# 「夜は人狩りサービスタイムよ」
+says, 'Night is happy hour for man-hunting.'
+# 「私が本当の闇夜の恐怖を教えてあげる！」
+says, 'I'll show you the terror of the pitch-black night!'
+# 「これから、楽しい妖怪祭りが始まるよ。」
+says, 'And now, the fun youkai festival begins.'
+# 「鴨が葱しょって～♪やってくる～あ～やってくる～♪」
+sings, 'A duck carries an onion and~ it's coming~ ah~ it's coming~'
+# 「生水飲むと～おなかを壊す～♪湖飲むと～三途河～♪」
+sings, 'If you drink unboiled water~, then your stomach gets upset~, if you drink lake water~, Sanzu River~'
+# 「お空の上はマッハの時代～♪文明開化の味がする～♪」
+sings, 'The era of Mach is above the skies~, it has the taste of Westernization~'
+# 「いっちどっはおいでよ～♪ほてるはなみずき～♪」
+sings, 'It's worth visiting once~, Hotel Hanamizuki~'
+# 「さくら～さくら～♪さくらを見ている愚かな人間をさらえ～♪」
+sings, 'Cherry blossoms~ cherry blossoms~, I'll kidnap a stupid human gazing at cherry blossoms~'
+
+N:1108:Keine
+# 「今夜を無かった事にしてやる！」
+says, 'I'll make this night have never happened!'
+# 「今夜は、お前の歴史で満漢全席だ！」
+says, 'Tonight, I'll make an imperial feast of your history!'
+# 「大人しく通り過ぎてくれるなら、私も何もしまい。だが、お前達は少々騒々し過ぎる」
+says, 'If you were quietly passing by, I would leave you be. But you are being a little too noisy.'
+# 「これ以上は下がれないな」
+says, 'I can't withdraw any further.'
+# 「里の人間にも里の歴史にも弾幕一本触れさせる物か！」
+says, 'I won't let a single one of your danmaku touch the humans or history of this village!'
+
+N:1109:Tewi
+# 「タラッタラッタラッタ、可愛いダンス～♪」
+sings, 'Tala-tala-tala-ta, a cute dance~'
+# 「面白い。面白いよ！私の足下、全部四つ葉のクローバー！」
+says, 'Fun, so fun! All about my feet are four-leaf clovers!'
+# 「兎西向きゃ尾は東～」
+sings, 'When the rabbit faces west, its tail faces east~'
+# はニコニコ笑っている。
+grins mischievously.
+
+N:1110:Udonge
+# 「もう、変なのが紛れ込んできたわね。うちは今忙しいの。」
+sighs, 'Oh boy, something strange has slipped in. We're busy right now.'
+# 「私の目を見て、もっと狂うが良いわ！」
+says, 'Look into my eyes, and become even more insane!'
+# 「貴方の方向は狂い始めている。もう真っ直ぐ飛んでいられない！」
+says, 'Your sense of direction is starting to go haywire. You're already unable to fly straight!'
+# 「私の目を見ても、まだ正気で居られると思うなよ！」
+says, 'I doubt you'll be able to remain sane after looking into my eyes!'
+# 「貴方は真っ直ぐ動いているつもりでも端から見ればフラフラです。」
+says, 'You think to move straight, but in the eyes of others you're swaying.'
+# 「あんたには月の科学なんて理解できるはずもない」
+says, 'You can't possibly comprehend the science of the moon.'
+# 「人の商売の邪魔をしないでくれる？」
+says, 'Could you stop interfering in other people's business?'
+# は真っ赤な瞳であなたを見ている・・
+stares with red eyes...
+# 「勝手に上がり込んで何をしようっていうのよ。」
+says, 'What do you think you're doing barging in here without permission?'
+# 「聞こえなかったの？これだから耳の短いやつは困るよ」
+says, 'Didn't you hear me? This is the problem with short-ears.'
+
+N:1111:Eirin
+# 「あら。遊んでいく気になったみたいね。」
+says, 'Oh. It looks like you want to play.'
+# 「薬は攻撃にも使えるのよ！」
+says, 'Medicine can also be used to attack!'
+# 「貴方みたいな幼い子供が永遠の民である私に敵うはずが無いじゃない。」
+says, 'A child like you could never stand against me, an eternal being.'
+# 「いつまでその余裕が持つかしらね。」
+says, 'How long will your attitude last, I wonder.'
+
+N:1112:Kaguya
+# 「何やら騒がしいわね。どうしたのかしら。」
+says, 'There's some commotion. I wonder what's happened.'
+# 「今まで、何人もの人間が敗れ去っていった五つの難題。貴方に幾つ解けるかしら？」
+says, 'My five requests which so many have failed to complete... I wonder how many you can fulfill?
+# 「まぁいいわ。そんなに私と戦いたいのならやりましょう？」
+says, 'Well, no matter. If you're eager to fight, then why don't we begin?'
+# 「さぁそろそろ、心の準備は出来たかしら。」
+says, 'It's about time. Have you steeled yourself?'
+# 「焦らなくても見せてあげるわよ。本当の月が持つ毒気を！それと、私からの美しき難題を！」
+says, 'There's no hurry, I'll show you... the miasma of the true moon! And, my beautiful impossible requests!
+# 「ここには誰も居ない。誰も訪れない。退屈過ぎて死にそうだわ。」
+says, 'Nobody else is here. Nobody visits. I'm bored to death.'
+
+N:1113:Mokou
+# 「これは久しぶりに歯応えのある刺客になりそうね。」
+says, 'I've not had a tough assassin in a long time.'
+# 「お前も永遠の苦輪に悩むがいい！」
+says, 'You too will suffer in eternal torment!'
+# 「やっぱりあいつの仕業なのね。」
+says, 'Of course this was her doing.'
+# 「ふん、輝夜の使いがどれほどのもんなのか見せて貰おうか。」
+says, 'Hmph, let me test Kaguya's messenger for myself.'
+# 「私を普通の人間だと思うな。」
+says, 'Don't take me for an ordinary human.'
+# 「どうせ死にはしないから思いっきりかかってきな！」
+says, 'It's not like I'll ever die anyway, so don't hold back!'
+# 「不死者に勝負を挑もうなど正気の沙汰では無いぞ」
+says, 'You must be insane to challenge an immortal.'
+# 「何だかさっきから私の中の火が黙っていないんだ。」
+says, 'The fire within me hasn't been able to stay quiet for a while now.'
+# 「不尽の火から生まれるは、何度でも甦る不死の鳥。」
+says, 'An immortal bird, ever-resurrecting, born from the inexhaustible flames.'
+# 「こいつは十分強そうだし、ちょっと遊んでやっても良いんじゃないか？」
+muses, 'This guy seems strong enough. It'll be okay to have a little fun, right?'
+# 「誰だそこにいるのは！！」
+says, 'Who goes there!?'
+
+N:1115:Minoriko
+# 「神様たる物、身に纏う香りも気をつけないと。」
+says, 'As a god, one must put a great deal of care into their odour.
+# 「あ、ちなみに私は豊穣の神ね」
+says, 'Oh, by the way, I'm the harvest god.'
+# 「私はただの八百万分の一の神。この先は、神様がごろごろしているんだから」
+says, 'I'm merely one among myriad gods. Ahead, there are countless others.'
+
+N:1116:Hina
+# 「あらゆる厄災が降りかかるわよ。」
+says, 'Every disaster will befall you.'
+# 「あらあらまだ居たの？さっき追い返したつもりだったのに」
+says, 'Oh, are you still there? I thought I had chased you away.'
+# 「あっ、そう！」
+says, 'Ah, that's right!'
+# 「これは……随分と……禍々しい」
+says, 'This is... rather... ominous.'
+# はくるくる回転している。
+is rotating around and around.
+
+N:1117:Nitori
+# 「私は河城にとり。通称、谷カッパのにとり。」
+says, 'I'm Nitori Kawashiro. They call me Nitori the Valley Kappa.'
+# 「私のバールの様な物が火を噴くぜ！」
+says, 'My crowbar-like-thing spews fire!'
+# 「お祭り騒ぎに踊らされてる奴なんてただのカモだ。」
+says, 'Anyone who dances at the whims of a festival is just a sucker.'
+# 「面白いもんいっぱい持ってるな。ちょっと見－せーろーよー。」
+says, 'You have a lot of interesting stuff. Hey, let! Me! See! It!'
+# 「なんだい。今更、祭りに参加してきたって分け前やんないよ。」
+says, 'Huh? You can't join the festival this late and still expect to get a share.'
+
+N:1118:Momiji
+# 「見せてやるよ、本物の獣を！」
+says, 'I'll show you a real beast!'
+# はあなたに向けて威圧的に剣を構えた。
+brandishes a sword menacingly.
+
+N:1119:Aya
+# 「百戦錬磨の私にとってこの程度は準備運動にもなりません。」
+says, 'For a veteran like me, this isn't even a warm-up exercise.'
+# 「思ったより、記事になりそうなネタはないですね……」
+says, 'Looks like there isn't as much material as I thought...'
+# 「あ、遅れました。私は新聞記者の射命丸文です。今は休暇兼取材中なのです」
+says, 'Ah, excuse me. I'm a newspaper reporter, Aya Shameimaru. It's my day off and I'm collecting information.'
+# 「あやややや。」
+says, 'Ayayayaya.'
+# 「さあ、手加減してあげるから本気で掛かってきなさい！」
+says, 'Now, I'll go easy on you, so come at me with all your might!'
+# 「号外～、号外だよ～。大した事件もないけど号外だよ！」
+shouts, 'Extra~, extra~! Nothing big's happened, but it's still an extra!'
+# 「何処で悪事を働こうとも、全てつらっと筒抜けですよ！」
+says, 'No matter where you commit your crimes, the truth will always be discovered!'
+# 「事件に関係なさそうだから、一思いに吹き飛ばせてあげましょう。」
+says, 'You don't seem related to the incident, so without further ado, allow me to blow you into next week.'
+# 「この理由なく好戦的な感じ……嫌いじゃない！　むしろフェイバリット！」
+says, 'What a pointlessly belligerent attitude... not bad! In fact, it's my favorite!'
+# 「さ、記事にするわよー」
+says, 'Now to write an article about it!'
+
+N:1120:Sanae
+# 「私は東風谷早苗。人であり神である現人神です！」
+says, 'I'm Sanae Kochiya, a human who's also a living god!'
+# 「では退治させて頂きます！」
+says, 'Well then, time to exterminate you!'
+# 「いざ尋常に勝負せーい！」
+says, 'Come, let's fight fairly!'
+# 「いきなり襲いかかってくるなんて随分ですね！」
+says, 'It's very rude to suddenly attack somebody out of nowhere like that!'
+# 「これは事件の匂いがするわ！」
+says, 'This smells like an incident!'
+# 「手加減はしませんよ？」
+says, 'I won't hold back, okay?'
+# 「……覚悟！」
+says, '...I'm ready!'
+# 「何ここ……石炭でも掘っているのかな」
+says, 'What is this place...? Are they mining for coal?'
+# 「すぐに出てきてくれれば調査は楽なんだけどねー」
+says, 'It'll make this investigation much easier if you come out right away.'
+
+N:1121:Kanako
+# 「我を呼ぶのは何処の人ぞ。」
+thunders, 'Who calls for My presence?'
+# 「神の信仰を邪魔する者は一つ一つ排除しなければいけません」
+says, 'A god must eliminate all who oppose their struggle for faith, one by one.'
+# 「貴方は一度──神の荒ぶる御魂を味わうと良い！」
+thunders, 'Let you experience once -- the raging soul of a god!'
+# 「邪魔よ。急いでいるの」
+says, 'You're in my way. I'm in a hurry.'
+
+N:1122:Suwako
+# 「*おおっと*　これは珍しい」
+says, '*Whoa!* Now that's curious!'
+# 「うひゃあ！良いね、戦ってくれるんだ。楽しみー」
+says, 'Uhyaa! Excellent, it's a battle, then! This should be fun...'
+# 「今日は私の弾幕お祭りの番よ！」
+says, 'Today it's my turn to have a danmaku festival!'
+# 「もっと大地を敬おうよ。呪われても知らないよ？へへ。」
+says, 'Pay more respect to the earth. Otherwise, who knows? You might get cursed. Heh heh.'
+# 「我ら日本の神様はどんな者でも受け入れるのよ。八百万も居るから、今更拒絶出来なくなったし。」
+says, 'We Japanese gods accept all followers. There are 8 million of us, we can't justify rejections any more.'
+
+N:1123:Lily
+# は満面の笑顔で突撃してくる。
+charges around with a big smile on her face.
+# 「わーい！」
+says, 'Yay!'
+# 「わーい！」
+says, 'Yay!'
+# 「こういう平和的に弾幕を発散できるイベントを待っていたわー。」
+says, 'I've been waiting for an event like this where I can shoot danmaku peacefully!'
+
+N:1125:Yamame
+# 「地底に遊びに来たのかい？あそこは今お祭り騒ぎよ。 誰も拒みゃしないから楽しんでおいき」
+says, 'Did you come to play underground? It's a wild party down there right now. Everyone is welcome, so go have fun.'
+# 「地下に落とされた妖怪達の力を見たいのね」
+says, 'Looking for the strength of the youkai who were banished underground?'
+# 「どうやら友好的な来訪者ではなさそうね」
+says, 'Seems like you're not a friendly visitor.'
+# 「今日は朝から何にも食べてないの」
+says, 'I haven't eaten anything since this morning.'
+# 「今日の獲物は大きいぞー」
+says, 'Today's catch is really big!'
+
+N:1126:Parsee
+# 「悪い事は言わないわ。ここで大人しく帰った方が良い。」
+says, 'For your own good, it's better that you just go home quietly.'
+# 「逆さ摩天楼の果てまでようこそ」
+says, 'Welcome to the end of the upside-down skyscraper.'
+# 「妬ましいわね。そんな妬ましい貴方は、退屈な私に面白い事を見せる必要がある！」
+says, 'I'm so jealous. Enviable person, show me something to relieve my boredom!'
+# 「地上の光が妬ましい。巡る風が妬ましい。」
+says, 'I'm jealous of the light above ground. I'm jealous of the gentle breeze.'
+# 「封じた筈の恐怖の妖怪。今一度味わうと良い！」
+says, 'This dreadful youkai power that should have been sealed away... experience it once more!'
+# の目がぼうっと緑色に光った。
+watches with green eyes dimly glowing.
+
+N:1127:Yuugi
+# 「あんた、なかなかやるね。」
+says, 'Hey, you're doing pretty well.'
+# 「何者か知らんけど、 暴れる奴には暴れて迎えるのが礼儀ってね！」
+says, 'I don't know who you are, but a rowdy welcome is best for a rowdy guest!'
+# 「気に入った！もっと愉しませてあげるから駄目になるまでついてきなよ！」
+says, 'I like you! I've got more fun for you, so follow me until you can't take any more!'
+# 「お？なんだい？もう降参かい？」
+says, 'Hm? What's that? Giving up already?'
+# 「私は山の四天王の一人、力の勇儀。弱点は、煎った豆だね」
+says, 'I'm one of the Big Four of the mountain, Yuugi the Strong. My weakness is fried beans.'
+# は大きな盃で美味そうに酒を飲んでいる。
+sips some nice-looking sake from a dish.
+# 「酒も回って気持ちよくなってきたし、そろそろ出番かな！」
+says, 'The sake's kicking in and I feel great. It's about go time!'
+# 「怪我をする前に地上に帰りな！」
+says, 'Go back to the surface before you get hurt!'
+# 「いっちょ派手にぶちかましてやろう！」
+says, 'Then, I'll make it a big one!'
+
+N:1128:Satori
+# 「貴方の心の中にある美しい弾幕で生ぬるい地上へ逃げ帰れ！」
+says, 'With the beautiful danmaku in your heart, I'll chase you back to your lukewarm surface world!'
+# 「私には見える。心を読む第三の目が貴方の心象を映し出す！」
+says, 'I can see it. My third eye will reflect the contents of your mind!'
+# 「私には一切隠し事は出来ません。」
+says, 'No one can hide anything from me.'
+# 「さあ、心に武器を持って！自分の心象と戦うが良いわ！」
+says, 'Now, arm your heart! And do battle with your own mental image!
+# 「眠りを覚ます恐怖の記憶（トラウマ）で眠るがいい！」
+says, 'Now, sleep with this trauma that will leave you sleepless!'
+# 「あ、今もっと強い技を思い出したわね？ふむふむ、参考にしておくわ。」
+says, 'Oh, you remembered a stronger technique? Hmm-hmm, I'll have to take another look.'
+
+N:1129:Rin
+# 「楽しいことしてるね！あたいも混ぜてくれるかい？」
+says, 'Looks like you're having fun! Mind if I join ya?'
+# 「見てた見てた聞いてたよ。」
+says, 'I've been watching and watching and listening.'
+# 「骨と魂は拾ってあげるから」
+says, 'I'll collect your bones and soul.'
+# 「猫は猫でも、そんじょそこらの猫と一緒にしてもらっちゃぁ困る。」
+says, 'A cat's a cat, but don't go mistaking me for your ordinary cat.'
+# 「死体と怨霊ならあたいにお任せ！」
+says, 'Leave your corpses and your vengeful spirits to me!'
+# 「おっと見つかっちゃったかい」
+says, 'Oops, ya caught me.'
+# 「嬉しいねぇ。そんなに死に急ぐなんてね。」
+says, 'Oh, ohh, I'm so glad. You're in such a hurry to die.'
+# 「そう、死の匂いが足りないのよねー。」
+explains, 'That's right, what's missing is the scent of death.'
+# 「わっ！ビックリした」
+shrieks, 'Wah! You scared me!'
+# 「死ねい！死んで積み荷の嵩を増せ！」
+says, 'Die! Die and weight my cargo!'
+
+N:1130:Utsuho
+# 「今は誰も訊ねて来ない地獄の底の底にようこそ。」
+says, 'Welcome to the bottom of the depths of Hell, that no one should ever visit.'
+# 「美味しく頂く為には時間をかけて焼かないと」
+says, 'You have to roast it just long enough for it to taste the best.'
+# 「貴方も私とフュージョンしましょ？」
+says, 'Won't you fuse with me?'
+# 「まだまだ暴れ足りないよ！私の中の核反応がもっと暴れろと言っているわ！」
+says, 'This isn't enough to sate my violence! The nuclear reactions within me demand a greater rage!'
+# 「異物発見！融合炉の温度低下に要注意。即座に異物を排除せよ！」
+announces, 'Foreign substance detected! Significant drop in reactor core temperatures requires urgent attention. The foreign substance is to be immediately eradicated!'
+# 「私が飲み込んだ神の炎！　核エネルギーで跡形もなく溶けきるがいいわ！」
+says, 'The divine flames that I swallowed! Their nuclear energy will melt you away without a trace!
+# 「忘れられた灼熱地獄へ落とされるなんて相当なうっかりさん？」
+scoffs, 'How careless could you have been, to fall into the Hell of Blazing Fires?'
+# 「不純物が喋った！」
+says, 'The contaminant spoke!'
+
+N:1131:Koishi
+# 「良い遊び相手が見つかったわ。」
+says, 'I've found a good playmate.'
+# 「ライバルは全て潰さないと自分の望みは叶えられないってお姉ちゃんが言ってた。」
+says, 'My sister was saying that you'll never achieve your dreams if you can't crush all your rivals.'
+# 「貴方の死体は地霊殿のエントランスに飾ってあげる！」
+says, 'I'll decorate the entrance of the Palace of the Earth Spirits with your corpse!'
+# 「見えてないのかな。これでも喰らえい！」
+says, 'Can't you see me? Hey, take this!'
+# 「誰しも子供の時にね、大人には気付かれない友達っていたでしょ？うふふ。」
+says, 'When we were kids, didn't everyone have an invisible friend that adults didn't notice? Hehe.'
+# 「もしもーし、私は今何処にいると思いますー？」
+says, 'Hello hello, where do you think I am right now?'
+# 「あら、ここは何処かしら？」
+says, 'Huh, where am I?'
+
+N:1132:Nazrin
+# 「どうやら宝の反応は君だったみたいだ。」
+says, 'So you were the source of the reaction.'
+# 「そんなに急いでどこに行く？」
+says, 'Where are you going in such a hurry?'
+# 「あんまり戦いたくないが……しょうがないな」
+says, 'I don't really want to fight you but... oh well.'
+# 「残念だが、ネズミを甘く見ると死ぬよ」
+says, 'Underestimate mice, and you will die.'
+# 「こいつからお宝センサーが反応している」
+says, 'The treasure sensor is reacting to you.'
+# 「お宝は私だけのもんよ！」
+says, 'The treasure is mine and mine alone!'
+
+N:1133:Kogasa
+# 「驚けー！」
+yells, 'Surprise!'
+# 「当たって砕け、うらめしやー！」
+says, 'Feast or famine- Booooooo!'
+# 「うらめしや？」
+says, 'Boo?'
+# 「乗るしかないでしょ！この大波に！」
+says, 'I have no choice! But to ride this big wave!'
+# はケラケラ笑っている。
+cackles.
+# 「はっはっはー無駄よ！」
+laughs, 'Mwuh-ha-haaaa! It's futile!'
+# 「……私を見て驚かないの？」
+says, '...aren't you surprised to see me?'
+# 「なんと、わちきが時代遅れともうすか」
+says, 'What? You're telling me I'm outdated?'
+# 「その格好！雨をなめているわね！」
+says, 'That outfit! You making light of the rain, huh!?'
+# 「いつ如何なるところでも雨は降るのよ。このようにね！」
+says, 'It can rain anytime, anywhere. Like this!'
+
+N:1134:Ichirin
+# 「問答無用！賊の類に掛ける情けは無し」
+says, 'No arguing! I won't show any mercy to robbers!'
+# 「仕方ない。力で説き伏せるしかないか」
+says, 'I have no choice. I will persuade you by force!'
+# 「仏の心を持って成敗してくれる！」
+says, 'I'll punish you with a Buddha-like heart!'
+# 「私に挑もうなんて良い度胸ね」
+says, 'You've got guts, challenging us.'
+
+N:1135:Murasa
+# 「呪われた水を浴びて船から落ちるが良いわ！」
+says, 'Fall overboard and bathe in the cursed waters!'
+# 「ふふ、残念ながら力無き者の乗船は認めておりません。」
+says, 'Heh-heh, unfortunately we don't allow powerless passengers aboard this ship.'
+# の体から水が滴り落ちている。
+is trailing water everywhere, perpetually soaked.
+# The below line was under Ichirin's index but originates from Murasa in Gouyoku Ibun.
+# Moved it as this was presumably a mistake.
+# 「どけどけーい！ボサっと突ったってるな！」
+says, 'Go, go, MOVE IT! Why are you standing in the way like an idiot?!'
+
+N:1136:Shou
+# 「それも良いでしょう。貴方には貴方の正義がある。」
+says, 'Very well, then. You have your own sense of justice.'
+# 「魔界に有りてなお輝き続けるこの法の光──」
+says, 'The light of dharma still shines brightly even in Makai...'
+# 「毘沙門天の宝塔が照らす法の光が、貴方から邪心を奪うでしょう！」
+says, 'Bishamonten's pagoda illuminates the light of dharma. It will cleanse your heart of evil!'
+# 「私は毘沙門天の代理。」
+says, 'I am the representative of Bishamonten.'
+# 「良いでしょう。私と戦うと言うのなら、相手になります。」
+says, 'Very well. If you want to do battle, then I will be your opponent.'
+# の持つ宝塔が輝きを放った。
+raises the pagoda in her hand as it glows and glitters.
+# 「本当の財宝の輝きというものを、見せてやろうじゃないか。」
+says, 'Let me show you the brilliance of real treasure.'
+# 「獣の血が騒ぐ……！」
+says, 'My beast blood boils...!'
+
+N:1137:Byakuren
+# 「誠に愚かで自分勝手であるッ！いざ、南無三──！」
+says, 'How foolish and self-centered you are! Now, namusan――!'
+# 「誠に薄く、軽挙妄動であるッ！いざ、南無三──！」
+says, 'How weak and rash you are! Now, namusan――!'
+# 「誠に浅く、大欲非道であるッ！いざ、南無三──！」
+says, 'How superficial, greedy, and unjust you are! Now, namusan――!'
+# 「誠に狭く、田夫野人であるッ！いざ、南無三──！」
+says, 'What a narrow-minded boor you are! Now, namusan――!'
+# 「誠に浅く、付和雷同であるッ！いざ、南無三──！」
+says, 'What a shallow, blind follower you are! Now, namusan――!'
+
+N:1138:Nue
+# 「さあ、私の正体に気付いた貴方を葬って、正体不明を取り戻さないとね」
+says, 'Now that you've discovered my true form, I'll bury you and take back my unidentity!'
+# 「さあ、私の正体に気付いた貴方を力ずくで黙らせてやるわ！」
+says, 'Now that you've discovered my true form, I'll shut you up with force!'
+# 「正体不明の飛行物体に怯えて死ね！！」
+says, 'Die in terror of this unidentified flying object!!'
+# 「私は正体不明の妖怪、鵺。正体不明こそが私の力の源」
+says, 'I'm the youkai of the unknown, the Nue. Being unidentified is the source of my power.'
+# 「お前はここで終わりだがな！」
+says, 'It's over for you, now!'
+
+N:1139:Kyouko
+# 「おはよーございます」
+says, 'Good morning!'
+# 「朝のおつとめは、掃除に炊飯、そして迎え撃ち。」
+says, 'My morning duties are sweeping, cooking, and meeting the enemy.'
+# 「ぎゃーてーぎゃーてー」
+chants, 'Gyaa~te~gyaa~te~'
+# 「声が小さい！」
+says, 'You're too quiet!'
+
+N:1140:Yoshika
+# 「これから先はお前達が入って良い場所ではない！」
+moans, 'The likes of you must not travel beyond this place!'
+# 「ちーかよーるなー！」
+moans, 'Dooon't come any closeeer!'
+# 「我々の仲間になるが良い！」
+moans, 'You shall become one of our companions!'
+# 「ゾンビは永遠に不滅です！　お前は誰だ？」
+moans, 'Zombies are eternal and undying! Who are you?'
+# 「我々の弾幕でやられれば、お前もキョンシーになるのだ！」
+moans, 'If you are struck by our danmaku, you will become a jiangshi too!'
+
+N:1141:Seiga
+# 「あの娘、いま何処にいるのかしら？」
+says, 'Just where has that girl gotten to?'
+# 「いらっしゃい。あら、貴方……」
+says, 'Welcome. Oh, you are...'
+# 「私は霍青娥（かくせいが）。今は仙人をやっています」
+says, 'I am Seiga Kaku. I'm currently occupied as a hermit.'
+# 「死体は死なないのよ。素敵でしょ？」
+says, 'Corpses can't die. Isn't that wonderful?'
+# 「この程度で死んでちゃ仙人にはなれないわ。」
+says, 'If I died to something of this level, I'd never make it as a hermit.'
+
+N:1142:Tojiko
+# 「やってやんよ！」
+says, 'Have at it!'
+# 「おろかものめが！」
+says, 'Damned fool!'
+# 「うらめしやー！」
+says, 'Curse youuu!'
+# 「ついに積年の怨みを見せつけるときが来た！」
+says, 'At last, the time has come to express my ancient grudge!'
+# の周りに火花が散っている。
+sends sparks flying all about.
+
+N:1143:Futo
+# 「おぬしも尸解仙……だな？」
+says, 'Thou art also a shikaisen... yes?'
+# 「物部の秘術と道教の融合、その身に刻むがいい！」
+says, 'Inscribe into thy body this union of the secret art of the Mononobe and the way of the Tao!'
+# 「文字通り生まれ変わった我が道術、派手に喰らうが良い！」
+says, 'My Taoist arts have been literally reborn, and now thou shalt receive them!'
+# 「しまった、話しかける奴を間違えた」
+says, 'Egads... to address this person was to make an error.'
+# 「どうだ？この美しき戦略は」
+says, 'What dost thou think of it? My beautiful strategy.'
+# 「良かろう、修行の成果を見せてやる。」
+says, 'So be it, I shall display the fruits of my training.'
+
+N:1144:Miko
+# 「君の行動は全て見させて頂いたわ」
+says, 'I have observed all of your actions.'
+# 「そう、君は私に牙を剥くでしょう。特に理由も無く」
+says, 'Yes, you will bear your fangs at me. With no reason to do so.'
+# 「さあ私を倒して見せよ。そしては私は生ける伝説となる！」
+says, 'Now, attempt to defeat me! And I shall become a living legend!'
+# 「私は豊聡耳神子。人は私を聖徳王と呼ぶわ」
+says, 'I am Toyosatomimi no Miko. People call me Shoutoku Ou.'
+# 「そんな弱気じゃ人心は掌握出来ないぞ！」
+says, 'You will not capture people's hearts with such timidity!'
+# 「中々見所がある。弟子にならないか？」
+says, 'You show promise. Would you like to become my disciple?'
+# は高笑いを始めた。
+roars with laughter.
+# 「強い者が正義。それが幻想郷の流儀なら簡単な話です！」
+says, 'Might makes right. If that is the way of Gensoukyou, then this matter is simple!'
+# 「さあ、我を崇めよ！」
+says, 'Come, worship me!'
+# 「幻想郷の平穏は私に任せよ。人心の掌握は得意分野である。」
+says, 'Leave the peace of Gensoukyou to me. Capturing the hearts of others is my expertise.'
+
+N:1145:Wakasagi
+# 「私を退治しに来たのですね？」
+says, 'Did you come here to exterminate me?'
+# 「いつも無視するんだもん。そろそろ私達（ようかい）の出番があってもいいでしょ？」
+says, 'I'm always being ignored. Isn't it time we youkai took the stage?'
+# は何かを歌っている。
+is singing something.
+
+N:1146:Banki
+# 「私を見ても怖がらないなんて許さない」
+says, 'How dare you not be scared at the sight of me.'
+# 「その見返りは恐怖体験だけどな！」
+says, 'Now you'll experience terror in return!'
+# の首がくるりと一回転した。
+rotates her head full circle.
+# 「頭を見る度うなされよ！」
+says, 'You'll be left with nightmares whenever you see a head!'
+
+N:1147:Kagerou
+# 「貴方に私が倒せるかしら？」
+says, 'Can you defeat me?'
+# 「調子に乗ると痛い目に遭うわよ？」
+says, 'If you get cocky then you'll regret it, isn't that right?'
+# 「ふふふ、当たるもんなら当ててみな！」
+says, 'Hehehe, if you think you can hit me, go ahead and try!'
+
+N:1148:Benben
+# 「みーつけた。私の相手になってくれそうな人」
+says, 'I spy, someone who could be my opponent.'
+# 「あんたの相手はこの私だよ！」
+says, 'You will be facing me!'
+# 「ふーん……てっきりお仲間だと思ったんだけどねぇ」
+says, 'Hmm... I thought for sure you were a companion.'
+# 「悪いけどここで足止めさせてもらうよ。」
+says, 'Sorry, I'll have to stop you here.'
+# 「はーい、今日は私達のライブにようこそ！」
+says, 'Hi there, welcome to our concert today!'
+# 「お次の曲はヘビーに行くよ！」
+says, 'This next one is going to be heavy!'
+
+N:1149:Yatsuhashi
+# 「やるわよー？」
+says, 'You ready to do this?'
+# 「私の相手をしてくれない？」
+says, 'Will you be my opponent?'
+# 「道具だからって甘く見ないでよね。」
+says, 'Don't underestimate me just because I'm a tool.'
+# 「鎮魂ライブの始まり始まりー！」
+says, 'Let the soul consolation concert begin!'
+# 「調律してくれていた人が死ぬと琴も死んでしまう。死んだ琴を見る度に人の死を思い出す。そんな事を思いながらこの弾幕をお送りします。」
+says, 'When the person who tuned a koto dies, the koto dies too. Whenever one sees a dead koto, it's a reminder of someone's death. Thinking of that, I send you this danmaku.'
+
+N:1150:Seija
+# 「我ら力弱き者達が如何に虐げられていたか」
+says, 'How we, the weak, have been oppressed...'
+# 「初めての挫折を味わうがいい！」
+says, 'Taste the frustration of a first failure!'
+# 「逃げも隠れもしないぞ、全てを敵に回してやる！」
+says, 'I'll not run away or hide, I'll turn everyone against me!'
+# 「どんな手を使っても生き残ったもんが勝ちなんだよ」
+says, 'Whatever the means, the one who survives, wins.'
+# 「我が名は正邪、生まれ持ってのアマノジャクだ！」
+says, 'My name is Seija, and I am a born amanojaku!'
+# 「そっちが反則でくるならこっちにも策があるぞ」
+says, 'If you're not going to play fair, then I've got some tricks too.'
+
+N:1151:Sukuna
+# 「さあ、秘宝（こづち）よ！もの言わぬ道具に夢幻の力を与え給え！」
+says, 'Now, treasured mallet! Grant the power of dreams to the wordless tools!'
+# 「だーれ？」
+says, 'Who iiis iiit?'
+# 「あわてふためくがいい。私には逃げ惑う強者の姿が見える。」
+says, 'Feel free to panic. I can see a strong figure fleeing from me.'
+# 「あはははは」
+laughs, 'Ahahahaha!'
+# 「小さいからって馬鹿にするなよー？こう見えても誇り高き小人族だ」
+says, 'Don't make fun of me because I'm small! I'm a proud member of the inchling race!'
+# 「見よ！感じろ！小さき者の気高い弾幕を！」
+says, 'Behold! Feel! The sublime danmaku of those who are tiny!'
+
+N:1152:Raiko
+# 「さあ試すとするか。私の新しい魔力を」
+says, 'So, shall we try out my new magical power?'
+# 「幻想郷に始原のビートを響かせよ！」
+says, 'Let the primal beat resound throughout Gensoukyou!'
+# 「私達は自由よ！」
+says, 'We are free!'
+# 「太鼓を叩くに頭脳は要らぬ。猿人時代の魂を呼び覚ませ！」
+says, 'Awaken your caveman spirit, for it doesn't need brains to beat a drum!'
+# 「お祭りの花形はやはり太鼓。太鼓のリズムで盛り上がらない祭りはない！」
+says, 'The taiko is the star of the show, naturally. There's nothing that isn't roused by its rhythm!'
+
+N:1153:Kasen
+# はあなたを一喝した！
+rebukes you sharply!
+# 「ばかものー！」
+says, 'You idiot!'
+# 「これは試験よ。もちろん貴方が弱いとただ死ぬだけの。」
+says, 'This is an examination. Of course, if you're weak, you'll just die.'
+# 「こんな所で本気を出すわけが無い。」
+says, 'There's no way I'd get serious in a situation such as this.'
+# 「私の理念は天道と共にある！」
+says, 'My ideals exist alongside the laws of Heaven!'
+# 「さあ、カウントダウンは始まった。何をすれば良いのか判らないほど愚かでもあるまい。」
+says, 'The countdown has begun. Surely you're not so foolish as to not understand what to do now.'
+
+N:1154:Suika
+# 「我が群隊は百鬼夜行、鬼の萃まる所に人間も妖怪も居れる物か！」
+says, 'My army is the night parade of a hundred demons! No human or youkai can stand against foregathered oni!'
+# 「鬼の力、萃める力、思う存分に味わうといいわ！」
+says, 'The power of an oni, the power to gather, enjoy it to your heart's content!'
+# 「もう何百年も前から呑み続けているわよ。」
+slurs, 'I've been drinkin' for centuries already.'
+# 「私は砕いたり萃めたりするのが得意なのよ。」
+slurs, 'I'm just good at dispersin' and gatherin' things.'
+# 「ほらほらどうしたー」
+slurs, 'Hey hey, what's the matter?'
+# 「鬼が出たぞー！」
+says, 'Then suddenly an oni jumped out!'
+# は瓢箪からグビグビと酒を飲んでいる。
+gulps down sake from a gourd.
+# は「へっへっへ」と笑いながらのしのし歩いてくる。
+staggers towards you, laughing drunkenly.
+# 「退屈させるなよ？」
+says, 'Don't make it boring!'
+
+N:1156:Iku
+# 「という訳で地震が起きます」
+says, 'To cut it short, an earthquake is going to occur.'
+# 「不意を突いて地震が起きます」
+says, 'Getting straight to the point, an earthquake is going to occur.'
+# 「そこはかとなく地震が起きます」
+says, 'You there, an earthquake is going to occur.'
+# 「不安を残せれば私も仕事の甲斐がありますわ」
+says, 'That I leave you anxious is a sign I am doing my job properly.'
+# 「私はただ危険を知らせるだけの龍宮の使い。」
+says, 'I am merely a messenger of the Dragon Palace who warns of danger.'
+# 「まもなく幽霊の数が激増するでしょう。それはそれは悲劇的に」
+says, 'Soon, the quantity of ghosts will increase sharply. Appalling, isn't it?'
+
+N:1157:Tenshi
+# 「私は天界に住む比那名居の人。」
+boasts, 'I'm a member of the Hinanawi clan that lives in the heavens.'
+# 「空の天気も、地の安定も、人の気質も私の掌の上。」
+boasts, 'The weather in the sky, the stability of the earth, and the hearts of man are all in the palm of my hand.'
+# 「そう地上で、人間と妖怪が戦うように…… 私はあのやりとりに憧れているのよ！」
+says, 'On the ground, humans and youkai do battle... I long for that exchange!'
+# 「ふん、私のやっている事に間違いなどない。 天道は私の手にある！」
+says, 'Hmph, I've made no mistakes. The law of Heaven lies with me!'
+# 「地上に這い蹲ってる虫ケラよ！　失望させるなよ！」
+says, 'Grovel in the dirt, insect! Don't disappoint me!'
+# 「天人の威光で全てを焼き尽くしてやろう！」
+says, 'I'll burn everything down with the majesty of a celestial!'
+
+N:1158:Kokoro
+# 「私と最強の称号を賭けて闘え！」
+says, 'Fight me for the title of the strongest!'
+# 「おっと、すみませんすみません。決して怪しい者ではございません」
+says, 'Oops, sorry sorry. I am definitely not a suspicious person at all.'
+# 「私を楽しませてくれる人はどこにいるー」
+says, 'Where is the person who can entertain meeee?'
+# 「希望の面は何処だぁ！」
+roars, 'Where is the Mask of Hope!?'
+# 「ねえ、判るー？この気持ち」
+says, 'Hey, do you know it? "This" emotion.'
+# 「そこが絶望という名のゴールだ！」
+says, 'That way lies the finish line of despair!'
+# 「くらえ！我が奥義、暗黒能楽！」
+says, 'Take this! My arcane Noh of Darkness!'
+# 「ふっふっふ、我は整髪料を克服した真の口裂け女。」
+says, 'Heh heh heh. Having overcome hair products, I am the true Kuchisake-onna!'
+
+N:1159:Medicine
+# 「今年のスーさんは、ちょっと気が早いわね？」
+says, 'Isn't Su-san a little rash this year?'
+# 「ああ、躰が毒で満たされていく」
+says, 'Ahh, my body's brimming with poison.'
+# 「一番怖い毒は、少しずつ体を蝕んでいく毒、精神を蝕んでいく毒」
+says, 'The most terrifying poison is one that slowly eats away at the body and mind.'
+# 「これだけスーさんの力があれば、他にも仲間を作れそうね」
+says, 'With this much power from Su-san, I think I could make some companions.'
+# 「コンパロコンパロ毒よ集まれー」
+says, 'Konparo, konparo, poison gathers!'
+
+N:1160:Yuuka
+# 「貴方は、何しにここに来たのかしら？」
+says, 'I wonder, what did you come here for?'
+# 「仕掛けて欲しいのね？仕様が無いわ」
+says, 'You want to challenge me? It can't be helped, then.'
+# 「これは、幻想郷で唯一枯れない花なのよ」
+says, 'This is the only flower in Gensoukyou that never withers.'
+# はにっこりと笑っている。
+is smiling broadly.
+# 「ここの向日葵は侵入者に過敏なの。」
+says, 'The sunflowers here are hypersensitive to intruders.'
+# 「ほら、向日葵が貴方を注目し始めたわ。」
+says, 'Look, the sunflowers have started to pay attention to you.'
+
+N:1161:Komachi
+# 「あたいは三途の川の一級案内人、小野塚の小町。」
+says, 'I'm the first-class Sanzu River guide, Komachi of Onozuka.'
+# 「自殺する愚か者はいねーかねー」
+leers, 'Are there any fools here who want to commit suicide~?'
+# 「死神を舐めない方が身の為だ。」
+says, 'Not underestimating a shinigami would be in your best interests.'
+# 「私のタイタニックでお前さんを運んでやる。半額サービスだ」
+says, 'I'll ferry you over in my Titanic. Half price service.'
+# 「これは少し勉強させてやるか、人間の苦輪と言う物を！」
+says, 'Time for a little lesson about the human cycle of suffering!'
+# 「あれぇ？ここに生まれたて幽霊が居るはずなんだけどなぁ。」
+says, 'Huh? Wasn't there supposed to be a new-formed ghost around here?'
+# 「いやいやあたいはただのしがない船頭さ」
+says, 'No, no, I'm just a humble boatwoman.'
+# は大鎌をぶんぶん振り回している。
+flourishes a large scythe, its blade whooshing in the air.
+# は何かを探してひょこひょこ歩き回っている。
+rambles about in search of something.
+
+N:1162:Eiki
+# 「私は罪を裁く者。紫の桜の霊を無間に落とす者。」
+says, 'I am the one who judges sin. The one who sends the spirits residing in violet cherry blossoms to Avici.'
+# 「貴方はここで少し裁かれる必要がある。」
+says, 'A little judgment is necessary here.'
+# 「少しお灸を据えてあげましょう。」
+says, 'Let us have you reprimanded.'
+# 「少しでも罪を減らすために、これから善行を積む必要がある」
+says, 'To cleanse your sins even a little, you must accomplish good deeds.'
+# 「反省だけでは駄目、後悔なんて以ての外。罪を犯すとは、そんな生易しい物ではない。」
+lectures, 'Reflection alone is not enough, much less regret. Committing a sin isn't such a simple matter as that. A sin cannot be settled but with judgment.'
+# 「罪は裁かれて初めて精算できるのです。その為に、私が居るのですよ」
+lectures, 'Time alone cannot settle a sin. Only after a sin is judged will you be able to settle it. For that purpose, I am here.'
+# 「貴方は、少し力を持ちすぎたことを自覚せよ！」
+says, 'Now be aware that you hold a little too much power!'
+
+N:1226:Reimu
+# 「本当の結界を見せてあげるわ」
+says, 'Now, I'll show you my true barriers.'
+# 「神の力を思い知りなさい！」
+says, 'Realize the power of the gods!'
+# 「八百万回呪われよ！」
+says, 'Receive a myriad of curses!'
+# 「で、邪魔なんですけど」
+says, 'You know, you're in my way.'
+# 「邪魔させないわ」
+says, 'I won't let you hinder me.'
+# 「これは本格的に異変が起こっているんだわ」
+says, 'This must be a full-blown incident.'
+# 「こうなりゃ何でも相手になるわよ」
+says, 'I'll take on you or anyone.'
+# 「こういう所に何らかの敵がいる！　私の経験上！」
+says, 'There must be an enemy here! My experience tells me so!'
+# 「あんたも暴れるというのなら、ここで成敗してくれる！」
+says, 'You're causing trouble, so I'll punish you right here!'
+# 「あら、あんたもハズレ？　おかしいなぁ」
+says, 'Oh, so you're a blank lot too? How odd.'
+# 「私は妖怪に味方する者を退治してまわる巫女よ！」
+says, 'I'm the shrine maiden who punishes those who aid youkai!'
+# 「喧嘩を売ってるのね？」
+says, 'Are you trying to pick a fight?'
+# 「さあ倒されたい妖怪はどこにいる？」
+says, 'Now, where is the youkai I need to defeat?'
+# 「まさかもうお終いじゃ無いわよね？」
+says, 'Surely this can't be the end of it?'
+# 「ああん？」
+says, 'Wha?'
+# 「泣く子も黙る博麗神社の巫女よ！」
+says, 'I'm the Hakurei shrine maiden who silences even crying children!'
+# は苛立っているようだ。
+looks annoyed.
+# 「やり場のない私の憤りをあんたにあげる」
+says, 'I've nowhere to vent my anger, so I'll use you!'
+# 「やっぱり天狗はずる賢い奴！」
+says, 'Those tengu are such crafty bastards!'
+# 「何か嫌な感じね」
+says, 'Something doesn't feel right.'
+# 「私が退治しない道理は無い！」
+says, 'There's no reason why I shouldn't exterminate you!'
+# 「そこまでよ！」
+says, 'You'll go no further!'
+# 「それは私の仕事だから、帰って寝てなさい」
+says, 'This is my job, so go home and sleep.'
+# 「こいつは…また厄介な奴が現れたわね」
+says, 'Why you... yet another troublemaker.'
+# 「どうしたの？　かかってこないの？」
+says, 'What's the matter? Aren't you going to come at me?'
+# 「これが博麗神社の巫女の力よ！」
+says, 'This is the power of the Hakurei shrine maiden!'
+# 「妖怪達になんか負けるもんですか！」
+says, 'There's no way I'd lose to a bunch of youkai!'
+# 「むむ、何やつ。」
+says, 'Buh. Who're you?'
+# 「早速手掛かり発見ね」
+says, 'Looks like I've found a clue already.'
+# 「本当にこんな所に売人がいるのかなぁ」
+says, 'Is there really a trader in a place like this?'
+# 「私に隠し事が出来ると思わないでよ」
+says, 'Don't think you can hide anything from me.'
+# 「一体、何処まで続いてるの？この洞窟」
+says, 'Just how long does this cave go on for!?'
+# 「もう！さっきからどういうことなのよ！」
+says, 'Augh! It's just been one thing after another today, hasn't it!'
+# 「あーもうゴチャゴチャうるさい！」
+says, 'Ahhh! It's all such a noisy mess!'
+# 「一体何処に居るのよー！」
+says, 'Where on earth are you!?'
+# 「出たな妖怪！」
+says, 'There you are, you youkai!'
+# 「これで神社が少し大きくなるわ」
+says, 'This will make the shrine a little bigger.'
+
+N:1227:Marisa
+# 「撃ったから動いた。さぁ、これからが本番だぜ」
+says, 'You shot, I moved. Now the real battle begins.'
+# 「全てはアリスがやった。さぁ、そこをどきな！」
+says, 'It was all Alice's fault. Now, get out of the way!'
+# 「判ってないな。もう巻き込まれちまってるんだよ。私も……お前もな」
+says, 'You don't get it. We've been neck-deep in this for a while now... both you and me.'
+# 「どうだ、私と勝負しないか？」
+says, 'How about it? Want to challenge me?'
+# 「うえーい」
+says, 'Bweeeeh.'
+# 「あー？」
+says, 'Ehhh?'
+# 「そうだな。今日の粘菌の繁殖率は中吉だ」
+says, 'Right. The reproduction rate of slime molds today predicts moderate luck.'
+# 「おお？何か障害物っぽい奴が現れたな」
+says, 'Ooh? Some obstacle-like guy has appeared.'
+# 「お前か？色々やってくれたのは」
+says, 'Is it you? The one who was doing all those things?'
+# 「こんな面白そうなもん見つけて手ぶらで帰れるもんか」
+says, 'I can't go home empty-handed from an interesting place like this.'
+# 「ああん？やる気か？」
+says, 'Huh? You wanna go?'
+# 「おっと邪魔が入った」
+says, 'Whoops. Here comes trouble.'
+# 「何か見慣れない奴がウロチョロしてるな」
+says, 'Some new faces I'm seeing running around here.'
+# は箒に跨って突進してくる。
+charges forward riding a broom.
+# 「これは久しぶりの掘り出しもんだぜぇ！」
+says, 'You don't get to find something like this too often!'
+# 「狸に化かされた人がいると聞いてやってきましたー」
+says, 'I heard someone here got fooled by a tanuki?'
+# 「こう修羅場をくぐっているとなぁ、戦場の匂いくらい判るもんだ」
+says, 'When you've lived through bloodshed and carnage, you know the smell of a battlefield.'
+# 「これはまぎれもなく異変だ！」
+says, 'This is definitely an incident!'
+# 「…そういうことか！」
+says, '...so that's how it is!'
+# 「肉食は戦い飽きた」
+says, 'I'm sick of fighting carnivores.'
+# 「とんでもなく深い洞窟だな」
+says, 'What a ridiculously deep cave.'
+# 「とんでもない掘り出し物が見つかりそうだぜ」
+says, 'I feel like I'm gonna dig up something ridiculously good.'
+# 「ようやく敵のお出ましか」
+says, 'Finally, the villain makes an appearance!'
+# 「私は、闇市場の謎を調査しているだけだ！」
+says, 'I'm just, uh, investigating the enigma of the Black Markets!'
+# 「こりゃ阻止しないといけないな！今ここで！」
+says, 'I have to stop this! Right here and right now!'
+
+N:1230:Mamizou
+# 「壮大な狸囃子の始まりじゃ！」
+says, 'Let the majestic tanuki belly-drumming begin!'
+# 「儂の化け力はまだまだ健在じゃ。」
+says, 'My transformation powers are still in good health.'
+# 「儂が来たからには聖人の好きにはさせんて。」
+says, 'Now that I've come here, that saint won't be able to do as she pleases.'
+# 「儂の弾幕変化十番勝負で、みっちりと稽古を付けてやるぞ！」
+says, 'I'll train you well with a 10-round transformation danmaku match!'
+# 「ふぉっふぉっふぉ」
+laughs, 'Hohoho!'
+# 「しょうがないのう」
+says, 'Oh well, what can you do?'
+# 「下品下生の本領発揮といこうかのう」
+says, 'Why don't we show off what the crudest of the crude can really do?'
+# は煙管を吹かしている。
+takes a drag on a pipe.
+
+N:1267:Sumireko
+# 「なんてこった。本当に帰れなくなるなんて」
+says, 'What have I done? Can I really not get home?'
+# 「ああ、どうにかして外の世界に帰りたい」
+whimpers, 'Aah, I want to get back to the Outside World however I can.'
+# 「何とかして戻る手段を考えないと……」
+says, 'I have to think of some way to get home...'
+# 「今度は一体何よ。もう帰らせてよー」
+whimpers, 'What is it now? Just let me go home already.'
+# 「くっ」
+sighs, 'Ugh...'
+
+N:1268:Three Fairies
+# 「いえーい♪いたずら大成功！」
+says, 'Yay~! The prank was a great success!'
+# 「私達の姿は見えてないはずよ」
+whispers, 'They shouldn't be able to see us.'
+# 「いつものように来訪者を道に迷わせるわよっ！」
+whispers, 'Let's make the visitor get lost as usual!'
+# 「川にハメましょうそうしましょう」
+whispers, 'How about we lead them into the river?'
+# 「……努力じゃないのよ。大切なのは、うーん」
+says, '...it's not effort. The important thing is, hmm...'
+# 「三人でかかれば何にも怖くはないわ」
+says, 'There's nothing to be scared of when the three of us are together.'
+# 「私達は、三人で一つ」「一本の矢は簡単に折れても三本束ねれば」「三倍早く矢が尽きるわ！」
+says, 'We three as as one.' 'A single arrow is broken easily, but if three are bundled together-' 'The arrows run out three times faster!'
+
+N:1273:Seiran
+# 「邪魔しなくても撃つぞ！」
+says, 'Obstacle or not, open fire!'
+# 「ためらいなく撃つぞ！」
+says, 'Fire at will!'
+# 「しょうがないから撃つぞ！」
+says, 'There's no alternative, open fire!'
+# 「こちら清蘭、好戦的な地上人と接触した」
+says, 'This is Seiran. I've made contact with a hostile Earthling.'
+# 「これから浄化活動に入る」
+says, 'Proceeding with purification.'
+# 「我々は月の兎のイーグルラヴィ」
+says, 'We are the Moon Rabbit Eagle Ravi.'
+# 「地上は油断も隙も無い」
+says, 'I can't let my guard down while I'm on Earth.'
+
+N:1274:Ringo
+# 「お待ちしておりましたー」
+says, 'I've been waiting for you.'
+# 「手加減無しで遊べそうね！」
+says, 'Looks like I can play with you without holding back!'
+# 「月の流儀に度肝を抜くが良い！」
+says, 'Be amazed by the fighting style of the Moon!'
+# 「穢れた地上の指図など受けないわ」
+says, 'I won't take orders from impure Earthlings.'
+# は団子を頬張っている。
+is stuffing her face with dango.
+# 「喰らえ、大量の不良在庫！(＊スタッフで美味しく食べてね)」
+says, 'Eat this, we've loads of dead stock!' (Leftovers will be enjoyed by the staff afterwards)
+# (MGMG)
+munches.
+# (MGMG)
+munches.
+# (MGMG)
+munches.
+
+N:1275:Doremy
+# 「生身！？もしかして生身！？」
+says, 'A physical body!? Is this your physical body!?'
+# 「今は眠りなさい。貴方の槐安は今作られる」
+soothes, 'Go to sleep. I will craft your Kaian now.'
+# 「あらあら、眠らないのです？」
+says, 'My my, won't you sleep?'
+# 「夢を喰い、夢を創る私に敵うと思うなよ！」
+says, 'Don't think you can challenge me, an eater and creator of dreams!'
+# 「さあ、良い子だからぐっすり眠って全てを忘れちゃいましょう。」
+soothes, 'Now, be a good child, sleep soundly and forget about everything.'
+# はピンク色の妙な物体を弄んでいる。
+plays with a strange pink object.
+# 「そこの哀れな夢の迷子よ。何処に行こうというのか。」
+says, 'Poor dreaming lost child, where are you going?'
+# 「可哀相に……。」
+says, 'You poor thing...'
+
+N:1276:Sagume
+# 「…………」
+says, '......'
+# 「…………」
+says, '......'
+# は無言でこちらを観察している。
+observes you in silence.
+
+N:1277:Clownpiece
+# 「きゃはははは！」
+laughs, 'Kyahahahaha!'
+# 「きゃはははは！面白いことが起こっているわー！」
+laughs, 'Kyahahahaha! Something interesting is going on!'
+# 「イッツ、ルナティックターイム！」
+announces, 'It's Lunatic Time!'
+# 「狂気の世界へようこそ！」
+says, 'Welcome to a world of madness!'
+# 「とてつもないパワーでお前をやっつけちゃうぞー！」
+says, 'I'll beat you down with this tremendous power!'
+# は松明を振り回している。
+waves a torch raised in the air.
+# は楽しげに飛び回っている。
+bounds about energetically.
+# 「火事と喧嘩は江戸の華ってね。」
+says, 'They say fires and fights are the flowers of Edo.'
+# 「サイコーに地獄だぜぇ！」
+says, 'This is the ultimate hell!'
+# 「地獄の妖精を馬鹿にするとは怖いもの知らずめ」
+says, 'You must have a death wish to make fun of a hell fairy!'
+# 「こんな機会滅多にないぜー！」
+says, 'You don't get a chance like this every day!'
+
+N:1278:Junko
+# 「倶に天を戴かずとも憎しみだけが純化する」
+fumes, 'Even if she and I cannot dwell together under heaven, only my hatred will be purified.'
+# 「そして見よ！生死を拒絶した純粋なる霊力を！」
+says, 'Now behold! Pure spiritual force that rejects life and death!'
+# 「そして見よ！純粋なる瑕穢の向こう側を！」
+says, 'Now behold! What lies beyond pure impurity!'
+# 「その憎しみを彼女に当てられないのが悔しくて仕方が無い！」
+fumes, 'That this hatred will never touch her leaves me nothing but vexation!'
+# 「嫦娥よ。見てるか！？」
+says, 'Chang'e, are you watching!?'
+# 「私の力の前では無力！絶対的無力！」
+says, 'You are helpless before my power! Utterly helpless!'
+# はどこか明後日の方向を睨みつけている・・
+is scowling in the wrong direction...
+# 「地上の美しさは穢れに由来するのはよく判った。だがまだ死への恐れが足りない様だな。」
+says, 'I understand that the beauty of the Earth arises from its impurity. But it seems you lack sufficient fear of death.'
+# 「死を恐れよ。命を惜しめ。人間も妖怪も生命を感じる事で我々にひれ伏すしか無くなるのだから。」
+says, 'Fear death. Treasure life. Be it human or youkai, those who value life must bow to us. Because it will disappear.'
+
+N:1279:Hecatia
+N:1280:
+N:1281:
+# 「んもう、待ちくたびれたわよん」
+says, 'Geez, I was getting tired of waiting.'
+# 「オーケーオーケー、相手にしてあげる」
+sing-songs, 'O~kay~o~kay~, I'll take you on.'
+# 「死んでも悔しがれ！」
+says, 'Die and regret it!'
+# 「腕がなるわー。」
+says, 'I'm all aquiver with excitement.'
+# 「よーし、可愛いねぇ。ちょっと遊んでやるわ」
+says, 'All right, you're cute! I'll play with you a little.'
+# 「それだけの理由で貴方を地獄へ堕とす、ただそれだけの理由だ！」
+says, 'For that reason alone, I'll drop you into Hell. That's the only reason!'
+# 「月、地球、異界……殺されたい身体を自分で選べ！」
+says, 'The Moon, the Earth, the Otherworld... choose the body you want to be killed by!'
+# 「どんなもんかと思ったら、なんとガチじゃない(嬉)。」
+says, 'I didn't know what to expect, but it looks like you're serious (happy).'
+# 「地上も地獄みたいになって来たわねぇ。」
+says, 'And now the Earth looks a lot like Hell.'
+# 「罪人が見る月は、こんなものかも知れないよ。」
+says, 'Perhaps this is what the Moon looks like to a sinner.'
+
+N:1297:Yorihime
+# 「月の海には生き物は棲んでいない。生命の海は穢れの海なのです」
+says, 'Nothing lives in the oceans of the Moon. An ocean of life is an ocean of impurity.'
+# 「地上にはこれほど熱い火はほとんどない」
+says, 'I doubt there any many flames on Earth as hot as this.'
+# 「そう、私は神々をその身に降ろして力を借りることができる」
+says, 'Yes, I can call the gods down to my body and borrow their power.'
+# 「怖気づいたのかしら？」
+says, 'Oh, did you lose your nerve?'
+# 「私には八百万の技がある」
+says, 'I have a myriad of techniques.'
+# 「光を斬るのは水を斬るよりもずっと容易いこと」
+says, 'It's much easier to cut through light than to cut through water.'
+# は不敵な笑みを浮かべている。
+wears a fearless smile.
+
+N:1298:Toyohime
+# 「桃は私に運動をしろと言っているのね」
+says, 'The peaches are telling me to exercise.'
+# 「うふふ～お師匠様の言ったとおりね」
+laughs, 'Ohoho~! It's just as Master said.'
+# 「道は邇きに在り而るにこれを遠きに求む」
+says, 'The way may be close by, but that is why you must seek it far away.'
+# 「浅はかなものよ。私と一戦交えるかね」
+says, 'O frivolous one, would you challenge me to combat?'
+# 「穢土に生まれ、悪心に操られし穢身、お前の浄土はここではない！」
+says, 'Child of a filthy world, impure body commanded by malice, this is not your Pure Land!'
+# は桃を頬張っている。
+is stuffing herself with peaches.
+
+N:1299:Rei'sen
+# は半ば逃げ腰で銃を構えている。
+wields her gun half-heartedly.
+# 「何故私がこんな殺伐とした戦いの前線に..」
+mutters, 'Me on the front lines, how did it come to this...'
+
+N:1310:Eternity Larva
+# はひらひらと飛び回っている。
+flutters about.
+# 「今なら新世界の神にでもなれそうな気分よ！」
+says, 'Right now I feel like I could become the god of the new world!'
+# 「夏はどっちの物か、勝負だよ！」
+says, 'It's a battle to decide who summer belongs to!'
+# 「わーい、戦いだ戦いだ！」
+says, 'Yayyy, let's fight, let's fight!'
+# 「やあ！みんな夏しちゃってる？」
+says, 'Hi! Is everyone enjoying summer?'
+# 「これだけ一度に沢山の鱗粉を出せるのは私しかいないわ！」
+explains, 'And the only one who can produce so many scales at once is me!'
+
+N:1311:Nemuno
+# は巨大な包丁をあなたに向けた。
+points a huge kitchen knife at you.
+# 「なんだ？ここはうちのなわばりだべ。」
+says, 'What? This here is my turf.'
+# 「よそ者が勝手に入ってくるな。」
+says, 'Outsiders can't just barge in.'
+# 「いいだろう。お望み通り掻っ捌いてやるぞ。」
+says, 'Fine. I'll cut and dress ya, as you wish.'
+# 「これ以上ここに留まるというなら、お前を開きにして天日に干すぞ！」
+says, 'Stick around any longer, and I'll sun-dry you like a fish!'
+# 「これ以上ここに止まるというなら、お前が越冬用の保存食になるだけだ。」
+says, 'Stick around any longer, and you'll be this winter's larder.'
+
+N:1312:Aunn
+# は大声で呼ばわった。
+makes a loud alarm call.
+# 「あ！」
+says, 'a!'
+# 「うん！」
+says, 'Un!'
+# 「こりゃあ、残念だけど追い出さないといけないわぁ。」
+says, 'Sorry, I'll have to chase you away now.'
+# 「巫女が留守の間は私が侵入者を追い払っているの。」
+says, 'While the shrine maiden's away, I keep out intruders!'
+# 「それ以上神社に居るつもりなら、容赦しないよ！」
+says, 'If you intend to stay in this shrine any longer, I'll show you no mercy!'
+# 「うわ、何をするー」
+says, 'Aah! What do I do!?'
+
+N:1313:Narumi
+# は合掌して微笑んだ。
+presses her hands together and smiles.
+# 「何故だろう、こんなに魔力が溢れ出てくるなんて……。」
+says, 'My, what is happening? I'm overflowing with magical power...'
+# 「誰であろうとも、魔法を専門とする私に敵う筈が無い。」
+says, 'No matter who it is, none can rival I, a magic specialist.'
+# 「残念無念、また来世ー！」
+says, 'A bitter shame! See you in your next life!'
+# 「誰でも良いから、この力を試したい！」
+says, 'It doesn't matter who, I want to try this power out on someone!'
+
+N:1314:Satono
+# は憑かれたように踊っている。
+dances as if possessed.
+# は狂おしく踊っている。
+dances crazily.
+# 「手加減はしないけど、死んだら殺すからねー！」
+says, 'I won't hold back, but if you dare die, I'll kill you!'
+# 「貴方が弱すぎるとお師匠様に怒られちゃうからねー。」
+says, 'If you're too weak to pass, Master will get angry.'
+# 「私達は背後で踊ることで対象の潜在能力を無限に引き出せるの。」
+says, 'By dancing behind our targets' backs, we can bring out their limitless potential.'
+
+N:1315:Mai
+# は憑かれたように踊っている。
+dances as if possessed.
+# は狂おしく踊っている。
+dances crazily.
+# 「あはははは。今度の相手はこいつよ。」
+laughs, 'Ahahahaha. And now your next opponent is this guy.'
+# 「君が選ばれた者なのか、これからテストする。」
+says, 'I'll be testing you, to see if you're a chosen one.' 
+# 「予想外は人生の最高のスパイスさ。」
+says, 'The unexpected is the greatest spice of life.'
+# 「もしかして君が選ばれた者なのかな？」
+says, 'Could you be one of the chosen ones?'
+
+N:1316:Okina
+# は楽しげに鼓を打ち鳴らしている。
+beats a drum merrily.
+# 「見よ！聞け！語れ！秘神の真なる魔力がお前の障碍となろう！」
+says, 'See it! Hear it! Speak of it! The true magic of the secret god shall be your hindrance!'
+# 「見よ！聞け！語れ！これが障碍の秘神の姿だ！」
+says, 'See it! Hear it! Speak of it! The figure of the secret god of hindrances!'
+# 「幻想郷の縁起は我々、障碍の者を抜きにしては語れぬ。」
+says, 'Without we of hindrance, the origins of Gensoukyou will ever remain unwritten.'
+# 「真なる秘神の力、全て味わい尽くすが良い！」
+says, 'Savor every last drop of the true power of the secret god!'
+# 「まさに烏滸の沙汰！愚直に退け！」
+says, 'Such utter cheek that you crow of! Begone in earnest!'
+# 「真なる秘神の秘術をしかと見よ！」
+says, 'Behold the true mystic arts of the secret god!'
+# 「はっはっは、面白い、面白い！」
+laughs, 'Interesting, interesting!'
+# 「天に輝く七星の輝きが皆の心に驚波をもたらすだろう。」
+says, 'The brilliance of the Seven Stars shining above will bring wonderment to the hearts of all.'
+
+N:1318:Kosuzu
+# はクスクス笑っている。
+giggles.
+# の姿を鬼のような影が覆っている...
+is wreathed in demonic shadow...
+# 「あの方の言ったとおりね。みんなこれが目的なんだって」
+says, 'It's just as she said. Everyone's after this scroll.'
+# 「これを正しく使えば幻想郷のパワーバランスを正せる筈よ」
+says, 'If used properly, this could restore balance to Gensoukyou.'
+
+N:1319:Joon
+# はこちらを馬鹿にするように高笑いしている。
+laughs mockingly at the ridiculous creature before her.
+# 「私は姉さんと違ってお金を集めるのが得意なんだから。」
+says, 'Unlike my older sister, I'm good at making money.'
+# 「よくここまで辿り着いたわね。」
+says, 'Nicely done, making it this far.'
+# 「外道？浅ましい？結構結構。私にとっては褒め言葉だわー。」
+says, 'Fiend? Shameful? Lovely! Music to my ears!'
+# 「私は依神女苑。泣く子も黙る疫病神。」
+says, 'I'm Joon Yorigami, the plague god who'll swindle even a crying child.'
+
+N:1320:Shion1
+# 「私は依神紫苑。泣く子も貧する貧乏神。」
+says, 'I'm Shion Yorigami, the poverty god who'll ruin even a crying child.'
+# はタクシーに轢かれそうになった。
+almost gets run over by a taxi.
+# は不安げに佇んでいる。
+stands there looking anxious.
+
+N:1321:Shion2
+# 「私が本気になった以上、ここにいる全員を負けさせてやる。」
+says, 'When I'm done here, everyone will be a loser.'
+# 「誰も得をしない。誰も幸せにならない。全員が等しく不幸の世界を見せてやる！」
+says, 'No one wins. No one finds happiness. I'll show you a world where we all suffer together!'
+# 「最凶最悪は一人で十分。それこそが私、貧乏神の依神紫苑だ！貧しさに怯えて死ね！」
+says, 'I was the worst and most disastrous all on my own! I am the god of poverty, Shion Yorigami! Die cowering before poverty!'
+# 「私は貧乏神。全人類の不幸を一身に背負うわ。その負のオーラも無尽蔵だ！！」
+says, 'I am the god of poverty. I carry the misfortune of all mankind. This negative aura is inexhaustible!'
+# 「誰が貧乏人だ！貧乏のことは言うなー！」
+says, 'Who are you calling poor!? Don't you dare say that!'
+# は凄まじい負のオーラを撒き散らしている。
+emits a horrible negative aura.
+
+N:1322:Sumireko (dream arena)
+# 「おや？いつものように居眠りしたのに、ここは一体？」
+says, 'Oh? I nodded off as usual, but where's this?'
+# 「まさかこの闘いが夢の中だなんて。」
+says, 'I can't believe this battle is just a dream.'
+# 「あーあ、目が覚めたら現国かあ。あれ超つまんないのよね。」
+says, 'Ahh, when I wake up, it's back to Japanese class... that's just so super-dull.'
+# 「ドッペルゲンガーの怪。そう、これこそが私の真のオカルト。」
+says, 'The Doppelganger... yes, this is my true Occultism.'
+# 「何てアメージング！やっぱり幻想郷は不思議な場所ね！」
+says, 'This is amazing! I knew Gensoukyou was weird!'
+# 「このやりとりももう何度目かしら。」
+says, 'How many times have we had this exchange?'
+# 「全部記録をとってSNSに投稿して、イイネを集めまくってやるぜ！」
+says, 'After I record all of this and post it to social media, I'm gonna get tons of likes!'
+# 「稀代のサイキッカー、宇佐見菫子の本当の力を見せてやる！」
+says, 'I'll show you the power of the unparalleled psychic, Sumireko Usami!'
+
+N:1341:Eika
+# 「こんなところで暴れるから積み石がみんな崩れちゃったよ。」
+says, 'All the stones we were stacking fell over because of your thrashing around!'
+# 「子供達が頑張って積んだのに……。」
+says, 'The children worked so hard on those...'
+# 「お前なんて石にあたって死んじまえ！」
+says, 'Someone like you deserves to be stoned to death!'
+# 「今すぐここから出ていけ！」
+says, 'Get out of here, now!'
+# 「積み石は子供達の大切な作品なのにー！」
+says, 'Every stone pile was a precious work of art made by the children!'
+# はあなたの暴挙に怒り心頭のようだ。
+looks furious with your violent behaviour.
+
+N:1342:Urumi
+# 「愛しの古代魚達の餌にしてやろう。」
+says, 'I'll feed you to my beloved ancient fish.'
+# 「お望み通り彼岸送りしてやろう！」
+says, 'I'll send you off to Higan just as you wish!'
+# 「今なら安全に送り返してやっても良いんだが……。」
+says, 'If you turn back now, I can send you home safely...'
+# 「私も久しく人を襲っていないんでねぇ……。」
+says, 'It's been a while since I last attacked someone...'
+# 「ふっふっふ、私の代わりにこの子を見といてくれないか？」
+sniggers, 'Could you please watch my baby for a moment?'
+# は御包みのようなものを優しく抱いている。
+cradles something that looks like a wrapped-up baby.
+
+N:1343:Kutaka
+# 「ここで大人しく帰って頂きたいと思います！」
+says, 'I'd like to politely request that you behave yourself and go home!'
+# 「水際作戦決行中です！今すぐ引き返してください！」
+says, 'Coastal operations underway! Please turn back now!'
+# 「なる程、やはり危険人物でしたねぇ」
+says, 'That's it! I knew you were a dangerous individual.'
+# の頭上のヒヨコがピヨピヨ鳴いている。
+is alerted by a chick sitting on her head.
+# はホイッスルを吹き鳴らした。
+blows a whistle.
+
+N:1344:Yachie
+# 「地獄は絶望的に広いですよ。私が案内しましょう。」
+says, 'Hell is hopelessly vast. Allow me to guide you.'
+# 「敵のところまで案内してやりましょうか？」
+says, 'Shall I guide you to the enemy's location?'
+# 「私は鬼傑組の組長です。それ以上に説明が必要でしょうか？」
+says, 'I am the leader of the Kiketsu Family. Do you really need any further explanation?'
+# は見下すような目であなたを見ている。
+looks down on you condescendingly.
+# 「搦手こそが最短最良だ！」
+says, 'There is no route swifter or more effective than the rear!'
+
+N:1345:Mayumi
+# 「貴様から感じる霊気……」
+says, 'That aura I feel from you...'
+# 「これは埴輪兵士が作られてから初めての緊急事態だわ！」
+says, 'This is the first emergency situation we've had since the Haniwa Soldiers were created!'
+# 「早くみんなに知らせないと！」
+says, 'I have to go alert everyone, quick!'
+# はハニワのような剣？をあなたに向けた。
+points a sword-shaped haniwa(?) at you.
+
+N:1346:Keiki
+# 「今なら見逃してあげると言っているのに気が付かないなんて。」
+says, 'I'm saying that I'll let you off the hook if you back off now, but you don't seem to notice.'
+# 「しかたがない。しかたがないねぇ……。」
+says, 'What a shame. What a crying shame...'
+# 「神域を冒して乗り込んできておいて逃げられると思うなよ？」
+says, 'You've violated my sanctuary, and you think you can get away with it?'
+# 「肉のお前を滅して、土と水で美しく造り直してやる！」
+says, 'I'll destroy your body of flesh, and build you anew from soil and water!'
+# 「私は畜生どもから人間霊を守る造形神よ。」
+says, 'I am the sculptor god who protects the human spirits from the foul beasts.'
+# (Create!)
+[Create!]s
+# は何かを削り出している。
+sculpts something.
+
+N:1347:Saki
+# 「どんな策を弄しようとも最後に勝つのは力だけだ。」
+says, 'No matter what schemes you pull, strength is what wins in the end.'
+# 「肌で感じろよ、畜生の理を！最後は暴力が勝つ！」
+says, 'Experience the law of beasts with your own skin! Violence wins in the end!'
+# 「ふっふっふ、心地よいな。」
+says, 'Heh-heh-heh, nice.'
+# 「私は強いぞ。遠慮なく全力を出し切れよ！」
+says, 'I'm strong. Hold nothing back and come at me!'
+# 「程なくして畜生界は我ら勁牙組の物になるだろう。」
+says, 'Before long, our Keiga Family will take hold of the Animal Realm.'
+# は楽しげに宙を駆けている。
+joyfully races through the air.
+# 「畜生界一のパワーとスピードを見せてやろう！」
+says, 'I'll show you the best power and speed in the Animal Realm!'
+# 「お前の強さなら最初から幹部でも良いぞ」
+says, 'With that might of yours, you could start at a high rank right away.'
+
+N:1355:Miyoi
+# はパタパタと両手を振って挨拶してきた。
+waves both hands in greeting.
+# 「ゆっくりして行って下さいよ」
+says, 'Please, take it easy.'
+# 「これは気づきませんで」
+says, 'I didn't notice you were empty!'
+# 「これはサービスよ」
+says, 'It's on the house.'
+# 「酔いで心を埋めてしまえば妖怪なんて出てこない」
+says, 'If you drink enough to forget your worries, you won't run into any youkai.'
+# 「今こそ立ち上がってマスタースパークよ！」
+says, 'It's time for your comeback, Master Spark!'
+# 「これを呑んで全てを忘れて貰いましょう」
+says, 'Drink and forget everything.'
+
+N:1357:Mike
+# 「へっ！？」
+exclaims, 'Hehh!?'
+# 「ああん？力ずくで奪おうって言うのかい？」
+says, 'Ahn? So you're taking them by force?'
+# 「それなりの対価ってもんが必要でしょ？」
+says, 'You'll offer me something of equal value, right?'
+# はあなたを差し招いてくる。
+makes a beckoning gesture.
+
+N:1358:Takane
+# 「こんな僻地に珍しいね」
+says, 'Don't see your type out in the sticks often.'
+# 「さっさと帰った帰った」
+says, 'Go home already, get outta here.'
+# 「騒ぎが大きくなる前に始末しないとなぁ！」
+says, 'I'd better deal with this before it becomes a huge fuss!'
+# はあなたの懐具合を値踏みしているようだ。
+gauges your financial situation.
+# 「まだまだ稼げるネタなんでね！これを奪われるわけにはいかないよ！」
+says, 'This is still a profitable enterprise! I can't let you steal it!'
+
+N:1359:Sannyo
+# 「うせな！煙草の味が濁る」
+says, 'Shut it! You're making my tobacco taste bad.'
+# 「どうやらただの暴徒じゃあないみたいだねぇ」
+says, 'Guess you're not just out on a riot.'
+# 「ここから先は立ち入り禁止だ」
+says, 'Beyond here, entry is forbidden.'
+# 「怪我したくなければさっさと去れ」
+says, 'If you don't want to get hurt, then scram.'
+# は「おろかものめが」と呟いた。
+mutters, 'You absolute fool.'
+# は美味そうに煙草をくゆらせている。
+is enjoying her smoke.
+# 「もう何も見られない様にしてやる」
+says, 'You won't be able to see anything after I'm done with you.'
+# 「去らないというのなら力ずくで追い返してやろう」
+says, 'If you don't get out, I'll force you to.'
+
+N:1360:Misumaru
+# 「悪い事は言わない。今すぐ引き返しなさい」
+says, 'I'm saying this for your own good. Turn back immediately!'
+# は溜め息をついた。
+sighs in exasperation.
+# 「この先は無酸素エリアです」
+says, 'Up ahead is an anoxic area.'
+# 「これは脅しでは無いと言うのに……」
+says, 'I am not saying this as a threat...'
+# 「自ら去るか、運ばれて去るか今すぐ選びなさい！」
+says, 'Will you leave, or be carried out? Make your choice!'
+
+N:1361:Tsukasa
+# 「こーん」
+barks, 'Kon'
+# 「ほら私の言っていたとおりになったわ」
+says, 'See, it happened just like I said it would.'
+# 「面白くなってきたわー！」
+says, 'This is getting interesting~!'
+# はニヤニヤと笑っている。
+smirks.
+# 「ふふふ、しーらないっと」
+says, 'Hehehe, don't say I didn't warn yooou.'
+# 「弱い人からの仕事は受けないことにしているの」
+says, 'I make it a rule to not take jobs from weak people.'
+
+N:1362:Megumu
+# 「おやおや面白いお方がいらっしゃる」
+says, 'Why, what's this? We seem to have an interesting guest.'
+# 「手加減無用！」
+says, 'Holding back is pointless!'
+# 「手加減無用！」
+says, 'Holding back is pointless!'
+# は足を組んで余裕の態度だ。
+stands relaxedly with one leg crossed.
+# は悠々とあなたを睨めつけている。
+watches you without concern.
+# は配下の狐と何やら密談している。
+talks privately with a fox subordinate.
+
+N:1363:Chimata
+# 「何人たりとも神の手から逃れられる物か」
+says, 'None can escape the hand of God.'
+# 「こういう賊がいるからいつまで経っても平和が訪れない」
+says, 'That robbers like you exist is why peace cannot be achieved.'
+# 「お前の所有物は全て開放してやろう」
+says, 'Allow me to liberate all of your possessions!'
+# 「すべて無(かみ)に返そう」
+says, 'Let us return all things to nothing.'
+# 「これで終わりだ！」
+says, 'This marks the end!'
+# は＄マークのようなポーズをとっている。
+strikes a pose shaped like a $ sign.
+
+N:1364:Momoyo
+# 「また誰か来た！盗掘者どもめ、大勢で来やがったな」
+says, 'Another one! You damn thieves come in droves.'
+# 「この場で徹底的に叩きのめしてやろう！」
+says, 'I'll give you a thrashing right here and now!'
+# は「レッツディガップ！」と楽しげだ。
+cheerily exclaims, 'Let's Dig Up!'
+# 「喜び震えよ！山がお前の墓標だ！」
+says, 'Tremble in joy! The mountain shall be your grave!'
+# 「正々堂々とした盗掘者は大歓迎だ」
+says, 'I'll always give a warm welcome to thieves who play fair and square!'
+
+N:1366:Yuuma
+# は忍び笑いを漏らしながら石油を掘っている。
+digs for oil, sniggering to herself.
+# 「一つ掘っては金のためー」
+sings, 'The first is dug for gold~'
+# 「二つ掘っては国のためー」
+sings, 'The second is dug for land~'
+# 「三つ掘っては憎しみのため……」
+sings, 'The third is dug for hate...'
+# 「……また石油泥棒が来たか」
+says, '...another oil thief?'
+# 「あっはっは！」
+cackles, 'Ah-hah-hah!'
+# 「あっはっは！」
+cackles, 'Ah-hah-hah!'
+# 「もがき苦しんで石油の一滴となれ！」
+says, 'Writhe in agony and become a drop of oil!'
+# 「栄養価が高そうだから私が呑み込んでやろう」
+says, 'You look nutritious, so I'll be the one to gobble you up.'
+# 「最高に胃袋が喜ぶ夜になりそうだ！」
+says, 'My stomach will be glad tonight!'
+# 「お前のその強欲さ、悪くないな」
+says, 'You're nice and greedy, I'll give you that.'
+# 「クックック、狂人がまた一人増えたな」
+sniggers, 'Keh-heh-heh! There's another crazy one!'
+# 「手始めにお前が派手に散れい！」
+says, 'First of all, you'll fall in style!'
+# はあなたを食べたらどんな味がするのか考えているようだ。
+wonders what you'd taste like.
+
+N:1368:Mizuchi
+# 「いつからだろう。この幻想郷から混沌が失われたのは」
+says, 'How long has it been? Since Gensoukyou lost its chaos?'
+# 「不自然な秩序は何処かで崩壊するというのに」
+says, 'Unnatural order is bound to crumble somewhere.'
+# 「ふん。無知とは残酷なものだ」
+says, 'Hmph. Ignorance is such a cruel thing.'
+# 「人間は妖怪に敗れたのか」
+fumes, 'Did humans lose to youkai?'
+# の首にかかった鎖がジャラリと鳴った。
+jangles as she moves, chained about the neck.
+# は不気味に笑っている。
+laughs an eerie laugh.
+
+N:1385:Enoko
+# 「それで本気を出したの？」
+says, 'So you've got serious?'
+# 「この世は弱肉強食だ！弱かったら死ね！」
+says, 'In this world, it's survival of the fittest! If you're weak, then die!'
+# 「お前を捉えて勁牙組に入隊させてやる！」
+says, 'I'll capture you and enlist you in the Keiga Family.'
+# 「いざ勝負だ！よく噛んで死ねい！」
+says, 'The fight begins! I'll grind you to death with my fangs!'
+# は両手のトラバサミを鳴らしている。
+makes snapping noises with the beartraps on her arms.
+
+N:1386:Biten
+# 「幻想郷の斉天大聖とは私の事だ！よく覚えときなー」
+says, 'I am Gensoukyou's one and only Great Sage, Heaven's Equal! Remember it well!'
+# 「ああん、喧嘩売っとんのかワレ」
+says, 'Hey! Are you trying to pick a fight?'
+# 「さあさあ、かかってこい！手加減の仕方は勉強中だけどな！」
+says, 'Now, bring it on! But know I'm still learning how to keep my strength in check!'
+# 「幻想郷の天は我にある！ひれ伏せるが良い！」
+says, 'The Heavens of Gensoukyou are within my grasp! You would do well to grovel!'
+# は透明な棒を頭上でぶん回している。
+twirls a transparent staff over her head.
+
+N:1387:Chiyari
+# 「ここから生きて返すつもりなんてサラサラないけどな！」
+says, 'It'll take you blood, sweat, and tears to leave here alive!'
+# 「饕餮に敵を見つけたら構わず殺せと言われてたな」
+says, 'I was told to off any of Toutetsu's enemies without a second thought.'
+# 「誰がチュパカブラだ！」
+says, 'Who're you calling a chupacabra!'
+# 「いつものように口を封じる！末代まで恨め！」
+says, 'I'll shut you up as usual! Hold your grudge forever!'
+# の掌から血が流れ落ちている...
+has blood flowing from her palms...
+
+N:1388:Hisami
+# 「ふふふ。私から逃げられるとお思いで？」
+smirks, 'You think you can escape from me?'
+# 「貴様ごときが残無様に会うなど10年早いわ」
+says, 'If you want to meet Lady Zanmu, you're 10 years too early.'
+# 「地獄へようこそ」
+says, 'Welcome to Hell.'
+# 「案内するのは死霊だけだがな！」
+says, 'I guide only the spirits of the dead!'
+# 「さあさあ、地獄の果てまでもご案内致しましょう！」
+says, 'Come, come, allow me to guide you to the ends of Hell!'
+
+N:1389:Zanmu
+# 「儂は虚無を使って、異変を平定する者だ」
+says, 'I am the one who wields nothingness to quell this incident.'
+# 「儂が欲しいのは未来だ。全てを操って未来を作る」
+says, 'What I desire is the future. All my manipulations are to create that future.'
+# 「このような虚無の世界に何用だ」
+says, 'What sort of matter brought you to this world of nothingness?'
+# 「虚無に苦しめ！それが儂からの手土産だ！」
+says, 'Feel the bane of nothingness! Let that be my gift to you!'
+# 「全力で空想を越えよ！」
+says, 'Overcome this fantasy with all your might!'
+# 「選ぶがいい。全てを忘れるか、無に帰すかを！」
+says, 'Make your choice. Forget everything, or become nothing!'
 
 N:*:Default lines
 #Gensoukyou uniques have no default lines
