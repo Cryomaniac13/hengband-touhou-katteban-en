@@ -289,13 +289,13 @@ N:1112:Kaguya
 # 「何やら騒がしいわね。どうしたのかしら。」
 says, 'There's some commotion. I wonder what's happened.'
 # 「今まで、何人もの人間が敗れ去っていった五つの難題。貴方に幾つ解けるかしら？」
-says, 'My five requests which so many have failed to complete... I wonder how many you can fulfill?
+says, 'My five requests which so many have failed to complete... I wonder how many you can fulfill?'
 # 「まぁいいわ。そんなに私と戦いたいのならやりましょう？」
 says, 'Well, no matter. If you're eager to fight, then why don't we begin?'
 # 「さぁそろそろ、心の準備は出来たかしら。」
 says, 'It's about time. Have you steeled yourself?'
 # 「焦らなくても見せてあげるわよ。本当の月が持つ毒気を！それと、私からの美しき難題を！」
-says, 'There's no hurry, I'll show you... the miasma of the true moon! And, my beautiful impossible requests!
+says, 'There's no hurry, I'll show you... the miasma of the true moon! And, my beautiful impossible requests!'
 # 「ここには誰も居ない。誰も訪れない。退屈過ぎて死にそうだわ。」
 says, 'Nobody else is here. Nobody visits. I'm bored to death.'
 
@@ -325,7 +325,7 @@ says, 'Who goes there!?'
 
 N:1115:Minoriko
 # 「神様たる物、身に纏う香りも気をつけないと。」
-says, 'As a god, one must put a great deal of care into their odour.
+says, 'As a god, one must put a great deal of care into their odour.'
 # 「あ、ちなみに私は豊穣の神ね」
 says, 'Oh, by the way, I'm the harvest god.'
 # 「私はただの八百万分の一の神。この先は、神様がごろごろしているんだから」
@@ -489,7 +489,7 @@ says, 'I can see it. My third eye will reflect the contents of your mind!'
 # 「私には一切隠し事は出来ません。」
 says, 'No one can hide anything from me.'
 # 「さあ、心に武器を持って！自分の心象と戦うが良いわ！」
-says, 'Now, arm your heart! And do battle with your own mental image!
+says, 'Now, arm your heart! And do battle with your own mental image!'
 # 「眠りを覚ます恐怖の記憶（トラウマ）で眠るがいい！」
 says, 'Now, sleep with this trauma that will leave you sleepless!'
 # 「あ、今もっと強い技を思い出したわね？ふむふむ、参考にしておくわ。」
@@ -529,7 +529,7 @@ says, 'This isn't enough to sate my violence! The nuclear reactions within me de
 # 「異物発見！融合炉の温度低下に要注意。即座に異物を排除せよ！」
 announces, 'Foreign substance detected! Significant drop in reactor core temperatures requires urgent attention. The foreign substance is to be immediately eradicated!'
 # 「私が飲み込んだ神の炎！　核エネルギーで跡形もなく溶けきるがいいわ！」
-says, 'The divine flames that I swallowed! Their nuclear energy will melt you away without a trace!
+says, 'The divine flames that I swallowed! Their nuclear energy will melt you away without a trace!'
 # 「忘れられた灼熱地獄へ落とされるなんて相当なうっかりさん？」
 scoffs, 'How careless could you have been, to fall into the Hell of Blazing Fires?'
 # 「不純物が喋った！」
@@ -707,7 +707,7 @@ says, 'My Taoist arts have been literally reborn, and now thou shalt receive the
 # 「しまった、話しかける奴を間違えた」
 says, 'Egads... to address this person was to make an error.'
 # 「どうだ？この美しき戦略は」
-says, 'What dost thou think of it? My beautiful strategy.'
+says, 'What dost thou think of it? My beauteous strategy.'
 # 「良かろう、修行の成果を見せてやる。」
 says, 'So be it, I shall display the fruits of my training.'
 

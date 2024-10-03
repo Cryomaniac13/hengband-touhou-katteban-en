@@ -11789,7 +11789,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sへDDTを喰らわせた！",
         "You hit %s with DDT!"),						MELEE_MODE_MA,20, 18, 8, 8, MELEE_STUN2 ,10},
 	{ _("%sへヒートナックルを放った！",
-        "You hit %s with Heat Knuckle"),               MELEE_MODE_MA,21, 15, 6, 6, MELEE_FIRE ,5},
+        "You hit %s with Heat Knuckle!"),               MELEE_MODE_MA,21, 15, 6, 6, MELEE_FIRE ,5},
 	{ _("%sへマッハパンチを放った！",
         "You hit %s with a mach punch!"),                 MELEE_MODE_MA,22, 12, 7, 7, MELEE_STUN ,4},
 	{ _("%sへ虎咬拳を放った！",
@@ -12537,7 +12537,7 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%sにトラバサミのデスロールを見舞った！",
         "You hit %s with a beartrap death roll!"),   	MELEE_MODE_ENOKO,45, 40, 10, 10, MELEE_DEC_ATK ,10 },
 	{ _("%sを三つの顎で噛んで噛んで噛みまくった！",
-        "You keep chomping and chomping and chomping on %s with three of your jaws!"),   MELEE_MODE_ENOKO,47, 40, 12, 12, MELEE_DELAY ,12 },
+        "You keep chomping and chomping and chomping on %s with your three jaws!"),   MELEE_MODE_ENOKO,47, 40, 12, 12, MELEE_DELAY ,12 },
 
 	{ _("終端用dummy", "terminator dummy"),0,0,0,1,1,0}
 };

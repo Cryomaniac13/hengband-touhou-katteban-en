@@ -2936,7 +2936,7 @@ void compound_drug(void)
 			rsv = SV_POTION_POLYMORPH;
 			if(one_in_(3))c_put_str(TERM_WHITE,_("乳鉢が溶けて崩れた・・", "Your mortar melts and crumbles..."),9 , 8);
 			else if(one_in_(2))c_put_str(TERM_WHITE,_("蒸留器が虹色の液を吐き出した！",
-                                                        "Iridiscent liquid flows out of distiller!"),9 , 8);
+                                                        "Iridescent liquid flows out of the distiller!"),9 , 8);
 			else c_put_str(TERM_WHITE,_("大釜が不自然に捻くれた・・",
                                         "The cauldron twists in an unnatural way..."),9 , 8);
 		}
@@ -2949,9 +2949,9 @@ void compound_drug(void)
 			else if(one_in_(2))
 				c_put_str(TERM_WHITE,_("空から鳥が落ちてきた。", "A bird falls out of the sky."),9 , 8);
 			else if(p_ptr->town_num == TOWN_EIENTEI)
-				c_put_str(TERM_WHITE,_("窓の外の竹林が一斉に枯れた。", "Bamboo outside window suddenly withers."),9 , 8);
+				c_put_str(TERM_WHITE,_("窓の外の竹林が一斉に枯れた。", "Bamboo outside the window suddenly withers."),9 , 8);
 			else
-				c_put_str(TERM_WHITE,_("窓の外の木々が一斉に枯れた。", "Trees outside window suddenly wither."),9 , 8);
+				c_put_str(TERM_WHITE,_("窓の外の木々が一斉に枯れた。", "Trees outside the window suddenly wither."),9 , 8);
 		}
 
 		else if(cost_mod < 30000)
@@ -2963,7 +2963,7 @@ void compound_drug(void)
 			else if(EXTRA_MODE)
 				c_put_str(TERM_WHITE,_("爆音がダンジョンを揺るがした！", "The dungeon shakes from the explosion!"),9 , 8);
 			else if(p_ptr->town_num == TOWN_EIENTEI)
-				c_put_str(TERM_WHITE,_("爆音が竹林を揺るがした！", "Bamboo forest shakes from the explosion!"),9 , 8);
+				c_put_str(TERM_WHITE,_("爆音が竹林を揺るがした！", "The bamboo forest shakes from the explosion!"),9 , 8);
 			else
 				c_put_str(TERM_WHITE,_("爆音が街を揺るがした！", "The town shakes from the explosion!"),9 , 8);
 		}
@@ -2997,7 +2997,7 @@ void compound_drug(void)
                                         "The items in the pharmacy room suddenly become garishly colored!"),9 , 8);
 			else
 				c_put_str(TERM_WHITE,_("調剤室の品々がブラックホールに吸い込まれた！",
-                                        "The items in the pharmacy room get sucked in a black hole!"),9 , 8);
+                                        "The items in the pharmacy room get sucked into a black hole!"),9 , 8);
 		}
 
 		c_put_str(TERM_WHITE,_("調剤に失敗した・・", "Chemistry failed..."),10 , 8);
@@ -3113,7 +3113,7 @@ bool kogasa_smith(void)
 	{
 
 
-		if(one_in_(4)) 		q = _("「驚きの仕事しますよ」", "'It's a surprising job.'");
+		if(one_in_(4)) 		q = _("「驚きの仕事しますよ」", "'The results of my work will surprise you.'");
 		else if(one_in_(3))	q = _("「是非私に任せてくれませんか？」", "'Will you leave it to me?'");
 		else if(one_in_(2))	q = _("「そこで私の出番ですよー！」", "'That's where I come in!'");
 		else			q = _("「私は鍛冶も得意なんですよ」", "'I'm also good at blacksmithing.'");
@@ -3250,20 +3250,20 @@ void exbldg_search_around(void)
 
 	case BLDG_EX_UDONGE: //うどんげの行商
 		msg1 = _("ダンジョンにホワイトボードが置かれ、兎の薬売りが脇に立っている。",
-                "A whiteboard stand there, with a rabbit selling medicine by the side.");
+                "A whiteboard stands there, with a rabbit selling medicine by the side.");
 		msg1_2 = "";
 		msg2 = _("話しかけますか？", "Talk?");
-		msg3 = _("薬売りは帰っていった。", "The medicine seller went home.");
+		msg3 = _("薬売りは帰っていった。", "The medicine seller has gone home.");
 		break;
 	case BLDG_EX_SUWAKO: //諏訪子
 		msg1 = _("諏訪子が冬眠している。", "Suwako is hibernating here.");
 		msg1_2 = "";
 		msg2 = _("つついてみますか？", "Poke her?");
-		msg3 = _("諏訪子はさらに深くへと潜って行った。", "Suwako went deeper into the dungeon.");
+		msg3 = _("諏訪子はさらに深くへと潜って行った。", "Suwako has gone deeper into the dungeon.");
 		break;
 	case BLDG_EX_IKUCHI: //キノコ
 		msg1 = _("沢山のキノコが輪のような形に連なって生えている。",
-                "Many mushroooms are growing in a big circle here.");
+                "Many mushrooms are growing in a big circle here.");
 		msg1_2 = "";
 		msg2 = _("採取していきますか？", "Collect some?");
 		msg3 = _("キノコの採取は済んだ。", "You've already gathered mushrooms.");
@@ -3320,7 +3320,7 @@ void exbldg_search_around(void)
                 "You are in a dark space with many doors floating around. Someone stands before you...");
 		if(p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_MARISA || p_ptr->pclass == CLASS_AYA || p_ptr->pclass == CLASS_CIRNO)
 			msg1_2 = _("隠岐奈「おや、また来たのか。加護でも授けてほしいのか？」",
-                        "Okina - 'Oh you again? Do you want me to give you my blessing?'");
+                        "Okina - 'Oh, you again? Do you want me to give you my blessing?'");
 		else if(p_ptr->pclass == CLASS_MAI || p_ptr->pclass == CLASS_SATONO)
 			msg1_2 = _("隠岐奈「任務は順調のようだな。それとも手助けが欲しいのか？」",
                         "Okina - 'Your mission seems to be going well. Do you need some help?'");
@@ -3329,7 +3329,7 @@ void exbldg_search_around(void)
                         "Okina - 'Hey, outsider. Have you been feeling well?'");
 		else
 			msg1_2 = _("　「二童子の奴は何をしているんだ？妙な奴が迷い込んできたぞ。」",
-                        "   'What are those two children are doing? A stranger just wandered in.'");
+                        "   'What are those two children doing? A stranger just wandered in.'");
 		msg2 = _("この場に留まりますか？", "Stay here?");
 		msg3 = _("奇妙な空間はもうない。", "The strange space is no longer here.");
 		break;
@@ -3347,11 +3347,11 @@ void exbldg_search_around(void)
 				msg1 = "「…物は相談なんだが。";
 				msg1_2 = "何も言わずにその宝塔を$1,000,000で売ってほしい。」";
 #else
-                msg1 = "'...I want buy that pagoda from you for $1,000,000.";
+                msg1 = "'...I want to buy that pagoda from you for $1,000,000.";
                 msg1_2 = "Just don't tell anyone.'";
 #endif
 				msg2 = _("売りますか？", "Sell it?");
-				msg3 = _("すでに宝塔を手放した。", "You already handed over the pagoda.");
+				msg3 = _("すでに宝塔を手放した。", "You've already handed over the pagoda.");
 			}
 			else
 			{
@@ -3361,7 +3361,7 @@ void exbldg_search_around(void)
                         "'Hey! I have a map of this floor, do you want to take a look?'");
 				msg1_2 = "";
 				msg2 = format(_("$%dらしい。買いますか？", "It costs $%d. Purchase?"),price);
-				msg3 = _("すでに地図を見せてもらっている。", "You already have examined the map.");
+				msg3 = _("すでに地図を見せてもらっている。", "You've already examined the map.");
 			}
 		}
 		break;
@@ -3402,12 +3402,12 @@ void exbldg_search_around(void)
 
 	case BLDG_EX_ZASHIKI: //座敷わらしのテレワーク
 
-		msg1 = _("眼鏡をかけた座敷わらしが話しかけてきた...", "Glasses-wearing zashiki-warashi are talking...");
+		msg1 = _("眼鏡をかけた座敷わらしが話しかけてきた...", "A glasses-wearing zashiki-warashi starts talking...");
 		if (p_ptr->prace == RACE_ZASHIKIWARASHI)
 		{
 			if(one_in_(3))
 				msg1_2 = _("「あなたが留守の間、私が代理で拠点を担当しますね」",
-                        "'I'll be in charge of exploration base while you're away'");
+                        "'I'll be in charge of the exploration base while you're away'");
 			else if (one_in_(2))
 				msg1_2 = _("「やはり時代はリモートね！でも快適なのにすごく仕事が増えている気がするの」",
                         "'It's truly the era of remote work! However, I have the feeling amount of work has increased'");
@@ -3423,7 +3423,7 @@ void exbldg_search_around(void)
                         "'I'm in charge of taking care of your exploration base.'");
 			else if (one_in_(2))
 				msg1_2 = _("「少しだけあなたの探索をお手伝いしましょう」",
-                        "'It might be just a bit, but I'll help you with exploration base.'");
+                        "'It might be just a bit, but I'll help you with your exploration.'");
 			else
 				msg1_2 = _("「あなたの家に泥棒が入らないのは私がちゃんと見張っているからですよ？」",
                         "'Do robbers avoid your house because I'm watching over it?'");
@@ -3747,7 +3747,7 @@ void exbldg_search_around(void)
 
 						if (p_ptr->stat_max[stat] == p_ptr->stat_max_max[stat]) break;
 						prt(_("能楽の神として、潜在能力を引き出してやろう！",
-                            "As the god of Noh, I'll draw out your latent abilities!"), 7, 21);
+                            "As the god of Noh, I'll draw out your latent abilities!'"), 7, 21);
 						do_inc_stat(stat);
 						flag_done = TRUE;
 						break;
@@ -3772,7 +3772,7 @@ void exbldg_search_around(void)
 							break;
 
 						prt(_("宿神として、技能を高めてやろう！",
-                            "As the god of outcasts, I shall raise your skills!"), 7, 21);
+                            "As the god of outcasts, I shall raise your skills!'"), 7, 21);
 
 						//技能レベルが20上昇
 						p_ptr->skill_exp[skill_index] += SKILL_LEV_TICK * 20;
@@ -3796,7 +3796,7 @@ void exbldg_search_around(void)
 					{
 
 						prt(_("星神として、行く手の闇を払ってやろう！",
-                            "As the god of stars, I shall drive away the darkness!"),7,21);
+                            "As the god of stars, I shall drive away the darkness!'"),7,21);
 						mass_genocide_3(0, FALSE, TRUE);
 						wiz_lite(FALSE);
 
@@ -3809,7 +3809,7 @@ void exbldg_search_around(void)
 						if (flag_max_inven) break;
 
 						prt(_("この幻想郷を創った賢者の一人として、力を貸してやろう！",
-                            "As one of the sage creators of Gensoukyou, I shall lend you my power!"), 7, 21);
+                            "As one of the sage creators of Gensoukyou, I shall lend you my power!'"), 7, 21);
 						object_prep(o_ptr, (int)lookup_kind(TV_ITEMCARD, SV_ITEMCARD));
 						apply_magic_itemcard(o_ptr, dun_level, MON_OKINA);//隠岐奈のカード入手
 						object_desc(o_name, o_ptr, 0);
@@ -3973,7 +3973,7 @@ void exbldg_search_around(void)
 				{
 					if(flag_max_inven) continue; //アイテムがいっぱいだったら再判定
 
-					msg_print(_("何かがスキマからこぼれ落ちた。", "Someone falls out of the gap."));
+					msg_print(_("何かがスキマからこぼれ落ちた。", "Something falls out of the gap."));
 					object_prep(o_ptr, (int)lookup_kind(TV_ITEMCARD, SV_ITEMCARD));
 					apply_magic_itemcard(o_ptr,dun_level,MON_YUKARI);//紫のカード入手
 					object_desc(o_name,o_ptr,0);
@@ -4338,7 +4338,7 @@ bool orin_deliver_item(void)
 		{
 			if(p_ptr->pclass == CLASS_SATORI || p_ptr->pclass == CLASS_KOISHI)
 				prt(_("火焔猫燐「持ってきましたよー。ありゃ、持ちきれないんですか？」",
-                    "Rin Kaenbyou - 'Come on, I brought it for you. Wouldn't you carry it?'"),5,20);
+                    "Rin Kaenbyou - 'Come on, I brought it for you. Won't you carry it?'"),5,20);
 			else
 #ifdef JP
 				prt("火焔猫燐「ちょっとちょっと、折角はるばる運んできたってのに受け取れないのかい？」",5,20);
@@ -5423,7 +5423,7 @@ bool geidontei_cooking(bool flag_self )
 
 	case MON_SUPPON:
 		prt(_("野趣味あふれる液体を一息に呷った！",
-            "You slurp down the widly-tasting liquid in a single gulp!"), 8, 20);
+            "You slurp down the wild-tasting liquid in a single gulp!"), 8, 20);
 		set_hero(5000, FALSE);
 		set_alcohol(p_ptr->alcohol + 2000);
 		break;
@@ -5462,7 +5462,7 @@ bool geidontei_cooking(bool flag_self )
 		prt(_("香ばしくておいしい！",
             "Fragrant and delicious!"), 8, 20);
 		prt(_("少し意識が飛んで柿の木の夢を見た気がする...",
-            "You feel slightly disorientied, dreaming of persimmon trees..."), 9, 20);
+            "You feel slightly disorientated, dreaming of persimmon trees..."), 9, 20);
 		set_tim_res_water(5000, FALSE);
 		break;
 
