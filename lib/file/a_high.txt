@@ -8,11 +8,13 @@ N: 1:BIAS_ELEC
 #『黄泉の八雷神』
 'Lightning Gods of Yomi'
 #『九天応元雷声普化天尊』
+'Thunder Emperor Fuka Tenson'
 #雷神トールの
 of Thor
 #精霊マルトーの
 of the Maruts
 #天鼓雷音如来の
+of Tenkurai Onnyorai
 #全能の神ゼウスの
 of Zeus
 #『茨歌仙』
@@ -30,7 +32,9 @@ N: 2:BIAS_POIS
 #『ティル=カラクシ』
 'Tir-karakse'
 #神農の
+of Shennong
 #源翁和尚の
+of Gen'nou Shinshou
 #建御名方神の
 of Takeminakata-no-Kami
 #アスクレピオスの
@@ -38,7 +42,7 @@ of Asklepios
 #『オモイカネディバイス』
 'Omoikane Device'
 #遊星よりの
-from a Wandering Star
+from Another World
 
 N: 3:BIAS_FIRE
 #『煉獄火炎』
@@ -100,6 +104,7 @@ N: 5:BIAS_ACID
 #『アルティメット・スーツ』
 'Ultimate Suit'
 #巧聖先師の
+of Qiao Sheng
 #聖獣玄武の
 of Genbu
 #女神ヘケトの
@@ -364,6 +369,7 @@ of Supremacy
 #アフロディテの
 of Aphrodite
 #癒し手エステの
+of Beauty Therapy
 #織女ヴァイレの
 of Vaire
 #悲哀の女神ニエンナの
@@ -379,7 +385,10 @@ of Rin Satsuki
 #木花咲耶姫の
 of Konohanasakuya-Hime
 #歳神様の
+of Toshigami-Sama
 #極めて威厳のある
+of Exceeding Majesty
+
 
 N:*:Default
 #『要塞』

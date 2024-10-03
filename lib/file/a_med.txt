@@ -26,9 +26,11 @@ N: 2:BIAS_POIS
 #『薬師の壷』
 'Medicine Pot'
 #『大黄牡丹』
+'Rhubarb Peony'
 #『補中益気』
 'Bu Zhong Yi Qi'
 #『白虎加人参』
+'White Tiger Ginseng'
 #『蠍座の聖衣』
 'Scorpio Robe'
 #『烏柩沙摩明王』
@@ -88,6 +90,7 @@ N: 4:BIAS_COLD
 #『怒涛の鮫』
 'Surging Shark'
 #モランの
+of Moran
 #オーロラの
 of Aurora
 #トゥアゴン王の
@@ -146,7 +149,7 @@ of the Chaos Lord
 #『狂気の瞳』
 'Lunatic Eyes'
 #『カゴメカゴメ』
-'Kagome-Lagome'
+'Kagome-Kagome'
 #『星条旗のピエロ』
 'Star-Spangled Pierrot'
 
@@ -166,6 +169,7 @@ N:14:BIAS_NECROMANTIC
 #ワラキア公の
 of the Ruler of Wallachia
 #魔女モルガンの
+of Morgan le Fay
 #骸骨王カントラスの
 of Cantoras
 #死せる神ダルニザーンの
@@ -249,6 +253,7 @@ of Baggins
 #冥界ニブルヘイムの
 of Niflheimr
 #お宇佐さまの素い
+of the Rabbit Boss's Nature
 #恋色
 of the Color of Love
 #『手長足長』
@@ -261,6 +266,7 @@ N: 7:BIAS_INT
 #『知識の書』
 'Tome of Intelligence'
 #『コンラの泉』
+'Connla's Well'
 #『薔薇の女王』
 'Queen of Roses'
 #『賢者の知見』
@@ -270,6 +276,7 @@ N: 7:BIAS_INT
 #『思金神の閃き』
 'Omoikane's Insight'
 #道士徐福の
+of Xu Fu
 #ヴォルデモード卿の
 of Lord Voldemort
 #『ラクトガール』

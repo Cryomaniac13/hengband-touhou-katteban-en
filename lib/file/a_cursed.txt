@@ -6,7 +6,9 @@ of Haos
 #『ドキュン』
 'Dokyun'
 #『隔靴掻痒』
+'Unscratchable Itch'
 #『諸行無常』
+'Impermanence of Worldly Things'
 #『七転八倒』
 'Constant Struggle'
 #『十死零生』
@@ -28,7 +30,9 @@ of Haos
 #『ウツダシノウ』
 'Wanna Die'
 #『カゼコンコン』
+'Kazekonkon'
 #『歳末助け合い』
+'Years' End Charity'
 #『不確定性理論』
 'Uncertainty Principle'
 #『マグナム・ドライ』
@@ -36,7 +40,9 @@ of Haos
 #『フリー・フォール』
 'Freefall'
 #『ひょうきん懺悔室』
+'Facetious Confession Room'
 #『つくばの美味しい水』
+'Delicious Water of Tsukaba'
 #『魂を守りてぇ』
 'Soul Keeep'
 #『悲哀の化身』
@@ -100,6 +106,7 @@ of Tristan
 #マゾヒストの
 of the Masochist
 #カンパリ入道の
+of Kanpari Nyuudou
 #マイクロスロスの
 of Microsloth
 #河童の里名物になるはずだった
@@ -107,7 +114,7 @@ of Microsloth
 #捕らぬ狸の
 of the Uncaptured Tanuki
 #リバース
-'Reverse'
+(Reverse)
 #針小棒大の
 of Exaggeration
 #バチ当たりな
@@ -115,10 +122,12 @@ of Exaggeration
 #『決まったァーー』
 'I'm done for...'
 #不良易者の
+of the Rogue Diviner
 #塩の長者の
 of the Horse Eater
 #なんか事件の香りがする
 (Smells Like an Incident)
 #カーナビの
+of Car-Navi
 #この世で最も呪われた
 'Most Cursed in This World'

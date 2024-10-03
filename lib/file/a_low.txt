@@ -186,6 +186,7 @@ N:12:BIAS_CHAOS
 #『無政府主義』
 'Anarchy'
 #『平穏のせせらぎ』
+'Tranquil Babbling'
 #『パズル・ボックス』
 'Puzzle Box'
 #『次元のほころび』
@@ -227,6 +228,7 @@ N: 8:BIAS_WIS
 #『巫女の従者』
 'Oracle's Attendant'
 #『神宮之御守』
+'Grand Shrine Talisman'
 #『平和の願い手』
 'Peacehoper'
 #『天光を求めし者』
@@ -238,6 +240,7 @@ of Abundance
 #神秘！
 'Mystic!'
 #『鰯の頭』
+'Pilchard's Head'
 #『柊の葉』
 'Holly Leaf'
 
@@ -262,7 +265,7 @@ of the Illusion
 #トゥック翁の
 of the Old Took
 #禿のジャックの
-of the Jack of Hadows
+of Jack of Hadows
 #光の妖精の
 of the Fairies of Light
 #侵略せよ！
@@ -288,6 +291,7 @@ of Martine
 #クイズ王の
 of Quiz King
 #知ったかぶりの
+of the Smart Alec
 #図書館司書の
 of the Librarian
 #眉唾！
@@ -310,6 +314,7 @@ of Sumo Wrestler
 #ミノタウロスの
 of the Minotaur
 #太古！
+'Prehistoric!'
 
 N:10:BIAS_CON
 #『熊の掌』
@@ -321,6 +326,7 @@ N:10:BIAS_CON
 #『森トロル』
 'Mori Troll'
 #『ウドの大木』
+'Big Useless Fellow'
 #『健康優良児』
 'Healthy Children'
 #『アブトロニック』
@@ -411,6 +417,7 @@ N:*:Default
 'Generator'
 #フーの
 #久月の
+of Kyugetsu
 #ガラスの
 of Glass
 #バラヒアの
@@ -422,7 +429,7 @@ of Transylvania
 #サマルトリアの王子の
 of the Prince of Cannock
 #孤独なウェアウルフの
-of the Lone Werewolf
+of the Lonesome Werewolf
 #索道土産の
 of Ropeway Souvenirs
 #バンブー
