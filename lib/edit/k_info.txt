@@ -3197,7 +3197,7 @@ A:30/4
 F:SEARCH | HIDE_TYPE
 
 N:302:ТmРЂ:ажаяВћ
-E:Brilliance:Amber
+E:Genius:Amber
 G:":y
 I:48:6:0
 W:50:0:3:10000
