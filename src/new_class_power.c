@@ -14785,7 +14785,7 @@ class_power_type class_power_raiko[] =
         "Fires a ball of sound.")},
 	{12,6,25,FALSE,TRUE,A_INT,0,0,_("怨霊アヤノツヅミ", "Vengeful Spirit Aya-no-Tsuzumi"),
 		_("演奏中は周囲のモンスターを感知する。レベルが上がると感知できるものが増える。",
-        "Starts a performance continuously detecting nearby monster. Detects other objects as well at higher levels.")},
+        "Starts a performance continuously detecting nearby monsters. Detects other objects as well at higher levels.")},
 	{16,12,30,FALSE,TRUE,A_STR,0,0,_("ランドパーカス", "Land Percuss"),
 		_("地震を起こしてダンジョンを崩し、一時的に士気高揚を得る。",
         "Causes an earthquake, breaking down the dungeon; also temporarily grants heroism.")},
