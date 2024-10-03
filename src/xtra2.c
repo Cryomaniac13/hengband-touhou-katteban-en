@@ -8668,7 +8668,7 @@ void gain_maid_reward(void)
 	{
 		msg_print(_("封書を開けた。", "You open the envelope."));
 		msg_print(_("主から褒賞の言葉を受け取った。さらなる力が湧いた。",
-                    "Your master has rewarded you. You feel more powerful."));
+                    "Your master has praised you. You feel more powerful."));
 		reward = _("能力値が上がった。", "raising a stat.");
 			(void)do_inc_stat(randint0(6));
 	}
