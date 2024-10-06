@@ -1,223 +1,472 @@
 N: 1:BIAS_ELEC
+#『雷光』
 'Lightning'
-'Lightning Blade'
+#『雷牙』
 'Thunder Fang'
-'Blue Thunder'
-'Lightning Heart'
-'Thunderstriker'
-'Purple Lightning'
+#『電撃王』
+'Electroshock King'
+#『電光石火』
+'Lightning Speed'
+#『青い霹靂』
+'Bolt Out of the Blue'
+#『閃く稲妻』
+'Lightning Flash'
+#『雷震鳴動』
+'Thunderclap'
+#『フィサリア』
+'Physalia'
+#『ハリケーン』
 'Hurricane'
+#『タイフーン』
 'Typhoon'
+#『テムペスト』
 'Tempest'
+#『ストームシーカー』
 'Storm Seeker'
-of Electricity
-of Energy
+#『ストームハルバード』
+'Storm Halberd'
+#『サンダーストライカー』
+'Thunderstriker'
+#稲妻バヤジットの
+of Bayezid the Thunderbolt
+#蘇我の亡霊の
+of the Soga Ghost
 
 N: 2:BIAS_POIS
+#『ホーネット』
 'Hornet'
+#『ヒドラゾン』
 'Hydrazone'
+#『メルカプト』
 'Mercapto'
+#『クロライド』
 'Chloride'
+#『ワスプの毒針』
 'Poison Needle of Wasp'
-'Snake Fang'
-'Stinger'
-'Vipera's Fang'
-'Aflatoxin'
-'Needle Bland'
-'Assassin'
+#『リオチェレス』
+#『イソメトラス』
+#『スコーピオン』
 'Scorpion'
-'Poison Bland'
+#『アンスラクス』
+'Anthrax'
+#『ヴィーペラの牙』
+'Vipera's Fang'
+#『ラトロデクタス』
+'Latrodectus'
+#『アフラトキシン』
+'Aflatoxin'
+#『グロッシナの接吻』
+#『マーシュ・バイパ－』
 'Marsh Viper'
+#『ポイズン・トルネード』
 'Poison Tornado'
-'Assassinstrike'
-of Venoms
-of Poison
+#『アサシン・ストライク』
+'Assassin Strike'
+#『スイートポイズン』
+'Sweet Poison'
 
 N: 3:BIAS_FIRE
-'Flame Saber'
-'Fire Whip'
-'Fire Thorn'
-'Flame's Toungue'
-'Fire Bland'
+#『干将』
+#『火の刺』
+'Fire Sting'
+#『炎の鞭』
+'Flame Whip'
+#『太陽風』
+'Solar Wind'
+#『紅蓮火炎』
+'Crimson Lotus Blaze'
+#『竜虎大決闘』
+'Duel of Tiger and Dragon'
+#『ミラージュ』
+'Mirage'
+#『プロミネンス』
 'Prominence'
+#『パイロテクニクス』
+'Pyrotechnics'
+#『フレイムセイバー』
+'Flame Saber'
+#『ファイア・トルネード』
 'Fire Tornado'
+#『バーニング・ハンマー』
 'Burning Hammer'
-'Roaring Flames'
-'Heliotropic Wind'
-of Solar Wind
-of Flame
-of Zhuque
+#バイバルス王の
+of Baybars
+#灼熱地獄ゴビの
+of Gobi
+#燃える神チェカラクの
+of Checkalach
+#『超妖怪弾頭』
+'Super Youkai Warhead'
+#核熱魔人の
+of the Nuclear Fiend
 
 N: 4:BIAS_COLD
-'Silver Frost'
+#『莫耶』
+'Mo Ye'
+#『樹氷』
+'Frosted Trees'
+#『氷柱』
 'Icicle'
+#『氷の刃』
 'Ice Edge'
-'Freezing Point'
-'Flost Bland'
-'General of Winter'
+#『冷酷丸』
+#『雪月花』
+'Setsugekka'
+#『冬将軍』
+'General Winter'
+#『イエティの怒り』
+'Wrath of Yeti'
+#『アイスクライマー』
 'Ice Climber'
-of Aurora
-of Alaska
+#『オーロラ・エクスキューション』
+'Aurora Execution'
+#極寒の地エゾの
 of Ezo
+#風水師の
+of the Feng Shui Master
+#『コールドディヴィニティー』
+'Cold Divinity'
+#『白い悪魔』
+'White Devil'
 
 N: 5:BIAS_ACID
-'Rust Monster'
-'Sulfuric Acid'
-'Melted-in Balm'
+#『酸の刃』
 'Acid Blade'
-'Rustbringer'
-'Acid Drop'
+#『酸の滴』
+'Drop of Acid'
+#『カルボライト』
+'Carbolite'
+#『サルファイト』
+'Sulfite'
+#『ナイトライト』
 'Nitrate'
-'Preoxy'
+#『ペルオキシー』
+'Peroxy'
+#『腐食を招く者』
+'Corrossioncaller'
+#『メルテッディン・バルム』
+'Meltedin Balm'
+#梅源郷キシュウの
+#リバース
+(Reverse)
 
 N:12:BIAS_CHAOS
+#『狂気の円環』
 'Cyclcraze'
+#『ハルマゲドン』
 'Armageddon'
+#『ルナティック』
 'Lunatic'
+#『カオスベーン』
 'Chaosbane'
+#『ワープエッジ』
 'Warped Edge'
+#『ロースレイヤー』
 'Lawslayer'
+#『全てを歪めし者』
 'Distorter'
+#『アザトートの宴』
 'Banquet of Azathoth'
+#『コズミック・ホラー』
 'Cosmic Horror'
+#『アマニータの芳香』
 'Amanitaceae Aroma'
-of Changes
+#混沌の王女ダラの
 of Dara
+#地獄の伯爵マシャバクの
+of Mashabak
+#混沌の神ハイオンハーンの
 of Hionhurn
+#『ルナ・ダイアル』
+'Luna Dial'
+#狂い輝く
+of Maddening Gleam
 
 N:14:BIAS_NECROMANTIC
-'Reaper'
-'Hellwind'
-'Chief of Souls'
-'Edge of Miasma'
+#『瘴気の刃』
+'Miasma Blade'
+#『デスソード』
 'Death Sword'
+#『魂の支配者』
+'Chief of Souls'
+#『修羅百鬼剣』
+'Blade of Hundred Asuras'
+#『奈落の猛禽』
+'Pit Raptor'
+#『ヘルブレード』
 'Hell Blade'
+#『ゾンビクロー』
 'Zombie Claw'
+#『ペスティレンス』
 'Pestilence'
-'Night Blade'
+#『ナイトブレード』
+'Nightblade'
+#『ダークバニッシャー』
 'Dark Banisher'
+#『ブラッディ=メアリー』
 'Bloody Mary'
-of Helthing
-of Darkness Strom
-of Genocide
+#虐殺の
+of Massacre
+#闇の嵐の
+of Darkness Storm
+#ヘルシング卿の
+of Hellsing
+#使者スリングウェシルの
 of Thuringwethil
+#『幽霊楽団』
+'Phantom Band'
+#祐天上人の
+of Yuuten-Shounin
 
 N:15:BIAS_LAW
 N:13:BIAS_PRIESTLY
 N: 8:BIAS_WIS
-'Lawgiver'
-'Sun Sword'
-'Deamonbane'
-'Gospel'
-'Advent'
-'Mundwine'
-'God Hand'
-'Ray Storm'
-'Crusader'
-'Demonbane'
-'Lightbringer'
-'Joyeuse'
-'Shiningcalibur'
-of Saladin
-of Holiness
-of Justice
-of the Priests
+#聖なる
+(Sacred)
+#『畏怖』
 of Awe
-of Mind
-of Soul
-
+#『降臨』
+'Advent'
+#『神の手』
+'God Hand'
+#『クルタナ』
+'Curtana'
+#『ガラディン』
+'Galadyn'
+#『サンソード』
+'Sunsword'
+#『破邪百獣剣』
+'Hundred Beasts Exorcising Sword'
+#『レイストーム』
+'Ray Storm'
+#『クルセイダー』
+'Crusader'
+#『ジョワユース』
+'Joyeuse'
+#『デーモンベーン』
+'Demonbane'
+#『ライトブリンガー』
+'Lightbringer'
+#『シャイニングカリバー』
+'Shiningcalibur'
+#『コニャーズ・フォールチョン』
+#英雄サラディンの
+of Saladin
+#『彼岸帰航』
+'Higan Retour'
+#森で垂迹した
+(Manifested in the Forest)
+#『セラフィックチキン』
+'Seraphic Chicken'
 
 N:16:BIAS_ROGUE
-'Thiefbane'
-'Quylthulg Smasher'
-'Cat's Clow'
+#『忍』
 'Shinobi'
-'Speed King'
-'Quicker'
+#『鶏鳴狗盗』
+#『電光石火』
+'Lightning Speed'
+#『スプリガン』
 'Spriggan'
-of the Night
+#『シーフベーン』
+'Thiefbane'
+#『ゼノペルティス』
+#『スピードスター』
+'Speedster'
+#『レディーラック』
+'Lady Luck'
+#『クイルスルグスマッシャー』
+'Quylthulg Smasher'
+#影のジャックの
 of Jack of Shadows
+#忍びの地コウガの
 of Koga
+#人形使いの
+of the Puppeteer
+#社会派ルポライターの
+of the Social Reporter
+#台風の
+of Typhoon
+#『グリーンスパイラル』
+'Green Spiral'
 
-N:17:BIAS_MAGE
 N: 7:BIAS_INT
-'Magicbane'
-'Hucker'
-'Manabringer'
-'Mirror of Seeing'
+N:17:BIAS_MAGE
+#『知嚢』
+'Knowledge'
+#『ハッカー』
+'Hacker'
+#『予見の鏡』
+'Scrying Mirror'
+#『邪眼の鞭』
 'Whip of Evil Eye'
-'Brainstorm'
+#『ラプラスの魔』
 'Laplace's Devil'
-of Grand Wizardry
+#『敬虔のガンダ』
+#『サイコ・ソード』
+'Psycho Sword'
+#『エデンの林檎』
+'Apple of Eden'
+#『マジックベーン』
+'Magicbane'
+#『マナブリンガー』
+'Manabringer'
+#『ブレインストーム』
+'Brainstorm'
+#精神集中の
 of Concentration
-of Ritual
+#兵法家孫武の
+of Sun Tzu
+#『ラクトガール』
+'Locked Girl'
+#白仙坊主の
+of Hakusen
 
 N:18:BIAS_WARRIOR
 N: 6:BIAS_STR
 N:10:BIAS_CON
+#『小烏丸』
+'Kogarasumaru'
+#『兜割り』
+'Kabutowari'
+#『戦の巧み』
+'Skill of Warfare'
+#『鬼丸国綱』
+'Kunisuna Onimaru'
+#『玉纏横刀』
+'Tamamaki-no-tachi'
+#『憤怒の杵』
+'Wrathful Mallet'
+#『きりさき丸』
+'Kirisakimaru'
+#『蛇韓鋤之剣』
+'Orochikarasabi-no-tsurugi'
+#『スカルスマッシャー』
 'Skullbasher'
-'Bonebreaker'
-'Skullbuster'
-'Skull Smasher'
+#『ボーンクラッシャー』
+'Bonecrusher'
+#『巨人の剛力』
 'Giant Strength'
-'Dragonbane'
-'Crash of Rhinos'
-'Cycle of Life'
-'Bull Elephant'
+#『戦士の誉れ』
 'Warrior's Honor'
-of Rage
-of Crushing
-of Tomoe
+#巴御前の
+of Tomoe Gozen
+#領主エルケンブランドの
 of Erkenbrando
+#『ライジングオンバシラ』
+'Rising Onbashira'
+#坂田金時の
+of Sakata no Kintoki
 
 N: 9:BIAS_DEX
-'Gilettar'
-'Elvagil'
-'Orchast'
-'Cleaver'
-'Buttle Mastery'
-'Limbslicer'
-'Bryionak'
-of the Master
-of Charismatic Cook
-
 N:19:BIAS_RANGER
-'Eaglesword'
-'Tigarbaton'
-'Lionfang'
-'Sharkcutter'
-'Bisonaxe'
-'Sunstrike'
-'Hellwind'
-'Shooting Star'
-of the Eagle Lord
-of Entanglement
-of the Druid
+#『大輪剣』
+'Dairinken'
+#『白虎真剣』
+'White Tiger True Sword'
+#『ギレッター』
+'Gilettar'
+#『エルヴァギル』
+'Elvagil'
+#『イーグルソード』
+'Eagle Sword'
+#『タイガーバトン』
+'Tiger Baton'
+#『ライオンファング』
+'Lion Fang'
+#『シャークカッター』
+'Shark Cutter'
+#『バイソンアックス』
+'Bison Axe'
+#天下一品の
+'Best of the Best'
+#バルキリーの
 of the Valkyrie
-of the Hunter
-of Marksmanship
+#ケンタウロスの
+of the Centaur
+#ロビンフッドの
+of Robin Hood
+#巧みのクルフィンの
+of Curufin
+#ウルトラソニック
+(Ultrasonic)
+#『マウンテンマーダー』
+'Mountain Murder'
+
+N:11:BIAS_CHR
+#『モナリザ』
+'Mona Lisa'
+#『天使の囁き』
+'Angel's Whisper'
+#『ニンフの微笑み』
+'Nymph's Smile'
+#ジョシュアの
+of Joshua
+#キューピッドの
+of the Cupid
+#夢幻郷カダスの
+of Kadath of the Dreamlands
+#今どきの
+of the Present
+#伶人マグロオルの
+of Maglor
+#『竹林のルーガルー』
+'Bamboo Forest's Loup-Garou'
+#輝く針の
+of the Shining Needle
+#スイート安眠
+'Sweet Dreams'
 
 N:*:Default
-'Weapon Alpha'
-'Werebane'
-'Dragon Clow'
-'Kraken'
-'Blue Steele'
+#『龍爪』
+'Dragon Nail'
+#『憤激』
 'Fury'
-'Howler'
-'Roarer'
-'Red October'
-'Witchfire'
-'Lord of Flies'
+#『狼吠』
+'Wolf's Howl'
+#『虎吠』
+'Tiger's Howl'
+#『血雨』
+'Blood Rain'
+#『不知火』
+'Shiranui'
+#『蝿の王』
+'Lord of the Flies'
+#『伏魔殿』
+#『万魔殿』
 'Pandemonium'
-'Bloodrain'
+#『デルタ』
 'Delta'
-'Cubragol'
-of Joshua
-of Slay Mold
-of Damocles
+#『クラーケン』
+'Kraken'
+#『ワーベイン』
+'Werebain'
+#『モルドスレイヤー』
+'Moldslayer'
+#『ブルー・スティール』
+'Blue Steel'
+#『レッド・オクトバー』
+'Red October'
+#ラーの
+of Ra
+#将軍の
 of the Shogun
+#ボーグの
 of the Borg
+#憎しみの
 of Hatred
+#ダモクレスの
+of Damocles
+#選ばれし者の
+of the Chosen
+#アンバーの王子オズリックの
 of Osric
+#アンバーの王子フィンドーの
 of Finndo
+#『広有射怪鳥事』
+'Hiroari Shoots a Strange Bird'
+#『ヒガンルトゥール』
+'Higan Retour'
+#『アナザーマーダー』
+'Another Murder'
+#『本所七不思議』
+'Seven Mysteries of Honjo'
