@@ -1,0 +1,458 @@
+N: 1:BIAS_ELEC
+#『雷竜の鱗』
+'Scale of Lightning Dragon'
+#『雷獣の咆哮』
+'Raijuu's Roar'
+#『シャンブラー』
+'Shambler'
+#『黄泉の八雷神』
+'Lightning Gods of Yomi'
+#『九天応元雷声普化天尊』
+'Thunder Emperor Fuka Tenson'
+#雷神トールの
+of Thor
+#精霊マルトーの
+of the Maruts
+#天鼓雷音如来の
+of Tenkurai Onnyorai
+#全能の神ゼウスの
+of Zeus
+#『茨歌仙』
+'Ibarakasen'
+
+N: 2:BIAS_POIS
+#『愛染明王』
+'Ragaraja'
+#『浄魂癒身』
+'Soul Purification'
+#『冬虫夏草』
+'Cordyceps'
+#『偉大なる不浄』
+'Great Unclean One'
+#『ティル=カラクシ』
+'Tir-karakse'
+#神農の
+of Shennong
+#源翁和尚の
+of Gen'nou Shinshou
+#建御名方神の
+of Takeminakata-no-Kami
+#アスクレピオスの
+of Asklepios
+#『オモイカネディバイス』
+'Omoikane Device'
+#遊星よりの
+from Another World
+
+N: 3:BIAS_FIRE
+#『煉獄火炎』
+'Rengoku-Kaen'
+#『閻魔大王』
+of Yama
+#『アグニの護り』
+'Agni's Protection'
+#『ラバ・バースト』
+'Lava Burst'
+#『ファイア・ウォール』
+'Firewall'
+#『アフラマズダの恩寵』
+'Grace of Ahura Mazda'
+#天照大神の
+of Amaterasu Ookami
+#太元帥明王の
+of Atavaka
+#悪魔ベリアルの
+of Belial
+#絶対神アラーの
+#of Allah
+#天使ウリエルの
+of Uriel
+#地底の太陽の
+of the Subterranean Sun
+#『鳳翼天翔』
+'Feng Wing Ascension'
+#『獄炎の鳥』
+'Hellfire Bird'
+
+N: 4:BIAS_COLD
+#『大雪原』
+'Great Snowfield'
+#『氷竜の鱗』
+'Scale of Ice Dragon'
+#『絶対零度』
+'Absolute Zero'
+#『冬の抱擁』
+'Winter's Embrace'
+#『白銀の護り手』
+'Silver Guardian'
+#『ヘルカトゥルマ』
+'Helka-Turma'
+#『アイス・ウォール』
+'Ice Wall'
+#『ホワイト・ダイヤモンド』
+'White Diamond'
+#地獄の最高裁判長の
+of the Supreme Judge of Hell
+#『フロストコラムス』
+'Frost Columns'
+
+N: 5:BIAS_ACID
+#『蛟』
+'Mizuchi'
+#『ヴリトラの鱗』
+'Scale of Vrtra'
+#『アルティメット・スーツ』
+'Ultimate Suit'
+#巧聖先師の
+of Qiao Sheng
+#聖獣玄武の
+of Genbu
+#女神ヘケトの
+of Heket
+#大王ボルドールの
+of Boldor
+#水龍様の
+of Lord Suiryuu
+#水鬼鬼神長の
+of Suiki the Kishin Chief
+
+N:12:BIAS_CHAOS
+#『制御の鎖』
+'Chain of Control'
+#『完全なる無』
+'Perfect Void'
+#『禁断の護り手』
+'Keeper of Secrets'
+#大破壊の
+of Great Destruction
+#<ナーグル>の
+of Nurgle
+#<スラーネシュ>の
+of Slaanesh
+#道化師バロの
+of Balo
+#囁く者ピアレーの
+of Pyaray
+#古き神スローターの
+of Slortar
+#官能の女神アルナラの
+of Arnara
+#U・N・オーエンの
+of U. N. Owen
+#『平安のエイリアン』
+'Heian Alien'
+#絶対秘神の
+of the Ultimate Absolute Secret God
+
+N:14:BIAS_NECROMANTIC
+#『生殺与奪』
+'Ius Vitae Necisque'
+#『デメテルの愛』
+'Love of Demeter'
+#『コルウィニアの鍵』
+'Kolwynia, the Key That Was Lost'
+#『ルシファーの血鎧』
+'Bloodmail of Lucifer'
+#地獄の王サタンの
+of Satan
+#冥界の王ハデスの
+of Hades
+#妖術師サウロンの
+of Sauron
+#死天使アズリエルの
+of Azriel
+#公爵メフィストフェレスの
+of Mephistopheles
+#墨染の
+'Ink-Black'
+#『死体旅行』
+'Corpse Voyage'
+#常世神の
+of Tokoyo-no-Kami
+#『有機体全てのメメント』
+'Memento of All Organisms'
+
+#N:15:BIAS_LAW
+N:13:BIAS_PRIESTLY
+N: 8:BIAS_WIS
+#『創世記』
+'Genesis'
+#『光の化身』
+'Avatar of Light'
+#『神の権化』
+'Divine Incarnation'
+#『無想転生』
+'Fantasy Nature'
+#『天界防護』
+'Celestial Protection'
+#『神聖祝福』
+'Divine Blessing'
+#『神々の祝福』
+'Blessing of the Gods'
+#『聖杯の加護』
+'Protection of the Grail'
+#『ゴッドモード』
+'God Mode'
+#『永遠の信仰者』
+'Ever-Faithful'
+#『純真のタリスマン』
+'Talisman of Simplicity'
+#『運命支配』
+'Weirding'
+#告知者ラファエルの
+of Raphael
+#八苦を滅した
+'Elimination of Eight Sufferings'
+#『天資英邁』
+'Innate Wisdom'
+#弥勒菩薩の
+of Maitreya
+#萱野姫の
+of Kaya-no-Hime
+#正八幡大菩薩の
+of Hachiman
+#『神代鉱石』
+'Ore from the Age of the Gods'
+#『タイニーシャングリラ』
+'Tiny Shangri-La'
+
+N: 9:BIAS_DEX
+N:16:BIAS_ROGUE
+#『神隠し』
+'Spiriting Away'
+#『疾風迅雷』
+'Quick as the Wind'
+#『ペル=ヒーシエ』
+#『ベルゼブブの翅』
+'Beelzebub's Wing'
+#神速の
+of Godspeed
+#韋駄天の
+of Idaten
+#怪盗ルパンの
+of Lupin
+#アンバーの王子エリックの
+of Eric
+#『イマジナリーフレンド』
+'Imaginary Friend'
+#『ディスガイザー』
+'Disguiser'
+#『ミシカルリング』
+'Mythical Ring'
+
+N:17:BIAS_MAGE
+N: 7:BIAS_INT
+#『魔力の塔』
+'Mana Tower'
+#『明鏡止水』
+'Clear Mind'
+#『無想転生』
+'Fantasy Nature'
+#『魔力の虹結晶』
+'Mana Prism'
+#『エチオピアの目』
+'the Eye of the Aethiopica'
+#大賢者の
+of the Great Magi
+#長春真人の
+of Master Changchun
+#知恵者ロキの
+of Loki
+#魔法使マーリンの
+of Merlin
+#天満大自在天神の
+of Tenman Daijizai Tenjin
+#策士の九尾の
+of the Scheming Nine-Tailed Fox
+#恋色マスター
+of the Color of Love
+#『メイガスナイト』
+'Magus Night'
+#『ルナティックドリーマー』
+'Lunatic Dreamer'
+#『星降る天魔の山』
+'Starry Mountain of Tenma'
+
+N:18:BIAS_WARRIOR
+N: 6:BIAS_STR
+#『金剛』
+'Vajra'
+#『万力の衣』
+'Cloth of Vice'
+#『イージス』
+'Aegis'
+#『風林火山』
+'Fuu-rin-ka-zan'
+#『無敗神話』
+'Undefeated Myth'
+#『摩利支天』
+of Marici
+#『獅子心王の魂』
+'Lionheart Soul'
+#無敵の
+of Unrivaled Strength
+#武力の
+of Armed Might
+#源義経の
+of Minamoto no Yoshitsune
+#女神ニケの
+of Nike
+#不死身アキレスの
+of Achilles
+#巨人王クロノスの
+of Kronos
+#勇者ディオメデスの
+of Diomedes
+#独立不撓の
+of Unyielding Independence
+#茨木の
+of Ibaraki
+#『超人』
+'Superhuman'
+#『ミッシングパワー』
+'Missing Power'
+
+N:10:BIAS_CON
+N:19:BIAS_RANGER
+#『ファロス』
+'Faroth'
+#『自然の恵み』
+'Nature's Gift'
+#『大地の護り』
+'Gaia's Protection'
+#『運命のオーブ』
+'Orb of Destiny'
+#『命を与えし者』
+'Lifegiver'
+#『ガイアの祝福』
+'Gaia's Blessing'
+#『エル=ドラウグ』
+'Er-Draug'
+#『アンバー・プリズン』
+'Amber Prison'
+#『アーリマンの心臓』
+'Heart of Ahriman'
+#『リビング・アーマー』
+'Living Armour'
+#『生命のマトリックス』
+'Life Matrix'
+#船大工キアダンの
+of Cirdan
+#鹿の女王ネスサの
+of Nessa
+#コーウィンの聖紋の
+of Corwin's Pattern
+#大地の妃ヤヴァンナの
+of Yavanna
+#『百万鬼夜行』
+'Night Parade of Million Oni'
+#『天の八衢』
+'Heavenly Crossroads'
+#石長姫の
+of Iwanaga-Hime
+#『秘神の後光』
+'Halo of the Secret God'
+
+N:11:BIAS_CHR
+#『凪の刻』
+'Time of Calm'
+#『永遠の女神』
+'Goddess of Eternity'
+#『テルペリオン』
+'Telperion'
+#『ラウレリンの輝き』
+'Brilliant of Laurelin'
+#『エルベレスの御手』
+'Hand of Elbereth'
+#至高の
+of Supremacy
+#アフロディテの
+of Aphrodite
+#癒し手エステの
+of Beauty Therapy
+#織女ヴァイレの
+of Vaire
+#悲哀の女神ニエンナの
+of Nienna
+#永遠と須臾の
+of Eternity and the Instantaneous
+#『ネメシスの要塞』
+'Nemesis Stronghold'
+#亡き王女の為の
+for a Dead Princess
+#冴月麟の
+of Rin Satsuki
+#木花咲耶姫の
+of Konohanasakuya-Hime
+#歳神様の
+of Toshigami-Sama
+#極めて威厳のある
+of Exceeding Majesty
+
+
+N:*:Default
+#『要塞』
+'Stronghold'
+#『運命星』
+'Destiny Star'
+#『モノリス』
+'Monolith'
+#『完全無欠』
+'Flawless'
+#『エリート』
+'Elite'
+#『永遠の砦』
+'Eternal Fortress'
+#『天衣無縫』
+'Celestial Clothing'
+#『絶対権力』
+'Absolute Power'
+#『銀河結界』
+'Galactic Barrier'
+#『ジェネシス』
+'Genesis'
+#『メガノイド』
+'Meganoid'
+#『秩序の支配者』
+'Lord of Order'
+#『バトルメック』
+'Battlemech'
+#『リビング・ウォール』
+'Living Wall'
+#『バトル・フォース』
+'Battle Force'
+#『ダル=イ=サリオン』
+'Dal-i-Thalion'
+#帝国の
+of the Empire
+#創造主達の
+of the Creators
+#スラインの
+of Thrain
+#マラカイトの
+of Malachite
+#偉大なる守護の
+of Grand Protection
+#ケレボルン王の
+of Celeborn
+#海の都レブマの
+of Rebma
+#マーリンの聖紋の
+of Merlin's Pattern
+#ダンジョンマスターの
+of the Dungeon Master
+#ダンジョンキーパーの
+of the Dungeon Keeper
+#アンバーの王女デアドリの
+of Deirdre
+#アンバーの王子ランダムの
+of Random of Amber
+#楽園の
+of Paradise
+#永遠の
+of Eternity
+#華胥の国の
+of the Kingdom of Huaxu
+#金城鉄壁の
+of the Unassailable Fortress
+

@@ -1,0 +1,443 @@
+N: 1:BIAS_ELEC
+#『避雷針』
+'Lightning Rod'
+#『静電気』
+'Static Charge'
+#『電離層』
+'Ionosphere'
+#『電撃大将』
+'Lightning General'
+#『ショック！』
+'Shocking!'
+#『カミナリ親父』
+'Father Thunder'
+#絶縁性の
+of Insulation
+#雷さまの
+of the Thunderer
+#電気の司ボルタの
+of Volta
+#古代の怨霊の
+of the Ancient Vengeful Spirit
+#サトノヤマネノカミの
+of Sato-no-Yamane-no-Kami
+
+N: 2:BIAS_POIS
+#『薬指』
+'Medicine Finger'
+#『清浄化』
+'Purification'
+#『セボン』
+'Sebon'
+#『予防接種』
+'Vaccination'
+#『オブラート』
+'Oblate'
+#『アンチドーテ』
+'Antidote'
+#『コスモクリーナー』
+'Cosmocleaner'
+#『ベラドンナの予見者』
+'Nightshade Seer'
+#タロスの
+of Talos
+#コボルドの
+of the Kobold
+#タランチュラの
+of the Tarantula
+#感染症の
+of Infection
+#『バタフライドリーム』
+'Butterfly Dream'
+
+N: 3:BIAS_FIRE
+#燃えない
+of Nonflammability
+#『消火』
+'Firefighter'
+#『芭蕉扇』
+'Fan'
+#『魔法瓶』
+'Vacuum Flask'
+#『太陽の衣』
+'Vestments of the Sun'
+#『炎の転校生』
+'Burning Student'
+#『サングラス』
+'Sunglasses'
+#『炎の守り手』
+'Keeper of Flame'
+#『ヒートシンク』
+'Heatsink'
+#『デッドヒート』
+'Dead Heat'
+#牛魔王の
+of the Bull Demon King
+#ハロウィンの
+of Halloween
+#常夏の地ハワイの
+of Hawaii
+#触ると温かい
+'Warm to Touch'
+#激熱！
+'Scalding Hot!'
+#『フラッタリングサマー』
+'Fluttering Summer'
+#『大寒の灼熱炎祭り』
+'Deep Winter Red Hot Fire Festival'
+
+N: 4:BIAS_COLD
+#『雪』
+'Snow'
+#『鉄面皮』
+'Mask of Iron'
+#『マフラー』
+'Muffler'
+#『北風小僧』
+'North Wind Brat'
+#『南極２号』
+'Antarctic II'
+#『クールミント』
+'Cool Mint'
+#『スノーレッツ』
+'Snowlets'
+#『シベリヤ寒気団』
+'Siberian Cold Air Mass'
+#『パーシャル冷蔵庫』
+'Partial Refrigerator'
+#母さんが夜なべした
+'Mother Worked Long Into The Night'
+#『冬の忘れ物』
+'What Winter Left Behind'
+#『オイルヒーター』
+'Oil Heater'
+
+N: 5:BIAS_ACID
+#パワー
+'Power'
+#祝福された錆びない
+'Rustproof'
+#『氷酢酸』
+'Glacial Acetic Acid'
+#『酸性雨』
+'Acidic Rain'
+#『ｘｄｄ』
+'xdd'
+#『オーリ』
+of Ori
+#『ハロゲン』
+'Halogen'
+#『ドメスト』
+'Domestos'
+#『不融不溶』
+'Insoluble'
+#『鉄の意思』
+'Iron Will'
+#『ステンレス』
+'Stainless'
+#『メルティング』
+'Melting'
+#『テフロン・コート』
+'Teflon Coat'
+#『血塗られた赤蛙塚』
+'Bloodstained Red Frog'
+#『なめえもん』
+'Nameemon'
+
+N:14:BIAS_NECROMANTIC
+#『常闇の刻』
+'Darkest Hour'
+#『邪悪なる力』
+'Unholy Strength'
+#『レヴナント』
+'Revenant'
+#『冥府の契約』
+'Infernal Contract'
+#『虚無への供物』
+'Sacrifice to void'
+#『忘却せる恐怖』
+'Forgotten Fear'
+#『ゾンビ・マスター』
+'Zombie Master'
+#異形の
+of Deformity
+#サバトの
+of the Sabbath
+#恐怖の地アーカムの
+of Arkham
+#アレイスター・クロウリーの
+of Aleister Crowley
+#凶兆の
+of Ill Omen
+#恐怖！
+'Terrifying!'
+
+N:12:BIAS_CHAOS
+#『蜃気楼』
+'Mirage'
+#『モザイク』
+'Mosaic'
+#『歪曲空間』
+'Warp-Space'
+#『静寂の歌』
+'Song of Silence'
+#『フラクタル』
+'Fractal'
+#『シャッフル』
+'Shuffle'
+#『時間の捻れ』
+'Time Warp'
+#『無政府主義』
+'Anarchy'
+#『平穏のせせらぎ』
+'Tranquil Babbling'
+#『パズル・ボックス』
+'Puzzle Box'
+#『次元のほころび』
+'Reality Ripple'
+#『ストレンジ・アトラクタ』
+'Strange Attractor'
+#玉虫色の
+of Iridescence
+#厄神様の
+of the Curse God
+#『デザイアドライブ』
+'Desire Drive'
+#戦慄せよ！
+'Tremble!'
+#『九月のパンプキン』
+'September Pumpkin'
+
+#N:15:BIAS_LAW
+N:13:BIAS_PRIESTLY
+N: 8:BIAS_WIS
+#『般若経』
+'Prajnaparamita Sutra'
+#『安息日』
+'Holiday'
+#『告解室』
+'Confession Room'
+#『霊的焦点』
+'Spiritual Focus'
+#『聖なる力』
+'Holy Strength'
+#『生臭坊主』
+'Worldly Priest'
+#『予定調和』
+'Preestablished Harmony'
+#『希望の化身』
+'Avatar of Hope'
+#『心の守り手』
+'Keeper of Mind'
+#『巫女の従者』
+'Oracle's Attendant'
+#『神宮之御守』
+'Grand Shrine Talisman'
+#『平和の願い手』
+'Peacehoper'
+#『天光を求めし者』
+'Seeker of Skybreak'
+#座敷童子の
+of the Zashiki-Warashi
+#豊穣の
+of Abundance
+#神秘！
+'Mystic!'
+#『鰯の頭』
+'Pilchard's Head'
+#『柊の葉』
+'Holly Leaf'
+
+N:16:BIAS_ROGUE
+N: 9:BIAS_DEX
+#『驚速』
+'Speed'
+#『ＬＳＤ』
+'LSD'
+#『加速装置』
+'Accelerator'
+#『五行遁行』
+'Five Elements'
+#『ジョーカー』
+of Joker
+#『かくれんぼ』
+'Hide-and-Seek'
+#『真・スメアゴル』
+'True Smeagol'
+#幻影の
+of Illusion
+#トゥック翁の
+of the Old Took
+#禿のジャックの
+of Jack of Hadows
+#光の妖精の
+of the Fairies of Light
+#侵略せよ！
+'Invade!'
+#『メンタルグラスホッパー』
+'Mental Grasshopper'
+
+N:17:BIAS_MAGE
+N: 7:BIAS_INT
+#『ヰ=ミダス』
+'Imidas'
+#『デジャ=ヴ』
+'Deja-Vu'
+#『カフェイン』
+'Caffeine'
+#『穴開知恵袋』
+'Perforated Bag of Wisdom'
+#『魔道師の誓い』
+'Oath of Mages'
+#『ミューズの囁き』
+'Whispers of Muse'
+#マーチンの
+of Martine
+#クイズ王の
+of the Quiz King
+#知ったかぶりの
+of the Smart Alec
+#図書館司書の
+of the Librarian
+#眉唾！
+'Unbelievable!'
+
+N:18:BIAS_WARRIOR
+N: 6:BIAS_STR
+#『ターボ』
+'Turbo'
+#『象踏不壊』
+'Unbreakable'
+#『筋肉番付』
+'Kinniku Banzuke'
+#『肉のカーテン』
+'Muscle Curtain'
+#南蛮王孟獲の
+of the King of Southerners
+#スモー戦士の
+of the Sumo Wrestler
+#ミノタウロスの
+of the Minotaur
+#太古！
+'Prehistoric!'
+
+N:10:BIAS_CON
+#『熊の掌』
+'Bear Fist'
+#『ザ・我慢』
+'Endurance'
+#『育ち盛り』
+'Growth Period'
+#『森トロル』
+'Mori Troll'
+#『ウドの大木』
+'Big Useless Fellow'
+#『健康優良児』
+'Healthy Children'
+#『アブトロニック』
+'Abtronic'
+#体専の
+of the Fitness Specialist
+#牛うなりの
+of Bullroarer
+#プロレスラーの
+of the Pro Wrestler
+#釣瓶落としの
+of the Tsurube-Otoshi
+#山姥の
+of the Yamanba
+
+N:19:BIAS_RANGER
+#『雑草』
+'Weeds'
+#『迷彩色』
+'Camouflage'
+#『探知機』
+'Radar'
+#『ハウンド』
+'Hound'
+#『猿決闘す』
+'Monkey Duel'
+#『石ころ帽子』
+'Pebble Hat'
+#『生命の息吹』
+'Breath of Life'
+#『ぷらなりあ』
+'Planaria'
+#『アンモナイト』
+'Ammonite'
+#レッサーパンダの
+of the Lesser Panda
+#夜雀の
+of the Night Sparrow
+
+N:11:BIAS_CHR
+#萌える
+'Cutie Girls'
+#『電撃成婚』
+'Sudden Marriage'
+#『激情熱愛』
+'Passionate Love'
+#『ブライダル』
+'Bridal'
+#『乙女の黒髪』
+'Brunet Hair of Maiden'
+#『薔薇のブーケ』
+'Rose Bouquet'
+#『無垢のドレス』
+'Innocent Dress'
+#『ミニ=スカート』
+'Miniskirt'
+#『だりぃーさおりん』
+'Dal-i-Thalion'
+#コンパニオンの
+of the Companion
+#ナルキッソスの
+of Narcissus
+#マーメイドの
+of the Mermaid
+#深秘を曝け！
+'Expose the Esoteric!'
+
+N:*:Default
+#『ピザ』
+'Pizza'
+#『刀返ι』
+'Bladereturner'
+#『サンボ』
+'Sambo'
+#『バベル』
+'Babel'
+#『鉄の処女』
+'Iron Maiden'
+#『背信の絆』
+'Treacherous Link'
+#『グランプリ』
+'Grand Prix'
+#『パウアハアハ』
+'Paurhaach'
+#『キュレイター』
+'Curator'
+#『ジェネレーター』
+'Generator'
+#フーの
+#久月の
+of Kyugetsu
+#ガラスの
+of Glass
+#バラヒアの
+of Barahir
+#グルネマンツの
+of Gurnemanz
+#トランシルバニアの
+of Transylvania
+#サマルトリアの王子の
+of the Prince of Cannock
+#孤独なウェアウルフの
+of the Lonesome Werewolf
+#索道土産の
+of Ropeway Souvenirs
+#バンブー
+of Bamboo
+#ステキ！
+'Wonderful!'

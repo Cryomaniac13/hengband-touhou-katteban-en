@@ -1,0 +1,133 @@
+N:*:Default
+#せっかくだから
+'Because it's time'
+#混沌の堂々たゐ
+of Haos
+#『ドキュン』
+'Dokyun'
+#『隔靴掻痒』
+'Unscratchable Itch'
+#『諸行無常』
+'Impermanence of Worldly Things'
+#『七転八倒』
+'Constant Struggle'
+#『十死零生』
+'Survival Rate Zero'
+#『色即是空』
+'Form is Emptiness'
+#『百鬼夜行』
+'Hundred Demons Night Parade'
+#『魑魅魍魎』
+'Chimimouryou'
+#『アラベスク』
+'Arabesque'
+#『イッテヨシ』
+'Begone'
+#『カムロスト』
+'Camlost'
+#『相対性理論』
+'Theory of Relativity'
+#『ウツダシノウ』
+'Wanna Die'
+#『カゼコンコン』
+'Kazekonkon'
+#『歳末助け合い』
+'Years' End Charity'
+#『不確定性理論』
+'Uncertainty Principle'
+#『マグナム・ドライ』
+'Magnum Drei'
+#『フリー・フォール』
+'Freefall'
+#『ひょうきん懺悔室』
+'Facetious Confession Room'
+#『つくばの美味しい水』
+'Delicious Water of Tsukaba'
+#『魂を守りてぇ』
+'Soul Keeep'
+#『悲哀の化身』
+'Avatar of Woe'
+#恐怖の
+of Terror
+#苦痛の
+of Pain
+#悲痛の
+of Sadness
+#激痛の
+of Agony
+#不幸の
+of Misfortune
+#石化の
+of Petrification
+#幻滅の
+of Disillusion
+#衝撃の
+of Shocking
+#降伏の
+of Surrender
+#破滅の
+of Doom
+#災難の
+of Woe
+#窒息の
+of Suffocation
+#混乱の
+of Confusion
+#呪いの
+of Curses
+#偽りの
+of Falsehood
+#弱さの
+of Weakness
+#屈辱の
+of Humiliation
+#自殺の
+of Suicide
+#服毒の
+of Poisoning
+#愚者の
+of the Fool
+#ガラスの
+of Glass
+#貧乏神の
+of the Poverty God
+#臆病者の
+of the Coward
+#憎しみの
+of Hatred
+#悲しみの
+of Sorrow
+#マクベスの
+of Macbeth
+#カミカゼの
+of Kamikaze
+#トリスタンの
+of Tristan
+#マゾヒストの
+of the Masochist
+#カンパリ入道の
+of Kanpari Nyuudou
+#マイクロスロスの
+of Microsloth
+#河童の里名物になるはずだった
+(Kappa Village Specialty)
+#捕らぬ狸の
+of the Uncaptured Tanuki
+#リバース
+(Reverse)
+#針小棒大の
+of Exaggeration
+#バチ当たりな
+'Slap in the Face'
+#『決まったァーー』
+'I'm done for...'
+#不良易者の
+of the Rogue Diviner
+#塩の長者の
+of the Horse Eater
+#なんか事件の香りがする
+(Smells Like an Incident)
+#カーナビの
+of Car-Navi
+#この世で最も呪われた
+'Most Cursed in This World'
