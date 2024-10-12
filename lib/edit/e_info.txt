@@ -206,7 +206,7 @@ F:INT | WIS |
 F:FORCE_WEAPON | SEE_INVIS
 
 N:21:ínóÏÇÃ
-E:of Earthquakes
+E:of Earth Spirits
 X:24:20
 W:10:18:0:6000
 C:0:0:0:3
@@ -441,7 +441,7 @@ F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | XTRA_H_RES
 
 N:50:ãSê_í∑ÇÃ
-E:of the Kishin Lord
+E:of the Kishin Chief
 X:31:70
 W:0:80:0:44444
 C:5:5:10:3
@@ -838,7 +838,7 @@ F:INT | WIS | HEAVY_CURSE | CURSED |
 F:TELEPORT | RES_SOUND
 
 N:99:ínîõóÏÇÃ
-E:of Earthbound Spirits
+E:of the Jibaku Ghost
 X:35:0
 W:0:16:0:0
 C:0:0:10:5
