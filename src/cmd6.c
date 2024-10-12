@@ -3248,7 +3248,7 @@ msg_print("「オクレ兄さん！」");
 			if(no_bad_effect){ident=TRUE;break;}
 			if(p_ptr->immune_cold) break;
 			msg_print(_("体の中から物凄く冷えた！", "You are suddenly extremely cold!"));
-			take_hit(DAMAGE_NOESCAPE, mod_cold_dam(1600), "cooling medicine", -1);
+			take_hit(DAMAGE_NOESCAPE, mod_cold_dam(1600), _("何か涼しくなる薬", "cooling medicine"), -1);
 			break;
 
 		case SV_POTION_POLYMORPH:
