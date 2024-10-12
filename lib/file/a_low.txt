@@ -18,8 +18,9 @@ of the Thunderer
 #電気の司ボルタの
 of Volta
 #古代の怨霊の
-of Ancient Vengeful Spirits
+of the Ancient Vengeful Spirit
 #サトノヤマネノカミの
+of Sato-no-Yamane-no-Kami
 
 N: 2:BIAS_POIS
 #『薬指』
@@ -41,9 +42,9 @@ N: 2:BIAS_POIS
 #タロスの
 of Talos
 #コボルドの
-of Kobold
+of the Kobold
 #タランチュラの
-of Tarantula
+of the Tarantula
 #感染症の
 of Infection
 #『バタフライドリーム』
@@ -75,7 +76,7 @@ of the Bull Demon King
 #ハロウィンの
 of Halloween
 #常夏の地ハワイの
-of the Hawaiian Islands
+of Hawaii
 #触ると温かい
 'Warm to Touch'
 #激熱！
@@ -105,6 +106,7 @@ N: 4:BIAS_COLD
 #『パーシャル冷蔵庫』
 'Partial Refrigerator'
 #母さんが夜なべした
+'Mother Worked Long Into The Night'
 #『冬の忘れ物』
 'What Winter Left Behind'
 #『オイルヒーター』
@@ -120,7 +122,9 @@ N: 5:BIAS_ACID
 #『酸性雨』
 'Acidic Rain'
 #『ｘｄｄ』
+'xdd'
 #『オーリ』
+of Ori
 #『ハロゲン』
 'Halogen'
 #『ドメスト』
@@ -158,7 +162,7 @@ N:14:BIAS_NECROMANTIC
 #異形の
 of Deformity
 #サバトの
-of Sabbath
+of the Sabbath
 #恐怖の地アーカムの
 of Arkham
 #アレイスター・クロウリーの
@@ -255,13 +259,13 @@ N: 9:BIAS_DEX
 #『五行遁行』
 'Five Elements'
 #『ジョーカー』
-of the Joker
+of Joker
 #『かくれんぼ』
 'Hide-and-Seek'
 #『真・スメアゴル』
 'True Smeagol'
 #幻影の
-of the Illusion
+of Illusion
 #トゥック翁の
 of the Old Took
 #禿のジャックの
@@ -282,6 +286,7 @@ N: 7:BIAS_INT
 #『カフェイン』
 'Caffeine'
 #『穴開知恵袋』
+'Perforated Bag of Wisdom'
 #『魔道師の誓い』
 'Oath of Mages'
 #『ミューズの囁き』
@@ -289,7 +294,7 @@ N: 7:BIAS_INT
 #マーチンの
 of Martine
 #クイズ王の
-of Quiz King
+of the Quiz King
 #知ったかぶりの
 of the Smart Alec
 #図書館司書の
@@ -310,7 +315,7 @@ N: 6:BIAS_STR
 #南蛮王孟獲の
 of the King of Southerners
 #スモー戦士の
-of Sumo Wrestler
+of the Sumo Wrestler
 #ミノタウロスの
 of the Minotaur
 #太古！
@@ -332,11 +337,11 @@ N:10:BIAS_CON
 #『アブトロニック』
 'Abtronic'
 #体専の
-of the Body Specialist
+of the Fitness Specialist
 #牛うなりの
 of Bullroarer
 #プロレスラーの
-of Pro Wrestler
+of the Pro Wrestler
 #釣瓶落としの
 of the Tsurube-Otoshi
 #山姥の
@@ -362,7 +367,7 @@ N:19:BIAS_RANGER
 #『アンモナイト』
 'Ammonite'
 #レッサーパンダの
-of Lesser Panda
+of the Lesser Panda
 #夜雀の
 of the Night Sparrow
 
@@ -386,13 +391,13 @@ N:11:BIAS_CHR
 #『だりぃーさおりん』
 'Dal-i-Thalion'
 #コンパニオンの
-of Companion
+of the Companion
 #ナルキッソスの
 of Narcissus
 #マーメイドの
 of the Mermaid
 #深秘を曝け！
-'Reveal the Secrets!'
+'Expose the Esoteric!'
 
 N:*:Default
 #『ピザ』
