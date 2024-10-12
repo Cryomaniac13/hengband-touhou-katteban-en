@@ -169,7 +169,7 @@ N:1103:Yuyuko
 # 「一瞬も全て。全ても一瞬。あなたと遊んでいる時間も必然よ」
 says, 'An instant is everything. Everything is an instant. It's inevitable that I spend time playing with you.'
 # 「私を倒してみせなさい！」
-says, 'Show me that you can defeat me!'
+says, 'Show me how you defeat me!'
 # は指をくるくる回している。
 twirls her fingers around and around.
 
@@ -189,7 +189,7 @@ says, 'Ah, whatever.'
 
 N:1105:Yukari
 # 「どうも、うちの藍が迷惑をかけたようで」
-says, 'It appears my Ran has caused some nuisance for you.'
+says, 'It appears my Ran has caused some nuisance.'
 # 「永遠にお休みなさい」
 says, 'Sleep for all eternity.'
 # 「何でそんなにカリカリしてるのかしら？」
@@ -241,7 +241,7 @@ says, 'If you were quietly passing by, I would leave you be. But you are being a
 # 「これ以上は下がれないな」
 says, 'I can't withdraw any further.'
 # 「里の人間にも里の歴史にも弾幕一本触れさせる物か！」
-says, 'I won't let a single one of your danmaku touch the humans or history of this village!'
+says, 'I won't let a single danmaku touch the humans or history of this village!'
 
 N:1109:Tewi
 # 「タラッタラッタラッタ、可愛いダンス～♪」
@@ -351,7 +351,7 @@ says, 'My crowbar-like-thing spews fire!'
 # 「お祭り騒ぎに踊らされてる奴なんてただのカモだ。」
 says, 'Anyone who dances at the whims of a festival is just a sucker.'
 # 「面白いもんいっぱい持ってるな。ちょっと見－せーろーよー。」
-says, 'You have a lot of interesting stuff. Hey, let! Me! See! It!'
+says, 'You have lots of interesting stuff. Hey, let! Me! See! It!'
 # 「なんだい。今更、祭りに参加してきたって分け前やんないよ。」
 says, 'Huh? You can't join the festival this late and still expect to get a share.'
 
@@ -765,7 +765,7 @@ says, 'I spy, someone who could be my opponent.'
 # 「あんたの相手はこの私だよ！」
 says, 'You will be facing me!'
 # 「ふーん……てっきりお仲間だと思ったんだけどねぇ」
-says, 'Hmm... I thought for sure you were a companion.'
+says, 'Hmm... I thought for sure you were a comrade.'
 # 「悪いけどここで足止めさせてもらうよ。」
 says, 'Sorry, I'll have to stop you here.'
 # 「はーい、今日は私達のライブにようこそ！」
@@ -851,7 +851,7 @@ slurs, 'I'm just good at dispersin' and gatherin' things.'
 # 「ほらほらどうしたー」
 slurs, 'Hey hey, what's the matter?'
 # 「鬼が出たぞー！」
-says, 'Then suddenly an oni jumped out!'
+says, 'Then suddenly an oni appeared!'
 # は瓢箪からグビグビと酒を飲んでいる。
 gulps down sake from a gourd.
 # は「へっへっへ」と笑いながらのしのし歩いてくる。
@@ -981,7 +981,7 @@ says, 'I won't let you hinder me.'
 # 「これは本格的に異変が起こっているんだわ」
 says, 'This must be a full-blown incident.'
 # 「こうなりゃ何でも相手になるわよ」
-says, 'I'll take on you or anyone.'
+says, 'If this is the way it is, I'll take on anyone.'
 # 「こういう所に何らかの敵がいる！　私の経験上！」
 says, 'There must be an enemy here! My experience tells me so!'
 # 「あんたも暴れるというのなら、ここで成敗してくれる！」
