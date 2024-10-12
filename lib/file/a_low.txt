@@ -259,7 +259,7 @@ N: 9:BIAS_DEX
 #『五行遁行』
 'Five Elements'
 #『ジョーカー』
-of Joker
+of the Joker
 #『かくれんぼ』
 'Hide-and-Seek'
 #『真・スメアゴル』
