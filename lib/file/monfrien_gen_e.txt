@@ -1,6 +1,1145 @@
 #monfrien for Gensoukyou uniques
-#
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
+
+N:1089:Rumia
+# 「そーなのかー」
+says, 'Is that so?'
+# はふよふよと飛んでいる。
+hovers softly in the air.
+# 「『聖者は十字架に磔られました』っていってるように見える？」
+says, 'Are you reminded of the saint who was crucified?'
+
+N:1090:Cirno
+# 「妖精の未来はあたいが創る！」
+says, 'I will create the future of fairies!'
+# 「あたいこそが最強の妖精、氷のチルノだー！」
+says, 'I am the strongest fairy, Cirno of Ice!'
+# 「知らないの？凍った花を摘むと気持ちの良い音がするの」
+says, 'Don't you know? What you pick a frozen flower, it makes a nice sound.'
+# はふふんとポーズを取った。
+postures defiantly with a huff.
+
+N:1091:Meiling
+# 「みんなまだまだね！四千年の歴史から見ればみんな子供のようだわ。」
+says, 'Everyone still has a long way to go! Compared to 4000 years of history, we're all like children.'
+# 「常に自分を見つめ直すのです。」
+says, 'One must always reexamine oneself.'
+# は太極拳の構えをとった。
+takes up a tai chi stance.
+
+N:1092:Patchouli
+# 「魔法の力は、いわば科学その物。つまり時代の最先端よ。」
+says, 'The power of magic is, so to speak, science. That is to say, it's at the forefront of the times.'
+# 「外の世界の魔法は進んでいるのよね。幻想郷には研究者が少なすぎるのよ。」
+says, 'The magic of the outside world is advancing, isn't it? There are too few researchers in Gensoukyou.'
+# 「頭をちゃんと使うと眠る事が出来なくなる。」
+says, 'When you're properly using your head, you won't be able to sleep.'
+# 「うーん、最近、目が悪くなったわ。」
+says, 'Hmm, my eyesight has been getting worse lately.'
+# は咳き込んでいる。
+erupts into a coughing fit.
+
+N:1093:Sakuya
+# 「畑泥棒対策にマンドラゴラを植えました。」
+says, 'We've planted mandrakes in the garden to counter thieves.'
+# 「幻想郷の平和なんて、砂上のバベルみたいなもんね。」
+says, 'The peace of Gensoukyou is like Babel built upon the sand.'
+# 「あなたもこの館に雇われたのかしら？」
+says, 'Were you also hired to work in the mansion?'
+# 「さて、早速仕事に取りかかって貰おうかしら。」
+says, 'Well, let's get to work right away.'
+# 「あなたは悩みが少なそうでいいわね。」
+says, 'You seem to have few worries. Isn't that nice.'
+# 「この辺りの治安は、昔からこうなのかしら。」
+says, 'Has the law enforcement in this area always been like this?'
+
+N:1094:Remilia
+# 「楽しい夜になりそうね」
+says, 'Looks like it's going to be a fun night.'
+# 「あなたは今まで食べてきたパンの枚数を覚えてるの？」
+says, 'Can you remember how many slices of bread you have eaten until now?'
+# 「能ある鷹は尻尾隠さず……よ。」
+says, 'A skilled hawk does not hide its... tail.'
+# 「棺桶は死人の入るものだって、前に言ったじゃない。」
+says, 'I told you before, coffins are for the dead.'
+
+N:1095:Flandre
+# 「なんかお呼びかしら？」
+says, 'Did someone call me?'
+# 「一緒に遊んでくれるのかしら？」
+says, 'Will you play with me?'
+# 「きゅっとしてドカーンね」
+says, 'I go "squeeze" and it goes "boom".'
+# 「私も人間と言うものが見たくなって、外に出ようとしたの。」
+says, 'I wanted to see what humans were like, so I tried to go outside.'
+
+N:1096:Letty
+# 「くろまく～」
+hums, 'Pulling strings, what fun~!'
+# 「私が眠らせてあげるわ。安らかな春眠。」
+says, 'I'll help you to sleep. A peaceful deep sleep.'
+# 「なんだか今年は調子が良いわ～」
+says, 'Somehow this year has been wonderful~'
+
+N:1097:Chen
+# 「おかしいと思ったら人に聞く！」
+says, 'If you think it's strange, ask someone!'
+# 「呼ばれて飛び出て……。」
+says, 'You call out, I pop out...'
+# は素早く駆け回っている。
+zooms around.
+
+N:1098:Alice
+# 「弾幕はブレイン。常識よ」
+says, 'Danmaku is about brains. That's common sense.'
+# 「他人の心配する位なら自分の心配したら？」
+says, 'Why don't you worry about yourself if you have time to worry about others?'
+# 「私を普通の人間と一緒にしないでよ。」
+says, 'Don't categorize me with normal humans.'
+# 「ああもう！　こんな雑魚にかまってないで先急ぐわよ！」
+says, 'For goodness' sake! There's no time to waste on small fry!'
+# 「取り敢えず、相手にしてやったら？　目の前の奴。」
+says, 'Why don't you pay attention to the problem first? The one that's right there.'
+
+N:1099:Lunasa
+# 「宴にはまだ速い」
+says, 'You are early for the banquet.'
+# 「雑音は、始末するまで」
+says, 'Unwanted noise, go away.'
+# 「本当に優れた音楽は騒音と変わらないのよ」
+says, 'Excellent music is no different from noise.'
+# 「手助け歓迎中よ。」
+says, 'Assistance is welcome.'
+
+N:1100:Merlin
+# 「まぁ、プチ宴会にはなるかな？」
+says, 'I guess it'll be a mini banquet?'
+# 「私の演奏を聴いて、無事だった食料は無いわ」
+says, 'No dish has escaped my performance alive!'
+# 「私の音は感情の音、トランペットのぐるぐるは感情の増幅器なのよ」
+says, 'My sounds are the sounds of emotion, and my trumpet's dizziness the amplifier!'
+
+N:1101:Lyrica
+# 「宴の時間～。」
+says, 'Banquet time~'
+# 「私の音は幻想の音、あの世の音。」
+says, 'My sound is the sound of fantasy, of the world beyond.'
+# 「今日はソロ活動記念日。貴方は最初の観客よー」
+says, 'Today's the anniversary of my solo act. You're my first audience!'
+
+N:1102:Youmu
+# 「妖怪が鍛えたこの楼観剣に斬れぬものなど、あんまり無い！ 」
+says, 'The things that my youkai-forged Roukanken cannot cut are next to none!'
+# 「夜は短いのですよ！早く敵を見つけて斬り潰すのです。」
+says, 'The night is very short! We have to find the villains quickly, and cut them into mash.'
+# 「ここは何処でしょう……？」
+says, 'Where is this place...?'
+# 「実は私、怖い物苦手なんですよぉ。」
+says, 'To tell the truth, I'm not good with scary things...'
+# 「さあ、出て来い！そこに隠れる闇に蠢くものよ。」
+says, 'You, show yourself! You wriggling one, hiding in the darkness.'
+
+N:1103:Yuyuko
+# 「一瞬も全て。全ても一瞬。あなたと遊んでいる時間も必然よ」
+says, 'An instant is everything. Everything is an instant. It's inevitable that I spend time playing with you.'
+# は指をくるくる回している。
+twirls her fingers around and around.
+# 「どう？この枝が倒れた方に進んでみない？」
+says, 'Where? Why not go in the direction that this branch falls?'
+# 「あの世はいつも賑やかで華やかな処だわ。」
+says, 'The afterlife is always a lively and gorgeous place.'
+
+N:1104:Ran
+# 「今夜も、楽しい宴の準備～。」
+says, 'Fun banquet preparations again tonight~.'
+# 「紫様が作った方程式は私の力を無敵の物に変える。」
+says, 'Lady Yukari's equations will increase my power indefinitely.'
+# 「…私が貴方を式神にしてあげようか？」
+says, '...do you want to become my shikigami?'
+
+N:1105:Yukari
+# 「どうも、うちの藍が迷惑をかけたようで」
+says, 'It appears my Ran has caused some nuisance.'
+# 「何でそんなにカリカリしてるのかしら？」
+says, 'Why do you look so annoyed? Are you lacking calcium?'
+# 「あなたは気がついていない。極楽と地獄の境界が曖昧になっている事に」
+says, 'You don't yet know. The border between paradise and hell is becoming ambiguous.'
+# 「あなたは気がついていない。すでに、昼と夜の境界は私の手の内にあることに」
+says, 'You don't yet know. The border between day and night is already in the palm of my hand.'
+# 「ちょいとお時間良いかしら？」
+says, 'May I borrow a little of your time?'
+# 「その優しい火が～♪命取られて消えていく～♪」
+croons, 'That gentle flame~, it takes your life and disappears~'
+# 「夢遊病？　あれも私の得意技なの。」
+says, 'Sleepwalking? That's another of my specialties.'
+
+N:1106:Wriggle
+# 「月の見える夜は楽しまないと駄目じゃない。」
+says, 'It's a waste to not enjoy a moonlit night.'
+# 「もしかして、物騒な話？」
+says, 'Wait, are you up to something evil?'
+# の周りを沢山の蛍が飛んでいる。
+fills the air with fireflies.
+
+N:1107:Mystia
+# 「翼が傷つき倒れても～♪ここでは寝るな～鈴蘭の夢～♪」
+sings, 'Even if my wings are injured and I fall~ I cannot sleep here~ Suzuran dreams~'
+# 「生水飲むと～おなかを壊す～♪湖飲むと～三途河～♪」
+sings, 'If you drink unboiled water~, then your stomach gets upset~, if you drink lake water~, Sanzu River~'
+# 「お空の上はマッハの時代～♪文明開化の味がする～♪」
+sings, 'The era of Mach is above the skies~, it has the taste of Westernization~'
+# 「いっちどっはおいでよ～♪ほてるはなみずき～♪」
+sings, 'It's worth visiting once~, Hotel Hanamizuki~'
+# 「唄う歌を選ばないのがプロってもんよ」
+says, 'A professional isn't picky about what they sing.'
+# 「春風や～教えておくれ～♪明日のおかずと今晩のおかず～♪」
+sings, 'Spring breeze~ please tell me~, What's tomorrow's side dish and what's tonight's side dish~'
+# 「もういーくつねるとー、おーしょうがつー♪」
+sings, 'Hooow many nights to sleep, until it's Neeew Yeeear's~'
+# 「何をおっしゃる、うっさぎさん～♪」
+sings, 'What are you saying, Mr. Bunny~'
+# 「ヒトッ、ヒトッ、ヒトをッ！人間を～さらえぇ♪」
+sings, 'Human, human, human! Snatch away the humans~'
+# 「歌い続けないと死んじゃうんだから仕方がない」
+says, 'If I don't keep singing I'll die so it can't be helped.'
+
+N:1108:Keine
+# 「なにやら不穏な空気が漂っていたので里を遮断したが……」
+says, 'I felt something unsettling in the air, so I cut off the village...'
+# 「大人しく通り過ぎてくれるなら、私も何もしまい。」
+says, 'If you're quietly passing by, then I will leave you be.'
+# 「里の人間にも里の歴史にも弾幕一本触れさせる物か！」
+says, 'I won't let a single danmaku touch the humans or history of this village!'
+
+N:1109:Tewi
+# 「優れた嘘は誰も損をしないのよ？」
+says, 'A great lie brings no harm, right?'
+# 「兎は高等よ？昔はあまたの神々と交流もあったもんよ」
+says, 'Don't you know rabbits are high class? In the old days, they associated with many gods.'
+# 「兎西向きゃ尾は東～」
+sings, 'When the rabbit faces west, its tail faces east~'
+# 「可愛い兎屋さんですが、ここは一つ如何ですか？」
+says, 'This is our cute little bunny shop. Can I interest you in one?'
+
+N:1110:Udonge
+# 「ついにこの時が来たのね。」
+says, 'The time has finally come.'
+# 「うーん、上の方から懐かしい風を感じるわ。」
+says, 'Hmm, I feel a nostalgic breeze coming from above.'
+# 「この先待ち受けているのが悪夢だとしても、それでも私は行くしかない。」
+says, 'Even if there is a nightmare waiting for me ahead, I have no choice but to go on.'
+# 「私はもう月の兎を止めたんだ。今はもう地上の兎なのよ。」
+says, 'I'm no longer a Moon Rabbit. I'm an Earth rabbit now.'
+
+N:1111:Eirin
+# 「ふふふ。無事ついて来てるようね。」
+says, 'Hehehe. Looks like you're following along safely.'
+# 「あいにく、私は薬学の心得があるから、多少の怪我なら大丈夫だけど。」
+says, 'Sorry to say, I know a little about medicine, so small injuries are not a problem.'
+
+N:1112:Kaguya
+# 「何やら騒がしいわね。どうしたのかしら。」
+says, 'There's some commotion. I wonder what's happened.'
+# 「たまのお客様は大切に扱うわ。」
+says, 'Our odd guests are treated with care.'
+# 「今まで身を隠していたから余り外に出れなかっただけよ。でも、今日はその分遊ばさせてもらう。」
+says, 'I've been hiding up until now so I've not have much chance to go out. But, I'll make up for that today.'
+# 「この光は貴き月の民ですら忘れた太古の記憶なのよ。」
+says, 'This light is an ancient memory, forgotten even by the exalted Lunarians.'
+
+N:1113:Mokou
+# 「何だかさっきから私の中の火が黙っていないんだ。」
+says, 'The fire within me hasn't been able to stay quiet for a while now.'
+# 「本当の恐怖は、約束された恐怖の向こうにある。」
+says, 'True terror lies beyond the fear that you expect.'
+# 「実はね。私には死が無いの。死なないって事は、生きてもいない。」
+says, 'In truth, I can't die. To be without death is to be without life.'
+# 「蓬莱の薬、人間は決して口にしてはならぬ禁忌の薬。」
+says, 'The Hourai Elixir is a forbidden drug that should never be consumed by humans.'
+# 「生れてこの方手加減が必要ない生活してきたから。」
+says, 'I've never had to hold back since the day I was born. That's the way I live.'
+
+N:1115:Minoriko
+# 「神様たる物、身に纏う香りも気をつけないと。」
+says, 'As a god, one must put a great deal of care into their odour.'
+# 「あ、ちなみに私は豊穣の神ね」
+says, 'Oh, by the way, I'm the harvest god.'
+# 「私はただの八百万分の一の神。この先は、神様がごろごろしているんだから」
+says, 'I'm merely one among myriad gods. Ahead, there are countless others.'
+
+N:1116:Hina
+# 「なんなら、貴方の厄災も全て引き受けましょうか？」
+says, 'Would you like me to take on all your misfortunes?'
+# 「えんがちょの向こう側に私が居るから、人間は平和に暮らせるのよ。」
+says, 'It's because I cross my fingers that humans can live in peace.'
+# はくるくる回転している。
+is rotating around and around.
+
+N:1117:Nitori
+# 「私のバールの様な物が火を噴くぜ！」
+says, 'My crowbar-like-thing spews fire!'
+# 「お祭り騒ぎに踊らされてる奴なんてただのカモだ。」
+says, 'Anyone who dances at the whims of a festival is just a sucker.'
+# 「面白いもんいっぱい持ってるな。ちょっと見－せーろーよー。」
+says, 'You have lots of interesting stuff. Hey, let! Me! See! It!'
+# 「なんだい。今更、祭りに参加してきたって分け前やんないよ。」
+says, 'Huh? You can't join the festival this late and still expect to get a share.'
+
+N:1119:Aya
+# 「まあ、記事内容なんていくらでも捏造できるわね」
+says, 'Meh, I can just make up the content as much as I want.'
+# 「百戦錬磨の私にとってこの程度は準備運動にもなりません。」
+says, 'For a veteran like me, this isn't even a warm-up exercise.'
+# 「思ったより、記事になりそうなネタはないですね……」
+says, 'Looks like there isn't as much material as I thought...'
+# 「さあさあ、貴方の好きなように行動して良いですよ？」
+says, 'Come now, why don't you act as you please?'
+# 「ほら、私のことは気にせず続けて良いですよ？さあ」
+says, 'Hey, pay me no mind and just continue. Go on.'
+# 「何か事件が起こればすぐに駆けつけるわ、これでも新聞記者なの」
+says, 'Rushing to the scene as soon as something happens, that's what being a newspaper reporter is about.'
+# 「再び密着取材の方に戻らせて頂きます。後ろの方から見守ってますので」
+says, 'I will now resume my close coverage. I'll be watching over you from behind.'
+
+N:1120:Sanae
+# 「流されるがままにとんでもないところにいる気がするー！」
+says, 'I feel like just going with the flow has resulted in an unbelievable situation...!'
+# 「おみくじは有料にしないと信憑性無いですよねぇ。」
+says, 'Fortune-telling slips have no credibility if there isn't a fee for them.'
+# 「幻想郷の人達って荒っぽいなぁ。」
+says, 'Everyone in Gensoukyou is so rough.'
+# 「やりますねぇ。商売敵に容赦ないその感じ、完全に幻想郷のヤクザですよ」
+beams, 'Not half bad. This merciless business dealing, it's like we're the Gensoukyou yakuza!'
+
+N:1121:Kanako
+# 「我を呼ぶのは何処の人ぞ。」
+thunders, 'Who calls for My presence?'
+# 「最近は、厳かな雰囲気を見せるよりも友達感覚の方が信仰が集まりやすいのよ。」
+says, 'These days it's easier to win faith with a friendly attitude than with a solemn air and august presence.'
+# 「山は私自身であり、山は私への信仰の対象です。」
+says, 'The mountain is me, the mountain is the object of worship of me.'
+
+N:1122:Suwako
+# 「今日は私の弾幕お祭りの番よ！」
+says, 'Today it's my turn to have a danmaku festival!'
+# 「もっと大地を敬おうよ。呪われても知らないよ？へへ。」
+says, 'Pay more respect to the earth. Otherwise, who knows? You might get cursed. Heh heh.'
+# 「我ら日本の神様はどんな者でも受け入れるのよ。八百万も居るから、今更拒絶出来なくなったし。」
+says, 'We Japanese gods accept all followers. There are 8 million of us, we can't justify rejections any more.'
+
+N:1123:Lily
+# 「わーい！」
+says, 'Yay!'
+# 「わーい！」
+says, 'Yay!'
+# 「こういう平和的に弾幕を発散できるイベントを待っていたわー。」
+says, 'I've been waiting for an event like this where I can shoot danmaku peacefully!'
+# 「春以外は思う存分動けないからストレスが溜まるんだよねー。」
+says, 'I don't get to move around as much as I'd like outside of spring, so I've got a lot of stress built up!'
+
+N:1125:Yamame
+# 「地底に遊びに来たのかい？あそこは今お祭り騒ぎよ。 誰も拒みゃしないから楽しんでおいき」
+says, 'Did you come to play underground? It's a wild party down there right now. Everyone is welcome, so go have fun.'
+# 「地下に落とされた妖怪達の力を見たいのね」
+says, 'Looking for the strength of the youkai who were banished underground?'
+
+N:1126:Parsee
+# 「ゲーム気分で地下に潜るのはお勧めしない。経験値稼ぎのつもりが、時間だけ潰れる事になるかもね。」
+says, 'I wouldn't recommend that you treat going underground like a game. You might be trying to get experience points, but you'll just be wasting time in the end.'
+# 「逆さ摩天楼の果てまでようこそ」
+says, 'Welcome to the end of the upside-down skyscraper.'
+# 「妬ましいわね。そんな妬ましい貴方は、退屈な私に面白い事を見せる必要がある！」
+says, 'I'm so jealous. Enviable person, show me something to relieve my boredom!'
+# 「地上の光が妬ましい。巡る風が妬ましい。」
+says, 'I'm jealous of the light above ground. I'm jealous of the gentle breeze.'
+
+N:1127:Yuugi
+# 「あんた、なかなかやるね。」
+says, 'Hey, you're doing pretty well.'
+# 「気に入った！もっと愉しませてあげるから駄目になるまでついてきなよ！」
+says, 'I like you! I've got more fun for you, so follow me until you can't take any more!'
+# 「私は山の四天王の一人、力の勇儀。弱点は、煎った豆だね」
+says, 'I'm one of the Big Four of the mountain, Yuugi the Strong. My weakness is fried beans.'
+# 「久しぶりにわくわくしてきたよ！」
+says, 'I haven't been this excited in a long time!'
+# 「山では平和に楽しくやってるかねぇ。」
+says, 'I bet it's peaceful and fun up in the mountain.'
+# は大きな盃で美味そうに酒を飲んでいる。
+sips some nice-looking sake from a dish.
+# 「酒も回って気持ちよくなってきたし、そろそろ出番かな！」
+says, 'The sake's kicking in and I feel great. It's about go time!'
+
+N:1128:Satori
+# 「……え？喉が渇いたって？そう、お茶の用意でもしましょうか？」
+says, '...hmm? You're thirsty? Why don't I put on some tea?'
+# 「そう『面倒だからみんな倒して地上に帰ろう』と考えているのね。」
+says, 'You're thinking, "This is too much bother, I'll just beat up everyone and go back to the surface".'
+# 「心を読む能力は本当に素晴らしい。どんな相手にも通用する最高の力だわ。」
+says, 'The ability to read minds is truly magnificent. It's the ultimate power against any opponent.'
+
+N:1129:Rin
+# 「楽しいことしてるね！あたいも混ぜてくれるかい？」
+says, 'Looks like you're having fun! Mind if I join ya?'
+# 「骨と魂は拾ってあげるから」
+says, 'I'll collect your bones and soul.'
+# 「猫は猫でも、そんじょそこらの猫と一緒にしてもらっちゃぁ困る。」
+says, 'A cat's a cat, but don't go mistaking me for your ordinary cat.'
+# 「死体と怨霊ならあたいにお任せ！地獄の死体運搬はお燐の猫車運送でってね。」
+says, 'Leave your corpses and your vengeful spirits to me! Shipping dead bodies to Hell, Orin's wheelbarrow transport at your service.'
+# 「怨霊は恨みだけが一人歩きした幽霊さ。こいつが憑けば人間も妖怪もこの世を怨むようになる。」
+says, 'A vengeful spirit is a ghost that came into being because of a grudge. If one possesses a human or a youkai, the possessed will begin to hold a grudge against the world.'
+# 「行くんだね行くんだね！もう止めやしないよ。」
+says, 'You're going huh, you're going! I won't stop ya.'
+
+N:1130:Utsuho
+# 「私は、ある神様の力を取り込んだわ。黒い太陽、八咫烏様。この力は、太陽の力と同じ。」
+says, 'I've absorbed the power of a certain god. The Black Sun, Lord Yatagarasu. It's the same as the power of the sun.'
+# 「貴方も私とフュージョンしましょ？」
+says, 'Won't you fuse with me?'
+# 「まだまだ暴れ足りないよ！私の中の核反応がもっと暴れろと言っているわ！」
+says, 'This isn't enough to sate my violence! The nuclear reactions within me demand a greater rage!'
+# 「って、何をしてたんだっけ？」
+says, 'Wait, what were we doing?'
+
+N:1131:Koishi
+# 「良い遊び相手が見つかったわ。」
+says, 'I've found a good playmate.'
+# 「誰しも子供の時にね、大人には気付かれない友達っていたでしょ？うふふ。」
+says, 'When we were kids, didn't everyone have an invisible friend that adults didn't notice? Hehe.'
+# 「もしもーし、私は今何処にいると思いますー？」
+says, 'Hello hello, where do you think I am right now?'
+# 「あら、ここは何処かしら？」
+says, 'Huh, where am I?'
+# 「今度、家に遊びに来てよ。面白い怨霊とか用意しておくから。」
+says, 'Come play at my house next time. We'll find some interesting spirits for you, or something.'
+# 「有意は無意に敵わないの。」
+says, 'The conscious always loses to the unconscious.'
+# 「生物は考えている事だけで行動してる訳じゃない。意識と無意識の両方で行動しているのよ。」
+says, 'Living things don't act only on what they consciously think. They act both consciously and unconsciously.'
+
+N:1132:Nazrin
+# は何かを探しているようだ。
+seems to be searching for something.
+# はゆらゆらとロッドを動かしている。
+swings dowsing rods back and forth.
+# 「そんなに急いでどこに行く？」
+says, 'Where are you going in such a hurry?'
+# 「私の子ネズミ達が人間に反応して困るんだ。食欲旺盛だからね。」
+says, 'My little mice keep reacting to humans and it's such a headache. They're just a bunch of walking stomachs.'
+
+N:1133:Kogasa
+# 「最近、暇なのよねぇ。 傘が一人で動き始めても誰も驚かないし。」
+says, 'I've been so bored lately. Nobody gets surprised by an umbrella moving on its own.' 
+# 「乗るしかないでしょ！この大波に！」
+says, 'I have no choice! But to ride this big wave!'
+# 「しくしく。頑張って妖怪らしくしようとしてるのにねぇ。」
+sniffles, 'I'm doing my best to look youkai-like.'
+# 「ちょっと待って。速いわ～。」
+says, 'Please wait a minute. You're so fast~.'
+# 「外の世界ではベビーシッターは傘で空を飛ぶらしいよ。」
+explains, 'In the Outside World, babysitters fly through the sky using umbrellas.'
+
+N:1134:Ichirin
+# 「命蓮寺は本来妖怪に開かれています。いつでもどうぞ。お仲間もいっぱいいますよ」
+says, 'The Myouren Temple has been open to youkai from the start. You're welcome to join any time. You'd make lots of friends, too.'
+# 「在家でも仏教始められるよん。」
+says, 'You can also enter Buddhism as a layperson.'
+# 「これで命蓮寺の参拝客がもっと増えるでしょう」
+says, 'Now we'll surely have more visitors to our temple.'
+# は入道と何やら話し込んでいるようだ。
+appears to be in some form of deep conversation with the nyuudou.
+
+N:1135:Murasa
+# 「これが数多の妖怪を葬ってきた力なのか。」
+says, 'This power's buried a lot of youkai, hasn't it?'
+# の体から水が滴り落ちている。
+is trailing water everywhere, perpetually soaked.
+# 「聖（ひじり）が望む未来。それは争いのない美しい妖怪世界。」
+says, 'The future Hijiri desires is a peaceful, beautiful world of youkai.'
+# 「さあ、貴方も魔の地の住人よ。」
+says, 'Now you're a resident of the demons' land, too.'
+
+N:1136:Shou
+# 「私は妖怪ですが、毘沙門天に帰依しています。」
+says, 'It's true that I'm a youkai, but I'm also a devotee of Bishamonten.'
+# 「貴方はこれからどうするのですか？」
+says, 'What are you going to do after this point?'
+# の持つ宝塔が輝きを放った。
+raises the pagoda in her hand as it glows and glitters.
+# 「本当の財宝の輝きというものを、見せてやろうじゃないか。」
+says, 'Let me show you the brilliance of real treasure.'
+# 「獣の血が騒ぐ……！」
+says, 'My beast blood boils...!'
+
+N:1137:Byakuren
+# 「貴方は私の考えを支持してくれますか？」
+says, 'Do you support my thinking?'
+# 「私は人間と妖怪の平等を訴え、世界に平穏をもたらすのです。」
+says, 'I want to appeal for human and youkai equality, and bring peace to the world.'
+# 「ふむ。皆の心が荒んでいるわ。私が皆の道徳を取り戻しましょう」
+says, 'Hmm. Everyone's hearts have become corrupt. I must restore morality to all.'
+# 「何事も一睡の夢。南無三南無三宝。」
+says, 'All is a wink of a dream. Namusan namusanpo.'
+# 「無益な殺生はしたくない。私は人の心を救えればそれで良いのです」
+says, 'I don't want to kill in vain. As long as I can save the hearts of the people, I will be content.'
+
+N:1138:Nue
+# 「私だって何か参加したかったもん」
+says, 'I wanted to get in on this too.'
+# 「もっともっと潤うのよ！」
+says, 'More, I'll profit even more!'
+# の背中の翼のような触手のようなものが奇妙にうねっている。
+undulates the wing-like tentacles on her back in a perplexing way.
+
+N:1139:Kyouko
+# 「で、どこに行くの？」
+says, 'So, where are you going?'
+# 「これも勤行なのよ」
+says, 'This is also part of the liturgy.'
+# 「ぎゃーてーぎゃーてー」
+chants, 'Gyaa~te~gyaa~te~'
+# 「ぜむとーどーしゅー」
+chants, 'Zemuto~do~shu~'
+# 「挨拶はきちんとしないとね。」
+says, 'You've always gotta give a proper greeting.'
+
+N:1140:Yoshika
+# 「え？臭うだと？これでもお肌ケアしているんだぞうぅ」
+says, 'Huh? I stink? But I take such good care of my skin.'
+# 「ゾンビは永遠に不滅です！　お前は誰だ？」
+moans, 'Zombies are eternal and undying! Who are you?'
+# 「そうだ！思い出したぞ。我々は霊廟を護るために蘇ったのだ！」
+says, 'That's right! I remember. We were revived to protect the mausoleum!'
+# 「何の話だ？」
+says, 'What are you saying?'
+
+N:1141:Seiga
+# 「あの娘、いま何処にいるのかしら？」
+says, 'Just where has that girl gotten to?'
+# 「改宗します？貴方ならいい仙人になれますよ？」
+says, 'Would you like to convert? Wouldn't you make an excellent hermit?'
+# は謎めいた笑みを浮かべている。
+smiles enigmatically.
+# 「私は大抵の壁ならこれで穴を開けることができるわ」
+says, 'With this, I can open a way through nearly any wall.'
+
+N:1142:Tojiko
+# 「やってやんよ！」
+says, 'Have at it!'
+# 「おろかものめが！」
+says, 'Damned fool!'
+# の周りに火花が散っている。
+sends sparks flying all about.
+
+N:1143:Futo
+# 「おぬしも尸解仙……だな？」
+says, 'Thou art also a shikaisen... yes?'
+# 「我が宗教、例え妖怪でも拒みはせぬぞ」
+says, 'My religion refuseth not even youkai.'
+# 「どうだ、改宗せぬか？」
+says, 'Wouldst thou consider converting?'
+# は皿を数えている。
+counts a pile of plates.
+# 「良かろう、修行の成果を見せてやる。」
+says, 'So be it, I shall display the fruits of my training.'
+
+N:1144:Miko
+# 「そんな弱気じゃ人心は掌握出来ないぞ！」
+says, 'You will not capture people's hearts with such timidity!'
+# 「中々見所がある。弟子にならないか？」
+says, 'You show promise. Would you like to become my disciple?'
+# は高笑いを始めた。
+roars with laughter.
+# 「黄色のマントが良いと答えてくれたら、蜜柑をあげようと準備してたのだが……。」
+says, 'In case someone asked for the yellow mantle, I had prepared mandarins as a gift, but...'
+
+N:1145:Wakasagi
+# は何かを歌っている。
+is singing something.
+# 「そろそろ私達の出番があってもいいでしょ？」
+says, 'Isn't it time we youkai took the stage?'
+
+N:1146:Banki
+# 「意外と沢山居るのよ。人里近くに住む妖怪も。」
+says, 'You'd be surprised by how many there are. Youkai who live around the Human Village.'
+# の首がくるりと一回転した。
+rotates her head full circle.
+# は歩きながら本を読んでいる。
+is engrossed in a book while walking.
+
+N:1147:Kagerou
+# 「ようやく私達のような妖怪も脚光を浴びる時が来たわ。」
+says, 'It's finally time for youkai like us to have a turn in the limelight.'
+# は遠吠えをした。
+howls.
+
+N:1148:Benben
+# 「今まで大人しくしていたけど、これからは私達の時代だわ。」
+says, 'We've been meek so far, but from now on it'll be our era.'
+# 「あんたの相手はこの私だよ！」
+says, 'You will be accompanying me!'
+# 「ふーん……てっきりお仲間だと思ったんだけどねぇ」
+says, 'Hmm... I thought for sure you were a comrade.'
+
+N:1149:Yatsuhashi
+# 「やるわよー？」
+says, 'You ready to do this?'
+# 「私の相手をしてくれない？」
+says, 'Will you be my partner?'
+# 「道具だからって甘く見ないでよね。」
+says, 'Don't underestimate me just because I'm a tool.'
+# 「鎮魂ライブの始まり始まりー！」
+says, 'Let the soul consolation concert begin!'
+
+N:1150:Seija
+# 「逃げも隠れもしないぞ、全てを敵に回してやる！」
+says, 'I'll not run away or hide, I'll turn everyone against me!'
+# 「どんな手を使っても生き残ったもんが勝ちなんだよ」
+says, 'Whatever the means, the one who survives, wins.'
+# 「我が名は正邪、生まれ持ってのアマノジャクだ！」
+says, 'My name is Seija, and I am a born amanojaku!'
+
+N:1151:Sukuna
+# 「小が大を兼ねたって良いじゃない。」
+says, 'It's great that small things can have a big purpose.'
+# 「あはははは」
+laughs, 'Ahahahaha!'
+# 「小さいからって馬鹿にするなよー？こう見えても誇り高き小人族だ」
+says, 'Don't make fun of me because I'm small! I'm a proud member of the inchling race!'
+
+N:1152:Raiko
+# 「さあ試すとするか。私の新しい魔力を」
+says, 'So, shall we try out my new magical power?'
+# 「幻想郷に始原のビートを響かせよ！」
+says, 'Let the primal beat resound throughout Gensoukyou!'
+# 「私達は自由よ！」
+says, 'We are free!'
+# 「太鼓を叩くに頭脳は要らぬ。猿人時代の魂を呼び覚ませ！」
+says, 'Awaken your caveman spirit, for it doesn't need brains to beat a drum!'
+# 「お祭りの花形はやはり太鼓。太鼓のリズムで盛り上がらない祭りはない！」
+says, 'The taiko is the star of the show, naturally. There's nothing that isn't roused by its rhythm!'
+# 「太鼓こそが楽器の原点。そして音楽の原点はやはり心臓の鼓動なのだ。」
+says, 'Drums are the original instrument. And your heartbeat is the original music.'
+
+N:1153:Kasen
+# は団子を食べている。
+eats dango.
+# は肉まんを食べている。
+eats a steamed meat bun.
+# は焼き芋を食べている。
+eats a baked sweet potato.
+# は饅頭を食べている。
+eats a manju.
+# は夏季限定冷やし団子を食べている。
+eats chilled summer special dango.
+# は説教を始めた。
+begins to lecture...
+
+N:1154:Suika
+# 「空の月も天蓋に映って居るだけだから、天を割れば幾らでも砕くことが出来るのよ～」
+explains, 'So since the moon you see in the sky is just being reflected in the heavens, all you gotta do is tear the heavens apart~'
+# 「お酒～」
+slurs, 'Sake~'
+# 「もう何百年も前から呑み続けているわよ。」
+slurs, 'I've been drinkin' for centuries already.'
+# 「私は砕いたり萃めたりするのが得意なのよ。」
+slurs, 'I'm just good at dispersin' and gatherin' things.'
+# は瓢箪からグビグビと酒を飲んでいる。
+gulps down sake from a gourd.
+
+N:1156:Iku
+# 「という訳で地震が起きます」
+says, 'To cut it short, an earthquake is going to occur.'
+# 「不意を突いて地震が起きます」
+says, 'Getting straight to the point, an earthquake is going to occur.'
+# 「そこはかとなく地震が起きます」
+says, 'You there, an earthquake is going to occur.'
+# 「不安を残せれば私も仕事の甲斐がありますわ」
+says, 'That I leave you anxious is a sign I am doing my job properly.'
+# 「私はただ危険を知らせるだけの龍宮の使い。」
+says, 'I am merely a messenger of the Dragon Palace who warns of danger.'
+# 「まもなく幽霊の数が激増するでしょう。それはそれは悲劇的に」
+says, 'Soon, the quantity of ghosts will increase sharply. Appalling, isn't it?'
+
+N:1157:Tenshi
+# 「天界は成仏した霊が住む処。貴方も成仏してみます？」
+says, 'Heaven is a place where spirits who have achieved nirvana live. Would you like to try to attain nirvana too?'
+# 「天人はたまに地上に降りて忠言するものよね。」
+says, 'Celestials occasionally descend to the Earth to give advice.' 
+# 「あー、勉強はめんどくさいなぁ。こんな昔の人の事ばっかり頭に叩き込んでもねぇ。」
+sighs, 'Ah, studying is such a chore. I can't keep cramming all this knowledge from the ancients into my head.'
+# 「ま、どっちでも良いか。続けるよ！相棒！」
+says, 'Eh, either way is fine. Let's continue! Partner!'
+# 「お前の命を狙っている奴が来たんだ。戦いの準備をしようじゃないか！」
+says, 'The one coming to take your life is here. It's time to prepare for battle!'
+
+N:1158:Kokoro
+# 「スマイルスマイル！」
+says, 'Smiley-smiley!'
+# 「私は全包囲に顔を持っている。背後に廻ったところで驚かないぞ。」
+says, 'I have a face for every direction. I won't be surprised if you sneak up behind me.'
+# 「えーとお面間違えた。これが驚きのお面。」
+says, 'Uh, that was the wrong mask. This is the Mask of Surprise.'
+# 「もう昔の希望の面は要らないわ。感情と言うものが何とか掴めてきたもん」
+says, 'I don't need that old Mask of Hope any more. I've got my hands on these things called emotions.'
+# 「みんなを見て感情の勉強中なのー」
+says, 'I'm observing everyone to study their emotions!'
+
+N:1159:Medicine
+# 「今年のスーさんは、ちょっと気が早いわね？」
+says, 'Isn't Su-san a little rash this year?'
+# 「ああ、躰が毒で満たされていく」
+says, 'Ahh, my body's brimming with poison.'
+# 「一番怖い毒は、少しずつ体を蝕んでいく毒、精神を蝕んでいく毒」
+says, 'The most terrifying poison is one that slowly eats away at the body and mind.'
+# 「コンパロコンパロ毒よ集まれー」
+says, 'Konparo, konparo, poison gathers!'
+
+N:1160:Yuuka
+# 「これは、幻想郷で唯一枯れない花なのよ」
+says, 'This is the only flower in Gensoukyou that never withers.'
+# 「花が目出度いのに死の象徴でもある理由は判る？」
+says, 'Do you know why flowers symbolize both happiness and death?'
+# はにっこりと笑っている。
+is smiling broadly.
+# 「異変が起きても楽しそうね」
+says, 'It's fun even with this incident in full blaze.'
+
+N:1161:Komachi
+# 「ふふふ。また面白い暇つぶしを見つけてしまった。」
+says, 'Hehehe. I've found another amusing way to kill time.'
+# 「道なんてあって無いようなもんさ」
+says, 'Paths are not really necessary.'
+# 「彼岸で、三途のタイタニックったあ、あたいの船の事さ。」
+says, 'On Higan's shore was Sanzu's Titanic. I mean my boat.'
+# 「いやいや、あたいはただのしがない船頭さ。」
+says, 'No, no, I'm just a humble boatwoman.'
+# 「さあ、まだまだこの世には楽しいことがある。 死ぬだなんて十年早い」
+says, 'Well, there are still things to enjoy in this world. It's 10 years too early for you to die.'
+
+N:1162:Eiki
+# 「そう、貴方は少し迷惑をかけすぎる」
+says, 'Yes, you are a little too troublesome.'
+# 「そう、貴方は少し業が深すぎる」
+says, 'Yes, you are a little too hard-working.'
+# 「そう、貴方は少し嘘を吐き過ぎる」
+says, 'Yes, you are a little too much of a liar.'
+# 「そう、貴方は少し自分勝手過ぎる」
+says, 'Yes, you are a little too selfish.'
+# 「そう、貴方は少し人間に冷たすぎる」
+says, 'Yes, you are a little too cold to others.'
+# 「そう、貴方は少し混沌を呼びすぎる」
+says, 'Yes, you cause a little too much chaos.'
+# 「そう、貴方は少し好奇心が旺盛すぎる」
+says, 'Yes, you are a little too curious.'
+# 「一度、私の裁きを受けてみる？ そうすれば、少しは身を正すでしょう。」
+says, 'Would you like to experience my judgment just this once? If you do, then you will straighten yourself out a little.'
+
+N:1226:Reimu
+# 「報酬は高く付くから覚えときなさい。」
+says, 'You owe me big for this, so don't you forget it.'
+# 「何よ、私を呼びつけておいて出迎えもないの？」
+says, 'What, you call me all the way here and don't even greet me?'
+# 「抜け駆けは許さないわ！」
+says, 'I won't let you get a head start on me!'
+# 「私の直感が外れた事なんて無いんだから」
+says, 'My intuition is never wrong.'
+# 「本当の結界を見せてあげるわ」
+says, 'Now, I'll show you my true barriers.'
+# 「これは本格的に異変が起こっているんだわ」
+says, 'This must be a full-blown incident.'
+# 「こうなりゃ何でも相手になるわよ」
+says, 'If this is the way it is, I'll take on anyone.'
+# 「こういう所に何らかの敵がいる！　私の経験上！」
+says, 'There must be an enemy here! My experience tells me so!'
+# 「さあ倒されたい妖怪はどこにいる？」
+says, 'Now, where is the youkai I need to defeat?'
+# 「泣く子も黙る博麗神社の巫女よ！」
+says, 'I'm the Hakurei shrine maiden who silences even crying children!'
+# は苛立っているようだ。
+looks annoyed.
+# 「何か嫌な感じね」
+says, 'Something doesn't feel right.'
+
+N:1227:Marisa
+# 「ああ、そうかい。今の、植物の名前だぜ。「亜阿相界」。」
+says, 'Ah, is that so. Just now, that was the name of a flower. "Aasoukai".'
+# 「遠隔操作型か？　それにしてはパワーが高い気がするが。」
+says, 'So you're a long-distance type? You have quite a bit of power for that type though.'
+# 「私はいつも通り、迷惑な妖怪を退治しているだけだぜ。」
+says, 'I'm just exterminating some annoying youkai, like usual.'
+# 「判ってないな。もう巻き込まれちまってるんだよ。私も……お前もな」
+says, 'You don't get it. We've been neck-deep in this for a while now... both you and me.'
+# 「うえーい」
+says, 'Bweeeeh.'
+# 「そうだな。今日の粘菌の繁殖率は中吉だ」
+says, 'Right. The reproduction rate of slime molds today predicts moderate luck.'
+# 「おお？何か障害物っぽい奴が現れたな」
+says, 'Ooh? Some obstacle-like guy has appeared.'
+# 「こんな面白そうなもん見つけて手ぶらで帰れるもんか」
+says, 'I can't go home empty-handed from an interesting place like this.'
+# 「何か見慣れない奴がウロチョロしてるな」
+says, 'Some new faces I'm seeing running around here.'
+# 「これは久しぶりの掘り出しもんだぜぇ！」
+says, 'You don't get to find something like this too often!'
+# 「こう修羅場をくぐっているとなぁ、戦場の匂いくらい判るもんだ」
+says, 'When you've lived through bloodshed and carnage, you know the smell of a battlefield.'
+# 「弾幕はパワーだよ。」
+says, 'Danmaku is about power.'
+# 「今日も一日頑張るぜー！」
+says, 'I'm gonna do my best today, too!'
+# 「星は好きなんだよ。星空はロマンがある」
+says, 'I like stars. The starry sky is romantic.'
+
+N:1230:Mamizou
+# 「壮大な狸囃子の始まりじゃ！」
+says, 'Let the majestic tanuki belly-drumming begin!'
+# 「儂の化け力はまだまだ健在じゃ。」
+says, 'My transformation powers are still in good health.'
+# 「儂が来たからには聖人の好きにはさせんて。」
+says, 'Now that I've come here, that saint won't be able to do as she pleases.'
+# 「儂の弾幕変化十番勝負で、みっちりと稽古を付けてやるぞ！」
+says, 'I'll train you well with a 10-round transformation danmaku match!'
+# 「ふぉっふぉっふぉ」
+laughs, 'Hohoho!'
+# 「しょうがないのう」
+says, 'Oh well, what can you do?'
+# 「下品下生の本領発揮といこうかのう」
+says, 'Why don't we show off what the crudest of the crude can really do?'
+# は煙管を吹かしている。
+takes a drag on a pipe.
+
+N:1267:Sumireko
+# 「まさかこの闘いが夢の中だなんて。」
+says, 'I can't believe this battle is just a dream.'
+# 「あーあ、目が覚めたら現国かあ。あれ超つまんないのよね。」
+says, 'Ahh, when I wake up, it's back to Japanese class... that's just so super-dull.'
+# 「ドッペルゲンガーの怪。そう、これこそが私の真のオカルト。」
+says, 'The Doppelganger... yes, this is my true Occultism.'
+
+N:1268:Three Fairies
+# 「私達の姿は見えてないはずよ」
+whispers, 'They shouldn't be able to see us.'
+# 「いつものように来訪者を道に迷わせるわよっ！」
+whispers, 'Let's make the visitor get lost as usual!'
+# 「……努力じゃないのよ。大切なのは、うーん」
+says, '...it's not effort. The important thing is, hmm...'
+# 「三人でかかれば何にも怖くはないわ」
+says, 'There's nothing to be scared of when the three of us are together.'
+# 「私達は、三人で一つ」「一本の矢は簡単に折れても三本束ねれば」「三倍早く矢が尽きるわ！」
+says, 'We three as as one.' 'A single arrow is broken easily, but if three are bundled together-' 'The arrows run out three times faster!'
+
+N:1273:Seiran
+# 「我々は月の兎のイーグルラヴィ」
+says, 'We are the Moon Rabbit Eagle Ravi.'
+# 「見せてやるわ、月面最速ガンナーの妙技を！」
+says, 'Feast your eyes on the exquisite skill of the fastest gunner on the Moon!'
+
+N:1274:Ringo
+# は団子を頬張っている。
+is stuffing her face with dango.
+# 「食べ物も色々あるし私も地上に生まれたかったわぁ。」
+says, 'There are so many kinds of food on Earth, I wish I'd been born there.'
+# 「我々は幻想郷を浄化しに来たんだけど、我々、月の兎（したっぱ）にとってはどうでもいい話。」
+says, 'We came to purify Gensoukyou, but we Moon Rabbits don't really care about that.'
+# 「私も地上に住みたいなー。仕事も何もかもかなぐり捨てて。」
+says, 'I want to live on Earth too. And just forget about work and everything else.'
+# (MGMG)
+munches.
+# (MGMG)
+munches.
+# (MGMG)
+munches.
+
+N:1275:Doremy
+# 「さっきからずっと貴方に完全憑依しています。」
+says, 'I've been perfectly possessing you the whole time.'
+# 「暴走した夢の世界の住人を監視しないとね」
+says, 'I have to monitor all the rampaging dream dwellers.'
+# 「夢の世界の貴方が愚痴ってましたよ。」
+says, 'Your Dream World self is always complaining.'
+# 「必要以上に気を付けてね。それでは貴方に吉夢が訪れん事を。」
+says, 'Be even more careful than you need to. Now, then, I wish you pleasant dreams.'
+# はピンク色の妙な物体を弄んでいる。
+plays with a strange pink object.
+
+N:1276:Sagume
+# 「これから破滅的な手段にて新しい展開が始まるでしょう。私は貴方に乗るわ。破壊者は貴方になる。」
+says, 'A new development will surely occur soon, through terribly destructive means. I'm throwing my lot in with you. You'll be the destroyer.'
+# 「さあ、私が口にするわ。もう貴方は運命から逃れられないわよ。」
+says, 'I shall now put it into words. You can no longer escape from fate.'
+# 「私は言葉で世界の行く末を変える存在です。」
+says, 'I am a being who can change the world's course with my words.'
+# 「ついに運命は逆さに動き始めた。」
+says, 'Fate has at last begun to reverse.'
+# 「月の都の命運は貴方に賭けるしかない。」
+says, 'I have no choice but to bet the fate of the Lunar Capital on you.'
+
+N:1277:Clownpiece
+# 「きゃはははは！」
+laughs, 'Kyahahahaha!'
+# 「イッツ、ルナティックターイム！」
+announces, 'It's Lunatic Time!'
+# 「狂気の世界へようこそ！」
+says, 'Welcome to a world of madness!'
+# は松明を振り回している。
+waves a torch raised in the air.
+# は楽しげに飛び回っている。
+bounds about energetically.
+# 「火事と喧嘩は江戸の華ってね。」
+says, 'They say fires and fights are the flowers of Edo.'
+# 「サイコーに地獄だぜぇ！」
+says, 'This is the ultimate hell!'
+# 「まさに地獄だぜ！」
+says, 'This is indeed hell!'
+# 「ちょっくら神社に火をつけてくる」
+says, 'I'll set a little fire to the shrine.'
+
+N:1278:Junko
+# 「倶に天を戴かずとも憎しみだけが純化する」
+fumes, 'Even if she and I cannot dwell together under heaven, only my hatred will be purified.'
+# 「そして見よ！生死を拒絶した純粋なる霊力を！」
+says, 'Now behold! Pure spiritual force that rejects life and death!'
+# 「そして見よ！純粋なる瑕穢の向こう側を！」
+says, 'Now behold! What lies beyond pure impurity!'
+# 「その憎しみを彼女に当てられないのが悔しくて仕方が無い！」
+fumes, 'That this hatred will never touch her leaves me nothing but vexation!'
+# 「嫦娥よ。見てるか！？」
+says, 'Chang'e, are you watching!?'
+# はどこか明後日の方向を睨みつけている・・
+is scowling in the wrong direction...
+
+N:1279:Hecatia
+N:1280:
+N:1281:
+# 「んもう、待ちくたびれたわよん」
+says, 'Geez, I was getting tired of waiting.'
+# 「腕がなるわー。」
+says, 'I'm all aquiver with excitement.'
+# 「よーし、可愛いねぇ。ちょっと遊んでやるわ」
+says, 'All right, you're cute! I'll play with you a little.'
+# 「これは余興みたいなもんよ。」
+says, 'This is just a bit of side-show entertainment.'
+
+N:1297:Yorihime
+# 「月の海には生き物は棲んでいない。生命の海は穢れの海なのです」
+says, 'Nothing lives in the oceans of the Moon. An ocean of life is an ocean of impurity.'
+# 「地上にはこれほど熱い火はほとんどない」
+says, 'I doubt there any many flames on Earth as hot as this.'
+# 「そう、私は神々をその身に降ろして力を借りることができる」
+says, 'Yes, I can call the gods down to my body and borrow their power.'
+# 「私には八百万の技がある」
+says, 'I have a myriad of techniques.'
+# 「光を斬るのは水を斬るよりもずっと容易いこと」
+says, 'It's much easier to cut through light than to cut through water.'
+# は不敵な笑みを浮かべている。
+wears a fearless smile.
+
+N:1298:Toyohime
+# 「うふふ～お師匠様の言ったとおりね」
+laughs, 'Ohoho~! It's just as Master said.'
+# 「道は邇きに在り而るにこれを遠きに求む」
+says, 'The way may be close by, but that is why you must seek it far away.'
+# は桃を頬張っている。
+is stuffing herself with peaches.
+
+N:1299:Rei'sen
+# は半ば逃げ腰で銃を構えている。
+wields her gun half-heartedly.
+# 「何故私がこんな殺伐とした戦いの前線に..」
+mutters, 'Me on the front lines, how did it come to this...'
+
+N:1310:Eternity Larva
+# はひらひらと飛び回っている。
+flutters about.
+# 「今なら新世界の神にでもなれそうな気分よ！」
+says, 'Right now I feel like I could become the god of the new world!'
+# 「わーい、戦いだ戦いだ！」
+says, 'Yayyy, let's fight, let's fight!'
+# 「力が有り余ってるんで手伝ってあげようか。」
+says, 'I've got more power than I know what to do with, so I'll help you out.
+# 「夏の青空が私をそうさせたの。」
+says, 'The blue summer sky made me do it.'
+# 「これだけ一度に沢山の鱗粉を出せるのは私しかいないわ！」
+explains, 'And the only one who can produce so many scales at once is me!'
+
+N:1311:Nemuno
+# は巨大な包丁を研いでいる。
+sharpens a huge kitchen knife.
+# 「んー、何かあったのか？」
+says, 'Ehh... somethin' going on?'
+# 「あんた強いな。何者なんだ？」
+says, 'You sure are tough! Who're you?'
+# 「強いやつは嫌いではない。うちに寄っていくか？」
+says, 'I can't not like strong folk! Wanna stop by my place?'
+# 「こんな血の匂いがする集まりは何だ？これでは包丁がうずくじゃないか。」
+says, 'What's this gathering that reeks of blood? Makes my knife ache.'
+
+N:1312:Aunn
+# は大声で呼ばわった。
+makes a loud alarm call.
+# 「あ！」
+says, 'a!'
+# 「こう見えても神社の守護神です。」
+says, 'Despite appearances, I'm the guardian god of this shrine.'
+# 「頑張ってー。影ながら応援してるわよ。」
+says, 'Good luck! I'll be cheering you on from the shadows!'
+# 「へー貴方が噂の！」
+says, 'Oh, you're the one everyone's talking about!'
+
+N:1313:Narumi
+# は合掌して微笑んだ。
+presses her hands together and smiles.
+# 「まだまだ力が有り余っているわ！」
+says, 'I still have more than enough power!'
+# 「背中が熱いというか。」
+says, 'It feels kind of like my back is burning.'
+# 「普段はこんな好戦的じゃあないのよ。ひっそり暮らしたい派なのよ。」
+says, 'I'm not usually this belligerent. I prefer to live a quiet life.'
+# 「誰でも良いから、この力を試したい！」
+says, 'It doesn't matter who, I want to try this power out on someone!'
+
+N:1314:Satono
+# は憑かれたように踊っている。
+dances as if possessed.
+# は狂おしく踊っている。
+dances crazily.
+# 「私達は背後で踊ることで対象の潜在能力を無限に引き出せるの。」
+says, 'By dancing behind our targets' backs, we can bring out their limitless potential.'
+
+N:1315:Mai
+# は憑かれたように踊っている。
+dances as if possessed.
+# は狂おしく踊っている。
+dances crazily.
+# 「予想外は人生の最高のスパイスさ。」
+says, 'The unexpected is the greatest spice of life.'
+# 「もしかして君が選ばれた者なのかな？」
+says, 'Could you be one of the chosen ones?'
+
+N:1316:Okina
+# は楽しげに鼓を打ち鳴らしている。
+beats a drum merrily.
+# 「見よ！　聞け！　語れ！　秘神の真なる魔力がお前の障碍となろう！」
+says, 'See it! Hear it! Speak of it! The true magic of the secret god shall be your hindrance!'
+# 「見よ！　聞け！　語れ！　これが障碍の秘神の姿だ！」
+says, 'See it! Hear it! Speak of it! The figure of the secret god of hindrances!'
+# 「幻想郷の縁起は我々、障碍の者を抜きにしては語れぬ。」
+says, 'Without we of hindrance, the origins of Gensoukyou will ever remain unwritten.'
+# 「真なる秘神の力、全て味わい尽くすが良い！」
+says, 'Savor every last drop of the true power of the secret god!'
+# 「真なる秘神の秘術をしかと見よ！」
+says, 'Behold the true mystic arts of the secret god!'
+
+N:1318:Kosuzu
+# はクスクス笑っている。
+giggles.
+# の姿を鬼のような影が覆っている...
+is wreathed in demonic shadow...
+# 「あの方の言ったとおりね。みんなこれが目的なんだって」
+says, 'It's just as she said. Everyone's after this scroll.'
+# 「これを正しく使えば幻想郷のパワーバランスを正せる筈よ」
+says, 'If used properly, this could restore balance to Gensoukyou.'
+
+N:1319:Joon
+# はこちらを馬鹿にするように高笑いしている。
+laughs mockingly at the ridiculous creature before her.
+# 「私は姉さんと違ってお金を集めるのが得意なんだから。」
+says, 'Unlike my older sister, I'm good at making money.'
+# 「よくここまで辿り着いたわね。」
+says, 'Nicely done, making it this far.'
+# 「外道？　浅ましい？　結構結構。私にとっては褒め言葉だわー。」
+says, 'Fiend? Shameful? Lovely! Music to my ears!'
+# 「私は依神女苑。泣く子も黙る疫病神。」
+says, 'I'm Joon Yorigami, the plague god who'll swindle even a crying child.'
+
+N:1320:Shion1
+# 「私は依神紫苑。泣く子も貧する貧乏神。」
+says, 'I'm Shion Yorigami, the poverty god who'll ruin even a crying child.'
+# はタクシーに轢かれそうになった。
+almost gets run over by a taxi.
+# は不安げに佇んでいる。
+stands there looking anxious.
+
+N:1321:Shion2
+# 「私が本気になった以上、ここにいる全員を負けさせてやる。」
+says, 'When I'm done here, everyone will be a loser.'
+# 「誰も得をしない。誰も幸せにならない。全員が等しく不幸の世界を見せてやる！」
+says, 'No one wins. No one finds happiness. I'll show you a world where we all suffer together!'
+# 「最凶最悪は一人で十分。それこそが私、貧乏神の依神紫苑だ！　貧しさに怯えて死ね！」
+says, 'I was the worst and most disastrous all on my own! I am the god of poverty, Shion Yorigami! Die cowering before poverty!'
+# 「私は貧乏神。全人類の不幸を一身に背負うわ。その負のオーラも無尽蔵だ！！」
+says, 'I am the god of poverty. I carry the misfortune of all mankind. This negative aura is inexhaustible!'
+# は凄まじい負のオーラを撒き散らしている。
+emits a horrible negative aura.
+
+N:1322:Sumireko (dream arena)
+# 「おや？　いつものように居眠りしたのに、ここは一体？」
+says, 'Oh? I nodded off as usual, but where's this?'
+# 「まさかこの闘いが夢の中だなんて。」
+says, 'I can't believe this battle is just a dream.'
+# 「あーあ、目が覚めたら現国かあ。あれ超つまんないのよね。」
+says, 'Ahh, when I wake up, it's back to Japanese class... that's just so super-dull.'
+# 「ドッペルゲンガーの怪。そう、これこそが私の真のオカルト。」
+says, 'The Doppelganger... yes, this is my true Occultism.'
+
+N:1341:Eika
+# は楽しげに石を積んでいる。
+happily stacks stones.
+# は周囲の霊たちと談笑している。
+chats with the spirits surrounding her.
+# は石の早積み競争を始めたようだ。
+commences a stone-stacking competition.
+
+N:1342:Urumi
+# 「ここは生きた人間が来るところじゃないぞ。」
+says, 'This is no place for the living to be.'
+# 「道に迷ったわけではないのね。」
+says, 'You're no lost traveller.'
+# 「土産話を楽しみにしているぞ。」
+says, 'I look forward to the tales of your exploits.'
+
+N:1343:Kutaka
+# 「私は、久侘歌（くたか）。地獄の関所を見張っています。」
+says, 'I am Kutaka. I guard the border checkpoint of Hell.'
+# 「中々の腕前でございます。」
+says, 'You're quite skilled indeed.'
+# 「鳥頭は貴重な能力です。」
+says, 'Being a birdbrain is a valuable trait.'
+
+N:1344:Yachie
+# は見下すような目であなたを見ている。
+looks down on you condescendingly.
+# 「口先だけでないと信じているぞ。」
+says, 'I trust that you're not just talk.'
+# 「さすが心強いぞ！」
+says, 'Truly reassuring!'
+
+N:1346:Keiki
+# 「どうだ……私の味方にならないか……？」
+says, 'So then... won't you join my side...?'
+# 「この食うか食われるかの畜生界で、私ほど物を生み出している者もいないわよ。」
+says, 'In this eat-or-be-eaten Animal Realm, nobody creates as much as I do.'
+# 「私は迫害されていた人間霊を救った神なのよ。」
+says, 'I am the god who saved the persecuted human spirits.'
+# (Create!)
+[Create!]s
+
+N:1357:Mike
+# 「いいカードあるよー」
+says, 'I've got some nice cards!'
+# 「今ならレアなカードが揃っているよ」
+says, 'I've got some rare cards in right now.'
+
+N:1385:Enoko
+# 「今日も平和だわー寝ちゃおっかなー」
+says, 'It's so peaceful today. I think I'll take a nap.'
+
+N:1386:Biten
+# 「誰と戦っても良いなんて楽しみー！」
+says, 'No matter who I fight, I'll be fine as long as it's fun!'
+# 「なんかやっつけても罪悪感無い奴出てこないかなー」
+says, 'It'd be great if I could find someone I wouldn't feel bad about beating up...'
 
 N:*:Default lines
 #Gensoukyou uniques have no default lines
-

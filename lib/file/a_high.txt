@@ -28,7 +28,7 @@ N: 2:BIAS_POIS
 #『冬虫夏草』
 'Cordyceps'
 #『偉大なる不浄』
-'Great unclean one'
+'Great Unclean One'
 #『ティル=カラクシ』
 'Tir-karakse'
 #神農の
@@ -112,9 +112,9 @@ of Heket
 #大王ボルドールの
 of Boldor
 #水龍様の
-of the Water Dragon
+of Lord Suiryuu
 #水鬼鬼神長の
-of the Sui-ki Kishin Chief
+of Suiki the Kishin Chief
 
 N:12:BIAS_CHAOS
 #『制御の鎖』
@@ -224,7 +224,7 @@ N:16:BIAS_ROGUE
 'Quick as the Wind'
 #『ペル=ヒーシエ』
 #『ベルゼブブの翅』
-'Beelzebub's wing'
+'Beelzebub's Wing'
 #神速の
 of Godspeed
 #韋駄天の
@@ -290,7 +290,7 @@ of Marici
 #『獅子心王の魂』
 'Lionheart Soul'
 #無敵の
-of Unrivaled Power
+of Unrivaled Strength
 #武力の
 of Armed Might
 #源義経の
@@ -337,7 +337,7 @@ N:19:BIAS_RANGER
 #『生命のマトリックス』
 'Life Matrix'
 #船大工キアダンの
-of C('i)adan
+of Cirdan
 #鹿の女王ネスサの
 of Nessa
 #コーウィンの聖紋の
@@ -432,7 +432,7 @@ of Thrain
 #マラカイトの
 of Malachite
 #偉大なる守護の
-of Great Protection
+of Grand Protection
 #ケレボルン王の
 of Celeborn
 #海の都レブマの
@@ -446,7 +446,7 @@ of the Dungeon Keeper
 #アンバーの王女デアドリの
 of Deirdre
 #アンバーの王子ランダムの
-of Random
+of Random of Amber
 #楽園の
 of Paradise
 #永遠の
@@ -454,5 +454,5 @@ of Eternity
 #華胥の国の
 of the Kingdom of Huaxu
 #金城鉄壁の
-of Iron Fortress
+of the Unassailable Fortress
 

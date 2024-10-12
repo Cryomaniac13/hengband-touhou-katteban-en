@@ -12,7 +12,7 @@ N: 1:BIAS_ELEC
 #猛き雷神の
 of the Fierce Thunder God
 #ヘルダイバーの
-of Helldiver
+of the Helldiver
 #フィンゴン王の
 of Fingon
 #海底都市ルルイエの
@@ -68,7 +68,7 @@ N: 3:BIAS_FIRE
 #『フレイム・コート』
 'Flamecoat'
 #灼熱の地サハラの
-of Sahara
+of the Sahara
 #悪魔ルンゴルシンの
 of Lungorthin
 #明治十七年の
@@ -106,11 +106,11 @@ of Siberia
 
 N: 5:BIAS_ACID
 #『王水』
-of Aqua Regia
+'Aqua Regia'
 #『守護宝玉』
 'Guardian Jewel'
 #『ドールの皮膚』
-'Skin of Dhole'
+'Dhole Skin'
 #『ウーズ・アーマー』
 'Oozearmor'
 #『ゼラチン・キューブ』
@@ -124,14 +124,15 @@ of Caranthir
 #『惨憺たる大海原』
 'Miserable Depths of the Ocean'
 #筒川大明神の
+of Tsutsukawa Daimyojin
 #『ジェリーストーン』
 'Jelly Stone'
 
 N:12:BIAS_CHAOS
 #『凪の時』
-'Time of Calm'
+'Moment of Calm'
 #『法の番人』
-'Guard of Law'
+'Warden of Law'
 #『カオス・タイル』
 'Chaos Tile'
 #『秩序を乱す者』
@@ -145,7 +146,7 @@ of Harmony
 #セルダンの
 of Seldon
 #混世魔王の
-of the Chaos Lord
+of the Chaos Gods
 #『狂気の瞳』
 'Lunatic Eyes'
 #『カゴメカゴメ』
@@ -155,7 +156,7 @@ of the Chaos Lord
 
 N:14:BIAS_NECROMANTIC
 #『深淵の底』
-'The Depth of Abyss'
+'Abyssal Depths'
 #『漆黒の烏』
 'Jet-black Bird'
 #『皆既日食』
@@ -167,7 +168,7 @@ N:14:BIAS_NECROMANTIC
 #『アンダーテイカー』
 'Undertaker'
 #ワラキア公の
-of the Ruler of Wallachia
+of the Prince of Wallachia
 #魔女モルガンの
 of Morgan le Fay
 #骸骨王カントラスの
@@ -175,6 +176,7 @@ of Cantoras
 #死せる神ダルニザーンの
 of Darnizhaan
 #暗きものの王ヴォルーンの
+of Lord Vholran
 #『古きユアンシェン』
 'Old Yuanxian'
 #『幽冥の鬼神』
@@ -309,7 +311,7 @@ of the Warrior Emperor
 #第六天魔王の
 of Dairokuten-Maou
 #悲しき巨人の
-of Sad Giant
+of the Sad Giant
 #戦神バルキリーの
 of the Valkyrie
 #明治十七年の
@@ -412,7 +414,7 @@ of Crystal
 #ベレゲノンの
 of Belegennon
 #チャンピオンの
-of Champion
+of the Champion
 #ゴンドール王国の
 of Gondor
 #ハクタクの
