@@ -1791,7 +1791,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"白狼天狗",
 #endif
-		"WhiteWolf-Tengu",
+		"White-Wolf-Tengu",
 
 		{  3,  -2,  -2, 2, 3, -2 },
 		8, -3, 0, 2, 20, 12, 15, 5,
@@ -2281,7 +2281,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"小人(人間大)",
 #endif
-		"Kobito(HumanSize)",
+		"Inchling (Big)",
 
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  10,  0,  0,  0,
@@ -2357,7 +2357,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"女子高生",
 #endif
-		"HighschoolGirl",
+		"High School Girl",
 
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  10,  0,  0,  0,
@@ -2376,7 +2376,7 @@ const player_race race_info[MAX_RACES] =
 #ifdef JP
 		"蓬莱人",
 #endif
-		"Person_of_Hourai",
+		"Person of Hourai",
 
 		{  0,  0,  0,  0,  0,  0 },
 		0,  0,  0,  0,  10,  0,  0,  0,
@@ -5972,8 +5972,8 @@ const player_class class_info[MAX_CLASS] =
 		"狂気なる地獄の妖精",
 		"VFS_Clownpiece",
 #else
-		"VFS_Clownpiece",
-		"VFS_Clownpiece",
+		"VFS Clownpiece",
+		"VFS Clownpiece",
 #endif
 		{ 4, 1, 1, 4, 4, 1},
 		16, 20, 32, 3, 20, 32, 45, 40,
@@ -15656,8 +15656,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"悪夢に悩まされる",
 		"Violet_Detector",
 #else
-		"Violet_Detector",
-		"Violet_Detector",
+		"Violet Detector",
+		"Violet Detector",
 #endif
 		{ 0,  0,  0,  0,  0,  0 },
 		0,  0, 0, 0, 0,  0,  0,  0,
@@ -15672,8 +15672,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"意外に顔が広い",
 		"Well_Connected",
 #else
-		"Well_Connected",
-		"Well_Connected",
+		"Well-Connected",
+		"Well-Connected",
 #endif
 		{ 0,  0,  0,  0,  0,  3 },
 		0,  0, 0, 0, 0,  0,  0,  0,
@@ -15688,8 +15688,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"スマホ首の",
 		"Very_Long_Neck",
 #else
-		"Very_Long_Neck",
-		"Very_Long_Neck",
+		"Phone Neck",
+		"Phone Neck",
 #endif
 		{ -2,  4,  4,  -2,  -2,  -4 },
 		-4,  8, 0, -2, 0,  0,  -20,  -10,
@@ -15704,8 +15704,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"奸佞邪智の鬼　",
 		"Oni_Hermit",
 #else
-		"Oni_Hermit",
-		"Oni_Hermit",
+		"Cunning Oni",
+		"Cunning Oni",
 #endif
 		{ -3,  4,  -1,  2,  -2,  -2 },
 		5,  0,  5,  -3,  -5,  3,  10,  30,
@@ -15752,8 +15752,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"社会派ルポライター",
 		"Social_Reporter",
 #else
-		"Social_Reporter",
-		"Social_Reporter",
+		"Social Reporter",
+		"Social Reporter",
 #endif
 		{ -1,  1,  1,  -1,  -1,  1 },
 		0, 0, 0, 0, 10, 0, -10, -10,
@@ -15768,8 +15768,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"石油王　",
 		"Oil_Baron",
 #else
-		"Oil_Baron",
-		"Oil_Baron",
+		"Oil Baron",
+		"Oil Baron",
 #endif // JP
 		{ 0, -1, -1, 0, 1, 3 },
 		0, 0, 0, -1, 5, 0, 5, 5,
@@ -15803,8 +15803,8 @@ const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL] =
 		"通貨発行者　",
 		"Moneymaker",
 #else
-        "Moneymaker",
-        "Moneymaker",
+        "Money Printer",
+        "Money Printer",
 #endif
 		{ 0,  0,  0,  0,  0,  0 },
 		0,  0, 0, 0, 0,  0,  0,  0,
