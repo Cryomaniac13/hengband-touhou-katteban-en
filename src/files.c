@@ -7438,7 +7438,7 @@ void display_player(int mode)
 #else
                     if(streq(p_ptr->died_from, "hourai"))
 					{
-						sprintf(statmsg, "...You became an eternally living person of Hourai.");
+						sprintf(statmsg, "...You became an eternally living Houraijin.");
 					}
 					else if (streq(p_ptr->died_from, "true_loser"))
 					{

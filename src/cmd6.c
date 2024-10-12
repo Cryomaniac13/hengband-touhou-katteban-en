@@ -2400,7 +2400,7 @@ static void do_cmd_quaff_potion_aux(int item , bool flag_ignore_warning)
 				//将来的なアイテム引継ぎ追加のため入れておく
 				if(p_ptr->prace == RACE_HOURAI)
 				{
-					msg_print(_("あなたはすでに蓬莱人だ。", "You are already a person of Hourai."));
+					msg_print(_("あなたはすでに蓬莱人だ。", "You are already a Houraijin."));
 					return;
 				}
 
