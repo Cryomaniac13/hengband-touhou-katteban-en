@@ -1,0 +1,199 @@
+Pseudo-identification types
+---------------------------
+There are five tiers of pseudo-ID, which determine how likely it is to activate.
+Heavy sense inscribes items with 'average', 'excellent', 'terrible', etc.
+Light sense inscribes all good+ items with 'uncursed' and leaves average items unlabeled.
+Accessory sensing has only one type, but some classes are incapable of it at all.
+
+With the Unlucky Black Aura mutation:
+1/13 chance of a sense inscription being inverted (e.g 'excellent' becomes 'worthless')
+With the Lucky White Aura mutation:
+1/13 chance of a light sense becoming a heavy sense
+
+Effects of Magicmaster flag (MM)
+--------------------------------
+Minimum spell failure rate is 0% (5% normally)
+Minimum spell failure rate in Berserk personality is 20% (30% normally)
+Spell level requirement lowered by 2
+Can use Barrier Guard with Ctrl+G (mana shield effect)
+Can use Staff of Mana Storm without taking self-damage
+Higher chance of bolt attacks becoming beams
+Lower chance of destroying items on recharge failure, will not destroy stacks of wands
+Better resistance to magic item draining attacks
+Prevents friendlies from accidentally melee attacking each other, including the player
+Increases activation failure rate of Oni/Werebeast racial berserk rage powers
+Directly improves the effects of the following spells:
+	Shuffle, Wind Cutter, Mana Burst, Incite Possession,
+	Oil Eruption, Smash Armor, Hell Lance, Holy Orb, Curse of Azathoth
+
+Grassroots Youkai Network eligibility (GN)
+------------------------------------------
+All standard classes are eligible for the Grassroots Network (marked **)
+However, the player must be one of the following races:
+	Youkai, Fairy, Magician, Werebeast, Tsukumogami, Youkai-Doll, Fox, 
+	Bakedanuki, Mermaid, Nyuudou, Koakuma, Golem, Jiangshi, or Ghost.
+
+EX Score
+--------
+Some classes have an altered score multiplier in EXTRA difficulty.
+This is treated as a modifier of the base score.
+e.g. 90 to 99 is internally *1.1, 240 to 192 is internally *0.8
+
+------------------------------------------------------------------------------------------
+Class			|	Arms/armour sense	|	Accessory	|	MM	|	GN	| Score	| EX Score
+------------------------------------------------------------------------------------------
+ Alice			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	Yes	|	48	|	48
+ Aunn			|	2: Slow, Light		|	3: Slow		|	No	|	No	|	60	|	60
+ Aya			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	38	|	38
+ Benben			|	4: Medium, Heavy	|	3: Slow		|	No	|	Yes	|	56	|	56
+ Biten			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	55	|	55
+ Byakuren		|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	22	|	22
+Card-Trader		|	2: Slow, Light		|	4: Medium	|	No	|	**	|	70	|	70
+Cavalry			|	5: Fast, Heavy		|	1: None!	|	No	|	**	|	90	|	99
+Chemist			|	3: Slow, Heavy		|	4: Medium	|	No	|	**	|	100	|	150
+ Chen			|	2: Slow, Light		|	3: Slow		|	No	|	No	|	105	|	131
+ Chimata		|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	20	|	40
+ Chiyari		|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	50	|	50
+ Cirno			|	1: V. slow, Light	|	1: None!	|	No	|	Yes	|	150	|	150
+Civilian		|	2: Slow, Light		|	1: None!	|	No	|	**	|	150	|	150
+ Clownpiece		|	1: V. slow, Light	|	3: Slow		|	No	|	No	|	150	|	60
+ Clownpiece(VFS)|	1: V. slow, Light	|	3: Slow		|	No	|	Yes	|	150	|	150
+Danmakulogist	|	1: V. slow, Light	|	4: Medium	|	Yes	|	**	|	70	|	70
+ Doremy			|	3: Slow, Heavy		|	4: Medium	|	Yes	|	No	|	45	|	68
+ Eika			|	1: V. slow, Light	|	3: Slow		|	No	|	Yes	|	195	|	195
+ Eiki			|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	18	|	18
+ Eirin			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	50	|	50
+Engineer		|	4: Medium, Heavy	|	1: None!	|	No	|	**	|	82	|	123
+ Enoko			|	3: Slow, Heavy		|	2: V. slow	|	No	|	No	|	60	|	60
+ Eternity Larva	|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	270	|	270
+Explorer		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	85	|	85
+ Flandre		|	2: Slow, Light		|	2: V. slow	|	Yes	|	No	|	16	|	16
+ Futo			|	1: V. slow, Light	|	4: Medium	|	Yes	|	No	|	60	|	60
+Guardian		|	4: Medium, Heavy	|	3: Slow		|	No	|	**	|	75	|	75
+ Hatate			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	47	|	47
+ Hecatia		|	4: Medium, Heavy	|	5: Fast		|	Yes	|	No	|	6	|	6
+High-Mage		|	1: V. slow, Light	|	5: Fast		|	Yes	|	**	|	90	|	108
+ Hina			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	125	|	200
+ Hisami			|	3: Slow, Heavy		|	4: Medium	|	Yes	|	No	|	45	|	45
+ Ichirin		|	2: Slow, Light		|	3: Slow		|	No	|	No	|	67	|	67
+ Iku			|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	65	|	65
+Jeweler			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	**	|	75	|	120
+ Joon			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	35	|	35
+ Junko			|	4: Medium, Heavy	|	4: Medium	|	Yes	|	No	|	18	|	18
+ Kagerou		|	1: V. slow, Light	|	3: Slow		|	No	|	Auto|	75	|	75
+ Kaguya			|	4: Medium, Heavy	|	5: Fast		|	No	|	No	|	100	|	100
+ Kanako			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	20	|	40
+ Kasen			|	3: Slow, Heavy		|	4: Medium	|	Yes	|	No	|	27	|	27
+ Keiki			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	16	|	16
+ Keine			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	56	|	56
+ Kisume			|	4: Medium, Heavy	|	1: None!	|	No	|	Yes	|	180	|	180
+ Kogasa			|	5: Fast, Heavy		|	5: Fast		|	No	|	Yes	|	110	|	110
+ Koishi			|	1: V. slow, Light	|	1: None!	|	No	|	No	|	25	|	30
+ Kokoro			|	4: Medium, Heavy	|	5: Fast		|	No	|	No	|	30	|	30
+ Komachi		|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	45	|	45
+ Kosuzu			|	1: V. slow, Light	|	4: Medium	|	No	|	No	|	200	|	200
+ Kutaka			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	55	|	55
+ Kyouko			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	120	|	120
+ Letty			|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	120	|	120
+Librarian		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	90	|	90
+ Lily White		|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	240	|	192
+ Luna Child		|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	200	|	200
+ Lunasa			|	3: Slow, Heavy		|	3: Slow		|	No	|	Yes	|	50	|	50
+ Lyrica			|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	50	|	50
+Mage			|	1: V. slow, Light	|	5: Fast		|	Yes	|	**	|	85	|	102
+Magic-Eater		|	2: Slow, Light		|	5: Fast		|	Yes	|	**	|	80	|	64
+Magic-Knight	|	3: Slow, Heavy		|	3: Slow		|	No	|	**	|	75	|	75
+ Mai			|	4: Medium, Heavy	|	3: Slow		|	No	|	No	|	52	|	52
+Maid/Butler		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	85	|	85
+ Mamizou		|	4: Medium, Heavy	|	5: Fast		|	Yes	|	Yes	|	24	|	24
+ Marisa			|	1: V. slow, Light	|	5: Fast		|	Yes	|	No	|	10	|	10
+Marksman		|	4: Medium, Heavy	|	2: V. slow	|	No	|	**	|	80	|	80
+Martial-Artist	|	2: Slow, Light		|	1: None!	|	No	|	**	|	75	|	75
+ Mayumi			|	5: Fast, Heavy		|	3: Slow		|	No	|	No	|	42	|	42
+ Medicine		|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	63	|	76
+ Megumu			|	4: Medium, Heavy	|	4: Medium	|	Yes	|	No	|	32	|	32
+ Meiling		|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	65	|	65
+ Merlin			|	1: V. slow, Light	|	1: None!	|	No	|	Yes	|	50	|	50
+ Mike			|	3: Slow, Heavy		|	4: Medium	|	No	|	Yes	|	105	|	105
+ Miko			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	12	|	12
+ShMaiden/Priest	|	2: Slow, Light		|	4: Medium	|	Yes	|	**	|	80	|	80
+Mindcrafter		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	60	|	54
+ Minoriko		|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	120	|	120
+ Misumaru		|	2: Slow, Light		|	5: Fast		|	No	|	No	|	40	|	60
+ Miyoi			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	120	|	120
+ Mokou			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	100	|	100
+ Momiji			|	4: Medium, Heavy	|	1: None!	|	No	|	No	|	80	|	46
+ Momoyo			|	5: Fast, Heavy		|	3: Slow		|	No	|	No	|	15	|	15
+ Murasa			|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	65	|	65
+ Mystia			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	100	|	100
+ Narumi			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	No	|	60	|	60
+ Nazrin			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	123	|	123
+ Nemuno			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	80	|	80
+Ninja			|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	80	|	72
+ Nitori			|	4: Medium, Heavy	|	2: V. slow	|	No	|	No	|	63	|	76
+ Nue			|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	24	|	24
+ Okina			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	12	|	12
+ Orin			|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	52	|	36
+Outsider		|	1: V. slow, Light	|	1: None!	|	No	|	No	|	300	|	300
+ Parsee			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	110	|	110
+ Patchouli		|	1: V. slow, Light	|	5: Fast		|	Yes	|	No	|	40	|	48
+ Raiko			|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	20	|	30
+ Ran			|	4: Medium, Heavy	|	4: Medium	|	Yes	|	No	|	48	|	29
+Ranger			|	3: Slow, Heavy		|	2: V. slow	|	No	|	**	|	70	|	70
+ Reimu			|	4: Medium, Heavy	|	4: Medium	|	Yes	|	No	|	10	|	10
+ Reisen2		|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	120	|	120
+ Remilia		|	3: Slow, Heavy		|	2: V. slow	|	No	|	No	|	16	|	16
+ Ringo			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	63	|	50
+ Rumia			|	2: Slow, Light		|	1: None!	|	No	|	Yes	|	150	|	150
+ Sagume			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	No	|	35	|	70
+ Saki			|	5: Fast, Heavy		|	3: Slow		|	No	|	No	|	14	|	14
+ Sakuya			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	38	|	23
+Samurai			|	5: Fast, Heavy		|	1: None!	|	No	|	**	|	90	|	90
+ Sanae			|	2: Slow, Light		|	4: Medium	|	Yes	|	No	|	63	|	63
+ Sannyo			|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	58	|	58
+ Satono			|	4: Medium, Heavy	|	3: Slow		|	No	|	No	|	52	|	52
+ Satori			|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	72	|	72
+SecondhandDealer|	5: Fast, Heavy		|	5: Fast		|	No	|	**	|	80	|	106
+ Seiga			|	2: Slow, Light		|	5: Fast		|	Yes	|	No	|	37	|	41
+ Seija			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	125	|	175
+ Seiran			|	4: Medium, Heavy	|	2: V. slow	|	No	|	No	|	93	|	93
+ Sekibanki		|	3: Slow, Heavy		|	2: V. slow	|	No	|	Auto|	110	|	110
+ Shinmyoumaru	|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	27	|	27
+ Shinmyoumaru2	|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	67	|	67
+ Shion			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	160	|	80
+ Shizuha		|	2: Slow, Light		|	1: None!	|	No	|	No	|	150	|	150
+ Shou			|	4: Medium, Heavy	|	3: Slow		|	No	|	No	|	48	|	48
+Shugenja		|	3: Slow, Heavy		|	3: Slow		|	No	|	**	|	75	|	75
+Soldier			|	3: Slow, Heavy		|	1: None!	|	No	|	**	|	80	|	80
+ Star Sapphire	|	3: Slow, Heavy		|	2: V. slow	|	No	|	Yes	|	240	|	240
+ Suika			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	24	|	24
+ Sumireko		|	2: Slow, Light		|	4: Medium	|	No	|	No	|	40	|	30
+ Sunny Milk		|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	220	|	220
+ Suwako			|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	20	|	30
+ Takane			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	72	|	72
+Teacher			|	3: Slow, Heavy		|	3: Slow		|	No	|	**	|	80	|	80
+ Tenshi			|	2: Slow, Light		|	4: Medium	|	No	|	No	|	27	|	27
+ Tewi			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	67	|	80
+ Three-fairies	|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	100	|	80
+ Tojiko			|	3: Slow, Heavy		|	2: V. slow	|	No	|	No	|	57	|	57
+ Toyohime		|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	11	|	11
+ Tsukasa		|	2: Slow, Light		|	4: Medium	|	No	|	No	|	60	|	60
+Tsukumo-Master	|	5: Fast, Heavy		|	5: Fast		|	No	|	**	|	80	|	100
+ Udonge			|	4: Medium, Heavy	|	2: V. slow	|	No	|	No	|	48	|	48
+ Urumi			|	4: Medium, Heavy	|	2: V. slow	|	No	|	Yes	|	75	|	75
+ Utsuho			|	1: V. slow, Light	|	1: None!	|	No	|	No	|	25	|	25
+ Wakasagi		|	2: Slow, Light		|	2: V. slow	|	No	|	Auto|	135	|	135
+Warrior			|	5: Fast, Heavy		|	1: None!	|	No	|	**	|	100	|	90
+ Wriggle		|	2: Slow, Light		|	1: None!	|	No	|	Yes	|	160	|	160
+ Yachie			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	35	|	35
+ Yamame			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	120	|	120
+ Yatsuhashi		|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	56	|	56
+ Yorihime		|	5: Fast, Heavy		|	4: Medium	|	Yes	|	No	|	11	|	11
+ Yoshika		|	1: V. slow, Light	|	1: None!	|	No	|	No	|	60	|	60
+ Youmu			|	4: Medium, Heavy	|	2: V. slow	|	No	|	No	|	49	|	49
+ Yukari			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	No	|	8	|	8
+ Yuugi			|	3: Slow, Heavy		|	2: V. slow	|	No	|	No	|	45	|	45
+ Yuuka			|	4: Medium, Heavy	|	4: Medium	|	Yes	|	No	|	21	|	21
+ Yuuma			|	5: Fast, Heavy		|	3: Slow		|	No	|	No	|	14	|	14
+ Yuyuko			|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	17	|	20
+ Zanmu			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	20	|	20

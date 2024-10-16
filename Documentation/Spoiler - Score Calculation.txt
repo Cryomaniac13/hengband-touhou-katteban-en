@@ -1,0 +1,72 @@
+Original is from Touhou Hengband wiki:
+https://w.atwiki.jp/hengtouhou/pages/232.html
+
+Sources of score
+----------------
+For each dungeon gain:
+(deepest level^2 * dmult)
+Where dmult is 3 on EASY, 5 on NORMAL, 10 on HARD, 50 on LUNATIC, 30 on EXTRA
+
+Experience points / 10 (up to 1,000,000 points)
+Total wealth in gold and items / 10 (up to 1,000,000 points)
+Value of most expensive item / 10 (up to 1,000,000 points)
+
+For each quest completed gain:
+(quest level^2) * (60 - character level)
+Doubled in EXTRA
+
+For completing boss quests:
+Defeat Yukari Yakumo +100,000 (unavailable to Ran)
+Defeat Taisui Xingjun +500,000
+Defeat the Serpent of Chaos +1,000,000
+
+For each unique monster defeated gain (monster level^2)
+For defeating Oberon, additional +300,000, or +600,000 in EXTRA
+For defeating other Amberite unique, additional +10,000
+
+For each unique2 monster defeated gain (monster level)
+unique2 monsters are Reimu, Marisa, gold and silver angels, and randomly generated uniques
+
+Bonus upon retiring after having defeated Taisui Xingjun:
+(3,000,000 - dungeon_turn) * 2
+If Cannonballer personality or LUNATIC, double it.
+If playing as Sakuya, halve it.
+
+dungeon_turn is mostly like regular turncount, but compensated for some time-consuming actions:
+When the player is at full HP/MP, dungeon_turns on the world map are 1/132 of normal turns
+Resting at an inn takes up to a maximum of 2500 dungeon_turns (about 35~36 minutes in normal turns)
+
+Score multipliers
+-----------------
+Character multiplier shown on About page
+
+From difficulty:
+1/10 for EASY, 2/1 for HARD, 8/1 for LUNATIC, 4/1 for EXTRA
+
+Multipliers by birth option:
+----------------------------------------------------------------------
+Birth option						|	Not EXTRA mode	|	EXTRA mode
+----------------------------------------------------------------------
+Always arena levels					|	11/10			|	6/5
+Always small levels					|	11/10			|	4/3
+Always unusual rooms				|	4/5				|	4/3
+Shops are closed					|	3/2				|	4/3
+Expand your home OFF				|	12/10			|	12/10
+No bonus points						|	3/2				|	3/2
+10 bonus points						|	6/5				|	6/5
+20 bonus points						|	21/20			|	21/20
+No fixed artifacts					|	13/10			|	13/10
+...as Secondhand-Dealer or Jeweler	|	11/10			|	11/10
+Preserve artifacts OFF				|	12/10			|	11/10
+No demon books						|	21/20			|	21/20
+
+Additional multiplier for dungeon_turns passed:
++1% per 100,000 dungeon_turns under 3,000,000 (halved for Sakuya)
+-1% per 100,000 dungeon_turns over 6,000,000 (up to -50%)
+
+If playing as Mokou, (1/1 + revive count) multiplier
+If playing as a Prismriver and have never switched sister, 13/10 multiplier
+If playing as Shion and have never used Possession, 3/1 multiplier
+If Munchkin personality, 1/100 multiplier
+If Berserker personality, 1/2 multiplier
+If created and drunk Hourai Elixir, 4/3 multiplier
