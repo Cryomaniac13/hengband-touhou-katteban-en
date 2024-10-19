@@ -376,7 +376,7 @@ If an earthquake branded arrow hits an enemy, it can stun them by making\them sh
 
 
 N:20:Archer Guild explanation
-Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materials:\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
+Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materials：\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
 
 N:21:Engineer Guild explanation
 Create machines:\Create a machine after paying required expenses.\Amount of available machines increases with your level, intelligence and dexterity.\ \Request supplies:\Purchase gunpowder/energy packs/etc. Price might vary.
@@ -432,33 +432,70 @@ N:98:Talk to Kaguya (Eirin)
 Kaguya - 'Lunar Capital is under heavy assault.\ Hey, Eirin, how about we go and beat up the cause behind this incident?\ It's fine, we can do it!\ I've told Toyohime to open us an entrance.'
 
 N:99:Town rumors (LUNATIC)
-Aieeee!
-Power calls upon power! Mutants are the law!
+# 能力は能力を呼ぶ！ミュータントこそ法！！
+Power calls upon power! Mutants are the law!	
+# ミュータントこそ諸悪の根源！全ては完璧な社会の実現のために！	
 Mutants are the root of all evil!\All for creating a perfect society! 
+# コンピューターによる支配を！全ては完璧な社会の実現のために！
 Make computers control everythings!\All for creating a perfect society! 
+# ウサギ穴から出て自然に回帰せよ！自然の中でこそ我々は本来の姿で在れるのだ！
 Leave the rabbit hole and return to nature!\We can take on our true form in the nature!
+# もとの幸福な時代に戻りましょう！我々はもっと自由であるべきなのです！
 Let's return to the good old times!\We should all be free!
-All the wise men have the means to acquire enlightenment.\Now, take this pill.
+# 賢き人はみな道に至る手段をもっています。さあこの錠剤を飲むのです。
+All the wise men have the means to acquire enlightenment.\Now, take this pill.	
+# 力こそ全て。そうでない奴は家畜だ。我々こそが真の道を知っている。	
 Power is everything. Weaklings are just livestock.\We know the true way.
+# 昔月から地上に逃げた玉兎に何とか連絡を取りましょう。最高のビジネスチャンスよ！	
 Let's get in touch with the moon rabbits who have escaped to Earth.\It's the perfect business opportunity!
+# デストローーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーイ！	
 Destroooooooooooooooooooooooooooooooooooooooooooy!
-Lady Yukari, there's no doubt about rebellious intentions of @.
-Lady Chang'e, there's no doubt about rebellious intentions of @.
+# 起て万国の労働者！資本家を打倒せよ！
+Hark! Workers of the world! Overthrow the capitalists!
+# 紫様、＠の反逆的性向は疑いがありません。
+Lady Yukari, there's no doubt about the rebellious intentions of @.
+# 嫦娥様、＠の反逆的性向は疑いがありません。
+Lady Chang'e, there's no doubt about the rebellious intentions of @.
+# Ia! Ia! Cthulhu fhtagn! Ph'nglui mglw'nafh Cthulhu R'lyeh wgah-nagl fhtagn!
 Ia! Ia! Cthulhu fhtagn! Ph'nglui mglw'nafh Cthulhu R'lyeh wgah-nagl fhtagn!
+# イア！イア！ハスタア！
 Ia! Ia! Hastur!
+# ほう
 Hou
-Buuuuuuuuuuummmmmmmmmmmmmmm..........
-Beta testing is over, let's proceed to release.
- \ \ \ \ \         Wow, the owner here is sick
- \ \ \ \ \         Thanks for your hard work... is what I'd like, to say,\          but I'll make you disappear.
+# ブウウウウウウウーーーーーンンンーーーンンン……
+Vroooooooooommmmmmmmm-mmmmm-mmmmm......
+# 失敗を悔やむのは意味がないわ。ケーキが無くなるまで試し続けるのよ。	
+There's no sense crying\Over every mistake.\You just keep on trying\Till you run out of cake.
+# 切り刻んで燃やされるのは苦しかったけど、あなたの成功が私には誇らしいわ。
+You tore me to pieces\And threw every piece into a fire\As they burned it hurt because\I was so happy for you!
+# ベータは終了、予定通りのリリースよ。
+And we're out of beta.\We're releasing on time.
+# すばらしい銃が作られるわ。生きている皆のために。\死んだ人のことは諦めましょう。
+And you make a neat gun\For the people who are\Still alive.
+# しなければいけない実験があるわ。\済ませなければいけない調査があるわ。\生きている皆のために。\生きている皆について。
+I've experiments to run\There is research to be done\On the people who are\Still alive.
+# かっぱっぱー、かっぱっぱー、きゅうりのキュウちゃん丸かじりー。
+Kappappa~, kappappa~, taking a big bite out of Kyuuchan cucumber~.
+# 　\　\　\　\　\　　　　　　　おわああ、ここの家の主人は病気です
+ \ \ \ \ \         Owaaa, the owner of this house is sick
+# 　\　\　\　\　\　　　　　　　ご苦労だった・・・と言いたいところだが、\　　　　　　　君達には消えてもらう。
+ \ \ \ \ \         Thanks for your hard work... is what I'd like to say,\          but I'll make you disappear.
+# オッペケペッポーペッポー\　\　　　アジャラカモクレン！！
 Oppeke Peppo Peppo\ \    Ajarakamokuren!!
+# あの、「えすくらめんと」とは何ですか？\今あなたが叫んでいたのですよ。
+Um, what is 'exukurament'?\You were screaming just now.
+# STAY ALERT!\TRUST NO-ONE!\KEEP YOUR LASER HANDY!
 STAY ALERT!\TRUST NO-ONE!\KEEP YOUR LASER HANDY!
-Death is just an opportunity to get new clothes. 
+# 死は新しい服を得る機会に過ぎない。
+Death is just an opportunity to get new clothes.
+# 白目が見える距離まで近づいてから撃て。
 Don't shoot until you see the whites of their eyes.
-How pitiful...
-Unending nightmare...... how pitiful...... stay strong......
+# 可哀相に……。
+You poor thing......
+# 終わることのない悪夢……可哀相に……強く生きて……。
+An unending nightmare...... you poor thing...... stay strong......
+# 　\　\　\　\　\　\　\　\　\　\　　　　　　　　　　　　　m('U')m Kilroy was here
  \ \ \ \ \ \ \ \ \ \                m('U')m Kilroy was here
 
 N:*:Default rumor error message
 ERROR:No proper entry in rumors_new_e.txt
-
