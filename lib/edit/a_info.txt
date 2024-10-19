@@ -4785,7 +4785,7 @@ I:37:9:3
 W:40:40:20:50000
 P:1:1d1:-10:0:5
 F:INSTA_ART | QUESTITEM | CHR
-D:$The favourite sake vessel of Yuugi Hoshiguma. It enhanced the quality of any sake poured into it.
+D:$The favourite sake vessel of Yuugi Hoshiguma. It enhances the quality of any sake poured into it.
 D:¯ŒF—E‹Vˆ¤—p‚Ì‘å‚«‚È”u‚¾B‚±‚Ì”u‚Éğ‚ğ’‚®‚Æğ‚ÌŠi‚ªã‚ª‚é‚Æ‚¢‚¤B
 
 N:279:ˆÉ“¤”\”„‚Ì—é
