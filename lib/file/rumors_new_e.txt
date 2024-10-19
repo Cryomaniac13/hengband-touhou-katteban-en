@@ -376,7 +376,7 @@ If an earthquake branded arrow hits an enemy, it can stun them by making\them sh
 
 
 N:20:Archer Guild explanation
-Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materialsÅF\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
+Enchant arrows using materials:\ You can increase to-hit/to-dam of a bundle of up to 99 arrows.\ Upper limit depends on materials used.\ \Brand arrows using materials:\ You can brand ordinary arrows with elemental powers or other special effects.\ Amount of arrows branded and the kind of element depends on material you use.
 
 N:21:Engineer Guild explanation
 Create machines:\Create a machine after paying required expenses.\Amount of available machines increases with your level, intelligence and dexterity.\ \Request supplies:\Purchase gunpowder/energy packs/etc. Price might vary.
