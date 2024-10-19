@@ -64,3 +64,112 @@ AAAAAAAAAAAAAHHHHHHHHHHHHHHHRRRRRRRRRRRGGGGGGGGGGG!
 No more, if you value your character's life!
 Give it up, guy.
 Disk error. (a)bort, (r)etry, (f)ail?
+Are you sure you want to use borg commands? [y/n]
+You feel oddly normal.
+You cannot cast spells!
+'I grow tired of thee, mortal.'
+You just completed your quest!
+You hear a bell toll three times!
+Successfully created a spoiler file.
+Hmmm, it seems to be cursed.
+There is a malignant black aura surrounding you...
+A terrible black aura blasts your weapon!
+You feel your life draining away!
+A mysterious force prevents you from doing that.
+Are you sure you want to use debug commands? [y/n]
+You can't do that while wielding a weapon!
+You have to pick a target in your sight.
+# 何かがピカっと光った！
+There is a bright flash of light!
+# 今何か…気のせいか？
+What was that... your imagination?
+# お前は何を言っているんだ
+The hell are you saying?
+# …えっち
+...sexy.
+# 気軽に言ってくれるなあ。
+Feel free to tell me all about it.
+# そーなのかー。
+Is that so?
+# 解読班、ちょっとこれを見てくれ。
+Decipherment team, take a look at this.
+# ああっ、そうだなっ！
+Ahhh, that's riiight!
+# そのキーは使われていません。知ってますよね？
+That key is not in use. You know that, right?
+# やめてくださいしんでしまいます
+Stop it, I beg you, I'll die!
+# え？何？聞こえない。
+Eh? What? I can't hear you.
+# ピザを注文しますか？(y/n)
+Are you sure you want to order a pizza? [y/n]
+# 胸が熱くなるな！
+My heart burns!
+# これは暗号だ！地球は滅亡する！
+It's a code! The Earth will be destroyed!
+# よし解った。ゆっくり休め。
+Okay, I understand. Now get some rest.
+# モルダー、あなた疲れてるのよ。
+Mulder, you're tired.
+# ちょっと！あたいにもわかるように話してよ！
+Come on! Talk to me in a way I can understand!
+# あなたの猫度を96点に設定しました。
+You have achieved a cat rating of 96 points.
+# おかしいと思ったら人に聞く！
+If you think it's strange, ask someone!
+# ひょっとしてそのコマンドはあなたの空想上の存在ではありませんか？
+Have you considered the possibility of that command being a figment of your imagination?
+# あー？
+Ah?
+# あー？
+Ah?
+# あー？
+Ah?
+# あー？
+Ah?
+# あー？
+Ah?
+# 話は聞かせてもらった。君をシベリアの別荘に招待しようじゃないか。
+I've heard your story. I'd like to invite you to my big house in Siberia.
+# 市民、そのコマンドはあなたのセキュリティクリアランスには開示されていませんが？
+Citizen, access to that command is not disclosed in your security clearance.
+# ***警告！キーの打ち間違えは事故死の兆候として広く知られています。***
+***WARNING! Pressing the wrong keys is a widely known indicator of accidental death.***
+# われにおまかせを！
+Leave it to me!
+# やってやんよ！
+I'll do it!
+# 落ち着け。深呼吸しろ。
+Settle down. Deep breaths.
+# ちょっと！どこ触ってんのよ！
+Hey! Where do you think you're touching!
+# ウカツ！このタイプミスはセプク案件だ！
+How careless! This typo is an issue of seppuku!
+# まあ待ちなさい。
+Just wait.
+# 反逆自白コマンドを受理しました。十秒以内に弁明を行ってください。
+Treason admission command received. Please explain yourself within ten seconds.
+# 本当に自爆しますか？(Y/y)
+Are you sure you want to self-detonate? [Y/y]
+# おみくじにはハズレと書かれていた。
+Your fortune foretells no luck.
+# おみくじの結果は大吉だ。
+Your fortune foretells excellent luck.
+# おみくじの結果は末吉だ。
+Your fortune foretells good luck.
+# おみくじの結果は＊＊＊大凶＊＊＊だ。
+Your fortune foretells ***DISASTROUS*** luck.
+# …そうでは無い。
+...nope, doesn't look like it.
+# お言葉ですが……やなこった！
+If you would excuse me saying... I don't wanna!
+# KABOOOOOOOOM!
+KABOOOOOOOOM!
+# ミツケタ
+Mitsuketa
+# 聞こえますかー！今あなたの後ろにいるのー！
+Can you hear me? I'm behind you right now!
+# 霊界トランスモードに入りますか？(y/n)
+Are you sure you want to enter Trance Mode? [y/n]
+# タイプミスの許される地上人には我々の苦労は判らないよねー。
+Earthlings, whose typos are forgiven, cannot possibly understand our hard work.
