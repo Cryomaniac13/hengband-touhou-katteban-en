@@ -51,7 +51,7 @@ N:1110:Udongein
 # 「なんていうこと。思ってたよりずっと強い……」
 says, 'Goodness. You're far more than I expected.'
 # 「ああ、師匠にしかられるぅ。」
-says, 'Ah, master will scold me.'
+says, 'Ah, Master will scold me.'
 
 N:1113:Mokou
 # 「なんてこと！もう体力の限界が……」

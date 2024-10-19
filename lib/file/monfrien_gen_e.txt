@@ -305,7 +305,7 @@ N:1120:Sanae
 # 「流されるがままにとんでもないところにいる気がするー！」
 says, 'I feel like just going with the flow has resulted in an unbelievable situation...!'
 # 「おみくじは有料にしないと信憑性無いですよねぇ。」
-says, 'Fortune-telling slips have no credibility if there isn't a fee for them.'
+says, 'Fortune-telling has no credibility if there isn't a fee for it.'
 # 「幻想郷の人達って荒っぽいなぁ。」
 says, 'Everyone in Gensoukyou is so rough.'
 # 「やりますねぇ。商売敵に容赦ないその感じ、完全に幻想郷のヤクザですよ」
@@ -957,7 +957,7 @@ says, 'Right now I feel like I could become the god of the new world!'
 # 「わーい、戦いだ戦いだ！」
 says, 'Yayyy, let's fight, let's fight!'
 # 「力が有り余ってるんで手伝ってあげようか。」
-says, 'I've got more power than I know what to do with, so I'll help you out.
+says, 'I've got more power than I know what to do with, so I'll help you out.'
 # 「夏の青空が私をそうさせたの。」
 says, 'The blue summer sky made me do it.'
 # 「これだけ一度に沢山の鱗粉を出せるのは私しかいないわ！」
