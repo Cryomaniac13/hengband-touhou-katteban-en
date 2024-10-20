@@ -8253,7 +8253,7 @@ I:72:14:0
 W:20:0:10:72000
 A:30/45
 P:0:1d1:0:0:0
-D:$A mysterius fuzzball. It is said it brings good fortune to its holder.
+D:$A mysterious fuzzball. It is said it brings good fortune to its holder.
 D:謎の毛玉だ。持ち主に幸運をもたらすと伝えられている。
 F:USABLE
 
@@ -8276,8 +8276,8 @@ I:73:37:500
 W:30:0:20:0
 A:30/255
 P:0:5d5:0:0:0
-D:$An ore that gives off a youkai-like aura. It is said that it is made of
-D:$souls of corpses buried under sakura trees.
+D:$A gemstone that gives off a youkai-like aura. It is said that it forms from
+D:$the soul of a corpse buried under a sakura tree.
 D:妖気を放つ鉱石だ。桜の木の下の死体の魂が長い年月をかけて結晶化した姿であるという。
 
 N:794:折れた針
@@ -8288,6 +8288,8 @@ W:10:0:10:0
 A:20/7:50/3
 P:0:1d5:0:0:0
 D:$A bunch of bent and broken long needles.
+D:$'Since they've drunk so much blood, they're infamous magic items.'
+D:$('Wild and Horned Hermit', volume 6)
 D:曲がったり折れたりした長い針の束だ。
 D:「多くの血を吸った針は曰くつきのマジックアイテムさ」(東方茨歌仙 6)
 
@@ -8585,8 +8587,8 @@ G:,:r
 I:79:6:2000
 A:0/2:20/3:
 W:0:0:2:100
-D:$Manju frequently sold at the entrance of the ropeway. Doesn't
-D:$last for too long.
+D:$Manju sold at the opening event of the Moriya ropeway.
+D:$They sell out fast.
 D:索道(ロープウェイ)開通にあやかって売り出された饅頭だ。あまり日持ちしないらしい。
 
 N:823:鼓
