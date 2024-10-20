@@ -2859,6 +2859,8 @@ F:RES_ACID | RES_FIRE | RES_COLD | RES_ELEC | RES_POIS |
 F:INSTA_ART
 F:RES_HOLY | RES_WATER | RES_TIME | RES_INSANITY
 U:RECALL
+D:$One of the Three Sacred Treasures. It was created by Tamaoya-no-mikoto,
+D:$and bestowed to Ninigi-no-mikoto the Heavenly Grandson upon his descent to Earth.
 D:三種の神器の一つ。玉祖命（たまのおやのみこと）によって造られ、
 D:天孫降臨の際に他の神器と共に邇邇藝命（ににぎのみこと）に授けられた。
 
@@ -2883,9 +2885,9 @@ F:INT | WIS | TELEPATHY | HIDE_TYPE | BLESSED
 F:RES_ACID | RES_FIRE | RES_COLD | RES_ELEC | RES_LITE | RES_DARK
 F:RES_SHARDS | RES_SOUND | RES_BLIND
 U:DISP_EVIL
-D:$One of the Three Sacred Treasures. A scarlet gold mirror made by Ishikoridome-no-Mikoto.
+D:$One of the Three Sacred Treasures. A scarlet gold mirror made by Ishikoridome-no-mikoto.
 D:$When Amaterasu Oomikami shut herself away, she saw the sun-like glow of the mirror from inside the cave,
-D:$causing her to approach in shock, upon which Ame-no-Tajikarao-no-Mikoto pulled her outside.
+D:$causing her to approach in shock, upon which Ame-no-Tajikarao-no-mikoto pulled her outside.
 D:三種の神器の一つ。石凝姥命（いしこりどめのみこと）によって造られた緋緋色金の鏡だ。
 D:天の岩戸に籠もっていた天照大御神は岩戸の隙間からこの鏡の太陽のような輝きを認め、
 D:驚いてもっとよく見ようとしたところを天手力男命（あまのたぢからおのみこと）に引き出されたという。
@@ -2950,6 +2952,8 @@ P:0:4d6:13:21:0
 F:STR | HIDE_TYPE |
 F:VORPAL | SLAY_DRAGON |
 F:FREE_ACT | LITE | LEVITATION | SHOW_MODS
+D:$Forged by the giants, this sword was taken from the monster Grendel's lair
+D:$by the mighty hero Beowulf, who used it to slay the dragon terrorizing his people.
 D:剛力無双のデンマークの英雄王ベーオウルフが巨人族から奪い、
 D:最後の戦いではこの剣によって竜を退治した。
 
@@ -3085,6 +3089,9 @@ P:0:2d5:18:9:0
 F:CON | SEARCH | BLOWS |
 F:SLAY_EVIL | KILL_DRAGON | ESP_DRAGON |
 F:SHOW_MODS
+D:$The dragon-slaying sword Caudimordax, unwittingly gifted to Farmer Giles
+D:$by king Augustus Bonifacius. When a dragon is nearby, it flies out of its
+D:$sheath and practically fights by itself.
 D:「…その名も有名なカウディモルダクス剣、つまり物語の本など
 D:でおなじみの、あの俗にいわゆる噛尾刀であるぞ。…竜が５マイ
 D:ル以内に近付くと、さやの中にはおさまっていないのじゃ。これ
@@ -3100,6 +3107,9 @@ P:10:1d4:-2:0:18
 F:STEALTH | 
 F:RES_FIRE | RES_CHAOS | RES_COLD
 F:HIDE_TYPE
+D:$In preparation for his battle with the dragon Chrysophylax, the villagers
+D:$of Ham stitched steel rings all over Farmer Giles' clothes to create this
+D:$makeshift armour.
 D:「むかし南の国からりっぱな本物の鎖かたびらを買えなかった
 D:者は、革のシャツに鉄の輪を縫い付けて、それでがまんしたと
 D:いうことを聞いたことがある。ひとつその手でやってみること
@@ -3181,6 +3191,9 @@ W:30:15:24:75000
 P:0:1d7:27:9:0
 F:DEX | BLOWS | SLAY_DEMON | RIDING
 F:FREE_ACT | SEE_INVIS | SHOW_MODS | RES_CHAOS | RES_DISEN |
+D:$A sword wielded by the Rose, a woman who searches the Multiverse for three
+D:$sisters on a quest for revenge. It possesses awesome speed and precision.
+D:$Its companion is 'Littlethorn'.
 D:復讐のため、三姉妹を探して時間流を旅する＜薔薇＞と呼ばれる女性の剣だ。
 D:恐るべき速度と狙いをはずさぬ正確さを秘めている。
 D:『小さき刺』と対を成している。
@@ -3193,6 +3206,9 @@ W:20:6:10:22500
 P:0:1d5:18:6:10
 F:SPEED | INT | CHR | REGEN | SLAY_EVIL |
 F:FREE_ACT | SEE_INVIS | SHOW_MODS |
+D:$A dagger wielded by the Rose, a woman who searches the Multiverse for three
+D:$sisters on a quest for revenge.
+D:$Its companion is 'Quickthorn'.
 D:復讐のため、三姉妹を探して時間流を旅する＜薔薇＞と呼ばれる女性の剣だ。
 D:『すばやき刺』と対を成している。
 
@@ -3210,6 +3226,7 @@ F:KILL_EVIL | SLAY_KWAI | REGEN | FREE_ACT |
 F:RES_SHARDS | RES_FEAR | BLESSED | RES_NETHER |
 F:SEE_INVIS | WARNING | SHOW_MODS
 F:RES_HOLY
+D:$"The name of it, said the lady, is Excalibur, that is as much to say as Cut-steel."
 D:「妖精郷にて鍛えられし我はいや高き刃なりて、相応しき王の佩刀とならん」
 D:（トマス・マロリー、アーサー王の死）
 
@@ -3405,6 +3422,9 @@ W:70:8:30:100000
 P:0:3d6:-25:25:0
 F:STR | DEX | BLOWS | CHAOTIC | CURSED | HEAVY_CURSE | TY_CURSE | AGGRAVATE
 F:BRAND_FIRE | BRAND_COLD | BRAND_ELEC | BRAND_ACID | BRAND_POIS
+D:$A sword which somehow combines the speed of the Falcon Sword with the power of the
+D:$Sword of Destruction. With a weapon like this, defeating Sidoh the Master of
+D:$Destruction would be a piece of cake.
 D:強力な破壊力をほこる「はかいのつるぎ」と素早く攻撃を繰りだす
 D:「はやぶさのけん」を合わせた武器だ。この剣を使えば破壊神シドーを倒すことなど
 D:赤子の手を捻るようなものだ。
@@ -3772,6 +3792,10 @@ P:0:4d4:12:16:0
 F:STR | CHR | STEALTH | SPEED | 
 F:SLAY_EVIL | KILL_UNDEAD | SLAY_ANIMAL | 
 F:RES_NETHER | RES_FEAR | RES_DARK | RES_COLD
+D:$The sword wielded by Eowyn the shieldmaiden, princess of Rohan, on the battle
+D:$of the Pelennor Fields. It slew the Witch-King of Angmar, who boasted that no
+D:$living man could hinder him.
+D:$"But no living man am I! You look upon a woman. Eowyn I am, Eomund's daughter."
 D:「盾持つ乙女」ことローハン王国のエオウィン姫が、
 D:ベレンノールの野において魔王に振るった剣だ。
 D:「しかしわたしは生き身の人間の男ではない！お前が向き合って
@@ -4948,7 +4972,7 @@ F:STR | SUST_STR | CHR | SUST_CHR | ESP_DRAGON | INSTA_ART | FULL_NAME
 F:RES_FIRE | RES_COLD | RES_ACID | RES_ELEC | RES_POIS | RES_LITE | RES_DARK
 F:LEVITATION | SEE_INVIS | WARNING | SH_ELEC | RES_CHAOS | RES_DISEN | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To Grand Councilor Ootomo, please bring me the jewel of five colours that is found on the neck of the dragon.'
+D:$'To Grand Councilor Ootomo, please bring me the jewel of five colours that is found on the neck of the dragon.'           
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「大伴の大納言には、龍の頸に五色に光る珠あり。それを取りて賜へ。」(竹取物語)
@@ -4966,7 +4990,7 @@ F:RES_TIME | BLESSED | FULL_NAME | QUESTITEM
 D:$One of the five Impossible Requests.                         
 D:$'To Prince Kuramochi, in the Eastern sea is a mountain called Hourai.
 D:$On it is a rare tree with roots of silver, stems of gold, and white gems of fruit.
-D:$Please break off a branch and bring it to me.'
+D:$Please break off a branch and bring it to me.'                                            
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「車持の皇子には、東の海に蓬莱という山あるなり。それに銀を根とし、黄金を茎とし、白き珠を実として立てる木あり。
@@ -4984,7 +5008,7 @@ F:ESP_DEITY | DEC_MANA | FULL_NAME
 F:RES_SHARDS | RES_SOUND | RES_HOLY
 F:RES_FEAR | RES_CONF | RES_INSANITY | SLOW_DIGEST | LITE | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To Prince Ishitsukuri, please bring me the stone bowl of the Buddha from the country called India.'
+D:$'To Prince Ishitsukuri, please bring me the stone bowl of the Buddha from the country called India.'                    
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「石作の皇子には、仏の御石の鉢といふ物あり。それを取りて賜へ。」(竹取物語)
@@ -4997,7 +5021,7 @@ P:3:0d0:0:0:32
 F:WIS | SUST_WIS | CHR | SUST_CHR | REFLECT | IM_ACID | IM_FIRE | RES_COLD | RES_ELEC
 F:RES_BLIND | SH_FIRE | FULL_NAME | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To the third man, please bring me the robe made from the skin of a Fire Rat from the country called China.'
+D:$'To the third man, please bring me the robe made from the skin of a Fire Rat from the country called China.'       
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「いま一人には、唐土にある火鼠の皮衣を賜へ。」(竹取物語)
@@ -5011,7 +5035,7 @@ F:CON | SUST_CON | CHR | SUST_CHR | EASY_SPELL
 F:RES_POIS | RES_NETHER | RES_WATER | INSTA_ART | FULL_NAME | QUESTITEM
 F:FREE_ACT | REGEN | TELEPATHY | SH_COLD
 D:$One of the five Impossible Requests.                         
-D:$'To Middle Councilor Isonokami, please bring me the cowrie shell that the swallow possesses.'
+D:$'To Middle Councilor Isonokami, please bring me the cowrie shell that the swallow possesses.'                         
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「石上の中納言には、燕の持たる子安の貝、取りて賜へ。」(竹取物語)
