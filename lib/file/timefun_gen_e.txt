@@ -1,0 +1,156 @@
+#timenormとtimefunをv1.1.18からこのファイルに変更。
+#現在時刻を四桁に直し、SからEの範囲のあとのD行からランダムに一行表示される。
+#Some translations are sourced from community contributions to touhouwiki.net and thpatch.net
+
+S:0000
+E:0029
+#D:「今は眠りなさい。貴方の槐安は今作られる」
+D:'Go to sleep. I will craft your Kaian now.'
+
+S:0030
+E:0059
+#D:「あらあら、眠らないのです？」
+D:'My my, won't you sleep?'
+
+S:0100
+E:0159
+#D:どこからか声がする。「三軒隣りの旦那さんがね..」
+D:You happen to hear, 'The master of the house three doors down...'
+#D:どこからか声がする。「霧雨の嬢ちゃんがね..」
+D:You happen to hear, 'The Kirisame girl...'
+#D:どこからか声がする。「鈴奈庵の嬢ちゃんがまた失神して..」
+D:You happen to hear, 'The girl from Suzuunan collapsed again...'
+#D:どこからか声がする。「アガサクリスＱの正体は..」
+D:You happen to hear, 'The true identity of Agatha Chris Q...'
+#D:どこからか声がする。「いつも買い食いしている仙人様は実は..」
+D:You happen to hear, 'That hermit who's always buying snacks is really...'
+#D:どこからか声がする。「油揚げが売り切れと聞いた九尾のお狐様がね..」
+D:You happen to hear, 'When the nine-tailed fox heard that the fried tofu was sold out...'
+#D:どこからか声がする。「鈴奈庵にこっそり出入りしている子供は..」
+D:You happen to hear, 'That child who sneakily visits Suzuunan...'
+#D:どこからか声がする。「博麗の巫女さんが推理小説にハマって..」
+D:You happen to hear, 'The Hakurei shrine maiden is addicted to mystery novels...'
+
+S:0200
+E:0229
+#D:草木も眠る丑三つ時だ。
+D:It's the dead of night. Even the plants and trees are asleep.
+#D:夜の人里はしんと静まり返っている。虫の声すら聞こえない...
+D:At night, the village is absolutely silent. Not even the sounds of insects can be heard...
+
+S:0230
+E:0359
+#D:「そう、貴方は少し生活習慣を見直す必要がある。」
+D:'Yes, you need to reassess your lifestyle a little.'
+
+
+S:0400
+E:0459
+#D:「イッツ、ルナティックターイム！」
+D:'It's Lunatic Time!'
+
+S:0500
+E:0559
+#D:「貴方の悪夢は私が美味しく頂きました」
+D:'Your nightmares were delicious.'
+
+S:0600
+E:0759
+#D:「おはよーございます！」
+D:'Good morning!'
+
+S:0800
+E:1059
+#D:「こんな天気じゃとても仕事にならないね。」
+D:'I can't get any work done in this weather.'
+#D:「この休暇が、仕事の効率を上げるんだ」
+D:'This break will improve my working efficiency.'
+#D:「２２時になったら起こしてね。」
+D:'Wake me up at 10 PM.'
+
+S:1100
+E:1110
+#D:「もしもーし！聞こえてますかー！今あなたの目の前にいるのー！」
+D:'Hello hello! Can you hear me? I'm in front of you right now!'
+
+S:1111
+E:1111
+#D:「レアな時刻にはレアな物が見つかるんだぜ。」
+D:'A rare time is perfect for finding rare things.'
+
+S:1112
+E:1129
+#D:「そーなのかー」
+D:'Is that so?'
+
+S:1130
+E:1159
+#D:「あー、お掃除が進まない！」
+D:'Ah, the cleaning isn't getting anywhere!'
+#D:「退屈だからモケーレ＝ムベンベごっこでもするよ！」
+D:'I'm bored, let's play Mokele-mbembe!'
+
+S:1200
+E:1259
+#D:「口に物を入れたまま喋らないの。」 
+D:'Don't talk with your mouth full.'
+
+S:1300
+E:1459
+#D:シエスタの時間である。
+D:It's siesta time.
+
+S:1500
+E:1529
+#D:(MGMG)
+D:(munch munch)
+
+S:1530
+E:1659
+#D:「何よこんな真昼間に。まだ外が明るいじゃない。」
+D:'What? It's the middle of the day. It's still bright out.'
+
+S:1700
+E:1759
+#D:今は逢魔が時よん。
+D:It's the twilight hour. Prepare for your scheduled demons.
+
+S:1800
+E:1859
+#D:「さあ、そろそろ宴会が始まるよ！」
+D:'Well, the feast is about to begin!'
+
+S:1900
+E:2059
+#D:「お嬢様、青い紅茶を淹れてみましたわ。」
+D:'Mistress, I've tried making some blue tea.'
+
+
+S:2100
+E:2159
+#D:「夜の境内裏はロマンチックね」（←のんき）
+D:'It's so romantic out behind the shrine at night.' (How carefree)
+
+
+S:2200
+E:2229
+#D:「今なんどきだい？」「へえ四つで。」「五、六、七、八..」
+D:'What time is it?' 'Oh, four.' 'Five, six, seven, eight...'
+
+S:2230
+E:2259
+#D:狼の遠吠えが聞こえる。
+D:You hear the howling of a wolf.
+#D:どこからか歌声が聞こえてくる..
+D:You can hear distant singing...
+
+S:2300
+E:2359
+#D:「夜は人狩りサービスタイムよ！」
+D:'Night is happy hour for man-hunting!'
+#D:「眠いよう、もう帰っていい？」
+D:'I'm tired, can I go home already?'
+#D:今夜の月は一段と狂気の光を放っている。
+D:Tonight's moon shines with even more insanity.
+
+

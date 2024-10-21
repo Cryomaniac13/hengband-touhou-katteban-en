@@ -10900,6 +10900,9 @@ void do_cmd_time(void)
 
 #ifdef JP
 	path_build(buf, sizeof(buf), ANGBAND_DIR_FILE, "timefun_gen.txt");
+#else
+	path_build(buf, sizeof(buf), ANGBAND_DIR_FILE, "timefun_gen_e.txt");
+#endif
 
 	/* Open this file */
 	fff = my_fopen(buf, "rt");
@@ -10960,5 +10963,4 @@ void do_cmd_time(void)
 
 	/* Close the file */
 	my_fclose(fff);
-#endif // JP
 }

@@ -23558,7 +23558,7 @@ D:$"...a wily-looking little man, with a sharp nose and a
 D:$laughing mouth and a shock of straw-colored hair. He was dressed
 D:$in something like a Renaissance costume of orange, red, and brown.
 D:$He wore long hose and a tight-fitting embroidered doublet."
-D:$(Roger Zelazny, 'Nine Princes in Amber', p.28)
+D:$(Roger Zelazny, 'Nine Princes in Amber')
 D:ランダムは九王子の末弟で、あちこちの影を遊び歩いて過ごしていた。
 D:打算的で気分屋だが意外に義理堅いところもある。
 D:「ずるそうな顔つきの小男。尖った鼻、笑っている口、むぎわらを束ねたような髪。
@@ -23736,7 +23736,7 @@ F:RES_CHAO | RES_DISE | RES_INER | RES_TIME | FORCE_DEPTH
 F:RES_TELE | NO_FEAR | NO_CONF | NO_STUN | NO_SLEEP | 
 S:1_IN_1 | 
 S:DISPEL | FORGET | ROCKET | WAVEMOTION | BR_FIRE | BO_MANA | HOLD | FIRE_STORM | TOXIC_STORM
-D:$The ultimate weapon of the ancient Ronkan civilisation.
+D:$The ultimate weapon of the ancient Ronkan civilization.
 D:$Even the heroes with the Twelve Weapons couldn't defeat it.
 D:古代ロンカ文明の最終兵器だ。十二の武器を持つ勇者達でも敵わない。
 
@@ -23864,7 +23864,7 @@ F:DRAGON | NO_CONF | NO_SLEEP | RES_TELE
 S:1_IN_4 |
 S:BR_ELEC | BR_AQUA | BA_WATE | THUNDER_STORM | BLINK | TELE_AWAY | TELE_TO
 S:S_DRAGON | BR_CHAO | TELE_HI_APPROACH
-D:$A dragon with wings and four legs, an auspicious beast that symbolises transformation.
+D:$A dragon with wings and four legs, an auspicious beast that symbolizes transformation.
 D:$It flies freely though the Heavens and brings about storms.
 D:四本足と翼を持つ龍だ。変幻を象徴する瑞獣で天を自在に駆け嵐を呼ぶという。
 
@@ -25602,7 +25602,7 @@ F:IM_POIS | RES_WATE | IM_ACID
 F:NO_SLEEP | NO_STUN
 S:1_IN_3
 S:SPECIAL2
-D:$"This soil will grow good Saibamen." (Akira Toriyama, Dragon Ball)
+D:$"This soil will grow good Saibamen." (Akira Toriyama, 'Dragon Ball')
 D:「この土ならいい栽培マンが育つぜ」(鳥山明「DRAGON BALL」)
 
 N:1289:夢塊
@@ -26194,6 +26194,8 @@ W:7:5:0:100:0:0
 B:TOUCH:POISON:1d7
 B:TOUCH:BLIND:1d1
 F:ANIMAL | AQUATIC | WILD_SHORE | WILD_OCEAN | RES_WATE |
+D:$A slippery serpentine fish that has taken up residence in rivers and lakes
+D:$unnoticed. Roast eel is said to be medicinal.
 D:いつの間にか川や湖に棲むようになった、ヌルヌルした蛇のような魚だ。
 D:焼くと病気を治す薬になるという。
 
@@ -26205,6 +26207,9 @@ W:6:1:0:30:0:0
 B:CRUSH:HURT:1d16
 F:BASH_DOOR | WILD_WOOD | WILD_MOUNTAIN | WILD_TOWN
 F:ANIMAL | WILD_ONLY| GEN_NEUTRAL | FOOD
+D:$A beast with a short and stout body about one metre long.
+D:$It will sometimes come down from the mountains to enter human settlements and devastate cropfields.
+D:$Its meat is euphemistically called 'botan' or 'mountain whale' and is a delicacy.
 D:ずんぐりした胴体をもつ体長1メートル強の獣だ。山から人里に降りてきて畑を荒らすこともある。肉は牡丹や山鯨などと呼ばれ美味である。
 
 N:1325:蝶の妖精
@@ -26953,7 +26958,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR
 F:KWAI
 S:1_IN_4 |
 S:CONF | HOLD | MIND_BLAST
-D:$An alcohol bottle possessed by a demon of drunkedness. You'll probably be
+D:$An alcohol bottle possessed by a demon of drunkenness. You'll probably be
 D:$trapped in the dream world if you carelessly drink it.
 D:酔魔の取り憑いた酒だ。不用意に飲むと夢の世界に閉じ込められてしまうだろう。
 
@@ -27425,6 +27430,7 @@ F:NO_STUN | NO_SLEEP | NO_CONF | NO_FEAR
 F:CAN_FLY | 
 F:RES_TIME | RES_TELE
 D:$An information gathering AI sent from the Outside World.
+D:$It takes shape as a byproduct of its previous information gathering.
 D:外界から送り込まれた情報収集用AIだ。これはすでに情報収集を済ませた残滓のようだ。
 
 

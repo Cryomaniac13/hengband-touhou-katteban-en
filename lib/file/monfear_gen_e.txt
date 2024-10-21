@@ -121,7 +121,7 @@ says, 'Has my infamy already spread so far?'
 
 N:1152:Raiko
 # 「まだまだ使いこなせてないかなぁ」
-says, 'I'm still no master of the art.'
+says, 'I still haven't mastered it.'
 
 N:1158:Kokoro
 # 「怖い……この人怖いよう」
