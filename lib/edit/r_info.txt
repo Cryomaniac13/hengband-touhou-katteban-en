@@ -11882,10 +11882,10 @@ S:1_IN_3 |
 S:CAUSE_3 | HOLD | SCARE | BLIND | BO_ACID | S_DEMON |
 S:FORGET | BO_NETH | MIND_BLAST | DARKNESS
 D:$A demon from the Courts of Chaos.  According to Corwin, 
-D:$'it was well over six feet in height, with great branches of antlers 
+D:$"it was well over six feet in height, with great branches of antlers 
 D:$growing out of its forehead.  Nude, its flesh was a uniform ash-gray 
 D:$in color.  It appeared to be sexless, and it had gray, leathery wings 
-D:$extending far out behind it'.
+D:$extending far out behind it".
 D:混沌の宮廷から来たデーモンだ。
 D:「身長は６フィートは優にあり、額から鹿のような大きな枝角が生えていた。裸で、
 D:肌の色は一様な灰色。性の区別はないらしい。灰色の鞣し革のような翼が、うしろの
@@ -12629,7 +12629,7 @@ F:HURT_HOLY
 S:1_IN_6
 S:BLINK | TPORT | TELE_TO | CAUSE_3
 D:$Nasty undead little creatures.  They are chanting the name of the 
-D:$sinister wizard who created them: 'Bruce! Bruce..!'
+D:$sinister wizard who created them: "Bruce! Bruce..!"
 D:やっかいな小型のアンデッドだ。彼らは自分たちを造った
 D:邪悪な魔法使いの名を連呼している。「ブルース！ブルース！…」
 
@@ -18165,7 +18165,7 @@ S:TPORT | BLIND | HOLD | BLINK | HEAL | HASTE |
 S:TELE_TO | CONF | BO_MANA | BRAIN_SMASH | PSY_SPEAR
 D:$Seeing the look in your eyes, he asks, "Do you know me?" You're 
 D:$very tempted to answer, "Of course! You're Superman Locke! 
-D:$Immortal, the strongest ESPer ever!
+D:$Immortal, the strongest ESPer ever!"
 D:「そうだ！超人ロック！」「僕を知っているのか？」
 D:「もちろん！不老不死にして、史上最強のエスパー！」
 D:（聖悠紀、超人ロック「赤いサーペント」）
@@ -25602,7 +25602,7 @@ F:IM_POIS | RES_WATE | IM_ACID
 F:NO_SLEEP | NO_STUN
 S:1_IN_3
 S:SPECIAL2
-D:$"This soil will grow good Saibamen." (Akira Toriyama, 'Dragon Ball')
+D:$"This soil will grow good Saibaimen." (Akira Toriyama, 'Dragon Ball')
 D:「この土ならいい栽培マンが育つぜ」(鳥山明「DRAGON BALL」)
 
 N:1289:夢塊
@@ -27184,7 +27184,7 @@ D:人語を話し狡猾だが意外にユーモアがあるようだ。
 
 
 N:1378:水龍
-E:Water-Dragon
+E:Water dragon
 G:D:B
 I:125:53d100:30:145:80
 W:64:2:0:30000:0:0
