@@ -3335,7 +3335,7 @@ F:SLAY_DEMON | FREE_ACT | RES_COLD | LEVITATION |
 F:SLOW_DIGEST | ACTIVATE | SHOW_MODS |
 F:ESP_EVIL
 U:BA_COLD_2
-D:$The beautiful sword of Thingol, justly named "King's Ire".  It glistens
+D:$The beautiful sword of Thingol, justly named 'King's Ire'.  It glistens
 D:$ icy enough to freeze the hearts of demons, and you feel supple and
 D:$ lightfooted as you clasp its hilt of gold and silver inlay.
 D:いみじくも「王の怒り」と名付けられた、灰色マント王シンゴルの美しい剣だ。
@@ -3859,7 +3859,7 @@ D:シャーウッドの森に住む義賊ロビン・フッドの弓だ。
 
 # from Slash'EM
 N:206:『ヘルファイア』
-E:of 'Hellfire'
+E:'Hellfire'
 I:32:1:4
 W:30:15:80:60000
 P:0:2d1:15:17:0
@@ -4013,7 +4013,7 @@ P:0:0d0:0:0:15
 F:CHR | LEVITATION | SEE_INVIS | FREE_ACT |
 F:RES_COLD | RES_ELEC | RES_HOLY | RES_WATER
 D:$A beautiful anti-mass hagoromo worn by Celestial maidens.
-D:$It's property of the Heavenly Emperor, so it would be a serious problem if you were to lose it.
+D:$It's property of the Heavenly Emperor, so it would be a serious problem if it were to get lost.
 D:天女が身に纏う反質量の美しい羽衣だ。天帝からの支給品のため無くすと大変だ。
 
 N:217:源義経の
@@ -4823,7 +4823,7 @@ F:FREE_ACT | RES_NETHER | RES_DARK | LITE | BLESSED
 F:SEE_INVIS | SHOW_MODS | XTRA_POWER | XTRA_H_RES | ACTIVATE
 U:BANISH_EVIL
 D:$A ritual instrument known as the 'kagura bells' comprised of many small bells strung together around a handle in a tiered arrangement.
-D:$This particular set belongs to the shrine maiden god Izunome.
+D:$This particular set was held by the shrine maiden god Izunome.
 D:伊豆能売が持っていた鈴だ。
 D:たくさんの小さな鈴を繋いで柄と飾り布をつけた、「神楽鈴」と呼ばれる形のものだ。
 
@@ -4972,7 +4972,7 @@ F:STR | SUST_STR | CHR | SUST_CHR | ESP_DRAGON | INSTA_ART | FULL_NAME
 F:RES_FIRE | RES_COLD | RES_ACID | RES_ELEC | RES_POIS | RES_LITE | RES_DARK
 F:LEVITATION | SEE_INVIS | WARNING | SH_ELEC | RES_CHAOS | RES_DISEN | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To Grand Councilor Ootomo, please bring me the jewel of five colours that is found on the neck of the dragon.'           
+D:$"To Grand Councilor Ootomo, please bring me the jewel of five colours that is found on the neck of the dragon."          
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「大伴の大納言には、龍の頸に五色に光る珠あり。それを取りて賜へ。」(竹取物語)
@@ -4988,9 +4988,9 @@ F:SLAY_EVIL | SLAY_GOOD | SLAY_HUMAN | KILL_UNDEAD | KILL_DEMON | KILL_KWAI | ES
 F:SLAY_ANIMAL | SLAY_DRAGON | SLAY_DEITY
 F:RES_TIME | BLESSED | FULL_NAME | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To Prince Kuramochi, in the Eastern sea is a mountain called Hourai.
+D:$"To Prince Kuramochi, in the Eastern sea is a mountain called Hourai.
 D:$On it is a rare tree with roots of silver, stems of gold, and white gems of fruit.
-D:$Please break off a branch and bring it to me.'                                            
+D:$Please break off a branch and bring it to me."                                            
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「車持の皇子には、東の海に蓬莱という山あるなり。それに銀を根とし、黄金を茎とし、白き珠を実として立てる木あり。
@@ -5008,7 +5008,7 @@ F:ESP_DEITY | DEC_MANA | FULL_NAME
 F:RES_SHARDS | RES_SOUND | RES_HOLY
 F:RES_FEAR | RES_CONF | RES_INSANITY | SLOW_DIGEST | LITE | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To Prince Ishitsukuri, please bring me the stone bowl of the Buddha from the country called India.'                    
+D:$"To Prince Ishitsukuri, please bring me the stone bowl of the Buddha from the country called India."                    
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「石作の皇子には、仏の御石の鉢といふ物あり。それを取りて賜へ。」(竹取物語)
@@ -5021,7 +5021,7 @@ P:3:0d0:0:0:32
 F:WIS | SUST_WIS | CHR | SUST_CHR | REFLECT | IM_ACID | IM_FIRE | RES_COLD | RES_ELEC
 F:RES_BLIND | SH_FIRE | FULL_NAME | QUESTITEM
 D:$One of the five Impossible Requests.                         
-D:$'To the third man, please bring me the robe made from the skin of a Fire Rat from the country called China.'       
+D:$"To the third man, please bring me the robe made from the skin of a Fire Rat from the country called China."       
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「いま一人には、唐土にある火鼠の皮衣を賜へ。」(竹取物語)
@@ -5035,7 +5035,7 @@ F:CON | SUST_CON | CHR | SUST_CHR | EASY_SPELL
 F:RES_POIS | RES_NETHER | RES_WATER | INSTA_ART | FULL_NAME | QUESTITEM
 F:FREE_ACT | REGEN | TELEPATHY | SH_COLD
 D:$One of the five Impossible Requests.                         
-D:$'To Middle Councilor Isonokami, please bring me the cowrie shell that the swallow possesses.'                         
+D:$"To Middle Councilor Isonokami, please bring me the cowrie shell that the swallow possesses."                         
 D:$('The Tale of the Bamboo Cutter')
 D:五つの難題の一つだ。
 D:「石上の中納言には、燕の持たる子安の貝、取りて賜へ。」(竹取物語)
@@ -5156,9 +5156,9 @@ P:0:8d40:30:30:5
 F:ACTIVATE | FULL_NAME
 F:RES_WATER | XTRA_SHOTS
 U:GUN_VARIABLE
-D:$'I recommend this one.                                        
-D:$It'll spring open with just a touch...'    (gunshots)  
-D:$                                     '...err, not that one.'         
+D:$"I recommend this one.                                        
+D:$It'll spring open with just a touch..."    (gunshots)  
+D:$                                     "...err, not that one."         
 D:$('Inaba of the Moon and Inaba of the Earth')
 D:「これなんかオススメだ。ワンタッチでぱっと開く仕掛けの…」　　(銃声)
 D:　　　　　　　　　　　　　　　　　　　　　　　　　　「…うん、これは違うな」
