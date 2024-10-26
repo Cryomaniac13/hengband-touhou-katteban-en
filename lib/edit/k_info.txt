@@ -781,7 +781,7 @@ W:10:0:4:5
 A:20/4:40/2:60/2
 P:0:3d4:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
-D:$Arrows made of steel. Powerful, but heavy.
+D:$An arrow made of steel. Powerful, but heavy.
 D:鋼鉄製の矢だ。威力は申し分ないが重い。
 
 N:74:追尾の矢
@@ -819,6 +819,7 @@ W:10:0:4:10
 A:25/4:50/2:60/2
 P:0:3d5:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A crossbow bolt made of steel. Powerful, but heavy.
 D:鋼鉄製のクロスボウの矢だ。威力は申し分ないが重い。
 
 N:77:追尾クロスボウの矢
@@ -845,6 +846,7 @@ W:0:0:2:1
 A:3/6
 P:0:1d1:-2:-4:0
 F:SHOW_MODS
+D:$The blade of this dagger has snapped in two.
 D:柄の上でぽっきり折れたダガーだ。
 
 N:79:ナイフ
@@ -888,6 +890,7 @@ W:8:0:8:20
 A:15/2
 P:0:1d5:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A thick woodsman's knife, used to cut vegetation or to butcher a hunting kill.
 D:肉厚の丈夫な小刀だ。主に狩人が草木を切り払ったり獲物を解体するのに使う。
 
 N:83:短刀
@@ -898,6 +901,7 @@ W:10:0:10:30
 A:20/2
 P:0:1d6:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A small straight single-edged sword, highly portable and easily concealed.
 D:携帯性に優れた小型の直刀だ。
 
 N:84:忍者刀
@@ -908,6 +912,7 @@ W:20:0:14:265
 A:15/2
 P:0:1d9:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A short sword wielded by ninja. Its size and minimal curvature make it easy to carry.
 D:忍者の用いる刀だ。小振りで反りが少なく持ち運びやすい。
 
 
@@ -919,6 +924,7 @@ W:50:0:2:3500
 A:65/6
 P:0:1d6:0:0:0
 F:SHOW_MODS | BLOWS | IGNORE_FIRE
+D:$A short sword made of a fantastically light metal. Its wielder can strike as swiftly as a falcon.
 D:非常に軽い金属で作られた小型の剣だ。隼のように素早く振るうことができる。
 
 
@@ -931,6 +937,9 @@ A:70/4
 P:0:2d6:5:5:0
 F:SHOW_MODS
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A dagger made out of a dragon scale.
+D:$It's sharp enough to pierce through armour, and additionally
+D:$confers to its user protection from a variety of attacks.
 D:竜の鱗を削り出して作った短剣だ。
 D:鎧を貫くような鋭さに加え、使用者に対し様々な攻撃からの保護を与える。
 
@@ -943,6 +952,7 @@ A:30/6
 P:0:1d1:0:0:0
 F:SHOW_MODS
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A thick needle full of strong poison.
 D:強力な毒が仕込まれた太い針だ。
 
 ##### 長剣 TVAL:24#####
@@ -1037,6 +1047,8 @@ W:40:0:70:800
 A:40/2
 P:0:2d8:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A large straight sword intended for two-handed use.
+D:$Though not quite a greatsword, it possesses great sharpness.
 D:両手用の直剣だ。両手剣としてはやや小振りだが鋭い切れ味を持っている。
 
 N:96:グレート・ソード
@@ -1086,6 +1098,8 @@ A:90/8
 P:0:7d5:10:10:0
 F:SHOW_MODS | VORPAL | TUNNEL
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A sword made from the metal of legend, scarlet gold.
+D:$Its blade is unbelievably strong and is as sharp as a razor.
 D:伝説の金属、緋緋色金の剣だ。信じ難い強度と剃刀のような切れ味を持つ。
 
 
@@ -1110,6 +1124,9 @@ W:10:0:16:200
 A:10/3
 P:0:2d4:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A small single-edged slashing sword.
+D:$Used by samurai as a companion to the katana,
+D:$or by commoners as a self-defense tool.
 D:小振りな日本刀だ。武士の予備武器として、また町人の護身用としても用いられた。
 
 #上質のとき1/2くらいで切れ味付与の予定
@@ -1133,6 +1150,8 @@ W:35:0:70:1000
 A:35/3
 P:0:5d4:0:0:0
 F:SHOW_MODS | RIDING | IGNORE_FIRE
+D:$A very large single-edged curved slashing sword.
+D:$Your physical strength will need to be in shape if you hope to handle it.
 D:長大な日本刀だ。余程の膂力がないと扱えない。
 
 N:104:古刀
@@ -1143,10 +1162,12 @@ W:55:0:40:5000
 A:55/4
 P:0:5d4:0:0:0
 F:SHOW_MODS | VORPAL | IGNORE_FIRE
+D:$Created over four centuries ago, the techniques used to forge this
+D:$katana have been lost to time.
 D:失われた作刀法による四百年以上前の刀だ。
 
 N:105:妖刀
-E:& Spectral Katana~
+E:& Haunted Katana~
 G:|:B
 I:25:6:0
 W:85:0:36:30000
@@ -1154,6 +1175,8 @@ A:85/8
 P:0:7d4:0:10:0
 F:SHOW_MODS | SLAY_HUMAN
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$This katana is imbued with a powerful grudge.
+D:$Carrying it fills you with an urge to murder...
 D:強力な怨念が込められた刀だ。持っていると人を斬りたくなる気がする…
 
 ##### 鈍器 TVAL:26#####
@@ -1250,6 +1273,7 @@ W:0:0:10:2
 A:0/2
 P:0:1d2:-2:-4:0
 F:SHOW_MODS
+D:$A broken stick that seems like it used to be a handle for some kind of weapon.
 D:折れた棒だ。どうやら何かの武器の柄の部分だったようだ。
 
 N:114:花
@@ -1260,6 +1284,7 @@ W:0:0:4:5
 A:0/3:10/5:30/5
 P:0:1d1:0:0:0
 F:SHOW_MODS | CHR
+D:$A lovely big blooming flower. Fairies like to carry these.
 D:綺麗に咲いた大きな花だ。妖精たちが好んで携えている。
 
 N:115:魔導師の杖
@@ -1270,6 +1295,7 @@ W:25:0:12:4000
 A:25/4
 P:0:1d2:0:0:0
 F:SHOW_MODS | DEC_MANA
+D:$A cane specially enchanted to ease spellcasting.
 D:呪文の詠唱を助ける特別な魔法がかかった杖だ。
 
 N:116:クォータースタッフ
@@ -1294,16 +1320,19 @@ W:20:0:24:360
 A:20/1
 P:0:1d11:0:0:0
 F:SHOW_MODS | RIDING
+D:$A six-foot-long pole used as a weapon in combination with unarmed martial arts.
 D:六尺の長さの固い棒だ。
 
 N:118:錫杖
-E:& Jo Staff~
+E:& Shakujou~
 G:/:s
 I:27:6:0
 W:11:0:30:300
 A:11/2
 P:0:1d7:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A staff with a number of metal rings hanging from a loop on one end.
+D:$Its pleasant jangling is said to distance one from earthly desires.
 D:複数の金属の輪を束ねて先端に付けた杖の一種だ。
 D:小気味良い音には煩悩を除去する効果があるという。
 
@@ -1316,6 +1345,8 @@ W:25:0:32:500
 A:25/2
 P:0:2d6:0:0:0
 F:SHOW_MODS
+D:$A weapon made of two stout sticks connected to each other with a chain or rope.
+D:$It takes a lot of skill to use properly.
 D:二本の棒を紐や鎖で繋いだ武器だ。扱いには熟練を要する。
 
 #六尺棒、ヌンチャク、鉄棒装備時は追加格闘攻撃回数にボーナス
@@ -1327,6 +1358,7 @@ W:35:0:100:1000
 A:35/2
 P:0:2d8:0:0:0
 F:SHOW_MODS | IGNORE_FIRE
+D:$A rod-shaped, studded club made of solid iron. It's rather heavy.
 D:鉄製の長い棒だ。かなりの重量がある。
 
 #巫女のときダイスが4d6で生成される？
@@ -1379,6 +1411,7 @@ W:10:0:24:80
 A:10/2
 P:0:1d5:0:0:0
 F:SHOW_MODS | THROW
+D:$A small hand-axe with a weighty, curved head, suitable for throwing.
 D:湾曲した刃を持つ片手斧だ。投擲に向いている。
 
 N:125:ハチェット
@@ -1389,6 +1422,8 @@ W:10:0:30:150
 A:10/2
 P:0:1d7:0:0:0
 F:SHOW_MODS
+D:$A small axe useful in all number of mundane tasks
+D:$that can also serve as a weapon in times of need.
 D:手斧だ。日常生活に欠かせない便利な道具だが戦闘にも使えないことはない。
 
 N:126:ブロード・アックス
@@ -1410,7 +1445,7 @@ W:20:0:90:550
 A:20/1
 P:0:2d8:0:0:0
 F:SHOW_MODS
-D:$A double-bladed axe. Powerful enough to cleave through armor.
+D:$A double-bladed axe. Powerful enough to cleave through armour.
 D:幅広の両刃の斧だ。鎧をも切り裂く威力がある。
 
 N:128:ロッホアーバー・アックス
@@ -1421,6 +1456,7 @@ W:35:0:120:900
 A:35/1
 P:0:3d7:0:0:0
 F:SHOW_MODS
+D:$A heavy, long-handled, long-bladed axe with a hook on the reverse of its tip.
 D:長い柄に幅広の刃がついた斧だ。刃の先端には鉤が付いている。
 
 N:129:グレート・アックス
@@ -1469,7 +1505,7 @@ A:0/1
 P:0:1d7:0:0:0
 F:SHOW_MODS | RIDING
 D:$The basic polearm, with a double-edged knife mounted on a light shaft.
-D:$This weapon can be thrown effectively.
+D:$Suitable for stabbing with.
 D:最も基本的な竿状武器だ。軽く長い竿の先に尖った両刃の穂先が付いていて、
 D:突き刺すのに適している。
 
@@ -1481,8 +1517,8 @@ W:10:0:40:180
 A:10/1
 P:0:1d9:0:0:0
 F:SHOW_MODS
+D:$A long and thin infantry spear with a precise spike tip for piercing armour.
 D:細長く鋭い錐のような穂先を持つ歩兵槍だ。鎧をも貫通する威力がある。
-
 
 N:134:ロング・スピア
 E:& Long Spear~
@@ -1492,6 +1528,7 @@ W:15:0:50:400
 A:15/1
 P:0:2d7:0:0:0
 F:SHOW_MODS | RIDING
+D:$A spear with a long handle which can skewer your foes before they get close.
 D:かなり柄の長い槍だ。敵を寄せ付けずに攻撃できる。
 
 #ランス・ヘヴィランスは乗馬中の攻撃回数計算で重量ペナルティが少ない
@@ -1503,6 +1540,7 @@ W:25:0:100:550
 A:25/1
 P:0:2d8:0:0:0
 F:SHOW_MODS | RIDING
+D:$A long spear with a cone tip. It's intended for use during a horseback charge, and is difficult to use on foot.
 D:大きく長い円錐形の穂先を持った槍だ。馬上で構えて突撃する為に作られている。
 
 #ランス・ヘヴィランスは乗馬中の攻撃回数計算で重量ペナルティが少ない
@@ -1514,6 +1552,8 @@ W:45:0:300:1500
 A:45/4
 P:0:4d8:0:0:0
 F:SHOW_MODS | RIDING
+D:$A massive lance intended to be attached to a horse's saddle or armour via metal fixtures.
+D:$It's far too heavy for a typical person to swing around.
 D:巨大な馬上突撃槍だ。通常の人間に振り回せるような重量ではなく、鞍や鎧に金具で固定して扱う。
 
 N:137:三叉戟
@@ -1524,6 +1564,8 @@ W:55:0:80:3000
 A:55/2
 P:0:3d9:0:0:0
 F:SHOW_MODS | RIDING
+D:$A spear tipped with three prongs. It was originally designed as a fishing tool.
+D:$It appears in religious imagery, and is often used as a ritual implement.
 D:先端が三叉の刃になった槍だ。漁具を起源とし、祭具として扱われることも多い。
 
 
@@ -1562,6 +1604,8 @@ W:20:0:52:550
 A:20/2
 P:0:2d7:0:0:0
 F:SHOW_MODS | RIDING
+D:$A style of weapon from antiquity composed of a long curved slashing blade
+D:$atop a 5-foot long handle.
 D:1.5メートル程の長い柄の先に反った刃が付いている。日本古来の長柄武器だ。
 
 N:140:ルツェルン・ハンマー
@@ -1572,8 +1616,9 @@ W:25:0:60:720
 A:25/1
 P:0:2d8:0:0:0
 F:SHOW_MODS | RIDING
+D:$A weapon that combines a long spear with a war hammer.
+D:$Its length increases the momentum of its swings, resulting in deadly impact.
 D:長槍とハンマーを合わせた武器だ。重量と遠心力を活かした一撃は強力無比だ。
-
 
 N:141:大鎌
 E:& War Scythe~
@@ -1659,6 +1704,8 @@ I:32:2:0
 W:30:0:160:500
 A:30/2:40/2
 F:SHOW_MODS
+D:$A large and powerful mechanical bow. Its firing rate is slow as a
+D:$mechanism must be worked in order to pull its heavy string back.
 D:強力な機械式の弓だ。専用の器具を使って弦を引くため撃つのに時間がかかる。
 
 ##### 銃 TVAL:33 #####
@@ -1672,6 +1719,7 @@ P:0:16d16:20:20:0
 F:SHOW_MODS | INSTA_ART
 F:ACTIVATE
 U:GUN_VARIABLE
+D:$The mercenary 'Combat-Echizen' discovered this gun in a mysterious ruin.
 D:傭兵「コンバット越前」が謎の遺跡で発見した銃だ。
 
 ##### 魔導書→v1.1.32 マジックアイテム TV:34 #####
@@ -1695,6 +1743,7 @@ W:30:0:2:1000
 A:30/255
 P:0:1d1:0:0:0
 F:SHOW_MODS | INSTA_ART
+D:$An elegant fan.
 D:雅な扇だ。
 
 ##### その他武器 TV:36 #####
@@ -1708,6 +1757,8 @@ A:15/5
 P:0:1d1:0:0:0
 F:ACTIVATE
 U:FISHING
+D:$Just an ordinary fishing pole.
+D:$However, in Gensoukyou, playing at being Tai Gong Wang is putting your life on the line.
 D:何の変哲もない釣竿だ。しかし幻想郷では太公望を気取るのも命懸けである。
 
 ##### 盾 TV:37 #####
@@ -1761,6 +1812,8 @@ I:37:5:0
 W:45:0:120:450
 A:45/2
 P:10:1d6:0:0:0
+D:$A steel shield engraved with a coat of arms.
+D:$It tapers to a point at the bottom for ease of use while riding.
 D:紋章が彫り込まれた鋼鉄製の盾だ。乗馬中に使いやすいように下側が尖っている。
 
 N:157:ミラー・シールド
@@ -1783,6 +1836,8 @@ W:60:0:50:10000
 A:60/5
 P:8:1d3:0:0:10
 F:IGNORE_ACID | IGNORE_FIRE | IGNORE_ELEC | IGNORE_COLD
+D:$A shield made from dragon scales.
+D:$It provides mystical protection from various types of attack.
 D:竜の鱗を貼り合わせて作った盾だ。様々な攻撃に対する神秘的な防御効果がある。
 
 N:159:鏡
@@ -1803,6 +1858,8 @@ I:38:1:0
 W:10:0:1:200
 A:10/2:30/2:60/2:
 P:1:1d1:0:0:0
+D:$A long thin piece of decorative fabric.
+D:$The most common personal ornament in Gensoukyou.
 D:細長い飾り布だ。幻想郷では最もありふれた装飾品だ。
 
 N:161:はちまき
@@ -1812,6 +1869,8 @@ I:38:2:0
 W:10:0:2:200
 A:10/1
 P:1:1d1:0:0:0
+D:$A long thin piece of decorative fabric. It's worn
+D:$wrapped about the forehead in order to boost your fighting spirit.
 D:細長い布だ。額に巻いて気合を入れるのに使う。
 
 N:162:スカーフ
@@ -1821,6 +1880,8 @@ I:38:3:0
 W:10:0:2:200
 A:10/1
 P:1:1d1:0:0:0
+D:$A somewhat large piece of decorative fabric.
+D:$It's worn mostly coiled around the head and neck.
 D:大きめの飾り布だ。主に頭や首に巻いて使う。
 
 
@@ -1954,6 +2015,7 @@ I:40:3:0
 W:5:2:8:50
 A:5/2:30/2
 P:2:0d0:0:0:0
+D:$A maid uniform. A clean impression and ease of movement are paramount.
 D:メイドの制服だ。清潔感と動きやすさが重視されている。
 
 N:177:道着
@@ -1963,6 +2025,8 @@ I:40:4:0
 W:3:0:16:30
 A:3/3:30/4
 P:3:0d0:0:0:0
+D:$A uniform worn by those who practice martial arts.
+D:$It's durable and easy to move around in.
 D:武道や拳法を行う者が着る服だ。丈夫で動きやすい。
 
 N:178:ドレス
@@ -1972,6 +2036,7 @@ I:40:5:0
 W:15:5:20:1000
 A:15/5:30/5
 P:3:0d0:0:0:0
+D:$A splendid foreign-style outfit covered in decorations.
 D:装飾の多い華美な洋服だ。
 
 N:179:着物
@@ -1981,6 +2046,7 @@ I:40:6:0
 W:1:2:20:20
 A:1/2:30/2
 P:3:0d0:0:0:0
+D:$Traditional Japanese clothing.
 D:日本古来の服だ。
 
 N:180:スーツ
@@ -1990,6 +2056,8 @@ I:40:7:0
 W:10:2:20:100
 A:10/2:30/2
 P:3:0d0:0:0:0
+D:$An outfit in the style of the Outside World.
+D:$Makes for a beautiful figure, but is a little stiff to move in.
 D:外界の装束だ。立ち姿が美しいがやや動きづらい。
 
 N:181:道士服
@@ -1999,6 +2067,7 @@ I:40:8:0
 W:10:5:30:180
 A:10/4:40/4
 P:4:0d0:0:0:0
+D:$An outfit in the style of a continental Taoist.
 D:大陸の修行僧の服だ。
 
 N:182:黒装束
@@ -2009,6 +2078,7 @@ W:30:0:36:5000
 A:40/4
 P:4:1d1:0:0:10
 F:STEALTH | IGNORE_FIRE
+D:$A jet-black outfit worn by thieves and assassins.
 D:盗賊や暗殺者が着用する漆黒の装束だ。
 
 N:183:修験装束
@@ -2018,6 +2088,7 @@ I:40:10:0
 W:15:3:40:300
 A:15/3:45/3
 P:4:0d0:0:0:0
+D:$The outfit worn by shugenja and tengu.
 D:修験者や天狗の装束だ。
 
 N:184:防護服
@@ -2027,6 +2098,8 @@ I:40:11:0
 W:5:0:50:400
 A:7/1
 P:6:1d1:0:0:0
+D:$Durable clothes packed with fabric padding.
+D:$It gets pretty hot while you're wearing it.
 D:厚い布服に詰め物を入れた丈夫な服だ。着てるとけっこう暑い。
 
 N:185:レザージャケット
@@ -2036,6 +2109,7 @@ I:40:12:0
 W:20:0:60:700
 A:20/3
 P:9:1d2:0:0:0
+D:$A tough jerkin made from many layers of thick leather sown together.
 D:厚い革を重ねて縫い合わせた丈夫な服だ。
 
 N:186:巫女装束
@@ -2045,6 +2119,8 @@ I:40:13:0
 W:80:2:14:10000
 A:80/4
 P:12:1d2:0:0:0
+D:$The uniform of a shrine maiden.
+D:$The torso part and the sleeves are separated, resulting in a unique form.
 D:巫女の装束だ。胴と袖が分かれた独特のフォルムだ。
 
 
@@ -2101,6 +2177,8 @@ I:41:5:0
 W:25:0:220:1000
 A:25/1
 P:18:1d4:-2:0:0
+D:$A leather doublet with many overlapping steel plates attached directly
+D:$to its outside.
 D:胴を覆う革製のシャツの裏地に金属の板を多数打ち付けた鎧だ。
 
 N:192:パーシャル・プレート・メイル
@@ -2114,12 +2192,14 @@ D:$A steel corselet and vambraces over a skirt and leggings of chain.
 D:鋼鉄製の胴鎧だ。
 
 N:193:大鎧
-E:O-yoroi~
+E:Ou-yoroi~
 G:[:R
 I:41:7:0
 W:35:0:300:1500
 A:35/2
 P:24:1d4:-3:0:0
+D:$An imposing armour suit made up of a complex combination of
+D:$iron plates and scales, leather, and ornamented cords.
 D:鉄板や皮や飾り紐を複雑に組み合わせた威風堂々とした鎧だ。
 
 N:194:フル・プレート・メイル
@@ -2173,6 +2253,7 @@ P:25:2d4:-2:0:5
 F:RES_ACID |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of jet-black scales from which white fumes constantly pour.
 D:常に白い煙を上げる漆黒の鱗鎧だ。
 
 N:198:ブルードラゴン・スケイルメイル
@@ -2185,6 +2266,7 @@ P:25:2d4:-2:0:5
 F:RES_ELEC |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of sapphire-blue scales that flash with uncanny lightning.
 D:不気味な稲妻と光を放つ、サファイアのように青い鱗鎧だ。
 
 
@@ -2198,6 +2280,7 @@ P:25:2d4:-2:0:5
 F:RES_COLD |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of snow-white scales that twinkle coldly.
 D:冷たくきらめく純白の鱗鎧だ。
 
 N:200:レッドドラゴン・スケイルメイル
@@ -2210,6 +2293,7 @@ P:30:2d4:-2:0:10
 F:RES_FIRE |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of crimson-red scales, painted by blazing flames.
 D:燃える炎に彩られた深紅の鱗鎧だ。
 
 N:201:グリーンドラゴン・スケイルメイル
@@ -2222,6 +2306,7 @@ P:30:2d4:-2:0:10
 F:RES_POIS |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of green scales that glow with a sickly light.
 D:病的な緑に光る鱗鎧だ。
 
 N:202:万色ドラゴン・スケイルメイル
@@ -2234,6 +2319,7 @@ P:40:2d4:-2:0:10
 F:RES_ACID | RES_ELEC | RES_FIRE | RES_COLD | RES_POIS
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of five-coloured scales that pulsates with wrathful energy.
 D:五色に輝き、怒りのエネルギーに脈打つ鱗鎧だ。
 
 N:203:ブロンズドラゴン・スケイルメイル
@@ -2245,6 +2331,8 @@ A:70/8
 P:30:2d4:-2:0:10
 F:FREE_ACT | RES_CONF | RES_BLIND | RES_FEAR |
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$An armour of verdigris scales. It feels as familiar as if you'd been wearing it
+D:$for ten years, and fills your heart with dauntlessness.
 D:緑青の重厚な鱗鎧だ。十年着続けたように体に馴染み、不撓不屈の力が湧いてくる。
 
 N:204:シルバードラゴン・スケイルメイル
@@ -2257,6 +2345,7 @@ P:30:2d4:-2:0:10
 F:RES_HOLY
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | RES_NETHER
 U:BR_DRAGON
+D:$An armour of shining silver scales. Just to look upon it fills your soul with purity.
 D:輝く銀の鱗鎧だ。見ているだけで心まで洗われるようである。
 
 N:205:ゴールドドラゴン・スケイルメイル
@@ -2269,6 +2358,7 @@ P:40:2d4:-2:0:10
 F:RES_SOUND | RES_LITE | RES_DARK
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of shining golden scales. It fills you with a sense of unfetterable nobility.
 D:黄金に輝く鱗鎧だ。何物にもとらわれない気高さを感じられる。
 
 N:206:ロードラゴン・スケイルメイル
@@ -2281,6 +2371,8 @@ P:40:2d4:-2:0:10
 F:RES_SOUND | RES_SHARDS |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of majestic blue and silver scales.
+D:$You feel a forbidding vibration, like a tornado approaching from afar.
 D:青と銀の色彩を帯びた荘厳な鱗鎧だ。触れると遠方から竜巻が近づくような重々しい振動を感じる。
 
 N:207:カオスドラゴン・スケイルメイル
@@ -2293,6 +2385,8 @@ P:40:2d4:-2:0:10
 F:RES_CHAOS | RES_DISEN |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of countless-coloured scales that sparkle weirdly.
+D:$Its colours and even its shape seem to change each time you look at it.
 D:様々な色に妖しくきらめく鱗鎧だ。色だけでなく鎧の形すら見る度に変化している気がする。
 
 N:208:バランスドラゴン・スケイルメイル
@@ -2305,6 +2399,8 @@ P:40:2d4:-2:0:10
 F:RES_CHAOS | RES_DISEN | RES_SOUND | RES_SHARDS |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of seemingly mundane grey scales.
+D:$Upon close inspection, you can see it pulsates with great rainbow patterns of energy.
 D:鱗鎧だ。何気なく見ると平凡な灰色だが、
 D:よく見ると強力なエネルギーが虹色の紋様となって脈打っているのがわかる。
 
@@ -2319,6 +2415,8 @@ F:RES_TIME | RES_WATER | FREE_ACT | SPEEDSTER | SLOW_DIGEST | REGEN
 #発動次元の扉？
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 #U:BR_DRAGON
+D:$An armour of translucent purple scales which occasionally seems to flicker or float in the air.
+D:$It's as if it's not bound by our laws of nature.
 D:半透明の紫色の鱗鎧だ。見ていると時々宙に浮いたり瞬いたりする。この世界の法則の外に存在するかのようだ。
 
 N:210:ダイヤモンドドラゴン・スケイルメイル
@@ -2333,6 +2431,8 @@ F:RES_HOLY | RES_INSANITY
 F:FREE_ACT | RES_BLIND | RES_CONF | RES_FEAR | RES_DARK | RES_LITE | RES_NETHER
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BR_DRAGON
+D:$An armour of diamond scales.
+D:$Primordial passion radiates from it in dazzling brilliance.
 D:金剛石の鱗鎧だ。原初の激情がまばゆい輝きとなって放たれている。
 
 N:211:パワードラゴン・スケイルメイル
@@ -2350,6 +2450,7 @@ F:RES_NETHER | RES_CHAOS | RES_LITE | RES_DARK |
 F:RES_SHARDS | RES_SOUND | RES_DISEN |
 F:ACTIVATE | IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 U:BA_MISS_3
+D:$The rare vision of an armour of the scales of the greatest Wyrm of all, that of the element of 'power'.
 D:最も強力な『力』のエレメントを持つワイアームの鱗鎧である。滅多にお目にかかれることはない。
 
 ##### クローク TV:43 #####
@@ -2371,7 +2472,7 @@ I:43:2:0
 W:5:0:6:500
 A:5/1:30/1
 P:1:0d0:0:0:0
-D:$An elaborately embroided decorative cloak. Doesn't provide much defense, though.
+D:$An elaborately embroidered decorative cloak. Doesn't provide much protection, though.
 D:精巧な刺繍が施された装飾的な外套だ。防御効果はあまり望めない。
 
 N:214:毛皮のクローク
@@ -2450,6 +2551,7 @@ I:44:3:0
 W:5:0:2:30
 A:5/2
 P:1:0d0:0:0:0
+D:$A decorative head ornament, such as a headband or a maid cap.
 D:頭を飾る飾り布だ。カチューシャやメイドキャップなどもここに含まれる。
 
 
@@ -2502,6 +2604,8 @@ I:44:8:0
 W:30:0:60:300
 A:30/3
 P:7:1d2:0:0:0
+D:$The helmet of a samurai, made of riveted iron
+D:$and with decorative horn-like crest plates attached.
 D:武士の兜だ。折り重なった鉄板を鋲で繋ぎ止めて角のような飾り板を取り付けてある。
 
 N:226:鋼鉄ヘルメット
@@ -2601,6 +2705,7 @@ I:45:4:0
 W:25:0:20:150
 A:25/1
 P:3:1d1:0:0:0
+D:$Strapped leather wrist wrappings studded with metal.
 D:鉄板と革紐による重厚な手の覆いだ。
 
 N:235:篭手
@@ -2610,6 +2715,9 @@ I:45:5:0
 W:30:0:30:300
 A:30/1
 P:4:1d1:0:0:0
+D:$Sleeves made of iron plates extending to the wrists,
+D:$backs of the hands, and thumbs. The fingers are left exposed
+D:$in order to not interfere with firing a bow.
 D:手首と手の甲と親指を鉄板で覆う防具だ。弓を射やすいように指の露出が多い。
 
 N:236:ガントレット
@@ -2656,7 +2764,7 @@ I:46:1:0
 W:1:0:8:10
 A:1/1
 P:1:0d0:0:0:0
-D:$ Ordinary shoes.
+D:$Ordinary shoes.
 D:普通の革靴だ。
 
 N:240:草鞋
@@ -2676,6 +2784,7 @@ I:46:3:0
 W:1:2:14:10
 A:1/4
 P:1:0d0:0:0:0
+D:$Traditional wooden sandals elevated from the ground with "teeth" on the underside.
 D:底に「歯」と呼ばれる突起が付いた伝統的な木の履物だ。
 
 N:242:ブーツ
@@ -2685,6 +2794,7 @@ I:46:4:0
 W:3:0:12:20
 A:3/1
 P:2:0d0:0:0:0
+D:$Tall shoes that cover the ankle. Long ones can reach above the knee.
 D:足首を覆う丈の長い靴だ。長いものは膝上まである。
 
 N:243:レザーブーツ
@@ -3399,6 +3509,7 @@ I:49:1:0
 W:15:0:3:1000
 A:15/2
 F:ACTIVATE
+D:$When blown, it will return your subordinates to you no matter where they are on the level.
 D:これを吹き鳴らすとフロアのどこにいてもペット達が帰ってくる。
 
 ##### 杖：TVAL55 #####
@@ -5233,6 +5344,8 @@ I:72:2:0
 W:50:0:5:20000
 A:30/30
 P:0:1d1:0:0:0
+D:$It's believed that ilmenite is found in vast quantities on the surface of the Moon.
+D:$It's anticipated to become a resource of the distant future.
 D:月面から大量に産出されるとみられているチタン鉄鉱だ。遠い未来の資源として期待されている。
 
 
@@ -5245,6 +5358,7 @@ I:73:1:0
 W:10:0:1:100
 A:10/255
 P:0:4d4:0:0:0
+D:$A precious primitive moss that glows emerald green in dim light.
 D:貴重な原始的コケ植物だ。薄暗いところでエメラルド色に光る。
 
 ##### Kinoko TVAL:74#####
@@ -5257,6 +5371,7 @@ W:5:0:1:0
 A:5/1:5/1
 P:0:4d4:0:0:0
 D:$It poisons you when you eat it.
+D:$If eaten by Medicine, it heals 8d8 hit points and satiates hunger.
 D:それは食べると毒に冒される。メディスンが食べると8d8の体力を回復する。
 
 N:510:盲目:青い
@@ -5459,6 +5574,7 @@ W:3:0:4:0
 A:3/1
 P:0:1d1:0:0:0
 D:$It poisons you when you quaff it.
+D:$If quaffed by Medicine, it heals 4d8 hit points and satiates hunger.
 D:それは飲むと毒に冒される。メディスンが飲むと4d8の体力を回復し空腹を満たす。
 
 N:531:盲目:藍色の
@@ -6302,7 +6418,7 @@ I:73:3:3000
 W:25:0:50:1000
 A:1/255
 P:0:5d5:0:0:0
-D:$Hematite formed in a shape of a flower.
+D:$Hematite formed in the shape of a flower.
 D:花のような形に形成された赤鉄鉱だ。
 
 N:607:マグネタイト
@@ -6373,7 +6489,7 @@ I:73:10:100
 W:60:0:30:30000
 A:60/255
 P:0:5d5:0:0:0
-D:$Dragon scale. Hard to come by in Gensoukyou.
+D:$Dragon scale. In ordinary circumstances, it'd be hard to come by in Gensoukyou.
 D:龍族の鱗だ。通常幻想郷では滅多に手に入らない。
 
 N:614:ゲルセミウム・エレガンス
@@ -6576,6 +6692,8 @@ I:78:7:4000
 W:0:0:10:600
 A:20/2
 P:0:1d1:0:0:0
+D:$A fiery liquid. Drinking it will make you temporarily vigorous.
+D:$Its taste, cleanliness, or possible side effects are not well understood.
 D:燃えるような液体だ。飲むと一時的に元気が出る。味と副作用と清潔さは不明。
 
 N:636:一四二〇年醸造のビール
@@ -6672,7 +6790,7 @@ I:78:16:4000
 W:0:0:10:30000
 A:75/3
 P:0:1d1:0:0:0
-D:$Extremely old liquor Yuyuko brought out from somewhere. Isn't poisoned.
+D:$Extremely old liquor that Yuyuko brought out from somewhere. Isn't poisoned.
 D:幽々子がどこからか持ってきた物凄く古いお酒だ。毒は入っていない。
 
 
@@ -6715,6 +6833,8 @@ I:78:20:7000
 W:0:0:10:15000
 A:30/5
 P:0:1d1:0:0:0
+D:$Alcohol made with a sake bug, which the oni have been cultivating for many years.
+D:$It has a complex and unmitigatedly unrefined flavour.
 D:鬼が長年かけて改良した酒虫による酒だ。決して洗練させないあくまで複雑な味だ。
 
 
@@ -6791,6 +6911,9 @@ I:78:27:30000
 W:0:0:10:30000
 A:40/10
 P:0:1d1:0:0:0
+D:$High-quality liquor that's pleasant to drink despite its high alcohol content.
+D:$However, due to the addition of ink-cap mushroom extract, even a single sip will inevitably
+D:$cause acute alcohol poisoning.
 D:度数が高い割にすっきり飲める上質な酒だ。
 D:しかしヒトヨタケのエキスが仕込まれており一口でも飲むと急性アルコール中毒は必至である。
 
@@ -6832,6 +6955,7 @@ I:38:4:0
 W:40:0:0:2000
 A:40/5:80/3
 P:3:1d1:0:0:0
+D:$An oversized ribbon rimmed with frills.
 D:フリルで縁取られた大型のリボンだ。
 
 N:661:宝塔
@@ -6966,6 +7090,7 @@ P:0:16d16:5:50:0
 F:SHOW_MODS
 F:ACTIVATE
 U:GUN_VARIABLE
+D:An old-style muzzle-loaded infantry gun that fires round balls.
 D:球形の弾丸を発射する先込め式の旧型歩兵銃だ。
 
 N:675:「持出厳禁」と書かれた薬箱
@@ -6998,6 +7123,8 @@ W:35:0:5:20000
 A:35/255
 P:0:1d1:0:0:0
 F:USABLE
+D:$A strange board that displays pictures and writing when you touch it.
+D:$The youkai understand the rule 'If a human has this, then I can eat them'.
 D:触ると絵や文字が映る妙な板だ。
 D:妖怪たちは「これを持っている人間は食べてもいい」と認識している。
 
@@ -7568,6 +7695,8 @@ I:75:68:0
 W:3:0:4:0
 A:3/255
 P:0:1d1:0:0:0
+D:$It severely poisons you when you quaff it.
+D:$If quaffed by Medicine, it heals 20d20 hit points and completely satiates hunger.
 D:それは飲むと20d20の毒ダメージを受ける。
 D:メディスンが飲むと20d20の体力と魔力を回復し、満腹になる。
 
@@ -7578,6 +7707,8 @@ I:72:5:0
 W:10:0:50:30000
 A:50/50
 P:0:1d1:0:0:0
+D:$A large shell coloured red, blue, yellow, white, and black.
+D:$It's certainly a lucky item, but it's unclear whether it's really a kappa's or not.
 D:赤青黄白黒の五色の色が付いた大きな甲羅だ。
 D:実に縁起が良い代物だが、本当に河童の甲羅なのかどうかは不明である。
 
@@ -7588,6 +7719,7 @@ I:72:6:0
 W:10:0:4:3000
 A:10/30
 P:0:1d1:0:0:0
+D:$A tool for colouring the air. Also called a 'triangle mirror'.
 D:風に色を塗る道具だ。プリズムとも呼ばれる。
 
 N:727:河童の腕
@@ -7597,6 +7729,7 @@ I:72:7:0
 W:50:0:50:30000
 A:30/30
 P:0:1d1:0:0:0
+D:$It's a kappa arm. It must be a kappa arm because it came in a box labeled 'kappa arm'.
 D:河童の腕である。なぜそうとわかるかというと、「河童の腕」と書かれた箱に入っているからだ。
 
 
@@ -7607,6 +7740,8 @@ I:72:8:0
 W:50:0:300:10000
 A:40/50
 P:0:1d1:0:0:0
+D:$An armful-sized egg.
+D:$It's unknown what kind of egg it is.
 D:一抱えほどもある巨大な卵だ。何の卵なのかは不明だ。
 
 N:729:エイジャの赤石
@@ -7616,6 +7751,7 @@ I:72:9:0
 W:50:0:4:300000
 A:110/100
 P:0:1d1:0:0:0
+D:$The flawless Super Aja.
 D:大きく不純物のないスーパーエイジャだ。
 
 
@@ -7660,6 +7796,9 @@ W:10:0:50:3000
 A:40/80
 P:0:1d1:0:0:0
 F:USABLE
+D:$At a glance it's just a statuette of a cat, but if
+D:$you keep it in your home, mice and rats will miraculously
+D:$be kept away.
 D:一見ただの猫の置物だが、これを家に置いておくと不思議なほど鼠が出なくなる。
 
 N:734:氷の鱗
@@ -7745,6 +7884,8 @@ W:15:0:110:300
 A:20/3
 P:0:1d10:0:0:0
 F:SHOW_MODS
+D:$A big wooden mallet used for threshing grain and pounding mochi in a pestle.
+D:$There are also some which are rod-shaped, like a log cut down in the middle.
 D:臼とセットで脱穀や餅搗きに使う大型の木槌だ。丸太の中央を細くしたような棒形のものもある。
 
 N:743:材質が全く分からない金属製の箱
@@ -7969,7 +8110,7 @@ W:1:0:5:1000
 A:1/255
 P:0:1d1:0:0:0
 D:$Turns your lower body half into a fish tail upon being drunk. If you're wearing
-D:$footweat, it will come off.
+D:$footwear, it will come off.
 D:$Having a fish tail grants water resistance and extra attacks in martial art combat,
 D:$but you can't use footwear, and you will slow down on land unless you're levitating.
 D:それは飲むと下半身が魚の尾になる。靴を履いていると脱げる。
@@ -8217,7 +8358,7 @@ I:73:36:3000
 W:100:0:50:50000
 A:100/255
 P:0:3d3:0:0:0
-D:$A fragment of the Izanagi plate that has disappeared 25 million years ago.
+D:$A fragment of the Izanagi Plate that disappeared into the depths of the Earth 25 million years ago.
 D:2500万年前に地底に消えたイザナギプレートの欠片だ。
 
 N:788:ミクロオキシゲン
@@ -8244,6 +8385,7 @@ I:43:7:0
 W:1:0:10:50
 A:1/2:50/2
 P:1:0d0:0:0:0
+D:$A short cloak that covers the shoulders and back.
 D:肩や背を覆う、丈の短いクロークだ。
 
 N:791:ケセランパサラン
@@ -8288,7 +8430,7 @@ W:10:0:10:0
 A:20/7:50/3
 P:0:1d5:0:0:0
 D:$A bunch of bent and broken long needles.
-D:$'Since they've drunk so much blood, they're infamous magic items.'
+D:$"Since they've drunk so much blood, they're infamous magic items."
 D:$('Wild and Horned Hermit', volume 6)
 D:曲がったり折れたりした長い針の束だ。
 D:「多くの血を吸った針は曰くつきのマジックアイテムさ」(東方茨歌仙 6)
@@ -8318,7 +8460,6 @@ F:ACTIVATE
 U:GUN_VARIABLE
 D:$A weird trumpet-shaped gun with rabbit ears.
 D:兎耳が生えたラッパのような形をした奇妙な銃だ。
-
 
 N:797:猟銃
 E:& Hunting Rifle~
@@ -8483,6 +8624,7 @@ G:,:r
 I:79:5:3000
 A:30/7:90/5
 W:0:0:8:500
+D:$A delicious-looking and delicious-smelling peach.
 D:香りの良い美味しそうな桃の実だ。
 
 N:812:博麗:四角い
@@ -8527,6 +8669,8 @@ I:72:15:0
 W:25:0:40:100
 A:25/50
 P:0:8d8:0:0:0
+D:$A jar that a certain magician sold to the villagers.
+D:$Apparently it protects its owner from being tricked by tanuki.
 D:某魔法使いが里の住人に売りつけた壺だ。この壺があれば狸に化かされなくなるらしい。
 F:USABLE
 
@@ -8537,7 +8681,7 @@ I:72:16:0
 W:25:0:40:70000
 A:25/50
 P:0:8d8:0:0:0
-D:$It's a treasure that can produce indefinite amount of oil.
+D:$It's a treasure that can produce limitless amounts of oil.
 D:無限に油が湧き出すという秘宝だ。
 F:USABLE|HOUSE
 
@@ -8567,7 +8711,7 @@ W:70:0:20:10000
 P:0:1d8:10:10:0
 F:SHOW_MODS
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | INSTA_ART | SLAY_EVIL
-D:$A double-edged ritual weapon.
+D:$A ritual weapon with sharp blades on each end.
 D:「金剛杵」(ヴァジュラ)と呼ばれる法具のうち、両端が鋭い刃になったものだ。
 
 N:821:作業服
@@ -8643,12 +8787,13 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 D:両肩で背負うための紐が付けられた布袋だ。蓋の裏に「KOSUZU」と書かれている...
 
 N:828:茂林寺の茶釜
-E:& Morinji Tea Pot~
+E:& Morinji Tea Kettle~
 G:*:D
 I:72:17:0
 W:25:0:200:5000
 A:20/30
 P:0:12d12:0:0:0
+D:$A marvelous tea kettle that never runs out of water no matter how much you pour from it.
 D:いくら汲んでもお湯が尽きないという不思議な茶釜だ。
 F:HOUSE
 
@@ -8683,6 +8828,9 @@ A:1/255
 P:0:12d12:0:0:0
 F:IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:FIXED_FLAVOR | FULL_NAME
+D:$A round white mushroom famous for ballooning to an amazing size overnight.
+D:$When fully mature, the fruit bursts open and scatters millions of spores.
+D:$Immature puffballs are edible.
 D:「ヤブダマ」とも呼ばれる白くて丸いキノコだ。一夜のうちに驚くほどの大きさに育つことで有名だ。
 D:成熟したら破けて大量の胞子をまき散らす。未熟な物は食用可能である。
 
@@ -8708,6 +8856,8 @@ G:,:D
 I:80:7:5000
 W:1:0:2:1000
 A:1/255
+D:$Roasting an eel removes its toxins and turns the eel
+D:$into a medicine that can cure many illnesses, or so it is said.
 D:鰻を焼くと毒が抜けて病気を治す薬になるといわれている。
 
 N:835:写真
@@ -9118,6 +9268,7 @@ W:30:0:20:10000
 A:20/3
 F:ACTIVATE
 U:ACCESS_HOME_ONLY_ARROW
+D:$This quiver allows you to remotely send and retrieve arrows to and from your home.
 D:これを使うと探索拠点に矢を置いたり探索拠点から矢を取り出したりすることができる。
 
 N:874:ファインセラミックスの鎧
@@ -9128,6 +9279,8 @@ W:70:0:120:30000
 A:60/12
 P:25:2d4:-2:0:10
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$This armour is made from highly engineered non-metallic materials.
+D:All sorts of specialist fine ceramics are being developed every day.
 D:高度に調整された非金属材料で作られた鎧だ。
 D:様々な特性を持つファインセラミックスが日々開発されている。
 
@@ -9147,6 +9300,7 @@ I:73:40:30
 W:30:0:6:0
 A:1/255
 P:0:1d5:0:0:0
+D:$Skulls are scattered all over the place in Hell.
 D:地獄のそこら中に落ちている頭蓋骨だ。
 
 N:877:魔法スイカ
@@ -9155,6 +9309,8 @@ G:,:g
 I:80:9:7500
 W:1:0:200:1
 A:1/255
+D:$A giant watermelon bearing a creepy skull-like pattern.
+D:$They grow at the tops of trees in the Forest of Magic.
 D:ドクロのような不気味な模様の巨大なスイカだ。魔法の森の木の上に生っている。
 
 
@@ -9165,6 +9321,7 @@ I:72:20:0
 W:10:0:80:0
 A:1/255
 P:0:1d1:0:0:0
+D:$A cute stone statue of a baby.
 D:可愛らしい赤子の石像だ。
 
 N:879:チョウセンアサガオの葉
@@ -9173,6 +9330,7 @@ G:,:g
 I:80:10:1
 W:10:3:1:0
 A:10/3
+D:$Leaves from the poisonous plant also known as 'devil's trumpet'.
 D:「マンダラゲ（曼陀羅華）」とも呼ばれる毒草の葉だ。
 
 N:880:宿屋の置物
@@ -9183,6 +9341,9 @@ W:10:0:30:0
 A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
+D:$An ornament a zashiki-warashi brought in as a substitute for pay
+D:$after a business trip to the Outside World.
+D:$The words 'zashiki-warashi lodging' are engraved on it.
 D:外界に出張した座敷わらしが給料の代わりに持ち帰ってきた置物だ。「座敷わらしの宿」と彫り込まれている。
 
 
@@ -9195,6 +9356,10 @@ A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$On the outside, this appears to be some kind of insect cage or make-up box.
+D:$If you peek inside, you'll see a bed and curtains set up.
+D:$This is the house Shinmyoumaru lived in after she was shrunk
+D:$as the price of using the Miracle Mallet.
 D:一見虫籠か化粧道具箱のようだが、中を覗いてみるとベッドやカーテンなどが設えられている。
 D:針妙丸が小槌の力の代償で小型化していたときに住んでいた家だ。
 
@@ -9208,6 +9373,8 @@ A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$It's said that vampires sleep in coffins filled with earth from their place of origin.
+D:$But this coffin is lined with bedsheets and full of roses.
 D:吸血鬼は故郷の土を詰めた棺桶で眠ると伝えられている。
 D:しかしこの棺桶にはシーツが敷かれて薔薇の花が敷き詰められている。
 
@@ -9220,11 +9387,12 @@ A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A small yellow disc with a resemblance of a face drawn on it.
 D:人の顔のような絵が書かれた小さな黄色い円盤だ。
 
 
 N:884:ラフノールの鏡
-E:Mirror of Ruffnor
+E:Mirror of Raffnord
 G:*:w
 I:72:25:0
 W:10:0:20:30000
@@ -9232,16 +9400,18 @@ A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A crystalline structure that is as thin as a mirror yet incredibly sturdy.
 D:鏡のように薄いが途方もなく頑丈な結晶体だ。
 
 N:885:鳥の巣風エクステ
-E:Bird's Nest
+E:Bird's Nest Extensions
 G:*:r
 I:72:26:0
 W:10:0:2:300
 A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
+D:$A voluminous bright red hairpiece.
 D:ボリュームのある真っ赤な付け毛だ。
 
 N:886:運命の切札
@@ -9252,6 +9422,8 @@ W:65:0:2:30000
 A:65/50
 P:0:1d1:0:0:0
 F:HOUSE
+D:$A pile of cards with depictions of unfamiliar scenery and forms on them.
+D:$On the reverse of each card is the image of a unicorn.
 D:見覚えのない風景や図形が描かれたカードの束だ。カードの裏面にはユニコーンが描かれている。
 
 
@@ -9263,6 +9435,9 @@ W:10:0:60:100000
 A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
+D:$A magical sailing ship that can always find good wind to travel by.
+D:$It's big enough to carry all the gods, but when folded up,
+D:$becomes small enough to fit in a pocket.
 D:自分で風を起こして進む魔法の帆船だ。広げれば全ての神々が乗り込めるほど巨大だが畳めば持ち歩けるほどの大きさになるという。
 
 N:888:古書型コンピュータ
@@ -9273,6 +9448,9 @@ W:10:0:10:10000
 A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
+D:$At first, this appears to be an old book. When opened,
+D:$it turns out to be a computer full of the latest technology
+D:$of the Lunar Capital.
 D:一見古い書物だが、開くと月の都の最新テクノロジーが詰まったコンピュータになっている。
 
 N:889:貝殻の戦車
@@ -9283,6 +9461,7 @@ W:10:0:60:100000
 A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
+D:$A majestic and splendid chariot in the shape of a huge seashell.
 D:巨大な貝殻のような形をした荘厳華麗な戦車だ。
 
 N:890:古のものの水晶
@@ -9293,6 +9472,7 @@ W:25:0:300:10000
 A:25/25
 P:0:1d1:0:0:0
 F:HOUSE
+D:$This mysterious crystal is so cold you can barely hold it in your hands.
 D:手で持てないほどの冷気を発する不思議な水晶だ。
 
 N:891:指輪:赤金色の
@@ -9325,13 +9505,14 @@ D:鯢呑亭で人気の清酒だ。秋に注文すると妙に酔いが回りやすい酒が出てくるという噂だ
 
 
 N:894:龍珠
-E:& Dragon Orb~
+E:& Dragon Gem~
 G:*:v
 I:73:41:8000
 W:100:0:20:30000
 A:100/255
 P:0:2d2:0:0:0
 D:$A glowing rainbow-colored jewel, said to belong to a dragon.
+D:$It captures the soul, albeit only very slightly.
 D:龍の持ち物と言われる七色に光る宝石だ。ほんの僅かにだが魂を込める効果があるという。
 
 
@@ -9362,7 +9543,7 @@ D:$A small box decorated with lots of flair. You can't wait to open it!
 D:やたらと派手に光る小箱だ。これを開けるときには興奮を抑えきれないだろう！
 
 N:897:酔魔の酒の空き瓶
-E:& Empty Alcohol Bottle~
+E:& Empty Possessed Bottle~
 G:!:w
 I:72:32:0
 W:25:0:5:10
@@ -9415,6 +9596,7 @@ F:SHOW_MODS
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 F:ACTIVATE
 U:GUN_VARIABLE
+D:$A weird big trumpet-shaped gun with rabbit ears.
 D:兎耳が生えた大きなラッパのような形をした奇妙な銃だ。
 
 N:902:蠱毒皿
@@ -9478,7 +9660,7 @@ W:25:0:5:10000
 A:1/255
 P:0:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | USABLE
-D:$Lunar jewel with power to somewhat dispel impurity.
+D:$A lunar jewel with the power to somewhat dispel impurity.
 D:穢れをほんのりと祓う力のある月の宝玉だ。
 
 N:908:粗雑な作りの木箱
