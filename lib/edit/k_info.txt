@@ -1859,7 +1859,7 @@ W:10:0:1:200
 A:10/2:30/2:60/2:
 P:1:1d1:0:0:0
 D:$A long thin piece of decorative fabric.
-D:$The most common personal ornament in Gensoukyou.
+D:$The most common type of personal ornament in Gensoukyou.
 D:細長い飾り布だ。幻想郷では最もありふれた装飾品だ。
 
 N:161:はちまき
@@ -2784,7 +2784,7 @@ I:46:3:0
 W:1:2:14:10
 A:1/4
 P:1:0d0:0:0:0
-D:$Traditional wooden sandals elevated from the ground with "teeth" on the underside.
+D:$Traditional wooden sandals elevated from the ground with 'teeth' on the underside.
 D:底に「歯」と呼ばれる突起が付いた伝統的な木の履物だ。
 
 N:242:ブーツ
@@ -3059,7 +3059,7 @@ A:20/1
 F:SHOW_MODS
 
 N:272:達人:トルコ石の
-E:Slaying:Turquoise
+E:Expertise:Turquoise
 G:=:B
 I:47:26:0
 W:40:0:2:1000
@@ -3509,7 +3509,7 @@ I:49:1:0
 W:15:0:3:1000
 A:15/2
 F:ACTIVATE
-D:$When blown, it will return your subordinates to you no matter where they are on the level.
+D:$When blown, it returns your subordinates to you no matter where they are on the level.
 D:これを吹き鳴らすとフロアのどこにいてもペット達が帰ってくる。
 
 ##### 杖：TVAL55 #####
@@ -5371,7 +5371,7 @@ W:5:0:1:0
 A:5/1:5/1
 P:0:4d4:0:0:0
 D:$It poisons you when you eat it.
-D:$If eaten by Medicine, it heals 8d8 hit points and satiates hunger.
+D:$If eaten by Medicine, it heals 8d8 hit points and satiates hunger.
 D:それは食べると毒に冒される。メディスンが食べると8d8の体力を回復する。
 
 N:510:盲目:青い
@@ -6509,6 +6509,7 @@ I:73:12:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A translucent deep crimson gemstone. The birth stone of January.
 D:石榴石とも呼ばれる深紅に透き通った宝石だ。一月の誕生石でもある。
 
 N:616:アメジスト
@@ -6518,6 +6519,7 @@ I:73:13:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A translucent purple crystal. The birth stone of February.
 D:紫水晶とも呼ばれる。二月の誕生石でもある。
 
 N:617:アクアマリン
@@ -6527,6 +6529,7 @@ I:73:14:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A light blue gemstone. The birth stone of March.
 D:藍玉とも呼ばれる明るい青の宝石だ。三月の誕生石でもある。
 
 N:618:ダイヤモンド
@@ -6536,6 +6539,7 @@ I:73:15:100
 W:90:0:1:100000
 A:90/255
 P:0:5d5:0:0:0
+D:$A colourless, transparent gemstone. The birth stone of April.
 D:金剛石とも呼ばれる無色透明の宝石だ。四月の誕生石でもある。
 
 N:619:エメラルド
@@ -6545,6 +6549,7 @@ I:73:16:100
 W:70:0:1:40000
 A:70/255
 P:0:5d5:0:0:0
+D:$A translucent green gemstone. The birth stone of May.
 D:翠玉とも呼ばれる緑色透明の宝石だ。五月の誕生石でもある。
 
 N:620:ムーンストーン
@@ -6554,6 +6559,7 @@ I:73:17:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A blue-white gemstone. The birth stone of June.
 D:月長石とも呼ばれる青白色の宝石だ。六月の誕生石でもある。
 
 N:621:ルビー
@@ -6563,6 +6569,7 @@ I:73:18:100
 W:75:0:1:50000
 A:75/255
 P:0:5d5:0:0:0
+D:$A translucent bright red gemstone. The birth stone of July.
 D:紅玉とも呼ばれる赤色透明の宝石だ。七月の誕生石でもある。
 
 N:622:ペリドット
@@ -6572,6 +6579,7 @@ I:73:19:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A translucent light green gemstone. The birth stone of August.
 D:橄欖石の一種で薄緑色透明の宝石だ。八月の誕生石でもある。
 
 N:623:サファイア
@@ -6581,6 +6589,7 @@ I:73:20:100
 W:65:0:1:30000
 A:65/255
 P:0:5d5:0:0:0
+D:$A translucent blue gemstone. The birth stone of September.
 D:青玉とも呼ばれる青色透明の宝石だ。九月の誕生石でもある。
 
 N:624:オパール
@@ -6590,6 +6599,7 @@ I:73:21:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$An iridescent gemstone. The birth stone of October.
 D:蛋白石のうち虹色に光る宝石だ。十月の誕生石でもある。
 
 N:625:トパーズ
@@ -6599,6 +6609,7 @@ I:73:22:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A translucent yellow gemstone. The birth stone of November.
 D:黄玉とも呼ばれる黄色透明の宝石だ。十一月の誕生石でもある。
 
 N:626:ラピスラズリ
@@ -6608,6 +6619,7 @@ I:73:23:100
 W:30:0:1:5000
 A:30/255
 P:0:5d5:0:0:0
+D:$A blue stone also called ultramarine. The birth stone of December.
 D:青金石、群青とも呼ばれる青色半透明の宝石だ。十二月の誕生石でもある。
 
 N:627:隕鉄
@@ -7139,7 +7151,7 @@ D:$Nothing happens if you eat it.
 D:それは食べても何も起こらない。
 
 N:679:紫の袱紗
-E:& Purple Envelope~
+E:& Purple envelope~
 G:&:v
 I:60:45:0
 W:1:0:50:10000
@@ -7340,7 +7352,7 @@ D:(使用：20+1d20ターンの酸電火冷毒一時耐性　使用回数：7
 D:補充：赤エネルギーパック)
 
 N:694:メガクラッシュ
-E:& Mega Crash
+E:& Mega Crush
 G:&:B
 I:57:13:1
 W:1:0:40:5000
@@ -7946,7 +7958,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 #ハルモニア
 N:749:首飾り:眩い
-E:& Necklace~:Rusty
+E:& Necklace~:Dazzling
 G:":y
 I:48:31:0
 W:30:0:3:45000
@@ -7984,7 +7996,7 @@ D:薄汚れた石鉢だ。
 
 #燕の子安貝
 N:753:子安貝:貝の
-E:& Torque~:Rusty
+E:& Cowrie~:Seashell
 G:":y
 I:48:32:0
 W:30:0:3:45000
@@ -8165,6 +8177,8 @@ I:81:10:30000
 W:1:0:5:0
 A:1/255
 P:0:1d1:0:0:0
+D:$"What on earth did you put in this?" "Aren't there some things better left unsaid?"
+D:$('Inaba of the Moon and Inaba of the Earth')
 D:「いったい何を入れたんですか？」「世の中には聞かないほうがいいこともあるのよ？」
 D:(東方儚月抄　～ 月のイナバと地上の因幡　上)
 
@@ -8226,7 +8240,8 @@ I:81:15:0
 W:60:0:4:10000
 A:1/255
 P:0:16d16:0:0:0
-D:$'Master! This is!' 'Huh? You want some too, Udonge?', 'I'll pass!'
+D:$"Master! This is!" "Huh? You want some too, Udonge?", "I'll pass!"
+D:$('Inaba of the Moon and Inaba of the Earth')
 D:「ししょー！それ！」「あらウドンゲも飲む？」「遠慮します！」
 D:(東方儚月抄　～ 月のイナバと地上の因幡　上)
 
@@ -9543,7 +9558,7 @@ D:$A small box decorated with lots of flair. You can't wait to open it!
 D:やたらと派手に光る小箱だ。これを開けるときには興奮を抑えきれないだろう！
 
 N:897:酔魔の酒の空き瓶
-E:& Empty Possessed Bottle~
+E:& Empty Spirits Bottle~
 G:!:w
 I:72:32:0
 W:25:0:5:10
@@ -9551,10 +9566,9 @@ A:1/255
 P:0:1d1:0:0:0
 F:HOUSE
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE
-D:$An empty bottle. Its smell tells that it stored quite a strong liquor at
+D:$An empty bottle. Its smell tells that it stored some pretty hard liquor at
 D:$some point.
 D:ただの空き瓶だ。匂いを嗅いでみると相当強い酒が入っていたらしいことがわかる。
-
 
 N:898:フォービドゥンフルーツ
 E:& Forbidden Fruit~
@@ -9564,7 +9578,7 @@ W:65:0:2:50000
 A:66/66
 P:0:1d1:0:0:0
 D:$The forbidden fruit of Tree of Wisdom. Adam and Eve ate it, instigated by
-D:$the Serpent, and got banished from Paradise.
+D:$the Serpent, and were banished from Paradise.
 D:禁断の知恵の樹の実だ。アダムとイヴは蛇に唆されてこの実を口にし楽園から追放されたという。
 
 N:899:豪華な箱
