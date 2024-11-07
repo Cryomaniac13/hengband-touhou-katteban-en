@@ -5665,7 +5665,7 @@ D:先端はフォークのように少し割れている。
 
 
 N:341:捻れた黒杖
-E:Twisted Black Rod
+E:Twisted Black Staff
 I:27:3:2
 W:66:5:60:66000
 P:0:2d8:8:8:0
