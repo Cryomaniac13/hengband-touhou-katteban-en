@@ -15396,7 +15396,7 @@ soldier_skill_type soldier_skill_table[SOLDIER_SKILL_ARRAY_MAX][SOLDIER_SKILL_NU
 		{0,_("運用効率向上", "Improved Efficiency"),
             _("MP最大値が50%上昇する。",
             "Raises maximum MP by 50%.")},
-		{35,_("メガクラッシュ", "Mega Crash"),
+		{35,_("メガクラッシュ", "Mega Crush"),
             _("周辺を*破壊*する。",
             "*Destroys* nearby area.")},
 		{40,_("爆薬改良", "Improved Landmines"),

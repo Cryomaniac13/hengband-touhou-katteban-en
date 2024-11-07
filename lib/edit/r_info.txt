@@ -7185,6 +7185,8 @@ F:FORCE_SLEEP | KWAI | RES_SHAR | IM_FIRE | SELF_LITE_1
 F:HURT_HOLY | HURT_COLD | GEN_KWAI | NEVER_MOVE
 S:1_IN_3
 S:BLINK | TPORT
+D:$It manifests as smoke without fire rising from a house.
+D:$However, if the smoke is ignored, the house really will burn down.
 D:最初は人家から立ち昇るただの煙だ。
 D:しかし誰にも煙を気づかれなければ本当にその家を燃やしてしまうという。
 

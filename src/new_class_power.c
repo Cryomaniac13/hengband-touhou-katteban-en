@@ -10497,7 +10497,7 @@ class_power_type class_power_soldier[] =
 	{25,25,60,FALSE,FALSE,A_INT,0,0,_("自己治療", "Heal Self"),
 		_("HPと一部のステータス異常を回復する。",
         "Recovers HP and some status abnormalities.")},
-	{28,40,60,FALSE,FALSE,A_DEX,0,0,_("メガクラッシュ", "Mega Crash"),
+	{28,40,60,FALSE,FALSE,A_DEX,0,0,_("メガクラッシュ", "Mega Crush"),
 		_("周囲を*破壊*する。",
         "*Destroys* the nearby area.")},
 	{35,20,60,FALSE,FALSE,A_DEX,0,0,_("弾丸加工", "Create Ammo"),

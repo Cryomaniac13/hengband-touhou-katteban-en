@@ -201,7 +201,7 @@ static cptr get_blow_effect_desc(int effect)
         case RBE_INERTIA:  p = "slow"; break;
         case RBE_STUN:     p = "stun"; break;
         case RBE_CHAOS:    p = "attack with chaos"; break;
-        case RBE_ELEMENT:  p = "attack with elements"; break;
+        case RBE_ELEMENT:  p = "attack with an element"; break;
         case RBE_MUTATE:   p = "cause mutations"; break;
         case RBE_SMITE:    p = "purify"; break;
         case RBE_DROWN:    p = "drown"; break;
@@ -3411,7 +3411,7 @@ case RBE_DR_MANA:  q = "–‚—Í‚ð’D‚¤"; break;
 			case RBE_HUNGER:     q = "‹Q‰ì‚ð‚à‚½‚ç‚·"; break;
 #else
             case RBE_CHAOS:  q = "attack with chaos"; break;
-			case RBE_ELEMENT:     q = "attack with elements"; break;
+			case RBE_ELEMENT:     q = "attack with an element"; break;
 			case RBE_MUTATE:     q = "cause mutations"; break;
 			case RBE_SMITE:     q = "purify"; break;
 			case RBE_DROWN:     q = "drown"; break;
