@@ -151,7 +151,7 @@ mind_power mind_powers[5] =
       { 15, 20,   0, "Charge"},
       { 20, 15,   0, "Smash a Trap"},
       { 25, 20,  60, "Quake"},
-      { 30, 80,  75, "Massacre"},
+      { 30, 80,  75, "Banishment"},
       { 99,  0,   0, ""},
       { 99,  0,   0, ""},
       { 99,  0,   0, ""},
