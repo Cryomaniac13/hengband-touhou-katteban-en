@@ -848,7 +848,7 @@ errr do_cmd_write_nikki(int type, int num, cptr note)
 #ifdef JP
 					fprintf(fff, "%s‚ª–•E‚É‚æ‚Á‚ÄÁ‚¦‹‚Á‚½B\n", note);
 #else
-					fprintf(fff, "%s was made disappeared by massacre.\n", note);
+					fprintf(fff, "%s was made disappeared by erasure.\n", note);
 #endif
 					break;
 				case RECORD_NAMED_PET_WIZ_ZAP:
@@ -10903,7 +10903,6 @@ void do_cmd_time(void)
 #else
 	path_build(buf, sizeof(buf), ANGBAND_DIR_FILE, "timefun_gen_e.txt");
 #endif
-
 	/* Open this file */
 	fff = my_fopen(buf, "rt");
 
