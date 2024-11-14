@@ -136,7 +136,7 @@ Wand of Striking                     100
 Scroll of Flames                     100
 Scroll of Ice                        100
 Scroll of Logrus                     100
-Scroll of Massacre                   100
+Scroll of Banishment                 100
 Emerald                               70
 Ruby                                  70
 Sapphire                              70
@@ -162,7 +162,7 @@ Staff of Mana Storm                   30
 Wand of Disintegration                50
 Wand of Rockets                       25
 Rod of Perception                    100
-Scroll of Massacre Nearby            100
+Scroll of Banish Nearby              100
 Izanagi Object                        50
 Diamond                               80
 

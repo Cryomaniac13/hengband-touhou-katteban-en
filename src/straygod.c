@@ -1366,7 +1366,7 @@ void deity_racial_power(power_desc_type *power_desc, int *num_return)
 
 			if(rank1 == 57 || rank2 == 57 || rank3 == 57 ) //âM‚è_
 			{
-				strcpy(power_desc[num].name, _("ü•Ó–•E", "Massacre Nearby"));
+				strcpy(power_desc[num].name, _("ü•Ó–•E", "Banish Nearby"));
 				power_desc[num].level = 35;
 				power_desc[num].cost = 60;
 				power_desc[num].stat = A_CON;

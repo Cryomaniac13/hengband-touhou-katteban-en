@@ -4435,8 +4435,8 @@ const player_class class_info[MAX_CLASS] =
 		"Œê‚ç‚ê‚é‰ö—Í—_",
 		"Yugi",
 #else
-		"Yugi",
-		"Yugi",
+		"Yuugi",
+		"Yuugi",
 #endif
 		{4, 1, 2, -1, 3, 1},
 		10, 24, 29, 1, 16, 20, 90, 40,
@@ -6510,8 +6510,8 @@ const player_class class_info[MAX_CLASS] =
 		"–³”s‚Ì„—~“¯–¿’·",
 		"Yuma",
 #else
-		"Yuma",
-		"Yuma",
+		"Yuuma",
+		"Yuuma",
 #endif // JP
 		{ 2, 4, 3, 1, 7, -3 },
 		20, 32, 60, 4, 30, 25, 65, 40,
@@ -13446,9 +13446,9 @@ const activation_type activation_info[] =
 	{ "BANISH_EVIL", ACT_BANISH_EVIL, 40, 2000, {250, 0},
 	  _("×ˆ«Á–Å", "banish evil") },
 	{ "GENOCIDE", ACT_GENOCIDE, 50, 10000, {500, 0},
-	  _("–•E", "massacre") },
+	  _("–•E", "banish") },
 	{ "MASS_GENO", ACT_MASS_GENO, 50, 10000, {1000, 0},
-	  _("ü•Ó–•E", "massacre nearby") },
+	  _("ü•Ó–•E", "banish nearby") },
 	{ "SCARE_AREA", ACT_SCARE_AREA, 20, 2500, {20, 0},
 	  _("ƒ‚ƒ“ƒXƒ^[‹°Q", "frighten monsters") },
 	{ "AGGRAVATE", ACT_AGGRAVATE, 0, 100, {0, 0},
@@ -15236,7 +15236,7 @@ const cptr gf_desc_name[MAX_GF] =
 	//90
 	"mana drain","mental attack","brain attack","curse 1","curse 2",
 	"curse 3","curse 4","hand of doom","capture","animate dead",
-	"charm living","identify","(normal attack)","mesmerize","massacre",
+	"charm living","identify","(normal attack)","mesmerize","banishment",
 	"photo","charm demon","lava creation","blood curse","seeker ray",
 	"super ray","*healing*","water creation","holy battle","bind evil",
 	"curse","spatial distortion","cosmic horror","exorcism 1","exorcism 2",
@@ -17590,7 +17590,7 @@ const cptr	nameless_skill_type_desc[JKF1_MAX + 1] =
 	"temporary haste","protection from magic","physical defense","magic armor","temporary superstealth",
 	//40
 	"wall walking","shard aura","element resistance","ultimate resistance","confer essence",
-	"confer essence","identify","*destruction*","silence level","*massacre*",
+	"confer essence","identify","*destruction*","silence level","*banishment*",
 	//50
 	"invoke chaos (1d777)","line of sight teleport away","line of sight death rays","line of sight aquatic slay attack","line of sight binding",
 	"prevent summons","alter reality","meteor shower","emit light","empower melee attacks",

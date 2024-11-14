@@ -5457,7 +5457,7 @@ bool symbol_genocide(int power, bool player_cast, int default_char)
 #ifdef JP
 		result |= genocide_aux(i, power, player_cast, 4, "–•ŽE");
 #else
-		result |= genocide_aux(i, power, player_cast, 4, "Massacre");
+		result |= genocide_aux(i, power, player_cast, 4, "Banishment");
 #endif
 	}
 
@@ -5504,7 +5504,7 @@ bool mass_genocide(int power, bool player_cast)
 #ifdef JP
 		result |= genocide_aux(i, power, player_cast, 3, "Žü•Ó–•ŽE");
 #else
-		result |= genocide_aux(i, power, player_cast, 3, "Massacre Nearby");
+		result |= genocide_aux(i, power, player_cast, 3, "Banish Nearby");
 #endif
 	}
 
