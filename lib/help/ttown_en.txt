@@ -219,7 +219,7 @@ You can leave and re-enter exploration base related quests without a risk of
 failure. However, once you go back inside, all items on the floor will
 disappear.
 
-Some magic like *Destruction* or Massacre can't be used in quest dungeons.'
+Some magic like *Destruction* or Banishment can't be used in quest dungeons.'
 
 ***** <WorldMap>
 === World Map ===

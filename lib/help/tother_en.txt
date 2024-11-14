@@ -118,7 +118,8 @@ levels. Here's the detailed list of differences:
   If you go down the stairs before completing the quest, it counts as
   abndoning the quest. If you use Teleport Level, you abandon the quest and
   move down to the next level.
-  Just like in normal quest dungeons, you can't use *Destruction* or Massacre.
+  Just like in normal quest dungeons,
+  you can't use *Destruction* or Banishment.
   You'll want to deal with summoning enemies as quick as you can.
 
 - Special Buildings
