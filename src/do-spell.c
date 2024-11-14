@@ -21538,7 +21538,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (name) return "抹殺";
 		if (desc) return "フロア全体の指定した文字のモンスターを現在の階から追放する。抵抗されると無効。";
 #else
-		if (name) return "Massacre";
+		if (name) return "Banishment";
 		if (desc) return "Eliminates an entire class of monster, exhausting you.  Powerful or unique monsters may resist.";
 #endif
 
@@ -21858,7 +21858,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (name) return "周辺抹殺";
 		if (desc) return "自分の周囲にいるモンスターを現在の階から追放する。抵抗されると無効。";
 #else
-		if (name) return "Massacre Nearby";
+		if (name) return "Banish Nearby";
 		if (desc) return "Eliminates all nearby monsters, exhausting you.  Powerful or unique monsters may be able to resist.";
 #endif
 
