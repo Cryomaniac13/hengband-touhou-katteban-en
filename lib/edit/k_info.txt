@@ -857,7 +857,7 @@ W:0:0:4:10
 A:0/1:5/1:10/1:20/1
 P:0:1d3:0:0:0
 F:SHOW_MODS | THROW | IGNORE_FIRE
-D:$A two-edged knife with a sharp point.
+D:$A small single-edged knife. It can also be thrown.
 D:片刃の小型の刃物だ。投擲にも使える。
 
 N:80:ダガー
@@ -868,7 +868,7 @@ W:0:0:6:10
 A:0/1:5/1:10/1:20/1
 P:0:1d4:0:0:0
 F:SHOW_MODS | THROW | IGNORE_FIRE
-D:$A two-edged knife with a sharp point.
+D:$A two-edged knife with a sharp point. It can also be thrown.
 D:先端が鋭い両刃の短剣だ。投擲にも使える。
 
 N:81:マン・ゴーシュ
@@ -3783,7 +3783,7 @@ D:一時的に弱い邪悪な者の攻撃を回避しやすくなる結界を張り、
 D:毒・朦朧・切り傷を癒し、恐怖を取り除き、体力が50回復する。
 
 N:352:抹殺:チークの
-E:Massacre:Teak
+E:Banishment:Teak
 G:_:U
 I:55:27:4
 W:80:0:50:20000
@@ -5206,7 +5206,7 @@ D:それは読むと呪文を1つ学習できるようになる。
 D:学習できない、または学習する必要のない職業では何も起きない。
 
 N:495:抹殺:頭 一回 聞 確
-E:Massacre:ashval paylech
+E:Banishment:ashval paylech
 G:?:w
 I:70:44:0
 W:40:0:5:750
@@ -5217,7 +5217,7 @@ D:それは読むと指定した文字のモンスターを現在の階から消し去る。抵抗されると
 D:無効。
 
 N:496:周辺抹殺:衣変 試死 魑
-E:Massacre Nearby:trolsee mex
+E:Banish Nearby:trolsee mex
 G:?:w
 I:70:45:0
 W:50:0:5:1000
@@ -5805,6 +5805,9 @@ I:75:32:0
 W:1:0:4:35
 A:1/1
 P:0:1d1:0:0:0
+D:$It's labeled 'Usagi Alliance Pharmaceuticals'.
+D:$It removes fear, grants temporary heroism, and heals you 10
+D:$when you quaff it.
 D:「兎角同盟製薬」印の薬だ。
 D:それは飲むと恐怖を取り除き、一時的にヒーロー気分になり、体力が10回復する。
 
@@ -6120,7 +6123,7 @@ D:$and hallucination when you quaff it.
 D:それは飲むと体力が50回復し、盲目・毒・混乱・朦朧・切り傷・幻覚を癒す。
 
 N:580:紺珠:深い紺色の
-E:Ultramarine Orb:Dark Green
+E:Ultramarine Orb:Deep Navy Blue
 G:!:b
 I:75:62:100
 W:90:0:4:100000
@@ -6287,6 +6290,8 @@ G:,:U
 I:79:1:300
 A:0/5
 W:0:0:2:3
+D:$A baked confectionery made from flour and sugar and such.
+D:$The distinction between cookies and biscuits is a cultural divide.
 D:小麦粉に砂糖などを混ぜて焼いた菓子だ。ビスケットとの違いは文化圏によって様々だ。
 
 
@@ -6299,6 +6304,9 @@ G:,:U
 I:80:0:3500
 W:0:0:10:15
 A:0/1:5/1:10/1:20/1
+D:$Portable provisions made from dried fruits and cereals that have been
+D:$ground up into powder, kneaded, and baked. Acceptably nutritious
+D:$but interminably tasteless.
 D:穀物やドライフルーツなどを粉末にして練って焼いた携帯食糧だ。それなりに栄養はあるが味気ない。
 
 N:596:乾パン
@@ -6388,6 +6396,7 @@ G:,:g
 I:80:5:500
 W:1:0:2:10
 A:1/3
+D:$A shiny cucumber. A kappa's favourite food.
 D:ツヤのよいキュウリだ。河童の大好物だ。
 #河童と山童が食べたら満腹になる特殊仕様にしてみよう
 
@@ -6397,6 +6406,7 @@ G:,:U
 I:80:6:500
 W:1:0:4:30
 A:1/5
+D:$Aromatic deep-fried sliced tofu.
 D:香ばしい油揚げだ。
 #妖狐が食べたらMPが回復する特殊仕様にしてみよう
 
@@ -6629,6 +6639,8 @@ I:73:24:1000
 W:85:0:80:120000
 A:85/255
 P:0:5d5:0:0:0
+D:$A meteorite that's super-rich in iron content.
+D:$For some reason, it has marks in the shape of a torii gate scratched into it...
 D:鉄分を多く含む隕石だ。なぜか鳥居のような形の傷が刻まれている・・
 
 N:628:不死鳥の羽
@@ -6638,6 +6650,7 @@ I:72:3:100
 W:90:0:4:160000
 A:90/255
 P:0:5d5:0:0:0
+D:$A great, beautiful plume that glows as if aflame.
 D:燃えるように光る、大型の美しい羽根だ。
 
 
@@ -6648,6 +6661,8 @@ I:73:25:1000
 W:100:0:50:150000
 A:100/255
 P:0:5d5:0:0:0
+D:$A legendary metal of diverse and powerful qualities which
+D:$cannot be described as anything less than mystical.
 D:伝説の金属だ。神秘的としか言いようのない多様かつ強力な特性を持つ。
 
 N:630:レミリアからの書簡
@@ -7838,6 +7853,7 @@ I:37:9:0
 W:10:0:20:1000
 P:1:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_FIRE | IGNORE_ELEC | IGNORE_COLD | INSTA_ART
+D:$A large red dish which could hold about one sho (1.8 litres) of sake.
 D:一升くらい入りそうな赤く大きな盃だ。
 
 N:737:焼き芋
@@ -7846,6 +7862,9 @@ G:,:u
 I:79:2:5000
 A:10/255
 W:0:0:10:100
+D:$Someone's put a lot of effort into baking this sweet potato.
+D:$Peel back the piping hot, aromatic skin, and you'll find
+D:$steaming fluffy flesh within, moist and sweet and gold as honey.
 D:丹精込めて焼き上げたサツマイモだ。熱々の香ばしい皮を剥くとホクホクの身が湯気を立て、中は蜜のように金色でしっとりと甘い。
 
 N:738:ミラクルフルーツ
@@ -7875,6 +7894,7 @@ I:72:11:0
 W:10:0:50:1000
 A:10/255
 P:0:1d1:0:0:0
+D:$A flag that is believed to have been planted on the Moon by humans who landed there.
 D:月に降り立った人間が置いて行ったとされている旗だ。
 
 N:741:ウィジャボード
@@ -7884,6 +7904,7 @@ I:72:12:0
 W:20:0:50:2000
 A:20/25
 P:0:1d1:0:0:0
+D:$A board with which one can commune with the dead.
 D:降霊術を行うための板だ。
 F:USABLE
 
@@ -7928,6 +7949,8 @@ I:73:31:500
 W:45:0:10:0
 A:45/255
 P:0:25d25:0:0:0
+D:$A fragment of a nightmare, found flying around in the Dream World like meteorites.
+D:$The implications of your physical body getting hit by one are awful.
 D:夢の世界を隕石のように飛び交う悪夢の断片だ。生身で被弾すると大変なことになる。
 
 N:746:希望の結晶
@@ -7937,6 +7960,7 @@ I:73:32:500
 W:45:0:10:0
 A:45/255
 P:0:1d1:0:0:0
+D:$A manifested form of people's hopes and dreams.
 D:人々の夢と希望が形を成したものだ。
 
 N:747:団子
@@ -7945,6 +7969,8 @@ G:,:w
 I:79:4:1500
 A:0/3:40/3:80/3
 W:0:0:4:100
+D:$A confectionery made of rice flour and water pounded together
+D:$and then steamed or boiled.
 D:米粉などを水でこねて茹でたり蒸して作った菓子だ。
 
 N:748:細長い木箱
@@ -7972,6 +7998,8 @@ I:72:13:0
 W:95:0:6000:500000
 A:120/100
 P:0:20d100:0:0:0
+D:$A gigantic single slab of camphor wood that was supposedly
+D:$used as the ceiling board for the top floor of Kinkaku-ji temple.
 D:楠の巨大な一枚板だ。金閣寺の最上層の天井板として使われたと伝えられる。
 
 #龍の頸の玉
@@ -7986,12 +8014,13 @@ F:INSTA_ART
 
 #仏の御石の鉢
 N:752:鉢
-E:& Sakazuki~
+E:& Bowl~
 G:*:w
 I:37:10:0
 W:120:0:50:300000
 P:10:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_FIRE | IGNORE_ELEC | IGNORE_COLD | INSTA_ART
+D:$A dirty stone bowl.
 D:薄汚れた石鉢だ。
 
 #燕の子安貝
@@ -8177,7 +8206,7 @@ I:81:10:30000
 W:1:0:5:0
 A:1/255
 P:0:1d1:0:0:0
-D:$"What on earth did you put in this?" "Aren't there some things better left unsaid?"
+D:$"What on earth did you put in this?" "Aren't there some things better left unsaid?"
 D:$('Inaba of the Moon and Inaba of the Earth')
 D:「いったい何を入れたんですか？」「世の中には聞かないほうがいいこともあるのよ？」
 D:(東方儚月抄　～ 月のイナバと地上の因幡　上)
@@ -8320,7 +8349,7 @@ I:73:34:0
 W:45:0:10:0
 A:45/255
 P:0:1d4:0:0:0
-D:$Burning residue of something.
+D:$The burned residue of something.
 D:何かの燃え滓だ。
 
 N:783:ミステリウム
@@ -8352,7 +8381,8 @@ I:81:23:10
 W:1:0:5:1000
 A:1/255
 P:0:1d1:0:0:0
-D:$Confuses and stuns monsters with high probability rate when thrown.
+D:$When thrown at a monster, confuses and stuns them with a high probability rate.                                           
+D:$"Citizens, happiness is mandatory." ('Paranoia')
 D:それはモンスターに投げると高確率で混乱・朦朧させる。　　　　
 D:「市民、幸福は義務です。」(RPG『パラノイア』)
 
@@ -8789,6 +8819,7 @@ I:34:3:0
 W:30:0:4:1000
 A:30/255
 F:SHOW_MODS | INSTA_ART
+D:$This scroll looks ancient, but there's nothing written on it...
 D:古びた巻物だ。しかし中には何も記されていない…
 
 N:827:背嚢
@@ -8799,6 +8830,8 @@ W:1:0:60:100
 A:1/255
 P:0:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$A cloth bag with attached cords allowing it to be carried over the shoulders.
+D:$'KOSUZU' is written on the back of the lid flap...
 D:両肩で背負うための紐が付けられた布袋だ。蓋の裏に「KOSUZU」と書かれている...
 
 N:828:茂林寺の茶釜
@@ -8813,13 +8846,15 @@ D:いくら汲んでもお湯が尽きないという不思議な茶釜だ。
 F:HOUSE
 
 N:829:羊皮紙の包み
-E:& Sheepskin Wrapped Box
+E:& Parchment Bundle
 G:&:r
 I:60:57:0
 W:1:0:100:100
 A:1/255
 P:0:1d1:0:0:0
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$Wrapped up under lots of parchment is a box made of aromatic incense wood.
+D:$It has some weird engravings on it...
 D:大きな羊皮紙にくるまれた香木製の箱だ。箱には不気味な彫刻が施されている…
 
 N:830:銀の鍵
@@ -8835,7 +8870,7 @@ F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD | USABLE
 
 
 N:831:オニフスベ:白くて大きな
-E:& Giant Puffball~
+E:& Giant Puffball~:Big White
 G:,:y
 I:74:32:10000
 W:10:0:20:1
@@ -8882,6 +8917,8 @@ I:62:1:0
 W:0:0:1:0
 A:0/255
 P:0:1d1:0:0:0
+D:$A beautiful danmaku photo. For some reason,
+D:$it remained after you woke up from the dream.
 D:美しい弾幕の写真だ。夢から覚めてもなぜか手元に残っていた。
 
 #TV:83 *真・勝利*後に霧雨魔法店の特殊コマンドで作成できるスペルカード
@@ -8904,6 +8941,14 @@ I:72:19:0
 W:10:0:50:6000
 A:25/40
 P:0:1d1:0:0:0
+D:$Four monkey figurines representing 'see no evil',
+D:$'speak no evil', 'hear no evil', and 'free no evil',
+D:$the creation of a renowned saint.
+D:$Purportedly, 'free no evil' will catch the worms
+D:$that crawl from the body before they can report your sins
+D:$to heaven and result in shortening your lifespan.
+D:$With these in hand, your perpetual youth and longevity
+D:$are as good as guaranteed.
 D:高名な聖人が制作した「見ザル」「言わザル」「聞かザル」「逃さザル」の四体組のお猿の像だ。
 D:「逃さザル」は、人の罪を天に告げ口して寿命を縮める虫を捕まえてくれるという。
 D:これがあれば不老長寿は約束されたも同然だ。
@@ -8913,22 +8958,25 @@ D:これがあれば不老長寿は約束されたも同然だ。
 #これを追加したらSV_STRANGE_OBJ_MAX値を増やす
 
 N:838:山怪散楽図
-E:Sankaisangakuzu
+E:Sangaku of Mountain Apparitions
 G:?:w
 I:82:0:0
 W:1:0:20:2000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A spooky scroll depicting hair-raising scenes of hell.
 D:おどろおどろしい地獄絵図が描かれた巻物だ。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:839:天狗之書
-E:Tengu Book
+E:Tengu Letter
 G:?:w
 I:82:1:0
 W:1:0:20:3000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Correspondence from a tengu to a human.
+D:$Its excellent calligraphy stands out on the high-quality Mino paper.
 D:天狗が人に認めた手紙だ。上質な美濃紙に非常な達筆が目に映える。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8939,6 +8987,9 @@ I:82:2:0
 W:1:0:20:4000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Kosuzu and Akyuu and discover the map to the Hieda buried treasure
+D:$and successfully decipher it. Marisa and co catch wind of it and
+D:$embark on their own excavation, but...
 D:稗田埋蔵金の地図を発見し、解読に成功した小鈴と阿求。噂を嗅ぎつけた魔理沙らと発掘捜査に乗り出すが...
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8949,6 +9000,8 @@ I:82:3:0
 W:1:0:60:5000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A lively and vibrant mushroom bonsai.
+D:$Whoever raised it must have done so with great care.
 D:瑞々しく艷やかなキノコの盆栽だ。誰の手によるものなのか不明だが非常な手をかけて育てられたであろうことが見て取れる。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8959,6 +9012,8 @@ I:82:4:0
 W:1:0:20:7000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A weird plush animal made of a hard material that came in from the Outside World.
+D:$Do children there cherish things like this?
 D:外界から伝来した、妙に硬い材質の縫いぐるみだ。外界の子供はこんなものを愛でるのだろうか？
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8969,6 +9024,9 @@ I:82:5:0
 W:1:0:50:8000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Guarded for generations in a sake shop of the Human Village,
+D:$this treasure shaped like a water container is said to be
+D:$the secret to business prosperity.
 D:人里の酒屋が代々秘蔵していた商売繁盛の秘宝だ。水を入れる器のような形をしている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8979,6 +9037,8 @@ I:82:6:0
 W:1:0:200:10000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A smoking instrument shaped like a pretty vase.
+D:$It's said that using it makes the tobacco smoother.
 D:美しい壺のような形をした喫煙道具だ。これを使って煙草を吸うと煙がまろやかになるとか。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -8989,16 +9049,20 @@ I:82:7:0
 W:1:0:20:12000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A clay doll with extraordinarily large eyes, created in the distant past.
+D:$It's rare to find one completely intact.
 D:目の部分が非常に大きく形成されている古代の土人形だ。完全な形で残っているものは珍しい。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:846:渾天儀
-E:Kontengi
+E:Armillary Sphere
 G:*:B
 I:82:8:0
 W:1:0:60:13000000
 A:1/255
 P:0:1d1:0:0:0
+D:$An unusual celestial globe charting constellations that depict youkai.
+D:$Its creator was probably one of Gensoukyou's old youkai.
 D:妖怪たちを象った星座が描かれた珍しい天球儀だ。幻想郷の古い妖怪による作と目される。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9009,29 +9073,39 @@ I:82:9:0
 W:1:0:30:15000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A stone with the miraculous ability to be always damp and seeping water.
+D:$A pair of fish live within. It's said that if you
+D:$shave the stone down until its transparent interior can be seen,
+D:$it will become a thing of unparalleled beauty.
 D:中から水が染み出し続ける不思議な石だ。
 D:石の中にはつがいの魚がおり、石の中が透けて見えるまで削ると得も言われぬ美しさを醸し出すという。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 
 N:848:三段ロケットの模型
-E:Rocket Model
+E:Three-Stage Rocket Model
 G:&:w
 I:82:10:0
 W:1:0:80:16000000
 A:1/255
 P:0:1d1:0:0:0
+D:$It looks like three cabins wonkily stacked up on top of each other.
+D:$The Mistress of the Scarlet Devil Mansion once used this rocket to
+D:$visit the Moon.
 D:歪な三階建ての小屋のような外見をしている。かつて紅魔館の主はこのロケットで月へ行ったという。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 
 N:849:聞き耳頭巾
-E:Kikimimizukin
+E:Inari's Listening Hood
 G:(:b
 I:82:11:0
 W:1:0:6:18000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Although it looks like a plain old hood, this garment has absorbed
+D:$spiritual power from the Inari shrine. When worn on one's head,
+D:$you can hear and understand the voices of plants and animals.
 D:外見はただの古ぼけた頭巾だが、お稲荷様の霊力が籠もっており被ると動物や草花の声を聴くことができるという。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9043,6 +9117,8 @@ I:82:12:0
 W:1:0:30:20000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A body print of the incredibly rare juvenile evil dragon.
+D:$The model has stylishly signed it in the corner as 'Evil Dragon'.
 D:世にも珍しい邪竜の幼体の魚拓だ。隅に「邪竜☆」とサインがされている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9053,6 +9129,8 @@ I:82:13:0
 W:1:0:1000:22000000
 A:1/255
 P:0:1d1:0:0:0
+D:$At first you might mistake it for a sleeping human,
+D:$but in reality it's just an incredibly detailed doll... isn't it?
 D:一見したところ眠っている人間だが、実は非常に精巧な人形だ。　...いや、本当にこれは人形なのだろうか？
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9063,6 +9141,8 @@ I:82:14:0
 W:1:0:16000:25000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A very strange-looking vehicle. Could it be
+D:$another product of the Lunarians?
 D:極めて奇妙な形をした車だ。これも月面の文明の産物なのだろうか？
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9074,6 +9154,10 @@ I:82:15:0
 W:1:0:2000:27000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A stone with the miraculous ability to be always damp and seeping water.
+D:$As the dragon within grows, the stone too grows larger and larger,
+D:$until, with a flash of lightning, it breaks and the dragon
+D:$ascends to the skies.
 D:中から水が染み出し続ける不思議な石だ。石の中には龍が住んでいる。
 D:龍の成長とともに石はどんどん巨大になっていき、やがては稲妻と共に石が割れて龍は天に昇っていくという。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
@@ -9085,6 +9169,7 @@ I:82:16:0
 W:1:0:1000:30000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A giant robot... -shaped balloon.
 D:巨大人型ロボット...の形をした風船だ。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9095,26 +9180,31 @@ I:82:17:0
 W:1:0:2:32000000
 A:1/255
 P:0:1d1:0:0:0
+D:$An exceedingly rare large blue diamond.
 D:極めて希少な大粒のブルーダイヤモンドだ。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:856:箱庭冥界
-E:Hakoniwa Meikai
+E:Miniature Netherworld
 G:&:D
 I:82:18:0
 W:1:0:100:35000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Looking closely at this elaborate boxed model of the Netherworld,
+D:$you can see it even has things that look like ghosts floating around.
 D:非常に精巧な冥界の模型が入った箱だ。覗き込むと中に人魂のようなものが飛んでいるのが見える。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:857:天狗の葉団扇
-E:Tengu Fan
+E:Tengu's Leaf Fan
 G:\:u
 I:82:19:0
 W:1:0:10:38000000
 A:1/255
 P:0:1d1:0:0:0
+D:$Only high-ranking tengu are permitted to hold fans like these.
+D:$As such, it commands an overwhelming air of grace and merit.
 D:高位の天狗のみが持つことを許されるとされる団扇だ。非常に強い験力が込められている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9125,6 +9215,8 @@ I:82:20:0
 W:1:0:6:40000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A pure white mask representing the face of a child.
+D:$Its gentle expression is reminiscent of Jizo's.
 D:真っ白な子供の顔の面だ。お地蔵さまのような柔和な表情をしている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9135,16 +9227,22 @@ I:82:21:0
 W:1:0:2:44000000
 A:1/255
 P:0:1d1:0:0:0
+D:$It's supposed to be a powerful weapon developed on the Moon over a millennium ago.
+D:$The terrible nature of the Lunarians is self-evident.
 D:千年以上も前に月で開発された強力な兵器であるらしい。月面文明の恐ろしさをまざまざと見せつけられる。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:860:マヨヒガの茶碗
-E:Mayohiga Pottery
+E:Mayohiga Tea Bowl
 G:(:w
 I:82:22:0
 W:1:0:5:48000000
 A:1/255
 P:0:1d1:0:0:0
+D:$The strange estate named 'Mayohiga' is sometimes unexpectedly encountered in the mountains.
+D:$Although there are always traces of people living there just recently, nobody can be found
+D:$no matter how much you search. It is said that any item retrieved from there
+D:$will bring its owner prosperity.
 D:山中に突然「マヨヒガ」と呼ばれる見知らぬ家が現れることがある。
 D:中にはたった今まで人が生活していたような痕跡があるものの幾ら探しても人影は見当たらず、
 D:そこから持ち帰った物品は持ち主に富を授けると言われている。
@@ -9157,16 +9255,22 @@ I:82:23:0
 W:1:0:20:50000000
 A:1/255
 P:0:1d1:0:0:0
+D:$An old codex written in an unknown language and featuring
+D:$many peculiar illustrations.
 D:正体不明の言語による古文書だ。多数の奇妙な挿絵が描かれている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:862:蜃
-E:Shinn
+E:Shen
 G:l:D
 I:82:24:0
 W:1:0:100:55000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A youkai shellfish that transformed from an old Nagafu clam.
+D:$It has the power to create gigantic mirages.
+D:$It's said that in the old days, the well-informed
+D:$would watch these mirages as a banquet centerpiece.
 D:齢を経た長太(ながふ)の蛤が変じたとされる妖貝だ。
 D:この妖怪は巨大な幻「蜃気楼」を作り出す力を持っている。
 D:この幻を見ながら宴会を開くのが古い時代の通人の嗜みであったとか。
@@ -9179,6 +9283,8 @@ I:82:25:0
 W:1:0:20:60000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A translucent orb made of a mysterious material.
+D:$On the inside surface is a distinctive star-shaped design.
 D:不思議な材質の半透明の球だ。中には星のような文様がひとつ浮かび上がっているのが見える。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9189,30 +9295,41 @@ I:82:26:0
 W:1:0:150:70000000
 A:1/255
 P:0:1d1:0:0:0
+D:$A bonsai of a Lunar plant. In its native environment,
+D:$it neither withers nor fruits, but when brought to the Earth
+D:$it absorbs impurity and produces orbs of seven colours.
+D:$This is called the Jeweled Branch of Hourai, and the pursuit of
+D:$such a treasure has resulted in many conflicts all over the world.
 D:月原産の植物の盆栽だ。この植物は月では枯れも実をつけもしないが、
 D:地上に持ち込むと穢れを吸収し七色の玉をつける。
 D:これを蓬莱の玉の枝といい、この秘宝を巡って地上では幾多の争いが繰り返された。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:865:数百年前の手記
-E:Old Note
+E:Centuries-Years-Old Note
 G:?:u
 I:82:27:0
 W:1:0:20:80000000
 A:1/255
 P:0:1d1:0:0:0
+D:$An enigmatic scrap of paper that was supposedly discovered
+D:$hundreds of years ago in the Bamboo Forest of the Lost.
+D:$Besides referencing technology that should not exist at the time
+D:$such as mobile phones and GPS, it contains the shocking
+D:$view that this world is someone's dream.
 D:数百年前に竹林で発見されたとされる謎の紙片だ。
 D:携帯電話やGPSなど当時存在しなかったはずの技術への言及とともに、
 D:この世界が誰かの夢であるという衝撃の見解が記されている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
 N:866:幺楽団復活演奏会のチラシ
-E:Fantastic Modulation
+E:Yougakudan Comeback Concert Flyer
 G:?:w
 I:82:28:0
 W:1:0:2:99999999
 A:1/255
 P:0:1d1:0:0:0
+D:$'Fantastic Modulation be forever in your heart' is written on it.
 D:「いつも心に Fantastic Modulation」と書かれている。
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
 
@@ -9225,6 +9342,8 @@ A:1/255
 P:0:2d5:0:0:0
 F:SHOW_MODS | RIDING
 F:IGNORE_ACID | IGNORE_ELEC | IGNORE_FIRE | IGNORE_COLD
+D:$An elegant straight sword decorated with seven stars
+D:$in the shape of the Big Dipper constellation.
 D:北斗七星の意匠が施された優美な直剣だ。
 
 
@@ -9235,6 +9354,8 @@ I:84:1:0
 W:1:0:10:100000
 A:1/255
 P:0:1d1:0:0:0
+D:$A very old plate.
+D:$One wonders if it was used on dinner tables ages ago.
 D:すごく古い皿だ。遥か昔の食卓を賑わしたのだろうか。
 
 N:869:壺
@@ -9244,6 +9365,8 @@ I:84:2:0
 W:1:0:10:300000
 A:1/255
 P:0:1d1:0:0:0
+D:$This vase is a piece de resistance.
+D:$It shouldn't be used as a chair or clotheshorse.
 D:売り物の壺だ。本来は椅子や物干し代わりに使うべきものではない。
 F:HOUSE
 
@@ -9254,6 +9377,8 @@ I:84:3:0
 W:1:0:10:500000
 A:1/255
 P:0:1d1:0:0:0
+D:$An artist of distant days past must have absolutely dedicated
+D:$heart and soul into carving this statue.
 D:遠い日の芸術家が全身全霊を捧げて彫り上げたのだろう。
 
 N:871:宝剣
@@ -9263,15 +9388,19 @@ I:84:4:0
 W:1:0:10:1000000
 A:1/255
 P:0:20d20:0:0:0
+D:$An intricately decorated sword which could only have been created
+D:$by pouring all the skill and technology of the ancients into it in a display of power.
 D:精巧な装飾を施された一振りの剣だ。力の象徴として古代の技術の全てを注ぎ込んで作られたのだろう。
 
 N:872:オーパーツ
-E:Out-of-place Artifact
+E:OOPArt
 G:`:v
 I:84:5:0
 W:1:0:10:3000000
 A:1/255
 P:0:25d25:0:0:0
+D:$An out-of-place artifact - an excavated object which inexplicably exceeds the
+D:$capabilities of the technology of its apparent time.
 D:アウトオブプレースアーティファクト、すなわちその時代の技術水準では製作不可能なはずの謎めいた出土品がこう呼ばれる。
 
 
@@ -9306,6 +9435,9 @@ G:,:w
 I:80:8:500
 W:1:0:3:300000
 A:1/255
+D:$The peerless elixir used by the celestials in their rituals.
+D:$It's said that if a human eats it, they'll instantly find themselves
+D:$ascending, leaving their old life behind.
 D:天人が儀式に使う最上級の霊薬だ。人が食べれば忽ちのうちに羽化登仙に至るという。
 
 N:876:頭蓋骨
