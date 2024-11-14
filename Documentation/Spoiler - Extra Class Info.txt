@@ -15,7 +15,7 @@ Effects of Magicmaster flag (MM)
 Minimum spell failure rate is 0% (5% normally)
 Minimum spell failure rate in Berserk personality is 20% (30% normally)
 Spell level requirement lowered by 2
-Can use Barrier Guard with Ctrl+G (mana shield effect)
+Can use Barrier Guard with Ctrl+g (mana shield effect, see help files for details)
 Can use Staff of Mana Storm without taking self-damage
 Higher chance of bolt attacks becoming beams
 Lower chance of destroying items on recharge failure, will not destroy stacks of wands
@@ -83,15 +83,13 @@ Chemist			|	3: Slow, Heavy		|	4: Medium	|	No	|	**	|	100	|	150	|	+3	|	3	|	60	|	4	
  Cirno			|	1: V. slow, Light	|	1: None!	|	No	|	Yes	|	150	|	150	|	12	|	4	|	50	|	5	|	B+	|
 Civilian		|	2: Slow, Light		|	1: None!	|	No	|	**	|	150	|	150	|	+3	|	2	|	80	|	4	|	C	|
  Clownpiece		|	1: V. slow, Light	|	3: Slow		|	No	|	No	|	150	|	60	|	**	|	3	|	20	|	6	|	D	|
- Clownpiece(VFS)|	1: V. slow, Light	|	3: Slow		|	No	|	Yes	|	150	|	150	|	12	|	3	|	70	|	4	|	D	|
 Danmakulogist	|	1: V. slow, Light	|	4: Medium	|	Yes	|	**	|	70	|	70	|	+1	|	3	|	30	|	3	|	D	|
  Doremy			|	3: Slow, Heavy		|	4: Medium	|	Yes	|	No	|	45	|	68	|	14	|	4	|	30	|	4	|	C+	|
  Eika			|	1: V. slow, Light	|	3: Slow		|	No	|	Yes	|	195	|	195	|	13	|	3	|	30	|	3	|	E	|
- Eiki			|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	18	|	18	|	19	|	4	|	30	|	4	|	E	|
  Eirin			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	50	|	50	|	17	|	5	|	15	|	5	|	C	|
 Engineer		|	4: Medium, Heavy	|	1: None!	|	No	|	**	|	82	|	123	|	+2	|	2	|	80	|	4	|	C	|
  Enoko			|	3: Slow, Heavy		|	2: V. slow	|	No	|	No	|	60	|	60	|	19	|	3	|	40	|	3	|	B+	|
- Eternity Larva	|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	270	|	270	|	9	|	2	|	60	|	3	|	D	|
+ Eternitylarva	|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	270	|	270	|	9	|	2	|	60	|	3	|	D	|
 Explorer		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	85	|	85	|	+4	|	3	|	55	|	5	|	C	|
  Flandre		|	2: Slow, Light		|	2: V. slow	|	Yes	|	No	|	16	|	16	|	23	|	4	|	100	|	6	|	C	|
  Futo			|	1: V. slow, Light	|	4: Medium	|	Yes	|	No	|	60	|	60	|	13	|	4	|	55	|	3	|	B+	|
@@ -122,8 +120,8 @@ Jeweler			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	**	|	75	|	120	|	1+	|	4	|	45	|	4	
  Kyouko			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	120	|	120	|	14	|	3	|	60	|	4	|	D	|
  Letty			|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	120	|	120	|	13	|	4	|	50	|	4	|	D	|
 Librarian		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	90	|	90	|	+4	|	4	|	60	|	5	|	D	|
- Lily White		|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	240	|	192	|	10	|	4	|	80	|	5	|	E	|
- Luna Child		|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	200	|	200	|	10	|	4	|	60	|	4	|	E	|
+ Lilywhite		|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	240	|	192	|	10	|	4	|	80	|	5	|	E	|
+ Lunachild		|	2: Slow, Light		|	3: Slow		|	No	|	Yes	|	200	|	200	|	10	|	4	|	60	|	4	|	E	|
  Lunasa			|	3: Slow, Heavy		|	3: Slow		|	No	|	Yes	|	50	|	50	|	10	|	4	|	40	|	4	|	D	|
  Lyrica			|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	50	|	50	|	10	|	4	|	50	|	5	|	C	|
 Mage			|	1: V. slow, Light	|	5: Fast		|	Yes	|	**	|	85	|	102	|	+0	|	4	|	30	|	3	|	E	|
@@ -144,13 +142,13 @@ Martial-Artist	|	2: Slow, Light		|	1: None!	|	No	|	**	|	75	|	75	|	+4	|	1	|	80	|	
  Miko			|	5: Fast, Heavy		|	5: Fast		|	Yes	|	No	|	12	|	12	|	15	|	5	|	25	|	5	|	B+	|
 ShMaiden/Priest	|	2: Slow, Light		|	4: Medium	|	Yes	|	**	|	80	|	80	|	+4	|	4	|	40	|	5	|	C	|
 Mindcrafter		|	4: Medium, Heavy	|	4: Medium	|	No	|	**	|	60	|	54	|	+3	|	4	|	30	|	3	|	B+	|
+ Minamitsu		|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	65	|	65	|	16	|	3	|	40	|	5	|	B+	|
  Minoriko		|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	120	|	120	|	13	|	4	|	60	|	3	|	E	|
  Misumaru		|	2: Slow, Light		|	5: Fast		|	No	|	No	|	40	|	60	|	14	|	4	|	70	|	3	|	E	|
  Miyoi			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	120	|	120	|	9	|	3	|	90	|	3	|	D+	|
  Mokou			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	100	|	100	|	10	|	3	|	70	|	5	|	B+	|
  Momiji			|	4: Medium, Heavy	|	1: None!	|	No	|	No	|	80	|	46	|	15	|	2	|	50	|	5	|	C	|
  Momoyo			|	5: Fast, Heavy		|	3: Slow		|	No	|	No	|	15	|	15	|	25	|	5	|	40	|	6	|	A	|
- Murasa			|	3: Slow, Heavy		|	3: Slow		|	No	|	No	|	65	|	65	|	16	|	3	|	40	|	5	|	B+	|
  Mystia			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	100	|	100	|	14	|	4	|	40	|	5	|	B	|
  Narumi			|	4: Medium, Heavy	|	5: Fast		|	Yes	|	No	|	60	|	60	|	14	|	4	|	40	|	3	|	E	|
  Nazrin			|	4: Medium, Heavy	|	4: Medium	|	No	|	No	|	123	|	123	|	12	|	3	|	40	|	4	|	E	|
@@ -191,10 +189,10 @@ SecondhandDealer|	5: Fast, Heavy		|	5: Fast		|	No	|	**	|	80	|	106	|	+4	|	2	|	70	
  Shou			|	4: Medium, Heavy	|	3: Slow		|	No	|	No	|	48	|	48	|	17	|	3	|	30	|	6	|	B	|
 Shugenja		|	3: Slow, Heavy		|	3: Slow		|	No	|	**	|	75	|	75	|	+4	|	4	|	55	|	5	|	A	|
 Soldier			|	3: Slow, Heavy		|	1: None!	|	No	|	**	|	80	|	80	|	+4	|	2	|	120	|	5	|	B!	|
- Star Sapphire	|	3: Slow, Heavy		|	2: V. slow	|	No	|	Yes	|	240	|	240	|	9	|	3	|	70	|	4	|	E	|
+ Starsapphire	|	3: Slow, Heavy		|	2: V. slow	|	No	|	Yes	|	240	|	240	|	9	|	3	|	70	|	4	|	E	|
  Suika			|	2: Slow, Light		|	2: V. slow	|	No	|	No	|	24	|	24	|	28	|	3	|	30	|	5	|	A	|
  Sumireko		|	2: Slow, Light		|	4: Medium	|	No	|	No	|	40	|	30	|	13	|	4	|	60	|	3	|	B+	|
- Sunny Milk		|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	220	|	220	|	11	|	2	|	80	|	4	|	C	|
+ Sunnymilk		|	1: V. slow, Light	|	2: V. slow	|	No	|	Yes	|	220	|	220	|	11	|	2	|	80	|	4	|	C	|
  Suwako			|	3: Slow, Heavy		|	5: Fast		|	Yes	|	No	|	20	|	30	|	18	|	4	|	20	|	5	|	B+	|
  Takane			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	72	|	72	|	12	|	2	|	45	|	4	|	D	|
 Teacher			|	3: Slow, Heavy		|	3: Slow		|	No	|	**	|	80	|	80	|	+3	|	4	|	45	|	5	|	C	|
@@ -208,11 +206,13 @@ Tsukumo-Master	|	5: Fast, Heavy		|	5: Fast		|	No	|	**	|	80	|	100	|	+4	|	3	|	25	|
  Udonge			|	4: Medium, Heavy	|	2: V. slow	|	No	|	No	|	48	|	48	|	15	|	3	|	50	|	5	|	B+	|
  Urumi			|	4: Medium, Heavy	|	2: V. slow	|	No	|	Yes	|	75	|	75	|	13	|	3	|	40	|	5	|	B	|
  Utsuho			|	1: V. slow, Light	|	1: None!	|	No	|	No	|	25	|	25	|	18	|	5	|	90	|	5	|	B+	|
+ VFS-Clownpiece	|	1: V. slow, Light	|	3: Slow		|	No	|	Yes	|	150	|	150	|	12	|	3	|	70	|	4	|	D	|
  Wakasagi		|	2: Slow, Light		|	2: V. slow	|	No	|	Auto|	135	|	135	|	12	|	2	|	50	|	4	|	C	|
 Warrior			|	5: Fast, Heavy		|	1: None!	|	No	|	**	|	100	|	90	|	+9	|	1	|	60	|	6	|	B	|
  Wriggle		|	2: Slow, Light		|	1: None!	|	No	|	Yes	|	160	|	160	|	13	|	3	|	30	|	4	|	B	|
  Yachie			|	3: Slow, Heavy		|	4: Medium	|	No	|	No	|	35	|	35	|	16	|	4	|	25	|	4	|	B	|
  Yamame			|	2: Slow, Light		|	2: V. slow	|	No	|	Yes	|	120	|	120	|	14	|	3	|	50	|	4	|	C	|
+ Yamaxanadu		|	5: Fast, Heavy		|	5: Fast		|	No	|	No	|	18	|	18	|	19	|	4	|	30	|	4	|	E	|
  Yatsuhashi		|	4: Medium, Heavy	|	4: Medium	|	No	|	Yes	|	56	|	56	|	11	|	4	|	70	|	3	|	D	|
  Yorihime		|	5: Fast, Heavy		|	4: Medium	|	Yes	|	No	|	11	|	11	|	18	|	4	|	30	|	6	|	B	|
  Yoshika		|	1: V. slow, Light	|	1: None!	|	No	|	No	|	60	|	60	|	22	|	2	|	50	|	5	|	B+	|
