@@ -824,7 +824,7 @@ sprintf(dummy, "本当に%s{呪われている}を使いますか？", o_name);
 			msg_print(_("仮面の額に「エイジャの赤石」がぴったり収まっている。",
                         "'Red Stone of Aja' would perfectly fit in the forehead of your mask."));
 			msg_print(NULL);
-			sprintf(dummy, _("このまま装備してみますか？", "Wear it as it is?"));
+			sprintf(dummy, _("このまま装備してみますか？", "Wear it like that?"));
 			if (!get_check(dummy)) return;
 		}
 		else if(p_ptr->prace != RACE_VAMPIRE)
