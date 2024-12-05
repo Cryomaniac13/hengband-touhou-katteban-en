@@ -125,7 +125,7 @@ void reset_concentration(bool msg)
 		if(p_ptr->pclass == CLASS_KISUME)
 			msg_print(_("あなたは地面まで降下した。", "You lower to the ground."));
 		else if(p_ptr->pclass == CLASS_YUGI)
-			msg_print(_("必殺の構えを解いた。","You stop assuming your posture."));
+			msg_print(_("必殺の構えを解いた。","You resume your normal stance."));
 		else if(p_ptr->pclass == CLASS_SANAE)
 			msg_print(_("詠唱が途切れた。", "You stop chanting."));
 		else if(p_ptr->pclass == CLASS_MEIRIN)
@@ -155,9 +155,9 @@ void reset_concentration(bool msg)
 				{
 					p_ptr->kamioroshi &= ~(KAMIOROSHI_GION);
 					if(p_ptr->paralyzed || (p_ptr->stun >= 100) || p_ptr->alcohol >= DRANK_4 && !(p_ptr->muta2 & MUT2_ALCOHOL))
-						msg_print(_("祇園様の剣が地面から抜けた。", "Sword of Gion exits the ground."));
+						msg_print(_("祇園様の剣が地面から抜けた。", "The Sword of Gion comes out of the ground."));
 					else
-						msg_print(_("祇園様の剣を地面から引き抜いた。", "You pull Sword of Gion out of the ground."));
+						msg_print(_("祇園様の剣を地面から引き抜いた。", "You pull the Sword of Gion out of the ground."));
 				}
 			}
 		}
@@ -166,7 +166,7 @@ void reset_concentration(bool msg)
 			if(p_ptr->magic_num1[0] == CONCENT_KANA)
 				msg_print(_("気合いが散った。", "You stop focusing."));
 			else
-				msg_print(_("魔力の集中が元に戻った。", "You are no longer concetrating mana."));
+				msg_print(_("魔力の集中が元に戻った。", "You are no longer concentrating mana."));
 
 		}
 		else
@@ -655,7 +655,7 @@ void do_cmd_snipe(void)
 #ifdef JP
 		msg_print("頭が朦朧としていて集中できない！");
 #else
-		msg_print("You are too stuned!");
+		msg_print("You are too stunned!");
 #endif
 		return;
 	}
