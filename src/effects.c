@@ -8909,13 +8909,13 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 					msg_print("あなたの所作は洗練を極めた！");
 #else
                 if(p_ptr->stat_ind[A_CHR] < 3)
-					msg_print("You start unsightly swaying...");
+					msg_print("You sway unsightily...");
 				else if (p_ptr->stat_ind[A_CHR] < 13)
 					msg_print("You feel like you're moving slower than usual.");
 				else if (p_ptr->stat_ind[A_CHR] < 23)
-					msg_print("You start moving efficiently.");
+					msg_print("You move briskly and efficiently.");
 				else if (p_ptr->stat_ind[A_CHR] < 33)
-					msg_print("You start moving like in a dance.");
+					msg_print("You move as gracefully as dancing.");
 				else
 					msg_print("Your movement is extremely refined!");
 #endif
@@ -8931,13 +8931,13 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #ifdef JP
 				msg_format("あなたは財を持つものの運気を奪い始めた...");
 #else
-                msg_format("You start stealing fortune from the wealthy...");
+                msg_format("You begin to steal fortune from the wealthy...");
 #endif
 			else if (p_ptr->pclass == CLASS_PARSEE)
 #ifdef JP
 				msg_format("あなたの周囲が嫉妬と不和の雰囲気に満ちた...");
 #else
-                msg_format("Jealousy and discord permeates your surroundings...");
+                msg_format("Jealousy and discord permeate your surroundings...");
 #endif
 			else if (p_ptr->pclass == CLASS_SHION)
 			{
@@ -8958,7 +8958,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 					msg_format("You become the embodiment of misfortune of all mankind!");
 					break;
 				case 2:
-					msg_format("Overwhelming negative aura spreads through the dungeon!");
+					msg_format("An inexhaustible negative aura fills the dungeon!");
 					break;
 				default:
 					msg_format("Your accumulated power of misfortune bursts forth!");
@@ -8975,7 +8975,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #ifdef JP
 				msg_format("あなたは手元に力を込めた。ずっしりとした重みを感じる...");
 #else
-                msg_format("You gather power in your hands. You feel heavy weight...");
+                msg_format("You gather power in your hands. You feel a heavy weight...");
 #endif
 			}
 			else if (p_ptr->pclass == CLASS_YUYUKO) //v1.1.76
@@ -8983,7 +8983,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #ifdef JP
 				msg_format("周囲の者を自らの方へ差し招くような妖しい光を放った...");
 #else
-                msg_format("You emit a bewitching light inviting towards you...");
+                msg_format("You emit a bewitching light beckoning others towards you...");
 #endif
 			}
 			else if (p_ptr->pclass == CLASS_TAKANE)
@@ -9017,7 +9017,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 			else if (p_ptr->pclass == CLASS_ZANMU)
 			{
 				msg_format(_("あなたは無いはずのものに対し不思議な力を行使した。",
-                            "You use a mysterious power against what should not be there."));
+                            "You use a mysterious power over that which does not exist."));
 			}
 			else
 			{
@@ -9150,7 +9150,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #ifdef JP
 				msg_format("少し喉が渇いた。");
 #else
-                msg_format("You feel slightly thirsty.");
+                msg_format("You feel a bit thirsty.");
 #endif
 			else if((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES))
 #ifdef JP
@@ -9198,7 +9198,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
                 msg_print("You are moving normally once again.");
 #endif
 			else if (p_ptr->pclass == CLASS_IKU && ind == 0)
-				msg_format(_("あなたは構えを解いた。", "You stop assuming your posture."));
+				msg_format(_("あなたは構えを解いた。", "You resume your normal stance."));
 			else if(p_ptr->pclass == CLASS_SUWAKO && ind == 0)
 			{
 #ifdef JP
@@ -9222,9 +9222,9 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 				if(ind == 1) msg_format("境界が元に戻った。");
 				if(ind == 2) msg_format("フロアの気配が元に戻った。");
 #else
-                if(ind == 0) msg_format("Boundary returns to normal. The power spot vanishes.");
-				if(ind == 1) msg_format("Boundary returns to normal.");
-				if(ind == 2) msg_format("Atmosphere on this floor returns to normal.");
+                if(ind == 0) msg_format("The boundary returns to normal. The power spot vanishes.");
+				if(ind == 1) msg_format("The boundary returns to normal.");
+				if(ind == 2) msg_format("The atmosphere on this floor returns to normal.");
 #endif
 			}
 			else if(p_ptr->pclass == CLASS_RINGO)
@@ -9285,7 +9285,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 #ifdef JP
 				msg_format("灯の効果が消えた。");
 #else
-                msg_format("Your lantern is no longer in effect.");
+                msg_format("Your light trap is no longer in effect.");
 #endif
 			}
 			else if (p_ptr->pclass == CLASS_TAKANE)
@@ -9313,7 +9313,7 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 			else if (p_ptr->pclass == CLASS_MIYOI)
 			{
 				msg_format(_("あなたは普段の動きに戻った。",
-                            "You are moving normally again."));
+                            "You are moving normally once again."));
 			}
 			else if (p_ptr->pclass == CLASS_ZANMU)
 			{
@@ -9393,7 +9393,7 @@ bool set_asthma(int v)
 
 		if(new_aux == 1) msg_print("Your throat feels refreshed.");
 		else if(new_aux == 2) msg_print("You're coughing a little.");
-		else if(new_aux == 3) msg_print("You can't stop coughing and stay quiet.");
+		else if(new_aux == 3) msg_print("You can't stop coughing and can't stay quiet.");
 		else if(new_aux == 4) msg_print("You have a severe cough and have difficulty speaking.");
 		else msg_print("Your throat tightens with your every breath!");
 #endif
@@ -9526,7 +9526,7 @@ bool set_no_move(int v)
 #ifdef JP
 			msg_print("その場から移動できなくなった！");
 #else
-			msg_print("You become unable to move from this place!");
+			msg_print("You are rooted to the spot!");
 #endif
 			/* Sniper */
 			notice = TRUE;

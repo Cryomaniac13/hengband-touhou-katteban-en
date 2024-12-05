@@ -67,7 +67,7 @@ N:1094:Remilia
 # 「君は何故こんな事をしたのかね」
 says, 'Why did you do such a thing?'
 # 「無駄無駄無駄ぁ。」
-says, 'Futile, futile, futile.'
+says, 'Muda-muda-mudaaa.'
 # 「咲夜ー。もっとちゃんと犯人を選んでよー！」
 says, 'Sakuyaaa, please choose the suspects more carefully!'
 # 「……咲夜ー。家の中に変な人が居るよー」
@@ -193,7 +193,7 @@ says, 'It appears my Ran has caused some nuisance.'
 # 「永遠にお休みなさい」
 says, 'Sleep for all eternity.'
 # 「何でそんなにカリカリしてるのかしら？」
-says, 'Why do you look so annoyed? Are you lacking calcium?'
+says, 'Why are you gritting your teeth? Are you lacking calcium?'
 # 「あなたは気がついていない。極楽と地獄の境界が曖昧になっている事に」
 says, 'You don't yet know. The border between paradise and hell is becoming ambiguous.'
 # 「あなたは気がついていない。すでに、昼と夜の境界は私の手の内にあることに」
@@ -201,7 +201,7 @@ says, 'You don't yet know. The border between day and night is already in the pa
 # 「ちょいとお時間良いかしら？」
 says, 'May I borrow a little of your time?'
 # 「その優しい火が～♪命取られて消えていく～♪」
-croons, 'That gentle flame~, it takes your life and disappears~'
+croons, 'That gentle flame~, its life is taken and winks out~
 
 N:1106:Wriggle
 # 「蛍様が出て喜ばない奴なんて、久しぶりに見たよ！」
@@ -921,7 +921,7 @@ N:1160:Yuuka
 # 「貴方は、何しにここに来たのかしら？」
 says, 'I wonder, what did you come here for?'
 # 「仕掛けて欲しいのね？仕様が無いわ」
-says, 'You want to challenge me? It can't be helped, then.'
+says, 'You want to challenge me? Then I suppose I must.'
 # 「これは、幻想郷で唯一枯れない花なのよ」
 says, 'This is the only flower in Gensoukyou that never withers.'
 # はにっこりと笑っている。
@@ -1347,9 +1347,9 @@ says, 'Sorry, I'll have to chase you away now.'
 # 「巫女が留守の間は私が侵入者を追い払っているの。」
 says, 'While the shrine maiden's away, I keep out intruders!'
 # 「それ以上神社に居るつもりなら、容赦しないよ！」
-says, 'If you intend to stay in this shrine any longer, I'll show you no mercy!'
+says, 'If you intend to stay in the shrine any longer, I'll show you no mercy!'
 # 「うわ、何をするー」
-says, 'Aah! What do I do!?'
+says, 'Uwaa, what do I do!?'
 
 N:1313:Narumi
 # は合掌して微笑んだ。
@@ -1525,11 +1525,11 @@ says, 'There is no route swifter or more effective than the rear!'
 
 N:1345:Mayumi
 # 「貴様から感じる霊気……」
-says, 'That aura I feel from you...'
+says, 'I can't abide that aura I feel from you...'
 # 「これは埴輪兵士が作られてから初めての緊急事態だわ！」
 says, 'This is the first emergency situation we've had since the Haniwa Soldiers were created!'
 # 「早くみんなに知らせないと！」
-says, 'I have to go alert everyone, quick!'
+says, 'I have to alert everyone, quick!'
 # はハニワのような剣？をあなたに向けた。
 points a sword-shaped haniwa(?) at you.
 
@@ -1673,7 +1673,7 @@ says, 'Allow me to liberate all of your possessions!'
 # 「すべて無(かみ)に返そう」
 says, 'Let us return all things to nothing.'
 # 「これで終わりだ！」
-says, 'This marks the end!'
+says, 'This marks the conclusion!'
 # は＄マークのようなポーズをとっている。
 strikes a pose shaped like a $ sign.
 
@@ -1773,7 +1773,7 @@ N:1388:Hisami
 # 「ふふふ。私から逃げられるとお思いで？」
 smirks, 'You think you can escape from me?'
 # 「貴様ごときが残無様に会うなど10年早いわ」
-says, 'If you want to meet Lady Zanmu, you're 10 years too early.'
+says, 'One such as you is 10 years too early to meet Lady Zanmu.'
 # 「地獄へようこそ」
 says, 'Welcome to Hell.'
 # 「案内するのは死霊だけだがな！」
@@ -1787,7 +1787,7 @@ says, 'I am the one who wields nothingness to quell this incident.'
 # 「儂が欲しいのは未来だ。全てを操って未来を作る」
 says, 'What I desire is the future. All my manipulations are to create that future.'
 # 「このような虚無の世界に何用だ」
-says, 'What sort of matter brought you to this world of nothingness?'
+says, 'What business brought you to this world of nothingness?'
 # 「虚無に苦しめ！それが儂からの手土産だ！」
 says, 'Feel the bane of nothingness! Let that be my gift to you!'
 # 「全力で空想を越えよ！」

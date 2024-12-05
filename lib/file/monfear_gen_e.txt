@@ -27,7 +27,7 @@ says, 'Oh no, Lady Yuyuko! When I close my eyes it goes completely dark!'
 
 N:1106:Wriggle
 # 「ひぇぇ」
-squeals, 'Eeek!'
+squeals, 'Eeeeee!'
 
 N:1107:Mystia
 # 「ここも駄目だ～！」
@@ -53,7 +53,7 @@ says, 'You, you're too strong for my weapons...'
 
 N:1119:Aya
 # 「正確すぎる情報は、時として批難されるものです。」
-says, 'Uncompromisingly accurate reportage is sometimes criticized.'
+says, 'Uncompromisingly accurate reportage sometimes results in criticism.'
 # 「もう……。善良な市民の味方を攻撃してどうするんですか」
 says, 'What are you doing, attacking an ally of upstanding citizens?'
 
@@ -103,7 +103,7 @@ N:1146:Banki
 # 「な、なによあんた。強いじゃないのよ」
 says, 'Wha, what's with you? You're actually strong.'
 # 「く、くやしいけど、ここは大人しく退くか……」
-says, 'Unfortunate, but I guess I'll take a step back for now...'
+says, 'U-unfortunate, I guess I'll slip away quietly...'
 
 N:1147:Kagerou
 # 「ひえー」
@@ -111,7 +111,7 @@ squeals, 'Eek!'
 
 N:1149:Yatsuhashi
 # 「わーお、こりゃ無理だー」
-says, 'Wow, I can't stand up to this!'
+says, 'Wo-ow, I can't stand up to this!'
 
 N:1150:Seija
 # 「まだだ、まだ諦めないぞ！」
