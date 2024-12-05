@@ -121,7 +121,7 @@ says, 'You smashed me up-'
 # 「もう戦いは懲り懲りです」
 says, 'I've had enough, no more, please.'
 # 「ああ、驚いて貰えない妖怪に価値なんて……。」
-says, 'Oh, what's the point of a youkai who can't surprise people?'
+sighs, 'Oh, what's the point of a youkai who can't surprise people?'
 
 N:1134:Ichirin
 # 「悔しいけど……完敗ね。この仇はきっと……」
@@ -197,7 +197,7 @@ bawls, 'I've LOOOSST!'
 
 N:1152:Raiko
 # 「あらららら降参よー」
-says, 'My, my! I concede.'
+says, 'My, my, my, my! I concede.'
 # 「道具って切ないわー」
 says, 'Poor sad tools...'
 
@@ -362,7 +362,7 @@ says, 'I wonder if you would consider joining the Keiga family?'
 
 N:1355:Miyoi
 # 「ひゃあ」
-says, 'Hi~yaa'
+sighs, 'Hi~yaa'
 
 N:1357:Mike
 # 「っく……！」
@@ -388,7 +388,7 @@ says, 'Not half bad.'
 
 N:1361:Tsukasa
 # 「ふにゅー」
-says, 'Funyuu~'
+squeals, 'Funyuu~'
 
 N:1362:Megumu
 # 「ふっふっふ　お見事」
