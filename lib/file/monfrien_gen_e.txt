@@ -95,7 +95,7 @@ says, 'Danmaku is about brains. That's common sense.'
 # 「他人の心配する位なら自分の心配したら？」
 says, 'Why don't you worry about yourself if you have time to worry about others?'
 # 「私を普通の人間と一緒にしないでよ。」
-says, 'Don't categorize me with normal humans.'
+says, 'Don't lump me in with normal humans.'
 # 「ああもう！　こんな雑魚にかまってないで先急ぐわよ！」
 says, 'For goodness' sake! There's no time to waste on small fry!'
 # 「取り敢えず、相手にしてやったら？　目の前の奴。」
@@ -131,11 +131,11 @@ N:1102:Youmu
 # 「妖怪が鍛えたこの楼観剣に斬れぬものなど、あんまり無い！ 」
 says, 'The things that my youkai-forged Roukanken cannot cut are next to none!'
 # 「夜は短いのですよ！早く敵を見つけて斬り潰すのです。」
-says, 'The night is very short! We have to find the villains quickly, and cut them into mash.'
+says, 'The night is very short! We must find the villains quickly, and cut them into mash.'
 # 「ここは何処でしょう……？」
 says, 'Where is this place...?'
 # 「実は私、怖い物苦手なんですよぉ。」
-says, 'To tell the truth, I'm not good with scary things...'
+says, 'To be honest, I'm not good with scary things...'
 # 「さあ、出て来い！そこに隠れる闇に蠢くものよ。」
 says, 'You, show yourself! You wriggling one, hiding in the darkness.'
 
@@ -151,7 +151,7 @@ says, 'The afterlife is always a lively and gorgeous place.'
 
 N:1104:Ran
 # 「今夜も、楽しい宴の準備～。」
-says, 'Fun banquet preparations again tonight~.'
+says, 'Fun party preparations again tonight~.'
 # 「紫様が作った方程式は私の力を無敵の物に変える。」
 says, 'Lady Yukari's equations will increase my power indefinitely.'
 # 「…私が貴方を式神にしてあげようか？」
@@ -161,7 +161,7 @@ N:1105:Yukari
 # 「どうも、うちの藍が迷惑をかけたようで」
 says, 'It appears my Ran has caused some nuisance.'
 # 「何でそんなにカリカリしてるのかしら？」
-says, 'Why do you look so annoyed? Are you lacking calcium?'
+says, 'Why are you gritting your teeth? Are you lacking calcium?'
 # 「あなたは気がついていない。極楽と地獄の境界が曖昧になっている事に」
 says, 'You don't yet know. The border between paradise and hell is becoming ambiguous.'
 # 「あなたは気がついていない。すでに、昼と夜の境界は私の手の内にあることに」
@@ -169,7 +169,7 @@ says, 'You don't yet know. The border between day and night is already in the pa
 # 「ちょいとお時間良いかしら？」
 says, 'May I borrow a little of your time?'
 # 「その優しい火が～♪命取られて消えていく～♪」
-croons, 'That gentle flame~, it takes your life and disappears~'
+croons, 'That gentle flame~, its life is taken and winks out~
 # 「夢遊病？　あれも私の得意技なの。」
 says, 'Sleepwalking? That's another of my specialties.'
 
@@ -223,7 +223,7 @@ says, 'This is our cute little bunny shop. Can I interest you in one?'
 
 N:1110:Udonge
 # 「ついにこの時が来たのね。」
-says, 'The time has finally come.'
+says, 'At last, the time has come.'
 # 「うーん、上の方から懐かしい風を感じるわ。」
 says, 'Hmm, I feel a nostalgic breeze coming from above.'
 # 「この先待ち受けているのが悪夢だとしても、それでも私は行くしかない。」
@@ -283,11 +283,11 @@ says, 'Anyone who dances at the whims of a festival is just a sucker.'
 # 「面白いもんいっぱい持ってるな。ちょっと見－せーろーよー。」
 says, 'You have lots of interesting stuff. Hey, let! Me! See! It!'
 # 「なんだい。今更、祭りに参加してきたって分け前やんないよ。」
-says, 'Huh? You can't join the festival this late and still expect to get a share.'
+says, 'Huh? You can't join the festival this late and still expect to get a cut.'
 
 N:1119:Aya
 # 「まあ、記事内容なんていくらでも捏造できるわね」
-says, 'Meh, I can just make up the content as much as I want.'
+says, 'Meh, I can just make up the content as I want.'
 # 「百戦錬磨の私にとってこの程度は準備運動にもなりません。」
 says, 'For a veteran like me, this isn't even a warm-up exercise.'
 # 「思ったより、記事になりそうなネタはないですね……」
@@ -387,13 +387,13 @@ says, 'A cat's a cat, but don't go mistaking me for your ordinary cat.'
 # 「死体と怨霊ならあたいにお任せ！地獄の死体運搬はお燐の猫車運送でってね。」
 says, 'Leave your corpses and your vengeful spirits to me! Shipping dead bodies to Hell, Orin's wheelbarrow transport at your service.'
 # 「怨霊は恨みだけが一人歩きした幽霊さ。こいつが憑けば人間も妖怪もこの世を怨むようになる。」
-says, 'A vengeful spirit is a ghost that came into being because of a grudge. If one possesses a human or a youkai, the possessed will begin to hold a grudge against the world.'
+explains, 'A vengeful spirit is a ghost that came into being because of a grudge. If one possesses a human or a youkai, the possessed will begin to hold a grudge against the world.'
 # 「行くんだね行くんだね！もう止めやしないよ。」
 says, 'You're going huh, you're going! I won't stop ya.'
 
 N:1130:Utsuho
 # 「私は、ある神様の力を取り込んだわ。黒い太陽、八咫烏様。この力は、太陽の力と同じ。」
-says, 'I've absorbed the power of a certain god. The Black Sun, Lord Yatagarasu. It's the same as the power of the sun.'
+says, 'I've absorbed the power of a certain god. The Black Sun, Lord Yatagarasu. The same as the power of the sun.'
 # 「貴方も私とフュージョンしましょ？」
 says, 'Won't you fuse with me?'
 # 「まだまだ暴れ足りないよ！私の中の核反応がもっと暴れろと言っているわ！」
@@ -473,11 +473,11 @@ says, 'My beast blood boils...!'
 
 N:1137:Byakuren
 # 「貴方は私の考えを支持してくれますか？」
-says, 'Do you support my thinking?'
+says, 'Do I have your support in my thinking?'
 # 「私は人間と妖怪の平等を訴え、世界に平穏をもたらすのです。」
-says, 'I want to appeal for human and youkai equality, and bring peace to the world.'
+says, 'I appeal for human and youkai equality, to bring about a peaceful world.'
 # 「ふむ。皆の心が荒んでいるわ。私が皆の道徳を取り戻しましょう」
-says, 'Hmm. Everyone's hearts have become corrupt. I must restore morality to all.'
+says, 'Hmm. Everyone's hearts have become corrupt. I will restore morality to all.'
 # 「何事も一睡の夢。南無三南無三宝。」
 says, 'All is a wink of a dream. Namusan namusanpo.'
 # 「無益な殺生はしたくない。私は人の心を救えればそれで良いのです」
@@ -665,13 +665,13 @@ N:1157:Tenshi
 # 「天界は成仏した霊が住む処。貴方も成仏してみます？」
 says, 'Heaven is a place where spirits who have achieved nirvana live. Would you like to try to attain nirvana too?'
 # 「天人はたまに地上に降りて忠言するものよね。」
-says, 'Celestials occasionally descend to the Earth to give advice.' 
+says, 'Celestials occasionally descend to the Earth to share their wisdom.' 
 # 「あー、勉強はめんどくさいなぁ。こんな昔の人の事ばっかり頭に叩き込んでもねぇ。」
 sighs, 'Ah, studying is such a chore. I can't keep cramming all this knowledge from the ancients into my head.'
 # 「ま、どっちでも良いか。続けるよ！相棒！」
 says, 'Eh, either way is fine. Let's continue! Partner!'
 # 「お前の命を狙っている奴が来たんだ。戦いの準備をしようじゃないか！」
-says, 'The one coming to take your life is here. It's time to prepare for battle!'
+says, 'The one coming to take your life has arrived. It's time to prepare for battle!'
 
 N:1158:Kokoro
 # 「スマイルスマイル！」
@@ -709,13 +709,13 @@ N:1161:Komachi
 # 「ふふふ。また面白い暇つぶしを見つけてしまった。」
 says, 'Hehehe. I've found another amusing way to kill time.'
 # 「道なんてあって無いようなもんさ」
-says, 'Paths are not really necessary.'
+says, 'A path is not really necessary.'
 # 「彼岸で、三途のタイタニックったあ、あたいの船の事さ。」
 says, 'On Higan's shore was Sanzu's Titanic. I mean my boat.'
 # 「いやいや、あたいはただのしがない船頭さ。」
 says, 'No, no, I'm just a humble boatwoman.'
 # 「さあ、まだまだこの世には楽しいことがある。 死ぬだなんて十年早い」
-says, 'Well, there are still things to enjoy in this world. It's 10 years too early for you to die.'
+says, 'Well, there are still things to enjoy in this world. You've a decade on you yet.'
 
 N:1162:Eiki
 # 「そう、貴方は少し迷惑をかけすぎる」
@@ -853,7 +853,7 @@ munches.
 
 N:1275:Doremy
 # 「さっきからずっと貴方に完全憑依しています。」
-says, 'I've been perfectly possessing you the whole time.'
+says, 'I've been perfectly possessing you this whole time.'
 # 「暴走した夢の世界の住人を監視しないとね」
 says, 'I have to monitor all the rampaging dream dwellers.'
 # 「夢の世界の貴方が愚痴ってましたよ。」
@@ -981,7 +981,7 @@ makes a loud alarm call.
 # 「あ！」
 says, 'a!'
 # 「こう見えても神社の守護神です。」
-says, 'Despite appearances, I'm the guardian god of this shrine.'
+says, 'Maybe I don't look it, but I'm the guardian god of the shrine.'
 # 「頑張ってー。影ながら応援してるわよ。」
 says, 'Good luck! I'll be cheering you on from the shadows!'
 # 「へー貴方が噂の！」
@@ -1027,7 +1027,7 @@ says, 'See it! Hear it! Speak of it! The figure of the secret god of hindrances!
 # 「幻想郷の縁起は我々、障碍の者を抜きにしては語れぬ。」
 says, 'Without we of hindrance, the origins of Gensoukyou will ever remain unwritten.'
 # 「真なる秘神の力、全て味わい尽くすが良い！」
-says, 'Savor every last drop of the true power of the secret god!'
+says, 'Savour every last drop of the true power of the secret god!'
 # 「真なる秘神の秘術をしかと見よ！」
 says, 'Behold the true mystic arts of the secret god!'
 
