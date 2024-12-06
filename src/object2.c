@@ -1804,6 +1804,8 @@ int object_similar_part(object_type *o_ptr, object_type *j_ptr)
 	/* Require identical object types */
 	if (o_ptr->k_idx != j_ptr->k_idx) return 0;
 
+	//v2.0.19 片方が固定★ならまとめられないようにする　酒の★がまとめの対象になってしまったので条件式追加
+	if (object_is_fixed_artifact(o_ptr) || object_is_fixed_artifact(j_ptr)) return 0;
 
 	/* Analyze the items */
 	switch (o_ptr->tval)
@@ -2076,7 +2078,7 @@ int object_similar_part(object_type *o_ptr, object_type *j_ptr)
 /*
  *  Determine if an item can absorb a second item.
  */
-/*:::アイテムがまとめられるか判定　詳細未読*/
+/*:::アイテムがまとめられるか判定*/
 bool object_similar(object_type *o_ptr, object_type *j_ptr)
 {
 	int total = o_ptr->number + j_ptr->number;
@@ -9737,7 +9739,8 @@ static void drain_essence(void)
 	s = "You have nothing you can extract from.";
 #endif
 
-	if (!get_item(&item, q, s, (USE_INVEN))) return;
+	//v2.0.19 床上からもエッセンス抽出できるようにする　実質袿姫専用
+	if (!get_item(&item, q, s, (USE_INVEN|USE_FLOOR))) return;
 
 	/* Get the item (in the pack) */
 	if (item >= 0)

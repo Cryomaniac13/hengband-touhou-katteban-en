@@ -2622,6 +2622,51 @@ you'll have to keep making money.'
 
 
 
+***** <Beekeeper>
+--- Beekeeper ---
+Str: 0  Int: 2 Wis: -1 Dex: 1 Con: 0 Chr: 1
+Dsm: 30(10) MDev: 36(12) MProt: 30(10)  Stl: 3(0) Srh: 24(3)
+Fighting: 48(18) Shooting: 40(12)
+Hit Dice: +3
+XP Penalty: 30
+Score: 85%
+Base max amount of blows: 4
+MPÅF C
+Follower cost coefficient: 40
+
+Magic realm aptitude:
+  Can study one realm
+  Aptitude C for all realms
+
+Skill aptitude:
+  Martial Arts  D    Shields      D      Riding      D       Dual-Wielding D
+  Throwing      C    Short Blades B      Long Blades D       Katanas       D
+  Blunt Weapons D    Staves       D      Axes        B       Spears        D
+  Polearms      D    Bows         D      Crossbows   D       Guns          E
+
+Class special abilities:
+  Learns abilities mainly related to detection and supply
+  replenishment
+
+Resistances/etc:
+  Sustain CON (20)
+  Poison resistance (30)
+
+Keine - 'There are bees in Forest of Magic that have been partially turned
+into youkai by the forest's mana. Beekeepers raise them and collect honey.
+They can refine it into mead or magical potions, and they can give their bees
+orders to fight or search for items. However, failing to communicate with them
+might cause the bees to attack you. High charisma makes the bees less likely
+to revolt. Eating honey recovers MP, but also poisons you and drains CON;
+at high enough levels, beekeepers will resist those effects.
+
+Their combat skills aren't that high, and they require multiple stats to
+function well, so early game will be tough. You can rely on abundant MP
+recovery items and fight with offensive magic, or you can rely on bees and
+fight in close combat.'
+
+
+
 ***** <Outsider>
 --- Outsider ---
 Str: -3  Int: -3 Wis:-3 Dex: -3 Con: -3 Chr: -3

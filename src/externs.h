@@ -2785,4 +2785,8 @@ extern int calc_spell_caster_level(bool apply_berserker);
 //v2.0.15
 extern int search_special_flag_mon(void);
 
+//v2.0.19
+extern void	add_honey(void);
+extern bool object_is_eatable(object_type *o_ptr);
+extern bool object_is_magic_item(object_type *o_ptr);
 

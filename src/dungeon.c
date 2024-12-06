@@ -5810,7 +5810,8 @@ static void process_world(void)
 
 	/*** Check the Time and Load ***/
 	///system アングバンドへの門・・・？
-	///sysdel
+	//ずっと昔に大学のPCで遊んでいる人を締め出すために実装された機能らしい
+#if 0
 	if (!(turn % (50*TURNS_PER_TICK)))
 	{
 		/* Check time and load */
@@ -5855,6 +5856,7 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 			}
 		}
 	}
+#endif
 
 	/*** Attempt timed autosave ***/
 	/*:::オートセーブ*/
@@ -6017,17 +6019,19 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 		}
 	}
 
-	//v1.1.86 半日に一度、月虹市場のトレードカウントをリセット
-	//v1.1.87アビリティカードの高騰度を設定してカードショップの在庫を設定
-	//EXTRAモードでは他で計算する
+	//6:00と18:00に行われる処理
+	//EXTRAモード以外
 	if (!(turn % (TURNS_PER_TICK * TOWN_DAWN / 2)) && !EXTRA_MODE)
 	{
+		//月虹市場のトレードカウントをリセット
+		//アビリティカードの高騰度を設定してカードショップの在庫を更新
 		ability_card_trade_count = 0;
 		set_abilitycard_price_rate();
 		make_ability_card_store_list();
-
 		break_market();
 
+		//v2.0.19 養蜂家の蜂蜜増加もここに追加する
+		if (p_ptr->pclass == CLASS_BEEKEEPER) add_honey();
 	}
 
 	//野良神様は日数経過で好戦度と名声変化
@@ -6070,8 +6074,9 @@ msg_print("今、アングバンドへの門が閉ざされました。");
 
 	///mod140412 月齢処理
 	///mod150121 慧音除く
+	//v2.0.19 あうんも除く
 	if((prace_is_(RACE_VAMPIRE)
-		|| (prace_is_(RACE_WARBEAST) && p_ptr->pclass != CLASS_KEINE)
+		|| (prace_is_(RACE_WARBEAST) && p_ptr->pclass != CLASS_KEINE && p_ptr->pclass != CLASS_AUNN)
 		||p_ptr->mimic_form == MIMIC_VAMPIRE)
 		&& !(turn % ((TURNS_PER_TICK * TOWN_DAWN) / 2)))
 	{
@@ -8350,6 +8355,7 @@ static void process_player(void)
 		if (p_ptr->pclass == CLASS_HINA) p_ptr->magic_num1[0] = 500;
 
 
+
 		hack_startup = FALSE;
 	}
 
@@ -9740,6 +9746,12 @@ static void dungeon(bool load_game)
 			if (p_ptr->wizard) msg_print("hatate reset");
 			p_ptr->hatate_mon_search_dungeon = 0;
 			p_ptr->hatate_mon_search_ridx = 0;
+		}
+
+		//v2.0.19 養蜂家は難易度EXTRAのときフロア移動に伴い蜂蜜を得る
+		if (EXTRA_MODE && p_ptr->pclass == CLASS_BEEKEEPER)
+		{
+			add_honey();
 		}
 
 		//v1.1.13 公転周期の罠の解除

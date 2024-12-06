@@ -138,6 +138,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 	object_type forge;
 	char desc[160];
 
+	/*
 	//移動禁止テスト
 	if (!p_ptr->tim_no_move)
 	{
@@ -146,6 +147,14 @@ static void do_cmd_wiz_hack_ben_2(void)
 	else
 	{
 		set_no_move(0);
+	}
+	*/
+
+	//千亦　カードランクMAX
+	if (p_ptr->pclass == CLASS_CHIMATA)
+	{
+		for (i = 0; i < ABILITY_CARD_LIST_LEN; i++) p_ptr->magic_num2[i] = 1;
+		return;
 	}
 
 	//尤魔　空腹で倒れる直前にする

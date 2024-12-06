@@ -1137,6 +1137,27 @@ bool do_cmd_eat_food_aux(int item)
 				break;
 			}
 
+			//v2.0.19　魔法の森の蜂蜜
+			case SV_SWEETS_HONEY:
+			{
+				msg_print(_("甘くておいしいがどこか妙な味だ...",
+                            "It's sweet and delicious, but it tastes somewhat odd..."));
+
+				player_gain_mana(damroll(10,10));
+
+				//芳香や尤魔以外は毒と耐久減少判定
+				if (p_ptr->pclass != CLASS_YUMA && p_ptr->pclass != CLASS_YOSHIKA)
+				{
+					if (!p_ptr->resist_pois && !IS_OPPOSE_POIS())
+					{
+						set_poisoned(p_ptr->poisoned + 100 + randint1(100));
+					}
+					do_dec_stat(A_CON);
+				}
+			}
+			break;
+
+
 		}
 
 		//v2.0.15 日狭美も菓子でMP回復するようにする
@@ -1566,9 +1587,8 @@ msg_print("食べ物がアゴを素通りして落ち、消えた！");
  * Hook to determine if an object is eatable
  */
 /*:::食べられるアイテムを判別する　通常の食物、一部種族の杖、バルログ、悪魔変化の死体*/
-///race item 食べられるアイテムのhook
-///mod131223 食べられるアイテム
-static bool item_tester_hook_eatable(object_type *o_ptr)
+//v2.0.19 item_tester_hook_eatableから関数名変更しexternした
+bool object_is_eatable(object_type *o_ptr)
 {
 
 	//v2.0.6 尤魔はあらゆるものを食用可能
@@ -1672,7 +1692,7 @@ void do_cmd_eat_food(void)
 	}
 
 	/* Restrict choices to food */
-	item_tester_hook = item_tester_hook_eatable;
+	item_tester_hook = object_is_eatable;
 
 	/* Get an item */
 #ifdef JP
@@ -2095,6 +2115,13 @@ static void do_cmd_quaff_potion_aux(int item , bool flag_ignore_warning)
 			if (!shion_comment_food(FALSE, NULL))
 				msg_print(_("..味はさておき、元気が出てくる気がする！", "...Taste aside, you're feeling better!"));
 			break;
+
+		case SV_ALCOHOL_MEAD:
+			msg_print(_("なんとも変わった味だ。蜂蜜をそのまま食べたほうが美味しい気がする。",
+                        "It has a very odd taste. You feel eating honey as it is would taste better."));
+
+			break;
+
 
 		default:
 			if(hoshiguma)

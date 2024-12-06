@@ -8480,3 +8480,34 @@ bool	check_transportation_trap(monster_type *m_ptr, int power)
 	return FALSE;
 
 }
+
+//—{–I‰Æ‚ª‰ñŽû‰Â”\‚È–I–¨‚ð‘‚â‚·
+//p_ptr->magic_num1[0]‚É–I–¨‚ÌŒÂ”*100‚ð‹L˜^‚·‚é
+//“ïˆÕ“xEXTRA‚Å‚Í1ƒtƒƒA~‚è‚é–ˆA‚»‚êˆÈŠO‚Å‚Í6:00‚Æ18:00‚ÉŒÄ‚Î‚ê‚é
+void	add_honey(void)
+{
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int add_num;
+
+	if (p_ptr->pclass != CLASS_BEEKEEPER)
+	{
+		msg_print(_("ERROR:—{–I‰ÆˆÈŠO‚Åadd_honey()‚ªŒÄ‚Î‚ê‚½", "ERROR: add_honey() called for non-beekeeper"));
+		return;
+	}
+
+	//—‚ÌƒŒƒxƒ‹‚Æ–£—Í‚Å¶¬”‚ª‘‰Á
+	add_num = 200 + plev * (10 + chr_adj) / 2;
+
+
+	if (EXTRA_MODE) add_num /= 2;
+	if (cheat_peek) msg_format(_("–I–¨“üŽè:%d.%02d", "Honey obtained: %d.%02d"),add_num/100,add_num%100);
+
+	p_ptr->magic_num1[0] += add_num;
+
+	//–I–¨99ŒÂ•ª‚Å‘ƒ” ‚ª–ž”t
+	if (p_ptr->magic_num1[0] > 9999)	p_ptr->magic_num1[0] = 9999;
+
+}
+
+

@@ -4098,10 +4098,13 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 24) add_flag(flgs, TR_RES_CONF);
 		if (p_ptr->lev > 34) add_flag(flgs, TR_SUST_INT);
 		if (p_ptr->lev > 34) add_flag(flgs, TR_SUST_WIS);
-
-
 		break;
 
+	case CLASS_BEEKEEPER:
+		if (p_ptr->lev > 19) add_flag(flgs, TR_SUST_CON);
+		if (p_ptr->lev > 29) add_flag(flgs, TR_RES_POIS);
+
+		break;
 
 
 	default:
@@ -6821,7 +6824,6 @@ c_put_str(TERM_L_GREEN, "能力修正", row - 1, col);
 		object_flags_known(o_ptr, flgs);
 
 		/* Initialize color based of sign of pval. */
-		///sys パラメータが10以上上がるような装備は色を変えて一の桁だけ出すようにしてみる？
 		for (stat = 0; stat < 6; stat++)
 		{
 			/* Default */
@@ -7028,6 +7030,8 @@ c_put_str(TERM_L_GREEN, "能力修正", row - 1, col);
 
 			///mod150110 橙が濡れたらパラメータダウン
 			if(p_ptr->pclass == CLASS_CHEN && p_ptr->magic_num1[0]) dummy -= 3;
+
+
 
 			/*:::Hack- 小傘の本体が呪われたらパラメータダウン*/
 			if(p_ptr->pclass == CLASS_KOGASA)

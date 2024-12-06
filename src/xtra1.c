@@ -541,6 +541,7 @@ static void prt_stat(int stat)
 #define BAR_NO_MOVE				114 //v2.0.11 ˆÚ“®‹Ö~
 #define BAR_TRANSPORTATION_TRAP	115 //v2.0.11 ˆÚ‘—‚Ìã©
 #define BAR_VOID				116 //v2.0.17 c–³‹•–³‘€ì
+#define BAR_BEES				117 //v2.0.19 —{–I‰Æ‚Ì–I
 
 //‚±‚±‚Ì’l‚Í127‚ªŒ»İ‚ÌŒÀŠE‚Å‚ ‚éB(v1.1.46‚Å95‚©‚çŠg’£)
 
@@ -677,6 +678,7 @@ static struct {
 	{ TERM_RED, "”›", "ˆÚ“®‹Ö~" },
 	{ TERM_WHITE, "‘—", "ˆÚ‘—‚Ìã©" },
 	{ TERM_L_DARK, "–³", "‹•–³‚Ì—Í" },
+	{ TERM_YELLOW, "–I", "–I‚ÌŒì‰q" },
 
 
 	{0, NULL, NULL}
@@ -808,6 +810,7 @@ static struct {
 	{ TERM_RED, "Imb", "Immob" },
 	{ TERM_WHITE, "TT", "TprtTrap" },
 	{ TERM_L_DARK, "Vd", "VoidPwr" },
+	{ TERM_YELLOW, "Bee", "BeeProt" },
 
 
 	{0, NULL, NULL}
@@ -1158,6 +1161,9 @@ static void prt_status(void)
 
 	if (p_ptr->pclass == CLASS_ZANMU && (p_ptr->tim_general[0]))
 		ADD_FLG(BAR_VOID);
+
+	if (p_ptr->pclass == CLASS_BEEKEEPER && (p_ptr->tim_general[0]))
+		ADD_FLG(BAR_BEES);
 
 
 	/* Hex spells */
@@ -6592,6 +6598,22 @@ void calc_bonuses(void)
 		if (plev > 34)p_ptr->sustain_int = TRUE;
 		if (plev > 34)p_ptr->sustain_wis = TRUE;
 		break;
+
+	case CLASS_BEEKEEPER:
+
+		if (plev > 19) p_ptr->sustain_con = TRUE;
+		if (plev > 29) p_ptr->resist_pois = TRUE;
+		//–I‚É‚æ‚éŒì‰q’†
+		if (p_ptr->tim_general[0])
+		{
+			p_ptr->to_a += 5 + plev / 2;
+			p_ptr->dis_to_a += 5 + plev / 2;
+			p_ptr->skill_srh += 5 + plev / 2;
+			p_ptr->skill_stl -= 3;
+		}
+
+		break;
+
 
 	default:
 		break;

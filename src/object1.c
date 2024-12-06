@@ -654,6 +654,9 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 	char temp[70 * 20];
 	char temp2[70 * 20];
+#ifndef JP
+	char score_value_line[70 * 20];
+#endif
 	cptr            info[128];
 	char o_name[MAX_NLEN];
 	int wid, hgt;
@@ -2403,7 +2406,6 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 #ifndef JP
     {
-        char score_value_line[70 * 20];
         sprintf(score_value_line, ("It is worth %ld score."), (long)o_ptr->score_value);
         info[i++] = score_value_line;
     }

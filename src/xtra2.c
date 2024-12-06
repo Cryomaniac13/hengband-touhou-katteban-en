@@ -2681,8 +2681,10 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 				object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_MARISA_TUBO));
 			else if(one_in_(2) && randint1(dun_level) > 30)
 				object_prep(q_ptr, lookup_kind(TV_ALCOHOL, SV_ALCOHOL_MAMUSHI));
-			else
+			else if(one_in_(2) && randint1(dun_level) > 10)
 				object_prep(q_ptr, lookup_kind(TV_FOOD, SV_FOOD_STRANGE_BEAN));
+			else
+				object_prep(q_ptr, lookup_kind(TV_ALCOHOL, SV_ALCOHOL_MEAD));
 
 			(void)drop_near(q_ptr, -1, y, x);
 		}
@@ -2832,6 +2834,42 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			(void)drop_near(q_ptr, -1, y, x);
 		}
 		break;
+
+	case MON_ANIMAL_GHOST_E://脱走カワウソ霊　1%で薄灰色の小箱
+		if (drop_chosen_item && one_in_(100))
+		{
+			q_ptr = &forge;
+			object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_GAMEBOY));
+			(void)drop_near(q_ptr, -1, y, x);
+
+		}
+		break;
+
+	case MON_SWARMBEES_1:	//蜂の群れ　蜂蜜
+	case MON_SWARMBEES_2:
+	case MON_SWARMBEES_3:
+		if (drop_chosen_item)
+		{
+
+			if (randint1(r_ptr->level) > 18)
+			{
+				q_ptr = &forge;
+				object_prep(q_ptr, lookup_kind(TV_SWEETS, SV_SWEETS_HONEY));
+				(void)drop_near(q_ptr, -1, y, x);
+			}
+		}
+		break;
+		//究極生命体カーズ　10%で赤石
+	case MON_KARS:
+		if (drop_chosen_item && one_in_(10))
+		{
+			q_ptr = &forge;
+			object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_ASIA));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+		break;
+
 
 	default:
 		if (!drop_chosen_item) break;
@@ -3500,6 +3538,10 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			chance = 100;
 			break;
 
+		case MON_KARS:
+			a_idx = ART_STONEMASK;
+			chance = 20;
+			break;
 
 
 		}

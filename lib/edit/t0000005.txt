@@ -115,6 +115,10 @@ F:b:BUILDING_1:3:0:0:0:0:NONE:35
 F:b:BUILDING_1:3
 F:y:FLOOR:3:0:577
 
+?:[AND [EQU $RACE Youkai-Doll] [EQU $QUEST35 3] ]
+F:y:FLOOR:3:0:497
+
+
 # Quest 35 finished,
 ?:[EQU $QUEST35 4]
 F:b:BUILDING_1:3

@@ -282,6 +282,14 @@ bool make_attack_normal(int m_idx)
 
 	}
 
+	//v2.0.19 —{–I‰Æ‚Ì–I‚É‚æ‚éƒJƒEƒ“ƒ^[
+	if (p_ptr->pclass == CLASS_BEEKEEPER && (p_ptr->tim_general[0]))
+	{
+		msg_print(_("–I‚½‚¿‚ª“G‚ðŒ}Œ‚‚µ‚½I", "Bees retailate against the enemy!"));
+		if (py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_ATTACK_BEE)) return TRUE;
+	}
+
+
 
 	if (p_ptr->pclass == CLASS_SEIJA && p_ptr->special_defense & NINJA_KAWARIMI)
 	{

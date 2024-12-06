@@ -946,7 +946,8 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 			break;
 		}
 	}
-	if (mult > 150) mult = 150;
+	//v2.0.19 スレイの倍率を最大16倍に変更
+	if (mult > 160) mult = 160;
 
 	/* Return the total damage */
 	return (tdam * mult / 10);
@@ -6365,7 +6366,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 
 /*:::変異部位や盾などによる追加格闘攻撃用ルーチン　*/
-static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
+static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath, int mode)
 {
 	int		num = 0, k, bonus_h, bonus_d , chance;
 
@@ -6392,7 +6393,6 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 	//bool            is_lowlevel = (r_ptr->level < (p_ptr->lev - 15));
 	bool flag_gain_exp = FALSE;
 
-	int skill_type;
 
 	//int				martial_arts_method = 0;
 	int i;
@@ -6473,6 +6473,20 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 		method[num_blow++] = select_gun_melee_mode();
 	}
 
+	//養蜂家の蜂による攻撃(カウンターと遠隔攻撃特技)のときそれ以外の格闘攻撃を全部取り消して再設定
+	if (mode == HISSATSU_ATTACK_BEE)
+	{
+		num_blow = 0;
+
+		method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 15) method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 23) method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 31) method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 39) method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 44) method[num_blow++] = MELEE_MODE_BEES;
+		if(p_ptr->stat_ind[A_CHR] + 3 > 49) method[num_blow++] = MELEE_MODE_BEES;
+	}
+
 
 	if(num_blow==0) return;
 
@@ -6495,6 +6509,10 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 		int mult = 100;
 		int mon_ac = r_ptr->ac;
 
+		int skill_type = SKILL_MARTIALARTS;
+		int skill_exp = 0;
+		int skill_bonus;
+
 		//v1.1.94
 		int		attack_effect_type = ATTACK_EFFECT_NONE; //朦朧など敵にステータス異常を付与するとき
 		int		critical_rank = 0; //クリティカルや切れ味や不意打ちなどが決まったとき増える
@@ -6506,27 +6524,49 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			mon_ac = MONSTER_DECREASED_AC(mon_ac);
 		}
 
-		/*:::経験値を得る　今の所盾以外は全て格闘*/
-		if (method[num] == MELEE_MODE_SHIELD)
+		//v2.0.19 蜂による攻撃はスキルでなくレベルのみでボーナスを得る
+		if (method[num] == MELEE_MODE_BEES)
 		{
-			skill_type = SKILL_SHIELD;
+			skill_bonus = p_ptr->lev / 2;
+			skill_exp = p_ptr->lev * 160;
 		}
-		else if(!flag_gain_exp)
+		else
 		{
-			skill_type = SKILL_MARTIALARTS;
-			flag_gain_exp = TRUE; //盾格闘は一度しか出ないがそれ以外は何度も出るので一度しか経験値を得られないようにしている
+			/*技能経験値の獲得と技能によるボーナス*/
+			if (method[num] == MELEE_MODE_SHIELD)
+			{
+				skill_type = SKILL_SHIELD;
+			}
+			else if (!flag_gain_exp)
+			{
+				skill_type = SKILL_MARTIALARTS;
+				flag_gain_exp = TRUE; //盾格闘は一度しか出ないがそれ以外は何度も出るので一度しか経験値を得られないようにしている
+			}
+			gain_skill_exp(skill_type, m_ptr);
+			skill_exp = ref_skill_exp(skill_type);
+
+			skill_bonus = p_ptr->lev / 2 * skill_exp / 8000;
+			if (heavy_armor() && method[num] != MELEE_MODE_SHIELD) skill_bonus /= 2;
+
 		}
-		gain_skill_exp(skill_type, m_ptr);
 
 		/*:::装備品などの修正を再計算する*/
-		bonus_h = ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
-		bonus_d = ((int)(adj_str_td[p_ptr->stat_ind[A_STR]]) - 128);
+
+		//蜂の攻撃は器用と腕力の代わりに知能と魅力を使う。また養蜂家の白兵技能(skill_thn)が低いので命中に多少補正する
+		if (method[num] == MELEE_MODE_BEES)
 		{
-			int tmp =  p_ptr->lev / 2 * ref_skill_exp(skill_type) / 8000;
-			if(heavy_armor() && method[num] != MELEE_MODE_SHIELD) tmp /= 2;
-			bonus_h += tmp;
-			bonus_d += tmp/2;
+			bonus_h = ((int)(adj_dex_th[p_ptr->stat_ind[A_INT]]) - 128) + p_ptr->lev;
+			bonus_d = ((int)(adj_str_td[p_ptr->stat_ind[A_CHR]]) - 128);
 		}
+		else
+		{
+			bonus_h = ((int)(adj_dex_th[p_ptr->stat_ind[A_DEX]]) - 128);
+			bonus_d = ((int)(adj_str_td[p_ptr->stat_ind[A_STR]]) - 128);
+		}
+
+		bonus_h += skill_bonus;
+		bonus_d += skill_bonus/2;
+
 		if (p_ptr->stun > 50 || p_ptr->drowning){	bonus_h -= 20;	bonus_d -= 20;	}
 		else if (p_ptr->stun){	bonus_h -= 5;	bonus_d -= 5;	}
 		if (IS_HERO()) bonus_h += 12;
@@ -6547,6 +6587,8 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			bonus_h += o_ptr->to_h/2;
 			bonus_d += o_ptr->to_d/2;
 		}
+
+
 		chance = (p_ptr->skill_thn + (bonus_h * BTH_PLUS_ADJ));
 
 		/* Test for hit */
@@ -6570,7 +6612,7 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			if ((r_ptr->flags3 & RF3_UNDEAD) || (r_ptr->flags3 & RF3_NONLIVING)) resist_stun += 66;
 			*/
 
-			max_times = ref_skill_exp(skill_type) / 2000 + 1;
+			max_times = skill_exp / 2000 + 1;
 
 			/*:::指定攻撃エフェクトから数回選定し一番高レベルなのを決定*/
 			for (times = 0; times < max_times; times++)
@@ -6860,7 +6902,7 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 				//v1.1.94 攻撃後の朦朧付与などをここで行う
 				else
 				{
-					apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,FALSE);
+					apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, skill_exp, effect_turns,FALSE);
 				}
             }
 
@@ -6947,6 +6989,9 @@ static void py_attack_aux2(int y, int x, bool *fear, bool *mdeath)
 			if (k > 0) anger_monster(m_ptr);
 
 			touch_zap_player(m_ptr);
+
+			if(mode != HISSATSU_ATTACK_BEE)
+				touch_zap_player(m_ptr);
 
 			/* Confusion attack */
 			/*:::混乱の手処理*/
@@ -7585,12 +7630,14 @@ bool py_attack(int y, int x, int mode)
 
 		if(cheat_xtra) msg_format("Energy_use:%d",energy_use);
 	}
-	else if(mode == HISSATSU_GION || mode == HISSATSU_DOUBLESCORE || mode == HISSATSU_COUNTER_SPEAR)
+	else if(mode == HISSATSU_GION || mode == HISSATSU_DOUBLESCORE || mode == HISSATSU_COUNTER_SPEAR || mode == HISSATSU_ATTACK_BEE)
 	{
 		; //カウンター系の攻撃は行動消費なし
 	}
 	else
+    {
 		energy_use = 100;
+    }
 
 	if(IS_METAMORPHOSIS && r_info[MON_EXTRA_FIELD].flags1 & RF1_NEVER_BLOW)
 	{
@@ -7601,7 +7648,9 @@ bool py_attack(int y, int x, int mode)
 	/*:::両手が武器以外で塞がっており攻撃用変異も持ってない場合、攻撃できない*/
 	///sys 両手がふさがってると攻撃できない処理　追加格闘の1～2回くらい出てもいいかもしれない
 	if (!p_ptr->migite && !p_ptr->hidarite &&
-	    !(p_ptr->muta2 & (MUT2_HORNS | MUT2_BIGHORN | MUT2_HARDHEAD | MUT2_BIGTAIL)))
+	    !(p_ptr->muta2 & (MUT2_HORNS | MUT2_BIGHORN | MUT2_HARDHEAD | MUT2_BIGTAIL)) &&
+		mode != HISSATSU_ATTACK_BEE
+		)
 	{
 #ifdef JP
 		msg_format("%s攻撃できない。", (empty_hands(FALSE) == EMPTY_HAND_NONE) ? "両手がふさがって" : "");
@@ -7630,7 +7679,7 @@ bool py_attack(int y, int x, int mode)
 		health_track(c_ptr->m_idx);
 	}
 
-	//v2.0.9 美宵特集格闘
+	//v2.0.9 美宵特殊格闘
 	if (flag_miyoi_serve_alcohol)
 	{
 		int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
@@ -7741,7 +7790,7 @@ bool py_attack(int y, int x, int mode)
 
 
 	/* Handle player fear */
-	if (p_ptr->afraid && mode != HISSATSU_EXCLAW && mode != HISSATSU_YOSHIKA && mode != HISSATSU_GION && !alice_doll_attack && mode != HISSATSU_DOUBLESCORE
+	if (p_ptr->afraid && mode != HISSATSU_EXCLAW && mode != HISSATSU_YOSHIKA && mode != HISSATSU_GION && !alice_doll_attack && mode != HISSATSU_DOUBLESCORE && mode != HISSATSU_ATTACK_BEE
 		|| p_ptr->pclass == CLASS_KOMACHI && m_ptr->r_idx == MON_EIKI)
 	{
 		/* Message */
@@ -7869,6 +7918,11 @@ bool py_attack(int y, int x, int mode)
 		if (p_ptr->hidarite && !mdeath && inventory[INVEN_RARM].tval == TV_KNIFE)
 			py_attack_aux(y, x, &fear, &mdeath, 1, mode);
 	}
+	//養蜂家の蜂によるカウンター攻撃
+	else if (mode == HISSATSU_ATTACK_BEE)
+	{
+		py_attack_aux2(y, x, &fear, &mdeath,mode);
+	}
 	else
 	{
 		if (p_ptr->migite)
@@ -7883,7 +7937,7 @@ bool py_attack(int y, int x, int mode)
 	//ここに条件追加したらdisplay_player_various()の「+α」表示条件式にも追加する
 	if(!mdeath && !(IS_METAMORPHOSIS) && !mode && !(mimic_info[p_ptr->mimic_form].MIMIC_FLAGS & MIMIC_NO_EXATACK)
 		&& p_ptr->pclass != CLASS_3_FAIRIES )
-		py_attack_aux2(y,x,&fear,&mdeath);
+		py_attack_aux2(y,x,&fear,&mdeath,mode);
 
 	/* Mutations which yield extra 'natural' attacks */
 	///sys 変異部位攻撃　ここの内容は↑のpy_attack_aux2()に移した

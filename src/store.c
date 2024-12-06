@@ -2252,7 +2252,16 @@ static bool store_object_similar(object_type *o_ptr, object_type *j_ptr)
 	if (o_ptr->name2 != j_ptr->name2) return (0);
 
 	/* Artifacts don't stack! */
-	if (object_is_artifact(o_ptr) || object_is_artifact(j_ptr)) return (0);
+	//v2.0.19 矢、ボルト、針のみは☆でも累積可能にする
+	if (object_is_artifact(o_ptr) || object_is_artifact(j_ptr))
+	{
+		if (!object_is_needle_arrow_bolt(o_ptr)) return 0;
+		if (object_is_fixed_artifact(o_ptr) || object_is_fixed_artifact(j_ptr))	return 0;
+
+		//☆名が同じなら同一視する。アイテムフラグと殺戮値も他でチェックされるので多分衝突はないだろう
+		if (o_ptr->art_name != j_ptr->art_name) return 0;
+
+	}
 
 	/* Hack -- Identical art_flags! */
 	for (i = 0; i < TR_FLAG_SIZE; i++)
@@ -5649,6 +5658,9 @@ static void store_sell(void)
 
 			/* Identify it */
 			identify_item(o_ptr);
+			//v2.0.19 *鑑定*済にする
+			o_ptr->ident |= (IDENT_MENTAL);
+
 
 			/* Get local object */
 			q_ptr = &forge;

@@ -778,7 +778,8 @@ s16b mult_hissatsu(int mult, u32b *flgs, monster_type *m_ptr, int mode)
 		else if (mult < 60) mult = MIN(60, mult+30);
 	}
 
-	if (mult > 150) mult = 150;
+	//v2.0.19 ƒXƒŒƒCÅ‘å”{—¦‚ð16”{‚É•ÏX
+	if (mult > 160) mult = 160;
 
 	return mult;
 }

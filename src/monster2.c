@@ -1208,6 +1208,12 @@ static bool summon_specific_aux(int r_idx)
 			break;
 		}
 
+		case SUMMON_BEES:
+		{
+			okay = (r_idx >= MON_SWARMBEES_1 && r_idx <= MON_SWARMBEES_3);
+			break;
+		}
+
 
 	}
 
@@ -4985,10 +4991,6 @@ msg_print("守りのルーンが壊れた！");
 
 
 
-
-
-
-
 	/*:::ユニークとナズグルは怪しい影にならない・・上のほうのルーチンでも似た事やった気がするが。*/
 	if ((r_ptr->flags7 & RF7_UNIQUE2) ||(r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_NAZGUL) || (r_ptr->level < 10)) mode &= ~PM_KAGE;
 
@@ -5045,6 +5047,11 @@ msg_print("守りのルーンが壊れた！");
 		m_ptr->mflag |= MFLAG_SPECIAL;
 	}
 
+	//v2.0.19 クローンで召喚するモード
+	if (mode & PM_CLONE)
+	{
+		m_ptr->smart |= SM_CLONED;
+	}
 
 
 	/*::: -Mega Hack- 狐狸戦争のときは選択した陣営に合わせて友好度設定 仮に狐=秩序、狸=混沌陣営にしておく。*/

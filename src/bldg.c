@@ -2066,6 +2066,8 @@ struct marisa_store_type marisa_wants_table[] =
 
 	{ TV_SOUVENIR,SV_SOUVENIR_MOON_ORB ,300 },
 
+	{ TV_SWEETS,SV_SWEETS_HONEY ,30 },
+
 	{0,0,0}//終端用ダミー
 };
 
@@ -13939,11 +13941,17 @@ static void kaguya_quest(void)
 		int tmp,i;
 		quest_type      *q_ptr;
 
+		//v2.0.19 難易度NORMALで紫打倒後に領域に行けてしまうのでフラグ処理を見直す
+		bool flag_enter_serpen = FALSE;
+
+		if (quest[QUEST_TAISAI].status == QUEST_STATUS_FINISHED)
+			flag_enter_serpen = TRUE;
+
 		q_ptr = &quest[QUEST_SERPENT];
 
 		if(q_ptr->status > QUEST_STATUS_UNTAKEN) return;
 
-		if(!p_ptr->total_winner)
+		if(!flag_enter_serpen)
 		{
 			if(p_ptr->pclass == CLASS_EIRIN)
 				msg_format(_("輝夜「楽しみね永琳！珍しいものが沢山見られそうだわ。」",

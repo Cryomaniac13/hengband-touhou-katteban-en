@@ -6682,7 +6682,7 @@ const player_class class_info[MAX_CLASS] =
         "Mizuchi",
 #endif
 		{ -3, 2, 1, 0, -2, 2 },
-		20, 30, 35, 4, 16, 20, 35, 40,
+		20, 36, 35, 4, 16, 20, 35, 40,
 		12, 12, 12, 0,  3,  5, 12, 15,
 		2, 30, 40
 
@@ -6701,6 +6701,33 @@ const player_class class_info[MAX_CLASS] =
 				,MON_TSUKASA
 	},
 
+	{
+#ifdef JP
+		"—{–I‰Æ",
+		"—{–I‰Æ",
+		"Beekeeper",
+#else
+        "Beekeeper",
+        "Beekeeper",
+#endif
+		{ 0, 2, -1, 1, 0, 1 },
+		30, 36, 30, 3, 24, 24, 48, 40,
+		10, 12, 10, 0,  3,  4, 18, 12,
+		3, 30, 40
+
+		//’Ç‰Á’lb’è
+		,{ 1,4,4,4,4,4,4,4,4,4,4,4,4,0,0,4 }
+		,A_INT
+		,4,2,90,
+		{ 2,2,2,2,3,0,0,0,0,0
+		,4,2,2,2,3,4,2,2,2,2
+		,1 }
+		,85,3,3,3,
+		FALSE,FALSE,FALSE
+		,TRUE
+		,3
+		,0 //not unique;
+	},
 
 
 };
@@ -12539,6 +12566,21 @@ const martial_arts_new ma_blows_new[] =
 	{ _("%s‚ğO‚Â‚ÌŠ{‚ÅŠš‚ñ‚ÅŠš‚ñ‚ÅŠš‚İ‚Ü‚­‚Á‚½I",
         "You keep chomping and chomping and chomping on %s with your three jaws!"),   MELEE_MODE_ENOKO,47, 40, 12, 12, MELEE_DELAY ,12 },
 
+
+	//v2.0.19 —{–I‰Æ‚Ì–I
+	{ _("–I‚½‚¿‚ªˆĞŠd“I‚È‰H‰¹‚ğ—§‚Ä‚½B",
+        "Your bees buzz menacingly."),			MELEE_MODE_BEES, 1,  0, 1, 1, 0 ,1 },
+	{ _("¬‚³‚È–I‚ª%s‚ğh‚µ‚½B",
+        "A small bee stings %s."),				MELEE_MODE_BEES,10,  0, 2, 8, MELEE_POIS ,1 },
+	{ _("–I‚ÌŒQ‚ê‚ª%s‚ÉŒQ‚ª‚Á‚½B",
+        "A swarm of bees engulfs %s."),			MELEE_MODE_BEES,20, 10, 3, 8, MELEE_POIS ,3 },
+	{ _("–³”‚Ì–I‚ª%s‚ğ‰Ÿ‚µ•ï‚ñ‚¾I",
+        "Countless bees envelop %s!"),			MELEE_MODE_BEES,28, 15, 4, 8, MELEE_POIS ,4 },
+	{ _("–I‚½‚¿‚ª%s‚ÉŸX‚É“Åj‚ğ“Ë‚«—§‚Ä‚½I",
+        "Bees stab %s over and over with their poisoned stingers!"),	MELEE_MODE_BEES,35, 25, 7, 8, MELEE_POIS ,6 },
+	{ _("—d‰ö–I‚Ì‘åŒQ‚ª%s‚ğ“Û‚İ‚ñ‚¾I",
+        "A large swarm of youkai bees swallows %s!"),			MELEE_MODE_BEES,43, 35, 10,10, MELEE_DEC_ATK ,8 },
+
 	{ _("I’[—pdummy", "terminator dummy"),0,0,0,1,1,0}
 };
 
@@ -14769,6 +14811,9 @@ const drug_material_type drug_material_table[] =
 	{ TV_SOUVENIR,SV_SOUVENIR_KODOKUZARA,30000,
 	{ 0,0,0,0,1000,-1000,1000,0 } },
 
+	//–I–¨
+	{ TV_SWEETS,SV_SWEETS_HONEY ,500,
+	{ 0,0,0,0,200,200,300,300 } },
 
 	{0,0,0,{0,0,0,0,0,0,0,0}} //I’[—pƒ_ƒ~[
 };

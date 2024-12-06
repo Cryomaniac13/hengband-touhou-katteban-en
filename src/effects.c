@@ -112,9 +112,9 @@ void set_action(int typ)
 			case ACTION_HAYAGAKE:
 			{
 #ifdef JP
-				msg_print("足が重くなった。");
+				msg_print("あなたは轟音を立てて停止した！");
 #else
-				msg_print("You are no longer walking extremely fast.");
+				msg_print("You come to a halt!");
 #endif
 				energy_use = 100;
 				break;
@@ -175,9 +175,9 @@ void set_action(int typ)
 		case ACTION_HAYAGAKE:
 		{
 #ifdef JP
-			msg_print("足が羽のように軽くなった。");
+			msg_print("あなたは猛然と駆け出した！");
 #else
-			msg_print("You begin to walk extremely fast.");
+			msg_print("You start running at an intense speed!");
 #endif
 			break;
 		}
@@ -9019,6 +9019,12 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 				msg_format(_("あなたは無いはずのものに対し不思議な力を行使した。",
                             "You use a mysterious power over that which does not exist."));
 			}
+			else if (p_ptr->pclass == CLASS_BEEKEEPER)
+			{
+				msg_format(_("あなたは大量の蜂に護衛と警戒を命じた。",
+                            "You order a large amount of bees to defend you and keep watch."));
+			}
+
 			else
 			{
 				msg_format(_("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義", "ERROR: tim_general[%d] is undefined"), ind);
@@ -9319,6 +9325,11 @@ bool set_tim_general(int v, bool do_dec, int ind, int num)
 			{
 				msg_format(_("力の影響が止まった。", "Your power is no longer in effect."));
 			}
+			else if (p_ptr->pclass == CLASS_BEEKEEPER)
+			{
+				msg_format(_("あなたの身を守る蜂がいなくなった。", "Bees no longer protect you."));
+			}
+
 			else
 			{
 				msg_format(_("ERROR:tim_general[%d]が定義されていない呼ばれ方をした、もしくはメッセージが未定義", "ERROR: tim_general[%d] is undefined"), ind);

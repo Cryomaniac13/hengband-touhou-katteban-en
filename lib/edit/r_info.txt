@@ -27436,6 +27436,74 @@ D:$It takes shape as a byproduct of its previous information gathering.
 D:外界から送り込まれた情報収集用AIだ。これはすでに情報収集を済ませた残滓のようだ。
 
 
+N:1391:『脱獄した動物霊(鬼傑組)』
+E:Animal Ghost Escapee (Kiketsu Family)
+G:G:G
+I:120:10d30:50:70:10
+W:20:2:4:600:0:0
+B:BITE:LOSE_STR:3d6
+B:TOUCH:EXP_40:2d8
+F:HURT_HOLY
+F:UNIQUE | FORCE_MAXHP
+F:COLD_BLOOD | STAY_AT_HOME2
+F:UNDEAD | ANIMAL | CAN_FLY | CAN_SWIM | ONLY_ITEM | DROP_2D2
+F:IM_COLD | IM_POIS | RES_NETH | RES_DARK
+F:NO_SLEEP | NO_CONF | GEN_KWAI| SMART | FRIENDLY
+S:1_IN_3
+S:DANMAKU | CAUSE_3 | DRAIN_MANA | HOLD | BLIND | CONF | BLINK | SHRIEK
+D:畜生界の巨大組織「鬼傑組」から脱走してきたカワウソ霊だ。
+D:地上を満喫しつつも古巣からの追っ手に怯えているようだ。
+
+N:1392:蜂の群れ
+E:Bee swarm
+G:I:y
+I:110:2d100:30:75:0
+W:12:1:3:80:600:1393
+B:STING:POISON:1d3
+B:STING:POISON:1d3
+B:STING:POISON:1d3
+B:STING:POISON:1d3
+F:WEIRD_MIND | FRIENDS | CAN_FLY | WILD_WOOD | RAND_50 | STAY_AT_HOME1
+F:HURT_FIRE
+F:NO_FEAR
+F:ANIMAL
+D:$A swarm of bees living in the Forest of Magic. It is said they have strong
+D:$sense of loyalty - harm one of them and the swarm will come after you.
+D:魔法の森に棲む蜂の群れだ。蜂は君臣の義を持つとされ、一匹を傷つけたら一群が報復に来るという。
+
+N:1393:魔法蜂の群れ
+E:Magic bee swarm
+G:I:o
+I:115:5d100:50:90:0
+W:24:2:3:240:3000:1394
+B:STING:POISON:2d4
+B:STING:POISON:2d4
+B:STING:POISON:2d4
+B:STING:DR_MANA:4d6
+F:WEIRD_MIND | FRIENDS | CAN_FLY | WILD_WOOD | ONLY_ITEM | DROP_90 | RAND_25 | STAY_AT_HOME1
+F:IM_POIS | HURT_FIRE
+F:NO_FEAR
+F:ANIMAL
+D:$A swarm of bees that have acquired intelligence through the forest's mana.
+D:$They understand human language and are capable of simple communication.
+D:魔法の森の魔力で知性を獲得した蜂の群れだ。人語を理解し簡単なコミュニケーションがとれる。
+
+N:1394:妖怪蜂の群れ
+E:Youkai bee swarm
+G:I:r
+I:120:8d100:80:120:0
+W:36:3:3:720:0:0
+B:STING:POISON:3d6
+B:STING:POISON:3d6
+B:STING:LOSE_STR:3d6
+B:STING:DR_MANA:6d8
+F:WEIRD_MIND | FRIENDS | CAN_FLY | WILD_WOOD | ONLY_ITEM | DROP_1D2 | STAY_AT_HOME1
+F:IM_POIS | HURT_FIRE | HURT_HOLY
+F:ANIMAL | KWAI
+F:NO_FEAR
+D:$A massive swarm of sapient youkai bees. They have gained in ferocity along
+D:$with intelligence, and won't be easily tamed.
+D:意思を持つ妖怪蜂たちの巨大な群体だ。知性とともに凶暴性も増しており容易く飼い慣らせる相手ではない。
 
 
 ###注意：モンスターを追加したときdefines.hのMON_IDX_MAXを増やさないと音楽再生でバグる###

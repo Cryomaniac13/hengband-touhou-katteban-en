@@ -1731,6 +1731,13 @@ void do_cmd_cast(void)
 		o_ptr = &o_list[0 - item];
 	}
 
+	//v2.0.19 幽々子「西行寺無余涅槃」中に魔法が使える不具合の修正
+	//元々剣術家はここに来ないので無想の型を取り消す処理が用意されていなかった
+	if (p_ptr->special_defense & (KATA_MUSOU))
+	{
+		set_action(ACTION_NONE);
+	}
+
 	//v1.1.36 魔法書リピートバグ対応 'n'でリピート中に魔法書のk_idxが前回と違っていたらもう一度探す。
 	//弥縫策極まるが他にスマートなやり方を思いつかない。
 	//魔法書がなくなっている場合再選択から始めるべきかもしれないがまあ中断でも問題ないだろう。
@@ -2566,6 +2573,8 @@ int calculate_upkeep(void)
 			else if(p_ptr->pclass == CLASS_HECATIA && (r_ptr->flags3 & RF3_UNDEAD)) tmp_lev /= 4;
 			else if(p_ptr->pclass == CLASS_HECATIA && (r_ptr->flags3 & RF3_ANG_CHAOS)) tmp_lev /= 2;
 
+			//養蜂家は蜂のコストが低い
+			if (p_ptr->pclass == CLASS_BEEKEEPER && (m_ptr->r_idx == MON_SWARMBEES_1 || m_ptr->r_idx == MON_SWARMBEES_2 || m_ptr->r_idx == MON_SWARMBEES_3)) tmp_lev /= 2;
 
 
 

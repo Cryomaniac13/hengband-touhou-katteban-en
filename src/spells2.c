@@ -3962,6 +3962,8 @@ msg_print("アイテムの存在を感じとった！");
 }
 
 
+
+
 /*
  * Detect all "magic" objects on the current panel.
  *
@@ -3972,7 +3974,6 @@ msg_print("アイテムの存在を感じとった！");
  * It can probably be argued that this function is now too powerful.
  */
 /*:::魔法感知*/
-///item TVAL 魔法感知
 bool detect_objects_magic(int range)
 {
 	int i, y, x, tv;
@@ -3984,6 +3985,7 @@ bool detect_objects_magic(int range)
 	/* Scan all objects */
 	for (i = 1; i < o_max; i++)
 	{
+
 		object_type *o_ptr = &o_list[i];
 
 		/* Skip dead objects */
@@ -3992,6 +3994,9 @@ bool detect_objects_magic(int range)
 		/* Skip held objects */
 		if (o_ptr->held_m_idx) continue;
 
+		//v2.0.19 魔法アイテムの判定を別関数に括り出し
+		if (!object_is_magic_item(o_ptr)) continue;
+
 		/* Location */
 		y = o_ptr->iy;
 		x = o_ptr->ix;
@@ -3999,43 +4004,14 @@ bool detect_objects_magic(int range)
 		/* Only detect nearby objects */
 		if (distance(py, px, y, x) > range) continue;
 
-		/* Examine the tval */
-		tv = o_ptr->tval;
-		///item 「魔法のかかったアイテム」のTVAL指定
-		/* Artifacts, misc magic items, or enchanted wearables */
-		if (object_is_artifact(o_ptr) ||
-			object_is_ego(o_ptr) ||
-		    (tv == TV_WHISTLE) ||
-		    (tv == TV_AMULET) ||
-			(tv == TV_RING) ||
-		    (tv == TV_STAFF) ||
-			(tv == TV_WAND) ||
-			(tv == TV_ROD) ||
-		    (tv == TV_SCROLL) ||
-			(tv == TV_POTION) ||
-		    (tv == TV_BOOK_ELEMENT) ||
-			(tv == TV_BOOK_FORESEE) ||
-		    (tv == TV_BOOK_ENCHANT) ||
-			(tv == TV_BOOK_SUMMONS) ||
-		    (tv == TV_BOOK_MYSTIC) ||
-		    (tv == TV_BOOK_LIFE) ||
-			(tv == TV_BOOK_PUNISH) ||
-			(tv == TV_BOOK_NATURE) ||
-			(tv == TV_BOOK_TRANSFORM) ||
-			(tv == TV_BOOK_DARKNESS) ||
-			(tv == TV_BOOK_NECROMANCY) ||
-			(tv == TV_BOOK_CHAOS) ||
-		    ((o_ptr->to_a > 0) || (o_ptr->to_h + o_ptr->to_d > 0)))
-		{
-			/* Memorize the item */
-			o_ptr->marked |= OM_FOUND;
+		/* Memorize the item */
+		o_ptr->marked |= OM_FOUND;
 
-			/* Redraw */
-			lite_spot(y, x);
+		/* Redraw */
+		lite_spot(y, x);
 
-			/* Detect */
-			detect = TRUE;
-		}
+		/* Detect */
+		detect = TRUE;
 	}
 
 	/* Describe */

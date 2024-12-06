@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 18
+#define H_VER_PATCH 19
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1324,9 +1324,11 @@
 #define CLASS_ZANMU				154
 #define CLASS_MIZUCHI			155
 
+#define CLASS_BEEKEEPER			156
+
 /*Maximum number of player "class" types (see "table.c", etc)*/
-/*:::class_info[]の項目数 CLASS_**の最終+1　キャラメイク時のクラス数はbirth.cのMAX_CLASS_CHOICEなので注意*/
-#define MAX_CLASS            156
+/*:::class_info[]の項目数 CLASS_**の最終+1*/
+#define MAX_CLASS            157
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
 //v2.0.2 典の「寄生」も基本的に同じ扱いにする
@@ -3493,6 +3495,7 @@
 #define SV_ALCOHOL_GEIDON	32
 #define SV_ALCOHOL_DOBUROKU	33
 #define SV_ALCOHOL_ONITUBUSHI 34
+#define SV_ALCOHOL_MEAD 35
 
 
 
@@ -3506,6 +3509,8 @@
 #define SV_SWEETS_DANGO				4
 #define SV_SWEETS_PEACH				5
 #define SV_SWEETS_MANJYU			6
+#define SV_SWEETS_HONEY				7 //ハチミツ
+
 //新しく珍しいのを追加したらgrassroots_trading_cards()の尤魔のところに処理追加
 
 
@@ -3860,7 +3865,7 @@
 #define PM_ALLOW_SP_UNIQUE	0x00002000 //クエストフロアにもランダムユニークなどの特殊ユニークを召喚する
 #define PM_FORCE_ENEMY		0x00004000 //v1.1.64 友好設定の敵でも敵として呼ばれる。友好フラグの敵の救援召喚など
 #define PM_SET_MFLAG_SP		0x00008000	//呼び出したモンスターにMFLAG_SPECIAL(職業ごとに役割の違う特殊フラグ)を立てる
-
+#define PM_CLONE			0x00010000 //cloneフラグを立てて呼び出す
 
 /* Bit flags for monster_desc() */
 #define MD_OBJECTIVE      0x00000001 /* Objective (or Reflexive) */
@@ -4091,6 +4096,7 @@
 #define SUMMON_ONLY_GOLD	105
 #define SUMMON_TENGU_MINION	106
 #define SUMMON_MONKEYS		107
+#define SUMMON_BEES			108
 
 
 
@@ -6993,7 +6999,7 @@ extern int PlayerUID;　
 #define MON_G_ONRYOU	1199
 #define MON_ONRYOU	1200
 
-
+#define MON_KARS	1201
 
 #define MON_MOZGUS	1202
 #define MON_MOZGUS2	1203
@@ -7177,7 +7183,13 @@ extern int PlayerUID;　
 #define MON_HISAMI			1388
 #define MON_ZANMU			1389
 
-#define MON_IDX_MAX			1391	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_ANIMAL_GHOST_E	1391 //東方酔蝶華に出た脱走カワウソ動物霊
+
+#define MON_SWARMBEES_1		1392
+#define MON_SWARMBEES_2		1393
+#define MON_SWARMBEES_3		1394
+
+#define MON_IDX_MAX			1395	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -7279,6 +7291,9 @@ extern int PlayerUID;　
 
 #define HISSATSU_TRIANGLE	31 //入身のあと離脱
 #define HISSATSU_COUNTER_SPEAR 32 //槍技能ボーナス　敵の攻撃時に一撃だけカウンター
+#define HISSATSU_ATTACK_BEE	33 //養蜂家の蜂　追加格闘のみで攻撃する
+
+
 #define HISSATSU_KAPPA  40
 
 #define HISSATSU_LONGARM  41
@@ -7894,6 +7909,7 @@ extern int PlayerUID;　
 #define MELEE_MODE_JYOON_3		105 //v1.1.92 女苑専用性格用
 #define MELEE_MODE_AUNN_2		106 //v2.0.11 あうん追加攻撃用
 #define MELEE_MODE_ENOKO		107 //v2.0.12 慧ノ子
+#define MELEE_MODE_BEES			108 //v2.0.19 養蜂家
 
 /*:::格闘効果の特殊効果分類*/
 #define MELEE_STUN				1	//朦朧

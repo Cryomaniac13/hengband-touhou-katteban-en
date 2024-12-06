@@ -46,6 +46,287 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
 
 
 
+//v2.0.19 養蜂家
+//p_ptr->magic_num1[0]に生成可能な蜂蜜数(*100)を記録
+class_power_type class_power_beekeeper[] =
+{
+
+	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,("蜂蜜採取", "Collect Honey"),
+	_("アイテム「蜂蜜」を生成する。生成できる量は時間経過に伴い回復する。難易度EXTRAではフロア移動で回復する。蜂蜜を食べると満腹度とMPが回復するが耐性がないと体調を崩してしまう。",
+	"Creates a 'Honey' item. Amount of honey you can get increases as time passes. On Extra difficulty level, it increases when you enter a new dungeon level. Eating honey reduces hunger and restores MP, but it deteriorates your health if you're not resistant.") },
+
+	{ 5,5,20,FALSE,FALSE,A_INT,0,0,_("食料探索", "Search for Food"),
+	_("フロアに落ちている食べられるアイテムを探す。アイテムの存在と大まかな距離を知ることができる。",
+    "Searches for edible items lying on the floor. Gives a rough estimate of distance.")},
+
+	{ 10,20,30,FALSE,FALSE,A_INT,0,0,_("蜂蜜酒製造", "Create Mead"),
+	_("蜂蜜2つを消費し「蜂蜜酒」を生成する。売ると多少の金になる。高レベルになると「黄金の蜂蜜酒」ができることがある。",
+	"Spends 2 units of honey to create 'Mead'. You can sell it for a decent price. If your level is high enough, you might create 'Golden Mead'.") },
+
+	{ 15,10,30,FALSE,FALSE,A_CHR,0,0,_("蜂を呼ぶ", "Call Bees"),
+	_("友好的な蜂の群れを召喚する。魅力が高いと呼び出せる量が増える。レベル40以降は配下として召喚する。",
+    "Summons a swarm of friendly bees. The higher your charisma is, the more bees will be summoned. At level 40, you summon them as your followers.")},
+
+	{ 20,15,35,FALSE,FALSE,A_INT,0,0,_("魔力探知", "Detect Magic"),
+	_("フロアに落ちている魔力を帯びたアイテムを探す。アイテムの存在と大まかな距離を知ることができる。装飾品、巻物、薬、杖、魔法棒、ロッド、カード、魔法のかかった武具が該当する。",
+	"Searches for magical items lying on the floor. Gives a rough estimate of distance. Detects accessories, scrolls, potions, staves, wands, rods, cards and enchanted equipment.") },
+
+	{ 25,20,40,FALSE,FALSE,A_CHR,0,4,_("攻撃命令", "Attack Order"),
+	_("ターゲットしたモンスターに蜂が攻撃する。攻撃の威力は知能と魅力で決まり、装備品の修正値の影響も受ける。",
+    "Orders bees to attack target monster. Attack power depends on your intelligence and charisma, and is influenced by your equipment bonuses as well.")},
+
+	{ 30,30,50,FALSE,FALSE,A_INT,0,0,_("偵察命令", "Scouting Order"),
+	_("周辺の地形とモンスターを感知する。",
+    "Maps nearby area and detects monsters.")},
+
+	{ 35,40,60,FALSE,FALSE,A_CHR,0,0,_("護衛命令", "Defense Order"),
+	_("一時的にACと探索能力が上昇し、さらに隣接攻撃を受けた時に蜂が反撃するようになる。隠密能力が低下する。",
+	"Temporarily raises your AC and searching skill, and bees will retailate against melee attacks you receive. Lowers your stealth.") },
+
+	{ 40,80,80,FALSE,TRUE,A_INT,0,0,_("魔法薬製造", "Create Magic Potion"),
+	_("蜂蜜5つを消費し「魔力復活の薬」を生成する。",
+	"Spends 5 units of honey to create a Potion of Restore Mana.") },
+
+	{ 45,50,70,FALSE,TRUE,A_INT,0,0,_("知覚共有", "Shared Perception"),
+	_("一定時間、周囲の地形・アイテム・モンスターを感知し続けるようになる。",
+	"Temporarily keeps detecting surrounding area layout, items, and monsters.") },
+
+	{ 50,100,75,FALSE,FALSE,A_CHR,0,0,_("全軍突撃命令", "All-Out Assault Order"),
+	_("視界内の全てのモンスターに蜂が攻撃する。",
+	"Orders bees to attack all monsters in sight.") },
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+
+cptr do_cmd_class_power_aux_beekeeper(int num, bool only_info)
+{
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int dir;
+
+	switch (num)
+	{
+	case 0://蜂蜜採取
+	{
+		int prod_num = p_ptr->magic_num1[0] / 100;
+
+		object_type forge, *q_ptr = &forge;
+		if (only_info) return format(_("採取可能量:%d", "amount: %d"), prod_num);
+
+		if (!prod_num)
+		{
+			msg_print(_("まだ蜂蜜が集まっていない。", "There's no honey gathered yet."));
+			return NULL;
+		}
+
+		msg_print(_("蜂たちの集めた蜂蜜を回収した。", "You collect honey your bees have gathered."));
+		object_prep(q_ptr, lookup_kind(TV_SWEETS, SV_SWEETS_HONEY));
+
+		q_ptr->number = prod_num;//99を超えないようadd_hohey()で処理している
+		p_ptr->magic_num1[0] = 0;
+
+		drop_near(q_ptr, -1, py, px);
+		break;
+	}
+
+	case 1:
+	{
+		if (only_info) return format("");
+		msg_print(_("あなたは蜂たちに食料の探索を命じた。", "You order bees to search for food."));
+		search_specific_object(8);
+		break;
+	}
+
+	case 2:	//蜂蜜酒製造
+	case 8: //魔力復活薬生成
+	{
+		object_type forge;
+		object_type *q_ptr = &forge;
+		int need_num;
+		int item_slot = -1;
+		int i;
+		int tv, sv;
+
+		if (num == 2) need_num = 2;
+		else 	need_num = 5;
+
+		if (only_info) return format("");
+
+		//必要な蜂蜜があるかどうか確認。銘で分けるなどして複数の蜂蜜がインベントリにあることは考慮しない。
+		for (i = 0; i<INVEN_PACK; i++)
+		{
+			object_type *o_ptr = &inventory[i];
+			if (o_ptr->tval != TV_SWEETS) continue;
+			if (o_ptr->sval != SV_SWEETS_HONEY) continue;
+			if (o_ptr->number < need_num) continue;
+
+			item_slot = i;
+			break;
+		}
+
+		if (item_slot < 0)
+		{
+			msg_print(_("必要なだけの蜂蜜がない。", "You don't have enough honey."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは醸造器具を取り出した...", "You take out your brewing equipment..."));
+
+		inven_item_increase(item_slot, -(need_num));
+		inven_item_describe(item_slot);
+		inven_item_optimize(item_slot);
+
+		//蜂蜜酒生成のとき高レベルだと黄金の蜂蜜酒になる可能性がある
+		if (num == 2 && weird_luck() && randint1(plev) > 20)
+		{
+			tv = TV_ALCOHOL;
+			sv = SV_ALCOHOL_GOLDEN_MEAD;
+		}
+		else if (num == 2)
+		{
+			tv = TV_ALCOHOL;
+			sv = SV_ALCOHOL_MEAD;
+		}
+		else
+		{
+			tv = TV_POTION;
+			sv = SV_POTION_RESTORE_MANA;
+		}
+
+		object_prep(q_ptr, lookup_kind(tv, sv));
+		drop_near(q_ptr, -1, py, px);
+
+	}
+	break;
+
+	case 3:
+	{
+		bool flag = FALSE;
+		int i;
+		int count = 1 + plev / 24;
+		if (only_info) return "";
+
+		for (i = 0; i<count; i++)
+		{
+			u32b mode;
+			//召喚された蜂にはcloneフラグをつける。わざと倒して蜂蜜を大量入手できないようにするため
+			if (plev < 40) mode = (PM_CLONE | PM_ALLOW_GROUP | PM_FORCE_FRIENDLY);
+			else  mode = (PM_CLONE | PM_ALLOW_GROUP | PM_FORCE_PET);
+
+			if ((summon_specific(-1, py, px, p_ptr->lev, SUMMON_BEES, mode)))flag = TRUE;
+		}
+		if (flag)
+			msg_print(_("あなたは蜂を呼び出した。", "You call forth bees."));
+		else
+			msg_print(_("蜂は現れなかった。", "No bees have appeared."));
+
+		break;
+	}
+	case 4:
+	{
+		if (only_info) return format("");
+		msg_print(_("あなたは蜂たちに魔力の残滓を辿らせた。", "You let bees track down lingering magical power."));
+		search_specific_object(9);//処理設定要
+		break;
+	}
+	case 5:	//蜂による遠隔攻撃　蜂による追加格闘のみ行う
+	{
+		int range = plev / 8;
+		int x, y;
+		monster_type *m_ptr, *m2_ptr;
+
+		if (only_info) return format(_str_eff_range, range);
+
+		project_length = range;
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay() || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。",
+                        "You have to pick a target in sight."));
+			return NULL;
+		}
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+		if (!m_ptr->r_idx || !m_ptr->ml)
+		{
+			msg_print(_("そこには何もいない。", "There's nobody here."));
+			return NULL;
+		}
+		else
+		{
+			char m_name[80];
+			monster_desc(m_name, m_ptr, 0);
+			msg_format(_("蜂たちが%sに襲いかかった！", "Bees attack %s!"), m_name);
+			py_attack(m_ptr->fy, m_ptr->fx, HISSATSU_ATTACK_BEE);
+
+		}
+	}
+	break;
+
+	case 6://周辺調査
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+
+		msg_print(_("蜂たちがあなたに周囲の情報を伝えた。", "Bees give you information about nearby area."));
+		map_area(rad);
+		detect_monsters_normal(rad);
+		detect_monsters_invis(rad);
+
+		break;
+	}
+
+	case 7: //護衛命令
+	{
+		int base = 5 + plev / 2;
+		int time;
+
+		if (only_info) return format(_str_eff_dur_plus_1d, base, base);
+		time = base + randint1(base);
+		set_tim_general(time, FALSE, 0, 0);
+
+	}
+	break;
+
+	//レーダーセンス
+	case 9:
+	{
+		int base = p_ptr->lev / 2;
+		if (only_info) return format(_str_eff_dur_plus_1d, base, base);
+
+		msg_format(_("あなたは蜂たちと視界を共有した。", "You start sharing perception with your bees."));
+		set_radar_sense(randint1(base) + base, FALSE);
+		break;
+	}
+
+	case 10:
+	{
+		if (only_info) return format("");
+
+		flag_friendly_attack = TRUE;
+		msg_format(_("あなたは全ての蜂を開放した！", "You release all of your bees!"));
+		project_hack2(GF_YOUMU, 0, 0, 100);//妖夢の六根清浄斬を流用する
+		flag_friendly_attack = FALSE;
+
+	}
+	break;
+
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
 
 // v2.0.17 残無専用技
 class_power_type class_power_zanmu[] =
@@ -4204,6 +4485,9 @@ class_power_type class_power_orin2[] =
 	_("隣接したモンスター一体を指定し、そのモンスターを常に感知し続ける。レベル30以上のときそのモンスターからの攻撃を受ける直前に自動的に短距離テレポートを試みる。テレポートにはMP30を消費し、モンスターのレベルが高いとテレポートに失敗しやすい。",
     "You'll be able to constantly keep tracking position of a target adjacent monster. At level 30, can attempt to automatically teleport a short distance before getting hit in melee by that monster. Teleportation consumes 30 MP, and is more likely to fail against high level monsters.")},
 
+	{ 30,30,50,TRUE,FALSE,A_DEX,0,10,_("早駆け", "Rapid Movement"),
+	_("非常に素早く移動できるようになるがHPとMPが自然回復しなくなる。早駆け中にもう一度実行すると解除される。",
+	"You start moving extremely quickly, but you no longer recover HP and MP. Using this ability once again cancels the effect.") },
 
 
 
@@ -4298,6 +4582,39 @@ cptr do_cmd_class_power_aux_orin2(int num, bool only_info)
 		}
 
 
+	}
+	break;
+
+	//早駆け　本家忍者のと同じ
+	case 3:
+	{
+
+		if (only_info) return  format("");
+
+		if (p_ptr->action == ACTION_HAYAGAKE)
+		{
+			set_action(ACTION_NONE);
+			return NULL;
+		}
+		else
+		{
+			cave_type *c_ptr = &cave[py][px];
+			feature_type *f_ptr = &f_info[c_ptr->feat];
+
+			if (!have_flag(f_ptr->flags, FF_PROJECT) ||
+				(!p_ptr->levitation && have_flag(f_ptr->flags, FF_DEEP)))
+			{
+#ifdef JP
+				msg_print("ここでは素早く動けない。");
+#else
+				msg_print("You cannot move quickly in here.");
+#endif
+			}
+			else
+			{
+				set_action(ACTION_HAYAGAKE);
+			}
+		}
 	}
 	break;
 
@@ -19357,7 +19674,7 @@ cptr do_cmd_class_power_aux_mokou(int num, bool only_info)
 				msg_print(_("カードから火の鳥が現れて飛んで行った！", "A phoenix flies out of the card!"));
 			else
 				msg_print(_("火の鳥が飛んだ！", "A phoenix flies forth!"));
-			fire_rocket((plev > 39)?GF_FIRE:GF_NUKE, dir, dam, rad);
+			fire_rocket((plev > 39)?GF_NUKE:GF_FIRE, dir, dam, rad);
 		}
 		break;
 	case 3:
@@ -22459,15 +22776,20 @@ class_power_type class_power_yamame[] =
 {
 
 	{1,5,0,TRUE,FALSE,A_DEX,0,0,_("巣を張る", "Weave Web"),
-		_("地形「蜘蛛の巣」を作る。巣の上にいるとACボーナスを得られる。レベル30以降はさらに高速移動能力を得られ、また巣の上にいるモンスターを感知する。",
+		_("地形「蜘蛛の巣」を作る。巣の上にいるとACにボーナスを得られる。レベル30以降はさらに高速移動能力を得られ、また巣の上にいるモンスターを感知する。",
         "Creates a spiderweb terrain. You gain AC bonus while on a spiderweb; at level 30 you also gain swift movement and can sense monsters in webs.")},
 	{12,10,35,FALSE,TRUE,A_STR,0,4,_("キャプチャーウェブ", "Capture Web"),
 		_("周囲に蜘蛛の巣を張り巡らせる。レベル25以上になるとさらに周囲の敵にダメージを与え減速させようとする。",
         "Weaves spiderwebs around you. At level 25, deals damage to nearby enemies and slows them.")},
-	{19,22,40,FALSE,FALSE,A_CON,0,0,_("原因不明の熱病", "Unexplained Fever"),
+	{16,22,40,FALSE,FALSE,A_CON,0,0,_("原因不明の熱病", "Unexplained Fever"),
 		_("視界内の敵を混乱、朦朧させる。",
         "Confuses and stuns enemies in sight.")},
-	{23,16,55,FALSE,FALSE,A_DEX,50,0,_("カンダタロープ", "Kandata's Rope"),
+
+	{20,20,45,TRUE,FALSE,A_CON,0,10,_("ガスのブレス", "Breathe Poison"),
+		_("現在HPの1/4の威力の毒のブレスを吐く。",
+		"Breathes poison (damage: 1/4 of your current HP).") },
+
+	{24,16,55,FALSE,FALSE,A_DEX,50,0,"カンダタロープ",
 		_("近くの蜘蛛の巣を指定し、そこへ一瞬で移動する。反テレポート状態でも使用できる。もしその蜘蛛の巣の場所にモンスターがいた場合自分は移動せずそのモンスターを自分のところまで引き寄せる。ただし巨大な敵には効果がない。また装備品が重いと失敗しやすい。",
         "Move to a nearby spiderweb in an instant. Can be used even under anti-teleportation. If there's a monster on that web, you move that monster up to yourself instead. Does not work on gigantic enemies. Failure rate is higher when using heavy equipment.")},
 	{28,28,60,FALSE,FALSE,A_WIS,0,10,_("フィルドミアズマ", "Filled Miasma"),
@@ -22564,8 +22886,27 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 
 			break;
 		}
-	case 3: //カンダタロープ
-	case 7: //v1.1.91 ヴェノムウェブ
+
+	//v2.0.19 ガスのブレス
+	case 3:
+	{
+		int dam = p_ptr->chp / 4;
+		if (dam<1) dam = 1;
+		if (dam > 1600) dam = 1600;
+
+		if (only_info) return format(_str_eff_dam, dam);
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_print(_("あなたは大きく息を吸うと毒ガスを吹き出した！", "You take a deep breath and spew out poisonous gas!"));
+
+		fire_ball(GF_POIS, dir, dam, -2);
+	}
+	break;
+
+
+
+	case 4: //カンダタロープ
+	case 8: //v1.1.91 ヴェノムウェブ
 		{
 			int range;
 			int x = 0, y = 0;
@@ -22639,7 +22980,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 		}
 
 
-	case 4: //フィルドミアズマ
+	case 5: //フィルドミアズマ
 		{
 			int dam = plev * 3 + chr_adj * 3;
 			if(only_info) return format(_str_eff_dam,dam);
@@ -22649,7 +22990,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 			break;
 		}
 
-	case 5: //樺黄小町
+	case 6: //樺黄小町
 		{
 			int y, x;
 			monster_type *m_ptr;
@@ -22710,7 +23051,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 			break;
 		}
 
-	case 6: //階段生成
+	case 7: //階段生成
 	{
 		if (only_info) return format("");
 
@@ -22719,7 +23060,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 		break;
 	}
 
-	case 8: //石窟の蜘蛛の巣
+	case 9: //石窟の蜘蛛の巣
 		{
 			if(only_info) return format("");
 			msg_print(_("周囲が光る網に埋め尽くされた！", "Glowing webs spread around you!"));
@@ -23799,7 +24140,8 @@ cptr do_cmd_class_power_aux_nitori(int skillnum, bool only_info)
 			ty = py + 99 * ddy[dir];
 			if ((dir == 5) && target_okay())
 			{
-				flg &= ~(PROJECT_STOP);
+				//v2.0.19 ターゲットするかどうかでロケットかボールか変わるとややこしいのでロケットに統一する
+				//flg &= ~(PROJECT_STOP);
 				tx = target_col;
 				ty = target_row;
 			}
@@ -38691,6 +39033,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_BEEKEEPER:
+		class_power_table = class_power_beekeeper;
+		class_power_aux = do_cmd_class_power_aux_beekeeper;
+		power_desc = power_desc_waza;
+		break;
+
 	default:
 #ifdef JP
 		msg_print("あなたは職業による特技を持っていない。");
@@ -38709,6 +39057,13 @@ void do_cmd_new_class_power(bool only_browse)
         msg_print("You are too confused!");
 #endif
 		return;
+	}
+
+
+	//v2.0.19 内部的に無想の型を使う特技の使用中に別の特技が使える不具合を修正
+	if (p_ptr->special_defense & (KATA_MUSOU) & !only_browse)
+	{
+		set_action(ACTION_NONE);
 	}
 
 	screen_save();
@@ -39153,8 +39508,33 @@ void do_cmd_new_class_power(bool only_browse)
 			msg_print(_("フロアのモンスター達から追われる身になった！",
                         "All monsters on the floor are after you!"));
 		}
+		//養蜂家は蜂に命令する特技に失敗すると蜂に襲われることがある
+		else if (p_ptr->pclass == CLASS_BEEKEEPER && num != 2 && num != 8)
+		{
+			int fail_check;
+
+			msg_format(_("蜂との意思疎通に失敗した！", "You fail to communicate with bees!"));
+
+			fail_check = p_ptr->stat_ind[A_CHR] + 3 - num * 3;
+			if (fail_check < 4)	fail_check = 4;
+			if (!randint0(fail_check))
+			{
+				bool flag_summon = FALSE;
+				//護衛命令キャンセル
+				set_tim_general(0, TRUE, 0, 0);
+				do
+				{
+					if ((summon_specific(-1, py, px, p_ptr->lev, SUMMON_BEES, (PM_ALLOW_GROUP | PM_FORCE_ENEMY)))) flag_summon = TRUE;
+
+				} while (!randint0(6));
+
+				if(flag_summon)	msg_format(_("蜂が襲いかかってきた！", "Bees attack you!"));
+			}
+		}
 		else
+        {
 			msg_format(_("%sの使用に失敗した！", "You failed to use %s!"),power_desc);
+        }
 
 	}
 
@@ -40016,7 +40396,7 @@ const support_item_type support_item_list[] =
 	_("それは視界内の敵を混乱、朦朧させる。",
     "Confuses and stuns enemies in sight.")},
 	//樺黄小町
-	{60,30, 80,6,5,	MON_YAMAME,class_power_yamame,do_cmd_class_power_aux_yamame,5,
+	{60,30, 80,6,5,	MON_YAMAME,class_power_yamame,do_cmd_class_power_aux_yamame,6,
 	_("土蜘蛛の牙", "Tsuchigumo's Fang"),
 	_("それは隣接した敵にダメージを与える。毒耐性を持たない敵には三倍のダメージを与え、攻撃力を低下させ、低確率で一撃で倒す。",
     "Deals damage to an adjacent enemy. Deals triple damage to enemies without poison resistance, lowers their attack power, and has a low chance of defeating them in a single strike.")},

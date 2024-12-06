@@ -757,8 +757,43 @@ bool object_is_cheap_to_jyoon(object_type *o_ptr)
 }
 */
 
+//v2.0.19 魔法感知に引っかかるアイテムの判定を変更し、
+//detect_objects_magic()から別関数に括り出した
+bool object_is_magic_item(object_type *o_ptr)
+{
+	int tv;
+	if (!o_ptr->k_idx) return FALSE;
 
+	/* Examine the tval */
+	tv = o_ptr->tval;
 
+	/* Artifacts, misc magic items, or enchanted wearables */
+	if (object_is_artifact(o_ptr) ||
+		object_is_ego(o_ptr) ||
+		(tv == TV_WHISTLE) ||
+		(tv == TV_AMULET) ||
+		(tv == TV_RING) ||
+		(tv == TV_STAFF) ||
+		(tv == TV_WAND) ||
+		(tv == TV_ROD) ||
+		(tv == TV_SCROLL) ||
+		(tv == TV_POTION) ||
+		(tv >= MIN_MAGIC && tv <= MAX_MAGIC) ||
+		(tv == TV_BOOK_OCCULT) ||
+		(tv == TV_MAGICITEM) ||
+		(tv == TV_MAGICWEAPON) ||
+		(tv == TV_CAPTURE) ||
+		(tv == TV_ITEMCARD) ||
+		(tv == TV_SOUVENIR) ||
+		(tv == TV_MATERIAL) ||
+		(tv == TV_ABILITY_CARD)
+		)
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
 
 
 
