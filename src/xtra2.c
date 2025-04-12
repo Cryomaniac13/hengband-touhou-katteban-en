@@ -5272,6 +5272,14 @@ void verify_panel(void)
 	p_ptr->window |= (PW_OVERHEAD | PW_DUNGEON);
 }
 
+void verify_panel_force_recenter(void)
+{
+    bool old_center_player = center_player;
+
+    center_player = TRUE;
+    verify_panel();
+    center_player = old_center_player;
+}
 
 /*
  * Monster health description

@@ -7930,6 +7930,12 @@ msg_print("アリーナが魔法を吸収した！");
 			break;
 		}
 
+		case '[':
+        {
+            verify_panel_force_recenter();
+            break;
+        }
+
 		/* Make random artifact list */
 		case KTRL('V'):
 		{
@@ -9988,6 +9994,9 @@ static void load_all_pref_files(void)
 	/*:::@名.prf マクロ設定ファイル読み込みか*/
 	/* Access the "character" pref file */
 	sprintf(buf, "%s.prf", player_base);
+
+	/* Access the savefile pref file */
+	sprintf(buf, "%s.prf", savefile_base);
 
 	/* Process that file */
 	process_pref_file(buf);

@@ -3281,7 +3281,7 @@ void do_cmd_macros(void)
 
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Ask for a file */
 			if (!askfor(tmp, 80)) continue;
@@ -3337,7 +3337,7 @@ void do_cmd_macros(void)
 
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Ask for a file */
 			if (!askfor(tmp, 80)) continue;
@@ -3917,7 +3917,7 @@ void do_cmd_visuals(void)
 #endif
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Query */
 			if (!askfor(tmp, 70)) continue;
@@ -3950,7 +3950,7 @@ void do_cmd_visuals(void)
 #endif
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Get a filename */
 			if (!askfor(tmp, 70)) continue;
@@ -4017,7 +4017,7 @@ void do_cmd_visuals(void)
 #endif
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Get a filename */
 			if (!askfor(tmp, 70)) continue;
@@ -4101,7 +4101,7 @@ void do_cmd_visuals(void)
 #endif
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Get a filename */
 			if (!askfor(tmp, 70)) continue;
@@ -4673,7 +4673,7 @@ void do_cmd_colors(void)
 
 
 			/* Default file */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Query */
 			if (!askfor(tmp, 70)) continue;
@@ -4712,7 +4712,7 @@ void do_cmd_colors(void)
 
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Get a filename */
 			if (!askfor(tmp, 70)) continue;
