@@ -45,13 +45,160 @@ cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
 
+//v2.0.20 大妖精
+class_power_type class_power_daiyousei[] =
+{
+
+	{ 5,5,10,FALSE,TRUE,A_INT,0,0,_("霧を泳ぐⅠ", "Swim in Mist I"),
+	_("自分の周囲のモンスターを混乱させようと試みる。",
+   "Attempts to confuse adjacent monsters.") },
+
+	{ 12,6,20,FALSE,TRUE,A_CHR,0,1,_("ファイア・ボルト", "Fire Bolt"),
+	_("火炎属性のボルトを放つ。",
+	"Shoots a bolt of fire.") },
+
+	{ 18,20,30,FALSE,TRUE,A_INT,0,0,_("霧を泳ぐⅡ", "Swim in Mist II"),
+	_("視界内のモンスターを混乱させようと試みる。",
+    "Attempts to confuse all monsters in sight.") },
+
+	{ 24,10,40,FALSE,TRUE,A_CHR,0,4,_("ファイア・ボール", "Fire Ball"),
+	_("やや強力な火炎属性のボールを放つ。",
+    "Shoots a fairly powerful ball of fire.")},
+
+	{ 30,25,50,FALSE,TRUE,A_INT,0,0,_("霧を泳ぐⅢ", "Swim in Mist III"),
+	_("モンスター一体を高確率で混乱・攻撃力低下状態にしようと試みる。",
+	"Attempts to confuse and reduce attack power of a monster, with high chance of success.") },
+
+	{ 35,20,60,FALSE,TRUE,A_CHR,0,8,_("レーザー", "Laser"),
+	_("閃光属性のビームを放つ。",
+    "Fires a beam of light.")},
+
+	{ 40,30,75,FALSE,TRUE,A_INT,0,0,_("霧を泳ぐⅣ", "Swim in Mist IV"),
+	_("近くの指定したグリッドへテレポートする。",
+    "Teleports to specified nearby location.")},
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+cptr do_cmd_class_power_aux_daiyousei(int num, bool only_info)
+{
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+	int dir;
+
+	switch (num)
+	{
+	case 0:
+	{
+		int dam = 20 + plev * 3 + chr_adj * 5;
+		int rad = 2 + plev / 20;
+		if (only_info) return format(_("効果:～%d", "pow: ~%d"), dam / 2);
+
+		msg_print(_("あなたの周りの霧が濃くなった。", "Mist around you becomes thicker."));
+		project(0, rad, py, px, dam, GF_OLD_CONF, (PROJECT_KILL | PROJECT_JUMP), -1);
+	}
+	break;
+	case 1:
+	{
+		int dice = 6 + plev / 8;
+		int sides = 8;
+		int base = plev + chr_adj;
+
+		if (only_info) return format(_str_eff_dam_dice_sides, dice, sides);
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print(_("火炎弾を放った。", "You launch a fire bullet."));
+		fire_bolt(GF_FIRE, dir, damroll(dice, sides));
+		break;
+	}
+
+	case 2: //視界内混乱
+	{
+
+		int power = 15 + plev / 2 + chr_adj * 2;
+
+		if (only_info) return format(_str_eff_power, power);
+
+		msg_print(_("部屋に霧が漂いはじめた...", "Mist in the room starts becoming thicker..."));
+		project_hack2(GF_OLD_CONF, 0, 0, power);
+
+	}
+	break;
+
+	case 3://ファイアボール
+	{
+		int base = 50 + plev * 2 + chr_adj * 3;
+
+		if (only_info) return format(_str_eff_dam, base);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_print(_("大きな火球を放った。", "You launch a large ball of fire."));
+		fire_ball(GF_FIRE, dir, base , 2);
+
+		break;
+	}
+
+	case 4:
+	{
+		int power = p_ptr->lev * 3 + chr_adj * 3;
+		if (only_info) return format(_str_eff_power, power);
+
+		if (power < 100) power = 100;
+
+		if (!get_aim_dir(&dir)) return NULL;
+		if (dir != 5 || !target_okay())
+		{
+			msg_print(_("視界内のターゲットを明示的に指定しないといけない。", "You have to pick a target in sight."));
+			return NULL;
+		}
+		msg_print(_("濃密な霧が標的を押し包んだ！", "Dense mist envelops your target!"));
+		fire_ball_jump(GF_OLD_CONF, dir, power, 0,"");
+		fire_ball_hide(GF_DEC_ATK, dir, power, 0);
+
+		break;
+	}
+
+	case 5:
+	{
+		int dice = plev / 2;
+		int sides = 8;
+		int base = plev + chr_adj * 3;
+
+		if (only_info) return format(_str_eff_dam_base_dice_sides, base, dice, sides);
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_format(_("あなたはレーザーを放った！", "You fire a laser!"));
+		fire_beam(GF_LITE, dir, base + damroll(dice, sides));
+		break;
+	}
+
+	case 6:
+	{
+		int range = plev / 6;
+		if (only_info) return format(_("距離:%d", "dist: %d"), range);
+		if (!dimension_door(D_DOOR_MINI)) return NULL;
+	}
+	break;
+
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
+
+
 
 //v2.0.19 養蜂家
 //p_ptr->magic_num1[0]に生成可能な蜂蜜数(*100)を記録
 class_power_type class_power_beekeeper[] =
 {
 
-	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,("蜂蜜採取", "Collect Honey"),
+	{ 1,0,0,FALSE,FALSE,A_CHR,0,0,_("蜂蜜採取", "Collect Honey"),
 	_("アイテム「蜂蜜」を生成する。生成できる量は時間経過に伴い回復する。難易度EXTRAではフロア移動で回復する。蜂蜜を食べると満腹度とMPが回復するが耐性がないと体調を崩してしまう。",
 	"Creates a 'Honey' item. Amount of honey you can get increases as time passes. On Extra difficulty level, it increases when you enter a new dungeon level. Eating honey reduces hunger and restores MP, but it deteriorates your health if you're not resistant.") },
 
@@ -6137,7 +6284,7 @@ class_power_type class_power_sangetsu_2[] =
 	{ 45,50,80,FALSE,TRUE,A_CHR,0,0,_("パーフェクトフリーズ", "Perfect Freeze"),
     _("視界内の全てに対し強力な極寒属性攻撃を放つ。",
     "Hits everything in sight with a powerful ice attack.")},
-	{ 48,72,80,FALSE,TRUE,A_CHR,0,0,_("究極の必殺技", "Ultimate Special Technique"),
+	{ 48,72,80,FALSE,TRUE,A_CHR,0,0,_("収束レーザー", "Convergent Laser"),
 	_("閃光属性の強力なレーザーを放つ。",
     "Fires a powerful light element laser.")},
 
@@ -22789,7 +22936,7 @@ class_power_type class_power_yamame[] =
 		_("現在HPの1/4の威力の毒のブレスを吐く。",
 		"Breathes poison (damage: 1/4 of your current HP).") },
 
-	{24,16,55,FALSE,FALSE,A_DEX,50,0,"カンダタロープ",
+	{24,16,55,FALSE,FALSE,A_DEX,50,0,_("カンダタロープ", "Kandata Rope"),
 		_("近くの蜘蛛の巣を指定し、そこへ一瞬で移動する。反テレポート状態でも使用できる。もしその蜘蛛の巣の場所にモンスターがいた場合自分は移動せずそのモンスターを自分のところまで引き寄せる。ただし巨大な敵には効果がない。また装備品が重いと失敗しやすい。",
         "Move to a nearby spiderweb in an instant. Can be used even under anti-teleportation. If there's a monster on that web, you move that monster up to yourself instead. Does not work on gigantic enemies. Failure rate is higher when using heavy equipment.")},
 	{28,28,60,FALSE,FALSE,A_WIS,0,10,_("フィルドミアズマ", "Filled Miasma"),
@@ -22912,7 +23059,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 			int x = 0, y = 0;
 			int dam = 0;
 
-			if (num == 3)
+			if (num == 4)
 			{
 				range = plev / 2;
 				if (only_info) return format(_("範囲:%d", "rng: %d"), range);
@@ -22938,7 +23085,7 @@ cptr do_cmd_class_power_aux_yamame(int num, bool only_info)
 				return NULL;
 			}
 
-			if (num == 3)
+			if (num == 4)
 			{
 				if (cave[y][x].m_idx)
 				{
@@ -29400,6 +29547,10 @@ bool item_tester_hook_make_venom(object_type *o_ptr)
 	if(o_ptr->tval == TV_MATERIAL && (o_ptr->sval == SV_MATERIAL_ARSENIC || o_ptr->sval == SV_MATERIAL_MERCURY || o_ptr->sval == SV_MATERIAL_GELSEMIUM)) return TRUE;
 	if(o_ptr->tval == TV_KNIFE && o_ptr->sval == SV_WEAPON_DOKUBARI && !object_is_artifact(o_ptr)) return TRUE;
 	if(object_is_melee_weapon(o_ptr) && o_ptr->name2 == EGO_WEAPON_BRANDPOIS) return TRUE;
+
+	//v2.0.20 花追加
+	if (o_ptr->tval == TV_STICK && o_ptr->sval == SV_WEAPON_FLOWER && (o_ptr->name2 == EGO_WEAPON_FLOWER_AMARYLLIS || o_ptr->name2 == EGO_WEAPON_FLOWER_LILY || o_ptr->name2 == EGO_WEAPON_FLOWER_GHOST)) return TRUE;
+
 	return FALSE;
 }
 
@@ -38094,7 +38245,7 @@ return TRUE;
 }
 
 
-/*:::職業特技の選択と参照と成功判定*/
+/*職業特技の選択と参照と成功判定*/
 void do_cmd_new_class_power(bool only_browse)
 {
 	class_power_type *class_power_table;
@@ -39038,6 +39189,13 @@ void do_cmd_new_class_power(bool only_browse)
 		class_power_aux = do_cmd_class_power_aux_beekeeper;
 		power_desc = power_desc_waza;
 		break;
+
+	case CLASS_DAIYOUSEI:
+		class_power_table = class_power_daiyousei;
+		class_power_aux = do_cmd_class_power_aux_daiyousei;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -41001,6 +41159,12 @@ const support_item_type support_item_list[] =
 		_("真っ赤な髑髏", "Bright-Red Skull"),
 		_("それは周囲のランダムな敵に分解属性のボールを連続で放つ。レベルが上がると威力、数、爆発半径が上昇する。",
         "Repeatedly fires disintegration balls at random nearby enemies. Power, amount and radius increases with level.") },
+
+	//v2.0.20 大妖精　単体混乱+攻撃低下
+		{ 50,1,50,3,5,	0,class_power_daiyousei,do_cmd_class_power_aux_daiyousei,4,
+		_("名もなき花", "Nameless Flower"),
+		_("それはモンスター一体を混乱、攻撃力低下状態にしようと試みる。",
+		"Attempts to confuse and reduce attack power of a single monster.") },
 
 
 

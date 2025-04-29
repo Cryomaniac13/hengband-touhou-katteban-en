@@ -8404,7 +8404,9 @@ W:100:0:50:50000
 A:100/255
 P:0:3d3:0:0:0
 D:$A fragment of the Izanagi Plate that disappeared into the depths of the Earth 25 million years ago.
+D:$It still holds mana and memories back from the era of gods.
 D:2500万年前に地底に消えたイザナギプレートの欠片だ。
+D:神の時代の魔力と記憶が今も残っている。
 
 N:788:ミクロオキシゲン
 E:MicroOxygen
@@ -9861,4 +9863,20 @@ P:0:1d1:0:0:0
 D:蜂蜜を発酵させて作られた酒だ。
 D:ただし実験的に作られたもので製法が未熟なためかあまり美味しくない。
 
+N:913:練酒
+E:Nerizake
+G:!:w
+I:78:36:1000
+W:0:0:30:3000
+A:1/255
+P:0:1d1:0:0:0
+D:古代の製法で造られたペースト状の酒だ。
+D:食べると幸福感に包まれるという噂だ。
+
+N:914:指輪:美しい
+E:& Ring~:Beautiful
+G:=:v
+I:47:53:0
+W:65:0:2:50000
+F:INSTA_ART 
 

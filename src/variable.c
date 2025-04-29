@@ -1741,3 +1741,4 @@ bool	flag_nue_check_undefined = TRUE;
 
 //v2.0.11 慧ノ子(モンスター)のトラップ生成が全てトラバサミになる特殊フラグ
 bool	hack_flag_enoko_make_beartrap = FALSE;
+

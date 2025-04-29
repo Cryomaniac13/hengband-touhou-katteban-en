@@ -3299,6 +3299,7 @@ outfit_type birth_outfit_class[] = {
 
 	{ CLASS_BITEN,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_BITEN,2,ART_BITEN,0,0,1 },
+	{ CLASS_BITEN,2,0,TV_ALCOHOL, SV_ALCOHOL_NERIZAKE,1 },
 
 	{ CLASS_ENOKO,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_ENOKO,2,ART_ENOKO,0,0,1 },
@@ -3313,6 +3314,8 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_BEEKEEPER,2,0,TV_SWEETS, SV_SWEETS_HONEY,10 },
 	{ CLASS_BEEKEEPER,2,0,TV_POTION, SV_POTION_CURE_POISON,3 },
 
+	{ CLASS_DAIYOUSEI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	//{ CLASS_DAIYOUSEI,2,0,TV_STICK, SV_WEAPON_FLOWER,1 }, 個別処理で上質生成する
 
 	{-1,0,0,0,0,0} //終端dummy
 };
@@ -3419,6 +3422,20 @@ void player_outfit(void)
 	{
 		object_prep(q_ptr, lookup_kind(TV_ABILITY_CARD, SV_ABILITY_CARD));
 		apply_magic_abilitycard(q_ptr, ABL_CARD_MANEKINEKO, 0, 0);
+		add_outfit(q_ptr);
+
+	}
+	//v2.0.20 大妖精の花
+	else if (p_ptr->pclass == CLASS_DAIYOUSEI)
+	{
+		object_prep(q_ptr, lookup_kind(TV_STICK, SV_WEAPON_FLOWER));
+		q_ptr->pval = 2;
+		q_ptr->to_d = 10;
+		q_ptr->to_h = 10;
+
+		object_aware(q_ptr);
+		object_known(q_ptr);
+		q_ptr->ident |= (IDENT_MENTAL);
 		add_outfit(q_ptr);
 
 	}
@@ -6133,7 +6150,7 @@ struct unique_player_type
 	cptr info;	//キャラメイク時に表示される説明文
 };
 
-#define UNIQUE_PLAYER_NUM 127
+#define UNIQUE_PLAYER_NUM 128
 #define CLASS_DUMMY 255
 #define RACE_DUMMY 255
 static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
@@ -6153,6 +6170,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 #ifdef JP
 	{TRUE,"ルーミア",CLASS_RUMIA,RACE_YOUKAI,ENTRY_KOUMA,SEX_FEMALE,
 	"あなたは幻想郷の空をあてもなく漂う妖怪です。闇を操る能力があり、暗黒攻撃に関するスキルと耐性を持ちます。身体能力は通常の人間よりは高めですが妖怪としてはごく平凡です。武器の扱いはやや苦手で魔法は使えません。成長すると暗黒攻撃を全く受け付けなくなります。"},
+	{TRUE,"大妖精",CLASS_DAIYOUSEI,RACE_FAIRY,ENTRY_KOUMA,SEX_FEMALE,
+	"あなたは妖精の中で比較的強い力を持つ大妖精の一人です。固有の名前は持っていません。普段は霧の湖で遊んで暮らしています。あなたは霧に関係する能力を持ち、霧に隠れたり人を霧で惑わせることができるようです。魔法を一領域習得することも出来ますが基本的に荒事は全く不得手です。あなたの冒険はかなりの苦労を強いられることになるでしょう。" },
 	{TRUE,"チルノ",CLASS_CIRNO,RACE_FAIRY,ENTRY_KOUMA,SEX_FEMALE,
 	"あなたは普段は霧の湖で遊んで暮らしている氷の妖精です。妖精としては規格外といえるほど強い力を持ちますが、それはあくまでも妖精の中での話です。氷の妖精なので冷気攻撃に強く、成長すると冷気攻撃を全く受け付けなくなります。しかし火炎はあなたの大敵です。冷気関係の特技が豊富ですが、魔法書などはまったく読めず魔道具の扱いも苦手です。探索や解除など細かい作業も苦手です。"},
 	{TRUE,"紅　美鈴",CLASS_MEIRIN,RACE_YOUKAI,ENTRY_KOUMA,SEX_FEMALE,
@@ -6168,6 +6187,8 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 #else
     {TRUE,"Rumia",CLASS_RUMIA,RACE_YOUKAI,ENTRY_KOUMA,SEX_FEMALE,
 	"You are a youkai who flies aimlessly in the skies of Gensoukyou. Your ability is manipulating darkness. You use darkness-based attacks and resist darkness as well. Your physical abilities are above human, but aren't particularly notable for a youkai. You're not that proficient with using weapons and can't use magic. You will become completely immune to darkness as you level up."},
+	{TRUE,"Greater-Fairy",CLASS_DAIYOUSEI,RACE_FAIRY,ENTRY_KOUMA,SEX_FEMALE,
+	"You are one of the greater fairies, comparatively strong for a fairy. You don't have an actual name. You usually spend your time playing at MIsty Lake. You have abilities related to mist, being capable of hiding in mist or using it to beguile people. You also can study a realm of magic, but you're not good at actual combat. Your adventure will be quite challenging."},
 	{TRUE,"Cirno",CLASS_CIRNO,RACE_FAIRY,ENTRY_KOUMA,SEX_FEMALE,
 	"You are an ice fairy who usually plays at the Misty Lake. You are unusually powerful for a fairy, but you're a fairy still. As an ice fairy, you resist cold attacks, and eventually will become immune to them. However, fire is your enemy. You have several cold-based abilities, but you can't read magic books and you are bad at using magic devices and delicate skills like searching or disarming."},
 	{TRUE,"Hong Meiling",CLASS_MEIRIN,RACE_YOUKAI,ENTRY_KOUMA,SEX_FEMALE,
@@ -6455,7 +6476,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,"玉造　魅須丸",CLASS_MISUMARU,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは勾玉制作職人です。鉱物などの素材から勾玉を制作し、これを専用スロットに装備して発動することで様々な能力を発揮することができます。使用する素材によって勾玉に発現する能力の種類や強さが変化します。またあなたは街の鍛冶宝飾ギルドで宝石や装飾品からエッセンスを抽出しそれを別の装飾品に付与することができます。さらに魔法を一領域習得することができますが、肉弾戦は全くの不得手です。また勾玉の繊細な力を使うため劣化攻撃が苦手です。" },
 	{ TRUE,"菅牧　典",CLASS_TSUKASA,RACE_YOUKO,ENTRY_KOURYUU,SEX_FEMALE,
-		"あなたは大天狗に仕える管狐です。人に囁きかけて唆し破滅と混乱をもたらすことをこよなく好みます。あなたは配下モンスターの背後に隠れて操る「寄生」という特殊な騎乗状態になることができます。通常騎乗可能なモンスター以外にも寄生ができ、他のモンスターからの攻撃は高確率で配下モンスターが受け、また配下モンスターが戦うことで得た経験値やアイテムは全てあなたが横取りします。あなたの肉弾戦能力は全く話になりませんが代わりに魔法を一領域習得することができます。配下モンスターを盾にしつつ後ろから魔法や特技で攻撃するのが基本的な戦い方になります。あなたは服が汚れるのが嫌いで、劣化や汚染の攻撃で通常より多くのダメージを受けてしまいます。" },
+		"あなたは大天狗に仕える管狐です。人に囁きかけて唆し破滅と混乱をもたらすことをこよなく好みます。あなたは配下モンスターの背後に隠れて操る「寄生」という特殊な騎乗状態になることができます。通常騎乗可能なモンスター以外にも寄生ができ、他のモンスターからの攻撃は高確率で配下モンスターが受け、また配下モンスターが戦うことで得た経験値やアイテムは全てあなたが横取りします。あなたの肉弾戦能力は全く話になりませんが代わりに魔法を一領域習得することができます。配下モンスターを盾にしつつ後ろから魔法や特技で攻撃するのが基本的な戦い方になります。変身はあまり得意ではないようです。あなたは服が汚れるのが嫌いで、劣化や汚染の攻撃で通常より多くのダメージを受けてしまいます。" },
 	{ TRUE,"飯綱丸　龍",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
 		"あなたは妖怪の山で鴉天狗たちを束ねる大天狗です。非常に動きが素早く機知に富み文武両道の強さです。さらに視界内すべてを攻撃する強力な特技を複数習得します。ただし長く生きてきたためレベルアップに必要な経験値は多くなります。また頭には頭襟しか装備できません。" },
 	{ TRUE,"天弓　千亦",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6472,7 +6493,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,"Misumaru Tamatsukuri",CLASS_MISUMARU,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a magatama crafter. You can create magatama from materials (like ores) and activate various abilities after equipping them into special slots. Power and kind of those abilities varies depending on which materials you use. You can use jeweler workshops in towns to extract essences from gemstones or accessories and then apply them to a different accessory. You also can study one realm of magic, but you're not good at combat. You are vulnerable to disenchantment attacks." },
 	{ TRUE,"Tsukasa Kudamaki",CLASS_TSUKASA,RACE_YOUKO,ENTRY_KOURYUU,SEX_FEMALE,
-		"You are a kuda-gitsune serving a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
+		"You are a kuda-gitsune serving a Great Tengu. You love whispering to people, instigating destruction and chaos. You have a special riding mechanic called 'parasitising', where you hide behind the back of your follower. You can parasitise non-rideable monsters as well, your follower has high chance of taking attacks from enemy monsters, and you gain all experience and items your follower normally would receive. You're not good at all at physical combat, but you can study one realm of magic. Mainly you'll be hiding behind the backs of your followers, fighting with spells and special abilities. You're not good at transformations. You hate getting your clothes dirty, so disenchantment and pollution attack deal more damage to you than usual." },
 	{ TRUE,"Megumu Iizunamaru",CLASS_MEGUMU,RACE_KARASU_TENGU,ENTRY_KOURYUU,SEX_FEMALE,
 		"You are a Great Tengu commanding the crow tengu of Youkai Mountain. You move very fast and are proficient in all areas. You also learn several powerful abilities hitting everything in your line of sight. However, you require a lot of experience to level up, and you have to wear a tokin on your head." },
 	{ TRUE,"Chimata Tenkyuu",CLASS_CHIMATA,RACE_DEITY,ENTRY_KOURYUU,SEX_FEMALE,
@@ -6721,7 +6742,7 @@ static bool get_unique_player(void)
 	unique_player_type table[16];
 	int cnt_table;
 #ifdef JP
-	char temp[80*9];
+	char temp[80*12];
 #else
     char temp[80*12];
 #endif
@@ -6890,9 +6911,9 @@ static bool get_unique_player(void)
 		roff_to_buf(table[k].info, 74, temp, sizeof(temp));
 		t = temp;
 #ifdef JP
-		for (i = 0; i< 9; i++)
+		for (i = 0; i< 12; i++)
 #else
-        for (i = 0; i< 11; i++)
+        for (i = 0; i< 12; i++)
 #endif
 		{
 			if(t[0] == 0)
@@ -8429,7 +8450,6 @@ void gain_perma_mutation(void)
  * Note that we may be called with "junk" leftover in the various
  * fields, so we must be sure to clear them first.
  */
-/*:::キャラクターメイク*/
 void player_birth(void)
 {
 	int i, j;

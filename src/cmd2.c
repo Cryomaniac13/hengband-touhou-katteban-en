@@ -1078,6 +1078,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_HISAMI) a_idx = ART_AMENOKAGAMI;
 			else if (p_ptr->pclass == CLASS_ZANMU) a_idx = ART_IKKYU;
 			else if (p_ptr->pclass == CLASS_BEEKEEPER) a_idx = ART_COLLUIN;
+			else if (p_ptr->pclass == CLASS_DAIYOUSEI) a_idx = ART_NIMUE_RING;
 
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//Åôê∂ê¨
@@ -6070,7 +6071,7 @@ void do_cmd_fire_gun_aux(int slot, int dir)
 	int rad=0;
 	int dam;
 	int timeout_base, timeout_max;
-	char o_name[160];
+	char o_name[MAX_NLEN];
 	object_type *o_ptr = &inventory[slot];
 	int chance;
 

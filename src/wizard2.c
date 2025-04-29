@@ -157,6 +157,13 @@ static void do_cmd_wiz_hack_ben_2(void)
 		return;
 	}
 
+	//—ì–²@‚¨æÎ‘KŠm”F
+	if (p_ptr->pclass == CLASS_REIMU)
+	{
+		msg_format(_("æÎ‘K:%d", "Donations: %d"), osaisen);
+		return;
+	}
+
 	//–Þ–‚@‹ó• ‚Å“|‚ê‚é’¼‘O‚É‚·‚é
 	if (p_ptr->pclass == CLASS_YUMA)
 	{

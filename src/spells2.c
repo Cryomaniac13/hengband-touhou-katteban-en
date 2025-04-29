@@ -3962,6 +3962,82 @@ msg_print("アイテムの存在を感じとった！");
 }
 
 
+//v2.0.20 特定のアイテムをフロアから探す
+// (似たような関数をすでに作ってたような気がする)
+bool detect_specific_objects(int range, int mode)
+{
+	int i, y, x;
+	int range2 = range;
+
+	bool detect = FALSE;
+
+	if (d_info[dungeon_type].flags1 & DF1_DARKNESS) range2 /= 3;
+
+	/* Scan objects */
+	for (i = 1; i < o_max; i++)
+	{
+		object_type *o_ptr = &o_list[i];
+		bool flag_ok = FALSE;
+
+		/* Skip dead objects */
+		if (!o_ptr->k_idx) continue;
+
+		/* Skip held objects */
+		if (o_ptr->held_m_idx) continue;
+
+		/* Location */
+		y = o_ptr->iy;
+		x = o_ptr->ix;
+
+		/* Only detect nearby objects */
+		if (distance(py, px, y, x) > range2) continue;
+
+		//modeに応じた発見判定
+		switch (mode)
+		{
+		case 1://本探し
+			if (o_ptr->tval >= MIN_MAGIC && o_ptr->tval <= TV_BOOK_END) flag_ok = TRUE;
+			if (o_ptr->tval == TV_MAGICITEM && o_ptr->sval == SV_MAGICITEM_MARISA) flag_ok = TRUE;
+			if (o_ptr->tval == TV_MAGICITEM && o_ptr->sval == SV_MAGICITEM_HYAKKI) flag_ok = TRUE;
+			if (o_ptr->tval == TV_CAPTURE) flag_ok = TRUE;
+
+			break;
+
+		default:
+			msg_format(_("ERROR:detect_specific_objects()に未設定のmode値(%d)が渡された",
+                    "ERROR: undefined mode (%d) passed as an argument to detect_specific_objects()"),mode);
+			return FALSE;
+
+
+		}
+
+
+		/* Detect "real" objects */
+		if (flag_ok)
+		{
+			/* Hack -- memorize it */
+			o_ptr->marked |= OM_FOUND;
+
+			/* Redraw */
+			lite_spot(y, x);
+
+			/* Detect */
+			detect = TRUE;
+		}
+	}
+
+
+	/* Describe */
+	if (detect)
+	{
+		if(mode == 1) msg_print(_("フロアに落ちている本の場所を把握した！",
+                                "You find out books lying around on the floor!"));
+
+	}
+
+	/* Result */
+	return (detect);
+}
 
 
 /*

@@ -4103,9 +4103,11 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 	case CLASS_BEEKEEPER:
 		if (p_ptr->lev > 19) add_flag(flgs, TR_SUST_CON);
 		if (p_ptr->lev > 29) add_flag(flgs, TR_RES_POIS);
-
 		break;
 
+	case CLASS_DAIYOUSEI:
+		if (p_ptr->lev > 24) add_flag(flgs, TR_RES_COLD);
+		break;
 
 	default:
 		break; /* Do nothing */
@@ -4514,6 +4516,7 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 29) add_flag(flgs, TR_RES_SOUND);
 		break;
 	case RACE_IMP:
+		add_flag(flgs, TR_SLOW_DIGEST);
 		add_flag(flgs, TR_RES_DARK);
 		add_flag(flgs, TR_RES_INSANITY);
 		if (p_ptr->lev > 19) add_flag(flgs, TR_RES_NETHER);
@@ -8119,7 +8122,7 @@ static void dump_aux_class_special(FILE *fff)
 			//–£{ŠÛ‚Í‘•”õ‚µ‚Ä‚¢‚éŒù‹Ê‚©‚ç‹Z‚Ìƒpƒ‰ƒ[ƒ^‚ðŽæ“¾
 			if (p_ptr->pclass == CLASS_MISUMARU)
 			{
-				char o_name[128];
+				char o_name[MAX_NLEN];
 				object_type *o_ptr = &inven_add[i];
 
 				if (!o_ptr->k_idx || o_ptr->tval != TV_SPELLCARD) continue;

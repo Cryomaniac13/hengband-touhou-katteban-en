@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 0
-#define H_VER_PATCH 19
+#define H_VER_PATCH 20
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1325,10 +1325,11 @@
 #define CLASS_MIZUCHI			155
 
 #define CLASS_BEEKEEPER			156
+#define CLASS_DAIYOUSEI			157
 
 /*Maximum number of player "class" types (see "table.c", etc)*/
 /*:::class_info[]の項目数 CLASS_**の最終+1*/
-#define MAX_CLASS            157
+#define MAX_CLASS            158
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
 //v2.0.2 典の「寄生」も基本的に同じ扱いにする
@@ -2026,6 +2027,7 @@
 #define ART_BITEN			348
 #define ART_ENOKO			349
 #define ART_IKKYU			350
+#define ART_NIMUE_RING			351
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/
@@ -2260,6 +2262,10 @@
 #define EGO_BOOTS_PEGASUS	206
 #define EGO_WEAPON_YAMANBA	207
 #define EGO_WEAPON_DANCER	208
+
+#define EGO_WEAPON_FLOWER_AMARYLLIS	211
+#define EGO_WEAPON_FLOWER_LILY	215
+#define EGO_WEAPON_FLOWER_GHOST	219
 
 
 /* Activation effects for random artifacts */
@@ -3496,7 +3502,7 @@
 #define SV_ALCOHOL_DOBUROKU	33
 #define SV_ALCOHOL_ONITUBUSHI 34
 #define SV_ALCOHOL_MEAD 35
-
+#define SV_ALCOHOL_NERIZAKE 36
 
 
 

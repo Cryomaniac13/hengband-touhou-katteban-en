@@ -10614,6 +10614,14 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 				p_ptr->magic_num1[0] = 1;
 				p_ptr->update |= (PU_BONUS);
 			}
+			//v2.0.20 —•‚à…‚ðŽó‚¯‚½‚ç­‚µ“ª‚ªˆ«‚­‚È‚é
+			else if (p_ptr->chp >= dam && p_ptr->pclass == CLASS_RAN && !CHECK_MULTISHADOW() && (!p_ptr->resist_water || one_in_(3)) )
+			{
+				msg_print(_("…‚ð”í‚Á‚ÄŽ®‚Ì’²Žq‚ªˆ«‚­‚È‚Á‚½...", "Getting wet makes your shikigami powers weaker..."));
+				do_dec_stat(A_INT);
+			}
+
+
 			else if(p_ptr->pclass == CLASS_HINA && p_ptr->magic_num1[0] > 0)
 			{
 				hina_gain_yaku(-(dam * 2));
@@ -12345,7 +12353,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 	}
 
 	if (p_ptr->pclass == CLASS_YATSUHASHI && music_singing(MUSIC_NEW_TSUKUMO_JINKIN)
-		&& m_ptr->r_idx && get_damage > 0 && !p_ptr->is_dead && (who > 0))
+		&& (who > 0) && m_ptr->r_idx && get_damage > 0 && !p_ptr->is_dead)
 	{
 		msg_format(_("%s‚Í‹Õ‚Ì‰¹‚É•ï‚Ü‚ê‚½EE", "%^s is enveloped in the sound of koto..."), m_name);
 		project(0, 0, m_ptr->fy, m_ptr->fx, get_damage, GF_MISSILE, PROJECT_KILL, -1);

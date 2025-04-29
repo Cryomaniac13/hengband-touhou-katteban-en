@@ -4439,6 +4439,12 @@ void make_magic_list_satono(void)
 				new_num = randint0(mlist_num + 1);
 				if (new_num >= memory) continue;
 			}
+			if (new_num < 0)
+			{
+				msg_print("ERROR:make_magic_list_satono()");
+				return;
+			}
+
 			p_ptr->magic_num1[new_num] = spell;
 			mlist_num++;
 		}
@@ -9370,8 +9376,17 @@ void  prism_change_class(bool urgency)
 	//各キャラの技能熟練度をp_ptr->magic_num1[3-66]に保持する
 	for(i=0;i<SKILL_EXP_MAX;i++)
 	{
-		p_ptr->magic_num1[3 + i + SKILL_EXP_MAX * (p_ptr->pclass - CLASS_LUNASA)] = p_ptr->skill_exp[i];
-		p_ptr->skill_exp[i] = p_ptr->magic_num1[3 + i + SKILL_EXP_MAX * (new_class - CLASS_LUNASA)];
+		int tmp_idx1 = 3 + i + SKILL_EXP_MAX * (p_ptr->pclass - CLASS_LUNASA);
+		int tmp_idx2 = 3 + i + SKILL_EXP_MAX * (new_class - CLASS_LUNASA);
+
+		if (tmp_idx1 < 0 || tmp_idx2 < 0)
+		{
+			msg_print("ERROR! : prism_change_class()");
+			return;
+		}
+
+		p_ptr->magic_num1[tmp_idx1] = p_ptr->skill_exp[i];
+		p_ptr->skill_exp[i] = p_ptr->magic_num1[tmp_idx2];
 	}
 
 	//突然変異も保持 magic_num2[3-74]
@@ -9907,7 +9922,7 @@ void check_drug_recipe_aux(object_type *o_ptr)
 	while(1)
 	{
 		char c;
-		char o_name[80];
+		char o_name[MAX_NLEN];
 		int idx;
 
 		if(character_icky > 1)	clear_bldg(4,22);
@@ -11730,7 +11745,7 @@ void	jyoon_record_money_waste(int sum)
 //装備を外したらカウントが進まなくなるがインベントリや家など全部のカウントをチェックしたり装備外し即回収にしたりするのも面倒なので放置
 void shion_seizure(int slot)
 {
-	char o_name[160];
+	char o_name[MAX_NLEN];
 	object_type *o_ptr = &inventory[slot];
 	int value;
 	u32b flgs[TR_FLAG_SIZE];

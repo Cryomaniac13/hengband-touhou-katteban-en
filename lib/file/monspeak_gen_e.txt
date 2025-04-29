@@ -710,6 +710,8 @@ says, 'Egads... to address this person was to make an error.'
 says, 'What dost thou think of it? My beauteous strategy.'
 # 「良かろう、修行の成果を見せてやる。」
 says, 'So be it, I shall display the fruits of my training.'
+#「我は風水を扱う仙人じゃ」
+#「風水はエクステリアも得意だぞ」
 
 N:1144:Miko
 # 「君の行動は全て見させて頂いたわ」

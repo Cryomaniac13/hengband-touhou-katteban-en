@@ -2122,6 +2122,14 @@ static void do_cmd_quaff_potion_aux(int item , bool flag_ignore_warning)
 
 			break;
 
+		case SV_ALCOHOL_NERIZAKE:
+			msg_print(_("áP‚É“ü‚Á‚½”S‰t‚ğH‚×‚Ä‚İ‚½B", "You consume the mucus in the jar."));
+			msg_print(_("–F†‚È‚è‚Æ—D‚µ‚¢ŠÃ‚İ‚ÅK‚¹‚È‹C‚¿‚É‚È‚Á‚½B", "The rich aroma and gentle sweetness make you feel happy."));
+			set_tim_lucky(20 + randint1(20), FALSE);
+
+			break;
+
+
 
 		default:
 			if(hoshiguma)

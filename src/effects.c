@@ -1649,9 +1649,10 @@ bool set_kamioroshi(u32b kamioroshi_type, int v)
 	bool flag_master = FALSE;
 
 	//_~‚ë‚µ‚ð‚Q‚Â“¯Žž‚É~‚ë‚¹‚éƒtƒ‰ƒO
+	//v2.0.20 —ì–²‚ÆˆË•P‚àƒŒƒxƒ‹40‚Ü‚Å‚Å‚«‚È‚¢‚±‚Æ‚É‚µ‚½
 	if(p_ptr->pclass == CLASS_HIGH_MAGE && p_ptr->realm1 == TV_BOOK_PUNISH && p_ptr->lev > 39
-		|| p_ptr->pclass == CLASS_REIMU && osaisen_rank() == 9
-		|| p_ptr->pclass == CLASS_YORIHIME)
+		|| p_ptr->pclass == CLASS_REIMU && osaisen_rank() == 9 && p_ptr->lev > 39
+		|| p_ptr->pclass == CLASS_YORIHIME && p_ptr->lev > 39)
 		flag_master = TRUE;
 
 	/* Hack -- Force good values */

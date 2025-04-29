@@ -39,6 +39,11 @@ D:It's the dead of night. Even the plants and trees are asleep.
 D:At night, the village is absolutely silent. Not even the sounds of insects can be heard...
 
 S:0230
+E:0259
+#D:どこからか太鼓の音が響いてくる...
+D:Sounds of taiko drums echo from somewhere...
+
+S:0300
 E:0359
 #D:「そう、貴方は少し生活習慣を見直す必要がある。」
 D:'Yes, you need to reassess your lifestyle a little.'

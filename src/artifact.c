@@ -5807,6 +5807,18 @@ void random_artifact_resistance(object_type * o_ptr, artifact_type *a_ptr)
 		}
 		return;
 	}
+	//v2.0.20 楼観剣は妖夢プレイ時以外にはダメージ増加・AC大幅減少がつくようにした
+	else if (o_ptr->name1 == ART_ROUKANKEN)
+	{
+		if (p_ptr->pclass != CLASS_YOUMU)
+		{
+			o_ptr->to_d = 25;
+			o_ptr->to_a = -25;
+			add_flag(o_ptr->art_flags, TR_AGGRAVATE);
+		}
+		return;
+
+	}
 	else if (o_ptr->name1 == ART_MURAMASA)
 	{
 		if (p_ptr->pclass != CLASS_SAMURAI && p_ptr->pclass != CLASS_YOUMU)

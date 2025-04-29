@@ -517,7 +517,8 @@ void teleport_player(int dis, u32b mode)
 			int tmp_m_idx = cave[oy+yy][ox+xx].m_idx;
 
 			/* A monster except your mount may follow */
-			if (tmp_m_idx && (p_ptr->riding != tmp_m_idx))
+			//v2.0.20 時間停止中はモンスターが追尾してこなくする
+			if (tmp_m_idx && (p_ptr->riding != tmp_m_idx) && !SAKUYA_WORLD && !world_player)
 			{
 				monster_type *m_ptr = &m_list[tmp_m_idx];
 				monster_race *r_ptr = &r_info[m_ptr->r_idx];
@@ -6642,6 +6643,7 @@ static bool dimension_door_aux(int x, int y, int mode)
 
 		else
 		{
+			if (p_ptr->pclass == CLASS_DAIYOUSEI) msg_print(_("あなたは霧に溶けるように消えた。", "You disappear, as if fading into mist."));
 			teleport_player_to(y, x, 0L);
 			return TRUE;
 		}
@@ -6856,7 +6858,7 @@ bool dimension_door( int mode)
 	/* Rerutn FALSE if cancelled */
 	if (!tgt_pt(&x, &y)) return FALSE;
 
-	if(mode == D_DOOR_MINI && distance(y,x,py,px) > 3)
+	if(mode == D_DOOR_MINI && distance(y,x,py,px) > (p_ptr->pclass == CLASS_DAIYOUSEI ? p_ptr->lev / 6 : 3))
 	{
 		msg_print(_("あなたの能力ではそこは遠すぎる。", "That's too far away for your ability."));
 		return FALSE;

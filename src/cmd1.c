@@ -893,6 +893,13 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 			/* Slaying */
 			mult = mult_slaying(mult, flgs, m_ptr);
 
+			/*:::特殊処理　クロノスの大鎌は男に対しXスレイ相当*/
+			//v2.0.20 スレイの直後に移動した
+			if (o_ptr->name1 == ART_KRONOS)
+			{
+				if ((r_ptr->flags1 & RF1_MALE) && mult < 40) mult = 40;
+			}
+
 			/* Elemental Brand */
 			mult = mult_brand(mult, flgs, m_ptr);
 
@@ -903,17 +910,10 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 				mult = mult_hissatsu(mult, flgs, m_ptr, mode);
 			}
 
-			/*:::特殊処理　クロノスの大鎌は男に対しXスレイ相当*/
-			if(o_ptr->name1 == ART_KRONOS)
-			{
-				if((r_ptr->flags1 & RF1_MALE) && mult < 40) mult = 40;
-			}
-
 			//v1.1.89 百々世のスネークイーターによるヘビスレイ
 			if (p_ptr->pclass == CLASS_MOMOYO)
 			{
 				if (p_ptr->tim_general[1] && r_ptr->d_char == 'J' && mult < 30) mult = 30;
-
 
 			}
 
@@ -925,14 +925,18 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 			}
 
 			/* Force Weapon */
-			///mod150808 アリスは無効化
-			if ((p_ptr->pclass != CLASS_ALICE) && (p_ptr->pclass != CLASS_SAMURAI) && (p_ptr->pclass != CLASS_MARTIAL_ARTIST) && (have_flag(flgs, TR_FORCE_WEAPON)) && (p_ptr->csp > (o_ptr->dd * o_ptr->ds / 5)))
+			if ( have_flag(flgs, TR_FORCE_WEAPON) && (p_ptr->csp > (o_ptr->dd * o_ptr->ds / 5)))
 			{
-				p_ptr->csp -= (1+(o_ptr->dd * o_ptr->ds / 5));
-				p_ptr->redraw |= (PR_MANA);
-				mult = mult * 3 / 2 + 20;
+				//v2.0.20 剣術家と格闘家は理力武器の恩恵を受けられない。アリスは投擲のときのみ理力有効
+				if (!(p_ptr->pclass == CLASS_ALICE && !thrown) && (p_ptr->pclass != CLASS_SAMURAI) && (p_ptr->pclass != CLASS_MARTIAL_ARTIST))
+				{
+					p_ptr->csp -= (1 + (o_ptr->dd * o_ptr->ds / 5));
+					p_ptr->redraw |= (PR_MANA);
+					mult = mult * 3 / 2 + 20;
 
-				gflag_force_effect = TRUE;//理力が効いたかどうか確認するためのフラグ
+					gflag_force_effect = TRUE;//理力が効いたかどうか確認するためのフラグ
+				}
+
 			}
 
 
@@ -4129,12 +4133,13 @@ int find_martial_arts_method(int findmode)
 static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int mode)
 {
 	int		num = 0, k, bonus, chance;
-	//int vir;
 
 	cave_type       *c_ptr = &cave[y][x];
 
 	monster_type    *m_ptr = &m_list[c_ptr->m_idx];
 	monster_race    *r_ptr = &r_info[m_ptr->r_idx];
+
+	int tmp_r_idx = m_ptr->r_idx;//モンスターを倒したあとはm_ptrを参照できなくなるのでr_idx値を使うために取っておく
 
 	/* Access the weapon */
 	object_type     *o_ptr = &inventory[INVEN_RARM + hand];
@@ -5793,6 +5798,25 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					}
 				}
 				*/
+
+				//v2.0.20 美天の棒は倒した敵を従わせるらしい
+				if (o_ptr->name1 == ART_BITEN && !weapon_invalid)
+				{
+					if (!(r_ptr->flags1 & (RF1_UNIQUE | RF1_QUESTOR))
+						&& !(r_ptr->flags2 & (RF2_PHANTOM | RF2_EPHEMERA))
+						&& !(r_ptr->flags3 & (RF3_NONLIVING))
+						&& !(r_ptr->flags7 & (RF7_UNIQUE2))
+						&& !p_ptr->inside_battle && !p_ptr->inside_arena
+						&& weird_luck()
+						)
+					{
+						if(summon_named_creature(0,y,x,tmp_r_idx,PM_FORCE_PET))
+							msg_format(_("%sが起き上がってあなたに従った！", "%^s gets up and serves you!"),m_name);
+
+					}
+
+				}
+
 				///item 斬鉄剣
 				if ((o_ptr->name1 == ART_ZANTETSU) && is_lowlevel && !weapon_invalid)
 #ifdef JP
@@ -5906,10 +5930,14 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 						}
 					}
 				}
-				m_ptr->maxhp -= (k+7)/8;
-				if (m_ptr->hp > m_ptr->maxhp) m_ptr->hp = m_ptr->maxhp;
-				if (m_ptr->maxhp < 1) m_ptr->maxhp = 1;
-				weak = TRUE;
+				//v2.0.20 ここってモンスターを倒した後でもm_ptrを参照していないか。問題はないかもしれないが気味が悪いので倒してないとき限定にしておく
+				if (!(*mdeath))
+				{
+					m_ptr->maxhp -= (k + 7) / 8;
+					if (m_ptr->hp > m_ptr->maxhp) m_ptr->hp = m_ptr->maxhp;
+					if (m_ptr->maxhp < 1) m_ptr->maxhp = 1;
+					weak = TRUE;
+				}
 			}
 
 			if (can_feed && (drain_result > 0))
@@ -7915,8 +7943,10 @@ bool py_attack(int y, int x, int mode)
 	{
 		if (p_ptr->migite && inventory[INVEN_RARM].tval == TV_KNIFE)
 			py_attack_aux(y, x, &fear, &mdeath, 0, mode);
-		if (p_ptr->hidarite && !mdeath && inventory[INVEN_RARM].tval == TV_KNIFE)
-			py_attack_aux(y, x, &fear, &mdeath, 1, mode);
+		//v2.0.20
+		//if (p_ptr->hidarite && !mdeath && inventory[INVEN_RARM].tval == TV_KNIFE)
+		if (p_ptr->hidarite && !mdeath && inventory[INVEN_LARM].tval == TV_KNIFE)
+		py_attack_aux(y, x, &fear, &mdeath, 1, mode);
 	}
 	//養蜂家の蜂によるカウンター攻撃
 	else if (mode == HISSATSU_ATTACK_BEE)
@@ -8363,6 +8393,16 @@ bool move_player_effect(int ny, int nx, u32b mpe_mode)
 			p_ptr->update |= (PU_BONUS);
 			handle_stuff();
 		}
+
+		//v2.0.20 藍も水を受けたら少し頭が悪くなる
+		if (p_ptr->pclass == CLASS_RAN && have_flag(f_ptr->flags, FF_WATER) && have_flag(f_ptr->flags, FF_DEEP)
+			&& !p_ptr->levitation && one_in_(p_ptr->resist_water ? 64 : 8))
+		{
+			msg_print(_("水に入って式の調子が悪くなった...", "Your shikigami powers get worse upon entering water..."));
+			do_dec_stat(A_INT);
+
+		}
+
 
 		//v1.1.35 ネムノ縄張り
 		if((c_ptr->cave_xtra_flag & CAVE_XTRA_FLAG_NEMUNO) != (oc_ptr->cave_xtra_flag & CAVE_XTRA_FLAG_NEMUNO))
@@ -10186,6 +10226,13 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	/*:::武器TVAL(23～)を対応する技能値配列項目(10～)に変換する*/
 	if(skill_num >= TV_KNIFE) n = skill_num -= SKILL_WEAPON_SHIFT;
 
+	if (n >= SKILL_EXP_MAX)
+	{
+		msg_format(_("ERROR:gain_skill_exp()に不正な値(%d)が渡された",
+                    "ERROR: incorrect value (%d) passed as an argument to gain_skill_exp()"), skill_num);
+		return;
+	}
+
 	/*:::職業ごとのその技能の最大値を得る 適性値*1600 */
 	skill_max = cp_ptr->skill_aptitude[n] * SKILL_LEV_TICK * 10;
 	max_skill_lev = cp_ptr->skill_aptitude[n] * 10;
@@ -10279,9 +10326,17 @@ s16b ref_skill_exp(int skill_num){
 	int n = skill_num;
 	if(skill_num >= TV_KNIFE) n = skill_num -= SKILL_WEAPON_SHIFT;
 
-	if(n >= 5 && n <= 9 || n >= 24){
+	if (n >= SKILL_EXP_MAX)
+	{
+		msg_format(_("ERROR:ref_skill_exp()に不正な値(%d)が渡された",
+                    "ERROR: incorrect value (%d) passed as an argument to ref_skill_exp()"), skill_num);
+		return 0;
+	}
+
+	if(n >= 5 && n <= 9){
 		msg_format(_("ERROR:ref_skill_exp()が現在使われていない技能(%d)で呼ばれた。",
                     "ERROR: Unused skill number (%d) called in ref_skill_exp()"),skill_num);
+		return 0;
 	}
 
 	//隠岐奈「無縁の芸能者」実行中

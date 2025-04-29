@@ -1680,6 +1680,7 @@ void monster_death(int m_idx, bool drop_item)
 	int dump_item = 0;
 	int dump_gold = 0;
 
+
 	int number = 0;
 
 	int yachie_card_num = 0;
@@ -2759,6 +2760,19 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			(void)drop_near(q_ptr, -1, y, x);
 		}
 	break;
+
+	//v2.0.20 美天　練酒
+	case	MON_BITEN:
+		if (drop_chosen_item)
+		{
+			q_ptr = &forge;
+			object_prep(q_ptr, lookup_kind(TV_ALCOHOL, SV_ALCOHOL_NERIZAKE));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+		break;
+
+
 	//v1.1.79 ロキ　スキーズブラズニル
 	case	MON_LOKI:
 		if (drop_chosen_item)
@@ -3692,7 +3706,8 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 	}
 
 	//霊夢は敵を倒すとお賽銭を得る
-	if(p_ptr->pclass == CLASS_REIMU && !is_pet(m_ptr))
+	//v2.0.20 賭け試合や夢日記ではお賽銭が入らなくする
+	if(p_ptr->pclass == CLASS_REIMU && !(is_pet(m_ptr) || p_ptr->inside_battle || p_ptr->inside_arena))
 	{
 		int amount = r_ptr->level * r_ptr->level * (50 + p_ptr->stat_ind[A_CHR]) / 200;
 		if(!amount) amount = 1;

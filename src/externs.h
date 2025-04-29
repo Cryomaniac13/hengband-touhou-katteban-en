@@ -885,8 +885,8 @@ extern void determine_bounty_uniques(void);
 //extern void determine_today_mon(bool conv_old);
 extern void play_game(bool new_game);
 extern bool psychometry(void);
-extern void leave_level(int level);
-extern void enter_level(int level);
+//extern void leave_level(int level);
+//extern void enter_level(int level);
 extern s32b turn_real(s32b hoge);
 extern void prevent_turn_overflow(void);
 
@@ -1005,7 +1005,7 @@ extern void roff_top(int r_idx);
 extern void screen_roff(int r_idx, int mode);
 extern void display_roff(int r_idx);
 extern void output_monster_spoiler(int r_idx, void (*roff_func)(byte attr, cptr str));
-extern void create_name(int type, char *name);
+//extern void create_name(int type, char *name);
 extern bool mon_hook_dungeon(int r_idx);
 
 extern monster_hook_type get_monster_hook(void);
@@ -1651,7 +1651,7 @@ extern bool check_monspell_learned(int monspell_num);
 /* hissatsu.c */
 //extern void hissatsu_info(char *p, int power);
 extern void do_cmd_hissatsu(void);
-extern void do_cmd_hissatsu_browse(void);
+//extern void do_cmd_hissatsu_browse(void);
 extern void do_cmd_gain_hissatsu(void);
 extern s16b mult_hissatsu(int mult, u32b *flgs, monster_type *m_ptr, int mode);
 
@@ -2113,7 +2113,7 @@ extern void search_specific_object(int mode);
 extern void mutation_stop_mouth(void); //ŠO‚©‚çŽg‚¦‚é‚æ‚¤‚É‚·‚é
 
 extern bool eat_rock(void);
-extern bool item_tester_hook_make_tsukumo(object_type *o_ptr);
+//extern bool item_tester_hook_make_tsukumo(object_type *o_ptr);
 
 ///mod140813 šb‘§
 extern bool set_asthma(int v);
@@ -2791,3 +2791,5 @@ extern void	add_honey(void);
 extern bool object_is_eatable(object_type *o_ptr);
 extern bool object_is_magic_item(object_type *o_ptr);
 
+//v2.0.20
+extern bool detect_specific_objects(int range, int mode);
