@@ -4015,9 +4015,11 @@ int find_martial_arts_method(int findmode)
 		else
 			return MELEE_MODE_JYOON_1;
 
-
-
-
+	case CLASS_MIZUCHI:
+		if (!CHECK_MIZUCHI_RESURRECT)
+			return MELEE_MODE_MIZUCHI;
+		else
+			break;
 	}
 
 
@@ -5231,7 +5233,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 				//v1.1.46 女苑の特殊処理　モードによって金を奪ったり消費したりする
 				if (p_ptr->pclass == CLASS_JYOON)
 				{
-					if (martial_arts_method == MELEE_MODE_JYOON_1)
+					//v2.1.0 夢日記では金を奪えないように変更
+					if (martial_arts_method == MELEE_MODE_JYOON_1 && !p_ptr->inside_arena)
 					{
 						int tmp, gain_money;
 
@@ -5752,7 +5755,7 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 					if (skill_type == TV_AXE) attack_effect_type = ATTACK_EFFECT_DEC_DEF;
 					if (skill_type == TV_POLEARM) attack_effect_type = ATTACK_EFFECT_DELAY;
 
-					apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,TRUE);
+					if(attack_effect_type) apply_special_effect(c_ptr->m_idx, attack_effect_type, critical_rank, ref_skill_exp(skill_type), effect_turns,TRUE);
 				}
 			}
 
@@ -10223,22 +10226,23 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	if (CLASS_RIDING_BACKDANCE && skill_num == SKILL_RIDING) return;
 
 
-	/*:::武器TVAL(23～)を対応する技能値配列項目(10～)に変換する*/
-	if(skill_num >= TV_KNIFE) n = skill_num -= SKILL_WEAPON_SHIFT;
+	//これらの武器に熟練度はない
+	if (skill_num == TV_MAGICITEM || skill_num == TV_MAGICWEAPON || skill_num == TV_OTHERWEAPON)
+	{
+		return;
+	}
 
-	if (n >= SKILL_EXP_MAX)
+	/*:::武器TVAL(23～)を対応する技能値配列項目(10～)に変換する*/
+	//v2.1.0 式を間違えて配列外アクセスになっていたので修正。ここでskill_numが変わっていたので銃の熟練度獲得の補正が機能していなかった？
+	if (skill_num >= TV_KNIFE) n -= SKILL_WEAPON_SHIFT;
+
+	if (n < 0 || n >= SKILL_EXP_MAX)
 	{
 		msg_format(_("ERROR:gain_skill_exp()に不正な値(%d)が渡された",
                     "ERROR: incorrect value (%d) passed as an argument to gain_skill_exp()"), skill_num);
 		return;
 	}
-
-	/*:::職業ごとのその技能の最大値を得る 適性値*1600 */
-	skill_max = cp_ptr->skill_aptitude[n] * SKILL_LEV_TICK * 10;
-	max_skill_lev = cp_ptr->skill_aptitude[n] * 10;
-	old_skill_lev = p_ptr->skill_exp[n] / SKILL_LEV_TICK;
-
-	if(n==0) skill_desc = _("格闘", "Martial Arts");
+    else if(n==0) skill_desc = _("格闘", "Martial Arts");
 	else if(n==1) skill_desc = _("盾", "Shields");
 	else if(n==2) skill_desc = _("乗馬", "Riding");
 	else if(n==3) skill_desc = _("二刀流", "Dual Wielding");
@@ -10254,12 +10258,17 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	else if(n==18) skill_desc = _("弓", "Bows");
 	else if(n==19) skill_desc = _("クロスボウ", "Crossbows");
 	else if(n==20) skill_desc = _("銃", "Guns");
-	else if(n>=21&&n<=23) return; /*MAGICBOOK/MAGICWEAPON/OTHERWEAPONには熟練度がない*/
-	else{
+	else
+    {
 		msg_format(_("ERROR:gain_skill_exp()が現在使われていない技能(%d)で呼ばれた。",
                     "ERROR: Unkown skill called (%d) in gain_skill_exp()"),skill_num);
 		return;
 	}
+
+	/*:::職業ごとのその技能の最大値を得る 適性値*1600 */
+	skill_max = cp_ptr->skill_aptitude[n] * SKILL_LEV_TICK * 10;
+	max_skill_lev = cp_ptr->skill_aptitude[n] * 10;
+	old_skill_lev = p_ptr->skill_exp[n] / SKILL_LEV_TICK;
 
 	//既に上限の場合終了
 	if(p_ptr->skill_exp[n] >= skill_max) return;
@@ -10289,9 +10298,9 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 	if((p_ptr->lev < old_skill_lev ) && one_in_(2)) amount /= 2;
 
 	/*:::騎乗モンスターが弱いと騎乗技能は上がりにくい*/
-	if(n == SKILL_RIDING && (ridinglevel < old_skill_lev) && one_in_(2)) amount /= 2;
+	if(skill_num == SKILL_RIDING && (ridinglevel < old_skill_lev) && one_in_(2)) amount /= 2;
 	/*:::盾は少し上がりにくい*/
-	if(n == SKILL_SHIELD && one_in_(2)) amount /= 2;
+	if(skill_num == SKILL_SHIELD && one_in_(2)) amount /= 2;
 
 	/*:::ペットによる技能値上げを抑止*/
 	if(is_pet(m_ptr) && p_ptr->skill_exp[n] > 4000)
@@ -10322,18 +10331,33 @@ void gain_skill_exp(int skill_num , monster_type* m_ptr)
 
 
 /*:::武器、技能の経験値を参照する*/
+//p_ptr->skill_exp[21]に経験値が記録される
+//[0-4]:格闘、盾、騎乗、二刀、投擲
+//[5-9]:空欄
+//[10-20]:短剣～銃 TV_***から13を引いた値
 s16b ref_skill_exp(int skill_num){
-	int n = skill_num;
-	if(skill_num >= TV_KNIFE) n = skill_num -= SKILL_WEAPON_SHIFT;
 
-	if (n >= SKILL_EXP_MAX)
+	int n = skill_num;
+
+	//v2.1.0 n = skill_num -= SKILL_WEAPON_SHIFTになってたので修正
+	//エラーメッセージが変になる以外に実行上の問題はなかったはず
+	if(skill_num >= TV_KNIFE) n -= SKILL_WEAPON_SHIFT;
+
+	//v2.1.0 針などを装備したときの処理追加
+	//2.0.20でエラーが出るようになったようだがそれ以前はなんでこの処理なしでもエラーが出なかったんだろう？
+	//→2.0.20でマジックナンバーを解消してSKILL_EXP_MAXにしたがそれ以前はマジックナンバーをミスっててずっと配列外アクセスしてたというオチだった。
+	//ひょっとしたら針や扇の命中率が極端に高かったり低かったりしたかもしれない
+	if (skill_num == TV_MAGICITEM || skill_num == TV_MAGICWEAPON || skill_num == TV_OTHERWEAPON)
+	{
+		return 0;
+	}
+	else if (n < 0 || n >= SKILL_EXP_MAX)
 	{
 		msg_format(_("ERROR:ref_skill_exp()に不正な値(%d)が渡された",
                     "ERROR: incorrect value (%d) passed as an argument to ref_skill_exp()"), skill_num);
 		return 0;
 	}
-
-	if(n >= 5 && n <= 9){
+	else if(n >= 5 && n <= 9){
 		msg_format(_("ERROR:ref_skill_exp()が現在使われていない技能(%d)で呼ばれた。",
                     "ERROR: Unused skill number (%d) called in ref_skill_exp()"),skill_num);
 		return 0;

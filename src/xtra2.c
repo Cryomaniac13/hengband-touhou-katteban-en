@@ -429,6 +429,9 @@ bool monster_is_you(s16b r_idx)
 		case CLASS_ZANMU:
 			if (r_idx == MON_ZANMU) return TRUE;
 			else return FALSE;
+		case CLASS_MIZUCHI:
+			if (r_idx == MON_MIZUCHI) return TRUE;
+			else return FALSE;
 
 	}
 

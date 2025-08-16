@@ -4109,6 +4109,17 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (p_ptr->lev > 24) add_flag(flgs, TR_RES_COLD);
 		break;
 
+	case CLASS_MIZUCHI:
+		add_flag(flgs, TR_RES_FEAR);
+		add_flag(flgs, TR_RES_NETHER);
+		add_flag(flgs, TR_FREE_ACT);
+
+		if(plev > 29)add_flag(flgs, TR_WARNING);
+		if(plev > 39)add_flag(flgs, TR_RES_INSANITY);
+		break;
+
+
+
 	default:
 		break; /* Do nothing */
 	}

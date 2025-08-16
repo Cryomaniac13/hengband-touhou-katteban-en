@@ -1591,6 +1591,7 @@ bool hack_flag_access_home_orin = FALSE;
 /*:::idxが設定されるとsummon_named_creature,typeが指定されるとsummon_specificが呼ばれる*/
 int hack_ex_bldg_summon_idx = 0;
 int hack_ex_bldg_summon_type = 0;
+int hack_ex_bldg_summon_num = 0;
 u32b hack_ex_bldg_summon_mode = 0L;
 
 ///mod160305 ヤマビコ可能な魔法を受けた時idxを記録 アイテムカードで使うために独立変数にした
@@ -1741,4 +1742,7 @@ bool	flag_nue_check_undefined = TRUE;
 
 //v2.0.11 慧ノ子(モンスター)のトラップ生成が全てトラバサミになる特殊フラグ
 bool	hack_flag_enoko_make_beartrap = FALSE;
+
+//v2.1.0 怨霊に応援されているときnew_class_power_aux経由の攻撃の属性が変更される特殊フラグ
+bool	hack_flag_darkness_power = FALSE;
 

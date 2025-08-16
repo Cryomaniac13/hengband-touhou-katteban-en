@@ -78,8 +78,8 @@
  */
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
-#define H_VER_MINOR 0
-#define H_VER_PATCH 20
+#define H_VER_MINOR 1
+#define H_VER_PATCH 0
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -494,6 +494,8 @@
 #define MUT4_GHOST_HANIWA				0x00000080L
 //v1.1.84
 #define MUT4_GHOST_HANGOKUOH			0x00000100L
+//v2.1.0
+#define MUT4_GHOST_CHEERS				0x00000200L
 
 
 
@@ -1330,6 +1332,10 @@
 /*Maximum number of player "class" types (see "table.c", etc)*/
 /*:::class_info[]の項目数 CLASS_**の最終+1*/
 #define MAX_CLASS            158
+
+#define CHECK_MIZUCHI_GHOST			(p_ptr->pclass == CLASS_MIZUCHI && p_ptr->prace == RACE_SPECTRE)
+#define CHECK_MIZUCHI_RESURRECT		(p_ptr->pclass == CLASS_MIZUCHI && p_ptr->magic_num2[0])
+
 
 //v1.1.41 舞と里乃の騎乗を「背後で踊る」にするための判定
 //v2.0.2 典の「寄生」も基本的に同じ扱いにする
@@ -2446,6 +2452,8 @@
 #define ACT_BLAST_MISSILES		189
 //v2.0.11
 #define ACT_TRANSPORTATION_TRAP		190
+//v2.1.0
+#define ACT_MUGENSYUKU			191
 
 
 #define ACT_CAST_OFF            250
@@ -2521,6 +2529,8 @@
 #define TV_BOW			31
 #define TV_CROSSBOW		32
 #define TV_GUN			33
+
+//TVが34以上の武器は武器技能獲得の対象にならない　詳細はref_skill_expなど
 
 //v1.1.32 MAGICBOOK→MAGICITEM 隣接攻撃に使わない手に持つもの全般にした。グリマリ、鼓など
 #define TV_MAGICITEM		34
@@ -7916,6 +7926,7 @@ extern int PlayerUID;　
 #define MELEE_MODE_AUNN_2		106 //v2.0.11 あうん追加攻撃用
 #define MELEE_MODE_ENOKO		107 //v2.0.12 慧ノ子
 #define MELEE_MODE_BEES			108 //v2.0.19 養蜂家
+#define MELEE_MODE_MIZUCHI		109 //v2.1.0  瑞霊
 
 /*:::格闘効果の特殊効果分類*/
 #define MELEE_STUN				1	//朦朧
@@ -8331,8 +8342,9 @@ extern int PlayerUID;　
 #define BLDG_EX_YUMA		39 //尤魔
 #define BLDG_EX_ZASHIKI		40 //座敷わらしのテレワーク　拠点使用可能
 #define BLDG_EX_HATATE		41 //はたての家
+#define BLDG_EX_GHOSTS		42 //v2.1.0 怨霊たちの溜まり場
 
-#define BLDG_EX_MAX			42 //最後の建物番号+1
+#define BLDG_EX_MAX			43 //最後の建物番号+1
 
 
 #define CAST_MONSPELL_EXTRA_KYOUKO_YAMABIKO -1

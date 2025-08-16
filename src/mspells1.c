@@ -864,6 +864,16 @@ msg_format("悪意に満ちた黒いオーラが%sをとりまいた...", o_name);
 
 		o_ptr->feeling = FEEL_NONE;
 	}
+	//v2.1.0 瑞霊はアイテムの呪いを無効化 呪いフラグはobject_flags()で無視するのでここではpvalなどのマイナスを0にする
+	if (p_ptr->pclass == CLASS_MIZUCHI && object_is_equipment(o_ptr))
+	{
+		if (o_ptr->to_a < 0) o_ptr->to_a = 0;
+		if (o_ptr->to_d < 0) o_ptr->to_d = 0;
+		if (o_ptr->to_h < 0) o_ptr->to_h = 0;
+		if (o_ptr->pval < 0) o_ptr->pval = 0;
+	}
+
+
 	p_ptr->update |= (PU_BONUS);
 }
 

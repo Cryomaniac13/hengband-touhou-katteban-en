@@ -1991,6 +1991,7 @@ void do_cmd_takeoff(void)
 
 		if(p_ptr->pclass == CLASS_TSUKUMO_MASTER) force_remove2 = TRUE;
 		if(p_ptr->prace == RACE_TSUKUMO) force_remove2 = TRUE;
+		if (p_ptr->pclass == CLASS_MIZUCHI) force_remove2 = TRUE;
 
 		if(force_remove1 || force_remove2)
 		{
@@ -3930,7 +3931,7 @@ bool wield_check( int slot, int item_new, int mode)
 	}
 
 	/*:::人魚、屠自古は靴を履けない　外すことはできるがここに来ずに自動的に外れる予定*/
-	if(p_ptr->muta3 & MUT3_FISH_TAIL || p_ptr->prace == RACE_NINGYO  || p_ptr->pclass == CLASS_TOZIKO || p_ptr->pclass == CLASS_KISUME){
+	if(p_ptr->muta3 & MUT3_FISH_TAIL || p_ptr->prace == RACE_NINGYO  || p_ptr->pclass == CLASS_TOZIKO || p_ptr->pclass == CLASS_KISUME || (CHECK_MIZUCHI_GHOST)){
 		if(slot == INVEN_FEET && o_ptr_new->tval != 0)
 		{
 			msg_print(_("あなたは靴を履くことができない。", "You cannot wear boots."));

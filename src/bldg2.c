@@ -2675,6 +2675,7 @@ void compound_drug(void)
 			if(!max)
 			{
 				msg_print(_("材料の数が足りない。", "You don't have enough materials."));
+				inkey();
 				continue;
 			}
 			else if(max > 1)
@@ -2695,6 +2696,7 @@ void compound_drug(void)
 			{
 				msg_print(_("所持金が施設使用料に足りないようだ。",
                             "You don't have enough money to pay the fee."));
+				inkey();
 				continue;
 			}
 
@@ -3434,6 +3436,12 @@ void exbldg_search_around(void)
 		msg3 = _("「それでは、探索頑張ってくださいね。」", "'Good luck in your adventure.'");
 		break;
 
+	case BLDG_EX_GHOSTS: //v2.1.0 怨霊の溜まり場
+		msg1 = _("怨霊の群れが無言であなたを遠巻きに見ている...", "The swarm of vengeful spirits silently watches you from afar...");
+		msg1_2 = "";
+		msg2 = _("この場にとどまりますか？", "Stay here?");
+		msg3 = _("怨霊たちはあなたに構わず何やら盛り上がっている...", "The vengeful spirits seem to be excited about something, ignoring you...");
+		break;
 
 
 
@@ -4267,6 +4275,43 @@ void exbldg_search_around(void)
 			show_building(&building[ex_bldg_num]);
 			break;
 		}
+
+
+		case BLDG_EX_GHOSTS: //v2.1.0 怨霊の溜まり場
+		{
+
+			clear_bldg(4, 18);
+			prt(_("怨霊たちがあなたに近寄ってくる...", "The vengeful spirits approach you..."), 7, 20);
+			inkey();
+
+			if (p_ptr->chp <= p_ptr->mhp / 2)
+			{
+				prt(_("怨霊たちはあなたに向けて高らかにラッパを吹き鳴らした！",
+                    "The vengeful spirits loudly blow trumpets at you!"), 12, 20);
+				hp_player(500);
+				set_cut(0);
+				set_stun(0);
+				gain_random_mutation(218);
+			}
+			else
+			{
+				c_put_str(TERM_RED, _("怨霊たちはあなたに殺到して揉みくちゃにした！",
+                    "The vengeful spirits assault you!"), 12, 20);
+
+				hack_ex_bldg_summon_mode = (PM_ALLOW_GROUP | PM_NO_PET);
+				if (randint1(dun_level) < 25) hack_ex_bldg_summon_idx = MON_ONRYOU;
+				else
+				{
+					hack_ex_bldg_summon_idx = MON_G_ONRYOU;
+					hack_ex_bldg_summon_num = 2 + dun_level / 16;
+				}
+
+			}
+			inkey();
+
+		}
+		break;
+
 		default:
 		msg_print(_("ERROR:exbldg_search_around()にこの建物の処理が登録されていない",
                     "ERROR: Logic for this building not listed in exbldg_search_around()"));
@@ -4505,6 +4550,14 @@ bool	nightmare_diary(void)
 	{
 		msg_print(_("あなたは本を見せてもらえなかった。",
                     "You weren't allowed to read the diary."));
+		return FALSE;
+	}
+
+	//瑞霊も参加不可。入るときに憑依効果が消滅して出られなくなるので
+	if (CHECK_MIZUCHI_GHOST)
+	{
+		msg_print(_("やめておこう。夢の支配者に心を開示したくない。",
+                "Better not do this. You don't want to open up your heart to the ruler of dreams."));
 		return FALSE;
 	}
 
@@ -5000,15 +5053,20 @@ bool hatate_search_unique_monster(void)
 			return FALSE;
 		}
 		//自分　＠がはたてのときは一つ前に行くはず
-		if (monster_is_you(search_r_idx))
+		else if (monster_is_you(search_r_idx))
 		{
-			prt(_("　見つけたわ！私の目の前ね！」", "  it's you! You're in front of me!'"), 9, 20);
+			if(p_ptr->pclass == CLASS_MIZUCHI)
+				prt(_("　やっぱり駄目ね。あいつを念写すると画像が破損するの。ごめんね？」",
+                    "  It's no use. The image gets messed up when I try to take a photo. I'm sorry."), 9, 20);
+			else
+				prt(_("　見つけたわ！私の目の前ね！」", "  it's you! You're in front of me!'"), 9, 20);
 			inkey();
 			return FALSE;
 		}
 
 		//打倒済み
-		if (r_ptr->r_akills)
+		//v2.1.0 レイマリ除く
+		if (r_ptr->r_akills && search_r_idx != MON_REIMU && search_r_idx != MON_MARISA)
 		{
 			if (hatate)
 				prt(_("　自分が格好良く倒したシーンが写っていた。", "   There's a scene of you beating the target up."), 9, 20);
@@ -5283,6 +5341,19 @@ bool hatate_search_unique_monster(void)
 		else
 			c_put_str(TERM_WHITE, format("I've found the target! Level %d of %s!'", search_floor, (d_name + d_info[search_dungeon].name)), 9, 20);
 #endif
+
+		//v2.1.0 追加ジョークメッセージ
+		if (search_r_idx == MON_DIO)
+		{
+
+			if (hatate)
+				c_put_str(TERM_WHITE, format(_("...こちらを見て何か叫んでいるように見えるのは気のせいだろうか？",
+                                            "...looks like he's looking here and shouting something... but that's just my imagination?")), 10, 20);
+			else
+					c_put_str(TERM_WHITE, format(_("(ひょっとしてこの人こっちに気づいてる？)",
+                                            "(By the way, did that person notice that?)")), 10, 20);
+
+		}
 
 		inkey();
 

@@ -2050,6 +2050,8 @@ msg_print("そこには何もありません。");
 			return;
 		}
 
+		//v2.1.0 vault内でも発動できるようにした
+#if 0
 		/* No fetching from vault */
 		if (c_ptr->info & CAVE_ICKY)
 		{
@@ -2061,7 +2063,7 @@ msg_print("アイテムがコントロールを外れて落ちた。");
 
 			return;
 		}
-
+#endif
 		/* We need to see the item */
 		if (require_los)
 		{
@@ -7942,7 +7944,7 @@ bool energy_drain(void)
 		monster_race    *r_ptr = &r_info[m_ptr->r_idx];
 		char            m_name[120];
 		int fail = r_ptr->level;
-		int dam = p_ptr->lev * 2;
+		int dam = (CHECK_MIZUCHI_GHOST) ? (p_ptr->lev * 3) : (p_ptr->lev * 2);
 
 		monster_desc(m_name, m_ptr, 0);
 		if (!monster_living(r_ptr))

@@ -1194,9 +1194,9 @@ struct player_type
 	/*:::アリーナのどこまで勝ち上がったか　負けたら負の値が入る*/
 	//s16b arena_number;		/* monster number in arena -KMW- */
 	s16b kourindou_number;	//v1.1.56 香霖堂での珍品蒐集のためarena_numberをこれに変えた
-	bool inside_arena;		/* Is character inside arena? */
+	bool inside_arena;		/* 本家アリーナ、こっちでいう夢日記の中*/
 	s16b inside_quest;		/* Inside quest level */
-	bool inside_battle;		/* Is character inside tougijou? */
+	bool inside_battle;		/* 本家闘技場、こっちでいう賭け試合の観戦中 */
 
 	/*:::ワールドマップでの位置*/
 	s32b wilderness_x;	/* Coordinates in the wilderness */

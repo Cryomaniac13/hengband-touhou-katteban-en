@@ -5807,6 +5807,17 @@ void apply_magic(object_type *o_ptr, int lev, u32b mode)
 		if (k_ptr->gen_flags & (TRG_RANDOM_CURSE1)) o_ptr->curse_flags |= get_curse(1, o_ptr);
 		if (k_ptr->gen_flags & (TRG_RANDOM_CURSE2)) o_ptr->curse_flags |= get_curse(2, o_ptr);
 	}
+
+
+	//v2.1.0 瑞霊はアイテムの呪いを無効化 呪いフラグはobject_flags()で無視するのでここではpvalなどのマイナスを0にする
+	if (p_ptr->pclass == CLASS_MIZUCHI && object_is_equipment(o_ptr))
+	{
+		if (o_ptr->to_a < 0) o_ptr->to_a = 0;
+		if (o_ptr->to_d < 0) o_ptr->to_d = 0;
+		if (o_ptr->to_h < 0) o_ptr->to_h = 0;
+		if (o_ptr->pval < 0) o_ptr->pval = 0;
+	}
+
 }
 
 
@@ -10212,7 +10223,8 @@ static void drain_essence(void)
 	}
 	else
 	{
-		floor_item_increase(0 - item, -1);
+		//v2.1.0 個数が常に1になっていたので修正
+		floor_item_increase(0 - item, -o_ptr->number);
 		floor_item_describe(0 - item);
 		floor_item_optimize(0 - item);
 	}

@@ -6594,6 +6594,16 @@ void do_cmd_store(void)
 		return ;
 	}
 
+	//v2.1.0 —ì‚Í‚»‚Ì‚Ü‚Ü‚Å‚Í’nã‚Ì“X‚É“ü‚ê‚È‚¢(‹Œ’n–ŽsŠX‚É‚Í“ü‚ê‚é)
+	if ((CHECK_MIZUCHI_GHOST) && !dun_level && p_ptr->town_num != TOWN_CHITEI && which != STORE_HOME && which != STORE_MUSEUM)
+	{
+		if (p_ptr->mimic_form != MIMIC_MARISA && p_ptr->mimic_form != MIMIC_METAMORPHOSE_NORMAL)
+		{
+			msg_print(_("‚ ‚È‚½‚ÍŽè”z’†‚¾B’N‚©‚ÉœßˆË‚µ‚È‚¢‚Æ“ü‚ê‚È‚¢B", "You're a wanted person. You can't go inside if you're not possessing someone."));
+			return;
+		}
+	}
+
 	//v1.1.36 ¬—éƒNƒGƒXƒgŽó’’†
 	//v1.1.36b “X‚ÌŽí—Þ‚Ì”»’è‚ð–Y‚ê‚Ä‘S“X‹x‹Æ‚µ‚Ä‚½‚Ì‚ÅC³
 	if(p_ptr->town_num == TOWN_HITOZATO && which == STORE_BOOK && quest[QUEST_KOSUZU].status == QUEST_STATUS_TAKEN)

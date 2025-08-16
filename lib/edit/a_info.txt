@@ -5809,3 +5809,16 @@ F:INSTA_ART | HIDE_TYPE
 F:INT | WIS | CHR | SAVING
 F:RES_INSANITY | RES_CONF | RES_CHAOS | RES_BLIND | SEE_INVIS
 D:湖の姫ニミュエが騎士ランスロットに授けた強力な退魔の指輪だ。
+
+N:352:先代巫女の
+E:of the Ancestral Shrine Maiden
+I:27:9:4
+W:80:40:60:300000
+P:0:5d4:20:20:10
+F:WIS | CON | CHR | SAVING |
+F:SLAY_EVIL | KILL_UNDEAD | SLAY_UNDEAD | KILL_DEMON | SLAY_DEMON | KILL_KWAI | SLAY_KWAI
+F:FREE_ACT | RES_NETHER | RES_TIME | LITE | BLESSED | RES_FEAR
+F:SEE_INVIS | SHOW_MODS | ACTIVATE
+U:MUGENSYUKU
+D:百年以上前、人間と妖怪の関係が今よりずっと殺伐としていた時代の博麗の巫女が持っていた長大な幣だ。
+D:十字の棒に大きな鈴と飾り布がついている。

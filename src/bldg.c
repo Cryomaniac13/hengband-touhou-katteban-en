@@ -2509,7 +2509,6 @@ static void sell_curiosity(void)
 
 
 /*:::闘技場処理。モンスターを選定して戦わせるところまで？*/
-///sysdel tougi inside_battleは面倒なので残すがこの関数は削除する予定
 #if 0
 void battle_monsters(void)
 {
@@ -10561,7 +10560,7 @@ bool check_quest_unique_text(void)
 #ifdef JP
 					strcpy(quest_text[line++], "太陽の畑で妖怪に正体を見破られて戦いになった。");
 					strcpy(quest_text[line++], "なかなかの強敵で撤退を余儀なくされた。");
-					strcpy(quest_text[line++], "最近の妖怪もそう捨てたものではないのかもしれない。");
+					strcpy(quest_text[line++], "最近の妖怪もそう腑抜けてはいないようだ。");
 #else
 					strcpy(quest_text[line++], "The youkai in Garden of Sun have noticed your true");
                     strcpy(quest_text[line++], "identity and attacked, forcing you to retreat.");
@@ -10899,9 +10898,11 @@ bool check_ignoring_quest(int questnum)
 
 	case QUEST_HANGOKU1: //v1.1.84 連続昏睡事件Ⅰ　魔理沙・紫・★が出ないモードのとき受領不可
 		if (pc == CLASS_MARISA || pc == CLASS_YUKARI) return TRUE;
+		if (pc == CLASS_MIZUCHI) return TRUE;
 		if (ironman_no_fixed_art) return TRUE;
-
 		break;
+	case QUEST_HANGOKU2://連続昏睡事件2
+		if (pc == CLASS_MIZUCHI) return TRUE;
 
 	case QUEST_MORIYA_2:
 		if (pc == CLASS_CHIMATA) return TRUE;//千亦はアビリティカードが報酬のクエストを受けられない
@@ -13519,7 +13520,7 @@ bool pass_through_chirei_koudou(void)
 		}
 		//go through
 	default:
-		prt(_("あなたは薄暗い洞窟の中を歩き始めた...", "You start walking through the dark cave..."), 10, 10);
+		prt(_("あなたは薄暗い洞窟の中を進み始めた...", "You start going through the dark cave..."), 10, 10);
 		break;
 	}
 
@@ -17613,10 +17614,39 @@ void do_cmd_bldg(void)
 		return;
 	}
 
+	which = f_info[cave[py][px].feat].subtype;
+	bldg = &building[which];
+
 	if (mimic_info[p_ptr->mimic_form].MIMIC_FLAGS & MIMIC_IS_GIGANTIC)
 	{
 		msg_print(_("建物に入れない。", "You can't enter buildings."));
 		return ;
+	}
+
+	//v2.1.0 瑞霊はそのままでは地上の建物に入れない
+	if (p_ptr->pclass == CLASS_MIZUCHI)
+	{
+		//さとりの建物には入れない
+		if (p_ptr->town_num == TOWN_CHITEI && which == 0)
+		{
+			msg_print(_("ここはさとりの屋敷だ。入るわけにはいかない。", "This is Satori's residence. You really shouldn't enter it."));
+			return;
+		}
+
+		else if (p_ptr->town_num == TOWN_HITOZATO && which == 9);//雛人形無人販売所
+		else if (p_ptr->town_num == TOWN_TENGU && which == 3);//路地裏
+		else if (p_ptr->town_num == TOWN_KIRISAME && which == 3);//地霊虹洞
+		//種族が幽霊のとき、憑依や人型変身中でないと地上の建物に入れない(旧地獄市街には入れる)
+		else if (p_ptr->town_num == TOWN_CHITEI && which == 4)//温泉街
+		{
+			msg_print(_("さとりのペットが見張っているようだ。誰かに憑依しないと入れない。", "It's being watched over by Satori's pets. You can't enter unless you're possessing someone."));
+			return;
+		}
+		else if ((CHECK_MIZUCHI_GHOST) && !dun_level && p_ptr->town_num != TOWN_CHITEI && p_ptr->mimic_form != MIMIC_MARISA && p_ptr->mimic_form != MIMIC_METAMORPHOSE_NORMAL)
+		{
+			msg_print(_("あなたは手配中だ。誰かに憑依しないと入れない。", "You're a wanted person. You can't enter unless you're possessing someone."));
+			return;
+		}
 	}
 
 	if(SUPER_SHION)
@@ -17632,9 +17662,6 @@ void do_cmd_bldg(void)
 		return ;
 	}
 
-	which = f_info[cave[py][px].feat].subtype;
-
-	bldg = &building[which];
 
 	//雛は厄が多すぎると建物に入れない(無人販売所のみ可)
 	if(p_ptr->pclass == CLASS_HINA && p_ptr->magic_num1[0] > (HINA_YAKU_LIMIT2+5000) && (p_ptr->town_num != TOWN_HITOZATO || which != 9))

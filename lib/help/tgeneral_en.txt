@@ -89,7 +89,7 @@ Keine - 'You should know this already by the point you've launched this mod,
 but I'm going to say this anyway.
 Gensouband is being officially distributed here:
 
---- http://www.miyamasa.net/heng_th_katte.html ---
+--- https://gensoband.main.jp/index.html ---
 
 If you have any questions or want to report a bug, unnatural message, or make
 a game balance suggestion, post a message on its BBS. (in Japanese)'

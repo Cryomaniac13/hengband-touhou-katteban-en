@@ -6820,6 +6820,13 @@ byte calc_ex_dun_bldg_prob(int ex_bldg_idx)
 		if (p_ptr->pclass == CLASS_HATATE) return 50;
 		else return 10;
 
+	case BLDG_EX_GHOSTS:
+		if (p_ptr->muta4 & MUT4_GHOST_CHEERS) return 0;
+		else if (lev < 20) return 0;
+		else if (lev < 75) return 10;
+		else return 20;
+
+
 	default:
 		msg_format(_("WARNING:建物idx(%d)の出現確率が設定されていない",
                     "WARNING: Undefined rarity for building idx %d"),ex_bldg_idx);
@@ -7524,6 +7531,16 @@ void	init_extra_dungeon_buildings(void)
 		}
 		break;
 
+		case BLDG_EX_GHOSTS:
+		{
+			sprintf(building[i].name, _("開けた場所", "Open area"));
+			sprintf(building[i].owner_name, _("怨霊の群れ", "Swarm of vengeful spirits"));
+
+			sprintf(building[i].act_names[0], _("辺りを見る", "Look around"));
+			building[i].letters[0] = 'a';
+			building[i].actions[0] = BACT_EX_SEARCH_AROUND;
+		}
+		break;
 
 
 
@@ -7559,7 +7576,7 @@ static byte build_type_ex(void)
 	building_ex_idx[0] = get_extra_dungeon_building_idx();
 
 	//テスト用
-	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_MARISA;
+	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_GHOSTS;
 
 	/* Find and reserve some space in the dungeon.  Get center of room. */
 	if (!find_space(&yval, &xval, ysize, xsize)) return 0;

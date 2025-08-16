@@ -868,6 +868,7 @@ msg_print("あなたは魔法書を読むことができない。");
 		return;
 	}
 
+
 	if (mimic_info[p_ptr->mimic_form].MIMIC_FLAGS & (MIMIC_NO_CAST))
 	{
 		msg_print(_("今は本を読めない。", "You cannot read books in your current form."));
@@ -957,6 +958,14 @@ s = "読める本がない。";
 	{
 		o_ptr = &o_list[0 - item];
 	}
+
+	//v2.1.0 瑞霊は仙術を学ぶことができない
+	if (p_ptr->pclass == CLASS_MIZUCHI && !(CHECK_MIZUCHI_RESURRECT) && o_ptr->tval <= TV_BOOK_NATURE)
+	{
+		msg_print(_("あなたの巫女としての力はすでに失われている。", "You have lost the power you once had as a shrine maiden."));
+		return;
+	}
+
 
 	/* Access the item's sval */
 	sval = o_ptr->sval;
@@ -1784,6 +1793,12 @@ void do_cmd_cast(void)
 	//if ((p_ptr->pclass != CLASS_SORCERER) && (p_ptr->pclass != CLASS_RED_MAGE) && (o_ptr->tval == REALM2_BOOK)) increment = 32;
 	if (!(REALM_SPELLMASTER) && (o_ptr->tval == p_ptr->realm2)) increment = 32;
 
+	//v2.1.0 瑞霊は仙術を使うことができない
+	if (p_ptr->pclass == CLASS_MIZUCHI && !(CHECK_MIZUCHI_RESURRECT) && o_ptr->tval <= TV_BOOK_NATURE)
+	{
+		msg_print(_("あなたの巫女としての力はすでに失われている。", "You have lost the power you once had as a shrine maiden."));
+		return;
+	}
 
 	/* Track the object kind */
 	object_kind_track(o_ptr->k_idx);

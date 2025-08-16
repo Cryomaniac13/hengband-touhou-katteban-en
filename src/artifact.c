@@ -2778,6 +2778,17 @@ bool create_artifact(object_type *o_ptr, bool a_scroll)
 		remove_flag(o_ptr->art_flags, TR_BRAND_COLD);
 	}
 
+	//v2.1.0 瑞霊はアイテムの呪いを無効化 呪いフラグはobject_flags()で無視するのでここではpvalなどのマイナスを0にする
+	if (p_ptr->pclass == CLASS_MIZUCHI && object_is_equipment(o_ptr))
+	{
+		if (o_ptr->to_a < 0) o_ptr->to_a = 0;
+		if (o_ptr->to_d < 0) o_ptr->to_d = 0;
+		if (o_ptr->to_h < 0) o_ptr->to_h = 0;
+		if (o_ptr->pval < 0) o_ptr->pval = 0;
+	}
+
+
+
 	/*:::power_levelはランダム命名のランクに使われる*/
 	if (!object_is_weapon_ammo(o_ptr))
 	{
@@ -5667,6 +5678,19 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 		}
 		break;
 
+		case ACT_MUGENSYUKU:
+		{
+			int	dam = p_ptr->lev * 6;
+
+			//巫女系職業は威力2倍
+			if (p_ptr->pclass == CLASS_PRIEST || p_ptr->pclass == CLASS_REIMU || p_ptr->pclass == CLASS_SANAE || (CHECK_MIZUCHI_RESURRECT))
+				dam *= 2;
+			msg_print(_("空間が清浄な鈴の音に閉ざされた。", "Purifying sound of bells seals off the area."));
+			project_hack2(GF_HOLY_FIRE, 0, 0, dam);
+			project_hack(GF_NO_MOVE, dam / 10);
+
+		}
+		break;
 
 
 
@@ -5776,6 +5800,17 @@ void random_artifact_resistance(object_type * o_ptr, artifact_type *a_ptr)
 {
 	bool give_resistance = FALSE, give_power = FALSE;
 
+	//v2.1.0 瑞霊はアイテムの呪いを無効化 呪いフラグはobject_flags()で無視するのでここではpvalなどのマイナスを0にする
+	if (p_ptr->pclass == CLASS_MIZUCHI && object_is_equipment(o_ptr))
+	{
+		if (o_ptr->to_a < 0) o_ptr->to_a = 0;
+		if (o_ptr->to_d < 0) o_ptr->to_d = 0;
+		if (o_ptr->to_h < 0) o_ptr->to_h = 0;
+		if (o_ptr->pval < 0) o_ptr->pval = 0;
+	}
+
+
+
 	if (o_ptr->name1 == ART_TERROR) /* Terror Mask is for warriors... */
 	{
 		if (p_ptr->pclass == CLASS_PARSEE || p_ptr->pclass == CLASS_WARRIOR || p_ptr->pclass == CLASS_ARCHER || p_ptr->pclass == CLASS_CAVALRY || p_ptr->pseikaku == SEIKAKU_BERSERK || p_ptr->pclass == CLASS_CLOWNPIECE)
@@ -5819,6 +5854,17 @@ void random_artifact_resistance(object_type * o_ptr, artifact_type *a_ptr)
 		return;
 
 	}
+	//v2.1.0 瑞霊のとき地獄の首輪に永遠の呪い
+	else if (o_ptr->name1 == ART_HARNESS_HELL)
+	{
+		if (p_ptr->pclass == CLASS_MIZUCHI)
+		{
+			o_ptr->curse_flags |= TRC_PERMA_CURSE;
+		}
+		return;
+
+	}
+
 	else if (o_ptr->name1 == ART_MURAMASA)
 	{
 		if (p_ptr->pclass != CLASS_SAMURAI && p_ptr->pclass != CLASS_YOUMU)
@@ -5875,6 +5921,8 @@ void random_artifact_resistance(object_type * o_ptr, artifact_type *a_ptr)
 	{
 		one_high_resistance(o_ptr);
 	}
+
+
 }
 
 

@@ -872,6 +872,20 @@ static byte choose_realm(int *count)
 		if(cp_ptr->realm_aptitude[i] > 1)
 		{
 
+			//v2.1.0 瑞霊は第一領域に仙術、第二領域に妖術のみ選択可能
+			if (p_ptr->pclass == CLASS_MIZUCHI)
+			{
+				if (p_ptr->realm1 == REALM_NONE)
+				{
+					if (i >= TV_BOOK_TRANSFORM) continue;
+				}
+				else
+				{
+					if (i <  TV_BOOK_TRANSFORM) continue;
+				}
+			}
+
+
 			//v1.1.65 華扇は特殊性格にすると妖術選択可能になる(性格選択後に再びこの関数に戻ってくる)
 			if (p_ptr->pclass == CLASS_KASEN)
 			{
@@ -3316,6 +3330,10 @@ outfit_type birth_outfit_class[] = {
 
 	{ CLASS_DAIYOUSEI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	//{ CLASS_DAIYOUSEI,2,0,TV_STICK, SV_WEAPON_FLOWER,1 }, 個別処理で上質生成する
+
+	{ CLASS_MIZUCHI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_MIZUCHI,2,ART_HARNESS_HELL,0, 0,1 },
+
 
 	{-1,0,0,0,0,0} //終端dummy
 };
@@ -6586,8 +6604,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		_("あなたは伊吹萃香の酒瓢箪『伊吹瓢』に棲み着く座敷わらしです。瓢箪の影響によるものか人を酔い潰して夢や記憶に干渉する酔魔のような力を持っています。あなたには戦う力はほとんどありませんが、愛想よくお酒を勧めて敵の心すら開かせるほどの接客能力があります。お酒を何度も飲ませてそのまま酔い潰してしまえば倒したのと同じ扱いになります。しかし中には酒を勧めても応じないモンスターやいくら酒を飲んでも酔わないモンスターもいます。そういった敵に襲われてしまったらあなたにできることは逃亡あるのみです。あなたに必要な能力は魅力です。接客の成功率だけでなく飲ませる酒の強さにも影響を与えます。",
         "You are a zashiki-warashi living in the Ibuki Gourd of Suika Ibuki. Living in it has granted you the power to drive people drunk and interfere with their dreams and memories. You don't have much combat power, but you serve customers so well you can placate your enemies by offering them drinks. Making someone pass out by serving them enough alcohol is treated the same as defeating them. However, there are monsters who won't accept your drinks, or who can drink a lot without passing out. If you get attacked by those monsters, retreat might be your only option. Charisma is your required ability - it affects not only your customer service, but the strengths of your drinks as well.") },
 
-	{ FALSE,_("宮出口　瑞霊", "Mizuchi Miyadeguchi"),CLASS_MIZUCHI,RACE_SPECTRE,ENTRY_OTHER,SEX_FEMALE,
-		_("未実装", "unimplemented") },
+	{ TRUE,_("宮出口　瑞霊", "Mizuchi Miyadeguchi"),CLASS_MIZUCHI,RACE_SPECTRE,ENTRY_OTHER,SEX_FEMALE,
+		_("あなたは博麗の家に強い怨みをもつ強力な怨霊です。他者に取り憑いて乗っ取る特技を持っており、あなた自身も高い戦闘力を持っています。現在あなたは幻想郷の地上から警戒されており、誰かに憑依しないと地上の建物や店を利用することができません。怨霊であり密かな呪具コレクターでもあるあなたは装備品の呪いの影響を防ぐことができます。しかしあなたは下半身の具現化が不完全なため靴を履くことができず、また首の地獄の首輪を外すことができません。あなたはかつて巫女として様々な術を学んでいましたが、怨霊となったときにほぼ失われています。",
+        "You are a powerful vengeful spirit bearing a strong grudge towards the Hakurei family. You have the ability to possess and take control of others, but you're pretty powerful by yourself as well. You are currently being tracked down in Gensoukyou, so you can't enter shops or buildings on surface without possessing someone. As a vengeful spirits and a collector of cursed items, you are protected from curses on your equipment. However, the lower half of your body is not fully formed, so you can't wear boots, and the Harness of Hell on your neck can't be removed. You once learned various spells as a shrine maiden, but you lost them upon becoming a vengeful spirit.")},
 
 
 

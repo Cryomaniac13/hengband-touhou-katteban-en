@@ -3802,6 +3802,9 @@ static void process_world_aux_curse(void)
 	//v1.1.48 今更だが広域マップでは発動しないことにした
 	if (p_ptr->wild_mode) return;
 
+	//v2.1.0 瑞霊は装備品の呪い発生を防ぐ
+	if (p_ptr->pclass == CLASS_MIZUCHI) return;
+
 	//v1.1.48 紫苑の不運パワーが多すぎるとき確率で勝手にスーパー貧乏神に変身する
 	if (p_ptr->pclass == CLASS_SHION && one_in_(99) && !p_ptr->tim_mimic)
 	{
@@ -8370,6 +8373,23 @@ static void process_player(void)
 	{
 		mokou_resurrection();
 	}
+	//v2.1.0 憑依中の瑞霊がやられたとき強制変身解除しHP半分残して復活
+	else if (p_ptr->pclass == CLASS_MIZUCHI && flag_mokou_resurrection)
+	{
+		flag_mokou_resurrection = FALSE;
+
+		msg_print(_("緊急脱出！", "Emergency escape!"));
+		p_ptr->special_defense &= ~(SD_METAMORPHOSIS);
+		p_ptr->special_flags &= ~(SPF_IGNORE_METAMOR_TIME);
+		set_mimic(0, 0, TRUE);
+
+		p_ptr->chp = p_ptr->mhp / 2;
+
+		p_ptr->redraw |= (PR_MANA | PR_HP);
+		handle_stuff();
+
+
+	}
 
 	/*:::闘技場なら全モンスターが常に把握されている状態にする。そのあと＠は行動をせずそのまま終了*/
 	if (p_ptr->inside_battle)
@@ -9159,10 +9179,19 @@ msg_print("中断しました。");
 		///mod160303 EXモードの建物内で特定の行動をとった時これらの変数が設定され敵召喚
 		if(hack_ex_bldg_summon_idx || hack_ex_bldg_summon_type )
 		{
-			if(hack_ex_bldg_summon_type)
-				summon_specific(0,py,px,dun_level,hack_ex_bldg_summon_type,hack_ex_bldg_summon_mode);
-			else if(hack_ex_bldg_summon_idx)
-				summon_named_creature(0,py,px,hack_ex_bldg_summon_idx,hack_ex_bldg_summon_mode);
+
+			if (hack_ex_bldg_summon_type)
+			{
+				summon_specific(0, py, px, dun_level, hack_ex_bldg_summon_type, hack_ex_bldg_summon_mode);
+			}
+			else if (hack_ex_bldg_summon_idx)
+			{
+				int tmp_cnt;
+				if (hack_ex_bldg_summon_num < 1) hack_ex_bldg_summon_num = 1;
+				for(tmp_cnt =0; tmp_cnt <hack_ex_bldg_summon_num; tmp_cnt++)
+					summon_named_creature(0, py, px, hack_ex_bldg_summon_idx, hack_ex_bldg_summon_mode);
+			}
+			hack_ex_bldg_summon_num = 0;
 			hack_ex_bldg_summon_idx = 0;
 			hack_ex_bldg_summon_type = 0;
 			hack_ex_bldg_summon_mode = 0L;

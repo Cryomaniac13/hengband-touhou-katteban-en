@@ -245,7 +245,8 @@ void object_flags(object_type *o_ptr, u32b flgs[TR_FLAG_SIZE])
 	}
 
 	//—‚Ì–ï—Ž‚Æ‚µ‚É‚æ‚éŽô‚¢–³Œø‰»ˆ—
-	if(p_ptr->pclass == CLASS_HINA && o_ptr->xtra3 == SPECIAL_ESSENCE_OTHER)
+	//v2.1.0 —ì‚à
+	if(p_ptr->pclass == CLASS_HINA && o_ptr->xtra3 == SPECIAL_ESSENCE_OTHER || p_ptr->pclass == CLASS_MIZUCHI)
 	{
 		remove_flag(flgs, TR_NO_TELE);
 		remove_flag(flgs, TR_NO_MAGIC);
@@ -402,7 +403,8 @@ void object_flags_known(object_type *o_ptr, u32b flgs[TR_FLAG_SIZE])
 	}
 
 	//—‚Ì–ï—Ž‚Æ‚µ‚É‚æ‚éŽô‚¢–³Œø‰»ˆ—
-	if(p_ptr->pclass == CLASS_HINA && o_ptr->xtra3 == SPECIAL_ESSENCE_OTHER)
+	//v2.1.0 —ì‚à
+	if(p_ptr->pclass == CLASS_HINA && o_ptr->xtra3 == SPECIAL_ESSENCE_OTHER || p_ptr->pclass == CLASS_MIZUCHI)
 	{
 		remove_flag(flgs, TR_NO_TELE);
 		remove_flag(flgs, TR_NO_MAGIC);

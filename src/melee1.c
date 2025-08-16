@@ -2791,7 +2791,14 @@ msg_format("%s‚Í‘Ì—Í‚ð‰ñ•œ‚µ‚½‚æ‚¤‚¾B", m_name);
 					if(damage == 0) damage_effect_check = 0;
 					get_damage += take_hit(DAMAGE_ATTACK, damage, ddesc, -1);
 					update_smart_learn(m_idx, DRS_HOLY);
-					break;
+
+					//v2.1.0 ‰…—ì‚Ì‰ž‰‡‚Í”jŽ×ŒnUŒ‚‚ðŽó‚¯‚é‚ÆÁ‚¦‚é
+					if (!CHECK_MULTISHADOW() && (p_ptr->muta4 & MUT4_GHOST_CHEERS))
+					{
+						lose_mutation(218);
+					}
+
+				break;
 
 				}
 				//mod131230 “M‚ê‚³‚¹‚é‘ÅŒ‚

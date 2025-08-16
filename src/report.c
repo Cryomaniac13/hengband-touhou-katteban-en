@@ -30,21 +30,28 @@
  * internet resource value
  */
 ///system
-/*:::スコア送信関係　丸ごとコメントアウトしとこう*/
 #define HTTP_PROXY ""                   /* Default proxy url */
 #define HTTP_PROXY_PORT 0               /* Default proxy port */
 #define HTTP_TIMEOUT    20              /* Timeout length (second) */
-//v1.1.25 スコアサーバアドレス
-#define SCORE_SERVER "www.miyamasa.net"    /* Default score server url */
-#define SCORE_PORT 80                   /* Default score server port */
 
 #ifdef SCORE_SERVER_TEST
 
 //テストサーバ
+#define SCORE_SERVER "gensoband.main.jp"    /* Default score server url */
+#define SCORE_PORT 80                   /* Default score server port */
 #define SCORE_PATH "/score_test/receive_httppost.cgi"
 
-#else
 
+//ローカルテストサーバ
+//#define SCORE_SERVER "localhost"    /* Default score server url */
+//#define SCORE_PORT 8080                   /* Default score server port */
+//#define SCORE_PATH "/cgi-bin/score_test/receive_httppost_cgi.py"
+
+
+#else
+//v2.1.0 スコアサーバアドレス変更
+#define SCORE_SERVER "gensoband.main.jp"    /* Default score server url */
+#define SCORE_PORT 80                   /* Default score server port */
 #define SCORE_PATH "/score/receive_httppost.cgi"
 
 
@@ -415,6 +422,7 @@ static bool http_get_msg(int sd)
 	bool success = FALSE;
 	bool use_tmpfile = FALSE;
 	byte err_code = 0L;
+	int loop_count = 0;
 
 	path_build(file_name, sizeof(buf), ANGBAND_DIR_USER, "http_post_result.log");
 
@@ -436,12 +444,16 @@ static bool http_get_msg(int sd)
 		use_tmpfile = TRUE;
 	}
 
-
 	while (1)
 	{
+		loop_count++;
         memset(buf, 0, sizeof(buf));
         read_size = recv(sd, buf, 2048, 0);
-        if (read_size > 0)
+		if (read_size <= 0)
+		{
+			break;
+		}
+        else if (read_size > 0)
 		{
 
 			if(my_strstr(buf,"RECEIVE_SAVEFILE_SUCCESSFULLY"))
@@ -458,14 +470,18 @@ static bool http_get_msg(int sd)
 			if (my_strstr(buf, "GET_NUM_ERROR"))
 				err_code |= 0x10;
 
-
 			fprintf(fff,"%s",buf);
-        }
-        else
-		{
-            break;
+
+			//v2.1.0 lolipopサーバからはTransfer-Encoding: chunkedでCGI応答テキストが返ってくる。
+			//chunkedのデータは"0\r\n\r\n"が送られてきて終わることになっており、これを検出してbreakしないとあちらが送信終了してるのにこちらはタイムアウトまで数十秒待ち続けるらしい。
+			//本来ならchunkedの各要素のバイト数表記とメッセージ長を検証して本当にこれが末尾なのか確認すべきなんだが、
+			//まあここのメッセージにこんな文字列が混ざることはほかにないはずなので超簡易処理で済ませる。
+			if (my_strstr(buf, "0\r\n\r\n")) break;
+
+
         }
     }
+	fprintf(fff, "recv loopcount:%d\n", loop_count);
 
 	/* Close the file */
 	my_fclose(fff);
@@ -581,8 +597,12 @@ errr report_score(void)
 	{
 		//実際に区切りをするときはboundary=..のときより-が2つ多く要る
 		buf_sprintf(score, "--%s\r\n", MULTIPART_BOUNDARY);
-		buf_sprintf(score, "Content-Disposition: form-data; name=\"screen_shot\"\r\n");
+
+		//v2.1.0 python3.7では何故か知らんがFieldStorage()がバイナリを扱うためにfilenameフィールドが必須らしいので追加
+		//buf_sprintf(score, "Content-Disposition: form-data; name=\"screen_shot\"\r\n");
+		buf_sprintf(score, "Content-Disposition: form-data; name=\"screen_shot\"; filename=\"scr.da1\"\r\n");
 		buf_sprintf(score, "Content-Type: text/html\r\n\r\n");
+		//buf_sprintf(score, "Content-Type: application/octet-stream\r\n"); なぜかoctet-streamでは動かない
 
 		buf_append(score, screen_dump, strlen(screen_dump));
 	}
@@ -590,8 +610,12 @@ errr report_score(void)
 	//スコアダンプを送信
 	{
 		buf_sprintf(score, "--%s\r\n", MULTIPART_BOUNDARY);
-		buf_sprintf(score, "Content-Disposition: form-data; name=\"dump_file\"\r\n");
+
+		//buf_sprintf(score, "Content-Disposition: form-data; name=\"dump_file\"\r\n");
+		buf_sprintf(score, "Content-Disposition: form-data; name=\"dump_file\"; filename=\"dump.da2\"\r\n");
 		buf_sprintf(score, "Content-Type: text/html\r\n\r\n");
+		//buf_sprintf(score, "Content-Type: application/octet-stream\r\n");
+
 		make_dump(score);
 
 	}
@@ -612,7 +636,8 @@ errr report_score(void)
 			char *tmp_buf;
 
 			buf_sprintf(score, "--%s\r\n", MULTIPART_BOUNDARY);
-			buf_sprintf(score, "Content-Disposition: form-data; name=\"save_file\"\r\n");
+			//buf_sprintf(score, "Content-Disposition: form-data; name=\"save_file\"\r\n");
+			buf_sprintf(score, "Content-Disposition: form-data; name=\"save_file\"; filename=\"save.da3\"\r\n");
 			buf_sprintf(score, "Content-Type: application/octet-stream\r\n");
 			buf_sprintf(score, "Content-Transfer-Encoding: binary\r\n\r\n");
 
@@ -712,7 +737,6 @@ errr report_score(void)
 	#endif
 		Term_fresh();
 		http_post(sd, SCORE_PATH, score);
-		//http_post(sd, SCORE_TEST_PATH, score);
 
 		//サーバからのメッセージを受信する。成功のメッセージがなかったらエラーフラグ
 		if(!http_get_msg(sd))

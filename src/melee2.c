@@ -3785,6 +3785,13 @@ static void process_monster(int m_idx)
 	{
 		if (check_mon_blind(m_idx)) aware = FALSE;
 	}
+	//v2.1.0 —ìö•š
+	else if (p_ptr->pclass == CLASS_MIZUCHI && p_ptr->tim_general[0] )
+	{
+		if (!los(m_ptr->fy, m_ptr->fx, py, px)) aware = FALSE;
+	}
+
+
 
 	//v2.0.9 ”üª‹L‰¯Á‹
 	if (p_ptr->pclass == CLASS_MIYOI && p_ptr->tim_general[0])
