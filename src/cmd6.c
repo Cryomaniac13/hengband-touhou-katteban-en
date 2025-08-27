@@ -6217,8 +6217,8 @@ void do_cmd_use_staff(void)
 	q = "何を使いますか? ";
 	s = "使えるアイテムがない。";//v1.1.86 杖→アイテム　アビリティカードとか使うようになったので
 #else
-	q = "Use which staff? ";
-	s = "You have no staff to use.";
+	q = "Use which item? ";
+	s = "You have no items you can use.";
 #endif
 
 	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return;
