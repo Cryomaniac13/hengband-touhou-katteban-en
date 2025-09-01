@@ -2469,7 +2469,7 @@ static cptr likert(int x, int y)
 //本家では職や構えごとの専用テーブルを使ってたが職と攻撃手段の増加で不可能になったためpy_attack_aux()の計算処理を100回試行して合計することにした。
 //Cコマンドを実行するたびに値がずれるが仕方ない。
 //v1.1.65 display_player_various()内にあったが別関数に分離
-int calc_martialarts_dam_x100(hand_idx)
+int calc_martialarts_dam_x100(int hand_idx)
 {
 	int sum=0;
 	int num = 100;
