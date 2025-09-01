@@ -4598,7 +4598,7 @@ bool	nightmare_diary(void)
 		prt(format("%c) %s", ('a' + i), nightmare_stage_table[i].desc), 9 + i, 22);
 	}
 	prt(format(_("í—ğ:%dí%dŸ",
-                "Battle Record: %d wins, %d attempts"), nightmare_diary_count, nightmare_diary_win), 18, 30);
+                "Battle Record: %d attempts, %d wins"), nightmare_diary_count, nightmare_diary_win), 18, 30);
 	prt(format(_("—İŒv•]‰¿“_:%d",
                 "Total Points: %d"), nightmare_total_point), 19, 30);
 

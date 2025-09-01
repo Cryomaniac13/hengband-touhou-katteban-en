@@ -5945,7 +5945,7 @@ bool probing(void)
 				/* Note that we learnt some new flags  -Mogami- */
 				msg_format("%s‚É‚Â‚¢‚Ä‚³‚ç‚ÉÚ‚µ‚­‚È‚Á‚½‹C‚ª‚·‚éB", buf);
 #else
-				if (!(r_ptr->flags1 & RF1_UNIQUE)) {
+				if (!(r_ptr->flags1 & RF1_UNIQUE) && !((r_ptr->flags7 & RF7_UNIQUE2) && (r_ptr->flags7 & RF7_VARIABLE))) {
 					/* Pluralize it */
 					plural_aux(buf);
 				}
