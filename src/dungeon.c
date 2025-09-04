@@ -5627,7 +5627,7 @@ static void process_world(void)
 			{
 				wm_ptr = &m_list[win_m_idx];
 				monster_desc(m_name, wm_ptr, 0);
-				msg_format(_("%s‚ªŸ—˜‚µ‚½I", "%s wins!"), m_name);
+				msg_format(_("%s‚ªŸ—˜‚µ‚½I", "%^s wins!"), m_name);
 			}
 			else if(battle_mon_team_type[i] < 0)
 			{
