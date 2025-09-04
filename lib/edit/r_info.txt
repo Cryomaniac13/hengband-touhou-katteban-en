@@ -987,6 +987,7 @@ B:WAIL:CURSE:1d1
 F:KWAI | DROP_GOOD | DROP_90
 F:IM_FIRE | IM_COLD | IM_ELEC | IM_ACID | IM_POIS | RES_DARK
 F:GEN_NEUTRAL | NEVER_MOVE | FORCE_SLEEP
+D:$An old and powerful tsukumogami. It must've been gathering strength for a long time.
 D:古く強い付喪神だ。長い時間をかけ力を蓄えたのだろう。
 S:1_IN_3
 S:DANMAKU | CAUSE_2 | 
@@ -3215,7 +3216,7 @@ B:HIT:HURT:1d9
 F:FORCE_SLEEP | MALE | 
 F:FRIENDS | DROP_60 | RAND_50 | GEN_NEUTRAL
 F:OPEN_DOOR | KWAI | HURT_HOLY
-D:$Youkai who came to Human Village replacing the zashiki-warashi
+D:$Youkai who came to Human Village replacing the zashiki-warashi.
 D:$They were too terrifying, and eventually got driven out.
 D:座敷童の代わりに人里にやってきた妖怪だ。
 D:働き者なのだが見た目が怖すぎて人里から追い出された。
