@@ -2425,7 +2425,13 @@ bool screen_object(object_type *o_ptr, u32b mode)
 
 #ifndef JP
     {
-        sprintf(score_value_line, ("It is worth %ld score."), (long)o_ptr->score_value);
+        //sprintf(score_value_line, ("It is worth %ld score."), (long)o_ptr->score_value);
+        s32b value = object_value_real(o_ptr);
+        if (value > 0) {
+            sprintf(score_value_line, ("It is worth $%ld."), value);
+        } else {
+            sprintf(score_value_line, "It's not worth anything in its current state.");
+        }
         info[i++] = score_value_line;
     }
 #endif // JP
