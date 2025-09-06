@@ -5808,6 +5808,8 @@ W:65:65:2:75000
 F:INSTA_ART | HIDE_TYPE
 F:INT | WIS | CHR | SAVING
 F:RES_INSANITY | RES_CONF | RES_CHAOS | RES_BLIND | SEE_INVIS
+D:$The Lady of the Lake bestowed this powerful exorcising
+D:$ring upon the knight Sir Lancelot.
 D:湖の姫ニミュエが騎士ランスロットに授けた強力な退魔の指輪だ。
 
 N:352:先代巫女の
@@ -5820,5 +5822,9 @@ F:SLAY_EVIL | KILL_UNDEAD | SLAY_UNDEAD | KILL_DEMON | SLAY_DEMON | KILL_KWAI | 
 F:FREE_ACT | RES_NETHER | RES_TIME | LITE | BLESSED | RES_FEAR
 F:SEE_INVIS | SHOW_MODS | ACTIVATE
 U:MUGENSYUKU
+D:$A grand oonusa that was carried by a Hakurei shrine maiden more than
+D:$a century ago, when youkai and humans were far more hostile
+D:$towards each other than they are today.
+D:$It's decorated with a hanging cloth, and large bells are attached to its cross.
 D:百年以上前、人間と妖怪の関係が今よりずっと殺伐としていた時代の博麗の巫女が持っていた長大な幣だ。
 D:十字の棒に大きな鈴と飾り布がついている。
