@@ -33,6 +33,7 @@ N:*:Default
 #『混ぜるな危険』
 'Danger - Do Not Mix!'
 #『オマエモナー』
+'Omaemonaa'
 #『ヽ(´ー｀)ノ』
 #『ソウノレソード』
 'Solesword'
@@ -80,7 +81,9 @@ of Organic Farming
 #マイクロスロスの
 of Microsloth
 #今はもう大人しい
+(Already docile once more)
 #『それがこのざまである』
+'And it ended up like this'
 #『死にたい奴だけ使ってよし』
 'For Death Seekers Only'
 #『狂気山脈』
@@ -94,6 +97,7 @@ of the Fourth Fairy of Light
 #『ないでーす』
 'No~'
 #『片葉の葦』
+'One-Leafed Reed'
 #価値がわからない
 with Unknown Price
 #『世界の終わりも恐くない』

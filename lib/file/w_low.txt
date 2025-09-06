@@ -59,12 +59,15 @@ N: 2:BIAS_POIS
 #『ハリセンボン』
 'Harisenbon'
 #『ガラスヒヴァ』
+'Ryukyu Keelback'
 #『ダイオキシン』
 'Dioxin'
 #『クシロコパの毒針』
 'Xylocopa's Sting'
 #『シリー=カーゲル』
+'Sillyca Gel'
 #『スギズ=スリッパー』
+'Old Slipper'
 #劣化ウランの
 of Depleted Uranium
 #『スイートポイズン』
@@ -92,11 +95,13 @@ N: 3:BIAS_FIRE
 #『ダイナマイト』
 'Dynamite'
 #『トムヤンクン』
+'Tom Yum Kang'
 #『食らい尽くすもの』
 'Devourer'
 #『ワンショット・ライター』
 'One-shot Lighter'
 #激辛の地シセンの
+of the incredibly spicy land of Sichuan
 #蛍妖怪の
 of the Firefly Youkai
 #夏しちゃってる
@@ -128,17 +133,36 @@ N: 4:BIAS_COLD
 'Tomboy'
 
 N: 5:BIAS_ACID
-'Adenine'
-'Guanine'
-'Thymine'
-'Cytosine'
-'Uracil'
-'Leucine'
-'Melt Down'
-'Acidic detergent'
+#『白蟻』
 'Termite'
-'Blade of Pepsi'
+#『酸性雨』
 'Acid Rain'
+#『ペプツ』
+'Blade of Pepsi'
+#『アデニン』
+'Adenine'
+#『グアニン』
+'Guanine'
+#『シトシン』
+'Cytosine'
+#『ウラシル』
+'Uracil'
+#『ロイシン』
+'Leucine'
+#『アルギニン』
+'Arginine'
+#『メルトダウン』
+'Melt Down'
+#『トリプトファン』
+'Tryptophan'
+#『不憫な不法投棄物』
+'Piteous Illegal Dumping'
+『融々自適』
+'Dissolving Free and Easy'
+『ミ=ツカン』
+'Mi-zkan'
+『サン=ポール』
+'Sun Polle'
 
 N:12:BIAS_CHAOS
 #『コッホ』
@@ -152,6 +176,7 @@ N:12:BIAS_CHAOS
 #『変幻自在』
 'Phantasmagoria'
 #『シロシーベ』
+'Psilocybe'
 #『ランダマイザー』
 'Randomizer'
 #『マンデルブロー』
@@ -181,6 +206,7 @@ N:14:BIAS_NECROMANTIC
 #『墓石』
 'Tombstone'
 #『卒塔婆』
+'Stupa'
 #『邪戦士』
 'Evil Soldlier'
 #『屍好刃』
@@ -220,6 +246,7 @@ N: 8:BIAS_WIS
 #『免罪符』
 'Indulgence'
 #『チルミル』
+'Chirumiru'
 #『自己啓発』
 'Self-Improvement'
 #『サティアン』
@@ -231,7 +258,7 @@ N: 8:BIAS_WIS
 #『神の威を借る狐』
 'Fox Borrowing Power of God'
 #『禁じられた遊び』
-'Frobidden Games'
+'Forbidden Games'
 #『天使のラブソング』
 'Angel's Love Song'
 #『天使の祝福』
@@ -281,6 +308,7 @@ of the Dowser
 N:17:BIAS_MAGE
 N: 7:BIAS_INT
 #『一夜漬』
+'Cramming'
 #『ク=モン』
 'Kumon'
 #『カンニング』
@@ -360,6 +388,7 @@ of *Slay Bear*
 #『モスキート』
 'Mosquito'
 #『ブルライアット』
+'Bull Riot'
 #『キャットキラー』
 of *Slay Cat*
 #『ムーマクベーン』
