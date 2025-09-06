@@ -1,149 +1,285 @@
 N: 1:BIAS_ELEC
+#『雷電』
 'Thunder Dragon'
+#『トールハンマー』
 'Thor's Hammer'
+#『ブリューナク』
 'Brionac'
+#『ケラウノス』
 'Claimh Solais'
+#『アンスウェラー』
 'Answerer'
+#『ヴァジュラ』
 'Vajra'
+#鍛冶神ヘパイストスの
 of Hephaestus
 
 N: 2:BIAS_POIS
+#『スキュラ』
 'Scylla'
+#『テュポーン』
 'Typhoon'
+#『ステュクス』
 'Styx'
+#『ユルング』
 'Yurlungur'
+#『ヨルムンガンド』
 'Jormungardr'
+#『アンタレス』
 'Antares'
+#『スモーキングドラゴン』
 'Smoking Dragon'
 
 N: 3:BIAS_FIRE
+#『ケルベロス』
 'Cerberus'
+#『オルトロス』
 'Orthros'
+#『サラマンダー』
 'Salamander'
+#『プレゲトン』
 'Phelegeton'
+#『タラスク』
 'Tarrasque'
+#『シューティングスター』
 'Shooting Star'
+#『セントエルモエクスプロージョン』
 'Saint Elmo Explosion'
+#『地獄極楽メルトダウン』
 'Hell and Heaven Meltdown'
-'Flame of Prometeus'
+#『プロメテウスの火』
+'Flame of Prometheus'
 
 N: 4:BIAS_COLD
+#『ポラリスユニーク』
 'Polaris Unique'
+#『シリウス』
 'Sirius'
+#『コキュートス』
 'Cocytus'
+#『ブラムド』
 'Bramd'
+#『アークトゥルス』
 'Arcturus'
+#『カノープス』
 'Canopis'
 
 N: 5:BIAS_ACID
+#『ガルグイユ』
 'Gargoyle'
+#『ガニメデ』
 'Ganymede'
+#『ゴリアテ』
 'Goliath'
+#『レーテ』
 'Lethe'
+#『エイブラ』
 'Eibra'
-'Spiritus Galaxy'
+#『海底大戦争』
+'Kaitei Daisensou'
+#『スピリタスの大銀河』
+'Spiritus Great Galaxy'
+#『トリトン』
 'Triton'
 
 N:12:BIAS_CHAOS
+#『リーサルウェポン』
 'Lethal Weapon'
+#『ナース』
 'Narse'
+#『ウロボロス』
 'Ouroboros'
+#『フォービドゥンフルーツ』
 'Forbidden Fruit'
+#『アンノウンX』
 'Unknown X'
+#『ルナティックドリームショット』
 'Lunatic Dream Shoot'
+#『ルナレインボー』
 'Lunar Rainbow'
 
 N:13:BIAS_PRIESTLY
+#『広有怪鳥射事』
 'Hiroari Shoots a Strange Bird'
-'Minotaka'
+#『陰陽散華』
+'Yin-Yang Scattering'
+#『ミンタカ』
+'Mintaka'
+#『アルニラム』
+'Alnilam'
+#『アルニタク』
+'Alnitak'
+#『リバースインヴォーカー』
 'Reverse Invoker'
 
 N:14:BIAS_NECROMANTIC
+#『アケローン』
 'Acheron'
+#『ニーズホッグ』
 'Nidhogg'
+#『ガルム』
 'Garm'
+#『ヘルカタストロフィ』
 'Hell Catastrophe'
+#『カロン』
 'Charon'
 
 N:15:BIAS_LAW
+#『ヘヴンズゲート』
 'Heaven's Gate'
+#『マイセン』
 'Mycen'
+#『アガスティア』
 'Agasteria'
+#『アマテラス』
 'Amaterasu'
 
 N:16:BIAS_ROGUE
+#『クエレブレ』
 'Cuelebre'
+#『ファフナー』
 'Fafner'
+#『アヴァロンの銃』
 'Gun of Avalon'
-from a Wandering Star
+#遊星よりの
+from Another World
+#『不等式のティンカーベル』
+'Tinkerbell of Inequality'
 
 N:17:BIAS_MAGE
+#『アルゴス』
 'Argoth'
+#『フギン』
 'Hugin'
+#『ムニン』
 'Munin'
+#竈神ヘスティアの
 of Hestia
+#『メデューサ』
 'Medusa'
+#『デネブ』
 'Deneb'
 
 N:18:BIAS_WARRIOR
+#『アルビオン』
 'Albion'
+#『ベヒーモス』
 'Behemoth'
+#戦神アレスの
 of Ares
+#太陽神アポロンの
 of Apollo
 
 N:19:BIAS_RANGER
+#『ディア・フライシュッツ』
 'Der Freischutz'
+#『ルミネスリコシェ』
 'Luminous Ricochet'
+#『冥府光芒一閃』
 'Light Flash of the Netherworld'
+#『風神一扇』
 'Wind God Fan'
+#女神アルテミスの
 of Artemis
+#『コズミックレディエーション』
 'Cosmic Radiation'
 
 N:*:Default
+#『精霊手』
 'Spirit Hand'
+#『シュート・ザ・ムーン』
 'Shoot the Moon'
+#『スーパーペルセイド』
 'Super Perseid'
+#『スターボウブレイク』
 'Starbow Break'
+#『アローヘッド』
 'Arrowhead'
+#『ラストダンサー』
 'Last Dancer'
+#『カーテンコール』
 'Curtain Call'
+#『セプテントリオン』
 'Septentrion'
-'Nemesis Stronghold'
+#『ネメシスの要塞』
+'Nemesis's Stronghold'
+#『フォボス』
 'Phobos'
+#『ダイモス』
 'Deimos'
+#『メティス』
 'Metis'
+#『イオ』
 'Io'
+#『パンドラ』
 'Pandora'
+#『ハイペリオン』
 'Hyperion'
+#『ベガ』
 'Vega'
+#『プロキオン』
 'Proxion'
+#『ペテルギウス』
 'Betelgeuse'
+#『アケルナル』
 'Achemar'
+#『アルタイル』
 'Altair'
+#『フォーマルハウト』
 'Fomalhaut'
+#『レグルス』
 'Regules'
+#『ベネトナシュ』
 'Benetnasch'
+#『アヴィオール』
 'Avior'
+#『アトリア』
 'Atlia'
+#『アルファルド』
 'Alfard'
+#『ミラ』
 'Mira'
+#『デネブ・カイトス』
 'Deneb Kaitos'
+#『アルゴル』
 'Algol'
+#『ザッハーク』
 'Zahakk'
+#『ラドン』
 'Radon'
+#『おたけさん』
+'Otake-san'
+#『ザ・グレイト・ラグタイムショー』
 'The Great Ragtime Show'
-of Super Space-Time
-of Infinity
+#超時空
+(Super Space-Time)
+#無限
+(Infinite)
+#超古代文明の
 of Super-Ancient Civilization
-of Antimatter
+#アンチマター
+(Antimatter)
+#『ミミちゃん』
 'Mimi-chan'
+#小兎姫の
 of Kotohime
+#朝倉理香子の
 of Rikako Asakura
+#北白河ちゆりの
 of Chiyuri Kitashirakawa
+#岡崎教授の
 of Professor Okazaki
+#『ワンマンアーミー』
 'Army of One'
-'Cyberdemon
+#『サイバーデーモン』
+'Cyberdemon'
+#『メギドファイア』
 'Megiddo Fire'
+#『アイサイトクリーニング』
 'Eyesight Cleaning'
+#『ダンタリオンの笛』
 'Dantalian Flute'
+#コッペリアの
 of Coppelia
+#秘匿された
+(Hidden)
