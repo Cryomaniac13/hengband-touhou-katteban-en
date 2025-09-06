@@ -5348,10 +5348,10 @@ bool hatate_search_unique_monster(void)
 
 			if (hatate)
 				c_put_str(TERM_WHITE, format(_("...こちらを見て何か叫んでいるように見えるのは気のせいだろうか？",
-                                            "...looks like he's looking here and shouting something... but that's just my imagination?")), 10, 20);
+                                            "...is it just your imagination, or is he looking right at you and shouting something?")), 10, 20);
 			else
 					c_put_str(TERM_WHITE, format(_("(ひょっとしてこの人こっちに気づいてる？)",
-                                            "(By the way, did that person notice that?)")), 10, 20);
+                                            "(Could that person have noticed what I was doing?)")), 10, 20);
 
 		}
 
