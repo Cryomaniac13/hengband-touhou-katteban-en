@@ -201,7 +201,7 @@ says, 'You don't yet know. The border between day and night is already in the pa
 # 「ちょいとお時間良いかしら？」
 says, 'May I borrow a little of your time?'
 # 「その優しい火が～♪命取られて消えていく～♪」
-croons, 'That gentle flame~, its life is taken and winks out~
+croons, 'That gentle flame~, its life is taken and winks out~'
 
 N:1106:Wriggle
 # 「蛍様が出て喜ばない奴なんて、久しぶりに見たよ！」
@@ -711,7 +711,9 @@ says, 'What dost thou think of it? My beauteous strategy.'
 # 「良かろう、修行の成果を見せてやる。」
 says, 'So be it, I shall display the fruits of my training.'
 #「我は風水を扱う仙人じゃ」
+says, 'I am a hermit, feng shui practician.'
 #「風水はエクステリアも得意だぞ」
+says, 'Feng shui is also good at exterior design.'
 
 N:1144:Miko
 # 「君の行動は全て見させて頂いたわ」
@@ -1756,6 +1758,8 @@ says, 'Hey! Are you trying to pick a fight?'
 says, 'Now, bring it on! But know I'm still learning how to keep my strength in check!'
 # 「幻想郷の天は我にある！ひれ伏せるが良い！」
 says, 'The Heavens of Gensoukyou are within my grasp! You would do well to grovel!'
+#「今日も一日、楽しんでいこうー！」」
+says, 'Let's make today another fun one!'
 # は透明な棒を頭上でぶん回している。
 twirls a transparent staff over her head.
 

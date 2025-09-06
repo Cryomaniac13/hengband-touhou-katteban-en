@@ -1,127 +1,313 @@
 N:*:Default
+#魔法の
 of Magic
-of Gimmick
-of Superalloy
-of Wilderness
-of 23rd Century
-of Gunmania
-of Ian Flemming
+#仕込み
+(Training)
+#超合金
+(Superalloy)
+#荒野の
+of the Wilderness
+#二十三世紀最新型の
+(23rd Century Model)
+#ガンマニアの
+of Gun Mania
+#イアン・フレミングの
+of Ian Fleming
+#日銀総裁の
+of the Central Bank Governor
+#ヘリコプター・ベンの
 of Helicopter Ben
+#『ギミックアーム』
 'Gimmick Arm'
+#『ダグラスショット』
 'Douglas Shoot'
+#所さんの
 of Tokoro
-of Official
-of Pirate Dora
+#本官の
+of the Official
+#次元大介の
+of Daisuke Jigen
+#海賊ドーラの
+of Dora the Pirate
+#『スーパースターガン』
 'Super Star Gun'
+#『今週のビックリドッキリメカ』
 'This Week's Mecha'
+#クイーン・エメラルダスの
 of Queen Emeraldas
+#バンコラン少佐の
 of Major Bancoran
+#デューク東郷の
 of Duke Togo
+#巴マミの
 of Tomoe Mami
+#タマネギ84号の
 'Tamanegi No. 84'
-of Sixth Heaven Demon King
-of Ijuin Hayato
+#第六天魔王の
+of the Sixth Heaven Demon King
+#伊集院隼人の
+of Hayato Ijuin
+#シュトロハイム少佐の
 of Major Stroheim
+#サンダース軍曹の
 of Sergeant Sanders
+#爆竜大佐の
 of Colonel Bakuryu
+#南条くんの
 of Nanjo
+#吸血鬼ハンターレイラの
 of Leila the Vampire Hunter
-of Barreta the Dark Hunter
-of Dr Eggman
-of John Grey A.
-'Robopiccha'
-of Sailor Uniform
+#ダークハンターバレッタの
+of Bulleta the Dark Hunter
+#ドクター・エッグマンの
+of Dr. Eggman
+#ジョンガリ・Ａの
+of Johngalli A
+#『ロボピッチャ』
+'Robo Pitcher'
+#セーラー服と
+and Sailor Suit
+#カール・ハウスホッファの
 of Karl Haushofer
+#ハートマン軍曹の
 of Sergeant Hartman
-of Tonpo the Mad Clown
+#マッドピエロ・トンプーの
+of Tongpu the Mad Pierrot
+#ランドルフ・カーターの
 of Randolph Carter
+#ヴィンセント・ヴァレンタインの
 of Vincent Valentine
+#バリー・バートンの
 of Barry Burton
+#ジェームズ・ボンドの
 of James Bond
-of Colonel Straydam
+#ストライダム大佐の
+of Colonel Strydum
+#ジョン・マクレーン刑事の
 of John McClane
+#フランク・ドレビン刑事の
 of Frank Drebin
-of Sergent Albert
-of Akihiko Sakata
-of Heinkel Woofer
-of Takeshi Kovac
+#アルベルト軍曹の
+of Sergeant Albert
+#アキヒコ・サカタ博士の
+of Dr. Akihiko Sakata
+#ジェド豪士の
+of Jed Goshi
+#ハインケル・ウーフーの
+of Heinkel Wulf
+#タケシ・コヴァッチの
+of Takeshi Kovacs
+#『TATSUJIN』
 'TATSUJIN'
-of Smithsonian Museum
+#スミソニアン航空宇宙博物館所蔵の
+of the Smithsonian Museum
+#アバディーン戦車博物館所蔵の
 of Aberdeen Tank Museum
+#陸上自衛隊土浦駐屯地火砲館所蔵の
+of Tsuchiura Garrison Tank Museum
+#モスクワ中央軍事博物館所蔵の
+of the Moscow Museum of Armed Forces
+#ケープ・カナベラルの
 of Cape Canaveral
+#近江国国友村の
+of Kunitomo
+#紀伊国根来衆の
+of the Negoro-shu
+#紀伊国雑賀衆の
+of the Saiga-ikki
+#和泉国堺
+of Sakai City
+#俺の両手は
 'My Two Hands'
+#Ｒ・田中一郎の
 of R. Tanaka Ichiro
+#『轟天号』
 'Goutengo'
+#潜木怪儡の
+of Kairai Kugurugi
+#轟天雷
 of Heavenly Thunder
+#太乙真人
 of Taiyi Zhenren
-of Masirito
-of Mustadio
-of Randall
+#マシリト博士
+of Dr. Mashirito
+#機工士ムスタディオ
+of Mustadio the Machinist
+#銃士レンドルの
+of Lindl the Fusilier
+#スマッシュ大作の
 of Smash Blockbuster
-of Clanton Family
+#鯨波兵庫の
+of Kujiranami Hyougo
+#星野鉄郎の
+of Tetsuro Hoshino
+#クラントン家の
+of the Clanton Family
+#大村益次郎の
 of Masujiro Omura
-of Hachiban Kinbei
+#八板金兵衛の
+of Yaita Kinbei
+#からくり儀右衛門の
+of Karakuri Giemon
+#雑賀孫一の
+of Saiga Magoichi
+#カラミティ・ジェーンの
 of Calamity Jane
+#ヘンリー八世の
 of Henry VIII
+#マリエッテ社の
 of Mariette
+#ワーテルローの
 of Waterloo
+#ネイズビーの
 of Nadesby
-of Okehazam
+#長篠の
+of Nagashino
+#桶狭間の
+of Okehazama
+#九龍城の
 of Kowloon
+#サイゴンの
 of Saigon
+#ヨハネスブルグの
 of Johanessburg
+#ネオアームストロングサイクロンジェット
 'Neo Armstrong Cyclone Jet'
-of Yakuza
+#ヤクザ＝
+(Yakuza)
+#デッカー・
 of Decker
-of Lonely Soul
-of Tanegashima
-of the Wind Valley
-of Federation
-of the Machine Kingdom
-of the Mechanic City
+#タネガシマ＝
+(Lonely Soul)
+#南蛮渡来の
+(Nanban Import)
+#ペジテ市の
+of Pejite City
+#風の谷
+of the Valley of the Wind
+#魔界都市新宿の
+of Demon City Shinjuku
+#連邦の
+of the Federation
+#機械王国フィガロの
+of Machine Kingdom Figaro
+#機工都市ゴーグの
+of the Clockwork City of Gorg
+#アンブレラ社の
 of Umbrella Corporation
-of Melchia Armed Forces
+#剣菱重工の
+of Kenbishi Heavy Industries
+#公安9課の
+of Public Security Section 9
+#ドウグ社の
+of Doug Company
+#戦争法人ロストック社の
+of Rostock Corporation
+#メルキア装甲特殊部隊の
+of Melkian Armoured Special Forces
+#キャンプ・スワンピーの
 of Camp Swampy
-of Gunhill
-'Mesopotamia Colt'
+#ガンヒルの
+of Gun Hill
+#OK牧場の
+of OK Corral
+#『メソポタミアコルト』
+'Mesopotamian Colt'
+#『ハーモニウム』
 'Harmonium'
+#『コンサーティーナ』
 'Concertina'
+#『オンド・マルトノ』
 'Ondes Martenot'
+#『チェレスタ』
 'Celesta'
+#『クラビコード』
 'Clavichord'
+#『オルガン』
 'Organ'
+#『ゴング』
 'Gong'
+#『テンプル・ブロック』
 'Temple Block'
+#『ウィンドチャイム』
 'Wind Chime'
+#『トライアングル』
 'Triangle'
+#『シンバル』
 'Cymbal'
+#『ウドゥ』
+'Udu'
+#『チャイム』
 'Chime'
-'Cowbell;
+#『カウベル』
+'Cowbell'
+#ビブラスラップ』
 'Vibraslap'
+#『コキリコ』
 'Kokiriko'
+#『シロフォン』
 'Xylophone'
+#『グングル』
+'Ghungroo'
+#『ラチェット』
 'Ratchet'
+#『ハープ』
 'Harp'
+#『サウン・ガウ』
+'Saung-gauk'
+#『バラライカ』
 'Balalaika'
+#『セタール』
 'Sitar'
+#『バンジョー』
 'Banjo'
-'Lute'
+#『カーヌーン』
+'Qanun'
+#『月琴』
 'Yueqin'
+#『馬頭琴』
+'Matouqin'
+#『フィドル』
 'Fiddle'
+#『胡弓』
+'Kokyuu'
+#『ハーディ・ガーディ』
 'Hurdy-Gurdy'
-'Eolian Harp'
-'Toumbarine'
+#『エオリアンハープ』
+'Aeolian Harp'
+#『トロンバマリーナ』
+'Tromba Marina'
+#『バグパイプ』
 'Bagpipe'
-'Auros'
+#『笙』
+'Sheng'
+#『アウロス』
+'Aulos'
+#『篳篥』
 'Hichiriki'
+#『ピッコロ』
 'Piccolo'
+#『フルート』
 'Flute'
+#『ケーナ』
+'Quena'
+#『ユーフォニアム』
 'Euphonium'
+#『龍笛』
+'Ryuuteki'
+#吠えろ！
 'Roar!'
+#唸れ！
 'Howl!'
+#轟け！
 'Resound'
+#叫べ！
 'Scream!'
+#輝け！
 'Shine!'
+#撃て！
 'Shoot!'
-'Funny Explosive Weapon'
-'Kappa 2001'
+#『ファニーな暴力兵器』
+'Funny Violent Weapon'
+#『Kappa2001』
+'Kappa2001'

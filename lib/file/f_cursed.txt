@@ -1,34 +1,81 @@
 N:*:Default
+#呪いの
 of Curses
+#悲運の
 of Misfortune
+#非業の
 of Powerlessness
+#血塗られた
 (Bloodstained)
+#無慈悲なる
 'No Mercy'
-'Because It's Time'
+#せっかくだから
+'Because it's time'
+#『クリムヅン』
 'Crimzun'
+#『やりやがったな！』
 'Now you've done it!'
-'What are you saying'
+#『お前は何を言っているんだ』
+'The hell are you saying?'
+#『みんな死ぬしかないじゃない』
 'Everyone Has to Die'
+#『捨丸のやつ要らぬことを』
+'Sutemaru is fooling around'
+#『バイドシステムα』
 'Bydo System Alpha'
+#『ムスタディオをやっつけろ』
+'Defeat Mustadio'
+#『モルダーあなた疲れてるのよ』
+'Mulder, you're tired'
+#セキュリティクリアランス違反の
 of Security Unclearance
+#『y=ｰ( ﾟдﾟ)･∵.ﾀｰﾝ』
+#R&D部の
 of R&D
-of Great Lunar Teacher
+#大月先生の
+of Mr. Ootsuki the science teacher
+#ネビル・シュートの
 of Nevil Shoot
-of Some Incident
+#なんか事件の香りがする
+(Smells Like an Incident)
+#天邪鬼の
 of Amanojaku
+#『ウィドウ・メーカー』
 'Widowmaker'
-of Rook and Yan
-of Fiend Zamiel
+#ルークとヤンの
+of Luke and Jan
+#魔王ザミエルの
+of Samiel
+#天若日子の
 of Ame-no-waka
+#杉谷善住坊の
+of Sugitani Zenjubou
+#堕落の都市ソドムの
+of the fallen city of Sodom
+#『グレムリン』
 'Gremlin'
+#『TATSUTIN』
 'TATSUTIN'
+#『九連放銃』
+#Mahjong pun, the equivalent of "hit me" uses literal kanji for shooting a gun
+'Nine-Card Misfire'
+#上九一色村の
 of Kamikuishiki Village
+#ウィルバー・ウェイトリーの
 of Wilbur Waitley
+#『ロシアンルーレット』
 'Russian Roulette'
-of Suicide
+#スーサイド・
+(Suicidal)
+#ジャミーズの
 of Jamming
-'What is this?'
+#『なんじゃこりゃぁ！？』
+'What is this!?'
+#『ギャフンEND』
 'Gyafun END'
+#『ボスケテ』
 'Boskete'
+#『ラッキー弾幕占い』
 'Lucky Danmaku Divination'
-'Treacherous Attack from Behind'
+#『裏切りの後方射撃』
+'Treacherous Shot in the Back'

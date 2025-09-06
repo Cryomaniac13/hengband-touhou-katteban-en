@@ -1,101 +1,285 @@
 N:*:Default
-'One of Thousand'
+#『ワン・オブ・テンサウザンド』
+'One of Ten Thousand'
+#アトランティス王国の
 of Atlantis
+#レムリア大陸の
 of Lemuria
+#『ワイズマンスナップ』
 'Wiseman Snap'
+#『ピースメーカー』
 'Peacemaker'
+#『怒りのアフガン』
+#Localised name of Rambo III, huh
+'Angry Afghanistan'
+#『ガンマレイ』
 'Gamma Ray'
+#『ハッピートリガー』
 'Happy Trigger'
+#『パイルバンカー』
 'Pile Bunker'
-of Devil Wave
-of Force
+#デビルウェーブ
+(Devil Wave)
+#フォース
+Force
+#『餓狼の弾痕』
+'Bullet Holes of the Hungry Wolf'
+#『極大射程』
 'Maximum Range'
+#『地獄の黙示録』
 'Apocalypse Now'
+#『スイス・アカウント』
 'Swiss Account'
+#『ラストマン・スタンディング』
 'Last Man Standing'
+#『リーサルドラグーン』
 'Lethal Dragoon'
+#『サイコガン』
 'Psycho Gun'
+#『チョップリフター』
 'Choplifter'
+#『デスペナルティ』
 'Death Penalty'
-'Million Dollars'
+#『ミリオンダラー』
+'Million Dollar'
+#『ライオンハート』
 'Lionheart'
+#『マグナムファング』
 'Magnum Fang'
+#『ディザスター』
 'Disaster'
+#『デヴィリーライトレイ』
 'Devilry Light Ray'
+#『パラレルクロス』
 'Parallel Cross'
+#『ラピッドショット』
 'Rapid Shoot'
-'Green Stream'
+#『彩光乱舞』
+'Vivid Chaotic Dance'
+#『グリーンストーム』
+'Green Storm'
+#『コールドスナップ』
 'Cold Snap'
-'Comet on Earth'
+#『地上の流星』
+'Meteor on Earth'
+#『ポイズンビー』
 'Poison Bee'
+#『モケーレ・ムベンベ』
 'Mokele-mbembe'
-of Space Police
+#宇宙警察の
+of the Space Police
+#『アルファガン』
 'Alpha Gun'
+#『鷲は舞い降りた』
 'The Eagle has Landed'
+#『ラビットファルコナー』
 'Rabbit Falconer'
+#『ファルコン』
 'Falcon'
+#『レイヴン』
 'Raven'
+#『アルバトロス』
 'Albatross'
+#『パロット』
 'Parrot'
-'Carnelia'
+#『カナリア』
+'Canary'
+#『シーガル』
 'Seagull'
+#『ウッドペッカー』
 'Woodpecker'
+#『ピーコック』
+'Peacock'
+#『ロビン』
 'Robin'
+#『ストーク』
 'Stork'
+#『ヘロン』
 'Heron'
+#『ターキー』
 'Turkey'
+#『スパロー』
 'Sparrow'
+#『ピジョン』
 'Pigeon'
+#『スターリング』
 'Starling'
+#『イーグル』
 'Eagle'
+#『アーキオプタリスク』
 'Archepteryx'
+#『赤啄木鳥』
+'Wryneck'
+#『信天翁』
+'Albatross'
+#『雨燕』
+'Swift'
+#『海燕』
+'Petrel'
+#『斑鳩』
+'Grosbeak'
+#『鸚哥』
+'Lory'
+#『鶯』
+'Nightingale'
+#『烏骨鶏』
+'Silkie'
+#『鸚鵡』
+'Cockatoo'
+#『鵲』
+'Magpie'
+#『郭公』
+'Cuckoo'
+#『金糸雀』
+'Finch'
+#『翡翠』
+'Kingfisher'
+#『啄木鳥』
+'Piculet'
+#『水鶏』
+'Water Rail'
+#『孔雀』
+'Peafowl'
+#『木葉木菟』
+'Scops Owl'
+#『軍鶏』
+'Shamo'
+#『十姉妹』
+'Munia'
+#『鶺鴒』
+'Wagtail'
+#『鶫』
+'Thrush'
+#『朱鷺』
+'Ibis'
+#『隼』
+'Falcon'
+#『火食鳥』
+'Cassowary'
+#『雲雀』
+'Skylark'
+#『仏法僧』
+'Dollarbird'
+#『不如帰』
+'Koel'
+#『鷦鷯』
+'Wren'
+#『百舌鳥』
+'Shrike'
+#『山原水鶏』
+'Crake'
+#『百合鴎』
+'Tern'
+#『ワイルドボア』
 'Wild Boar'
+#『ジャッカル』
 'Jackal'
+#『コヨーテ』
 'Coyote'
+#『タイガー』
 'Tiger'
+#『レパード』
 'Leopard'
+#『バブーン』
 'Baboon'
+#『キャメル』
 'Camel'
+#『ドンキー』
 'Donkey'
+#『フォックス』
 'Fox'
+#『ラクーン』
 'Racoon'
+#『スロース』
 'Sloth'
+#『ヘッジホッグ』
 'Hedgehog'
+#『モール』
 'Mole'
+#『ドーマウス』
 'Dormouse'
+#『ホーネット』
 'Hornet'
+#『ファイアフライ』
 'Firefly'
+#『アネモネ』
 'Anemone'
+#『アイリス』
 'Iris'
+#『月下美人』
 'Queen of the Night'
+#『金鳳花』
 'Buttercup'
+#『蒲公英』
 'Dandelion'
-'Cornflower
+#『矢車菊』
+'Cornflower'
+#『鉄砲百合』
 'Easter Lily'
+#『鳳仙花』
+'Balsam'
+#『ウォルナット』
 'Walnut'
+#『オールドウィロウ』
 'Old Willow'
+#『レインメーカー』
 'Rainmaker'
+#『スターフィッシュ』
 'Starfish'
+#『ジェリーフィッシュ』
 'Jellyfish'
-of Nitori Kawashiro
-of Rabbit Alliance
-of Tank Girls
-'Wild Gun'
+#エンジニア河城にとりの
+(Kawashiro Brand)
+#兎角同盟謹製の
+(Rabbit-Manufactured)
+#戦車むすめの
+of Tank Girl
+#『野鉄砲』
+'Nodeppou'
+#蓬莱薬局の
 of Hourai Pharmacy
+#清蘭屋の
 of Seiran Store
-of Eternal Calm
-of Infinite Article
-'Starfall'
-'Mysterious'
-of Magic
-'Hyper'
-of Photons
-'Phial'
+#秘密結社エターナルカームの
+of secret society 'Eternal Calm'
+#無限条の
+of Infinite Articles
+#星降る
+of Falling Stars
+#不思議な不思議な
+(Mysterious, Mysterious)
+#魔導
+(Sorcerous)
+#ハイパー
+(Hyper)
+#光子
+(Photon)
+#『アハト・アハト』
+'Acht-Acht'
+#『瑠璃瓶』
+#don't know what this is referring to
+'Crystal Phial'
+#『首領砲』
+'LordCannon'
+#『架空兵器』
 'Fictional Weapon'
+#『黄金銃』
 'Golden Gun'
+#『チェスト種子島』
+'Arquebus Chest'
+#未来の世界の猫型ロボットの
+of the cat-shaped robot of the future world
+#『セントエルモの火』
 'St Elmo's Fire'
+#『レッドスプライト』
 'Red Sprite'
+#『アゾビスイソブチロニトリル』
+'Azobisisobutyronitrile'
+#『メチルエチルケトンパーオキサイド』
 'Methyl Ethyl Ketone Peroxide'
+#『ジニトロソペンタメチレンテトラミン』
 'Dinitrosopentamethylenetetramine'
+#『キトゥン』
 'Kitten'
+#バンデットリィ
 of Banditry
