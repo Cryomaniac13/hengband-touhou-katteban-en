@@ -209,5 +209,9 @@ N:1361:Tsukasa
 # 「はあ、これは参った」
 says, 'Haa, this is bad.'
 
+N:1391:Kiketsu escapee
+#は普通のカワウソのふりをしてキューキュー鳴いている。
+starts squeaking and pretending to be a normal otter.
+
 N:*:Default lines
 #Gensoukyou uniques have no default lines
