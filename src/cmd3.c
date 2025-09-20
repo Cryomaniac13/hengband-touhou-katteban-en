@@ -4001,7 +4001,7 @@ bool wield_check( int slot, int item_new, int mode)
 			if(p_ptr->pclass == CLASS_KASEN)
 				msg_print(_("‚ ‚È‚½‚Í‚»‚ê‚ğ‘•”õ‚Å‚«‚È‚¢B", "You cannot wear that."));
 			else
-				msg_print(_("Šp‚ª×–‚‚ÅŠ•‚ğ‚©‚Ô‚ê‚È‚¢B", "You horns prevent you from wearing a helmet."));
+				msg_print(_("Šp‚ª×–‚‚ÅŠ•‚ğ‚©‚Ô‚ê‚È‚¢B", "Your horns prevent you from wearing a helmet."));
 			return (FALSE);
 		}
 	}
