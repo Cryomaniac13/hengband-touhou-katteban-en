@@ -1,3 +1,5 @@
+See also: Races/Classes/Personalities in the help system (help/traceclas_en)
+
 Pseudo-identification types
 ---------------------------
 There are five tiers of pseudo-ID, which determine how likely it is to activate.
@@ -10,7 +12,7 @@ With the Unlucky Black Aura mutation:
 With the Lucky White Aura mutation:
 1/13 chance of a light sense becoming a heavy sense
 
-Effects of Magicmaster flag (MM)
+Effects of Magic Specialist flag (MM)
 --------------------------------
 Minimum spell failure rate is 0% (5% normally)
 Minimum spell failure rate in Berserk personality is 20% (30% normally)
@@ -55,7 +57,7 @@ Several races/classes also treat appropriate follower types as having a lower le
 
 Attacks per round (APR)
 -----------------------
-The maximum number of melee weapon attacks a class can naturally achieve.
+The maximum number of melee weapon blows a class can naturally achieve.
 Extra attacks from enchantments, short blades skill, special class effects etc. are added on top.
 This does not affect unarmed attacks, where the maximum is derived from martial arts skill.
 
