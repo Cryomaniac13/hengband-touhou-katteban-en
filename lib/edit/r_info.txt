@@ -23297,6 +23297,7 @@ F:KWAI | GEN_NEUTRAL | FRIENDS
 F:IM_ACID | IM_FIRE | IM_COLD | IM_ELEC | HURT_HOLY
 S:1_IN_7 |
 S:DANMAKU | BR_FIRE
+D:$A miniature clone that grew from Suika's cast-off hairs.
 D:萃香の髪から生まれた小型の分身だ。
 
 N:1156:美しき緋の衣『永江　衣玖』
@@ -27438,7 +27439,7 @@ D:外界から送り込まれた情報収集用AIだ。これはすでに情報収集を済ませた残滓のようだ
 
 
 N:1391:『脱獄した動物霊(鬼傑組)』
-E:Animal Ghost Escapee (Kiketsu Family)
+E:Animal ghost escapee (Kiketsu Family)
 G:G:G
 I:120:10d30:50:70:10
 W:20:2:4:600:0:0
@@ -27452,6 +27453,9 @@ F:IM_COLD | IM_POIS | RES_NETH | RES_DARK
 F:NO_SLEEP | NO_CONF | GEN_KWAI| SMART | FRIENDLY
 S:1_IN_3
 S:DANMAKU | CAUSE_3 | DRAIN_MANA | HOLD | BLIND | CONF | BLINK | SHRIEK
+D:$An animal spirit that escaped from the huge Kiketsu Family. 
+D:$Though enjoying its life on the surface, it seems to be
+D:$frightened of a forced repatriation.
 D:畜生界の巨大組織「鬼傑組」から脱走してきたカワウソ霊だ。
 D:地上を満喫しつつも古巣からの追っ手に怯えているようだ。
 

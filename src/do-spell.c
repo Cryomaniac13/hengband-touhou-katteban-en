@@ -1779,7 +1779,7 @@ static cptr do_life_spell(int spell, int mode)
 		if (name) return "光の召喚";
 		if (desc) return "光源が照らしている範囲か部屋全体を永久に明るくする。";
 #else
-		if (name) return "Call Light";
+		if (name) return "Invoke Light";
 		if (desc) return "Lights up nearby area and the inside of a room permanently.";
 #endif
 
@@ -1954,7 +1954,7 @@ static cptr do_life_spell(int spell, int mode)
 		if (desc) return "一定時間、火炎と冷気に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Heat and Cold";
-		if (desc) return "Gives resistance to fire and cold. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire and cold. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -3285,7 +3285,7 @@ static cptr do_nature_spell(int spell, int mode)
 		if (desc) return "一定時間、冷気、炎、電撃に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Environment";
-		if (desc) return "Gives resistance to fire, cold and electricity for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold and electricity for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -3567,7 +3567,7 @@ static cptr do_nature_spell(int spell, int mode)
 		if (desc) return "一定時間、酸、電撃、炎、冷気、毒に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resistance True";
-		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -4839,7 +4839,7 @@ static cptr do_death_spell(int spell, int mode)
 		if (desc) return "一定時間、毒への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Poison";
-		if (desc) return "Gives resistance to poison. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to poison. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -6753,7 +6753,7 @@ static cptr do_arcane_spell(int spell, int mode)
 		if (desc) return "一定時間、冷気への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Cold";
-		if (desc) return "Gives resistance to cold. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to cold. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -6774,7 +6774,7 @@ static cptr do_arcane_spell(int spell, int mode)
 		if (desc) return "一定時間、炎への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Fire";
-		if (desc) return "Gives resistance to fire. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to fire. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -6795,7 +6795,7 @@ static cptr do_arcane_spell(int spell, int mode)
 		if (desc) return "一定時間、電撃への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Lightning";
-		if (desc) return "Gives resistance to electricity. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to electricity. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -6816,7 +6816,7 @@ static cptr do_arcane_spell(int spell, int mode)
 		if (desc) return "一定時間、酸への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Acid";
-		if (desc) return "Gives resistance to acid. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to acid. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7243,7 +7243,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、冷気への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Cold";
-		if (desc) return "Gives resistance to cold. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to cold. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7264,7 +7264,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、炎への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Fire";
-		if (desc) return "Gives resistance to fire. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to fire. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7308,7 +7308,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、電撃への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Lightning";
-		if (desc) return "Gives resistance to electricity. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to electricity. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7329,7 +7329,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、酸への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Acid";
-		if (desc) return "Gives resistance to acid. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to acid. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7395,7 +7395,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、毒への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Poison";
-		if (desc) return "Gives resistance to poison. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to poison. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -7563,7 +7563,7 @@ static cptr do_craft_spell(int spell, int mode)
 		if (desc) return "一定時間、酸、電撃、炎、冷気、毒に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resistance";
-		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -7956,7 +7956,7 @@ static cptr do_daemon_spell(int spell, int mode)
 		if (desc) return "一定時間、炎への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Fire";
-		if (desc) return "Gives resistance to fire, cold and electricity for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold and electricity for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -8317,7 +8317,7 @@ static cptr do_daemon_spell(int spell, int mode)
 		if (desc) return "恐怖を取り除き、一定時間、炎と冷気の耐性、炎のオーラを得る。耐性は装備による耐性に累積する。";
 #else
 		if (name) return "Devil Cloak";
-		if (desc) return "Removes fear. Gives resistance to fire and cold, and aura of fire. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Removes fear. Gives resistance to fire and cold, and aura of fire. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -10108,7 +10108,7 @@ static cptr do_music_spell(int spell, int mode)
 		if (desc) return "酸、電撃、炎、冷気、毒に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Finrod's Resistance";
-		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison. Stacks with resistances from equipment.";
 #endif
 
 		/* Stop singing before start another */
@@ -11245,7 +11245,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Tobi-Izuna";
-		if (desc) return "Attacks a two squares distant monster. Requires wielding a katana.";
+		if (desc) return "Attacks a monster at a distance of (2 + level/16). Requires wielding a katana.";
 #endif
 
 		if (cast)
@@ -11267,8 +11267,8 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (name) return "五月雨斬り";
 		if (desc) return "3方向に対して攻撃する。刃のある武器を持っていないと使えない。";
 #else
-		if (name) return "3-Way Attack";
-		if (desc) return "Attacks in 3 directions in one time. Requires wielding an edged weapon.";
+		if (name) return "Samedare-giri";
+		if (desc) return "Attacks in 3 directions at once. Requires wielding an edged weapon.";
 #endif
 
 		if (cast)
@@ -11330,7 +11330,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "武器を手元に戻ってくるように投げる。戻ってこないことがあり、受け止めそこねることもある。元々投げた時に戻ってくる武器の場合、さらに戻りやすく受けやすくなる。何か武器を持っていないと使えない。";
 #else
 		if (name) return "Boomerang";
-		if (desc) return "Throws current weapon. And it'll return to your hand unless failed.";
+		if (desc) return "Throws current weapon and attempts to make it return to you. Weapons with the returning property are easier to use successfully.";
 #endif
 
 		if (cast)
@@ -11351,7 +11351,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "火炎耐性のないモンスターに大ダメージを与える。何か武器を持っていないと使えない。";
 #else
 		if (name) return "Burning Strike";
-		if (desc) return "Attacks a monster with more damage unless it has resistance to fire. Requires wielding a weapon.";
+		if (desc) return "Attacks a monster, dealing more damage if it is not resistant to fire. Requires wielding a weapon.";
 #endif
 
 		if (cast)
@@ -11385,7 +11385,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "近くの思考することができるモンスターを感知する。";
 #else
 		if (name) return "Detect Ferocity";
-		if (desc) return "Detects all monsters except mindless in your vicinity.";
+		if (desc) return "Detects all non-mindless monsters in your vicinity.";
 #endif
 
 		if (cast)
@@ -11405,7 +11405,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "相手にダメージを与えないが、朦朧とさせる。何か武器を持っていないと使えない。";
 #else
 		if (name) return "Strike to Stun";
-		if (desc) return "Attempts to stun a monster in the adjacent. Requires wielding a weapon.";
+		if (desc) return "Attempts to stun an adjacent monster. Requires wielding a weapon.";
 #endif
 
 		if (cast)
@@ -11475,7 +11475,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "攻撃した後、反対側に抜ける。何か武器を持っていないと使えない。";
 #else
 		if (name) return "Harainuke";
-		if (desc) return "Attacks monster with your weapons normally, then move through counter side of the monster. Requires wielding a weapon.";
+		if (desc) return "Attacks monster with your weapons normally, then move through to the other side of the monster. Requires wielding a weapon.";
 #endif
 
 		if (cast)
@@ -11538,7 +11538,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "毒耐性のないモンスターに大ダメージを与える。何か武器を持っていないと使えない。";
 #else
 		if (name) return "Serpent's Tongue";
-		if (desc) return "Attacks a monster with more damage unless it has resistance to poison. Requires wielding a weapon.";
+		if (desc) return "Attacks a monster, dealing more damage if it is not resistant to poison. Requires wielding a weapon.";
 #endif
 
 		if (cast)
@@ -11576,7 +11576,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "混沌の勢力に属するアンデッドや悪魔に大ダメージを与えるが、他のモンスターには全く効果がない。剣か刀を装備していないと使えない。";
 #else
 		if (name) return "Zammaken";
-		if (desc) return "Attacks an evil unliving monster with great damage. No effect to other  monsters. Requires wielding a sword or a katana.";
+		if (desc) return "Deals great damage to chaotic undead and demons. No effect on other monsters. Requires wielding a sword or a katana.";
 #endif
 
 		if (cast)
@@ -11619,7 +11619,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Wind Blast";
-		if (desc) return "Attacks an adjacent monster, and blow it away. Requires wielding a sword or a katana.";
+		if (desc) return "Attacks an adjacent monster, and blows it away. Requires wielding a sword or a katana.";
 #endif
 
 		if (cast)
@@ -11700,7 +11700,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
         if(check) return "";
 		if (name) return "Judge";
-		if (desc) return "Identifies a weapon or armor. Or *identifies* these at level 45.";
+		if (desc) return "Identifies a weapon or armour. *Identifies* at level 45.";
 #endif
 
 		if (cast)
@@ -11732,7 +11732,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Rock Smash";
-		if (desc) return "Breaks rock. Or greatly damage a monster made by rocks. Requires wielding an edged weapon.";
+		if (desc) return "Break rocks, or greatly damage a monster made of rocks. Requires wielding an edged weapon.";
 #endif
 
 		if (cast)
@@ -11769,7 +11769,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "攻撃回数が増え、冷気耐性のないモンスターに大ダメージを与える。剣か刀を装備していないと使えない。";
 #else
 		if (name) return "Midare-Setsugekka";
-		if (desc) return "Attacks a monster with increased number of attacks and more damage unless it has resistance to cold. Requires wielding a sword or a katana.";
+		if (desc) return "Attacks a monster with an increased number of attacks, dealing more damage if it is not resistant to cold. Requires wielding a sword or a katana.";
 #endif
 
 		if (cast)
@@ -11807,7 +11807,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		if (desc) return "モンスターを一撃で倒す攻撃を繰り出す。失敗すると1点しかダメージを与えられない。武器を装備していないと使えない。";
 #else
 		if (name) return "Spot Aiming";
-		if (desc) return "Attempts to kill a monster instantly. If failed cause only 1HP of damage. Requires wielding a weapon.";
+		if (desc) return "Attempts to kill a monster instantly. Causes only 1HP of damage if that fails. Requires wielding a weapon.";
 #endif
 
 		if (cast)
@@ -11850,7 +11850,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Majingiri";
-		if (desc) return "Attempts to attack with critical hit. Requires wielding an axe.";
+		if (desc) return "Attempts to attack with a critical hit. Requires wielding an axe.";
 #endif
 
 		if (cast)
@@ -11885,7 +11885,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Desperate Attack";
-		if (desc) return "Attacks with all of your power. But all damages you take will be doubled for one turn.";
+		if (desc) return "Attacks with all of your power, but all damage you take will be doubled for one turn.";
 #endif
 
 		if (cast)
@@ -11931,7 +11931,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		}
 
 		if (name) return "Lightning Eagle";
-		if (desc) return "Attacks a monster with more damage unless it has resistance to electricity. Requires wielding a sword or katana.";
+		if (desc) return "Attacks a monster, dealing more damage if it is not resistant to electricity. Requires wielding a sword or katana.";
 #endif
 
 		if (cast)
@@ -11966,7 +11966,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Rush Attack";
-		if (desc) return "Steps close to a monster and attacks at a time.";
+		if (desc) return "Steps close to a monster and attacks at the same time.";
 #endif
 
 		if (cast)
@@ -11983,7 +11983,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Bloody Maelstrom";
-		if (desc) return "Attacks all adjacent monsters with power corresponding to your cut status. Then increases your cut status. No effect to unliving monsters.";
+		if (desc) return "Attacks all adjacent monsters with power corresponding to your cut status. Then increases your cut status. No effect on unliving monsters.";
 #endif
 
 		if (cast)
@@ -12045,7 +12045,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		}
 
 		if (name) return "Earthquake Blow";
-		if (desc) return "Causes an earthquake. Requires wield a 5 kg or heavier weapon.";
+		if (desc) return "Causes an earthquake. Requires wielding a 5kg or heavier weapon.";
 #endif
 
 		if (cast)
@@ -12135,7 +12135,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "War Cry";
-		if (desc) return "Damages all monsters in sight with sound. Aggravate nearby monsters.";
+		if (desc) return "Damages all monsters in sight with sound. Aggravates nearby monsters.";
 #endif
 
 		if (cast)
@@ -12170,7 +12170,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		}
 
 		if (name) return "Musou-Sandan";
-		if (desc) return "Attacks with powerful 3 strikes. Requires wielding a spear or a polearm.";
+		if (desc) return "Attacks with 3 powerful strikes. Requires wielding a spear or a polearm.";
 #endif
 
 		if (cast)
@@ -12263,7 +12263,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Vampire's Fang";
-		if (desc) return "Attacks with vampiric strikes which absorbs HP from a monster and gives them to you. No effect to unliving monsters.";
+		if (desc) return "Attacks with vampiric strikes which absorb HP from a monster and gives them to you. No effect on nonliving monsters.";
 #endif
 
 		if (cast)
@@ -12298,7 +12298,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Moon Dazzling";
-		if (desc) return "Attempts to stun, confuse and sleep all waking monsters.";
+		if (desc) return "Attempts to stun, confuse and sleep all monsters within sight.";
 #endif
 
 		if (cast)
@@ -12324,7 +12324,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #else
 		if(check) return "";
 		if (name) return "Hundred Slaughter";
-		if (desc) return "Performs a series of rush attacks. The series continues while killing each monster in a time and SP remains.";
+		if (desc) return "Performs a series of rush attacks. Each attack consumes MP. The series continues as long as the attacked monster lives and you have MP remaining.";
 #endif
 
 		if (cast)
@@ -12430,7 +12430,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Twin Slash";
-		if (desc) return "double attacks at a time. Requires wield a sword or a katana.";
+		if (desc) return "Attacks twice in one turn. Requires wielding a sword or a katana.";
 #endif
 
 		if (cast)
@@ -12481,7 +12481,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 		}
 
 		if (name) return "Kofuku-Zettousei";
-		if (desc) return "Performs a powerful attack which even effect nearby monsters. Requires wielding a katana.";
+		if (desc) return "Performs a powerful attack which even affects nearby monsters. Requires wielding a katana.";
 #endif
 
 		if (cast)
@@ -12502,7 +12502,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #ifdef JP
 				msg_print("なぜか攻撃することができない。");
 #else
-				msg_print("Something prevent you from attacking.");
+				msg_print("Something prevents you from attacking.");
 #endif
 				return "";
 			}
@@ -12559,7 +12559,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Keiun-Kininken";
-		if (desc) return "Attacks a monster with extremely powerful damage. But you also takes some damages. Hurts a undead monster greatly. Requires wielding a katana.";
+		if (desc) return "Attacks a monster with extreme power, but you also take some damage. Hurts undead monsters greatly. Requires wielding a katana.";
 #endif
 
 		if (cast)
@@ -12586,7 +12586,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 #ifdef JP
 			take_hit(DAMAGE_NOESCAPE, 100 + randint1(100), "慶雲鬼忍剣を使った衝撃", -1);
 #else
-			take_hit(DAMAGE_NOESCAPE, 100 + randint1(100), "exhaustion on using Keiun-Kininken", -1);
+			take_hit(DAMAGE_NOESCAPE, 100 + randint1(100), "exhaustion from using Keiun-Kininken", -1);
 #endif
 		}
 		break;
@@ -12607,7 +12607,7 @@ static cptr do_hissatsu_spell(int spell, int mode)
 			else return NULL;
 		}
 		if (name) return "Cut Through Time";
-		if (desc) return "'It'll take two hundred years to be able to cut through time.'";
+		if (desc) return "'It'll take two hundred years to be able to cut through time.' Almost instantly hits everything in sight with nexus. Requires wielding a katana.";
 #endif
 
 		if (cast)
@@ -14013,7 +14013,7 @@ static cptr do_new_spell_element(int spell, int mode)
 	case 7:
 		if (name) return _("温度遮断", "Thermal Insulation");
 		if (desc) return _("一定時間、火炎と冷気に対する耐性を得る。装備による耐性に累積する。",
-                            "Grants temporary resistance to fire and cold. Stacks with resistance from equipment.");
+                            "Grants temporary resistance to fire and cold. Stacks with resistances from equipment.");
 
 		{
 			int base = 20;
@@ -14029,7 +14029,7 @@ static cptr do_new_spell_element(int spell, int mode)
 	case 8:
 		if (name) return _("耐電撃", "Resist Electricity");
 		if (desc) return _("一定時間、電撃への耐性を得る。装備による耐性に累積する。",
-                            "Grants temporary resistance to lightning. Stacks with resistance from equipment.");
+                            "Grants temporary resistance to lightning. Stacks with resistances from equipment.");
 
 		{
 			int base = 20;
@@ -14307,7 +14307,7 @@ static cptr do_new_spell_element(int spell, int mode)
 #ifdef JP
 					msg_print("エレメンタルは現れなかった。");
 #else
-					msg_print("No Elementals arrive.");
+					msg_print("No elementals arrive.");
 #endif
 				}
 			}
@@ -14316,7 +14316,7 @@ static cptr do_new_spell_element(int spell, int mode)
 	case 19:
 		if (name) return _("元素耐性", "Resist Elements");
 		if (desc) return _("一定時間、酸、電撃、炎、冷気に対する耐性を得る。装備による耐性に累積する。",
-                            "Grants temporary resistance to acid, lightning, fire and cold. Stacks with resistance from equipment.");
+                            "Grants temporary resistance to acid, lightning, fire and cold. Stacks with resistances from equipment.");
 
 		{
 			int base = plev;
@@ -14853,7 +14853,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		if (desc) return "遠距離のテレポートをする。";
 #else
 		if (name) return "Teleport Self";
-		if (desc) return "Teleport long distance.";
+		if (desc) return "Teleport a long distance.";
 #endif
 
 		{
@@ -14996,7 +14996,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		if (desc) return "モンスターをテレポートさせるビームを放つ。抵抗されると無効。";
 #else
 		if (name) return "Teleport Other";
-		if (desc) return "Teleports all monsters on the line away unless resisted.";
+		if (desc) return "Teleports all monsters in a line away unless resisted.";
 #endif
 
 		{
@@ -15207,7 +15207,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		if (desc) return "装備中の並あるいは上質の武器に対し、永続的に対秩序の特性を付与する。";
 #else
 		if (name) return "Chaos Branding";
-		if (desc) return "Makes current weapon a Chaotic weapon.";
+		if (desc) return "Permanently adds the chaotic brand to the currently wielded weapon.";
 #endif
 
 		{
@@ -15416,7 +15416,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		if (desc) return "ランダムな属性の視界内攻撃を発生させる。";
 #else
 		if (name) return "Call Chaos";
-		if (desc) return "Generate random kind of balls or beams.";
+		if (desc) return "Hits everything in sight with a random element.";
 #endif
 
 		{
@@ -15436,7 +15436,7 @@ static cptr do_new_spell_chaos(int spell, int mode)
 		if (desc) return "自分の周囲に向かって、ロケット、純粋な魔力の球、核熱の球を放つ。ただし、壁に隣接して使用すると広範囲を破壊する。";
 #else
 		if (name) return "Call the Void";
-		if (desc) return "Fires rockets, mana balls and nuclear waste balls in all directions each unless you are not adjacent to any walls. Otherwise *destroys* huge area.";
+		if (desc) return "Fires rockets, mana balls and nuclear waste balls in all directions each unless you are not adjacent to any walls. Otherwise *destroys* a huge area.";
 #endif
 
 		{
@@ -15764,7 +15764,7 @@ static cptr do_new_spell_foresee(int spell, int mode)
 		if (desc) return "近くの全てのモンスターを感知する。";
 #else
 		if (name) return "Detect Monsters";
-		if (desc) return "Detects all monsters in your vicinity unless invisible.";
+		if (desc) return "Detects all nearby monsters.";
 #endif
 
 		{
@@ -16053,7 +16053,7 @@ static cptr do_new_spell_foresee(int spell, int mode)
 
 	case 18:
 		if (name) return _("*鑑定*", "*Identify*");
-		if (desc) return _("アイテムの持つ能力を完全に知る。", "Fully learns all abilites of an item.");
+		if (desc) return _("アイテムの持つ能力を完全に知る。", "*Identifies* an item.");
 
 		{
 			if (cast)
@@ -16069,7 +16069,7 @@ static cptr do_new_spell_foresee(int spell, int mode)
 		if (desc) return "現在の自分の状態を完全に知る。";
 #else
 		if (name) return "Self Knowledge";
-		if (desc) return "Gives you useful info regarding your current resistances, the powers of your weapon and maximum limits of your stats.";
+		if (desc) return "Gives you information about yourself.";
 #endif
 
 		{
@@ -16534,7 +16534,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "一定時間、火炎と冷気に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Heat and Cold";
-		if (desc) return "Gives resistance to fire and cold. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to fire and cold. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -16602,7 +16602,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "一定時間、電撃への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Lightning";
-		if (desc) return "Gives resistance to electricity. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to electricity. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -16623,7 +16623,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "一定時間、酸への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Acid";
-		if (desc) return "Gives resistance to acid. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to acid. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -16643,7 +16643,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "狂戦士化し、恐怖を除去する。";
 #else
 		if (name) return "Berserk";
-		if (desc) return "Gives bonus to hit and HP, immunity to fear for a while. But decreases AC.";
+		if (desc) return "Gives bonus to hit and HP and immunity to fear for a while, but decreases AC.";
 #endif
 
 		{
@@ -16802,7 +16802,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "一定時間、酸、電撃、炎、冷気、毒に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resistance";
-		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -16889,7 +16889,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "一定時間、武器に冷気、炎、電撃、酸、毒のいずれかの属性をつける。武器を持たないと使えない。";
 #else
 		if (name) return "Mana Branding";
-		if (desc) return "Makes current weapon some elemental branded. You must wield weapons.";
+		if (desc) return "Gives the currently wielded weapon a temporary elemental brand.";
 #endif
 
 		{
@@ -17072,7 +17072,7 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (desc) return "装備中の並あるいは上質の武器に対し、永続的に何らかの属性や特性を付加する。";
 #else
 		if (name) return "Craftsman's Technique";
-		if (desc) return "Makes current weapon a random ego weapon.";
+		if (desc) return "Permanently applies an ego to an equipped non-ego weapon.";
 #endif
 
 		{
@@ -17109,8 +17109,8 @@ static cptr do_new_spell_enchant(int spell, int mode)
 		if (name) return "無生物破壊";
 		if (desc) return "隣接した無生物に対し極めて強力な攻撃を行う。アンデッドやデーモンは対象に入らない。";
 #else
-		if (name) return "Destroy Nonliving";
-		if (desc) return "Performs extremely powerful attack against an adjacent nonliving being, except undead or demons.";
+		if (name) return "Destroy Inanimate";
+		if (desc) return "Performs an extremely powerful attack against an adjacent nonliving being. Does not affect undead or demons.";
 #endif
 
 		{
@@ -17340,7 +17340,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "食料を一つ作り出す。";
 #else
 		if (name) return "Produce Food";
-		if (desc) return "Produces a Ration of Food.";
+		if (desc) return "Produces a ration of food.";
 #endif
 
 		{
@@ -17432,7 +17432,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "一定時間、冷気、炎、電撃に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Environment";
-		if (desc) return "Gives resistance to fire, cold and electricity for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold and electricity for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -17455,7 +17455,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "怪我を全快させ、毒を体から完全に取り除き、体力を少し回復させる。";
 #else
 		if (name) return "Cure Wounds & Poison";
-		if (desc) return "Heals all cut and poison status. Heals HP a little.";
+		if (desc) return "Cures cut and poison status. Heals HP a little.";
 #endif
 
 		{
@@ -17525,7 +17525,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "光線を放つ。光りを嫌うモンスターに効果がある。";
 #else
 		if (name) return "Ray of Sunlight";
-		if (desc) return "Fires a beam of light which damages to light-sensitive monsters.";
+		if (desc) return "Fires a beam of light which can damage light-sensitive monsters.";
 #endif
 
 		{
@@ -17565,7 +17565,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print(_("あなたは蔦や木の根を操った！", "You manipulated the vines and roots of the tree."));
+				msg_print(_("あなたは蔦や木の根を操った！", "You manipulate vines and tree roots!"));
 				project_hack(GF_SLOW_TWINE, power);
 			}
 		}
@@ -17576,7 +17576,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "瞬間的に自然と一体化し、近くの地形、罠、モンスターを感知する。";
 #else
 		if (name) return "Nature Awareness";
-		if (desc) return "Maps nearby area. Detects all monsters, traps, doors and stairs.";
+		if (desc) return "Maps nearby area and detects all monsters, traps, doors and stairs.";
 #endif
 
 		{
@@ -17624,7 +17624,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "秘伝の薬草による治療を行う。HPを中程度回復させて毒と切り傷を治す。";
 #else
 		if (name) return "Herbal Healing";
-		if (desc) return "Heals HP greatly. And heals cut, stun and poison completely.";
+		if (desc) return "Cures cut, poison and stun status. Heals HP moderately.";
 #endif
 
 		{
@@ -17723,7 +17723,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 				{
 					sides *= 2;
 					if(!fire_ball_jump(GF_ARROW,dir,damroll(dice,sides),0,_("地響きとともに木が一本倒れた！",
-                                                                            "There is a loud sound as a tree falls down!"))) return NULL;
+																			"A tree falls down with an earth-quaking crash!"))) return NULL;
 				}
 				else
 				{
@@ -17742,7 +17742,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "一定時間、酸、電撃、炎、冷気、毒に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resistance True";
-		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire, cold, electricity, acid and poison for a while. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -17806,7 +17806,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "野生の大鷲にアイテムを自宅まで運んでもらう。ただしあまり重いものを運ばせることはできない。";
 #else
 		if (name) return "Eagle Familiar";
-		if (desc) return "Summons a wild eagle to carry an item to your house. Cannot carry too heavy items.";
+		if (desc) return "Summons a wild eagle to carry an item to your house. Cannot carry heavy items.";
 #endif
 
 		{
@@ -17834,7 +17834,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 
 			if (cast)
 			{
-				msg_print(_("部屋中が吹雪に覆われた！", "Strong blizzard blows through the room!"));
+				msg_print(_("部屋中が吹雪に覆われた！", "A blizzard blankets the room!"));
 				project_hack2(GF_COLD, 0,0,dam);
 
 			}
@@ -17955,7 +17955,7 @@ static cptr do_new_spell_nature(int spell, int mode)
 		if (desc) return "装備中の並あるいは上質の武器に対し、永続的に何らかの元素属性を付加する。";
 #else
 		if (name) return "Elemental Branding";
-		if (desc) return "Makes current weapon branded with an element.";
+		if (desc) return "Permanently adds an elemental brand to the currently equipped weapon.";
 #endif
 
 		{
@@ -18228,7 +18228,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "一定時間、地獄属性への耐性を得る。";
 #else
 		if (name) return "Resist Nether";
-		if (desc) return "Gives resistance to nether.";
+		if (desc) return "Gives resistance to nether for a while.";
 #endif
 
 		{
@@ -18302,7 +18302,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "地獄のボルトもしくはビームを放つ。アンデッドにはほぼ効かずデーモンには効果が薄い。";
 #else
 		if (name) return "Nether Bolt";
-		if (desc) return "Fires a bolt or beam of nether. Less effective against demons and has particularly no effect on undead.";
+		if (desc) return "Fires a bolt or beam of nether. Less effective against demons and has no effect on undead.";
 #endif
 
 		{
@@ -18401,7 +18401,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "モンスター一体に怨霊を憑依させ、高確率で狂戦士化させる。抵抗されると無効。妖怪に効きやすいが通常の精神を持たないモンスターには効かない。";
 #else
 		if (name) return "Incite Possession";
-		if (desc) return "Makes a single monster possessed a vengeful spirit, making it berserk with a high probability rate. Does nothing if resisted. Works well against youkai, but does not affect monsters with unusual mind.";
+		if (desc) return "Has a vengeful spirit possess a single monster, making it go berserk. Does nothing if resisted. Works well against youkai, but does not affect monsters with unusual minds.";
 #endif
 
 		{
@@ -18464,7 +18464,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "フロアにいるアンデッドの配下をターゲット周辺に呼び寄せる。";
 #else
 		if (name) return "Instigate";
-		if (desc) return "Transports your undead followers on this floor around the target.";
+		if (desc) return "Teleports your undead followers on this floor to the target.";
 #endif
 
 		{
@@ -18678,7 +18678,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "一定時間、吸血鬼に変化する。変化している間は本来の種族の能力を失い、代わりに吸血鬼としての能力を得る。";
 #else
 		if (name) return "Vampire Form";
-		if (desc) return "Mimic a vampire for a while. Loses abilities of original race and gets abilities as a vampire.";
+		if (desc) return "Mimic a vampire for a while. Lose the abilities of your original race and gain the abilities of a vampire.";
 #endif
 
 		{
@@ -18788,7 +18788,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "破滅の手を放つ。食らったモンスターはそのときのHPの半分前後のダメージを受ける。";
 #else
 		if (name) return "Hand of Doom";
-		if (desc) return "Attempts to make a monster's HP almost half.";
+		if (desc) return "Attempts to roughly halve a monster's current HP.";
 #endif
 
 		{
@@ -18836,7 +18836,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "一定時間、自分がダメージを受けたときに攻撃を行ったモンスターに対して同等のダメージを与える。";
 #else
 		if (name) return "Oath of Vengeance";
-		if (desc) return "Gives special aura for a while. When you are attacked by a monster, the monster are injured with same amount of damage as you take.";
+		if (desc) return "For the duration, whenever you take damage from a monster, the attacker receives the same amount of damage.";
 #endif
 
 		{
@@ -18857,7 +18857,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "生命のある敵を一撃で倒し、そのHPを吸収する。抵抗されると無効。力強い敵や賢い敵には効きにくい。";
 #else
 		if (name) return "Soul Steal";
-		if (desc) return "Defeats living enemy in a single blow and drains their HP. Does nothing if resisted. Less effective against powerful or smart enemies.";
+		if (desc) return "Defeats a living enemy in a single blow and drains their HP. Does nothing if resisted. Less effective against powerful or smart enemies.";
 #endif
 
 		{
@@ -18880,7 +18880,7 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (desc) return "一定時間、壁を通り抜けることができ受けるダメージが軽減される幽体の状態に変身する。";
 #else
 		if (name) return "Wraithform";
-		if (desc) return "Becomes wraith form which gives ability to pass walls and makes all damages half.";
+		if (desc) return "Temporarily become a wraith, halving all damage and allowing you to walk through walls.";
 #endif
 
 		{
@@ -18902,8 +18902,8 @@ static cptr do_new_spell_necromancy(int spell, int mode)
 		if (name) return "血の呪い";
 		if (desc) return "極めて強力な呪いにより敵1体に大ダメージを与え、時々何らかの追加効果を引き起こす。生命のない敵にも効果がある。30～100のHPを消費し、体力が減っているほど威力が高まる。";
 #else
-		if (name) return "Bloody Curse";
-		if (desc) return "Puts blood curse which damages and causes various effects on a monster. Effective against nonliving enemies as well. Drain 30-100 HP, and is more effective the less HP you have.";
+		if (name) return "Blood Curse";
+		if (desc) return "Invokes a blood curse on a single monster, causing damage and various effects. Effective against nonliving enemies. Drains 30-100 HP, and is more effective the less HP you have.";
 #endif
 
 		{
@@ -19012,7 +19012,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "怪我と体力を少し回復させる。";
 #else
 		if (name) return "Cure Light Wounds";
-		if (desc) return "Heals cut and HP a little.";
+		if (desc) return "Heals cuts and HP a little.";
 #endif
 
 		{
@@ -19035,7 +19035,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "一定時間、命中率とACと魔法防御力にボーナスを得る。";
 #else
 		if (name) return "Bless";
-		if (desc) return "Gives bonus to hit and AC for a few turns.";
+		if (desc) return "Gives a bonus to hit and AC for a few turns.";
 #endif
 
 		{
@@ -19073,7 +19073,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (name) return "光の召喚";
 		if (desc) return "光源が照らしている範囲か部屋全体を永久に明るくする。";
 #else
-		if (name) return "Call Light";
+		if (name) return "Invoke Light";
 		if (desc) return "Lights up nearby area and the inside of a room permanently.";
 #endif
 
@@ -19157,7 +19157,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "体力を大幅に回復させ、負傷と朦朧状態も全快する。";
 #else
 		if (name) return "Curing";
-		if (desc) return "Greatly recovers HP and cures cuts and stunning.";
+		if (desc) return "Recovers HP and cures cuts and stunning.";
 #endif
 
 		{
@@ -19205,7 +19205,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "一定時間、火炎と冷気に対する耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Heat and Cold";
-		if (desc) return "Gives resistance to fire and cold. These resistances can be added to which from equipment for more powerful resistances.";
+		if (desc) return "Gives resistance to fire and cold. Stacks with resistances from equipment.";
 #endif
 
 		{
@@ -19266,7 +19266,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "一定時間、毒への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Poison";
-		if (desc) return "Gives resistance to poison. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to poison. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -19304,7 +19304,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "極めて強力な回復呪文で、負傷と朦朧状態も全快する。";
 #else
 		if (name) return "Healing";
-		if (desc) return "Much powerful healing magic, and heals cut and stun completely.";
+		if (desc) return "Greatly recovers HP, and cures cut and stunning completely.";
 #endif
 
 		{
@@ -19327,7 +19327,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "自分のいる床の上に、モンスターが通り抜けたり召喚されたりすることができなくなるルーンを描く。";
 #else
 		if (name) return "Glyph of Warding";
-		if (desc) return "Sets a glyph on the floor beneath you. Monsters cannot attack you if you are on a glyph, but can try to break glyph.";
+		if (desc) return "Sets a glyph on the floor beneath you. Monsters cannot attack you if you are on a glyph, but can try to break the glyph.";
 #endif
 
 		{
@@ -19382,7 +19382,7 @@ static cptr do_new_spell_life(int spell, int mode)
 				set_tim_addstat(A_STR,100 + 1 + p_ptr->lev / 15,time,FALSE);
 				set_tim_addstat(A_DEX,100 + 1 + p_ptr->lev / 15,time,FALSE);
 				set_tim_addstat(A_CON,100 + 1 + p_ptr->lev / 15,time,FALSE);
-				msg_print(_("肉体を急激に活性化させた！", "Your physical abilities get rapidly augmented!"));
+				msg_print(_("肉体を急激に活性化させた！", "Your physical abilities are rapidly augmented!"));
 
 			}
 		}
@@ -19396,7 +19396,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "アイテムにかかった強力な呪いを解除する。";
 #else
 		if (name) return "Dispel Curse";
-		if (desc) return "Removes normal and heavy curse from equipped items.";
+		if (desc) return "Removes normal and heavy curses from equipped items.";
 #endif
 
 		{
@@ -19598,7 +19598,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "一定時間、恐怖と狂気への耐性、魔法防御上昇を得る。";
 #else
 		if (name) return "Mental Barrier";
-		if (desc) return "Granys temporary resistance to fear and insanity and raises protection from magic.";
+		if (desc) return "Grants temporary resistance to fear and insanity and raises protection from magic.";
 #endif
 
 		{
@@ -19651,7 +19651,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "自分の周囲にいるアンデッドを現在の階から消し去る。抵抗されると無効。";
 #else
 		if (name) return "Annihilate Undead";
-		if (desc) return "Eliminates all nearby undead monsters, exhausting you.  Powerful or unique monsters may be able to resist.";
+		if (desc) return "Banishes all nearby undead monsters, exhausting you. Powerful or unique monsters may be able to resist.";
 #endif
 
 		{
@@ -19743,7 +19743,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "自分のいる床と周囲8マスの床の上に、モンスターが通り抜けたり召喚されたりすることができなくなるルーンを描く。";
 #else
 		if (name) return "Warding True";
-		if (desc) return "Creates glyphs in all adjacent squares and under you.";
+		if (desc) return "Creates protective glyphs in all adjacent squares and under you.";
 #endif
 
 		{
@@ -19766,7 +19766,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "最強の治癒の魔法で、負傷と朦朧状態も全快する。";
 #else
 		if (name) return "Healing True";
-		if (desc) return "The greatest healing magic. Heals all HP, cut and stun.";
+		if (desc) return "The greatest healing magic. Restores all HP, and cures all cuts and stunning.";
 #endif
 
 		{
@@ -19790,7 +19790,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "全ての突然変異を治し、HP最大値を再計算する。";
 #else
 		if (name) return "New Life";
-		if (desc) return "Cures all mutation and rerolls your maximum HP.";
+		if (desc) return "Cures all mutations and rerolls your maximum HP.";
 #endif
 
 		{
@@ -19830,7 +19830,7 @@ static cptr do_new_spell_life(int spell, int mode)
 		if (desc) return "一定時間、あらゆる耐性を付け、ACと魔法防御能力を上昇させる。";
 #else
 		if (name) return "Ultimate Resistance";
-		if (desc) return "Gives ultimate resistance, bonus to AC and speed.";
+		if (desc) return "Temporarily grants all resistances, and bonuses to AC and magical defense.";
 #endif
 
 		{
@@ -19979,7 +19979,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		if (desc) return "一時的に火に対する耐性を得る。レベルが上昇すると酸と冷気に対する耐性も得られる。";
 #else
 		if (name) return "Transform Skin";
-		if (desc) return "Grants temporary resistance to fire. On higher levels, grants resistance to acid and cold as well.";
+		if (desc) return "Grants temporary resistance to fire. At higher levels, grants resistance to acid and cold as well.";
 #endif
 
 		{
@@ -20225,7 +20225,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		if (desc) return "両手の爪を巨大な刃に変化させる。ACが30上昇し強力な格闘攻撃ができるようになるが魔法の失敗率が上昇する。また右腕装備、左腕装備、グローブは一時的に無効化される。";
 #else
 		if (name) return "Augment Nails";
-		if (desc) return "Turns nails on both of your hands into huge blades. Raises AC by 30 and lets you perform strong barehanded attacks, but raises spell failure rate. Temporarily disables gloves and items you're holding in your arms.";
+		if (desc) return "Turns nails on both of your hands into huge blades. Raises AC by 30 and lets you perform strong barehanded attacks, but increases spell failure rate. Temporarily disables gloves and items you're holding in your arms.";
 #endif
 
 		{
@@ -20340,7 +20340,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		if (desc) return "指定した場所の地面を跳ね上げ、そこに乗っている敵を吹き飛ばし少しダメージを与える。一部の敵には効果がない。自分を吹き飛ばすこともできる。アイテムも吹き飛ぶが壊れることがある。";
 #else
 		if (name) return "Catapult Floor";
-		if (desc) return "Makes floor at target location spring forth, catapulting any enemies standing there. Does not effect some enemies. You can catapult yourself as well. Items also can be launched in this manner, but they might break.";
+		if (desc) return "Makes the floor at target location spring up, catapulting any enemies standing there. Does not affect some enemies. You can catapult yourself as well. Items also can be launched in this manner, but they might break.";
 #endif
 
 		{
@@ -20432,7 +20432,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 		if (desc) return "HPと傷を完全に回復するがランダムな能力が恒久的に減少することがある。減少する確率はHP回復量と最大HPの比率により最高1/2まで上がる。";
 #else
 		if (name) return "Reshape Body";
-		if (desc) return "Fully heals and cures cuts, but might permanently reduce a random stat. Chance of stat reduction is proportional to HP recovered and maxes out at 50%.";
+		if (desc) return "Fully heals HP and cures cuts, but might permanently reduce a random stat. Chance of stat reduction is proportional to HP recovered and maxes out at 50%.";
 #endif
 
 		{
@@ -20903,7 +20903,7 @@ static cptr do_new_spell_transform(int spell, int mode)
 	case 31:
 		if (name) return _("転生", "Rebirth");
 		if (desc) return _("三つのランダムな種族候補から一つ選択し、その種族へと変化する。全ての突然変異を治し、HPと能力値と経験値は再計算後に全回復する。現在経験値の1～5%が永久に失われる。一部の種族は使用不可。",
-                            "Changes you race into one out of 3 randomly chosen ones. Cures all mutations and fully heals after recalculations. Permanently reduces curren total experience by 1-5%. Cannot be used by some races.");
+                            "Changes your race into one of 3 randomly chosen options. Cures all mutations and fully heals after recalculations. Permanently reduces current total experience by 1-5%. Cannot be used by some races.");
 
 		{
 			if (cast)
@@ -21053,7 +21053,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "近くの思考することができるモンスターを感知する。";
 #else
 		if (name) return "Detect Ferocity";
-		if (desc) return "Detects all monsters except mindless in your vicinity.";
+		if (desc) return "Detects all non-mindless monsters in your vicinity.";
 #endif
 
 		if (cast)
@@ -21221,7 +21221,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "一定時間、毒への耐性を得る。装備による耐性に累積する。";
 #else
 		if (name) return "Resist Poison";
-		if (desc) return "Gives resistance to poison. This resistance can be added to which from equipment for more powerful resistance.";
+		if (desc) return "Gives resistance to poison. Stacks with resistance from equipment.";
 #endif
 
 		{
@@ -21277,7 +21277,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "指定したモンスター一体を現在の階から追放する。抵抗されると無効。";
 #else
 		if (name) return "Exile";
-		if (desc) return "Exiles target monster from current floor. Does nothing if resisted.";
+		if (desc) return "Banishes the target monster from the floor. Does nothing if resisted.";
 #endif
 
 
@@ -21325,7 +21325,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "悪魔1体を召喚して配下にする。召喚された悪魔が敵対することもあり、敵対する確率は賢さと魅力による。";
 #else
 		if (name) return "Summon Demon";
-		if (desc) return "Summons a demon.";
+		if (desc) return "Summons a demon. The summoned demon might be hostile; hostility rate depends on your wisdom and charisma.";
 #endif
 
 		{
@@ -21539,7 +21539,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "フロア全体の指定した文字のモンスターを現在の階から追放する。抵抗されると無効。";
 #else
 		if (name) return "Banishment";
-		if (desc) return "Eliminates an entire class of monster, exhausting you.  Powerful or unique monsters may resist.";
+		if (desc) return "Banishes an entire class of monster, exhausting you. Powerful or unique monsters may resist.";
 #endif
 
 		{
@@ -21560,7 +21560,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "近くの敵一体に対し精神攻撃を行う。通常の精神を持たない敵には効果が薄い。眠っている敵には効果が高く、敵を起こしにくい。";
 #else
 		if (name) return "Nightmare";
-		if (desc) return "Performs mental attack against a nearby enemy. Less effective against enemies with unusual mind. Works well against sleeping enemies and isn't likely to wake them up.";
+		if (desc) return "Performs a mental attack against a nearby enemy. Less effective against enemies with unusual minds. Works well against sleeping enemies and isn't likely to wake them up.";
 #endif
 
 		{
@@ -21583,7 +21583,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "狂戦士化し、恐怖を除去し、加速する。";
 #else
 		if (name) return "Battle Frenzy";
-		if (desc) return "Gives another bonus to hit and HP, immunity to fear for a while. Hastes you. But decreases AC.";
+		if (desc) return "Hastes and berserks you, giving a bonus to hit and HP, immunity to fear, but decreasing AC.";
 #endif
 
 		{
@@ -21635,7 +21635,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "ヘルファイア属性のビームを放つ。あらゆる敵に効果があり、天使などにはさらに大きなダメージを与える。";
 #else
 		if (name) return "Hell Lance";
-		if (desc) return "Fires a beam of hellfire. Effective against any enemies, and deals even more damage to beings like angels.";
+		if (desc) return "Fires a beam of hellfire. Effective against any monster type, and deals even more damage to beings like angels.";
 #endif
 
 		{
@@ -21659,7 +21659,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "一定時間、悪魔に変化する。変化している間は本来の種族の能力を失い、代わりに悪魔としての能力を得る。";
 #else
 		if (name) return "Polymorph Demon";
-		if (desc) return "Mimic a demon for a while. Loses abilities of original race and gets abilities as a demon.";
+		if (desc) return "Mimic a demon for a while. Loses abilities of original race and gains the abilities of a demon.";
 #endif
 
 		{
@@ -21759,7 +21759,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "位置を指定してテレポートする。明るく照らされた場所や障害物のある場所には出られない。指定した位置に出られなかったときテレポートは行われない。";
 #else
 		if (name) return "Shadow Gate";
-		if (desc) return "Teleports to a specified position. Cannot teleport if that spot is illuminated or if there's an obstacle in the way. No teleportation occurs if you're unable to move to the specified position.";
+		if (desc) return "Teleports to a specified position. Cannot teleport if that spot is illuminated or if there's an obstacle on it. If the teleportation fails, you will not move.";
 #endif
 
 		{
@@ -21835,7 +21835,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "一定時間通常の限界を超えて魅力が上昇し、さらに詠唱時に視界内にいる敵全てを配下にしようと試みる。";
 #else
 		if (name) return "Temptation";
-		if (desc) return "Temporarily raises your charisma beyond ordinary limit, and attempts to charm all enemies in sight.";
+		if (desc) return "Temporarily raises your charisma beyond the ordinary limit, and attempts to charm all enemies in sight.";
 #endif
 
 		{
@@ -21859,7 +21859,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "自分の周囲にいるモンスターを現在の階から追放する。抵抗されると無効。";
 #else
 		if (name) return "Banish Nearby";
-		if (desc) return "Eliminates all nearby monsters, exhausting you.  Powerful or unique monsters may be able to resist.";
+		if (desc) return "Banishes all nearby monsters, exhausting you.  Powerful or unique monsters may be able to resist.";
 #endif
 
 		{
@@ -22055,7 +22055,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "近距離のテレポートをする。";
 #else
 		if (name) return "Phase Door";
-		if (desc) return "Teleport short distance.";
+		if (desc) return "Teleport a short distance.";
 #endif
 
 		{
@@ -22191,7 +22191,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "遠距離のテレポートをする。";
 #else
 		if (name) return "Teleport";
-		if (desc) return "Teleport long distance.";
+		if (desc) return "Teleport a long distance.";
 #endif
 
 		{
@@ -22212,7 +22212,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "自然界の存在を配下として一体～複数召喚する。代償として食料を消費する。";
 #else
 		if (name) return "Summon Animal";
-		if (desc) return "Summons one or more animals. Requires food ration as an extra cost.";
+		if (desc) return "Summons one or more animals. Requires food as an extra cost.";
 #endif
 
 		{
@@ -22280,7 +22280,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "モンスターをテレポートさせるビームを放つ。抵抗されると無効。";
 #else
 		if (name) return "Teleport Away";
-		if (desc) return "Teleports all monsters on the line away unless resisted.";
+		if (desc) return "Teleports all monsters in a line away unless resisted.";
 #endif
 
 		{
@@ -22331,7 +22331,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "瞬時に上か下の階にテレポートする。";
 #else
 		if (name) return "Teleport Level";
-		if (desc) return "Teleport to up or down stairs in a moment.";
+		if (desc) return "Instantly teleport up or down floors.";
 #endif
 
 		{
@@ -22516,7 +22516,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "短距離内の指定した場所にテレポートする。";
 #else
 		if (name) return "Dimension Door";
-		if (desc) return "Teleport to given location.";
+		if (desc) return "Teleport to the given location.";
 #endif
 
 		{
@@ -22544,7 +22544,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "行ったことのある街へ移動する。地上にいるときしか使えない。";
 #else
 		if (name) return "Teleport to town";
-		if (desc) return "Teleport to a town which you choose in a moment. Can only be used outdoors.";
+		if (desc) return "Teleport to a town of your choice. Can only be used outdoors.";
 #endif
 
 		{
@@ -22560,7 +22560,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (name) return "ハウンド召喚";
 		if (desc) return "狼・ゼファーハウンド系モンスターを配下として一グループ召喚する。代償は不要。";
 #else
-		if (name) return "Summond Hounds";
+		if (name) return "Summon Hounds";
 		if (desc) return "Summons wolves or zephyr hounds. Has no extra cost.";
 #endif
 
@@ -22802,7 +22802,7 @@ static cptr do_new_spell_summon(int spell, int mode)
 		if (desc) return "一定時間、時空攻撃への耐性を得る。";
 #else
 		if (name) return "Resist Time";
-		if (desc) return "Grants temporay resistance to time.";
+		if (desc) return "Grants temporary resistance to time.";
 #endif
 
 		{
@@ -23090,7 +23090,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "近くの全ての見えるモンスターを感知する。レベル20以上で見えないモンスターも感知する。";
 #else
 		if (name) return "Detect Monsters";
-		if (desc) return "Detects all monsters in your vicinity unless invisible.";
+		if (desc) return "Detects all non-invisible monsters in your vicinity. At level 20, also detects invisible monsters.";
 #endif
 
 		{
@@ -23112,7 +23112,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "近距離のテレポートをする。";
 #else
 		if (name) return "Phase Door";
-		if (desc) return "Teleport short distance.";
+		if (desc) return "Teleport a short distance.";
 #endif
 
 		{
@@ -23135,7 +23135,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "光る球を生成し、今いる部屋を明るくする。";
 #else
 		if (name) return "Sphere of Light";
-		if (desc) return "Creates a sphere of light, illuminating nearby area.";
+		if (desc) return "Creates a sphere of light, illuminating the nearby area.";
 #endif
 
 		{
@@ -23154,7 +23154,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "モンスター1体を眠らせる。レベル30以上で視界内全てのモンスターを眠らせる。抵抗されると無効。";
 #else
 		if (name) return "Hypnotism";
-		if (desc) return "Attempts to sleep a monster. At level 30 attempts to sleep all monsters in sight.";
+		if (desc) return "Attempts to put a monster to sleep. At level 30 attempts to affect all monsters in sight.";
 #endif
 
 		{
@@ -23182,7 +23182,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "遠距離のテレポートをする。";
 #else
 		if (name) return "Teleport";
-		if (desc) return "Teleport long distance.";
+		if (desc) return "Teleport a long distance.";
 #endif
 
 		{
@@ -23241,7 +23241,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 
 	case 8:
 		if (name) return _("韋駄天の術", "Art of Idaten");
-		if (desc) return _("一定時間移動速度が上昇する。", "Temporarily increases movement speed.");
+		if (desc) return _("一定時間移動速度が上昇する。", "Grants temporary swift movement.");
 
 		{
 			int base = 25 + plev / 2;
@@ -23278,7 +23278,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "モンスターをテレポートさせるビームを放つ。抵抗されると無効。";
 #else
 		if (name) return "Teleport Away";
-		if (desc) return "Teleports all monsters on the line away unless resisted.";
+		if (desc) return "Teleports all monsters in a line away unless resisted.";
 #endif
 
 		{
@@ -23485,7 +23485,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "行ったことのある街へ移動する。地上にいるときしか使えない。";
 #else
 		if (name) return "Art of Flying Swallow";
-		if (desc) return "Teleport to a town which you choose in a moment. Can only be used outdoors.";
+		if (desc) return "Teleport to a town of your choosing. Can only be used outdoors.";
 #endif
 
 		{
@@ -23502,7 +23502,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (name) return "幻術";
 		if (desc) return "視界内のモンスターを混乱、恐怖、減速、朦朧させる。";
 #else
-		if (name) return "Illusionary Technique";
+		if (name) return "Art of Illusion";
 		if (desc) return "Attempts to confuse, terrify, slow and stun all monsters in sight.";
 #endif
 
@@ -23527,7 +23527,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (name) return "*鑑定*";
 		if (desc) return "アイテムの持つ能力を完全に知る。";
 #else
-		if (name) return "Identify True";
+		if (name) return "*Identify*";
 		if (desc) return "*Identifies* an item.";
 #endif
 
@@ -23545,7 +23545,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (name) return "金丹の術";
 		if (desc) return "HPを回復し、満腹度を増加させ、切り傷・毒・朦朧・幻覚を治癒する。";
 #else
-		if (name) return "Kintanjutsu";
+		if (name) return "Art of Life Elixir";
 		if (desc) return "Restores HP, satiates hunger and cures cuts, poison, stunning and hallucination.";
 #endif
 
@@ -23570,8 +23570,8 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (name) return "壁抜け";
 		if (desc) return "一定時間、半物質化し壁を通り抜けられるようになる。";
 #else
-		if (name) return "Walk through Wall";
-		if (desc) return "Gives ability to pass walls for a while.";
+		if (name) return "Pass Through Walls";
+		if (desc) return "Gives ability to walk through walls for a while.";
 #endif
 
 		{
@@ -23614,7 +23614,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "短距離内の指定した場所にテレポートする。";
 #else
 		if (name) return "Dimension Door";
-		if (desc) return "Teleport to given location.";
+		if (desc) return "Teleport to the given location.";
 #endif
 
 		{
@@ -23706,7 +23706,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "その階全体を永久に照らし、ダンジョン内すべてのアイテムを感知する。さらに、一定時間テレパシー能力を得る。";
 #else
 		if (name) return "Clairvoyance";
-		if (desc) return "Maps and lights whole dungeon level. Knows all objects location. And gives telepathy for a while.";
+		if (desc) return "Maps and lights the whole dungeon level, detects all objects, and gives telepathy for a while.";
 #endif
 
 		{
@@ -23782,7 +23782,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "ごく短時間、ダメージを受けなくなるバリアを張る。切れた瞬間に少しターンを消費するので注意。";
 #else
 		if (name) return "Globe of Invulnerability";
-		if (desc) return "Generates barrier which completely protect you from almost all damages. Takes a few your turns when the barrier breaks or duration time is exceeded.";
+		if (desc) return "Creates a barrier which completely protects you from almost all damage. Takes a few of your turns when dispelled or the duration expires.";
 #endif
 
 		{
@@ -23804,7 +23804,7 @@ static cptr do_new_spell_mystic(int spell, int mode)
 		if (desc) return "短時間巨大化する。それまでにかかっていた一時効果は全て解除される。巨大化中は身体能力が爆発的に上昇するが魔法書と巻物と魔道具が使用できない。Uコマンドで巨大化を解除できる。";
 #else
 		if (name) return "Kishin Form";
-		if (desc) return "Transforms into a giant for a short period of time. Removes all other temporary effects. Incredibly raises physical abilities, but makes you unable to use spellbooks, scrolls and magic devices. Can be dispelled with 'U'.";
+		if (desc) return "Transforms you into a giant for a short period of time. Removes all other temporary effects. Incredibly raises physical abilities, but makes you unable to use spellbooks, scrolls and magic devices. Can be dispelled with 'U'.";
 #endif
 
 		{
@@ -23947,7 +23947,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		break;
 	case 5:
 		if (name) return _("士気高揚", "Raise Morale");
-		if (desc) return _("一定時間、恐怖を取り除き恐怖耐性を得て白兵能力が少し上昇する。", "Cures fear; temporarily grants resistance to fear and raises your combat abilities.");
+		if (desc) return _("一定時間、恐怖を取り除き恐怖耐性を得て白兵能力が少し上昇する。", "Cures fear, temporarily grants resistance to fear and raises your combat abilities.");
 
 		{
 			int base = 25;
@@ -24003,7 +24003,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 #ifdef JP
 					msg_print("装備品にかかった呪縛が解けた。");
 #else
-					msg_print("The curse on your equipment has been lifted.");
+					msg_print("The curse on your equipment is lifted.");
 #endif
 				}
 			}
@@ -24069,7 +24069,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "破邪属性のボールを放って攻撃する。純魔法職が使うと少し威力が高い。";
 #else
 		if (name) return "Holy Orb";
-		if (desc) return "Fires a ball with holy power. Slightly more powerful when used by a pure magic class.";
+		if (desc) return "Fires a ball with holy power. Slightly more powerful when used by a magic expert class.";
 #endif
 
 		{
@@ -24099,7 +24099,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "視界内のアンデッド・悪魔・妖怪にダメージを与え朦朧とさせる。";
 #else
 		if (name) return "Exorcism";
-		if (desc) return "Damages all undead, demons and youkai in sight, and also stuns them.";
+		if (desc) return "Damages all undead, demons and youkai in sight, and stuns them.";
 #endif
 
 		{
@@ -24120,8 +24120,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (name) return "封印解除";
 		if (desc) return "一直線上の全ての罠と扉を破壊する。";
 #else
-		if (name) return "Unbarring Ways";
-		if (desc) return "Fires a beam which destroy traps and doors.";
+		if (name) return "Unsealing";
+		if (desc) return "Fires a beam which destroys traps and doors.";
 #endif
 
 		{
@@ -24219,8 +24219,8 @@ static cptr do_new_spell_punish(int spell, int mode)
 		}
 		break;
 #else
-		if (name) return _("天なる轟き", "Heavenly Thunder");
-		if (desc) return _("指定した位置に雷雲を呼び出し、強力な電撃属性攻撃を行う。", "Calls thunderclouds to specified position, launching a powerful lightning attack.");
+		if (name) return _("天なる轟き", "Heaven's Thundering");
+		if (desc) return _("指定した位置に雷雲を呼び出し、強力な電撃属性攻撃を行う。", "Calls thunderclouds to the specified position, and launches a powerful lightning attack.");
 		{
 			int dam = plev * 5;
 
@@ -24247,7 +24247,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "視界内の混沌の勢力に属するモンスターにダメージを与え、体力を回復し、毒、恐怖、朦朧状態、負傷から全快する。";
 #else
 		if (name) return "Holy Word";
-		if (desc) return "Damages all evil monsters in sight, heals HP somewhat, and completely heals poison, fear, stun and cut status.";
+		if (desc) return "Damages all chaotic monsters in sight, heals HP somewhat, and completely heals poison, fear, stun and cut status.";
 #endif
 
 		{
@@ -24276,7 +24276,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 
 	case 16:
 		if (name) return _("封魔", "Seal Evil");
-		if (desc) return _("混沌の勢力に属するモンスターの動きを止める。", "Stops movement of a chaotically aligned monster.");
+		if (desc) return _("混沌の勢力に属するモンスターの動きを止める。", "Stops a chaotically-aligned monster from moving.");
 
 		{
 			int power = plev * 7 / 2;
@@ -24298,7 +24298,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "混沌の勢力のモンスターの攻撃を防ぐバリアを張る。";
 #else
 		if (name) return "Protection from Evil";
-		if (desc) return "Gives aura which protect you from evil monster's physical attack.";
+		if (desc) return "Grants an aura which protects you from chaotic monsters' physical attacks.";
 #endif
 
 		{
@@ -24316,7 +24316,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 	case 18:
 		if (name) return _("破邪の印", "Holy Seal");
 		if (desc) return _("1体のモンスターに破邪属性の大ダメージを与え恐怖・朦朧・能力低下させる。抵抗されると無効。破邪弱点でないモンスターには効果がない。",
-                            "Deals large amount of holy damage to a single monster; also terrifies, stuns, and lowers stats. Does nothing if resisted. Has no effect on monster not vulnerable to holy attacks.");
+                            "Deals large amount of holy damage to a single monster; also terrifies, stuns, and lowers stats. Does nothing if resisted. Has no effect on monsters not vulnerable to holy attacks.");
 
 		{
 			int dice = 15 + plev / 5;
@@ -24339,7 +24339,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "アイテムにかかった強力な呪いを解除する。";
 #else
 		if (name) return "Dispel Curse";
-		if (desc) return "Removes normal and heavy curse from equipped items.";
+		if (desc) return "Removes normal and heavy curses from equipped items.";
 #endif
 
 		{
@@ -24363,7 +24363,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "一定時間、破邪属性のオーラを身にまとう。";
 #else
 		if (name) return "Holy Aura";
-		if (desc) return "Gives aura of holy power which injures evil monsters which attacked you for a while.";
+		if (desc) return "Grants an aura of holy power that injures chaotic monsters which attack you for a while.";
 #endif
 
 		{
@@ -24410,7 +24410,7 @@ static cptr do_new_spell_punish(int spell, int mode)
 		if (desc) return "視界内の混沌の勢力に属するモンスターを全てテレポートさせる。抵抗されると無効。";
 #else
 		if (name) return "Banish Evil";
-		if (desc) return "Teleports all chaotically aligned monsters in sight away unless resisted.";
+		if (desc) return "Teleports all chaotically-aligned monsters in sight away unless resisted.";
 #endif
 
 		{
@@ -24664,7 +24664,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 	case 0:
 		if (name) return _("走る二宮金次郎像", "Running Ninomiya Kinjirou");
 		if (desc) return _("二宮金次郎像が駆けて行ってターゲットへ体当たりする。ただし暗い穴や水地形などを越えられない。",
-                            "Ninomiya Kinjirou statue charges at target and tackles it. Cannot cross terrain like chasms or water.");
+                            "A Ninomiya Kinjirou statue charges at the target and tackles it. Cannot cross terrain like chasms or water.");
 
 		{
 			int wgt = 200 + plev * 8;
@@ -24686,7 +24686,7 @@ static cptr do_new_spell_occult(int spell, int mode)
 					ty = target_row;
 				}
 				//ダミーアイテムを生成し重量を設定し特殊射撃ルーチンへ渡す
-				msg_print(_("二宮金次郎像が駈け出した！", "Ninomiya Kinjirou statue runs forward!"));
+				msg_print(_("二宮金次郎像が駈け出した！", "The statue of Ninomiya Kinjirou runs forward!"));
 				object_prep(tmp_o_ptr,lookup_kind(TV_MATERIAL,SV_MATERIAL_NINOMIYA));
 				tmp_o_ptr->weight = wgt;
 				do_cmd_throw_aux2(py,px,ty,tx,2,tmp_o_ptr,6);
