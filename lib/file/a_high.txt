@@ -171,6 +171,8 @@ of Mephistopheles
 of Tokoyo-no-Kami
 #『有機体全てのメメント』
 'Memento of All Organisms'
+#『ファンタスティックドリフト』
+'Fantastic Drift'
 
 #N:15:BIAS_LAW
 N:13:BIAS_PRIESTLY
@@ -215,6 +217,8 @@ of Hachiman
 'Ore from the Age of the Gods'
 #『タイニーシャングリラ』
 'Tiny Shangri-La'
+#錦の上の
+'Atop the Brocade'
 
 N: 9:BIAS_DEX
 N:16:BIAS_ROGUE
@@ -311,6 +315,8 @@ of Ibaraki
 'Superhuman'
 #『ミッシングパワー』
 'Missing Power'
+#『コズミックダスト』
+'Cosmic Dust'
 
 N:10:BIAS_CON
 N:19:BIAS_RANGER
@@ -352,6 +358,8 @@ of Yavanna
 of Iwanaga-Hime
 #『秘神の後光』
 'Halo of the Secret God'
+#『セイクリッドフォレスト』
+'Sacred Forest'
 
 N:11:BIAS_CHR
 #『凪の刻』
@@ -455,4 +463,7 @@ of Eternity
 of the Kingdom of Huaxu
 #金城鉄壁の
 of the Unassailable Fortress
-
+#『ピラミッドの神域』
+'Pyramid's Sacred Ground'
+#『ロジカルウォール』
+'Logical Wall'

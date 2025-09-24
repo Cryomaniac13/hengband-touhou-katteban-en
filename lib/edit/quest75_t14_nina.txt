@@ -1,0 +1,132 @@
+# Name
+Q:$75:N:Moriya Schemes III
+Q:75:N:守矢の策動Ⅲ
+
+# Definition
+Q:$75:Q:1:0:0:1:63:1413:0:0:6
+Q:75:Q:1:0:0:1:63:1413:0:0:6
+
+# Description for quest
+?:[LEQ $QUEST75 2]
+Q:$75:T:Sanae - 'I went beneath the pyramid to meet Lady Kanako's friend,
+Q:$75:T:  but a dangerous youkai got in my way, and I couldn't go further!
+Q:$75:T:  It's a really dangerous one - facing it alone is unreasonable!
+Q:$75:T:  Could you offer me your assistance?'
+Q:75:T:早苗「神奈子様のご友人にお会いしに地下ピラミッドに行ったんですが、
+Q:75:T:　危険な妖怪に邪魔されて先に進めないんです！
+Q:75:T:　もう本当に危険な妖怪であれに一人で対峙するのは色々と無理です！
+Q:75:T:　どうか力を貸して頂けませんか？」
+?:1
+
+# Description for quest reward
+?:[EQU $QUEST75 3]
+Q:$75:T:Sanae - 'That was a formidable foe.
+Q:$75:T:  I'm usually pretty knowledgeable about this matter,
+Q:$75:T:  but I couldn't withstand facing her.
+Q:$75:T:  Anyway, thank you for your help.
+Q:$75:T:  Please accept this gift from Lady Kanako's friend.'
+Q:75:T:早苗「恐るべき敵でした。
+Q:75:T:　私もああいうのに理解はあるほうなのですが、
+Q:75:T:　本物を前にするとどうしても耐えられなくて。
+Q:75:T:　ともあれご助力ありがとうございました。
+Q:75:T:　神奈子様のご友人からも御礼の品を預かっています。」
+
+?:1
+# Description for quest failed
+?:[EQU $QUEST75 5]
+Q:$75:T:Sanae - 'What a formidable foe...
+Q:$75:T:  We'll have to seal off that area.
+Q:$75:T:  Fortunately, Lady Kanako's friend managed to escape,
+Q:$75:T:  and we'll take her in for protection.'
+Q:75:T:早苗「恐るべき敵です...
+Q:75:T:　もうあの区域は封鎖するしかないですね。
+Q:75:T:　幸い神奈子様のご友人も脱出して来られたので、
+Q:75:T:　うちで保護させていただくことにしましょう。」
+?:1
+
+# Grass
+F:;:GRASS
+
+# Dirt
+F:,:DIRT:8:
+
+# Tree
+F:T:TREE
+
+#EX fairy
+F:e:FLOOR:8:17
+
+#fossil fairy
+F:f:TREE:8:1407
+
+# nina
+F:q:FLOOR:8:w1413
+
+
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+D:X........XXX......TT.......TT.......X.........X
+D:X.........X........TT..q...X.......X....***...X
+D:X........TXT.....T..TT....T...T.....XT.*****..X
+D:X.........TT....TTX...T..T......XX..XXX.***..XX
+D:X..TTT.....TX..............T......XXXTXX..XXXXX
+D:XX..T......TTX.......X...TT........X..TXXXXTffX
+D:Xf...........XT...................X.X..TT.T..fX
+D:Xf.....TT.....XXT................XX...........X
+D:Xf.............XXT.......XX.......XX..*...T.TfX
+D:XX.........*....XXX..**XXX.........X...e...TffX
+D:X.................XTXTXT............X.......TfX
+D:X..................XTX......e........X......XXX
+D:X..................*................XX.*...XXXX
+D:X....e............X...............TXXT....XX**X
+D:XXX.............XX................TTTT...XXTTTX
+D:XfXXXTTTT.......X.......TT............XXXX....X
+D:XfffXXXXTT.......X.....TTTT..*XXX...XXX.......X
+D:XfTT**XXT.........XXX*..TTXXXXTTTXXX......e...X
+D:X....TT.X......XXX...XXXXXX.....XTT...........X
+D:X........X....X...............................X
+D:XT........X.........X........................TX
+D:XTTT.....TXT........X.......*.......XX...X...TX
+D:XXfTTT..TX.........XT..............XffX.X.....X
+D:XfXfTT..X...T......TXTT...........X...fX......X
+D:XTfXT..X...XX.......TXT.......XTXX..........TTX
+D:XfTfX......XXT......TTXT....XTXffX.........T..X
+D:XTf.X..............TTXT.....TX***fXX.e........X
+D:X...XX.......e......XT......Tf***fTXXX........X
+D:X*...X......................Xf***TTX.XX...TTfX
+D:X**..X..................*...XXXTXX.....XXXXTfTX
+D:X*..TXT..*...XX..............XX...........TfTfX
+D:X...X..........XX..X........X..............TfTX
+D:X.TX.............XX........X................TfX
+D:X.fX.............TTXT.....X............e.....TX
+D:X.fX......XXX....TXXT......X....X.............X
+D:X.X....eTTX..X...XTT........X..........TTTTTTTX
+D:X..XTT.TTXTT..X..X..........XT........TTXXXXTTX
+D:XX..XTTTXXXT...XX...........TXT........TTXTXXXX
+D:X*XX...TTXTT.....T..........TTT......XX...ffTTX
+D:X*XX....TTT.......T....e....TT.......X........X
+D:XXX.X............T..................XX........X
+D:X....X..............................XfTT......X
+D:X.....XX.....TT.........TT....TT.....X.....*..X
+D:X......XXX...T...............TT....TTXX.......X
+D:X........XX.XXX..e................T...X.......X
+D:X..........XX.XX..T...TT...........TTTXT......X
+D:X..............XXXX..XXX.......TT......XT.....X
+D:X..............T..XXXXTXXX...XXX........X.....X
+D:X.......eX...............X.XX***X.......X.....X
+D:XXX....XXX.TTTT...........X..XXXTTT....*......X
+D:X*XXX.X.TTXTfXX............XXXX..XXXXX......e.X
+D:X...XX.....XXXX.....*..........XXXfffXXX......X
+D:X...........................TTT...TTTT.XXX.TTTX
+D:X...............TT.........TTT.X.........XXXffX
+D:XXX..............TT.........TTT.X..........XXfX
+D:XffX.........................TTTXX....*e....XXX
+D:XffX.......X................TTTTTX...........XX
+D:XXX.....X.XXX.................TTX.............X
+D:X......X....XXT.XX.....<.......X........*.....X
+D:X.....T......T.X..X.TT........X...............X
+D:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+# Starting position
+P:55:23
+

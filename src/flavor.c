@@ -53,6 +53,7 @@ static bool object_easy_know(int i)
   		case TV_BOOK_HISSATSU:
   		case TV_BOOK_MEDICINE:
 		case TV_BOOK_OCCULT:
+		case TV_STONE_INCIDENT:
 		{
 			return (TRUE);
 		}
@@ -1573,6 +1574,7 @@ void object_desc(char *buf, object_type *o_ptr, u32b mode)
 		case TV_STRANGE_OBJ:
 		case TV_SPELLCARD:
 		case TV_ABILITY_CARD:
+		case TV_STONE_INCIDENT:
 
 		{
 			break;

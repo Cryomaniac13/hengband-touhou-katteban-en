@@ -764,6 +764,15 @@ void wilderness_gen(void)
 		/*:::leaving_dungeonでなくteleport_townなのか？*/
 		p_ptr->teleport_town = FALSE;
 	}
+
+	//v2.1.1 守矢神社の木人を配置していた場所に広域モードから戻ってきたらエラーになったので削除処理追加
+	// 　単に削除すると別の所でなにか問題が起こって原因に気づきにくいかもしれないので警告メッセージも入れとく
+	if (cave[p_ptr->oldpy][p_ptr->oldpx].m_idx)
+	{
+		msg_print(_("WARNING:プレイヤーがいる場所にモンスターが存在したので削除された", "WARNING: A monster was present at the player's location; it was removed"));
+		delete_monster_idx(cave[p_ptr->oldpy][p_ptr->oldpx].m_idx);
+	}
+
 	/*:::＠を配置*/
 	player_place(p_ptr->oldpy, p_ptr->oldpx);
 	/* p_ptr->leaving_dungeon = FALSE;*/
@@ -1310,6 +1319,10 @@ bool change_wild_mode(void)
 		if (MON_CSLEEP(m_ptr)) continue;
 		if (m_ptr->cdis > MAX_SIGHT) continue;
 		if (!is_hostile(m_ptr)) continue;
+
+		//木人は除く
+		if (r_info[m_ptr->r_idx].flags7 & RF7_ONLY_RIDING) continue;
+
 #ifdef JP
 		msg_print("敵がすぐ近くにいるときは広域マップに入れない！");
 #else

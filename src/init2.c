@@ -1589,7 +1589,7 @@ errr init_buildings(void)
 			building[i].member_race[j] = 0;
 		}
 
-		for (j = 0; j < MAX_MAGIC+1; j++)
+		for (j = 0; j < MAX_BASIC_MAGIC_REALM+1; j++)
 		{
 			building[i].member_realm[j] = 0;
 		}

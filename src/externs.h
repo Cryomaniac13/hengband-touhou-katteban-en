@@ -556,7 +556,7 @@ extern u16b max_m_idx;
 extern s32b max_wild_x;
 extern s32b max_wild_y;
 extern quest_type *quest;
-extern char quest_text[10][80];
+extern char quest_text[10][128];
 extern int quest_text_line;
 extern s16b gf_color[MAX_GF];
 extern int init_flags;
@@ -1201,7 +1201,7 @@ extern bool dispel_demons(int dam);
 extern bool crusade(void);
 extern bool turn_undead(void);
 extern bool destroy_area(int y1, int x1, int r, bool in_generate, bool force_floor, bool flan);
-extern bool earthquake_aux(int cy, int cx, int r, int m_idx);
+extern bool earthquake_aux(int cy, int cx, int r, int m_idx,int mode);
 extern bool earthquake(int cy, int cx, int r);
 extern void lite_room(int y1, int x1);
 extern void unlite_room(int y1, int x1);
@@ -1930,10 +1930,14 @@ extern bool same_category_realm(int realm1, int realm2);
 extern void calc_spell_info(magic_type *s_ptr, int realm, int spell);
 
 ///新魔法領域の難度などの表　領域、魔法番号、適性の順
-extern magic_type spell_base_info[MAX_MAGIC][32][6];
+extern magic_type spell_base_info[MAX_BASIC_MAGIC_REALM][32][6];
 
 ///mod160620 オカルト魔法用新テーブル
 extern magic_type occult_spell_base_info[32][6];
+
+//v2.1.1 異変領域魔法
+extern magic_type incident_spell_base_info[32][6];
+
 
 ///mod140208 水一時耐性
 extern bool set_tim_res_water(int v, bool do_dec);
@@ -2279,7 +2283,7 @@ extern int calc_doll_blow_num(int doll_num);
 
 
 ///mod150811 魔理沙
-extern struct marisa_magic_type marisa_magic_table[MARISA_MAX_MAGIC_KIND];
+extern struct marisa_magic_type marisa_magic_table[MARISA_MAGIC_KIND_MAX];
 extern void marisa_make_magic_recipe(void);
 extern bool marisa_will_buy(object_type *o_ptr);
 extern cptr marisa_essence_name[8];
@@ -2798,3 +2802,6 @@ extern bool detect_specific_objects(int range, int mode);
 //v2.1.0
 extern bool hack_flag_darkness_power;
 
+//v2.1.1
+extern bool set_res_blast(int v);
+extern bool set_rob_mana(int v);

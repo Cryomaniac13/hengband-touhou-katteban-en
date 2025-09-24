@@ -2390,7 +2390,7 @@ bool monst_spell_monst(int m_idx)
                                             "%^s slams %s with a golden mallet!"), m_name,t_name);
 					dam = 100 + randint0(100);
 					monst_breath_monst(m_idx, y, x, GF_MISSILE, dam, 0, FALSE, 0, FALSE);
-					earthquake_aux(y, x, 4, m_idx);
+					earthquake_aux(y, x, 4, m_idx, 0);
 				}
 				/*:::正邪非隣接時　位置交換*/
 				else
@@ -4144,7 +4144,7 @@ bool monst_spell_monst(int m_idx)
 				if (see_m)	msg_format(_("%^sは大地震を起こした！", "%^s causes a large earthquake!"), m_name);
 				for (k = 0; k < tmp_num; k++)
 				{
-					earthquake_aux(m_ptr->fy, m_ptr->fx, tmp_rad, m_idx);
+					earthquake_aux(m_ptr->fy, m_ptr->fx, tmp_rad, m_idx, 0);
 					tmp_rad += randint1(2);
 
 				}

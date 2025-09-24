@@ -288,6 +288,8 @@ of the Social Reporter
 of Typhoon
 #『グリーンスパイラル』
 'Green Spiral'
+#鹿狩りの
+of Deer Hunting
 
 N: 7:BIAS_INT
 N:17:BIAS_MAGE
@@ -391,6 +393,8 @@ of Curufin
 (Ultrasonic)
 #『マウンテンマーダー』
 'Mountain Murder'
+#聖なる森の
+of the Sacred Forest
 
 N:11:BIAS_CHR
 #『モナリザ』

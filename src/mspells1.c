@@ -1153,6 +1153,10 @@ bool dispel_check(int m_idx)
 	//v1.1.56 スペルカード　全部1/2
 	if (p_ptr->tim_spellcard_count && one_in_(2)) return (TRUE);
 
+	//v2.1.1
+	if (p_ptr->tim_res_blast) return (TRUE);
+
+
 
 	/* Wraith form */
 	if (p_ptr->wraith_form) return (TRUE);
@@ -1999,6 +2003,7 @@ bool make_attack_spell(int m_idx, int special_flag)
 		if(m_ptr->hp > m_ptr->maxhp / 3 || m_ptr->cdis > 1)
 			f4 &= ~(RF4_SPECIAL2);
 	}
+
 
 	//既にランダムユニーク2がフロアにいる場合隠岐奈は特別行動2をしない
 	if (m_ptr->r_idx == MON_OKINA && r_info[MON_RANDOM_UNIQUE_2].cur_num)
@@ -3466,7 +3471,7 @@ else msg_format("%^sが魔力のブレスを吐いた。", m_name);
 					//v1.2.00 50ポイント弱体化
 					dam = 50 + randint0(100);
 					breath(y, x, m_idx, GF_MISSILE, dam, 0, FALSE, -1, FALSE);
-					earthquake_aux(y, x, 4, m_idx);
+					earthquake_aux(y, x, 4, m_idx, 0);
 				}
 				/*:::正邪非隣接時　位置交換*/
 				else
@@ -5185,7 +5190,7 @@ msg_format("%sは無傷の球の呪文を唱えた。", m_name);
 				msg_format(_("%^sは大地震を起こした！", "%^s causes a large earthquake!"), m_name);
 				for (k = 0; k < tmp_num; k++)
 				{
-					earthquake_aux(m_ptr->fy, m_ptr->fx, tmp_rad, m_idx);
+					earthquake_aux(m_ptr->fy, m_ptr->fx, tmp_rad, m_idx, 0);
 					tmp_rad += randint1(2);
 
 				}
@@ -5530,10 +5535,12 @@ msg_print("記憶が薄れてしまった。");
 #ifdef JP
             if( m_ptr->r_idx == MON_KOISHI) msg_format("%^sがあなたの目を深く覗き込んだ…", m_name);
             else if (m_ptr->r_idx == MON_ZANMU) msg_format("%^sと対峙していると途方もない虚無感に襲われた！", m_name);
+            else if (m_ptr->r_idx == MON_NINA) msg_format("%^sは宇宙的真実のヴィジョンをあなたに浴びせた！", m_name);
             else	msg_format("%^sの大いなる悪意があなたの精神を絡め取った…", m_name);
 #else
             if( m_ptr->r_idx == MON_KOISHI) msg_format("%^s stares deep into your eyes...", m_name);
             else if (m_ptr->r_idx == MON_ZANMU) msg_format("As you confront %s, you suddenly feel a tremendous sense of emptiness!", m_name);
+            else if (m_ptr->r_idx == MON_NINA) msg_format("%^s overwhelms you with visions of cosmic truth!", m_name);
             else	msg_format("The great will of %^s invades your mind...", m_name);
 #endif
 

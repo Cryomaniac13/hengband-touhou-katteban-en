@@ -3866,9 +3866,9 @@ static errr parse_line_building(char *buf)
 		{
 			return 0;
 			/*
-			if (tokenize(s+2, MAX_MAGIC, zz, 0) == MAX_MAGIC)
+			if (tokenize(s+2, MAX_BASIC_MAGIC_REALM, zz, 0) == MAX_BASIC_MAGIC_REALM)
 			{
-				for (i = 0; i < MAX_MAGIC; i++)
+				for (i = 0; i < MAX_BASIC_MAGIC_REALM; i++)
 				{
 					building[index].member_realm[i+1] = atoi(zz[i]);
 				}

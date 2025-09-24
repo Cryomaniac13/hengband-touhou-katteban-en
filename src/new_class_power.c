@@ -44,6 +44,192 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.1.1 ウバメ
+
+class_power_type class_power_ubame[] =
+{
+
+	{7,5,20,FALSE,FALSE,A_INT,0,0,_("殺気感知", "Detect Murderous Intent"),
+		_("周囲の精神を持つモンスターを感知する。",
+        "Detects nearby non-mindless monsters.")},
+
+	{16,16,30,TRUE,FALSE,A_STR,0,10,_("コズミックダスト", "Cosmic Dust"),
+		_("指定方向の隣接グリッドに分解属性のボールを発生させる。ダメージは素手攻撃力によって決まる。素手でないと使えない。",
+        "Creates a disintegration ball in an adjacent grid in given direction. Damage depends on your barehanded attack power. Cannot be used when not barehanded.")},
+
+	{23,25,40,FALSE,TRUE,A_STR,0,0,_("唐櫃返し", "Karabitsu Upheaval"),
+		_("一直線のモンスターにダメージを与えて吹き飛ばし、さらにトラップを解除する。ダメージは素手攻撃力によって決まる。素手でないと使えない。",
+        "Deals damage to monsters in a line and pushes them back, also disarming traps. Damage depends on your barehanded attack power. Cannot be used when not barehanded.")},
+
+	{30,25,50,FALSE,FALSE,A_WIS,0,0,_("塵のすみか", "Dust Dwelling"),
+		_("隣接したモンスター全てに魔力消去を行い、また魔法力を低下させようと試みる。",
+        "Dispels all adjacent monsters, also attempting to lower their magic power.")},
+
+	{36,60,70,FALSE,TRUE,A_STR,0,0,_("唐櫃大返し", "Great Karabitsu Upheaval"),
+	_("ダンジョン内で地震を起こす。この地震は永久壁を破壊する。クエストダンジョン内でも使用可能。",
+    "Causes an earthquake in the dungeon. This earthquake can destroy permanent walls. Can be used in quest dungeons as well.")},
+
+	{44,80,80,FALSE,FALSE,A_CHR,0,0,_("宇宙塵", "Space Dust"),
+		_("自分の周囲のランダムな地点に隕石属性のボールを連続で発生させる。ダメージは素手攻撃力によって決まる。素手でないと使えない。",
+        "Generates multiple meteors at random points in your vicinity. Damage depends on your barehanded attack power. Cannot be used when not barehanded.")},
+
+	{99,0,0,FALSE,FALSE,0,0,0,"dummy",""},
+};
+
+
+
+cptr do_cmd_class_power_aux_ubame(int num, bool only_info)
+{
+	int plev = p_ptr->lev;
+
+	int dir;
+
+	int barehand_dam;
+
+	if (inventory[INVEN_RARM].k_idx || inventory[INVEN_LARM].k_idx)
+		barehand_dam = 0;
+	else
+		barehand_dam = plev + MAX(p_ptr->to_d[0], p_ptr->to_d[1]);
+
+
+	switch (num)
+	{
+	case 0:
+	{
+		int rad = DETECT_RAD_DEFAULT;
+		if (only_info) return format(_str_eff_area, rad);
+		detect_monsters_mind(rad);
+	}
+	break;
+
+
+	case 1://コズミックダスト
+	{
+		int dam = barehand_dam * 3;
+		int y, x;
+		int rad = 1 + plev / 24;
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!barehand_dam)
+		{
+			msg_print(_("手が塞がっていて使えない。", "You can't use this with your hands full."));
+			return NULL;
+		}
+
+		if (!get_rep_dir2(&dir)) return NULL;
+		if (dir == 5) return NULL;
+
+		y = py + ddy[dir];
+		x = px + ddx[dir];
+
+		msg_print(_("気合いと共に拳を突き出した！", "You shout, thrusting your fist forward!"));
+		project(0, rad, y, x, dam, GF_DISINTEGRATE, (PROJECT_KILL | PROJECT_ITEM | PROJECT_JUMP | PROJECT_GRID), -1);
+	}
+	break;
+
+	case 2://唐櫃返し
+	{
+		int dam = barehand_dam;
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!barehand_dam)
+		{
+			msg_print(_("手が塞がっていて使えない。", "You can't use this with your hands full."));
+			return NULL;
+		}
+
+		if (!get_aim_dir(&dir)) return NULL;
+		msg_format(_("すくい上げるようなアッパーを放った！", "You perform a scooping uppercut!"));
+
+		//透明のトラップ破壊ビームを追加
+		project_hook(GF_KILL_TRAP, dir, 0, (PROJECT_BEAM | PROJECT_GRID | PROJECT_HIDE));
+		fire_beam(GF_TORNADO, dir, dam);
+	}
+	break;
+
+	case 3:
+	{
+
+		int dir, y, x;
+		int power = 100 + plev * 4;
+
+		if (only_info) return format(_str_eff_power, power / 2);
+
+		msg_print(_("周囲の魔力が塵となって消えていく。", "Magical power nearby turns to dust and vanishes."));
+		for (dir = 0; dir < 8; dir++)
+		{
+			y = py + ddy_ddd[dir];
+			x = px + ddx_ddd[dir];
+
+			if (cave[y][x].m_idx) dispel_monster_status(cave[y][x].m_idx);
+		}
+
+		(void)project(0, 1, py, px, power, GF_DEC_MAG, (PROJECT_KILL | PROJECT_HIDE), -1);
+
+	}
+	break;
+
+	case 4:
+	{
+		int x, y;
+		int rad = 1 + plev / 10;
+		cave_type* c_ptr;
+		feature_type* f_ptr;
+		if (only_info) return format(_("半径:%d", "rad: %d"), rad+2);
+
+		if (!dun_level)
+		{
+			msg_print(_("こんなところでこの技を使ってはいけない。", "You can't use this ability in a place like this."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは渾身の力を込めて地面をぶん殴った！", "You strike the ground with all of your might!"));
+		for (y = py - rad; y <= py + rad; y++)
+		{
+			for (x = px - rad; x <= px + rad; x++)
+			{
+				c_ptr = &cave[y][x];
+				f_ptr = &f_info[c_ptr->feat];
+				if (!in_bounds(y, x)) continue;
+				if (distance(py, px, y, x) > rad) continue;
+
+				if (!have_flag(f_ptr->flags, FF_WALL)) continue;
+				if (!have_flag(f_ptr->flags, FF_PERMANENT)) continue;
+				cave_set_feat(y, x, feat_dirt);
+			}
+		}
+		earthquake_aux(py, px, rad+2,0,1);
+
+	}
+	break;
+
+	case 5:
+	{
+		int dam = barehand_dam * 3 / 2;
+		if (only_info) return format(_("損傷:%d*不定", "dam: %d*undef"), dam);
+
+		if (!barehand_dam)
+		{
+			msg_print(_("手が塞がっていて使えない。", "You can't use this with your hands full."));
+			return NULL;
+		}
+
+		msg_print(_("あなたは天に向けて拳を突き上げた！", "You thrust your fist, directed towards the heaven!"));
+		cast_meteor(dam, 2, GF_METEOR);
+
+
+	}
+	break;
+
+	default:
+		if (only_info) return format(_str_unimp);
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+	return "";
+}
+
+
 
 
 
@@ -362,7 +548,6 @@ cptr do_cmd_class_power_aux_daiyousei(int num, bool only_info)
 	{
 		int dice = 6 + plev / 8;
 		int sides = 8;
-		int base = plev + chr_adj;
 
 		if (only_info) return format(_str_eff_dam_dice_sides, dice, sides);
 		if (!get_aim_dir(&dir)) return NULL;
@@ -12631,13 +12816,16 @@ class_power_type class_power_toyohime[] =
 	{9,8,25,FALSE,FALSE,A_INT,0,0,_("穢身感知", "Detect Impurity"),
 		_("周囲の広範囲の生物を感知する。",
         "Detects living beings in nearby area.")},
-	{15,25,40,FALSE,FALSE,A_CHR,0,5,_("月の軍勢召喚", "Summon Lunar Troops"),
+	{15,25,40,FALSE,TRUE,A_CHR,0,5,_("月の軍勢召喚", "Summon Lunar Troops"),
 		_("月面勢力のモンスターを配下として多数召喚する。",
         "Summons several Lunarian-aligned monsters as your followers.")},
-	{20,18,50,FALSE,FALSE,A_DEX,0,0,_("テレポート・レベル", "Teleport Level"),
+	{18,18,50,FALSE,TRUE,A_DEX,0,0,_("テレポート・レベル", "Teleport Level"),
 		_("別のフロアへテレポートする。",
         "Teleports you to another level.")},
-	{25,25,60,FALSE,TRUE,A_INT,0,0,_("次元の扉", "Dimension Door"),
+	{23,32,50,FALSE,TRUE,A_CHR,0,5,_("潮盈珠", "Shiomitsutama"), //v2.1.1追加
+		_("自分の周囲に水属性攻撃を行い地形を水にする。同名のアーティファクトを所持していると威力が強化される。",
+        "Performs a water element attack around yourself, turning the terrain into water. Power increases if you have the artifact with the same name.")},
+	{27,25,60,FALSE,TRUE,A_INT,0,0,_("次元の扉", "Dimension Door"),
 		_("指定したグリッドへテレポートする。距離が遠すぎると失敗することがある。",
         "Teleports to a specified location. Might fail if you try to teleport too far away.")},
 	{30,30,55,FALSE,TRUE,A_WIS,0,0,_("*追放*", "*Banishment*"),
@@ -12663,6 +12851,7 @@ class_power_type class_power_toyohime[] =
 cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 {
 	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
 	int dir;
 
 	switch(num)
@@ -12721,7 +12910,29 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 			teleport_level(0);
 		}
 		break;
+
+
 	case 4:
+	{
+		int dam = 100 + plev * 5 + chr_adj * 5;
+		int rad = 1 + plev / 12;
+
+		if (check_equip_specific_fixed_art(ART_SHIOMITSUTAMA, FALSE))
+		{
+			dam *= 2;
+			rad += 2;
+		}
+		if (only_info) return format(_("損傷:～%d ", "dam:~%d"), dam / 2);
+
+		msg_print(_("あなたは大渦を巻き起こした！", "You create a massive whirlpool!"));
+
+		project(0, rad, py, px, rad, GF_WATER_FLOW, PROJECT_GRID, -1);
+		project(0, rad, py, px, dam, GF_WATER, (PROJECT_KILL | PROJECT_GRID | PROJECT_ITEM), -1);
+
+		break;
+	}
+
+	case 5:
 		{
 			int range = plev;
 			if(only_info) return format(_("距離:%d", "dist: %d"),range);
@@ -12729,7 +12940,7 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 		}
 		break;
 
-	case 5: //追放
+	case 6: //追放
 		{
 			int power = 100 + plev * 3;
 
@@ -12752,7 +12963,7 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 
 		}
 		break;
-	case 6: //次元の扉Ⅱ
+	case 7: //次元の扉Ⅱ
 		{
 			int x, y;
 			monster_type *m_ptr;
@@ -12808,7 +13019,7 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 		break;
 
 
-	case 7:
+	case 8:
 		{
 			int tx,ty,i;
 			bool flag = FALSE;
@@ -12834,7 +13045,7 @@ cptr do_cmd_class_power_aux_toyohime(int num, bool only_info)
 
 		}
 		break;
-	case 8: //公転周期の罠
+	case 9: //公転周期の罠
 		{
 			if(only_info) return format("");
 
@@ -19765,7 +19976,7 @@ class_power_type class_power_kanako[] =
 
 	{45,96,80,FALSE,TRUE,A_STR,0,0,_("メテオリックオンバシラ", "Meteoric Onbashira"),
 		_("周囲のランダムな場所に隕石属性の強力なボールを連続で発生させる。",
-        "Generates multiple strong meteor at random positions in your vicinity.")},
+        "Generates multiple strong meteors at random positions in your vicinity.")},
 
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",	""},
 };
@@ -35067,6 +35278,7 @@ class_power_type class_power_mage[] =
 		_("杖・魔法棒・ロッドから魔力を吸い取りMPを回復する。魔道具が壊れることがある。",
         "Drains magical power from a staff/wand/rod and recovers MP. Might break the magic device.")},
 
+
 	{99,0,0,FALSE,FALSE,0,0,0,"dummy",	""},
 };
 cptr do_cmd_class_power_aux_mage(int num, bool only_info)
@@ -35089,7 +35301,6 @@ cptr do_cmd_class_power_aux_mage(int num, bool only_info)
 	}
 	return "";
 }
-
 
 
 /*:::華扇専用技*/
@@ -38520,7 +38731,16 @@ bool check_class_skill_usable(char *errmsg,int skillnum, class_power_type *class
 		}
 	}
 
+	else if (p_ptr->pclass == CLASS_ENOKO)
+	{
+		if(is_special_seikaku(SEIKAKU_SPECIAL_ENOKO) && skillnum == 6)
+		{
+			my_strcpy(errmsg, _("両手のトラバサミがないのでこの特技は使えない。", "You cannot use this ability without beartraps on your hands."), 150);
+			return FALSE;
 
+		}
+
+	}
 
 
 
@@ -39487,6 +39707,11 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_UBAME:
+		class_power_table = class_power_ubame;
+		class_power_aux = do_cmd_class_power_aux_ubame;
+		power_desc = power_desc_waza;
+		break;
 
 
 	default:
@@ -41179,12 +41404,12 @@ const support_item_type support_item_list[] =
     "Restrains a monster, preventing them from moving and having a medium chance of preventing them from taking actions. Less effective against fast/powerful/gigantic enemies and unique monsters.")},
 
 	//次元の扉Ⅱ
-	{60,20, 80,7,5,MON_REISEN2,class_power_toyohime,do_cmd_class_power_aux_toyohime,6,
+	{60,20, 80,7,5,MON_REISEN2,class_power_toyohime,do_cmd_class_power_aux_toyohime,7,
 	_("愚者の封書", "Fool's Envelope"),
 	_("それは視界内のモンスター一体を指定した場所にテレポートさせる。テレポート耐性をもつ敵対的なモンスターには効果がない。",
     "Teleports a monster in sight to a specified location. Does not affect hostile monsters with teleportation resistance.")},
 	//月の公転周期の罠
-	{255,110, 127,1,100,MON_TOYOHIME,class_power_toyohime,do_cmd_class_power_aux_toyohime,8,
+	{255,110, 127,1,100,MON_TOYOHIME,class_power_toyohime,do_cmd_class_power_aux_toyohime,9,
 	_("賢者の封書", "Wise Man's Envelope"),
 	_("それを発動すると以後モンスターがテレポートしたときフロアから消滅し、さらにモンスターによる召喚魔法が阻害されるようになる。",
     "From the point you activate it, monsters teleporting on this level will be banished, and there will be interference with monster summoning spells.")},
@@ -41467,12 +41692,17 @@ const support_item_type support_item_list[] =
 		_("それはモンスター一体を混乱、攻撃力低下状態にしようと試みる。",
 		"Attempts to confuse and reduce attack power of a single monster.") },
 
-		//v2.1.0 瑞霊　エナジードレイン
-		{ 80,40,100,8,5,	0,class_power_mizuchi,do_cmd_class_power_aux_mizuchi,4,
-		_("大怨霊の手袋", "Great Vengeful Spirit's Gloves"),
-		_("それは隣接したモンスターからHPとMPを奪う。回避されることもある。生命を持たない敵には無効。",
-        "Drains HP and MP from an adjacent monster. Can be dodged. Does not work against nonliving enemies.")},
+    //v2.1.0 瑞霊　エナジードレイン
+    { 80,40,100,8,5,	0,class_power_mizuchi,do_cmd_class_power_aux_mizuchi,4,
+    _("大怨霊の手袋", "Great Vengeful Spirit's Gloves"),
+    _("それは隣接したモンスターからHPとMPを奪う。回避されることもある。生命を持たない敵には無効。",
+    "Drains HP and MP from an adjacent monster. Can be dodged. Does not work against nonliving enemies.")},
 
+	//v2.1.1
+	{ 90,20,80,1,25,	MON_UBAME,class_power_ubame,do_cmd_class_power_aux_ubame,4,
+	_("怪王の冠", "Youkai Ruler's Crown"),
+	_("それは地震を起こす。この地震は永久壁を破壊する。",
+    "Causes an earthquake. This earthquake can destroy permanent walls.")},
 
 
 

@@ -2977,6 +2977,17 @@ static void process_world_aux_timeout(void)
 		(void)set_tim_aggravation(p_ptr->tim_aggravation - 1, TRUE);
 	}
 
+	//v2.1.1 新魔法用追加
+	if (p_ptr->tim_res_blast)
+	{
+		(void)set_res_blast(p_ptr->tim_res_blast - 1);
+	}
+	if (p_ptr->tim_rob_mana)
+	{
+		(void)set_rob_mana(p_ptr->tim_rob_mana - 1);
+	}
+
+
 	if (p_ptr->transportation_trap)
 	{
 		set_tim_transportation_trap(p_ptr->transportation_trap - 1, TRUE);
@@ -3921,7 +3932,7 @@ static void process_world_aux_curse(void)
 					if(dun_level && !p_ptr->inside_quest)
 					{
 						msg_print(_("突如、地震が発生した！", "Suddenly, an earthquake happens!"));
-						earthquake_aux(py,px,10,0);
+						earthquake_aux(py,px,10,0,0);
 					}
 					else
 						msg_print(_("地響きが聞こえた・・", "You hear the ground rumbling..."));

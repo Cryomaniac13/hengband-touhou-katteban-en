@@ -3899,7 +3899,11 @@ int find_martial_arts_method(int findmode)
 	case CLASS_NINJA:
 		return MELEE_MODE_NINJA;
 	case CLASS_ENOKO:
-		return MELEE_MODE_ENOKO;
+		if (is_special_seikaku(SEIKAKU_SPECIAL_ENOKO))
+			break;
+		else
+			return MELEE_MODE_ENOKO;
+
 	//格闘家の専用攻撃は素手時のみ
 	case CLASS_MARTIAL_ARTIST:
 		if((randint0(100) < plev+30) && !kick) return MELEE_MODE_MA;
@@ -4031,11 +4035,11 @@ int find_martial_arts_method(int findmode)
 	{
 		int kick_chance;
 
-		if(p_ptr->pclass == CLASS_SHIZUHA || p_ptr->pclass == CLASS_ALICE || p_ptr->pclass == CLASS_SAKI) //静葉とアリスはキックしか出ない v1.1.71 早鬼追加
+		if (p_ptr->pclass == CLASS_SHIZUHA || p_ptr->pclass == CLASS_ALICE || p_ptr->pclass == CLASS_SAKI) //静葉とアリスはキックしか出ない v1.1.71 早鬼追加
 			kick_chance = 100;
-		else if(p_ptr->pclass == CLASS_WRIGGLE || p_ptr->pclass == CLASS_BENBEN || p_ptr->pclass == CLASS_KUTAKA)//リグルと弁々はキックが出やすい
+		else if (p_ptr->pclass == CLASS_WRIGGLE || p_ptr->pclass == CLASS_BENBEN || p_ptr->pclass == CLASS_KUTAKA)//リグルと弁々はキックが出やすい
 			kick_chance = 70;
-		else if(p_ptr->prace == RACE_NINGYO) //人魚はキック(=人魚の尾)が出やすい
+		else if (p_ptr->prace == RACE_NINGYO) //人魚はキック(=人魚の尾)が出やすい
 			kick_chance = 50;
 		else
 			kick_chance = 35;

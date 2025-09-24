@@ -2311,7 +2311,7 @@ act = "%sの耳元で轟音を出した。";
 
 			case RBE_SHATTER:
 				damage -= (damage * ((ac < 150) ? ac : 150) / 250);
-				if (damage > 23) earthquake_aux(m_ptr->fy, m_ptr->fx, 8, m_idx);
+				if (damage > 23) earthquake_aux(m_ptr->fy, m_ptr->fx, 8, m_idx,0);
 				break;
 
 			case RBE_EXP_10:
@@ -3163,7 +3163,7 @@ bool monplayer_attack_monst(int t_idx)
 
 			case RBE_SHATTER:
 				damage -= (damage * ((ac < 150) ? ac : 150) / 250);
-				if (damage > 23) earthquake_aux(py, px, 8, 0);
+				if (damage > 23) earthquake_aux(py, px, 8, 0, 0);
 				break;
 
 			case RBE_EXP_10:
@@ -3534,7 +3534,42 @@ static void process_monster(int m_idx)
 		}
 	}
 
-
+	//v2.1.1 阿梨夜のバッドステータスは瞬間回復する
+	if (m_ptr->r_idx == MON_ARIYA)
+	{
+		char m_name[80];
+		monster_desc(m_name, m_ptr, 0);
+		if (MON_DEC_ATK(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_DEC_ATK, m_idx, 0);
+			msg_format(_("%sの攻撃力が瞬く間に回復したようだ。", "%^s recovers attack power in an instant."), m_name);
+		}
+		if (MON_DEC_DEF(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_DEC_DEF, m_idx, 0);
+			msg_format(_("%sの防御力が瞬く間に回復したようだ。", "%^s recovers defense power in an instant."), m_name);
+		}
+		if (MON_DEC_MAG(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_DEC_MAG, m_idx, 0);
+			msg_format(_("%sの魔力が瞬く間に回復したようだ。", "%^s recovers magical power in an instant."), m_name);
+		}
+		if (MON_DRUNK(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_DRUNK, m_idx, 0);
+			msg_format(_("%sの酔いは一瞬で醒めたようだ。", "%^s sobers up in an instant."), m_name);
+		}
+		if (MON_NO_MOVE(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_NO_MOVE, m_idx, 0);
+			msg_format(_("%sは何事もなかったように再び飛び始めた。", "%^s starts flying again, as if nothing had happened."), m_name);
+		}
+		if (MON_BERSERK(m_ptr))
+		{
+			(void)set_monster_timed_status_add(MTIMED2_BERSERK, m_idx, 0);
+			msg_format(_("%sはいきなり落ち着いた。", "%^s suddenly calms down."), m_name);
+		}
+	}
 
 
 	/*::: -Hack- 小町などの移動抑止特技の特殊処理 効果持続中は該当モンスターをNEVER_MOVE扱いにするが破られることもある*/

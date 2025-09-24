@@ -690,6 +690,17 @@ static int	set_random_unique_bias_of_your_dream(void)
 		else bias_num = RUBIAS_HOLY;
 		break;
 
+	case CLASS_MIZUCHI:
+		if (one_in_(2))	bias_num = RUBIAS_NETH;
+		else bias_num = RUBIAS_HOLY;
+		break;
+
+
+	case CLASS_UBAME:
+		if (one_in_(2))	bias_num = RUBIAS_TOUGHNESS;
+		else bias_num = RUBIAS_POWER;
+		break;
+
 	}
 
 
@@ -4206,6 +4217,38 @@ void get_random_unique_name(int r_idx, monster_race *r_ptr, int power, int bias)
 		else
 			sprintf(name_total, _("夢の世界の『%s』", "%s of the Dream World"), player_name);
 
+		my_strcpy(random_unique_name[r_idx - MON_RANDOM_UNIQUE_1], name_total, sizeof(random_unique_name[r_idx - MON_RANDOM_UNIQUE_1]) - 2);
+		return;
+	}
+
+	//v2.1.1 浅間浄穢山では別の名称を使う
+	if (dungeon_type == DUNGEON_ASAMA)
+	{
+		switch (bias)
+		{
+			case RUBIAS_NONE:	case RUBIAS_MULTI_MAGIC:	case RUBIAS_MULTI_BREATH:
+				sprintf(name_total, _("『虚構人間(ノンエンティティ)』", "Fictitious Person (Non-Entity)"));
+				break;
+			case RUBIAS_WATE:	case RUBIAS_HOLY:	case RUBIAS_SOUND:
+				sprintf(name_total, _("『虚構人間(ヒロイン)』", "Fictitious Person (Heroine)"));
+				break;
+			case RUBIAS_TOUGHNESS:	case RUBIAS_POWER:	case RUBIAS_SPEED:
+				sprintf(name_total, _("『虚構人間(ステレオタイプ)』", "Fictitious Person (Stereotype)"));
+				break;
+			case RUBIAS_CURSE:	case RUBIAS_SUMMON:	case RUBIAS_DEMONIC:
+				sprintf(name_total, _("『虚構人間(シャーマンタイプ)』", "Fictitious Person (Shamantype)"));
+				break;
+			case RUBIAS_NETH:	case RUBIAS_CHAOS:	case RUBIAS_INSANITY:
+				sprintf(name_total, _("『虚構人間(ゲームキャラクター)』", "Fictitious Person (Game Character)"));
+				break;
+			case RUBIAS_MANA:	case RUBIAS_PHYSICAL:	case RUBIAS_SPACE:
+				sprintf(name_total, _("『虚構人間(シンプルトン)』", "Fictitious Person (Simpleton)"));
+				break;
+			default:
+				sprintf(name_total, _("『虚構人間(アルゴリズミスト)』", "Fictitious Person (Algorithmist)"));
+				break;
+
+		}
 		my_strcpy(random_unique_name[r_idx - MON_RANDOM_UNIQUE_1], name_total, sizeof(random_unique_name[r_idx - MON_RANDOM_UNIQUE_1]) - 2);
 		return;
 	}

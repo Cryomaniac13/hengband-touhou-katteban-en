@@ -1288,6 +1288,10 @@ static bool restrict_monster_to_dungeon(int r_idx)
 	if (d_ptr->special_div >= 64) return TRUE;
 	if (summon_specific_type && !(d_ptr->flags1 & DF1_CHAMELEON)) return TRUE;
 
+	//v2.1.1 ちゃんと確認してないがランダムユニークって以前生成されたときのパラメータで判定される？よくわからんからこの先のチェックはスルー
+	if (r_ptr->flags7 & RF7_VARIABLE) return TRUE;
+
+
 	/*:::この先、ダンジョンフラグとモンスターフラグを比較して一致したモンスターしか出さない処理*/
 	switch (d_ptr->mode)
 	{
@@ -1504,6 +1508,8 @@ errr get_mon_num_prep(monster_hook_type monster_hook,
 			if (randint0(64) < (hoge & 0x3f)) entry->prob2++;
 		}
 
+		//v2.1.1 ピラミッドではランダムユニークを出やすくする レイマリも出やすくなるがまあいいか
+		if (dungeon_type == DUNGEON_ASAMA && (r_ptr->flags7 & RF7_VARIABLE)) entry->prob2 *= 10;
 
 		///mod140301 生息地実装
 		/// この辺りでextraが0のはずのモンスターがときどき3になってる。なぜ？どっかでうっかり代入した？
@@ -2968,6 +2974,11 @@ void update_mon(int m_idx, bool full)
 					if (r_ptr->flags2 & (RF2_SMART)) r_ptr->r_flags2 |= (RF2_SMART);
 					if (r_ptr->flags2 & (RF2_STUPID)) r_ptr->r_flags2 |= (RF2_STUPID);
 				}
+			}
+			//v2.1.1 浅間浄穢山でユイマンとアリヤはモンスターを常に感知
+			else if (dungeon_type == DUNGEON_ASAMA && (p_ptr->pclass == CLASS_YUIMAN || p_ptr->pclass == CLASS_ARIYA))
+			{
+				flag = TRUE;
 			}
 
 			/* Basic telepathy */

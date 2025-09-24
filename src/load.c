@@ -2429,8 +2429,13 @@ static void rd_extra(void)
 		rd_s16b(&p_ptr->hatate_mon_search_ridx);
 		rd_s16b(&p_ptr->hatate_mon_search_dungeon);
 
+		//v2.1.1 future_use_s16b‚©‚ç3‚ÂŽg‚¤ 14¨11
+		rd_s16b(&p_ptr->tim_res_blast);
+		rd_s16b(&p_ptr->tim_rob_mana);
+		rd_s16b(&p_ptr->tim_xxxxxx);
 
-		for (i = 0; i < 14; i++)
+
+		for (i = 0; i < 11; i++)
 			rd_s16b(&p_ptr->future_use_s16b[i]);
 
 		for (i = 0; i < 8; i++)

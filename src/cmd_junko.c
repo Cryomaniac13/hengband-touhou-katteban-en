@@ -1180,7 +1180,11 @@ bool convert_item_to_mana(void)
 			case SV_MATERIAL_RYUUZYU:
 				add_junko_flag_val(JKF1_BREATH_DEF, 300 * amt);
 				add_junko_flag_val(JKF2_MANA, 100 * amt);
+				break;
 
+			case SV_MATERIAL_SAZAREISHI:
+				add_junko_flag_val(JKF1_RESTORE_NEXUS, 300 * amt);
+				add_junko_flag_val(JKF1_EXPLOSION_DEF, 300 * amt);
 				break;
 
 
@@ -2067,6 +2071,8 @@ const magatama_material_type magatama_material_table[] =
 	{ TV_SOUVENIR,SV_SOUVENIR_ILMENITE				,40,120,JKF_TYPE_TELEPO,0 }, //月のイルメナイト
 	{ TV_SOUVENIR,SV_SOUVENIR_ASIA					,50,150,JKF_TYPE_ATTACK,JKF2_NUKE }, //エイジャ　lev50 核熱
 	{ TV_SOUVENIR,SV_SOUVENIR_MIRROR_OF_RUFFNOR		,50,150,JKF_TYPE_DEFENSE,0 }, //ラフノールの鏡　lev50 防御
+
+	{ TV_MATERIAL,SV_MATERIAL_SAZAREISHI		,40,75,JKF_TYPE_HEAL,JKF2_SHARDS },//さざれ石 Lev40 回復
 
 	{ 0,0,0,0,0 },//終端ダミー tval=0
 };

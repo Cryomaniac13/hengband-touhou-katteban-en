@@ -299,9 +299,20 @@ void reset_tim_flags(void)
 	p_ptr->tim_no_move = 0L;
 	p_ptr->transportation_trap = 0L;
 
+	p_ptr->tim_res_blast = 0L;
+	p_ptr->tim_rob_mana = 0L;
+	p_ptr->tim_xxxxxx = 0L;
+
+
+
+
+
+	//行動可能にする
 	while(p_ptr->energy_need < 0) p_ptr->energy_need += ENERGY_NEED();
 	world_player = FALSE;
-	///race clalss 一時効果解除でも一部の職や種族は一部効果が継続する
+
+	//一時効果解除でも一部の職や種族は一部効果が継続する処理
+	//
 	//if (prace_is_(RACE_DEMON) && (p_ptr->lev > 44)) p_ptr->oppose_fire = 1;
 	if ((p_ptr->pclass == CLASS_NINJA) && (p_ptr->lev > 44)) p_ptr->oppose_pois = 1;
 
@@ -450,14 +461,6 @@ void dispel_player(void)
 		p_ptr->special_defense &= ~(SD_HELLFIRE_BARRIER);
 	}
 
-	//v1.1.94 硝子の盾
-	if (p_ptr->special_defense & SD_GLASS_SHIELD)
-	{
-		msg_print(_("硝子の盾が消えた。", "Your glass shield vanishes."));
-		p_ptr->special_defense &= ~(SD_GLASS_SHIELD);
-
-	}
-
 	//v2.0.1 生命爆発の薬
 	if (p_ptr->special_defense & SD_LIFE_EXPLODE)
 	{
@@ -465,6 +468,18 @@ void dispel_player(void)
 		p_ptr->special_defense &= ~(SD_LIFE_EXPLODE);
 
 	}
+
+	//v2.1.1 異変石増幅
+	if (p_ptr->special_defense & SD_AMPLIFY_STONE)
+	{
+		msg_print(_("石の輝きが普段通りに戻った。", "The stone's brilliance returns to normal."));
+		p_ptr->special_defense &= ~(SD_AMPLIFY_STONE);
+	}
+
+	//v2.1.1 爆風耐性
+	set_res_blast(0);
+	//v2.1.1 魔力奪取
+	set_rob_mana(0);
 
 
 	//うどんげ「イビルアンジュレーション」消去
@@ -10496,6 +10511,136 @@ bool set_tim_transportation_trap(int v, bool do_dec)
 
 	/* Recalculate bonuses */
 	p_ptr->update |= (PU_BONUS);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
+
+//v2.1.1 爆風防御の一時効果
+//ボールとロケットのダメージを半減する。ブレス・ボルト・レーザー・巨大レーザーは非対象
+bool set_res_blast(int v)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+
+	/* Open */
+	if (v)
+	{
+		if (!p_ptr->tim_res_blast)
+		{
+#ifdef JP
+			msg_print("爆風に対する耐性を得た！");
+#else
+			msg_print("Oh, wow! Everything looks so cosmic now!");
+#endif
+			/* Sniper */
+			notice = TRUE;
+		}
+	}
+
+	/* Shut */
+	else
+	{
+		if (p_ptr->tim_res_blast)
+		{
+#ifdef JP
+			msg_print("爆風からの耐性を失った。");
+#else
+			msg_print("You can see clearly again.");
+#endif
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	p_ptr->tim_res_blast = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+	/* Disturb */
+	if (disturb_state) disturb(0, 1);
+
+	/* Update the health bar */
+	p_ptr->redraw |= (PR_HEALTH | PR_UHEALTH);
+
+	/* Update monsters */
+	p_ptr->update |= (PU_MONSTERS | PU_BONUS);
+
+	/* Handle stuff */
+	handle_stuff();
+
+	/* Result */
+	return (TRUE);
+}
+
+
+//v2.1.1 敵打倒時MP回復の一時効果
+bool set_rob_mana(int v)
+{
+	bool notice = FALSE;
+
+	/* Hack -- Force good values */
+	v = (v > 10000) ? 10000 : (v < 0) ? 0 : v;
+
+	if (p_ptr->is_dead) return FALSE;
+
+
+	/* Open */
+	if (v)
+	{
+		if (!p_ptr->tim_rob_mana)
+		{
+#ifdef JP
+			msg_print("魔力への飽くなき飢えを感じる！");
+#else
+			msg_print("You feel an insatiable hunger for mana!");
+#endif
+			/* Sniper */
+			notice = TRUE;
+		}
+	}
+
+	/* Shut */
+	else
+	{
+		if (p_ptr->tim_rob_mana)
+		{
+#ifdef JP
+			msg_print("魔力に対する渇望が収まった。");
+#else
+			msg_print("You lose your craving for mana.");
+#endif
+			notice = TRUE;
+		}
+	}
+
+	/* Use the value */
+	p_ptr->tim_rob_mana = v;
+
+	/* Redraw status bar */
+	p_ptr->redraw |= (PR_STATUS);
+
+	/* Nothing to notice */
+	if (!notice) return (FALSE);
+	/* Disturb */
+	if (disturb_state) disturb(0, 1);
+
+	/* Update the health bar */
+	p_ptr->redraw |= (PR_HEALTH | PR_UHEALTH);
+
+	/* Update monsters */
+	p_ptr->update |= (PU_MONSTERS | PU_BONUS);
 
 	/* Handle stuff */
 	handle_stuff();

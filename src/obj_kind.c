@@ -778,7 +778,7 @@ bool object_is_magic_item(object_type *o_ptr)
 		(tv == TV_ROD) ||
 		(tv == TV_SCROLL) ||
 		(tv == TV_POTION) ||
-		(tv >= MIN_MAGIC && tv <= MAX_MAGIC) ||
+		(tv >= MIN_MAGIC && tv <= MAX_BASIC_MAGIC_REALM) ||
 		(tv == TV_BOOK_OCCULT) ||
 		(tv == TV_MAGICITEM) ||
 		(tv == TV_MAGICWEAPON) ||

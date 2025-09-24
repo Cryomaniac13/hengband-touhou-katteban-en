@@ -6652,6 +6652,8 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_RUBY) gain = 300;
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_IZANAGIOBJECT) gain = 100;
 				if(tv == TV_SOUVENIR && sv == SV_SOUVENIR_PHOENIX_FEATHER) gain = 1000;
+				if (tv == TV_STONE_INCIDENT && sv == 0) gain = 200;
+				if (tv == TV_STONE_INCIDENT && sv == 1) gain = 200;
 				break;
 
 			case MARISA_POWER_COLD:
@@ -6664,6 +6666,8 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_IZANAGIOBJECT) gain = 100;
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_SAPPHIRE) gain = 300;
 				if (tv == TV_SOUVENIR && sv == SV_SOUVENIR_ELDER_THINGS_CRYSTAL) gain = 1000;
+				if (tv == TV_STONE_INCIDENT && sv == 2) gain = 200;
+				if (tv == TV_STONE_INCIDENT && sv == 3) gain = 200;
 				break;
 			case MARISA_POWER_ELEC:
 				if(tv == TV_MUSHROOM && sv == SV_MUSHROOM_PARALYSIS) gain = 4;
@@ -6677,6 +6681,8 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_DRAGONSCALE) gain = 100;
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_EMERALD) gain = 300;
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_IZANAGIOBJECT) gain = 100;
+				if (tv == TV_STONE_INCIDENT && sv == 4) gain = 200;
+				if (tv == TV_STONE_INCIDENT && sv == 5) gain = 200;
 				break;
 			case MARISA_POWER_LITE:
 				if(tv == TV_MUSHROOM && sv == SV_MUSHROOM_NAIVETY) gain = 4;
@@ -6726,6 +6732,9 @@ void marisa_gain_power(object_type *o_ptr, int mult)
 				if(tv == TV_MATERIAL && sv == SV_MATERIAL_HIHIIROKANE) gain = 1000;
 				if (tv == TV_SOUVENIR && sv == SV_SOUVENIR_ELDER_THINGS_CRYSTAL) gain = 300;
 				if (tv == TV_SWEETS && sv == SV_SWEETS_HONEY) gain = 2;
+				if (tv == TV_MATERIAL && sv == SV_MATERIAL_SAZAREISHI) gain = 300;
+				if (tv == TV_STONE_INCIDENT && sv == 6) gain = 200;
+				if (tv == TV_STONE_INCIDENT && sv == 7) gain = 200;
 
 				break;
 			case MARISA_POWER_STAR:

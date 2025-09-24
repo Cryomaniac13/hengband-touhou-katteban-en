@@ -1186,26 +1186,7 @@ bool make_attack_normal(int m_idx)
 			obvious = TRUE;
 
 
-			//v1.1.94 ÉŽq‚Ì‚@ÚGŒ^—×ÚUŒ‚‚ðˆê“x‚¾‚¯–³Œø‰»‚µ”j•Ð‘®«‚Å”½Œ‚
-			if (touched && (p_ptr->special_defense & SD_GLASS_SHIELD))
-			{
-				int shard_dam;
 
-				if (cp_ptr->magicmaster)
-					shard_dam = p_ptr->lev * 6;
-				else
-					shard_dam = p_ptr->lev * 4;
-
-				msg_format(_("ÉŽq‚Ì‚‚ªÓ‚¯‚½I", "Your glass shield shatters!"));
-				project(0, 0, m_ptr->fy, m_ptr->fx, shard_dam, GF_SHARDS, PROJECT_KILL, -1);
-				if (!m_ptr->r_idx) alive = FALSE;
-
-				p_ptr->special_defense &= ~(SD_GLASS_SHIELD);
-				p_ptr->redraw |= (PR_STATUS);
-				redraw_stuff();
-
-				continue;
-			}
 
 			/* Roll out the damage */
 			damage = damroll(d_dice, d_side);
@@ -2251,7 +2232,7 @@ bool make_attack_normal(int m_idx)
 					/* Radius 8 earthquake centered at the monster */
 					if (damage > 23 || explode)
 					{
-						earthquake_aux(m_ptr->fy, m_ptr->fx, 8, m_idx);
+						earthquake_aux(m_ptr->fy, m_ptr->fx, 8, m_idx,0);
 					}
 
 					break;

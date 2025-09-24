@@ -3806,7 +3806,7 @@ bool wield_check( int slot, int item_new, int mode)
 		}
 	}
 	//v2.0.12慧ノ子は武器や盾を持てない グリマリなど武器扱いでない特殊アイテムは持てる
-	else if (p_ptr->pclass == CLASS_ENOKO)
+	else if (p_ptr->pclass == CLASS_ENOKO && !is_special_seikaku(SEIKAKU_SPECIAL_ENOKO))
 	{
 		if ((slot == INVEN_RARM || slot == INVEN_LARM) && (object_is_weapon(o_ptr_new) || object_is_shooting_weapon(o_ptr_new)|| o_ptr_new->tval == TV_SHIELD))
 		{

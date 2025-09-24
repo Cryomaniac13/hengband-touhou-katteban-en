@@ -13,13 +13,21 @@
 
 # N:<index>:<name>
 # D:<long name>
-# W:<min depth>:<min depth>:<min player level>:<flags mode>:<min alloc>:<max alloc chance>:<obj good>:<obj great>:<pit>:<nest>
+# W:<min depth>:<max depth>:<min player level>:<flags mode>:<min alloc>:<max alloc chance>:<obj good>:<obj great>:<pit>:<nest>
 # L:<floor1>:<%1>:<floor2>:<%2>:<floor3>:<%3>:<tunnel%>
 # A:<wall1>:<%1>:<wall2>:<%2>:<wall3>:<%3>:<outer wall>:<inner wall>:<stream1>:<stream2>
 # F:<flags>
 # M:<monster flags>
 # S:<monster spells>
 ##P:ダンジョンの位置 Y:Xの順でYは上端から数える
+
+#flags mode
+#d_info[].modeに格納される
+#F:行で指定したフラグをANDで解釈するかORで解釈するかなど　普通はORの3にしとく
+
+#pit/nest
+#d_info[].pit/nestに格納される
+#pit_types[]とnest_types[]に定義されたpit/nestの中から出現可能なものをビットフラグで記録している
 
 # Note on the MONSTER_DIV_ dungeon flag
 # It defines the percentage of monsters affected by the restrictions
@@ -242,4 +250,19 @@ F:MONSTER_DIV_0 | WATER_RIVER | CAVE | CAVERN | SMALLEST
 F:LAVA_RIVER | DESTROY
 M:R_CHAR_$bcijmvwEFGIS | KWAI | DEITY | UNDEAD | NONLIVING
 F:FINAL_GUARDIAN_1364
+
+#特殊処理で51-55階はMAZEフラグを無視する
+N:16:浅間浄穢山
+E:Asama Mountain
+D:$cave leading to the Asama Purifying Mountain
+D:浅間浄穢山へ続く洞窟
+P:9:38
+W:30:55:10:3:30:80:80:25:0x0006:0x0033
+L:FLOOR:100:FLOOR:0:FLOOR:0:0
+A:GRANITE:100:GRANITE:0:GRANITE:0:GRANITE:GRANITE:MAGMA_VEIN:QUARTZ_VEIN
+F:MONSTER_DIV_5 | MAZE | CAVE | CAVERN | LAKE_TREE
+M:FAIRY | DEITY | NONLIVING
+F:FINAL_GUARDIAN_1412 | 
+F:FINAL_OBJECT_915
+
 

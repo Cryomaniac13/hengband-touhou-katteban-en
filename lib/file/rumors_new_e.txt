@@ -4,7 +4,6 @@
 N:0:Moon Rabbit Rumors (endgame)
 Lady Toyohime was very depressed the other day.\The youkai from Earth stole a valuable drink.
 Lady Yorihime was very angry the other day.\The youkai from Earth stole a valuable drink.
-Fly me to the moon, and let me play among the stars~
 That youkai lady on Earth is pretty cute.
 Lady Toyohime said\that the depths of that cavern on Earth are connected to some absurd place.
 The princesses have been going down to Earth lately,\so maybe I'll just play outside for a bit...
@@ -82,6 +81,7 @@ The weapon store occasionally sells hunting rifles.\However, you can't use them 
 If you're bad at combat, try carrying around plenty of torches\to throw at the enemies. It works particularly well against ghosts.
 Outside the village, there's a doll sales stand that people\rarely approach. I've heard it can help if you had your life force drained.
 I see many adventurers charging out holding a shield and a sword,\but I think holding a sword with both hands might be more effective.
+Shop doesn't sell scrolls you need for adventure?\They say a kappa has opened a store for adventurers at Myouren Temple - they might be in stock there.\However, it's a bit more expensive compared to other stores.
 
 
 N:2:Tengu Village Rumors (basic combat tactics, race/class)
@@ -122,6 +122,7 @@ I've recently seen people using some unusual 'occult' spells.\However, our books
 I've seen a haniwa get attacked by ghosts, but those attacks had\no effect at all. By the way, why are those haniwa moving?\Is this some new kind of golem?
 A zashiki-warashi came to stay here a while ago.\I've heard they can't leave their household, but they\can move around if they dwell in some weird jar.\It was talking something about wanting a more powerful house.
 There was some weird fellow who kept following me no matter\how many tornados I've launched at her. Apparently, that was\a danmakulogist looking for weak enemies that can cast tornados.\How rude!
+A person came in selling mead, followed by a large swarm of bees.\If you make the bees angry, you'll get attack, so you'd have to be careful.
 
 
 N:3:Underground Town Rumors (midgame tactics)
@@ -301,7 +302,8 @@ You want to cover resistance to fire and free action by the\time you reach dunge
 If you want to fight in close combat, aim for strength and\dexterity of at least 20; otherwise, you won't get many blows per round.
 You can increase amount of blows in melee by holding your weapon\with both hands. If your strength is low, that might be better than\carrying a weapon and a shield.
 Oni weapons are powerful, but they are very heavy.\If you can wield them properly, though, you'll get more critical hits\the heavier your weapon is.
-Are you good at collection mushrooms and materials?\If your Searching skill is low, you'll have hard time finding those\special items in the dungeon.
+Are you good at collection mushrooms and materials?\If your Searching skill is low, you'll have hard time finding those\special items in the dungeon.\To raise your Searching, you'd need something like my pendulum...\Don't give me that greedy look, I'm not giving it to you!
+A mysterious underground pyramid has been discovered nearby Hell Valley.\It's a giant maze on the inside, inhabited by weird beings called 'hallucinations'.
 
 N:7:Talking to Kaguya
 Kaguya - 'How are you, hero? You've became really strong.\ \By the way, an otherworldly cave has appeared at the Moon as well.\The capital is about to be attacked by monsters and consumed by impurity.\Toyohime and Yorihime are doing their best, but it doesn't look good.\Could you help if you have the time?\I'll open a path leading to the Moon.'

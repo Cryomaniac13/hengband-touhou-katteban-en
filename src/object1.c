@@ -3060,7 +3060,7 @@ bool check_book_realm(const byte book_tval, const byte book_sval)
 	if(cp_ptr->realm_aptitude[0] == 0) return FALSE;
 
 	//v1.1.32 パチュリー専用性格「書痴」の例外処理
-	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && book_tval <= MAX_MAGIC)
+	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && book_tval <= MAX_BASIC_MAGIC_REALM)
 		return TRUE;
 
 
@@ -7027,8 +7027,9 @@ bool same_category_realm(int realm1, int realm2)
 		return (TRUE);
 	if(realm1 >= TV_BOOK_TRANSFORM && realm1 <= TV_BOOK_CHAOS && realm2 >= TV_BOOK_TRANSFORM && realm2 <= TV_BOOK_CHAOS )
 		return (TRUE);
-
-	if(realm1 == TV_BOOK_OCCULT && realm2 == TV_BOOK_OCCULT) return TRUE;
+	//v2.1.1
+	if((realm1 == TV_BOOK_OCCULT || realm1 == TV_STONE_INCIDENT)
+		&& (realm2 == TV_BOOK_OCCULT || realm2 == TV_STONE_INCIDENT)) return TRUE;
 
 	return (FALSE);
 

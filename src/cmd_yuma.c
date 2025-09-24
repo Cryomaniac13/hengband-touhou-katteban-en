@@ -293,6 +293,12 @@ int yuma_eat_other_things(object_type *o_ptr)
 		yuma_gain_itemflag(o_ptr);
 
 	}
+	else if (o_ptr->tval == TV_STONE_INCIDENT)
+	{
+		msg_print(_("‚Ç‚±‚©‚ÅŠ´‚¶‚½‚±‚Æ‚Ì‚ ‚é–‚—Í‚Ì‰ò‚ð“Û‚Ýž‚ñ‚¾I", "You swallow a lump of mana you've felt somewhere before!"));
+		gain_exp(object_value_real(o_ptr) / 2);
+		food_val = 1000;
+	}
 
 	//–‚–@‘‚ÆŠª•¨ ‚Æ‚è‚ ‚¦‚¸‰¿Ši‚ð‚»‚Ì‚Ü‚ÜH—¿‚ÉB‚ˆÊ–‚–@‘‚Í‚È‚É‚©“Á‹Z‚ðŠl“¾‚·‚é‚©H
 	else if (o_ptr->tval <= TV_BOOK_END || o_ptr->tval == TV_SCROLL)

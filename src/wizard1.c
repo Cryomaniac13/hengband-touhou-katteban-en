@@ -259,6 +259,7 @@ static grouper group_item[] =
 	{ TV_BOOK_HISSATSU,      "åïèpîÈì`èë" },
 	{ TV_BOOK_MEDICINE,      "í≤ç‹îÈì`èë" },
 	{ TV_BOOK_OCCULT,      "ÉIÉJÉãÉgñ{" },
+	{ TV_STONE_INCIDENT,      "àŸïœêŒ" },
 #else
     { TV_BOOK_ELEMENT,     "Books (Elemental Arcane Arts)" },
 	{ TV_BOOK_FORESEE,  "Books (Divination Arcane Arts)" },
@@ -275,13 +276,14 @@ static grouper group_item[] =
 	{ TV_BOOK_HISSATSU,      "Books (Swordsmanship)" },
 	{ TV_BOOK_MEDICINE,      "Books (Chemistry)" },
 	{ TV_BOOK_OCCULT,      "Books (Occult)" },
+	{ TV_STONE_INCIDENT,      "Incident Stones" },
 #endif
 #ifdef JP
 	{ TV_WHISTLE,       "ìJ" },
 	{ TV_CAPTURE,       "ódñÇñ{" },
 #else
 	{ TV_WHISTLE,       "Whistle" },
-	{ TV_CAPTURE,       "Capture Ball" },
+	{ TV_CAPTURE,       "Demon Book" },
 #endif
 
 #ifdef JP

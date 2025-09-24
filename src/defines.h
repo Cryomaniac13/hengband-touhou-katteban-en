@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 1
-#define H_VER_PATCH 0
+#define H_VER_PATCH 1
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -227,8 +227,10 @@
 #define QUEST_YAKUZA_1		71
 #define QUEST_HANGOKU2		72
 #define QUEST_YAKUZA_2		73
+#define QUEST_DELIVER_SAZARE 74
+#define QUEST_NINA			75
 
-#define QUEST_MAX			74 //クエストの最後の番号+1
+#define QUEST_MAX			76 //クエストの最後の番号+1
 
 //v1.1.24 急流下りクエストでこのターン数以下で入賞
 #define QT_TURN1			250
@@ -902,7 +904,7 @@
 #define REALM_CRAFT      8
 #define REALM_DAEMON       9
 #define REALM_CRUSADE      10
-#define MAX_MAGIC          10
+#define MAX_BASIC_MAGIC_REALM          10
 #define MIN_TECHNIC        16
 #define REALM_MUSIC        16
 #define REALM_HISSATSU     17
@@ -910,14 +912,14 @@
 #define MAX_REALM          18
 */
 ///realm item
-//#define VALID_REALM        (MAX_REALM + MAX_MAGIC - MIN_TECHNIC + 1)
+//#define VALID_REALM        (MAX_REALM + MAX_BASIC_MAGIC_REALM - MIN_TECHNIC + 1)
 //#define NUM_TECHNIC        (MAX_REALM - MIN_TECHNIC + 1)
 
 ///realm 剣術や歌の判定用
-//#define is_magic(A) ((((A) > REALM_NONE) && ((A) < MAX_MAGIC + 1)) ? TRUE : FALSE)
-//#define is_magic(A) (( ((A) > REALM_NONE) && ((A) < MAX_MAGIC + 1)) ? TRUE : FALSE)
+//#define is_magic(A) ((((A) > REALM_NONE) && ((A) < MAX_BASIC_MAGIC_REALM + 1)) ? TRUE : FALSE)
+//#define is_magic(A) (( ((A) > REALM_NONE) && ((A) < MAX_BASIC_MAGIC_REALM + 1)) ? TRUE : FALSE)
 //#define tval2realm(A) ((A) - TV_LIFE_BOOK + 1)
-//#define technic2magic(A)      (is_magic(A) ? (A) : (A) - MIN_TECHNIC + 1 + MAX_MAGIC)
+//#define technic2magic(A)      (is_magic(A) ? (A) : (A) - MIN_TECHNIC + 1 + MAX_BASIC_MAGIC_REALM)
 #define is_good_realm(REALM)   ((REALM) >= TV_BOOK_MYSTIC && (REALM) <= TV_BOOK_NATURE)
 #define is_evil_realm(REALM)   ((REALM) >= TV_BOOK_TRANSFORM && (REALM) <= TV_BOOK_CHAOS)
 
@@ -1329,9 +1331,16 @@
 #define CLASS_BEEKEEPER			156
 #define CLASS_DAIYOUSEI			157
 
+#define CLASS_UBAME				158
+#define CLASS_CHIMI				159
+#define CLASS_NAREKO			160
+#define CLASS_YUIMAN			161
+#define CLASS_ARIYA				162
+#define CLASS_NINA				163
+
 /*Maximum number of player "class" types (see "table.c", etc)*/
 /*:::class_info[]の項目数 CLASS_**の最終+1*/
-#define MAX_CLASS            158
+#define MAX_CLASS            164
 
 #define CHECK_MIZUCHI_GHOST			(p_ptr->pclass == CLASS_MIZUCHI && p_ptr->prace == RACE_SPECTRE)
 #define CHECK_MIZUCHI_RESURRECT		(p_ptr->pclass == CLASS_MIZUCHI && p_ptr->magic_num2[0])
@@ -1389,8 +1398,9 @@
 #define SEIKAKU_SPECIAL_JYOON		12
 #define SEIKAKU_SPECIAL_MARISA		13
 #define SEIKAKU_SPECIAL_MEGUMU		14
+#define SEIKAKU_SPECIAL_ENOKO		15
 
-#define MAX_SEIKAKU_SPECIAL			15 //一つ上の最大+1
+#define MAX_SEIKAKU_SPECIAL			16 //一つ上の最大+1
 
 
 
@@ -1841,6 +1851,7 @@
 #define ART_SHIVA_JACKET		26
 #define ART_THORIN				29
 #define ART_BERUTHIEL			34
+#define ART_FINGOLFIN			57
 #define ART_SHIVA_SHOES			61
 
 #define ART_ICANUS              128
@@ -2503,17 +2514,24 @@
 #define TV_BOOK_NECROMANCY	11
 #define TV_BOOK_CHAOS		12
 
-#define MAX_MAGIC          12 //OCCULTも魔法扱いにするが、MAX_MAGICは動かさない方が良さそう。例外処理で対応しよう。
+#define MAX_BASIC_MAGIC_REALM          12 //魔術、仙術、妖術の三大領域の終端　この他にも調剤とかオカルトとか後から足したが管理方法が色々違うのでこの数値もまだ使う
 
 #define TV_BOOK_HISSATSU	13
 #define TV_BOOK_MEDICINE	14
 #define TV_BOOK_OCCULT		15
-//tval16～19は将来の魔法領域追加のために使わずにおく。
-//魔法書のtvalと職業データの魔法領域適性リストを対応付けたせいで拡張しにくくなってしまった
-#define TV_BOOK_END		15
+
+//v2.1.1 異変領域の異変石　魔法書と同様に使用する
+#define TV_STONE_INCIDENT	16
+
+//魔法書tval値と魔法領域realm値の現時点終端
+//20までは拡張可能
+#define TV_BOOK_END		16
+
+//注意:この次tval:17以上の魔法領域を実装するならp_ptr->old_realmを16ビットから32ビットに拡張する必要がある
 
 
-#define TV_BULLET		20
+
+#define TV_BULLET		20	//没アイテム。しかし将来の実装を見越してあちこちに使ってしまったので消すのも面倒でそのままにしてある
 #define TV_ARROW		21
 #define TV_BOLT			22
 
@@ -2628,6 +2646,9 @@
 
 //SVAL:上質ドロップの本 TV:1-13
 #define SV_BOOK_MIN_GOOD    2
+
+//v2.1.1 TV_STONE_INCIDENTの異変石のsvalの最大値 7
+#define SV_INCIDENT_STONE_MAX 7
 
 //SVAL:矢玉と弾薬 TV:20-22
 #define SV_AMMO_LIGHT		0	//通常
@@ -3359,6 +3380,7 @@
 #define SV_MATERIAL_NINOMIYA			39 //二宮金次郎像(投擲ダミーアイテム)
 #define SV_MATERIAL_SKULL			40 //頭蓋骨
 #define SV_MATERIAL_RYUUZYU				41 //v1.1.86 龍珠
+#define SV_MATERIAL_SAZAREISHI			42 //v2.1.1 さざれ石
 
 //SVAL:キノコTV:74
 #define SV_MUSHROOM_POISON                   0
@@ -3983,7 +4005,7 @@
 //アイテムカードなどで他のクラスからも使える特技はこのビットを使わないこと。
 //いずれもしspecial_defenseのフラグビットが足りなくなるようなら咲夜や雛のフラグビットをこれに吸収して再利用してもいい。
 #define SD_UNIQUE_CLASS_POWER	0x10000000
-#define SD_GLASS_SHIELD			0x20000000
+#define SD_AMPLIFY_STONE			0x20000000 //硝子の盾にしようかと思っていたが没にし異変石増幅にする
 
 
 //クラス専用のSPECIAL_DEFENSEフラグが現在有効になっているかどうかを確認する
@@ -7205,7 +7227,17 @@ extern int PlayerUID;　
 #define MON_SWARMBEES_2		1393
 #define MON_SWARMBEES_3		1394
 
-#define MON_IDX_MAX			1395	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_UBAME			1408
+#define MON_CHIMI			1409
+#define MON_NAREKO			1410
+#define MON_YUIMAN			1411
+#define MON_ARIYA			1412
+#define MON_NINA			1413
+
+
+
+
+#define MON_IDX_MAX			1414	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -7427,7 +7459,9 @@ extern int PlayerUID;　
 #define DUNGEON_DREAM_WORLD 13
 #define DUNGEON_HELL		14
 #define DUNGEON_KOURYUU		15 //v1.1.86 虹龍洞
-#define DUNGEON_MAX			16 //最大値+1であること 音楽ファイル再生に使われる
+#define DUNGEON_ASAMA		16 //v2.1.1  浅間浄穢山
+
+#define DUNGEON_MAX			17 //最大値+1であること 音楽ファイル再生に使われる
 
 #define DUNGEON_FEAT_PROB_NUM 3
 
@@ -8240,7 +8274,7 @@ extern int PlayerUID;　
 ///mod150614 闘技場変更
 #define BATTLE_MON_LIST_MAX	20
 #define BATTLE_MON_RANDOM_TEAM_NAME_NUM	43
-#define BATTLE_MON_SPECIAL_TEAM_NUM	52
+#define BATTLE_MON_SPECIAL_TEAM_NUM	54
 #define BATTLE_MON_TICKS	300
 
 ///mod150712 神奈子
@@ -8267,7 +8301,7 @@ extern int PlayerUID;　
 
 
 ///mod150811 魔理沙
-#define MARISA_MAX_MAGIC_KIND	28 //魔理沙が作る自作魔法の種類　marisa_magic_table[]の要素数
+#define MARISA_MAGIC_KIND_MAX	28 //魔理沙が作る自作魔法の種類　marisa_magic_table[]の要素数
 #define MARISA_CARRY_MAGIC_NUM	16 //魔理沙が持っていける自作魔法の数
 #define MARISA_HOME_CARRY_SHIFT 40
 #define CMM_MODE_CHECK		0 //魔理沙魔法選択ルーチンの動作モード
@@ -8343,8 +8377,9 @@ extern int PlayerUID;　
 #define BLDG_EX_ZASHIKI		40 //座敷わらしのテレワーク　拠点使用可能
 #define BLDG_EX_HATATE		41 //はたての家
 #define BLDG_EX_GHOSTS		42 //v2.1.0 怨霊たちの溜まり場
+#define BLDG_EX_KEIKI2		43 //袿姫2 異変石を作る
 
-#define BLDG_EX_MAX			43 //最後の建物番号+1
+#define BLDG_EX_MAX			44 //最後の建物番号+1
 
 
 #define CAST_MONSPELL_EXTRA_KYOUKO_YAMABIKO -1

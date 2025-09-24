@@ -1,0 +1,41 @@
+
+# Name
+Q:$74:N:Seeking Perpetual Protection
+Q:74:N:不変の加護を求めて
+
+# Definition
+Q:$74:Q:9:0:0:0:55:0:0:0
+Q:74:Q:9:0:0:0:55:0:0:0
+
+?:[LEQ $QUEST74 2]
+Q:$74:T:Akyuu - 'I've heard rumours about Iwanaga-hime's shrine being discovered
+Q:$74:T:deep underground beneath Youkai Mountain. I have a keen interest into 
+Q:$74:T:items related to Iwanaga-hime. Could you please investigate that shrine,
+Q:$74:T:and bring back any empowered stones you might find?'
+Q:74:T:阿求「妖怪の山の地底深くに磐長姫の神社が発見されたという噂を聞きました。
+Q:74:T:私は磐長姫ゆかりの品物に高い関心を持っているのです。
+Q:74:T:神社の調査に赴き、もし力ある石などがあれば持ってきて頂けませんか？」
+?:1
+
+?:[EQU $QUEST74 3]
+Q:$74:T:Akyuu - 'That's a splendid stone. It truly embodies perpetuality.
+Q:$74:T:Thank you very much. I'll enshrine it with utmost care.
+Q:$74:T:Here's a token of my appreciation.
+Q:$74:T:You might get more use out of it than I can.'
+Q:74:T:阿求「これは素晴らしい岩ですね。まさに悠久を物語る佇まいです。
+Q:74:T:ありがとうございました。大事に祀らせて頂きます。
+Q:74:T:こちらは心ばかりのお礼です。
+Q:74:T:私より貴方のほうが有効に使っていただけるでしょう。」
+?:1
+
+?:[EQU $QUEST74 5]
+Q:$74:T:Akyuu - 'That's unfortunate.
+Q:$74:T:Well, I didn't except to acquire it that easily.
+Q:$74:T:I'll have to look for it by other means.
+Q:$74:T:Thank you for your efforts.'
+Q:74:T:阿求「それは残念です。
+Q:74:T:まあそう簡単に求めるものが手に入るとは思っていません。
+Q:74:T:他の手段を探してみることにいたします。
+Q:74:T:ご尽力ありがとうございました。」
+
+?:1

@@ -1080,6 +1080,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_BEEKEEPER) a_idx = ART_COLLUIN;
 			else if (p_ptr->pclass == CLASS_DAIYOUSEI) a_idx = ART_NIMUE_RING;
 			else if (p_ptr->pclass == CLASS_MIZUCHI) a_idx = ART_JACK;
+			else if (p_ptr->pclass == CLASS_UBAME) a_idx = ART_FINGOLFIN;
 
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//☆生成
@@ -1359,7 +1360,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if(cp_ptr->realm_aptitude[0] == 2)
 			{
 				int j,cnt=0;
-				for(j=1;j<=MAX_MAGIC;j++)
+				for(j=1;j<=MAX_BASIC_MAGIC_REALM;j++)
 				{
 					///mod スペマス系職の一部で報酬が生成されなかったので修正
 					if(cp_ptr->realm_aptitude[j] >1 && rp_ptr->realm_aptitude[j])
@@ -1369,7 +1370,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 					}
 				}
 
-				if(!cnt) book_tv = randint1(TV_BOOK_END-1); //ランダムな本の最終巻　TV=15は未実装の予備領域のため-1しとく
+				if(!cnt) book_tv = randint1(TV_BOOK_END-1); //ランダムな本の最終巻　TV=16の異変石は出さないので-1
 			}
 			else book_tv = randint1(TV_BOOK_END-1);
 

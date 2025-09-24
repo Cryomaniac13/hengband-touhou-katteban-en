@@ -169,6 +169,8 @@ of Xiombarg
 of Seven Stars
 #『終末への採掘』
 'Apocalyptic Mining'
+#フォーカラー
+of Four Colors
 
 N:14:BIAS_NECROMANTIC
 #『死の嵐』
@@ -247,6 +249,8 @@ of the Hakurei Shrine Maiden
 'Blade of the Moon'
 #『現し世の秘術師』
 'Occultist of the Present World'
+#プレステ・ジョアンの
+of Preste Joan
 
 N:16:BIAS_ROGUE
 #『赤い彗星』
@@ -300,6 +304,8 @@ of Saruman
 of Radagast
 #『月の頭脳』
 'Brain of the Moon'
+#『ムーンドラゴン』
+'Moon Dragon'
 
 N: 6:BIAS_STR
 N:10:BIAS_CON

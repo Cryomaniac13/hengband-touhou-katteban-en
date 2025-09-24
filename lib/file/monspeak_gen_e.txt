@@ -202,6 +202,7 @@ says, 'You don't yet know. The border between day and night is already in the pa
 says, 'May I borrow a little of your time?'
 # 「その優しい火が～♪命取られて消えていく～♪」
 croons, 'That gentle flame~, its life is taken and winks out~'
+#「イエス！説明してほしいのね！」
 
 N:1106:Wriggle
 # 「蛍様が出て喜ばない奴なんて、久しぶりに見たよ！」
@@ -494,6 +495,8 @@ says, 'Now, arm your heart! And do battle with your own mental image!'
 says, 'Now, sleep with this trauma that will leave you sleepless!'
 # 「あ、今もっと強い技を思い出したわね？ふむふむ、参考にしておくわ。」
 says, 'Oh, you remembered a stronger technique? Hmm-hmm, I'll have to take another look.'
+#「……なるほど、そういう事だったのね」
+#「どれどれ…」
 
 N:1129:Rin
 # 「楽しいことしてるね！あたいも混ぜてくれるかい？」
@@ -550,6 +553,7 @@ says, 'When we were kids, didn't everyone have an invisible friend that adults d
 says, 'Hello hello, where do you think I am right now?'
 # 「あら、ここは何処かしら？」
 says, 'Huh, where am I?'
+#「透明人間はのんきなもんだー」
 
 N:1132:Nazrin
 # 「どうやら宝の反応は君だったみたいだ。」
@@ -1046,6 +1050,8 @@ says, 'Where on earth are you!?'
 says, 'There you are, you youkai!'
 # 「これで神社が少し大きくなるわ」
 says, 'This will make the shrine a little bigger.'
+#「ひと言言いたい。迷路がすぎる！」
+
 
 N:1227:Marisa
 # 「撃ったから動いた。さぁ、これからが本番だぜ」
@@ -1098,6 +1104,8 @@ says, 'Finally, the villain makes an appearance!'
 says, 'I'm just, uh, investigating the enigma of the Black Markets!'
 # 「こりゃ阻止しないといけないな！今ここで！」
 says, 'I have to stop this! Right here and right now!'
+#「わざとらしいほどに複雑な構造だ」
+#「この攻撃の激しさは新しい異変(エキストラ)を感じさせる」
 
 N:1230:Mamizou
 # 「壮大な狸囃子の始まりじゃ！」
@@ -1304,6 +1312,10 @@ says, 'O frivolous one, would you challenge me to combat?'
 says, 'Child of a filthy world, impure body commanded by malice, this is not your Pure Land!'
 # は桃を頬張っている。
 is stuffing herself with peaches.
+#「そこまでよ。貴方に勝ち目はない」
+#「最初に私に会った幸運に感謝する事ね！」
+#「せんないねぇ」
+#は手の扇で顔を隠している。
 
 N:1299:Rei'sen
 # は半ば逃げ腰で銃を構えている。
@@ -1570,6 +1582,8 @@ joyfully races through the air.
 says, 'I'll show you the best power and speed in the Animal Realm!'
 # 「お前の強さなら最初から幹部でも良いぞ」
 says, 'With that might of yours, you could start at a high rank right away.'
+#「勁牙組の早鬼だ。組長だ！ひれふせい！」
+
 
 N:1355:Miyoi
 # はパタパタと両手を振って挨拶してきた。
@@ -1746,6 +1760,7 @@ says, 'In this world, it's survival of the fittest! If you're weak, then die!'
 says, 'I'll capture you and enlist you in the Keiga Family.'
 # 「いざ勝負だ！よく噛んで死ねい！」
 says, 'The fight begins! I'll grind you to death with my fangs!'
+#「そこあぶないよー」
 # は両手のトラバサミを鳴らしている。
 makes snapping noises with the beartraps on her arms.
 
@@ -1800,6 +1815,53 @@ says, 'Feel the bane of nothingness! Let that be my gift to you!'
 says, 'Overcome this fantasy with all your might!'
 # 「選ぶがいい。全てを忘れるか、無に帰すかを！」
 says, 'Make your choice. Forget everything, or become nothing!'
+
+N:1408:ウバメ
+#は天に向かって拳を突き上げた。
+#「こんな事をしたのはそこのお前か」
+#「訳わからんことするな」
+#「さっさと聖域を元に戻せ」
+
+N:1409:チミ
+#の姿が一瞬渦のようにぼやけた。
+#「ったく今の若いもんは」
+#「これだから...」
+
+N:1410:馴子
+#「え？盗掘しに来たの？」
+#「別に良いのよ？盗掘が夢でも何でも」
+#「ワクワクするぜー」
+#楽しげに杖を振っている。
+#「あまりにも仕事がなくて退屈していたんだから」
+#「へー、へー」
+#「答えられなかったお前はここで死ぬ運命にある！」
+
+N:1411:ユイマン
+#「これはまた人間そっくりね。しかし、よく見ると綻びも多い」
+#「いくら人間の形に見えても貴方は模造人間だ」
+#「それが初対面にする挨拶か？」
+#「貴方のその好戦的な性格は典型的なゲームキャラクターと呼ばれる者」
+#「貴方を直さないといけないね！」
+#「私は惑わされない」
+
+N:1412:阿梨夜
+#「やっと来た」
+#「そう来なくっちゃ」
+#「残りは少ないよ貴方の寿命...」
+#「変容すら呑み込む恒久の力だ！」
+#「私をこんな場所に閉じ込めておいて勝手なもんよね」
+#「石という物は不変の象徴です」
+#「あんな石にやられる程度のならそれまでのこと」
+#「私は不変の神なのです。だから、私は変に非ず」
+
+N:1413:ニナ
+#「誰が怪物よ、貝だけど」
+#「まだ目覚めていないようね　可哀想に」
+#「情報は武器なのよ。武器はただの道具。それ以上でもそれ以下でもないわ」
+#「真実を浴びて目覚めよ！私の蜃気楼で！」
+#「マジだよ」
+#「私は全てを知るもの」
+#「それは闇の勢力側が隠しているからよ！」
 
 N:*:Default lines
 #Gensoukyou uniques have no default lines

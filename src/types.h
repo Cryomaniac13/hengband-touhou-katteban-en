@@ -922,7 +922,7 @@ struct player_magic
 	int spell_weight;		/* Weight that hurts spells */
 
 	/*:::魔法10領域分の基本情報　添え字はREALM_???から1引いた値*/
-	magic_type info[MAX_MAGIC][32];    /* The available spells */
+	magic_type info[MAX_BASIC_MAGIC_REALM][32];    /* The available spells */
 };
 #endif
 
@@ -993,7 +993,9 @@ struct player_race
 	u32b choice;        /* Legal class choices */
 /*    byte choice_xtra;   */
 
-	byte realm_aptitude[16];/*:::各魔法領域に対する適性　添字はTV_BOOK_???に対応 [0]はダミー　0は習得不可、5は普通、9は大得意*/
+	/*:::各魔法領域に対する適性　添字はTV_BOOK_???に対応 [0]はダミー　0は習得不可、5は普通、9は大得意*/
+	//v2.1.1 [16]→[21]に拡張
+	byte realm_aptitude[21];
 	byte score_mult;		/*:::スコア倍率　基本100*/
 	bool flag_nofixed;		/*:::まだ実装されてない　キャラ選択時灰色　自己変容時不可*/
 	bool flag_nobirth;		/*:::初期選択不可　キャラ選択時表示されない 自己変容時可*/
@@ -1057,8 +1059,9 @@ struct player_class
 	/*:::各魔法領域への適性　習得レベルや難度に影響
 	 *:::[0]は魔法習得フラグで0だと非魔法職、1だと一領域使用可、2だと赤魔やスペマスなど特殊習得 3だと二領域習得可
 	 *:::[1～15]は魔法書のTVALに対応し、0:使用不可 1:司書など(二冊目まで　遅い) 2:一般人など（一部の魔法のみ　習得かなり遅い） 3:探検家など（一部使えない　習得遅い） 4:メイドなど（習得やや遅い） 5:メイジなど 6:ハイメイジなど（高適性)*/
-	/*:::  元素、予見、付与、召喚、神秘、生命、破邪、自然、変容、暗黒、死霊、混沌、必殺剣、予備領域1、予備領域2の順*/
-	byte realm_aptitude[16];
+	/*:::  元素、予見、付与、召喚、神秘、生命、破邪、自然、変容、暗黒、死霊、混沌、必殺剣、調剤、オカルト、異変の順*/
+	//v2.1.1 [16]→[21]に拡張
+	byte realm_aptitude[21];
 
 	/*:::攻撃回数計算値　calc_bonuses()のハードコーディングから移す*/
 	byte spell_stat; //魔法をどの能力値で使うか　基本はA_INT
@@ -1694,7 +1697,7 @@ struct player_type
 	//動物霊の所属勢力
 	s16b race_multipur_val[5];
 
-	s16b monkey_count ;//秘術魔法「猿の手」使用回数カウント
+	s16b monkey_count ;//怪異魔法「猿の手」使用回数カウント
 
 	//v1.1.56 アイテム「スペルカード」による一時効果をカウントする領域
 	s16b tim_spellcard_count;	//v1.1.56 スペルカードのタイムカウンタ
@@ -1731,8 +1734,15 @@ struct player_type
 	s16b hatate_mon_search_ridx;
 	s16b hatate_mon_search_dungeon;
 
+	//v2.1.1 異変領域新魔法の時限効果にfuture_use_s16bから3つ使用 14→11
 
-	s16b future_use_s16b[14];
+	s16b tim_res_blast; //爆風防御
+	s16b tim_rob_mana; //敵打倒時MP回復
+
+	s16b tim_xxxxxx; //貫通打撃を作ろうと思ったが切れ味付与か理力付与でよくない？と考え直してボツ。予備領域から切り出したままにしておく
+
+
+	s16b future_use_s16b[11];
 	s32b future_use_s32b[8];
 
 
@@ -1898,7 +1908,7 @@ struct building_type
 
 	s16b member_class[MAX_CLASS];   /* which classes are part of guild */
 	s16b member_race[MAX_RACES];    /* which classes are part of guild */
-	s16b member_realm[MAX_MAGIC+1]; /* which realms are part of guild */
+	s16b member_realm[MAX_BASIC_MAGIC_REALM+1]; /* which realms are part of guild */
 };
 
 
@@ -2467,7 +2477,7 @@ struct gun_base_param_type
 };
 
 
-/*:::秘術「異界との接触」のモンスターテーブル*/
+/*:::怪異「異界との接触」のモンスターテーブル*/
 typedef struct occult_contact_type occult_contact_type;
 struct occult_contact_type
 {

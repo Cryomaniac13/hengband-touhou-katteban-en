@@ -433,6 +433,10 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_MIZUCHI) return TRUE;
 			else return FALSE;
 
+		case CLASS_UBAME:
+			if (r_idx == MON_UBAME) return TRUE;
+			else return FALSE;
+
 	}
 
 
@@ -2042,17 +2046,27 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			if (p_ptr->magic_num1[0] > SUWAKO_POINT_MAX) p_ptr->magic_num1[0] = SUWAKO_POINT_MAX;
 			if (p_ptr->magic_num1[0] / 100 > point_old) p_ptr->update |= PU_MANA;
 		}
+
+		//打倒時MP奪取効果を効果の高い順に
+		//v2.1.1 異変魔法「スカベンジング」
+		if (p_ptr->tim_rob_mana)
+		{
+			int get_mana = r_ptr->level + p_ptr->lev / 2 + randint1(p_ptr->lev / 2);
+			if (r_ptr->level > 50 || r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) get_mana *= 2;
+			if (player_gain_mana(get_mana))
+				msg_print(_("倒れた敵から魔力を奪い取った！", "You steal mana from the defeated enemy!"));
+		}
 		//v1.1.21 兵士
-		if (HAVE_SOLDIER_SKILL(SOLDIER_SKILL_COMBAT, SS_C_SCAVENGER))
+		else if (HAVE_SOLDIER_SKILL(SOLDIER_SKILL_COMBAT, SS_C_SCAVENGER))
 		{
 			int get_mana = r_ptr->level;
 			if (r_ptr->level > 50 || r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) get_mana *= 2;
 			if (get_mana <1) get_mana = 1;
 			if (player_gain_mana(get_mana))
-				msg_print(_("MPが回復した！", "You recover MP!"));
+				msg_print(_("倒れた敵から物資を調達した！", "You scavenge supplies from the defeated enemy!"));
 		}
 		//v1.1.30 妖夢　修羅の血発動中
-		if (p_ptr->pclass == CLASS_YOUMU && p_ptr->tim_general[0])
+		else if (p_ptr->pclass == CLASS_YOUMU && p_ptr->tim_general[0])
 		{
 			int gain = MAX(1, r_ptr->level / 2);
 			if (r_ptr->level > 50 || r_ptr->flags1 & RF1_UNIQUE || r_ptr->flags7 & RF7_UNIQUE2) gain *= 2;
@@ -2507,6 +2521,18 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			q_ptr->number = 1;
 			(void)drop_near(q_ptr, -1, y, x);
 		}
+		//v2.1.1 ランダムな異変石も確率で落とす
+		if (drop_chosen_item && randint1(100) < r_ptr->level)
+		{
+			object_type forge2;
+			q_ptr = &forge2;
+			object_prep(q_ptr, lookup_kind(TV_STONE_INCIDENT, randint0(SV_INCIDENT_STONE_MAX+1)));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+
+
+
 		break;
 
 		/*:::清蘭は杵を落とす*/
@@ -2692,7 +2718,34 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 
 			(void)drop_near(q_ptr, -1, y, x);
 		}
+
+		//v2.1.1 ランダムな異変石も確率で落とす
+		if (drop_chosen_item && randint1(100) < r_ptr->level)
+		{
+			object_type forge2;
+			q_ptr = &forge2;
+			object_prep(q_ptr, lookup_kind(TV_STONE_INCIDENT, randint0(SV_INCIDENT_STONE_MAX + 1)));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+
 		break;
+
+	//v2.1.1 パチュリー、魅須丸、袿姫、さとりも異変石を落とす
+	case MON_PATCHOULI:
+	case MON_MISUMARU:
+	case MON_SATORI:
+	case MON_KEIKI:
+		if (drop_chosen_item)
+		{
+			object_type forge2;
+			q_ptr = &forge2;
+			object_prep(q_ptr, lookup_kind(TV_STONE_INCIDENT, randint0(SV_INCIDENT_STONE_MAX + 1)));
+			q_ptr->number = 1;
+			(void)drop_near(q_ptr, -1, y, x);
+		}
+		break;
+
 	case MON_KASEN:
 		if (drop_chosen_item && one_in_(3))
 		{

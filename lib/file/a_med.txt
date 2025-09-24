@@ -75,6 +75,8 @@ of Lungorthin
 of Meiji 17
 #煙々羅の
 of the Enenra
+#『塵の住処』
+'Dust Dwelling'
 
 N: 4:BIAS_COLD
 #『氷姫』

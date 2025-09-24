@@ -1168,7 +1168,8 @@ static bool cave_gen(void)
 
 	/* Build maze */
 	/*:::ダンジョン「迷宮」用処理*/
-	if (d_info[dungeon_type].flags1 & DF1_MAZE)
+	//v2.1.1 浅間山51階以降はMAZEフラグを無視して生成する
+	if ((d_info[dungeon_type].flags1 & DF1_MAZE) && !(dungeon_type == DUNGEON_ASAMA && dun_level > 50))
 	{
 		build_maze_vault(cur_wid/2-1, cur_hgt/2-1, cur_wid-4, cur_hgt-4, FALSE);
 

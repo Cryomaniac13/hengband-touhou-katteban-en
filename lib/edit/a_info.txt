@@ -5248,7 +5248,7 @@ U:RESIST_ALL
 D:$The favoured sword of Watatsuki no Yorihime, who is capable of channeling the power of any of the myriad gods.
 D:八百万の神様全ての力を借りられるという綿月依姫の愛刀だ。
 
-N:311:潮満瓊
+N:311:潮盈珠
 E:Shiomitsutama
 I:48:35:4
 W:90:150:10:120000
@@ -5828,3 +5828,13 @@ D:$towards each other than they are today.
 D:$It's decorated with a hanging cloth, and large bells are attached to its cross.
 D:百年以上前、人間と妖怪の関係が今よりずっと殺伐としていた時代の博麗の巫女が持っていた長大な幣だ。
 D:十字の棒に大きな鈴と飾り布がついている。
+
+N:353:維縵姫の
+E:of Yuiman-hime
+I:31:2:3
+W:60:40:30:100000
+P:0:0d0:15:15:0
+F:INT | WIS | CHR | STEALTH | SEE_INVIS | RES_NETHER | ESP_ANIMAL | DEC_MANA | XTRA_SHOTS | ACTIVATE
+U:SATIATE
+D:地の底の維縵国の姫が鹿狩りに使った弓だ。維縵姫は甲賀三郎と共に地上に出て後に浅間大明神になったという。
+

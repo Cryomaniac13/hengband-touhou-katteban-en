@@ -31,6 +31,9 @@ cptr spell_category_name(int tval)
 			return "オカルト";
 		else
 			return "呪文";
+	case TV_STONE_INCIDENT:
+		return "異変の力";
+
 	default:
 		return "呪文";
 
@@ -54,6 +57,9 @@ cptr spell_category_name(int tval)
 			return "occultism";
 		else
 			return "spell";
+	case TV_STONE_INCIDENT:
+		return "incident power";
+
 	default:
 		return "spell";
 #endif
@@ -66,7 +72,7 @@ static bool item_tester_cast_spell(object_type *o_ptr)
 {
 	if(flag_spell_consume_book)
 	{
-		if(o_ptr->tval >= MIN_MAGIC && o_ptr->tval <= MAX_MAGIC) return TRUE;
+		if(o_ptr->tval >= MIN_MAGIC && o_ptr->tval <= MAX_BASIC_MAGIC_REALM) return TRUE;
 		else if(o_ptr->tval == TV_BOOK_OCCULT) return TRUE;
 		else return FALSE;
 	}
@@ -151,13 +157,22 @@ static int get_spell(int *sn, cptr prompt, int sval, bool learned, int use_realm
 
 	/* Extract spells */
 	/*:::spells[0-7]に対し、一冊目なら1-8,二冊目なら9-16,三冊目なら17-24,四冊目なら25-31を格納しているらしい*/
+	//v2.1.1 異変石は8種類の石にそれぞれ4個の呪文を割り振るので計算方法を変える
 	for (spell = 0; spell < 32; spell++)
 	{
-		/* Check for this spell */
-		if ((fake_spell_flags[sval] & (1L << spell)))
+		if (use_realm == TV_STONE_INCIDENT)
 		{
-			/* Collect this spell */
-			spells[num++] = spell;
+			if (spell / 4 == sval) spells[num++] = spell;
+		}
+		else
+		{
+
+			/* Check for this spell */
+			if ((fake_spell_flags[sval] & (1L << spell)))
+			{
+				/* Collect this spell */
+				spells[num++] = spell;
+			}
 		}
 	}
 
@@ -181,7 +196,7 @@ static int get_spell(int *sn, cptr prompt, int sval, bool learned, int use_realm
 	//v1.1.32 パチュリー特殊性格追加
 	if (((use_realm) != p_ptr->realm1) && ((use_realm) != p_ptr->realm2)
 		&& !(REALM_SPELLMASTER && cp_ptr->realm_aptitude[use_realm]!=0)
-		&& !(is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_MAGIC)
+		&& !(is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_BASIC_MAGIC_REALM)
 		&& !flag_spell_consume_book) return FALSE;
 	/*:::ソーサラーか赤魔でも呪術、歌、剣術は使用不可*/
 	//if (((p_ptr->pclass == CLASS_SORCERER) || (p_ptr->pclass == CLASS_RED_MAGE)) && !is_magic(use_realm)) return FALSE;
@@ -430,7 +445,7 @@ static bool item_tester_learn_spell(object_type *o_ptr)
 		else return (FALSE);
 	}
 	//魔理沙は全ての領域を学習できる
-	if(p_ptr->pclass == CLASS_MARISA && o_ptr->tval >= MIN_MAGIC && o_ptr->tval <= MAX_MAGIC) return (TRUE);
+	if(p_ptr->pclass == CLASS_MARISA && o_ptr->tval >= MIN_MAGIC && o_ptr->tval <= MAX_BASIC_MAGIC_REALM) return (TRUE);
 
 	/*:::神官・巫女は第一領域に合わない第二領域を選択できない*/
 	if (p_ptr->pclass == CLASS_PRIEST)
@@ -460,7 +475,7 @@ static bool item_tester_learn_spell(object_type *o_ptr)
 	if(REALM_SPELLMASTER && cp_ptr->realm_aptitude[o_ptr->tval] != 0) return (TRUE);
 
 	//v1.1.32 パチュリー専用性格
-	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && o_ptr->tval <= MAX_MAGIC)
+	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && o_ptr->tval <= MAX_BASIC_MAGIC_REALM)
 		return TRUE;
 
 	return (FALSE);
@@ -671,14 +686,22 @@ void do_cmd_browse(void)
 
 
 	/*:::spells[0-7]に対し、一冊目なら1-8,二冊目なら9-16,三冊目なら17-24,四冊目なら25-31を格納しているらしい*/
+	//v2.1.1 異変石は8種類の石にそれぞれ4個の呪文を割り振るので計算方法を変える
 	/* Extract spells */
 	for (spell = 0; spell < 32; spell++)
 	{
-		/* Check for this spell */
-		if ((fake_spell_flags[sval] & (1L << spell)))
+		if (use_realm == TV_STONE_INCIDENT)
 		{
-			/* Collect this spell */
-			spells[num++] = spell;
+			if(spell / 4 == sval) spells[num++] = spell;
+		}
+		else
+		{
+			/* Check for this spell */
+			if ((fake_spell_flags[sval] & (1L << spell)))
+			{
+				/* Collect this spell */
+				spells[num++] = spell;
+			}
 		}
 	}
 
@@ -934,15 +957,15 @@ msg_format("新しい%sを覚えることはできない！", p);
 
 	/* Get an item */
 #ifdef JP
-q = "どの本から学びますか? ";
+q = "どれを使って魔法を学びますか? ";
 #else
-	q = "Study which book? ";
+	q = "Study spells using which item? ";
 #endif
 
 #ifdef JP
-s = "読める本がない。";
+s = "魔法を学べるものがない。";
 #else
-	s = "You have no books that you can read.";
+	s = "You have nothing you can study spells from.";
 #endif
 
 	if (!get_item(&item, q, s, (USE_INVEN | USE_FLOOR))) return;
@@ -1096,9 +1119,16 @@ s = "読める本がない。";
 	{
 		/* Message */
 #ifdef JP
-msg_format("その本には学ぶべき%sがない。", p);
+		if(o_ptr->tval == TV_STONE_INCIDENT)
+			msg_format("その石には学ぶべき%sがない。", p);
+		else
+			msg_format("その本には学ぶべき%sがない。", p);
+
 #else
-		msg_format("You cannot learn any %ss in that book.", p);
+		if(o_ptr->tval == TV_STONE_INCIDENT)
+            msg_format("You cannot learn any %ss in that stone.", p);
+        else
+            msg_format("You cannot learn any %ss in that book.", p);
 #endif
 
 
@@ -1821,14 +1851,14 @@ void do_cmd_cast(void)
 //		       sval, TRUE, realm))
 	if (!get_spell(&spell,"唱える", sval, TRUE, realm))
 	{
-		if (spell == -2) msg_format("その本には知っている%sがない。", prayer);
+		if (spell == -2) msg_format("その%sには知っている%sがない。", (o_ptr->tval == TV_STONE_INCIDENT ? "石" : "本"),prayer);
 		return;
 	}
 #else
 	if (!get_spell(&spell,"cast", sval, TRUE, realm))
 	{
 		if (spell == -2)
-			msg_format("You don't know any %ss in that book.", prayer);
+			msg_format("You don't know any %ss in that %s.", (o_ptr->tval == TV_STONE_INCIDENT ? "stone" : "book"), prayer);
 		return;
 	}
 #endif
@@ -3053,7 +3083,7 @@ bool do_riding(bool force)
 
 	if (p_ptr->special_defense & KATA_MUSOU) set_action(ACTION_NONE);
 
-	if (p_ptr->pclass == CLASS_ENOKO)
+	if (p_ptr->pclass == CLASS_ENOKO && !is_special_seikaku(SEIKAKU_SPECIAL_ENOKO))
 	{
 		msg_print(_("トラバサミが邪魔で騎乗ができない。", "You cannot ride, your beartraps get in the way."));
 		return FALSE;
@@ -4076,7 +4106,7 @@ void calc_spell_info(magic_type *s_ptr, int realm, int spell)
 		(void)COPY(s_ptr, &table, magic_type);
 		return;
 	}
-	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && realm <= MAX_MAGIC)
+	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && realm <= MAX_BASIC_MAGIC_REALM)
 	{
 		//v1.1.32 書痴パチュリーは本来適正のない仙術や妖術も使う
 	}
@@ -4093,7 +4123,7 @@ void calc_spell_info(magic_type *s_ptr, int realm, int spell)
 	//職業による適性から基礎情報を得る。霊夢は賽銭によるランク上昇有り
 	c_apt = cp_ptr->realm_aptitude[realm]-1;
 
-	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && realm <= MAX_MAGIC)
+	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && realm <= MAX_BASIC_MAGIC_REALM)
 	{
 		c_apt = 4;
 	}
@@ -4103,19 +4133,35 @@ void calc_spell_info(magic_type *s_ptr, int realm, int spell)
 		else if(osaisen_rank() > 4) c_apt += 1;
 		if(c_apt > 5) c_apt = 5;
 	}
-	if(realm == TV_BOOK_OCCULT)
+
+	//領域ごとに分岐して魔法の基本情報を取得
+	if (realm <= MAX_BASIC_MAGIC_REALM)
+	{
+		lev = spell_base_info[realm - 1][spell][c_apt].slevel;
+		table.smana = spell_base_info[realm - 1][spell][c_apt].smana;
+		table.sfail = spell_base_info[realm - 1][spell][c_apt].sfail;
+		table.sexp = spell_base_info[realm - 1][spell][c_apt].sexp;
+	}
+	else if(realm == TV_BOOK_OCCULT)
 	{
 		lev         = occult_spell_base_info[spell][c_apt].slevel;
 		table.smana = occult_spell_base_info[spell][c_apt].smana;
 		table.sfail = occult_spell_base_info[spell][c_apt].sfail;
 		table.sexp  = occult_spell_base_info[spell][c_apt].sexp;
 	}
+	else if(realm == TV_STONE_INCIDENT)
+	{
+		lev = incident_spell_base_info[spell][c_apt].slevel;
+		table.smana = incident_spell_base_info[spell][c_apt].smana;
+		table.sfail = incident_spell_base_info[spell][c_apt].sfail;
+		table.sexp = incident_spell_base_info[spell][c_apt].sexp;
+	}
 	else
 	{
-		lev         = spell_base_info[realm-1][spell][c_apt].slevel;
-		table.smana = spell_base_info[realm-1][spell][c_apt].smana;
-		table.sfail = spell_base_info[realm-1][spell][c_apt].sfail;
-		table.sexp  = spell_base_info[realm-1][spell][c_apt].sexp;
+		msg_print(_("ERROR:この領域の情報がcalc_spell_info()に設定されていない",
+                "ERROR: No information for this realm is defined in calc_spell_info()"));
+		return;
+
 	}
 
 	/*:::一部の職業は基本テーブルから数値を変更する*/
@@ -4247,7 +4293,10 @@ void calc_spell_info(magic_type *s_ptr, int realm, int spell)
 			table.smana = table.smana * 120 / 100;
 		}
 		//それ以外の第二領域は習得レベルが3上昇
-		else if(p_ptr->realm1 != REALM_NONE && realm != p_ptr->realm1 && p_ptr->pclass != CLASS_MARISA) lev += 3;
+		else if (p_ptr->realm1 != REALM_NONE && realm != p_ptr->realm1 && p_ptr->pclass != CLASS_MARISA)
+		{
+			lev += 3;
+		}
 
 
 		/*:::呪文に向かないグローブを装備しているとき失敗率にペナルティ　器用さでペナルティ軽減*/

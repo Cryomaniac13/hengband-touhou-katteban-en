@@ -1265,7 +1265,7 @@ quest_type *quest;
  * Quest text
  */
 /*:::クエスト受領、完了、失敗のときの文が入る*/
-char quest_text[10][80];
+char quest_text[10][128];
 
 /*
  * Current line of the quest text

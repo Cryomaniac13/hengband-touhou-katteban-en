@@ -6358,7 +6358,10 @@ bool destroy_area(int y1, int x1, int r, bool in_generate, bool force_floor, boo
  *:::（壁抜け可能なキャラクターを除く）
  *:::r:半径 m_idx:モンスターが地震を起こしたときそのモンスターのインデックス　＠は0*/
 //v2.0 r値を上限30にした。map[][]を32→64に
-bool earthquake_aux(int cy, int cx, int r, int m_idx)
+//v2.1 modeパラメータを追加
+// 0:通常
+// 1:クエストダンジョン内でも使用可能
+bool earthquake_aux(int cy, int cx, int r, int m_idx, int mode)
 {
 	int             i, t, y, x, yy, xx, dy, dx;
 	int             damage = 0;
@@ -6370,7 +6373,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 	if(p_ptr->pclass == CLASS_TENSHI && kanameishi_check(randint1(r))) return (FALSE);
 
 	/* Prevent destruction of quest levels and town */
-	if ((p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest)) || !dun_level || EXTRA_QUEST_FLOOR)
+	if (mode != 1 && ((p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest)) || !dun_level || EXTRA_QUEST_FLOOR))
 	{
 		return (FALSE);
 	}
@@ -6750,6 +6753,9 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 							}
 						}
 
+						//v2.1.1 ウバメの特技でクエストダンジョンでも地震を起こせるようにしたので追加
+						check_quest_completion(m_ptr);
+
 						/* Delete the monster */
 						delete_monster(yy, xx);
 
@@ -6915,7 +6921,7 @@ bool earthquake_aux(int cy, int cx, int r, int m_idx)
 
 bool earthquake(int cy, int cx, int r)
 {
-	return earthquake_aux(cy, cx, r, 0);
+	return earthquake_aux(cy, cx, r, 0, 0);
 }
 
 
@@ -7884,20 +7890,21 @@ bool get_random_target(int mode, int range)
 }
 
 ///mod140222
-/*:::視界内の敵をランダムに選定しそれに対して攻撃を放つ。＠が幻覚や盲目でも影響しない。*/
-/*:::ペットや味方は狙わないが巻き込む。*/
-/*:::method:1-ボルト 2-ビーム 3-ボール 4-軌跡の出ないボール*/
-/*:::5-大凶おみくじ　ボールだが自分も食らう*/
-//6 OPTフラグ設定ビーム
-/*:::range:@との距離 0なら通常視界範囲*/
-/*:::視界内にターゲットがいないときFALSE*/
-/*:::これを連打したとき途中でモンスターが全て倒れてFALSEが返ってもちゃんと行動順消費するよう気をつける*/
+/* 視界内の敵をランダムに選定しそれに対して攻撃を放つ。＠が幻覚や盲目でも影響しない。*/
+/* ペットや味方は狙わないが巻き込む。*/
+/* method:1-ボルト 2-ビーム 3-ボール 4-軌跡の出ないボール*/
+/* 5-大凶おみくじ　ボールだが自分も食らう 6-OPTフラグ設定ビーム
+/* 7-一番近くの敵のみを狙う
+/* range:@との距離 0なら通常視界範囲*/
+/* 視界内にターゲットがいないときFALSE*/
+/* これを連打したとき途中でモンスターが全て倒れてFALSEが返ってもちゃんと行動順消費するよう気をつける*/
 bool fire_random_target(int typ, int dam, int method, int rad, int range)
 {
 	int i;
 	monster_type *m_ptr;
 	int tmp_idx_cnt=0;
 	int target_who_tmp=0;
+	int min_dist = 999;
 
 	if(m_max < 2) return (FALSE);
 	for (i = 1; i < m_max; i++)
@@ -7915,8 +7922,30 @@ bool fire_random_target(int typ, int dam, int method, int rad, int range)
 		//v1.1.53 ボールが直接発生する系の攻撃は壁の中に出ない
 		if (method == 4 && rad > 0 && cave_have_flag_bold(m_ptr->fy, m_ptr->fx, FF_WALL)) continue;
 
-		tmp_idx_cnt++;
-		if(one_in_(tmp_idx_cnt)) target_who_tmp = i;
+		//一番距離の近い敵からランダムに選定
+		if (method == 7)
+		{
+			if (m_ptr->cdis > min_dist)
+				continue;
+			else if (m_ptr->cdis == min_dist)
+			{
+				tmp_idx_cnt++;
+				if (one_in_(tmp_idx_cnt)) target_who_tmp = i;
+			}
+			else
+			{
+				min_dist = m_ptr->cdis;
+				tmp_idx_cnt = 1;
+				target_who_tmp = i;
+			}
+		}
+		//視界内からランダムに選定
+		else
+		{
+			tmp_idx_cnt++;
+			if (one_in_(tmp_idx_cnt)) target_who_tmp = i;
+		}
+
 	}
 	if(!tmp_idx_cnt) return (FALSE);
 
@@ -7926,7 +7955,7 @@ bool fire_random_target(int typ, int dam, int method, int rad, int range)
 	target_col = m_ptr->fx;
 
 
-	if(method==1) return fire_bolt(typ,5,dam);
+	if(method==1 || method == 7) return fire_bolt(typ,5,dam);
 	else if(method==2)
 	{
 		if(range)	project_length = range;

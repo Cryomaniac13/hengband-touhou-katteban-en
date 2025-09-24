@@ -7463,20 +7463,20 @@ bool object_sort_comp(object_type *o_ptr, s32b o_value, object_type *j_ptr)
 	//v1.1.32 パチュリー専用性格「書痴」の例外処理
 	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI))
 	{
-		if (o_ptr->tval <= MAX_MAGIC && o_ptr->tval == j_ptr->tval)
+		if (o_ptr->tval <= MAX_BASIC_MAGIC_REALM && o_ptr->tval == j_ptr->tval)
 		{
 			if (o_ptr->sval < j_ptr->sval) return TRUE;
 			if (o_ptr->sval > j_ptr->sval) return FALSE;
 		}
-		else if (o_ptr->tval <= MAX_MAGIC)
+		else if (o_ptr->tval <= MAX_BASIC_MAGIC_REALM)
 		{
-			if (j_ptr->tval > MAX_MAGIC) return TRUE;
+			if (j_ptr->tval > MAX_BASIC_MAGIC_REALM) return TRUE;
 			else if (o_ptr->tval < j_ptr->tval) return TRUE;
 			else return FALSE;
 		}
-		else if (j_ptr->tval <= MAX_MAGIC)
+		else if (j_ptr->tval <= MAX_BASIC_MAGIC_REALM)
 		{
-			if (o_ptr->tval > MAX_MAGIC) return FALSE;
+			if (o_ptr->tval > MAX_BASIC_MAGIC_REALM) return FALSE;
 			else if (o_ptr->tval < j_ptr->tval) return TRUE;
 			else return FALSE;
 		}
@@ -7485,20 +7485,20 @@ bool object_sort_comp(object_type *o_ptr, s32b o_value, object_type *j_ptr)
 	else if(REALM_SPELLMASTER)
 	{
 
-		if(o_ptr->tval <= MAX_MAGIC && o_ptr->tval == j_ptr->tval)
+		if(o_ptr->tval <= MAX_BASIC_MAGIC_REALM && o_ptr->tval == j_ptr->tval)
 		{
 			if (o_ptr->sval < j_ptr->sval) return TRUE;
 			if (o_ptr->sval > j_ptr->sval) return FALSE;
 		}
-		else if(o_ptr->tval <= MAX_MAGIC && rp_ptr->realm_aptitude[o_ptr->tval] && cp_ptr->realm_aptitude[o_ptr->tval] )
+		else if(o_ptr->tval <= MAX_BASIC_MAGIC_REALM && rp_ptr->realm_aptitude[o_ptr->tval] && cp_ptr->realm_aptitude[o_ptr->tval] )
 		{
-			if(j_ptr->tval > MAX_MAGIC || rp_ptr->realm_aptitude[j_ptr->tval] == 0 || cp_ptr->realm_aptitude[j_ptr->tval] == 0 ) return TRUE;
+			if(j_ptr->tval > MAX_BASIC_MAGIC_REALM || rp_ptr->realm_aptitude[j_ptr->tval] == 0 || cp_ptr->realm_aptitude[j_ptr->tval] == 0 ) return TRUE;
 			else if(o_ptr->tval < j_ptr->tval) return TRUE;
 			else return FALSE;
 		}
-		else if(j_ptr->tval <= MAX_MAGIC && rp_ptr->realm_aptitude[j_ptr->tval] && cp_ptr->realm_aptitude[j_ptr->tval] )
+		else if(j_ptr->tval <= MAX_BASIC_MAGIC_REALM && rp_ptr->realm_aptitude[j_ptr->tval] && cp_ptr->realm_aptitude[j_ptr->tval] )
 		{
-			if(o_ptr->tval > MAX_MAGIC || rp_ptr->realm_aptitude[o_ptr->tval] == 0 || cp_ptr->realm_aptitude[o_ptr->tval] == 0 ) return FALSE;
+			if(o_ptr->tval > MAX_BASIC_MAGIC_REALM || rp_ptr->realm_aptitude[o_ptr->tval] == 0 || cp_ptr->realm_aptitude[o_ptr->tval] == 0 ) return FALSE;
 			else if(o_ptr->tval < j_ptr->tval) return TRUE;
 			else return FALSE;
 		}
@@ -8978,7 +8978,7 @@ static bool item_tester_hook_drain_essence(object_type *o_ptr)
 		 sv == SV_MATERIAL_HIHIIROKANE || sv == SV_MATERIAL_SCRAP_IRON || sv == SV_MATERIAL_ICESCALE  ||
 		 sv == SV_MATERIAL_NIGHTMARE_FRAGMENT || sv == SV_MATERIAL_HOPE_FRAGMENT ||
 		 sv == SV_MATERIAL_MYSTERIUM || sv == SV_MATERIAL_IZANAGIOBJECT || sv == SV_MATERIAL_RYUUZYU ||
-		 sv == SV_MATERIAL_ISHIZAKURA || sv == SV_MATERIAL_BROKEN_NEEDLE || sv == SV_MATERIAL_SKULL
+		 sv == SV_MATERIAL_ISHIZAKURA || sv == SV_MATERIAL_BROKEN_NEEDLE || sv == SV_MATERIAL_SKULL || sv == SV_MATERIAL_SAZAREISHI
 		 )) return (TRUE);
 
 		if(tv == TV_SOUVENIR && sv ==  SV_SOUVENIR_PHOENIX_FEATHER ) return (TRUE);
@@ -8997,6 +8997,8 @@ static bool item_tester_hook_drain_essence(object_type *o_ptr)
 		if(tv == TV_SOUVENIR && sv ==  SV_SOUVENIR_ILMENITE ) return (TRUE);
 		if(tv == TV_SOUVENIR && sv ==  SV_SOUVENIR_ASIA ) return (TRUE);
 		if (tv == TV_SOUVENIR && sv == SV_SOUVENIR_ELDER_THINGS_CRYSTAL) return (TRUE);//v1.1.89
+
+		if (tv == TV_STONE_INCIDENT) return(TRUE);
 
 	}
 
@@ -9893,6 +9895,15 @@ static void drain_essence(void)
 			add_flag(old_flgs, TR_RES_WATER);
 			o_ptr->to_a = 10;
 		}
+		else if (tv == TV_MATERIAL && sv == SV_MATERIAL_SAZAREISHI) //さざれ石　防御、カオス耐性、時空耐性、狂気耐性、耐久
+		{
+			add_flag(old_flgs, TR_RES_CHAOS);
+			add_flag(old_flgs, TR_RES_TIME);
+			add_flag(old_flgs, TR_RES_INSANITY);
+			add_flag(old_flgs, TR_CON);
+			o_ptr->to_a = 10;
+			o_ptr->pval = 2 + randint1(2);
+		}
 		else if(tv == TV_MATERIAL && sv == SV_MATERIAL_GELSEMIUM) //ゲルセミウム・エレガンス　カオス攻撃、毒殺、耐毒
 		{
 		 	add_flag(old_flgs, TR_BRAND_POIS);
@@ -10032,6 +10043,7 @@ static void drain_essence(void)
 			add_flag(old_flgs, TR_SLAY_UNDEAD);
 			add_flag(old_flgs, TR_SLAY_DEMON);
 		}
+
 		else
 		{
 			msg_print(_("ERROR:このアイテムのエッセンス抽出処理が定義されていない",
@@ -10039,7 +10051,52 @@ static void drain_essence(void)
 			return;
 		}
 	}
+	//v2.1.1 異変石からのエッセンス抽出
+	else if (o_ptr->tval == TV_STONE_INCIDENT)
+	{
+		for (i = 0; i < TR_FLAG_SIZE; i++) old_flgs[i] = 0L;
 
+		switch (o_ptr->sval)
+		{
+		case 0: //スカーレットデビル 吸血
+			add_flag(old_flgs, TR_VAMPIRIC);
+			break;
+		case 1: //クリーチャーレッド 加速
+			add_flag(old_flgs, TR_SPEED);
+			o_ptr->pval = 1;
+			break;
+
+		case 2: //スノーブロッサム 秩序スレイ
+			add_flag(old_flgs, TR_SLAY_GOOD);
+
+			break;
+		case 3: //ブルーシーズン 隠密
+			add_flag(old_flgs, TR_STEALTH);
+			o_ptr->pval = 1;
+
+			break;
+		case 4: //イエローサブタレイニアン テレパス
+			add_flag(old_flgs, TR_TELEPATHY);
+
+			break;
+		case 5: //インペリシャブルムーン 対邪スレイ
+			add_flag(old_flgs, TR_SLAY_EVIL);
+
+			break;
+		case 6: //ビーストハードネス　切れ味
+			add_flag(old_flgs, TR_VORPAL);
+
+			break;
+		case 7: //シントイズムウィンド　神格スレイ
+			add_flag(old_flgs, TR_SLAY_DEITY);
+
+			break;
+
+
+
+
+		}
+	}
 	else
 	{
 
@@ -10064,8 +10121,6 @@ static void drain_essence(void)
 	if (have_flag(old_flgs, TR_KILL_DEMON)) add_flag(old_flgs, TR_SLAY_DEMON);
 	if (have_flag(old_flgs, TR_KILL_KWAI)) add_flag(old_flgs, TR_SLAY_KWAI);
 	if (have_flag(old_flgs, TR_EX_VORPAL)) add_flag(old_flgs, TR_VORPAL);
-
-
 
 
 
@@ -12514,7 +12569,7 @@ bool generate_seven_star_sword(int mode)
                     "You have no intention of wielding weapons yourself."));
 		return FALSE;
 	}
-	if (p_ptr->pclass == CLASS_ENOKO)
+	if (p_ptr->pclass == CLASS_ENOKO && !is_special_seikaku(SEIKAKU_SPECIAL_ENOKO))
 	{
 		msg_print(_("トラバサミが邪魔で武器を持てない。", "You can't hold a weapon - your beartrap will get in the way."));
 		return FALSE;

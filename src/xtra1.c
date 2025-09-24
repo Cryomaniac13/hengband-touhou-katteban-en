@@ -516,7 +516,7 @@ static void prt_stat(int stat)
 #define BAR_KAIOUKEN	89
 #define BAR_HEAD_SHOT	90
 #define BAR_MANA_SHIELD 91
-#define BAR_SYURA 92
+#define BAR_ROB_MANA			92 //v2.1.1 —d–²ê—p‚ÌuC—…‚ÌŒŒv‚¾‚Á‚½‚ªˆÙ•Ï—Ìˆæ–‚–@uƒXƒJƒxƒ“ƒWƒ“ƒOv‚Æ‹¤—p‚µ‚Äu–‚—Í’DŽæv‚Æ•\Ž¦‚·‚é
 #define BAR_STATUE_FORM	93
 #define BAR_HELLFIRE_BARRIER	94
 #define BAR_ATTACK_VORPAL		95
@@ -533,7 +533,7 @@ static void prt_stat(int stat)
 #define BAR_SUPERSTEALTH_FOREST	106 //v1.1.88 –Ø‰B‚ê‚Ì‹Zp
 #define BAR_MOMOYO_EAT			107 //v1.1.89 •SX¢‚Ì‰½‚Æ‚©ƒC[ƒ^[
 #define BAR_TIM_AGGRAVATION		108 //v1.1.93 ˆêŽž”½Š´
-#define BAR_GLASS_SHIELD		109 //v1.1.94 ÉŽq‚Ì‚
+#define BAR_AMPLIFY_STONE		109 //v2.1.1 ˆÙ•ÏÎ‘•
 #define BAR_COUNTER				110
 #define BAR_LIFE_EXPLODE		111 //v2.0.1 ¶–½”š”­‚Ì–ò
 #define BAR_HIRARINUNO			112 //v2.0.1 ‚Ð‚ç‚è•z(ƒAƒrƒŠƒeƒBƒJ[ƒh)
@@ -543,6 +543,7 @@ static void prt_stat(int stat)
 #define BAR_VOID				116 //v2.0.17 Žc–³‹•–³‘€ì
 #define BAR_BEES				117 //v2.0.19 —{–I‰Æ‚Ì–I
 #define BAR_HIDE				118 //v2.1.0  ö•š
+#define BAR_RES_BLAST			119 //v2.1.1
 
 //‚±‚±‚Ì’l‚Í127‚ªŒ»Ý‚ÌŒÀŠE‚Å‚ ‚éB(v1.1.46‚Å95‚©‚çŠg’£)
 
@@ -649,7 +650,7 @@ static struct {
 	{TERM_RED, "ŠE", "ŠE‰¤Œ"},
 	{TERM_RED, "‘_", "Æ€"},
 	{TERM_L_BLUE, "–h", "Œ‹ŠEƒK[ƒh"},
-	{TERM_RED, "ŒŒ", "C—…‚ÌŒŒ"},
+	{TERM_RED, "’D", "–‚—Í’DŽæ"},
 	{TERM_L_DARK, "‘œ", "Î‘œ‰»"},
 
 	{TERM_L_DARK, "‹~", "‹~Ï"},
@@ -671,7 +672,7 @@ static struct {
 
 	{ TERM_RED, "‹ò", "–\H" },
 	{ TERM_RED, "“{", "”½Š´" },
-	{ TERM_WHITE, "‚", "ÉŽq‚Ì‚" },
+	{ TERM_L_GREEN, "‘", "ˆÙ•ÏÎ‘•" },
 	{ TERM_RED, "”½", "ƒJƒEƒ“ƒ^[" },
 	{ TERM_YELLOW, "”š", "¶–½”š”­" },
 	{ TERM_VIOLET, "•z", "‚Ð‚ç‚è•z" },
@@ -681,6 +682,7 @@ static struct {
 	{ TERM_L_DARK, "–³", "‹•–³‚Ì—Í" },
 	{ TERM_YELLOW, "–I", "–I‚ÌŒì‰q" },
 	{ TERM_L_DARK, "‰B", "ö•š" },
+	{ TERM_L_BLUE, "–h", "”š•—–hŒä" },
 
 
 	{0, NULL, NULL}
@@ -781,7 +783,7 @@ static struct {
 	{TERM_RED, "Kai", "Kaioken"},
 	{TERM_RED, "Aim", "Aim"},
 	{TERM_L_BLUE, "Def", "BarrGrd"},
-	{TERM_RED, "Bld", "AsuraBld"},
+	{TERM_RED, "Rob", "ManaRbbr"},
 	{TERM_L_DARK, "St", "Statue"},
 
 	{TERM_L_DARK, "Rlf", "Relief"},
@@ -803,7 +805,7 @@ static struct {
 
 	{ TERM_RED, "Eat", "Glutton" },
 	{ TERM_RED, "Agr", "Aggrav" },
-	{ TERM_WHITE, "GlS", "GlssShld" },
+	{ TERM_L_GREEN, "Amp", "StoneAmp" },
 	{ TERM_RED, "Ctr", "Counter" },
 
 	{ TERM_YELLOW, "Exp", "LifeExpl" },
@@ -814,6 +816,7 @@ static struct {
 	{ TERM_L_DARK, "Vd", "VoidPwr" },
 	{ TERM_YELLOW, "Bee", "BeeProt" },
 	{ TERM_L_DARK, "Ccl", "Conceal" },
+	{ TERM_L_BLUE, "Prt", "BlstProt" },
 
 
 	{0, NULL, NULL}
@@ -921,7 +924,7 @@ static void prt_status(void)
 
 	if (p_ptr->special_defense & NINJA_KAWARIMI) ADD_FLG(BAR_KAWARIMI);
 
-	if (p_ptr->special_defense & SD_GLASS_SHIELD) ADD_FLG(BAR_GLASS_SHIELD);
+	if (p_ptr->special_defense & SD_AMPLIFY_STONE) ADD_FLG(BAR_AMPLIFY_STONE);
 
 	/* Oppose Acid */
 	if (p_ptr->special_defense & DEFENSE_ACID) ADD_FLG(BAR_IMMACID);
@@ -1045,6 +1048,9 @@ static void prt_status(void)
 	//v1.1.93 ˆêŽž”½Š´
 	if (p_ptr->tim_aggravation)  ADD_FLG(BAR_TIM_AGGRAVATION);
 
+	//v2.1.1
+	if (p_ptr->tim_res_blast) ADD_FLG(BAR_RES_BLAST);
+
 
 	for(i=0;i<6;i++) if(p_ptr->tim_addstat_count[i])  ADD_FLG(BAR_EXSTAT);
 
@@ -1136,8 +1142,9 @@ static void prt_status(void)
 	if(p_ptr->pclass == CLASS_HECATIA && p_ptr->tim_general[0])
 		 ADD_FLG(BAR_HECATIA_MIRROR);
 
-	if(p_ptr->pclass == CLASS_YOUMU && p_ptr->tim_general[0])
-		 ADD_FLG(BAR_SYURA);
+
+	if(p_ptr->pclass == CLASS_YOUMU && p_ptr->tim_general[0] || p_ptr->tim_rob_mana)
+		 ADD_FLG(BAR_ROB_MANA);
 
 	if(p_ptr->special_attack & ATTACK_HEAD_SHOT)
 		 ADD_FLG(BAR_HEAD_SHOT);
@@ -1170,6 +1177,9 @@ static void prt_status(void)
 
 	if (p_ptr->pclass == CLASS_MIZUCHI && (p_ptr->tim_general[0]))
 		ADD_FLG(BAR_HIDE);
+
+
+
 
 
 	/* Hex spells */
@@ -6636,6 +6646,12 @@ void calc_bonuses(void)
 		if(plev > 39) p_ptr->resist_insanity = TRUE;
 
 		break;
+
+	case CLASS_UBAME:
+		p_ptr->resist_fear = TRUE;
+		if (plev > 29) p_ptr->warning = TRUE;
+		break;
+
 
 	default:
 		break;

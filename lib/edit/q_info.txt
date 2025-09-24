@@ -265,3 +265,12 @@
 #v2.0.13 ヤクザバトル2
 ?:[EQU $QUEST_NUMBER 73]
 %:quest73_t14_yakuza_battle2.txt
+
+#v2.1.1
+?:[EQU $QUEST_NUMBER 74]
+%:quest74_t01_deliver_sazareishi.txt
+
+?:[EQU $QUEST_NUMBER 75]
+%:quest75_t14_nina.txt
+
+

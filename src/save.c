@@ -1047,7 +1047,13 @@ static void wr_extra(void)
 	wr_s16b(p_ptr->hatate_mon_search_ridx);
 	wr_s16b(p_ptr->hatate_mon_search_dungeon);
 
-	for (i = 0; i < 14; i++)
+	//v2.1.1 future_use_s16b‚©‚ç3‚ÂŽg‚¤ 14¨11
+	wr_s16b(p_ptr->tim_res_blast);
+	wr_s16b(p_ptr->tim_rob_mana);
+	wr_s16b(p_ptr->tim_xxxxxx);
+
+
+	for (i = 0; i < 11; i++)
 		wr_s16b(p_ptr->future_use_s16b[i]);
 
 	for (i = 0; i < 8; i++)

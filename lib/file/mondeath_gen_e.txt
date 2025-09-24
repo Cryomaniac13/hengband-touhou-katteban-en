@@ -270,9 +270,11 @@ says, 'I'm tired, can I go home already?'
 says, 'I've run out of energy.'
 
 N:1297:Yorihime
-N:1298:Toyohime
 # 「ぎゃふん」
 gasps in disbelief.
+
+N:1298:
+#「後は、任せましたよ。私に会ったことは内緒にしてね」
 
 N:1299:Rei'sen
 # 「あの頃が懐かしい..」
@@ -423,6 +425,23 @@ says, 'I give, I give!'
 N:1388:Hisami
 # 「ああー強くて素敵だわー」
 says, 'Ahh, beautiful power.'
+
+N:1409:チミ
+#「これでも昔はのう...」
+
+N:1410:馴子
+#「神聖なる謎かけを冒涜しやがって...」
+
+N:1411:ユイマン
+#「また遊びに来てねー」
+#「今度、一緒に鹿狩りでもしましょ？」
+
+N:1412:阿梨夜
+#「貴方のお陰で、仕事を休めるわ。ありがとう」
+
+N:1413:ニナ
+#「まさか、真実が敗れるなんて」
+
 
 N:*:Default lines
 #Gensoukyou uniques have no default lines

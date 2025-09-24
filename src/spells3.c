@@ -4834,7 +4834,7 @@ int mod_need_mana(int need_mana, int spell, int realm)
 
 	/* Realm magic */
 	//if ((realm > REALM_NONE) && (realm <= MAX_REALM))
-	if (realm <= TV_BOOK_CHAOS || realm == TV_BOOK_OCCULT)
+	if (realm <= MAX_BASIC_MAGIC_REALM || realm == TV_BOOK_OCCULT || realm == TV_STONE_INCIDENT)
 	{
 		/*
 		 * need_mana defaults if spell exp equals SPELL_EXP_EXPERT and !p_ptr->dec_mana.
@@ -4924,7 +4924,7 @@ s16b spell_chance(int spell, int use_realm)
 
 
 	//v1.1.32 パチュリー専用性格「書痴」の例外処理
-	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_MAGIC);
+	if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_BASIC_MAGIC_REALM);
 	/* Paranoia -- must be literate */
 	//if (!mp_ptr->spell_book) return (100);
 	else if (cp_ptr->realm_aptitude[0] == 0) return (100);
@@ -5113,7 +5113,7 @@ bool spell_okay(int spell, bool learned, bool study_pray, int use_realm)
 		if( (REALM_SPELLMASTER) && cp_ptr->realm_aptitude[use_realm] !=0 ) return (TRUE);
 
 		//v1.1.32 パチュリー専用性格「書痴」の例外処理
-		if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_MAGIC)
+		if (is_special_seikaku(SEIKAKU_SPECIAL_PATCHOULI) && use_realm <= MAX_BASIC_MAGIC_REALM)
 			return TRUE;
 
 	/* Spell is learned */
@@ -7977,7 +7977,7 @@ bool energy_drain(void)
 
 //v1.1.86 壁抜けテレポ
 //紫特技だけでなくアビリティカードでもできるようにするために別関数に分離
-//秘術の隙間女はちょっと動作が違う。そのうち統合すべきかも
+//怪異の隙間女はちょっと動作が違う。そのうち統合すべきかも
 //mode:テレポートモード　統合に備えて値だけ作っとく
 //行動順消費しないときFALSE
 bool wall_through_telepo(int mode)
@@ -8318,9 +8318,11 @@ bool rokuro_head_search_item(int v, bool flag_stop)
 
 
 /*:::宝石(珍品は含まない)*/
+//v2.1.1 異変石も含む
 bool item_tester_hook_jewel(object_type *o_ptr)
 {
 	int sv = o_ptr->sval;
+	if (o_ptr->tval == TV_STONE_INCIDENT) return TRUE;
 	if (o_ptr->tval != TV_MATERIAL) return FALSE;
 
 	if (sv == SV_MATERIAL_GARNET || sv == SV_MATERIAL_AMETHYST || sv == SV_MATERIAL_AQUAMARINE ||
@@ -8351,36 +8353,46 @@ bool eat_jewel(void)
 	if (item >= 0) o_ptr = &inventory[item];
 	else o_ptr = &o_list[0 - item];
 
-	if (o_ptr->tval != TV_MATERIAL)
-	{
-		msg_print(_("ERROR:魔力食いで素材以外が選択された", "ERROR: Non-material picked for mana eating"));
-		return FALSE;
-	}
-	switch (o_ptr->sval)
-	{
-	case SV_MATERIAL_GARNET:
-	case SV_MATERIAL_AMETHYST:
-	case SV_MATERIAL_AQUAMARINE:
-	case SV_MATERIAL_MOONSTONE:
-	case SV_MATERIAL_PERIDOT:
-	case SV_MATERIAL_OPAL:
-	case SV_MATERIAL_TOPAZ:
-	case SV_MATERIAL_LAPISLAZULI:
-		mag = 100 + randint1(100);
-		break;
-	case SV_MATERIAL_SAPPHIRE:
-	case SV_MATERIAL_EMERALD:
-	case SV_MATERIAL_RUBY:
-	case SV_MATERIAL_RYUUZYU:
-		mag = 300 + randint1(300);
-		break;
-	case SV_MATERIAL_DIAMOND:
-		mag = 1000;
-		break;
 
-		break;
-	default:
-		msg_print(_("ERROR:魔力食いで登録されていないアイテムが選択された", "ERROR: Unregistered item picked for mana eating."));
+	if (o_ptr->tval == TV_STONE_INCIDENT)
+	{
+		mag = 500;
+
+	}
+	else if (o_ptr->tval == TV_MATERIAL)
+	{
+		switch (o_ptr->sval)
+		{
+		case SV_MATERIAL_GARNET:
+		case SV_MATERIAL_AMETHYST:
+		case SV_MATERIAL_AQUAMARINE:
+		case SV_MATERIAL_MOONSTONE:
+		case SV_MATERIAL_PERIDOT:
+		case SV_MATERIAL_OPAL:
+		case SV_MATERIAL_TOPAZ:
+		case SV_MATERIAL_LAPISLAZULI:
+			mag = 100 + randint1(100);
+			break;
+		case SV_MATERIAL_SAPPHIRE:
+		case SV_MATERIAL_EMERALD:
+		case SV_MATERIAL_RUBY:
+		case SV_MATERIAL_RYUUZYU:
+
+			mag = 300 + randint1(300);
+			break;
+		case SV_MATERIAL_DIAMOND:
+			mag = 1000;
+			break;
+
+			break;
+		default:
+			msg_print(_("ERROR:魔力食いで登録されていないアイテムが選択された", "ERROR: Unregistered item picked for mana eating."));
+			return FALSE;
+		}
+	}
+	else
+	{
+		msg_print(_("ERROR:魔力食いで素材以外が選択された", "ERROR: Non-material picked for mana eating."));
 		return FALSE;
 	}
 

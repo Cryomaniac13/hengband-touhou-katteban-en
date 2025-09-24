@@ -4244,9 +4244,15 @@ note = "には耐性がある！";
 #ifdef JP
 note = "の皮膚がただれた！";
 note_dies = "は蒸発した！";
+
+			if(is_gen_unique(m_ptr->r_idx)) note_dies = "は目を回して倒れた。";
+
 #else
 				note = " loses some skin!";
 				note_dies = " evaporates!";
+
+			if(is_gen_unique(m_ptr->r_idx)) note_dies = " spins around and collapses.";
+
 #endif
 
 				dam *= 2;
@@ -6215,9 +6221,13 @@ note_dies = "は光を受けて倒れた！";
 			///sysdel dead
 note = "の皮膚がただれた！";
 note_dies = "は溶けた！";
+if (is_gen_unique(m_ptr->r_idx)) note_dies = "は目を回して倒れた。";
+
 #else
 				note = " loses some skin!";
 				note_dies = " dissolves!";
+if (is_gen_unique(m_ptr->r_idx)) note_dies = " spins around and collapses.";
+
 #endif
 
 			}
@@ -7329,7 +7339,7 @@ note_dies = "は倒れた。";
 			if ((p_ptr->inside_quest && (quest[p_ptr->inside_quest].type == QUEST_TYPE_KILL_ALL) && !is_pet(m_ptr)) ||
 			    (r_ptr->flags1 & (RF1_UNIQUE)) || (r_ptr->flags7 & (RF7_NAZGUL)) || (r_ptr->flags7 & (RF7_VARIABLE))
 				|| (r_ptr->flags7 & (RF7_UNIQUE2)) || (r_ptr->flags1 & RF1_QUESTOR) || (m_ptr->mflag & MFLAG_EPHEMERA)
-				|| m_ptr->parent_m_idx || (r_ptr->flags7 & (RF7_FORCE_GO_STRAIGHT)))
+				|| m_ptr->parent_m_idx || (r_ptr->flags7 & (RF7_FORCE_GO_STRAIGHT)) || (r_ptr->flags7 & (RF7_ONLY_RIDING)))
 			{
 #ifdef JP
 				msg_format("%sには効果がなかった。",m_name);
@@ -14465,7 +14475,8 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 			{
 				break;
 			}
-			else if(check_activated_nameless_arts(JKF1_EXPLOSION_DEF) && rad > 0 && !breath)
+			//爆風防御　ブレスは防げないが自分が壁か森にいて敵が隣接している状態でブレスを吐かれた場合上の方でbreathフラグがFALSEになるので半減の対象になる。まあいいか
+			else if((check_activated_nameless_arts(JKF1_EXPLOSION_DEF) || p_ptr->tim_res_blast)&& rad > 0 && !breath)
 			{
 				msg_print(_("あなたは攻撃に対しいくらかの耐性を示した。", "You somewhat resist the attack."));
 				effective_dist++;
