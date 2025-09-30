@@ -3531,7 +3531,7 @@ void do_cmd_macros(void)
 
 
 			/* Default filename */
-			sprintf(tmp, "%s.prf", player_base);
+			sprintf(tmp, "%s.prf", savefile_base);
 
 			/* Ask for a file */
 			if (!askfor(tmp, 80)) continue;

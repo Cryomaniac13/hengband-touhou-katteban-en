@@ -59,7 +59,7 @@ Like normal text editor, you can move the cursor by Left, Right, Up,
 Down arrow keys, and Home, End, PageUp, and PageDown keys.  And any
 letter keys pressed are written as a text.
 
-Press ^W to finish the edito.  All changes will be saved automatically.
+Press ^W to finish editing.  All changes will be saved automatically.
 Or press ^Q to quit and discard all changes.
 
 Press ESC to open a command menu.
@@ -330,274 +330,235 @@ Dagger (1d4) (+3,+2)            ->   [[[[R|(!nameless weapons:^dagger|
 Dagger (1d4) {excellent}        ->   [[[[R|(!ego weapons:dagger|
 Dagger of Foxfire (1d4) (+2,+5) ->   [[[[R|(!common ego weapons:of foxfire|
 
-自動登録された設定を取り消したり編集する場合は、自動拾いエディタを使い
-ます。一番最後に追加されているので、[[[[o|End|キーで移動すると便利でしょう。
-自動登録の内容は自動拾いエディタの中では[[[[R|赤い文字|で表示されます。
+To edit or remove auto-registered items, use the editor.
+As the entries are appended to the end of the file, they can be quickly accessed
+via the [[[[o|End| key. Auto-registered entries are displayed in [[[[R|red text|.
 
-例えばこのようになります。
+Here's an example of what it looks like.
 [[[[D|--------------------------------------------------------------------------------
 [[[[R|?:$AUTOREGISTER
-[[[[R|# *警告!!* 以降の行は自動登録されたものです。
-[[[[R|# 後で自動的に削除されますので、必要な行は上の方へ移動しておいてください。
-[[[[R|(!無銘の武器:^ダガー
-[[[[R|(!魔法アイテム:^トラップ感知の巻物
-[[[[R|(!^スライムモルド
+[[[[R|# *Waring!* The lines below will be deleated later.
+[[[[R|# Keep it by cut & paste if you need these lines for future characters.
+[[[[R|(!nameless weapons:^dagger
+[[[[R|(!magical devices:^scroll of trap detection
+[[[[R|(!^slime mold
 [[[[D|--------------------------------------------------------------------------------
-この赤い文字表示は自動登録された内容が有効期限付きである事を示す警告で
-す。つまり、現在プレイ中のキャラクターが死亡して次のキャラクターを始め
-た時にはこの赤い文字の部分だけが全て削除されます。
 
+The red text warns that the auto-registered entries will expire. When your
+character dies and you start a new one, the red entries will be deleted.
 
-もし有効期限をキャンセルして、次以降のキャラクターでも永久に(再びあな
-たが編集するまで)同じ設定を使いたい時は、必要な設定行を
-「[[[[R|?:$AUTOREGISTER|」という行より上に移動してください。
+If you want to keep the auto-registered lines until you manually remove them,
+move the desired line above the [[[[R|?:$AUTOREGISTER| line. The [[[[o|cut(^X)|
+and [[[[o|paste(^V)| commands can be used to do this. For example, the slime
+mold line below will turn white after it's been moved in this way.
 
-例えば、「[[[[R|(!^スライムモルド|」の行にカーソルを移動して、[[[[o|カット(^X)|を実行
-し、次に「[[[[R|?:$AUTOREGISTER|」の行より上にカーソルを移動して[[[[o|ペースト(^V)|
-を実行すれば、以下のように行の順番が入れ換わり、「(!^スライムモルド」が
-白い文字に変わります。
 [[[[D|--------------------------------------------------------------------------------
-(!^スライムモルド
+(!^slime mold
 [[[[R|?:$AUTOREGISTER
-[[[[R|# *警告!!* 以降の行は自動登録されたものです。
-[[[[R|# 後で自動的に削除されますので、必要な行は上の方へ移動しておいてください
-[[[[R|(!無銘の武器:^ダガー
-[[[[R|(!魔法アイテム:^トラップ感知の巻物
+[[[[R|# *Waring!* The lines below will be deleated later.
+[[[[R|# Keep it by cut & paste if you need these lines for future characters.
+[[[[R|(!nameless weapons:^dagger
+[[[[R|(!magical devices:^scroll of trap detection
 [[[[D|--------------------------------------------------------------------------------
-これで、スライムモルドの自動破壊のみ次以降のキャラクターでも登録された
-ままになります。有効期限が定められているのは赤い文字で表示された行だけ
-なのです。
+Now the slime mold line will remain for future characters.
 
 
 
 ***** <AutopickFormat>
 [[[[G|====  Format of Auto-picker/destroyer  ====
 
-ユーザーディレクトリに"picktype.prf"又は "picktype-<名前>.prf" という
-ファイルを作って各行にアイテムの名前を書くと、変愚蛮怒にそのアイテムを
-自動的に拾ったり破壊するように指示する事ができます。
+Putting the file "pickpref.prf" or "pickpref-<name>.prf" in the
+lib/user folder will cause it to be automatically loaded by the game.
 
-この設定ファイルは以下のタイミングで読み込まれます。
-●ゲームを始める時。
-●自動拾いエディタを終了した時。
-●レベル/魔法領域/種族のどれかが変わった時。
-●「$」コマンドを使った時。(外部のエディタで設定を書き変えた時に使用)
+This file is accessed when:
+ When the game starts
+ When the editor is closed
+ When your level, magic realm or race changes
+ When the [[[[o|$| command is used
 
-設定ファイルの具体例は (lib/pref/picktype.prf [k]) を参照してください。
-
-
---- 自動拾い/破壊の基本書式 ---
-
-基本的に、名前の一部にファイルに書いた文字列が含まれていれば、そのアイ
-テムを自動的に拾います。ただし行の先頭に…、
-
-「!」がついている場合はそのアイテムを[[[[o|自動的に破壊|します。
-「~」がついている場合は拾いも破壊もせずに[[[[o|床に残します|。
-「;」がついている場合は[[[[o|拾う前に確認|メッセージが出ます。
-「(」がついている場合は全体図「M」コマンド中での[[[[o|表示を抑止|します。
-
-picktype.prf の先頭から順番に優先的に評価するので、不要なものの破壊の
-設定の下にその他のアイテムを拾う設定を書いたり、比較的高級なアイテムを
-放置する設定の下にその他の低質なアイテムを破壊する設定を書くのが便利な
-方法です。
-
-自動拾いや破壊や放置として設定されたアイテムは、「(」で抑止されない限
-り[[[[o|ダンジョンの全体図「M」コマンド|の中でその位置と名前を表示する事がで
-きます。設定コマンドの説明(jcommdesc.txt#Looking [z])のダンジョンの全
-体図を表示を参照してください。
-
-***** [z] jcommdesc.txt#Looking
-
---- 特別なキーワード ---
-
-各行の以下のようなキーワードで始まるものは特別扱いになります。
-
-・すべての～        : すべてのアイテムが対象になります。
-・収集中の～        : 既に同じ種類の物を持っているアイテム
-・未判明の～        : 効果の分からないアイテム
-・鑑定済みの～      : 鑑定されているアイテム
-・*鑑定*済みの～    : *鑑定*されているアイテム
-・ダイス目の違う～  : 殺戮の武器等でダイスの目が通常と異なるアイテム
-・ダイス目n以上の～ : ダイス数×面数が n 以上のアイテム
-・修正値n以上の～   : 能力修正値が(+n)以上のアイテム
-                      能力修正が無い場合は他の数値が+n以上なら対象になります。
-・無価値の～        : 価値のない(売却できない)アイテム
-・アーティファクト～: 判明しているアーティファクト
-・エゴ～            : 判明しているエゴ装備
-・上質の～          : {上質}の装備
-・無銘の～          : 非エゴ, 非アーティファクトの装備
-・並の～            : {並}の装備
-・レアな～          : ドラゴン防具等の珍しいベースアイテムの装備
-・ありふれた～      : ドラゴン防具等以外の普通のベースアイテムの装備
-・読めない～        : 専門としない魔法領域の魔法書
-・第一領域の～      : 第一領域の魔法書
-・第二領域の～      : 第二領域の魔法書
-・n冊目の～         : nが1から4のとき、n冊目の魔法書
-
-～の部分では、アイテムの種類を表す以下のようなキーワードが特別扱いになります
-
-・アイテム          : すべてのアイテムが対象になります。
-・武器              : 武器が対象になります。
-・防具              : 防具が対象になります。
-・矢                : 矢、クロスボウの矢、石、弾
-・魔法アイテム      : 巻物・杖・魔法棒・ロッド
-・魔法書            : 魔法書、武芸の書、歌集
-・リボン            : リボン枠の装備品
-・酒                : 酒カテゴリのアイテム
-・珍品              : 珍品カテゴリのアイテム
-・カード            : 難易度EXTRAで手に入るアイテムカード
-
-他に部位別の装備品を対象とするキーワード:
- 盾、弓、指輪、アミュレット、光源、鎧、クローク、兜、籠手、靴
-が使用できます。
-
-この後に区切り記号のコロン「:」を挟んでさらに文字列が続く場合は、その
-文字列が名前の一部に含まれているアイテムが対象になります。ここで、アイ
-テムの種類を表すキーワード(アイテム、武器、防具等) を使用しない場合は
-区切り記号は省略できます。また、文字列の頭に記号「^」を入れるとそれは
-アイテム名の先頭部分に一致します。具体的には以下のように解釈されます。
-
-光源:石          // 名前に"石"を含む光源を拾う。「光源石」 は使用不可。
-籠手:腕力の      // 腕力のガントレットを拾うが、腕力の指輪は拾わない。
-!ローブ          // 名前に"ローブ"を含むもの(ローブ、グローブ等)を破壊。
-!^ローブ         // グローブは破壊しない。
-!防具:^耐        // 耐火、耐冷、耐電、耐酸の防具を破壊。全耐性は破壊しない。
-
-また、行の最後に # で始まる文字列を書くと、鑑定したりアイテムの
-上に立った瞬間に自動的にその文字列がアイテムに刻まれます。
+See [[[[o|lib/pref/pickpref.prf| [[[[G|[k]| for the example file.
 
 
---- 厳密な書式 ---
+--- Basic formatting ---
 
-各行の厳密な書式は以下のような順番です。未鑑定の や ダイス目の違う 等
-のキーワードは一行に並べて書く事で両方の制限を適用させる事が出来ます。
-現在のバージョンではキーワードの順番も自由です。
+By default, items are picked up automatically.
 
- [! ~ ; (]
- [[すべての] [収集中の]
-  [未判明の] [未鑑定の] [鑑定済みの] [*鑑定*済みの]
-  [アーティファクト] [エゴ] [上質の] [無銘の] [並の] 
-  [無価値の] [レアな] [ありふれた]
-  [ダイス目の違う] [ダイス目n以上の] [修正値n以上の]
-  [賞金首の] [ユニーク・モンスターの] [人間の]
-  [読めない] [第一領域の] [第二領域の] [n冊目の]
-  [アイテム|アーティファクト|武器|得意武器|防具|矢|魔法アイテム|
-   がらくた|死体や骨|魔法書|鈍器|盾|弓|指輪|アミュレット|光源|鎧|
-   クローク|兜|籠手|靴] :]
- [[^]その他の文字列] [#自動刻み文字列]
+[[[[o|!| Automatically destroys items.
+[[[[o|~| Leaves items on the floor.
+[[[[o|;| Prompts for confirmation before picking up.
+[[[[o|(| Hides the item from the overview on the [[[[o|M| overhead map
 
+Items are evaluated top to bottom, so an item that matches a line for
+pick up and a line for destroy will be affected by the highest one.
+
+Valid items will appear on the [[[[o|M| overhead map unless they are also
+marked with (. Items set to be automatically picked up will appear on
+the overhead map by default, items set to be destroyed will appear with
+[[[[o|K|), and items set to be left on the floor will appear with [[[[o|N|.
+
+--- Special Keywords ---
+
+beginning an entry with any of the following keywords narrows its conditions.
+
+ all ~                : applies to all items
+ collecting ~         : applies to items you already have
+ unaware ~            : applies to non-pseudo-identified items
+ unidentified ~       : applies to unidentified items
+ identified ~         : applies to identified items
+ *identified* ~       : applies to *identified* items
+ dice boosted ~       : applies to weapons with increased dice values
+ more than (n) dice ~ : applies to weapons with (n) or more dice
+ more bonus than (n) ~: applies to items with (n) or more pval
+                        if there isn't a pval, other values are checked
+ worthless ~          : applies to items with no sell value
+ artifact ~           : applies to known artifacts
+ ego ~                : applies to known ego items
+ good ~               : applies to (good) items
+ unnamed ~            : applies to non-ego, non-artifacts
+ average ~            : applies to (average) items
+ rare ~               : applies to rare base item types such as dragon armour
+ common ~             : applies to non-rare base item types
+ unreadable ~         : applies to books not in any of your magic realms
+ first realm's ~      : applies to books in your first magic realm
+ second realm's ~     : applies to books in your second magic realm
+ first, second, etc   : applies to spellbook tiers
+
+The [[[[o|~| in the above should be replaced with one of the following,
+which designate item types.
+
+ items                : any kind of item
+ weapons              : all weapons
+ favorite weapons     : favoured weapon type for the current class
+ hafted weapons       : blunt weapons
+ armors               : armours
+ missiles             : arrows, bolts, stones, bullets
+ magical devices      : scrolls, staves, rods, wands
+ lights               : light sources
+ guns                 : guns
+ materials            : materials used for crafting or catalysts
+ spellbooks           : spellbooks
+ ribbons              : ribbons
+ shields              : shields
+ bows                 : bows and crossbows
+ rings                : rings
+ amulets              : amulets
+ suits                : maid and butler suits
+ cloaks               : cloaks
+ helms                : helms
+ gloves               : gloves
+ boots                : boots
+ sweets               : manju, cookies etc
+ soft drinks          : water, slime mold juice, fruit juice
+ alcohol              : alcohol
+ cards                : cards found in EXTRA mode
+ souvenirs            : strange items that can be exchanged for gold
+
+If a [[[[o|:| is placed between the keywords and a string, the selection
+will be narrowed to items whose name contains that string. If no keyword is used,
+the colon can be omitted and all of the text will be counted as a name string.
+Starting the string with [[[[o|^| will match only the beginning of the name.
+
+lights:stone    // picks up any light with "stone" in its name
+!maid           // destroys everything with "maid" in its name
+!armors:maid    // destroys armors with "maid" in the name,
+                   including shrine maiden clothes
+!armors:^maid   // destroys maid uniforms, doesn't destroy shrine maiden clothes
+
+Adding [[[[o|#| after a string will automatically engrave the following characters
+onto the item.
+
+staff of speed#!k!d@us // picks up all staves of speed and engraves them with !k!d@us
+
+--- Formatting ---
+
+Keywords can be combined to apply multiple conditions at once.
+They can be written in any order.
+The overall order of operations goes like this:
+
+First:    ! ~ ; (
+Second:   <keywords>
+Third:    :
+Fourth:   ^ <string> # <inscription>
 
 ***** <ConditionFormat>
-[[[[G|===  条件式の書式仕様  ===
+[[[[G|===  Conditional expressions  ===
 
-全てのユーザー設定ファイルは、種族や職業、レベル等に条件を付けて設定す
-ることが出来ます。特に自動拾いやマクロの設定に利用すると便利です。
+All user settings files can be configured with conditional expressions
+for race, class etc. This can be particularly useful for auto-pickup and
+macros.
 
+---  Formatting conditional expressions  ---
 
----  条件分岐の書式  ---
+?:<variable>
 
-?:引数
+   "0" is false
+   "1" or any other value is true
 
-   引数が"0"なら以降の自動拾い／破壊の登録をスキップする。
-   引数が"1"なら以降の登録を行う。 引数が"0"以外は全て"1"と見なす。
+Branches cannot be nested, but some expressions can include other expressions. See below.
 
- (注意!)条件分岐を入れ子にすることは出来ません。
+---  Operators  ---
 
+[EQU <variable1> <variable2> ...]
+   True if all variables match.
 
----  使用可能な演算子  ---
+[GEQ <variable1> <variable2> ...]
+   True if variable1 is greater than or equal to variable2.
 
-特別な文字列といくつかの引数のリストを'['と']'で囲むと演算子として
-の働きをして、結果が真 "1" であるか、 偽 "0" であるかを返します。
+[LEQ <variable1> <variable2> ...]
+   True if variable1 is less than or equal to variable2.
 
-[EQU 引数１ 引数２ ...]
-   引数１と他のどれかの引数が等しいと"1"、どれも等しくないと"0"を返す。
+[IOR [<expression1>] [<expression2>] ...]
+   Inclusive OR, logical sum.
+   True if any of the contained expressions are true.
 
-[IOR 引数１ 引数２ ...]
-[AND 引数１ 引数２ ...]
-   IORは引数の論理和、ANDは引数の論理積をとって真なら"1"、偽なら"0"を
-   返す。
+[NOT [<expression1>] [<expression2>] ...]
+   True if any of the contained expressions are false.
 
-[NOT 引数]
-   引数が"1"なら"0"、"0"なら"1"を返す。
+[AND [<expression1>] [<expression2>] ...]
+   Logical AND, conjunction.
+   True if all of the contained expressions are true.
 
-[LEQ 引数１ 引数２ ...]
-[GEQ 引数１ 引数２ ...]
+---  Variables  ---
 
-   LEQは引数の大きさを数値として比較して引数１≦引数２≦...のとき"1"を
-   返す。GEQは引数１≧引数２≧...のとき"1"を返す。
-
-
----  変数説明  ---
-
-条件判定文の中で、'$'で始まるいくつかの文字列は自動的にキャラクターの
-状態を表わす文字列に置き変えられます。
+In conditionals, these tokens beginning with [[[[o|$| will return values from the
+current state of your character.
 
 $RACE
-   種族を英語名で返す。
-   Human, Half-Elf, Elf, Hobbit, Gnome, Dwarf, Half-Orc, Half-Troll,
-   Amberite, High-Elf, Barbarian, Half-Ogre, Half-Giant, Half-Titan,
-   Cyclops, Yeek, Klackon, Kobold, Nibelung, Dark-Elf, Draconian,
-   Mindflayer, Imp, Golem, Skeleton, Zombie, Vampire, Spectre, Sprite,
-   Beastman, Ent, Archon, Balrog, Dunadan, Shadow-Fairy, Kutar,
-   Android
-   のどれか
-   
-   勝手版では 「~」コマンド →「a」で「自分に関する情報」を見ることで種族と職業の英語表記を知ることができます。
-   また自動拾いのメニューから「色々挿入」→「条件分岐ブロックの例を挿入」を入力することによっても確認ができます。
+   The player's race, as displayed on the [[[[o|C| screen or the [[[[o|~a| screen.
 
 $CLASS
-   職業を英語名で返す。
-   Warrior, Mage, Priest, Rogue, Ranger, Paladin, Warrior-Mage,
-   Chaos-Warrior, Monk, Mindcrafter, High-Mage, Tourist, Imitator,
-   BeastMaster, Sorcerer, Archer, Magic-Eater, Bard, Red-Mage,
-   Samurai, ForceTrainer, Blue-Mage, Cavalry, Berserker, Weaponsmith,
-   Mirror-Master, Ninja, Sniper
-   のどれか
+   The player's class, as displayed on the [[[[o|C| screen or the [[[[o|~a| screen.
 
 $PLAYER
-   プレイヤーの名前を返す。ただし、' '(スペース)、'['、']'は
-   prefの制約でそのまま使えないため、'_'に置き換えて返す。
-   例: 名前が"[ Temp ]"ならば、$PLAYERは"__Temp__"を返す。
+   The player's name. Spaces and square brackets are replaced with a [[[[o|_|.
 
 $REALM1
-   魔法領域を英語名で返す。
-   Life, Sorcery, Nature, Chaos, Death, Trump Arcane, Craft, Daemon,
-   Crusade, Music, Kendo, Hex
-   のどれか
-   
-   勝手版での魔法領域英語名は以下のようになっています。
-   元素:Element
-   予見:Foreseeing
-   付与:Enchant
-   召喚:Summon
-   神秘:Mystic
-   生命:Life
-   破邪:Punish
-   自然:Nature
-   変容:Transform
-   暗黒:Darkness
-   死霊:Necromancy
-   混沌:Chaos
-   武芸:Sword
-   調剤:Makedrug
-   秘術:Occult
+   The player's first magic realm.
+   Elements, Divination, Enchantment, Summoning, Mysticism, Life, Exorcism,
+   Nature, Transformation, Darkness, Necromancy, Chaos, Swordsmanship,
+   Pharmacy, or Occult.
  
 $REALM2
-   第２魔法領域を英語名で返す。
+   The player's second magic realm.
 
 $LEVEL
-   プレイヤーのレベルを２桁の文字列で返す。
-   "01","09","10","50" 等
+   The player's level. Returns two digits.
+   "01","09","10","50" etc
 
 $MONEY
-   プレイヤーの所持金を９桁の文字列で返す。
-   "000012345" 等
+   The player's money. Returns nine digits.
+   "000012345" etc
 
----  ファイルの挿入の書式  ---
+$EXTRA_MODE
+   Returns ON during EXTRA mode, or OFF otherwise.
 
-%:ファイル名
-   「lib\user\ファイル名」 か 「~/.angband/Hengband/ファイル名」 を自
-   動拾いの登録ファイルとして読み込みます。
+$BERSERKER
+   Returns ON if player has the Berserk personality, or OFF otherwise.
+
+---  Linking external files  ---
+
+%:[[[[o|filename|
+   Loads lib\user\[[[[o|filename| as an additional part of the automatic pickup rules.
 
 
 
