@@ -3,12 +3,6 @@
 #=================================================#
 
 #
-# Pick up all wanted corpses for bounty hunting.
-# And inscribe {Wanted} on it.
-#
-wanted corpses or skeletons#Wanted
-
-#
 # Pick up all magical items with unknown effects.
 #
 unaware items
@@ -43,40 +37,53 @@ potion of speed#!k
 # Pick up important magical scrolls,
 # unless you are a Berserker who cannot read scrolls.
 #
-?:[NOT [EQU $CLASS Berserker]]
+?:[NOT [EQU $BERSERKER ON]]
 scroll of artifact creation
 scroll of *destruction*
-scroll of mass genocide
-scroll of genocide
+scroll of banish nearby
+scroll of banishment
 ?:1
 
 #
-# Auto-destroy some junk juice.
+# Youkai-Foxes restore MP when eating tofu.
 #
-!potion of apple juice
+?:[EQU $RACE Youkai-Fox]
+fried tofu
+?:1
 
-?:[EQU $CLASS Archer]
-# Archers pick up all bones to create arrows from it.
-junks:^broken skull
-junks:^broken bone
-corpses or skeletons:skeleton
+#
+# Auto-destroy soft drinks if you have no use for them.
+# Mysticism users can turn soft drinks into spirit sake,
+# so instead collect them.
+#
+?:[NOT [IOR [EQU $REALM1 Mysticism] [EQU $REALM2 Mysticism]]]
+!soft drinks:slime mold juice
+!soft drinks:water
+!soft drinks:grape juice
+!soft drinks:apple juice
 
-?:[EQU $CLASS Magic-Eater]
+?:[IOR [EQU $REALM1 Mysticism] [EQU $REALM2 Mysticism]]
+soft drinks:slime mold juice
+soft drinks:water
+soft drinks:grape juice
+soft drinks:apple juice
+?:1
+
+#
 # Magic-Eaters pick up magical devices to absorb its magical power.
+#
+?:[EQU $CLASS Magic-Eater]
 magical devices:rod
 magical devices:staff
 magical devices:wand
+?:1
 
+#
+# Ninja want darkness sources instead of light.
+#
 ?:[EQU $CLASS Ninja]
-# Ninja use a Light source of Darkness.
 (~ego lights:of darkness
-
-# Ninja throw Iron Spikes as Shuriken. 
-Iron Spike#@v0
-
-# Define a macro to throw Iron Spikes on pressing the TAB key.
-A:\s\s\s\s\\v0*t
-P:\t
+(~magical devices:darkness
 ?:1
 
 #
