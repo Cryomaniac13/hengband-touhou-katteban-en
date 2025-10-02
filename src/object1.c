@@ -641,6 +641,132 @@ return "モンスターを捕える、又は解放する。";
 #endif
 }
 
+/*
+ * Returns a string describing chance of successfull activation
+ * Applies to magic devices and activateable items
+ *
+ */
+static cptr item_activation_chance(object_type *o_ptr)
+{
+	static char chance_detail[256];
+
+	int lev, chance;
+	int total_chance, success_chance;
+
+	u32b flgs[TR_FLAG_SIZE];
+
+	/* Extract the flags */
+	object_flags(o_ptr, flgs);
+
+	if((p_ptr->pclass == CLASS_HIGH_MAGE && p_ptr->lev > 39 && p_ptr->realm1 == TV_BOOK_ENCHANT) ||
+	   (p_ptr->pclass == CLASS_CLOWNPIECE && o_ptr->name1 == ART_CLOWNPIECE) ||
+	   (p_ptr->pclass == CLASS_VFS_CLOWNPIECE && o_ptr->name1 == ART_CLOWNPIECE))
+	{
+		return "You are guaranteed to successfully activate this item.";
+	}
+
+	if(p_ptr->pseikaku == SEIKAKU_BERSERK)
+	{
+		return "You have no chance of successfully activating this item.";
+	}
+
+	if (o_ptr->tval == TV_WAND || o_ptr->tval == TV_STAFF)
+	{
+		lev = k_info[o_ptr->k_idx].level;
+		if (lev > 50) lev = 50 + (lev - 50)/2;
+
+		chance = p_ptr->skill_dev;
+		chance = chance - lev;
+
+		// For very low success chance: Requires passing one_in_(USE_DEVICE - chance + 1),
+		// then still requires regular check for success
+		if (chance < USE_DEVICE)
+		{
+			total_chance = USE_DEVICE * (USE_DEVICE - chance + 1);
+			success_chance = 1;
+		}
+		else
+		{
+			total_chance = chance;
+			success_chance = (total_chance - (USE_DEVICE - 1));
+		}
+
+		sprintf(chance_detail, "You have %d in %d chance of successfully activating this item.", success_chance, total_chance);
+		return chance_detail;
+    }
+
+	if (o_ptr->tval == TV_ROD || o_ptr->tval == TV_ABILITY_CARD)
+	{
+		if (o_ptr->tval == TV_ROD) lev = k_info[o_ptr->k_idx].level + 5;
+		else
+		{
+			ability_card_type *ac_ptr;
+			ac_ptr = &ability_card_list[o_ptr->pval];
+			lev = ac_ptr->difficulty + 5;
+		}
+		chance = p_ptr->skill_dev;
+
+		if (chance > lev)
+		{
+			lev -= (chance - lev)*2;
+			if (lev < USE_DEVICE) lev = USE_DEVICE;
+
+			total_chance = chance*2;
+			success_chance = (total_chance - lev);
+		}
+		else
+		{
+			chance -= (lev - chance)*2;
+			if (chance < USE_DEVICE) chance = USE_DEVICE;
+
+			total_chance = lev*2;
+			success_chance = chance;
+		}
+
+		sprintf(chance_detail, "You have %d in %d chance of successfully activating this item.", success_chance, total_chance);
+		return chance_detail;
+	}
+
+	if (have_flag(flgs, TR_ACTIVATE))
+	{
+		lev = k_info[o_ptr->k_idx].level;
+
+		if (object_is_fixed_artifact(o_ptr)) lev = a_info[o_ptr->name1].level;
+		else if (object_is_random_artifact(o_ptr))
+		{
+			const activation_type* const act_ptr = find_activation_info(o_ptr);
+			if (act_ptr) {
+				lev = act_ptr->level;
+			}
+		}
+		else if (((o_ptr->tval == TV_RING) || (o_ptr->tval == TV_AMULET)) && o_ptr->name2) lev = e_info[o_ptr->name2].level;
+		lev += 5;
+		chance = p_ptr->skill_dev;
+
+		if (chance > lev)
+		{
+			lev -= (chance - lev)*2;
+			if (lev < USE_DEVICE) lev = USE_DEVICE;
+
+			total_chance = chance*2;
+			success_chance = (total_chance - lev);
+		}
+		else
+		{
+			chance -= (lev - chance)*2;
+			if (chance < USE_DEVICE) chance = USE_DEVICE;
+
+			total_chance = lev*2;
+			success_chance = chance;
+		}
+
+		sprintf(chance_detail, "You have %d in %d chance of successfully activating this item.", success_chance, total_chance);
+		return chance_detail;
+
+	}
+
+	return "";
+}
 
 /*
  * Describe a "fully identified" item
@@ -717,9 +843,20 @@ bool screen_object(object_type *o_ptr, u32b mode)
 		{
 			info[i] = &temp2[j]; i++;
 		}
+#ifndef JP
+		if(o_ptr->pval >= 0 && o_ptr->pval < ABILITY_CARD_LIST_LEN && ability_card_list[o_ptr->pval].activate)
+		{
+			info[i++] = item_activation_chance(o_ptr);
+		}
+#endif
 	}
 
-
+#ifndef JP
+	else if (o_ptr->tval == TV_WAND || o_ptr->tval == TV_STAFF || o_ptr->tval == TV_ROD)
+	{
+		info[i++] = item_activation_chance(o_ptr);
+	}
+#endif
 
 	else if (object_is_equipment(o_ptr))
 	{
@@ -827,6 +964,9 @@ bool screen_object(object_type *o_ptr, u32b mode)
 			info[i++] = "...if it is being worn.";
 	#endif
 
+	#ifndef JP
+			info[i++] = item_activation_chance(o_ptr);
+	#endif
 		}
 		/* Figurines, a hack */
 		if (o_ptr->tval == TV_FIGURINE)
