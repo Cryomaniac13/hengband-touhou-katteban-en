@@ -965,7 +965,10 @@ bool screen_object(object_type *o_ptr, u32b mode)
 	#endif
 
 	#ifndef JP
-			info[i++] = item_activation_chance(o_ptr);
+			if (o_ptr->tval != TV_GUN)
+			{
+				info[i++] = item_activation_chance(o_ptr);
+			}
 	#endif
 		}
 		/* Figurines, a hack */
