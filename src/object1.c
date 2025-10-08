@@ -844,9 +844,12 @@ bool screen_object(object_type *o_ptr, u32b mode)
 			info[i] = &temp2[j]; i++;
 		}
 #ifndef JP
-		if(o_ptr->pval >= 0 && o_ptr->pval < ABILITY_CARD_LIST_LEN && ability_card_list[o_ptr->pval].activate)
+		if (p_ptr->pclass != CLASS_CHIMATA)
 		{
-			info[i++] = item_activation_chance(o_ptr);
+			if(o_ptr->pval >= 0 && o_ptr->pval < ABILITY_CARD_LIST_LEN && ability_card_list[o_ptr->pval].activate)
+			{
+				info[i++] = item_activation_chance(o_ptr);
+			}
 		}
 #endif
 	}
