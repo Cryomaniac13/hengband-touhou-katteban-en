@@ -273,8 +273,9 @@ N:1297:Yorihime
 # 「ぎゃふん」
 gasps in disbelief.
 
-N:1298:
+N:1298:Toyohime
 #「後は、任せましたよ。私に会ったことは内緒にしてね」
+says, 'The rest I'll leave to you. And do keep our encounter a secret, would you?'
 
 N:1299:Rei'sen
 # 「あの頃が懐かしい..」
@@ -426,21 +427,27 @@ N:1388:Hisami
 # 「ああー強くて素敵だわー」
 says, 'Ahh, beautiful power.'
 
-N:1409:チミ
+N:1409:Chimi
 #「これでも昔はのう...」
+says, 'Back in the old days...'
 
-N:1410:馴子
+N:1410:Nareko
 #「神聖なる謎かけを冒涜しやがって...」
+says, 'You desecrator of the sacred riddles...'
 
-N:1411:ユイマン
+N:1411:Yuiman
 #「また遊びに来てねー」
+says, 'Please visit again some time!'
 #「今度、一緒に鹿狩りでもしましょ？」
+says, 'Next time, why don't we go deer hunting together?'
 
-N:1412:阿梨夜
+N:1412:Ariya
 #「貴方のお陰で、仕事を休めるわ。ありがとう」
+says, 'Thanks to you, I can take some time off work. Thank you.'
 
-N:1413:ニナ
+N:1413:Nina
 #「まさか、真実が敗れるなんて」
+says, 'No way, that the truth could lose!'
 
 
 N:*:Default lines

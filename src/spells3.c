@@ -8456,8 +8456,13 @@ void	search_specific_monster(int mode)
 	}
 	else
 	{
+		#ifdef JP
 		char msg_mode[40];
 		char msg_dist[16];
+		#else
+		char msg_mode[40];
+		char msg_dist[26];
+		#endif
 
 		if (mode == 1) my_strcpy(msg_mode, _("”ñ“úí‚Ì—\’›", "something out of the ordinary"), sizeof(msg_mode) - 2);
 
