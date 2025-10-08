@@ -1891,8 +1891,8 @@ says, 'The power of perpetuity that can engulf transformation itself!'
 says, 'To be selfishly confined in a place like this.'
 #「石という物は不変の象徴です」
 says, 'A stone is a symbol of the unchanging.'
-#「程度のならそれまでのこと」
-says, 'If that's all, then there's nothing to it.'
+#「あんな石にやられる程度のならそれまでのこと」
+says, 'If those stones were enough to stop you, then you would've deserved it.'
 #「私は不変の神なのです。だから、私は変に非ず」
 says, 'I am the god of the unchanging. I cannot be unusual.'
 
