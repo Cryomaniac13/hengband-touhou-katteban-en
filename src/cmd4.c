@@ -4960,7 +4960,7 @@ static cptr do_cmd_feeling_text[11] =
 	//"‹°‚ë‚µ‚¢€‚ÌŒ¶‚ª–Ú‚É•‚‚©‚ÑA‹Câ‚µ‚»‚¤‚É‚È‚Á‚½I",
 
 #else
-	"You nearly faint as horrible visions of death fill your mind!",
+	"An unbelievable situation is unfolding on this level!",
 #endif
 
 #ifdef JP
