@@ -1860,7 +1860,7 @@ waves her scepter cheerfully.
 #「あまりにも仕事がなくて退屈していたんだから」
 says, 'Nothing's been happening and I was getting so bored.'
 #「へー、へー」
-says, 'Oh? Oohh?'
+says, 'Oh, oohh!'
 #「答えられなかったお前はここで死ぬ運命にある！」
 says, 'You didn't have the right answer, so you're destined to die here!'
 

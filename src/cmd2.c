@@ -7736,7 +7736,7 @@ msg_print("‚±‚ê‚Í‚ ‚Ü‚è—Ç‚­‚È‚¢‹C‚ª‚·‚éB");
 #ifdef JP
 			msg_format("%s‚ª•Ô‚Á‚Ä‚±‚È‚©‚Á‚½I", o2_name);
 #else
-			msg_format("%s doesn't back!", o2_name);
+			msg_format("%s doesn't come back!", o2_name);
 #endif
 		}
 	}
