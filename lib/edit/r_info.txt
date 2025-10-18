@@ -27523,6 +27523,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_8
 S:MISSILE | BO_FIRE
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1396:敵意の小結晶(青)
 E:Small hostile crystal (blue)
@@ -27536,6 +27538,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_8
 S:MISSILE | BO_COLD
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1397:敵意の小結晶(黄)
 E:Small hostile crystal (yellow)
@@ -27549,6 +27553,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_8
 S:MISSILE | BO_ELEC
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1398:敵意の小結晶(緑)
 E:Small hostile crystal (green)
@@ -27562,6 +27568,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_8
 S:MISSILE | BO_ACID
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 
 N:1399:敵意の中結晶(赤)
@@ -27576,6 +27584,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_4
 S:BO_FIRE | BA_FIRE
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1400:敵意の中結晶(青)
 E:Medium hostile crystal (blue)
@@ -27589,6 +27599,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_4
 S:BO_COLD | BA_COLD
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1401:敵意の中結晶(黄)
 E:Medium hostile crystal (yellow)
@@ -27602,6 +27614,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_4
 S:BO_ELEC | BA_ELEC
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 N:1402:敵意の中結晶(緑)
 E:Medium hostile crystal (green)
@@ -27615,8 +27629,8 @@ F:STAY_AT_HOME3 | HAS_LITE_1 | GEN_NEUTRAL
 S:1_IN_4
 S:BO_ACID | BA_ACID
 D:外界から流れ込んで来た仮想敵に対する敵意が結晶化したものだ。
-
-
+D:$A crystallisation of hostility towards a possible enemy that has
+D:$flowed in from the outside world.
 
 #倒したら異変石をドロップする？
 N:1403:敵意の巨大結晶(赤)
@@ -27632,6 +27646,8 @@ S:1_IN_1
 S:BA_FIRE | FIRE_STORM | BRAIN_SMASH | BA_LITE | BO_MANA | PUNISH_4 | BO_PLAS
 D:外界から流れ込んで来た敵意の巨大な結晶だ。
 D:辺り構わず苛烈な攻撃を撒き散らす。
+D:$A giant crystallisation of hostility towards that which has flowed in from
+D:$the outside world. Its ferocious attacks scatter indiscriminately.
 
 N:1404:敵意の巨大結晶(青)
 E:Huge hostile crystal (blue)
@@ -27646,6 +27662,8 @@ S:1_IN_1
 S:BA_COLD | ICE_STORM | BRAIN_SMASH | BA_DARK | BO_MANA | CAUSE_4 | BO_ICEE
 D:外界から流れ込んで来た敵意の巨大な結晶だ。
 D:辺り構わず苛烈な攻撃を撒き散らす。
+D:$A giant crystallisation of hostility towards that which has flowed in from
+D:$the outside world. Its ferocious attacks scatter indiscriminately.
 
 N:1405:敵意の巨大結晶(黄)
 E:Huge hostile crystal (yellow)
@@ -27660,6 +27678,8 @@ S:1_IN_1
 S:BA_ELEC | THUNDER_STORM | BRAIN_SMASH | BA_LITE | BO_MANA | PUNISH_4 | TORNADO
 D:外界から流れ込んで来た敵意の巨大な結晶だ。
 D:辺り構わず苛烈な攻撃を撒き散らす。
+D:$A giant crystallisation of hostility towards that which has flowed in from
+D:$the outside world. Its ferocious attacks scatter indiscriminately.
 
 N:1406:敵意の巨大結晶(緑)
 E:Huge hostile crystal (green)
@@ -27674,6 +27694,8 @@ S:1_IN_1
 S:BA_ACID | ACID_STORM | BRAIN_SMASH | BA_DARK | BO_MANA | CAUSE_4 | BA_POLLUTE
 D:外界から流れ込んで来た敵意の巨大な結晶だ。
 D:辺り構わず苛烈な攻撃を撒き散らす。
+D:$A giant crystallisation of hostility towards that which has flowed in from
+D:$the outside world. Its ferocious attacks scatter indiscriminately.
 
 
 N:1407:化石の森の妖精
@@ -27691,6 +27713,8 @@ S:1_IN_5
 S:DANMAKU | SLOW | HOLD | BRAIN_SMASH | 
 D:幻想郷の至る所に出現する自然の具現だ。
 D:この妖精は浅間浄穢山の深層部に出現する。
+D:$Embodiments of nature appearing everywhere in Gensoukyou.
+D:$This one comes from the depths of the Asama Purifying Mountain.
 
 N:1408:聖域に棲む山姥の長『塵塚　ウバメ』
 E:Ubame Chirizuka, Sanctuary-Dwelling Yamanba Chief
@@ -27816,6 +27840,8 @@ F:KWAI | DEITY | DRAGON | UNDEAD | NONLIVING | ANIMAL | HUMAN | FAIRY | HANIWA
 F:HURT_ROCK | NO_FEAR | NO_STUN | NO_CONF | NO_SLEEP | 
 D:修行用の人形だ。
 D:新品同様のまま埃を被っているように見える。
+D:$A wooden doll for training on.
+D:$It seems to be as good as new, yet it's covered in dust.
 
 
 
