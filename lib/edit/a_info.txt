@@ -5837,4 +5837,6 @@ P:0:0d0:15:15:0
 F:INT | WIS | CHR | STEALTH | SEE_INVIS | RES_NETHER | ESP_ANIMAL | DEC_MANA | XTRA_SHOTS | ACTIVATE
 U:SATIATE
 D:地の底の維縵国の姫が鹿狩りに使った弓だ。維縵姫は甲賀三郎と共に地上に出て後に浅間大明神になったという。
-
+D:$A bow wielded by the princess of Yuiman deep beneath the earth,
+D:$used to hunt deer. She came to the surface world with Kouga Saburou and
+D:$became Asama no Okami.
