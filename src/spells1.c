@@ -14118,7 +14118,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 					{
 						char m_name[80];
 						monster_desc(m_name, m_ptr, 0);
-						if (is_seen(m_ptr))msg_format(_("「イヤーッ！」%^sはブリッジでこれを回避！", "%^s evades it with a bridge!"), m_name);
+						if (is_seen(m_ptr))msg_format(_("「イヤーッ！」%^sはブリッジでこれを回避！", "'Iyaaa!' %^s evades by performing a bridge!"), m_name);
 						return (notice);
 
 					}
