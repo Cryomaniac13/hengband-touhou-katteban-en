@@ -2843,7 +2843,7 @@ note = "はひどい痛手をうけた。";
 			{
 
 
-				note = _("にはかなり耐性がある！", " resist a lot.");
+				note = _("にはかなり耐性がある！", " resists a lot.");
 				dam /= 9;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_IM_COLD);
 			}
@@ -3290,7 +3290,7 @@ note = "には耐性がある。";
 
 			if (r_ptr->flagsr & RFR_HURT_HOLY && r_ptr->flagsr & RFR_HURT_WATER)
 			{
-				note = _("はひどい痛手を受けた！", "is severely wounded!");
+				note = _("はひどい痛手を受けた！", " is severely wounded!");
 				dam *= 3;
 
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_HOLY);
@@ -3299,13 +3299,13 @@ note = "には耐性がある。";
 			}
 			else if (r_ptr->flagsr & RFR_HURT_HOLY)
 			{
-				note = _("は聖なる水を浴びて身をすくめた。", "shudders after being doused in holy water.");
+				note = _("は聖なる水を浴びて身をすくめた。", " shudders after being doused in holy water.");
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_HOLY);
 				dam *= 2;
 			}
 			else if (r_ptr->flagsr & RFR_HURT_WATER)
 			{
-				note = _("は水が苦手なようだ。", "doesn't like water.");
+				note = _("は水が苦手なようだ。", " doesn't like water.");
 				dam *= 2;
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flagsr |= (RFR_HURT_WATER);
 			}
@@ -4293,7 +4293,7 @@ note_dies = "は蒸発した！";
 #ifdef JP
 				note = "には完全な耐性がある！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags2 |= (RF2_EMPTY_MIND);
 				break;
@@ -4358,7 +4358,7 @@ note_dies = "は蒸発した！";
 #ifdef JP
 										note = "には効果がなかった。";
 #else
-										note = " is unaffected.";
+										note = " is unaffected!";
 #endif
 
 									else
@@ -4437,7 +4437,7 @@ note_dies = "は蒸発した！";
 #ifdef JP
 				note = "には完全な耐性がある！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				break;
 			}
@@ -4450,7 +4450,7 @@ note_dies = "は蒸発した！";
 			{
 				note = NULL;
 				msg_format(_("%^sの堕落した精神は攻撃を跳ね返した！",
-                            "%^s delivers you a mental backlash!"), m_name);
+                            "%^s delivers a mental backlash!"), m_name);
 
 				/* Saving throw */
 				if ((randint0(100 + r_ptr->level / 2) < p_ptr->skill_sav) && !CHECK_MULTISHADOW())
@@ -4674,7 +4674,7 @@ note_dies = "は蒸発した！";
 #ifdef JP
 									note = "には効果がなかった。";
 #else
-									note = " is unaffected.";
+									note = " is unaffected!";
 #endif
 
 								else
@@ -6906,7 +6906,7 @@ note_dies = "は倒れた。";
 			//	if (see_s_msg) msg_format("%sには効果がなかった。", m_name);
 				if (see_s_msg) msg_format("%sは魔力を持たないようだ。", m_name);
 #else
-				if (see_s_msg) msg_format("%s is unaffected.", m_name);
+				if (see_s_msg) msg_format("%s is unaffected!", m_name);
 #endif
 			}
 			dam = 0;
@@ -6946,7 +6946,7 @@ note_dies = "は倒れた。";
 #ifdef JP
 				note = "には完全な耐性がある！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				dam = 0;
 			}
@@ -7040,7 +7040,7 @@ note_dies = "は倒れた。";
 			///mod140321 呪い系は無生物には効かなくした
 			else if(!monster_living(r_ptr))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				if (is_original_ap_and_seen(m_ptr))
 				{
 					if (r_ptr->flags3 & RF3_DEMON) r_ptr->r_flags3 |= (RF3_DEMON);
@@ -7090,7 +7090,7 @@ note_dies = "は倒れた。";
 			///mod140321 呪い系は無生物には効かなくした
 			else if(!monster_living(r_ptr))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				if (is_original_ap_and_seen(m_ptr))
 				{
 					if (r_ptr->flags3 & RF3_DEMON) r_ptr->r_flags3 |= (RF3_DEMON);
@@ -7140,7 +7140,7 @@ note_dies = "は倒れた。";
 			///mod140321 呪い系は無生物には効かなくした
 			else if(!monster_living(r_ptr))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				if (is_original_ap_and_seen(m_ptr))
 				{
 					if (r_ptr->flags3 & RF3_DEMON) r_ptr->r_flags3 |= (RF3_DEMON);
@@ -7191,7 +7191,7 @@ note_dies = "は倒れた。";
 			///mod140321 呪い系は無生物には効かなくした
 			else if(!monster_living(r_ptr))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				if (is_original_ap_and_seen(m_ptr))
 				{
 					if (r_ptr->flags3 & RF3_DEMON) r_ptr->r_flags3 |= (RF3_DEMON);
@@ -7309,7 +7309,7 @@ note_dies = "は倒れた。";
 			/* Attempt a saving throw */
 			else if (r_ptr->flags2 & (RF2_ELDRITCH_HORROR | RF2_EMPTY_MIND | RF2_WEIRD_MIND))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				dam = 0;
 			}
 			else if (chance < r_ptr->level)
@@ -7344,7 +7344,7 @@ note_dies = "は倒れた。";
 #ifdef JP
 				msg_format("%sには効果がなかった。",m_name);
 #else
-				msg_format("%^s is unaffected.", m_name);
+				msg_format("%^s is unaffected!", m_name);
 #endif
 				skipped = TRUE;
 				break;
@@ -7458,7 +7458,7 @@ msg_format("うまく捕まえられなかった。");
 #ifdef JP
 				note = "には効果がなかった！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				dam = 0;
 				skipped = TRUE;
@@ -7470,7 +7470,7 @@ msg_format("うまく捕まえられなかった。");
 #ifdef JP
 				note = "には効果がなかった！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				dam = 0;
 				skipped = TRUE;
@@ -7573,7 +7573,7 @@ note = "は眠り込んでしまった！";
 #ifdef JP
 note = "には効果がなかった！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 			}
 
@@ -7610,7 +7610,7 @@ note = "には効果がなかった！";
 				///sysdel dead
 				if (seen_msg) msg_format("%sはどこかへ消えた。", m_name);
 #else
-				if (seen_msg) msg_format("%^s disappered!", m_name);
+				if (seen_msg) msg_format("%^s disappeared!", m_name);
 #endif
 				//chg_virtue(V_VITALITY, -1);
 				return TRUE;
@@ -7783,7 +7783,7 @@ note = "には効果がなかった。";
 #ifdef JP
 				note = "には効果がなかった。";
 #else
-                note = " is unaffected.";
+                note = " is unaffected!";
 #endif
 				dam = 0;
 			}
@@ -7893,7 +7893,7 @@ note = "には効果がなかった。";
 			}
 			else if(!monster_living(r_ptr))
 			{
-				note = _("には効果がなかった。", " is unaffected.");
+				note = _("には効果がなかった。", " is unaffected!");
 				if (is_original_ap_and_seen(m_ptr))
 				{
 					if (r_ptr->flags3 & RF3_DEMON) r_ptr->r_flags3 |= (RF3_DEMON);
@@ -7907,7 +7907,7 @@ note = "には効果がなかった。";
 
 			else if((r_ptr->flags1 & RF1_UNIQUE) || (r_ptr->flags7 & RF7_UNIQUE2) ||(r_ptr->flags1 & RF1_QUESTOR))
 			{
-				note = _("には効いていないようだ。", " does not look to be affected.");
+				note = _("には効いていないようだ。", " doesn't seem like a valid target.");
 				dam = 0;
 				break;
 			}
@@ -7921,7 +7921,7 @@ note = "には効果がなかった。";
 #ifdef JP
 				note = "は呪文に抵抗した！";
 #else
-				note = "is unaffected!";
+				note = " is unaffected!";
 #endif
 				dam = 0;
 			}
@@ -8261,7 +8261,7 @@ note = "には効果がなかった。";
 #ifdef JP
 				note = "には完全な耐性がある！";
 #else
-				note = " is immune!";
+				note = " is immune.";
 #endif
 				if (is_original_ap_and_seen(m_ptr)) r_ptr->r_flags2 |= (RF2_EMPTY_MIND);
 				break;
@@ -8926,7 +8926,7 @@ note = "には効果がなかった。";
 
 			if (r_ptr->flags7 & RF7_CAN_FLY)
 			{
-				note = _("は悠々と穴の上を飛んでいる...", "leisurely floats above the chasm...");
+				note = _("は悠々と穴の上を飛んでいる...", " leisurely floats above the chasm...");
 				dam = 0;
 				break;
 			}
@@ -8975,14 +8975,14 @@ note = "には効果がなかった。";
 			else if (m_ptr->r_idx == MON_SUIKA || m_ptr->r_idx == MON_YUGI || m_ptr->r_idx == MON_KASEN || m_ptr->r_idx == MON_YUMA || m_ptr->r_idx == MON_UWABAMI)
 			{
 				dam /= 16;
-				note = _("にはかなり耐性がある！", "resists a lot!");
+				note = _("にはかなり耐性がある！", " resists a lot!");
 			}
 
 			//天狗は酒に強い
 			else if (r_ptr->d_char == 't')
 			{
 				dam /= 4;
-				note = _("には耐性がある。", "resists.");
+				note = _("には耐性がある。", " resists.");
 			}
 			/*
 			//毒耐性で抵抗させようかと思ったがやめた
@@ -8997,7 +8997,7 @@ note = "には効果がなかった。";
 			else if (r_ptr->flags2 & (RF2_GIGANTIC | RF2_POWERFUL))
 			{
 				dam /= 2;
-				note = _("はいくらか耐性を示した。", "resists somewhat.");
+				note = _("はいくらか耐性を示した。", " resists somewhat.");
 			}
 
 			//人間には効果3倍、人間型生物には効果2倍
@@ -9013,7 +9013,7 @@ note = "には効果がなかった。";
 
 			if (!dam)
 			{
-				note = _("は全く酔う様子がない！", "isn't getting drunk at all!");
+				note = _("は全く酔う様子がない！", " isn't getting drunk at all!");
 				break;
 			}
 
@@ -10360,7 +10360,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			if (fuzzy) msg_print("何か清らかなもので攻撃された！");
 			//if (fuzzy) msg_print("何かで攻撃された！");
 #else
-			if (fuzzy) msg_print("You are hit by something pure!");
+			if (fuzzy) msg_print("You are hit by something purifying!");
 #endif
 			///mod140103 破邪耐性・弱点考慮用関数作った
 			dam = mod_holy_dam(dam);
@@ -10806,7 +10806,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #endif
 			if(HAVE_SOLDIER_SKILL(SOLDIER_SKILL_ENGINEER,SS_E_DETONATOR))
 			{
-				msg_print(_("あなたは全くの無傷だ。", "You are not wounded at all."));
+				msg_print(_("あなたは全くの無傷だ。", "You are unharmed."));
 				dam = 0;
 				break;
 			}
@@ -10815,7 +10815,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 				dam += dam / 4;
 			else if (prace_is_(RACE_HANIWA))
 			{
-				msg_print(_("無数の破片があなたを傷つけた！", "Countless shard wound you!"));
+				msg_print(_("無数の破片があなたを傷つけた！", "Countless shards wound you!"));
 				dam += dam / 4;
 			}
 
@@ -10844,7 +10844,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 			if (fuzzy) msg_print("轟音で攻撃された！");
 #else
-			if (fuzzy) msg_print("You are hit by a loud noise!");
+			if (fuzzy) msg_print("You are hit by something loud!");
 #endif
 			///mod141106 響子轟音免疫
 			if(p_ptr->pclass == CLASS_KYOUKO && p_ptr->lev > 29) break;
@@ -10854,7 +10854,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 				dam += dam / 4;
 			else if (prace_is_(RACE_HANIWA))
 			{
-				msg_print(_("衝撃があなたを傷つけた！", "The shockwave wound you!"));
+				msg_print(_("衝撃があなたを傷つけた！", "The shockwave wounds you!"));
 				dam += dam / 4;
 			}
 
@@ -10964,7 +10964,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 			if (fuzzy) msg_print("気のパワーで攻撃された！");
 #else
-			if (fuzzy) msg_print("You are hit by power of Ki!");
+			if (fuzzy) msg_print("You are hit by the power of Ki!");
 #endif
 
 			if(p_ptr->pclass == CLASS_MARTIAL_ARTIST)
@@ -11213,7 +11213,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 			if (fuzzy) msg_print("何か奇妙なもので攻撃された！");
 #else
-			if (fuzzy) msg_print("You are hit by something!");
+			if (fuzzy) msg_print("You are hit by something weird!");
 #endif
 
 			if (p_ptr->resist_time)
@@ -11590,7 +11590,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 			if (fuzzy) msg_print("何かが空からあなたの頭上に落ちてきた！");
 #else
-			if (fuzzy) msg_print("Something falls from the sky on you!");
+			if (fuzzy) msg_print("Something falls from the sky onto your head!");
 #endif
 
 			if(CHECK_FAIRY_TYPE == 54)
@@ -11802,7 +11802,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 					msg_print("霊的エネルギーで精神が攻撃された。");
 #else
-					msg_print("Your mind is blasted by psyonic energy.");
+					msg_print("Your mind is blasted by psionic energy.");
 #endif
 
 					if (!p_ptr->resist_conf)
@@ -11952,7 +11952,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 					}
 					else if(blast < 60)
 					{
-						msg_print(_("何かが目の前に佇んでいる。", "Something stand before you."));
+						msg_print(_("何かが目の前に佇んでいる。", "Something stands before you."));
 						summon_specific(0, py, px, dun_level, SUMMON_INSANITY, (PM_NO_PET));
 					}
 					else if(blast < 70)
@@ -11962,20 +11962,20 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 						p_ptr->redraw = PR_MANA;
 						redraw_stuff();
 						msg_print(_("自分を取り戻すのに全ての精神力を使い果たした・・",
-                                    "You've exhausted all of your mental energy to regain composure..."));
+                                    "You've exhausted all of your mental energy to regain your composure..."));
 					}
 					else if(blast < 80)
 					{
 						int muta[5] = {75,76,77,79,130};
 						msg_print(_("禁断の知識に脳が耐え切れない！",
-                                    "You brain can't withstand the forbidden knowledge!"));
+                                    "Your brain can't withstand the forbidden knowledge!"));
 						gain_random_mutation(muta[randint0(5)]);
 					}
 					else if(blast < 90)
 					{
 						int cnt;
 						msg_print(_("宇宙の深淵から悍ましい存在があなたを追跡してきた！",
-                                    "You are pursued by terrifying beings from the depths of cosmos!"));
+                                    "You are pursued by terrifying beings from the depths of the cosmos!"));
 						for(cnt = randint1(3);cnt>0;cnt--)summon_specific(0, py, px, dun_level, SUMMON_INSANITY2, (PM_ALLOW_GROUP | PM_ALLOW_UNIQUE | PM_NO_PET));
 					}
 					else
@@ -12166,7 +12166,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #ifdef JP
 					msg_print("あなたは命が薄まっていくように感じた！");
 #else
-					msg_print("You feel your life fade away!");
+					msg_print("You feel your life fading away!");
 #endif
 					curse_equipment(40, 20);
 				}
@@ -12385,7 +12385,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 	if (p_ptr->pclass == CLASS_YATSUHASHI && music_singing(MUSIC_NEW_TSUKUMO_JINKIN)
 		&& (who > 0) && m_ptr->r_idx && get_damage > 0 && !p_ptr->is_dead)
 	{
-		msg_format(_("%sは琴の音に包まれた・・", "%^s is enveloped in the sound of koto..."), m_name);
+		msg_format(_("%sは琴の音に包まれた・・", "%^s is enveloped in the sound of the koto..."), m_name);
 		project(0, 0, m_ptr->fy, m_ptr->fx, get_damage, GF_MISSILE, PROJECT_KILL, -1);
 	}
 
@@ -14080,7 +14080,10 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 						else if (m_ptr->r_idx == MON_DIO) msg_print("ディオ・ブランドーは指一本で攻撃を弾き返した！");
 						else msg_print("攻撃は跳ね返った！");
 #else
-						msg_print("The attack bounces!");
+						if ((m_ptr->r_idx == MON_KENSHIROU) || (m_ptr->r_idx == MON_RAOU))
+							msg_print("'Hokuto Shinken-ougi Nishishinkuha!'");
+						else if (m_ptr->r_idx == MON_DIO) msg_print("Dio Brando deflects the attack with one finger！");
+						else msg_print("The attack bounces!");
 #endif
 					}
 					if (is_original_ap_and_seen(m_ptr)) ref_ptr->r_flags2 |= RF2_REFLECTING;
@@ -14115,7 +14118,7 @@ bool project(int who, int rad, int y, int x, int dam, int typ, int flg, int mons
 					{
 						char m_name[80];
 						monster_desc(m_name, m_ptr, 0);
-						if (is_seen(m_ptr))msg_format(_("「イヤーッ！」%^sはブリッジでこれを回避！", "%^s evades it!"), m_name);
+						if (is_seen(m_ptr))msg_format(_("「イヤーッ！」%^sはブリッジでこれを回避！", "%^s evades it with a bridge!"), m_name);
 						return (notice);
 
 					}

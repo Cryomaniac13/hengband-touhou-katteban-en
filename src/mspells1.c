@@ -5206,7 +5206,7 @@ msg_format("%s‚Í–³‚Ì‹…‚ÌŽô•¶‚ð¥‚¦‚½B", m_name);
 #ifdef JP
 						msg_format("%^s‚Í“Ë‘RŽ‹ŠE‚©‚çÁ‚¦‚½!", m_name);
 #else
-						msg_format("%^s suddenly go out of your sight!", m_name);
+						msg_format("%^s suddenly goes out of your sight!", m_name);
 #endif
 						teleport_away(m_idx, 10, TELEPORT_NONMAGICAL);
 						p_ptr->update |= (PU_MONSTERS);

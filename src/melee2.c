@@ -3522,7 +3522,7 @@ static void process_monster(int m_idx)
 
 		m_ptr->timed_shard_count -= 1;
 
-		mon_take_hit(m_idx, dam, &dummy, _("は管狐弾のダメージで倒れた。", "%^s is defeated by kuda-gitsune bullets."));
+		mon_take_hit(m_idx, dam, &dummy, _("は管狐弾のダメージで倒れた。", " is defeated by kuda-gitsune bullets."));
 
 		if (!m_ptr->r_idx) return;
 
@@ -3592,7 +3592,7 @@ static void process_monster(int m_idx)
 
 		if(smash)
 		{
-			msg_format(_("%sは束縛を振り払った！", "%^s breaks free of restraints!"),m_name);
+			msg_format(_("%sは束縛を振り払った！", "%^s breaks free of the restraints!"),m_name);
 			set_monster_timed_status_add(MTIMED2_NO_MOVE, m_idx, 0);
 			if (one_in_(2)) flag_never_move = FALSE;
 		}
@@ -3872,14 +3872,14 @@ static void process_monster(int m_idx)
 	//妖夢の分身との距離が離れすぎると分身が消える
 	if(m_ptr->r_idx == MON_YOUMU && (m_ptr->mflag & MFLAG_EPHEMERA) && m_ptr->cdis > MAX_SIGHT)
 	{
-		msg_print(_("あなたの半霊は霊体に戻って帰ってきた！", "You ghost half returns to its original ghost body!"));
+		msg_print(_("あなたの半霊は霊体に戻って帰ってきた！", "Your ghost half returns to its original ghost body!"));
 		delete_monster_idx(m_idx);
 		return;
 	}
 	//パルスィ特殊召喚
 	else if(p_ptr->pclass == CLASS_PARSEE && m_ptr->r_idx == MON_GREEN_EYED && !m_list[p_ptr->magic_num1[0]].r_idx)
 	{
-		msg_print(_("緑目の怪物は消えた。", "The green-eyed monster disappear."));
+		msg_print(_("緑目の怪物は消えた。", "The green-eyed monster disappears."));
 		delete_monster_idx(m_idx);
 		return;
 	}
@@ -4080,7 +4080,7 @@ static void process_monster(int m_idx)
 #ifdef JP
 				msg_format("%sはあなたの束縛から逃れようとしている。", m_name);
 #else
-				msg_format("%^s seems to be trying to escape from your restriction.", m_name);
+				msg_format("%^s seems to be trying to escape from your yoke.", m_name);
 #endif
 				riding_pinch++;
 				disturb(1, 1);
@@ -4099,14 +4099,14 @@ static void process_monster(int m_idx)
 					if(CLASS_RIDING_BACKDANCE)
 						msg_format("%s manages to shake you off!", m_name);
 					else
-						msg_format("%^s succeeded to escape from your restriction!", m_name);
+						msg_format("%^s has escaped from your yoke!", m_name);
 #endif
 					if (rakuba(-1, FALSE))
 					{
 #ifdef JP
 						msg_print("地面に落とされた。");
 #else
-						msg_print("You have fallen from riding pet.");
+						msg_print("You have fallen to the ground.");
 #endif
 					}
 				}
@@ -4139,7 +4139,7 @@ static void process_monster(int m_idx)
 #ifdef JP
 					msg_print("地面に落とされた。");
 #else
-					msg_print("You have fallen from riding pet.");
+					msg_print("You have fallen to the ground.");
 #endif
 				}
 				/* Check for quest completion */
@@ -5210,7 +5210,7 @@ msg_format("%^s%s", m_name, monmessage);
 			{
 				monster_desc(m_name, m_ptr, 0);
 				msg_format(_("%sは祇園様の怒りに触れた！",
-                            "%s is hit by the wrath of Sword of Gion!"),m_name);
+                            "%s suffers the wrath of Sword of Gion!"),m_name);
 				py_attack(m_ptr->fy,m_ptr->fx,HISSATSU_GION);
 				if (m_ptr->r_idx && randint1(r_ptr->level) < randint1(p_ptr->lev)) return;
 			}
@@ -5532,7 +5532,7 @@ msg_format("%^s%s", m_name, monmessage);
 
 				if (randint1(rlev) > p_ptr->lev)
 				{
-					msg_print(_("トラップが破壊された！", "The trap gets destroyed!"));
+					msg_print(_("トラップが破壊された！", "The trap is destroyed!"));
 					cave_alter_feat(ny, nx, FF_DISARM);
 					note_spot(ny, nx);
 					lite_spot(ny, nx);
@@ -6977,7 +6977,7 @@ static void process_monsters_mtimed_aux(int m_idx, int mtimed_idx)
 		{
 			char m_name[80];
 			monster_desc(m_name, m_ptr, 0);
-			msg_format(_("%^sは束縛を振り払った！", "%^s breaks free of restraints!"), m_name);
+			msg_format(_("%^sは束縛を振り払った！", "%^s breaks free of the restraints!"), m_name);
 		}
 	}
 	break;
