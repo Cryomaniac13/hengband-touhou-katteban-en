@@ -2364,7 +2364,9 @@ bool	mon_saving_throw(monster_type *m_ptr, int power)
 
 	if (cheat_xtra) msg_format("saving throw: power%d-lev%d",chance,r_ptr->level);
 
-	if (r_ptr->level >= randint1(chance)) return TRUE;
+	//v2.1.2 r_ptr->level→rlev 補正後のレベルを使ってなかったので修正
+	if (rlev >= randint1(chance)) return TRUE;
+
 	else return FALSE;
 
 }
@@ -8787,13 +8789,17 @@ note = "には効果がなかった。";
 			if(typ == GF_SUPER_EGO && (r_ptr->flags2 & (RF2_WEIRD_MIND | RF2_EMPTY_MIND)))
 			{
 				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
 				obvious = FALSE;
+				break;
 			}
 
 			if (mon_saving_throw(m_ptr, dam))
 			{
 				note = _("には効果がなかった！", " is unaffected!");
+				dam = 0;
 				obvious = FALSE;
+				break;
 			}
 
 			switch (typ)

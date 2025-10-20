@@ -4930,6 +4930,13 @@ void cave_set_feat(int y, int x, int feat)
 			if (cave[py][px].info & CAVE_GLOW) set_superstealth(FALSE);
 		}
 	}
+
+	//v2.1.2 チミ　フロアの自然地形をカウントするフラグをON
+	if (p_ptr->pclass == CLASS_CHIMI)
+	{
+		flag_chimi_need_count_feat = TRUE;
+	}
+
 }
 
 /*:::c_ptr->feat = conv_dungeon_feat(letter[idx].feature);  init1.cより*/

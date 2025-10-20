@@ -5649,7 +5649,9 @@ bool mass_genocide_2(int power, int rad, int mode)
 //永琳の主の輝夜は対象にならない
 //黒服の男達、オープンパンドラ、摩多羅ハウスの星の加護
 //v1.1.57 消したモンスターの数を返すことにした
-int mass_genocide_3(int rad, bool geno_friend, bool geno_unique)
+//v2.1.2 動作モードを設定
+// 1:チミの特技専用　森の近くにいるモンスターのみを対象にする
+int mass_genocide_3(int rad, bool geno_friend, bool geno_unique, int mode)
 {
 	int i;
 	int geno_count = 0;
@@ -5677,6 +5679,28 @@ int mass_genocide_3(int rad, bool geno_friend, bool geno_unique)
 		//geno_friendでないとき友好とペットを保護
 		if (!geno_friend && is_pet(m_ptr)) continue;
 		if (!geno_friend && is_friendly(m_ptr)) continue;
+
+		//modeが1のとき森に隣接していないモンスターは非対象
+		if (mode == 1)
+		{
+			int yy, xx,j;
+			bool flag_safe = TRUE;
+
+			for (j = 0; j < 9; j++)
+			{
+				int yy = m_ptr->fy + ddy_ddd[j];
+				int xx = m_ptr->fx + ddx_ddd[j];
+				if (!in_bounds(yy, xx)) continue;
+				if (cave_have_flag_bold((yy), (xx), FF_TREE))
+				{
+					flag_safe = FALSE;
+					break;
+				}
+			}
+
+			if (flag_safe) continue;
+
+		}
 
 		//QUESTORは抹殺されないが近くにいたら飛ばす
 		if (r_ptr->flags1 & (RF1_QUESTOR))

@@ -1746,3 +1746,6 @@ bool	hack_flag_enoko_make_beartrap = FALSE;
 //v2.1.0 怨霊に応援されているときnew_class_power_aux経由の攻撃の属性が変更される特殊フラグ
 bool	hack_flag_darkness_power = FALSE;
 
+//v2.1.2 封獣チミのプレイ時にフロアの森などの地形をカウントするフラグ
+bool flag_chimi_need_count_feat = TRUE;
+

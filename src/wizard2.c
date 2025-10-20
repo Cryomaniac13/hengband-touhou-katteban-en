@@ -150,6 +150,7 @@ static void do_cmd_wiz_hack_ben_2(void)
 	}
 	*/
 
+
 	//千亦　カードランクMAX
 	if (p_ptr->pclass == CLASS_CHIMATA)
 	{

@@ -8481,8 +8481,10 @@ bool move_player_effect(int ny, int nx, u32b mpe_mode)
 		}
 
 		/* Spontaneous Searching */
-		///sys 知覚処理　探索と一本化しよう
-		if ((p_ptr->skill_fos >= 50) || (0 == randint0(50 - p_ptr->skill_fos)))
+
+		//v2.1.2 この判定には「知覚」が使われていたが今更ながら探索を使うことにする
+//		if ((p_ptr->skill_fos >= 50) || (0 == randint0(50 - p_ptr->skill_fos)))
+		if ((p_ptr->skill_srh >= 50) || (0 == randint0(50 - p_ptr->skill_srh)))
 		{
 			search();
 		}
@@ -9063,21 +9065,25 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 	else if (!have_flag(f_ptr->flags, FF_MOVE) && have_flag(f_ptr->flags, FF_CAN_FLY) && !p_ptr->levitation)
 	{
 
-		//v1.1.86 山童は浮遊がなくても山脈を越えられることにした
+
 		if (prace_is_(RACE_YAMAWARO) && have_flag(f_ptr->flags, FF_MOUNTAIN))
 		{
+			//v1.1.86 山童は浮遊がなくても山脈を越えられることにした
+			;
+		}
+		else if (p_ptr->pclass == CLASS_CHIMI && have_flag(f_ptr->flags, FF_MOUNTAIN))
+		{
+			//v2.1.2 チミも浮遊なしで山脈を越えられる。ただし種族大妖怪で浮遊持ちのため一部の変身のときしかここには来ない
 			;
 		}
 		else
 		{
 			msg_format(_("空を飛ばないと%sの上には行けない。",
                         "You can't move on %s without flying."), f_name + f_info[get_feat_mimic(c_ptr)].name);
-
 			energy_use = 0;
 			running = 0;
 			oktomove = FALSE;
 		}
-
 	}
 
 	/*

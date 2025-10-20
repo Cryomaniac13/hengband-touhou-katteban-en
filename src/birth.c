@@ -3345,6 +3345,7 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_MIZUCHI,2,ART_HARNESS_HELL,0, 0,1 },
 
 	{ CLASS_UBAME,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_CHIMI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 
 	{-1,0,0,0,0,0} //終端dummy
 };
@@ -6504,7 +6505,7 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
         "You are a mysterious god who has been hiding behind the scenes for a long time. You have been controlling Gensoukyou through the mysterious powers of the Back Door. You can open doors on monsters' backs, tapping into their powers for your own use, and you will be able to use more of their special abilities as you level up. As you have many other names aside from 'God of Back Door', you also learn many various and powerful special abilities. You can see in darkness as in plain daylight, and you can walk through closed doors as if there isn't anything there.")},
 
 	{ TRUE,_("戎 瓔花", "Eika Ebisu"),CLASS_EIKA,RACE_STRAYGOD,ENTRY_KIKEI,SEX_FEMALE,
-		_("あなたは神格化しつつある水子霊で、賽の河原で子供達の霊と一緒に石を積んで暮らしています。あなたの得技は石積みです。あなたが祈りを込めて積んだ石は神聖な力を発揮します。しかしあなた自身は戦う力をほとんど持っていません。あなたの冒険はまさに石積みのような苦行となることでしょう。あなたは経験を積むことで神格として成熟し能力が大きく変わります。",
+		_("あなたは神格化しつつある水子霊で、賽の河原で子供達の霊と一緒に石を積んで暮らしています。あなたの特技は石積みです。あなたが祈りを込めて積んだ石は神聖な力を発揮します。しかしあなた自身は戦う力をほとんど持っていません。あなたの冒険はまさに石積みのような苦行となることでしょう。あなたは経験を積むことで神格として成熟し能力が大きく変わります。",
         "You are a divine spirit of a stillborn child; you live at Sai no Kawara, spending time stacking stones in towers with other child spirits. Your special talent is stacking stones, and you can imbue them with divine power via praying. However, you hardly have any combat abilities. Your quest will be as arduous as stacking a tall tower of stones. As you gain experience, you might mature as a deity, greatly changing your powers.")},
 	{ TRUE,_("牛崎 潤美", "Urumi Ushizaki"),CLASS_URUMI,RACE_YOUKAI,ENTRY_KIKEI,SEX_FEMALE,
 		_("あなたは三途の河で古代魚を捕って暮らす牛鬼です。あなたには身近な物の重さを変える能力があり、得意技は石の赤子を押し付けて超重量にすることでモンスターを水に沈めることです。あなたは水辺でないと本領を発揮することができませんが、どのような場所でも高い身体能力を活かしてそれなりに戦うことができるでしょう。",
@@ -6650,8 +6651,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("塵塚　ウバメ", "Ubame Chirizuka"),CLASS_UBAME,RACE_YOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
 		_("あなたは山姥で、聖域に住むほかの山姥たちのリーダー格です。普段は聖域を守るために尽力していますが必要とあれば他者が作った聖域を破壊することもできます。あなたは身体能力が高く肉弾戦を得意としますが魔法を習得することはできません。",
 		"You are a yamanba, the leader of the yamanba living in the sanctuary. You usually defend your own sanctuary, but you can destroy sanctuaries others have created if the need arises. You have high physical stats and are proficient at close combat, but you cannot use magic.") },
-	{ FALSE,_("封獣　チミ", "Chimi Houjuu"),CLASS_CHIMI,RACE_YOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
-		"" },
+	{ TRUE,_("封獣　チミ", "Chimi Houjuu"),CLASS_CHIMI,RACE_DAIYOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
+		_("あなたは魑魅(ちみ)と呼ばれる古い物の怪で、自然の力を操って様々な不思議な現象を起こすことができます。しかしあなたは自然のない場所では力を振るうことができず、街や建物など人の手が入った場所では大幅に弱体化してしまいます。とくにクエストダンジョンの攻略は非常に困難になるので十分に力をつけてから挑みましょう。あなたは魔法を一領域習得可能ですが接近戦の適性は低めです。",
+		"You are an ancient youkai called a 'chimi', capable of causing mysterious phenomena through manipulating forces of nature. However, you are unable to use your power in places without natural terrain, and are greatly weakened in artificial locations like towns or buildings. In particular, clearing quest dungeons will be an immense ordeal - make sure you're powerful enough before going in. You can study one realm of magic, but your melee aptitude is low.") },
 	{ FALSE,_("道神　馴子", "Nareko Michigami"),CLASS_NAREKO,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
 		"" },
 	{ FALSE,_("ユイマン・浅間", "Yuiman Asama"),CLASS_YUIMAN,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
@@ -6797,6 +6799,10 @@ void extra_mode_score_mult(int *mult, int class_idx)
 
 	case CLASS_CHIMATA:
 		mod = 200;
+		break;
+
+	case CLASS_CHIMI:
+		mod = 175;
 		break;
 
 	default:

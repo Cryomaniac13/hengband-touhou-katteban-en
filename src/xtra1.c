@@ -4679,7 +4679,8 @@ static void calc_bo_player_gain_flgs(u32b flgs[TR_FLAG_SIZE], int pval_src, int 
 	if (have_flag(flgs, TR_STEALTH)) p_ptr->skill_stl += pv;
 	if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_srh += pv * 5;
 
-	if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += pv * 5;
+	//知覚パラメータを廃止
+	//if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += pv * 5;
 	if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += pv;
 	if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += pv * 20;
 
@@ -4931,7 +4932,7 @@ void calc_bonuses(void)
 	/* Base skill -- searching frequency */
 	///mod140105 種族変更（準備）playe_race.r_fosを削除
 	//p_ptr->skill_fos = tmp_rp_ptr->r_fos + cp_ptr->c_fos + ap_ptr->a_fos;
-	p_ptr->skill_fos = tmp_rp_ptr->r_srh + cp_ptr->c_srh + ap_ptr->a_srh;
+	p_ptr->skill_fos = tmp_rp_ptr->r_srh + cp_ptr->c_srh + ap_ptr->a_srh; //一応残しておくがもうどこからも使われていないはず　いずれ何か別の技能値を用意したくなったら使う
 
 	/* Base skill -- combat (normal) */
 	p_ptr->skill_thn = tmp_rp_ptr->r_thn + cp_ptr->c_thn + ap_ptr->a_thn;
@@ -4954,7 +4955,7 @@ void calc_bonuses(void)
 		p_ptr->skill_sav += deity_table[p_ptr->race_multipur_val[3]].r_sav;
 		p_ptr->skill_stl += deity_table[p_ptr->race_multipur_val[3]].r_stl;
 		p_ptr->skill_srh += deity_table[p_ptr->race_multipur_val[3]].r_srh;
-		p_ptr->skill_fos += deity_table[p_ptr->race_multipur_val[3]].r_graze;
+		//p_ptr->skill_fos += deity_table[p_ptr->race_multipur_val[3]].r_graze;
 		p_ptr->skill_thn += deity_table[p_ptr->race_multipur_val[3]].r_thn;
 		p_ptr->skill_thb += deity_table[p_ptr->race_multipur_val[3]].r_thb;
 		p_ptr->skill_tht += deity_table[p_ptr->race_multipur_val[3]].r_thb;
@@ -6652,6 +6653,58 @@ void calc_bonuses(void)
 		if (plev > 29) p_ptr->warning = TRUE;
 		break;
 
+	case CLASS_CHIMI:
+		//フロアの自然が少ないと弱体 0-3 3はペナルティなし
+		switch (p_ptr->magic_num2[0])
+		{
+		case 0:
+			for (i = 0; i < 6; i++) p_ptr->stat_add[i] -= 4;
+			p_ptr->skill_stl -= 4;
+			p_ptr->skill_dev -= 8;
+			p_ptr->skill_sav -= 8;
+
+			p_ptr->to_a -= 20;
+			p_ptr->dis_to_a -= 20;
+			p_ptr->to_h[0] -= 20;
+			p_ptr->to_h[1] -= 20;
+			p_ptr->to_h_m -= 20;
+			p_ptr->dis_to_h[0] -= 20;
+			p_ptr->dis_to_h[1] -= 20;
+
+			break;
+		case 1:
+			for (i = 0; i < 6; i++) p_ptr->stat_add[i] -= 2;
+			p_ptr->skill_stl -= 2;
+			p_ptr->skill_dev -= 4;
+			p_ptr->skill_sav -= 4;
+			p_ptr->to_a -= 10;
+			p_ptr->dis_to_a -= 10;
+			p_ptr->to_h[0] -= 10;
+			p_ptr->to_h[1] -= 10;
+			p_ptr->to_h_m -= 10;
+			p_ptr->dis_to_h[0] -= 10;
+			p_ptr->dis_to_h[1] -= 10;
+			break;
+		case 2:
+			for (i = 0; i < 6; i++) p_ptr->stat_add[i] -= 1;
+			p_ptr->skill_stl -= 1;
+			p_ptr->skill_dev -= 2;
+			p_ptr->skill_sav -= 2;
+			p_ptr->to_a -= 5;
+			p_ptr->dis_to_a -= 5;
+			p_ptr->to_h[0] -= 5;
+			p_ptr->to_h[1] -= 5;
+			p_ptr->to_h_m -= 5;
+			p_ptr->dis_to_h[0] -= 5;
+			p_ptr->dis_to_h[1] -= 5;
+			break;
+
+		}
+
+
+
+		break;
+
 
 	default:
 		break;
@@ -8215,7 +8268,7 @@ void calc_bonuses(void)
 			p_ptr->skill_sav += 10;
 			p_ptr->skill_stl += 1;
 			p_ptr->skill_srh += 5;
-			p_ptr->skill_fos += 5;
+			//p_ptr->skill_fos += 5;
 			p_ptr->skill_dig += 20;
 
 		}
@@ -8378,7 +8431,7 @@ void calc_bonuses(void)
 			if (have_flag(flgs, TR_MAGIC_MASTERY))    p_ptr->skill_dev += 8 * tmp_addstat;
 			if (have_flag(flgs, TR_STEALTH)) p_ptr->skill_stl += tmp_addstat;
 			if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_srh += tmp_addstat * 5;
-			if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += tmp_addstat * 5;
+			//if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += tmp_addstat * 5;
 			if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += tmp_addstat;
 			if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += (tmp_addstat * 10);
 			if (have_flag(flgs, TR_SPEED)) new_speed += tmp_addstat;
@@ -8687,7 +8740,7 @@ void calc_bonuses(void)
 
 
 
-			if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5 / 2);
+			//if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5 / 2);
 			if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += pv / 2;
 			if (have_flag(flgs, TR_TUNNEL)) p_ptr->skill_dig += (pv * 10);
 			if (have_flag(flgs, TR_SPEED)) new_speed += pv / 2;
@@ -8764,7 +8817,7 @@ void calc_bonuses(void)
 		if (have_flag(flgs, TR_SAVING)) p_ptr->skill_sav += pv * 4;
 
 		/* Affect searching frequency (factor of five) */
-		if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5);
+		//if (have_flag(flgs, TR_SEARCH)) p_ptr->skill_fos += (pv * 5);
 
 		/* Affect infravision */
 		if (have_flag(flgs, TR_INFRA)) p_ptr->see_infra += pv;
@@ -9548,7 +9601,7 @@ void calc_bonuses(void)
 			p_ptr->skill_dev -= 12;
 			p_ptr->skill_stl -= 3;
 			p_ptr->skill_srh -= 8;
-			p_ptr->skill_fos -= 8;
+			//p_ptr->skill_fos -= 8;
 			p_ptr->skill_dig -= 40;
 			p_ptr->to_h[0] -= 20;
 			p_ptr->to_h[1] -= 20;
@@ -9574,7 +9627,7 @@ void calc_bonuses(void)
 			p_ptr->skill_dev -= 20;
 			p_ptr->skill_stl -= 4;
 			p_ptr->skill_srh -= 16;
-			p_ptr->skill_fos -= 16;
+			//p_ptr->skill_fos -= 16;
 			p_ptr->skill_dig -= 80;
 			p_ptr->to_h[0] -= 40;
 			p_ptr->to_h[1] -= 40;
@@ -10011,7 +10064,7 @@ void calc_bonuses(void)
 		p_ptr->skill_dev -= 20;
 		p_ptr->skill_sav -= 30;
 		p_ptr->skill_srh -= 15;
-		p_ptr->skill_fos -= 15;
+		//p_ptr->skill_fos -= 15;
 		p_ptr->skill_tht -= 20;
 		p_ptr->skill_dig += 30;
 	}
@@ -11499,7 +11552,7 @@ void calc_bonuses(void)
 	p_ptr->skill_srh += adj_general[p_ptr->stat_ind[A_DEX]] + adj_general[p_ptr->stat_ind[A_INT]];
 
 	/* Affect Skill -- search frequency (Level, by Class) */
-	p_ptr->skill_fos += (cp_ptr->x_fos * p_ptr->lev / 10);
+	//p_ptr->skill_fos += (cp_ptr->x_fos * p_ptr->lev / 10);
 
 	/* Affect Skill -- combat (normal) (Level, by Class) */
 	p_ptr->skill_thn += ((cp_ptr->x_thn * p_ptr->lev / 10) + (ap_ptr->a_thn * p_ptr->lev / 50));
@@ -11523,7 +11576,7 @@ void calc_bonuses(void)
 		p_ptr->skill_dev += rank * 3 + rank * lv / 10;
 		p_ptr->skill_sav += rank * 3 + rank * lv / 10;
 		p_ptr->skill_srh += rank * 2 + rank * lv / 20;
-		p_ptr->skill_fos += rank * 2 + rank * lv / 20;
+		//p_ptr->skill_fos += rank * 2 + rank * lv / 20;
 		p_ptr->skill_stl += rank / 2;
 		p_ptr->skill_thn += rank * 5 + rank * lv / 5;
 		p_ptr->skill_thb += rank * 5 + rank * lv / 5;
@@ -11539,7 +11592,7 @@ void calc_bonuses(void)
 		p_ptr->skill_dev += rank * 2 + rank * lv / 10;
 		p_ptr->skill_sav += rank * 2 + rank * lv / 10;
 		p_ptr->skill_srh += rank * 2 + rank * lv / 25;
-		p_ptr->skill_fos += rank * 2 + rank * lv / 25;
+		//p_ptr->skill_fos += rank * 2 + rank * lv / 25;
 		p_ptr->skill_stl += rank / 3;
 		p_ptr->skill_thn += rank * 5 + rank * lv / 5;
 		p_ptr->skill_thb += rank * 5 + rank * lv / 5;
@@ -11555,7 +11608,7 @@ void calc_bonuses(void)
 		p_ptr->skill_sav -= cp_ptr->c_sav / 3 + (cp_ptr->x_sav * p_ptr->lev / 30);
 		p_ptr->skill_stl -= cp_ptr->c_stl / 3 + (cp_ptr->x_stl * p_ptr->lev / 30);
 		p_ptr->skill_srh -= cp_ptr->c_srh / 3 + (cp_ptr->x_srh * p_ptr->lev / 30);
-		p_ptr->skill_fos -= cp_ptr->c_fos / 3 + (cp_ptr->x_fos * p_ptr->lev / 30);
+		//p_ptr->skill_fos -= cp_ptr->c_fos / 3 + (cp_ptr->x_fos * p_ptr->lev / 30);
 		p_ptr->skill_thn -= cp_ptr->c_thn / 3 + (cp_ptr->x_thn * p_ptr->lev / 30);
 		p_ptr->skill_thb -= cp_ptr->c_thb / 3 + (cp_ptr->x_thb * p_ptr->lev / 30);
 		p_ptr->skill_tht -= cp_ptr->c_thb / 3 + (cp_ptr->x_thb * p_ptr->lev / 30);

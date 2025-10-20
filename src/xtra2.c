@@ -437,6 +437,10 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_UBAME) return TRUE;
 			else return FALSE;
 
+		case CLASS_CHIMI:
+			if (r_idx == MON_CHIMI) return TRUE;
+			else return FALSE;
+
 	}
 
 
@@ -3478,6 +3482,12 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 			a_idx = ART_EXCALIBUR_J;
 			chance = 50;
 			break;
+
+		case MON_ARIYA:
+			a_idx = ART_STONEMASK;
+			chance = 75;
+			break;
+
 
 			///item mon 変更予定？
 		///del131224 酒呑童子は削除するかもしれないのでドロップ処理も消しとく

@@ -2747,7 +2747,7 @@ static void display_player_various(void)
 	xsav = p_ptr->skill_sav;
 	xstl = p_ptr->skill_stl;
 	xsrh = p_ptr->skill_srh;
-	xfos = p_ptr->skill_fos;
+	//xfos = p_ptr->skill_fos;
 
 	desc = likert(xthn, 12);
 	display_player_one_line(ENTRY_SKILL_FIGHT, desc, likert_color);
@@ -2762,8 +2762,8 @@ static void display_player_various(void)
 	desc = likert((xstl > 0) ? xstl : -1, 1);
 	display_player_one_line(ENTRY_SKILL_STEALTH, desc, likert_color);
 
-	/*:::*/
-	desc = likert(xfos, 6);
+	//「知覚」パラメータの廃止
+	//desc = likert(xfos, 6);
 	//display_player_one_line(ENTRY_SKILL_PERCEP, desc, likert_color);
 
 	desc = likert(xsrh, 6);
@@ -6657,6 +6657,19 @@ c_put_str(TERM_YELLOW, "現在", row, stat_col+35);
 		else if (p_ptr->pclass == CLASS_LARVA)
 		{
 			c_adj += p_ptr->lev / 15;
+		}
+		//チミ　自然ランクによるパラメータ弱体化
+		else if (p_ptr->pclass == CLASS_CHIMI)
+		{
+			switch (p_ptr->magic_num2[0])
+			{
+			case 0:
+				c_adj -= 4; break;
+			case 1:
+				c_adj -= 2; break;
+			case 2:
+				c_adj -= 1; break;
+			}
 		}
 
 		//v1.1.21 兵士パラメータアップ　獣人満月と累積するようにelseはつけない

@@ -2220,6 +2220,13 @@ msg_print("床上のアイテムが呪文を跳ね返した。");
 	/* Redraw */
 	lite_spot(py, px);
 
+	//v2.1.2 チミ　フロアの自然地形をカウントするフラグをON
+	if (p_ptr->pclass == CLASS_CHIMI)
+	{
+		flag_chimi_need_count_feat = TRUE;
+	}
+
+
 	return TRUE;
 }
 
@@ -6897,6 +6904,21 @@ bool dimension_door( int mode)
 		msg_print(_("そこには水がないようだ。", "There's no water there."));
 		return FALSE;
 	}
+
+	//v2.1.2 チミ「まつろわぬ沢の気」による水地形テレポート　範囲制限
+	if ((mode == D_DOOR_MURASA) && p_ptr->pclass == CLASS_CHIMI)
+	{
+		int range = p_ptr->magic_num1[FF_WATER] / 20;
+		if (range < 5) range = 5;
+		if (range > 100) range = 100;
+
+		if (distance(y, x, py, px) > range)
+		{
+			msg_print(_("そこまで遠くに飛ぶことはできない。", "You can't move that far."));
+			return FALSE;
+		}
+	}
+
 	if (dimension_door_aux(x, y, mode)) return TRUE;
 
 #ifdef JP
@@ -8531,4 +8553,202 @@ void	add_honey(void)
 
 }
 
+
+
+
+//v2.1.2 封獣チミのプレイ時にフロアの森などの地形をカウントする
+//@の弱体化の状態をmagic_num2[0]に記録している
+//フロアの特定地形の個数をmagic_num1[]に記録している
+void chimi_count_feat(bool msg)
+{
+	int x, y,max_x,max_y;
+
+	//@の弱体化の状態をmagic_num2[0]に記録している
+	int old_stat = p_ptr->magic_num2[0];
+	int new_stat;
+	int nature_power = 0;
+	//各地形の個数
+	int tree_num = 0;
+	int water_num = 0;
+	int lava_num = 0;
+
+	//カウントが必要なフラグが立ってない場合終了
+	if (!flag_chimi_need_count_feat) return;
+	if (p_ptr->pclass != CLASS_CHIMI) return;
+
+	//フロアの最外グリッド(入れない壁を一列含む)
+	max_y = cur_hgt-1;
+	max_x = cur_wid-1;
+
+	//クエストダンジョンでは本来のエリアより広い範囲が永久壁で埋められているのでそれをカウントしないよう永久壁のみの列/行を省いてmax_x/yを変更する
+	if (p_ptr->inside_quest && is_fixed_quest_idx(p_ptr->inside_quest))
+	{
+		bool flag_find_space = FALSE;
+
+		for (y = max_y - 1; y > 1; y--)
+		{
+			for (x = 1; x < max_x; x++)
+			{
+				cave_type* c_ptr = &cave[y][x];
+				if (!cave_have_flag_grid(c_ptr, FF_PERMANENT))
+				{
+					flag_find_space = TRUE;
+					break;
+				}
+			}
+			if (flag_find_space)
+				break;
+		}
+		max_y = y + 1;
+		flag_find_space = FALSE;
+
+		for (x = max_x - 1; x > 1; x--)
+		{
+			for (y = 1; y < max_y; y++)
+			{
+				cave_type* c_ptr = &cave[y][x];
+				if (!cave_have_flag_grid(c_ptr, FF_PERMANENT))
+				{
+					flag_find_space = TRUE;
+					break;
+				}
+			}
+			if (flag_find_space)
+				break;
+		}
+		max_x = x + 1;
+
+		if (cheat_room) msg_format("new_max_xy: %d / %d", max_x, max_y);
+
+	}
+
+
+	//自然の地形をカウントする
+	for (y = 1; y < max_y; y++)
+	{
+		for (x = 1; x < max_x; x++)
+		{
+			cave_type* c_ptr = &cave[y][x];
+
+			if (cave_have_flag_grid(c_ptr, FF_MOUNTAIN))//このMOUNTAINは地上の山地形を指しダンジョン内の進入不可地形の山は含まない
+			{
+				nature_power += 3;
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_MORE) || cave_have_flag_grid(c_ptr, FF_LESS))//階段は計算に含まない
+			{
+				continue;
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_PERMANENT)) //永久壁や建物入口やパターンなどは自然ランク大幅低下
+			{
+				nature_power -= 50;
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_WALL))//それ以外の壁は以降の判定をスキップ　これの有無でどれくらい処理が早くなるか知らんが
+			{
+				continue;
+			}
+			else if (is_glyph_grid(c_ptr))//守りのルーンは大幅プラスとする
+			{
+				nature_power += p_ptr->lev * 5;
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_TREE))
+			{
+				nature_power += 6;
+				tree_num++;
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_WATER))
+			{
+				if (cave_have_flag_bold(y, x, FF_DEEP))
+					nature_power += 4;
+				else
+					nature_power += 2;
+
+				water_num++;
+
+			}
+			else if (cave_have_flag_grid(c_ptr, FF_LAVA) ||
+				cave_have_flag_grid(c_ptr, FF_COLD_PUDDLE) || cave_have_flag_grid(c_ptr, FF_ELEC_PUDDLE) ||
+				cave_have_flag_grid(c_ptr, FF_ACID_PUDDLE) || cave_have_flag_grid(c_ptr, FF_POISON_PUDDLE))
+			{
+				if (cave_have_flag_bold(y, x, FF_DEEP))
+					nature_power += 2;
+				else
+					nature_power += 1;
+
+				if (cave_have_flag_grid(c_ptr, FF_LAVA)) lava_num++;
+
+			}
+
+			else if (cave_have_flag_bold(y, x, FF_OIL_FIELD)) //石油
+			{
+				nature_power -= 20;
+			}
+			else if (cave_have_flag_bold(y, x, FF_GLASS)) //ガラス地形
+			{
+				nature_power -= 10;
+			}
+
+			else if (cave[y][x].info & CAVE_ICKY) //vaultや特殊部屋など
+			{
+				nature_power -= 3;
+			}
+
+			//あまり数値が低いともうカウントをやめようかと思ったが永遠亭など一部のマップで判定がズレたので無しにする
+			//if (nature_power < -10000) break;
+		}
+
+		//if (nature_power < -10000) break;
+
+	}
+
+	//EXTRAではフロアに建物があってランクを下げるので多少補正
+	if (EXTRA_MODE) nature_power += 1000;
+
+	//ピラミッド内では常に最大
+	if (dungeon_type == DUNGEON_ASAMA) new_stat = 3;
+	else if (nature_power >10000) new_stat = 3;
+	else if (nature_power >  500) new_stat = 2;
+	else if (nature_power > -500) new_stat = 1;
+	else new_stat = 0;
+
+	if (cheat_room) msg_format("nature_power:%d tree:%d water:%d lava:%d", nature_power, tree_num, water_num, lava_num);
+
+	//フロアの特定地形の個数をmagic_num1[]に記録している
+	p_ptr->magic_num1[FF_TREE] = tree_num;
+	p_ptr->magic_num1[FF_WATER] = water_num;
+	p_ptr->magic_num1[FF_LAVA] = lava_num;
+
+	//弱体ランクが変わった場合パラメータの再計算が必要
+	if (old_stat != new_stat)
+	{
+		if (msg)
+		{
+			if (dungeon_type == DUNGEON_ASAMA)
+				msg_print(_("ここは異常な場所なのに過ごしやすい。まるで何かに守られているようだ。",
+						"This place seems odd yet comfortable. It's almost like something is protecting you."));
+			else if (new_stat == 3)
+				msg_print(_("ここは自然が豊かで心地よい。",
+						"Force of nature is abundant in this place; it feels pleasant."));
+			else if (new_stat == 2)
+				msg_print(_("ここでは自然の力をいくらか感じられる。",
+						"You sense some amount of force of nature here."));
+			else if (new_stat == 1)
+				msg_print(_("自然の力をほとんど感じられない。元気が出ない...",
+						"You can hardly sense force of nature. You don't feel lively..."));
+			else
+				msg_print(_("ここでは自然の力を全く感じられない！力が抜ける！",
+						"You don't sense force of nature here at all! You're losing your power!"));
+		}
+
+		//新たな弱体ランクを記録
+		p_ptr->magic_num2[0] = new_stat;
+		//パラメータ再計算
+		p_ptr->update |= (PU_BONUS | PU_HP | PU_MANA);
+		p_ptr->redraw |= (PR_HP | PR_MANA | PR_STATS);
+		handle_stuff();
+
+	}
+
+	//この関数が呼ばれるフラグをOFF
+	flag_chimi_need_count_feat = FALSE;
+}
 

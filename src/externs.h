@@ -2526,7 +2526,7 @@ extern const player_seikaku seikaku_info_special[MAX_SEIKAKU_SPECIAL];
 
 extern cptr skill_exp_desc[SKILL_EXP_MAX];
 
-extern int mass_genocide_3(int rad, bool geno_friend, bool geno_unique);
+extern int mass_genocide_3(int rad, bool geno_friend, bool geno_unique,int mode);
 
 extern bool straygod_job_adviser(void);
 
@@ -2805,3 +2805,10 @@ extern bool hack_flag_darkness_power;
 //v2.1.1
 extern bool set_res_blast(int v);
 extern bool set_rob_mana(int v);
+
+//v2.1.2
+extern bool flag_chimi_need_count_feat;
+extern void chimi_count_feat(bool msg);
+
+
+

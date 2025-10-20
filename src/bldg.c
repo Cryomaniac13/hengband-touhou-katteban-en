@@ -7904,12 +7904,12 @@ bool check_quest_unique_text(void)
 			else
 			{
 #ifdef JP
-				strcpy(quest_text[line++], "山童の娘「む、天狗様・・");
-				strcpy(quest_text[line++], "・・実はこの近くに山を荒らす余所者のアジトがあるのです。");
+				strcpy(quest_text[line++], "山童の娘「む、天狗様ではありませんか。");
+				strcpy(quest_text[line++], "実はこの近くに山を荒らす余所者のアジトがあるのです。");
 				strcpy(quest_text[line++], "何とかして下さいませんか。」");
 #else
-                strcpy(quest_text[line++], "Yamawaro - 'Ugh, a tengu...");
-				strcpy(quest_text[line++], "...You know, there are some strangers living in a nearby hideout");
+                strcpy(quest_text[line++], "Yamawaro - 'Ugh, you're a tengu?");
+				strcpy(quest_text[line++], "You know, there are some strangers living in a nearby hideout");
 				strcpy(quest_text[line++], "that cause a ruckus on the mountain. Could you do something about it?'");
 #endif
 			}

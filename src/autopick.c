@@ -1174,7 +1174,8 @@ static bool is_autopick_aux(object_type *o_ptr, autopick_type *entry, cptr o_nam
 	/*** Weapons which dd*ds is more than nn ***/
 	if (IS_FLG(FLG_MORE_DICE))
 	{
-		if (o_ptr->dd * o_ptr->ds < entry->dice)
+		//v2.1.2 •ŠíˆÈŠO‚Í”ñ‘ÎÛ‚É‚·‚é
+		if (!object_is_weapon_ammo(o_ptr) || o_ptr->dd * o_ptr->ds < entry->dice)
 			return FALSE;
 	}
 
@@ -1750,6 +1751,10 @@ static bool is_opt_confirm_destroy(object_type *o_ptr)
 		{
 			if (o_ptr->tval == TV_FLASK)
 				return FALSE;
+		}
+		else if (p_ptr->pclass == CLASS_CHIMI)
+		{
+			if (o_ptr->tval == TV_MATERIAL && o_ptr->sval == SV_MATERIAL_STONE) return FALSE;
 		}
 		else if (CHECK_ABLCARD_DEALER_CLASS)
 		{

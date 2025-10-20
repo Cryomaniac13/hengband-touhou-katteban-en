@@ -3817,7 +3817,7 @@ void exbldg_search_around(void)
 
 						prt(_("星神として、行く手の闇を払ってやろう！",
                             "As the god of stars, I shall drive away the darkness!'"),7,21);
-						mass_genocide_3(0, FALSE, TRUE);
+						mass_genocide_3(0, FALSE, TRUE,0);
 						wiz_lite(FALSE);
 
 						flag_done = TRUE;
