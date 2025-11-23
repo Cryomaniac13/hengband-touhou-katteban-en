@@ -5,7 +5,7 @@ did was translating it into English and putting it on GitHub; it was
 originally available through the author's website.
 
 Here's the author's page with most recent build available:
-http://www.miyamasa.net/heng_th_katte.html
+https://gensoband.main.jp/index.html
 
 Keep in mind the website blocks several IP ranges; try using a VPN/proxy
 if you can't normally access it.
