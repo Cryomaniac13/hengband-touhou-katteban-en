@@ -1673,7 +1673,7 @@ static void check_music(void)
 		switch(spell)
 		{
 		case MUSIC_NEW_MYSTIA_YAZYAKU: //ミスティア　夜雀の歌
-			need_mana = 8; break;
+			need_mana = 4; break;
 		case MUSIC_NEW_MYSTIA_MYSTERIOUS: //ミスティア　ミステリアスソング
 			need_mana = 24; break;
 		case MUSIC_NEW_MYSTIA_CHORUSMASTER: //ミスティア　真夜中のコーラスマスター

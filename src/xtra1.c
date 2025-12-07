@@ -6706,6 +6706,18 @@ void calc_bonuses(void)
 		break;
 
 
+	case CLASS_NAREKO:
+
+		p_ptr->see_inv = TRUE;
+		p_ptr->resist_holy = TRUE;
+		if (plev >  9) p_ptr->free_act = TRUE;
+		if (plev > 19) p_ptr->esp_human = TRUE;
+		if (plev > 29) p_ptr->resist_lite = TRUE;
+		if (plev > 34) p_ptr->warning = TRUE;
+		if (plev > 39) p_ptr->resist_neth = TRUE;
+		break;
+
+
 	default:
 		break;
 
@@ -10341,6 +10353,14 @@ void calc_bonuses(void)
 			penalty2 = MIN(0, penalty2);
 			p_ptr->to_a += 10;
 			p_ptr->dis_to_a += 10;
+		}
+		//オシリス神セットボーナス
+		else if ((inventory[INVEN_RARM].name1 == ART_HQA) && (inventory[INVEN_LARM].name1 == ART_NXXW)
+			|| (inventory[INVEN_RARM].name1 == ART_NXXW) && (inventory[INVEN_LARM].name1 == ART_HQA))
+		{
+			penalty1 = MIN(0, penalty1);
+			penalty2 = MIN(0, penalty2);
+			new_speed += 3;
 		}
 
 		else

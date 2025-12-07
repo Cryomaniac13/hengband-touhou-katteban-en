@@ -8402,9 +8402,13 @@ msg_print("生命力が体から吸い取られた気がする！");
 			lose_exp(p_ptr->exp / 16);
 			if (!one_in_(6)) break;
 		case 13: case 14: case 15: case 19: case 20:
-			if (stop_ty || (p_ptr->free_act && (randint1(125) < p_ptr->skill_sav)) || (RACE_RESIST_STATUE) || ( p_ptr->pseikaku == SEIKAKU_BERSERK) || (p_ptr->pclass == CLASS_AUNN))
+			if (stop_ty || (p_ptr->free_act && (randint1(125) < p_ptr->skill_sav)) || (p_ptr->pseikaku == SEIKAKU_BERSERK))
 			{
-				/* Do nothing */ ;
+				msg_print(_("あなたは彫像化の呪いを跳ね除けた！", "You avoid the petrification curse!"));
+			}
+			else if ( (RACE_RESIST_STATUE) || (p_ptr->pclass == CLASS_AUNN) || (p_ptr->pclass == CLASS_EIKI) || (p_ptr->pclass == CLASS_NAREKO))
+			{
+				msg_print(_("あなたは元々石なので彫像化しなかった！", "Since you already were made of stone, you weren't petrified!"));
 			}
 			else
 			{

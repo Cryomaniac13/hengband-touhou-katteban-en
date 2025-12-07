@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 1
-#define H_VER_PATCH 2
+#define H_VER_PATCH 3
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -2045,6 +2045,8 @@
 #define ART_ENOKO			349
 #define ART_IKKYU			350
 #define ART_NIMUE_RING			351
+#define ART_NXXW			354
+#define ART_HQA				355
 
 
 /*** Ego-Item indexes (see "lib/edit/e_info.txt") ***/
@@ -2351,6 +2353,7 @@
 #define ACT_SUMMON_HOUND        75
 #define ACT_SUMMON_DAWN         76
 #define ACT_SUMMON_OCTOPUS      77
+#define ACT_SUMMON_MONSTERS		78
 /* 76 - 80 unused */
 #define ACT_CHOIR_SINGS         80
 #define ACT_CURE_LW             81
@@ -3597,6 +3600,7 @@
 #define SV_COMPOUND_MICRO_OCSIGEN		24 //ミクロオキシゲン
 #define SV_COMPOUND_VLADIMIR			25 //広域立体制圧用爆裂焼夷榴弾弾筒(合成用ではない)
 #define SV_COMPOUND_MEDICINE_CHEST		26 //メディスンチェスト(投擲)に使うダミーアイテム
+#define SV_COMPOUND_BUGKILLER			27 //蚊除けの薬草酒
 
 
 //真・勝利後に香霖堂から買える珍品のSVAL Tval:82
@@ -4046,6 +4050,9 @@
 /*
  * Legal restrictions for "summon_specific()"
  */
+
+#define SUMMON_ALL					1
+
 #define SUMMON_ANT                  11
 #define SUMMON_SPIDER               12
 #define SUMMON_HOUND                13
@@ -4337,8 +4344,10 @@
 #define GF_HOLY_WATER	168 //破邪弱点にも効く水属性
 #define GF_TIMED_SHARD	169 //「遅効性の管狐弾」専用
 
+#define GF_DISP_BUGS	170 //虫取り属性
+
 //↑の最大+1
-#define MAX_GF			170
+#define MAX_GF			171
 //ここを追加変更するときspell-xx.prfとgf_desc[]も変更すること
 //ときどきproject()にある紫の境界操作関係の処理を手直しする
 
@@ -5195,7 +5204,7 @@
 #define RF7_SELF_DARK_1         0x00020000  /* Monster darkens itself */
 #define RF7_HAS_DARK_2          0x00040000  /* Monster carries darkness */
 #define RF7_SELF_DARK_2         0x00080000  /* Monster darkens itself */
-#define RF7_FULL_MOON           0x00100000  /*:::満月時パワーアップ*/
+#define RF7_ALWAYS_RUN          0x00100000  //v2.1.3 常に逃げるモンスター　前バージョンまでここにはFULL_MOONフラグがあったが没にした
 #define RF7_FROM_HELL           0x00200000  /*:::死神*/
 #define RF7_VARIABLE			0x00400000	/*:::可変パラメータモンスター*/
 #define RF7_DOPPELGANGER		0x00800000	//ドッペルゲンガー
@@ -7234,10 +7243,7 @@ extern int PlayerUID;　
 #define MON_ARIYA			1412
 #define MON_NINA			1413
 
-
-
-
-#define MON_IDX_MAX			1414	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
+#define MON_IDX_MAX			1418	//最大IDX+1 この数値をちゃんと増やさないと音楽再生のところでバグるかも
 
 
 
@@ -8928,6 +8934,8 @@ extern int PlayerUID;　
 #define CHIMATA_CARD_RANK	(p_ptr->pclass == CLASS_CHIMATA ? p_ptr->magic_num2[255] : 0)
 #define CHECK_CHIMATA_HAVE_CARD(CARD_IDX) (p_ptr->pclass == CLASS_CHIMATA ? (p_ptr->magic_num2[(CARD_IDX)]) : 0)
 
+//v2.1.3 慧ノ子のトラップリスト長
+#define ENOKO_TRAP_LIST_MAX	17
 
 #define SCORES_RAW_FILE "scores.raw"
 /*#ifdef FIX_SCORES_FORMAT

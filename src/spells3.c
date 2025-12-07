@@ -4335,6 +4335,14 @@ bool potion_smash_effect2(int who, int y, int x, int sval)
 		angry = TRUE;
 		break;
 
+	case SV_COMPOUND_BUGKILLER: //v2.1.3 ‰áœ‚¯‚Ì–ò‘Žð
+
+		project_hack3(0, y, x, GF_DISP_BUGS, 1, 150, 150);
+
+		angry = TRUE;
+		break;
+
+
 	default:
 		;//‰½‚à‚µ‚È‚¢
 	}
@@ -7972,6 +7980,8 @@ bool energy_drain(void)
 		if (!monster_living(r_ptr))
 		{
 			msg_format(_("%s‚Í¶–½—Í‚ðŽ‚½‚È‚¢‚æ‚¤‚¾B", "%s does not have life force."), m_name);
+
+			return TRUE;//v2.1.3C³
 		}
 		if (r_ptr->flags2 & RF2_POWERFUL) fail = fail * 3 / 2;
 		if (r_ptr->flags1 & RF1_UNIQUE) fail *= 2;

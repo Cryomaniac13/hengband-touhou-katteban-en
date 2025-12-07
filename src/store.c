@@ -227,7 +227,7 @@ static cptr comment_nazgul_loss2[MAX_COMMENT_1] =
 static cptr comment_nitori_agree[MAX_COMMENT_1] =
 {
 	"「毎度ありー！」",
-	"「これからもぜひうちで頼むよ！」",
+	"「いやーΩ高い！」",
 	"「さあさあ、他には何か御入用で？」",
 	"店主は美味そうにきゅうりを食べている。",
 };
@@ -3311,7 +3311,11 @@ static void store_create(void)
 				level = MIN(127,tmp); //ダンジョン内BM
 			}
 
-
+			//v2.1.3 ときどき香霖堂に蚊除けの薬草酒が並ぶ
+			if (p_ptr->town_num == TOWN_KOURIN && one_in_(64))
+			{
+				i = lookup_kind(TV_COMPOUND, SV_COMPOUND_BUGKILLER);
+			}
 
 			//v1.1.86 商売上手な招き猫
 			level += lev_bonus;

@@ -2783,7 +2783,7 @@ extern bool	check_transportation_trap(monster_type *m_ptr, int power);
 
 //v2.0.12
 extern enoko_make_trap_type enoko_make_trap_list[];
-extern bool place_chosen_trap(int plev, bool only_beartrap);
+extern bool place_chosen_trap(int plev, int choose);
 
 //v2.0.14
 extern int calc_spell_caster_level(bool apply_berserker);

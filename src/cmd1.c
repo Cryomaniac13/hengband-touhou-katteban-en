@@ -3137,18 +3137,18 @@ bool place_chosen_trap_aux(int y, int x, int list_idx)
 //トラップを一覧から選択して＠の足元に設置する
 //慧ノ子のトラップ配置に使う。アイテムカードと将来の拡張性考慮のため職業を限定しない
 //plevは配置可能なトラップの制限に影響する。
-//only_beartrapはアイテムカード使用時に置かれるトラップがトラバサミに固定される。
-bool place_chosen_trap(int plev, bool only_beartrap)
+//v2.1.3 only_beartrapをchooseに変更しlist_idxを直接指定できるようにした。ここで選択するときは負の値を入れて呼ぶ
+bool place_chosen_trap(int plev, int choose)
 {
 
 	int i, list_idx;
 	int list_len = 0;
 	char c;
 
-	//設置できるトラップが1つだけのときトラップ一覧表示はしない
-	if (only_beartrap)
+	//トラップの種類が指定されたときはそれを使う
+	if (choose >= 0 && choose < ENOKO_TRAP_LIST_MAX)
 	{
-		list_idx = 0;
+		list_idx = choose;
 	}
 	else
 	{
@@ -3156,7 +3156,7 @@ bool place_chosen_trap(int plev, bool only_beartrap)
 		screen_save();
 		for (i = 1; i<22; i++)Term_erase(17, i, 255);
 		prt(_("どのトラップを配置しよう？", "Set up which trap?"), 2, 30);
-		for (i = 0; enoko_make_trap_list[i].player_level; i++)
+		for (i = 0; i < ENOKO_TRAP_LIST_MAX; i++)
 		{
 
 			if (enoko_make_trap_list[i].player_level > plev) break;
@@ -4338,7 +4338,8 @@ static void py_attack_aux(int y, int x, bool *fear, bool *mdeath, s16b hand, int
 
 		///mod140817 ミスティア鳥目処理
 	case CLASS_MYSTIA:
-		if(check_mon_blind(c_ptr->m_idx)) fuiuchi = TRUE;
+		//v2.1.3 歌っていないときにcheck_mon_blind()の中で鳥目処理の代わりに光学迷彩の判定が発動していたので歌っているときしか入らないよう修正
+		if(music_singing(MUSIC_NEW_MYSTIA_YAZYAKU) && check_mon_blind(c_ptr->m_idx)) fuiuchi = TRUE;
 		break;
 
 	case CLASS_NUE:

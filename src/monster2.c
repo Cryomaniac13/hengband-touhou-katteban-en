@@ -699,6 +699,14 @@ static bool summon_specific_aux(int r_idx)
 	/* Check our requirements */
 	switch (summon_specific_type)
 	{
+		//v2.1.3 summon_specific()をtype=0で呼んだら処理上ALLOW_UNIQUEフラグがなくてもユニークが出てきてしまうので、
+		// 「特に召喚制限はないけどユニークだけ禁止」を実現するためにこれを追加しておく
+		case SUMMON_ALL:
+		{
+			okay = TRUE;
+			break;
+		}
+
 		case SUMMON_ANT:
 		{
 			okay = (r_ptr->d_char == 'a');

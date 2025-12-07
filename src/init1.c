@@ -552,7 +552,7 @@ static cptr r_info_flags7[] =
 	"SELF_DARK_1",
 	"HAS_DARK_2",
 	"SELF_DARK_2",
-	"FULL_MOON",
+	"ALWAYS_RUN", //v2.1.3 FULL_MOONÇ©ÇÁïœçXÇµÇΩ
 	"FROM_HELL",
 	"VARIABLE",
 	"DOPPELGANGER",

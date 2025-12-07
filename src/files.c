@@ -409,6 +409,7 @@ static named_num gf_desc[] =
 	{ "GF_KANAMEISHI",			GF_KANAMEISHI },
 	{ "GF_HOLY_WATER",			GF_HOLY_WATER },
 	{ "GF_TIMED_SHARD",			GF_TIMED_SHARD },
+	{ "GF_DISP_BUGS",			GF_DISP_BUGS },
 
 
 	{NULL, 						0						}
@@ -4123,6 +4124,17 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 29)add_flag(flgs, TR_WARNING);
 		break;
 
+	case CLASS_NAREKO:
+		add_flag(flgs, TR_SEE_INVIS);
+		add_flag(flgs, TR_RES_HOLY);
+		if(plev > 9)add_flag(flgs, TR_FREE_ACT);
+		if (plev > 19)add_flag(flgs, TR_ESP_HUMAN);
+		if (plev > 29)add_flag(flgs, TR_RES_LITE);
+		if (plev > 34)add_flag(flgs, TR_WARNING);
+		if (plev > 39)add_flag(flgs, TR_RES_NETHER);
+		break;
+
+
 
 	default:
 		break; /* Do nothing */
@@ -5434,6 +5446,12 @@ static void tim_player_flags(u32b flgs[TR_FLAG_SIZE])
 	if (p_ptr->tim_speedster)
 	{
 		add_flag(flgs, TR_SPEEDSTER);
+	}
+
+	//v2.1.3 ”²‚¯‚Ä‚½‚Ì‚Å’Ç‰Á
+	if (p_ptr->tim_res_time)
+	{
+		add_flag(flgs, TR_RES_TIME);
 	}
 
 	///mod141218 ’Ç‰Á

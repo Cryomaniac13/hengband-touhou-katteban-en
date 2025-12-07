@@ -71,13 +71,13 @@ static cptr info_difficulty[5] ={
 	"通常のモードです。敵の体力が低く、またあまりひどいことは起こりにくいように調整されています。50階クリア時点でゲームクリア扱いになります。",
 	"敵がやや力強くなり、しばしば序盤から強敵が出現し、いくつかの事柄に不規則性が出ます。基本的に変愚蛮怒と同様の設定ですが、強いキャラクターでプレイすれば変愚蛮怒より簡単です。スコアはNORMALの2倍です。HARD以降でないと選択できない職業や性格が存在します。",
 	"敵が凄まじく力強く素早く注意深くなり、有り得ないほどの強敵が頻繁に出現し、理不尽なまでの様々な困難があなたに襲い掛かります。スコアはNORMALの8倍です。",
-	"極めて特殊なモードです。鉄獄1階からゲームが開始されそこから降りるのみです。レベルが上がりやすくなり、深層のアイテムが出現しやすくなり、消耗品が複数まとめて生成され、「アイテムカード」が出現します。ランダムクエストはなくなり、一定階ごとに特定のクエストダンジョンが生成されます。十全な準備を整えられない中で最善を尽くすことが求められます。スコアはNORMALの4倍です。"
+	"極めて特殊なモードです。鉄獄1階からゲームが開始されダンジョンから出たり階段を上ることはできません。レベルが上がりやすくなり、深層のアイテムが出現しやすくなり、消耗品が複数まとめて生成され、「アイテムカード」が出現します。ランダムクエストはなくなり、一定階ごとに特定のクエストダンジョンが生成されます。十全な準備を整えられない中で最善を尽くすことが求められます。スコアはNORMALの4倍です。"
 #else
     "Training mode. Your stats are increased, and you can continue playing even after getting a game over. This mode ends at floor 50. Significantly lowers score.",
 	"Normal mode. It's simpler compared to base Hengband - enemies have less health, and bad situations happen less often. Game is considered to be won once you clear floor 50.",
 	"Enemies are fairly tough, and dangerous enemies can appear early on. More or less similar to original Hengband, but it's easier compared to it if you're playing as a strong character. Score is doubled compared to Normal difficulty. There are some classes/personalities available only on Hard or higher.",
 	"Enemies are far stronger, faster and cautious; incredibly strong enemies pop up as you suffer other unreasonable troubles. Score is multiplied by eight compared to Normal difficulty.",
-	"Very special game mode. You start at floor 1 of Angband and can only go down. Experience level is easy to raise, out-of-depth items appear more frequently, consumables are generated in large quantities, and 'item cards' appear as well. There are no random quests, but special quest dungeons appear at certain levels. You have to do your best without being able to fully prepare. Score is quadrupled compared to Normal difficulty."
+	"Very special game mode. You start at floor 1 of Angband and cannot leave the dungeon or go upstairs. Experience level is easy to raise, out-of-depth items appear more frequently, consumables are generated in large quantities, and 'item cards' appear as well. There are no random quests, but special quest dungeons appear at certain levels. You have to do your best without being able to fully prepare. Score is quadrupled compared to Normal difficulty."
 #endif
 };
 
@@ -340,6 +340,8 @@ static cptr class_jouhou[MAX_CLASS] =
 "","","","","","","","","","",
 "","","","","",//class155
 "あなたは危険な魔法の森に居を構える変わり者です。近所の魔法使いが森の蜂を育てて蜂蜜を集めているのを見て真似してみることにしました。森の魔力で変質した蜂たちはあなたといくらかの意思疎通ができ、蜂蜜を集める以外にも色々と助けになってくれます。あなたには武器と魔法の心得が多少ありますがどちらも本職には遠く及びません。蜂たちをうまく使って生き延びましょう。ただし蜂への命令に失敗すると蜂は怒って攻撃してくるかもしれません。あなたに必要な能力は知能と魅力です。",//156:養蜂家
+"","","","","","","",
+
 #else
 
 "You are proficient at handling weapons and can pave your way by brute force. You're not just good at hacking and slashing, but have skill in using projectile weapons as well. You're rarely outmatched in one-on-one combat, but are very bad at everything else. In order to survive in the dungeon past midgame, you will have to do something about your underwhelming magic device skill and stealth.",
@@ -414,6 +416,8 @@ static cptr class_jouhou[MAX_CLASS] =
 "","","","","","","","","","",
 "","","","","",//class155
 "You are a weird person living in the dangerous Forest of Magic. After seeing its resident magician raise forest bees and collect their honey, you decided to do the same. The bees altered by the forest's magic are capable of communicating with you to some extent, and can come in handy for other purposes than just collecting honey. You have some knowledge of both weapon combat and magic, but you're nowhere as proficient as actual specialists. Use your bees well to survive. If you fail to give orders to your bees, they might get angry and attack you. You require intelligence and charisma stats.",//156:養蜂家
+"","","","","","","",
+
 #endif
 };
 
@@ -3346,6 +3350,9 @@ outfit_type birth_outfit_class[] = {
 
 	{ CLASS_UBAME,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_CHIMI,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+
+	{ CLASS_NAREKO,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_NAREKO,2,0,TV_HAMMER, SV_WEAPON_MACE,1 },
 
 	{-1,0,0,0,0,0} //終端dummy
 };
@@ -6654,8 +6661,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("封獣　チミ", "Chimi Houjuu"),CLASS_CHIMI,RACE_DAIYOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
 		_("あなたは魑魅(ちみ)と呼ばれる古い物の怪で、自然の力を操って様々な不思議な現象を起こすことができます。しかしあなたは自然のない場所では力を振るうことができず、街や建物など人の手が入った場所では大幅に弱体化してしまいます。とくにクエストダンジョンの攻略は非常に困難になるので十分に力をつけてから挑みましょう。あなたは魔法を一領域習得可能ですが接近戦の適性は低めです。",
 		"You are an ancient youkai called a 'chimi', capable of causing mysterious phenomena through manipulating forces of nature. However, you are unable to use your power in places without natural terrain, and are greatly weakened in artificial locations like towns or buildings. In particular, clearing quest dungeons will be an immense ordeal - make sure you're powerful enough before going in. You can study one realm of magic, but your melee aptitude is low.") },
-	{ FALSE,_("道神　馴子", "Nareko Michigami"),CLASS_NAREKO,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
-		"" },
+	{ TRUE,_("道神　馴子", "Nareko Michigami"),CLASS_NAREKO,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
+		_("あなたははるか昔に何者かに置かれた道祖神が自我を得た存在です。魔法を一領域巧みに扱うことができ、さらに罠や壁を作り出して敵を妨害する特技を持っています。また近接戦闘もそれほど苦手ではありません。あなたは謎掛けが好きで、人に謎をかけて惑わせると精神的に満たされてMPが回復します。",
+		"You are a dousojin that has been placed long ago by someone, and eventually obtained sentience. You can proficiently use a single magic realm, and you also have special abilities to create traps and walls, obstructing your foes. You're not that bad at melee combat, either. You love telling ridles; befuddling people with riddles gives you mental satisfaction, restoring MP.") },
 	{ FALSE,_("ユイマン・浅間", "Yuiman Asama"),CLASS_YUIMAN,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
 		"" },
 	//その他からこっちに持って来た

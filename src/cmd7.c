@@ -1768,7 +1768,7 @@ bool check_mon_blind(int m_idx)
 	{
 		chance = p_ptr->lev*6 + (p_ptr->skill_stl+5)*6;
 	}
-	else
+	else //ほかにとりの光学迷彩、その効果のあるEXTRAアイテムカード、サニー幻惑のとき
 	{
 		chance = p_ptr->lev*3 + (p_ptr->skill_stl+5)*3;
 		if(chance < 50) chance=50;

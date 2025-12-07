@@ -441,6 +441,11 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_CHIMI) return TRUE;
 			else return FALSE;
 
+		case CLASS_NAREKO:
+			if (r_idx == MON_NAREKO) return TRUE;
+			else return FALSE;
+
+
 	}
 
 
@@ -1196,6 +1201,9 @@ void check_quest_completion(monster_type *m_ptr)
 	object_type forge;
 	object_type *q_ptr;
 	monster_race *r_ptr = &r_info[m_ptr->r_idx];
+
+	//v2.1.3 夢日記内ではこの処理は行われない
+	if (p_ptr->inside_arena) return;
 
 	//一時的存在は関係ない
 	if(m_ptr->mflag & MFLAG_EPHEMERA) return;
@@ -2715,6 +2723,8 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 				object_prep(q_ptr, lookup_kind(TV_SOUVENIR, SV_SOUVENIR_MARISA_TUBO));
 			else if(one_in_(2) && randint1(dun_level) > 30)
 				object_prep(q_ptr, lookup_kind(TV_ALCOHOL, SV_ALCOHOL_MAMUSHI));
+			else if (one_in_(3) && randint1(dun_level) > 15)
+				object_prep(q_ptr, lookup_kind(TV_COMPOUND, SV_COMPOUND_BUGKILLER));
 			else if(one_in_(2) && randint1(dun_level) > 10)
 				object_prep(q_ptr, lookup_kind(TV_FOOD, SV_FOOD_STRANGE_BEAN));
 			else

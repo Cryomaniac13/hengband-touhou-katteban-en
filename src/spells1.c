@@ -6607,6 +6607,47 @@ note = "は恐怖しなかった。";
 			break;
 		}
 
+		//v2.1.3 蚊除けの薬草酒を割ったときの飛沫 a,c,w,Iシンボルにのみダメージ
+		case GF_DISP_BUGS:
+		{
+			if (r_ptr->flagsr & RFR_RES_ALL)
+			{
+				skipped = TRUE;
+				dam = 0;
+				break;
+			}
+			/* Only affect undead */
+			if (my_strchr("acwI", r_ptr->d_char))
+			{
+				/* Obvious */
+				if (seen) obvious = TRUE;
+
+				/* Learn about type */
+				if (randint1(r_ptr->level) < caster_lev) do_stun = randint0(4) + 4;
+
+				/* Message */
+#ifdef JP
+			///sysdel dead
+				note = "は身震いした。";
+				note_dies = "は倒れた。";
+#else
+				note = " shudders.";
+				note_dies = " is defeated.";
+#endif
+			}
+
+			/* Others ignore */
+			else
+			{
+				/* Irrelevant */
+				skipped = TRUE;
+
+				/* No damage */
+				dam = 0;
+			}
+
+			break;
+		}
 
 		/* Dispel evil */
 		///mod131231 混沌勢力を対象にしておく
@@ -9091,6 +9132,7 @@ note = "には効果がなかった。";
 	/* Quest monsters cannot be polymorphed */
 	if (r_ptr->flags1 & RF1_QUESTOR) do_poly = FALSE;
 
+	//乗馬中のモンスターは変身を受けない
 	if (p_ptr->riding && (c_ptr->m_idx == p_ptr->riding)) do_poly = FALSE;
 
 	/* "Unique" and "quest" monsters can only be "killed" by the player. */

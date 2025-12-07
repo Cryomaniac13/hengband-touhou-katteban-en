@@ -512,6 +512,9 @@ static int mon_will_run(int m_idx)
 	/* All "afraid" monsters will run away */
 	if (MON_MONFEAR(m_ptr)) return (TRUE);
 
+	//v2.1.3 「常に逃げるモンスター」の処理。今のところモンスター「肉人」のみ
+	if (r_ptr->flags7 & RF7_ALWAYS_RUN) return(TRUE);
+
 #ifdef ALLOW_TERROR
 
 	/* Nearby monsters will not become terrified */
@@ -3416,8 +3419,6 @@ bool mon_aisatsu(int m_idx)
 /*:::モンスター一体の行動処理*/
 /*:::増殖モンスターの最大数は階ごとに決まっている？*/
 /*:::恐怖したモンスターはドアを開けられない種族でもドアを開けるようになる？ドアを打ち破るしかできない種族でもドアを開けるようになる？よくわからん*/
-
-/*:::恐怖したモンスターの挙動を少し変えたい。＠と反対側の適当なグリッドをターゲットに指定したらいいような気がするが*/
 
 static void process_monster(int m_idx)
 {
@@ -7278,5 +7279,13 @@ void monster_gain_exp(int m_idx, int s_idx)
 		update_mon(m_idx, FALSE);
 		lite_spot(m_ptr->fy, m_ptr->fx);
 	}
-	if (m_idx == p_ptr->riding) p_ptr->update |= PU_BONUS;
+
+	if (m_idx == p_ptr->riding)
+	{
+		p_ptr->update |= PU_BONUS;
+
+		//v2.1.3 里乃が後ろで踊っているモンスターがレベルアップしたとき呪文リストを更新する
+		if (p_ptr->pclass == CLASS_SATONO)	make_magic_list_satono();
+
+	}
 }

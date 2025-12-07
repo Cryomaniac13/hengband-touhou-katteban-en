@@ -5840,3 +5840,28 @@ D:地の底の維縵国の姫が鹿狩りに使った弓だ。維縵姫は甲賀三郎と共に地上に出て後に浅
 D:$A bow wielded by the princess of Yuiman deep beneath the earth,
 D:$used to hunt deer. She came to the surface world with Kouga Saburou and
 D:$became Asama no Okami.
+
+N:354:ネケク
+E:'Nekhakha'
+I:26:4:3
+W:60:16:60:100000
+P:0:3d6:18:18:0
+F:STR | CON | WIS | FULL_NAME
+F:SLAY_EVIL | SLAY_UNDEAD | KILL_UNDEAD | FREE_ACT | RES_CONF | RES_BLIND | RES_NETHER
+F:SHOW_MODS | DEC_MANA | ACTIVATE
+D:エジプトの冥界神オシリスの竿型の短杖だ。生命と豊穣の象徴とされている。
+U:CURE_700
+
+#ネケクと一緒に装備したら二刀ペナルティ軽減と加速+3にする
+N:355:ヘカ
+E:'Heka'
+I:26:2:3
+W:60:16:60:100000
+P:0:3d4:15:15:0
+F:INT | DEX | CHR | FULL_NAME
+F:SLAY_EVIL | SLAY_UNDEAD | KILL_UNDEAD | FREE_ACT | RES_FEAR | RES_INSANITY | RES_NETHER
+F:SHOW_MODS | EASY_SPELL | ACTIVATE
+D:エジプトの冥界神オシリスの鉤形の短杖だ。支配と王権の象徴とされている。
+U:SUMMON_MONSTERS
+
+
