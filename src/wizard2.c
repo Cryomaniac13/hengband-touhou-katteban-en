@@ -632,7 +632,9 @@ static void do_cmd_wiz_hack_ben(void)
 
     (void)probing();
 
-	msg_format("yakuzaII_target_r_idx:%d", quest[QUEST_YAKUZA_2].r_idx);
+	//msg_format("yakuzaII_target_r_idx:%d", quest[QUEST_YAKUZA_2].r_idx);
+
+	msg_format("tht:%d to_h_b:%d", p_ptr->skill_tht, p_ptr->to_h_b);
 
 	if (r_info[MON_BITEN].flags1 & RF1_QUESTOR) msg_print("biten_questor");
 	if (r_info[MON_BITEN].flags3 & RF3_WANTED) msg_print("biten_wanted");

@@ -1775,8 +1775,9 @@ bool check_mon_blind(int m_idx)
 	}
 
 	if(my_strchr("iwEJLSUWXZ", r_ptr->d_char)) chance /= 3;
-	else if(r_ptr->flags3 | (RF3_UNDEAD)) chance /= 3;
+	else if(r_ptr->flags3 & (RF3_UNDEAD)) chance /= 3;//v2.1.4 演算子ミス修正
 	else if(my_strchr("acfgklqruyACDGIY", r_ptr->d_char)) chance = chance / 2;
+
 	if (r_ptr->flags2 & RF2_SMART) chance /= 2;
 	if (p_ptr->cursed & TRC_AGGRAVATE) chance /= 5;
 	if (r_ptr->level > p_ptr->lev * 2) chance /= 3;
@@ -7525,6 +7526,7 @@ void kanameishi_break()
 //モード4:紫の「無限の超高速飛行体」投擲の指輪の影響を受けない
 //5:ハルコンネン2発動用ダミーアイテム 必中
 //6:二宮金次郎像
+//7:ユイマン特技「ディアジェノサイダー」専用　投擲の指輪の効果半減、常に「投擲に向いた武器」扱い、動物スレイ、射程最大
 bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_ptr, int mode)
 {
 	int item;
@@ -7566,12 +7568,14 @@ bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_pt
 		return FALSE;
 	}
 
+	if (mode == 7) suitable_item = TRUE;
+
 	/*:::強力投擲の指輪の効果*/
 	if(p_ptr->mighty_throw)
 	{
-			//咲夜のナイフ全部投げは強力投擲の効果が薄い
-		if(mode == 1) mult += 1;
-			//菫子の投擲は指輪の効果を得られない
+		//咲夜のナイフ全部投げは強力投擲の効果が薄い
+		if(mode == 2 || mode==7) mult += 1;
+		//菫子の投擲は指輪の効果を得られない
 		else if ( p_ptr->pclass != CLASS_SUMIREKO) ;
 		else if ( mode == 4 || mode == 5 || mode == 6) ;
 		else
@@ -7594,7 +7598,7 @@ bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_pt
 
 	//菫子は重量を無視
 	//デフレーションワールドも同じく
-	if(p_ptr->pclass == CLASS_SUMIREKO || mode == 3) tdis = 18;
+	if(p_ptr->pclass == CLASS_SUMIREKO || mode == 3||mode==7) tdis = 18;
 	else if(mode == 5 || mode == 6) tdis = 18;
 	else if(tdis > 18) tdis = 18;
 	else if(tdis < 1) tdis = 1;
@@ -7816,15 +7820,20 @@ bool do_cmd_throw_aux2(int y, int x, int ty, int tx, int mult, object_type *o_pt
 				}
 				else
 				{
+					int tmp_mode = 0;
+
+					//「ディアジェノサイダー」のとき動物スレイを追加するためのパラメータ
+					if (mode == 7) tmp_mode = HISSATSU_SLAY_ANIMAL;
 
 					dd = q_ptr->dd;
 					ds = q_ptr->ds;
 					torch_dice(q_ptr, &dd, &ds);
 
+
 					if(suitable_item && object_is_artifact(q_ptr)) dd *= 2; //投擲向きのアーティファクトを投げた時のボーナス追加
 
 					tdam = damroll(dd, ds);
-					tdam = tot_dam_aux(q_ptr, tdam, m_ptr, 0, TRUE);
+					tdam = tot_dam_aux(q_ptr, tdam, m_ptr, tmp_mode, TRUE);
 					tdam = critical_shot(q_ptr->weight, q_ptr->to_h, tdam);
 					if (q_ptr->to_d > 0)
 						tdam += q_ptr->to_d;
@@ -12115,5 +12124,99 @@ void process_over_exert(int sleep_turn_base)
 	}
 
 }
+
+
+
+
+
+//ユイマン特技「ディアジェノサイダー」
+//矢を指定し、ターゲットを視界内でランダムに選定し、指定回数ぶんその矢を投擲(throw_aux2)する
+//行動順消費時TRUE
+bool deer_genocider(int arrow_num)
+{
+
+	int item;
+	object_type* o_ptr;
+	cptr q, s;
+	int num = arrow_num;
+	int used_num;
+
+	if (p_ptr->image || p_ptr->blind)
+	{
+		msg_print(_("今はこの特技を使えない。", "You can't use this special ability right now."));
+		return FALSE;
+	}
+
+	//投げる矢を選択
+	q = _("どれを投げますか? ", "Throw what?");
+	s = _("矢を持っていない。", "You don't have any arrows.");
+	item_tester_hook = object_is_ammo;
+	if (!get_item(&item, q, s, (USE_INVEN)))return FALSE;
+	if (item >= 0)	o_ptr = &inventory[item];
+	else return FALSE;
+
+	if (o_ptr->number < num) num = o_ptr->number;
+#ifdef JP
+	msg_format("あなたは矢を%s掴んだ！",num > 1 ? "まとめて":"");
+#else
+	msg_format("You grab %s!",num > 1 ? "a bundle of arrows":"an arrow");
+#endif
+
+	//有効な矢の本数ぶんループ
+	for (used_num = 0; used_num < num; used_num++)
+	{
+		int i,target_who_tmp=0;
+		int tmp_idx_cnt = 0;
+		monster_type* m_ptr;
+
+		object_type forge;
+		object_type *tmp_o_ptr = &forge;
+
+		object_copy(tmp_o_ptr, o_ptr);
+		tmp_o_ptr->number = 1;
+
+		//視界内のターゲットからランダムに選定
+		for (i = 1; i < m_max; i++)
+		{
+			m_ptr = &m_list[i];
+
+			if (!m_ptr->r_idx) continue;
+			if (is_pet(m_ptr)) continue;
+			if (is_friendly(m_ptr)) continue;
+			if (!m_ptr->ml) continue;
+			if (!projectable(py, px, m_ptr->fy, m_ptr->fx)) continue;
+			//if (range && m_ptr->cdis > range) continue;
+
+			tmp_idx_cnt++;
+			if (one_in_(tmp_idx_cnt)) target_who_tmp = i;
+		}
+		if (!tmp_idx_cnt) break;
+
+		target_who = target_who_tmp;
+		m_ptr = &m_list[target_who];
+		target_row = m_ptr->fy;
+		target_col = m_ptr->fx;
+
+		//投擲処理　
+		do_cmd_throw_aux2(py, px, target_row, target_col, 1, tmp_o_ptr, 7);
+
+	}
+
+	if (!used_num)
+	{
+		msg_print(_("しかし周囲に標的がいなかった。", "However, there were no targets nearby."));
+		return TRUE;
+	}
+
+	//矢の減少処理
+	inven_item_increase(item, -used_num);
+	inven_item_describe(item);
+	inven_item_optimize(item);
+
+	return TRUE;
+
+}
+
+
 
 

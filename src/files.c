@@ -2067,8 +2067,17 @@ static void display_player_middle(void)
 		}
 		if(inventory[INVEN_LARM].tval == TV_GUN)
 		{
+			int kyouten_card_num = 0;
 			chance = calc_gun_fire_chance(INVEN_LARM);
 			timeout = calc_gun_timeout(&inventory[INVEN_LARM]) * calc_gun_charge_mult(INVEN_LARM);
+
+			//v2.1.4 左手分を忘れていたので追加
+			kyouten_card_num = count_ability_card(ABL_CARD_KYOUTEN);
+			if (kyouten_card_num)
+			{
+				timeout = timeout * 100 / (100 + CALC_ABL_KYOUTEN_RECHARGE_BONUS(kyouten_card_num));
+			}
+
 			//銃両手持ち(右手に武器左手に銃→銃呪われる→武器外す、で左手両手持ちにもなりうるはず？)
 			if(!inventory[INVEN_RARM].k_idx)
 			{
@@ -4134,6 +4143,15 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 39)add_flag(flgs, TR_RES_NETHER);
 		break;
 
+	case CLASS_YUIMAN:
+		add_flag(flgs, TR_SEE_INVIS);
+		add_flag(flgs, TR_RES_NETHER);
+		if (plev >  9)add_flag(flgs, TR_SUST_INT);
+		if (plev > 19)add_flag(flgs, TR_ESP_ANIMAL);
+		if (plev > 29)add_flag(flgs, TR_RES_CONF);
+		if (plev > 39)add_flag(flgs, TR_ESP_UNIQUE);
+
+		break;
 
 
 	default:
@@ -9593,7 +9611,10 @@ static void show_file_aux_line(cptr str, int cy, cptr shower)
 		/* Shower string? */
 		if (endcol == showercol)
 		{
-			int showerlen = strlen(shower);
+			//v2.1.4 showerがNULLのときstrlenの動作がおかしくなるとコンパイラに怒られたので適当に直した
+			int showerlen;
+			if (shower) showerlen = strlen(shower);
+			else showerlen = 0;
 
 			/* Print the shower string in yellow */
 			Term_addstr(showerlen, TERM_YELLOW, &str[i]);

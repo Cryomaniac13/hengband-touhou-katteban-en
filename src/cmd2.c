@@ -1083,7 +1083,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_UBAME) a_idx = ART_FINGOLFIN;
 			else if (p_ptr->pclass == CLASS_CHIMI) a_idx = ART_SHIOMITSUTAMA;
 			else if (p_ptr->pclass == CLASS_NAREKO) a_idx = ART_HQA;
-
+			else if (p_ptr->pclass == CLASS_YUIMAN) a_idx = ART_LUTHIEN;
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//☆生成
 		}
@@ -7176,6 +7176,13 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 
 	//美天の棒投げ　少し射程が長い
 	if (shuriken == -3) tdis += 3;
+
+	//v2.1.4 ユイマンが矢を投げるとき射程最大&投擲向き扱い
+	if (p_ptr->pclass == CLASS_YUIMAN && (o_ptr->tval == TV_ARROW || o_ptr->tval == TV_BOLT))
+	{
+		suitable_item = TRUE;
+		tdis = 18;
+	}
 
 	if(tdis > 18) tdis = 18;
 	if(tdis < 1) tdis = 1;

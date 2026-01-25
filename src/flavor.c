@@ -1328,7 +1328,6 @@ bool object_is_quest_target(object_type *o_ptr)
 ///mod140930 武器投擲ダメージ
 cptr print_throw_dam(object_type *o_ptr)
 {
-	//たいまつくらいは含む？
 	int mult = 1; //通常投擲を想定
 	int use = 100; //energy_use
 	bool suitable_item = FALSE;
@@ -1339,8 +1338,17 @@ cptr print_throw_dam(object_type *o_ptr)
 
 	//オプションOFFのとき
 	if(!show_throwing_dam) return "";
-	//武器のみが対象
-	if(!object_is_melee_weapon(o_ptr)) return "";
+
+	//v2.1.4 ユイマンの弓非装備時には矢に対しても投擲ダメージを表示
+	if (p_ptr->pclass == CLASS_YUIMAN && !object_is_shooting_weapon(&inventory[INVEN_RARM]) && !object_is_shooting_weapon(&inventory[INVEN_LARM]))
+	{
+		if (!object_is_melee_weapon(o_ptr) && !object_is_ammo(o_ptr)) return "";
+	}
+	//それ以外は武器のみが対象
+	else
+	{
+		if (!object_is_melee_weapon(o_ptr)) return "";
+	}
 	//特殊変身中は投擲不可
 	if (mimic_info[p_ptr->mimic_form].MIMIC_FLAGS & MIMIC_ONLY_MELEE) return " (0/0)";
 	//未鑑定だと威力不明 (ただし鑑定済みでないとこのルーチンが呼ばれない)
@@ -1348,6 +1356,9 @@ cptr print_throw_dam(object_type *o_ptr)
 
 	object_flags(o_ptr, flgs);
 	if(have_flag(flgs, TR_THROW)) suitable_item = TRUE;
+
+	//v2.1.4 ユイマンが矢を投擲するときボーナス
+	if (p_ptr->pclass == CLASS_YUIMAN && object_is_ammo(o_ptr)) suitable_item = TRUE;
 
 	if (p_ptr->mighty_throw) mult += 2;
 

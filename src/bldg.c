@@ -8211,6 +8211,21 @@ bool check_quest_unique_text(void)
 #endif
 			}
 		}
+		else if (pc == CLASS_YUIMAN)
+		{
+			if (comp || fail)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "久しぶりに旧友と腕比べを楽しんだ。");
+				strcpy(quest_text[line++], "次は一緒に鹿狩りに出かけたいものだ。");//一行40字まで
+#else
+				strcpy(quest_text[line++], "It was fun testing your strength against your old friend.");
+				strcpy(quest_text[line++], "You'd like to go deer hunting together next time.");//一行40字まで
+#endif
+			}
+
+		}
+
 		break;
 		//宴会幹事
 	case QUEST_HANAMI:
@@ -8942,7 +8957,9 @@ bool check_quest_unique_text(void)
 		//サーペント打倒メインクエスト
 	case QUEST_SERPENT:
 		//v1.1.18
-		if(pc == CLASS_JUNKO || pc == CLASS_HECATIA || pc == CLASS_CLOWNPIECE || pc == CLASS_VFS_CLOWNPIECE)
+		//v2.1.4 ユイマンとアリヤも入れておく
+		if(pc == CLASS_JUNKO || pc == CLASS_HECATIA || pc == CLASS_CLOWNPIECE || pc == CLASS_VFS_CLOWNPIECE
+			|| pc == CLASS_YUIMAN || pc == CLASS_ARIYA)
 		{
 			if(accept)
 			{
@@ -10844,6 +10861,46 @@ bool check_quest_unique_text(void)
 #endif
 			}
 		}
+		else if (pc == CLASS_YUIMAN)
+		{
+			if (accept)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "四季の竪穴の下の化石の森に強力な妖怪が発生したようだ。");
+				strcpy(quest_text[line++], "あれでも永く住んだ我が家だ。庭先での狼藉を放置するわけにはいかない。");
+#else
+				strcpy(quest_text[line++], "A powerful youkai was discovered in the fossilized forest beneath");
+				strcpy(quest_text[line++], "Pit of Four Seasons. It was your old home for many years; you can't let such");
+				strcpy(quest_text[line++], "mischief get unchecked.");
+#endif
+			}
+			else if (comp)
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "想像以上に強力な存在だったがどうにか退治に成功した。");
+				strcpy(quest_text[line++], "戦闘後、化石の木の洞の中に不思議なほど手に馴染む弓を発見した。");
+				strcpy(quest_text[line++], "戦利品として使わせてもらおう。");
+#else
+				strcpy(quest_text[line++], "It was more powerful than you imagined, but you managed to defeat it.");
+				strcpy(quest_text[line++], "After the battle, you discovered a mysteriously familiar bow in a cave there.");
+				strcpy(quest_text[line++], "You're taking it as spoils of war.");
+#endif
+			}
+			else
+			{
+#ifdef JP
+				strcpy(quest_text[line++], "汚染の広まり続ける化石の森からの逃亡を余儀なくされた。");
+				strcpy(quest_text[line++], "せめて不用意な探検者がこの混沌に飛び込まないよう見張らねばならない。");
+				strcpy(quest_text[line++], "外界の情報がただの妖怪をこうまで変容させるなどと誰が信じるだろう？");
+#else
+				strcpy(quest_text[line++], "You had to flee the fossilized forest from the encroaching pollution.");
+				strcpy(quest_text[line++], "You'll have to keep watch to prevent careless explorers from stumbling");
+				strcpy(quest_text[line++], "into this place. Who'd think an ordinary youkai would get transformed");
+				strcpy(quest_text[line++], "to such extent by the information from Outside World?");
+#endif
+			}
+		}
+
 		break;
 
 
@@ -11064,6 +11121,8 @@ bool check_ignoring_quest(int questnum)
 		break;
 	case QUEST_HANGOKU2://連続昏睡事件2
 		if (pc == CLASS_MIZUCHI) return TRUE;
+
+		break;//v2.1.4 抜けてた
 
 	case QUEST_MORIYA_2:
 		if (pc == CLASS_CHIMATA) return TRUE;//千亦はアビリティカードが報酬のクエストを受けられない

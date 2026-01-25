@@ -445,6 +445,10 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_NAREKO) return TRUE;
 			else return FALSE;
 
+		case CLASS_YUIMAN:
+			if (r_idx == MON_YUIMAN) return TRUE;
+			else return FALSE;
+
 
 	}
 

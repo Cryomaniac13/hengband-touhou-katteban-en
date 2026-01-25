@@ -820,6 +820,8 @@ s16b tot_dam_aux(object_type *o_ptr, int tdam, monster_type *m_ptr, int mode, bo
 	object_flags(o_ptr, flgs);
 	torch_flags(o_ptr, flgs); /* torches has secret flags */
 
+	if (mode == HISSATSU_SLAY_ANIMAL) add_flag(flgs, TR_SLAY_ANIMAL);
+
 	if (!thrown)
 	{
 		/* Magical Swords */
@@ -8181,7 +8183,32 @@ bool player_can_enter(s16b feature, u16b mode)
 {
 	feature_type *f_ptr = &f_info[feature];
 
-	if (p_ptr->riding) return monster_can_cross_terrain(feature, &r_info[m_list[p_ptr->riding].r_idx], mode | CEM_RIDING);
+	if (p_ptr->riding)
+	{
+		return monster_can_cross_terrain(feature, &r_info[m_list[p_ptr->riding].r_idx], mode | CEM_RIDING);
+	}
+	//v2.1.4 モンスターに変身/憑依しているときの移動不可判定を追加　NEVER_MOVEフラグはmove_player()内で処理
+	else if (IS_METAMORPHOSIS)
+	{
+		monster_race* r_ptr = &r_info[MON_EXTRA_FIELD];
+
+		//泳げないモンスターは深い水に侵入できない
+		if (have_flag(f_ptr->flags, FF_WATER) && have_flag(f_ptr->flags, FF_DEEP)
+			&& !(r_ptr->flags7 & (RF7_AQUATIC | RF7_CAN_SWIM | RF7_CAN_FLY))
+			&& !p_ptr->levitation)
+		{
+			return FALSE;
+		}
+		//水棲モンスターは陸に上がれない
+		if (!have_flag(f_ptr->flags, FF_WATER)
+			&& (r_ptr->flags7 & (RF7_AQUATIC)) && !(r_ptr->flags7 & (RF7_CAN_FLY))
+			&& !p_ptr->levitation)
+		{
+			return FALSE;
+		}
+
+	}
+
 
 	/* Pattern */
 	if (have_flag(f_ptr->flags, FF_PATTERN))
@@ -8198,6 +8225,12 @@ bool player_can_enter(s16b feature, u16b mode)
 
 	//v1.1.57 隠岐奈はドアを抜けられる
 	if (p_ptr->pclass == CLASS_OKINA && have_flag(f_ptr->flags, FF_DOOR) ) return TRUE;
+
+	//v2.1.4 山童とチミは浮遊なしで山脈を越えられる
+	if (have_flag(f_ptr->flags, FF_MOUNTAIN) && (prace_is_(RACE_YAMAWARO) || p_ptr->pclass == CLASS_CHIMI))
+	{
+		return TRUE;
+	}
 
 	if (!have_flag(f_ptr->flags, FF_MOVE)) return FALSE;
 
@@ -8736,10 +8769,12 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 
 		if(r_ptr->flags1 & RF1_NEVER_MOVE)
 		{
-			msg_print(_("あなたは動けない。", "You cannot move."));
-			return;
+			msg_print(_("あなたは移動できない。", "You cannot move."));
+			p_can_enter = FALSE;
 		}
-		if(cave_have_flag_bold(y,x,FF_WATER) && cave_have_flag_bold(y,x,FF_DEEP) && !(r_ptr->flags7 & (RF7_CAN_SWIM|RF7_CAN_FLY)))
+
+		/* 荒野で隣のマップに移るときに判定が変になるのでplayer_can_enter()内に移した
+		if(cave_have_flag_bold(y,x,FF_WATER) && cave_have_flag_bold(y,x,FF_DEEP) && !(r_ptr->flags7 & (RF7_AQUATIC|RF7_CAN_SWIM|RF7_CAN_FLY)))
 		{
 			msg_print(_("あなたは泳げない。", "You cannot swim."));
 			return;
@@ -8749,6 +8784,7 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 			msg_print(_("あなたは陸上で動けない。", "You cannot move on land."));
 			return;
 		}
+		*/
 	}
 
 	/* Exit the area */
@@ -9066,6 +9102,7 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 	else if (!have_flag(f_ptr->flags, FF_MOVE) && have_flag(f_ptr->flags, FF_CAN_FLY) && !p_ptr->levitation)
 	{
 
+		//v2.1.4 山童の山脈に侵入できる処理をplayer_can_enter()に移したのでここも整理するべきなのだがちょっとフラグがややこしいので放置
 
 		if (prace_is_(RACE_YAMAWARO) && have_flag(f_ptr->flags, FF_MOUNTAIN))
 		{
@@ -9095,9 +9132,10 @@ void move_player(int dir, bool do_pickup, bool break_trap, bool activate_trap)
 	/*:::木の上で減速する処理*/
 	//v1.1.86 山童は減速しないことにした
 	//v2.0.11 美天も減速しない
+	//v2.1.4 ユイマンも
 	else if (have_flag(f_ptr->flags, FF_TREE) && !p_can_kill_walls && !p_ptr->levitation)
 	{
-		if ((p_ptr->pclass != CLASS_RANGER && p_ptr->pclass != CLASS_BITEN && !prace_is_(RACE_YAMAWARO))  && (!p_ptr->riding || !(riding_r_ptr->flags8 & RF8_WILD_WOOD))) energy_use *= 2;
+		if ((p_ptr->pclass != CLASS_RANGER && p_ptr->pclass != CLASS_BITEN && p_ptr->pclass != CLASS_YUIMAN && !prace_is_(RACE_YAMAWARO))  && (!p_ptr->riding || !(riding_r_ptr->flags8 & RF8_WILD_WOOD))) energy_use *= 2;
 	}
 
 	//v1.1.91 石油地形上で減速する処理

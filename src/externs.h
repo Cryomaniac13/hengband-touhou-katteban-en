@@ -2810,5 +2810,8 @@ extern bool set_rob_mana(int v);
 extern bool flag_chimi_need_count_feat;
 extern void chimi_count_feat(bool msg);
 
+//v2.1.4
+extern bool deer_genocider(int arrow_num);
+
 
 

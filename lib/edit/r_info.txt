@@ -25187,7 +25187,7 @@ F:NO_CONF | NO_SLEEP | NO_FEAR | NO_STUN | RES_TELE |
 F:STUPID
 D:テスト用の妖精だ。もしこのモンスターが通常出現したらバグなので製作者までご一報下さい。
 S:1_IN_2
-S:BA_DISTORTION
+S:HASTE | INVULNER
 
 N:1264:地獄鴉
 E:Hell raven

@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 1
-#define H_VER_PATCH 3
+#define H_VER_PATCH 4
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -7236,6 +7236,10 @@ extern int PlayerUID;　
 #define MON_SWARMBEES_2		1393
 #define MON_SWARMBEES_3		1394
 
+//「敵意の◯◯結晶」を全て指定するための範囲
+#define MON_HOSTILE_CRYSTAL_START	1395
+#define MON_HOSTILE_CRYSTAL_END		1406
+
 #define MON_UBAME			1408
 #define MON_CHIMI			1409
 #define MON_NAREKO			1410
@@ -7347,6 +7351,7 @@ extern int PlayerUID;　
 #define HISSATSU_COUNTER_SPEAR 32 //槍技能ボーナス　敵の攻撃時に一撃だけカウンター
 #define HISSATSU_ATTACK_BEE	33 //養蜂家の蜂　追加格闘のみで攻撃する
 
+#define HISSATSU_SLAY_ANIMAL 34 //動物スレイがつく　現状「ディアジェノサイダー」専用
 
 #define HISSATSU_KAPPA  40
 

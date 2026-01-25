@@ -3354,6 +3354,9 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_NAREKO,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_NAREKO,2,0,TV_HAMMER, SV_WEAPON_MACE,1 },
 
+	{ CLASS_YUIMAN,2,0,TV_CLOTHES, SV_CLOTHES,1 },
+	{ CLASS_YUIMAN,2,0,TV_ARROW, SV_AMMO_LIGHT,30 },
+
 	{-1,0,0,0,0,0} //終端dummy
 };
 
@@ -6664,8 +6667,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("道神　馴子", "Nareko Michigami"),CLASS_NAREKO,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
 		_("あなたははるか昔に何者かに置かれた道祖神が自我を得た存在です。魔法を一領域巧みに扱うことができ、さらに罠や壁を作り出して敵を妨害する特技を持っています。また近接戦闘もそれほど苦手ではありません。あなたは謎掛けが好きで、人に謎をかけて惑わせると精神的に満たされてMPが回復します。",
 		"You are a dousojin that has been placed long ago by someone, and eventually obtained sentience. You can proficiently use a single magic realm, and you also have special abilities to create traps and walls, obstructing your foes. You're not that bad at melee combat, either. You love telling ridles; befuddling people with riddles gives you mental satisfaction, restoring MP.") },
-	{ FALSE,_("ユイマン・浅間", "Yuiman Asama"),CLASS_YUIMAN,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
-		"" },
+	{ TRUE,_("ユイマン・浅間", "Yuiman Asama"),CLASS_YUIMAN,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
+		_("あなたは神の世界の端にある維縵国の王女でした。月の民によって迷宮に囚われ長い間働かされていましたが外の異変と巫女らの活躍により外に出られるようになりました。戦闘においては弓の扱いが得意で、弓がなくても矢を直接投擲して戦うことができます。また魔法を一領域巧みに扱うことができ、さらに体に巻き付いた蛇の能力で装備品の呪いを解いたり敵から魔力を奪ったりすることができます。ダンジョン「浅間浄穢山」はあなたにとって自宅も同然で、そこでは高い感知力と一部の特殊モンスターに対する高い制圧力を行使することが可能です。",
+		"You are the princess of Yuimankoku, the land on the edge of the world of the gods. You were imprisoned in a labyrinth and being forced to work for Lunarians for a long time, but were able to escape due to the outside incident and the shrine maiden's actions. You're proficient at using bows, and you can simply throw the arrows by yourself if you don't have a bow. You also can study a single realm of magic, and you can use snakes wrapped around your body to remove curses from equipment or steal magical power from enemies. Asama Purifying Mountain dungeon is your home, and there you have strong detection abilities and are capable of overwhelmingly suppressing specific monster types.") },
 	//その他からこっちに持って来た
 	{TRUE,_("綿月　豊姫", "Watatsuki no Toyohime"),CLASS_TOYOHIME,RACE_LUNARIAN,ENTRY_OTHER,SEX_FEMALE,
 	_("あなたは月の名家の姫で、依姫の姉です。海と山を繋ぐ力を持ち、大規模な召喚や空間操作を好き放題に行います。荒事は苦手ですが月の最新兵器を所有しており、並みの敵ならまとめて吹き飛ばすことができます。	あなたは穢れを嫌う月の民であり、様々な邪悪な攻撃で大ダメージを受けてしまいます。",

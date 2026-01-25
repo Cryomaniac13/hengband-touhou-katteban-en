@@ -17183,13 +17183,14 @@ static cptr do_new_spell_enchant(int spell, int mode)
 				{
 					object_type *o_ptr;
 					char desc[80];
+					int charge = base; //v2.1.4 e‘•”õŽž‚Ì”»’è‚ªe‚æ‚èŒã‚ë‚Ì‘•”õ•i‚É“K—p‚³‚ê‚Ä‚¢‚½‚Ì‚ÅC³
 
 					o_ptr = &inventory[inven];
 					if(o_ptr->timeout)
 					{
 						flag = TRUE;
-						if(o_ptr->tval == TV_GUN) base *= 100;
-						o_ptr->timeout -= base;
+						if(o_ptr->tval == TV_GUN) charge *= 100;
+						o_ptr->timeout -= charge;
 						if(o_ptr->timeout < 1)
 						{
 							o_ptr->timeout = 0;
