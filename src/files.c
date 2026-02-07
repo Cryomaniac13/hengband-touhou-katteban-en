@@ -4150,8 +4150,50 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 		if (plev > 19)add_flag(flgs, TR_ESP_ANIMAL);
 		if (plev > 29)add_flag(flgs, TR_RES_CONF);
 		if (plev > 39)add_flag(flgs, TR_ESP_UNIQUE);
+		break;
+
+	case CLASS_ARIYA:
+
+		add_flag(flgs, TR_SEE_INVIS);
+		add_flag(flgs, TR_LEVITATION);
+		add_flag(flgs, TR_FREE_ACT);
+		add_flag(flgs, TR_RES_CONF);
+		add_flag(flgs, TR_RES_BLIND);
+		add_flag(flgs, TR_RES_FEAR);
+		add_flag(flgs, TR_RES_INSANITY);
+		add_flag(flgs, TR_RES_NETHER);
+
+		if (plev > 9)
+		{
+			add_flag(flgs, TR_RES_FIRE);
+			add_flag(flgs, TR_RES_COLD);
+			add_flag(flgs, TR_RES_ELEC);
+			add_flag(flgs, TR_RES_ACID);
+			add_flag(flgs, TR_RES_POIS);
+		}
+
+		if (plev > 19)
+		{
+			add_flag(flgs, TR_SUST_STR);
+			add_flag(flgs, TR_SUST_INT);
+			add_flag(flgs, TR_SUST_WIS);
+			add_flag(flgs, TR_SUST_DEX);
+			add_flag(flgs, TR_SUST_CON);
+			add_flag(flgs, TR_SUST_CHR);
+		}
+
+		if (plev > 39)
+		{
+			add_flag(flgs, TR_RES_HOLY);
+			add_flag(flgs, TR_RES_TIME);
+			add_flag(flgs, TR_RES_CHAOS);
+			add_flag(flgs, TR_RES_DISEN);
+		}
 
 		break;
+
+
+
 
 
 	default:

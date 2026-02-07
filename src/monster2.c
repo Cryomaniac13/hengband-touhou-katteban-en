@@ -2983,7 +2983,7 @@ void update_mon(int m_idx, bool full)
 					if (r_ptr->flags2 & (RF2_STUPID)) r_ptr->r_flags2 |= (RF2_STUPID);
 				}
 			}
-			//v2.1.1 浅間浄穢山でユイマンとアリヤはモンスターを常に感知
+			//v2.1.1 浅間浄穢山でユイマンと阿梨夜はモンスターを常に感知
 			else if (dungeon_type == DUNGEON_ASAMA && (p_ptr->pclass == CLASS_YUIMAN || p_ptr->pclass == CLASS_ARIYA))
 			{
 				flag = TRUE;

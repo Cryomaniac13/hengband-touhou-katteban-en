@@ -46,6 +46,276 @@ cptr _str_unimp = _("未実装", "unimplemented");
 cptr _str_unimp_error = _("ERROR:実装していない特技が呼ばれた num:%d",
                         "ERROR: Unimplemented special ability called (num: %d)");
 
+//v2.1.5 阿梨夜
+class_power_type class_power_ariya[] =
+{
+
+	{ 5,5,25,FALSE,TRUE,A_CON,0,5,_("弾幕の化石", "Danmaku Fossil"),
+	_("無属性のボールで攻撃する。威力はプレイヤーのACに応じて上昇する。",
+	"Fires a non-elemental ball. Power increases along with player's AC.") },
+
+	{ 10,15,30,FALSE,TRUE,A_DEX,0,0,_("巌となるさざれ石", "Pebbles Forming a Boulder"),
+	_("指定した位置のモンスターにダメージを与える。モンスターがいないときは「岩」地形を生成する。",
+	"Deals damage to monster in a specified position, or creates a pile of rubble if there's no monster there.") },
+
+	{ 15,30,40,FALSE,TRUE,A_CHR,0,0,_("永遠の冬", "Eternal Winter"),
+	_("視界内の全てを極寒属性で攻撃し、さらにモンスターを短時間移動禁止にする。",
+	"Hits everything in sight with ice, also preventing monsters from moving for a short while.") },
+
+	{ 20,50,50,FALSE,TRUE,A_CHR,0,0,_("混沌の冬", "Chaotic Winter"),
+	_("周囲のモンスターを追い払う。クエスト中のフロアでは使えない。",
+	"Banishes nearby monsters. Cannot be used on quest levels.") },
+
+	{ 25,35,55,FALSE,FALSE,A_CON,0,10,_("ストーンゴッデス", "Stone Goddess"),
+	_("HPを大幅に回復する。",
+	"Greatly recovers HP.") },
+
+	{ 30,50,60,FALSE,TRUE,A_CON,0,0,_("幻想のリリクウィー", "Illusionary Reliquiae"),
+	_("自分を中心に万能属性の巨大なボールを発生させて攻撃する。威力はプレイヤーのACに応じて上昇する。",
+	"Attacks with a giant non-elemental ball centered on yourself. Power increases along with player's AC.") },
+
+	{ 35,80,70,FALSE,TRUE,A_DEX,0,0,_("錦の上のイマジナリー", "Imaginary Atop Magnificence"),
+	_("フロア全ての壁を永久壁にする。またはフロア全ての永久壁を普通の壁にする。",
+	"Makes all walls on the level permanent, or turns all permanent walls on the level into regular ones.") },
+
+	{ 40,100,80,FALSE,FALSE,A_CON,0,0,_("不生不滅の石の女神", "Goddess of Unliving, Undying Stone"),
+	_("一時的に無敵化する。",
+	"Grants temporary invulnerability.") },
+
+	{ 45,240,90,FALSE,TRUE,A_CHR,0,0,_("恒久の冬", "Perpetual Winter"),
+	_("現在のフロアでモンスターのあらゆる特殊行動を禁止する。移動や通常攻撃は可能。フロアを移動すると解除される。",
+	"Prevents any kind of special actions for monsters on this level. They still can move and perform regular attacks. Effect stops once you move to another level.") },
+
+	{ 99,0,0,FALSE,FALSE,0,0,0,"dummy","" },
+};
+
+
+
+cptr do_cmd_class_power_aux_ariya(int num, bool only_info)
+{
+	int dir;
+	int plev = p_ptr->lev;
+	int chr_adj = adj_general[p_ptr->stat_ind[A_CHR]];
+
+	switch (num)
+	{
+	case 0:
+	{
+		int dir, damage;
+
+		damage = p_ptr->ac + p_ptr->to_a;
+
+		if (damage < 1) damage = 1;
+
+		if (only_info) return format(_str_eff_dam, damage);
+
+		if (!get_aim_dir(&dir)) return NULL;
+
+		msg_format(_("重厚な弾幕を放った。", "You fire dense danmaku."));
+		fire_ball(GF_ARROW, dir, damage, 1);
+
+	}
+	break;
+	case 1:
+	{
+		int dam = plev * 2 + chr_adj * 5;
+		int x, y;
+		monster_type* m_ptr;
+		bool flag = FALSE;
+
+		if (only_info) return format(_str_eff_dam, dam);
+
+		if (!get_aim_dir(&dir)) return NULL;
+
+		if (dir != 5 || !projectable(target_row, target_col, py, px))
+		{
+			msg_print(_("視界内の一グリッドを指定しないといけない。", "You have to pick a location in sight."));
+			return NULL;
+		}
+
+		y = target_row;
+		x = target_col;
+
+		m_ptr = &m_list[cave[y][x].m_idx];
+
+
+		//モンスターがいるときダメージ
+		if (m_ptr->r_idx)
+		{
+			msg_print(_("小石が降り注いだ。", "Pebbles come falling down."));
+			project(0, 0, y, x, dam, GF_ARROW, (PROJECT_KILL | PROJECT_JUMP), -1);
+		}
+		//障害物があるとき岩を作れない
+		else if (!cave_naked_bold(y, x))
+		{
+			msg_print(_("ここには岩を作れない。", "You can't create rubble here."));
+		}
+		//何もないとき岩生成
+		else
+		{
+			msg_print(_("小石が集まって大岩になった！", "Pebbles come together, forming a boulder!"));
+			cave_set_feat(y, x, f_tag_to_index_in_init("RUBBLE"));
+
+		}
+
+	}
+	break;
+	case 2:
+	{
+		int dam = plev * 3 + chr_adj * 5;
+		if (only_info) return format(_str_eff_dam, dam);
+		msg_print(_("周囲の熱が急速に失われた！", "Everything around you rapidly loses heat!"));
+		project_hack2(GF_ICE, 0, 0, dam);
+		project_hack(GF_NO_MOVE, dam / 10);
+
+		break;
+	}
+	case 3:
+	{
+		int range = plev ;
+		if (plev == 50) range = 255;
+
+		if (only_info) return format(_str_eff_area, range);
+
+		if(mass_genocide_3(range, TRUE, TRUE, 0))
+			msg_print(_("ひどく孤独になった気がする。", "You feel terribly lonely."));
+
+
+	}
+	break;
+
+	case 4:
+	{
+		int heal = plev * 8;
+		if (plev == 50) heal = 9999;
+		if (only_info) return format(_str_eff_heal, heal);
+
+		if(plev == 50) msg_print(_("あなたは一瞬で体を修復した。", "You repair your body in an instant."));
+		hp_player(heal);
+
+	}
+	break;
+
+
+	case 5: //幻想のリリクウィー
+	{
+		int base = plev * 10 + chr_adj * 10 + (p_ptr->ac + p_ptr->to_a) * 2;
+
+		if (only_info) return format(_str_eff_dam_around, base / 2);
+
+		msg_format(_("荘厳な光が降り積もっていく...", "Majestic light comes down, gathering..."));
+		project(0, 7, py, px, base, GF_PSY_SPEAR, (PROJECT_GRID | PROJECT_KILL| PROJECT_JUMP), -1);
+
+	}
+	break;
+
+
+	case 6:
+	{
+		int y, x, feat,i;
+		feature_type* f_ptr;
+		bool perma = FALSE;
+		char c;
+		if (only_info) return format("");
+
+		screen_save();
+
+		for (i = 1; i < 20; i++) Term_erase(16, i, 255);
+		put_str(_("a) 普通の壁を永久壁にする", "a) Make regular walls permanent"), 10, 20);
+		put_str(_("b) 永久壁を普通の壁にする", "b) Make permanent walls regular"), 11, 20);
+		put_str(_("(ESC:cancel)", "(ESC: cancel)"), 12, 20);
+		while (TRUE)
+		{
+			c = inkey();
+
+			if (c == 'a' || c == 'A')
+			{
+				perma = TRUE;
+				break;
+			}
+			else if (c == 'b' || c == 'B')
+			{
+				perma = FALSE;
+				break;
+			}
+			else if (c == ESCAPE || c == ' ')
+			{
+				screen_load();
+				return NULL;
+			}
+		}
+		screen_load();
+
+		if (perma)
+			msg_print(_("不変の力がフロアを覆った。", "Power of permanence spreads through the level."));
+		else
+			msg_print(_("不変の力がフロアから消えた。", "Power of permanence vanishes from the level."));
+
+		for (y = 1; y < cur_hgt - 1; y++)
+		{
+			for (x = 1; x < cur_wid - 1; x++)
+			{
+				if (cave_have_flag_bold(y, x, FF_WALL) && !cave_have_flag_bold(y, x, FF_PERMANENT) && perma)
+					cave_set_feat(y, x, feat_permanent);
+
+				if (cave_have_flag_bold(y, x, FF_WALL) && cave_have_flag_bold(y, x, FF_PERMANENT) && !perma)
+					cave_set_feat(y, x, feat_granite);
+
+			}
+		}
+
+		p_ptr->redraw |= (PR_MAP);
+		p_ptr->window |= (PW_OVERHEAD | PW_DUNGEON);
+		handle_stuff();
+
+	}
+	break;
+
+	case 7:
+	{
+		int base = 20;
+
+		if (only_info) return format(_str_eff_dur_plus_1d, base, base);
+		set_invuln(base + randint1(base), FALSE);
+
+	}
+	break;
+
+
+	case 8:
+	{
+		if (only_info) return "";
+
+		if (p_ptr->special_defense & SD_UNIQUE_CLASS_POWER)
+		{
+			msg_print(_("すでにこのフロアは停止している。", "The level is already stopped."));
+			return NULL;
+		}
+
+		msg_print(_("あなたはこのフロアの変化を停止させた！", "You stop any changes on this level!"));
+
+		p_ptr->special_defense |= SD_UNIQUE_CLASS_POWER;
+		p_ptr->redraw |= (PR_STATUS|PR_MAP);
+
+
+	}
+	break;
+
+
+	default:
+	{
+		if (only_info) return _str_unimp;
+
+		msg_format(_str_unimp_error, num);
+		return NULL;
+	}
+
+	}
+	return "";
+}
+
+
+
 
 
 //v2.1.4 ユイマン
@@ -40771,6 +41041,12 @@ void do_cmd_new_class_power(bool only_browse)
 		power_desc = power_desc_waza;
 		break;
 
+	case CLASS_ARIYA:
+		class_power_table = class_power_ariya;
+		class_power_aux = do_cmd_class_power_aux_ariya;
+		power_desc = power_desc_waza;
+		break;
+
 
 	default:
 #ifdef JP
@@ -42786,6 +43062,11 @@ const support_item_type support_item_list[] =
 	_("それは隣接したモンスター一体からMPを吸収し、さらに加速や無敵化を消去する。",
 	"Drains MP from an adjacent monster, and also dispels haste and invulnerability.") },
 
+	//v2.1.5 阿梨夜　錦の上のイマジナリー
+	{ 120,50,120,2,30,	MON_ARIYA,class_power_ariya,do_cmd_class_power_aux_ariya,6,
+	_("化石の翼", "Fossil Wing"),
+	_("フロア全ての壁を永久壁にする。またはフロア全ての永久壁を普通の壁にする。",
+	"Makes all walls on this level permanent, or turns all permanent walls on the level into regular ones.") },
 
 
 

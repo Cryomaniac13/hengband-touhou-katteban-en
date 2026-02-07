@@ -8402,7 +8402,7 @@ msg_print("¶–½—Í‚ª‘Ì‚©‚ç‹z‚¢æ‚ç‚ê‚½‹C‚ª‚·‚éI");
 			lose_exp(p_ptr->exp / 16);
 			if (!one_in_(6)) break;
 		case 13: case 14: case 15: case 19: case 20:
-			if (stop_ty || (p_ptr->free_act && (randint1(125) < p_ptr->skill_sav)) || (p_ptr->pseikaku == SEIKAKU_BERSERK))
+			if (stop_ty || (p_ptr->free_act && (randint1(125) < p_ptr->skill_sav)) || (p_ptr->pseikaku == SEIKAKU_BERSERK) || (p_ptr->pclass == CLASS_ARIYA))
 			{
 				msg_print(_("‚ ‚È‚½‚Í’¤‘œ‰»‚Ìô‚¢‚ğ’µ‚Ëœ‚¯‚½I", "You avoid the petrification curse!"));
 			}

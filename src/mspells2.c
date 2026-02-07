@@ -365,6 +365,9 @@ bool monst_spell_monst(int m_idx)
 	/* Cannot cast spells when confused */
 	if (MON_CONFUSED(m_ptr)) return (FALSE);
 
+	//v2.1.5 ˆ¢—œ–éuP‹v‚Ì“~v‚ÌŒø‰Ê
+	if (ARIYA_STOP) return (FALSE);
+
 	//ƒ}ƒ~ƒ]ƒE“ñƒbŠâ‰Æ‚ÌÙ‚«
 	if(p_ptr->pclass == CLASS_MAMIZOU && p_ptr->magic_num1[0] == m_idx)
 		return (FALSE);

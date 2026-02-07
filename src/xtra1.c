@@ -544,6 +544,7 @@ static void prt_stat(int stat)
 #define BAR_BEES				117 //v2.0.19 —{–I‰Æ‚Ì–I
 #define BAR_HIDE				118 //v2.1.0  ö•š
 #define BAR_RES_BLAST			119 //v2.1.1
+#define BAR_ARIYA_STOP			120
 
 //‚±‚±‚Ì’l‚Í127‚ªŒ»Ý‚ÌŒÀŠE‚Å‚ ‚éB(v1.1.46‚Å95‚©‚çŠg’£)
 
@@ -683,6 +684,7 @@ static struct {
 	{ TERM_YELLOW, "–I", "–I‚ÌŒì‰q" },
 	{ TERM_L_DARK, "‰B", "ö•š" },
 	{ TERM_L_BLUE, "–h", "”š•—–hŒä" },
+	{ TERM_L_DARK, "’â", "’âŽ~" },
 
 
 	{0, NULL, NULL}
@@ -817,6 +819,7 @@ static struct {
 	{ TERM_YELLOW, "Bee", "BeeProt" },
 	{ TERM_L_DARK, "Ccl", "Conceal" },
 	{ TERM_L_BLUE, "Prt", "BlstProt" },
+	{ TERM_L_DARK, "Stp", "Stop" },
 
 
 	{0, NULL, NULL}
@@ -1178,6 +1181,8 @@ static void prt_status(void)
 	if (p_ptr->pclass == CLASS_MIZUCHI && (p_ptr->tim_general[0]))
 		ADD_FLG(BAR_HIDE);
 
+	if(ARIYA_STOP)
+		ADD_FLG(BAR_ARIYA_STOP);
 
 
 
@@ -6725,6 +6730,64 @@ void calc_bonuses(void)
 		if (plev > 39) p_ptr->esp_unique = TRUE;
 		break;
 
+	case CLASS_ARIYA:
+
+		p_ptr->to_a += plev * 3;
+		p_ptr->dis_to_a += plev * 3;
+
+		p_ptr->see_inv = TRUE;
+		p_ptr->levitation = TRUE;
+		p_ptr->free_act = TRUE;
+		p_ptr->resist_conf = TRUE;
+		p_ptr->resist_blind = TRUE;
+		p_ptr->resist_fear = TRUE;
+		p_ptr->resist_insanity = TRUE;
+		p_ptr->resist_neth = TRUE;
+
+		if (plev > 9)
+		{
+			p_ptr->resist_fire = TRUE;
+			p_ptr->resist_cold = TRUE;
+			p_ptr->resist_elec = TRUE;
+			p_ptr->resist_acid = TRUE;
+			p_ptr->resist_pois = TRUE;
+
+		}
+
+		if (plev > 19)
+		{
+			p_ptr->sustain_str = TRUE;
+			p_ptr->sustain_int = TRUE;
+			p_ptr->sustain_wis = TRUE;
+			p_ptr->sustain_con = TRUE;
+			p_ptr->sustain_dex = TRUE;
+			p_ptr->sustain_chr = TRUE;
+		}
+
+		if (plev > 29)
+		{
+			p_ptr->sh_fire;
+			p_ptr->oppose_fire = 1;
+			p_ptr->oppose_cold = 1;
+			p_ptr->oppose_pois = 1;
+			p_ptr->redraw |= PR_STATUS;
+		}
+
+		if (plev > 39)
+		{
+			p_ptr->resist_holy = TRUE;
+			p_ptr->resist_time = TRUE;
+			p_ptr->resist_chaos = TRUE;
+			p_ptr->resist_disen = TRUE;
+		}
+
+		if (plev > 44)
+		{
+			p_ptr->magicdef = 1;
+
+		}
+
+		break;
 
 
 	default:

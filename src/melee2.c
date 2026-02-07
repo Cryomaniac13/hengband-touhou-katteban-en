@@ -4300,7 +4300,7 @@ static void process_monster(int m_idx)
 	/* Attempt to "multiply" if able and allowed */
 	///mod140817 —‚ğ”F¯‚µ‚Ä‚¢‚È‚¢ê‡‚ ‚Ü‚è‘‚¦‚È‚¢‚±‚Æ‚É‚µ‚½
 	///mod150610 “¬‹Zê‚Å‚Í‘‚¦‚È‚¢‚±‚Æ‚É‚µ‚½
-	if ((r_ptr->flags2 & RF2_MULTIPLY) && !p_ptr->inside_battle && (num_repro < MAX_REPRO) && (aware || one_in_(13)))
+	if ((r_ptr->flags2 & RF2_MULTIPLY) && !p_ptr->inside_battle && (num_repro < MAX_REPRO) && (aware || one_in_(13)) && !(ARIYA_STOP))
 	{
 		int k, y, x;
 

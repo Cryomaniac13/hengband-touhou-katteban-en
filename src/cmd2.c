@@ -1084,6 +1084,7 @@ static void chest_death(bool scatter, int y, int x, s16b o_idx)
 			else if (p_ptr->pclass == CLASS_CHIMI) a_idx = ART_SHIOMITSUTAMA;
 			else if (p_ptr->pclass == CLASS_NAREKO) a_idx = ART_HQA;
 			else if (p_ptr->pclass == CLASS_YUIMAN) a_idx = ART_LUTHIEN;
+			else if (p_ptr->pclass == CLASS_ARIYA) a_idx = ART_PALANTIR;
 
 			else k_idx =  lookup_kind(TV_SCROLL, SV_SCROLL_ARTIFACT);//™¶¬
 		}
@@ -7512,6 +7513,9 @@ bool do_cmd_throw_aux(int mult, bool boomerang, int shuriken)
 							   tdam, m_ptr->hp);
 	#endif
 
+
+						msg_format("tdm:%d",p_ptr->to_d_m);
+
 					}
 					//“Š±ƒXƒLƒ‹‚ğ“¾‚é
 					gain_skill_exp(SKILL_THROWING, m_ptr);
@@ -8118,3 +8122,5 @@ void walk_energy_modify(void)
 
 
 }
+
+

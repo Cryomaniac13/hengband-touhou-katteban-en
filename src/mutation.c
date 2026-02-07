@@ -178,6 +178,7 @@ bool gain_random_mutation(int choose_mut)
 	if ((p_ptr->muta3 & MUT3_PEGASUS) || (p_ptr->muta3 & MUT3_FISH_TAIL) || (p_ptr->muta2 & MUT2_BIGHORN)) no_wield_change = TRUE;
 
 
+
 	//蓬莱人は変異無効 箱によるオーラ除く
 	//v1.1.98 瑞霊の憑依も受ける
 	if(p_ptr->prace == RACE_HOURAI && choose_mut != 193 && choose_mut != 217)
@@ -188,6 +189,12 @@ bool gain_random_mutation(int choose_mut)
                                         "The back of your neck feels stuffy for a moment, but nothing happens."));
 		else msg_print(_("一瞬頭がぼうっとしたが何も起こらなかった。",
                             "Your head feels dull for a moment, but nothing happens."));
+		return TRUE;
+	}
+	//v2.1.5 阿梨夜突然変異無効
+	else if (p_ptr->pclass == CLASS_ARIYA)
+	{
+		msg_print(_("あなたは変異を拒絶した。", "You reject the mutation."));
 		return TRUE;
 	}
 

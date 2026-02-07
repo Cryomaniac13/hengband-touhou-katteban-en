@@ -1165,7 +1165,13 @@ bool dispel_check(int m_idx)
 	if (p_ptr->shield) return (TRUE);
 
 	/* Magic defence */
-	if (p_ptr->magicdef) return (TRUE);
+	if (p_ptr->magicdef)
+	{
+		if (p_ptr->pclass == CLASS_ARIYA && p_ptr->lev > 44)
+			;//lev45ˆÈ~‚Ìˆ¢—œ–é‚ÍíŽž–‚–@‚ÌŠZ
+		else
+			return (TRUE);
+	}
 
 	/* Multi Shadow */
 	if (p_ptr->multishadow) return (TRUE);
@@ -1209,6 +1215,7 @@ bool dispel_check(int m_idx)
 		else if ((p_ptr->pclass == CLASS_CHIYARI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_MAYUMI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_KEIKI) && (p_ptr->lev > 29));//”ñ‘ÎÛ
+		else if ((p_ptr->pclass == CLASS_ARIYA) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else if (is_special_seikaku(SEIKAKU_SPECIAL_JYOON) && (p_ptr->lev > 29));
 		else
 		{
@@ -1231,6 +1238,7 @@ bool dispel_check(int m_idx)
 	{
 		if ((p_ptr->pclass == CLASS_LETTY) && (p_ptr->lev > 19)) ;//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_NARUMI) && (p_ptr->lev > 29)) ;//”ñ‘ÎÛ
+		else if ((p_ptr->pclass == CLASS_ARIYA) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else
 		{
 			if (!p_ptr->immune_cold && (p_ptr->oppose_cold || music_singing(MUSIC_NEW_LYRICA_SOLO) || music_singing(MUSIC_RESIST))) return (TRUE);
@@ -1243,6 +1251,7 @@ bool dispel_check(int m_idx)
 		if ((p_ptr->pclass == CLASS_NINJA) && p_ptr->lev > 44);//”ñ‘ÎÛ
 		else if ((p_ptr->pclass == CLASS_MOMOYO) && p_ptr->lev > 19);
 		else if ((p_ptr->pclass == CLASS_YUMA) && p_ptr->lev > 19);
+		else if ((p_ptr->pclass == CLASS_ARIYA) && (p_ptr->lev > 29));//”ñ‘ÎÛ
 		else
 		{
 			if (p_ptr->oppose_pois || music_singing(MUSIC_NEW_LYRICA_SOLO) || music_singing(MUSIC_RESIST)) return (TRUE);
@@ -1819,6 +1828,9 @@ bool make_attack_spell(int m_idx, int special_flag)
 		reset_target(m_ptr);
 		return (FALSE);
 	}
+
+	//v2.1.5 ˆ¢—œ–éuP‹v‚Ì“~v‚ÌŒø‰Ê
+	if (ARIYA_STOP) return (FALSE);
 
 	//ƒ}ƒ~ƒ]ƒE“ñƒbŠâ‰Æ‚ÌÙ‚«
 	if(p_ptr->pclass == CLASS_MAMIZOU && p_ptr->magic_num1[0] == m_idx)

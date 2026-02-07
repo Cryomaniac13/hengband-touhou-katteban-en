@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 1
-#define H_VER_PATCH 4
+#define H_VER_PATCH 5
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -4009,7 +4009,7 @@
 //アイテムカードなどで他のクラスからも使える特技はこのビットを使わないこと。
 //いずれもしspecial_defenseのフラグビットが足りなくなるようなら咲夜や雛のフラグビットをこれに吸収して再利用してもいい。
 #define SD_UNIQUE_CLASS_POWER	0x10000000
-#define SD_AMPLIFY_STONE			0x20000000 //硝子の盾にしようかと思っていたが没にし異変石増幅にする
+#define SD_AMPLIFY_STONE		0x20000000 //硝子の盾にしようかと思っていたが没にし異変石増幅にする
 
 
 //クラス専用のSPECIAL_DEFENSEフラグが現在有効になっているかどうかを確認する
@@ -8941,6 +8941,11 @@ extern int PlayerUID;　
 
 //v2.1.3 慧ノ子のトラップリスト長
 #define ENOKO_TRAP_LIST_MAX	17
+
+//v2.1.5 阿梨夜の「恒久の冬」発動中
+#define ARIYA_STOP (p_ptr->pclass == CLASS_ARIYA && (p_ptr->special_defense & SD_UNIQUE_CLASS_POWER))
+
+
 
 #define SCORES_RAW_FILE "scores.raw"
 /*#ifdef FIX_SCORES_FORMAT

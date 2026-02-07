@@ -1,6 +1,6 @@
 
                   *****************************************
-                  **          Gensouband v2.1.4          **
+                  **          Gensouband v2.1.5          **
                   *****************************************
 
           Based on Moria:   Copyright (c) 1985 Robert Alan Koeneke

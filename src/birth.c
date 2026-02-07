@@ -3357,6 +3357,10 @@ outfit_type birth_outfit_class[] = {
 	{ CLASS_YUIMAN,2,0,TV_CLOTHES, SV_CLOTHES,1 },
 	{ CLASS_YUIMAN,2,0,TV_ARROW, SV_AMMO_LIGHT,30 },
 
+	{ CLASS_ARIYA,2,0,TV_CLOTHES, SV_CLOTH_DRESS,1 },
+	{ CLASS_ARIYA,0,ART_STONEMASK,0,0,0 },
+
+
 	{-1,0,0,0,0,0} //終端dummy
 };
 
@@ -6672,11 +6676,12 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		"You are the princess of Yuimankoku, the land on the edge of the world of the gods. You were imprisoned in a labyrinth and being forced to work for Lunarians for a long time, but were able to escape due to the outside incident and the shrine maiden's actions. You're proficient at using bows, and you can simply throw the arrows by yourself if you don't have a bow. You also can study a single realm of magic, and you can use snakes wrapped around your body to remove curses from equipment or steal magical power from enemies. Asama Purifying Mountain dungeon is your home, and there you have strong detection abilities and are capable of overwhelmingly suppressing specific monster types.") },
 	//その他からこっちに持って来た
 	{TRUE,_("綿月　豊姫", "Watatsuki no Toyohime"),CLASS_TOYOHIME,RACE_LUNARIAN,ENTRY_OTHER,SEX_FEMALE,
-	_("あなたは月の名家の姫で、依姫の姉です。海と山を繋ぐ力を持ち、大規模な召喚や空間操作を好き放題に行います。荒事は苦手ですが月の最新兵器を所有しており、並みの敵ならまとめて吹き飛ばすことができます。	あなたは穢れを嫌う月の民であり、様々な邪悪な攻撃で大ダメージを受けてしまいます。",
+		_("あなたは月の名家の姫で、依姫の姉です。海と山を繋ぐ力を持ち、大規模な召喚や空間操作を好き放題に行います。荒事は苦手ですが月の最新兵器を所有しており、並みの敵ならまとめて吹き飛ばすことができます。	あなたは穢れを嫌う月の民であり、様々な邪悪な攻撃で大ダメージを受けてしまいます。",
     "You are a Lunarian princess, older sister of Yorihime. You have the power to connect sea and mountains, and are capable of major summoning and space manipulation. While you don't like engaging in combat, you have the latest Lunarian weapon which easily can blow enemies away. As a Lunarian, you can't tolerate impurity, and you take large damage from 'evil' attacks.")},
+	{ TRUE,_("磐永　阿梨夜", "Ariya Iwanaga"),CLASS_ARIYA,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
+		_("あなたは不変の力をもつ石の女神です。その力は自分の体だけにとどまらずその気になれば幻想郷全域に及びます。あなたは非常に高い体力をもち、さらに自分への様々な攻撃を軽減あるいは無効化し、その上敵に対して凶悪な妨害を押し付け、また魔法を二領域巧みに扱うことができます。よほど油断をしない限り戦いで遅れを取ることはほぼないでしょう。ただしあらゆる変化を拒絶するあなたは成長が非常に遅くレベルアップに多くの経験値が必要です。また変身などの一部の補助魔法も効果を発揮しません。",
+		"You are a stone goddess holding the power of perpetuality. That power isn't restricted to your body - you could spread it across Gensoukyou if you wish so. You are extremely sturdy, you can diminish or negate various attacks directed at you, severely hamper your enemies, and you are also capable of studying two realms of magic. You won't fall behind in battle unless you get careless. However, as you reject any kind of change, levelling up will require a lot of experience. Also, you cannot use several kinds of support spells like transformations.") },
 
-	{ FALSE,_("磐永　阿梨夜", "Ariya Iwanaga"),CLASS_ARIYA,RACE_DEITY,ENTRY_KINJYOU,SEX_FEMALE,
-		"" },
 	{ FALSE,_("渡里　ニナ", "Nina Watari"),CLASS_NINA,RACE_YOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
 		"" },
 

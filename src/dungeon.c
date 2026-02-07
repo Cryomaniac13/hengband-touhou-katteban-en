@@ -925,6 +925,12 @@ static void regenhp(int percent)
 	{
 		percent = percent * (10 + p_ptr->lev) / 6;
 	}
+	//阿梨夜も早い
+	else if (p_ptr->pclass == CLASS_ARIYA)
+	{
+		percent = percent * 3;
+	}
+
 	else if (p_ptr->pclass == CLASS_SUWAKO && p_ptr->tim_general[0])//諏訪子冬眠
 	{
 		percent *= 10;
@@ -1038,6 +1044,10 @@ static void regenmana(int upkeep_factor, int regen_amount)
 		if(p_ptr->pclass == CLASS_PATCHOULI)
 		{
 			new_mana_frac += new_mana_frac * p_ptr->lev / 20;
+		}
+		else if (p_ptr->pclass == CLASS_ARIYA)//阿梨夜はもっと早い 3倍
+		{
+			new_mana_frac *= 3;
 		}
 		else if(p_ptr->prace == RACE_LUNARIAN)//月の民もMP回復速度が早い 2倍
 		{
@@ -4099,6 +4109,9 @@ static void process_world_aux_curse(void)
 				p_ptr->magic_num1[1] += 100 + randint1(100);
 				return;
 			}
+
+			//v2.1.5 阿梨夜経験値吸収無効化
+			if (p_ptr->pclass == CLASS_ARIYA) return;
 
 
 			p_ptr->exp -= (p_ptr->lev+1)/2;
@@ -9878,6 +9891,13 @@ static void dungeon(bool load_game)
 			flag_chimi_need_count_feat = TRUE;
 		}
 
+		//v2.1.5 阿梨夜　恒久の冬が発動していたら解除
+		if (ARIYA_STOP)
+		{
+			p_ptr->special_defense &= ~(SD_UNIQUE_CLASS_POWER);
+		}
+
+
 
 		//v1.1.77 お燐(専用性格)の追跡対象モンスターをクリア
 		/* v2.0.15 追跡対象をMFLAG_SPECIALで管理することにしたのでクリアする必要がなくなった
@@ -9889,28 +9909,28 @@ static void dungeon(bool load_game)
 		*/
 
 		//妹紅インペリシャブルシューティングを解除
-		else if(p_ptr->pclass == CLASS_MOKOU && p_ptr->magic_num2[0])
+		if(p_ptr->pclass == CLASS_MOKOU && p_ptr->magic_num2[0])
 		{
 			p_ptr->magic_num2[0] = 0;
 		}
 		//ルナチャ能力解除
-		else if((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES) && (p_ptr->tim_general[0] || p_ptr->tim_general[1]))
+		if((p_ptr->pclass == CLASS_LUNAR || p_ptr->pclass == CLASS_3_FAIRIES) && (p_ptr->tim_general[0] || p_ptr->tim_general[1]))
 		{
 			set_tim_general(0,TRUE,0,0);
 			set_tim_general(0,TRUE,1,0);
 		}
-		else if(p_ptr->pclass == CLASS_SANAE && p_ptr->magic_num1[1])
+		if(p_ptr->pclass == CLASS_SANAE && p_ptr->magic_num1[1])
 		{
 			msg_print(_("フロアから神の気配が消えた。", "Divine presence vanishes from this floor."));
 			p_ptr->magic_num1[1] = 0;
 		}
-		else if(p_ptr->pclass == CLASS_KOISHI && p_ptr->magic_num1[0])
+		if(p_ptr->pclass == CLASS_KOISHI && p_ptr->magic_num1[0])
 		{
 			msg_print(_("周囲の人影が消えた。", "The figures surrounding you disappear."));
 			p_ptr->magic_num1[0] = 0;
 		}
 		///mod150516 天子の要石をクリア
-		else if(p_ptr->pclass == CLASS_TENSHI)
+		if(p_ptr->pclass == CLASS_TENSHI)
 		{
 			p_ptr->magic_num1[0] = 0;
 			p_ptr->magic_num1[1] = 0;
@@ -9918,7 +9938,7 @@ static void dungeon(bool load_game)
 
 		}
 		//ドレミー変身解除
-		else if(p_ptr->pclass == CLASS_DOREMY && IS_METAMORPHOSIS)
+		if(p_ptr->pclass == CLASS_DOREMY && IS_METAMORPHOSIS)
 		{
 			p_ptr->special_defense &= ~(SD_METAMORPHOSIS);
 			p_ptr->special_flags &= ~(SPF_IGNORE_METAMOR_TIME);
@@ -9926,7 +9946,7 @@ static void dungeon(bool load_game)
 		}
 		//v1.1.48 紫苑憑依解除..はフロアを出てもされないことにした。そうでもしないと弱すぎる。
 		/*
-		else if (SHION_POSSESSING)
+		if (SHION_POSSESSING)
 		{
 			p_ptr->special_defense &= ~(SD_METAMORPHOSIS);
 			p_ptr->special_flags &= ~(SPF_IGNORE_METAMOR_TIME);
@@ -9934,7 +9954,7 @@ static void dungeon(bool load_game)
 		}
 		*/
 		//雛の呪い中断
-		else if (p_ptr->pclass == CLASS_HINA)
+		if (p_ptr->pclass == CLASS_HINA)
 		{
 			if(p_ptr->magic_num1[0]) set_tim_general(0,TRUE,0,0);
 			if(p_ptr->special_defense & SD_HINA_NINGYOU)
@@ -9944,7 +9964,7 @@ static void dungeon(bool load_game)
 				p_ptr->redraw |= (PR_STATUS);
 			}
 		}
-		else if (p_ptr->pclass == CLASS_YACHIE)
+		if (p_ptr->pclass == CLASS_YACHIE)
 		{
 			if (p_ptr->magic_num1[0])
 			{

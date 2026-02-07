@@ -518,7 +518,8 @@ void teleport_player(int dis, u32b mode)
 
 			/* A monster except your mount may follow */
 			//v2.0.20 時間停止中はモンスターが追尾してこなくする
-			if (tmp_m_idx && (p_ptr->riding != tmp_m_idx) && !SAKUYA_WORLD && !world_player)
+			//v2.1.5 阿梨夜能力発動中も追加
+			if (tmp_m_idx && (p_ptr->riding != tmp_m_idx) && !SAKUYA_WORLD && !world_player && !(ARIYA_STOP))
 			{
 				monster_type *m_ptr = &m_list[tmp_m_idx];
 				monster_race *r_ptr = &r_info[m_ptr->r_idx];

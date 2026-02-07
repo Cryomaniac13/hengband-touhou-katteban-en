@@ -449,6 +449,10 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_YUIMAN) return TRUE;
 			else return FALSE;
 
+		case CLASS_ARIYA:
+			if (r_idx == MON_ARIYA) return TRUE;
+			else return FALSE;
+
 
 	}
 
@@ -466,6 +470,8 @@ bool diehardmind()
 	if(p_ptr->pclass == CLASS_FLAN) return TRUE;
 	if(p_ptr->pclass == CLASS_EIKI) return TRUE;
 	if(p_ptr->pclass == CLASS_JUNKO) return TRUE;
+	if(p_ptr->pclass == CLASS_ARIYA) return TRUE;
+
 	if(prace_is_(RACE_HANIWA))return TRUE;
 
 
@@ -1855,6 +1861,9 @@ void monster_death(int m_idx, bool drop_item)
 			//酔い潰したモンスターは爆発しない
 			if (flag_drunk) break;
 
+			//v2.1.5 阿梨夜「恒久の冬」の効果
+			if (ARIYA_STOP) break;
+
 			if(m_ptr->r_idx == MON_SAGUME_MINE) rad = 4;
 
 			if(!world_monster) project(m_idx, 3, y, x, damage, typ, flg, -1);
@@ -2143,6 +2152,9 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 		{
 			bool notice = FALSE;
 
+			//v2.1.5 阿梨夜「恒久の冬」の効果
+			if (ARIYA_STOP) break;
+
 			for (i = 0; i < 2; i++)
 			{
 				int wy = y, wx = x;
@@ -2219,6 +2231,10 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 		 * Mega^3-hack: killing a 'Warrior of the Dawn' is likely to
 		 * spawn another in the fallen one's place!
 		 */
+
+		 //v2.1.5 阿梨夜「恒久の冬」の効果
+		if (ARIYA_STOP) break;
+
 		if (!p_ptr->inside_arena && !p_ptr->inside_battle)
 		{
 			if (!one_in_(7))
@@ -2257,6 +2273,10 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 		/* One more ultra-hack: An Unmaker goes out with a big bang! */
 		{
 			int flg = PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL;
+
+			//v2.1.5 阿梨夜「恒久の冬」の効果
+			if (ARIYA_STOP) break;
+
 			(void)project(m_idx, 6, y, x, 100, GF_CHAOS, flg, -1);
 		}
 		break;
@@ -2408,6 +2428,10 @@ msg_print("勝利！チャンピオンへの道を進んでいる。");
 	case MON_ROLENTO:
 		{
 			int flg = PROJECT_GRID | PROJECT_ITEM | PROJECT_KILL;
+
+			//v2.1.5 阿梨夜「恒久の冬」の効果
+			if (ARIYA_STOP) break;
+
 			(void)project(m_idx, 3, y, x, damroll(20, 10), GF_FIRE, flg, -1);
 		}
 		break;
@@ -4279,7 +4303,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 		///mod150502 諏訪子特殊処理 「赤口（ミシャグチ）さま」発動中はworld_monster=-1になって敵の呪いなどを受けない
 		//v1.1.52 新アリーナ内では6/7から3/4へ　下の正邪は新アリーナに出ないので変えない
 		//v2.0.9 美宵に酔い潰された場合復活しない
-		if (m_ptr->r_idx == MON_MOKOU && !one_in_(7) && !world_monster && !flag_drunk)
+		if (m_ptr->r_idx == MON_MOKOU && !one_in_(7) && !world_monster && !flag_drunk && !(ARIYA_STOP))
 		{
 			int rez_chance = p_ptr->inside_arena ? 4 : 7;
 
@@ -4292,7 +4316,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 			}
 		}
 		//正邪も6/7で復活する
-		if (m_ptr->r_idx == MON_SEIJA && !one_in_(7))
+		if (m_ptr->r_idx == MON_SEIJA && !one_in_(7) && !(ARIYA_STOP))
 		{
 			m_ptr->maxhp = m_ptr->max_maxhp;
 			m_ptr->hp = m_ptr->maxhp;
@@ -4556,7 +4580,7 @@ bool mon_take_hit(int m_idx, int dam, bool *fear, cptr note)
 		///mod150502 諏訪子特殊処理 「赤口（ミシャグチ）さま」発動中はworld_monster=-1になって敵の呪いなどを受けない
 		///mod150711 妹紅パゼストバイフェニックスのときも血の呪いを受けない
 		//v2.0.9 酔い潰したときは血の呪いが発動しない
-		if ((r_ptr->flags3 & RF3_ANG_AMBER) && one_in_(2) && !world_monster && !flag_mokou_possess && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
+		if ((r_ptr->flags3 & RF3_ANG_AMBER) && one_in_(2) && !world_monster && !flag_mokou_possess && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk && !(ARIYA_STOP))
 		{
 			int curses = 1 + randint1(3);
 			bool stop_ty = FALSE;
@@ -4797,6 +4821,8 @@ msg_format("%^sは恐ろしい血の呪いをあなたにかけた！", m_name);
 				if (r_ptr->blow[i].method == RBM_EXPLODE) explode = TRUE;
 			}
 
+			if (ARIYA_STOP) explode = FALSE;
+
 			/* Special note at death */
 			if (explode)
 #ifdef JP
@@ -4853,7 +4879,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 
 		///mod140118 アリスが倒れたら人形が全て爆発する
 		//v2.0.9 酔い潰したら爆発しない
-		if (m_ptr->r_idx == MON_ALICE && !world_monster && !flag_drunk)
+		if (m_ptr->r_idx == MON_ALICE && !world_monster && !flag_drunk && !(ARIYA_STOP))
 		{
 			int i;
 			bool flag_msg = TRUE;
@@ -4879,8 +4905,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 
 		/*:::神奈子を倒すとクエストクリア前に諏訪子が出てくる*/
-		if ((m_ptr->r_idx == MON_KANAKO) &&
-		    p_ptr->inside_quest == QUEST_KANASUWA)
+		if ((m_ptr->r_idx == MON_KANAKO) && p_ptr->inside_quest == QUEST_KANASUWA && !(ARIYA_STOP))
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4897,7 +4922,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		/*:::イケタ処理*/
 		/* Mega hack : replace IKETA to BIKETAL */
 		if ((m_ptr->r_idx == MON_IKETA) &&
-		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
+		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk && !(ARIYA_STOP))
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4941,7 +4966,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 		/*:::モズグス様変身処理追加*/
 		else if ((m_ptr->r_idx == MON_MOZGUS) &&
-		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
+		    !(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk && !(ARIYA_STOP))
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4959,7 +4984,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 		//v1.1.42 紫苑パワーアップ復活
 		else if ((m_ptr->r_idx == MON_SHION_1) &&
-			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk)
+			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !flag_drunk && !(ARIYA_STOP))
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;
@@ -4974,7 +4999,7 @@ msg_format("%sの首には賞金がかかっている。", m_name);
 		}
 		//v2.0.8 蟒蛇に変身する漁師
 		else if (m_ptr->r_idx == MON_FISHERMAN2 &&
-			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA))
+			!(p_ptr->inside_arena || p_ptr->inside_battle) && !(m_ptr->mflag & MFLAG_EPHEMERA) && !(ARIYA_STOP))
 		{
 			int dummy_y = m_ptr->fy;
 			int dummy_x = m_ptr->fx;

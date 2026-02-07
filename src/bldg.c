@@ -8957,7 +8957,7 @@ bool check_quest_unique_text(void)
 		//サーペント打倒メインクエスト
 	case QUEST_SERPENT:
 		//v1.1.18
-		//v2.1.4 ユイマンとアリヤも入れておく
+		//v2.1.4 ユイマンと阿梨夜も入れておく
 		if(pc == CLASS_JUNKO || pc == CLASS_HECATIA || pc == CLASS_CLOWNPIECE || pc == CLASS_VFS_CLOWNPIECE
 			|| pc == CLASS_YUIMAN || pc == CLASS_ARIYA)
 		{
@@ -10822,7 +10822,7 @@ bool check_quest_unique_text(void)
 			if (accept)
 			{
 #ifdef JP
-				strcpy(quest_text[line++], "霊夢と魔理沙の働きで聖域の地下の扉が開かれたが、");//60文字くらいまでいけるようにした。多分
+				strcpy(quest_text[line++], "霊夢と魔理沙の働きで聖域の地下の扉が開かれ、");//60文字くらいまでいけるようにした。多分
 				strcpy(quest_text[line++], "そこには結縵国の姫が囚われていたらしい。");
 				strcpy(quest_text[line++], "早速早苗を使いに出したが、帰ってくるなり寝込んでしまった。");
 				strcpy(quest_text[line++], "一体何が起こったというのか？");
