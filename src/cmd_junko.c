@@ -1857,7 +1857,7 @@ void	add_junko_flag_val(int flag_num, int add_val)
 	if(flag_num < 0 || flag_num > 107)
 	{
 		msg_format(_("ERROR:add_junko_flag_val()‚É•s³‚Ènum’l(%d)‚ª“ü—Í‚³‚ê‚½",
-                    "ERROR: Incorrect num value (%d) in add_junko_flag_val()"));
+                    "ERROR: Incorrect num value (%d) in add_junko_flag_val()"),flag_num);
 		return;
 	}
 

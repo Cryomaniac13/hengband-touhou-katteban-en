@@ -8406,7 +8406,7 @@ msg_print("生命力が体から吸い取られた気がする！");
 			{
 				msg_print(_("あなたは彫像化の呪いを跳ね除けた！", "You avoid the petrification curse!"));
 			}
-			else if ( (RACE_RESIST_STATUE) || (p_ptr->pclass == CLASS_AUNN) || (p_ptr->pclass == CLASS_EIKI) || (p_ptr->pclass == CLASS_NAREKO))
+			else if ( (RACE_RESIST_STATUE) || (p_ptr->pclass == CLASS_AUNN) || (p_ptr->pclass == CLASS_EIKI) || (p_ptr->pclass == CLASS_NAREKO) || (p_ptr->pclass == CLASS_NINA))
 			{
 				msg_print(_("あなたは元々石なので彫像化しなかった！", "Since you already were made of stone, you weren't petrified!"));
 			}

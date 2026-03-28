@@ -4482,7 +4482,6 @@ put_str("今ここで受けられるクエストはないようだ。", 8, 0);
 		break;
 
 
-
 	}
 
 	q_ptr = &quest[q_index];
@@ -10927,7 +10926,7 @@ bool check_quest_unique_text(void)
 /*:::Mega Hack - 一部ユニーククラスは特定のクエストを最初から受けられない。*/
 /*:::今の＠で受けられないクエストのときTRUEを返す。*/
 /*:::処理としては、該当クエストをゲームスタート時に全て失敗済にし、ダンプやステータスに表示しない。*/
-/*:::↑後日ミスに気がついた。これだとここでTRUEになったクエストが失敗終了の状態で初期町生成される。つまり例えばフランは妹様クエだけでなく京丸牡丹クエも受けられない。*/
+/*:::↑後日ミスに気がついた。これだとここでTRUEになったクエストが失敗終了の状態で町が生成される。つまり例えばフランは妹様クエだけでなく京丸牡丹クエも受けられない。*/
 /*:::どうしたものか。とりあえず放置。*/
 /*:::↑txxxxxxx.txtの条件分岐に細工して凌ぐしかないか。*/
 //ここの他にもcastle_quest()のところで受注の可能不可能を決めている処理がある。
@@ -11142,6 +11141,12 @@ bool check_ignoring_quest(int questnum)
 		if (pc == CLASS_SAKI || pc == CLASS_YACHIE || pc == CLASS_YUMA || pc == CLASS_ZANMU || pc == CLASS_HISAMI || pc == CLASS_EIKI || pc == CLASS_REIMU)
 			return TRUE;
 		break;
+
+
+	case QUEST_NINA:
+		if (pc == CLASS_NINA) return TRUE;
+		break;
+
 
 	}
 

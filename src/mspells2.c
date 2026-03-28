@@ -496,7 +496,6 @@ bool monst_spell_monst(int m_idx)
 		rlev = (rlev * 3 + 1) / 4;
 	}
 
-
 	/* Remove unimplemented spells */
 	f6 &= ~(RF6_WORLD | RF6_TRAPS | RF6_FORGET);
 
@@ -507,7 +506,6 @@ bool monst_spell_monst(int m_idx)
 			f5 &= ~(RF5_SUMMON_MASK);
 			f6 &= ~(RF6_SUMMON_MASK);
 			f9 &= ~(RF9_SUMMON_MASK);
-
 	}
 
 	if (f4 & RF4_BR_LITE)
@@ -6018,20 +6016,24 @@ if (blind) msg_format("%^sが強烈なエネルギーを放射した！", m_name);
 		}
 
 	}
-	if (m_ptr->ml && maneable && !world_monster && !p_ptr->blind && (p_ptr->pclass == CLASS_IMITATOR))
+	//v2.1.6 ものまね関係の処理の再実装
+	//ニナもしくはゴゴペンダント装備中のみモンスター特技を記憶できる
+	if (m_ptr->ml && maneable && !world_monster && !p_ptr->blind
+		&& (p_ptr->pclass == CLASS_NINA || check_equip_specific_fixed_art(ART_GOGO, TRUE)))
 	{
-		if (thrown_spell != 167) /* Not RF6_SPECIAL */
+		if (thrown_spell != 124 && thrown_spell != 167) //特別な行動1,2を除く
 		{
 			if (p_ptr->mane_num == MAX_MANE)
 			{
 				p_ptr->mane_num--;
-				for (i = 0; i < p_ptr->mane_num - 1; i++)
+				for (i = 0; i < p_ptr->mane_num; i++)
 				{
 					p_ptr->mane_spell[i] = p_ptr->mane_spell[i+1];
 					p_ptr->mane_dam[i] = p_ptr->mane_dam[i+1];
 				}
 			}
-			p_ptr->mane_spell[p_ptr->mane_num] = thrown_spell - 96;
+			//元々96だったがmonster_powers[]に代わって新しく使うmonspell_list2[]は1から始まるので95に変更
+			p_ptr->mane_spell[p_ptr->mane_num] = thrown_spell - 95;
 			p_ptr->mane_dam[p_ptr->mane_num] = dam;
 			p_ptr->mane_num++;
 			new_mane = TRUE;

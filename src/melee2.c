@@ -4688,10 +4688,16 @@ msg_format("%^s%s", m_name, monmessage);
                         "ERROR: Movement pattern not set for this monster"));
 			return;
 		}
+		//v2.1.6 移動禁止状態のとき無理矢理動こうとして何かトラブルになるようなのでここで終了
+		else if (flag_never_move)
+		{
+			return;
+		}
 		else
 		{
 			mm[0] = mm[1] = mm[2] = mm[3] = m_ptr->xtra_dir_param;
-			mm[4] = mm[5] = mm[6] = mm[7] = m_ptr->xtra_dir_param;
+			//どうもmm[7]は0でないとまずいようだ
+			mm[4] = mm[5] = mm[6] = m_ptr->xtra_dir_param;
 
 		}
 
@@ -4846,7 +4852,8 @@ msg_format("%^s%s", m_name, monmessage);
 
 	/*:::mm[]に格納された方角の順に数回移動を試みる*/
 	/* Take a zero-terminated array of "directions" */
-	for (i = 0; mm[i]; i++)
+	//v2.1.6 mm[8]に配列外アクセスしないよう条件追加
+	for (i = 0; i < 8 && mm[i]; i++)
 	{
 		/* Get the direction */
 		d = mm[i];

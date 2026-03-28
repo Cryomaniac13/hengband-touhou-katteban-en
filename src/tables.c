@@ -6905,20 +6905,20 @@ const player_class class_info[MAX_CLASS] =
 		"Nina",
 #endif
 
-		{ -1, 4, 4, 2, 1, -2 },
-		32, 35, 30, 4, 27, 30, 50, 55,
-		12, 10, 10, 0,  4, 12, 18, 23,
-		5, 45, 60
+		{ -2, 6, 4, 0, 4, 3 },
+		32, 45, 36, 4, 32, 30, 40, 45,
+		12, 15, 15, 0,  5, 12, 15, 16,
+		6, 33, 40
 
-		,{ 1,4,4,4,4,0,0,0,0,5,5,5,5,0,0,5,0,0,0,0,0 }
+		,{ 1,5,5,5,5,5,5,5,5,5,5,5,5,0,0,5,0,0,0,0,0 }
 			,A_INT
-			,4,2,90,
-			{ 3,2,2,2,3,0,0,0,0,0
-			,4,3,2,2,2,2,4,3,3,3
-			,1 }
-			,50,3,3,4,
-			FALSE,FALSE,TRUE
-			,FALSE
+			,3,2,90,
+			{ 2,4,1,2,2,0,0,0,0,0
+			,3,2,2,2,2,2,2,2,2,2
+			,2 }
+			,25,3,3,4,
+			TRUE,FALSE,TRUE
+			,TRUE
 			,4
 			,MON_NINA
 
@@ -14050,6 +14050,8 @@ const activation_type activation_info[] =
 		  { "MUGENSYUKU", ACT_MUGENSYUKU, 80, 30000,{ 50, 0 },
 		  _("無間縮結界", "infinite shrinking barrier") },
 
+		  { "MONOMANE", ACT_MONOMANE, 60, 20000,{ 25, 25 },
+		  _("ものまね", "imitation") },
 
 	{ NULL, 0, 0, 0, {0, 0},
 	  "" }
@@ -18365,5 +18367,29 @@ enoko_make_trap_type enoko_make_trap_list[ENOKO_TRAP_LIST_MAX] =
 
 	//{ 0,0,"","dummy" }//player_levelが0の終端ダミー リスト長さを定数で管理することにしたので削除
 
+};
+
+//v2.1.6
+//ニナが特技で作れるダンジョン内建物
+//レベル昇順にして最後にレベル0の終端ダミー
+const nina_build_type nina_build_table[] =
+{
+
+	{1,BLDG_EX_STORE_GENERAL,_("雑貨屋", "General Store")},
+	{1,BLDG_EX_STORE_WEAPON,_("武器屋", "Weapon Store")},
+	{1,BLDG_EX_STORE_ARMOURY ,_("防具屋", "Armoury")},
+	{20,BLDG_EX_STORE_TEMPLE ,_("薬屋", "Potion Store")},
+	{20,BLDG_EX_STORE_ALCHEMIST ,_("巻物屋", "Scroll Store")},
+	{20,BLDG_EX_STORE_MAGIC ,_("魔法屋", "Magic Store")},
+	{20,BLDG_EX_STORE_BOOK ,_("本屋", "Bookstore")},
+
+	{30,BLDG_EX_STORE_BLACK ,_("故買屋", "Pawn Shop")},
+	{30,BLDG_EX_EIRIN ,_("治療屋(治療費は階層で変動)", "Healer (cost depends on depth)")},
+	{30,BLDG_EX_PATCHOULI ,_("鑑定充填屋", "Identify/recharge services")},
+	{30,BLDG_EX_CHOCOLATE ,_("チョコレートの川", "Chocolate River")},
+
+	{40,BLDG_EX_HOME ,_("探索拠点", "Exploration base")},
+
+	{0,0,_("終端ダミー", "terminator dummy")}
 };
 

@@ -5716,6 +5716,15 @@ bool activate_random_artifact(object_type *o_ptr, int item)
 
 
 
+		//v2.1.6 ゴゴのペンダントの発動でものまねを使えるようにした
+		case ACT_MONOMANE:
+		{
+			if (!cast_monspell_new(1)) return FALSE;
+
+		}
+		break;
+
+
 		default:
 		{
 #ifdef JP

@@ -1638,12 +1638,14 @@ extern void do_cmd_mind(void);
 extern void do_cmd_mind_browse(void);
 
 /* mane.c */
-extern bool do_cmd_mane(bool baigaesi);
+//extern bool do_cmd_mane(bool baigaesi);
 
 /* mspells3.c */
-extern bool do_cmd_cast_learned(void);
-extern void learn_spell(int monspell);
-extern void set_rf_masks(s32b *f4, s32b *f5, s32b *f6, int mode);
+// ñ{â∆ê¬ñÇÇÃìGÇÃãZégóp
+//extern bool do_cmd_cast_learned(void);
+//extern void learn_spell(int monspell);
+//extern void set_rf_masks(s32b *f4, s32b *f5, s32b *f6, int mode);
+
 //v1.1.82 êVêEã∆Åuíeñãå§ãÜâ∆Åvóp
 extern void learn_monspell_new(int thrown_spell, monster_type *m_ptr, bool flag_direct, bool flag_look, int caster_dist);
 extern bool check_monspell_learned(int monspell_num);
@@ -2157,8 +2159,8 @@ extern const monspells2 monspell_list2[MAX_MONSPELLS2+1];
 extern void make_magic_list_satori(bool del);
 
 extern const cptr stat_desc[6];
-extern bool cast_monspell_new(void);
-extern cptr cast_monspell_new_aux(int num, bool only_info, bool fail, int xtra);
+extern bool cast_monspell_new(int mode);
+extern cptr cast_monspell_new_aux(int num, bool only_info, bool fail, int xtra, int mane_dam);
 
 extern bool satori_reading;
 
@@ -2813,5 +2815,12 @@ extern void chimi_count_feat(bool msg);
 //v2.1.4
 extern bool deer_genocider(int arrow_num);
 
+//v2.1.5
+extern bool nina_make_special_building(void);
+extern void nina_erase_special_building();
 
-
+//v2.1.6
+extern const nina_build_type nina_build_table[];
+extern void	nina_store_unique_mon(int r_idx);
+extern bool	nina_recall_unique_mon(void);
+extern bool teleport_pets_to(int max_num, int mode);

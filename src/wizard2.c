@@ -126,7 +126,7 @@ void print_all_item_param(int idx)
 
 
 
-/*:::デバッグ用処理領域の追加*/
+/*:::デバッグ用処理領域の追加 Iコマンド*/
 static void do_cmd_wiz_hack_ben_2(void)
 {
 	int i,j;
@@ -149,6 +149,14 @@ static void do_cmd_wiz_hack_ben_2(void)
 		set_no_move(0);
 	}
 	*/
+
+	//ニナのモンスター記憶
+	if (p_ptr->pclass == CLASS_NINA)
+	{
+		//[10]は常に空白のはず
+		for (i = 0; i < 11; i++)
+			msg_format("%2d : idx:%d",i,p_ptr->magic_num1[i]);
+	}
 
 
 	//千亦　カードランクMAX
@@ -633,6 +641,8 @@ static void do_cmd_wiz_hack_ben(void)
     (void)probing();
 
 	//msg_format("yakuzaII_target_r_idx:%d", quest[QUEST_YAKUZA_2].r_idx);
+
+	msg_format("repro:%d", num_repro);
 
 	msg_format("tht:%d to_h_b:%d", p_ptr->skill_tht, p_ptr->to_h_b);
 
@@ -2162,6 +2172,7 @@ static void wiz_quantity_item(object_type *o_ptr)
 	}
 }
 
+#if 0
 /* debug command for blue mage */
 static void do_cmd_wiz_blue_mage(void)
 {
@@ -2189,7 +2200,7 @@ static void do_cmd_wiz_blue_mage(void)
 		}
 	}
 }
-
+#endif
 
 /*
  * Play with an item. Options include:
@@ -2937,6 +2948,7 @@ void do_cmd_debug(void)
 		do_cmd_wiz_change();
 		break;
 
+#if 0
 	/* Blue Mage Only */
 	case 'E':
 		if (p_ptr->pclass == CLASS_BLUE_MAGE)
@@ -2944,7 +2956,7 @@ void do_cmd_debug(void)
 			do_cmd_wiz_blue_mage();
 		}
 		break;
-
+#endif
 	/* View item info */
 	case 'f':
 		identify_fully(FALSE);

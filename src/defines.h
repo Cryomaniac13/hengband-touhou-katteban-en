@@ -79,7 +79,7 @@
 ///sys131117 FAKE_VERSIONの定数を消した
 #define H_VER_MAJOR 2
 #define H_VER_MINOR 1
-#define H_VER_PATCH 5
+#define H_VER_PATCH 6
 #define H_VER_EXTRA 0
 
 /*:::＊＊＊◆◆◆アップロード時には必ずこれをコメントアウトする◆◆◆＊＊＊:::*/
@@ -1570,6 +1570,13 @@
 #define MAX_WILDERNESS          14 /* Maximum wilderness index */
 
 
+
+//v2.1.5
+//f_info[]のインデックス値そのもの
+//現在は柔軟な変更を可能にするためか起動時にfeat_xxxxみたいな変数に格納してそれを使っているが変える予定もないし扱いがややこしいので他の設定ファイルと同じようにインデックスを直接扱うことにする
+#define FEAT_BUILDING_EX4	233	//特殊建物4 ニナの特技により生成される
+
+
 /*
  * Feature flags - should be used instead of feature indexes unless generating.
  * Originally from UnAngband, and modified into TR-like style in Hengband
@@ -2468,7 +2475,8 @@
 #define ACT_TRANSPORTATION_TRAP		190
 //v2.1.0
 #define ACT_MUGENSYUKU			191
-
+//v2.1.6
+#define ACT_MONOMANE			192
 
 #define ACT_CAST_OFF            250
 #define ACT_FISHING             251
@@ -4023,8 +4031,10 @@
 #define KATA_MASK (KATA_IAI | KATA_FUUJIN | KATA_KOUKIJIN | KATA_MUSOU)
 
 //v1.1.13 p_ptr->special_flagsに使うフラグ
-#define SPF_ORBITAL_TRAP 0x01 //豊姫「公転周期の罠」
-#define SPF_IGNORE_METAMOR_TIME	0x02 //ドレミー・紫苑　モンスター変身の時間制限を無視する
+//ここのフラグを増やすときはreset_tim_flags()でクリアされるかどうか適切に設定すること
+#define SPF_ORBITAL_TRAP 0x01			//豊姫「公転周期の罠」
+#define SPF_IGNORE_METAMOR_TIME	0x02	//ドレミー・紫苑　モンスター変身の時間制限を無視する reset_tim_flags()で解除
+#define SPF_DUNGEON_ARCADE	0x04		//ニナ　次のダンジョン生成のとき地下街を必ず作る
 
 
 
@@ -5790,6 +5800,7 @@
  * Line 2 -- forbid object terrains
  * Line 3 -- forbid normal objects
  */
+//トラップ床やパターンにはFF_FLOORがないのでこの条件に当てはまらない
 #define cave_clean_bold(Y,X) \
 	(cave_have_flag_bold((Y), (X), FF_FLOOR) && \
 	 !(cave[Y][X].info & CAVE_OBJECT) && \
@@ -8344,7 +8355,12 @@ extern int PlayerUID;　
 #define EX_BUILDINGS_HISTORY_MAX	6 //Extraモードダンジョン建物出現履歴数　ここ変えるとセーブデータ互換性なくなるので注意
 #define EX_BUILDINGS_PARAM_MAX	6	//Extraモードダンジョン建物特殊パラメータ配列要素数　今のフロア限定　ここ変えるとセーブデータ互換性なくなるので注意
 
-#define	BLDG_EX_STORE_GENERAL	1
+//building_ex_idx[]のidx
+#define BLDG_EX_MODE_EXTRA		0	//難易度EXTRAの各フロアで生成される建物
+#define BLDG_EX_MODE_NINA		3	//渡里ニナの特技により生成される建物 EXTRAに限定されない
+
+//building_ex_idx[]に記録される建物idx
+#define	BLDG_EX_STORE_GENERAL	1	//特殊建物として店を作るときに使う 0を使えないのでSTORE_XXXとは値が合わない
 #define	BLDG_EX_STORE_ARMOURY	2
 #define	BLDG_EX_STORE_WEAPON	3
 #define	BLDG_EX_STORE_TEMPLE	4
@@ -8389,11 +8405,14 @@ extern int PlayerUID;　
 #define BLDG_EX_HATATE		41 //はたての家
 #define BLDG_EX_GHOSTS		42 //v2.1.0 怨霊たちの溜まり場
 #define BLDG_EX_KEIKI2		43 //袿姫2 異変石を作る
+#define BLDG_EX_HOME		44 //渡里ニナの特技専用 EXTRA特殊建物としては使われない
+#define BLDG_EX_CHOCOLATE	45 //チョコレートの川
 
-#define BLDG_EX_MAX			44 //最後の建物番号+1
+#define BLDG_EX_MAX			46 //最後の建物番号+1
 
 
 #define CAST_MONSPELL_EXTRA_KYOUKO_YAMABIKO -1
+#define CAST_MONSPELL_EXTRA_MONOMANE		-2
 
 //銃アイテム発動の射撃の種類
 #define	GUN_FIRE_MODE_DEFAULT	0	//射撃
@@ -8697,6 +8716,7 @@ extern int PlayerUID;　
 //cave[][].cave_xtra_flagに保持
 #define CAVE_XTRA_FLAG_NEMUNO		0x00000001	//ネムノの縄張り
 #define CAVE_XTRA_FLAG_YOUR_TRAP	0x00000002	//＠が設置したトラップ
+#define CAVE_XTRA_FLAG_NINA			0x00000004	//ニナの特技によって生成された建物　アイテムカードでもこの特技を使えるように実装しているのでニナ専用フラグではない
 
 
 //v1.1.35 ネムノが縄張りにいるかどうかの判定

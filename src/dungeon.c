@@ -1040,12 +1040,12 @@ static void regenmana(int upkeep_factor, int regen_amount)
 		s32b new_mana = 0;
 		u32b new_mana_frac = (p_ptr->msp * regen_rate / 100 + PY_REGEN_MNBASE);
 
-		//パチュリーはMP回復速度が早い 最大2.5倍
+		//パチュリーはMP回復速度が早い 最大2.5倍...と思ったが3.5倍回復してるが別にいいか
 		if(p_ptr->pclass == CLASS_PATCHOULI)
 		{
 			new_mana_frac += new_mana_frac * p_ptr->lev / 20;
 		}
-		else if (p_ptr->pclass == CLASS_ARIYA)//阿梨夜はもっと早い 3倍
+		else if (p_ptr->pclass == CLASS_ARIYA)//阿梨夜は3倍
 		{
 			new_mana_frac *= 3;
 		}
@@ -6886,7 +6886,7 @@ static bool enter_borg_mode(void)
 /*
  * Hack -- Declare the Ben Borg
  */
-extern void do_cmd_borg(void);
+//extern void do_cmd_borg(void);
 
 #endif /* ALLOW_BORG */
 
@@ -7477,14 +7477,14 @@ msg_print("ウィザードモード突入。");
 					    )
 						do_cmd_mind();
 					///sysdel ものまね、青魔、鍛冶、スナイパーはしばらく無効化しておこう
-					else if (p_ptr->pclass == CLASS_IMITATOR)
-						do_cmd_mane(FALSE);
+					//else if (p_ptr->pclass == CLASS_IMITATOR)
+					//	do_cmd_mane(FALSE);
 					else if (p_ptr->pclass == CLASS_MAGIC_EATER || p_ptr->pclass == CLASS_SEIJA)
 						do_cmd_magic_eater(FALSE, FALSE);
 					else if (p_ptr->pclass == CLASS_SAMURAI || p_ptr->pclass == CLASS_YOUMU)
 						do_cmd_hissatsu();
-					else if (p_ptr->pclass == CLASS_BLUE_MAGE)
-						do_cmd_cast_learned();
+					//else if (p_ptr->pclass == CLASS_BLUE_MAGE)
+					//	do_cmd_cast_learned();
 					//else if (p_ptr->pclass == CLASS_SMITH)
 					//do_cmd_kaji(FALSE);
 					else if (p_ptr->pclass == CLASS_SNIPER)
@@ -9163,11 +9163,21 @@ msg_print("中断しました。");
 					}
 				}
 			}
-			/*:::ものまね師のものまね情報更新*/
-			///class ものまね特殊処理
-			if (p_ptr->pclass == CLASS_IMITATOR)
+			//v2.1.6 ものまね師のものまねのストックが上限以上にあるとき行動するたびに1つずつ消える
+			//ゴゴペンダントでものまねを全職業利用可能にしたので職業制限を外しニナの容量を少し拡張
+			//if (p_ptr->pclass == CLASS_IMITATOR)
+			if(TRUE)
 			{
-				if (p_ptr->mane_num > (p_ptr->lev > 44 ? 3 : p_ptr->lev > 29 ? 2 : 1))
+				int monomane_hold_max;
+				if (p_ptr->pclass == CLASS_NINA)
+					monomane_hold_max = 1 + p_ptr->lev / 10;
+				else if (check_equip_specific_fixed_art(ART_GOGO, TRUE))
+					monomane_hold_max = MAX(1, p_ptr->lev / 15);
+				else
+					monomane_hold_max = 0;
+
+
+				if (p_ptr->mane_num > monomane_hold_max)
 				{
 					p_ptr->mane_num--;
 					for (i = 0; i < p_ptr->mane_num; i++)
@@ -9528,8 +9538,9 @@ static void dungeon(bool load_game)
 	//}
 	flag_nue_check_undefined = TRUE;
 
-	/*:::Mega Hack - Extraモードダンジョン内建物の名前やできることを設定　セーブ＆ロードに対応するためフロアに降り立った直後に呼ぶ*/
-	if(EXTRA_MODE && dun_level)
+	//ダンジョン内特殊建物の名前やできることを設定　セーブ＆ロードに対応するためフロアに降り立った直後に呼ぶ
+	//v2.1.6 EXTRA以外でニナの特技による追加建物が存在するときにもこの処理を呼ぶ
+	if(dun_level && (EXTRA_MODE || building_ex_idx[BLDG_EX_MODE_NINA]))
 	{
 		init_extra_dungeon_buildings();
 	}
@@ -9815,6 +9826,12 @@ static void dungeon(bool load_game)
 			ability_card_trade_count = 0;
 			set_abilitycard_price_rate();
 			make_ability_card_store_list();
+		}
+
+		//v2.1.5 ニナの特技によって生成された建物があるとき消去する
+		if (building_ex_idx[BLDG_EX_MODE_NINA])
+		{
+			nina_erase_special_building();
 		}
 
 		//v2.0.5 EXTRAではたてのモンスター捜索をしている場合そのフロアを通過したらリセット

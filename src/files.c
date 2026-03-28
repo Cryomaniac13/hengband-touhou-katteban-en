@@ -4192,6 +4192,15 @@ static void player_flags(u32b flgs[TR_FLAG_SIZE])
 
 		break;
 
+	case CLASS_NINA:
+
+		add_flag(flgs, TR_LEVITATION);
+		add_flag(flgs, TR_RES_WATER);
+
+		if (plev > 19) add_flag(flgs, TR_RES_ACID);
+		if (plev > 29) add_flag(flgs, TR_RES_SHARDS);
+		if (plev > 39) add_flag(flgs, TR_RES_TIME);
+		break;
 
 
 
@@ -7983,6 +7992,8 @@ static void dump_aux_pet(FILE *fff)
  */
 static void dump_aux_class_special(FILE *fff)
 {
+
+#if 0
 	if (p_ptr->pclass == CLASS_BLUE_MAGE)
 	{
 		int i = 0;
@@ -8116,7 +8127,9 @@ static void dump_aux_class_special(FILE *fff)
 			fputs(p[i], fff);
 		}
 	}
-	else if (p_ptr->pclass == CLASS_MAGIC_EATER || p_ptr->pclass == CLASS_SEIJA)
+	else
+#endif
+	if (p_ptr->pclass == CLASS_MAGIC_EATER || p_ptr->pclass == CLASS_SEIJA)
 	{
 		char s[EATER_EXT][MAX_NLEN];
 		int tval, ext, k_idx;

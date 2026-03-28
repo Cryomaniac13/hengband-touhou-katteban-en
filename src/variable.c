@@ -1333,7 +1333,7 @@ u32b start_time;
 int tsuri_dir;
 
 //bool sukekaku;
-bool new_mane;
+bool new_mane; //本家青魔とものまね師が新しい技や魔法を習得したとき「まね」などの文字を赤くするためのフラグらしい
 
 /*:::感知範囲外でモンスター同士が戦ったターンはtrue process_world()で「何かが聞こえた」と表示*/
 bool mon_fight;
@@ -1569,14 +1569,15 @@ bool flag_spell_consume_book = FALSE;
 bool flag_spell_forget = FALSE;
 
 //EXダンジョン用建物idxが格納される。f_infoのBUILDING_EX1-4に対応し、この値を参照してdungeon()直後にbuilding[0-3]が書き直される
+//v2.1.6 building_ex_idx[3]をニナの能力による建物生成に使用する。これは難易度EXTRA以外でも使えるがフロアを出るときにこの建物を消去するので生成済みフロア情報にこの建物のことが記録されなくても問題ないはず
 byte building_ex_idx[BLDG_EX_NUM] = {0,0,0,0};
 //Exダンジョンに出現した建物の履歴　最近出た建物を出にくくするため記録
 byte	ex_buildings_history[EX_BUILDINGS_HISTORY_MAX] = {0,0,0,0,0,0};
-//建物用パラメータ　とりあえず0-3はf_infoのBUILDING_EX1-4に対応。255のときもう建物を利用できない。
+//建物用パラメータ　とりあえず[0-3]はf_infoのBUILDING_EX1-4に対応。[4-5]は予備領域。ここが255のときもう建物を利用できないフラグとして扱う。
 byte	ex_buildings_param[EX_BUILDINGS_PARAM_MAX] = {0,0,0,0,0,0};
 
 
-//特殊な自宅アクセスーモードのフラグ
+//特殊な自宅アクセスモードのフラグ
 
 //魔理沙の着せかえ魔法やEXTRA建物など　家から出る時に確認
 bool hack_flag_access_home = FALSE;

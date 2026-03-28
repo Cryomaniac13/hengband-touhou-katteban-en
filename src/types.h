@@ -1353,9 +1353,10 @@ struct player_type
 	s32b magic_num1[MAGIC_NUM_SIZE];     /* Array for non-spellbook type magic */
 	byte magic_num2[MAGIC_NUM_SIZE];     /* Flags for non-spellbook type magics */
 
+	//ものまね師特技
 	s16b mane_spell[MAX_MANE];
 	s16b mane_dam[MAX_MANE];
-	s16b mane_num;
+	s16b mane_num;//現在ものまね候補をいくつ記憶しているか
 
 	s16b concent;      /* Sniper's concentration level */
 
@@ -2645,4 +2646,14 @@ typedef struct enoko_make_trap_type
 
 }enoko_make_trap_type;
 
+//v2.1.6
+//ニナが特技で作れるダンジョン内建物
+typedef struct
+{
+
+	int		lev;		//使用可能レベル 0は終端ダミー
+	int		bldg_idx;	//BLDG_EX_****が入る
+	cptr	bldg_name;	//建物の表示名
+
+}nina_build_type;
 

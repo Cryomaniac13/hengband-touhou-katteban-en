@@ -291,8 +291,9 @@ void reset_tim_flags(void)
 	p_ptr->ele_immune = 0;
 	p_ptr->special_attack = 0L;
 	p_ptr->special_defense = 0L;
-	//v1.1.13
-	p_ptr->special_flags = 0L;
+
+	//v2.1.6 special_flagsはドレミーや紫苑などの特殊変身フラグのみ解除することにした
+	p_ptr->special_flags &= ~(SPF_IGNORE_METAMOR_TIME);
 
 	p_ptr->tim_aggravation = 0L;
 
@@ -7025,7 +7026,7 @@ int take_hit(int damage_type, int damage, cptr hit_from, int monspell)
 		}
 	}
 	/*:::ラーニング処理*/
-	if (monspell >= 0) learn_spell(monspell);
+	//if (monspell >= 0) learn_spell(monspell);
 
 	/* Mega-Hack -- Apply "invulnerability" */
 	if ((damage_type != DAMAGE_USELIFE) && (damage_type != DAMAGE_LOSELIFE))

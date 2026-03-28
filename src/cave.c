@@ -1644,8 +1644,9 @@ void display_dungeon(void)
 	byte a;
 	char c;
 
-	byte ta;
-	char tc;
+	//v2.1.6 変数が初期化されていないとコンパイラが怒るので適当に入れる
+	byte ta = TERM_DARK;
+	char tc = 'x';
 
 	for (x = px - Term->wid / 2 + 1; x <= px + Term->wid / 2; x++)
 	{
@@ -1861,8 +1862,9 @@ void prt_path(int y, int x)
 			byte a = default_color;
 			char c;
 
-			byte ta;
-			char tc;
+			//v2.1.6 変数が初期化されていないとコンパイラが怒るので適当に入れる
+			byte ta = TERM_DARK;
+			char tc = 'x';
 
 			if (c_ptr->m_idx && m_list[c_ptr->m_idx].ml)
 			{

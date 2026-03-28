@@ -2138,7 +2138,7 @@ static bool cmd_racial_power_aux(s32b command)
 			}
 			else if(command == -3)
 			{
-				if(!cast_monspell_new()) return FALSE;
+				if(!cast_monspell_new(0)) return FALSE;
 			}
 			break;
 		case MIMIC_NUE:

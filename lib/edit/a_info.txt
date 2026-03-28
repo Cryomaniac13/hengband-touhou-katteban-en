@@ -3841,11 +3841,12 @@ U:CURE_MANA_FULL
 N:204:ものまねの始祖ゴゴの
 E:of Gogo the Imitator
 I:48:28:4
-W:50:100:2:55555
+W:65:150:2:55555
 P:0:0d0:0:0:0
 F:INT | WIS | DEX | 
 F:SEE_INVIS | LITE |
-F:INSTA_ART
+F:INSTA_ART | ACTIVATE
+U:MONOMANE
 
 N:205:森の狩人ロビンフッドの
 E:of Robin Hood

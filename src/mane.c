@@ -10,9 +10,13 @@
 
 /* Purpose: Imitation code */
 
+
 #include "angband.h"
 
+//v2.1.6 ニナの特技でものまねを実装したがここでなくcast_monspell_new()から実行することにしたのでここの本家ものまね関数は無効化した
+//mane.cから有効な関数がなくなったがプロジェクトとgithubからファイルを削除する方法をよく知らんので放置
 
+#if 0
 static int damage;
 
 static void mane_info(char *p, int power, int dam)
@@ -64,7 +68,7 @@ static void mane_info(char *p, int power, int dam)
 		}
 	}
 }
-
+#endif
 
 /*
  * Allow user to choose a imitation.
@@ -81,6 +85,7 @@ static void mane_info(char *p, int power, int dam)
  * sorry.
  */
 /*:::記憶しているものまねの一覧を表示し選択を受け付ける　*snにmonster_powers[]の添え字としてものまね番号を戻す*/
+#if 0
 static int get_mane_power(int *sn, bool baigaesi)
 {
 	int             i = 0;
@@ -115,7 +120,7 @@ cptr            p = "能力";
 	num = p_ptr->mane_num;
 
 	/* Build a prompt (accept all spells) */
-	(void)strnfmt(out_val, 78, 
+	(void)strnfmt(out_val, 78,
 #ifdef JP
 		      "(%c-%c, '*'で一覧, ESC) どの%sをまねますか？",
 #else
@@ -128,8 +133,8 @@ cptr            p = "能力";
 	choice= always_show_list ? ESCAPE:1 ;
 	while (!flag)
 	{
-		if(choice==ESCAPE) choice = ' '; 
-		else if( !get_com(out_val, &choice, TRUE) )break; 
+		if(choice==ESCAPE) choice = ' ';
+		else if( !get_com(out_val, &choice, TRUE) )break;
 
 		/* Request redraw */
 		if ((choice == ' ') || (choice == '*') || (choice == '?'))
@@ -279,13 +284,14 @@ put_str("失率 効果", y, x + 36);
 	/* Success */
 	return (TRUE);
 }
-
+#endif
 
 /*
  * do_cmd_cast calls this function if the player's class
  * is 'imitator'.
  */
 /*:::ものまねを実行する。選択と成功判定は済んでいる　詳細未読*/
+#if 0
 static bool use_mane(int spell)
 {
 	int             dir;
@@ -329,7 +335,7 @@ else msg_print("ロケットを発射した。");
 #else
 			else msg_print("You fire a rocket.");
 #endif
-		
+
 			fire_rocket(GF_ROCKET, dir, damage, 2);
 		break;
 	case MS_SHOOT:
@@ -339,7 +345,7 @@ else msg_print("矢を放った。");
 #else
 			else msg_print("You fire an arrow.");
 #endif
-		
+
 			fire_bolt(GF_ARROW, dir, damage);
 		break;
 	case MS_BR_HOLY:
@@ -355,7 +361,7 @@ else msg_print("酸のブレスを吐いた。");
 #else
 			else msg_print("You breathe acid.");
 #endif
-		
+
 			fire_ball(GF_ACID, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_ELEC:
@@ -365,7 +371,7 @@ else msg_print("稲妻のブレスを吐いた。");
 #else
 			else msg_print("You breathe lightning.");
 #endif
-		
+
 			fire_ball(GF_ELEC, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_FIRE:
@@ -375,7 +381,7 @@ else msg_print("火炎のブレスを吐いた。");
 #else
 			else msg_print("You breathe fire.");
 #endif
-		
+
 			fire_ball(GF_FIRE, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_COLD:
@@ -385,7 +391,7 @@ else msg_print("冷気のブレスを吐いた。");
 #else
 			else msg_print("You breathe frost.");
 #endif
-		
+
 			fire_ball(GF_COLD, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_POIS:
@@ -395,7 +401,7 @@ else msg_print("ガスのブレスを吐いた。");
 #else
 			else msg_print("You breathe gas.");
 #endif
-		
+
 			fire_ball(GF_POIS, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_NETHER:
@@ -405,7 +411,7 @@ else msg_print("地獄のブレスを吐いた。");
 #else
 			else msg_print("You breathe nether.");
 #endif
-		
+
 			fire_ball(GF_NETHER, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_LITE:
@@ -415,7 +421,7 @@ else msg_print("閃光のブレスを吐いた。");
 #else
 			else msg_print("You breathe light.");
 #endif
-		
+
 			fire_ball(GF_LITE, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_DARK:
@@ -425,7 +431,7 @@ else msg_print("暗黒のブレスを吐いた。");
 #else
 			else msg_print("You breathe darkness.");
 #endif
-		
+
 			fire_ball(GF_DARK, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_WAVEMOTION:
@@ -435,7 +441,7 @@ else msg_print("混乱のブレスを吐いた。");
 #else
 			else msg_print("You breathe confusion.");
 #endif
-		
+
 			fire_ball(GF_CONFUSION, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_SOUND:
@@ -445,7 +451,7 @@ else msg_print("轟音のブレスを吐いた。");
 #else
 			else msg_print("You breathe sound.");
 #endif
-		
+
 			fire_ball(GF_SOUND, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_CHAOS:
@@ -455,7 +461,7 @@ else msg_print("カオスのブレスを吐いた。");
 #else
 			else msg_print("You breathe chaos.");
 #endif
-		
+
 			fire_ball(GF_CHAOS, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_DISEN:
@@ -465,7 +471,7 @@ else msg_print("劣化のブレスを吐いた。");
 #else
 			else msg_print("You breathe disenchantment.");
 #endif
-		
+
 			fire_ball(GF_DISENCHANT, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_NEXUS:
@@ -475,7 +481,7 @@ else msg_print("因果混乱のブレスを吐いた。");
 #else
 			else msg_print("You breathe nexus.");
 #endif
-		
+
 			fire_ball(GF_NEXUS, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_TIME:
@@ -485,7 +491,7 @@ else msg_print("時間逆転のブレスを吐いた。");
 #else
 			else msg_print("You breathe time.");
 #endif
-		
+
 			fire_ball(GF_TIME, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_INERTIA:
@@ -495,7 +501,7 @@ else msg_print("遅鈍のブレスを吐いた。");
 #else
 			else msg_print("You breathe inertia.");
 #endif
-		
+
 			fire_ball(GF_INACT, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_GRAVITY:
@@ -505,7 +511,7 @@ else msg_print("重力のブレスを吐いた。");
 #else
 			else msg_print("You breathe gravity.");
 #endif
-		
+
 			fire_ball(GF_GRAVITY, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_SHARDS:
@@ -515,7 +521,7 @@ else msg_print("破片のブレスを吐いた。");
 #else
 			else msg_print("You breathe shards.");
 #endif
-		
+
 			fire_ball(GF_SHARDS, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_PLASMA:
@@ -525,7 +531,7 @@ else msg_print("プラズマのブレスを吐いた。");
 #else
 			else msg_print("You breathe plasma.");
 #endif
-		
+
 			fire_ball(GF_PLASMA, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BA_FORCE:
@@ -535,7 +541,7 @@ else msg_print("フォースのブレスを吐いた。");
 #else
 			else msg_print("You breathe force.");
 #endif
-		
+
 			fire_ball(GF_FORCE, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BR_MANA:
@@ -545,7 +551,7 @@ else msg_print("魔力のブレスを吐いた。");
 #else
 			else msg_print("You breathe mana.");
 #endif
-		
+
 			fire_ball(GF_MANA, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_SPECIAL2:
@@ -555,7 +561,7 @@ else msg_print("放射能球を放った。");
 #else
 			else msg_print("You cast a ball of radiation.");
 #endif
-		
+
 			fire_ball(GF_NUKE, dir, damage, 2);
 		break;
 	case MS_BR_NUKE:
@@ -565,7 +571,7 @@ else msg_print("放射性廃棄物のブレスを吐いた。");
 #else
 			else msg_print("You breathe toxic waste.");
 #endif
-		
+
 			fire_ball(GF_NUKE, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BALL_CHAOS:
@@ -575,7 +581,7 @@ else msg_print("純ログルスを放った。");
 #else
 			else msg_print("You invoke a raw Logrus.");
 #endif
-		
+
 			fire_ball(GF_CHAOS, dir, damage, 4);
 		break;
 	case MS_BR_DISI:
@@ -585,7 +591,7 @@ else msg_print("分解のブレスを吐いた。");
 #else
 			else msg_print("You breathe disintegration.");
 #endif
-		
+
 			fire_ball(GF_DISINTEGRATE, dir, damage, (plev > 35 ? -3 : -2));
 		break;
 	case MS_BALL_ACID:
@@ -595,7 +601,7 @@ else msg_print("アシッド・ボールの呪文を唱えた。");
 #else
 			else msg_print("You cast an acid ball.");
 #endif
-		
+
 			fire_ball(GF_ACID, dir, damage, 2);
 		break;
 	case MS_BALL_ELEC:
@@ -605,7 +611,7 @@ else msg_print("サンダー・ボールの呪文を唱えた。");
 #else
 			else msg_print("You cast a lightning ball.");
 #endif
-		
+
 			fire_ball(GF_ELEC, dir, damage, 2);
 		break;
 	case MS_BALL_FIRE:
@@ -615,7 +621,7 @@ else msg_print("ファイア・ボールの呪文を唱えた。");
 #else
 			else msg_print("You cast a fire ball.");
 #endif
-		
+
 			fire_ball(GF_FIRE, dir, damage, 2);
 		break;
 	case MS_BALL_COLD:
@@ -625,7 +631,7 @@ else msg_print("アイス・ボールの呪文を唱えた。");
 #else
 			else msg_print("You cast a frost ball.");
 #endif
-		
+
 			fire_ball(GF_COLD, dir, damage, 2);
 		break;
 	case MS_BALL_POIS:
@@ -635,7 +641,7 @@ else msg_print("悪臭雲の呪文を唱えた。");
 #else
 			else msg_print("You cast a stinking cloud.");
 #endif
-		
+
 			fire_ball(GF_POIS, dir, damage, 2);
 		break;
 	case MS_BALL_NETHER:
@@ -645,7 +651,7 @@ else msg_print("地獄球の呪文を唱えた。");
 #else
 			else msg_print("You cast a nether ball.");
 #endif
-		
+
 			fire_ball(GF_NETHER, dir, damage, 2);
 		break;
 	case MS_BALL_WATER:
@@ -655,7 +661,7 @@ else msg_print("流れるような身振りをした。");
 #else
 			else msg_print("You gesture fluidly.");
 #endif
-		
+
 			fire_ball(GF_WATER, dir, damage, 4);
 		break;
 	case MS_BALL_MANA:
@@ -665,7 +671,7 @@ else msg_print("魔力の嵐の呪文を念じた。");
 #else
 			else msg_print("You invoke a mana storm.");
 #endif
-		
+
 			fire_ball(GF_MANA, dir, damage, 4);
 		break;
 	case MS_BALL_DARK:
@@ -675,7 +681,7 @@ else msg_print("暗黒の嵐の呪文を念じた。");
 #else
 			else msg_print("You invoke a darkness storm.");
 #endif
-		
+
 			fire_ball(GF_DARK, dir, damage, 4);
 		break;
 	case MS_DRAIN_MANA:
@@ -713,7 +719,7 @@ else msg_print("アシッド・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast an acid bolt.");
 #endif
-		
+
 			fire_bolt(GF_ACID, dir, damage);
 		break;
 	case MS_BOLT_ELEC:
@@ -723,7 +729,7 @@ else msg_print("サンダー・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast a lightning bolt.");
 #endif
-		
+
 			fire_bolt(GF_ELEC, dir, damage);
 		break;
 	case MS_BOLT_FIRE:
@@ -733,7 +739,7 @@ else msg_print("ファイア・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast a fire bolt.");
 #endif
-		
+
 			fire_bolt(GF_FIRE, dir, damage);
 		break;
 	case MS_BOLT_COLD:
@@ -743,7 +749,7 @@ else msg_print("アイス・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast a frost bolt.");
 #endif
-		
+
 			fire_bolt(GF_COLD, dir, damage);
 		break;
 	case MS_STARBURST:
@@ -753,7 +759,7 @@ else msg_print("スターバーストの呪文を念じた。");
 #else
 			else msg_print("You invoke a starburst.");
 #endif
-		
+
 			fire_ball(GF_LITE, dir, damage, 4);
 		break;
 	case MS_BOLT_NETHER:
@@ -763,7 +769,7 @@ else msg_print("地獄の矢の呪文を唱えた。");
 #else
 			else msg_print("You cast a nether bolt.");
 #endif
-		
+
 			fire_bolt(GF_NETHER, dir, damage);
 		break;
 	case MS_BOLT_WATER:
@@ -773,7 +779,7 @@ else msg_print("ウォーター・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast a water bolt.");
 #endif
-		
+
 			fire_bolt(GF_WATER, dir, damage);
 		break;
 	case MS_BOLT_MANA:
@@ -783,7 +789,7 @@ else msg_print("魔力の矢の呪文を唱えた。");
 #else
 			else msg_print("You cast a mana bolt.");
 #endif
-		
+
 			fire_bolt(GF_MANA, dir, damage);
 		break;
 	case MS_BOLT_PLASMA:
@@ -793,7 +799,7 @@ else msg_print("プラズマ・ボルトの呪文を唱えた。");
 #else
 			else msg_print("You cast a plasma bolt.");
 #endif
-		
+
 			fire_bolt(GF_PLASMA, dir, damage);
 		break;
 	case MS_BOLT_ICE:
@@ -803,7 +809,7 @@ else msg_print("極寒の矢の呪文を唱えた。");
 #else
 			else msg_print("You cast a ice bolt.");
 #endif
-		
+
 			fire_bolt(GF_ICE, dir, damage);
 		break;
 	case MS_MAGIC_MISSILE:
@@ -813,7 +819,7 @@ else msg_print("マジック・ミサイルの呪文を唱えた。");
 #else
 			else msg_print("You cast a magic missile.");
 #endif
-		
+
 			fire_bolt(GF_MISSILE, dir, damage);
 		break;
 	case MS_SCARE:
@@ -823,7 +829,7 @@ else msg_print("恐ろしげな幻覚を作り出した。");
 #else
 			else msg_print("You cast a fearful illusion.");
 #endif
-		
+
 			fear_monster(dir, plev+10);
 		break;
 	case MS_BLIND:
@@ -837,7 +843,7 @@ else msg_print("誘惑的な幻覚をつくり出した。");
 #else
 			else msg_print("You cast a mesmerizing illusion.");
 #endif
-		
+
 			confuse_monster(dir, plev * 2);
 		break;
 	case MS_SLOW:
@@ -1269,13 +1275,14 @@ msg_print("特別な強敵を召喚した！");
 
 	return TRUE;
 }
-
+#endif
 
 /*
  * do_cmd_cast calls this function if the player's class
  * is 'imitator'.
  */
-/*:::ものまねを使用する*/
+//本家ものまねコマンド
+#if 0
 bool do_cmd_mane(bool baigaesi)
 {
 	int             n = 0, j;
@@ -1379,3 +1386,4 @@ msg_print("ものまねに失敗した！");
 
 	return TRUE;
 }
+#endif

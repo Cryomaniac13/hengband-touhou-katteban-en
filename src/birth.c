@@ -6656,7 +6656,6 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 	{ TRUE,_("奥野田　美宵", "Miyoi Okunoda"),CLASS_MIYOI,RACE_ZASHIKIWARASHI,ENTRY_OTHER,SEX_FEMALE,
 		_("あなたは伊吹萃香の酒瓢箪『伊吹瓢』に棲み着く座敷わらしです。瓢箪の影響によるものか人を酔い潰して夢や記憶に干渉する酔魔のような力を持っています。あなたには戦う力はほとんどありませんが、愛想よくお酒を勧めて敵の心すら開かせるほどの接客能力があります。お酒を何度も飲ませてそのまま酔い潰してしまえば倒したのと同じ扱いになります。しかし中には酒を勧めても応じないモンスターやいくら酒を飲んでも酔わないモンスターもいます。そういった敵に襲われてしまったらあなたにできることは逃亡あるのみです。あなたに必要な能力は魅力です。接客の成功率だけでなく飲ませる酒の強さにも影響を与えます。",
         "You are a zashiki-warashi living in the Ibuki Gourd of Suika Ibuki. Living in it has granted you the power to drive people drunk and interfere with their dreams and memories. You don't have much combat power, but you serve customers so well you can placate your enemies by offering them drinks. Making someone pass out by serving them enough alcohol is treated the same as defeating them. However, there are monsters who won't accept your drinks, or who can drink a lot without passing out. If you get attacked by those monsters, retreat might be your only option. Charisma is your required ability - it affects not only your customer service, but the strengths of your drinks as well.") },
-
 	{ TRUE,_("宮出口　瑞霊", "Mizuchi Miyadeguchi"),CLASS_MIZUCHI,RACE_SPECTRE,ENTRY_OTHER,SEX_FEMALE,
 		_("あなたは博麗の家に強い怨みをもつ強力な怨霊です。他者に取り憑いて乗っ取る特技を持っており、あなた自身も高い戦闘力を持っています。現在あなたは幻想郷の地上から警戒されており、誰かに憑依しないと地上の建物や店を利用することができません。怨霊であり密かな呪具コレクターでもあるあなたは装備品の呪いの影響を防ぐことができます。しかしあなたは下半身の具現化が不完全なため靴を履くことができず、また首の地獄の首輪を外すことができません。あなたはかつて巫女として様々な術を学んでいましたが、怨霊となったときにほぼ失われています。",
         "You are a powerful vengeful spirit bearing a strong grudge towards the Hakurei family. You have the ability to possess and take control of others, but you're pretty powerful by yourself as well. You are currently being tracked down in Gensoukyou, so you can't enter shops or buildings on surface without possessing someone. As a vengeful spirits and a collector of cursed items, you are protected from curses on your equipment. However, the lower half of your body is not fully formed, so you can't wear boots, and the Harness of Hell on your neck can't be removed. You once learned various spells as a shrine maiden, but you lost them upon becoming a vengeful spirit.")},
@@ -6682,8 +6681,9 @@ static unique_player_type unique_player_table[UNIQUE_PLAYER_NUM] =
 		_("あなたは不変の力をもつ石の女神です。その力は自分の体だけにとどまらずその気になれば幻想郷全域に及びます。あなたは非常に高い体力をもち、さらに自分への様々な攻撃を軽減あるいは無効化し、その上敵に対して凶悪な妨害を押し付け、また魔法を二領域巧みに扱うことができます。よほど油断をしない限り戦いで遅れを取ることはほぼないでしょう。ただしあらゆる変化を拒絶するあなたは成長が非常に遅くレベルアップに多くの経験値が必要です。また変身などの一部の補助魔法も効果を発揮しません。",
 		"You are a stone goddess holding the power of perpetuality. That power isn't restricted to your body - you could spread it across Gensoukyou if you wish so. You are extremely sturdy, you can diminish or negate various attacks directed at you, severely hamper your enemies, and you are also capable of studying two realms of magic. You won't fall behind in battle unless you get careless. However, as you reject any kind of change, levelling up will require a lot of experience. Also, you cannot use several kinds of support spells like transformations.") },
 
-	{ FALSE,_("渡里　ニナ", "Nina Watari"),CLASS_NINA,RACE_YOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
-		"" },
+	{ TRUE,_("渡里　ニナ", "Nina Watari"),CLASS_NINA,RACE_YOUKAI,ENTRY_KINJYOU,SEX_FEMALE,
+		_("あなたは蜃気楼を作り出す貝の妖怪です。あなたの本体は非常に古い貝の化石ですが自意識の上ではまだ生まれたばかりのため見聞きしたものにすぐ影響を受けてしまうようです。蜃気楼の力を使ってダンジョン内に建物を作ったり敵の使った特技をものまねして攻撃する特技を持っています。また魔法を一領域習得することができます。ものまねによる攻撃は非常に強力ですが配下を活用した独特の立ち回りが必要になります。あなたは防御力に優れるものの肉弾戦は全くの不得手なので、強い配下が手に入りにくい序盤では魔法をうまく活用しましょう。",
+		"You are a shellfish youkai capable of creating mirages. Your actual body is an ancient fossilized shell, but as you've just gained self awareness, you're easily influenced by what you perceive. You can use your mirage powers to create building inside dungeons or to imitate enemy attack spell. You also can study one realm of magic. Imitating attacks is extremely powerful, but it requires a very specific playstyle making use of your followers. While you have excellent defense, you're unskilled at close combat - rely on your spells in early game until you've acquired powerful followers.")},
 
 
 };
@@ -6821,6 +6821,10 @@ void extra_mode_score_mult(int *mult, int class_idx)
 	case CLASS_CHIMI:
 		mod = 175;
 		break;
+	case CLASS_NINA:
+		mod = 60;
+		break;
+
 
 	default:
 		return; //何もしない

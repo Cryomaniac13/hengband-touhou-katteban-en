@@ -97,7 +97,9 @@ F:a:BUILDING_0:3
 ?:[EQU $QUEST75 5]
 F:a:BUILDING_0:3:0:0:0:0:NONE:75
 
-?:[EQU $QUEST75 6]
+#?:[EQU $QUEST75 6]
+# このクエストが無効の＠が一つ前のクエストを受けられなくならないよう処理
+?:[ AND [ EQU $QUEST75 6 ] [ GEQ $QUEST69 3 ] ]
 F:a:BUILDING_0:3
 
 ?:1

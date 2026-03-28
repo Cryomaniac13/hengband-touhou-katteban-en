@@ -439,6 +439,9 @@ static bool find_space(int *y, int *x, int height, int width)
 	{
 		for (bx = bx1; bx < bx2; bx++)
 		{
+			//v2.1.5 よく分からんがコンパイラが警告を出しているので例外処理を入れておく
+			if (by < 0 || bx < 0) return FALSE;
+
 			dun->room_map[by][bx] = TRUE;
 		}
 	}
@@ -6836,6 +6839,16 @@ byte calc_ex_dun_bldg_prob(int ex_bldg_idx)
 			return 5;
 		}
 
+	case BLDG_EX_HOME:
+		//渡里ニナの特技専用 EXTRA特殊建物としては出現しない
+		return 0;
+
+		//v2.1.6 チョコレートの川
+	case BLDG_EX_CHOCOLATE:
+		if (p_ptr->pclass == CLASS_NINA) return 30;
+		else return 5;
+
+
 	default:
 		msg_format(_("WARNING:建物idx(%d)の出現確率が設定されていない",
                     "WARNING: Undefined rarity for building idx %d"),ex_bldg_idx);
@@ -7561,7 +7574,16 @@ void	init_extra_dungeon_buildings(void)
 		}
 		break;
 
+		case BLDG_EX_CHOCOLATE:
+		{
+			sprintf(building[i].name, _("奇妙な場所", "Strange place"));
+			sprintf(building[i].owner_name, _("無人", "empty"));
 
+			sprintf(building[i].act_names[0], _("辺りを見る", "Look around"));
+			building[i].letters[0] = 'a';
+			building[i].actions[0] = BACT_EX_SEARCH_AROUND;
+		}
+		break;
 
 
 	}
@@ -7570,32 +7592,37 @@ void	init_extra_dungeon_buildings(void)
 
 
 
-//Extraモード用ダンジョン内特殊建物 建てた建物のIDXを返す。建たなかったら0
-static byte build_type_ex(void)
+//難易度EXTRAのダンジョン内特殊建物の生成 建てた建物のIDXを返す。建たなかったら0
+//bldg_array_idx:building_ex_idx[4]の添字
+//0:難易度EXTRA
+//1-2:一応将来的にEXTRA建物を増やすなどの用途に使えるように半端にコードを組んでいるが完全なものではないので追加時はちゃんと見直す
+//3:ニナの特技で生成する建物に使うのでここでは扱わない
+static byte build_type_ex(int bldg_array_idx)
 {
 	int i, y, x, y1, x1, y2, x2, yval, xval,xsize,ysize;
 	cave_type *c_ptr;
 
-	int num = 1;//建物を1フロアに4種類まで準備した。でも今のところ1つしか使う気はない。
-	int new_subtype;
-
-	//建物サイズ 10を超えると画面端に生成された時なんかマップが変になる
-	//v1.1.61 可変に修正
-	xsize = 7 +randint0(1) * 2;
-	ysize = 5 +randint0(2) * 2;
-
-	if(num < 1 || num > BLDG_EX_NUM)
+	switch (bldg_array_idx)
 	{
-		msg_format(_("build_type_ex()に想定外の値(%d)が渡された", "Unexpected value, %d, passed to build_type_ex()."), num);
+	case BLDG_EX_MODE_EXTRA:
+		//BUILDING_EX1(SUBTYPE=0)を使用する。建物情報をbuilding_ex_idx[0]に格納
+		//1-8のときBUILDING_EXでなく店が作られる
+		building_ex_idx[bldg_array_idx] = get_extra_dungeon_building_idx();
+
+		//テスト用
+		if (p_ptr->wizard) building_ex_idx[bldg_array_idx] = BLDG_EX_CHOCOLATE;
+		break;
+
+	case BLDG_EX_MODE_NINA:
+		msg_format(_("build_type_ex()にニナ特技用の記憶域が指定された", "Memory area for Nina's special ability was specified in build_type_ex()"));
 		return 0;
+
+	default:
+		msg_format(_("build_type_ex()に未実装の値(%d)が渡された", "Unimplemented value (%d) passed to build_type_ex()"), bldg_array_idx);
+		return 0;
+
 	}
 
-	//ここで新しい建物の種類を選定 BUILDING_EX1のSUBTYPEが0でbuilding_ex_idx[0]に対応する
-	//1-8はBUILDING_EXでなく店が作られる
-	building_ex_idx[0] = get_extra_dungeon_building_idx();
-
-	//テスト用
-	if(p_ptr->wizard) building_ex_idx[0] = BLDG_EX_KEIKI2;
 
 	/* Find and reserve some space in the dungeon.  Get center of room. */
 	if (!find_space(&yval, &xval, ysize, xsize)) return 0;
@@ -7614,7 +7641,7 @@ static byte build_type_ex(void)
 			c_ptr = &cave[y][x];
 			if(y == yval && x == xval)
 			{
-				switch(building_ex_idx[0])
+				switch(building_ex_idx[bldg_array_idx])
 				{
 				case BLDG_EX_STORE_GENERAL:
 					cave_set_feat(y, x, f_tag_to_index_in_init("GENERAL_STORE"));
@@ -7654,7 +7681,7 @@ static byte build_type_ex(void)
 
 
 				default:
-					cave_set_feat(y, x, f_tag_to_index_in_init(format("BUILDING_EX%d",num)));
+					cave_set_feat(y, x, f_tag_to_index_in_init(format("BUILDING_EX%d", bldg_array_idx+1)));
 					break;
 				}
 			}
@@ -7725,9 +7752,9 @@ static byte build_type_ex(void)
 
 
 
-	if (cheat_room) msg_format(_("EXTRA用特殊建築物:idx%d", "Special extra building: ID is %d"), building_ex_idx[0]);
+	if (cheat_room) msg_format(_("EXTRA用特殊建築物:idx%d", "Special extra building: ID is %d"), building_ex_idx[bldg_array_idx]);
 
-	return building_ex_idx[0];
+	return building_ex_idx[bldg_array_idx];
 }
 
 
@@ -7965,13 +7992,22 @@ bool generate_rooms(void)
 	if(EXTRA_MODE && (dun_level != 100 && dun_level != 110 && dun_level != 120 && dun_level != 127))
 	{
 		int ex_built_idx;
-		ex_built_idx = build_type_ex();
+		ex_built_idx = build_type_ex(BLDG_EX_MODE_EXTRA);
 		if(ex_built_idx)
 		{
 			rooms_built++;
 			//店が出たとき地下街は生成されない
 			if(ex_built_idx <= BLDG_EX_STORE_BOOK) room_num[ROOM_T_ARCADE] = 0;
 		}
+	}
+
+	//v2.1.6 ニナの特技(もしくはそれを再現するアイテムカード)による地下街強制出現
+	//EXTRAで特殊建物として店が出たときには同じ在庫と店主の店が離れたところに重複して出ることになるがまあ仕方ない
+	if ((p_ptr->special_flags & SPF_DUNGEON_ARCADE) && (d_info[dungeon_type].flags1 & DF1_ARCADE))
+	{
+		if (cheat_room) msg_print(_("*地下街確定生成*", "*Dungeon town generation confirmed*"));
+		room_num[ROOM_T_ARCADE] = 1;
+		p_ptr->special_flags &= ~(SPF_DUNGEON_ARCADE);
 	}
 
 	/*
@@ -8046,3 +8082,221 @@ bool generate_rooms(void)
 
 	return TRUE;
 }
+
+//v2.1.6 渡里ニナがダンジョン内に特殊建物を生成する特技
+//紫の自宅生成とは違い未クリアクエストダンジョンやボスフロアでも使用可能だが周囲に広いスペースが必要
+//現時点ではニナ専用だがEXTRAアイテムカードなどで他の職業が使っても問題は起こらないはず
+//特殊生成建物としてf_infoのN:233:BUILDING_EX4を使用する
+//その建物の建物idxを記録するためにbuilding_ex_idx[3]を使用する
+//行動順消費するときTRUEを返す
+bool nina_make_special_building()
+{
+	int x = px, y = py;
+	int i;
+	int building_idx;
+	int list_len,menu_line,choose_num;
+	bool flag_ok;
+
+	if (building_ex_idx[BLDG_EX_MODE_NINA])
+	{
+		msg_print(_("すでにこのフロアで蜃気楼の建物を作り出している。", "There's already a mirage building on this level."));
+		return FALSE;
+	}
+
+	if (!dun_level || p_ptr->inside_arena)
+	{
+		msg_print(_("このフロアでは使えない。", "You can't use it on this level."));
+		return FALSE;
+
+	}
+
+	//周辺地形チェック 7x7の正方形エリア
+	flag_ok = TRUE;
+	for (y = py-3; y <= py+3; y++)
+	{
+		for (x = px-3; x <= px+3; x++)
+		{
+			if (!in_bounds(y, x)) continue;
+
+			//モンスターがいると不可
+			if (cave[y][x].m_idx)
+			{
+				msg_print(_("近くにモンスターがいる！", "There are monsters nearby!"));
+				flag_ok = FALSE;
+			}
+
+			//壁があると不可
+			if (cave_have_flag_bold(y, x, FF_WALL))
+			{
+				msg_print(_("もっと開けた場所が必要だ。", "You need more open space."));
+				flag_ok = FALSE;
+			}
+
+			//＠がいる場所はアイテムやトラップやルーンなども不可
+			if (player_bold(y,x) && !cave_clean_bold(y, x))
+			{
+				msg_print(_("床上の障害物が邪魔で建物を作れない。", "Something on the floor is in the way of construction."));
+				flag_ok = FALSE;
+			}
+
+			if (!flag_ok)break;
+		}
+		if (!flag_ok)break;
+	}
+	if (!flag_ok) return FALSE;
+
+
+	//作れる建物をカウント
+	list_len = 0;
+	for (i = 0; nina_build_table[i].lev; i++)
+	{
+		if (p_ptr->lev >= nina_build_table[i].lev) list_len++;
+		else break;
+	}
+	if (!list_len)
+	{
+		msg_print(_("まだ作れる建物がない。", "You can't make buildings yet."));//ここには来ないはず
+		return FALSE;
+	}
+
+	//作れる建物をリスト表示
+	screen_save();
+	menu_line = 1;
+	Term_erase(17, menu_line++, 255);
+	Term_erase(17, menu_line, 255);
+	prt(_("どんな建物の蜃気楼を作りますか？(ESC:キャンセル)", "Create a mirage of which building? (ESC: Cancel)"), menu_line++, 20);
+	for (i = 0; i < list_len; i++)
+	{
+		Term_erase(17, menu_line, 255);
+		prt(format("%c) %s", ('a' + i), nina_build_table[i].bldg_name), menu_line++, 25);
+	}
+	Term_erase(17, menu_line, 255);
+
+	//入力を受け付け
+	while (1)
+	{
+		char c = inkey();
+		if (c == ESCAPE)
+		{
+			screen_load();
+			return FALSE;
+		}
+		choose_num = c - 'a';
+
+		if (choose_num >= 0 && choose_num < list_len) break;
+
+	}
+	screen_load();
+
+	building_idx = nina_build_table[choose_num].bldg_idx;
+
+	//building_ex_idx[]への格納はinit_extra_dungeon_buildings()の前に行う必要がある
+	building_ex_idx[BLDG_EX_MODE_NINA] = building_idx;
+
+	//建物の生成
+	switch (building_idx)
+	{
+		//普通の店の場合
+
+	case BLDG_EX_STORE_GENERAL:
+		cave_set_feat(py, px, f_tag_to_index_in_init("GENERAL_STORE"));
+		store_init(TOWN_UG, STORE_GENERAL);
+		break;
+
+	case BLDG_EX_STORE_ARMOURY:
+		cave_set_feat(py, px, f_tag_to_index_in_init("ARMOURY"));
+		store_init(TOWN_UG, STORE_ARMOURY);
+		break;
+
+	case BLDG_EX_STORE_WEAPON:
+		cave_set_feat(py, px, f_tag_to_index_in_init("WEAPON_SMITHS"));
+		store_init(TOWN_UG, STORE_WEAPON);
+		break;
+
+	case BLDG_EX_STORE_TEMPLE:
+		cave_set_feat(py, px, f_tag_to_index_in_init("TEMPLE"));
+		store_init(TOWN_UG, STORE_TEMPLE);
+		break;
+	case BLDG_EX_STORE_ALCHEMIST:
+		cave_set_feat(py, px, f_tag_to_index_in_init("ALCHEMY_SHOP"));
+		store_init(TOWN_UG, STORE_ALCHEMIST);
+		break;
+	case BLDG_EX_STORE_MAGIC:
+		cave_set_feat(py, px, f_tag_to_index_in_init("MAGIC_SHOP"));
+		store_init(TOWN_UG, STORE_MAGIC);
+		break;
+	case BLDG_EX_STORE_BLACK:
+		cave_set_feat(py, px, f_tag_to_index_in_init("BLACK_MARKET"));
+		store_init(TOWN_UG, STORE_BLACK);
+		break;
+	case BLDG_EX_STORE_BOOK:
+		cave_set_feat(py, px, f_tag_to_index_in_init("BOOKSTORE"));
+		store_init(TOWN_UG, STORE_BOOK);
+		break;
+	case BLDG_EX_HOME:
+		cave_set_feat(py, px, f_tag_to_index_in_init("HOME"));
+		break;
+
+	default:
+		//特殊建物の場合
+		cave_set_feat(py, px, f_tag_to_index_in_init("BUILDING_EX4"));
+		//特殊建物にbldg[].lettersを再設定する
+		init_extra_dungeon_buildings();
+
+	}
+	//フロアから出るときに消去するための専用フラグを設定
+	cave[py][px].cave_xtra_flag |= CAVE_XTRA_FLAG_NINA;
+
+	msg_print(_("周囲の景色がゆらめき、あなたの前に建物が現れた。", "The scenery around you starts to shimmer, and a building appears before you."));
+
+	return TRUE;
+
+}
+
+//v2.1.5 ニナが生成した建物を消去する
+//フロア移動時に呼ばれる
+void nina_erase_special_building()
+{
+
+	int y, x;
+	bool flag_find = FALSE;
+
+	//特殊建物種別記録兼特殊建物生成済みフラグをクリア
+	building_ex_idx[BLDG_EX_MODE_NINA] = 0;
+
+	//EXTRAの場合このフロアにはもう来ないからフラグのクリアだけでいい
+	if (EXTRA_MODE) return;
+
+	//それ以外なら建物自体を消す必要があるので消すべき建物を探す
+	for (y = 1; y < cur_hgt -1 ; y++)
+	{
+		for (x = 1; x < cur_wid -1 ; x++)
+		{
+			//ニナの特技で生成した建物につく専用フラグ
+			if (cave[y][x].cave_xtra_flag & CAVE_XTRA_FLAG_NINA)
+			{
+					flag_find = TRUE;
+			}
+			if (flag_find)break;
+		}
+		if (flag_find)break;
+	}
+
+	if (!flag_find)
+	{
+		msg_print(_("ERROR:nina_erase_special_building()で建物の検出に失敗", "ERROR: Failed to find a building in nina_erase_special_building()"));
+		return;
+	}
+
+	//建物を床に変える
+	cave_set_feat(y, x, feat_floor);
+	//グリッドの特殊フラグをクリア
+	cave[y][x].cave_xtra_flag &= ~(CAVE_XTRA_FLAG_NINA);
+
+	msg_print(_("蜃気楼の建物がフロアから消えたようだ。", "The mirage building vanishes from the level."));
+
+}
+
+
+
+

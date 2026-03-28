@@ -453,6 +453,9 @@ bool monster_is_you(s16b r_idx)
 			if (r_idx == MON_ARIYA) return TRUE;
 			else return FALSE;
 
+		case CLASS_NINA:
+			if (r_idx == MON_NINA) return TRUE;
+			else return FALSE;
 
 	}
 
@@ -1101,6 +1104,8 @@ void create_extra_quest_rewards(void)
 	bool msg_done_flag = FALSE;
 	bool flag_ok = FALSE;
 	int sdia;
+	int stair_x=0, stair_y=0;
+	bool find_stair = FALSE;
 
 	if(!EXTRA_QUEST_FLOOR)
 	{
@@ -1113,18 +1118,31 @@ void create_extra_quest_rewards(void)
 	{
 		for (x = 1; x < cur_wid - 1; x++)
 		{
-			if(cave_have_flag_bold(y,x,FF_STAIRS)) break;
+			if (cave_have_flag_bold(y, x, FF_STAIRS))
+			{
+				find_stair = TRUE;
+				break;
+			}
 		}
-		if(cave_have_flag_bold(y,x,FF_STAIRS)) break;
+		if(find_stair) break;
 	}
+	if (!find_stair)
+	{
+		msg_print("ERROR:create_extra_quest_rewards()");
+		return;
+	}
+
+	stair_x = x;
+	stair_y = y;
+
 	for(sdia=1;sdia<10;sdia++)
 	{
 		int k;
 		for(k=sdia*10;k>0;k--)
 		{
 			//階段の近くでアイテムを落とせる座標を得る　壁を挟んでもいい
-			ty = y-sdia+randint0(sdia*2+1);
-			tx = x-sdia+randint0(sdia*2+1);
+			ty = stair_y-sdia+randint0(sdia*2+1);
+			tx = stair_x-sdia+randint0(sdia*2+1);
 
 			if(!in_bounds(ty,tx)) continue;
 			if(!cave_drop_bold(ty,tx)) continue;
@@ -1737,6 +1755,12 @@ void monster_death(int m_idx, bool drop_item)
 		&& !p_ptr->inside_battle && !is_pet(m_ptr);
 
 	if (MON_DRUNK(m_ptr) > m_ptr->maxhp)flag_drunk = TRUE;
+
+	//v2.1.6 ニナは倒したユニークモンスターを記録する
+	if (p_ptr->pclass == CLASS_NINA && drop_chosen_item && (r_ptr->flags1 & RF1_UNIQUE))
+	{
+		nina_store_unique_mon(m_ptr->r_idx);
+	}
 
 	//千亦の「無主への供物」を受けた敵はアイテムを落とさない
 	if (p_ptr->pclass == CLASS_CHIMATA && (m_ptr->mflag & MFLAG_SPECIAL))

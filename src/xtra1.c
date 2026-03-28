@@ -6766,7 +6766,7 @@ void calc_bonuses(void)
 
 		if (plev > 29)
 		{
-			p_ptr->sh_fire;
+			p_ptr->sh_fire = TRUE;
 			p_ptr->oppose_fire = 1;
 			p_ptr->oppose_cold = 1;
 			p_ptr->oppose_pois = 1;
@@ -6788,6 +6788,20 @@ void calc_bonuses(void)
 		}
 
 		break;
+
+	case CLASS_NINA:
+		p_ptr->to_a += MAX(20,plev);
+		p_ptr->dis_to_a += MAX(20, plev);
+
+		p_ptr->levitation = TRUE;
+		p_ptr->resist_water = TRUE;
+
+		if (plev > 19) p_ptr->resist_acid = TRUE;
+		if (plev > 29) p_ptr->resist_shard = TRUE;
+		if (plev > 39) p_ptr->resist_time = TRUE;
+
+		break;
+
 
 
 	default:

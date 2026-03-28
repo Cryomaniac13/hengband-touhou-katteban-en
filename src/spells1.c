@@ -10614,7 +10614,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			{
 				dam = 0;
 				msg_print(_("あなたには完全な耐性がある！", "You are fully immune!"));
-				learn_spell(monspell);
+				//learn_spell(monspell);
 				break;
 			}
 			//v1.1.15 ヘカ地獄免疫
@@ -10623,7 +10623,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			{
 				dam = 0;
 				msg_print(_("あなたには完全な耐性がある！", "You are fully immune!"));
-				learn_spell(monspell);
+				//learn_spell(monspell);
 				break;
 			}
 
@@ -10631,7 +10631,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 			{
 				dam = 0;
 				msg_print(_("あなたには完全な耐性がある！", "You are fully immune!"));
-				learn_spell(monspell);
+				//learn_spell(monspell);
 				break;
 			}
 			else if (p_ptr->resist_neth)
@@ -10650,7 +10650,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #endif
 
 				hp_player(dam / 4);
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -11785,7 +11785,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 					p_ptr->csp -= dam;
 				}
 
-				learn_spell(monspell);
+				//learn_spell(monspell);
 
 				/* Redraw mana */
 				p_ptr->redraw |= (PR_MANA);
@@ -11841,7 +11841,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -11893,7 +11893,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -12064,7 +12064,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -12098,7 +12098,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -12132,7 +12132,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -12166,7 +12166,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_print("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{
@@ -12205,7 +12205,7 @@ bool project_p(int who, cptr who_name, int r, int y, int x, int dam, int typ, in
 #else
 				msg_format("You resist the effects!");
 #endif
-				learn_spell(monspell);
+				//learn_spell(monspell);
 			}
 			else
 			{

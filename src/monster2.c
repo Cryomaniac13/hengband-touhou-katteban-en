@@ -233,7 +233,8 @@ void delete_monster_idx(int i)
 
 	/* Hack -- count the number of "reproducers" */
 	/*:::増殖モンスター用カウンター？も1減らす*/
-	if (r_ptr->flags2 & (RF2_MULTIPLY)) num_repro--;
+	//v2.1.6 念の為にマイナスにならないようにする
+	if (r_ptr->flags2 & (RF2_MULTIPLY) && num_repro > 0) num_repro--;
 
 	/*:::モンスターの一時ステータスを全て解除する*/
 	if (MON_CSLEEP(m_ptr)) (void)set_monster_csleep(i, 0);
@@ -1942,10 +1943,10 @@ void monster_desc(char *desc, monster_type *m_ptr, int mode)
 	seen = (m_ptr && ((mode & MD_ASSUME_VISIBLE) || (!(mode & MD_ASSUME_HIDDEN) && m_ptr->ml)));
 
 	/*:::特殊処理*/
-	if(m_ptr->r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI) seen = FALSE;
+	if(m_ptr && m_ptr->r_idx == MON_KOISHI && p_ptr->pclass != CLASS_KOISHI) seen = FALSE;
 
 	//ぬえの正体不明の種
-	if(m_ptr->mflag & MFLAG_NUE_UNKNOWN ) seen = FALSE;
+	if(m_ptr && m_ptr->mflag & MFLAG_NUE_UNKNOWN ) seen = FALSE;
 
 	/* Sexed Pronouns (seen and allowed, or unseen and allowed) */
 	pron = (m_ptr && ((seen && (mode & MD_PRON_VISIBLE)) || (!seen && (mode & MD_PRON_HIDDEN))));
@@ -5628,7 +5629,7 @@ msg_print("爆発のルーンは解除された。");
  */
 
 #define MON_SCAT_MAXD 10
-/*:::指定位置からmas_dist離れてて、モンスターの種類を指定していればそのモンスターが入れる地形も考慮したランダムな場所を返す？*/
+/*:::指定位置からmax_dist離れてて、モンスターの種類を指定していればそのモンスターが入れる地形も考慮したランダムな場所を返す？*/
 static bool mon_scatter(int r_idx, int *yp, int *xp, int y, int x, int max_dist)
 {
 	int place_x[MON_SCAT_MAXD];
@@ -5641,7 +5642,13 @@ static bool mon_scatter(int r_idx, int *yp, int *xp, int y, int x, int max_dist)
 		return FALSE;
 
 	for (i = 0; i < MON_SCAT_MAXD; i++)
+	{
 		num[i] = 0;
+
+		//初期化しなくても問題ないはずだがコンパイラが怒るので入れておく
+		place_x[i] = 0;
+		place_y[i] = 0;
+	}
 
 	for (nx = x - max_dist; nx <= x + max_dist; nx++)
 	{

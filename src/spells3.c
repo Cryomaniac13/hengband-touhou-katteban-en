@@ -274,6 +274,75 @@ void teleport_monster_to(int m_idx, int ty, int tx, int power, u32b mode)
 		p_ptr->update |= (PU_MON_LITE);
 }
 
+//v2.1.6 フロアにいる配下のうち数体を指定したターゲットの位置にテレポートさせる
+//死霊領域の「使嗾」にあったものをユニーククラスの特技用に改変
+//max_num:最大対象数 0のとき無制限にしようかと思ったがまだ実装していない
+//mode: 1-呼び出した配下をすぐ行動できるようにする
+//行動順消費したらTRUE
+#define PETS_LIST_MAX 100
+bool teleport_pets_to(int max_num, int mode)
+{
+
+	int i;
+	int tmp_m_idx_list[PETS_LIST_MAX];
+	int cnt = 0;
+	int dir;
+
+	if (max_num < 0 || max_num >= PETS_LIST_MAX) return FALSE;
+
+	//必要ないけどコンパイラに文句を言われるから初期化
+	for (i = 0; i < PETS_LIST_MAX; i++)tmp_m_idx_list[i] = 0;
+
+	//フロアから呼び出す配下を複数選ぶ
+	for (i = 1; i < m_max; i++)
+	{
+		monster_type* m_ptr = &m_list[i];
+		if (!m_ptr->r_idx) continue;
+		if (!is_pet(m_ptr)) continue;
+
+		//呼び出せる以上の数の配下がいたら候補から適当に入れ替える
+		if (cnt < max_num)
+		{
+			tmp_m_idx_list[cnt++] = i;
+		}
+		else if (randint1(cnt) >= max_num)
+		{
+			tmp_m_idx_list[randint0(max_num)] = i;
+			cnt++;
+		}
+	}
+	if (!cnt)
+	{
+		msg_format(_("フロアに配下がいない。", "You don't have followers on this level."));
+		return FALSE;
+	}
+	//ターゲット選択　指定したグリッドにモンスターがいなくてもいい
+	if (!get_aim_dir(&dir)) return FALSE;
+	if (dir != 5 || !projectable(target_row, target_col, py, px))
+	{
+		msg_print(_("視界内の一グリッドを指定しないといけない。", "You have to pick a position in sight."));
+		return FALSE;
+	}
+
+	//ターゲットに向けて配下をテレポート
+	for (i = 0; i < cnt ; i++)
+	{
+		monster_type* m_ptr = &m_list[tmp_m_idx_list[i]];
+		teleport_monster_to(tmp_m_idx_list[i], target_row, target_col, 100, TELEPORT_PASSIVE);
+
+		//mode=1のときテレポートされたモンスターがすぐ行動可能に
+		if(mode == 1)
+			m_ptr->energy_need = 0;
+
+	}
+
+	return TRUE;
+
+}
+#undef PETS_LIST_MAX
+
+
+
 /*:::指定グリッドが＠がテレポートしてくることができる場所か判定する*/
 bool cave_player_teleportable_bold(int y, int x, u32b mode)
 {
@@ -685,7 +754,7 @@ void teleport_away_followable(int m_idx)
 	{
 		bool follow = FALSE;
 
-		if ((p_ptr->muta1 & MUT1_VTELEPORT) || (p_ptr->pclass == CLASS_IMITATOR) || (p_ptr->pclass == CLASS_KOMACHI && p_ptr->lev > 24)) follow = TRUE;
+		if ((p_ptr->muta1 & MUT1_VTELEPORT) || (p_ptr->pclass == CLASS_NINA) || (p_ptr->pclass == CLASS_KOMACHI && p_ptr->lev > 24)) follow = TRUE;
 		else if (p_ptr->pclass == CLASS_RESEARCHER && p_ptr->lev > 24) follow = TRUE;
 		else if(IS_METAMORPHOSIS && r_info[MON_EXTRA_FIELD].flags2 & RF2_TELE_AFTER) follow = TRUE;
 		else
@@ -5783,6 +5852,11 @@ static int minus_ac(void)
 		case 5: o_ptr = &inventory[INVEN_HANDS]; break;
 		case 6: o_ptr = &inventory[INVEN_HEAD]; break;
 		case 7: o_ptr = &inventory[INVEN_FEET]; break;
+
+		//ここには来ないがコンパイラの警告対策で入れる
+		default:
+			return FALSE;
+
 	}
 
 	/* Nothing to damage */
@@ -5856,7 +5930,7 @@ int acid_dam(int dam, cptr kb_str, int monspell)
 	/* Total Immunity */
 	if (p_ptr->immune_acid || (dam <= 0))
 	{
-		learn_spell(monspell);
+		//learn_spell(monspell);
 		return 0;
 	}
 
@@ -5904,7 +5978,7 @@ int elec_dam(int dam, cptr kb_str, int monspell)
 	/* Total immunity */
 	if (p_ptr->immune_elec || (dam <= 0))
 	{
-		learn_spell(monspell);
+		//learn_spell(monspell);
 		return 0;
 	}
 	///mod140302 元素弱点、耐性処理統合
@@ -5962,7 +6036,7 @@ int fire_dam(int dam, cptr kb_str, int monspell)
 	/* Totally immune */
 	if (p_ptr->immune_fire || (dam <= 0))
 	{
-		learn_spell(monspell);
+		//learn_spell(monspell);
 		return 0;
 	}
 
@@ -6014,7 +6088,7 @@ int cold_dam(int dam, cptr kb_str, int monspell)
 	/* Total immunity */
 	if (p_ptr->immune_cold || (dam <= 0))
 	{
-		learn_spell(monspell);
+		//learn_spell(monspell);
 		return 0;
 	}
 	///mod140302 元素弱点、耐性処理統合
@@ -7374,7 +7448,7 @@ void cast_musou_hu_in(int reimu_idx)
 	for(;num > 0;num--)
 	{
 		int cnt = 0;
-		int tx,ty;
+		int tx=0,ty=0;//初期化しないとコンパイラが怒るから適当に初期値を入れる
 
 		if(projectable(py,px,ry,rx) && is_hostile(reimu_m_ptr))
 		{
@@ -7789,7 +7863,7 @@ bool teleport_to_specific_dir(int dist, int retry_chance, int mode)
 	}
 	else
 	{
-		int xx, yy;
+		int xx=x, yy=y;
 		for (i = retry_chance; i>0; i--)
 		{
 			xx = x + randint1(dist / 2);
@@ -8763,3 +8837,122 @@ void chimi_count_feat(bool msg)
 	flag_chimi_need_count_feat = FALSE;
 }
 
+//v2.1.6 ニナの「レプティリアンインテリジェンス」関連
+//ニナが記憶可能なモンスター数の最大値
+#define NINA_R_MEMORY_MAX	10
+
+//ニナが打倒したユニークモンスターのr_idxをp_ptr->magic_num1[0-9]に記憶する
+//モンスターを倒したとき呼ばれる
+//0に近いほど新しい
+void	nina_store_unique_mon(int r_idx)
+{
+	int i;
+
+	monster_race* r_ptr = &r_info[r_idx];
+
+	if (p_ptr->pclass != CLASS_NINA) return;
+
+	//ユニークモンスターのみ
+	if (!(r_ptr->flags1 & RF1_UNIQUE)) return;
+
+	//可変パラメータのユニークモンスターは非対象(いないはずだが一応)
+	if (r_ptr->flags7 & RF7_VARIABLE) return;
+
+	//記憶されているリストを一つずつ後ろへ　一番古いのは消える
+	for (i = (NINA_R_MEMORY_MAX - 1); i > 0; i--)
+	{
+		p_ptr->magic_num1[i] = p_ptr->magic_num1[i - 1];
+	}
+
+	//受け取ったr_idxを一番最初に記録
+	p_ptr->magic_num1[0] = r_idx;
+
+	if (cheat_xtra) msg_format("nina_store:%d",r_idx);
+
+}
+
+//ニナがnina_store_unique_mon()で記録したユニークモンスターのコピーを呼び出す
+//行動順消費するときTRUE
+bool	nina_recall_unique_mon(void)
+{
+
+	int summon_r_idx;
+	int i, list_len, menu_line, choose_num;
+	char c;
+
+	if (p_ptr->pclass != CLASS_NINA) return FALSE;
+
+	//召喚可能なモンスターをカウント
+	list_len = 0;
+	for (i = 0; i < NINA_R_MEMORY_MAX; i++)
+	{
+		if (p_ptr->magic_num1[i] > 0) list_len++;
+	}
+	if (!list_len)
+	{
+		msg_print(_("呼び出せるモンスターがいない。", "You don't have a monster you could call forth."));
+		return FALSE;
+	}
+
+	//召喚可能なモンスターをリスト表示
+	screen_save();
+	menu_line = 1;
+	Term_erase(17, menu_line++, 255);
+	Term_erase(17, menu_line, 255);
+	prt(_("誰のコピーを呼び出しますか？(ESC:キャンセル)", "Summon which copy? (ESC: Cancel)"), menu_line++, 20);
+	for (i = 0; i < list_len; i++)
+	{
+
+		cptr	mon_name;
+		monster_race* r_ptr = &r_info[p_ptr->magic_num1[i]];
+		mon_name = (r_name + r_ptr->name);
+
+		Term_erase(17, menu_line, 255);
+		prt(format("%c) %s", ('a' + i), mon_name), menu_line++, 25);
+	}
+	Term_erase(17, menu_line, 255);
+
+	//入力を受け付けてリスト内か確認
+	while (1)
+	{
+		c = inkey();
+		if (c == ESCAPE)
+		{
+			screen_load();
+			return FALSE;
+		}
+		choose_num = c - 'a';
+
+		if (choose_num >= 0 && choose_num < list_len) break;
+
+	}
+	screen_load();
+
+	//選択されたモンスターの召喚を試みる
+	summon_r_idx = p_ptr->magic_num1[choose_num];
+
+	if (summon_named_creature(0, py, px, summon_r_idx, PM_EPHEMERA))
+	{
+		msg_print(_("かつて戦った強敵の幻影が現れた！", "A phantasm of a powerful enemy you once fought appears!"));
+	}
+	else
+	{
+		msg_print(_("蜃気楼は形を取る前に揺らいで消えた。", "The mirage flickers and vanishes before taking form."));
+		return TRUE;
+	}
+
+	//召喚に成功した場合リストから削除して後ろを詰めて余白を0で埋める
+	list_len--;
+	for (i = choose_num; i < NINA_R_MEMORY_MAX; i++)
+	{
+		if (i < list_len)
+			p_ptr->magic_num1[i] = p_ptr->magic_num1[i + 1];
+		else
+			p_ptr->magic_num1[i] = 0;
+	}
+
+	return TRUE;
+
+}
+
+#undef NINA_R_MEMORY_MAX
