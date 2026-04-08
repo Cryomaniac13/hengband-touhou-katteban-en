@@ -55,7 +55,7 @@ Item                               Chance
 Potion of Curing                     100
 Potion of Cat Ears                    20
 Scroll of *Remove Curse*             100
-Gelsemium Elegance                   100
+Gelsemium Elegans                    100
 Arsenic                               80
 Mercury                               70
 Nightmare Shard                       80

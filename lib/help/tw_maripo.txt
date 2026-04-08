@@ -62,7 +62,7 @@ Materials           Stone                         1
                     Opal                          40
                     Arsenic ore                   45
                     Kyoumarubotan                 50
-                    Gelsemium Elegance            50
+                    Gelsemium Elegans             50
                     Topaz                         50
                     Magnetite                     60
                     Ishizakura                    75
