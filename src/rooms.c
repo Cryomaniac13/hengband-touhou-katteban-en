@@ -7602,6 +7602,11 @@ static byte build_type_ex(int bldg_array_idx)
 	int i, y, x, y1, x1, y2, x2, yval, xval,xsize,ysize;
 	cave_type *c_ptr;
 
+	//建物サイズ 10を超えると画面端に生成された時なんかマップが変になる
+	//v1.1.61 可変に修正
+	xsize = 7 +randint0(1) * 2;
+	ysize = 5 +randint0(2) * 2;
+
 	switch (bldg_array_idx)
 	{
 	case BLDG_EX_MODE_EXTRA:
