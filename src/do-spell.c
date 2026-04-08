@@ -21430,7 +21430,7 @@ static cptr do_new_spell_darkness(int spell, int mode)
 		if (desc) return "敵を一撃で倒すことがある武器「毒針」を作成する。材料として「ゲルセミウム・エレガンス」を一つ消費する。";
 #else
 		if (name) return "Create Poison Needle";
-		if (desc) return "Creates Poison Needle, a weapon capable of defeating enemies in a single blow. Requires Gelsemium Elegance as material.";
+		if (desc) return "Creates Poison Needle, a weapon capable of defeating enemies in a single blow. Requires Gelsemium Elegans as material.";
 #endif
 
 		{
