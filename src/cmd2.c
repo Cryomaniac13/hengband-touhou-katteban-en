@@ -6783,7 +6783,7 @@ bool do_cmd_fire(void)
 #ifdef JP
 			msg_print("射撃武器が重すぎて構えられない。");
 #else
-		msg_print("You have nothing to fire with.");
+		msg_print("Your firearm is too heavy for you to properly hold.");
 #endif
 		flush();
 		return FALSE;
@@ -6794,7 +6794,7 @@ bool do_cmd_fire(void)
 #ifdef JP
 			msg_print("この装備ではうまく射撃ができない。");
 #else
-		msg_print("You have nothing to fire with.");
+		msg_print("You can't shoot well with your current equipment.");
 #endif
 		flush();
 		return FALSE;
